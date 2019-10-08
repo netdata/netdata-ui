@@ -4,6 +4,9 @@
   "description": "netdata UI kit",
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/rimraf/bin.js node_modules/@types/react-native/ && npm run storybook",
+    "storybook": "start-storybook -p 6006",
+    "build": "npm run build-storybook",
     "test": "test"
   },
   "keywords": [
@@ -19,7 +22,17 @@
     "react-redux": "^7.1.1",
     "redux": "^4.0.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:netdata/netdata-ui.git"
+  },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-centered": "^5.2.3",
+    "@storybook/addon-jest": "^5.2.3",
+    "@storybook/addon-knobs": "^5.2.3",
+    "@storybook/addon-links": "^5.2.3",
+    "@storybook/addon-storysource": "^5.2.3",
     "@storybook/addons": "^5.2.3",
     "@storybook/react": "^5.2.3",
     "@types/jest": "^24.0.18",
@@ -28,14 +41,19 @@
     "@types/storybook__react": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "eslint": "^6.5.1",
     "eslint-config-netdata": "git+ssh://git@github.com/netdata/eslint-config-netdata.git",
     "jsdom": "^15.1.1",
     "prettier": "^1.18.2",
+    "react-intl": "^3.3.2",
     "redux-mock-store": "^1.5.3",
+    "rimraf": "^3.0.0",
     "storybook": "^5.1.11",
+    "storybook-addon-intl": "^2.4.1",
     "storybook-addon-styled-component-theme": "^1.2.5",
+    "storybook-readme": "^5.0.8",
     "styled-components": "^4.4.0",
     "typescript": "^3.6.3",
     "url-loader": "^2.2.0"

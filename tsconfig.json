@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": false,
+    "alwaysStrict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "typeRoots": ["node_modules/@types"]
+  },
+  "files": ["@types/typings.d.ts"],
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "/dist",
+    "**/test/**/*",
+    "*.test.*",
+    "**/stories/**/*",
+    "*.stories.tsx"
+  ]
+}
