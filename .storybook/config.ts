@@ -4,9 +4,17 @@ import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import { MockTheme } from "../src/theme/mock/mock-theme"
 
+const messages = {
+  ru: { "button.label": "Нажми" },
+  en: { "button.label": "click" },
+}
+
+const getMessages = locale => messages[locale]
+
 setIntlConfig({
   locales: ["ru", "en"],
-  defaultLocale: "en",
+  defaultLocale: "ru",
+  getMessages,
 })
 
 addDecorator(withIntl)
@@ -31,7 +39,7 @@ addDecorator(addReadme)
 addDecorator(withThemesProvider([MockTheme]))
 
 const loadStories = () => {
-  const req = require.context("../src", true, /\.stories\.tsx$/)
+  const req = require.context("../stories", true, /\.stories\.tsx$/)
   req.keys().forEach(filename => req(filename))
 }
 

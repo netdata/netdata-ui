@@ -16,7 +16,7 @@
     "outDir": "./dist",
     "typeRoots": ["node_modules/@types"]
   },
-  "files": ["@types/typings.d.ts"],
+  "files": ["@typings/typings.d.ts"],
   "include": ["src"],
   "exclude": [
     "node_modules",
