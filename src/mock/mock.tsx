@@ -1,5 +1,7 @@
 import React, { SyntheticEvent } from "react"
 import { FormattedMessage, defineMessages } from "react-intl"
+import styled from "styled-components"
+import { getOrElse } from "../../utils"
 
 const messages = defineMessages({
   mock: {
@@ -10,9 +12,13 @@ const messages = defineMessages({
 
 type MockPropsT = { test?: string; onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void }
 
+const MockSpan = styled.span`
+  color: ${getOrElse("fontColor", "#fff")};
+`
+
 export const Mock = ({ test = "default", onClick = () => {} }: MockPropsT) => (
   <>
-    <span>{test}</span>
+    <MockSpan>{test}</MockSpan>
     <br />
     <button type="button" onClick={onClick}>
       <FormattedMessage {...messages.mock} />

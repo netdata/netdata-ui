@@ -5,6 +5,8 @@ import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import centered from "@storybook/addon-centered/react"
 import { MockTheme } from "../src/theme/mock/mock-theme"
+import { MockTheme2 } from "../src/theme/mock/mock-theme2"
+
 import { messages } from "./localeMessages"
 
 const results = require("../.jest-test-results.json")
@@ -42,7 +44,7 @@ addParameters({
 
 addDecorator(addReadme)
 
-addDecorator(withThemesProvider([MockTheme]))
+addDecorator(withThemesProvider([MockTheme, MockTheme2]))
 
 const loadStories = () => {
   const req = require.context("../stories", true, /\.stories\.tsx$/)
