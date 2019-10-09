@@ -1,3 +1,4 @@
+import math from "polished/lib/math/math"
 import { view, lensPath, compose, Lens } from "ramda"
 
 type NumberOrStringT = number | string
@@ -33,3 +34,13 @@ export const getOrElse = <T>(key: string, alternate: AlternateT = "") => ({
 }: WrappedTheme & T) =>
   get(key)({ theme }) ||
   (alternate instanceof Function ? alternate({ theme, ...props }) : alternate)
+
+export const gap = ({ theme }: WrappedTheme): number => theme.GRID_GAP
+
+export const gapWith = (expr?: string) => (theme: WrappedTheme) => {
+  if (expr) {
+    const exprWithGap = expr.replace("_", `${gap(theme)}`)
+    return math(exprWithGap)
+  }
+  return gap(theme)
+}

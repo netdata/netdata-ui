@@ -1,10 +1,12 @@
-import createTheme from "../generic"
+import createTheme, { ThemeAtom } from "../generic"
+import * as constants from "./constants"
+import { colors } from "./colors"
 
-// System info. Mostly needed for storybook.
 const root = {
   name: "MockTheme",
   version: "0.0.1",
-  fontColor: "black",
 }
 
-export const MockTheme = [{}].reduce((acc, current) => createTheme(acc, current), root)
+const themeAtoms: ThemeAtom[] = [constants, colors]
+
+export const MockTheme = themeAtoms.reduce((acc, current) => createTheme(acc, current), root)

@@ -17,6 +17,7 @@
   "author": "netdata frontend team",
   "license": "ISC",
   "dependencies": {
+    "polished": "^3.4.1",
     "ramda": "^0.26.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
