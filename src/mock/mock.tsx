@@ -1,4 +1,4 @@
-import React from "react"
+import React, { SyntheticEvent } from "react"
 import { FormattedMessage, defineMessages } from "react-intl"
 
 const messages = defineMessages({
@@ -8,17 +8,13 @@ const messages = defineMessages({
   },
 })
 
-export interface StateProps {
-  test: string
-}
+type MockPropsT = { test?: string; onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void }
 
-type MockPropsT = { test?: string }
-
-export const Mock = ({ test = "default" }: MockPropsT) => (
+export const Mock = ({ test = "default", onClick = () => {} }: MockPropsT) => (
   <>
     <span>{test}</span>
     <br />
-    <button type="button">
+    <button type="button" onClick={onClick}>
       <FormattedMessage {...messages.mock} />
     </button>
   </>
