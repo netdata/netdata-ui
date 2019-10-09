@@ -14,6 +14,16 @@ module.exports = async ({ config }) => {
         ],
       },
       {
+        test: /\.stories\.tsx?$/,
+        loaders: [
+          {
+            loader: require.resolve("@storybook/source-loader"),
+            options: { parser: "typescript" },
+          },
+        ],
+        enforce: "pre",
+      },
+      {
         test: /\.md$/,
         use: [
           {
