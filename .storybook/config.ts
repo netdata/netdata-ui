@@ -3,6 +3,7 @@ import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
 import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
+import centered from "@storybook/addon-centered/react"
 import { MockTheme } from "../src/theme/mock/mock-theme"
 
 const results = require("../.jest-test-results.json")
@@ -19,6 +20,9 @@ setIntlConfig({
   defaultLocale: "ru",
   getMessages,
 })
+
+// @ts-ignore
+addDecorator(centered)
 
 addDecorator(withIntl)
 // @ts-ignore
