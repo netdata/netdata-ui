@@ -6,8 +6,9 @@
   "scripts": {
     "start": "./node_modules/rimraf/bin.js node_modules/@types/react-native/ && npm run storybook-start",
     "storybook-start": "start-storybook -p 6006",
+    "testOut": "jest --env=jsdom --json --outputFile=.jest-test-results.json",
     "build": "npm run build-storybook",
-    "test": "test"
+    "test": "jest --env=jsdom"
   },
   "keywords": [
     "uikit",
@@ -35,6 +36,8 @@
     "@storybook/addon-storysource": "^5.2.3",
     "@storybook/addons": "^5.2.3",
     "@storybook/react": "^5.2.3",
+    "@testing-library/jest-dom": "^4.1.1",
+    "@testing-library/react": "^9.3.0",
     "@types/jest": "^24.0.18",
     "@types/ramda": "^0.26.26",
     "@types/react": "^16.9.5",
@@ -45,10 +48,14 @@
     "babel-loader": "^8.0.6",
     "eslint": "^6.5.1",
     "eslint-config-netdata": "git+ssh://git@github.com/netdata/eslint-config-netdata.git",
+    "jest": "^24.9.0",
     "jsdom": "^15.1.1",
+    "json-loader": "^0.5.7",
     "markdown-loader": "^5.1.0",
     "prettier": "^1.18.2",
+    "raw-loader": "^3.1.0",
     "react-intl": "^3.3.2",
+    "react-test-render": "^1.1.2",
     "redux-mock-store": "^1.5.3",
     "rimraf": "^3.0.0",
     "storybook": "^5.1.11",
@@ -56,6 +63,7 @@
     "storybook-addon-styled-component-theme": "^1.2.5",
     "storybook-readme": "^5.0.8",
     "styled-components": "^4.4.0",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.3",
     "url-loader": "^2.2.0"
   }

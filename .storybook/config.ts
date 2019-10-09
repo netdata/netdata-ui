@@ -1,8 +1,11 @@
 import { addParameters, addDecorator, configure } from "@storybook/react"
 import { addReadme } from "storybook-readme"
+import { withTests } from "@storybook/addon-jest"
 import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import { MockTheme } from "../src/theme/mock/mock-theme"
+
+const results = require("../.jest-test-results.json")
 
 const messages = {
   ru: { "button.label": "Нажми" },
@@ -18,6 +21,8 @@ setIntlConfig({
 })
 
 addDecorator(withIntl)
+// @ts-ignore
+addDecorator(withTests({ results }))
 
 addParameters({
   options: {
