@@ -5,19 +5,15 @@ import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import centered from "@storybook/addon-centered/react"
 import { MockTheme } from "../src/theme/mock/mock-theme"
+import { messages } from "./localeMessages"
 
 const results = require("../.jest-test-results.json")
-
-const messages = {
-  ru: { "button.label": "Нажми" },
-  en: { "button.label": "click" },
-}
 
 const getMessages = locale => messages[locale]
 
 setIntlConfig({
-  locales: ["ru", "en"],
-  defaultLocale: "ru",
+  locales: ["ru", "en", "de"],
+  defaultLocale: "en",
   getMessages,
 })
 
@@ -25,6 +21,7 @@ setIntlConfig({
 addDecorator(centered)
 
 addDecorator(withIntl)
+
 // @ts-ignore
 addDecorator(withTests({ results }))
 

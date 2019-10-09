@@ -5,11 +5,12 @@ import Mock from "../../src/mock"
 // @ts-ignore
 import readme from "./README.md"
 
-storiesOf("Mock", module).add("Mock", () => <Mock />, {
+const mockStory = storiesOf("Mock", module)
+mockStory.add("Mock", () => <Mock />, {
   readme: {
     sidebar: readmeCleanup(readme),
   },
   jest: ["mock.test.tsx"],
 })
 
-storiesOf("Mock", module).add("Mock2", () => <Mock test="Some not default text" />)
+mockStory.add("Mock2", () => <Mock test="Some not default text" />)
