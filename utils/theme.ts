@@ -5,12 +5,12 @@ type NumberOrStringT = number | string
 
 type AlternateT = NumberOrStringT | (<T>(x?: WrappedTheme & T) => NumberOrStringT)
 
-interface DummyTheme {
+export interface DummyTheme {
   [key: string]: NumberOrStringT
   GRID_GAP: number
 }
 
-interface WrappedTheme {
+export interface WrappedTheme {
   theme: DummyTheme
 }
 

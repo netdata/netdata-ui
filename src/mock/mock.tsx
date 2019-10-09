@@ -10,7 +10,7 @@ const messages = defineMessages({
   },
 })
 
-type MockPropsT = { test?: string; onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void }
+export type MockPropsT = { test?: string; onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void }
 
 const MockSpan = styled.span`
   color: ${getOrElse("fontColor", "#fff")};

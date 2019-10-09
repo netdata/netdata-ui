@@ -2,6 +2,7 @@ import { addParameters, addDecorator, configure } from "@storybook/react"
 import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
 import { withThemesProvider } from "storybook-addon-styled-component-theme"
+import { withKnobs } from "@storybook/addon-knobs"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import centered from "@storybook/addon-centered/react"
 import { MockTheme } from "../src/theme/mock/mock-theme"
@@ -24,6 +25,7 @@ addDecorator(centered)
 
 addDecorator(withIntl)
 
+addDecorator(withKnobs)
 // @ts-ignore
 addDecorator(withTests({ results }))
 
