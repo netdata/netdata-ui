@@ -1,4 +1,4 @@
-module.exports = ({ config }) => {
+module.exports = async ({ config }) => {
   config.module.rules.push(
     ...[
       {

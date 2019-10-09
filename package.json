@@ -4,8 +4,8 @@
   "description": "netdata UI kit",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/rimraf/bin.js node_modules/@types/react-native/ && npm run storybook",
-    "storybook": "start-storybook -p 6006",
+    "start": "./node_modules/rimraf/bin.js node_modules/@types/react-native/ && npm run storybook-start",
+    "storybook-start": "start-storybook -p 6006",
     "build": "npm run build-storybook",
     "test": "test"
   },

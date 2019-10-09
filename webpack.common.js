@@ -1,3 +1,5 @@
-const storybookWebpacConfig = require("./.storybook/webpack.config")
-
-module.exports = storybookWebpacConfig
+module.exports = {
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+}
