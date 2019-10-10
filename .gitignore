@@ -2,3 +2,4 @@
 .vscode/
 .jest-test-results.json
 node_modules
+lib

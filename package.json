@@ -4,10 +4,13 @@
   "description": "netdata UI kit",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/rimraf/bin.js node_modules/@types/react-native/ && npm run testOut && npm run storybook-start",
+    "_drop_native": "./node_modules/rimraf/bin.js node_modules/@types/react-native/",
+    "start": "npm run _drop_native && npm run testOut && npm run storybook-start",
     "storybook-start": "start-storybook -p 6006",
     "testOut": "jest --env=jsdom --json --outputFile=.jest-test-results.json",
     "build": "npm run build-storybook",
+    "clean": "./node_modules/rimraf/bin.js ./lib",
+    "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6",
     "test": "jest --env=jsdom"
   },
   "keywords": [
@@ -40,6 +43,7 @@
     "@testing-library/jest-dom": "^4.1.1",
     "@testing-library/react": "^9.3.0",
     "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.12",
     "@types/ramda": "^0.26.26",
     "@types/react": "^16.9.5",
     "@types/storybook__react": "^4.0.2",

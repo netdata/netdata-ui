@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "declaration": true,
     "allowJs": false,
     "alwaysStrict": true,
     "noImplicitAny": false,
@@ -11,18 +12,20 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "jsx": "react",
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "typeRoots": ["node_modules/@types"]
+    "outDir": "./lib"
   },
+  "outDir": "lib",
+  "lib": ["es2015", "dom"],
   "files": ["@typings/typings.d.ts"],
-  "include": ["src"],
+  "include": ["src/**/*", "index.ts"],
   "exclude": [
     "node_modules",
     "/dist",
     "**/test/**/*",
     "*.test.*",
+    "*test-utils.ts",
     "**/stories/**/*",
     "*.stories.tsx"
   ]
