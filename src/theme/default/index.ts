@@ -1,12 +1,12 @@
 import createTheme, { ThemeAtom } from ".."
-import * as constants from "./constants"
 import { colors } from "./colors"
+import * as constants from "./constants"
 
 const root = {
-  name: "MockTheme",
+  name: "Default",
   version: "0.0.1",
 }
 
 const themeAtoms: ThemeAtom[] = [constants, colors]
 
-export const MockTheme = themeAtoms.reduce((acc, current) => createTheme(acc, current), root)
+export const DefaultTheme = themeAtoms.reduce((acc, current) => createTheme(acc, current), root)
