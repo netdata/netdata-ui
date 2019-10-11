@@ -32,6 +32,7 @@
     "url": "git@github.com:netdata/netdata-ui.git"
   },
   "devDependencies": {
+    "@netdata/eslint-config-netdata": "0.0.1",
     "@storybook/addon-actions": "^5.2.3",
     "@storybook/addon-centered": "^5.2.3",
     "@storybook/addon-jest": "^5.2.3",
@@ -53,7 +54,6 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "eslint": "^6.5.1",
-    "eslint-config-netdata": "git+ssh://git@github.com/netdata/eslint-config-netdata.git",
     "jest": "^24.9.0",
     "jsdom": "^15.1.1",
     "json-loader": "^0.5.7",
