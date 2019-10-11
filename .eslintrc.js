@@ -3,5 +3,5 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ["eslint-config-netdata"],
+  extends: ["@netdata/eslint-config-netdata"],
 }
