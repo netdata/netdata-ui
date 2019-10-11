@@ -1,4 +1,4 @@
-import createTheme, { ThemeAtom } from "../generic"
+import createTheme, { ThemeAtom } from ".."
 import * as constants from "./constants"
 import { colors } from "./colors"
 
