@@ -48,7 +48,7 @@ addDecorator(addReadme)
 addDecorator(withThemesProvider([DefaultTheme]))
 
 const loadStories = () => {
-  const req = require.context("../stories", true, /\.stories\.tsx$/)
+  const req = require.context("../src/components", true, /\.stories\.tsx$/)
   req.keys().forEach(filename => req(filename))
 }
 

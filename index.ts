@@ -1,3 +1,13 @@
-export { default as Mock } from "./src/mock"
-export { default as createTheme } from "./src/theme"
+export { default as Mock } from "./src/components/mock"
+export {
+  extendTheme,
+  ThemeAtom,
+  getSizeUnit,
+  getSizeBy,
+  calcSize,
+  getOrElse,
+  ContstructedTheme,
+  getColor,
+} from "./src/theme"
 export { DefaultTheme } from "./src/theme/default"
+export { devices } from "./src/media"

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect"
 import { Mock, MockPropsT } from "./mock"
-import { DefaultTheme } from "../theme/default"
-import { testWrapper } from "../../test-utils"
+import { DefaultTheme } from "../../theme/default"
+import { testWrapper } from "../../../test-utils"
 
 const localeMock = {
   ru: {
@@ -24,7 +24,7 @@ describe("Mock component test", () => {
   it(" * should render with test prop", () => {
     const { queryByText } = testWrapper<MockPropsT>(
       Mock,
-      { test: "Test prop text" },
+      { text: "Test prop text" },
       DefaultTheme,
       localeMock
     )
