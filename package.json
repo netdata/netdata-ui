@@ -24,8 +24,7 @@
     "ramda": "^0.26.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-redux": "^7.1.1",
-    "redux": "^4.0.4"
+    "styled-components": "^4.4.0"
   },
   "repository": {
     "type": "git",
@@ -60,6 +59,8 @@
     "markdown-loader": "^5.1.0",
     "prettier": "^1.18.2",
     "raw-loader": "^3.1.0",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
     "react-intl": "^3.3.2",
     "react-test-render": "^1.1.2",
     "redux-mock-store": "^1.5.3",
@@ -68,7 +69,6 @@
     "storybook-addon-intl": "^2.4.1",
     "storybook-addon-styled-component-theme": "^1.2.5",
     "storybook-readme": "^5.0.8",
-    "styled-components": "^4.4.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3",
     "url-loader": "^2.2.0"

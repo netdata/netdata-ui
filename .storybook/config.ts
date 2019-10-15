@@ -5,8 +5,7 @@ import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { withKnobs } from "@storybook/addon-knobs"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import centered from "@storybook/addon-centered/react"
-import { MockTheme } from "../src/theme/mock/mock-theme"
-import { MockTheme2 } from "../src/theme/mock/mock-theme2"
+import { DefaultTheme } from "../src/theme/default"
 
 import { messages } from "./localeMessages"
 
@@ -46,10 +45,10 @@ addParameters({
 
 addDecorator(addReadme)
 
-addDecorator(withThemesProvider([MockTheme, MockTheme2]))
+addDecorator(withThemesProvider([DefaultTheme]))
 
 const loadStories = () => {
-  const req = require.context("../stories", true, /\.stories\.tsx$/)
+  const req = require.context("../src/components", true, /\.stories\.tsx$/)
   req.keys().forEach(filename => req(filename))
 }
 

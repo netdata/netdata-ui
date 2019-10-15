@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect"
 import { Mock, MockPropsT } from "./mock"
-import { MockTheme2 } from "../theme/mock/mock-theme2"
-import { testWrapper } from "../../test-utils"
+import { DefaultTheme } from "../../theme/default"
+import { testWrapper } from "../../../test-utils"
 
 const localeMock = {
   ru: {
@@ -17,15 +17,15 @@ const localeMock = {
 
 describe("Mock component test", () => {
   it(" * should render with no props", () => {
-    const { queryByText } = testWrapper<null>(Mock, null, MockTheme2, localeMock)
+    const { queryByText } = testWrapper<null>(Mock, null, DefaultTheme, localeMock)
     const result = queryByText("default")
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render with test prop", () => {
     const { queryByText } = testWrapper<MockPropsT>(
       Mock,
-      { test: "Test prop text" },
-      MockTheme2,
+      { text: "Test prop text" },
+      DefaultTheme,
       localeMock
     )
     const result = queryByText("Test prop text")
