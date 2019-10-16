@@ -14,7 +14,7 @@ const { compilerOptions } = tsPathConfig
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  testPathIgnorePatterns: ["<rootDir>/test/", "<rootDir>/node_modules/", "workspaces"],
+  testPathIgnorePatterns: ["<rootDir>/test/", "<rootDir>/node_modules/", "lib"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
     "^.+\\.(css|less|scss)$": "identity-obj-proxy",
