@@ -24,7 +24,8 @@
     "ramda": "^0.26.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "rmwc": "^5.7"
   },
   "repository": {
     "type": "git",
