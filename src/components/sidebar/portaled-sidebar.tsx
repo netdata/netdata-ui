@@ -1,6 +1,5 @@
 import React, { FC } from "react"
 import { Portal } from "react-portal"
-
 import { PortalSidebox } from "./styled"
 
 export const PortalSidebar: FC<SidebarProps> = ({ children, right = false }: SidebarProps) => (

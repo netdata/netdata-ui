@@ -2,19 +2,26 @@ import React from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 
+import { text, boolean } from "@storybook/addon-knobs"
 import { Sidebar } from "./sidebar"
 import { PortalSidebar } from "./portaled-sidebar"
 import { getColor } from "../../theme/utils"
+import { readmeCleanup } from "../../../utils/readme"
+// @ts-ignore
+import readme from "./README.md"
 
 const sidebarStory = storiesOf("Sidebar", module)
 
 const subData = {
-  jest: [],
+  readme: {
+    sidebar: readmeCleanup(readme),
+  },
+  jest: ["portal.test.tsx", "portal-sidepan.test.tsx"],
 }
 
-sidebarStory.add("empty", () => <Sidebar />, subData)
+sidebarStory.add("empty", () => <Sidebar right={boolean("right", false)} />, subData)
 
-sidebarStory.add("on right", () => <Sidebar right />, subData)
+sidebarStory.add("on right", () => <Sidebar right={boolean("right", true)} />, subData)
 
 const StaticBox = styled.div`
   display: flex;
@@ -25,9 +32,16 @@ const StaticBox = styled.div`
   color: #fff;
 `
 
-const StaticContent = () => <StaticBox>This is simple static content</StaticBox>
-
-sidebarStory.add("with static content", () => <Sidebar info={<StaticContent />} />, subData)
+sidebarStory.add(
+  "with static content",
+  () => (
+    <Sidebar
+      right={boolean("right", false)}
+      info={<StaticBox>{text("infobox children text", "this is infobox children text")}</StaticBox>}
+    />
+  ),
+  subData
+)
 
 const SidebarContent = styled.div`
   display: flex;
@@ -42,8 +56,10 @@ const SidebarContent = styled.div`
 sidebarStory.add(
   "with sidebar content",
   () => (
-    <Sidebar>
-      <SidebarContent>This is sidebar content</SidebarContent>
+    <Sidebar right={boolean("right", false)}>
+      <SidebarContent>
+        {text("sidebar children text", "this is sidebar children text")}
+      </SidebarContent>
     </Sidebar>
   ),
   subData
@@ -52,8 +68,10 @@ sidebarStory.add(
 sidebarStory.add(
   "portaled sidebar",
   () => (
-    <PortalSidebar>
-      <SidebarContent>This is sidebar content</SidebarContent>
+    <PortalSidebar right={boolean("right", false)}>
+      <SidebarContent>
+        {text("sidebar children text", "this is sidebar children text")}
+      </SidebarContent>
     </PortalSidebar>
   ),
   subData
@@ -72,9 +90,11 @@ sidebarStory.add(
   "portal sidebar as overlay",
   () => (
     <>
-      <Underlay>Partialy hided content</Underlay>
-      <PortalSidebar right>
-        <SidebarContent>This is sidebar content</SidebarContent>
+      <Underlay>{text("underlay children", "this is text")}</Underlay>
+      <PortalSidebar right={boolean("right", true)}>
+        <SidebarContent>
+          {text("sidebar children text", "this is sidebar children text")}
+        </SidebarContent>
       </PortalSidebar>
     </>
   ),
