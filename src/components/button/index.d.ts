@@ -1,4 +1,4 @@
-export { MDXButton as default } from "./button"
+import { SyntheticEvent } from "react"
 
 export interface MDXButtonProps {
   label?: string
@@ -6,3 +6,5 @@ export interface MDXButtonProps {
   icon?: any
   isLoading?: boolean
 }
+
+export { MDXButton as default } from "./button"
