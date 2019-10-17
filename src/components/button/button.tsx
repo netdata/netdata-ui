@@ -1,22 +1,17 @@
 import React, { SyntheticEvent } from "react"
-import { Button } from "@rmwc/button"
 import { CircularProgress } from "@rmwc/circular-progress"
+import { StyledButton } from "./styled"
 
-export interface MDXButtonProps {
+export interface ButtonProps {
   label?: string
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
   icon?: any
   isLoading?: boolean
 }
 
-export const MDXButton = ({
-  label = "default",
-  onClick = () => {},
-  icon,
-  isLoading,
-}: MDXButtonProps) => (
+export const Button = ({ label = "default", onClick = () => {}, icon, isLoading }: ButtonProps) => (
   <>
-    <Button
+    <StyledButton
       label={label}
       onClick={onClick}
       unelevated

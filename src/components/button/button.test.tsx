@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect"
-import { MDXButton, MDXButtonProps } from "./button"
+import { Button, ButtonProps } from "./button"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 
@@ -18,15 +18,15 @@ const localeMock = {
   },
 }
 
-describe("MDXButton component test", () => {
+describe("Button component test", () => {
   it(" * should render with no props", () => {
-    const { queryByText } = testWrapper<null>(MDXButton, null, DefaultTheme, localeMock)
+    const { queryByText } = testWrapper<null>(Button, null, DefaultTheme, localeMock)
     const result = queryByText("default")
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render with test prop", () => {
-    const { queryByText } = testWrapper<MDXButtonProps>(
-      MDXButton,
+    const { queryByText } = testWrapper<ButtonProps>(
+      Button,
       { label: "Test prop text" },
       DefaultTheme,
       localeMock

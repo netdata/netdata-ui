@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { text, boolean } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
-import MDXButton from "."
+import Button from "."
 
 // @ts-ignore
 import readme from "./README.md"
@@ -14,13 +14,13 @@ const subData = {
   readme: {
     sidebar: readmeCleanup(readme),
   },
-  jest: ["mock.test.tsx"],
+  jest: ["button.test.tsx"],
 }
 
 mockStory.add(
   "Button",
   () => {
-    return <MDXButton label={text("Text prop", "")} onClick={action("clicked")} />
+    return <Button label={text("Label prop", "")} onClick={action("clicked")} />
   },
   subData
 )
@@ -28,7 +28,7 @@ mockStory.add(
 mockStory.add(
   "Button2",
   () => (
-    <MDXButton
+    <Button
       onClick={action("clicked")}
       isLoading={boolean("isLoading prop", true)}
       label={text("Label prop", "Hello loading button")}
