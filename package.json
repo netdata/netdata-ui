@@ -6,7 +6,7 @@
   "scripts": {
     "_drop_native": "./node_modules/rimraf/bin.js node_modules/@types/react-native/",
     "start": "npm run _drop_native && npm run testOut && npm run storybook-start",
-    "storybook-start": "start-storybook -p 6006",
+    "storybook-start": "bash start.sh",
     "testOut": "jest --env=jsdom --json --outputFile=.jest-test-results.json",
     "build": "npm run build-storybook",
     "clean": "./node_modules/rimraf/bin.js ./lib",
