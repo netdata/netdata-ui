@@ -1,6 +1,5 @@
 import React, { SyntheticEvent } from "react"
-import { CircularProgress } from "@rmwc/circular-progress"
-import { StyledButton } from "./styled"
+import { StyledButton, StyledCircularProgress } from "./styled"
 
 export interface ButtonProps {
   label?: string
@@ -9,13 +8,12 @@ export interface ButtonProps {
   isLoading?: boolean
 }
 
-export const Button = ({ label = "default", onClick = () => {}, icon, isLoading }: ButtonProps) => (
-  <>
+export const Button = ({ label = "label", onClick = () => {}, icon, isLoading }: ButtonProps) => {
+  return (
     <StyledButton
-      label={label}
+      label={label.toUpperCase()}
       onClick={onClick}
-      unelevated
-      icon={isLoading ? <CircularProgress /> : icon}
+      icon={isLoading ? <StyledCircularProgress /> : icon}
     />
-  </>
-)
+  )
+}

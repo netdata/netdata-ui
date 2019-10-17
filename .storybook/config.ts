@@ -14,7 +14,7 @@ const results = require("../.jest-test-results.json")
 const getMessages = locale => messages[locale]
 
 setIntlConfig({
-  locales: ["ru", "en", "de"],
+  locales: ["ru", "en", "de", "el"],
   defaultLocale: "en",
   getMessages,
 })

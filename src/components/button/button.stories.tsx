@@ -20,18 +20,18 @@ const subData = {
 mockStory.add(
   "Button",
   () => {
-    return <Button label={text("Label prop", "")} onClick={action("clicked")} />
+    return <Button label={text("Label prop", "Label")} onClick={action("clicked")} />
   },
   subData
 )
 
 mockStory.add(
-  "Button2",
+  "Button Loading",
   () => (
     <Button
       onClick={action("clicked")}
       isLoading={boolean("isLoading prop", true)}
-      label={text("Label prop", "LABEL")}
+      label={text("Label prop", "Label")}
     />
   ),
   subData
