@@ -60,12 +60,12 @@ const Underlay = styled.div`
 
 ```JSX
 <>
-	<Underlay>Some text</Underlay>
-	<PortalSidebar right>
-		<SidebarContent>
-            This is sidebar content
-        <SidebarContent>
-	</PortalSidebar>
+  <Underlay>Some text</Underlay>
+    <PortalSidebar right>
+    <SidebarContent>
+      This is sidebar content
+    <SidebarContent>
+  </PortalSidebar>
 </>
 ```
 <!-- prettier-ignore-end -->
