@@ -1,12 +1,16 @@
+import React, { SyntheticEvent } from "react"
+import { Button } from "@rmwc/button"
+import "@material/button/dist/mdc.button.css"
+import { CircularProgress } from "@rmwc/circular-progress"
+import "@rmwc/circular-progress/circular-progress.css"
 import styled from "styled-components"
-import { MDXButton } 
 
 export const MDXButton = ({
   label = "default",
   onClick = () => {},
   icon,
   isLoading,
-}: ButtonPropsT) => (
+}: MDXButtonProps) => (
   <>
     <Button
       label={label}

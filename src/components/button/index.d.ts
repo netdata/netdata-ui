@@ -1,8 +1,4 @@
-import React, { SyntheticEvent } from "react"
-import { Button } from "@rmwc/button"
-import "@material/button/dist/mdc.button.css"
-import { CircularProgress } from "@rmwc/circular-progress"
-import "@rmwc/circular-progress/circular-progress.css"
+export { MDXButton as default } from "./button"
 
 export interface MDXButtonProps {
   label?: string
