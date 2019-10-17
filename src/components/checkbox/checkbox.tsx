@@ -9,7 +9,7 @@ import {
   AccessibleArea,
 } from "./styled"
 
-interface Props {
+export interface CheckboxProps {
   checked: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   id?: string
@@ -19,7 +19,7 @@ interface Props {
   className?: string
 }
 
-export const Checkbox = ({ checked, className, labelPosition, label, ...props }: Props) => {
+export const Checkbox = ({ checked, className, labelPosition, label, ...props }: CheckboxProps) => {
   return (
     <StyledLabel className={className}>
       <AccessibleArea />

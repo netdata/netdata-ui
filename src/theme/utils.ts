@@ -33,6 +33,5 @@ export const getSizeBy = (multiplier: number) => (props: WrappedTheme) => {
 
 export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   const gutterValue = path(["constants", "GUTTER_HEIGHT"], theme) || 0
-  console.log(`${gutterValue}px`)
   return `${gutterValue}px`
 }
