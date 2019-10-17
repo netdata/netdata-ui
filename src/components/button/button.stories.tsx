@@ -31,7 +31,7 @@ mockStory.add(
     <Button
       onClick={action("clicked")}
       isLoading={boolean("isLoading prop", true)}
-      label={text("Label prop", "Hello loading button")}
+      label={text("Label prop", "LABEL")}
     />
   ),
   subData

@@ -9,13 +9,20 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
       ? css`
           background: ${getColor(["green", "malachite"])};
           border-radius: 3px;
+          border-color: ${getColor(["green", "malachite"])};
+          text-color: 
           width: 128px;
           height: 40px;
+          focus: {outline:0;}
         `
       : css`
           background: ${getColor(["green", "greenHaze"])};
           border-radius: 3px;
+          border-color: ${getColor(["green", "malachite"])};
           width: 128px;
           height: 40px;
+          focus: {
+            outline: 0;
+          }
         `};
 `
