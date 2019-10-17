@@ -19,7 +19,7 @@ interface SidebarProps {
 - `right` - side to render sidebar block, by default - **left**
 - `children` - content wich will be rendered to sidebar
 
-### Tipical usage
+### Typical usage
 
 ```JSX
 <Sidebar info={<StaticContent />} right>
@@ -45,7 +45,7 @@ interface SidebarProps {
 - `right` - side to render sidebar block, by default - **left**
 - `children` - content wich will be rendered to sidebar
 
-### Tipical usage
+### Typical usage
 
 ```typescript
 const Underlay = styled.div`
