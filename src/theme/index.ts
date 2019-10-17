@@ -7,4 +7,5 @@ export {
   getOrElse,
   ContstructedTheme,
   getColor,
+  propOrElse,
 } from "./utils"
