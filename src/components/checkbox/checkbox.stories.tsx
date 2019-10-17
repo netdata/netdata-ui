@@ -1,12 +1,21 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
+import { text } from "@storybook/addon-knobs"
 import { Checkbox } from "."
 import { getGutterHeight } from "../../theme/utils"
+import { readmeCleanup } from "../../../utils/readme"
+// @ts-ignore
+import readme from "./README.md"
 
 const checkBoxStory = storiesOf("Checkbox", module)
 
-const subData = {}
+const subData = {
+  readme: {
+    sidebar: readmeCleanup(readme),
+  },
+  jest: ["checkbox.test.tsx"],
+}
 
 checkBoxStory.add(
   "Controlled Checkbox",
@@ -27,7 +36,13 @@ checkBoxStory.add(
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setChecked(e.currentTarget.checked)
     }
-    return <Checkbox label="Do you like greek salad?" onChange={handleChange} checked={checked} />
+    return (
+      <Checkbox
+        label={text("label", "Do you like greek salad?")}
+        onChange={handleChange}
+        checked={checked}
+      />
+    )
   },
   subData
 )
@@ -41,8 +56,8 @@ checkBoxStory.add(
     }
     return (
       <Checkbox
-        labelPosition="left"
-        label="Do you like Soviet Russia?"
+        labelPosition={text("labelPosition", "left") as "left" | "right"}
+        label={text("label", "Do you like Soviet Russia?")}
         onChange={handleChange}
         checked={checked}
       />
