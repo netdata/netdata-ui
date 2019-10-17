@@ -1,4 +1,7 @@
 const rawColors: RawColorsT = {
+  white: {
+    pure: "#FFF",
+  },
   gray: {
     limedSpruce: "#35414A",
     silverSand: "#B5B9BC",

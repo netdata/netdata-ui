@@ -30,3 +30,9 @@ export const getSizeBy = (multiplier: number) => (props: WrappedTheme) => {
   const size = (getSizeUnit(props) || 0) * multiplier
   return `${size}px`
 }
+
+export const getGutterHeight = ({ theme }: WrappedTheme): string => {
+  const gutterValue = path(["constants", "GUTTER_HEIGHT"], theme) || 0
+  console.log(`${gutterValue}px`)
+  return `${gutterValue}px`
+}
