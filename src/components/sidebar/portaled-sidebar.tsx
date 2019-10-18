@@ -5,7 +5,7 @@ import { PortalSidebox } from "./styled"
 const ESCAPE_KEY = 27
 
 export const PortalSidebar: FC<PortalSidebarProps> = ({
-  isOpen,
+  isOpen = true,
   children,
   closeOnEsc = false,
   onClose = () => {},
