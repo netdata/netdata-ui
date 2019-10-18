@@ -9,6 +9,17 @@ interface ButtonProps {
   icon?: any
   isLoading?: boolean
   type?: ButtonType
+  disabled?: boolean
+}
+```
+
+## Button types
+
+````typescript
+
+export enum ButtonType {
+  default = "default",
+  noFill = "noFill",
 }
 ```
 
@@ -18,7 +29,7 @@ interface ButtonProps {
 
 ```typescript
 const myButton: Button = <Button icon="add" onClick={this.myHandler} label="Press me" />
-```
+````
 
 ### No fill button
 
@@ -34,6 +45,12 @@ Please note `type={ButtonTypes.default}` is optional (can be omitted):
 
 ```typescript
 const myButton: Button = (
-  <Button type={ButtonTypes.default} icon="add" onClick={this.myHandler} label="Press me" />
+  <Button
+    disabled={true}
+    type={ButtonTypes.default}
+    icon="add"
+    onClick={this.myHandler}
+    label="Press me"
+  />
 )
 ```
