@@ -12,4 +12,4 @@ deploy:
   repo: netdata/netdata-ui
   target_branch: gh-pages
   on:
-    branch: CI
+    branch: master
