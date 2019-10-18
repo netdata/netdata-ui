@@ -3,7 +3,6 @@ import { StyledButton, StyledCircularProgress } from "./styled"
 
 export enum ButtonType {
   default = "default",
-  disabled = "disabled",
   noFill = "noFill",
 }
 
@@ -13,6 +12,7 @@ export interface ButtonProps {
   icon?: any
   isLoading?: boolean
   type?: ButtonType
+  disabled?: boolean
 }
 
 export const Button = ({
@@ -21,6 +21,7 @@ export const Button = ({
   icon,
   isLoading = false,
   type = ButtonType.default,
+  disabled = false,
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -28,6 +29,7 @@ export const Button = ({
       onClick={onClick}
       icon={isLoading ? <StyledCircularProgress /> : icon}
       type={type}
+      disabled={disabled}
     />
   )
 }

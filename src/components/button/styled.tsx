@@ -8,23 +8,30 @@ import { ButtonType } from "./button"
 
 export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps} />)`
   ${props => {
+    if (props.disabled) {
+      return css`
+        opacity: 0.6;
+        cursor: not-allowed;
+        background: ${getColor(["green", "greenHaze"])};
+        border-radius: 3px;
+        border-color: ${getColor(["green", "greenHaze"])};
+        width: 128px;
+        height: 40px;
+        // font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+        color: ${getColor(["white", "plain"])};
+        &:active {
+          border-width: 0px;
+        }
+        &:focus {
+          outline: none;
+        }
+      `
+    }
     switch (props.type) {
-      case ButtonType.disabled:
-        return css`
-          opacity: 0.6;
-          cursor: not-allowed;
-          background: ${getColor(["green", "greenHaze"])};
-          border-radius: 3px;
-          border-color: ${getColor(["green", "greenHaze"])};
-          width: 128px;
-          height: 40px;
-          // font-family: IBM Plex Sans;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 12px;
-          line-height: 16px;
-          color: ${getColor(["white", "plain"])};
-        `
       case ButtonType.noFill:
         return css`
           background: ${getColor(["white", "plain"])};
@@ -45,11 +52,12 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
             height: 44px;
           }
           &:active {
+            background: ${getColor(["green", "malachite"])};
             border-color: ${getColor(["green", "greenHaze"])};
-            background: ${getColor(["gray", "gallery"])};
             border-width: 0px;
             width: 132px;
             height: 44px;
+            color: ${getColor(["white", "plain"])};
           }
           &:focus {
             outline: none;

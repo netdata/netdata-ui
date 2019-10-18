@@ -1,7 +1,7 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
-import { text } from "@storybook/addon-knobs"
+import { text, boolean } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
 import Button from "."
 
@@ -23,6 +23,7 @@ mockStory.add(
   () => {
     return (
       <Button
+        disabled={boolean("Disabled", false)}
         type={ButtonType.default}
         label={text("Label prop", "LABEL")}
         onClick={action("clicked")}
@@ -36,21 +37,10 @@ mockStory.add(
   "Button No Fill",
   () => (
     <Button
+      disabled={boolean("Disabled", false)}
       type={ButtonType.noFill}
       onClick={action("clicked")}
-      label={text("Label prop", "LABEL")}
-    />
-  ),
-  subData
-)
-
-mockStory.add(
-  "Button Disabled",
-  () => (
-    <Button
-      type={ButtonType.disabled}
-      onClick={action("clicked")}
-      label={text("Label prop", "LABEL")}
+      label={text("Label", "LABEL")}
     />
   ),
   subData
@@ -61,9 +51,10 @@ mockStory.add(
   () => (
     <Button
       icon="add"
+      disabled={boolean("Disabled", false)}
       type={ButtonType.default}
       onClick={action("clicked")}
-      label={text("Label prop", "LABEL")}
+      label={text("Label", "LABEL")}
     />
   ),
   subData
@@ -74,22 +65,10 @@ mockStory.add(
   () => (
     <Button
       icon="add"
+      disabled={boolean("Disabled", false)}
       type={ButtonType.noFill}
       onClick={action("clicked")}
-      label={text("Label prop", "LABEL")}
-    />
-  ),
-  subData
-)
-
-mockStory.add(
-  "Button Icon Disabled",
-  () => (
-    <Button
-      icon="add"
-      type={ButtonType.disabled}
-      onClick={action("clicked")}
-      label={text("Label prop", "LABEL")}
+      label={text("Label", "LABEL")}
     />
   ),
   subData

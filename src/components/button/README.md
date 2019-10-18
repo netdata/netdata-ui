@@ -30,7 +30,7 @@ const myButton: Button = (
 
 ### Icon button
 
-Please note `type={ButtonTypes.default}` is optional here (can be omitted):
+Please note `type={ButtonTypes.default}` is optional (can be omitted):
 
 ```typescript
 const myButton: Button = (
