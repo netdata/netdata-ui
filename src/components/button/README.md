@@ -30,6 +30,8 @@ const myButton: Button = (
 
 ### Icon button
 
+Please note `type={ButtonTypes.default}` is optional here (can be omitted):
+
 ```typescript
 const myButton: Button = (
   <Button type={ButtonTypes.default} icon="add" onClick={this.myHandler} label="Press me" />
