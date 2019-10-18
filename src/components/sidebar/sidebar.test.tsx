@@ -2,6 +2,7 @@ import "@testing-library/jest-dom/extend-expect"
 import { Sidebar } from "./sidebar"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
+import "jest-styled-components"
 
 describe("Sidebar component test", () => {
   it(" * should render with no props", () => {
@@ -10,9 +11,14 @@ describe("Sidebar component test", () => {
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render on the right side", () => {
-    const { container } = testWrapper(Sidebar, { right: true }, DefaultTheme, {})
-    const result = container.querySelector("aside")
-    expect(result && result.textContent).not.toBeNull()
+    const { queryByText } = testWrapper(
+      Sidebar,
+      { right: true, children: "some text" },
+      DefaultTheme,
+      {}
+    )
+    const result = queryByText("some text")
+    expect(result && result.parentElement).toHaveStyleRule("flex-direction", "row-reverse")
   })
   it(" * should render with children", () => {
     const { queryByText } = testWrapper(Sidebar, { children: "some text" }, DefaultTheme, {})
