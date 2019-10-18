@@ -3,4 +3,5 @@
 .jest-test-results.json
 storybook-static
 node_modules
+public
 lib

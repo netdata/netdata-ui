@@ -8,8 +8,8 @@
     "start": "npm run _drop_native && npm run testOut && npm run storybook-start",
     "storybook-start": "start-storybook -p 6006",
     "testOut": "jest --env=jsdom --json --outputFile=.jest-test-results.json",
-    "testOutBuild": "jest --env=jsdom --json --outputFile=./storybook-str.jest-test-results.json",
-    "build": "npm run testOutBuild && build-storybook -c storybook-static",
+    "testOutBuild": "jest --env=jsdom --json --outputFile=./public/.jest-test-results.json",
+    "build": "npm run testOutBuild && build-storybook -s public",
     "clean": "./node_modules/rimraf/bin.js ./lib",
     "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6",
     "test": "jest --env=jsdom"
