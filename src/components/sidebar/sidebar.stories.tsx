@@ -68,7 +68,7 @@ sidebarStory.add(
 sidebarStory.add(
   "portaled sidebar",
   () => (
-    <PortalSidebar right={boolean("right", false)} isOpen={boolean("isOpen", true)}>
+    <PortalSidebar right={boolean("right", false)}>
       <SidebarContent>
         {text("sidebar children text", "this is sidebar children text")}
       </SidebarContent>
@@ -100,7 +100,6 @@ sidebarStory.add(
         </Underlay>
         <PortalSidebar
           closeOnEsc
-          isOpen
           onClose={() => {
             setSomeText("closed on sidebar close event")
           }}

@@ -7,7 +7,6 @@ interface SidebarProps {
 }
 
 interface PortalSidebarProps<T = any> {
-  isOpen?: boolean
   closeOnEsc?: boolean
   onClose?: (args?: T) => void
   right?: boolean

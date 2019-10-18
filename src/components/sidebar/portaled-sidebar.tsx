@@ -1,41 +1,32 @@
-import React, { FC, useState, useEffect } from "react"
+import React, { FC, useEffect } from "react"
 import { Portal } from "react-portal"
 import { PortalSidebox } from "./styled"
 
 const ESCAPE_KEY = 27
 
 export const PortalSidebar: FC<PortalSidebarProps> = ({
-  isOpen = true,
   children,
   closeOnEsc = false,
   onClose = () => {},
   right = false,
 }: PortalSidebarProps) => {
-  const [isOpenState, setOpen] = useState(isOpen)
-
-  useEffect(() => {
-    setOpen(isOpen)
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
-        setOpen(false)
-        onClose()
-      }
-    })
-    return () => {
-      document.removeEventListener("keydown", (event: KeyboardEvent) => {
-        if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
-          setOpen(false)
-          onClose()
-        }
-      })
+  const evHandler = (event: KeyboardEvent) => {
+    if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
+      onClose()
     }
-  }, [isOpen])
+  }
+  useEffect(() => {
+    document.addEventListener("keydown", evHandler)
+    return () => {
+      document.removeEventListener("keydown", evHandler)
+    }
+  }, [])
 
-  return isOpenState ? (
+  return (
     <Portal>
       <PortalSidebox shadowSide={right} side={right ? "right" : "left"}>
         {children}
       </PortalSidebox>
     </Portal>
-  ) : null
+  )
 }

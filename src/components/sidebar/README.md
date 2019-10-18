@@ -37,14 +37,12 @@ This component is like `Sidebar` the only difference is that this component buil
 
 ```typescript
 interface PortalSidebarProps<T = any> {
-  isOpen?: boolean
   closeOnEsc?: boolean
   onClose?: (args?: T) => void
   right?: boolean
   children?: NodeT
 }
 ```
-- `isOpen` - controls the sidebar state by default it has value `true`
 - `closeOnEsc` - Sidebar will be closed on `Esc` key press
 - `onClose` - this function will be fired on SidebarClose
 - `right` - side to render sidebar block, by default - **left**

@@ -14,14 +14,14 @@ describe("PortalSidebar component test", () => {
     expect(aside && aside.nodeName).toBe("ASIDE")
   })
   it(" * should not render with no props", () => {
-    const { container } = testWrapper(PortalSidebar, { isOpen: false }, DefaultTheme, {})
+    const { container } = testWrapper(PortalSidebar, null, DefaultTheme, {})
     const result = container.querySelector("aside")
     expect(result).toBeNull()
   })
   it(" * should render on the right side", () => {
     const { queryByText } = testWrapper(
       PortalSidebar,
-      { right: true, children: TEST_ANCHOR, isOpen: true },
+      { right: true, children: TEST_ANCHOR },
       DefaultTheme,
       {}
     )
@@ -29,12 +29,7 @@ describe("PortalSidebar component test", () => {
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render with children", () => {
-    const { queryByText } = testWrapper(
-      PortalSidebar,
-      { children: TEST_ANCHOR, isOpen: true },
-      DefaultTheme,
-      {}
-    )
+    const { queryByText } = testWrapper(PortalSidebar, { children: TEST_ANCHOR }, DefaultTheme, {})
     const result = queryByText(TEST_ANCHOR)
     expect(result && result.textContent).toBe(TEST_ANCHOR)
   })
@@ -43,8 +38,7 @@ describe("PortalSidebar component test", () => {
     const handler = jest.fn()
     const { queryByText } = testWrapper(
       PortalSidebar,
-      { children: TEST_ANCHOR, isOpen: true, closeOnEsc: true, onClose: handler },
-
+      { children: TEST_ANCHOR, closeOnEsc: true, onClose: handler },
       DefaultTheme,
       {}
     )
