@@ -10,17 +10,17 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
   onClose = () => {},
   right = false,
 }: PortalSidebarProps) => {
-  const evHandler = (event: KeyboardEvent) => {
-    if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
-      onClose()
-    }
-  }
   useEffect(() => {
+    const evHandler = (event: KeyboardEvent) => {
+      if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
+        onClose()
+      }
+    }
     document.addEventListener("keydown", evHandler)
     return () => {
       document.removeEventListener("keydown", evHandler)
     }
-  }, [])
+  }, [closeOnEsc, onClose])
 
   return (
     <Portal>

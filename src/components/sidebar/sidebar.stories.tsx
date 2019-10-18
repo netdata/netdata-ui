@@ -50,7 +50,7 @@ const SidebarContent = styled.div`
   background-color: #fff;
   height: 100%;
   width: 100%;
-  color: black;
+  color: #3a3a3a;
 `
 
 sidebarStory.add(
