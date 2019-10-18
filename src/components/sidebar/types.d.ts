@@ -5,3 +5,11 @@ interface SidebarProps {
   right?: boolean
   children?: NodeT
 }
+
+interface PortalSidebarProps<T = any> {
+  isOpen: boolean
+  closeOnEsc?: boolean
+  onClose?: (args?: T) => void
+  right?: boolean
+  children?: NodeT
+}

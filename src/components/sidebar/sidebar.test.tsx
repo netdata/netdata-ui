@@ -4,37 +4,44 @@ import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 import "jest-styled-components"
 
+const TEST_ANCHOR = "some text"
+
 describe("Sidebar component test", () => {
   it(" * should render with no props", () => {
-    const { container } = testWrapper(Sidebar, null, DefaultTheme, {})
+    const { container } = testWrapper(Sidebar, { isOpen: true }, DefaultTheme, {})
     const result = container.querySelector("aside")
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render on the right side", () => {
     const { queryByText } = testWrapper(
       Sidebar,
-      { right: true, children: "some text" },
+      { right: true, children: TEST_ANCHOR, isOpen: true },
       DefaultTheme,
       {}
     )
-    const result = queryByText("some text")
+    const result = queryByText(TEST_ANCHOR)
     expect(result && result.parentElement).toHaveStyleRule("flex-direction", "row-reverse")
   })
   it(" * should render with children", () => {
-    const { queryByText } = testWrapper(Sidebar, { children: "some text" }, DefaultTheme, {})
-    const result = queryByText("some text")
+    const { queryByText } = testWrapper(
+      Sidebar,
+      { children: TEST_ANCHOR, isOpen: true },
+      DefaultTheme,
+      {}
+    )
+    const result = queryByText(TEST_ANCHOR)
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render with children", () => {
     const { queryByText } = testWrapper(
       Sidebar,
-      { children: "some text", info: "static text" },
+      { children: TEST_ANCHOR, info: TEST_ANCHOR, isOpen: true },
       DefaultTheme,
       {}
     )
-    const sidebarElement = queryByText("some text")
-    const staticComponent = queryByText("static text")
-    expect(sidebarElement && sidebarElement.textContent).toBe("some text")
-    expect(staticComponent && staticComponent.textContent).toBe("static text")
+    const sidebarElement = queryByText(TEST_ANCHOR)
+    const staticComponent = queryByText(TEST_ANCHOR)
+    expect(sidebarElement && sidebarElement.textContent).toBe(TEST_ANCHOR)
+    expect(staticComponent && staticComponent.textContent).toBe(TEST_ANCHOR)
   })
 })

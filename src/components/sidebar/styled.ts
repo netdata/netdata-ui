@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import { propOrElse, getColor } from "../../theme/utils"
 
+const LEFT = 2
+const RIGHT = -2
+
 export const ComponentBox = styled.div<{ side: "row" | "row-reverse" }>`
   display: flex;
   top: 0;
@@ -10,15 +13,18 @@ export const ComponentBox = styled.div<{ side: "row" | "row-reverse" }>`
   width: 100vw;
 `
 
-export const SidebarBox = styled.aside<{ shadowXOffset: number }>`
+export const SidebarBox = styled.aside<{ shadowSide: boolean }>`
   display: "flex";
   top: 0;
   bottom: 0;
   height: 100%;
   width: 50%;
-  box-shadow: 0px ${propOrElse(["shadowXOffset"], 2) ? 2 : -2}px 68px rgba(0, 0, 0, 0.288);
+  box-shadow: 0px ${propOrElse(["shadowSide"], false) ? LEFT : RIGHT}px 68px rgba(0, 0, 0, 0.288);
 `
-export const PortalSidebox = styled.aside<{ shadowXOffset: number; side: "left" | "right" }>`
+export const PortalSidebox = styled.aside<{
+  shadowSide: boolean
+  side: "left" | "right"
+}>`
   position: absolute;
   display: "flex";
   top: 0;
@@ -26,7 +32,7 @@ export const PortalSidebox = styled.aside<{ shadowXOffset: number; side: "left" 
   bottom: 0;
   height: 100%;
   width: 50%;
-  box-shadow: 0px ${propOrElse(["shadowXOffset"], 2) ? 2 : -2}px 68px rgba(0, 0, 0, 0.288);
+  box-shadow: 0px ${propOrElse(["shadowSide"], false) ? LEFT : RIGHT}px 68px rgba(0, 0, 0, 0.288);
 `
 
 export const InfoBox = styled.div`

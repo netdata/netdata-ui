@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 
@@ -68,7 +68,7 @@ sidebarStory.add(
 sidebarStory.add(
   "portaled sidebar",
   () => (
-    <PortalSidebar right={boolean("right", false)}>
+    <PortalSidebar right={boolean("right", false)} isOpen={boolean("isOpen", true)}>
       <SidebarContent>
         {text("sidebar children text", "this is sidebar children text")}
       </SidebarContent>
@@ -88,15 +88,30 @@ const Underlay = styled.div`
 
 sidebarStory.add(
   "portal sidebar as overlay",
-  () => (
-    <>
-      <Underlay>{text("underlay children", "this is text")}</Underlay>
-      <PortalSidebar right={boolean("right", true)}>
-        <SidebarContent>
-          {text("sidebar children text", "this is sidebar children text")}
-        </SidebarContent>
-      </PortalSidebar>
-    </>
-  ),
+  () => {
+    const [someText, setSomeText] = useState("opened")
+    const textHolder = ` - This is state-based text. It should be changed 
+      to "closed on sidebar close event" after you press "Esc"`
+    return (
+      <>
+        <Underlay>
+          {someText}
+          {textHolder}
+        </Underlay>
+        <PortalSidebar
+          closeOnEsc
+          isOpen
+          onClose={() => {
+            setSomeText("closed on sidebar close event")
+          }}
+          right={boolean("right", true)}
+        >
+          <SidebarContent>
+            {text("sidebar children text", "this is sidebar children text")}
+          </SidebarContent>
+        </PortalSidebar>
+      </>
+    )
+  },
   subData
 )

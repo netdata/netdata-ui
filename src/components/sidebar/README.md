@@ -29,19 +29,24 @@ interface SidebarProps {
 </Sidebar>
 ```
 
-### PortalSidebar
+## PortalSidebar
 
 This component is like `Sidebar` the only difference is that this component build on `react-portals` so it will be mounted in separate DOM element.
 
 ### Props
 
 ```typescript
-interface SidebarProps {
+interface PortalSidebarProps<T = any> {
+  isOpen: boolean
+  closeOnEsc?: boolean
+  onClose?: (args?: T) => void
   right?: boolean
-  children?: ReactNode
+  children?: NodeT
 }
 ```
-
+- `isOpen` - controls the sidebar state
+- `closeOnEsc` - Sidebar will be closed on `Esc` key press
+- `onClose` - this function will be fired on SidebarClose
 - `right` - side to render sidebar block, by default - **left**
 - `children` - content wich will be rendered to sidebar
 
@@ -61,7 +66,7 @@ const Underlay = styled.div`
 ```JSX
 <>
   <Underlay>Some text</Underlay>
-    <PortalSidebar right>
+  <PortalSidebar right>
     <SidebarContent>
       This is sidebar content
     <SidebarContent>

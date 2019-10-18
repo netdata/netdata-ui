@@ -26,6 +26,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-portal": "^4.2.0",
+    "react-use": "^12.7.1",
     "styled-components": "^4.4.0"
   },
   "repository": {
