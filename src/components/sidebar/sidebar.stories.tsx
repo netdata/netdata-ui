@@ -89,26 +89,27 @@ const Underlay = styled.div`
 sidebarStory.add(
   "portal sidebar as overlay",
   () => {
-    const [someText, setSomeText] = useState("opened")
-    const textHolder = ` - This is state-based text. It should be changed 
-      to "closed on sidebar close event" after you press "Esc"`
+    const [someText, setSomeText] = useState<string | null>("opened")
+    const textHolder = " - text should disappear after you press `Esc`"
     return (
       <>
         <Underlay>
           {someText}
           {textHolder}
         </Underlay>
-        <PortalSidebar
-          closeOnEsc
-          onClose={() => {
-            setSomeText("closed on sidebar close event")
-          }}
-          right={boolean("right", true)}
-        >
-          <SidebarContent>
-            {text("sidebar children text", "this is sidebar children text")}
-          </SidebarContent>
-        </PortalSidebar>
+        {someText && (
+          <PortalSidebar
+            closeOnEsc
+            onClose={() => {
+              setSomeText(null)
+            }}
+            right={boolean("right", true)}
+          >
+            <SidebarContent>
+              {text("sidebar children text", "this is sidebar children text")}
+            </SidebarContent>
+          </PortalSidebar>
+        )}
       </>
     )
   },
