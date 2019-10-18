@@ -17,7 +17,7 @@
     "outDir": "./lib"
   },
   "lib": ["es2015", "dom"],
-  "files": ["@typings/typings.d.ts"],
+  "files": ["@typings/typings.d.ts", "custom.d.ts"],
   "include": ["src/**/*", "index.ts"],
   "exclude": [
     "node_modules",
