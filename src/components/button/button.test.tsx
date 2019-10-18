@@ -21,7 +21,7 @@ const localeMock = {
 describe("Button component test", () => {
   it(" * should render with no props", () => {
     const { queryByText } = testWrapper<null>(Button, null, DefaultTheme, localeMock)
-    const result = queryByText("LABEL")
+    const result = queryByText("label")
     expect(result && result.textContent).not.toBeNull()
   })
 
@@ -32,7 +32,7 @@ describe("Button component test", () => {
       DefaultTheme,
       localeMock
     )
-    const result = queryByText("TEST PROP TEXT")
+    const result = queryByText("Test prop text")
     expect(result && result.textContent).not.toBeNull()
   })
 })
