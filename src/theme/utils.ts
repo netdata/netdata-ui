@@ -20,7 +20,7 @@ export interface WrappedTheme {
   theme: ContstructedTheme
 }
 
-export const propOrElse = <T>(pathName: string[], defaultValue: any) => (props: T) =>
+export const propOrElse = <T = any, R = any>(pathName: string[], defaultValue: R) => (props: T) =>
   pathOr(defaultValue, pathName, props)
 
 export const getOrElse = (pathName: string[], defaultValue: NumberOrStringT) => ({

@@ -45,8 +45,10 @@ sidebarStory.add(
 
 const SidebarContent = styled.div`
   display: flex;
+  flex-direction: column;
+  overflow: scroll;
   align-items: center;
-  justify-content: center;
+  justify-content: first baseline;
   background-color: #fff;
   height: 100%;
   width: 100%;
@@ -76,14 +78,38 @@ sidebarStory.add(
   ),
   subData
 )
+const Header = styled.div`
+  width: 100%;
+  background-color: ${getColor(["gray", "gallery"])};
+`
+sidebarStory.add(
+  "portaled with large list",
+  () => {
+    const list: number[] = []
+    for (let i = 0; i <= 100; i += 1) {
+      list.push(i)
+    }
+    return (
+      <PortalSidebar right={boolean("right", false)}>
+        <Header>I am header</Header>
+        <SidebarContent>
+          {list.map(e => (
+            <div key={e}>{e}</div>
+          ))}
+        </SidebarContent>
+      </PortalSidebar>
+    )
+  },
+  subData
+)
 
 const Underlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${getColor(["green", "greenHaze"])};
   height: 100vh;
   width: 100vw;
-  background-color: ${getColor(["green", "greenHaze"])};
 `
 
 sidebarStory.add(
