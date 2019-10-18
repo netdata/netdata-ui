@@ -2,7 +2,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { Button } from "@rmwc/button"
 import { CircularProgress } from "@rmwc/circular-progress"
-import "@rmwc/circular-progress/circular-progress.css"
+// import "@rmwc/circular-progress/circular-progress.css"
 import { getColor } from "../../theme/utils"
 
 export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps} />)`
