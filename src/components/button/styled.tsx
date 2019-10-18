@@ -25,7 +25,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           line-height: 16px;
           color: ${getColor(["white", "plain"])};
         `
-      case ButtonType.hollow:
+      case ButtonType.noFill:
         return css`
           background: ${getColor(["white", "plain"])};
           border-radius: 3px;
@@ -38,26 +38,24 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           font-size: 12px;
           line-height: 16px;
           color: ${getColor(["green", "greenHaze"])};
-        `
-      case ButtonType.bordered:
-        return css`
-          background: ${getColor(["green", "greenHaze"])};
-          border-radius: 3px;
-          border-color: ${getColor(["green", "algaeGreen"])};
-          width: 128px;
-          height: 40px;
-          // font-family: IBM Plex Sans;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 12px;
-          line-height: 16px;
-          color: ${getColor(["white", "plain"])};
+          &:hover {
+            border-color: ${getColor(["green", "hover"])};
+            border-width: 3px;
+          }
+          &:active {
+            background: ${getColor(["green", "malachite"])};
+          }
+          &:active {
+            background: ${getColor(["green", "malachite"])};
+            border-color: ${getColor(["green", "greenHaze"])};
+            border-width: 0px;
+          }
         `
       default:
         return css`
           background: ${getColor(["green", "greenHaze"])};
           border-radius: 3px;
-          border-color: ${getColor(["green", "greenHaze"])};
+          border-width: 0px;
           width: 128px;
           height: 40px;
           // font-family: IBM Plex Sans;
@@ -66,6 +64,15 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           font-size: 12px;
           line-height: 16px;
           color: ${getColor(["white", "plain"])};
+          &:hover {
+            border-color: ${getColor(["green", "hover"])};
+            border-width: 3px;
+          }
+          &:active {
+            background: ${getColor(["green", "malachite"])};
+            border-color: ${getColor(["green", "greenHaze"])};
+            border-width: 0px;
+          }
         `
     }
   }};
@@ -78,6 +85,3 @@ export const StyledCircularProgress = styled(({ ...otherProps }) => (
 
   `};
 `
-
-// background: ${getColor(["gray", "limedSpruce"])};
-// size="small"

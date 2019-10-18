@@ -3,9 +3,8 @@ import { StyledButton, StyledCircularProgress } from "./styled"
 
 export enum ButtonType {
   default = "default",
-  bordered = "bordered",
   disabled = "disabled",
-  hollow = "hollow",
+  noFill = "noFill",
 }
 
 export interface ButtonProps {
@@ -20,7 +19,7 @@ export const Button = ({
   label = "label",
   onClick = () => {},
   icon,
-  isLoading,
+  isLoading = false,
   type = ButtonType.default,
 }: ButtonProps) => {
   return (

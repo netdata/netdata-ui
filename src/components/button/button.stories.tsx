@@ -19,7 +19,7 @@ const subData = {
 }
 
 mockStory.add(
-  "Button",
+  "Button Default",
   () => {
     return (
       <Button
@@ -33,10 +33,10 @@ mockStory.add(
 )
 
 mockStory.add(
-  "Button Hollow",
+  "Button No Fill",
   () => (
     <Button
-      type={ButtonType.hollow}
+      type={ButtonType.noFill}
       onClick={action("clicked")}
       label={text("Label prop", "LABEL")}
     />
@@ -57,10 +57,37 @@ mockStory.add(
 )
 
 mockStory.add(
-  "Button Bordered",
+  "Button Icon",
   () => (
     <Button
-      type={ButtonType.bordered}
+      icon="add"
+      type={ButtonType.default}
+      onClick={action("clicked")}
+      label={text("Label prop", "LABEL")}
+    />
+  ),
+  subData
+)
+
+mockStory.add(
+  "Button Icon No Fill",
+  () => (
+    <Button
+      icon="add"
+      type={ButtonType.noFill}
+      onClick={action("clicked")}
+      label={text("Label prop", "LABEL")}
+    />
+  ),
+  subData
+)
+
+mockStory.add(
+  "Button Icon No Fill",
+  () => (
+    <Button
+      icon="add"
+      type={ButtonType.disabled}
       onClick={action("clicked")}
       label={text("Label prop", "LABEL")}
     />

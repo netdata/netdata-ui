@@ -12,6 +12,7 @@ const rawColors = {
     greenHaze: "#00AB44",
     algaeGreen: "#99DDB4",
     clearDay: "#F7FFFC",
+    hover: "#84D6A4",
   },
   red: {
     outrageousOrange: "#FF6037",
