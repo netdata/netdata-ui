@@ -67,11 +67,15 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           &:hover {
             border-color: ${getColor(["green", "hover"])};
             border-width: 3px;
+            width: 132px;
+            height: 44px;
           }
           &:active {
             background: ${getColor(["green", "malachite"])};
             border-color: ${getColor(["green", "greenHaze"])};
             border-width: 0px;
+            width: 132px;
+            height: 44px;
           }
         `
     }
