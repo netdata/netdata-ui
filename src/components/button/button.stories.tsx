@@ -81,16 +81,3 @@ mockStory.add(
   ),
   subData
 )
-
-mockStory.add(
-  "Button Icon No Fill",
-  () => (
-    <Button
-      icon="add"
-      type={ButtonType.disabled}
-      onClick={action("clicked")}
-      label={text("Label prop", "LABEL")}
-    />
-  ),
-  subData
-)
