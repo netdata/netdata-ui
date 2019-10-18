@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react"
 import { text } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
 import { Icon } from "."
+// @ts-ignore
 import readme from "./README.md"
 
 const iconStory = storiesOf("Icon", module)
@@ -26,11 +27,11 @@ const StyledContainer = styled.div`
 type sizeProp = "small" | "medium" | "large"
 
 iconStory.add(
-  "Cross",
+  "The X icon (pls change name)",
   () => {
     return (
       <StyledContainer>
-        <Icon name={text("name", "cross")} />
+        <Icon name={text("name", "x")} />
       </StyledContainer>
     )
   },
