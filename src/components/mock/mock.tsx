@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react"
+import React from "react"
 import { FormattedMessage, defineMessages } from "react-intl"
 import { TextContainer } from "./styled"
 
@@ -8,8 +8,6 @@ const messages = defineMessages({
     defaultMessage: "Click Me (en - default)",
   },
 })
-
-export type MockPropsT = { text?: string; onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void }
 
 export const Mock = ({ text = "default", onClick = () => {} }: MockPropsT) => (
   <>

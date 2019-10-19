@@ -1,4 +1,4 @@
-const rawColors = {
+const rawColors: RawColorsT = {
   gray: {
     limedSpruce: "#35414A",
     silverSand: "#B5B9BC",
@@ -29,9 +29,9 @@ const rawColors = {
   },
 }
 
-const appColors = {}
+const appColors: AppColorsT = {}
 
-export const colors = {
+export const colors: RawColorsT & AppColorsT = {
   ...appColors,
   ...rawColors,
 }

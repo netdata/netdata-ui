@@ -1,24 +1,10 @@
 import math from "polished/lib/math/math"
 import { mergeDeepRight, path, pathOr } from "ramda"
 
-export type ThemeAtom = string | number | { [key: string]: string | number | ThemeAtom }
-
-type NumberOrStringT = number | string
-
-export interface ContstructedTheme {
-  name: string
-  version: string
-  [key: string]: ThemeAtom
-}
-
 export const extendTheme = (
   theme: ContstructedTheme,
   extension: ContstructedTheme
 ): ContstructedTheme => mergeDeepRight(theme, extension)
-
-export interface WrappedTheme {
-  theme: ContstructedTheme
-}
 
 export const propOrElse = <T = any, R = any>(pathName: string[], defaultValue: R) => (props: T) =>
   pathOr(defaultValue, pathName, props)
