@@ -20,8 +20,6 @@ export const SidebarBox = styled.aside<SidebarBox>`
   bottom: 0;
   height: 100%;
   width: 50%;
-  box-shadow: 0px ${propOrElse<SidebarBox, boolean>(["shadowSide"], true) ? LEFT : RIGHT}px 68px
-    rgba(0, 0, 0, 0.288);
 `
 export const PortalSidebox = styled.aside<PortalSidebarbox>`
   position: absolute;
@@ -40,4 +38,6 @@ export const InfoBox = styled.div`
   display: flex;
   width: 50%;
   background-color: ${getColor(["green", "greenHaze"])};
+  box-shadow: inset 0px ${propOrElse<SidebarBox, boolean>(["shadowSide"], true) ? LEFT : RIGHT}px
+    68px rgba(0, 0, 0, 0.288);
 `

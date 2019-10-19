@@ -28,7 +28,7 @@ describe("Sidebar component test", () => {
     const result = queryByText(TEST_ANCHOR)
     expect(result && result.textContent).not.toBeNull()
   })
-  it(" * should render with children", () => {
+  it(" * should render with children and with content on sibling side", () => {
     const { queryByText } = testWrapper(
       Sidebar,
       { children: TEST_ANCHOR, info: TEST_INFO_ANCHOR },

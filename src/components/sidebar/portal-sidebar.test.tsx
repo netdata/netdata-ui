@@ -13,11 +13,6 @@ describe("PortalSidebar component test", () => {
     const aside = container && container.nextSibling && container.nextSibling.firstChild
     expect(aside && aside.nodeName).toBe("ASIDE")
   })
-  it(" * should not render with no props", () => {
-    const { container } = testWrapper(PortalSidebar, null, DefaultTheme, {})
-    const result = container.querySelector("aside")
-    expect(result).toBeNull()
-  })
   it(" * should render on the right side", () => {
     const { queryByText } = testWrapper(
       PortalSidebar,

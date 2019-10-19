@@ -16,7 +16,7 @@ const subData = {
   readme: {
     sidebar: readmeCleanup(readme),
   },
-  jest: ["portal.test.tsx", "portal-sidepan.test.tsx"],
+  jest: ["sidebar.test.tsx", "portal-sidebar.test.tsx"],
 }
 
 sidebarStory.add("empty", () => <Sidebar right={boolean("right", false)} />, subData)
