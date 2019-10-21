@@ -1,53 +1,50 @@
 type RawColorsT = {
   white: {
-    pure: string;
-  };
+    pure: string
+  }
   gray: {
-    limedSpruce: string;
-    silverSand: string;
-    gallery: string;
-  };
+    limedSpruce: string
+    silverSand: string
+    gallery: string
+  }
   green: {
-    malachite: string;
-    greenHaze: string;
-    algaeGreen: string;
-    clearDay: string;
-    hoverGreen: string;
-  };
+    malachite: string
+    greenHaze: string
+    algaeGreen: string
+    clearDay: string
+    hoverGreen: string
+  }
   red: {
-    outrageousOrange: string;
-    redOrange: string;
-    roseWhite: string;
-  };
+    outrageousOrange: string
+    redOrange: string
+    roseWhite: string
+  }
   yellow: {
-    amber: string;
-    safron: string;
-    orangeYellow: string;
-    safronMango: string;
-  };
+    amber: string
+    safron: string
+    orangeYellow: string
+    safronMango: string
+  }
   blue: {
-    blueBerry: string;
-    anakiwa: string;
-    anakiwaLight: string;
-    patternsBlue: string;
-  };
-};
+    blueBerry: string
+    anakiwa: string
+    anakiwaLight: string
+    patternsBlue: string
+  }
+}
 
-type AppColorsT = {};
+type AppColorsT = {}
 
-type NumberOrStringT = number | string;
+type NumberOrStringT = number | string
 
-type ThemeAtom =
-  | string
-  | number
-  | { [key: string]: string | number | ThemeAtom };
+type ThemeAtom = string | number | { [key: string]: string | number | ThemeAtom }
 
 interface ContstructedTheme {
-  name: string;
-  version: string;
-  [key: string]: ThemeAtom;
+  name: string
+  version: string
+  [key: string]: ThemeAtom
 }
 
 interface WrappedTheme {
-  theme: ContstructedTheme;
+  theme: ContstructedTheme
 }
