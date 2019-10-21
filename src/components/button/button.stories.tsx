@@ -51,10 +51,11 @@ mockStory.add(
   "Button Icon",
   () => (
     <Button
-      icon={<Icon name={text("name", "plus")} />}
+      icon={<Icon name={text("Icon name", "plus")} />}
       disabled={boolean("Disabled", false)}
       type={ButtonType.default}
       onClick={action("clicked")}
+      label={text("Label", "LABEL")}
     />
   ),
   subData
@@ -64,7 +65,7 @@ mockStory.add(
   "Button Icon No Fill",
   () => (
     <Button
-      icon={<Icon name={text("name", "+")} />}
+      icon={<Icon name={text("Icon name", "plus")} />}
       disabled={boolean("Disabled", false)}
       type={ButtonType.noFill}
       onClick={action("clicked")}

@@ -1,17 +1,11 @@
 import React from "react"
-import styled from "styled-components"
 import { iconsList } from "./icons-list"
+import { StyledIcon } from "./styled"
 
 interface Props {
   name: string
   size?: "small" | "medium" | "large"
   className?: string
-}
-
-const SIZES = {
-  small: "16px",
-  medium: "24px",
-  large: "40px",
 }
 
 const getSize = filename => {
@@ -23,11 +17,6 @@ const getSize = filename => {
   }
   return "medium"
 }
-
-export const StyledIcon = styled.svg<{ size: string }>`
-  height: ${({ size }) => SIZES[size]};
-  width: ${({ size }) => SIZES[size]};
-`
 
 export const Icon = ({ name, className, size }: Props) => {
   const iconSymbol = iconsList[name]

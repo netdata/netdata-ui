@@ -46,7 +46,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           line-height: 16px;
           color: ${getColor(["green", "greenHaze"])};
           &:hover {
-            border-color: ${getColor(["green", "hover"])};
+            border-color: ${getColor(["green", "hoverGreen"])};
             border-width: 3px;
             width: ${props.label ? "132px" : "44px"};
             height: 44px;
@@ -77,7 +77,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           line-height: 16px;
           color: ${getColor(["white", "pure"])};
           &:hover {
-            border-color: ${getColor(["green", "hover"])};
+            border-color: ${getColor(["green", "hoverGreen"])};
             border-width: 3px;
             width: ${props.label ? "132px" : "44px"};
             height: 44px;
