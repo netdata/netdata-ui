@@ -40,6 +40,7 @@ module.exports = async ({ config }) => {
           {
             loader: "svg-sprite-loader",
           },
+          "svgo-loader",
         ],
       },
     ]

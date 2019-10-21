@@ -71,6 +71,8 @@
     "storybook-addon-styled-component-theme": "^1.2.5",
     "storybook-readme": "^5.0.8",
     "svg-sprite-loader": "^4.1.6",
+    "svgo": "^1.3.0",
+    "svgo-loader": "^2.2.1",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3",
     "url-loader": "^2.2.0"

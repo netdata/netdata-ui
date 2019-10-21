@@ -50,10 +50,6 @@ iconStory.add(
   subData
 )
 
-// We could have control over SVG fill
-// But Figma add fill to the path, not svg
-// TBD if we need this, should be solved on Figma level
-// Or later we can try svgr-like utility
 const StyledPlus = styled(Icon)`
   stroke: red;
   border: 3px dotted pink;
