@@ -8,6 +8,7 @@ import Button from "."
 // @ts-ignore
 import readme from "./README.md"
 import { ButtonType } from "./button"
+import { Icon } from "../icon"
 
 const mockStory = storiesOf("Button", module)
 
@@ -50,11 +51,10 @@ mockStory.add(
   "Button Icon",
   () => (
     <Button
-      icon="add"
+      icon={<Icon name={text("name", "plus")} />}
       disabled={boolean("Disabled", false)}
       type={ButtonType.default}
       onClick={action("clicked")}
-      label={text("Label", "LABEL")}
     />
   ),
   subData
@@ -64,7 +64,7 @@ mockStory.add(
   "Button Icon No Fill",
   () => (
     <Button
-      icon="add"
+      icon={<Icon name={text("name", "+")} />}
       disabled={boolean("Disabled", false)}
       type={ButtonType.noFill}
       onClick={action("clicked")}

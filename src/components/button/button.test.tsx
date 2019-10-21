@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect"
-import { Button, ButtonProps } from "./button"
+import { Button, Props } from "./button"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 
@@ -26,7 +26,7 @@ describe("Button component test", () => {
   })
 
   it(" * should render with test prop", () => {
-    const { queryByText } = testWrapper<ButtonProps>(
+    const { queryByText } = testWrapper<Props>(
       Button,
       { label: "Test prop text" },
       DefaultTheme,

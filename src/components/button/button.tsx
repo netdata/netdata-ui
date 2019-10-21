@@ -6,7 +6,10 @@ export enum ButtonType {
   noFill = "noFill",
 }
 
-export interface ButtonProps {
+export interface Props {
+  id?: string
+  ref?: React.MutableRefObject<HTMLInputElement>
+  className?: string
   label?: string
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
   icon?: any
@@ -16,13 +19,13 @@ export interface ButtonProps {
 }
 
 export const Button = ({
-  label = "label",
+  label,
   onClick = () => {},
-  icon,
+  icon = null,
   isLoading = false,
   type = ButtonType.default,
   disabled = false,
-}: ButtonProps) => {
+}: Props) => {
   return (
     <StyledButton
       label={label}

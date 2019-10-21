@@ -3,10 +3,13 @@
 ## Props
 
 ```typescript
-interface ButtonProps {
+interface Props {
+  id?: string
+  ref?: React.MutableRefObject<HTMLInputElement>
+  className?: string
   label?: string
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
-  icon?: any
+  icon?: Icon
   isLoading?: boolean
   type?: ButtonType
   disabled?: boolean

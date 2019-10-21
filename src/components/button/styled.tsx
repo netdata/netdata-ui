@@ -15,7 +15,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
         background: ${getColor(["green", "greenHaze"])};
         border-radius: 3px;
         border-color: ${getColor(["green", "greenHaze"])};
-        width: 128px;
+        width: ${props.label ? "128px" : "40px"};
         height: 40px;
         // font-family: IBM Plex Sans;
         font-style: normal;
@@ -37,7 +37,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           background: ${getColor(["white", "plain"])};
           border-radius: 3px;
           border-color: ${getColor(["green", "greenHaze"])};
-          width: 128px;
+          width: ${props.label ? "128px" : "40px"};
           height: 40px;
           // font-family: IBM Plex Sans;
           font-style: normal;
@@ -48,14 +48,14 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           &:hover {
             border-color: ${getColor(["green", "hover"])};
             border-width: 3px;
-            width: 132px;
+            width: ${props.label ? "132px" : "44px"};
             height: 44px;
           }
           &:active {
             background: ${getColor(["green", "malachite"])};
             border-color: ${getColor(["green", "greenHaze"])};
             border-width: 0px;
-            width: 132px;
+            width: ${props.label ? "132px" : "44px"};
             height: 44px;
             color: ${getColor(["white", "plain"])};
           }
@@ -68,7 +68,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           background: ${getColor(["green", "greenHaze"])};
           border-radius: 3px;
           border-width: 0px;
-          width: 128px;
+          width: ${props.label ? "128px" : "40px"};
           height: 40px;
           // font-family: IBM Plex Sans;
           font-style: normal;
@@ -79,14 +79,14 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           &:hover {
             border-color: ${getColor(["green", "hover"])};
             border-width: 3px;
-            width: 132px;
+            width: ${props.label ? "132px" : "44px"};
             height: 44px;
           }
           &:active {
             background: ${getColor(["green", "malachite"])};
             border-color: ${getColor(["green", "greenHaze"])};
             border-width: 0px;
-            width: 132px;
+            width: ${props.label ? "132px" : "44px"};
             height: 44px;
           }
           &:focus {
