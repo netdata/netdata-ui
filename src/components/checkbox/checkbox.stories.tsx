@@ -30,6 +30,18 @@ checkBoxStory.add(
 )
 
 checkBoxStory.add(
+  "Disabled Checkbox",
+  () => {
+    const [checked, setChecked] = useState(false)
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setChecked(e.currentTarget.checked)
+    }
+    return <Checkbox disabled onChange={handleChange} checked={checked} />
+  },
+  subData
+)
+
+checkBoxStory.add(
   "Labeled Checkbox",
   () => {
     const [checked, setChecked] = useState(false)

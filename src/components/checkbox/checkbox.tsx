@@ -21,14 +21,21 @@ export interface CheckboxProps {
   disabled?: boolean
 }
 
-export const Checkbox = ({ checked, className, labelPosition, label, ...props }: CheckboxProps) => {
+export const Checkbox = ({
+  checked,
+  disabled,
+  className,
+  labelPosition,
+  label,
+  ...props
+}: CheckboxProps) => {
   return (
     <StyledLabel className={className}>
       <AccessibleArea />
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>
-        <HiddenCheckboxInput checked={checked} {...props} />
-        <StyledCheckbox checked={checked}>
+        <HiddenCheckboxInput disabled={disabled} checked={checked} {...props} />
+        <StyledCheckbox checked={checked} disabled={disabled}>
           <StyledIcon name="checkmark_s" />
         </StyledCheckbox>
       </CheckboxContainer>

@@ -27,15 +27,18 @@ export const HiddenCheckboxInput = styled.input.attrs({ type: "checkbox" })`
   width: 1px;
 `
 
-export const StyledCheckbox = styled.div<{ checked: boolean }>`
+export const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean }>`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 20px;
   height: 20px;
-  background: ${getColor(["white", "pure"])};
-  border: 1px solid ${getColor(["gray", "limedSpruce"])};
+  background: ${({ disabled }) =>
+    disabled ? getColor(["gray", "gallery"]) : getColor(["white", "pure"])};
+  border: 1px solid;
+  border-color: ${({ disabled }) =>
+    disabled ? getColor(["gray", "silverSand"]) : getColor(["gray", "limedSpruce"])};
   transition: all 150ms;
 
   ${HiddenCheckboxInput}:focus + & {
