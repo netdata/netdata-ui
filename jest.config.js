@@ -19,6 +19,7 @@ module.exports = {
   moduleNameMapper: {
     "^.+\\.(css|less|scss)$": "identity-obj-proxy",
     ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" }),
+    "\\.svg": "<rootDir>/src/__mocks__/filemock.tsx",
   },
   globals: {
     // All globals should be in upper case due webpack configuration

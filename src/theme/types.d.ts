@@ -1,4 +1,7 @@
 type RawColorsT = {
+  white: {
+    pure: string
+  }
   gray: {
     limedSpruce: string
     silverSand: string
