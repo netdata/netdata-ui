@@ -2,7 +2,7 @@
 
 ## Playground
 
-You can find latest **master** playground [here](https://netdata.github.io/netdata-ui/)
+You can find latest **master** storybook playground [here](https://netdata.github.io/netdata-ui/)
 
 ## Components
 
