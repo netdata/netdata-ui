@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Icon } from "../icon"
 import { getColor, getSizeUnit } from "../../theme/utils"
 
 export const CheckboxContainer = styled.div`
@@ -7,11 +8,10 @@ export const CheckboxContainer = styled.div`
   width: 20px;
   height: 20px;
 `
-// Could be changed to our standard icon
-export const Icon = styled.svg`
-  fill: none;
-  stroke: ${getColor(["green", "greenHaze"])};
-  stroke-width: 2px;
+
+export const StyledIcon = styled(Icon)`
+  flex-grow: 0;
+  flex-shrink: 0;
 `
 
 export const HiddenCheckboxInput = styled.input.attrs({ type: "checkbox" })`
@@ -29,7 +29,9 @@ export const HiddenCheckboxInput = styled.input.attrs({ type: "checkbox" })`
 
 export const StyledCheckbox = styled.div<{ checked: boolean }>`
   box-sizing: border-box;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20px;
   height: 20px;
   background: ${getColor(["white", "pure"])};
@@ -40,7 +42,7 @@ export const StyledCheckbox = styled.div<{ checked: boolean }>`
     box-shadow: 0 0 0 3px ${getColor(["gray", "gallery"])};
   }
 
-  ${Icon} {
+  ${StyledIcon} {
     visibility: ${props => (props.checked ? "visible" : "hidden")};
   }
 `

@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { iconsList } from "./icons-list"
 
-interface Props {
+export interface IconProps {
   name: string
   size?: "small" | "medium" | "large"
   className?: string
@@ -29,7 +29,7 @@ export const StyledIcon = styled.svg<{ size: string }>`
   width: ${({ size }) => SIZES[size]};
 `
 
-export const Icon = ({ name, className, size }: Props) => {
+export const Icon = ({ name, className, size }: IconProps) => {
   const iconSymbol = iconsList[name]
 
   if (!iconSymbol) {

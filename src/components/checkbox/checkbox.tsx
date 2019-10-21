@@ -1,11 +1,12 @@
 import React from "react"
+
 import {
   CheckboxContainer,
   HiddenCheckboxInput,
   StyledCheckbox,
-  Icon,
   StyledLabel,
   LabelText,
+  StyledIcon,
   AccessibleArea,
 } from "./styled"
 
@@ -17,6 +18,7 @@ export interface CheckboxProps {
   labelPosition?: "left" | "right"
   ref?: React.MutableRefObject<HTMLInputElement>
   className?: string
+  disabled?: boolean
 }
 
 export const Checkbox = ({ checked, className, labelPosition, label, ...props }: CheckboxProps) => {
@@ -27,9 +29,7 @@ export const Checkbox = ({ checked, className, labelPosition, label, ...props }:
       <CheckboxContainer>
         <HiddenCheckboxInput checked={checked} {...props} />
         <StyledCheckbox checked={checked}>
-          <Icon viewBox="0 0 24 24">
-            <polyline points="20 6 9 17 4 12" />
-          </Icon>
+          <StyledIcon name="checkmark_s" />
         </StyledCheckbox>
       </CheckboxContainer>
       {label && labelPosition === "right" && <LabelText right>{label}</LabelText>}
