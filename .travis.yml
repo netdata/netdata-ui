@@ -1,0 +1,15 @@
+language: "node_js"
+node_js: "12"
+
+before_script:
+  - npm run build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local_dir: storybook-static
+  repo: netdata/netdata-ui
+  target_branch: gh-pages
+  on:
+    branch: master
