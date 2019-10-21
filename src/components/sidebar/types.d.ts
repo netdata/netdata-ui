@@ -1,7 +1,7 @@
-type NodeT = import("react").ReactNode
+type ReactNode = import("react").ReactNode
 
 interface Component {
-  children?: NodeT
+  children?: ReactNode
 }
 
 interface ComponentBox extends Component {
@@ -15,7 +15,7 @@ interface PortalSidebarbox extends SidebarBox {
   side: "left" | "right"
 }
 interface SidebarProps extends Component {
-  info?: NodeT
+  info?: ReactNode
   right?: boolean
 }
 

@@ -28,8 +28,8 @@ export const PortalSidebox = styled.aside<PortalSidebarbox>`
   top: 0;
   ${propOrElse<PortalSidebarbox, string>(["side"], "left")}: 0;
   bottom: 0;
-  height: 100%;
-  width: 50%;
+  height: 100vh;
+  width: 50vw;
   box-shadow: 0px ${propOrElse<PortalSidebarbox, boolean>(["shadowSide"], true) ? LEFT : RIGHT}px
     68px rgba(0, 0, 0, 0.288);
 `
