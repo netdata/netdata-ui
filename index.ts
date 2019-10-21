@@ -1,4 +1,5 @@
 export { default as Mock } from "./src/components/mock"
+export { Icon, iconsList } from "./src/components/icon"
 export {
   extendTheme,
   ThemeAtom,
