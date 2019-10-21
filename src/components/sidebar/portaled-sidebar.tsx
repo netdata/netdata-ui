@@ -1,8 +1,15 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useEffect, ReactNode } from "react"
 import { Portal } from "react-portal"
 import { PortalSidebox } from "./styled"
 
 const ESCAPE_KEY = 27
+
+interface PortalSidebarProps<T = any> {
+  closeOnEsc?: boolean
+  onClose?: (args?: T) => void
+  right?: boolean
+  children?: ReactNode
+}
 
 export const PortalSidebar: FC<PortalSidebarProps> = ({
   children,
