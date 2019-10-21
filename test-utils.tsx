@@ -1,9 +1,11 @@
+/* eslint-disable spaced-comment */
+/// <reference types="./src/theme/types" />
+/* eslint-enable spaced-comment */
 import React, { FC } from "react"
 import { render } from "@testing-library/react"
 import { IntlProvider, createIntl } from "react-intl"
 import "@testing-library/jest-dom/extend-expect"
 import { ThemeProvider } from "styled-components"
-import { ThemeAtom } from "./src/theme"
 
 type ToBeTestedT<T> = FC<T>
 export function testWrapper<T, S = {}>(

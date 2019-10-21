@@ -22,7 +22,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
         font-weight: bold;
         font-size: 12px;
         line-height: 16px;
-        color: ${getColor(["white", "plain"])};
+        color: ${getColor(["white", "pure"])};
         &:active {
           border-width: 0px;
         }
@@ -34,7 +34,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
     switch (props.type) {
       case ButtonType.noFill:
         return css`
-          background: ${getColor(["white", "plain"])};
+          background: ${getColor(["white", "pure"])};
           border-radius: 3px;
           border-color: ${getColor(["green", "greenHaze"])};
           width: ${props.label ? "128px" : "40px"};
@@ -57,7 +57,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
             border-width: 0px;
             width: ${props.label ? "132px" : "44px"};
             height: 44px;
-            color: ${getColor(["white", "plain"])};
+            color: ${getColor(["white", "pure"])};
           }
           &:focus {
             outline: none;
@@ -75,7 +75,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           font-weight: bold;
           font-size: 12px;
           line-height: 16px;
-          color: ${getColor(["white", "plain"])};
+          color: ${getColor(["white", "pure"])};
           &:hover {
             border-color: ${getColor(["green", "hover"])};
             border-width: 3px;
