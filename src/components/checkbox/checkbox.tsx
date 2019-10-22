@@ -36,7 +36,7 @@ export const Checkbox = ({
       <CheckboxContainer>
         <HiddenCheckboxInput disabled={disabled} checked={checked} {...props} />
         <StyledCheckbox checked={checked} disabled={disabled}>
-          <StyledIcon name="checkmark_s" />
+          <StyledIcon name="checkmark_s" disabled={disabled} />
         </StyledCheckbox>
       </CheckboxContainer>
       {label && labelPosition === "right" && <LabelText right>{label}</LabelText>}

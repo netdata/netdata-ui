@@ -9,9 +9,11 @@ export const CheckboxContainer = styled.div`
   height: 20px;
 `
 
-export const StyledIcon = styled(Icon)`
+export const StyledIcon = styled(Icon)<{ disabled?: boolean }>`
   flex-grow: 0;
   flex-shrink: 0;
+  fill: ${({ disabled }) =>
+    disabled ? getColor(["gray", "silverSand"]) : getColor(["green", "greenHaze"])};
 `
 
 export const HiddenCheckboxInput = styled.input.attrs({ type: "checkbox" })`
