@@ -22,6 +22,7 @@ import trashcan from "./assets/trashcan.svg"
 import user from "./assets/user.svg"
 import warning from "./assets/warning.svg"
 import x from "./assets/x.svg"
+import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 
 export const iconsList = {
   alarm,
@@ -48,4 +49,5 @@ export const iconsList = {
   user,
   warning,
   x,
+  checkmark_partial_s,
 }
