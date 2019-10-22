@@ -55,6 +55,7 @@ export const StyledLabel = styled.label`
   cursor: pointer;
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
 `
 
 export const LabelText = styled.span<{ left?: boolean; right?: boolean }>`
