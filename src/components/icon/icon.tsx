@@ -2,7 +2,7 @@ import React from "react"
 import { iconsList } from "./icons-list"
 import { StyledIcon } from "./styled"
 
-interface Props {
+export interface IconProps {
   name: string
   size?: "small" | "medium" | "large"
   className?: string
@@ -18,7 +18,7 @@ const getSize = filename => {
   return "medium"
 }
 
-export const Icon = ({ name, className, size }: Props) => {
+export const Icon = ({ name, className, size }: IconProps) => {
   const iconSymbol = iconsList[name]
 
   if (!iconSymbol) {

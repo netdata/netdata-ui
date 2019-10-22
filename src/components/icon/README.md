@@ -20,7 +20,11 @@ be easily done on app level.
 
 ### How to add new icons
 
-Just add an .svg file to ./assets
+1. Add an .svg file to ./assets
+2. Add an export to the ./icons-list.ts
+
+Auto-consuming svg assets with require.context is disabled
+due to complications with jest/webpack difference.
 
 List of available Icons: TBD
 

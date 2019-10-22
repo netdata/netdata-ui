@@ -1,3 +1,4 @@
+import React from "react"
 import { addParameters, addDecorator, configure } from "@storybook/react"
 import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
@@ -6,6 +7,7 @@ import { withKnobs } from "@storybook/addon-knobs"
 import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import centered from "@storybook/addon-centered/react"
 import { DefaultTheme } from "../src/theme/default"
+import { GlobalStyles } from "../src/global-styles"
 
 import { messages } from "./localeMessages"
 
@@ -44,6 +46,13 @@ addParameters({
 })
 
 addDecorator(addReadme)
+
+addDecorator(story => (
+  <>
+    <GlobalStyles />
+    {story()}
+  </>
+))
 
 addDecorator(withThemesProvider([DefaultTheme]))
 
