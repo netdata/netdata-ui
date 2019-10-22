@@ -70,6 +70,7 @@
     "react-test-render": "^1.1.2",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.3",
+    "require-context": "^1.1.0",
     "rimraf": "^3.0.0",
     "storybook": "^5.1.11",
     "storybook-addon-intl": "^2.4.1",

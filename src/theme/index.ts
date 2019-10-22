@@ -6,4 +6,5 @@ export {
   getOrElse,
   getColor,
   propOrElse,
+  getGutterHeight,
 } from "./utils"
