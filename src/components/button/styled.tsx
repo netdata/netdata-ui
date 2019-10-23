@@ -45,6 +45,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
         return css`
           background: ${getColor(["white", "pure"])};
           border-radius: 3px;
+          border-style: solid;
           border-color: ${getColor(["green", "greenHaze"])};
           width: ${props.label ? "128px" : "40px"};
           height: 40px;
@@ -78,6 +79,9 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
           .rmwc-icon {
             margin-right: ${props.label ? "8px" : "0px"};
             height: 24px;
+          }
+          &.rmwc-icon path {
+              fill: ${getColor(["green", "malachite"])};
           }
         }
         `
