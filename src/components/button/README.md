@@ -18,8 +18,7 @@ interface Props {
 
 ## Button types
 
-````typescript
-
+```typescript
 export enum ButtonType {
   default = "default",
   noFill = "noFill",
@@ -32,7 +31,7 @@ export enum ButtonType {
 
 ```typescript
 const myButton: Button = <Button icon="add" onClick={this.myHandler} label="Press me" />
-````
+```
 
 ### No fill button
 

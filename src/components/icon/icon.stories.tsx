@@ -1,8 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
-import { text } from "@storybook/addon-knobs"
+import { select } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
+import { iconsList } from "./icons-list"
 import { Icon } from "."
 // @ts-ignore
 import readme from "./README.md"
@@ -24,14 +25,18 @@ const StyledContainer = styled.div`
   align-items: center;
 `
 
-type sizeProp = "small" | "medium" | "large"
+type SizePropT = "small" | "medium" | "large"
+
+const sizes: SizePropT[] = ["small", "medium", "large"]
+
+const icons: string[] = Object.keys(iconsList)
 
 iconStory.add(
   "The X icon (pls change name)",
   () => {
     return (
       <StyledContainer>
-        <Icon name={text("name", "x")} />
+        <Icon name={select("name", icons, "x")} />
       </StyledContainer>
     )
   },
@@ -43,7 +48,10 @@ iconStory.add(
   () => {
     return (
       <StyledContainer>
-        <Icon name={text("name", "gear")} size={text("size", "large") as sizeProp} />
+        <Icon
+          name={select("name", icons, "gear")}
+          size={select("size", sizes, "large") as SizePropT}
+        />
       </StyledContainer>
     )
   },
@@ -60,7 +68,7 @@ iconStory.add(
   () => {
     return (
       <StyledContainer>
-        <StyledPlus name={text("name", "plus")} />
+        <StyledPlus name={select("name", icons, "plus")} />
       </StyledContainer>
     )
   },

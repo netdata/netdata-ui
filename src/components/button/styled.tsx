@@ -1,6 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { Button } from "@rmwc/button"
+// import "@material/button/dist/mdc.button.css" from "identity-obj-proxy"
 import { CircularProgress } from "@rmwc/circular-progress"
 // import "@rmwc/circular-progress/circular-progress.css"
 import { getColor } from "../../theme/utils"
@@ -21,7 +22,6 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
         font-style: normal;
         font-weight: bold;
         font-size: 12px;
-        line-height: 16px;
         color: ${getColor(["white", "pure"])};
         &:active {
           border-width: 0px;
@@ -43,7 +43,6 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           font-style: normal;
           font-weight: bold;
           font-size: 12px;
-          line-height: 16px;
           color: ${getColor(["green", "greenHaze"])};
           &:hover {
             border-color: ${getColor(["green", "hoverGreen"])};
@@ -74,7 +73,6 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           font-style: normal;
           font-weight: bold;
           font-size: 12px;
-          line-height: 16px;
           color: ${getColor(["white", "pure"])};
           &:hover {
             border-color: ${getColor(["green", "hoverGreen"])};
@@ -92,6 +90,31 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           &:focus {
             outline: none;
           }
+
+          --mdc-theme-primary: #24aee9;
+          --mdc-theme-secondary: #e539ff;
+          --mdc-theme-error: #b00020;
+          --mdc-theme-background: ${getColor(["green", "greenHaze"])};
+          --mdc-theme-surface: #37474f;
+          --mdc-theme-on-primary: rgba(255, 255, 255, 0.87);
+          --mdc-theme-on-secondary: rgba(0, 0, 0, 0.87);
+          --mdc-theme-on-surface: rgba(255, 255, 255, 0.87);
+          --mdc-theme-on-error: #fff;
+          --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 1);
+          --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.7);
+          --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.5);
+          --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.5);
+          --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.5);
+          --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
+          --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
+          --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
+          --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
+          --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
+          --mdc-theme-text-primary-on-dark: white;
+          --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
+          --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
+          --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
+          --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
         `
     }
   }};

@@ -1,5 +1,5 @@
-export { default as Button } from "./src/components/button"
-export { default as Sidebar, PortalSidebar } from "./src/components/sidebar"
+export { Button } from "./src/components/button"
+export { Sidebar, PortalSidebar } from "./src/components/sidebar"
 export { Icon, IconProps, iconsList } from "./src/components/icon"
 export {
   extendTheme,
