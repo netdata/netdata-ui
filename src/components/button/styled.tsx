@@ -17,6 +17,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
         cursor: not-allowed;
         background: ${getColor(["green", "greenHaze"])};
         border-radius: 3px;
+        border-style: solid;
         border-color: ${getColor(["green", "greenHaze"])};
         width: ${props.label ? "128px" : "40px"};
         height: 40px;
