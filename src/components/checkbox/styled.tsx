@@ -16,12 +16,9 @@ export const StyledIcon = styled(Icon)<{ disabled?: boolean }>`
     disabled ? getColor(["gray", "silverSand"]) : getColor(["green", "greenHaze"])};
 `
 
-export const HiddenCheckboxInput = styled.input.attrs(
-  ({ indeterminate }: { indeterminate?: boolean }) => ({
-    type: "checkbox",
-    indeterminate: Boolean(indeterminate),
-  })
-)`
+export const HiddenCheckboxInput = styled.input.attrs({
+  type: "checkbox",
+})`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

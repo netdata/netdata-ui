@@ -44,13 +44,7 @@ export const Checkbox = ({
       <AccessibleArea />
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>
-        <HiddenCheckboxInput
-          disabled={disabled}
-          checked={checked}
-          indeterminate={indeterminate}
-          ref={checkboxInput}
-          {...props}
-        />
+        <HiddenCheckboxInput disabled={disabled} checked={checked} ref={checkboxInput} {...props} />
         <StyledCheckbox indeterminate={indeterminate} checked={checked} disabled={disabled}>
           <StyledIcon
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
