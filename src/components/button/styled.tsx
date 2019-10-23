@@ -3,6 +3,8 @@ import styled, { css } from "styled-components"
 import { Button } from "@rmwc/button"
 import { getColor } from "../../theme/utils"
 import { ButtonType } from "./button"
+import { CircularProgress } from "@rmwc/circular-progress"
+// import "@rmwc/circular-progress/circular-progress.css"
 
 export const StyledButton = styled(({ label, ...otherProps }) => (
   <Button label={label} {...otherProps} />
@@ -118,12 +120,6 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
   }};
 `
 
-/*
-RMWC Progress indication inside buttons TBD
-
-// import { CircularProgress } from "@rmwc/circular-progress"
-// import "@rmwc/circular-progress/circular-progress.css"
-
 export const StyledCircularProgress = styled(({ ...otherProps }) => (
   <CircularProgress {...otherProps} />
 ))`
@@ -131,6 +127,11 @@ export const StyledCircularProgress = styled(({ ...otherProps }) => (
 
   `};
 `
+
+/*
+RMWC Progress indication inside buttons TBD
+
+
 
 RMWC ThemeProvider vars
           --mdc-theme-primary: ${getColor(["green", "greenHaze"])};
