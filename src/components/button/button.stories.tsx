@@ -1,16 +1,17 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
-import { text, boolean } from "@storybook/addon-knobs"
+import { text, boolean, select } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
 import { Button } from "."
 
 // @ts-ignore
 import readme from "./README.md"
 import { ButtonType } from "./button"
-import { Icon } from "../icon"
+import { Icon, iconsList } from "../icon"
 
 const buttonStory = storiesOf("Button", module)
+const icons: string[] = Object.keys(iconsList)
 
 const subData = {
   readme: {
@@ -25,7 +26,6 @@ buttonStory.add(
     return (
       <Button
         disabled={boolean("Disabled", false)}
-        type={ButtonType.default}
         label={text("Label prop", "LABEL")}
         onClick={action("clicked")}
       />
@@ -51,9 +51,8 @@ buttonStory.add(
   "Button Icon",
   () => (
     <Button
-      icon={<Icon name={text("Icon name", "plus")} />}
+      icon={<Icon name={select("name", icons, "plus")} />}
       disabled={boolean("Disabled", false)}
-      type={ButtonType.default}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />
@@ -65,7 +64,7 @@ buttonStory.add(
   "Button Icon No Fill",
   () => (
     <Button
-      icon={<Icon name={text("Icon name", "plus")} />}
+      icon={<Icon name={select("name", icons, "plus")} />}
       disabled={boolean("Disabled", false)}
       type={ButtonType.noFill}
       onClick={action("clicked")}
