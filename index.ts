@@ -1,4 +1,3 @@
-export { default as Mock } from "./src/components/mock"
 export { Sidebar, PortalSidebar } from "./src/components/sidebar"
 export { Icon, IconProps, iconsList } from "./src/components/icon"
 export {
