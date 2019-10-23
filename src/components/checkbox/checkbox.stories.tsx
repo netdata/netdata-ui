@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
-import { text, boolean } from "@storybook/addon-knobs"
+import { text, select, boolean } from "@storybook/addon-knobs"
 import { Checkbox } from "."
 import { getGutterHeight } from "../../theme/utils"
 import { readmeCleanup } from "../../../utils/readme"
@@ -9,6 +9,9 @@ import { readmeCleanup } from "../../../utils/readme"
 import readme from "./README.md"
 
 const checkBoxStory = storiesOf("Checkbox", module)
+type LeftOrRight = "left" | "right"
+
+const position: LeftOrRight[] = ["left", "right"]
 
 const subData = {
   readme: {
@@ -59,7 +62,7 @@ checkBoxStory.add(
     }
     return (
       <Checkbox
-        labelPosition={text("Label Position", "left") as "left" | "right"}
+        labelPosition={select("Label Position", position, "left") as LeftOrRight}
         label={text("Label", "Do you like Soviet Russia?")}
         onChange={handleChange}
         checked={checked}
