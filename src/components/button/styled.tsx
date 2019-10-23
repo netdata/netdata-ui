@@ -53,6 +53,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
           font-size: 12px;
           color: ${getColor(["green", "greenHaze"])};
           &:hover {
+            border-style: solid;
             border-color: ${getColor(["green", "hoverGreen"])};
             border-width: 3px;
             width: ${props.label ? "132px" : "44px"};
@@ -74,7 +75,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
           flex-flow: row nowrap;
           align-items: center;
           .rmwc-icon {
-            margin-right: ${props.label ? "12px" : "0px"};
+            margin-right: ${props.label ? "8px" : "0px"};
             height: 24px;
           }
         `
@@ -90,6 +91,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
           font-size: 12px;
           color: ${getColor(["white", "pure"])};
           &:hover {
+            border-style: solid;
             border-color: ${getColor(["green", "hoverGreen"])};
             border-width: 3px;
             width: ${props.label ? "134px" : "46px"};
@@ -110,7 +112,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
           flex-flow: row nowrap;
           align-items: center;
           .rmwc-icon {
-            margin-right: ${props.label ? "12px" : "0px"};
+            margin-right: ${props.label ? "8px" : "0px"};
             height: 24px;
           }
         `
