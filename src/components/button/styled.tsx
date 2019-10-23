@@ -79,6 +79,7 @@ export const StyledButton = styled(({ label, ...otherProps }) => (
             margin-right: ${props.label ? "8px" : "0px"};
             height: 24px;
           }
+        }
         `
       default:
         return css`

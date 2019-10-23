@@ -19,7 +19,7 @@ export interface ButtonProps {
 }
 
 export const Button = ({
-  label,
+  label = "LABEL",
   onClick = () => {},
   icon = null,
   isLoading = false,
@@ -28,12 +28,11 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <StyledButton
+      label={label}
       onClick={onClick}
       icon={isLoading ? <StyledCircularProgress /> : icon}
       type={type}
       disabled={disabled}
-    >
-      {label}
-    </StyledButton>
+    />
   )
 }
