@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 
 import {
   CheckboxContainer,
@@ -19,6 +19,7 @@ export interface CheckboxProps {
   ref?: React.MutableRefObject<HTMLInputElement>
   className?: string
   disabled?: boolean
+  indeterminate?: boolean
 }
 
 export const Checkbox = ({
@@ -27,16 +28,34 @@ export const Checkbox = ({
   className,
   labelPosition,
   label,
+  indeterminate,
+  ref,
   ...props
 }: CheckboxProps) => {
+  const preparedRef = useRef(null)
+  const checkboxInput = ref || preparedRef
+
+  if (checkboxInput.current) {
+    checkboxInput.current.indeterminate = Boolean(indeterminate)
+  }
+
   return (
     <StyledLabel className={className}>
       <AccessibleArea />
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>
-        <HiddenCheckboxInput disabled={disabled} checked={checked} {...props} />
-        <StyledCheckbox checked={checked} disabled={disabled}>
-          <StyledIcon name="checkmark_s" disabled={disabled} />
+        <HiddenCheckboxInput
+          disabled={disabled}
+          checked={checked}
+          indeterminate={indeterminate}
+          ref={checkboxInput}
+          {...props}
+        />
+        <StyledCheckbox indeterminate={indeterminate} checked={checked} disabled={disabled}>
+          <StyledIcon
+            name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
+            disabled={disabled}
+          />
         </StyledCheckbox>
       </CheckboxContainer>
       {label && labelPosition === "right" && <LabelText right>{label}</LabelText>}
