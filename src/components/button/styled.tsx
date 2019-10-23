@@ -1,13 +1,14 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { Button } from "@rmwc/button"
-// import "@material/button/dist/mdc.button.css" from "identity-obj-proxy"
 import { CircularProgress } from "@rmwc/circular-progress"
 // import "@rmwc/circular-progress/circular-progress.css"
 import { getColor } from "../../theme/utils"
 import { ButtonType } from "./button"
 
-export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps} />)`
+export const StyledButton = styled(({ label, ...otherProps }) => (
+  <Button label={label} {...otherProps} />
+))`
   ${props => {
     if (props.disabled) {
       return css`
@@ -18,7 +19,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
         border-color: ${getColor(["green", "greenHaze"])};
         width: ${props.label ? "128px" : "40px"};
         height: 40px;
-        // font-family: IBM Plex Sans;
+        font-family: IBM Plex Sans;
         font-style: normal;
         font-weight: bold;
         font-size: 12px;
@@ -28,6 +29,13 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
         }
         &:focus {
           outline: none;
+        }
+        display: ${props.icon ? "flex" : "block"};
+        flex-flow: row nowrap;
+        align-items: center;
+        .rmwc-icon {
+          margin-right: ${props.label ? "12px" : "0px"};
+          height: 24px;
         }
       `
     }
@@ -39,7 +47,7 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           border-color: ${getColor(["green", "greenHaze"])};
           width: ${props.label ? "128px" : "40px"};
           height: 40px;
-          // font-family: IBM Plex Sans;
+          font-family: IBM Plex Sans;
           font-style: normal;
           font-weight: bold;
           font-size: 12px;
@@ -52,14 +60,22 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           }
           &:active {
             background: ${getColor(["green", "malachite"])};
-            border-color: ${getColor(["green", "greenHaze"])};
-            border-width: 0px;
+            border-style: solid;
+            border-color: ${getColor(["green", "malachite"])};
+            border-width: 3px;
             width: ${props.label ? "132px" : "44px"};
             height: 44px;
             color: ${getColor(["white", "pure"])};
           }
           &:focus {
             outline: none;
+          }
+          display: ${props.icon ? "flex" : "block"};
+          flex-flow: row nowrap;
+          align-items: center;
+          .rmwc-icon {
+            margin-right: ${props.label ? "12px" : "0px"};
+            height: 24px;
           }
         `
       default:
@@ -69,31 +85,51 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           border-width: 0px;
           width: ${props.label ? "128px" : "40px"};
           height: 40px;
-          // font-family: IBM Plex Sans;
-          font-style: normal;
+          font-family: IBM Plex Sans;
           font-weight: bold;
           font-size: 12px;
           color: ${getColor(["white", "pure"])};
           &:hover {
             border-color: ${getColor(["green", "hoverGreen"])};
             border-width: 3px;
-            width: ${props.label ? "132px" : "44px"};
-            height: 44px;
+            width: ${props.label ? "134px" : "46px"};
+            height: 46px;
           }
           &:active {
             background: ${getColor(["green", "malachite"])};
-            border-color: ${getColor(["green", "greenHaze"])};
-            border-width: 0px;
-            width: ${props.label ? "132px" : "44px"};
-            height: 44px;
+            border-style: solid;
+            border-color: ${getColor(["green", "malachite"])};
+            border-width: 3px;
+            width: ${props.label ? "134px" : "46px"};
+            height: 46px;
           }
           &:focus {
             outline: none;
           }
+          display: ${props.icon ? "flex" : "block"};
+          flex-flow: row nowrap;
+          align-items: center;
+          .rmwc-icon {
+            margin-right: ${props.label ? "12px" : "0px"};
+            height: 24px;
+          }
+        `
+    }
+  }};
+`
 
-          --mdc-theme-primary: #24aee9;
-          --mdc-theme-secondary: #e539ff;
-          --mdc-theme-error: #b00020;
+export const StyledCircularProgress = styled(({ ...otherProps }) => (
+  <CircularProgress {...otherProps} />
+))`
+  ${() => `
+
+  `};
+`
+/*
+RMWC ThemeProvider var
+          --mdc-theme-primary: ${getColor(["green", "greenHaze"])};
+          --mdc-theme-secondary: ${getColor(["green", "greenHaze"])};
+          --mdc-theme-error: ${getColor(["green", "greenHaze"])};
           --mdc-theme-background: ${getColor(["green", "greenHaze"])};
           --mdc-theme-surface: #37474f;
           --mdc-theme-on-primary: rgba(255, 255, 255, 0.87);
@@ -115,15 +151,4 @@ export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps
           --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
           --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
           --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
-        `
-    }
-  }};
-`
-
-export const StyledCircularProgress = styled(({ ...otherProps }) => (
-  <CircularProgress {...otherProps} />
-))`
-  ${() => `
-
-  `};
-`
+*/
