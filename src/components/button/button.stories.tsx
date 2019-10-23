@@ -10,7 +10,7 @@ import readme from "./README.md"
 import { ButtonType } from "./button"
 import { Icon } from "../icon"
 
-const mockStory = storiesOf("Button", module)
+const buttonStory = storiesOf("Button", module)
 
 const subData = {
   readme: {
@@ -19,7 +19,7 @@ const subData = {
   jest: ["button.test.tsx"],
 }
 
-mockStory.add(
+buttonStory.add(
   "Button Default",
   () => {
     return (
@@ -34,7 +34,7 @@ mockStory.add(
   subData
 )
 
-mockStory.add(
+buttonStory.add(
   "Button No Fill",
   () => (
     <Button
@@ -47,7 +47,7 @@ mockStory.add(
   subData
 )
 
-mockStory.add(
+buttonStory.add(
   "Button Icon",
   () => (
     <Button
@@ -61,7 +61,7 @@ mockStory.add(
   subData
 )
 
-mockStory.add(
+buttonStory.add(
   "Button Icon No Fill",
   () => (
     <Button
