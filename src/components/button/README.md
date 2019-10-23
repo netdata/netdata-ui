@@ -30,7 +30,9 @@ export enum ButtonType {
 ### Default button
 
 ```typescript
-const myButton: Button = <Button icon="add" onClick={this.myHandler} label="Press me" />
+const myButton: Button = (
+  <Button icon={<Icon name="github" />} onClick={this.myHandler} label="Press me" />
+)
 ```
 
 ### No fill button
@@ -50,7 +52,7 @@ const myButton: Button = (
   <Button
     disabled={true}
     type={ButtonTypes.default}
-    icon="add"
+    icon={<Icon name="plus" />}
     onClick={this.myHandler}
     label="Press me"
   />
