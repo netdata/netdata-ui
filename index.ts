@@ -1,4 +1,4 @@
-export { Button } from "./src/components/button"
+export { Button, ButtonProps } from "./src/components/button"
 export { Sidebar, PortalSidebar } from "./src/components/sidebar"
 export { Icon, IconProps, iconsList } from "./src/components/icon"
 export {

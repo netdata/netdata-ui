@@ -1,4 +1,4 @@
-import React from "react"
+import React, { SyntheticEvent } from "react"
 import { StyledButton, StyledCircularProgress } from "./styled"
 
 export enum ButtonType {
@@ -11,10 +11,10 @@ export interface ButtonProps {
   ref?: React.MutableRefObject<HTMLInputElement>
   className?: string
   label?: string
-  onClick?: (e: any) => void
+  onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
   icon?: any
   isLoading?: boolean
-  type?: any
+  type?: ButtonType
   disabled?: boolean
 }
 

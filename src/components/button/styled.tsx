@@ -6,6 +6,7 @@ import { CircularProgress } from "@rmwc/circular-progress"
 import { getColor } from "../../theme/utils"
 import { ButtonType } from "./button"
 
+// export const StyledButton = styled(({ ...otherProps }) => <Button {...otherProps} />)`
 export const StyledButton = styled(({ label, ...otherProps }) => (
   <Button label={label} {...otherProps} />
 ))`
