@@ -31,7 +31,7 @@ export const Button = ({
     <StyledButton
       label={label}
       onClick={onClick}
-      isLoading={isLoading}
+      // isLoading={isLoading}
       icon={isLoading ? <StyledCircularProgress /> : <Icon name={icon} />}
       type={type}
       disabled={disabled}
