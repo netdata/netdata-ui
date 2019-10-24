@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect"
-import { Button, Props } from "./button"
+import { Button, ButtonProps } from "./button"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 
@@ -20,7 +20,7 @@ const localeMock = {
 
 describe("Button component test", () => {
   it(" * should render with test prop", () => {
-    const { queryByText } = testWrapper<Props>(
+    const { queryByText } = testWrapper<ButtonProps>(
       Button,
       { label: "Test prop text" },
       DefaultTheme,

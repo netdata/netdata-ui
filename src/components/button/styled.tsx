@@ -79,7 +79,7 @@ const buttonTemplates = new Map([
             height: 24px;
             width: 24px;
           }
-          &.rmwc-icon path {
+          .rmwc-icon path {
               fill: ${getColor(["green", "malachite"])};
           }
         }
