@@ -13,3 +13,4 @@ export {
 export { DefaultTheme } from "./src/theme/default"
 export { devices } from "./src/media"
 export { Checkbox, CheckboxProps } from "./src/components/checkbox"
+export { stylesReset } from "./src/styles-reset"
