@@ -1,5 +1,6 @@
 import React, { SyntheticEvent } from "react"
 import { StyledButton, StyledCircularProgress } from "./styled"
+import { Icon } from "../icon"
 
 export enum ButtonType {
   default = "default",
@@ -30,9 +31,10 @@ export const Button = ({
     <StyledButton
       label={label}
       onClick={onClick}
-      icon={isLoading ? <StyledCircularProgress /> : icon}
+      icon={isLoading ? <StyledCircularProgress /> : <Icon name={icon} />}
       type={type}
       disabled={disabled}
+      isLoading={isLoading}
     />
   )
 }

@@ -8,7 +8,7 @@ import { Button } from "."
 // @ts-ignore
 import readme from "./README.md"
 import { ButtonType } from "./button"
-import { Icon, iconsList } from "../icon"
+import { iconsList } from "../icon"
 
 const buttonStory = storiesOf("Button", module)
 const icons: string[] = Object.keys(iconsList)
@@ -22,15 +22,13 @@ const subData = {
 
 buttonStory.add(
   "Button Default",
-  () => {
-    return (
-      <Button
-        disabled={boolean("Disabled", false)}
-        label={text("Label prop", "LABEL")}
-        onClick={action("clicked")}
-      />
-    )
-  },
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      label={text("Label prop", "LABEL")}
+      onClick={action("clicked")}
+    />
+  ),
   subData
 )
 
@@ -51,7 +49,7 @@ buttonStory.add(
   "Button Icon",
   () => (
     <Button
-      icon={<Icon name={select("name", icons, "plus")} />}
+      icon={select("name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
@@ -64,7 +62,7 @@ buttonStory.add(
   "Button Icon No Fill",
   () => (
     <Button
-      icon={<Icon name={select("name", icons, "plus")} />}
+      icon={select("name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       type={ButtonType.noFill}
       onClick={action("clicked")}
@@ -73,3 +71,16 @@ buttonStory.add(
   ),
   subData
 )
+
+// buttonStory.add(
+//   "Button Loading",
+//   () => (
+//     <Button
+//       isLoading={boolean("Is Loading", true)}
+//       disabled={boolean("Disabled", false)}
+//       label={text("Label prop", "LABEL")}
+//       onClick={action("clicked")}
+//     />
+//   ),
+//   subData
+// )

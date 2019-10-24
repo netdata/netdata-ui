@@ -1,4 +1,4 @@
-export { Button, ButtonProps } from "./src/components/button"
+export { Button, ButtonProps, ButtonType } from "./src/components/button"
 export { Sidebar, PortalSidebar } from "./src/components/sidebar"
 export { Icon, IconProps, iconsList } from "./src/components/icon"
 export {
@@ -8,7 +8,8 @@ export {
   calcSize,
   getOrElse,
   propOrElse,
-  getColor, // getGutterHeight,
+  getColor,
+  getGutterHeight,
 } from "./src/theme"
 export { DefaultTheme } from "./src/theme/default"
 export { devices } from "./src/media"
