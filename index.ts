@@ -1,3 +1,4 @@
+export { Button, ButtonProps, ButtonType } from "./src/components/button"
 export { Sidebar, PortalSidebar } from "./src/components/sidebar"
 export { Icon, IconProps, iconsList } from "./src/components/icon"
 export {

@@ -27,7 +27,9 @@
     "react-dom": "^16.10.2",
     "react-portal": "^4.2.0",
     "react-use": "^12.7.1",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "@rmwc/button": "^5.7",
+    "@rmwc/circular-progress": "^5.7"
   },
   "repository": {
     "type": "git",
