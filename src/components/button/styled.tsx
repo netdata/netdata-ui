@@ -6,120 +6,62 @@ import { getColor } from "../../theme/utils"
 
 const buttonTemplates = new Map([
   [
-    "disabled",
-    (label: string, icon: any, isLoading: boolean) => css`
-      opacity: 0.6;
-      cursor: not-allowed;
-      background: ${getColor(["green", "greenHaze"])};
-      border-radius: 3px;
-      border-width: 0px;
-      border-style: solid;
-      border-color: ${getColor(["green", "greenHaze"])};
-      width: ${label ? "128px" : "40px"};
-      height: 40px;
-      font-family: IBM Plex Sans;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 12px;
-      color: ${getColor(["white", "pure"])};
-      &:active {
-        border-width: 0px;
-      }
-      &:focus {
-        outline: none;
-      }
-      display: ${icon.props.name || isLoading ? "flex" : "block"};
-      flex-flow: row nowrap;
-      align-items: center;
-      .rmwc-icon {
-        margin-right: ${(label && icon.props.name) || isLoading ? "8px" : "0px"};
-        height: 24px;
-        width: 24px;
-      }
-    `,
-  ],
-  [
-    "noFill",
-    (label: string, icon: any, isLoading: boolean) => css`
-          background: ${getColor(["white", "pure"])};
-          border-radius: 3px;
-          border-style: solid;
-          border-color: ${getColor(["green", "greenHaze"])};
-          width: ${label ? "128px" : "40px"};
-          height: 40px;
-          font-family: IBM Plex Sans;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 12px;
-          color: ${getColor(["green", "greenHaze"])};
-          &:hover {
-            border-style: solid;
-            border-color: ${getColor(["green", "hoverGreen"])};
-            border-width: 3px;
-            width: ${label ? "132px" : "44px"};
-            height: 44px;
-          }
-          &:active {
-            background: ${getColor(["green", "malachite"])};
-            border-style: solid;
-            border-color: ${getColor(["green", "malachite"])};
-            border-width: 3px;
-            width: ${label ? "132px" : "44px"};
-            height: 44px;
-            color: ${getColor(["white", "pure"])};
-          }
-          &:focus {
-            outline: none;
-          }
-          display: ${icon.props.name || isLoading ? "flex" : "block"};
-          flex-flow: row nowrap;
-          align-items: center;
-          .rmwc-icon {
-            margin-right: ${(label && icon.props.name) || isLoading ? "8px" : "0px"};
-            height: 24px;
-            width: 24px;
-          }
-          .rmwc-icon path {
-              fill: ${getColor(["green", "malachite"])};
-          }
-        }
-        `,
-  ],
-  [
     "default",
-    (label: string, icon: any, isLoading: boolean) => css`
-      background: ${getColor(["green", "greenHaze"])};
+    (props: any) => css`
+      div {
+        width: ${props.label ? "134px" : "46px"};
+        height: 46px;
+      }
+      opacity: ${props.disabled ? 0.6 : 1.0};
+      cursor: ${props.disabled ? "not-allowed" : "pointer"};
+      background: ${
+        props.type === "noFill" ? getColor(["white", "pure"]) : getColor(["green", "greenHaze"])
+      };
+      border-color: ${getColor(["green", "greenHaze"])}
+      border-style: solid;
       border-radius: 3px;
-      border-width: 0px;
-      width: ${label ? "128px" : "40px"};
+      border-width: ${props.type === "noFill" ? "1px;" : "0px"}
+      width: ${props.label ? "128px" : "40px"};
       height: 40px;
       font-family: IBM Plex Sans;
       font-weight: bold;
       font-size: 12px;
-      color: ${getColor(["white", "pure"])};
+      color: ${
+        props.type === "noFill" ? getColor(["green", "greenHaze"]) : getColor(["white", "pure"])
+      };
       &:hover {
-        border-style: solid;
-        border-color: ${getColor(["green", "hoverGreen"])};
+        border-color: ${
+          props.disabled
+            ? getColor(["transparent", "fullyTransparent"])
+            : getColor(["green", "hoverGreen"])
+        };
         border-width: 3px;
-        width: ${label ? "134px" : "46px"};
-        height: 46px;
+        border-radius: 6px;
+        width: ${props.label ? "134px" : "46px"};
+        height: ${props.disabled ? "40px" : "46px"}
       }
       &:active {
-        background: ${getColor(["green", "malachite"])};
-        border-style: solid;
-        border-color: ${getColor(["green", "malachite"])};
+        color: ${getColor(["white", "pure"])}        
+        background: ${
+          props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "malachite"])
+        };
+        border-color: ${
+          props.disabled
+            ? getColor(["transparent", "fullyTransparent"])
+            : getColor(["green", "malachite"])
+        };
         border-width: 3px;
-        width: ${label ? "134px" : "46px"};
-        height: 46px;
-      }
+        border-radius: 6px;
+        width: ${props.label ? "134px" : "46px"};
+        height: ${props.disabled ? "40px" : "46px"}
       &:focus {
         outline: none;
       }
-      display: ${icon.props.name || isLoading ? "flex" : "block"};
+      display: ${props.icon.props.name || props.isLoading ? "flex" : "block"};
       flex-flow: row nowrap;
       align-items: center;
       .rmwc-icon {
-        margin-right: ${(label && icon.props.name) || isLoading ? "8px" : "0px"};
+        margin-right: ${(props.label && props.icon.props.name) || props.isLoading ? "8px" : "0px"};
         height: 24px;
         width: 24px;
       }
@@ -128,15 +70,13 @@ const buttonTemplates = new Map([
 ])
 
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
-  <Button label={label} icon={icon} {...otherProps} />
+  <div>
+    <Button label={label} icon={icon} {...otherProps} />
+  </div>
 ))`
   ${props => {
-    if (props.disabled) {
-      const template = buttonTemplates.get("disabled")
-      return template ? template(props.label, props.icon, props.isLoading) : css``
-    }
-    const template = buttonTemplates.get(props.type)
-    return template ? template(props.label, props.icon, props.isLoading) : css``
+    const template = buttonTemplates.get("default")
+    return template ? template(props) : css``
   }};
 `
 
