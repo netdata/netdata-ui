@@ -3,140 +3,153 @@ import styled, { css } from "styled-components"
 import { Button } from "@rmwc/button"
 import { CircularProgress } from "@rmwc/circular-progress"
 import { getColor } from "../../theme/utils"
+import { ButtonProps } from "./button"
 
-const buttonTemplates = new Map([
+const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
-    "disabled",
-    (label: string, icon: any, isLoading: boolean) => css`
-      opacity: 0.6;
-      cursor: not-allowed;
-      background: ${getColor(["green", "greenHaze"])};
-      border-radius: 3px;
-      border-width: 0px;
-      border-style: solid;
-      border-color: ${getColor(["green", "greenHaze"])};
-      width: ${label ? "128px" : "40px"};
-      height: 40px;
-      font-family: IBM Plex Sans;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 12px;
-      color: ${getColor(["white", "pure"])};
-      &:active {
-        border-width: 0px;
-      }
-      &:focus {
-        outline: none;
-      }
-      display: ${icon.props.name || isLoading ? "flex" : "block"};
-      flex-flow: row nowrap;
-      align-items: center;
-      .rmwc-icon {
-        margin-right: ${(label && icon.props.name) || isLoading ? "8px" : "0px"};
-        height: 24px;
-        width: 24px;
-      }
-    `,
+    "divWidth",
+    (props: ButtonProps) => {
+      return props.label ? "134px" : "46px"
+    },
   ],
   [
-    "noFill",
-    (label: string, icon: any, isLoading: boolean) => css`
-          background: ${getColor(["white", "pure"])};
-          border-radius: 3px;
-          border-style: solid;
-          border-color: ${getColor(["green", "greenHaze"])};
-          width: ${label ? "128px" : "40px"};
-          height: 40px;
-          font-family: IBM Plex Sans;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 12px;
-          color: ${getColor(["green", "greenHaze"])};
-          &:hover {
-            border-style: solid;
-            border-color: ${getColor(["green", "hoverGreen"])};
-            border-width: 3px;
-            width: ${label ? "132px" : "44px"};
-            height: 44px;
-          }
-          &:active {
-            background: ${getColor(["green", "malachite"])};
-            border-style: solid;
-            border-color: ${getColor(["green", "malachite"])};
-            border-width: 3px;
-            width: ${label ? "132px" : "44px"};
-            height: 44px;
-            color: ${getColor(["white", "pure"])};
-          }
-          &:focus {
-            outline: none;
-          }
-          display: ${icon.props.name || isLoading ? "flex" : "block"};
-          flex-flow: row nowrap;
-          align-items: center;
-          .rmwc-icon {
-            margin-right: ${(label && icon.props.name) || isLoading ? "8px" : "0px"};
-            height: 24px;
-            width: 24px;
-          }
-          .rmwc-icon path {
-              fill: ${getColor(["green", "malachite"])};
-          }
-        }
-        `,
+    "buttonWidthFocus",
+    (props: ButtonProps) => {
+      if (props.label) {
+        return props.disabled ? "128px" : "134px"
+      }
+      return props.disabled ? "40px" : "46px"
+    },
   ],
   [
-    "default",
-    (label: string, icon: any, isLoading: boolean) => css`
-      background: ${getColor(["green", "greenHaze"])};
-      border-radius: 3px;
-      border-width: 0px;
-      width: ${label ? "128px" : "40px"};
-      height: 40px;
-      font-family: IBM Plex Sans;
-      font-weight: bold;
-      font-size: 12px;
-      color: ${getColor(["white", "pure"])};
-      &:hover {
-        border-style: solid;
-        border-color: ${getColor(["green", "hoverGreen"])};
-        border-width: 3px;
-        width: ${label ? "134px" : "46px"};
-        height: 46px;
+    "buttonWidthNormal",
+    (props: ButtonProps) => {
+      return props.label ? "128px" : "40px"
+    },
+  ],
+  [
+    "buttonHeightFocus",
+    (props: ButtonProps) => {
+      return props.disabled ? "40px" : "46px"
+    },
+  ],
+  [
+    "buttonColorNormal",
+    (props: ButtonProps) => {
+      if (props.type === "noFill") {
+        return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["white", "pure"])
       }
-      &:active {
-        background: ${getColor(["green", "malachite"])};
-        border-style: solid;
-        border-color: ${getColor(["green", "malachite"])};
-        border-width: 3px;
-        width: ${label ? "134px" : "46px"};
-        height: 46px;
+      return getColor(["green", "greenHaze"])
+    },
+  ],
+  [
+    "buttonColorFocus",
+    (props: ButtonProps) => {
+      return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "malachite"])
+    },
+  ],
+  [
+    "buttonTextColor",
+    (props: ButtonProps) => {
+      if (props.type === "noFill") {
+        return props.disabled ? getColor(["white", "pure"]) : getColor(["green", "greenHaze"])
       }
-      &:focus {
-        outline: none;
+      return getColor(["white", "pure"])
+    },
+  ],
+  [
+    "borderWidthNormal",
+    (props: ButtonProps) => {
+      if (props.type === "noFill") {
+        return "1px"
       }
-      display: ${icon.props.name || isLoading ? "flex" : "block"};
-      flex-flow: row nowrap;
-      align-items: center;
-      .rmwc-icon {
-        margin-right: ${(label && icon.props.name) || isLoading ? "8px" : "0px"};
-        height: 24px;
-        width: 24px;
+      return props.disabled ? "0px" : "0px"
+    },
+  ],
+  [
+    "borderWidthFocus",
+    (props: ButtonProps) => {
+      if (props.type === "noFill") {
+        return props.disabled ? "1px" : "3px"
       }
-    `,
+      return props.disabled ? "0px" : "3px"
+    },
+  ],
+  [
+    "borderColor",
+    (props: ButtonProps) => {
+      return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "hoverGreen"])
+    },
+  ],
+  [
+    "borderColorFocus",
+    (props: ButtonProps) => {
+      return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "malachite"])
+    },
   ],
 ])
 
+const buttonProps = (propertyName: string, props: ButtonProps): string => {
+  const propertyFunction = buttonPropsMap.get(propertyName)
+  if (propertyFunction) {
+    return propertyFunction(props)
+  }
+  return "1px"
+}
+
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
-  <Button label={label} icon={icon} {...otherProps} />
+  <div>
+    <Button label={label} icon={icon} {...otherProps} />
+  </div>
 ))`
   ${props => {
-    if (props.disabled) {
-      const template = buttonTemplates.get("disabled")
-      return template ? template(props.label, props.icon, props.isLoading) : css``
+    return css`
+    div {
+      width: ${buttonProps("divWidth", props)};
+          height: 46px;
     }
-    const template = buttonTemplates.get(props.type)
-    return template ? template(props.label, props.icon, props.isLoading) : css``
+    &:focus {
+      outline: none;
+    }
+    opacity: ${props.disabled ? 0.6 : 1.0};
+    cursor: ${props.disabled ? "not-allowed" : "pointer"};
+    background: ${buttonProps("buttonColorNormal", props)};
+    border-color: ${getColor(["green", "greenHaze"])}
+    border-style: solid;
+    border-radius: 3px;
+    border-width: ${buttonProps("borderWidthNormal", props)};
+    width: ${buttonProps("buttonWidthNormal", props)};
+    height: 40px;
+    font-family: IBM Plex Sans;
+    font-weight: bold;
+    font-size: 12px;
+    color: ${buttonProps("buttonTextColor", props)};
+    &:hover {
+      // background: ${buttonProps("buttonColorFocus", props)};
+      border-color: ${buttonProps("borderColor", props)};
+      border-width: ${buttonProps("borderWidthFocus", props)};
+      border-radius: ${props.disabled ? "3px" : "6px"};
+      width: ${buttonProps("buttonWidthFocus", props)};
+      height: ${buttonProps("buttonHeightFocus", props)};
+    }
+    &:active {
+      color: ${getColor(["white", "pure"])}        
+      background: ${buttonProps("buttonColorFocus", props)};
+      border-color: ${buttonProps("borderColorFocus", props)};
+      border-width: ${buttonProps("borderWidthFocus", props)};
+      border-radius: ${props.disabled ? "3px" : "6px"};
+      width: ${buttonProps("buttonWidthFocus", props)};
+      height: ${buttonProps("buttonHeightFocus", props)};
+    }
+    display: ${props.icon.props.name || props.isLoading ? "flex" : "block"};
+    flex-flow: row nowrap;
+    align-items: center;
+    .rmwc-icon {
+      margin-right: ${(props.label && props.icon.props.name) || props.isLoading ? "8px" : "0px"};
+      height: 24px;
+      width: 24px;
+    }
+  `
   }};
 `
 

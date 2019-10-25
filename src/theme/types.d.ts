@@ -1,7 +1,4 @@
 type RawColorsT = {
-  transparent: {
-    transparent: string
-  }
   white: {
     pure: string
   }

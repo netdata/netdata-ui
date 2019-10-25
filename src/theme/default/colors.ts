@@ -1,7 +1,4 @@
 const rawColors: RawColorsT = {
-  transparent: {
-    transparent: "transparent",
-  },
   white: {
     pure: "#FFF",
   },
