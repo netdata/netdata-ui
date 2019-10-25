@@ -1,8 +1,4 @@
 const rawColors: RawColorsT = {
-  transparent: {
-    fullyTransparent: "rgba(0, 0, 0, 0.0)",
-    semiTransparent: "rgba(0, 0, 0, 0.5)",
-  },
   white: {
     pure: "#FFF",
   },
