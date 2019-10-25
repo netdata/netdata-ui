@@ -2,7 +2,7 @@ import "@testing-library/jest-dom/extend-expect"
 import { fireEvent } from "@testing-library/react"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
-import { MockedCheckbox } from "./checkbox.mock"
+import { MockedCheckbox, MockedCheckboxList } from "./checkbox.mock"
 
 describe("Checkbox test", () => {
   it(" * should render with required props", () => {
@@ -27,5 +27,14 @@ describe("Checkbox test", () => {
     fireEvent.click(checkbox)
     fireEvent.click(checkbox)
     expect(checkbox.checked).toBe(false)
+  })
+
+  it(" * should support indeterminate state for checkboxes list", () => {
+    const { container } = testWrapper<null>(MockedCheckboxList, null, DefaultTheme, null)
+    const checkboxesList = container.querySelectorAll("input")
+    const mainCheckbox = checkboxesList[0]
+    const childCheckbox = checkboxesList[1]
+    fireEvent.click(childCheckbox)
+    expect(mainCheckbox.indeterminate).toBe(true)
   })
 })

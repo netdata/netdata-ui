@@ -13,4 +13,4 @@ export {
 } from "./src/theme"
 export { DefaultTheme } from "./src/theme/default"
 export { devices } from "./src/media"
-export { Checkbox, CheckboxProps } from "./src/components/checkbox"
+export { Checkbox, CheckboxProps, useCheckboxesList } from "./src/components/checkbox"

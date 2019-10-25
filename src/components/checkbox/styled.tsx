@@ -16,7 +16,9 @@ export const StyledIcon = styled(Icon)<{ disabled?: boolean }>`
     disabled ? getColor(["gray", "silverSand"]) : getColor(["green", "greenHaze"])};
 `
 
-export const HiddenCheckboxInput = styled.input.attrs({ type: "checkbox" })`
+export const HiddenCheckboxInput = styled.input.attrs({
+  type: "checkbox",
+})`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -29,7 +31,11 @@ export const HiddenCheckboxInput = styled.input.attrs({ type: "checkbox" })`
   width: 1px;
 `
 
-export const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean }>`
+export const StyledCheckbox = styled.div<{
+  checked: boolean
+  disabled?: boolean
+  indeterminate?: boolean
+}>`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -48,7 +54,10 @@ export const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean 
   }
 
   ${StyledIcon} {
-    visibility: ${props => (props.checked ? "visible" : "hidden")};
+    visibility: ${props => {
+      if (props.indeterminate) return "visible"
+      return props.checked ? "visible" : "hidden"
+    }};
   }
 `
 
