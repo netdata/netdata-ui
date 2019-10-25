@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
 import { text, select, boolean } from "@storybook/addon-knobs"
-import { Checkbox } from "."
+import { Checkbox, useCheckboxesList } from "."
 import { getGutterHeight } from "../../theme/utils"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
@@ -73,7 +73,12 @@ checkBoxStory.add(
   subData
 )
 
+const MasterCheckbox = styled(Checkbox)`
+  margin-bottom: ${getGutterHeight};
+`
+
 const StyledCheckbox = styled(Checkbox)`
+  margin-left: 10px;
   margin-bottom: ${getGutterHeight};
 `
 
@@ -86,11 +91,23 @@ checkBoxStory.add(
     const [checkedTwo, setCheckedTwo] = useState(false)
     const [checkedThree, setCheckedThree] = useState(false)
 
+    const valuesList = [checkedOne, checkedTwo, checkedThree]
+    const handlersList = [setCheckedOne, setCheckedTwo, setCheckedThree]
+
+    const [allChecked, indeterminate, switchAll] = useCheckboxesList(valuesList, handlersList)
+
     const handleChange = (setter: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setter(e.currentTarget.checked)
     }
+
     return (
       <CheckboxGroup>
+        <MasterCheckbox
+          label="The Boss checkbox"
+          checked={allChecked}
+          onChange={switchAll}
+          indeterminate={indeterminate}
+        />
         <StyledCheckbox
           label="Do you like greek salad?"
           onChange={handleChange(setCheckedTwo)}
