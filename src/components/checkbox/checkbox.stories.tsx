@@ -8,7 +8,7 @@ import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 
-const checkBoxStory = storiesOf("Checkbox", module)
+const checkBoxStory = storiesOf("COMPONENTS|Controls/Checkbox", module)
 type LeftOrRight = "left" | "right"
 
 const position: LeftOrRight[] = ["left", "right"]

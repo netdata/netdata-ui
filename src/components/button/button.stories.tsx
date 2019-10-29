@@ -10,7 +10,7 @@ import readme from "./README.md"
 import { ButtonType } from "./button"
 import { iconsList } from "../icon"
 
-const buttonStory = storiesOf("Button", module)
+const buttonStory = storiesOf("COMPONENTS|Controls/Button", module)
 const icons: string[] = Object.keys(iconsList)
 
 const subData = {
@@ -46,6 +46,32 @@ buttonStory.add(
 )
 
 buttonStory.add(
+  "Button Borderless",
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      type={ButtonType.borderLess}
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+buttonStory.add(
+  "Button Icon Borderless",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      type={ButtonType.borderLess}
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
   "Button Icon",
   () => (
     <Button
@@ -67,6 +93,31 @@ buttonStory.add(
       type={ButtonType.noFill}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Action",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Action No Fill",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+      type={ButtonType.noFill}
     />
   ),
   subData

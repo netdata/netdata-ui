@@ -10,7 +10,7 @@ import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 
-const sidebarStory = storiesOf("Sidebar", module)
+const sidebarStory = storiesOf("COMPONENTS|Layout/Sidebar", module)
 
 const subData = {
   readme: {

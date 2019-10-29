@@ -8,7 +8,7 @@ import { Icon } from "."
 // @ts-ignore
 import readme from "./README.md"
 
-const iconStory = storiesOf("Icon", module)
+const iconStory = storiesOf("COMPONENTS|Utils/Icon", module)
 
 const subData = {
   readme: {
