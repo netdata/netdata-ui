@@ -8,10 +8,6 @@ import H5 from "./H5"
 import H6 from "./H6"
 import Text from "./Text"
 import TextSmall from "./TextSmall"
-import TextLarge from "./TextNano"
-import UppercaseLarge from "./UppercaseLarge"
-import Uppercase from "./Uppercase"
-import Caption from "./Caption"
 import { List, ListItem } from "./List"
 import { Button } from "../button"
 import TextFemto from "./TextFemto"
@@ -50,6 +46,7 @@ storiesOf("COMPONENTS|Utils", module)
     <div
       style={{
         display: "flex",
+
         justifyContent: "space-around",
         width: "100vw",
         alignItems: "center",
