@@ -27,3 +27,14 @@ https://fonts.google.com/specimen/IBM+Plex+Sans
   <TextFemto>TextFemto: The five boxing wizards jump quickly.</TextFemto>
 </div>
 ```
+
+### Lists
+
+```typescript
+<List>
+  <ListItem>My list item 1</ListItem>
+  <ListItem>My list item 2 and my list item 2-2</ListItem>
+  <ListItem>My list item 3</ListItem>
+  <ListItem>My list item 4</ListItem>
+</List>
+```
