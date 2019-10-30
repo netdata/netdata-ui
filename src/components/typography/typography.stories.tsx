@@ -24,9 +24,6 @@ const headers = (
 const texts = (
   <div>
     <div>
-      <Button label="Button" />
-    </div>
-    <div>
       <Text>Text: (Regular) The five boxing wizards jump quickly.</Text>
     </div>
     <div>
@@ -41,19 +38,26 @@ const texts = (
   </div>
 )
 
+const controls = (
+  <>
+    <Button label="Button" />
+  </>
+)
+
 storiesOf("COMPONENTS|Utils", module)
   .add("Typography", () => (
     <div
       style={{
         display: "flex",
-
         justifyContent: "space-around",
         width: "100vw",
+        flexFlow: "column",
         alignItems: "center",
       }}
     >
       {headers}
       {texts}
+      {controls}
     </div>
   ))
   .add("List", () => (
