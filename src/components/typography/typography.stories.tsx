@@ -1,17 +1,14 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
-import H1 from "./H1"
-import H2 from "./H2"
-import H3 from "./H3"
-import H4 from "./H4"
-import H5 from "./H5"
-import H6 from "./H6"
-import Text from "./Text"
-import TextSmall from "./TextSmall"
+import { H3 } from "./H3"
+import { H4 } from "./H4"
+import { H5 } from "./H5"
+import { Text } from "./Text"
+import { TextSmall } from "./TextSmall"
 import { List, ListItem } from "./List"
 import { Button } from "../button"
-import TextFemto from "./TextFemto"
-import TextNano from "./TextNano"
+import { TextFemto } from "./TextFemto"
+import { TextNano } from "./TextNano"
 
 const headers = (
   <div>
@@ -61,8 +58,6 @@ storiesOf("COMPONENTS|Utils", module)
       <br></br>
       <br></br>
       {texts}
-      <br></br>
-      <br></br>
       <br></br>
       <br></br>
       {controls}

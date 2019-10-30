@@ -2,7 +2,7 @@
 
 ## General info
 
-Based on IBM Plex Sans
+Based on `IBM Plex Sans`
 https://fonts.google.com/specimen/IBM+Plex+Sans
 
 ## Typical usage
