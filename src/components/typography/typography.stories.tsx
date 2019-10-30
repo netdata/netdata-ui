@@ -52,11 +52,19 @@ storiesOf("COMPONENTS|Utils", module)
         justifyContent: "space-around",
         width: "100vw",
         flexFlow: "column",
-        alignItems: "center",
+        alignItems: "left",
+        padding: "20px",
+        margin: "20px",
       }}
     >
       {headers}
+      <br></br>
+      <br></br>
       {texts}
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       {controls}
     </div>
   ))
