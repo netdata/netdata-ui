@@ -1,0 +1,29 @@
+# Typography
+
+## General info
+
+Based on IBM Plex Sans
+https://fonts.google.com/specimen/IBM+Plex+Sans
+
+## Typical usage
+
+### Titles
+
+```typescript
+<div>
+  <H3>H3: Title Big. The five boxing wizards jump quickly.</H3>
+  <H4>H4: Title Regular. The five boxing wizards jump quickly.</H4>
+  <H5>H5: Title Small. The five boxing wizards jump quickly.</H5>
+</div>
+```
+
+### Text
+
+```typescript
+<div>
+  <Text>Text: (Regular) The five boxing wizards jump quickly.</Text>
+  <TextSmall>TextSmall: The five boxing wizards jump quickly.</TextSmall>
+  <TextNano>TextNano: The five boxing wizards jump quickly.</TextNano>
+  <TextFemto>TextFemto: The five boxing wizards jump quickly.</TextFemto>
+</div>
+```
