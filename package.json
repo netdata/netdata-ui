@@ -15,7 +15,8 @@
     "build": "npm run _drop_native && npm run testOut && build-storybook",
     "clean": "./node_modules/rimraf/bin.js ./lib",
     "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "release": "npm run ts-bundle && npm publish"
   },
   "keywords": [
     "uikit",
