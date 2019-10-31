@@ -1,10 +1,10 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
-    "./lib"
+    "/lib"
   ],
   "scripts": {
     "_drop_native": "./node_modules/rimraf/bin.js node_modules/@types/react-native/",
