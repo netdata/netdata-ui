@@ -21,6 +21,7 @@ https://fonts.google.com/specimen/IBM+Plex+Sans
 
 ```typescript
 <div>
+  <TextBig>TextBig: The five boxing wizards jump quickly.</TextBig>
   <Text>Text: (Regular) The five boxing wizards jump quickly.</Text>
   <TextSmall>TextSmall: The five boxing wizards jump quickly.</TextSmall>
   <TextNano>TextNano: The five boxing wizards jump quickly.</TextNano>
