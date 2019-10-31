@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
@@ -16,8 +16,7 @@
     "clean": "./node_modules/rimraf/bin.js ./lib",
     "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6 && node copy-assets",
     "test": "jest --env=jsdom",
-    "postinstall": "install-peers",
-    "prepare": "npm run ts-bundle"
+    "prepare": "install-peers && npm run ts-bundle"
   },
   "keywords": [
     "uikit",
