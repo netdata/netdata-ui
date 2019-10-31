@@ -14,9 +14,9 @@
     "build-storybook": "build-storybook -c .storybook -o public",
     "build": "npm run _drop_native && npm run testOut && build-storybook",
     "clean": "./node_modules/rimraf/bin.js ./lib",
-    "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6",
+    "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6 && node copy-assets",
     "test": "jest --env=jsdom",
-    "release": "npm run ts-bundle && npm publish"
+    "prepare": "npm run ts-bundle"
   },
   "keywords": [
     "uikit",
@@ -62,6 +62,7 @@
     "@typescript-eslint/parser": "^2.3.3",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "cpx": "^1.5.0",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.3",
