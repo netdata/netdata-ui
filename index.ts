@@ -13,4 +13,5 @@ export {
 } from "./src/theme"
 export { DefaultTheme } from "./src/theme/default"
 export { devices } from "./src/media"
+export * from "./src/mixins"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./src/components/checkbox"

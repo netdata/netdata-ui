@@ -1,8 +1,8 @@
 import styled from "styled-components"
+import { text } from "../../mixins"
 
 export const TextSmall = styled.span`
+  ${text}
   font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
   line-height: 16px;
 `

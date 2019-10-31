@@ -1,8 +1,8 @@
 import styled from "styled-components"
+import { title } from "../../mixins"
 
 export const H1 = styled.h1`
+  ${title}
   font-size: 24px;
-  font-weight: bold;
-  font-style: normal;
   line-height: 28px;
 `
