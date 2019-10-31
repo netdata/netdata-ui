@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, FC } from "react"
 
 import {
   CheckboxContainer,
@@ -22,7 +22,7 @@ export interface CheckboxProps {
   indeterminate?: boolean
 }
 
-export const Checkbox = ({
+export const Checkbox: FC<CheckboxProps> = ({
   checked,
   disabled,
   className,

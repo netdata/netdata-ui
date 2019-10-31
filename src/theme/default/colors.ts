@@ -1,3 +1,5 @@
+import { RawColorsT, AppColorsT } from "../declarations"
+
 const rawColors: RawColorsT = {
   white: {
     pure: "#FFF",
