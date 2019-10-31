@@ -16,6 +16,7 @@
     "clean": "./node_modules/rimraf/bin.js ./lib",
     "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6 && node copy-assets",
     "test": "jest --env=jsdom",
+    "postinstall": "install-peers",
     "prepare": "npm run ts-bundle"
   },
   "keywords": [
@@ -27,13 +28,15 @@
   "dependencies": {
     "polished": "^3.4.1",
     "ramda": "^0.26.1",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
     "react-portal": "^4.2.0",
     "react-use": "^12.7.1",
-    "styled-components": "^4.4.0",
     "@rmwc/button": "^5.7",
     "@rmwc/circular-progress": "^5.7"
+  },
+  "peerDependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "styled-components": "^4.4.0"
   },
   "repository": {
     "type": "git",
@@ -64,6 +67,7 @@
     "babel-loader": "^8.0.6",
     "cpx": "^1.5.0",
     "eslint": "^6.5.1",
+    "install-peers-cli": "^2.1.1",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.3",
     "jsdom": "^15.1.1",
