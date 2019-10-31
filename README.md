@@ -5,6 +5,15 @@
 - `squash-merge` is a default PR merge strategy
 - after any merge, NPM version should be published (in future to be moved to CI)
 - versions are `major` (breaking changes, large refactors), `minor` (new component added), and `patch` (small changes)
+- please add declaration of exported components to provide nice typings for users.
+
+```typescript
+// BAD
+export const MyComponent = (props: PropsT) => <>...</>
+
+// GOOD
+export const MyComponent: FC<PropsT> = (props: PropsT) => <>...</>
+```
 
 ## Playground
 

@@ -1,5 +1,6 @@
 import math from "polished/lib/math/math"
 import { mergeDeepRight, path, pathOr } from "ramda"
+import { ContstructedTheme, NumberOrStringT, WrappedTheme } from "./declarations"
 
 export const extendTheme = (
   theme: ContstructedTheme,
