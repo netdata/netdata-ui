@@ -1,4 +1,4 @@
-export type ReactNode = import("react").ReactNode
+import { ReactNode } from "react"
 
 export interface Component {
   children?: ReactNode

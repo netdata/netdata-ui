@@ -25,17 +25,17 @@
   "author": "netdata frontend team",
   "license": "ISC",
   "dependencies": {
+    "@rmwc/button": "^5.7",
+    "@rmwc/circular-progress": "^5.7",
     "polished": "^3.4.1",
     "ramda": "^0.26.1",
     "react-portal": "^4.2.0",
-    "react-use": "^12.7.1",
-    "@rmwc/button": "^5.7",
-    "@rmwc/circular-progress": "^5.7"
+    "react-use": "^12.7.1"
   },
   "peerDependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.1"
   },
   "repository": {
     "type": "git",
@@ -60,6 +60,7 @@
     "@types/react-portal": "^4.0.2",
     "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "^4.1.19",
+    "styled-components": "^4.4.1",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
     "awesome-typescript-loader": "^5.2.1",
