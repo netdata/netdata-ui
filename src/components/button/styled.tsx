@@ -8,13 +8,13 @@ import { ButtonProps } from "./button"
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "divWidth",
-    (props: ButtonProps) => {
+    props => {
       return props.label ? "134px" : "46px"
     },
   ],
   [
     "buttonWidthFocus",
-    (props: ButtonProps) => {
+    props => {
       if (props.label) {
         return props.disabled ? "128px" : "134px"
       }
@@ -23,19 +23,19 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "buttonWidthNormal",
-    (props: ButtonProps) => {
+    props => {
       return props.label ? "128px" : "40px"
     },
   ],
   [
     "buttonHeightFocus",
-    (props: ButtonProps) => {
+    props => {
       return props.disabled ? "40px" : "46px"
     },
   ],
   [
     "buttonColorNormal",
-    (props: ButtonProps) => {
+    props => {
       if (props.type === "noFill") {
         return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["white", "pure"])
       }
@@ -44,13 +44,13 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "buttonColorFocus",
-    (props: ButtonProps) => {
+    props => {
       return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "malachite"])
     },
   ],
   [
     "buttonTextColor",
-    (props: ButtonProps) => {
+    props => {
       if (props.type === "noFill") {
         return props.disabled ? getColor(["white", "pure"]) : getColor(["green", "greenHaze"])
       }
@@ -59,7 +59,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "borderWidthNormal",
-    (props: ButtonProps) => {
+    props => {
       if (props.type === "noFill") {
         return "1px"
       }
@@ -68,7 +68,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "borderWidthFocus",
-    (props: ButtonProps) => {
+    props => {
       if (props.type === "noFill") {
         return props.disabled ? "1px" : "3px"
       }
@@ -77,13 +77,13 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "borderColor",
-    (props: ButtonProps) => {
+    props => {
       return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "hoverGreen"])
     },
   ],
   [
     "borderColorFocus",
-    (props: ButtonProps) => {
+    props => {
       return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "malachite"])
     },
   ],

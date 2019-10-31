@@ -7,7 +7,7 @@ const RIGHT = -2
 
 export const ComponentBox = styled.div<ComponentBoxT>`
   display: flex;
-  flex-direction: ${({ isRight }: ComponentBoxT) => (isRight ? "row-reverse" : "row")};
+  flex-direction: ${({ isRight }) => (isRight ? "row-reverse" : "row")};
   top: 0;
   bottom: 0;
   height: 100vh;
