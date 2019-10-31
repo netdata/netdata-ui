@@ -1,8 +1,11 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "netdata UI kit",
-  "main": "index.js",
+  "main": "./lib/index.js",
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "_drop_native": "./node_modules/rimraf/bin.js node_modules/@types/react-native/",
     "start": "npm run _drop_native && npm run testOut && npm run storybook-start",
@@ -12,7 +15,8 @@
     "build": "npm run _drop_native && npm run testOut && build-storybook",
     "clean": "./node_modules/rimraf/bin.js ./lib",
     "ts-bundle": "npm run _drop_native && npm run clean && tsc && tsc -m es6",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "release": "npm run ts-bundle && npm publish"
   },
   "keywords": [
     "uikit",
