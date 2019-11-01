@@ -25,3 +25,5 @@ You can find latest **master** storybook playground [here](https://netdata.githu
 - [Sidebar PortalSidebar](https://github.com/netdata/netdata-ui/blob/master/src/components/sidebar)
 - [Checkbox](https://github.com/netdata/netdata-ui/tree/master/src/components/checkbox)
 - [Button](https://github.com/netdata/netdata-ui/tree/master/src/components/button)
+- [Input](https://github.com/netdata/netdata-ui/tree/master/src/components/input)
+- [Typography](https://github.com/netdata/netdata-ui/tree/master/src/components/typography)
