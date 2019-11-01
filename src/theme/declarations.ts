@@ -1,4 +1,4 @@
-type RawColorsT = {
+export type RawColorsT = {
   white: {
     pure: string
   }
@@ -6,6 +6,7 @@ type RawColorsT = {
     limedSpruce: string
     silverSand: string
     gallery: string
+    bombay: string
   }
   green: {
     malachite: string
@@ -32,18 +33,18 @@ type RawColorsT = {
   }
 }
 
-type AppColorsT = {}
+export type AppColorsT = {}
 
-type NumberOrStringT = number | string
+export type NumberOrStringT = number | string
 
-type ThemeAtom = string | number | { [key: string]: string | number | ThemeAtom }
+export type ThemeAtom = string | number | { [key: string]: string | number | ThemeAtom }
 
-interface ContstructedTheme {
+export interface ContstructedTheme {
   name: string
   version: string
   [key: string]: ThemeAtom
 }
 
-interface WrappedTheme {
+export interface WrappedTheme {
   theme: ContstructedTheme
 }

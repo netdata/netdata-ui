@@ -1,3 +1,5 @@
+import { RawColorsT, AppColorsT } from "../declarations"
+
 const rawColors: RawColorsT = {
   white: {
     pure: "#FFF",
@@ -6,6 +8,7 @@ const rawColors: RawColorsT = {
     limedSpruce: "#35414A",
     silverSand: "#B5B9BC",
     gallery: "#EFEFEF",
+    bombay: "#AEB3B7",
   },
   green: {
     malachite: "#00CB51",
@@ -32,7 +35,13 @@ const rawColors: RawColorsT = {
   },
 }
 
-const appColors: AppColorsT = {}
+const appColors: AppColorsT = {
+  borderColor: rawColors.gray.bombay,
+  controlFocused: rawColors.gray.limedSpruce,
+  error: rawColors.red.redOrange,
+  success: rawColors.green.greenHaze,
+  text: rawColors.gray.limedSpruce,
+}
 
 export const colors: RawColorsT & AppColorsT = {
   ...appColors,

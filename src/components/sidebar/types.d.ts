@@ -1,25 +1,25 @@
-type ReactNode = import("react").ReactNode
+import { ReactNode } from "react"
 
-interface Component {
+export interface Component {
   children?: ReactNode
 }
 
-interface ComponentBox extends Component {
+export interface ComponentBoxT extends Component {
   isRight: boolean
 }
 
-interface SidebarBox {
+export interface SidebarBoxT {
   shadowSide: boolean
 }
-interface PortalSidebarbox extends SidebarBox {
+export interface PortalSidebarboxT extends SidebarBoxT {
   side: "left" | "right"
 }
-interface SidebarProps extends Component {
+export interface SidebarProps extends Component {
   info?: ReactNode
   right?: boolean
 }
 
-interface PortalSidebarProps<T = any> extends Component {
+export interface PortalSidebarProps<T = any> extends Component {
   closeOnEsc?: boolean
   onClose?: (args?: T) => void
   right?: boolean

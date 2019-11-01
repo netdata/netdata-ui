@@ -8,7 +8,7 @@ import { ButtonProps, ButtonType } from "./button"
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "divWidth",
-    (props: ButtonProps) => {
+    props => {
       return props.label ? "134px" : "46px"
     },
   ],
@@ -23,7 +23,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "buttonWidthNormal",
-    (props: ButtonProps) => {
+    props => {
       return props.label ? "128px" : "40px"
     },
   ],

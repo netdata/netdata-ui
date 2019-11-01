@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC } from "react"
 import { iconsList } from "./icons-list"
 import { StyledIcon } from "./styled"
 
@@ -18,7 +18,7 @@ const getSize = filename => {
   return "medium"
 }
 
-export const Icon = ({ name, className, size }: IconProps) => {
+export const Icon: FC<IconProps> = ({ name, className, size }: IconProps) => {
   const iconSymbol = iconsList[name]
 
   if (!iconSymbol) {

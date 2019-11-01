@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react"
+import React, { SyntheticEvent, FC } from "react"
 import { StyledButton, StyledCircularProgress } from "./styled"
 import { Icon } from "../icon"
 
@@ -20,7 +20,7 @@ export interface ButtonProps {
   disabled?: boolean
 }
 
-export const Button = ({
+export const Button: FC<ButtonProps> = ({
   label,
   onClick = () => {},
   icon = null,
