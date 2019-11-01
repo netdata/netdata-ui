@@ -10,7 +10,7 @@ import { Icon } from "../icon"
 // @ts-ignore
 import readme from "./README.md"
 
-const inputStory = storiesOf("TextInput", module)
+const inputStory = storiesOf("Components|Controls/TextInput", module)
 
 const subData = {
   readme: {

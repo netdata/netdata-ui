@@ -2,8 +2,7 @@
 
 ## General info
 
-Based on `IBM Plex Sans`
-https://fonts.google.com/specimen/IBM+Plex+Sans
+Using font: [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans)
 
 ## Typical usage
 
