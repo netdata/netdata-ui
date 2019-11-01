@@ -23,6 +23,7 @@ import user from "./assets/user.svg"
 import warning from "./assets/warning.svg"
 import x from "./assets/x.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
+import search_s from "./assets/search_s.svg"
 
 export const iconsList = {
   alarm,
@@ -50,4 +51,5 @@ export const iconsList = {
   warning,
   x,
   checkmark_partial_s,
+  search_s,
 }

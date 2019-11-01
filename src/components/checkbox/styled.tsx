@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Icon } from "../icon"
 import { getColor, getSizeUnit } from "../../theme/utils"
+import { controlFocused } from "../../mixins"
 
 export const CheckboxContainer = styled.div`
   display: block;
@@ -50,7 +51,7 @@ export const StyledCheckbox = styled.div<{
   transition: all 150ms;
 
   ${HiddenCheckboxInput}:focus + & {
-    box-shadow: 0 0 0 3px ${getColor(["gray", "gallery"])};
+    ${controlFocused}
   }
 
   ${StyledIcon} {
