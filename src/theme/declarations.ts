@@ -13,7 +13,6 @@ export type RawColorsT = {
     greenHaze: string
     algaeGreen: string
     clearDay: string
-    hoverGreen: string
   }
   red: {
     outrageousOrange: string

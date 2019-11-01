@@ -5,6 +5,7 @@ import { Icon } from "../icon"
 export enum ButtonType {
   default = "default",
   noFill = "noFill",
+  borderLess = "borderLess",
 }
 
 export interface ButtonProps {
@@ -20,7 +21,7 @@ export interface ButtonProps {
 }
 
 export const Button: FC<ButtonProps> = ({
-  label = "LABEL",
+  label,
   onClick = () => {},
   icon = null,
   isLoading = false,
