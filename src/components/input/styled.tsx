@@ -84,12 +84,14 @@ export const SuccessIcon = styled(StyledIcon)`
   fill: ${getColor(["success"])};
 `
 
-export const IconContainer = styled.div`
+export const IconContainer = styled.div<{ disabled?: boolean }>`
+  ${borderRadius}
   height: 38px;
   width: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
+  ${({ disabled, theme }) => disabled && `background: ${getColor(["gray", "gallery"])({ theme })}`};
 `
 
 export const MetaContainer = styled.div`

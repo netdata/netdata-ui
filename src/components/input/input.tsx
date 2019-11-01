@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MutableRefObject, FocusEvent } from "react"
+import React, { ChangeEvent, MutableRefObject, FocusEvent, ReactNode } from "react"
 import {
   StyledInput,
   StyledLabel,
@@ -77,7 +77,7 @@ export const TextInput = ({
           </LabelRow>
         )}
         <InputContainer focused={focused} success={isSuccess} error={isError} disabled={disabled}>
-          {iconLeft && <IconContainer>{iconLeft}</IconContainer>}
+          {iconLeft && <IconContainer disabled={disabled}>{iconLeft}</IconContainer>}
           <StyledInput
             {...props}
             disabled={disabled}
@@ -90,14 +90,14 @@ export const TextInput = ({
             iconRight={iconRight}
             type="text"
           />
-          {iconRight && <IconContainer>{iconRight}</IconContainer>}
+          {iconRight && <IconContainer disabled={disabled}>{iconRight}</IconContainer>}
           {metaDisplayed && error && (
-            <IconContainer>
+            <IconContainer disabled={disabled}>
               <StyledIcon name="cross_s" />
             </IconContainer>
           )}
           {metaDisplayed && success && (
-            <IconContainer>
+            <IconContainer disabled={disabled}>
               <SuccessIcon name="checkmark_s" />
             </IconContainer>
           )}

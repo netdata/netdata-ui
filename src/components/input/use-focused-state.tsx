@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react"
+import { FocusEventHandler, ReactFocusEvent } from "./types"
 
 type FocusHandler = FocusEventHandler
 type BlurHandler = FocusEventHandler

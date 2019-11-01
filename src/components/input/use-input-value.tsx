@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react"
+import { ChangeEventHandler, ReactInputChangeEvent } from "./types"
 
 type InputValue = string
 type MaxCharsIndicator = string
