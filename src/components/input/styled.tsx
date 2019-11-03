@@ -97,6 +97,7 @@ export const IconContainer = styled.div<{ disabled?: boolean }>`
 export const MetaContainer = styled.div`
   height: 40px;
   width: 100%;
+  max-width: 100%;
   padding: ${({ theme }) => {
     const sizeUnit = getSizeUnit({ theme }) as number
     return `${sizeUnit}px 0 ${sizeUnit}px ${sizeUnit}px`
@@ -121,4 +122,5 @@ export const FieldInfo = styled(MetaInfo)<{
   success?: boolean | string
 }>`
   color: ${getValidatedControlColor("text")};
+  flex-shrink: 1;
 `
