@@ -1,9 +1,9 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { Button } from "@rmwc/button"
+// import { Button } from "@rmwc/button"
 import { CircularProgress } from "@rmwc/circular-progress"
 import { getColor } from "../../theme/utils"
-import { ButtonProps, ButtonType } from "./button"
+import { ButtonProps, ButtonType, Button } from "./button"
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
