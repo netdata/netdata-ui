@@ -1,9 +1,8 @@
 import React from "react"
 import styled, { css } from "styled-components"
-// import { Button } from "@rmwc/button"
 import { CircularProgress } from "@rmwc/circular-progress"
 import { getColor } from "../../theme/utils"
-import { ButtonProps, ButtonType, Button } from "./button"
+import { ButtonProps, ButtonType } from "./button"
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
@@ -138,7 +137,9 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
       justifyContent: "space-around",
     }}
   >
-    <Button label={label} icon={icon} {...otherProps} />
+    <button type="button" icon={icon} {...otherProps}>
+      {label}
+    </button>
   </div>
 ))`
   ${props => {
@@ -148,7 +149,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     }
     opacity: ${props.disabled ? 0.6 : 1.0};
     cursor: ${props.disabled ? "not-allowed" : "pointer"};
-    background: ${buttonProps("buttonColorNormal", props)};
+    background-color: ${buttonProps("buttonColorNormal", props)};
     border-color: ${getColor(["green", "greenHaze"])}
     border-style: solid;
     border-radius: 3px;
@@ -168,7 +169,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     }
     &:active {
       color: ${buttonProps("buttonTextColorActive", props)};
-      background: ${buttonProps("buttonColorHover", props)};
+      background-color: ${buttonProps("buttonColorHover", props)};
       border-color: ${buttonProps("borderColorHover", props)};
       border-width: ${buttonProps("borderWidthHover", props)};
       border-radius: ${props.disabled ? "2px" : "4px"};
