@@ -24,12 +24,9 @@ import warning from "./assets/warning.svg"
 import x from "./assets/x.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import search_s from "./assets/search_s.svg"
-import artwork_3 from "./assets/artwork_3.svg"
-import netdata_full_logo from "./assets/netdata_full_logo.svg"
 
 export const iconsList = {
   alarm,
-  artwork_3,
   check,
   checkmark_s,
   cross_s,
@@ -40,7 +37,6 @@ export const iconsList = {
   google,
   hamburger,
   holder,
-  netdata_full_logo,
   magnify,
   node_default_l,
   node_notification_l,
