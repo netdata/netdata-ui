@@ -1,4 +1,8 @@
 export type RawColorsT = {
+  transparent: {
+    full: string
+    semi: string
+  }
   white: {
     pure: string
   }

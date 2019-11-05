@@ -4,5 +4,5 @@ import { text } from "../../mixins"
 export const TextBigger = styled.span`
   ${text}
   font-size: 24px;
-  line-height: 30px;
+  line-height: 32px;
 `

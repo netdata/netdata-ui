@@ -50,7 +50,48 @@ buttonStory.add(
   () => (
     <Button
       disabled={boolean("Disabled", false)}
-      type={ButtonType.borderLess}
+      type={ButtonType.borderless}
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Icon Borderless",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      type={ButtonType.borderless}
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Icon",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Icon No Fill",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      type={ButtonType.noFill}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />
