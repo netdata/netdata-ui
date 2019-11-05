@@ -48,9 +48,72 @@ buttonStory.add(
 buttonStory.add(
   "Button Borderless",
   () => (
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        background: "#1a1a1a",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+      }}
+    >
+      <Button
+        disabled={boolean("Disabled", false)}
+        type={ButtonType.borderless}
+        onClick={action("clicked")}
+        label={text("Label", "LABEL")}
+      />
+    </div>
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Icon Borderless",
+  () => (
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        background: "#1a1a1a",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+      }}
+    >
+      <Button
+        icon={select("name", icons, "plus")}
+        disabled={boolean("Disabled", false)}
+        type={ButtonType.borderless}
+        onClick={action("clicked")}
+        label={text("Label", "LABEL")}
+      />
+    </div>
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Icon",
+  () => (
     <Button
+      icon={select("name", icons, "plus")}
       disabled={boolean("Disabled", false)}
-      type={ButtonType.borderLess}
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Icon No Fill",
+  () => (
+    <Button
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      type={ButtonType.noFill}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />

@@ -22,7 +22,7 @@ interface Props {
 export enum ButtonType {
   default = "default",
   noFill = "noFill",
-  borderLess = "borderLess",
+  borderless = "borderless",
 }
 ```
 

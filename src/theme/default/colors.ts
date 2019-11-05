@@ -1,6 +1,10 @@
 import { RawColorsT, AppColorsT } from "../declarations"
 
 const rawColors: RawColorsT = {
+  transparent: {
+    full: "rgba(255, 255, 255, 0.0)",
+    semi: "rgba(255, 255, 255, 0.5)",
+  },
   white: {
     pure: "#FFF",
   },

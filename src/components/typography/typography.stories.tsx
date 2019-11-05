@@ -1,5 +1,6 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
+import { H0 } from "./H0"
 import { H1 } from "./H1"
 import { H2 } from "./H2"
 import { H6 } from "./H6"
@@ -13,6 +14,8 @@ import { Button } from "../button"
 import { TextFemto } from "./TextFemto"
 import { TextNano } from "./TextNano"
 import { TextBig } from "./TextBig"
+import { TextBigger } from "./TextBigger"
+import { TextHuge } from "./TextHuge"
 // @ts-ignore
 import readme from "./README.md"
 import { readmeCleanup } from "../../../utils/readme"
@@ -25,6 +28,7 @@ const subData = {
 
 const headers = (
   <div>
+    <H0>H1: Title Enourmous. The five boxing wizards jump quickly.</H0>
     <H1>H1: Title Huge. The five boxing wizards jump quickly.</H1>
     <H2>H2: Title Bigger. The five boxing wizards jump quickly.</H2>
     <H3>H3: Title Big. The five boxing wizards jump quickly.</H3>
@@ -36,6 +40,12 @@ const headers = (
 
 const texts = (
   <div>
+    <div>
+      <TextHuge>TextHuge: The five boxing wizards jump quickly.</TextHuge>
+    </div>
+    <div>
+      <TextBigger>TextBigger: The five boxing wizards jump quickly.</TextBigger>
+    </div>
     <div>
       <TextBig>TextBig: The five boxing wizards jump quickly.</TextBig>
     </div>

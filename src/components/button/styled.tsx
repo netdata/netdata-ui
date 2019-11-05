@@ -3,6 +3,7 @@ import styled, { css } from "styled-components"
 import { CircularProgress } from "@rmwc/circular-progress"
 import { getColor } from "../../theme/utils"
 import { ButtonProps, ButtonType } from "./button"
+import { Icon } from "../icon"
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
@@ -35,7 +36,10 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "buttonColorNormal",
     (props: ButtonProps) => {
-      if (props.type === ButtonType.noFill || props.type === ButtonType.borderLess) {
+      if (props.type === ButtonType.borderless) {
+        return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["transparent", "full"])
+      }
+      if (props.type === ButtonType.noFill) {
         return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["white", "pure"])
       }
       return getColor(["green", "greenHaze"])
@@ -44,8 +48,8 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "buttonColorHover",
     (props: ButtonProps) => {
-      if (props.type === ButtonType.borderLess) {
-        return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["white", "pure"])
+      if (props.type === ButtonType.borderless) {
+        return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["transparent", "full"])
       }
       return props.disabled ? getColor(["green", "greenHaze"]) : getColor(["green", "malachite"])
     },
@@ -53,7 +57,10 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "buttonTextColor",
     (props: ButtonProps) => {
-      if (props.type === ButtonType.noFill || props.type === ButtonType.borderLess) {
+      if (props.type === ButtonType.borderless) {
+        return getColor(["white", "pure"])
+      }
+      if (props.type === ButtonType.noFill) {
         return props.disabled ? getColor(["white", "pure"]) : getColor(["green", "greenHaze"])
       }
       return getColor(["white", "pure"])
@@ -65,7 +72,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
       if (props.type === ButtonType.noFill) {
         return props.disabled ? getColor(["white", "pure"]) : getColor(["green", "malachite"])
       }
-      if (props.type === ButtonType.borderLess) {
+      if (props.type === ButtonType.borderless) {
         return props.disabled ? getColor(["white", "pure"]) : getColor(["green", "malachite"])
       }
       return getColor(["white", "pure"])
@@ -77,8 +84,8 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
       if (props.type === ButtonType.noFill) {
         return getColor(["white", "pure"])
       }
-      if (props.type === ButtonType.borderLess) {
-        return props.disabled ? getColor(["white", "pure"]) : getColor(["green", "malachite"])
+      if (props.type === ButtonType.borderless) {
+        return props.disabled ? getColor(["white", "pure"]) : getColor(["white", "pure"])
       }
       return getColor(["white", "pure"])
     },
@@ -98,7 +105,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
       if (props.type === ButtonType.noFill) {
         return props.disabled ? "1px" : "1px"
       }
-      if (props.type === ButtonType.borderLess) {
+      if (props.type === ButtonType.borderless) {
         return "0"
       }
       return props.disabled ? "0" : "3px"
@@ -126,6 +133,24 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
   return "1px"
 }
 
+export const StyledIcon = styled(({ name, ...otherProps }) => (
+  <div
+    style={{
+      height: "24px",
+      marginRight: "10px",
+      fill: buttonProps("buttonTextColor", otherProps),
+    }}
+  >
+    <Icon name={name} />
+  </div>
+))`
+  ${props => {
+    return css`
+      fill: ${buttonProps("buttonTextColor", props)};
+    `
+  }};
+`
+
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
   <div
     className="wrapper"
@@ -137,7 +162,8 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
       justifyContent: "space-around",
     }}
   >
-    <button type="button" icon={icon} {...otherProps}>
+    <button type="button" {...otherProps}>
+      {icon ? <StyledIcon name={icon} {...otherProps} /> : null}
       {label}
     </button>
   </div>
@@ -176,11 +202,11 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
       width: ${buttonProps("buttonWidthHover", props)};
       height: ${buttonProps("buttonHeightHover", props)};
     }
-    display: ${props.icon.props.name || props.isLoading ? "flex" : "block"};
+    display: ${props.icon || props.isLoading ? "flex" : "block"};
     flex-flow: row nowrap;
     align-items: center;
     .rmwc-icon {
-      margin-right: ${(props.label && props.icon.props.name) || props.isLoading ? "8px" : "0"};
+      margin-right: ${(props.label && props.icon) || props.isLoading ? "8px" : "0"};
       height: 24px;
       width: 24px;
     }
