@@ -33,7 +33,7 @@ export const Button: FC<ButtonProps> = ({
       label={label}
       onClick={onClick}
       // isLoading={isLoading}
-      icon={isLoading ? <StyledCircularProgress /> : <Icon name={icon} />}
+      icon={isLoading ? <StyledCircularProgress /> : icon}
       type={type}
       disabled={disabled}
     />

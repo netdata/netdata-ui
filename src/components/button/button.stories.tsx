@@ -48,12 +48,23 @@ buttonStory.add(
 buttonStory.add(
   "Button Borderless",
   () => (
-    <Button
-      disabled={boolean("Disabled", false)}
-      type={ButtonType.borderless}
-      onClick={action("clicked")}
-      label={text("Label", "LABEL")}
-    />
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        background: "#1a1a1a",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+      }}
+    >
+      <Button
+        disabled={boolean("Disabled", false)}
+        type={ButtonType.borderless}
+        onClick={action("clicked")}
+        label={text("Label", "LABEL")}
+      />
+    </div>
   ),
   subData
 )
@@ -61,13 +72,24 @@ buttonStory.add(
 buttonStory.add(
   "Button Icon Borderless",
   () => (
-    <Button
-      icon={select("name", icons, "plus")}
-      disabled={boolean("Disabled", false)}
-      type={ButtonType.borderless}
-      onClick={action("clicked")}
-      label={text("Label", "LABEL")}
-    />
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        background: "#1a1a1a",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+      }}
+    >
+      <Button
+        icon={select("name", icons, "plus")}
+        disabled={boolean("Disabled", false)}
+        type={ButtonType.borderless}
+        onClick={action("clicked")}
+        label={text("Label", "LABEL")}
+      />
+    </div>
   ),
   subData
 )

@@ -133,6 +133,24 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
   return "1px"
 }
 
+export const StyledIcon = styled(({ name, ...otherProps }) => (
+  <div
+    style={{
+      height: "24px",
+      marginRight: "10px",
+      fill: buttonProps("buttonTextColor", otherProps),
+    }}
+  >
+    <Icon name={name} />
+  </div>
+))`
+  ${props => {
+    return css`
+      fill: ${buttonProps("buttonTextColor", props)};
+    `
+  }};
+`
+
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
   <div
     className="wrapper"
@@ -144,9 +162,9 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
       justifyContent: "space-around",
     }}
   >
-    <button type="button" icon={icon} {...otherProps}>
+    <button type="button" {...otherProps}>
+      {icon ? <StyledIcon name={icon} {...otherProps} /> : null}
       {label}
-      {icon ? <Icon name={icon} /> : null}
     </button>
   </div>
 ))`
@@ -184,11 +202,11 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
       width: ${buttonProps("buttonWidthHover", props)};
       height: ${buttonProps("buttonHeightHover", props)};
     }
-    display: ${props.icon.props.name || props.isLoading ? "flex" : "block"};
+    display: ${props.icon || props.isLoading ? "flex" : "block"};
     flex-flow: row nowrap;
     align-items: center;
     .rmwc-icon {
-      margin-right: ${(props.label && props.icon.props.name) || props.isLoading ? "8px" : "0"};
+      margin-right: ${(props.label && props.icon) || props.isLoading ? "8px" : "0"};
       height: 24px;
       width: 24px;
     }
