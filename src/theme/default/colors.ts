@@ -13,6 +13,7 @@ const rawColors: RawColorsT = {
     silverSand: "#B5B9BC",
     gallery: "#EFEFEF",
     bombay: "#AEB3B7",
+    darkMud: "#1A1A1A",
   },
   green: {
     malachite: "#00CB51",
