@@ -76,7 +76,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
       return disabled ? "0" : "3px"
     },
   ],
-  ["borderColor", disabled => (disabled ? getGreenHaze : getGreenMalachite)],
+  ["borderColor", ({ disabled }) => (disabled ? getGreenHaze : getGreenMalachite)],
   ["borderColorHover", ({ disabled }) => (disabled ? getGreenHaze : getGreenMalachite)],
 ])
 
