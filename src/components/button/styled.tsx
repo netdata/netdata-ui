@@ -95,7 +95,6 @@ export const StyledIcon = styled(({ name, ...otherProps }) => (
   <div
     style={{
       height: "24px",
-      marginRight: "10px",
       fill: buttonProps("buttonTextColor", otherProps),
     }}
   >
@@ -163,6 +162,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     display: ${props.icon || props.isLoading ? "flex" : "block"};
     flex-flow: row nowrap;
     align-items: center;
+    justify-content: center;
     .rmwc-icon {
       margin-right: ${(props.label && props.icon) || props.isLoading ? "8px" : "0"};
       height: 24px;
