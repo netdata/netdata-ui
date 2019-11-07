@@ -23,7 +23,7 @@ export const Button: FC<ButtonProps> = ({
   isLoading = false,
   type = DEFAULT,
   disabled = false,
-  ...rest
+  ...props
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -32,7 +32,7 @@ export const Button: FC<ButtonProps> = ({
       icon={isLoading ? <StyledCircularProgress /> : icon}
       type={type}
       disabled={disabled}
-      {...rest}
+      {...props}
     />
   )
 }

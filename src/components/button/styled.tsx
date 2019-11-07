@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { CircularProgress } from "@rmwc/circular-progress"
-import { getColor } from "../../theme/utils"
+import { getColor, getSizeBy } from "../../theme/utils"
 import { ButtonProps } from "./button"
 import { Icon } from "../icon"
 import { DEFAULT, NO_FILL, BORDER_LESS } from "./constants"
@@ -11,18 +11,21 @@ const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
-  ["divWidth", ({ label }) => (label ? "134px" : "46px")],
+  ["divWidth", ({ label }) => `${getSizeBy(label ? 16 : 6)}`],
   [
     "buttonWidthHover",
     ({ label, disabled, type }) => {
       if (label) {
-        return disabled || type !== "default" ? "128px" : "134px"
+        return disabled || `${getSizeBy(type !== DEFAULT ? 16 : 17)}`
       }
-      return disabled || type !== DEFAULT ? "40px" : "46px"
+      return disabled || `${getSizeBy(type !== DEFAULT ? 5 : 6)}`
     },
   ],
-  ["buttonWidthNormal", ({ label }) => (label ? "128px" : "40px")],
-  ["buttonHeightHover", ({ disabled, type }) => (disabled || type !== DEFAULT ? "40px" : "46px")],
+  ["buttonWidthNormal", ({ label }) => `${getSizeBy(label ? 16 : 5)}`],
+  [
+    "buttonHeightHover",
+    ({ disabled, type }) => disabled || `${getSizeBy(type !== DEFAULT ? 5 : 6)}`,
+  ],
   [
     "buttonColorNormal",
     ({ type, disabled }) => {
@@ -136,7 +139,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     border-radius: 3px;
     border-width: ${buttonProps("borderWidthNormal", props)};
     width: ${buttonProps("buttonWidthNormal", props)};
-    height: 40px;
+    height: ${getSizeBy(5)};
     font-weight: bold;
     font-size: 12px;
     color: ${buttonProps("buttonTextColor", props)};
