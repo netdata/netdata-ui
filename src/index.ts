@@ -1,4 +1,4 @@
-export { Button, ButtonProps, ButtonType } from "./components/button"
+export { Button, ButtonProps } from "./components/button"
 export { Sidebar, PortalSidebar } from "./components/sidebar"
 export { Icon, IconProps, iconsList } from "./components/icon"
 export { TextInput, useTouchedState, useFocusedState, useInputValue } from "./components/input"
