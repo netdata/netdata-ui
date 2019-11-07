@@ -112,8 +112,6 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
   <div
     className="wrapper"
     style={{
-      height: "46px",
-      width: label ? "134px" : "46px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
