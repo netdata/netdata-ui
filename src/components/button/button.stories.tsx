@@ -1,13 +1,13 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
+import styled from "styled-components"
+
 import { action } from "@storybook/addon-actions"
 import { text, boolean, select } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
 import { Button } from "."
-
 // @ts-ignore
 import readme from "./README.md"
-import { ButtonType } from "./button"
 import { iconsList } from "../icon"
 
 const buttonStory = storiesOf("COMPONENTS|Controls/Button", module)
@@ -37,7 +37,7 @@ buttonStory.add(
   () => (
     <Button
       disabled={boolean("Disabled", false)}
-      type={ButtonType.noFill}
+      type="noFill"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />
@@ -60,7 +60,7 @@ buttonStory.add(
     >
       <Button
         disabled={boolean("Disabled", false)}
-        type={ButtonType.borderless}
+        type="borderless"
         onClick={action("clicked")}
         label={text("Label", "LABEL")}
       />
@@ -85,7 +85,7 @@ buttonStory.add(
       <Button
         icon={select("name", icons, "plus")}
         disabled={boolean("Disabled", false)}
-        type={ButtonType.borderless}
+        type="borderless"
         onClick={action("clicked")}
         label={text("Label", "LABEL")}
       />
@@ -113,7 +113,7 @@ buttonStory.add(
     <Button
       icon={select("name", icons, "plus")}
       disabled={boolean("Disabled", false)}
-      type={ButtonType.noFill}
+      type="noFill"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />
@@ -140,7 +140,26 @@ buttonStory.add(
       icon={select("name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      type={ButtonType.noFill}
+      type="noFill"
+    />
+  ),
+  subData
+)
+
+const OverridedButton = styled(Button)`
+  background-color: black;
+  color: purple;
+`
+
+buttonStory.add(
+  "Button with CSS overriede",
+  () => (
+    <OverridedButton
+      icon={select("name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+      label="The text"
+      type="noFill"
     />
   ),
   subData

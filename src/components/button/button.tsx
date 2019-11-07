@@ -1,12 +1,8 @@
 import React, { SyntheticEvent, FC } from "react"
 import { StyledButton, StyledCircularProgress } from "./styled"
-import { Icon } from "../icon"
+import { DEFAULT } from "./constants"
 
-export enum ButtonType {
-  default = "default",
-  noFill = "noFill",
-  borderless = "borderless",
-}
+type ButtonType = "default" | "noFill" | "borderless"
 
 export interface ButtonProps {
   id?: string
@@ -25,17 +21,18 @@ export const Button: FC<ButtonProps> = ({
   onClick = () => {},
   icon = null,
   isLoading = false,
-  type = ButtonType.default,
+  type = DEFAULT,
   disabled = false,
+  ...rest
 }: ButtonProps) => {
   return (
     <StyledButton
       label={label}
       onClick={onClick}
-      // isLoading={isLoading}
       icon={isLoading ? <StyledCircularProgress /> : icon}
       type={type}
       disabled={disabled}
+      {...rest}
     />
   )
 }
