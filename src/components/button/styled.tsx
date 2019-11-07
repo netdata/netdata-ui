@@ -11,21 +11,18 @@ const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
-  ["divWidth", ({ label }) => `${getSizeBy(label ? 16 : 6)}`],
+  ["divWidth", ({ label }) => getSizeBy(label ? 16 : 6)],
   [
     "buttonWidthHover",
     ({ label, disabled, type }) => {
       if (label) {
-        return disabled || `${getSizeBy(type !== DEFAULT ? 16 : 17)}`
+        return disabled || getSizeBy(type !== DEFAULT ? 16 : 17)
       }
-      return disabled || `${getSizeBy(type !== DEFAULT ? 5 : 6)}`
+      return disabled || getSizeBy(type !== DEFAULT ? 5 : 6)
     },
   ],
-  ["buttonWidthNormal", ({ label }) => `${getSizeBy(label ? 16 : 5)}`],
-  [
-    "buttonHeightHover",
-    ({ disabled, type }) => disabled || `${getSizeBy(type !== DEFAULT ? 5 : 6)}`,
-  ],
+  ["buttonWidthNormal", ({ label }) => getSizeBy(label ? 16 : 5)],
+  ["buttonHeightHover", ({ disabled, type }) => disabled || getSizeBy(type !== DEFAULT ? 5 : 6)],
   [
     "buttonColorNormal",
     ({ type, disabled }) => {
