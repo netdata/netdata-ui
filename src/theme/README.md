@@ -78,7 +78,7 @@ const StyledDiv = styled.div`
 `
 ```
 
-- `propOrElse` - is pretty like the `getOrElse` but it extractig values not from the `theme` but from the `props`
+- `propOrElse` - is pretty like the `getOrElse` but it extracting values not from the `theme` but from the `props`
 
 ```typescript
 const Div = styled.div<{ display?: "flex" }>`
