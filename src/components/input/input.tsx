@@ -32,6 +32,7 @@ export interface ComponentProps {
   error?: boolean | string
   success?: boolean | string
   touched?: boolean
+  isDirty?: boolean
   instantFeedback?: boolean
   className?: string
   fieldIndicator?: string | ReactNode
@@ -58,11 +59,12 @@ export const TextInput = ({
   metaShrinked,
   placeholder = "",
   label,
+  isDirty,
   ...props
 }: TextInputProps) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
 
-  const metaDisplayed = touched || instantFeedback
+  const metaDisplayed = touched || (instantFeedback && isDirty)
   const isSuccess = metaDisplayed && success
   const isError = metaDisplayed && error
   const errorMessage = isError && error !== true && error
