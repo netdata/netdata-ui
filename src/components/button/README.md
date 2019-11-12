@@ -19,11 +19,8 @@ interface Props {
 ## Button types
 
 ```typescript
-export enum ButtonType {
-  default = "default",
-  noFill = "noFill",
-  borderless = "borderless",
-}
+  type ButtonType = "default" | "noFill" | "borderless",
+
 ```
 
 ## Typical usage
@@ -44,16 +41,10 @@ const myButton: Button = (
 
 ### Icon button
 
-Please note `type={ButtonTypes.default}` is optional (can be omitted):
+Please note `"default"` is optional (can be omitted):
 
 ```typescript
 const myButton: Button = (
-  <Button
-    disabled={true}
-    type={ButtonTypes.default}
-    icon={"plus"}
-    onClick={this.myHandler}
-    label="Press me"
-  />
+  <Button disabled={true} type="default" icon={"plus"} onClick={this.myHandler} label="Press me" />
 )
 ```

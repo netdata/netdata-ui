@@ -77,6 +77,64 @@ inputStory.add(
   subData
 )
 
+inputStory.add(
+  "Input with instant feedback",
+  () => {
+    const disabled = boolean("Disabled", false)
+    const [isValid, setIsValid] = useState(false)
+    const [validationMessage, setValidationMessage] = useState("")
+    const fieldMessage = text(
+      "Defailt field message",
+      "Pls fill this field for the sake of humanity"
+    )
+    const charLimit = number("Max characters", 20)
+
+    const onChange = useCallback(() => {
+      console.log("value has changed")
+    }, [])
+
+    const [value, handleChange, charsIndicator, isDirty] = useInputValue({
+      onChange,
+      maxChars: charLimit,
+    })
+
+    const onBlur = useCallback(() => {
+      console.log("performing some side effect on blur")
+    }, [])
+
+    const [touched, blurHandler] = useTouchedState({ onBlur })
+
+    useEffect(() => {
+      if (!isValid && value.length > 0) {
+        setIsValid(true)
+        setValidationMessage("Very green, much validated")
+      } else if (isValid && value.length === 0) {
+        setIsValid(false)
+      }
+    }, [isValid, value.length, touched])
+
+    return (
+      <Container>
+        <TextInput
+          disabled={disabled}
+          placeholder={text("Placeholder", "Enter something")}
+          fieldMessage={fieldMessage}
+          fieldIndicator={charsIndicator}
+          value={value}
+          touched={touched}
+          onBlur={blurHandler}
+          onChange={handleChange}
+          success={isValid && validationMessage}
+          error={!isValid}
+          instantFeedback
+          isDirty={isDirty}
+        />
+      </Container>
+    )
+  },
+  subData
+)
+
 const StyledIcon = styled(Icon)`
   fill: ${getColor(["gray", "limedSpruce"])};
 `
