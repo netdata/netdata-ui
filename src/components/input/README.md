@@ -33,7 +33,7 @@ export interface ComponentProps {
   success?: boolean | string
   touched?: boolean
   isDirty?: boolean
-  instantFeedback?: boolean
+  instantFeedback?: "all" | "positiveFirst"
   className?: string
   fieldIndicator?: string | ReactNode
   metaShrinked?: boolean
@@ -48,6 +48,8 @@ Notable props:
 - `fieldMessage` - default message under the input field
 - `success` and `error` - status indicators, could be boolean or strings (in this case they render instead of `fieldMessage`)
 - `instantFeedback` - set this to true, if you want to provide validation status as user types, not onBlur/other.
+  With `all` updates validation status on any value change, with `positiveFirst` - only when string is successfully
+  validated (`success` prop), or user started to erase entered data and current string has errors according to `error` prop.
 - `isDirty` - boolean flag showing if something was ever entered into the input. Use together with instantFeedback.
 - `metaShrinked` - set this to true to not render any meta information and reserved space under the input field
 - `fieldIndicator` - additional information field, which could be used for displaying `maxChars` string or other meta info.

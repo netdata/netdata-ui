@@ -78,15 +78,12 @@ inputStory.add(
 )
 
 inputStory.add(
-  "Input with instant feedback",
+  "Input with instant positive feedback",
   () => {
     const disabled = boolean("Disabled", false)
     const [isValid, setIsValid] = useState(false)
     const [validationMessage, setValidationMessage] = useState("")
-    const fieldMessage = text(
-      "Defailt field message",
-      "Pls fill this field for the sake of humanity"
-    )
+    const fieldMessage = text("Default field message", "Pls enter at least 5 characters")
     const charLimit = number("Max characters", 20)
 
     const onChange = useCallback(() => {
@@ -105,13 +102,13 @@ inputStory.add(
     const [touched, blurHandler] = useTouchedState({ onBlur })
 
     useEffect(() => {
-      if (!isValid && value.length > 0) {
+      if (!isValid && value.length >= 5) {
         setIsValid(true)
         setValidationMessage("Very green, much validated")
-      } else if (isValid && value.length === 0) {
+      } else if (isValid && value.length < 5) {
         setIsValid(false)
       }
-    }, [isValid, value.length, touched])
+    }, [isValid, value, touched])
 
     return (
       <Container>
@@ -126,7 +123,7 @@ inputStory.add(
           onChange={handleChange}
           success={isValid && validationMessage}
           error={!isValid}
-          instantFeedback
+          instantFeedback="positiveFirst"
           isDirty={isDirty}
         />
       </Container>
