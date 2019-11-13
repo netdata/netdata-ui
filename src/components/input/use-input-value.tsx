@@ -3,6 +3,7 @@ import { ChangeEventHandler, ReactInputChangeEvent } from "./types"
 
 type InputValue = string
 type MaxCharsIndicator = string
+type IsDirty = boolean
 type UseInputValue = ({
   value,
   onChange,
@@ -11,10 +12,11 @@ type UseInputValue = ({
   value?: string
   onChange?: ChangeEventHandler
   maxChars?: number
-}) => [InputValue, ChangeEventHandler, MaxCharsIndicator]
+}) => [InputValue, ChangeEventHandler, MaxCharsIndicator, IsDirty]
 
 export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars }) => {
   const [inputValue, setValue] = useState(value)
+  const [isDirty, setIsDirty] = useState(false)
 
   const handleChange = useCallback(
     (e: ReactInputChangeEvent) => {
@@ -25,14 +27,17 @@ export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars })
         return
       }
       setValue(newValue)
+      if (!isDirty) {
+        setIsDirty(true)
+      }
       if (onChange) {
         onChange(e)
       }
     },
-    [maxChars, onChange]
+    [isDirty, maxChars, onChange]
   )
 
   const maxCharsIndicator = maxChars ? `${inputValue.length}/${maxChars}` : ""
 
-  return [inputValue, handleChange, maxCharsIndicator]
+  return [inputValue, handleChange, maxCharsIndicator, isDirty]
 }

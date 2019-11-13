@@ -32,7 +32,8 @@ export interface ComponentProps {
   error?: boolean | string
   success?: boolean | string
   touched?: boolean
-  instantFeedback?: boolean
+  isDirty?: boolean
+  instantFeedback?: "all" | "positiveFirst"
   className?: string
   fieldIndicator?: string | ReactNode
   metaShrinked?: boolean
@@ -47,6 +48,9 @@ Notable props:
 - `fieldMessage` - default message under the input field
 - `success` and `error` - status indicators, could be boolean or strings (in this case they render instead of `fieldMessage`)
 - `instantFeedback` - set this to true, if you want to provide validation status as user types, not onBlur/other.
+  With `all` updates validation status on any value change, with `positiveFirst` - only when string is successfully
+  validated (`success` prop), or user started to erase entered data and current string has errors according to `error` prop.
+- `isDirty` - boolean flag showing if something was ever entered into the input. Use together with instantFeedback.
 - `metaShrinked` - set this to true to not render any meta information and reserved space under the input field
 - `fieldIndicator` - additional information field, which could be used for displaying `maxChars` string or other meta info.
 
@@ -93,6 +97,7 @@ TBD if we will use it, or procees with custom event-oriented form touch.
 ```typescript
 type InputValue = string
 type MaxCharsIndicator = string
+type IsDirty = boolean
 type UseInputValue = ({
   value,
   onChange,
@@ -101,12 +106,12 @@ type UseInputValue = ({
   value?: string
   onChange?: ChangeEventHandler
   maxChars?: number
-}) => [InputValue, ChangeEventHandler, MaxCharsIndicator]
+}) => [InputValue, ChangeEventHandler, MaxCharsIndicator, IsDirty]
 ```
 
 `useInputValue` hook is a short way to add basic functionaluty to the `<TextInput />` - a controlled state for
 input value, and custom side-effects handling for onChange. If `maxChars` option is passed, it will also return
-a quantity of entered symbols in relation to maximum allowed `as string`.
+a quantity of entered symbols in relation to maximum allowed `as string`. `isDirty` flag indicates if value was changed at least once, required for `instantFeedback` inputs to work properly.
 
 ### Further improvements TBD
 

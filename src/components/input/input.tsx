@@ -1,4 +1,5 @@
 import React, { ChangeEvent, MutableRefObject, FocusEvent, ReactNode } from "react"
+import { usePreviousDistinct } from "react-use"
 import {
   StyledInput,
   StyledLabel,
@@ -12,6 +13,7 @@ import {
   FieldInfo,
   LabelRow,
 } from "./styled"
+import { InstantFeedback } from "./types"
 import { useFocusedState } from "./use-focused-state"
 
 export interface InputProps {
@@ -32,7 +34,8 @@ export interface ComponentProps {
   error?: boolean | string
   success?: boolean | string
   touched?: boolean
-  instantFeedback?: boolean
+  isDirty?: boolean
+  instantFeedback?: InstantFeedback
   className?: string
   fieldIndicator?: string | ReactNode
   metaShrinked?: boolean
@@ -58,11 +61,23 @@ export const TextInput = ({
   metaShrinked,
   placeholder = "",
   label,
+  isDirty,
+  value,
   ...props
 }: TextInputProps) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
 
-  const metaDisplayed = touched || instantFeedback
+  const prevValue = usePreviousDistinct(value)
+
+  const metaDisplayed =
+    touched ||
+    (instantFeedback === "all" && isDirty) ||
+    (instantFeedback === "positiveFirst" && isDirty && success) ||
+    (instantFeedback === "positiveFirst" &&
+      isDirty &&
+      error &&
+      prevValue &&
+      value.length < prevValue.length) // if user starts to erase entered data, we provide negative feedback
   const isSuccess = metaDisplayed && success
   const isError = metaDisplayed && error
   const errorMessage = isError && error !== true && error
@@ -89,6 +104,7 @@ export const TextInput = ({
             iconLeft={iconLeft}
             iconRight={iconRight}
             type="text"
+            value={value}
           />
           {iconRight && <IconContainer disabled={disabled}>{iconRight}</IconContainer>}
           {metaDisplayed && error && (
