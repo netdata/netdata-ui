@@ -1,17 +1,16 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { CircularProgress } from "@rmwc/circular-progress"
-import { getColor, getSizeBy } from "../../theme/utils"
+import { getColor, getSizeBy, getBorderedButtonSizeBy } from "../../theme/utils"
 import { ButtonProps } from "./button"
 import { Icon } from "../icon"
-import { DEFAULT, NO_FILL, BORDER_LESS } from "./constants"
+import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 
 const getGreenHaze = getColor(["green", "greenHaze"])
 const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
-  ["divWidth", ({ label }) => getSizeBy(label ? 16 : 6)],
   [
     "buttonWidthHover",
     ({ label, disabled, type }) => {
@@ -25,12 +24,12 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ["buttonHeightHover", ({ disabled, type }) => disabled || getSizeBy(type !== DEFAULT ? 5 : 6)],
   [
     "buttonColorNormal",
-    ({ type, disabled }) => {
+    ({ type }) => {
       if (type === BORDER_LESS) {
-        return disabled ? getGreenHaze : getColor(["transparent", "full"])
+        return getColor(["transparent", "full"])
       }
-      if (type === NO_FILL) {
-        return disabled ? getGreenHaze : getWhitePure
+      if (type === HOLLOW) {
+        return getWhitePure
       }
       return getGreenHaze
     },
@@ -46,9 +45,9 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "buttonTextColor",
-    ({ type, disabled }) => {
-      if (type === NO_FILL) {
-        return disabled ? getWhitePure : getGreenHaze
+    ({ type }) => {
+      if (type === HOLLOW) {
+        return getGreenHaze
       }
       return getWhitePure
     },
@@ -56,18 +55,21 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "buttonTextColorHover",
     ({ type, disabled }) => {
-      if (type === NO_FILL || type === BORDER_LESS) {
+      if (type === HOLLOW) {
+        return getGreenHaze
+      }
+      if (type === BORDER_LESS) {
         return disabled ? getWhitePure : getGreenMalachite
       }
       return getWhitePure
     },
   ],
   ["buttonTextColorActive", () => getWhitePure],
-  ["borderWidthNormal", ({ type }) => (type === NO_FILL ? "1px" : "0")],
+  ["borderWidthNormal", ({ type }) => (type === HOLLOW ? "1px" : "0")],
   [
     "borderWidthHover",
     ({ type, disabled }) => {
-      if (type === NO_FILL) {
+      if (type === HOLLOW) {
         return "1px"
       }
       if (type === BORDER_LESS) {
@@ -88,16 +90,19 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
   return "1px"
 }
 
-export const StyledIcon = styled(({ name, ...otherProps }) => (
-  <div
-    style={{
-      height: "24px",
-      fill: buttonProps("buttonTextColor", otherProps),
-    }}
-  >
-    <Icon name={name} />
-  </div>
-))`
+export const StyledButtonWrapper = styled.div<{ label: string }>`
+  ${props => {
+    return css`
+      height: ${getBorderedButtonSizeBy(5)};
+      width: ${getBorderedButtonSizeBy(props.label ? 16 : 5)};
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    `
+  }};
+`
+
+export const StyledIcon = styled(({ name }) => <Icon className="button-icon" name={name} />)`
   ${props => {
     return css`
       fill: ${buttonProps("buttonTextColor", props)};
@@ -106,25 +111,22 @@ export const StyledIcon = styled(({ name, ...otherProps }) => (
 `
 
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
-  <div
-    className="wrapper"
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-    }}
-  >
+  <StyledButtonWrapper label={label}>
     <button type="button" {...otherProps}>
       {icon ? <StyledIcon name={icon} {...otherProps} /> : null}
       {label}
     </button>
-  </div>
+  </StyledButtonWrapper>
 ))`
   ${props => {
     return css`
     &:focus {
       outline: none;
     }
+    &button {
+      padding: 0;
+    }
+    padding: 8px;
     opacity: ${props.disabled ? 0.6 : 1.0};
     cursor: ${props.disabled ? "not-allowed" : "pointer"};
     background-color: ${buttonProps("buttonColorNormal", props)};
@@ -157,11 +159,11 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     display: ${props.icon || props.isLoading ? "flex" : "block"};
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: center;
-    .rmwc-icon {
-      margin-right: ${(props.label && props.icon) || props.isLoading ? "8px" : "0"};
+    .button-icon {
+      margin-right: ${(props.label && props.icon) || props.isLoading ? "16px" : "0"};
       height: 24px;
       width: 24px;
+      fill: ${buttonProps("buttonTextColor", props)},
     }
   `
   }};

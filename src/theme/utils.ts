@@ -1,6 +1,7 @@
 import math from "polished/lib/math/math"
 import { mergeDeepRight, path, pathOr } from "ramda"
 import { ContstructedTheme, NumberOrStringT, WrappedTheme } from "./declarations"
+import { BUTTON_BORDER } from "../components/button/constants"
 
 export const extendTheme = (
   theme: ContstructedTheme,
@@ -35,6 +36,13 @@ export const getSizeBy = (multiplier: number = 1) => (props: WrappedTheme) => {
 export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   const gutterValue = path(["constants", "GUTTER_HEIGHT"], theme) || 0
   return `${gutterValue}px`
+}
+
+export const getBorderedButtonSizeBy = (multiplier: number = 1) => (
+  props: WrappedTheme
+): string => {
+  const size = (getSizeUnit(props) || 0) * multiplier + BUTTON_BORDER * 2
+  return `${size}px`
 }
 
 export const getValidatedControlColor = (defaultColorPath = "borderColor") => ({
