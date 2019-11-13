@@ -123,7 +123,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     &button {
       padding: 0;
     }
-    padding: 7px;
+    padding: 8px;
     opacity: ${props.disabled ? 0.6 : 1.0};
     cursor: ${props.disabled ? "not-allowed" : "pointer"};
     background-color: ${buttonProps("buttonColorNormal", props)};
