@@ -87,9 +87,7 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
   return "1px"
 }
 
-export const StyledIcon = styled(({ name, ...otherProps }) => (
-  <Icon className="button-icon" name={name} />
-))`
+export const StyledIcon = styled(({ name }) => <Icon className="button-icon" name={name} />)`
   ${props => {
     return css`
       fill: ${buttonProps("buttonTextColor", props)};

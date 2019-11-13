@@ -37,6 +37,13 @@ export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   return `${gutterValue}px`
 }
 
+export const getBorderSizeBy = (multiplier: number = 1) => (props: WrappedTheme) => {
+  const { theme } = props
+  const borderBorderSize: number | undefined = path(["constants", "BORDER_SIZE"], theme) || 0
+  const borderValue = borderBorderSize * multiplier
+  return `${borderValue}px`
+}
+
 export const getValidatedControlColor = (defaultColorPath = "borderColor") => ({
   theme,
   success,
