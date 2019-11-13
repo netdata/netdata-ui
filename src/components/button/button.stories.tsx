@@ -33,11 +33,11 @@ buttonStory.add(
 )
 
 buttonStory.add(
-  "Button No Fill",
+  "Button Hollow",
   () => (
     <Button
       disabled={boolean("Disabled", false)}
-      type="noFill"
+      type="hollow"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />
@@ -108,12 +108,12 @@ buttonStory.add(
 )
 
 buttonStory.add(
-  "Button Icon No Fill",
+  "Button Icon Hollow",
   () => (
     <Button
       icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
-      type="noFill"
+      type="hollow"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
     />
@@ -134,13 +134,13 @@ buttonStory.add(
 )
 
 buttonStory.add(
-  "Button Action No Fill",
+  "Button Action Hollow",
   () => (
     <Button
       icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      type="noFill"
+      type="hollow"
     />
   ),
   subData
@@ -159,7 +159,7 @@ buttonStory.add(
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       label="The text"
-      type="noFill"
+      type="hollow"
     />
   ),
   subData

@@ -2,7 +2,7 @@ import React, { SyntheticEvent, FC } from "react"
 import { StyledButton, StyledCircularProgress } from "./styled"
 import { DEFAULT } from "./constants"
 
-type ButtonType = "default" | "noFill" | "borderless"
+type ButtonType = "default" | "hollow" | "borderless"
 
 export interface ButtonProps {
   id?: string

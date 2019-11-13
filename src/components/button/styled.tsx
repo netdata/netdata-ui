@@ -4,7 +4,7 @@ import { CircularProgress } from "@rmwc/circular-progress"
 import { getColor, getSizeBy } from "../../theme/utils"
 import { ButtonProps } from "./button"
 import { Icon } from "../icon"
-import { DEFAULT, NO_FILL, BORDER_LESS } from "./constants"
+import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 
 const getGreenHaze = getColor(["green", "greenHaze"])
 const getWhitePure = getColor(["white", "pure"])
@@ -24,12 +24,12 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ["buttonHeightHover", ({ disabled, type }) => disabled || getSizeBy(type !== DEFAULT ? 5 : 6)],
   [
     "buttonColorNormal",
-    ({ type, disabled }) => {
+    ({ type }) => {
       if (type === BORDER_LESS) {
-        return disabled ? getGreenHaze : getColor(["transparent", "full"])
+        return getColor(["transparent", "full"])
       }
-      if (type === NO_FILL) {
-        return disabled ? getGreenHaze : getWhitePure
+      if (type === HOLLOW) {
+        return getWhitePure
       }
       return getGreenHaze
     },
@@ -45,9 +45,9 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ],
   [
     "buttonTextColor",
-    ({ type, disabled }) => {
-      if (type === NO_FILL) {
-        return disabled ? getWhitePure : getGreenHaze
+    ({ type }) => {
+      if (type === HOLLOW) {
+        return getGreenHaze
       }
       return getWhitePure
     },
@@ -55,18 +55,21 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   [
     "buttonTextColorHover",
     ({ type, disabled }) => {
-      if (type === NO_FILL || type === BORDER_LESS) {
+      if (type === HOLLOW) {
+        return getGreenHaze
+      }
+      if (type === BORDER_LESS) {
         return disabled ? getWhitePure : getGreenMalachite
       }
       return getWhitePure
     },
   ],
   ["buttonTextColorActive", () => getWhitePure],
-  ["borderWidthNormal", ({ type }) => (type === NO_FILL ? "1px" : "0")],
+  ["borderWidthNormal", ({ type }) => (type === HOLLOW ? "1px" : "0")],
   [
     "borderWidthHover",
     ({ type, disabled }) => {
-      if (type === NO_FILL) {
+      if (type === HOLLOW) {
         return "1px"
       }
       if (type === BORDER_LESS) {

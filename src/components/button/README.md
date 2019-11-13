@@ -19,7 +19,7 @@ interface Props {
 ## Button types
 
 ```typescript
-  type ButtonType = "default" | "noFill" | "borderless",
+  type ButtonType = "default" | "hollow" | "borderless",
 
 ```
 
@@ -31,11 +31,11 @@ interface Props {
 const myButton: Button = <Button icon={"github"} onClick={this.myHandler} label="Press me" />
 ```
 
-### No fill button
+### Hollow button
 
 ```typescript
 const myButton: Button = (
-  <Button type={ButtonTypes.noFill} onClick={this.myHandler} label="Press me" />
+  <Button type={ButtonTypes.hollow} onClick={this.myHandler} label="Press me" />
 )
 ```
 
