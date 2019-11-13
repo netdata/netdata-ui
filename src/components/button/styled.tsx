@@ -90,7 +90,7 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
   return "1px"
 }
 
-export const StyledButtonWrapper = styled(({ ...otherProps }) => <div {...otherProps} />)`
+export const StyledButtonWrapper = styled.div<{ label: string }>`
   ${props => {
     return css`
       height: ${getBorderedButtonSizeBy(5)};
@@ -111,7 +111,7 @@ export const StyledIcon = styled(({ name }) => <Icon className="button-icon" nam
 `
 
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
-  <StyledButtonWrapper>
+  <StyledButtonWrapper label={label}>
     <button type="button" {...otherProps}>
       {icon ? <StyledIcon name={icon} {...otherProps} /> : null}
       {label}

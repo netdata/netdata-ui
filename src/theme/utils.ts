@@ -31,7 +31,7 @@ export const getColor = (colorPath: string[]) => getOrElse(["colors", ...colorPa
 export const getSizeBy = (multiplier: number = 1) => (props: WrappedTheme) => {
   const size = (getSizeUnit(props) || 0) * multiplier
   return `${size}px`
-}
+}             
 
 export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   const gutterValue = path(["constants", "GUTTER_HEIGHT"], theme) || 0
