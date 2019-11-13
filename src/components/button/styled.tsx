@@ -11,7 +11,6 @@ const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 
 const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
-  ["divWidth", ({ label }) => getSizeBy(label ? 16 : 6)],
   [
     "buttonWidthHover",
     ({ label, disabled, type }) => {
@@ -89,14 +88,7 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
 }
 
 export const StyledIcon = styled(({ name, ...otherProps }) => (
-  <div
-    style={{
-      height: "24px",
-      fill: buttonProps("buttonTextColor", otherProps),
-    }}
-  >
-    <Icon name={name} />
-  </div>
+  <Icon className="button-icon" name={name} />
 ))`
   ${props => {
     return css`
@@ -109,6 +101,8 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
   <div
     className="wrapper"
     style={{
+      height: "46px",
+      width: label ? "134px" : "46px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
@@ -125,6 +119,10 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     &:focus {
       outline: none;
     }
+    &button {
+      padding: 0;
+    }
+    padding: 7px;
     opacity: ${props.disabled ? 0.6 : 1.0};
     cursor: ${props.disabled ? "not-allowed" : "pointer"};
     background-color: ${buttonProps("buttonColorNormal", props)};
@@ -157,11 +155,11 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     display: ${props.icon || props.isLoading ? "flex" : "block"};
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: center;
-    .rmwc-icon {
-      margin-right: ${(props.label && props.icon) || props.isLoading ? "8px" : "0"};
+    .button-icon {
+      margin-right: ${(props.label && props.icon) || props.isLoading ? "12px" : "0"};
       height: 24px;
       width: 24px;
+      fill: ${buttonProps("buttonTextColor", props)},
     }
   `
   }};

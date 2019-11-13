@@ -83,7 +83,7 @@ buttonStory.add(
       }}
     >
       <Button
-        icon={select("name", icons, "plus")}
+        icon={select("Name", icons, "plus")}
         disabled={boolean("Disabled", false)}
         type="borderless"
         onClick={action("clicked")}
@@ -98,7 +98,7 @@ buttonStory.add(
   "Button Icon",
   () => (
     <Button
-      icon={select("name", icons, "plus")}
+      icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
@@ -111,7 +111,7 @@ buttonStory.add(
   "Button Icon No Fill",
   () => (
     <Button
-      icon={select("name", icons, "plus")}
+      icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       type="noFill"
       onClick={action("clicked")}
@@ -125,7 +125,7 @@ buttonStory.add(
   "Button Action",
   () => (
     <Button
-      icon={select("name", icons, "plus")}
+      icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
     />
@@ -137,7 +137,7 @@ buttonStory.add(
   "Button Action No Fill",
   () => (
     <Button
-      icon={select("name", icons, "plus")}
+      icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       type="noFill"
@@ -155,7 +155,7 @@ buttonStory.add(
   "Button with CSS overriede",
   () => (
     <OverridedButton
-      icon={select("name", icons, "plus")}
+      icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       label="The text"
