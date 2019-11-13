@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { CircularProgress } from "@rmwc/circular-progress"
-import { getColor, getSizeBy } from "../../theme/utils"
+import { getColor, getSizeBy, getBorderedButtonSizeBy } from "../../theme/utils"
 import { ButtonProps } from "./button"
 import { Icon } from "../icon"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
@@ -90,6 +90,18 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
   return "1px"
 }
 
+export const StyledButtonWrapper = styled(({ ...otherProps }) => <div {...otherProps} />)`
+  ${props => {
+    return css`
+      height: ${getBorderedButtonSizeBy(5)};
+      width: ${getBorderedButtonSizeBy(props.label ? 16 : 5)};
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    `
+  }};
+`
+
 export const StyledIcon = styled(({ name }) => <Icon className="button-icon" name={name} />)`
   ${props => {
     return css`
@@ -99,21 +111,12 @@ export const StyledIcon = styled(({ name }) => <Icon className="button-icon" nam
 `
 
 export const StyledButton = styled(({ label, icon, ...otherProps }) => (
-  <div
-    className="wrapper"
-    style={{
-      height: "46px",
-      width: label ? "134px" : "46px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-around",
-    }}
-  >
+  <StyledButtonWrapper>
     <button type="button" {...otherProps}>
       {icon ? <StyledIcon name={icon} {...otherProps} /> : null}
       {label}
     </button>
-  </div>
+  </StyledButtonWrapper>
 ))`
   ${props => {
     return css`
@@ -157,7 +160,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     flex-flow: row nowrap;
     align-items: center;
     .button-icon {
-      margin-right: ${(props.label && props.icon) || props.isLoading ? "12px" : "0"};
+      margin-right: ${(props.label && props.icon) || props.isLoading ? "16px" : "0"};
       height: 24px;
       width: 24px;
       fill: ${buttonProps("buttonTextColor", props)},
