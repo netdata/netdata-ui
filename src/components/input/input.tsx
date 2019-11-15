@@ -23,7 +23,7 @@ export interface InputProps {
   onFocus?: (e: FocusEvent) => void
   onBlur?: (e: FocusEvent) => void
   value: string
-  inputRef?: MutableRefObject<any> | CallBackRef
+  inputRef?: MutableRefObject<HTMLInputElement | null> | CallBackRef
   disabled?: boolean
   iconLeft?: ReactNode
   iconRight?: ReactNode
