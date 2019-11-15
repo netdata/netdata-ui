@@ -146,6 +146,13 @@ inputStory.add(
     const label = text("Label", "Label")
     const [value, handleChange] = useInputValue({ maxChars: charLimit })
 
+    // lazy ref workaround example
+    const inputElement = useCallback(input => {
+      if (input !== null) {
+        // do some imperative stuff
+      }
+    }, [])
+
     return (
       <Container>
         <TextInput
@@ -156,6 +163,7 @@ inputStory.add(
           value={value}
           onChange={handleChange}
           iconRight={SearchIcon}
+          inputRef={inputElement}
         />
       </Container>
     )
