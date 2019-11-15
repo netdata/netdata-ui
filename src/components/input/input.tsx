@@ -27,6 +27,7 @@ export interface InputProps {
   iconRight?: ReactNode
   name?: string
   placeholder?: string
+  autoFocus?: boolean
 }
 
 export interface ComponentProps {
