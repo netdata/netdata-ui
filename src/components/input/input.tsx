@@ -16,12 +16,14 @@ import {
 import { InstantFeedback } from "./types"
 import { useFocusedState } from "./use-focused-state"
 
+type CallBackRef = (input: any) => void
+
 export interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onFocus?: (e: FocusEvent) => void
   onBlur?: (e: FocusEvent) => void
   value: string
-  ref?: MutableRefObject<HTMLInputElement>
+  inputRef?: MutableRefObject<any> | CallBackRef
   disabled?: boolean
   iconLeft?: ReactNode
   iconRight?: ReactNode
@@ -64,6 +66,7 @@ export const TextInput = ({
   label,
   isDirty,
   value,
+  inputRef,
   ...props
 }: TextInputProps) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
@@ -106,6 +109,7 @@ export const TextInput = ({
             iconRight={iconRight}
             type="text"
             value={value}
+            ref={inputRef}
           />
           {iconRight && <IconContainer disabled={disabled}>{iconRight}</IconContainer>}
           {metaDisplayed && error && (
