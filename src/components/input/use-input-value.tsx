@@ -4,6 +4,7 @@ import { ChangeEventHandler, ReactInputChangeEvent } from "./types"
 type InputValue = string
 type MaxCharsIndicator = string
 type IsDirty = boolean
+type SetIsDirty = React.Dispatch<React.SetStateAction<boolean>>
 type UseInputValue = ({
   value,
   onChange,
@@ -12,7 +13,7 @@ type UseInputValue = ({
   value?: string
   onChange?: ChangeEventHandler
   maxChars?: number
-}) => [InputValue, ChangeEventHandler, MaxCharsIndicator, IsDirty]
+}) => [InputValue, ChangeEventHandler, MaxCharsIndicator, IsDirty, SetIsDirty]
 
 export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars }) => {
   const [inputValue, setValue] = useState(value)
@@ -39,5 +40,5 @@ export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars })
 
   const maxCharsIndicator = maxChars ? `${inputValue.length}/${maxChars}` : ""
 
-  return [inputValue, handleChange, maxCharsIndicator, isDirty]
+  return [inputValue, handleChange, maxCharsIndicator, isDirty, setIsDirty]
 }
