@@ -47,7 +47,7 @@ export const StyledCheckbox = styled.div<{
     disabled ? getColor(["gray", "gallery"]) : getColor(["white", "pure"])};
   border: 1px solid;
   border-color: ${({ disabled }) =>
-    disabled ? getColor(["gray", "silverSand"]) : getColor(["gray", "darkMud"])};
+    disabled ? getColor(["gray", "silverSand"]) : getColor(["gray", "limedSpruce"])};
   transition: all 150ms;
 
   ${HiddenCheckboxInput}:focus + & {

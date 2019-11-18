@@ -20,7 +20,6 @@ There are a collection of colors in theme, they could be accessed `raw` way or w
   - silverSand
   - gallery
   - bombay
-  - darkMud
 - green
   - malachite
   - greenHaze

@@ -11,7 +11,6 @@ export type RawColorsT = {
     silverSand: string
     gallery: string
     bombay: string
-    darkMud: string
   }
   green: {
     malachite: string

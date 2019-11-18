@@ -13,7 +13,6 @@ const rawColors: RawColorsT = {
     silverSand: "#B5B9BC",
     gallery: "#EFEFEF",
     bombay: "#AEB3B7",
-    darkMud: "#1A1A1A",
   },
   green: {
     malachite: "#00CB51",
@@ -42,10 +41,10 @@ const rawColors: RawColorsT = {
 
 const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
-  controlFocused: rawColors.gray.darkMud,
+  controlFocused: rawColors.gray.limedSpruce,
   error: rawColors.red.redOrange,
   success: rawColors.green.greenHaze,
-  text: rawColors.gray.darkMud,
+  text: rawColors.gray.limedSpruce,
 }
 
 export const colors: RawColorsT & AppColorsT = {
