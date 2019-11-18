@@ -42,10 +42,10 @@ const rawColors: RawColorsT = {
 
 const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
-  controlFocused: rawColors.gray.limedSpruce,
+  controlFocused: rawColors.gray.darkMud,
   error: rawColors.red.redOrange,
   success: rawColors.green.greenHaze,
-  text: rawColors.gray.limedSpruce,
+  text: rawColors.gray.darkMud,
 }
 
 export const colors: RawColorsT & AppColorsT = {
