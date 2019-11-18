@@ -38,7 +38,7 @@ export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   return `${gutterValue}px`
 }
 
-export const getBorderedButtonSizeBy = (multiplier: number = 1) => (
+export const getBorderedSizeBy = (multiplier: number = 1) => (
   props: WrappedTheme
 ): string => {
   const size = (getSizeUnit(props) || 0) * multiplier + BUTTON_BORDER * 2

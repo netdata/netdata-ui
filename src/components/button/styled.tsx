@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 import { CircularProgress } from "@rmwc/circular-progress"
-import { getColor, getSizeBy, getBorderedButtonSizeBy } from "../../theme/utils"
+import { getColor, getSizeBy, getBorderedSizeBy } from "../../theme/utils"
 import { ButtonProps } from "./button"
 import { Icon } from "../icon"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
@@ -93,8 +93,8 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
 export const StyledButtonWrapper = styled.div<{ label: string }>`
   ${props => {
     return css`
-      height: ${getBorderedButtonSizeBy(5)};
-      width: ${getBorderedButtonSizeBy(props.label ? 16 : 5)};
+      height: ${getBorderedSizeBy(5)};
+      width: ${getBorderedSizeBy(props.label ? 16 : 5)};
       display: flex;
       align-items: center;
       justify-content: space-around;
