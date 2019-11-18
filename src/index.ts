@@ -26,6 +26,7 @@ export {
   extendTheme,
   getSizeUnit,
   getSizeBy,
+  getBorderedSizeBy,
   calcSize,
   getOrElse,
   propOrElse,

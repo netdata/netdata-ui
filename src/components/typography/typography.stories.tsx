@@ -28,7 +28,7 @@ const subData = {
 
 const headers = (
   <div>
-    <H0>H1: Title Enourmous. The five boxing wizards jump quickly.</H0>
+    <H0>H0: Title Enourmous. The five boxing wizards jump quickly.</H0>
     <H1>H1: Title Huge. The five boxing wizards jump quickly.</H1>
     <H2>H2: Title Bigger. The five boxing wizards jump quickly.</H2>
     <H3>H3: Title Big. The five boxing wizards jump quickly.</H3>
