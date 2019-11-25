@@ -15,7 +15,6 @@ export const ComponentBox = styled.div<ComponentBoxT>`
 `
 
 export const SidebarBox = styled.aside<SidebarBoxT>`
-  display: "flex";
   overflow: hidden;
   top: 0;
   bottom: 0;
@@ -24,7 +23,6 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
 `
 export const PortalSidebox = styled.aside<PortalSidebarboxT>`
   position: absolute;
-  display: "flex";
   overflow: hidden;
   top: 0;
   ${propOrElse<PortalSidebarboxT, string>(["side"], "left")}: 0;
