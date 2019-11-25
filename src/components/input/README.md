@@ -18,14 +18,18 @@ export interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onFocus?: (e: FocusEvent) => void
   onBlur?: (e: FocusEvent) => void
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
   value: string
-  ref?: MutableRefObject<HTMLInputElement>
+  inputRef?: MutableRefObject<HTMLInputElement | null> | CallBackRef
   disabled?: boolean
   iconLeft?: ReactNode
   iconRight?: ReactNode
   name?: string
   placeholder?: string
+  autoFocus?: boolean
 }
+
+export type InstantFeedback = "all" | "positiveFirst"
 
 export interface ComponentProps {
   fieldMessage?: string
@@ -33,7 +37,7 @@ export interface ComponentProps {
   success?: boolean | string
   touched?: boolean
   isDirty?: boolean
-  instantFeedback?: "all" | "positiveFirst"
+  instantFeedback?: InstantFeedback
   className?: string
   fieldIndicator?: string | ReactNode
   metaShrinked?: boolean

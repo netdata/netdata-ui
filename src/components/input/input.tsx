@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MutableRefObject, FocusEvent, ReactNode } from "react"
+import React, { ChangeEvent, MutableRefObject, FocusEvent, ReactNode, KeyboardEvent } from "react"
 import { usePreviousDistinct } from "react-use"
 import {
   StyledInput,
@@ -22,6 +22,7 @@ export interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onFocus?: (e: FocusEvent) => void
   onBlur?: (e: FocusEvent) => void
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
   value: string
   inputRef?: MutableRefObject<HTMLInputElement | null> | CallBackRef
   disabled?: boolean

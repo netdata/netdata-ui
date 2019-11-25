@@ -9,10 +9,12 @@ interface PortalSidebarProps<T = any> {
   onClose?: (args?: T) => void
   right?: boolean
   children?: ReactNode
+  className?: string
 }
 
 export const PortalSidebar: FC<PortalSidebarProps> = ({
   children,
+  className,
   closeOnEsc = false,
   onClose = () => {},
   right = false,
@@ -31,7 +33,7 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
 
   return (
     <Portal>
-      <PortalSidebox shadowSide={right} side={right ? "right" : "left"}>
+      <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
         {children}
       </PortalSidebox>
     </Portal>

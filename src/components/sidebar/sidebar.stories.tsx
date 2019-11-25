@@ -82,22 +82,28 @@ const Header = styled.div`
   width: 100%;
   background-color: ${getColor(["gray", "gallery"])};
 `
+
+const StyledPortalSidebar = styled(PortalSidebar)`
+  width: 50%;
+  max-width: 300px;
+`
+
 sidebarStory.add(
-  "portaled with large list",
+  "styled portaled with large list",
   () => {
     const list: number[] = []
     for (let i = 0; i <= 100; i += 1) {
       list.push(i)
     }
     return (
-      <PortalSidebar right={boolean("right", false)}>
+      <StyledPortalSidebar right={boolean("right", false)}>
         <Header>I am header</Header>
         <SidebarContent>
           {list.map(e => (
             <div key={e}>{e}</div>
           ))}
         </SidebarContent>
-      </PortalSidebar>
+      </StyledPortalSidebar>
     )
   },
   subData

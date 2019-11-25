@@ -11,7 +11,8 @@ This component implements splitscrean view
 interface SidebarProps {
   info?: ReactNode
   right?: boolean  
-  children?: ReactNode    
+  children?: ReactNode
+  className?: string    
 }
 ```
 
@@ -41,6 +42,7 @@ interface PortalSidebarProps<T = any> {
   onClose?: (args?: T) => void
   right?: boolean
   children?: NodeT
+  className?: string
 }
 ```
 - `closeOnEsc` - Sidebar will be closed on `Esc` key press
