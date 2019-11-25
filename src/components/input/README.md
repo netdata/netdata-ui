@@ -18,7 +18,7 @@ export interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onFocus?: (e: FocusEvent) => void
   onBlur?: (e: FocusEvent) => void
-  onKeyDown?: (e: KeyboardEvent) => void
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void
   value: string
   inputRef?: MutableRefObject<HTMLInputElement | null> | CallBackRef
   disabled?: boolean
