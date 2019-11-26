@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import "@testing-library/jest-dom/extend-expect"
 import { Button, ButtonProps } from "./button"
 import { DefaultTheme } from "../../theme/default"
