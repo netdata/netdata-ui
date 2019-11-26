@@ -83,7 +83,7 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
 ])
 
 const buttonProps = (propertyName: string, props: ButtonProps): string => {
-  const propertyFunction = buttonPropsMap.get(propertyName)
+  const propertyFunction = buttonPropsMap.get(propertyName) as (a: ButtonProps) => string
   if (propertyFunction) {
     return propertyFunction(props)
   }
@@ -92,7 +92,7 @@ const buttonProps = (propertyName: string, props: ButtonProps): string => {
 
 export const StyledButtonWrapper = styled.div<{ label: string }>`
   ${props => {
-    return css`
+    return css<{ label: string }>`
       height: ${getBorderedSizeBy(5)};
       width: ${getBorderedSizeBy(props.label ? 16 : 5)};
       display: flex;

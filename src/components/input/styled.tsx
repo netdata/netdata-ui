@@ -3,9 +3,9 @@ import { Icon } from "../icon"
 import { getColor, getSizeBy, getValidatedControlColor, getSizeUnit } from "../../theme/utils"
 import { controlReset, borderRadius, controlFocused } from "../../mixins"
 import { InputProps } from "./input"
-
-const disabledCursorSupport = css<{ disabled?: boolean }>`
-  cursor: ${({ disabled }) => disabled && "not-allowed"};
+// @ts-ignore
+const disabledCursorSupport = css<any>`
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "")};
 `
 
 export const StyledContainer = styled.div`
