@@ -1,21 +1,40 @@
-import React from "react"
-import { useTable, useSortBy, useRowSelect } from "react-table"
-import { UHeader } from "./components/UserHeader"
+import React, { useEffect } from "react"
+import { useTable, useSortBy, useRowSelect, ColumnInstance, Row } from "react-table"
+import { UserHeader } from "./components/UserHeader"
 
 import { StyledTable, StyledThead, StyledRow } from "./styled"
 
-function RTable({ columns, data, sortedBy = [], ...rest }: any) {
-  const { getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+interface TablePropsT<T, RT = any> {
+  selectedItemsClb?: (items: T[]) => T[] | void
+  columns: RT
+  data: T[]
+  sortedBy?: string[]
+}
+
+function RTable<T extends object>({
+  columns,
+  data,
+  sortedBy = [],
+  selectedItemsClb,
+}: TablePropsT<T>) {
+  // @ts-ignore
+  const { getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows, ...rest } = useTable(
     { columns, data },
     useSortBy,
     useRowSelect
   )
+  useEffect(() => {
+    if (selectedItemsClb) {
+      selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
+    }
+  }, [selectedFlatRows, selectedItemsClb])
+
   return (
     <StyledTable>
       <StyledThead>
         {headerGroups.map((headerGroup, i) => (
           <tr key={i}>
-            {headerGroup.headers.map(column => (
+            {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => (
               <th
                 {...column.getHeaderProps(
                   // @ts-ignore
@@ -34,7 +53,7 @@ function RTable({ columns, data, sortedBy = [], ...rest }: any) {
           return (
             <StyledRow {...row.getRowProps()}>
               {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                return <td {...cell.getCellProps()}>{cell.render("Cell", { ...rest })}</td>
               })}
             </StyledRow>
           )
@@ -44,14 +63,20 @@ function RTable({ columns, data, sortedBy = [], ...rest }: any) {
   )
 }
 
-export function Table() {
-  const columns = React.useMemo(() => UHeader, [])
+export function Table<T extends object>({
+  selectedItemsClb,
+  data,
+  sortedBy,
+  columns,
+}: TablePropsT<T>) {
+  const cahedColumns = React.useMemo<typeof UserHeader>(() => columns, [])
 
   return (
-    <RTable
-      columns={columns}
-      sortedBy={["options"]}
-      data={[{ options: "andy", adding: "123" }, { options: "amy", adding: "123" }]}
+    <RTable<T>
+      selectedItemsClb={selectedItemsClb}
+      columns={cahedColumns}
+      sortedBy={sortedBy}
+      data={data}
     />
   )
 }

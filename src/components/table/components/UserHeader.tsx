@@ -1,23 +1,19 @@
-import React, { ChangeEvent } from "react"
+import React from "react"
+import { UseTableCellProps, CellProps } from "react-table"
 import { Checkbox } from "../../checkbox"
 import { StyledIcon, CellBox, OptionsBtn, ArrowIcon } from "../styled"
 import { Button } from "../../button"
 
-export type UserHeaderPropsT = {
-  handleAll: (e: ChangeEvent<HTMLInputElement>) => void
-  isAllSelected: boolean
-  callAddUser?: () => void
-  callSettings?: () => void
-}
-
-export const UHeader = [
+export const UserHeader = [
   {
     id: "selection",
     Header: ({ getToggleAllRowsSelectedProps }: any) => {
+      // @ts-ignore | TBD: IMPROVE PROPS
       const { checked, onChange } = getToggleAllRowsSelectedProps()
       return <Checkbox checked={checked} onChange={onChange} />
     },
-    Cell: ({ row }) => {
+    Cell: ({ row }: UseTableCellProps<any>) => {
+      // @ts-ignore | TBD: IMPROVE PROPS
       const { checked, onChange } = row.getToggleRowSelectedProps()
       return <Checkbox checked={checked} onChange={onChange} />
     },
@@ -32,14 +28,14 @@ export const UHeader = [
         Users
       </CellBox>
     ),
-    Cell: ({ cell }) => {
+    Cell: ({ cell }: CellProps<any>) => {
       return <CellBox>{cell.value}</CellBox>
     },
   },
   {
     id: "adding",
     accessor: "adding",
-    Header: ({ callAddUser, callSettings }) => (
+    Header: ({ callAddUser, callSettings }: any) => (
       <CellBox reversed>
         <Button icon="plus" onClick={callAddUser} />
         <OptionsBtn
@@ -50,9 +46,9 @@ export const UHeader = [
         />
       </CellBox>
     ),
-    Cell: ({ cell }) => (
+    Cell: (props: any) => (
       <CellBox reversed>
-        <StyledIcon name="nav_dots" />
+        <StyledIcon name="nav_dots" {...props} />
       </CellBox>
     ),
   },
