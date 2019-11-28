@@ -7,6 +7,8 @@ import { Icon } from "../icon"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 
 const getGreenHaze = getColor(["green", "greenHaze"])
+const getRedOrange = getColor(["red", "redOrange"])
+const getOutrageousOrange = getColor(["red", "outrageousOrange"])
 const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 
@@ -24,39 +26,45 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
   ["buttonHeightHover", ({ disabled, type }) => disabled || getSizeBy(type !== DEFAULT ? 5 : 6)],
   [
     "buttonColorNormal",
-    ({ type }) => {
+    ({ type, danger, disabled }) => {
       if (type === BORDER_LESS) {
         return getColor(["transparent", "full"])
       }
       if (type === HOLLOW) {
         return getWhitePure
       }
+      if (danger) {
+        return disabled ? getOutrageousOrange : getRedOrange
+      }
       return getGreenHaze
     },
   ],
   [
     "buttonColorHover",
-    ({ type, disabled }) => {
+    ({ type, disabled, danger }) => {
       if (type === BORDER_LESS) {
         return disabled ? getGreenHaze : getColor(["transparent", "full"])
+      }
+      if (danger) {
+        return disabled ? getRedOrange : getOutrageousOrange
       }
       return disabled ? getGreenHaze : getGreenMalachite
     },
   ],
   [
     "buttonTextColor",
-    ({ type }) => {
+    ({ type, danger }) => {
       if (type === HOLLOW) {
-        return getGreenHaze
+        return danger ? getRedOrange : getGreenHaze
       }
       return getWhitePure
     },
   ],
   [
     "buttonTextColorHover",
-    ({ type, disabled }) => {
+    ({ type, disabled, danger }) => {
       if (type === HOLLOW) {
-        return getGreenHaze
+        return danger ? getRedOrange : getGreenHaze
       }
       if (type === BORDER_LESS) {
         return disabled ? getWhitePure : getGreenMalachite
@@ -78,8 +86,24 @@ const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
       return disabled ? "0" : "3px"
     },
   ],
-  ["borderColor", ({ disabled }) => (disabled ? getGreenHaze : getGreenMalachite)],
-  ["borderColorHover", ({ disabled }) => (disabled ? getGreenHaze : getGreenMalachite)],
+  [
+    "borderColor",
+    ({ disabled, danger }) => {
+      if (danger) {
+        return disabled ? getRedOrange : getOutrageousOrange
+      }
+      return disabled ? getGreenHaze : getGreenMalachite
+    },
+  ],
+  [
+    "borderColorHover",
+    ({ disabled, danger }) => {
+      if (danger) {
+        return disabled ? getRedOrange : getOutrageousOrange
+      }
+      return disabled ? getGreenHaze : getGreenMalachite
+    },
+  ],
 ])
 
 const buttonProps = (propertyName: string, props: ButtonProps): string => {
@@ -130,7 +154,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     opacity: ${props.disabled ? 0.6 : 1.0};
     cursor: ${props.disabled ? "not-allowed" : "pointer"};
     background-color: ${buttonProps("buttonColorNormal", props)};
-    border-color: ${getGreenHaze}
+    border-color: ${props.danger ? getRedOrange : getGreenHaze}
     border-style: solid;
     border-radius: 3px;
     border-width: ${buttonProps("borderWidthNormal", props)};

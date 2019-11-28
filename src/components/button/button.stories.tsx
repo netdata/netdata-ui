@@ -33,6 +33,19 @@ buttonStory.add(
 )
 
 buttonStory.add(
+  "Button Default Danger",
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      label={text("Label prop", "LABEL")}
+      onClick={action("clicked")}
+      danger={boolean("Danger", true)}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
   "Button Hollow",
   () => (
     <Button
@@ -40,6 +53,20 @@ buttonStory.add(
       type="hollow"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Hollow Danger",
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      type="hollow"
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+      danger={boolean("Danger", true)}
     />
   ),
   subData
