@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useTable, useSortBy, useRowSelect, ColumnInstance, Row } from "react-table"
 import { StyledTable, StyledThead } from "./styled"
 
-interface TablePropsT<T, RT = any> {
+interface TableProps<T, RT = any> {
   selectedItemsClb?: (items: T[]) => T[] | void
   columns: RT
   data: T[]
@@ -14,7 +14,7 @@ function RTable<T extends object>({
   data,
   sortedBy = [],
   selectedItemsClb,
-}: TablePropsT<T>) {
+}: TableProps<T>) {
   // @ts-ignore
   const { getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows, ...rest } = useTable(
     { columns, data },
@@ -66,7 +66,7 @@ export function Table<T extends object>({
   data,
   sortedBy,
   columns,
-}: TablePropsT<T>) {
+}: TableProps<T>) {
   const cahedColumns = React.useMemo<typeof columns>(() => columns, [])
 
   return (
