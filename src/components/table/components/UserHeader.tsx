@@ -27,7 +27,6 @@ export const UserHeader = [
   {
     id: "user",
     accessor: "user",
-
     Header: () => (
       <CellBox>
         <StyledIcon name="arrow_down" />

@@ -9,7 +9,7 @@ interface TableProps<T, RT = any> {
   sortedBy?: string[]
 }
 
-function RTable<T extends object>({
+function ReactTable<T extends object>({
   columns,
   data,
   sortedBy = [],
@@ -70,7 +70,7 @@ export function Table<T extends object>({
   const cahedColumns = React.useMemo<typeof columns>(() => columns, [])
 
   return (
-    <RTable<T>
+    <ReactTable<T>
       selectedItemsClb={selectedItemsClb}
       columns={cahedColumns}
       sortedBy={sortedBy}

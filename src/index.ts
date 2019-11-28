@@ -37,3 +37,5 @@ export { DefaultTheme } from "./theme/default"
 export { devices } from "./media"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
+
+export { Table, UserHeader } from "./components/table"
