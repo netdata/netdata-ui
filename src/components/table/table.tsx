@@ -1,8 +1,6 @@
 import React, { useEffect } from "react"
 import { useTable, useSortBy, useRowSelect, ColumnInstance, Row } from "react-table"
-import { UserHeader } from "./components/UserHeader"
-
-import { StyledTable, StyledThead, StyledRow, RowBox } from "./styled"
+import { StyledTable, StyledThead } from "./styled"
 
 interface TablePropsT<T, RT = any> {
   selectedItemsClb?: (items: T[]) => T[] | void
@@ -27,7 +25,7 @@ function RTable<T extends object>({
     if (selectedItemsClb) {
       selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
     }
-  }, [selectedFlatRows, selectedItemsClb])
+  }, [selectedFlatRows])
 
   return (
     <StyledTable>
@@ -69,7 +67,7 @@ export function Table<T extends object>({
   sortedBy,
   columns,
 }: TablePropsT<T>) {
-  const cahedColumns = React.useMemo<typeof UserHeader>(() => columns, [])
+  const cahedColumns = React.useMemo<typeof columns>(() => columns, [])
 
   return (
     <RTable<T>
