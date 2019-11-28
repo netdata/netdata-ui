@@ -7,7 +7,6 @@ export const StyledTable = styled.table`
   width: 100%;
   height: 100%;
   border-collapse: collapse;
-  min-width: ${getSizeBy(90)};
 `
 
 export const StyledThead = styled.thead`

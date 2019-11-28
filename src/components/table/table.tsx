@@ -7,6 +7,7 @@ interface TableProps<T, RT = any> {
   columns: RT
   data: T[]
   sortedBy?: string[]
+  className?: string
 }
 
 function ReactTable<T extends object>({
@@ -14,6 +15,7 @@ function ReactTable<T extends object>({
   data,
   sortedBy = [],
   selectedItemsClb,
+  ...props
 }: TableProps<T>) {
   // @ts-ignore
   const { getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows, ...rest } = useTable(
@@ -28,7 +30,7 @@ function ReactTable<T extends object>({
   }, [selectedFlatRows])
 
   return (
-    <StyledTable>
+    <StyledTable {...props}>
       <StyledThead>
         {headerGroups.map((headerGroup, i) => (
           <tr key={i}>
@@ -66,6 +68,7 @@ export function Table<T extends object>({
   data,
   sortedBy,
   columns,
+  ...props
 }: TableProps<T>) {
   const cahedColumns = React.useMemo<typeof columns>(() => columns, [])
 
@@ -75,6 +78,7 @@ export function Table<T extends object>({
       columns={cahedColumns}
       sortedBy={sortedBy}
       data={data}
+      {...props}
     />
   )
 }
