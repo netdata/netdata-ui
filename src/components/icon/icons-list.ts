@@ -24,6 +24,9 @@ import warning from "./assets/warning.svg"
 import x from "./assets/x.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import search_s from "./assets/search_s.svg"
+import arrow_down from "./assets/arrow_down.svg"
+import triangle_down from "./assets/triangle_down.svg"
+import nav_dots from "./assets/nav_dots.svg"
 
 export const iconsList = {
   alarm,
@@ -52,4 +55,7 @@ export const iconsList = {
   x,
   checkmark_partial_s,
   search_s,
+  arrow_down,
+  triangle_down,
+  nav_dots,
 }

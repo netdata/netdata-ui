@@ -8,7 +8,7 @@ export interface ButtonProps {
   id?: string
   ref?: React.MutableRefObject<HTMLInputElement>
   className?: string
-  label?: string
+  label?: string | JSX.Element
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
   icon?: any
   isLoading?: boolean
