@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useTable, useSortBy, useRowSelect, ColumnInstance, Row } from "react-table"
 import { UserHeader } from "./components/UserHeader"
 
-import { StyledTable, StyledThead, StyledRow } from "./styled"
+import { StyledTable, StyledThead, StyledRow, RowBox } from "./styled"
 
 interface TablePropsT<T, RT = any> {
   selectedItemsClb?: (items: T[]) => T[] | void
@@ -51,11 +51,11 @@ function RTable<T extends object>({
         {rows.map(row => {
           prepareRow(row)
           return (
-            <StyledRow {...row.getRowProps()}>
+            <tr {...row.getRowProps()}>
               {row.cells.map(cell => {
                 return <td {...cell.getCellProps()}>{cell.render("Cell", { ...rest })}</td>
               })}
-            </StyledRow>
+            </tr>
           )
         })}
       </tbody>

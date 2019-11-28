@@ -40,3 +40,14 @@ export const CellBox = styled.div<{ reversed?: boolean }>`
   display: flex;
   flex-direction: ${({ reversed }) => (reversed ? "row-reverse" : "row")};
 `
+
+export const Avatar = styled.img`
+  margin-right: ${getSizeBy(2)};
+  height: ${getSizeBy(3)};
+  width: ${getSizeBy(3)};
+  border-radius: 50%;
+  display: inline-block;
+`
+export const RowBox = styled.div`
+  margin-top: ${getSizeBy(3)};
+`
