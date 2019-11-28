@@ -33,6 +33,19 @@ buttonStory.add(
 )
 
 buttonStory.add(
+  "Button Default Danger",
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      label={text("Label prop", "LABEL")}
+      onClick={action("clicked")}
+      danger={boolean("Danger", true)}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
   "Button Hollow",
   () => (
     <Button
@@ -40,6 +53,21 @@ buttonStory.add(
       type="hollow"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
+      danger={boolean("Danger", false)}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Hollow Danger",
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      type="hollow"
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+      danger={boolean("Danger", true)}
     />
   ),
   subData
@@ -63,6 +91,7 @@ buttonStory.add(
         type="borderless"
         onClick={action("clicked")}
         label={text("Label", "LABEL")}
+        danger={boolean("Danger", false)}
       />
     </div>
   ),
@@ -88,6 +117,7 @@ buttonStory.add(
         type="borderless"
         onClick={action("clicked")}
         label={text("Label", "LABEL")}
+        danger={boolean("Danger", false)}
       />
     </div>
   ),
@@ -102,6 +132,7 @@ buttonStory.add(
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
+      danger={boolean("Danger", false)}
     />
   ),
   subData
@@ -116,6 +147,7 @@ buttonStory.add(
       type="hollow"
       onClick={action("clicked")}
       label={text("Label", "LABEL")}
+      danger={boolean("Danger", false)}
     />
   ),
   subData
@@ -128,6 +160,7 @@ buttonStory.add(
       icon={select("Name", icons, "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
+      danger={boolean("Danger", false)}
     />
   ),
   subData
@@ -141,6 +174,7 @@ buttonStory.add(
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       type="hollow"
+      danger={boolean("Danger", false)}
     />
   ),
   subData

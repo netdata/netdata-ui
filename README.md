@@ -28,3 +28,4 @@ You can find latest **master** storybook playground [here](https://netdata.githu
 - [Button](https://github.com/netdata/netdata-ui/tree/master/src/components/button)
 - [Input](https://github.com/netdata/netdata-ui/tree/master/src/components/input)
 - [Typography](https://github.com/netdata/netdata-ui/tree/master/src/components/typography)
+- [Table](https://github.com/netdata/netdata-ui/tree/master/src/components/table)
