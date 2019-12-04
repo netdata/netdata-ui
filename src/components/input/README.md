@@ -14,6 +14,8 @@ Additional event handlers and any other valid `HTMLInputElement` props could be 
 by just passing them explicitly to the <TextInput />.
 
 ```typescript
+type CallBackRef = (input: any) => void
+
 export interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onFocus?: (e: FocusEvent) => void
@@ -29,7 +31,16 @@ export interface InputProps {
   autoFocus?: boolean
 }
 
-export type InstantFeedback = "all" | "positiveFirst"
+export interface MetaOptions {
+  error?: boolean | string
+  success?: boolean | string
+  touched?: boolean
+  isDirty?: boolean
+  instantFeedback?: InstantFeedback
+  prevValue: string | undefined
+  value: string
+  focused?: boolean
+}
 
 export interface ComponentProps {
   fieldMessage?: string
@@ -37,11 +48,12 @@ export interface ComponentProps {
   success?: boolean | string
   touched?: boolean
   isDirty?: boolean
-  instantFeedback?: InstantFeedback
+  instantFeedback?: "all" | "positiveFirst"
   className?: string
   fieldIndicator?: string | ReactNode
   metaShrinked?: boolean
   label?: string
+  handleMetaDisplay?: (metaOptions: MetaOptions) => boolean
 }
 
 export type TextInputProps = InputProps & ComponentProps
@@ -57,6 +69,50 @@ Notable props:
 - `isDirty` - boolean flag showing if something was ever entered into the input. Use together with instantFeedback.
 - `metaShrinked` - set this to true to not render any meta information and reserved space under the input field
 - `fieldIndicator` - additional information field, which could be used for displaying `maxChars` string or other meta info.
+- `handleMetaDisplay` - if instantFeedback / touched and default built-in logic is not suitable for some sophisticated usecases, this function could be used for full control over error/success display.
+
+### Meta Display
+
+This API is provided to control the display of error/success (meta) feedback for the input.
+
+```typescript
+export interface MetaOptions {
+  error?: boolean | string
+  success?: boolean | string
+  touched?: boolean
+  isDirty?: boolean
+  instantFeedback?: InstantFeedback
+  prevValue: string | undefined
+  value: string
+  focused?: boolean
+}
+```
+
+`handleMetaDisplay` function accepts the above arguments passed by the input internally. They include
+both props, and implementation-level values known only to the TextInput. Here is provided the default behaviour,
+which could be overriden using the same pattern:
+
+```typescript
+const defaultHandleMetaDisplay = ({
+  isDirty,
+  instantFeedback,
+  value,
+  prevValue,
+  error,
+  success,
+  touched,
+}: MetaOptions) =>
+  touched ||
+  Boolean(instantFeedback === "all" && isDirty) ||
+  Boolean(instantFeedback === "positiveFirst" && isDirty && success) ||
+  Boolean(
+    instantFeedback === "positiveFirst" &&
+      isDirty &&
+      error &&
+      prevValue &&
+      value.length < prevValue.length
+  )
+```
 
 ### Exposed hooks and application-level wrapping
 

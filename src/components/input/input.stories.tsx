@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
-import { text, number, boolean } from "@storybook/addon-knobs"
+import { text, number, boolean, select } from "@storybook/addon-knobs"
 import { useCallback } from "@storybook/addons"
 import { getColor } from "../../theme/utils"
 import { readmeCleanup } from "../../../utils/readme"
-import { TextInput, useInputValue, useTouchedState } from "."
+import { TextInput, useInputValue, useTouchedState, MetaOptions } from "."
+import { Button } from "../button"
 import { Icon } from "../icon"
 // @ts-ignore
 import readme from "./README.md"
@@ -77,8 +78,20 @@ inputStory.add(
   subData
 )
 
+const customMetaDisplay = ({ isDirty, value, prevValue, error, success, focused }: MetaOptions) =>
+  Boolean(success) ||
+  Boolean(focused && isDirty && error && prevValue && value.length < prevValue.length)
+
+const metaLabel = "Feedback Options"
+const metaOptions = {
+  None: undefined,
+  Custom: customMetaDisplay,
+}
+const metaDefaultValue = undefined
+const metaGroupId = "metaDisplayGroup"
+
 inputStory.add(
-  "Input with instant positive feedback",
+  "Input with feedback, custom meta and reset",
   () => {
     const disabled = boolean("Disabled", false)
     const [isValid, setIsValid] = useState(false)
@@ -90,7 +103,7 @@ inputStory.add(
       console.log("value has changed")
     }, [])
 
-    const [value, handleChange, charsIndicator, isDirty] = useInputValue({
+    const [value, handleChange, charsIndicator, isDirty, { resetValue }] = useInputValue({
       onChange,
       maxChars: charLimit,
     })
@@ -99,7 +112,7 @@ inputStory.add(
       console.log("performing some side effect on blur")
     }, [])
 
-    const [touched, blurHandler] = useTouchedState({ onBlur })
+    const [touched, blurHandler, setTouched] = useTouchedState({ onBlur })
 
     useEffect(() => {
       if (!isValid && value.length >= 5) {
@@ -107,11 +120,18 @@ inputStory.add(
         setValidationMessage("Very green, much validated")
       } else if (isValid && value.length < 5) {
         setIsValid(false)
+        setValidationMessage("Too few characters =(")
       }
     }, [isValid, value, touched])
 
+    const handleReset = () => {
+      resetValue()
+      setTouched(false)
+    }
+
     return (
       <Container>
+        <Button label="Reset value" onClick={handleReset} />
         <TextInput
           disabled={disabled}
           placeholder={text("Placeholder", "Enter something")}
@@ -122,8 +142,12 @@ inputStory.add(
           onBlur={blurHandler}
           onChange={handleChange}
           success={isValid && validationMessage}
-          error={!isValid}
+          error={!isValid && validationMessage}
           instantFeedback="positiveFirst"
+          handleMetaDisplay={
+            // @ts-ignore
+            select(metaLabel, metaOptions, metaDefaultValue, metaGroupId)
+          }
           isDirty={isDirty}
         />
       </Container>
