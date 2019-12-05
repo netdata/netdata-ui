@@ -27,6 +27,7 @@ import search_s from "./assets/search_s.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import triangle_down from "./assets/triangle_down.svg"
 import nav_dots from "./assets/nav_dots.svg"
+import space from "./assets/space.svg"
 
 export const iconsList = {
   alarm,
@@ -58,4 +59,5 @@ export const iconsList = {
   arrow_down,
   triangle_down,
   nav_dots,
+  space,
 }
