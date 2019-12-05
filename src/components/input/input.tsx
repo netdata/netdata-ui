@@ -33,6 +33,17 @@ export interface InputProps {
   autoFocus?: boolean
 }
 
+export interface MetaOptions {
+  error?: boolean | string
+  success?: boolean | string
+  touched?: boolean
+  isDirty?: boolean
+  instantFeedback?: InstantFeedback
+  prevValue: string | undefined
+  value: string
+  focused?: boolean
+}
+
 export interface ComponentProps {
   fieldMessage?: string
   error?: boolean | string
@@ -44,9 +55,30 @@ export interface ComponentProps {
   fieldIndicator?: string | ReactNode
   metaShrinked?: boolean
   label?: string
+  handleMetaDisplay?: (metaOptions: MetaOptions) => boolean
 }
 
 export type TextInputProps = InputProps & ComponentProps
+
+const defaultHandleMetaDisplay = ({
+  isDirty,
+  instantFeedback,
+  value,
+  prevValue,
+  error,
+  success,
+  touched,
+}: MetaOptions) =>
+  touched ||
+  Boolean(instantFeedback === "all" && isDirty) ||
+  Boolean(instantFeedback === "positiveFirst" && isDirty && success) ||
+  Boolean(
+    instantFeedback === "positiveFirst" &&
+      isDirty &&
+      error &&
+      prevValue &&
+      value.length < prevValue.length
+  ) // if user starts to erase entered data, we provide negative feedback
 
 export const TextInput = ({
   error,
@@ -68,21 +100,24 @@ export const TextInput = ({
   isDirty,
   value,
   inputRef,
+  handleMetaDisplay = defaultHandleMetaDisplay,
   ...props
 }: TextInputProps) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
 
   const prevValue = usePreviousDistinct(value)
 
-  const metaDisplayed =
-    touched ||
-    (instantFeedback === "all" && isDirty) ||
-    (instantFeedback === "positiveFirst" && isDirty && success) ||
-    (instantFeedback === "positiveFirst" &&
-      isDirty &&
-      error &&
-      prevValue &&
-      value.length < prevValue.length) // if user starts to erase entered data, we provide negative feedback
+  const metaDisplayed = handleMetaDisplay({
+    isDirty,
+    instantFeedback,
+    value,
+    prevValue,
+    error,
+    success,
+    touched,
+    focused,
+  })
+
   const isSuccess = metaDisplayed && success
   const isError = metaDisplayed && error
   const errorMessage = isError && error !== true && error
@@ -129,7 +164,7 @@ export const TextInput = ({
       {!metaShrinked && (
         <MetaContainer>
           <FieldInfo success={isSuccess} error={isError}>
-            {errorMessage || successMessage || fieldMessage}
+            {(isError && errorMessage) || (isSuccess && successMessage) || fieldMessage}
           </FieldInfo>
           <MetaInfo>{fieldIndicator}</MetaInfo>
         </MetaContainer>

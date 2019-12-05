@@ -1,10 +1,13 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useMemo } from "react"
 import { ChangeEventHandler, ReactInputChangeEvent } from "./types"
 
 type InputValue = string
 type MaxCharsIndicator = string
 type IsDirty = boolean
 type SetIsDirty = React.Dispatch<React.SetStateAction<boolean>>
+type SetValue = React.Dispatch<React.SetStateAction<string>>
+type ResetValue = (value?: string) => void
+
 type UseInputValue = ({
   value,
   onChange,
@@ -13,7 +16,17 @@ type UseInputValue = ({
   value?: string
   onChange?: ChangeEventHandler
   maxChars?: number
-}) => [InputValue, ChangeEventHandler, MaxCharsIndicator, IsDirty, SetIsDirty]
+}) => [
+  InputValue,
+  ChangeEventHandler,
+  MaxCharsIndicator,
+  IsDirty,
+  {
+    setIsDirty: SetIsDirty
+    setValue: SetValue
+    resetValue: ResetValue
+  }
+]
 
 export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars }) => {
   const [inputValue, setValue] = useState(value)
@@ -38,7 +51,21 @@ export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars })
     [isDirty, maxChars, onChange]
   )
 
-  const maxCharsIndicator = maxChars ? `${inputValue.length}/${maxChars}` : ""
+  const maxCharsIndicator = useMemo(() => (maxChars ? `${inputValue.length}/${maxChars}` : ""), [
+    maxChars,
+    inputValue,
+  ])
 
-  return [inputValue, handleChange, maxCharsIndicator, isDirty, setIsDirty]
+  const resetValue = useCallback((v: string = "") => {
+    setValue(v)
+    setIsDirty(false)
+  }, [])
+
+  return [
+    inputValue,
+    handleChange,
+    maxCharsIndicator,
+    isDirty,
+    { setIsDirty, setValue, resetValue },
+  ]
 }
