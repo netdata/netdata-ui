@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback } from "react"
 import { ChangeEventHandler, ReactInputChangeEvent } from "./types"
 
 type InputValue = string
@@ -51,10 +51,7 @@ export const useInputValue: UseInputValue = ({ value = "", onChange, maxChars })
     [isDirty, maxChars, onChange]
   )
 
-  const maxCharsIndicator = useMemo(() => (maxChars ? `${inputValue.length}/${maxChars}` : ""), [
-    maxChars,
-    inputValue,
-  ])
+  const maxCharsIndicator = maxChars ? `${inputValue.length}/${maxChars}` : ""
 
   const resetValue = useCallback((v: string = "") => {
     setValue(v)
