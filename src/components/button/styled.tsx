@@ -126,9 +126,9 @@ export const StyledButtonWrapper = styled.div<{ label: string }>`
   }};
 `
 
-export const StyledButton = styled(({ label, icon, ...otherProps }) => (
+export const StyledButton = styled(({ label, icon, danger, ...otherProps }) => (
   <StyledButtonWrapper label={label}>
-    <button type="button" {...otherProps}>
+    <button type="button" danger={danger.toString()} {...otherProps}>
       {icon ? <Icon className="button-icon" name={icon} /> : null}
       {label}
     </button>

@@ -39,7 +39,8 @@ export const UserHeader = [
         <RowBox>
           <CellBox>
             <Avatar src={photo} alt={`${name} avatar`} />
-            {name} ({mail})
+            {name}
+            {mail}
           </CellBox>
         </RowBox>
       )
