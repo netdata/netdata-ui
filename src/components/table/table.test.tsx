@@ -4,14 +4,14 @@
 
 import "@testing-library/jest-dom/extend-expect"
 import { Table } from "./table"
-import { UserHeader } from "./components/UserHeader"
+import { UserTableSchema } from "./components/UserHeader"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 import "jest-styled-components"
 
 const MOCK_PROPS = {
   sortedBy: ["user"],
-  columns: UserHeader,
+  columns: UserTableSchema,
   data: [
     {
       user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },

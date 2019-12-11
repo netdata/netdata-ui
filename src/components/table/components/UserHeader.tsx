@@ -1,10 +1,9 @@
 import React from "react"
-import { UseTableCellProps, CellProps } from "react-table"
 import { Checkbox } from "../../checkbox"
 import { StyledIcon, CellBox, OptionsBtn, ArrowIcon, Avatar, RowBox } from "../styled"
 import { Button } from "../../button"
 
-export const UserHeader = [
+export const UserTableSchema = [
   {
     id: "selection",
     Header: ({ getToggleAllRowsSelectedProps }: any) => {
@@ -12,7 +11,7 @@ export const UserHeader = [
       const { checked, onChange } = getToggleAllRowsSelectedProps()
       return <Checkbox checked={checked} onChange={onChange} />
     },
-    Cell: ({ row }: UseTableCellProps<any>) => {
+    Cell: ({ row }: any) => {
       // @ts-ignore | TBD: IMPROVE PROPS
       const { checked, onChange } = row.getToggleRowSelectedProps()
       return (
@@ -33,7 +32,7 @@ export const UserHeader = [
         Users
       </CellBox>
     ),
-    Cell: ({ cell }: CellProps<any>) => {
+    Cell: ({ cell }: any) => {
       const { name, mail, photo } = cell.value
       return (
         <RowBox>
