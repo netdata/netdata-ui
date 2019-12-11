@@ -126,18 +126,10 @@ export const StyledButtonWrapper = styled.div<{ label: string }>`
   }};
 `
 
-export const StyledIcon = styled(({ name }) => <Icon className="button-icon" name={name} />)`
-  ${props => {
-    return css`
-      fill: ${buttonProps("buttonTextColor", props)};
-    `
-  }};
-`
-
-export const StyledButton = styled(({ label, icon, ...otherProps }) => (
+export const StyledButton = styled(({ label, icon, danger, ...otherProps }) => (
   <StyledButtonWrapper label={label}>
-    <button type="button" {...otherProps}>
-      {icon ? <StyledIcon name={icon} {...otherProps} /> : null}
+    <button type="button" danger={danger.toString()} {...otherProps}>
+      {icon ? <Icon className="button-icon" name={icon} /> : null}
       {label}
     </button>
   </StyledButtonWrapper>
@@ -150,7 +142,7 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
     &button {
       padding: 0;
     }
-    padding: 8px;
+    padding: ${getSizeBy(1)};
     opacity: ${props.disabled ? 0.6 : 1.0};
     cursor: ${props.disabled ? "not-allowed" : "pointer"};
     background-color: ${buttonProps("buttonColorNormal", props)};
@@ -179,16 +171,20 @@ export const StyledButton = styled(({ label, icon, ...otherProps }) => (
       border-radius: ${props.disabled ? "2px" : "4px"};
       width: ${buttonProps("buttonWidthHover", props)};
       height: ${buttonProps("buttonHeightHover", props)};
+      .button-icon {
+        fill: ${buttonProps("buttonTextColorActive", props)};
+      }
     }
     display: ${props.icon || props.isLoading ? "flex" : "block"};
     flex-flow: row nowrap;
     align-items: center;
     .button-icon {
-      margin-right: ${(props.label && props.icon) || props.isLoading ? "16px" : "0"};
-      height: 24px;
-      width: 24px;
-      fill: ${buttonProps("buttonTextColor", props)},
+      margin-right: ${(props.label && props.icon) || props.isLoading ? getSizeBy(2) : "0"};
+      height: ${getSizeBy(3)};
+      width: ${getSizeBy(3)};
+      fill: ${buttonProps("buttonTextColor", props)};
     }
+    --mdc-ripple-upgraded
   `
   }};
 `
