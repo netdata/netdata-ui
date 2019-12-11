@@ -40,8 +40,8 @@ describe("Table component test", () => {
     expect(result && result.textContent).not.toBeNull()
   })
   it(" * should render data", () => {
-    const { getByText } = testWrapper(Table, { ...MOCK_PROPS }, DefaultTheme, {})
-    const result = getByText("dr. Zoidberg (drZ@planetmail.com)")
-    expect(result).not.toBeEmpty()
+    const { getAllByAltText } = testWrapper(Table, { ...MOCK_PROPS }, DefaultTheme, {})
+    const result = getAllByAltText("dr. Zoidberg avatar")
+    expect(result).toHaveLength(1)
   })
 })
