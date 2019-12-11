@@ -2,7 +2,7 @@ import React from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
-import { UserHeader } from "./components/UserHeader"
+import { UserTableSchema } from "./components/UserHeader"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
@@ -21,7 +21,7 @@ sidebarStory.add(
   () => (
     <Table
       sortedBy={["user"]}
-      columns={UserHeader}
+      columns={UserTableSchema}
       data={[
         {
           user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
@@ -56,7 +56,7 @@ sidebarStory.add(
   () => (
     <StyledTable
       sortedBy={["user"]}
-      columns={UserHeader}
+      columns={UserTableSchema}
       data={[
         {
           user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },

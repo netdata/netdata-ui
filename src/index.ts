@@ -38,4 +38,4 @@ export { devices } from "./media"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
 
-export { Table, UserHeader } from "./components/table"
+export { Table, UserTableSchema } from "./components/table"

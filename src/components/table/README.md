@@ -51,7 +51,7 @@ const columns = [
 export const SimpleTable = () => {
    <Table
     sortedBy={["user"]}
-    columns={UserHeader}
+    columns={UserTableSchema}
     data={[
       {
         user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
