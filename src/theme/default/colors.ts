@@ -43,6 +43,7 @@ const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
   controlFocused: rawColors.gray.limedSpruce,
   error: rawColors.red.redOrange,
+  warning: rawColors.yellow.amber,
   success: rawColors.green.greenHaze,
   text: rawColors.gray.limedSpruce,
 }
