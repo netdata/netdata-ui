@@ -8,6 +8,8 @@ interface TableProps<T, RT = any> {
   data: T[]
   sortedBy?: string[]
   className?: string
+  autoResetSelectedRows?: boolean
+  autoResetSortBy?: boolean
 }
 
 function ReactTable<T extends object>({
@@ -15,11 +17,22 @@ function ReactTable<T extends object>({
   data,
   sortedBy = [],
   selectedItemsClb,
+  autoResetSelectedRows = true,
+  autoResetSortBy = true,
   ...props
 }: TableProps<T>) {
   // @ts-ignore
-  const { getTableBodyProps, headerGroups, rows, prepareRow, selectedFlatRows, ...rest } = useTable(
-    { columns, data },
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    selectedFlatRows,
+    ...rest
+  } = useTable(
+    // @ts-ignore
+    { columns, data, autoResetSelectedRows, autoResetSortBy },
     useSortBy,
     useRowSelect
   )
@@ -27,10 +40,10 @@ function ReactTable<T extends object>({
     if (selectedItemsClb) {
       selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
     }
-  }, [selectedFlatRows])
+  }, [selectedFlatRows, selectedItemsClb])
 
   return (
-    <StyledTable {...props}>
+    <StyledTable {...props} {...getTableProps()}>
       <StyledThead>
         {headerGroups.map((headerGroup, i) => (
           <tr key={i}>
@@ -70,12 +83,12 @@ export function Table<T extends object>({
   columns,
   ...props
 }: TableProps<T>) {
-  const cahedColumns = React.useMemo<typeof columns>(() => columns, [])
+  const cachedColumns = React.useMemo<typeof columns>(() => columns, [columns])
 
   return (
     <ReactTable<T>
       selectedItemsClb={selectedItemsClb}
-      columns={cahedColumns}
+      columns={cachedColumns}
       sortedBy={sortedBy}
       data={data}
       {...props}
