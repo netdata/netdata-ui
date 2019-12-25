@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
@@ -16,33 +16,69 @@ const subData = {
 }
 const sidebarStory = storiesOf("COMPONENTS|Controls/Table", module)
 
+const initialState = [
+  {
+    user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
+    dots: "123",
+  },
+  {
+    user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
+    dots: "123",
+  },
+  {
+    user: {
+      photo: "https://i.pravatar.cc/32",
+      name: "dr. Zoidberg",
+      mail: "drZ@planetmail.com",
+    },
+    dots: "123",
+  },
+]
+
 sidebarStory.add(
-  "Users table",
-  () => (
-    <Table
-      sortedBy={["user"]}
-      columns={UserTableSchema}
-      data={[
-        {
-          user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
-          dots: "123",
-        },
-        {
-          user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
-          dots: "123",
-        },
-        {
-          user: {
-            photo: "https://i.pravatar.cc/32",
-            name: "dr. Zoidberg",
-            mail: "drZ@planetmail.com",
-          },
-          dots: "123",
-        },
-      ]}
-      selectedItemsClb={items => console.log(items)}
-    />
-  ),
+  "Users table with selection persist",
+  () => {
+    const [state, setState] = useState(initialState)
+    return (
+      <div>
+        <button
+          type="button"
+          onClick={() => {
+            const changedName = Math.random()
+              .toString()
+              .slice(0, 4)
+            setState([
+              {
+                user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
+                dots: "123",
+              },
+              {
+                user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
+                dots: "123",
+              },
+              {
+                user: {
+                  photo: "https://i.pravatar.cc/32",
+                  name: `Zoidberg #${changedName}`,
+                  mail: "drZ@planetmail.com",
+                },
+                dots: "123",
+              },
+            ])
+          }}
+        >
+          Reload Data
+        </button>
+        <Table
+          sortedBy={["user"]}
+          columns={UserTableSchema}
+          data={state}
+          selectedItemsClb={items => console.log(items)}
+          autoResetSelectedRows={false}
+        />
+      </div>
+    )
+  },
   subData
 )
 
@@ -57,24 +93,7 @@ sidebarStory.add(
     <StyledTable
       sortedBy={["user"]}
       columns={UserTableSchema}
-      data={[
-        {
-          user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
-          dots: "123",
-        },
-        {
-          user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
-          dots: "123",
-        },
-        {
-          user: {
-            photo: "https://i.pravatar.cc/32",
-            name: "dr. Zoidberg",
-            mail: "drZ@planetmail.com",
-          },
-          dots: "123",
-        },
-      ]}
+      data={initialState}
       selectedItemsClb={items => console.log(items)}
     />
   ),

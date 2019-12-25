@@ -1,8 +1,8 @@
 ## Table component
 
-The implementation based on top of `react-table` lib and pretty generic at moment.
+The implementation based on `react-table` lib and pretty generic at moment.
 
-**CAUTION:** in future this component will most likely will be refactored
+**CAUTION:** in future this component will most likely be refactored
 
 ### Props:
 
@@ -12,13 +12,17 @@ interface TableProps<T, RT = any> {
   columns: RT
   data: T[]
   sortedBy?: string[]
+  autoResetSelectedRows?: boolean
+  autoResetSortBy?: boolean
 }
 ```
 
 - `selectedItemClb` - selected item callback. This one used for calling something whenever any row in table is selected
-- `coulmns` - This is where all the layout happens. As example user table `columns` provided below. As basis `react-table` **columns** used here.
-- `data` - collection of table rows as js objects. Each first level key of object should reference to `accessor` fild described in colums.
-- `sortedBy` - describs which colums could provide sorting API. Values should be referenced to `coulumnss` `accessor`
+- `columns` - This is where all the layout happens. As example user table `columns` provided below. As basis `react-table` **columns** used here.
+- `data` - collection of table rows as js objects. Each first level key of object should reference to `accessor` fild described in columns.
+- `sortedBy` - describes which columns could provide sorting API. Values should be referenced to `columns` `accessor`
+- `autoResetSelectedRows`, `autoResetSortBy` - `true` by default, pass `false` if the selection
+  and sorting order of rows need to be persisted through the re-renders when `data` prop changes.
 
 This is setup of first **column** with the selection checkbox
 
