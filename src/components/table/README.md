@@ -21,8 +21,8 @@ interface TableProps<T, RT = any> {
 - `columns` - This is where all the layout happens. As example user table `columns` provided below. As basis `react-table` **columns** used here.
 - `data` - collection of table rows as js objects. Each first level key of object should reference to `accessor` fild described in columns.
 - `sortedBy` - describes which columns could provide sorting API. Values should be referenced to `columns` `accessor`
-- `autoResetSelectedRows`, `autoResetSortBy` - `true` by default, pass `false` if the selection
-  and sorting order of rows need to be persisted through the re-renders when `data` prop changes.
+- `autoResetSelectedRows`, `autoResetSortBy` - `false` by default, pass `true` if the selection
+  and sorting order of rows need to be cleared through the re-renders when `data` prop changes.
 
 This is setup of first **column** with the selection checkbox
 
