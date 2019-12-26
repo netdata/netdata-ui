@@ -17,8 +17,8 @@ function ReactTable<T extends object>({
   data,
   sortedBy = [],
   selectedItemsClb,
-  autoResetSelectedRows = true,
-  autoResetSortBy = true,
+  autoResetSelectedRows = false,
+  autoResetSortBy = false,
   ...props
 }: TableProps<T>) {
   // @ts-ignore
