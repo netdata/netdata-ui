@@ -30,6 +30,7 @@ import nav_dots from "./assets/nav_dots.svg"
 import space from "./assets/space.svg"
 import nodes from "./assets/nodes.svg"
 import room from "./assets/room.svg"
+import sorting_vertical from "./assets/sorting_vertical.svg"
 
 export const iconsList = {
   alarm,
@@ -64,4 +65,5 @@ export const iconsList = {
   space,
   nodes,
   room,
+  sorting_vertical,
 }
