@@ -5,3 +5,4 @@ storybook-static
 node_modules
 public
 lib
+coverage/
