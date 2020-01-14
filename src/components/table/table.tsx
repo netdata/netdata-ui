@@ -19,6 +19,7 @@ interface TableProps<T, RT = any> {
   className?: string
   autoResetSelectedRows?: boolean
   autoResetSortBy?: boolean
+  autoResetGroupBy?: boolean
   controlledState?: {
     columnOrder?: string[]
     groupBy?: string[] // For now we allow only single field grouping
@@ -33,6 +34,7 @@ export function Table<T extends object>({
   selectedItemsClb,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
+  autoResetGroupBy = false,
   controlledState = {},
   ...customProps
 }: TableProps<T>) {
@@ -45,13 +47,14 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
-    ...tableProps
+    state: { groupBy },
   } = useTable(
     {
       columns,
       data,
       autoResetSelectedRows,
       autoResetSortBy,
+      autoResetGroupBy,
       manualGroupBy: true,
       useControlledState: state => {
         return React.useMemo(
@@ -65,12 +68,15 @@ export function Table<T extends object>({
         )
       },
     },
-    useGroupBy,
+
     useColumnOrder,
+    useGroupBy,
     useSortBy,
+
     useRowSelect,
     useExpanded
   )
+  console.info(groupBy)
   console.info(headerGroups)
   console.info(rows)
 
@@ -89,7 +95,7 @@ export function Table<T extends object>({
               const sortProps = sortableBy.includes(column.id) ? column.getSortByToggleProps() : {}
               return (
                 <th {...sortProps} {...column.getHeaderProps()}>
-                  {column.render("Header", { ...tableProps })}
+                  {column.render("Header")}
                 </th>
               )
             })}
@@ -102,7 +108,7 @@ export function Table<T extends object>({
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell", { ...tableProps })}</td>
+                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
               })}
             </tr>
           )
