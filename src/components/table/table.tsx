@@ -55,7 +55,6 @@ export function Table<T extends object>({
       autoResetSelectedRows,
       autoResetSortBy,
       autoResetGroupBy,
-      manualGroupBy: true,
       useControlledState: state => {
         return React.useMemo(
           () => ({
@@ -68,11 +67,9 @@ export function Table<T extends object>({
         )
       },
     },
-
-    useColumnOrder,
     useGroupBy,
+    useColumnOrder,
     useSortBy,
-
     useRowSelect,
     useExpanded
   )
