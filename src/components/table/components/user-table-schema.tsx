@@ -62,7 +62,6 @@ export const UserTableSchema = [
   {
     id: "email",
     accessor: "email",
-    aggregate: "sum",
     Header: ({ column }: any) => {
       return <CellBox {...column.getGroupByToggleProps()}>Emails</CellBox>
     },
