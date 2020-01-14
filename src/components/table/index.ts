@@ -1,2 +1,2 @@
 export { Table } from "./table"
-export { UserTableSchema } from "./components/UserHeader"
+export { UserTableSchema } from "./components/user-table-schema"

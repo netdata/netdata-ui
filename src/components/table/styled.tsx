@@ -22,7 +22,8 @@ export const StyledRow = styled.tr`
   padding-right: 10px;
 `
 
-export const StyledIcon = styled(Icon)`
+export const StyledIcon = styled(Icon)<{ descending: boolean }>`
+  transform: ${({ descending }) => (descending ? "" : "rotate(180deg)")};
   color: ${getColor(["gray", "limedSpruce"])};
 `
 export const ArrowIcon = styled(Icon)`
@@ -33,6 +34,10 @@ export const ArrowIcon = styled(Icon)`
 export const OptionsBtn = styled(Button)`
   color: ${getColor(["gray", "limedSpruce"])};
   margin-left: 60px;
+`
+export const IconPlaceholder = styled.div`
+  width: 24px;
+  height: 24px;
 `
 
 export const CellBox = styled.div<{ reversed?: boolean }>`

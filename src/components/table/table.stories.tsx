@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
-import { UserTableSchema } from "./components/UserHeader"
+import { UserTableSchema } from "./components/user-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
@@ -18,19 +18,22 @@ const sidebarStory = storiesOf("COMPONENTS|Controls/Table", module)
 
 const initialState = [
   {
-    user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
+    user: { photo: "https://i.pravatar.cc/30", name: "Fry" },
     dots: "123",
+    email: "noway@noway.com",
   },
+
   {
-    user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
+    user: { photo: "https://i.pravatar.cc/31", name: "Amy" },
+    email: "amy@vong.com",
     dots: "123",
   },
   {
     user: {
       photo: "https://i.pravatar.cc/32",
       name: "dr. Zoidberg",
-      mail: "drZ@planetmail.com",
     },
+    email: "drZ@planetmail.com",
     dots: "123",
   },
 ]
@@ -39,6 +42,7 @@ sidebarStory.add(
   "Users table with selection persist",
   () => {
     const [state, setState] = useState(initialState)
+    const [groupBy, setGroupBy] = useState([] as string[])
     return (
       <div>
         <button
@@ -49,19 +53,31 @@ sidebarStory.add(
               .slice(0, 4)
             setState([
               {
-                user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
+                user: { photo: "https://i.pravatar.cc/30", name: "Fry" },
+                email: "noway@noway.com",
                 dots: "123",
               },
               {
-                user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
+                user: { photo: "https://i.pravatar.cc/31", name: "Amy" },
+                email: "amy@vong.com",
                 dots: "123",
+              },
+              {
+                user: { photo: "https://i.pravatar.cc/31", name: "Vong420" },
+                dots: "123",
+                email: "amy@vong.com",
               },
               {
                 user: {
                   photo: "https://i.pravatar.cc/32",
                   name: `Zoidberg #${changedName}`,
-                  mail: "drZ@planetmail.com",
                 },
+                email: "drZ@planetmail.com",
+                dots: "123",
+              },
+              {
+                user: { photo: "https://i.pravatar.cc/31", name: "Samy" },
+                email: "amy@vong.com",
                 dots: "123",
               },
             ])
@@ -69,11 +85,25 @@ sidebarStory.add(
         >
           Reload Data
         </button>
+        <label htmlFor="groupBySelect">
+          Group by:
+          <select
+            id="groupBySelect"
+            onChange={(e: any) => {
+              const { value }: { value: string } = e.target as any
+              setGroupBy([value])
+            }}
+          >
+            <option value="">None</option>
+            <option value="email"> Email </option>
+          </select>
+        </label>
         <Table
-          sortedBy={["user"]}
+          sortableBy={["user"]}
+          controlledState={{ groupBy }}
           columns={UserTableSchema}
           data={state}
-          selectedItemsClb={items => console.log(items)}
+          selectedItemsClb={items => {}}
           autoResetSelectedRows={false}
         />
       </div>
@@ -91,10 +121,10 @@ sidebarStory.add(
   "Users with overrided style",
   () => (
     <StyledTable
-      sortedBy={["user"]}
+      sortableBy={["user"]}
       columns={UserTableSchema}
       data={initialState}
-      selectedItemsClb={items => console.log(items)}
+      selectedItemsClb={items => {}}
     />
   ),
   subData
