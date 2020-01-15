@@ -38,4 +38,4 @@ export { devices, breakpoints } from "./media"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
 
-export { Table, UserTableSchema } from "./components/table"
+export { Table } from "./components/table"

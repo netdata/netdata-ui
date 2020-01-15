@@ -8,7 +8,7 @@ import {
   Avatar,
   RowBox,
   IconPlaceholder,
-} from "../styled"
+} from "./styled"
 import { Button } from "../../button"
 
 export const UserTableSchema = [
@@ -19,9 +19,10 @@ export const UserTableSchema = [
       const { checked, onChange, indeterminate } = getToggleAllRowsSelectedProps()
       return <Checkbox checked={checked} onChange={onChange} indeterminate={indeterminate} />
     },
-    Cell: ({ row }: any) => {
+    Cell: ({ row, selectedRowIds }: any) => {
       // @ts-ignore | TBD: IMPROVE PROPS
-      const { checked, onChange } = row.getToggleRowSelectedProps()
+      const { onChange } = row.getToggleRowSelectedProps()
+      const checked = selectedRowIds[row.id] || false
       return (
         <RowBox>
           <CellBox>
@@ -65,7 +66,7 @@ export const UserTableSchema = [
     Header: ({ column }: any) => {
       return <CellBox {...column.getGroupByToggleProps()}>Emails</CellBox>
     },
-    Cell: ({ cell, row }: any) => {
+    Cell: ({ cell }: any) => {
       const email = cell.value
       return (
         <RowBox>

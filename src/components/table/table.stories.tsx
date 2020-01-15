@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
-import { UserTableSchema } from "./components/user-table-schema"
+import { UserTableSchema } from "./mocks/mocked-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
@@ -47,6 +47,7 @@ sidebarStory.add(
       <div>
         <button
           type="button"
+          style={{ marginRight: "15px" }}
           onClick={() => {
             const changedName = Math.random()
               .toString()
@@ -104,7 +105,6 @@ sidebarStory.add(
           columns={UserTableSchema}
           data={state}
           selectedItemsClb={items => {}}
-          autoResetSelectedRows={false}
         />
       </div>
     )

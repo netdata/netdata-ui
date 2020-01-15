@@ -4,7 +4,7 @@
 
 import "@testing-library/jest-dom/extend-expect"
 import { Table } from "./table"
-import { UserTableSchema } from "./components/user-table-schema"
+import { UserTableSchema } from "./mocks/mocked-table-schema"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 import "jest-styled-components"

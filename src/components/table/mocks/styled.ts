@@ -1,26 +1,7 @@
 import styled from "styled-components"
-import { getSizeBy, getColor } from "../../theme/utils"
-import { Icon } from "../icon"
-import { Button } from "../button"
-
-export const StyledTable = styled.table`
-  width: 100%;
-  height: 100%;
-  border-collapse: collapse;
-`
-
-export const StyledThead = styled.thead`
-  & > tr th {
-    border-spacing: 0;
-    border-bottom: 1px solid #aeb3b7;
-    padding-bottom: 5px;
-  }
-`
-export const StyledRow = styled.tr`
-  padding-top: 25px;
-  padding-left: 10px;
-  padding-right: 10px;
-`
+import { getSizeBy, getColor } from "../../../theme/utils"
+import { Icon } from "../../icon"
+import { Button } from "../../button"
 
 export const StyledIcon = styled(Icon)<{ descending: boolean }>`
   transform: ${({ descending }) => (descending ? "" : "rotate(180deg)")};

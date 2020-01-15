@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, ReactNode } from "react"
 import {
   useTable,
   useSortBy,
@@ -10,6 +10,8 @@ import {
   useColumnOrder,
 } from "react-table"
 import { StyledTable, StyledThead } from "./styled"
+import { ColumnHead } from "./components/column-head"
+import { TableRow } from "./components/table-row"
 
 interface TableProps<T, RT = any> {
   selectedItemsClb?: (items: T[]) => T[] | void
@@ -25,6 +27,7 @@ interface TableProps<T, RT = any> {
     groupBy?: string[] // For now we allow only single field grouping
     // any other controlled fields for react-table state
   }
+  renderGroupHead?: ({ row }: { row: any }) => ReactNode
 }
 
 export function Table<T extends object>({
@@ -36,6 +39,7 @@ export function Table<T extends object>({
   autoResetSortBy = false,
   autoResetGroupBy = false,
   controlledState = {},
+  renderGroupHead,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -47,7 +51,7 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
-    state: { groupBy },
+    state: { selectedRowIds },
   } = useTable(
     {
       columns,
@@ -73,9 +77,6 @@ export function Table<T extends object>({
     useRowSelect,
     useExpanded
   )
-  console.info(groupBy)
-  console.info(headerGroups)
-  console.info(rows)
 
   useEffect(() => {
     if (selectedItemsClb) {
@@ -89,11 +90,14 @@ export function Table<T extends object>({
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => {
-              const sortProps = sortableBy.includes(column.id) ? column.getSortByToggleProps() : {}
+              const { key } = column.getHeaderProps()
               return (
-                <th {...sortProps} {...column.getHeaderProps()}>
-                  {column.render("Header")}
-                </th>
+                <ColumnHead
+                  key={key}
+                  column={column}
+                  customProps={customProps}
+                  sortableBy={sortableBy}
+                />
               )
             })}
           </tr>
@@ -102,12 +106,16 @@ export function Table<T extends object>({
       <tbody {...getTableBodyProps()}>
         {rows.map(row => {
           prepareRow(row)
+
           return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-              })}
-            </tr>
+            <TableRow
+              key={row.id}
+              row={row}
+              customProps={customProps}
+              prepareRow={prepareRow}
+              selectedRowIds={selectedRowIds}
+              renderGroupHead={renderGroupHead}
+            />
           )
         })}
       </tbody>
