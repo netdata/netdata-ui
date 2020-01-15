@@ -17,8 +17,8 @@ export const OptionsBtn = styled(Button)`
   margin-left: 60px;
 `
 export const IconPlaceholder = styled.div`
-  width: 24px;
-  height: 24px;
+  width: ${getSizeBy(3)};
+  height: ${getSizeBy(3)};
 `
 
 export const CellBox = styled.div<{ reversed?: boolean }>`
