@@ -1,27 +1,49 @@
-import React, { useEffect } from "react"
-import { useTable, useSortBy, useRowSelect, ColumnInstance, Row } from "react-table"
+import React, { useEffect, ReactNode } from "react"
+import {
+  useTable,
+  useSortBy,
+  useRowSelect,
+  ColumnInstance,
+  Row,
+  useGroupBy,
+  useExpanded,
+  useColumnOrder,
+} from "react-table"
 import { StyledTable, StyledThead } from "./styled"
+import { ColumnHead } from "./components/column-head"
+import { TableRow } from "./components/table-row"
 
 interface TableProps<T, RT = any> {
   selectedItemsClb?: (items: T[]) => T[] | void
   columns: RT
   data: T[]
-  sortedBy?: string[]
+  sortableBy?: string[]
   className?: string
   autoResetSelectedRows?: boolean
   autoResetSortBy?: boolean
+  autoResetGroupBy?: boolean
+  controlledState?: {
+    columnOrder?: string[]
+    groupBy?: string[] // For now we allow only single field grouping
+    // any other controlled fields for react-table state
+  }
+  renderGroupHead?: ({ row }: { row: any }) => ReactNode
 }
 
-function ReactTable<T extends object>({
+export function Table<T extends object>({
   columns,
   data,
-  sortedBy = [],
+  sortableBy = [],
   selectedItemsClb,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
-  ...props
+  autoResetGroupBy = false,
+  controlledState = {},
+  renderGroupHead,
+  ...customProps
 }: TableProps<T>) {
-  // @ts-ignore
+  // preserve column order to override default grouping behaviour
+  const columnOrder = controlledState.columnOrder || columns.map(({ id }) => id)
   const {
     getTableProps,
     getTableBodyProps,
@@ -29,13 +51,33 @@ function ReactTable<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
-    ...rest
+    state: { selectedRowIds },
   } = useTable(
-    // @ts-ignore
-    { columns, data, autoResetSelectedRows, autoResetSortBy },
+    {
+      columns,
+      data,
+      autoResetSelectedRows,
+      autoResetSortBy,
+      autoResetGroupBy,
+      useControlledState: state => {
+        return React.useMemo(
+          () => ({
+            ...state,
+            ...controlledState,
+            columnOrder,
+          }),
+          // eslint-disable-next-line
+          [state, controlledState]
+        )
+      },
+    },
+    useGroupBy,
+    useColumnOrder,
     useSortBy,
-    useRowSelect
+    useRowSelect,
+    useExpanded
   )
+
   useEffect(() => {
     if (selectedItemsClb) {
       selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
@@ -43,55 +85,40 @@ function ReactTable<T extends object>({
   }, [selectedFlatRows, selectedItemsClb])
 
   return (
-    <StyledTable {...props} {...getTableProps()}>
+    <StyledTable {...customProps} {...getTableProps()}>
       <StyledThead>
-        {headerGroups.map((headerGroup, i) => (
-          <tr key={i}>
-            {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => (
-              <th
-                {...column.getHeaderProps(
-                  // @ts-ignore
-                  sortedBy.includes(column.id) && column.getSortByToggleProps()
-                )}
-              >
-                {column.render("Header", { ...rest })}
-              </th>
-            ))}
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => {
+              const { key } = column.getHeaderProps()
+              return (
+                <ColumnHead
+                  key={key}
+                  column={column}
+                  customProps={customProps}
+                  sortableBy={sortableBy}
+                />
+              )
+            })}
           </tr>
         ))}
       </StyledThead>
       <tbody {...getTableBodyProps()}>
         {rows.map(row => {
           prepareRow(row)
+
           return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell", { ...rest })}</td>
-              })}
-            </tr>
+            <TableRow
+              key={row.id}
+              row={row}
+              customProps={customProps}
+              prepareRow={prepareRow}
+              selectedRowIds={selectedRowIds}
+              renderGroupHead={renderGroupHead}
+            />
           )
         })}
       </tbody>
     </StyledTable>
-  )
-}
-
-export function Table<T extends object>({
-  selectedItemsClb,
-  data,
-  sortedBy,
-  columns,
-  ...props
-}: TableProps<T>) {
-  const cachedColumns = React.useMemo<typeof columns>(() => columns, [columns])
-
-  return (
-    <ReactTable<T>
-      selectedItemsClb={selectedItemsClb}
-      columns={cachedColumns}
-      sortedBy={sortedBy}
-      data={data}
-      {...props}
-    />
   )
 }

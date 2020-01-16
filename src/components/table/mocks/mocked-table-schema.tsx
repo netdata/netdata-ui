@@ -1,6 +1,14 @@
 import React from "react"
 import { Checkbox } from "../../checkbox"
-import { StyledIcon, CellBox, OptionsBtn, ArrowIcon, Avatar, RowBox } from "../styled"
+import {
+  StyledIcon,
+  CellBox,
+  OptionsBtn,
+  ArrowIcon,
+  Avatar,
+  RowBox,
+  IconPlaceholder,
+} from "./styled"
 import { Button } from "../../button"
 
 export const UserTableSchema = [
@@ -8,12 +16,13 @@ export const UserTableSchema = [
     id: "selection",
     Header: ({ getToggleAllRowsSelectedProps }: any) => {
       // @ts-ignore | TBD: IMPROVE PROPS
-      const { checked, onChange } = getToggleAllRowsSelectedProps()
-      return <Checkbox checked={checked} onChange={onChange} />
+      const { checked, onChange, indeterminate } = getToggleAllRowsSelectedProps()
+      return <Checkbox checked={checked} onChange={onChange} indeterminate={indeterminate} />
     },
-    Cell: ({ row }: any) => {
+    Cell: ({ row, selectedRowIds }: any) => {
       // @ts-ignore | TBD: IMPROVE PROPS
-      const { checked, onChange } = row.getToggleRowSelectedProps()
+      const { onChange } = row.getToggleRowSelectedProps()
+      const checked = selectedRowIds[row.id] || false
       return (
         <RowBox>
           <CellBox>
@@ -26,25 +35,47 @@ export const UserTableSchema = [
   {
     id: "user",
     accessor: "user",
-    Header: () => (
-      <CellBox>
-        <StyledIcon name="arrow_down" />
-        Users
-      </CellBox>
-    ),
+    Header: ({ column }: { column: any }) => {
+      const isSorted = column.isSortedDesc !== undefined
+      return (
+        <CellBox>
+          {isSorted ? (
+            <StyledIcon descending={Boolean(column.isSortedDesc)} name="arrow_down" />
+          ) : (
+            <IconPlaceholder />
+          )}
+          Users
+        </CellBox>
+      )
+    },
     Cell: ({ cell }: any) => {
-      const { name, mail, photo } = cell.value
+      const { name, photo } = cell.value
       return (
         <RowBox>
           <CellBox>
             <Avatar src={photo} alt={`${name} avatar`} />
             {name}
-            {mail}
           </CellBox>
         </RowBox>
       )
     },
   },
+  {
+    id: "email",
+    accessor: "email",
+    Header: ({ column }: any) => {
+      return <CellBox {...column.getGroupByToggleProps()}>Emails</CellBox>
+    },
+    Cell: ({ cell }: any) => {
+      const email = cell.value
+      return (
+        <RowBox>
+          <CellBox>{email}</CellBox>
+        </RowBox>
+      )
+    },
+  },
+
   {
     id: "dots",
     accessor: "dots",

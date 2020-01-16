@@ -4,7 +4,7 @@
 
 import "@testing-library/jest-dom/extend-expect"
 import { Table } from "./table"
-import { UserTableSchema } from "./components/UserHeader"
+import { UserTableSchema } from "./mocks/mocked-table-schema"
 import { DefaultTheme } from "../../theme/default"
 import { testWrapper } from "../../../test-utils"
 import "jest-styled-components"
@@ -14,18 +14,18 @@ const MOCK_PROPS = {
   columns: UserTableSchema,
   data: [
     {
-      user: { photo: "https://i.pravatar.cc/30", name: "Fry", mail: "noway@noway.com" },
+      user: { photo: "https://i.pravatar.cc/30", name: "Fry", email: "noway@noway.com" },
       dots: "123",
     },
     {
-      user: { photo: "https://i.pravatar.cc/31", name: "Amy", mail: "amy@vong.com" },
+      user: { photo: "https://i.pravatar.cc/31", name: "Amy", email: "amy@vong.com" },
       dots: "123",
     },
     {
       user: {
         photo: "https://i.pravatar.cc/32",
         name: "dr. Zoidberg",
-        mail: "drZ@planetmail.com",
+        email: "drZ@planetmail.com",
       },
       dots: "123",
     },
