@@ -97,11 +97,13 @@ sidebarStory.add(
           >
             <option value="">None</option>
             <option value="email"> Email </option>
+            <option value="user">User name</option>
           </select>
         </label>
         <Table
           sortableBy={["user"]}
           controlledState={{ groupBy }}
+          initialState={{ sortBy: [{ id: "user", desc: false }] }}
           columns={UserTableSchema}
           data={state}
           selectedItemsClb={items => {}}

@@ -34,7 +34,21 @@ export const UserTableSchema = [
   },
   {
     id: "user",
-    accessor: "user",
+    /*
+    Documentation is a bit unclear on how to work with sortTypes, and also default
+    sort functions are not exported, so we are using another way of working
+    with object values sorting. We provide accessor to the prop to base our sorting on.
+
+    It makes sorting simple, but rendering - more tricky.
+    Value of cell / row will be primitive (the one we gave accessor to get), se we have to use
+    original row and its data to render other object values (which are left out by our accessor)
+
+    Keep in mind that grouping also works by accessor, so suddenly without overriding defaults,
+    we can group this column only by the accessed value, which will be user.name
+    */
+    accessor: row => {
+      return row.user.name
+    },
     Header: ({ column }: { column: any }) => {
       const isSorted = column.isSortedDesc !== undefined
       return (
@@ -48,8 +62,10 @@ export const UserTableSchema = [
         </CellBox>
       )
     },
-    Cell: ({ cell }: any) => {
-      const { name, photo } = cell.value
+    Cell: ({ row }: any) => {
+      const {
+        user: { name, photo },
+      } = row.original
       return (
         <RowBox>
           <CellBox>

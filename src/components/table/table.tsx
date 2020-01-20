@@ -22,6 +22,10 @@ interface TableProps<T, RT = any> {
   autoResetSelectedRows?: boolean
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
+  // initializer for table instance state, according to react-table signature
+  initialState?: {
+    sortBy?: [{ id: string; desc: Boolean }]
+  }
   controlledState?: {
     columnOrder?: string[]
     groupBy?: string[] // For now we allow only single field grouping
@@ -40,6 +44,7 @@ export function Table<T extends object>({
   autoResetGroupBy = false,
   controlledState = {},
   renderGroupHead,
+  initialState = {},
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -56,6 +61,7 @@ export function Table<T extends object>({
     {
       columns,
       data,
+      initialState,
       autoResetSelectedRows,
       autoResetSortBy,
       autoResetGroupBy,
