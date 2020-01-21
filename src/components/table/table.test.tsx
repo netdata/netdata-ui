@@ -10,23 +10,25 @@ import { testWrapper } from "../../../test-utils"
 import "jest-styled-components"
 
 const MOCK_PROPS = {
-  sortedBy: ["user"],
+  sortableBy: ["user"],
   columns: UserTableSchema,
   data: [
     {
-      user: { photo: "https://i.pravatar.cc/30", name: "Fry", email: "noway@noway.com" },
+      user: { photo: "https://i.pravatar.cc/30", name: "Fry" },
+      email: "noway@noway.com",
       dots: "123",
     },
     {
-      user: { photo: "https://i.pravatar.cc/31", name: "Amy", email: "amy@vong.com" },
+      user: { photo: "https://i.pravatar.cc/31", name: "Amy" },
+      email: "amy@vong.com",
       dots: "123",
     },
     {
       user: {
         photo: "https://i.pravatar.cc/32",
         name: "dr. Zoidberg",
-        email: "drZ@planetmail.com",
       },
+      email: "drZ@planetmail.com",
       dots: "123",
     },
   ],
