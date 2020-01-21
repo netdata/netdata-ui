@@ -1,20 +1,30 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useContext } from "react"
+import { LayoutContext } from "../../layout-context"
+import { TableCell } from "../table-cell"
+
+const rowRenderOptions = {
+  block: ({ children, ...props }: any) => (
+    <div className="table-row" {...props}>
+      {children}
+    </div>
+  ),
+  table: ({ children, ...props }: any) => <tr {...props}>{children}</tr>,
+}
+
+const RowTag = ({ children, layoutType, ...props }: any) => {
+  const renderTag = rowRenderOptions[layoutType]
+  return renderTag({ children, ...props })
+}
 
 interface Props {
   row: any
-  customProps: Object
   prepareRow: (row: any) => void
   selectedRowIds: string[]
   renderGroupHead?: ({ row }: { row: any }) => ReactNode
 }
 
-export const TableRow = ({
-  row,
-  customProps,
-  prepareRow,
-  selectedRowIds,
-  renderGroupHead,
-}: Props) => {
+export const TableRow = ({ row, prepareRow, selectedRowIds, renderGroupHead }: Props) => {
+  const layoutType = useContext(LayoutContext)
   const { subRows } = row
 
   if (subRows.length > 0) {
@@ -31,7 +41,6 @@ export const TableRow = ({
             <TableRow
               key={subRow.id}
               row={subRow}
-              customProps={customProps}
               prepareRow={prepareRow}
               selectedRowIds={selectedRowIds}
             />
@@ -41,14 +50,11 @@ export const TableRow = ({
     )
   }
   return (
-    <tr {...row.getRowProps()}>
+    <RowTag layoutType={layoutType} {...row.getRowProps()}>
       {row.cells.map(cell => {
-        return (
-          <td {...cell.getCellProps()}>
-            {cell.render("Cell", { ...customProps, selectedRowIds })}
-          </td>
-        )
+        const { key, cellProps } = cell.getCellProps()
+        return <TableCell key={key} cell={cell} selectedRowIds={selectedRowIds} {...cellProps} />
       })}
-    </tr>
+    </RowTag>
   )
 }

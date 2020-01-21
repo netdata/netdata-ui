@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
+import { EnhancedTable } from "./mocks/styled"
 import { UserTableSchema } from "./mocks/mocked-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
@@ -100,7 +101,7 @@ sidebarStory.add(
             <option value="user">User name</option>
           </select>
         </label>
-        <Table
+        <EnhancedTable
           sortableBy={["user"]}
           controlledState={{ groupBy }}
           initialState={{ sortBy: [{ id: "user", desc: false }] }}

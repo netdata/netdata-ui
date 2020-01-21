@@ -1,4 +1,4 @@
-import React, { useEffect, ReactNode } from "react"
+import React, { useEffect, useMemo, ReactNode } from "react"
 import {
   useTable,
   useSortBy,
@@ -8,12 +8,18 @@ import {
   useGroupBy,
   useExpanded,
   useColumnOrder,
+  useBlockLayout,
 } from "react-table"
 import { StyledTable, StyledThead } from "./styled"
 import { ColumnHead } from "./components/column-head"
 import { TableRow } from "./components/table-row"
+import { LayoutContextProvider } from "./layout-context"
+
+const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
+const blockTableHooks = [...tableHooks, useBlockLayout]
 
 interface TableProps<T, RT = any> {
+  layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
   columns: RT
   data: T[]
@@ -35,6 +41,7 @@ interface TableProps<T, RT = any> {
 }
 
 export function Table<T extends object>({
+  layoutType = "table",
   columns,
   data,
   sortableBy = [],
@@ -45,10 +52,16 @@ export function Table<T extends object>({
   controlledState = {},
   renderGroupHead,
   initialState = {},
-  ...customProps
+  className,
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
-  const columnOrder = controlledState.columnOrder || columns.map(({ id }) => id)
+  const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
+    columns,
+    controlledState.columnOrder,
+  ])
+
+  const reactTableHooks = layoutType === "block" ? blockTableHooks : tableHooks
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -77,11 +90,7 @@ export function Table<T extends object>({
         )
       },
     },
-    useGroupBy,
-    useColumnOrder,
-    useSortBy,
-    useRowSelect,
-    useExpanded
+    ...reactTableHooks
   )
 
   useEffect(() => {
@@ -91,40 +100,34 @@ export function Table<T extends object>({
   }, [selectedFlatRows, selectedItemsClb])
 
   return (
-    <StyledTable {...customProps} {...getTableProps()}>
-      <StyledThead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => {
-              const { key } = column.getHeaderProps()
-              return (
-                <ColumnHead
-                  key={key}
-                  column={column}
-                  customProps={customProps}
-                  sortableBy={sortableBy}
-                />
-              )
-            })}
-          </tr>
-        ))}
-      </StyledThead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row)
+    <LayoutContextProvider value={layoutType}>
+      <StyledTable {...getTableProps()} className={className}>
+        <StyledThead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => {
+                const { key } = column.getHeaderProps()
+                return <ColumnHead key={key} column={column} sortableBy={sortableBy} />
+              })}
+            </tr>
+          ))}
+        </StyledThead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map(row => {
+            prepareRow(row)
 
-          return (
-            <TableRow
-              key={row.id}
-              row={row}
-              customProps={customProps}
-              prepareRow={prepareRow}
-              selectedRowIds={selectedRowIds}
-              renderGroupHead={renderGroupHead}
-            />
-          )
-        })}
-      </tbody>
-    </StyledTable>
+            return (
+              <TableRow
+                key={row.id}
+                row={row}
+                prepareRow={prepareRow}
+                selectedRowIds={selectedRowIds}
+                renderGroupHead={renderGroupHead}
+              />
+            )
+          })}
+        </tbody>
+      </StyledTable>
+    </LayoutContextProvider>
   )
 }

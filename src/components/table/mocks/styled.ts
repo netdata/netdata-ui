@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { getSizeBy, getColor } from "../../../theme/utils"
 import { Icon } from "../../icon"
 import { Button } from "../../button"
+import { Table } from ".."
 
 export const StyledIcon = styled(Icon)<{ descending: boolean }>`
   transform: ${({ descending }) => (descending ? "" : "rotate(180deg)")};
@@ -22,8 +23,22 @@ export const IconPlaceholder = styled.div`
 `
 
 export const CellBox = styled.div<{ reversed?: boolean }>`
+  height: ${getSizeBy(10)};
   display: flex;
-  flex-direction: ${({ reversed }) => (reversed ? "row-reverse" : "row")};
+  align-items: center;
+  padding: 4px;
+`
+
+export const NestedCellContainer = styled.div``
+export const NestedCell = styled.div`
+  height: ${getSizeBy(10)};
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:not(:first-child) {
+    border-top: 1px solid ${getColor(["borderColor"])};
+  }
 `
 
 export const Avatar = styled.img`
@@ -33,6 +48,13 @@ export const Avatar = styled.img`
   border-radius: 50%;
   display: inline-block;
 `
-export const RowBox = styled.div`
-  margin-top: ${getSizeBy(3)};
+
+export const EnhancedTable = styled(Table)`
+  tbody {
+    tr {
+      td {
+        vertical-align: top;
+      }
+    }
+  }
 `
