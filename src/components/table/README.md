@@ -61,6 +61,11 @@ there are certain ways to solve that.
 - Leaving accessor pointing to object, and providing custom sort/groupBy functions. More tricky,
   and the library doc is somewhat uncertain about various cases.
 
+### Passing custom props to the table
+
+Any additional props passed to the table are available to access from columns schema rendering in runtime
+So, if you need to pass a handler for some button inside the cell, feel free to do it.
+
 ### Typical usage:
 
 May vary. Fun aside, component usage practices are volatile right now.

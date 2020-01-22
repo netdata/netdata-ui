@@ -9,13 +9,42 @@ import {
   useColumnOrder,
   useBlockLayout,
 } from "react-table"
-import { StyledTable } from "./styled"
+import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
 
 const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
 const blockTableHooks = [...tableHooks, useBlockLayout]
+
+const tableRenderOptions = {
+  mainContainer: {
+    block: ({ children, className, ...props }: any) => (
+      <BlockLayout className={`table-container ${className || ""}`} {...props}>
+        {children}
+      </BlockLayout>
+    ),
+    table: ({ children, ...props }: any) => <StyledTable {...props}>{children}</StyledTable>,
+  },
+  tbody: {
+    block: ({ children, ...props }: any) => (
+      <div className="table-body" {...props}>
+        {children}
+      </div>
+    ),
+    table: ({ children, ...props }: any) => <tbody {...props}>{children}</tbody>,
+  },
+}
+
+const TableContainer = ({ children, layoutType, ...props }: any) => {
+  const renderTableContainer = tableRenderOptions.mainContainer[layoutType]
+  return renderTableContainer({ children, ...props })
+}
+
+const TableBody = ({ children, layoutType, ...props }: any) => {
+  const renderTableBody = tableRenderOptions.tbody[layoutType]
+  return renderTableBody({ children, ...props })
+}
 
 interface TableProps<T, RT = any> {
   layoutType?: "table" | "block"
@@ -52,6 +81,7 @@ export function Table<T extends object>({
   renderGroupHead,
   initialState = {},
   className,
+  ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
   const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
@@ -100,15 +130,16 @@ export function Table<T extends object>({
 
   return (
     <LayoutContextProvider value={layoutType}>
-      <StyledTable {...getTableProps()} className={className}>
-        <TableHead headerGroups={headerGroups} sortableBy={sortableBy} />
-        <tbody {...getTableBodyProps()}>
+      <TableContainer layoutType={layoutType} {...getTableProps()} className={className}>
+        <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
+        <TableBody layoutType={layoutType} {...getTableBodyProps()}>
           {rows.map(row => {
             prepareRow(row)
 
             return (
               <TableRow
                 key={row.id}
+                customProps={customProps}
                 row={row}
                 prepareRow={prepareRow}
                 selectedRowIds={selectedRowIds}
@@ -116,8 +147,8 @@ export function Table<T extends object>({
               />
             )
           })}
-        </tbody>
-      </StyledTable>
+        </TableBody>
+      </TableContainer>
     </LayoutContextProvider>
   )
 }

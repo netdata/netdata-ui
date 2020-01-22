@@ -32,9 +32,10 @@ const HeaderGroup = ({ children, layoutType, ...props }: any) => {
 interface Props {
   headerGroups: any[]
   sortableBy: string[]
+  customProps?: Object
 }
 
-export const TableHead = ({ headerGroups, sortableBy }: Props) => {
+export const TableHead = ({ headerGroups, sortableBy, customProps }: Props) => {
   const layoutType = useContext(LayoutContext)
   return (
     <TableHeadLayout layoutType={layoutType}>
@@ -44,7 +45,14 @@ export const TableHead = ({ headerGroups, sortableBy }: Props) => {
           <HeaderGroup key={key} {...headerGroupProps} layoutType={layoutType}>
             {headerGroup.headers.map((column: ColumnInstance) => {
               const { key } = column.getHeaderProps()
-              return <ColumnHead key={key} column={column} sortableBy={sortableBy} />
+              return (
+                <ColumnHead
+                  key={key}
+                  column={column}
+                  sortableBy={sortableBy}
+                  customProps={customProps}
+                />
+              )
             })}
           </HeaderGroup>
         )

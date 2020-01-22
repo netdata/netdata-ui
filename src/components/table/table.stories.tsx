@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { Table } from "./table"
 import { EnhancedTable } from "./mocks/styled"
 import { UserTableSchema } from "./mocks/mocked-table-schema"
+import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
@@ -15,7 +16,7 @@ const subData = {
   },
   jest: ["table.test.tsx"],
 }
-const sidebarStory = storiesOf("COMPONENTS|Controls/Table", module)
+const tableStory = storiesOf("COMPONENTS|Controls/Table", module)
 
 const initialState = [
   {
@@ -39,7 +40,7 @@ const initialState = [
   },
 ]
 
-sidebarStory.add(
+tableStory.add(
   "Users table with selection persist",
   () => {
     const [state, setState] = useState(initialState)
@@ -115,13 +116,112 @@ sidebarStory.add(
   subData
 )
 
+const nodesData = [
+  {
+    node: { name: "Agent Arachovis" },
+    alarm: { critical: 2, warning: 3 },
+    chart: { chartName: "Fun Chart" },
+    chart2: { chartName: "Fun Chart" },
+    chart3: { chartName: "Fun Chart" },
+    chart4: { chartName: "Fun Chart" },
+  },
+  {
+    node: { name: "Babel" },
+    alarm: { critical: 0, warning: 0 },
+    chart: { chartName: "One more Chart" },
+    chart2: { chartName: "One more Chart" },
+    chart3: { chartName: "One more Chart" },
+    chart4: { chartName: "One more Chart" },
+  },
+  {
+    node: { name: "Zoom" },
+    alarm: { critical: 0, warning: 0 },
+    chart: { chartName: "Zoom Chart" },
+    chart2: { chartName: "Zoom Chart" },
+    chart3: { chartName: "Zoom Chart" },
+    chart4: { chartName: "Zoom Chart" },
+  },
+]
+
+const FixedContainer = styled.div`
+  height: 150px;
+  width: 500px;
+  overflow: hidden;
+`
+
+const BlockTable = styled(Table)`
+  border: 1px solid black;
+  border-bottom: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+
+  .table-row {
+    :last-child {
+      .td {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .column-head,
+  .table-cell {
+    margin: 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+
+    :last-child {
+      border-right: 0;
+    }
+  }
+`
+
+tableStory.add(
+  "Block layout table",
+  () => {
+    const [groupBy, setGroupBy] = useState([] as string[])
+    return (
+      <div>
+        <div>
+          <label htmlFor="groupBySelect">
+            Group by:
+            <select
+              id="groupBySelect"
+              onChange={(e: any) => {
+                const { value }: { value: string } = e.target as any
+                setGroupBy([value])
+              }}
+            >
+              <option value="">None</option>
+              <option value="alarm"> Alarm Status</option>
+            </select>
+          </label>
+        </div>
+        <FixedContainer>
+          <BlockTable
+            layoutType="block"
+            controlledState={{ groupBy }}
+            initialState={{ sortBy: [{ id: "node", desc: false }] }}
+            columns={NodesTableSchema}
+            data={nodesData}
+          />
+        </FixedContainer>
+      </div>
+    )
+  },
+  subData
+)
+
 const StyledTable = styled(Table)`
   width: 600px;
   background-color: ${getColor(["red", "roseWhite"])};
 `
 
-sidebarStory.add(
+tableStory.add(
   "Users with overrided style",
+
   () => (
     <StyledTable
       sortableBy={["user"]}
