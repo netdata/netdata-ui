@@ -116,7 +116,7 @@ sidebarStory.add(
 )
 
 const StyledTable = styled(Table)`
-  width: 800px;
+  width: 600px;
   background-color: ${getColor(["red", "roseWhite"])};
 `
 

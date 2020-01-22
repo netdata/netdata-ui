@@ -3,16 +3,15 @@ import {
   useTable,
   useSortBy,
   useRowSelect,
-  ColumnInstance,
   Row,
   useGroupBy,
   useExpanded,
   useColumnOrder,
   useBlockLayout,
 } from "react-table"
-import { StyledTable, StyledThead } from "./styled"
-import { ColumnHead } from "./components/column-head"
+import { StyledTable } from "./styled"
 import { TableRow } from "./components/table-row"
+import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
 
 const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
@@ -102,16 +101,7 @@ export function Table<T extends object>({
   return (
     <LayoutContextProvider value={layoutType}>
       <StyledTable {...getTableProps()} className={className}>
-        <StyledThead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: ColumnInstance<typeof columns>) => {
-                const { key } = column.getHeaderProps()
-                return <ColumnHead key={key} column={column} sortableBy={sortableBy} />
-              })}
-            </tr>
-          ))}
-        </StyledThead>
+        <TableHead headerGroups={headerGroups} sortableBy={sortableBy} />
         <tbody {...getTableBodyProps()}>
           {rows.map(row => {
             prepareRow(row)
