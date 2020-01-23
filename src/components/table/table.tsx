@@ -66,6 +66,7 @@ interface TableProps<T, RT = any> {
     // any other controlled fields for react-table state
   }
   renderGroupHead?: ({ row }: { row: any }) => ReactNode
+  ref?: any
 }
 
 export function Table<T extends object>({
@@ -81,6 +82,7 @@ export function Table<T extends object>({
   renderGroupHead,
   initialState = {},
   className,
+  ref,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -90,6 +92,7 @@ export function Table<T extends object>({
   ])
 
   const reactTableHooks = layoutType === "block" ? blockTableHooks : tableHooks
+  console.log("rerender")
 
   const {
     getTableProps,
@@ -130,7 +133,7 @@ export function Table<T extends object>({
 
   return (
     <LayoutContextProvider value={layoutType}>
-      <TableContainer layoutType={layoutType} {...getTableProps()} className={className}>
+      <TableContainer layoutType={layoutType} {...getTableProps()} className={className} ref={ref}>
         <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
         <TableBody layoutType={layoutType} {...getTableBodyProps()}>
           {rows.map(row => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useMemo, useEffect } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
@@ -9,6 +9,7 @@ import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 import { getColor } from "../../theme"
+import { useScrollDirection } from "./use-scroll-direction"
 
 const subData = {
   readme: {
@@ -144,18 +145,28 @@ const nodesData = [
 ]
 
 const FixedContainer = styled.div`
+  position: relative;
   height: 150px;
   width: 500px;
-  overflow: hidden;
+  overflow: auto;
 `
 
-const BlockTable = styled(Table)`
+const BlockTable = styled(Table)<{ scrollIsVertical?: boolean; scrollY: number }>`
   border: 1px solid black;
   border-bottom: 0;
-  height: 100%;
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: auto;
+  position: relative;
+
+  .table-head {
+    background: pink;
+    ${({ scrollIsVertical, scrollY }) =>
+      scrollIsVertical ? "top: 0; position: sticky;" : `top: ${scrollY}px; position: absolute;`}
+  }
+
+  .header-group {
+  }
+  .table-body {
+    ${({ scrollIsVertical }) => (scrollIsVertical ? "" : "margin-top: 37px;")}
+  }
 
   .table-row {
     :last-child {
@@ -178,10 +189,35 @@ const BlockTable = styled(Table)`
   }
 `
 
+const MemoizedTable = React.memo<any>(BlockTable)
+
+const blockTableInitialState = { sortBy: [{ id: "node", desc: false }] }
+
 tableStory.add(
   "Block layout table",
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
+    const [scrollableContainerRef, setScrollableContainerRef] = useState({ current: null }) as any
+
+    const [scrollYPosition, setScrollYPosition] = useState(0)
+
+    const [scrollIsVertical, prevScrollIsVertical, scrollY] = useScrollDirection({
+      scrollRef: scrollableContainerRef,
+    })
+
+    useEffect(() => {
+      if (!scrollIsVertical && prevScrollIsVertical) {
+        setScrollYPosition(scrollY)
+      }
+    }, [scrollIsVertical, prevScrollIsVertical, scrollY])
+
+    const controlledState = useMemo(
+      () => ({
+        groupBy,
+      }),
+      [groupBy]
+    )
+
     return (
       <div>
         <div>
@@ -199,11 +235,19 @@ tableStory.add(
             </select>
           </label>
         </div>
-        <FixedContainer>
-          <BlockTable
+        <FixedContainer
+          ref={node => {
+            if (scrollableContainerRef.current === null && node !== null) {
+              setScrollableContainerRef({ current: node })
+            }
+          }}
+        >
+          <MemoizedTable
+            scrollY={scrollYPosition}
+            scrollIsVertical={scrollIsVertical}
             layoutType="block"
-            controlledState={{ groupBy }}
-            initialState={{ sortBy: [{ id: "node", desc: false }] }}
+            controlledState={controlledState}
+            initialState={blockTableInitialState}
             columns={NodesTableSchema}
             data={nodesData}
           />
