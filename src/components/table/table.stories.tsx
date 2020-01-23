@@ -158,14 +158,13 @@ const BlockTable = styled(Table)<{ scrollIsVertical?: boolean; scrollY: number }
 
   .table-head {
     background: pink;
-    ${({ scrollIsVertical, scrollY }) =>
-      scrollIsVertical ? "top: 0; position: sticky;" : `top: ${scrollY}px; position: absolute;`}
+    top: 0;
+    position: sticky;
   }
 
   .header-group {
   }
   .table-body {
-    ${({ scrollIsVertical }) => (scrollIsVertical ? "" : "margin-top: 37px;")}
   }
 
   .table-row {
@@ -243,8 +242,6 @@ tableStory.add(
           }}
         >
           <MemoizedTable
-            scrollY={scrollYPosition}
-            scrollIsVertical={scrollIsVertical}
             layoutType="block"
             controlledState={controlledState}
             initialState={blockTableInitialState}

@@ -14,6 +14,7 @@ type UseScrollDirection = ({
 
 const initialScrollIsVertical = true
 
+// TODO - should be useScrollPosition
 export const useScrollDirection: UseScrollDirection = ({ scrollRef }: any) => {
   const [scrollState, setScrollState] = useState({
     isVertical: initialScrollIsVertical,
@@ -27,10 +28,6 @@ export const useScrollDirection: UseScrollDirection = ({ scrollRef }: any) => {
 
   const prevIsVertical =
     prevScrollStateIsVertical === undefined ? initialScrollIsVertical : prevScrollStateIsVertical
-
-  // TODO - cleaner naming and conditions
-  // Important - handle the case of double-scroll detection
-  // when the bottom scrollbar appears and Y changes for it's height
 
   useEffect(() => {
     if (scrollCoordinates.current === null) {
