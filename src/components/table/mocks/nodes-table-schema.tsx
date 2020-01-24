@@ -1,18 +1,19 @@
 import React from "react"
-import { CellBox, NestedCellContainer, NestedCell } from "./styled"
 
 export const NodesTableSchema = [
   {
-    id: "alarm",
-    accessor: "alarm",
+    id: "status",
+    accessor: "status",
     width: 40,
     Header: () => {
       return <div />
     },
     Cell: ({ row, cell }: any) => {
-      return <div>C: 0</div>
+      const { warning, critical } = cell.value
+      return <div>{critical > 0 && critical}</div>
     },
   },
+  { id: "services", accessor: "services" },
   {
     id: "node",
     accessor: row => {

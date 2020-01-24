@@ -19,12 +19,16 @@ const blockTableHooks = [...tableHooks, useBlockLayout]
 
 const tableRenderOptions = {
   mainContainer: {
-    block: ({ children, className, ...props }: any) => (
-      <BlockLayout className={`table-container ${className || ""}`} {...props}>
+    block: ({ children, className, callbackRef, ...props }: any) => (
+      <BlockLayout ref={callbackRef} className={`table-container ${className || ""}`} {...props}>
         {children}
       </BlockLayout>
     ),
-    table: ({ children, ...props }: any) => <StyledTable {...props}>{children}</StyledTable>,
+    table: ({ children, callbackRef, ...props }: any) => (
+      <StyledTable ref={callbackRef} {...props}>
+        {children}
+      </StyledTable>
+    ),
   },
   tbody: {
     block: ({ children, ...props }: any) => (
@@ -65,8 +69,15 @@ interface TableProps<T, RT = any> {
     groupBy?: string[] // For now we allow only single field grouping
     // any other controlled fields for react-table state
   }
-  renderGroupHead?: ({ row }: { row: any }) => ReactNode
-  ref?: any
+  renderGroupHead?: (props: {
+    row: any
+    layoutType: "block" | "table"
+    prepareRow: Function
+    selectedRowIds: any
+    customProps?: Object
+  }) => ReactNode
+  callbackRef?: (node: any) => void
+  defaultGroupByFn?: Function
 }
 
 export function Table<T extends object>({
@@ -82,7 +93,8 @@ export function Table<T extends object>({
   renderGroupHead,
   initialState = {},
   className,
-  ref,
+  callbackRef,
+  defaultGroupByFn,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -121,6 +133,7 @@ export function Table<T extends object>({
           [state, controlledState]
         )
       },
+      groupByFn: defaultGroupByFn,
     },
     ...reactTableHooks
   )
@@ -133,7 +146,12 @@ export function Table<T extends object>({
 
   return (
     <LayoutContextProvider value={layoutType}>
-      <TableContainer layoutType={layoutType} {...getTableProps()} className={className} ref={ref}>
+      <TableContainer
+        layoutType={layoutType}
+        {...getTableProps()}
+        className={className}
+        callbackRef={callbackRef}
+      >
         <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
         <TableBody layoutType={layoutType} {...getTableBodyProps()}>
           {rows.map(row => {

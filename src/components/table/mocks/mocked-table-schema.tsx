@@ -1,5 +1,4 @@
 import React from "react"
-import { tail } from "ramda"
 import { Checkbox } from "../../checkbox"
 import {
   StyledIcon,
@@ -115,5 +114,3 @@ export const UserTableSchema = [
     ),
   },
 ]
-
-export const NoSelectionSchema = tail(UserTableSchema)

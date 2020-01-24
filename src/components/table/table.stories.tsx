@@ -9,7 +9,8 @@ import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 import { getColor } from "../../theme"
-import { useScrollDirection } from "./use-scroll-direction"
+import { webkitVisibleScrollbar } from "../../mixins"
+import { defaultGroupByFn } from "./mocks/utils"
 
 const subData = {
   readme: {
@@ -121,6 +122,7 @@ const nodesData = [
   {
     node: { name: "Agent Arachovis" },
     alarm: { critical: 2, warning: 3 },
+    services: ["ubuntu", "mariadb"],
     chart: { chartName: "Fun Chart" },
     chart2: { chartName: "Fun Chart" },
     chart3: { chartName: "Fun Chart" },
@@ -129,6 +131,7 @@ const nodesData = [
   {
     node: { name: "Babel" },
     alarm: { critical: 0, warning: 0 },
+    services: ["ubuntu"],
     chart: { chartName: "One more Chart" },
     chart2: { chartName: "One more Chart" },
     chart3: { chartName: "One more Chart" },
@@ -136,6 +139,7 @@ const nodesData = [
   },
   {
     node: { name: "Zoom" },
+    services: ["mariadb"],
     alarm: { critical: 0, warning: 0 },
     chart: { chartName: "Zoom Chart" },
     chart2: { chartName: "Zoom Chart" },
@@ -144,14 +148,31 @@ const nodesData = [
   },
 ]
 
+const prepareData = (arr: any) =>
+  arr.reduce((a, c) => {
+    const {
+      alarm: { critical, warning },
+    } = c
+    let status = "okay"
+    if (critical > 0) {
+      status = "critical"
+    } else if (warning > 0) {
+      status = "warning"
+    }
+    return [...a, { ...c, status }]
+  }, [])
+
+const preparedData = prepareData(nodesData)
+
 const FixedContainer = styled.div`
   position: relative;
   height: 150px;
   width: 500px;
   overflow: auto;
+  ${webkitVisibleScrollbar}
 `
 
-const BlockTable = styled(Table)<{ scrollIsVertical?: boolean; scrollY: number }>`
+const BlockTable = styled(Table)`
   border: 1px solid black;
   border-bottom: 0;
   position: relative;
@@ -190,25 +211,16 @@ const BlockTable = styled(Table)<{ scrollIsVertical?: boolean; scrollY: number }
 
 const MemoizedTable = React.memo<any>(BlockTable)
 
-const blockTableInitialState = { sortBy: [{ id: "node", desc: false }] }
+const blockTableInitialState = {
+  sortBy: [{ id: "node", desc: false }],
+  hiddenColumns: ["services"],
+}
 
 tableStory.add(
   "Block layout table",
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
-    const [scrollableContainerRef, setScrollableContainerRef] = useState({ current: null }) as any
-
-    const [scrollYPosition, setScrollYPosition] = useState(0)
-
-    const [scrollIsVertical, prevScrollIsVertical, scrollY] = useScrollDirection({
-      scrollRef: scrollableContainerRef,
-    })
-
-    useEffect(() => {
-      if (!scrollIsVertical && prevScrollIsVertical) {
-        setScrollYPosition(scrollY)
-      }
-    }, [scrollIsVertical, prevScrollIsVertical, scrollY])
+    const [tableRef, setTableRef] = useState({ current: null }) as any
 
     const controlledState = useMemo(
       () => ({
@@ -230,23 +242,24 @@ tableStory.add(
               }}
             >
               <option value="">None</option>
-              <option value="alarm"> Alarm Status</option>
+              <option value="status"> Alarm Status</option>
+              <option value="services"> Services </option>
             </select>
           </label>
         </div>
-        <FixedContainer
-          ref={node => {
-            if (scrollableContainerRef.current === null && node !== null) {
-              setScrollableContainerRef({ current: node })
-            }
-          }}
-        >
+        <FixedContainer>
           <MemoizedTable
+            callbackRef={node => {
+              if (tableRef.current === null && node !== null) {
+                setTableRef({ current: node })
+              }
+            }}
             layoutType="block"
             controlledState={controlledState}
             initialState={blockTableInitialState}
             columns={NodesTableSchema}
-            data={nodesData}
+            data={preparedData}
+            defaultGroupByFn={defaultGroupByFn}
           />
         </FixedContainer>
       </div>
