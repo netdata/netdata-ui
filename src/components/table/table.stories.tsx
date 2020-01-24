@@ -10,7 +10,7 @@ import { readmeCleanup } from "../../../utils/readme"
 import readme from "./README.md"
 import { getColor } from "../../theme"
 import { webkitVisibleScrollbar } from "../../mixins"
-import { defaultGroupByFn } from "./mocks/utils"
+import { customGroupBy } from "./mocks/utils"
 
 const subData = {
   readme: {
@@ -259,7 +259,7 @@ tableStory.add(
             initialState={blockTableInitialState}
             columns={NodesTableSchema}
             data={preparedData}
-            defaultGroupByFn={defaultGroupByFn}
+            defaultGroupByFn={customGroupBy}
           />
         </FixedContainer>
       </div>
