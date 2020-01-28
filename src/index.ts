@@ -37,6 +37,6 @@ export { DefaultTheme } from "./theme/default"
 export { devices, breakpoints } from "./media"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
-export * from "./mixins"
+export { webkitVisibleScrollbar } from "./mixins"
 
 export { Table } from "./components/table"
