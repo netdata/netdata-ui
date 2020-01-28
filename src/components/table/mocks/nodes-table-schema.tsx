@@ -1,4 +1,5 @@
 import React from "react"
+import { UnreachableNodeMask } from "./styled"
 
 export const NodesTableSchema = [
   {
@@ -9,8 +10,7 @@ export const NodesTableSchema = [
       return <div />
     },
     Cell: ({ row, cell }: any) => {
-      const { warning, critical } = cell.value
-      return <div>{critical > 0 && critical}</div>
+      return <div>{cell.value === "critical" && "X"}</div>
     },
   },
   { id: "services", accessor: "services" },
@@ -21,12 +21,21 @@ export const NodesTableSchema = [
     },
     width: 160,
     Header: ({ column }: any) => {
-      return <div {...column.getGroupByToggleProps()}>Node name</div>
+      return <div>Node name</div>
     },
     Cell: ({ cell, row }: any) => {
       const {
         node: { name },
+        status,
       } = row.original
+      if (status === "unreachable") {
+        return (
+          <>
+            <div>{name}</div>
+            <UnreachableNodeMask>Unreachable</UnreachableNodeMask>
+          </>
+        )
+      }
       return <div>{name}</div>
     },
   },

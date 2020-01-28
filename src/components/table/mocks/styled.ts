@@ -58,3 +58,16 @@ export const EnhancedTable = styled(Table)`
     }
   }
 `
+
+export const UnreachableNodeMask = styled.div`
+  position: absolute;
+  left: 200px;
+  top: 0;
+  width: calc(100% - 200px);
+  height: 100%;
+  background: green;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 80px;
+`

@@ -146,15 +146,26 @@ const nodesData = [
     chart3: { chartName: "Zoom Chart" },
     chart4: { chartName: "Zoom Chart" },
   },
+  {
+    node: { name: "Happiness" },
+    services: [],
+    alarm: { critical: 0, warning: 0, unreachable: true },
+    chart: { chartName: "Zoom Chart" },
+    chart2: { chartName: "Zoom Chart" },
+    chart3: { chartName: "Zoom Chart" },
+    chart4: { chartName: "Zoom Chart" },
+  },
 ]
 
 const prepareData = (arr: any) =>
   arr.reduce((a, c) => {
     const {
-      alarm: { critical, warning },
+      alarm: { critical, warning, unreachable },
     } = c
     let status = "okay"
-    if (critical > 0) {
+    if (unreachable) {
+      status = "unreachable"
+    } else if (critical > 0) {
       status = "critical"
     } else if (warning > 0) {
       status = "warning"
@@ -180,6 +191,7 @@ const BlockTable = styled(Table)`
   .table-head {
     background: pink;
     top: 0;
+    z-index: 1;
     position: sticky;
   }
 
@@ -259,7 +271,7 @@ tableStory.add(
             initialState={blockTableInitialState}
             columns={NodesTableSchema}
             data={preparedData}
-            defaultGroupByFn={customGroupBy}
+            groupByFn={customGroupBy}
           />
         </FixedContainer>
       </div>

@@ -1,15 +1,16 @@
 import React, { ReactNode, useContext } from "react"
 import { LayoutContext } from "../../layout-context"
 import { TableCell } from "../table-cell"
+import { StyledRow, StyledBlockRow } from "./styled"
 
 const rowRenderOptions = {
   row: {
     block: ({ children, ...props }: any) => (
-      <div className="table-row" {...props}>
+      <StyledBlockRow className="table-row" {...props}>
         {children}
-      </div>
+      </StyledBlockRow>
     ),
-    table: ({ children, ...props }: any) => <tr {...props}>{children}</tr>,
+    table: ({ children, ...props }: any) => <StyledRow {...props}>{children}</StyledRow>,
   },
   group: {},
 }

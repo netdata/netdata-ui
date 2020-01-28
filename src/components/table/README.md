@@ -30,7 +30,15 @@ interface TableProps<T, RT = any> {
   initialState?: {
     sortBy?: [{ id: string; desc: Boolean }]
   }
-  renderGroupHead?: ({ row }: { row: any }) => ReactNode
+  renderGroupHead?: (props: {
+    row: any
+    layoutType: "block" | "table"
+    prepareRow: Function
+    selectedRowIds: any
+    customProps?: Object
+  }) => ReactNode
+  callbackRef?: (node: any) => void
+  groupByFn?: Function
 }
 ```
 
@@ -44,7 +52,9 @@ interface TableProps<T, RT = any> {
   for grouping. Should be used only to replace table hooks/defaults, any other custom state should be handled externally.
 - `initialState` - object to define table instance initial state, according to its API. For now used
   only for initial sort order
-- `renderGroupHead` - custom rendering for row indicating a header group
+- `renderGroupHead` - custom rendering for row indicating a header group, defaults to empty row with group name
+- `callbackRef` - callback function should be passed to establish ref to the Table when it's will be rendered
+- `groupByFn` - function used to group rows, defaults to one `react-table` is using
 
 This is setup of first **column** with the selection checkbox
 

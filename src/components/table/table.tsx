@@ -13,6 +13,7 @@ import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
+import { defaultGroupByFn } from "./utils"
 
 const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
 const blockTableHooks = [...tableHooks, useBlockLayout]
@@ -77,7 +78,7 @@ interface TableProps<T, RT = any> {
     customProps?: Object
   }) => ReactNode
   callbackRef?: (node: any) => void
-  defaultGroupByFn?: Function
+  groupByFn?: Function
 }
 
 export function Table<T extends object>({
@@ -94,7 +95,7 @@ export function Table<T extends object>({
   initialState = {},
   className,
   callbackRef,
-  defaultGroupByFn,
+  groupByFn = defaultGroupByFn,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -104,7 +105,6 @@ export function Table<T extends object>({
   ])
 
   const reactTableHooks = layoutType === "block" ? blockTableHooks : tableHooks
-  console.log("rerender")
 
   const {
     getTableProps,
@@ -133,7 +133,7 @@ export function Table<T extends object>({
           [state, controlledState]
         )
       },
-      groupByFn: defaultGroupByFn,
+      groupByFn,
     },
     ...reactTableHooks
   )
