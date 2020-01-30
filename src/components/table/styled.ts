@@ -6,10 +6,7 @@ export const StyledTable = styled.table`
   border-collapse: collapse;
 `
 
-export const StyledThead = styled.thead`
-  & > tr th {
-    border-spacing: 0;
-    border-bottom: 1px solid #aeb3b7;
-    padding-bottom: 5px;
-  }
+export const BlockLayout = styled.div`
+  display: inline-block;
+  border-spacing: 0;
 `

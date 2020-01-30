@@ -1,38 +1,76 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useContext } from "react"
+import { LayoutContext } from "../../layout-context"
+import { TableCell } from "../table-cell"
+import { StyledRow, StyledBlockRow } from "./styled"
+
+const rowRenderOptions = {
+  row: {
+    block: ({ children, ...props }: any) => (
+      <StyledBlockRow className="table-row" {...props}>
+        {children}
+      </StyledBlockRow>
+    ),
+    table: ({ children, ...props }: any) => <StyledRow {...props}>{children}</StyledRow>,
+  },
+  group: {},
+}
+
+const RowLayout = ({ children, layoutType, ...props }: any) => {
+  const renderRow = rowRenderOptions.row[layoutType]
+  return renderRow({ children, ...props })
+}
+
+const DefaultGroupHead = ({ row, layoutType }: any) => {
+  const rowProps = row.getRowProps()
+  return layoutType === "table" ? (
+    <tr {...rowProps}>
+      <td colSpan={row.cells.length}>{row.groupByVal}</td>
+    </tr>
+  ) : (
+    <div className="group-head" {...rowProps}>
+      {row.groupByVal}
+    </div>
+  )
+}
 
 interface Props {
   row: any
-  customProps: Object
   prepareRow: (row: any) => void
   selectedRowIds: string[]
-  renderGroupHead?: ({ row }: { row: any }) => ReactNode
+  renderGroupHead?: (props: {
+    row: any
+    layoutType: "block" | "table"
+    prepareRow: Function
+    selectedRowIds: any
+    customProps?: Object
+  }) => ReactNode
+  customProps?: Object
 }
 
 export const TableRow = ({
   row,
-  customProps,
   prepareRow,
   selectedRowIds,
   renderGroupHead,
+  customProps,
 }: Props) => {
+  const layoutType = useContext(LayoutContext) as "block" | "table"
   const { subRows } = row
 
   if (subRows.length > 0) {
     return renderGroupHead ? (
-      <>{renderGroupHead({ row })}</>
+      <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps })}</>
     ) : (
       <>
-        <tr {...row.getRowProps()}>
-          <td colSpan={row.cells.length}>{row.groupByVal}</td>
-        </tr>
+        <DefaultGroupHead row={row} layoutType={layoutType} />
         {subRows.map(subRow => {
           prepareRow(subRow)
           return (
             <TableRow
               key={subRow.id}
               row={subRow}
-              customProps={customProps}
               prepareRow={prepareRow}
+              customProps={customProps}
               selectedRowIds={selectedRowIds}
             />
           )
@@ -41,14 +79,19 @@ export const TableRow = ({
     )
   }
   return (
-    <tr {...row.getRowProps()}>
+    <RowLayout layoutType={layoutType} {...row.getRowProps()}>
       {row.cells.map(cell => {
+        const { key, ...cellProps } = cell.getCellProps()
         return (
-          <td {...cell.getCellProps()}>
-            {cell.render("Cell", { ...customProps, selectedRowIds })}
-          </td>
+          <TableCell
+            key={key}
+            cell={cell}
+            selectedRowIds={selectedRowIds}
+            {...cellProps}
+            customProps={customProps}
+          />
         )
       })}
-    </tr>
+    </RowLayout>
   )
 }

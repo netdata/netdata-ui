@@ -6,8 +6,9 @@ import {
   OptionsBtn,
   ArrowIcon,
   Avatar,
-  RowBox,
   IconPlaceholder,
+  NestedCellContainer,
+  NestedCell,
 } from "./styled"
 import { Button } from "../../button"
 
@@ -24,11 +25,9 @@ export const UserTableSchema = [
       const { onChange } = row.getToggleRowSelectedProps()
       const checked = selectedRowIds[row.id] || false
       return (
-        <RowBox>
-          <CellBox>
-            <Checkbox checked={checked} onChange={onChange} />
-          </CellBox>
-        </RowBox>
+        <CellBox>
+          <Checkbox checked={checked} onChange={onChange} />
+        </CellBox>
       )
     },
   },
@@ -67,12 +66,10 @@ export const UserTableSchema = [
         user: { name, photo },
       } = row.original
       return (
-        <RowBox>
-          <CellBox>
-            <Avatar src={photo} alt={`${name} avatar`} />
-            {name}
-          </CellBox>
-        </RowBox>
+        <CellBox>
+          <Avatar src={photo} alt={`${name} avatar`} />
+          {name}
+        </CellBox>
       )
     },
   },
@@ -82,12 +79,16 @@ export const UserTableSchema = [
     Header: ({ column }: any) => {
       return <CellBox {...column.getGroupByToggleProps()}>Emails</CellBox>
     },
-    Cell: ({ cell }: any) => {
+    Cell: ({ cell, row }: any) => {
       const email = cell.value
+      const {
+        user: { name },
+      } = row.original
       return (
-        <RowBox>
-          <CellBox>{email}</CellBox>
-        </RowBox>
+        <NestedCellContainer>
+          <NestedCell>{email}</NestedCell>
+          <NestedCell>{name}</NestedCell>
+        </NestedCellContainer>
       )
     },
   },
@@ -107,11 +108,9 @@ export const UserTableSchema = [
       </CellBox>
     ),
     Cell: (props: any) => (
-      <RowBox>
-        <CellBox reversed>
-          <StyledIcon name="nav_dots" {...props} />
-        </CellBox>
-      </RowBox>
+      <CellBox reversed>
+        <StyledIcon name="nav_dots" {...props} />
+      </CellBox>
     ),
   },
 ]
