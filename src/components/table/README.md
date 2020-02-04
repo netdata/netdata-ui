@@ -14,6 +14,11 @@ from flattened array, or to render groups some other way.
 
 ```typescript
 interface TableProps<T, RT = any> {
+  groupsOrderValues?: {
+    [groupID: string]: {
+      [groupValue: string]: number
+    }
+  }
   selectedItemsClb?: (items: T[]) => T[] | void
   columns: RT
   data: T[]
@@ -55,6 +60,8 @@ interface TableProps<T, RT = any> {
 - `renderGroupHead` - custom rendering for row indicating a header group, defaults to empty row with group name
 - `callbackRef` - callback function should be passed to establish ref to the Table when it's will be rendered
 - `groupByFn` - function used to group rows, defaults to one `react-table` is using
+- `groupsOrderValues` - config object to define order of groups by grouping id (refers to column id/accessor),
+  default sort order used if the prop not provided
 
 This is setup of first **column** with the selection checkbox
 
