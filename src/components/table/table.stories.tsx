@@ -157,6 +157,15 @@ const nodesData = [
   },
 ]
 
+const groupsOrderValues = {
+  status: {
+    critical: 0,
+    warning: 1,
+    unreachable: 2,
+    okay: 3,
+  },
+}
+
 const prepareData = (arr: any) =>
   arr.reduce((a, c) => {
     const {
@@ -266,6 +275,7 @@ tableStory.add(
                 setTableRef({ current: node })
               }
             }}
+            groupsOrderValues={groupsOrderValues}
             layoutType="block"
             controlledState={controlledState}
             initialState={blockTableInitialState}
