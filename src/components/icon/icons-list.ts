@@ -31,6 +31,9 @@ import space from "./assets/space.svg"
 import nodes from "./assets/nodes.svg"
 import room from "./assets/room.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
+import node from "./assets/node.svg"
+import question from "./assets/question.svg"
+import logo_s from "./assets/logo_s.svg"
 
 export const iconsList = {
   alarm,
@@ -66,4 +69,7 @@ export const iconsList = {
   nodes,
   room,
   sorting_vertical,
+  node,
+  question,
+  logo_s,
 }
