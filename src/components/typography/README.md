@@ -3,6 +3,7 @@
 ## General info
 
 Using font: [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans)
+Font is being set on text component level, with `sans-serif` as a backup option
 
 ## Typical usage
 
