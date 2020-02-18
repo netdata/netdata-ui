@@ -21,6 +21,12 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
   height: 100%;
   width: 50%;
 `
+
+export const DisabledOverlay = styled.div`
+  filter: blur(2px);
+  pointer-events: none;
+`
+
 export const PortalSidebox = styled.aside<PortalSidebarboxT>`
   position: absolute;
   overflow: hidden;

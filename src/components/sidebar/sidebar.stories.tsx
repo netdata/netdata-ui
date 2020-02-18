@@ -7,6 +7,8 @@ import { Sidebar } from "./sidebar"
 import { PortalSidebar } from "./portaled-sidebar"
 import { getColor } from "../../theme/utils"
 import { readmeCleanup } from "../../../utils/readme"
+import { Button } from "../button"
+
 // @ts-ignore
 import readme from "./README.md"
 
@@ -61,6 +63,7 @@ sidebarStory.add(
     <Sidebar right={boolean("right", false)}>
       <SidebarContent>
         {text("sidebar children text", "this is sidebar children text")}
+        <Button label="Click me" />
       </SidebarContent>
     </Sidebar>
   ),
