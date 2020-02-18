@@ -10,6 +10,7 @@ import google from "./assets/google.svg"
 import hamburger from "./assets/hamburger.svg"
 import holder from "./assets/holder.svg"
 import magnify from "./assets/magnify.svg"
+import node_slave from "./assets/node_slave.svg"
 import node_default_l from "./assets/node_default_l.svg"
 import node_notification_l from "./assets/node_notification_l.svg"
 import node_selected_l from "./assets/node_selected_l.svg"
@@ -49,6 +50,7 @@ export const iconsList = {
   hamburger,
   holder,
   magnify,
+  node_slave,
   node_default_l,
   node_notification_l,
   node_selected_l,
