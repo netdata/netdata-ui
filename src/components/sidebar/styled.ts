@@ -22,9 +22,14 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
   width: 50%;
 `
 
-export const DisabledOverlay = styled.div`
-  filter: blur(1px);
-  pointer-events: none;
+export const DisabledOverlay = styled.aside`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  opacity: 0.3;
 `
 
 export const PortalSidebox = styled.aside<PortalSidebarboxT>`

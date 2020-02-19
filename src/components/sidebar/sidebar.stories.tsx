@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 
 import { text, boolean } from "@storybook/addon-knobs"
+import { action } from "@storybook/addon-actions"
 import { Sidebar } from "./sidebar"
 import { PortalSidebar } from "./portaled-sidebar"
 import { getColor } from "../../theme/utils"
@@ -63,7 +64,6 @@ sidebarStory.add(
     <Sidebar right={boolean("right", false)}>
       <SidebarContent>
         {text("sidebar children text", "this is sidebar children text")}
-        <Button label="Click me" />
       </SidebarContent>
     </Sidebar>
   ),
@@ -129,8 +129,16 @@ sidebarStory.add(
     return (
       <>
         <Underlay>
+          <Button danger label="Click me 1" onClick={action("clicked1")} />
           {someText}
           {textHolder}
+          <Button
+            danger
+            label="Open!"
+            onClick={() => {
+              setSomeText("Opened")
+            }}
+          />
         </Underlay>
         {someText && (
           <PortalSidebar
@@ -142,6 +150,12 @@ sidebarStory.add(
           >
             <SidebarContent>
               {text("sidebar children text", "this is sidebar children text")}
+              <Button
+                label="Close"
+                onClick={() => {
+                  setSomeText(null)
+                }}
+              />
             </SidebarContent>
           </PortalSidebar>
         )}
