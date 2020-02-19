@@ -23,7 +23,7 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
 `
 
 export const DisabledOverlay = styled.div`
-  filter: blur(2px);
+  filter: blur(1px);
   pointer-events: none;
 `
 
