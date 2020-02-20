@@ -34,6 +34,7 @@ import sorting_vertical from "./assets/sorting_vertical.svg"
 import node from "./assets/node.svg"
 import question from "./assets/question.svg"
 import logo_s from "./assets/logo_s.svg"
+import pencil from "./assets/pencil.svg"
 
 export const iconsList = {
   alarm,
@@ -72,4 +73,5 @@ export const iconsList = {
   node,
   question,
   logo_s,
+  pencil,
 }

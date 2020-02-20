@@ -1,6 +1,6 @@
 import React, { FC, useEffect, ReactNode } from "react"
 import { Portal } from "react-portal"
-import { PortalSidebox } from "./styled"
+import { PortalSidebox, DisabledOverlay } from "./styled"
 
 const ESCAPE_KEY = 27
 
@@ -33,6 +33,7 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
 
   return (
     <Portal>
+      <DisabledOverlay />
       <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
         {children}
       </PortalSidebox>
