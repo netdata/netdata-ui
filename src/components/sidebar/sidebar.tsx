@@ -15,7 +15,7 @@ export const Sidebar: FC<SidebarProps> = ({
   right = false,
 }: SidebarProps) => (
   <ComponentBox isRight={right}>
-    <DisabledOverlay />
+    <DisabledOverlay className={className} />
     <SidebarBox className={className} shadowSide={right}>
       {children}
     </SidebarBox>
