@@ -33,7 +33,7 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
 
   return (
     <Portal>
-      <DisabledOverlay />
+      <DisabledOverlay className={className} />
       <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
         {children}
       </PortalSidebox>
