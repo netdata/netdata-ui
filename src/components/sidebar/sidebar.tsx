@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react"
-import { SidebarBox, ComponentBox, InfoBox, DisabledOverlay } from "./styled"
+import { SidebarBox, ComponentBox, InfoBox } from "./styled"
 
 export interface SidebarProps {
   info?: ReactNode
@@ -15,7 +15,6 @@ export const Sidebar: FC<SidebarProps> = ({
   right = false,
 }: SidebarProps) => (
   <ComponentBox isRight={right}>
-    <DisabledOverlay className={className} />
     <SidebarBox className={className} shadowSide={right}>
       {children}
     </SidebarBox>
