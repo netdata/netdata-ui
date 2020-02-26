@@ -28,6 +28,8 @@ export const DisabledOverlay = styled.aside`
   bottom: 0;
   height: 100vh;
   width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
   background-color: black;
   opacity: 0.3;
 `
