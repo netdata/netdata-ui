@@ -4,7 +4,6 @@ import {
   StyledInput,
   StyledLabel,
   InputContainer,
-  StyledIcon,
   SuccessIcon,
   IconContainer,
   StyledContainer,
@@ -12,6 +11,7 @@ import {
   MetaInfo,
   FieldInfo,
   LabelRow,
+  ErrorIcon,
 } from "./styled"
 import { InstantFeedback } from "./types"
 import { useFocusedState } from "./use-focused-state"
@@ -150,7 +150,7 @@ export const TextInput = ({
           {iconRight && <IconContainer disabled={disabled}>{iconRight}</IconContainer>}
           {metaDisplayed && error && (
             <IconContainer disabled={disabled}>
-              <StyledIcon name="cross_s" />
+              <ErrorIcon name="cross_s" />
             </IconContainer>
           )}
           {metaDisplayed && success && (

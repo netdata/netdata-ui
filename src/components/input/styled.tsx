@@ -79,6 +79,9 @@ export const StyledIcon = styled(Icon)<{ success?: boolean }>`
   flex-grow: 0;
   flex-shrink: 0;
 `
+export const ErrorIcon = styled(Icon)`
+  fill: ${getColor(["error"])};
+`
 
 export const SuccessIcon = styled(StyledIcon)`
   fill: ${getColor(["success"])};
