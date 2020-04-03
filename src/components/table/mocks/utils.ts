@@ -1,10 +1,12 @@
 import { defaultGroupByFn } from "../utils"
 
-export function groupByService(rows, columnId) {
-  const result = rows.reduce((prev, row) => {
+const groupByService = (rows: any, columnId: string) => {
+  const result = rows.reduce((prev: { [service: string]: any[] }, row: any) => {
     const servicesList = row.values[columnId]
 
-    servicesList.forEach(s => {
+    const displayedServices = servicesList.length ? servicesList : ["No Services"]
+
+    displayedServices.forEach((s: string) => {
       prev[s] = Array.isArray(prev[s]) ? prev[s] : []
       prev[s].push(row)
     })
