@@ -13,7 +13,7 @@ import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
-import { defaultGroupByFn, GroupsOrderValues, sortGroupsByPriority } from "./utils"
+import { defaultGroupByFn, GroupsOrderSettings, sortGroupsByPriority } from "./utils"
 
 const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
 const blockTableHooks = [...tableHooks, useBlockLayout]
@@ -52,7 +52,7 @@ const TableBody = ({ children, layoutType, ...props }: any) => {
 }
 
 interface TableProps<T, RT = any> {
-  groupsOrderValues?: GroupsOrderValues
+  groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
   columns: RT
@@ -83,7 +83,7 @@ interface TableProps<T, RT = any> {
 }
 
 export function Table<T extends object>({
-  groupsOrderValues,
+  groupsOrderSettings,
   layoutType = "table",
   columns,
   data,
@@ -147,11 +147,11 @@ export function Table<T extends object>({
   }, [selectedFlatRows, selectedItemsClb])
 
   const orderedRows = useMemo(() => {
-    if (groupBy.length > 0 && groupsOrderValues && groupsOrderValues[groupBy[0]]) {
-      return sortGroupsByPriority(rows, groupsOrderValues)
+    if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {
+      return sortGroupsByPriority(rows, groupsOrderSettings)
     }
     return rows
-  }, [groupBy, groupsOrderValues, rows])
+  }, [groupBy, groupsOrderSettings, rows])
 
   return (
     <LayoutContextProvider value={layoutType}>

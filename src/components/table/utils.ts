@@ -1,4 +1,5 @@
-import { pipe, sortBy, prop, map, path } from "ramda"
+import { pipe, sort, prop, map, path } from "ramda"
+
 // default  grouping function from the react-table utils
 
 type DefaultGroupByFn = (rows: any[], columnId: string) => { [groupName: string]: any[] }
@@ -12,17 +13,39 @@ export const defaultGroupByFn: DefaultGroupByFn = (rows, columnId) => {
   return result
 }
 
-export type GroupsOrderValues = {
-  [groupID: string]: {
-    [groupValue: string]: number
+export type GroupsOrderSettings = {
+  groupsOrder: {
+    [groupID: string]: {
+      [groupValue: string]: number
+    }
+  }
+  prioritySettings?: {
+    unprioritizedGroupsPlacement?: number
   }
 }
 
-export const sortGroupsByPriority = (groups: any[], groupOrderValues: GroupsOrderValues) =>
+const lowestPriority = 999999
+
+type Prioritized = {
+  priority: number
+}
+const sortByPriority = (a: Prioritized, b: Prioritized) => a.priority - b.priority
+
+const getPriority = (
+  groupsOrderSettings: GroupsOrderSettings,
+  groupByID: string,
+  groupValue: string
+) =>
+  path(["groupsOrder", groupByID, groupValue], groupsOrderSettings) ||
+  path(["prioritySettings", "unprioritizedGroupsPlacement"], groupsOrderSettings) ||
+  lowestPriority
+
+export const sortGroupsByPriority = (groups: any[], groupsOrderSettings: GroupsOrderSettings) =>
   pipe(
     map((group: any) => ({
       ...group,
-      priority: path([group.groupByID, group.groupByVal], groupOrderValues),
+      priority:
+        group.priority || getPriority(groupsOrderSettings, group.groupByID, group.groupByVal),
     })),
-    sortBy(prop("priority"))
+    sort(sortByPriority)
   )(groups)
