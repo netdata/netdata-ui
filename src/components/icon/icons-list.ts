@@ -39,6 +39,7 @@ import question from "./assets/question.svg"
 import logo_s from "./assets/logo_s.svg"
 import pencil from "./assets/pencil.svg"
 import chevron_left from "./assets/chevron_left.svg"
+import view_list from "./assets/view_list.svg"
 
 export const iconsList = {
   alarm,
@@ -82,4 +83,6 @@ export const iconsList = {
   node,
   question,
   pencil,
+  chevron_left,
+  view_list,
 }
