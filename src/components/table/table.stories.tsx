@@ -157,12 +157,20 @@ const nodesData = [
   },
 ]
 
-const groupsOrderValues = {
-  status: {
-    critical: 0,
-    warning: 1,
-    unreachable: 2,
-    okay: 3,
+const groupsOrderSettings = {
+  groupsOrder: {
+    status: {
+      critical: 1,
+      warning: 2,
+      unreachable: 3,
+      okay: 4,
+    },
+    services: {
+      "No Services": 99,
+    },
+  },
+  prioritySettings: {
+    unprioritizedGroupsPlacement: 5,
   },
 }
 
@@ -275,7 +283,7 @@ tableStory.add(
                 setTableRef({ current: node })
               }
             }}
-            groupsOrderValues={groupsOrderValues}
+            groupsOrderSettings={groupsOrderSettings}
             layoutType="block"
             controlledState={controlledState}
             initialState={blockTableInitialState}
