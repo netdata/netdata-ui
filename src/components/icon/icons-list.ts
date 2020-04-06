@@ -1,4 +1,7 @@
 import alarm from "./assets/alarm.svg"
+import alarmCritical from "./assets/alarm_c.svg"
+import alarmWarning from "./assets/alarm_w.svg"
+import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
 import cross_s from "./assets/cross_s.svg"
@@ -39,8 +42,12 @@ import chevron_left from "./assets/chevron_left.svg"
 
 export const iconsList = {
   alarm,
+  alarmCritical,
+  alarmCriticalWarning,
+  alarmWarning,
   check,
   checkmark_s,
+  chevron_left,
   cross_s,
   error,
   expand,
@@ -49,6 +56,7 @@ export const iconsList = {
   google,
   hamburger,
   holder,
+  logo_s,
   magnify,
   node_default_l,
   node_notification_l,
@@ -64,16 +72,14 @@ export const iconsList = {
   x,
   checkmark_partial_s,
   search_s,
+  sorting_vertical,
   arrow_down,
   triangle_down,
   nav_dots,
   space,
   nodes,
   room,
-  sorting_vertical,
   node,
   question,
-  logo_s,
   pencil,
-  chevron_left,
 }
