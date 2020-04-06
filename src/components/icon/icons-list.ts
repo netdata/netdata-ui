@@ -83,6 +83,5 @@ export const iconsList = {
   node,
   question,
   pencil,
-  chevron_left,
   view_list,
 }
