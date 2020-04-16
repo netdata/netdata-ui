@@ -40,12 +40,14 @@ This component is like `Sidebar` the only difference is that this component buil
 interface PortalSidebarProps<T = any> {
   closeOnEsc?: boolean
   onClose?: (args?: T) => void
+  closeOnOverlayClick?: boolean
   right?: boolean
   children?: NodeT
   className?: string
 }
 ```
 - `closeOnEsc` - Sidebar will be closed on `Esc` key press
+- `closeOnOverlayClick` - Sidebar will be closed on overlay click
 - `onClose` - this function will be fired on SidebarClose
 - `right` - side to render sidebar block, by default - **left**
 - `children` - content wich will be rendered to sidebar

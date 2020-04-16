@@ -7,6 +7,7 @@ const ESCAPE_KEY = 27
 interface PortalSidebarProps<T = any> {
   closeOnEsc?: boolean
   onClose?: (args?: T) => void
+  closeOnOverlayClick?: boolean
   right?: boolean
   children?: ReactNode
   className?: string
@@ -16,6 +17,7 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
   children,
   className,
   closeOnEsc = false,
+  closeOnOverlayClick = false,
   onClose = () => {},
   right = false,
 }: PortalSidebarProps) => {
@@ -31,9 +33,15 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
     }
   }, [closeOnEsc, onClose])
 
+  const handleOverlayClick = () => {
+    if (closeOnOverlayClick) {
+      onClose()
+    }
+  }
+
   return (
     <Portal>
-      <DisabledOverlay className={className} />
+      <DisabledOverlay className={className} onClick={handleOverlayClick} />
       <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
         {children}
       </PortalSidebox>
