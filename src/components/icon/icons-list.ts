@@ -40,9 +40,12 @@ import logo_s from "./assets/logo_s.svg"
 import pencil from "./assets/pencil.svg"
 import chevron_left from "./assets/chevron_left.svg"
 import view_list from "./assets/view_list.svg"
+import alarm_bell from "./assets/alarm_bell.svg"
+import dashboard from "./assets/dashboard.svg"
 
 export const iconsList = {
   alarm,
+  alarm_bell,
   alarmCritical,
   alarmCriticalWarning,
   alarmWarning,
@@ -50,6 +53,7 @@ export const iconsList = {
   checkmark_s,
   chevron_left,
   cross_s,
+  dashboard,
   error,
   expand,
   gear,
