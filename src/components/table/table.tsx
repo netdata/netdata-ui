@@ -59,7 +59,10 @@ const TableBody = ({ children, layoutType, ...props }: any) => {
   return renderTableBody({ children, ...props })
 }
 
-type FilterFunction = (rows: any[], id: string, filterValue: any) => boolean
+// Docs aren't clear about that, but the actual difference is,
+// that "id" is string for individual column filtering,
+// and array of column IDs for global filtering (our case)
+type FilterFunction = (rows: any[], id: string | string[], filterValue: any) => boolean
 
 interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
@@ -94,7 +97,7 @@ interface TableProps<T, RT = any> {
   disableGlobalFilter?: boolean
   globalFilter?: string | FilterFunction // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
-  filterTypes?: { [columnId: string]: FilterFunction }
+  filterTypes?: { [filterID: string]: FilterFunction }
 }
 
 export function Table<T extends object>({
