@@ -20,14 +20,14 @@ const RowLayout = ({ children, layoutType, ...props }: any) => {
   return renderRow({ children, ...props })
 }
 
-const DefaultGroupHead = ({ row, layoutType }: any) => {
+const DefaultGroupHead = ({ row, layoutType, style }: any) => {
   const rowProps = row.getRowProps()
   return layoutType === "table" ? (
-    <tr {...rowProps}>
+    <tr {...rowProps} style={style}>
       <td colSpan={row.cells.length}>{row.groupByVal}</td>
     </tr>
   ) : (
-    <div className="group-head" {...rowProps}>
+    <div className="group-head" {...rowProps} style={style}>
       {row.groupByVal}
     </div>
   )
@@ -43,8 +43,10 @@ interface Props {
     prepareRow: Function
     selectedRowIds: any
     customProps?: Object
+    style?: Object
   }) => ReactNode
   customProps?: Object
+  style?: Object | any
 }
 
 export const TableRow = ({
@@ -53,20 +55,30 @@ export const TableRow = ({
   selectedRowIds,
   renderGroupHead,
   customProps,
+  style,
 }: Props) => {
   const layoutType = useContext(LayoutContext) as "block" | "table"
-  const { subRows } = row
+  const { subRows, isVirtualGroupHeader } = row
+
+  if (isVirtualGroupHeader) {
+    return renderGroupHead ? (
+      <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps, style })}</>
+    ) : (
+      <DefaultGroupHead row={row} layoutType={layoutType} style={style} />
+    )
+  }
 
   if (subRows.length > 0) {
     return renderGroupHead ? (
-      <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps })}</>
+      <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps, style })}</>
     ) : (
       <>
-        <DefaultGroupHead row={row} layoutType={layoutType} />
+        <DefaultGroupHead row={row} layoutType={layoutType} style={style} />
         {subRows.map(subRow => {
           prepareRow(subRow)
           return (
             <TableRow
+              style={style}
               key={subRow.id}
               row={subRow}
               prepareRow={prepareRow}
@@ -79,7 +91,7 @@ export const TableRow = ({
     )
   }
   return (
-    <RowLayout layoutType={layoutType} {...row.getRowProps()}>
+    <RowLayout layoutType={layoutType} {...row.getRowProps({ style })}>
       {row.cells.map(cell => {
         const { key, ...cellProps } = cell.getCellProps()
         return (

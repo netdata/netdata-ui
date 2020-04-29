@@ -1,4 +1,4 @@
-import { pipe, sort, prop, map, path } from "ramda"
+import { pipe, sort, concat, map, path } from "ramda"
 
 // default  grouping function from the react-table utils
 
@@ -49,3 +49,14 @@ export const sortGroupsByPriority = (groups: any[], groupsOrderSettings: GroupsO
     })),
     sort(sortByPriority)
   )(groups)
+
+export const unwrapGroupedRows = (groups: any[]) =>
+  groups.reduce((acc: any, current: any) => {
+    const { subRows, ...restRowProps } = current
+    if (subRows.length > 0) {
+      acc.push({ subRows: [], isVirtualGroupHeader: true, ...restRowProps })
+      return concat(acc, subRows)
+    }
+    acc.push(current)
+    return acc
+  }, [])
