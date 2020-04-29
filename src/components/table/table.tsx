@@ -8,6 +8,7 @@ import {
   useExpanded,
   useColumnOrder,
   useBlockLayout,
+  useGlobalFilter,
 } from "react-table"
 import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
@@ -15,7 +16,14 @@ import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
 import { defaultGroupByFn, GroupsOrderSettings, sortGroupsByPriority } from "./utils"
 
-const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
+const tableHooks = [
+  useGlobalFilter,
+  useGroupBy,
+  useColumnOrder,
+  useSortBy,
+  useRowSelect,
+  useExpanded,
+]
 const blockTableHooks = [...tableHooks, useBlockLayout]
 
 const tableRenderOptions = {
@@ -51,6 +59,11 @@ const TableBody = ({ children, layoutType, ...props }: any) => {
   return renderTableBody({ children, ...props })
 }
 
+// Docs aren't clear about that, but the actual difference is,
+// that "id" is string for individual column filtering,
+// and array of column IDs for global filtering (our case)
+type FilterFunction = (rows: any[], id: string | string[], filterValue: any) => boolean
+
 interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
@@ -62,6 +75,7 @@ interface TableProps<T, RT = any> {
   autoResetSelectedRows?: boolean
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
+  autoResetFilters?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: {
     sortBy?: [{ id: string; desc: Boolean }]
@@ -80,6 +94,10 @@ interface TableProps<T, RT = any> {
   }) => ReactNode
   callbackRef?: (node: any) => void
   groupByFn?: Function
+  disableGlobalFilter?: boolean
+  globalFilter?: string | FilterFunction // string can refer to one of filterTypes
+  // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
+  filterTypes?: { [filterID: string]: FilterFunction }
 }
 
 export function Table<T extends object>({
@@ -92,12 +110,16 @@ export function Table<T extends object>({
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
+  autoResetFilters = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
   className,
   callbackRef,
   groupByFn = defaultGroupByFn,
+  disableGlobalFilter = false,
+  globalFilter,
+  filterTypes,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -124,6 +146,10 @@ export function Table<T extends object>({
       autoResetSelectedRows,
       autoResetSortBy,
       autoResetGroupBy,
+      autoResetFilters,
+      disableGlobalFilter,
+      globalFilter,
+      filterTypes,
       useControlledState: state => {
         return React.useMemo(
           () => ({

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react"
+import React, { useState, useMemo } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { Table } from "./table"
@@ -243,6 +243,20 @@ const MemoizedTable = React.memo<any>(BlockTable)
 const blockTableInitialState = {
   sortBy: [{ id: "node", desc: false }],
   hiddenColumns: ["services"],
+  globalFilter: { node: [] },
+}
+
+const globalFilterByNodeName = (rows, columnsIDs, filterValue) => {
+  const nodeNames = filterValue.node || []
+  const filteredRows = rows.filter(row => {
+    const rowValue = row.values.node
+    if (rowValue === undefined || nodeNames.length === 0) {
+      return true
+    }
+    const formattedValue = String(rowValue).toLowerCase()
+    return nodeNames.some(nodeName => formattedValue.includes(String(nodeName).toLowerCase()))
+  })
+  return filteredRows
 }
 
 tableStory.add(
@@ -250,12 +264,22 @@ tableStory.add(
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
     const [tableRef, setTableRef] = useState({ current: null }) as any
+    const [filterValue, setFilterValue] = useState("")
+    const [globalFilter, setGlobalFilter] = useState({ node: [] } as any)
+
+    const handleAddFilter = (e: any) => {
+      if (e.keyCode === 13) {
+        setGlobalFilter({ node: [...globalFilter.node, filterValue] })
+        setFilterValue("")
+      }
+    }
 
     const controlledState = useMemo(
       () => ({
         groupBy,
+        globalFilter,
       }),
-      [groupBy]
+      [groupBy, globalFilter]
     )
 
     return (
@@ -275,6 +299,15 @@ tableStory.add(
               <option value="services"> Services </option>
             </select>
           </label>
+          <input
+            value={filterValue}
+            onChange={e => {
+              setFilterValue(e.target.value)
+            }}
+            placeholder="Add filters"
+            onKeyDown={handleAddFilter}
+          />
+          {globalFilter.node.map(name => `${name} `)}
         </div>
         <FixedContainer>
           <MemoizedTable
@@ -290,6 +323,7 @@ tableStory.add(
             columns={NodesTableSchema}
             data={preparedData}
             groupByFn={customGroupBy}
+            globalFilter={globalFilterByNodeName}
           />
         </FixedContainer>
       </div>
