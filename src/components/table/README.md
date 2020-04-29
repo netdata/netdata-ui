@@ -27,7 +27,7 @@ interface TableProps<T, RT = any> {
   autoResetFilters?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: {
-    sortBy?: [{ id: string; desc: Boolean }]
+    sortBy?: [{ id: string; desc: boolean }]
   }
   controlledState?: {
     columnOrder?: string[]
