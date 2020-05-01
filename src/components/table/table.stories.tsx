@@ -118,6 +118,13 @@ tableStory.add(
   subData
 )
 
+type Node = {
+  node: { name: string }
+  alarm: { critical: number; warning: number; unreachable?: boolean }
+  services: string[]
+  [chartID: string]: { chartName: string } | any
+}
+
 const nodesData = [
   {
     node: { name: "Agent Arachovis" },
@@ -238,7 +245,7 @@ const BlockTable = styled(Table)`
   }
 `
 
-const MemoizedTable = React.memo<any>(BlockTable)
+const MemoizedTable = React.memo(BlockTable) as typeof Table
 
 const blockTableInitialState = {
   sortBy: [{ id: "node", desc: false }],
@@ -310,7 +317,7 @@ tableStory.add(
           {globalFilter.node.map(name => `${name} `)}
         </div>
         <FixedContainer>
-          <MemoizedTable
+          <MemoizedTable<Node>
             callbackRef={node => {
               if (tableRef.current === null && node !== null) {
                 setTableRef({ current: node })
