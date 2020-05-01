@@ -13,6 +13,18 @@ from flattened array, or to render groups some other way.
 ### Props:
 
 ```typescript
+type FilterFunction<T> = (rows: T[], id: string | string[], filterValue: any) => T[]
+
+type ColumnSort = { id: string; desc: Boolean }
+
+interface TableInstanceState {
+  sortBy?: ColumnSort[]
+  hiddenColumns?: string[]
+  groupBy?: string[]
+  columnOrder?: string[]
+  globalFilter?: any
+}
+
 interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
@@ -26,14 +38,8 @@ interface TableProps<T, RT = any> {
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
   // initializer for table instance state, according to react-table signature
-  initialState?: {
-    sortBy?: [{ id: string; desc: boolean }]
-  }
-  controlledState?: {
-    columnOrder?: string[]
-    groupBy?: string[] // For now we allow only single field grouping
-    // any other controlled fields for react-table state
-  }
+  initialState?: TableInstanceState
+  controlledState?: TableInstanceState
   renderGroupHead?: (props: {
     row: any
     layoutType: "block" | "table"
@@ -44,9 +50,9 @@ interface TableProps<T, RT = any> {
   callbackRef?: (node: any) => void
   groupByFn?: Function
   disableGlobalFilter?: boolean
-  globalFilter?: string | FilterFunction // string can refer to one of filterTypes
+  globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
-  filterTypes?: { [filterID: string]: FilterFunction }
+  filterTypes?: { [filterID: string]: FilterFunction<T> }
 }
 ```
 
