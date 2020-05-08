@@ -13,17 +13,21 @@ from flattened array, or to render groups some other way.
 ### Props:
 
 ```typescript
+type FilterFunction<T> = (rows: T[], id: string | string[], filterValue: any) => T[]
+
+type ColumnSort = { id: string; desc: Boolean }
+
+interface TableInstanceState {
+  sortBy?: ColumnSort[]
+  hiddenColumns?: string[]
+  groupBy?: string[]
+  columnOrder?: string[]
+  globalFilter?: any
+}
+
 interface TableProps<T, RT = any> {
-  groupsOrderSettings?: {
-    groupsOrder: {
-      [groupID: string]: {
-        [groupValue: string]: number
-      }
-    }
-    prioritySettings?: {
-      unprioritizedGroupsPlacement?: number
-    }
-  }
+  groupsOrderSettings?: GroupsOrderSettings
+  layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
   columns: RT
   data: T[]
@@ -32,14 +36,10 @@ interface TableProps<T, RT = any> {
   autoResetSelectedRows?: boolean
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
-  controlledState?: {
-    columnOrder?: string[]
-    groupBy?: string[] // For now we allow only single field grouping
-    // any other controlled fields for react-table state
-  }
-  initialState?: {
-    sortBy?: [{ id: string; desc: Boolean }]
-  }
+  autoResetFilters?: boolean
+  // initializer for table instance state, according to react-table signature
+  initialState?: TableInstanceState
+  controlledState?: TableInstanceState
   renderGroupHead?: (props: {
     row: any
     layoutType: "block" | "table"
@@ -49,6 +49,10 @@ interface TableProps<T, RT = any> {
   }) => ReactNode
   callbackRef?: (node: any) => void
   groupByFn?: Function
+  disableGlobalFilter?: boolean
+  globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
+  // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
+  filterTypes?: { [filterID: string]: FilterFunction<T> }
 }
 ```
 
@@ -59,7 +63,7 @@ interface TableProps<T, RT = any> {
 - any`autoReset...` props are `false` by default, pass `true` if the selection
   and sorting order of rows need to be cleared through the re-renders when `data` prop changes.
 - `controlledState` - an object could be passed to override table instance state. Currently used
-  for grouping. Should be used only to replace table hooks/defaults, any other custom state should be handled externally.
+  for grouping and filtering. Should be used only to replace table hooks/defaults, any other custom state should be handled externally.
 - `initialState` - object to define table instance initial state, according to its API. For now used
   only for initial sort order
 - `renderGroupHead` - custom rendering for row indicating a header group, defaults to empty row with group name
@@ -68,6 +72,8 @@ interface TableProps<T, RT = any> {
 - `groupsOrderSettings` - config object to define order of groups by grouping id (refers to column id/accessor),
   default sort order used if the prop not provided. Keep in mind, that provided custom `priority` in the config
   object, should be bigger that `0` to avoid JS falsy value condition.
+- `filterTypes` - custom set of filtering functions
+- `globalFilter` - custom function for global filtering
 
 This is setup of first **column** with the selection checkbox
 
