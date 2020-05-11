@@ -117,6 +117,7 @@ checkBoxStory.add(
           label="Do you like sguschenka?"
           onChange={handleChange(setCheckedOne)}
           checked={checkedOne}
+          disabled
         />
         <StyledCheckbox
           label="Was this story useful?"
