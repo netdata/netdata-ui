@@ -129,6 +129,7 @@ const VirtualizedBlockTable = styled(VirtualizedTable)`
   .header-group {
   }
   .table-body {
+    position: relative;
     width: 100%;
   }
 
