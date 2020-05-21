@@ -1,30 +1,11 @@
 import React, { useEffect, useMemo, ReactNode } from "react"
-import {
-  useTable,
-  useSortBy,
-  useRowSelect,
-  Row,
-  useGroupBy,
-  useExpanded,
-  useColumnOrder,
-  useBlockLayout,
-  useGlobalFilter,
-} from "react-table"
+import { useTable, Row } from "react-table"
 import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
 import { defaultGroupByFn, GroupsOrderSettings, sortGroupsByPriority } from "./utils"
-
-const tableHooks = [
-  useGlobalFilter,
-  useGroupBy,
-  useColumnOrder,
-  useSortBy,
-  useRowSelect,
-  useExpanded,
-]
-const blockTableHooks = [...tableHooks, useBlockLayout]
+import { tableHooks, blockTableHooks } from "./table-hooks"
 
 const tableRenderOptions = {
   mainContainer: {
@@ -74,7 +55,7 @@ interface TableInstanceState {
   globalFilter?: any
 }
 
-interface TableProps<T, RT = any> {
+export interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void

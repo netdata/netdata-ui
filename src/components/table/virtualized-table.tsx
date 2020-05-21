@@ -1,14 +1,5 @@
-import React, { useEffect, useMemo, ReactNode, useCallback, forwardRef } from "react"
-import {
-  useTable,
-  useSortBy,
-  useRowSelect,
-  Row,
-  useGroupBy,
-  useExpanded,
-  useColumnOrder,
-  useBlockLayout,
-} from "react-table"
+import React, { useEffect, useMemo, useCallback, forwardRef } from "react"
+import { useTable, Row } from "react-table"
 import { FixedSizeList } from "react-window"
 import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
@@ -18,15 +9,9 @@ import {
   StickyListContextProvider,
   StickyListContextConsumer,
 } from "./layout-context"
-import {
-  defaultGroupByFn,
-  GroupsOrderSettings,
-  sortGroupsByPriority,
-  unwrapGroupedRows,
-} from "./utils"
-
-const tableHooks = [useGroupBy, useColumnOrder, useSortBy, useRowSelect, useExpanded]
-const blockTableHooks = [...tableHooks, useBlockLayout]
+import { defaultGroupByFn, sortGroupsByPriority, unwrapGroupedRows } from "./utils"
+import { TableProps } from "./table"
+import { tableHooks, blockTableHooks } from "./table-hooks"
 
 const tableRenderOptions = {
   mainContainer: {
@@ -131,35 +116,7 @@ const StickyList = ({
   </StickyListContextProvider>
 )
 
-interface TableProps<T, RT = any> {
-  groupsOrderSettings?: GroupsOrderSettings
-  layoutType?: "table" | "block"
-  selectedItemsClb?: (items: T[]) => T[] | void
-  columns: RT
-  data: T[]
-  sortableBy?: string[]
-  className?: string
-  autoResetSelectedRows?: boolean
-  autoResetSortBy?: boolean
-  autoResetGroupBy?: boolean
-  // initializer for table instance state, according to react-table signature
-  initialState?: {
-    sortBy?: [{ id: string; desc: Boolean }]
-  }
-  controlledState?: {
-    columnOrder?: string[]
-    groupBy?: string[] // For now we allow only single field grouping
-    // any other controlled fields for react-table state
-  }
-  renderGroupHead?: (props: {
-    row: any
-    layoutType: "block" | "table"
-    prepareRow: Function
-    selectedRowIds: any
-    customProps?: Object
-  }) => ReactNode
-  callbackRef?: (node: any) => void
-  groupByFn?: Function
+interface VTableProps<T> extends TableProps<T> {
   width: number
   height: number
 }
@@ -183,7 +140,7 @@ export function VirtualizedTable<T extends object>({
   callbackRef,
   groupByFn = defaultGroupByFn,
   ...customProps
-}: TableProps<T>) {
+}: VTableProps<T>) {
   // preserve column order to override default grouping behaviour
   const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
     columns,
