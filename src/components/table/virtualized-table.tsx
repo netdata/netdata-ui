@@ -1,124 +1,20 @@
-import React, { useEffect, useMemo, useCallback, forwardRef } from "react"
+import React, { useEffect, useMemo, useCallback } from "react"
 import { useTable, Row } from "react-table"
-import { FixedSizeList } from "react-window"
-import { StyledTable, BlockLayout } from "./styled"
 import { TableRow } from "./components/table-row"
-import { TableHead } from "./components/table-head"
-import {
-  LayoutContextProvider,
-  StickyListContextProvider,
-  StickyListContextConsumer,
-} from "./layout-context"
+import { StickyVirtualList } from "./components/sticky-virtual-list"
+import { LayoutContextProvider } from "./layout-context"
 import { defaultGroupByFn, sortGroupsByPriority, unwrapGroupedRows } from "./utils"
 import { TableProps } from "./table"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
-const tableRenderOptions = {
-  mainContainer: {
-    block: ({ children, className, callbackRef, ...props }: any) => (
-      <BlockLayout ref={callbackRef} className={`table-container ${className || ""}`} {...props}>
-        {children}
-      </BlockLayout>
-    ),
-    table: ({ children, callbackRef, ...props }: any) => (
-      <StyledTable ref={callbackRef} {...props}>
-        {children}
-      </StyledTable>
-    ),
-  },
-  tbody: {
-    block: ({ children, ...props }: any) => (
-      <div className="table-body" {...props}>
-        {children}
-      </div>
-    ),
-    table: ({ children, ...props }: any) => <tbody {...props}>{children}</tbody>,
-  },
-}
-
-const TableContainer = ({ children, layoutType, ...props }: any) => {
-  const renderTableContainer = tableRenderOptions.mainContainer[layoutType]
-  return renderTableContainer({ children, ...props })
-}
-
-const TableBody = ({ children, layoutType, ...props }: any) => {
-  const renderTableBody = tableRenderOptions.tbody[layoutType]
-  return renderTableBody({ children, ...props })
-}
-
-const ItemWrapper = ({ data, index, style }: any) => {
-  const { ItemRenderer } = data
-  /* if (index === 0) {
-    return <ItemRenderer index={index} style={{ top: style.top * 2, ...style }} />
-  } */
-  return <ItemRenderer index={index} style={style} />
-}
-
-const innerElementType = forwardRef(
-  ({ children, style: { width, ...restStyles }, ...rest }: any, ref) => (
-    <StickyListContextConsumer>
-      {({
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        sortableBy,
-        className,
-        customProps,
-        layoutType,
-      }: any) => (
-        <TableContainer
-          style={restStyles}
-          layoutType={layoutType}
-          {...getTableProps()}
-          className={className}
-          callbackRef={ref}
-        >
-          <TableHead
-            headerGroups={headerGroups}
-            sortableBy={sortableBy}
-            customProps={customProps}
-          />
-          <TableBody layoutType={layoutType} {...getTableBodyProps()}>
-            {children}
-          </TableBody>
-        </TableContainer>
-      )}
-    </StickyListContextConsumer>
-  )
-)
-
-const StickyList = ({
-  children,
-  getTableProps,
-  getTableBodyProps,
-  headerGroups,
-  sortableBy,
-  className,
-  customProps,
-  layoutType,
-  ...rest
-}: any) => (
-  <StickyListContextProvider
-    value={{
-      ItemRenderer: children,
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      sortableBy,
-      className,
-      customProps,
-      layoutType,
-    }}
-  >
-    <FixedSizeList itemData={{ ItemRenderer: children }} {...rest}>
-      {ItemWrapper}
-    </FixedSizeList>
-  </StickyListContextProvider>
-)
-
-interface VTableProps<T> extends TableProps<T> {
-  width: number
-  height: number
+interface VTableProps<T, RT = any> extends TableProps<T, RT> {
+  virtualizedSettings: {
+    width: number
+    height: number
+    itemSize: number | GetItemSize
+    variableSize?: boolean
+    overscanCount?: number
+  }
 }
 
 export function VirtualizedTable<T extends object>({
@@ -131,14 +27,17 @@ export function VirtualizedTable<T extends object>({
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
+  autoResetFilters = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
   className,
-  width,
-  height,
-  callbackRef,
   groupByFn = defaultGroupByFn,
+  disableGlobalFilter = false,
+  globalFilter,
+  filterTypes,
+  virtualizedSettings: { width, height, variableSize = false, overscanCount, itemSize },
+  callbackRef,
   ...customProps
 }: VTableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -165,6 +64,10 @@ export function VirtualizedTable<T extends object>({
       autoResetSelectedRows,
       autoResetSortBy,
       autoResetGroupBy,
+      autoResetFilters,
+      disableGlobalFilter,
+      globalFilter,
+      filterTypes,
       useControlledState: state => {
         return React.useMemo(
           () => ({
@@ -195,6 +98,9 @@ export function VirtualizedTable<T extends object>({
     return rows
   }, [groupBy, groupsOrderSettings, rows])
 
+  // TODO - custom props dependency seems risky,
+  // as we don't know what is there and what will change
+  // However, we can rely on developer considiretion
   const renderVirtualizedRow = useCallback(
     ({ index, style }) => {
       const row = orderedRows[index]
@@ -216,12 +122,11 @@ export function VirtualizedTable<T extends object>({
 
   return (
     <LayoutContextProvider value={layoutType}>
-      <StickyList
+      <StickyVirtualList
         height={height}
         itemCount={orderedRows.length}
-        itemSize={40}
+        itemSize={itemSize}
         width={width}
-        innerElementType={innerElementType}
         getTableProps={getTableProps}
         getTableBodyProps={getTableBodyProps}
         headerGroups={headerGroups}
@@ -229,9 +134,11 @@ export function VirtualizedTable<T extends object>({
         className={className}
         customProps={customProps}
         layoutType={layoutType}
+        variableSize={variableSize}
+        overscanCount={overscanCount}
       >
         {renderVirtualizedRow}
-      </StickyList>
+      </StickyVirtualList>
     </LayoutContextProvider>
   )
 }

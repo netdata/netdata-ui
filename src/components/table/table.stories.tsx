@@ -110,7 +110,7 @@ tableStory.add(
           initialState={{ sortBy: [{ id: "user", desc: false }] }}
           columns={UserTableSchema}
           data={state}
-          selectedItemsClb={items => {}}
+          selectedItemsClb={() => {}}
         />
       </div>
     )
@@ -365,7 +365,7 @@ tableStory.add(
       sortableBy={["user"]}
       columns={UserTableSchema}
       data={initialState}
-      selectedItemsClb={items => {}}
+      selectedItemsClb={() => {}}
     />
   ),
   subData

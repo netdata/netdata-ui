@@ -18,6 +18,13 @@ const subData = {
 }
 const virtualizedTableStory = storiesOf("COMPONENTS|Controls/VirtualizedTable", module)
 
+type Node = {
+  node: { name: string }
+  alarm: { critical: number; warning: number; unreachable?: boolean }
+  services: string[]
+  [chartID: string]: { chartName: string } | any
+}
+
 const sampleNode = {
   node: { name: "Happiness" },
   services: [],
@@ -29,6 +36,9 @@ const sampleNode = {
 }
 
 const sampleNodes = new Array(20000).fill(sampleNode)
+const nodeHeights = sampleNodes.map(() => 25 + Math.round(Math.random() * 50))
+
+const getItemHeight = (index: number) => nodeHeights[index]
 
 const nodesData = [
   {
@@ -154,7 +164,7 @@ const VirtualizedBlockTable = styled(VirtualizedTable)`
   }
 `
 
-const MemoizedVirtualTable = React.memo<any>(VirtualizedBlockTable)
+const MemoizedVirtualTable = React.memo<any>(VirtualizedBlockTable) as typeof VirtualizedTable
 
 const blockTableInitialState = {
   sortBy: [{ id: "node", desc: false }],
@@ -176,6 +186,16 @@ virtualizedTableStory.add(
 
     const [ref, { width, height }] = useMeasure()
 
+    const virtualizedSettings = useMemo(
+      () => ({
+        width,
+        height,
+        itemSize: getItemHeight,
+        variableSize: true,
+      }),
+      [width, height]
+    )
+
     return (
       <div>
         <div>
@@ -196,7 +216,7 @@ virtualizedTableStory.add(
         </div>
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
-            <MemoizedVirtualTable
+            <MemoizedVirtualTable<Node>
               callbackRef={node => {
                 if (tableRef.current === null && node !== null) {
                   setTableRef({ current: node })
@@ -209,8 +229,7 @@ virtualizedTableStory.add(
               columns={NodesTableSchema}
               data={virtualizedData}
               groupByFn={customGroupBy}
-              width={width}
-              height={height}
+              virtualizedSettings={virtualizedSettings}
             />
           )}
         </NoScrollContainer>
