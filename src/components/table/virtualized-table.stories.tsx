@@ -175,7 +175,6 @@ virtualizedTableStory.add(
   "Virtualized table",
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
-    const [tableRef, setTableRef] = useState({ current: null }) as any
 
     const controlledState = useMemo(
       () => ({
@@ -217,11 +216,6 @@ virtualizedTableStory.add(
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable<Node>
-              callbackRef={node => {
-                if (tableRef.current === null && node !== null) {
-                  setTableRef({ current: node })
-                }
-              }}
               groupsOrderSettings={groupsOrderSettings}
               layoutType="block"
               controlledState={controlledState}

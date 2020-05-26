@@ -1,8 +1,6 @@
 ## Table component
 
-The implementation based on `react-table` lib and pretty generic at moment.
-
-**CAUTION:** in future this component will most likely be refactored
+Implementation based on `react-table` lib.
 
 **KNOWN ISSUES**
 
@@ -97,5 +95,46 @@ So, if you need to pass a handler for some button inside the cell, feel free to 
 
 ### Typical usage:
 
-May vary. Fun aside, component usage practices are volatile right now.
 Consult the `table.stories.tsx` to get ideas about application-level usage.
+
+## Virtualized table
+
+Made a standalone component, reusing common hooks / code with standard table.
+Solution based on `react-window` library.
+Implementation was tested only with `block layout`.
+
+### Props
+
+Accepts props just as ordinary table, plus virtialized settings to define relevant
+behaviour. `callbackRef` prop won't be used by virtualized table instance, as top-level ref
+is needed for internal usage.
+
+```typescript
+type GetItemSize = (index: number) => number
+
+interface VTableProps<T, RT = any> extends TableProps<T, RT> {
+  virtualizedSettings: {
+    width: number
+    height: number
+    itemSize: number | GetItemSize
+    variableSize?: boolean
+    overscanCount?: number
+  }
+}
+```
+
+Virtualized settings are mostly replicating `react-window` underlying components props.
+Exclusions:
+
+- `variableSize` - controls if the table will use `FixedSizeList` or `VariableSizeList`
+
+**Note on tradeoffs and usage**
+
+1. Requires numeric width and height of the container. `useMeasure` from `react-use` handles
+   this.
+
+2. Requires unwrapping of groups to flat list for rendering, as otherwise groups can't be virtualized.
+   `unwrapGroupedRows` from utils is exported to handle this with addition of `isVirtualGroupHeader: true`
+   to the row object. Should be memoized based on rows/grouping changes.
+
+3. When constructing a "map of heights" for list items, don't forget a fallback for `group headers`
