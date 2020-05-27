@@ -39,4 +39,4 @@ export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbo
 export * from "./components/input"
 export { webkitVisibleScrollbar } from "./mixins"
 
-export { Table } from "./components/table"
+export { Table, VirtualizedTable, unwrapGroupedRows } from "./components/table"
