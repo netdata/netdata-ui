@@ -110,7 +110,7 @@ behaviour. `callbackRef` prop won't be used by virtualized table instance, as to
 is needed for internal usage.
 
 ```typescript
-type GetItemSize = (index: number) => number
+type GetItemSize = (index: number, orderedRows: any) => number
 
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
@@ -137,4 +137,8 @@ Exclusions:
    `unwrapGroupedRows` from utils is exported to handle this with addition of `isVirtualGroupHeader: true`
    to the row object. Should be memoized based on rows/grouping changes.
 
-3. When constructing a "map of heights" for list items, don't forget a fallback for `group headers`
+3. The important detail is that `itemSize` getter function relies on `index` to get the height,
+   and in our case we unwrap the grouped rows in the flat list, so the indexes from original data array
+   won't help with calculating heights for grouped rows. Right now the solution offered is to use
+   a modified `itemSize` getter function, which should rely on index, and collection of unwrapped rows.
+   So, when constructing a "map of heights" for list items, don't forget a fallback for `group headers`.

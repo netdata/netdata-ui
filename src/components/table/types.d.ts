@@ -1,1 +1,1 @@
-type GetItemSize = (index: number) => number
+type GetItemSize = (index: number, orderedRows: any) => number

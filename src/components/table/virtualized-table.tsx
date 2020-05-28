@@ -7,6 +7,8 @@ import { defaultGroupByFn, sortGroupsByPriority, unwrapGroupedRows } from "./uti
 import { TableProps } from "./table"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
+type GetItemSize = (index: number, orderedRows: any) => number
+
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
     width: number
@@ -14,6 +16,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     itemSize: number | GetItemSize
     variableSize?: boolean
     overscanCount?: number
+    groupHeaderHeight?: number
   }
 }
 
@@ -98,6 +101,16 @@ export function VirtualizedTable<T extends object>({
     return rows
   }, [groupBy, groupsOrderSettings, rows])
 
+  const getItemSize = useCallback(
+    (index: number) => {
+      if (typeof itemSize === "number") {
+        return itemSize
+      }
+      return itemSize(index, orderedRows)
+    },
+    [itemSize, orderedRows]
+  )
+
   // TODO - custom props dependency seems risky,
   // as we don't know what is there and what will change
   // However, we can rely on developer considiretion
@@ -125,7 +138,7 @@ export function VirtualizedTable<T extends object>({
       <StickyVirtualList
         height={height}
         itemCount={orderedRows.length}
-        itemSize={itemSize}
+        itemSize={getItemSize}
         width={width}
         getTableProps={getTableProps}
         getTableBodyProps={getTableBodyProps}
