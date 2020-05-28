@@ -16,7 +16,6 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     itemSize: number | GetItemSize
     variableSize?: boolean
     overscanCount?: number
-    groupHeaderHeight?: number
   }
 }
 
