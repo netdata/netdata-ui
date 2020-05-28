@@ -135,7 +135,9 @@ Exclusions:
 
 2. Requires unwrapping of groups to flat list for rendering, as otherwise groups can't be virtualized.
    `unwrapGroupedRows` from utils is exported to handle this with addition of `isVirtualGroupHeader: true`
-   to the row object. Should be memoized based on rows/grouping changes.
+   to the row object. Should be memoized based on rows/grouping changes. Right now this operation
+   is `made by default` on the component's side, but this could change if we want to merge component
+   with original Table.
 
 3. The important detail is that `itemSize` getter function relies on `index` to get the height,
    and in our case we unwrap the grouped rows in the flat list, so the indexes from original data array
