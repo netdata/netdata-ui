@@ -59,6 +59,7 @@ interface Props {
   itemSize: number | GetItemSize
   resetAfterIndex?: (index: number, shouldForceUpdate: boolean) => void
   customProps: unknown
+  callbackRef: any
 }
 
 export const StickyVirtualList = ({
@@ -71,6 +72,7 @@ export const StickyVirtualList = ({
   customProps,
   layoutType,
   variableSize,
+  callbackRef,
   ...rest
 }: Props) => (
   <StickyListContextProvider
@@ -86,11 +88,11 @@ export const StickyVirtualList = ({
     }}
   >
     {variableSize ? (
-      <VariableSizeList itemData={{ ItemRenderer: children }} {...rest}>
+      <VariableSizeList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
         {ItemWrapper}
       </VariableSizeList>
     ) : (
-      <FixedSizeList itemData={{ ItemRenderer: children }} {...rest}>
+      <FixedSizeList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
         {ItemWrapper}
       </FixedSizeList>
     )}

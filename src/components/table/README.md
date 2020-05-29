@@ -106,8 +106,9 @@ Implementation was tested only with `block layout`.
 ### Props
 
 Accepts props just as ordinary table, plus virtialized settings to define relevant
-behaviour. `callbackRef` prop won't be used by virtualized table instance, as top-level ref
-is needed for internal usage.
+behaviour. `callbackRef` prop won't be used by virtualized table instance, but an `react-window` virtual
+list component, so we can find the instance by ref, and use item sizes cach invalidation imperative control,
+provided with `.resetAfterIndex`.
 
 ```typescript
 type GetItemSize = (index: number, orderedRows: any) => number

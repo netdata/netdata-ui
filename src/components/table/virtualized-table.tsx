@@ -148,6 +148,7 @@ export function VirtualizedTable<T extends object>({
         layoutType={layoutType}
         variableSize={variableSize}
         overscanCount={overscanCount}
+        callbackRef={callbackRef}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>
