@@ -60,3 +60,22 @@ export const unwrapGroupedRows = (groups: any[]) =>
     acc.push(current)
     return acc
   }, [])
+
+interface StyleDeps {
+  index: number
+  style: { [key: string]: number } // not quite true, but for most keys that we want to use
+  rows: any[]
+  verticalGutter: number
+}
+export const generateRowStyle = ({ index, style, rows, verticalGutter }: StyleDeps) => {
+  const prevRow = index !== 0 ? rows[index - 1] : {}
+  const currentRow = rows[index]
+
+  const noGutter = index === 0 || currentRow.isVirtualGroupHeader || prevRow.isVirtualGroupHeader
+
+  return {
+    ...style,
+    top: noGutter ? style.top : style.top + verticalGutter,
+    height: noGutter ? style.height : style.height - verticalGutter,
+  }
+}

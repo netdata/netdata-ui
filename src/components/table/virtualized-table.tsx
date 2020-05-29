@@ -3,7 +3,12 @@ import { useTable, Row } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
 import { LayoutContextProvider } from "./layout-context"
-import { defaultGroupByFn, sortGroupsByPriority, unwrapGroupedRows } from "./utils"
+import {
+  defaultGroupByFn,
+  sortGroupsByPriority,
+  unwrapGroupedRows,
+  generateRowStyle,
+} from "./utils"
 import { TableProps } from "./table"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
@@ -16,6 +21,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     itemSize: number | GetItemSize
     variableSize?: boolean
     overscanCount?: number
+    verticalGutter?: number
   }
 }
 
@@ -38,7 +44,14 @@ export function VirtualizedTable<T extends object>({
   disableGlobalFilter = false,
   globalFilter,
   filterTypes,
-  virtualizedSettings: { width, height, variableSize = false, overscanCount, itemSize },
+  virtualizedSettings: {
+    width,
+    height,
+    variableSize = false,
+    overscanCount,
+    itemSize,
+    verticalGutter = 0,
+  },
   callbackRef,
   ...customProps
 }: VTableProps<T>) {
@@ -110,9 +123,6 @@ export function VirtualizedTable<T extends object>({
     [itemSize, orderedRows]
   )
 
-  // TODO - custom props dependency seems risky,
-  // as we don't know what is there and what will change
-  // However, we can rely on developer considiretion
   const renderVirtualizedRow = useCallback(
     ({ index, style }) => {
       const row = orderedRows[index]
@@ -120,7 +130,7 @@ export function VirtualizedTable<T extends object>({
       return (
         <TableRow
           key={row.id}
-          style={style}
+          style={generateRowStyle({ index, style, verticalGutter, rows: orderedRows })}
           customProps={customProps}
           row={row}
           prepareRow={prepareRow}
@@ -129,7 +139,7 @@ export function VirtualizedTable<T extends object>({
         />
       )
     },
-    [orderedRows, prepareRow, customProps, selectedRowIds, renderGroupHead]
+    [orderedRows, prepareRow, customProps, selectedRowIds, renderGroupHead, verticalGutter]
   )
 
   return (

@@ -120,6 +120,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     itemSize: number | GetItemSize
     variableSize?: boolean
     overscanCount?: number
+    verticalGutter?: number
   }
 }
 ```
@@ -128,6 +129,11 @@ Virtualized settings are mostly replicating `react-window` underlying components
 Exclusions:
 
 - `variableSize` - controls if the table will use `FixedSizeList` or `VariableSizeList`
+
+- `verticalGutter` - controls vertical whitespace between rows, through correction of
+  "top" absolute position style and item height, provided by virtual list instance.
+  Note - group headers are excluded from this logic and don't have gutters, as well as
+  first row next to them - goal here is to allow easier customization of groups.
 
 **Note on tradeoffs and usage**
 
