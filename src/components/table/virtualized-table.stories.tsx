@@ -35,10 +35,7 @@ const sampleNode = {
   chart4: { chartName: "Zoom Chart" },
 }
 
-const sampleNodes = new Array(20000).fill(sampleNode)
-const nodeHeights = sampleNodes.map(() => 25 + Math.round(Math.random() * 50))
-
-const getItemHeight = (index: number) => nodeHeights[index]
+const sampleNodes = new Array(200).fill(sampleNode)
 
 const nodesData = [
   {
@@ -80,6 +77,9 @@ const nodesData = [
 ]
 
 const virtualNodesData = [...nodesData, ...sampleNodes]
+
+const nodeHeights = virtualNodesData.map(() => 25 + Math.round(Math.random() * 50))
+const getItemHeight = (index: number) => nodeHeights[index] + 8
 
 const groupsOrderSettings = {
   groupsOrder: {
@@ -192,6 +192,7 @@ virtualizedTableStory.add(
         height,
         itemSize: getItemHeight,
         variableSize: true,
+        verticalGutter: 8,
       }),
       [width, height]
     )

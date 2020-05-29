@@ -141,7 +141,6 @@ export function VirtualizedTable<T extends object>({
     },
     [orderedRows, prepareRow, customProps, selectedRowIds, renderGroupHead, verticalGutter]
   )
-
   return (
     <LayoutContextProvider value={layoutType}>
       <StickyVirtualList

@@ -71,11 +71,14 @@ export const generateRowStyle = ({ index, style, rows, verticalGutter }: StyleDe
   const prevRow = index !== 0 ? rows[index - 1] : {}
   const currentRow = rows[index]
 
-  const noGutter = index === 0 || currentRow.isVirtualGroupHeader || prevRow.isVirtualGroupHeader
+  const noGutter = currentRow.isVirtualGroupHeader || prevRow.isVirtualGroupHeader
+
+  const top = noGutter ? style.top : style.top + verticalGutter
+  const height = noGutter ? style.height : style.height - verticalGutter
 
   return {
     ...style,
-    top: noGutter ? style.top : style.top + verticalGutter,
-    height: noGutter ? style.height : style.height - verticalGutter,
+    top,
+    height,
   }
 }

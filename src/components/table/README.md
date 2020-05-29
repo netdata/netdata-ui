@@ -134,6 +134,8 @@ Exclusions:
   "top" absolute position style and item height, provided by virtual list instance.
   Note - group headers are excluded from this logic and don't have gutters, as well as
   first row next to them - goal here is to allow easier customization of groups.
+  Also, `verticalGutter` value should be added to each item calculated height, to maintain
+  sizes accurate.
 
 **Note on tradeoffs and usage**
 
