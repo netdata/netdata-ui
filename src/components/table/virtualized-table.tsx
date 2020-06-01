@@ -123,6 +123,9 @@ export function VirtualizedTable<T extends object>({
     [itemSize, orderedRows]
   )
 
+  // TODO - this is hard-memoized to bailout from remounts of all produced rows,
+  // if the callback function is re-created. However, some cases of this happening
+  // could be valid/required, let's observe how it develops
   const renderVirtualizedRow = useCallback(
     ({ index, style }) => {
       const row = orderedRows[index]
@@ -139,7 +142,8 @@ export function VirtualizedTable<T extends object>({
         />
       )
     },
-    [orderedRows, prepareRow, customProps, selectedRowIds, renderGroupHead, verticalGutter]
+    // eslint-disable-next-line
+    []
   )
   return (
     <LayoutContextProvider value={layoutType}>
