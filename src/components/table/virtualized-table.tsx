@@ -22,6 +22,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     variableSize?: boolean
     overscanCount?: number
     verticalGutter?: number
+    itemKey?: (index: number, data: any) => string
   }
 }
 
@@ -51,6 +52,7 @@ export function VirtualizedTable<T extends object>({
     overscanCount,
     itemSize,
     verticalGutter = 0,
+    itemKey,
   },
   callbackRef,
   ...customProps
@@ -168,6 +170,7 @@ export function VirtualizedTable<T extends object>({
         variableSize={variableSize}
         overscanCount={overscanCount}
         callbackRef={callbackRef}
+        itemKey={itemKey}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>

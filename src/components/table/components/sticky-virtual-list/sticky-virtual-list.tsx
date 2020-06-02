@@ -1,8 +1,8 @@
 import React, { forwardRef, ReactNode } from "react"
-import { FixedSizeList, VariableSizeList } from "react-window"
 import { StickyListContextProvider, StickyListContextConsumer } from "../../layout-context"
 import { TableContainer, TableBody } from "../table-container"
 import { TableHead } from "../table-head"
+import { StyledFixedList, StyledVariableList } from "./styled"
 
 const ItemWrapper = ({ data, index, style }: any) => {
   const { ItemRenderer } = data
@@ -60,6 +60,7 @@ interface Props {
   resetAfterIndex?: (index: number, shouldForceUpdate: boolean) => void
   customProps: unknown
   callbackRef: any
+  itemKey?: (index: number, data: any) => string
 }
 
 export const StickyVirtualList = ({
@@ -88,13 +89,13 @@ export const StickyVirtualList = ({
     }}
   >
     {variableSize ? (
-      <VariableSizeList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
+      <StyledVariableList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
         {ItemWrapper}
-      </VariableSizeList>
+      </StyledVariableList>
     ) : (
-      <FixedSizeList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
+      <StyledFixedList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
         {ItemWrapper}
-      </FixedSizeList>
+      </StyledFixedList>
     )}
   </StickyListContextProvider>
 )
