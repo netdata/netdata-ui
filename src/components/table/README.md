@@ -121,11 +121,15 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     variableSize?: boolean
     overscanCount?: number
     verticalGutter?: number
+    itemKey?: (index: number, data: any) => string
   }
 }
 ```
 
 Virtualized settings are mostly replicating `react-window` underlying components props.
+https://react-window.now.sh/#/api/FixedSizeList
+https://react-window.now.sh/#/api/VariableSizeList
+
 Exclusions:
 
 - `variableSize` - controls if the table will use `FixedSizeList` or `VariableSizeList`
