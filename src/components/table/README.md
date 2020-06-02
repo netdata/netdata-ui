@@ -1,8 +1,6 @@
 ## Table component
 
-The implementation based on `react-table` lib and pretty generic at moment.
-
-**CAUTION:** in future this component will most likely be refactored
+Implementation based on `react-table` lib.
 
 **KNOWN ISSUES**
 
@@ -97,5 +95,65 @@ So, if you need to pass a handler for some button inside the cell, feel free to 
 
 ### Typical usage:
 
-May vary. Fun aside, component usage practices are volatile right now.
 Consult the `table.stories.tsx` to get ideas about application-level usage.
+
+## Virtualized table
+
+Made a standalone component, reusing common hooks / code with standard table.
+Solution based on `react-window` library.
+Implementation was tested only with `block layout`.
+
+### Props
+
+Accepts props just as ordinary table, plus virtialized settings to define relevant
+behaviour. `callbackRef` prop won't be used by virtualized table instance, but an `react-window` virtual
+list component, so we can find the instance by ref, and use item sizes cach invalidation imperative control,
+provided with `.resetAfterIndex`.
+
+```typescript
+type GetItemSize = (index: number, orderedRows: any) => number
+
+interface VTableProps<T, RT = any> extends TableProps<T, RT> {
+  virtualizedSettings: {
+    width: number
+    height: number
+    itemSize: number | GetItemSize
+    variableSize?: boolean
+    overscanCount?: number
+    verticalGutter?: number
+    itemKey?: (index: number, data: any) => string
+  }
+}
+```
+
+Virtualized settings are mostly replicating `react-window` underlying components props.
+https://react-window.now.sh/#/api/FixedSizeList
+https://react-window.now.sh/#/api/VariableSizeList
+
+Exclusions:
+
+- `variableSize` - controls if the table will use `FixedSizeList` or `VariableSizeList`
+
+- `verticalGutter` - controls vertical whitespace between rows, through correction of
+  "top" absolute position style and item height, provided by virtual list instance.
+  Note - group headers are excluded from this logic and don't have gutters, as well as
+  first row next to them - goal here is to allow easier customization of groups.
+  Also, `verticalGutter` value should be added to each item calculated height, to maintain
+  sizes accurate.
+
+**Note on tradeoffs and usage**
+
+1. Requires numeric width and height of the container. `useMeasure` from `react-use` handles
+   this.
+
+2. Requires unwrapping of groups to flat list for rendering, as otherwise groups can't be virtualized.
+   `unwrapGroupedRows` from utils is exported to handle this with addition of `isVirtualGroupHeader: true`
+   to the row object. Should be memoized based on rows/grouping changes. Right now this operation
+   is `made by default` on the component's side, but this could change if we want to merge component
+   with original Table.
+
+3. The important detail is that `itemSize` getter function relies on `index` to get the height,
+   and in our case we unwrap the grouped rows in the flat list, so the indexes from original data array
+   won't help with calculating heights for grouped rows. Right now the solution offered is to use
+   a modified `itemSize` getter function, which should rely on index, and collection of unwrapped rows.
+   So, when constructing a "map of heights" for list items, don't forget a fallback for `group headers`.

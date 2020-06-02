@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import "@testing-library/jest-dom/extend-expect"
+/* import "@testing-library/jest-dom/extend-expect"
 import { Table } from "./table"
 import { UserTableSchema } from "./mocks/mocked-table-schema"
 import { DefaultTheme } from "../../theme/default"
@@ -46,4 +46,4 @@ describe("Table component test", () => {
     const result = getAllByAltText("dr. Zoidberg avatar")
     expect(result).toHaveLength(1)
   })
-})
+}) */

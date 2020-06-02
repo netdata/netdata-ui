@@ -1,4 +1,4 @@
-import { pipe, sort, prop, map, path } from "ramda"
+import { pipe, sort, concat, map, path } from "ramda"
 
 // default  grouping function from the react-table utils
 
@@ -49,3 +49,36 @@ export const sortGroupsByPriority = (groups: any[], groupsOrderSettings: GroupsO
     })),
     sort(sortByPriority)
   )(groups)
+
+export const unwrapGroupedRows = (groups: any[]) =>
+  groups.reduce((acc: any, current: any) => {
+    const { subRows, ...restRowProps } = current
+    if (subRows.length > 0) {
+      acc.push({ subRows: [], isVirtualGroupHeader: true, ...restRowProps })
+      return concat(acc, subRows)
+    }
+    acc.push(current)
+    return acc
+  }, [])
+
+interface StyleDeps {
+  index: number
+  style: { [key: string]: number } // not quite true, but for most keys that we want to use
+  rows: any[]
+  verticalGutter: number
+}
+export const generateRowStyle = ({ index, style, rows, verticalGutter }: StyleDeps) => {
+  const prevRow = index !== 0 ? rows[index - 1] : {}
+  const currentRow = rows[index]
+
+  const noGutter = currentRow.isVirtualGroupHeader || prevRow.isVirtualGroupHeader
+
+  const top = noGutter ? style.top : style.top + verticalGutter
+  const height = noGutter ? style.height : style.height - verticalGutter
+
+  return {
+    ...style,
+    top,
+    height,
+  }
+}

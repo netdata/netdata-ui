@@ -110,7 +110,7 @@ tableStory.add(
           initialState={{ sortBy: [{ id: "user", desc: false }] }}
           columns={UserTableSchema}
           data={state}
-          selectedItemsClb={items => {}}
+          selectedItemsClb={() => {}}
         />
       </div>
     )
@@ -124,6 +124,18 @@ type Node = {
   services: string[]
   [chartID: string]: { chartName: string } | any
 }
+
+const sampleNode = {
+  node: { name: "Happiness" },
+  services: [],
+  alarm: { critical: 0, warning: 0 },
+  chart: { chartName: "Zoom Chart" },
+  chart2: { chartName: "Zoom Chart" },
+  chart3: { chartName: "Zoom Chart" },
+  chart4: { chartName: "Zoom Chart" },
+}
+
+const sampleNodes = new Array(1000).fill(sampleNode)
 
 const nodesData = [
   {
@@ -162,6 +174,7 @@ const nodesData = [
     chart3: { chartName: "Zoom Chart" },
     chart4: { chartName: "Zoom Chart" },
   },
+  ...sampleNodes,
 ]
 
 const groupsOrderSettings = {
@@ -202,7 +215,7 @@ const preparedData = prepareData(nodesData)
 const FixedContainer = styled.div`
   position: relative;
   height: 150px;
-  width: 500px;
+  width: 400px;
   overflow: auto;
   ${webkitVisibleScrollbar}
 `
@@ -352,7 +365,7 @@ tableStory.add(
       sortableBy={["user"]}
       columns={UserTableSchema}
       data={initialState}
-      selectedItemsClb={items => {}}
+      selectedItemsClb={() => {}}
     />
   ),
   subData
