@@ -123,9 +123,15 @@ export function VirtualizedTable<T extends object>({
     [itemSize, orderedRows]
   )
 
-  // TODO - this is hard-memoized to bailout from remounts of all produced rows,
-  // if the callback function is re-created. However, some cases of this happening
-  // could be valid/required, let's observe how it develops
+  // TODO
+  // We can come up with declarative API for that, but now the solution is
+  // to depend on anything that can change order of items (grouping, filtering),
+  // so the indexes won't represent same items.
+
+  // This overall introduces some implicit details of how list rendering works,
+  // but its unclear what is the desired abstraction.
+  // Better tradeoff TBD.
+
   const renderVirtualizedRow = useCallback(
     ({ index, style }) => {
       const row = orderedRows[index]
@@ -143,7 +149,7 @@ export function VirtualizedTable<T extends object>({
       )
     },
     // eslint-disable-next-line
-    []
+    [controlledState, selectedRowIds, renderGroupHead, verticalGutter]
   )
   return (
     <LayoutContextProvider value={layoutType}>
