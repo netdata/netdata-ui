@@ -122,6 +122,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     overscanCount?: number
     verticalGutter?: number
     itemKey?: (index: number, data: any) => string
+    rendererHash?: string
   }
 }
 ```
@@ -145,6 +146,10 @@ Exclusions:
   our wrapper always puts `{orderedRows}` inside `data` argument object, which contains
   flattened and ordered array of all rows (including group headers), which could be used
   for generating keys.
+
+- `rendererHash` - hash used as dependency for memoizing virtualized row renderer callback function.
+  Could be used to determine, if the function should be re-created to render a changed data, but without
+  direct connection to the data object on instance level
 
 **Note on tradeoffs and usage**
 

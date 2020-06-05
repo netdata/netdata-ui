@@ -179,7 +179,6 @@ virtualizedTableStory.add(
     const [groupBy, setGroupBy] = useState([] as string[])
     const [tableRef, setTableRef] = useState({ current: null }) as any
     const [nodes, setNodes] = useState(virtualNodesData)
-    console.info(nodes)
 
     const virtualizedData = useMemo(() => prepareData(nodes), [nodes])
 
@@ -200,8 +199,11 @@ virtualizedTableStory.add(
         variableSize: true,
         verticalGutter: 8,
         itemKey: getItemKey,
+        rendererHash: nodes.reduce((acc, current) => {
+          return `${acc}${current.node.name}`
+        }, ""),
       }),
-      [width, height]
+      [width, height, nodes]
     )
 
     return (
@@ -236,7 +238,6 @@ virtualizedTableStory.add(
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable<Node>
               callbackRef={node => {
-                console.log("rerender")
                 if (tableRef.current === null && node !== null) {
                   setTableRef({ current: node })
                 }
