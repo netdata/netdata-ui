@@ -14,6 +14,8 @@ import { tableHooks, blockTableHooks } from "./table-hooks"
 
 type GetItemSize = (index: number, orderedRows: any) => number
 
+const itemKeyFallback = (index: number) => String(index)
+
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
     width: number
@@ -53,7 +55,7 @@ export function VirtualizedTable<T extends object>({
     overscanCount,
     itemSize,
     verticalGutter = 0,
-    itemKey = (index: number) => String(index),
+    itemKey = itemKeyFallback,
     rendererHash,
   },
   callbackRef,
