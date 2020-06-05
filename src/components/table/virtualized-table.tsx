@@ -52,7 +52,7 @@ export function VirtualizedTable<T extends object>({
     overscanCount,
     itemSize,
     verticalGutter = 0,
-    itemKey,
+    itemKey = (index: number) => String(index),
   },
   callbackRef,
   ...customProps
@@ -171,6 +171,7 @@ export function VirtualizedTable<T extends object>({
         overscanCount={overscanCount}
         callbackRef={callbackRef}
         itemKey={itemKey}
+        orderedRows={orderedRows}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>

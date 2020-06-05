@@ -141,6 +141,11 @@ Exclusions:
   Also, `verticalGutter` value should be added to each item calculated height, to maintain
   sizes accurate.
 
+- `itemKey` - works the same way as default `react-window` lists prop with same name, but
+  our wrapper always puts `{orderedRows}` inside `data` argument object, which contains
+  flattened and ordered array of all rows (including group headers), which could be used
+  for generating keys.
+
 **Note on tradeoffs and usage**
 
 1. Requires numeric width and height of the container. `useMeasure` from `react-use` handles
