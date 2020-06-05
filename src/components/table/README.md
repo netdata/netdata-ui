@@ -122,6 +122,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     overscanCount?: number
     verticalGutter?: number
     itemKey?: (index: number, data: any) => string
+    rendererHash?: string
   }
 }
 ```
@@ -140,6 +141,15 @@ Exclusions:
   first row next to them - goal here is to allow easier customization of groups.
   Also, `verticalGutter` value should be added to each item calculated height, to maintain
   sizes accurate.
+
+- `itemKey` - works the same way as default `react-window` lists prop with same name, but
+  our wrapper always puts `{orderedRows}` inside `data` argument object, which contains
+  flattened and ordered array of all rows (including group headers), which could be used
+  for generating keys.
+
+- `rendererHash` - hash used as dependency for memoizing virtualized row renderer callback function.
+  Could be used to determine, if the function should be re-created to render a changed data, but without
+  direct connection to the data object on instance level
 
 **Note on tradeoffs and usage**
 

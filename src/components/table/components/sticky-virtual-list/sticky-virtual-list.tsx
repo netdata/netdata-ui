@@ -61,6 +61,7 @@ interface Props {
   customProps: unknown
   callbackRef: any
   itemKey?: (index: number, data: any) => string
+  orderedRows: []
 }
 
 export const StickyVirtualList = ({
@@ -74,6 +75,8 @@ export const StickyVirtualList = ({
   layoutType,
   variableSize,
   callbackRef,
+  itemKey,
+  orderedRows,
   ...rest
 }: Props) => (
   <StickyListContextProvider
@@ -89,11 +92,21 @@ export const StickyVirtualList = ({
     }}
   >
     {variableSize ? (
-      <StyledVariableList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
+      <StyledVariableList
+        itemData={{ ItemRenderer: children, orderedRows }}
+        ref={callbackRef}
+        itemKey={itemKey}
+        {...rest}
+      >
         {ItemWrapper}
       </StyledVariableList>
     ) : (
-      <StyledFixedList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
+      <StyledFixedList
+        itemData={{ ItemRenderer: children, orderedRows }}
+        ref={callbackRef}
+        itemKey={itemKey}
+        {...rest}
+      >
         {ItemWrapper}
       </StyledFixedList>
     )}

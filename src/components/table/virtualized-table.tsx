@@ -14,6 +14,8 @@ import { tableHooks, blockTableHooks } from "./table-hooks"
 
 type GetItemSize = (index: number, orderedRows: any) => number
 
+const itemKeyFallback = (index: number) => String(index)
+
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
     width: number
@@ -23,6 +25,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     overscanCount?: number
     verticalGutter?: number
     itemKey?: (index: number, data: any) => string
+    rendererHash?: string
   }
 }
 
@@ -52,7 +55,8 @@ export function VirtualizedTable<T extends object>({
     overscanCount,
     itemSize,
     verticalGutter = 0,
-    itemKey,
+    itemKey = itemKeyFallback,
+    rendererHash,
   },
   callbackRef,
   ...customProps
@@ -62,6 +66,8 @@ export function VirtualizedTable<T extends object>({
     columns,
     controlledState.columnOrder,
   ])
+
+  const protectedRendererHash = useMemo(() => rendererHash || "stableFallback", [rendererHash])
 
   const reactTableHooks = layoutType === "block" ? blockTableHooks : tableHooks
 
@@ -126,13 +132,8 @@ export function VirtualizedTable<T extends object>({
   )
 
   // TODO
-  // We can come up with declarative API for that, but now the solution is
-  // to depend on anything that can change order of items (grouping, filtering),
-  // so the indexes won't represent same items.
-
-  // This overall introduces some implicit details of how list rendering works,
-  // but its unclear what is the desired abstraction.
-  // Better tradeoff TBD.
+  // find out what place selectedRowsIds have there
+  // and if rendererHash is the better tradeoff
 
   const renderVirtualizedRow = useCallback(
     ({ index, style }) => {
@@ -151,7 +152,7 @@ export function VirtualizedTable<T extends object>({
       )
     },
     // eslint-disable-next-line
-    [controlledState, selectedRowIds, renderGroupHead, verticalGutter]
+    [controlledState, selectedRowIds, renderGroupHead, verticalGutter, protectedRendererHash]
   )
   return (
     <LayoutContextProvider value={layoutType}>
@@ -171,6 +172,7 @@ export function VirtualizedTable<T extends object>({
         overscanCount={overscanCount}
         callbackRef={callbackRef}
         itemKey={itemKey}
+        orderedRows={orderedRows}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>

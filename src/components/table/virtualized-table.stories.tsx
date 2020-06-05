@@ -7,7 +7,6 @@ import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
-import { webkitVisibleScrollbar } from "../../mixins"
 import { customGroupBy } from "./mocks/utils"
 
 const subData = {
@@ -78,6 +77,11 @@ const nodesData = [
 
 const virtualNodesData = [...nodesData, ...sampleNodes]
 
+const getItemKey = (index, data) => {
+  const row = data.orderedRows[index]
+  return `${(row.original && row.original.node.name) || row.id} ${index}`
+}
+
 const nodeHeights = virtualNodesData.map(() => 25 + Math.round(Math.random() * 50))
 const getItemHeight = (index: number) => nodeHeights[index] + 8
 
@@ -113,8 +117,6 @@ const prepareData = (arr: any) =>
     }
     return [...a, { ...c, status }]
   }, [])
-
-const virtualizedData = prepareData(virtualNodesData)
 
 const NoScrollContainer = styled.div`
   position: relative;
@@ -176,6 +178,9 @@ virtualizedTableStory.add(
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
     const [tableRef, setTableRef] = useState({ current: null }) as any
+    const [nodes, setNodes] = useState(virtualNodesData)
+
+    const virtualizedData = useMemo(() => prepareData(nodes), [nodes])
 
     const controlledState = useMemo(
       () => ({
@@ -193,8 +198,12 @@ virtualizedTableStory.add(
         itemSize: getItemHeight,
         variableSize: true,
         verticalGutter: 8,
+        itemKey: getItemKey,
+        rendererHash: nodes.reduce((acc, current) => {
+          return `${acc}${current.node.name}`
+        }, ""),
       }),
-      [width, height]
+      [width, height, nodes]
     )
 
     return (
@@ -215,6 +224,15 @@ virtualizedTableStory.add(
               <option value="services"> Services </option>
             </select>
           </label>
+          <button
+            type="button"
+            onClick={() => {
+              const [first, ...rest] = nodes
+              setNodes(rest)
+            }}
+          >
+            delete first
+          </button>
         </div>
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
