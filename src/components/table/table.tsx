@@ -1,63 +1,11 @@
 import React, { useEffect, useMemo, ReactNode } from "react"
-import {
-  useTable,
-  useSortBy,
-  useRowSelect,
-  Row,
-  useGroupBy,
-  useExpanded,
-  useColumnOrder,
-  useBlockLayout,
-  useGlobalFilter,
-} from "react-table"
-import { StyledTable, BlockLayout } from "./styled"
+import { useTable, Row } from "react-table"
+import { TableContainer, TableBody } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
 import { defaultGroupByFn, GroupsOrderSettings, sortGroupsByPriority } from "./utils"
-
-const tableHooks = [
-  useGlobalFilter,
-  useGroupBy,
-  useColumnOrder,
-  useSortBy,
-  useRowSelect,
-  useExpanded,
-]
-const blockTableHooks = [...tableHooks, useBlockLayout]
-
-const tableRenderOptions = {
-  mainContainer: {
-    block: ({ children, className, callbackRef, ...props }: any) => (
-      <BlockLayout ref={callbackRef} className={`table-container ${className || ""}`} {...props}>
-        {children}
-      </BlockLayout>
-    ),
-    table: ({ children, callbackRef, ...props }: any) => (
-      <StyledTable ref={callbackRef} {...props}>
-        {children}
-      </StyledTable>
-    ),
-  },
-  tbody: {
-    block: ({ children, ...props }: any) => (
-      <div className="table-body" {...props}>
-        {children}
-      </div>
-    ),
-    table: ({ children, ...props }: any) => <tbody {...props}>{children}</tbody>,
-  },
-}
-
-const TableContainer = ({ children, layoutType, ...props }: any) => {
-  const renderTableContainer = tableRenderOptions.mainContainer[layoutType]
-  return renderTableContainer({ children, ...props })
-}
-
-const TableBody = ({ children, layoutType, ...props }: any) => {
-  const renderTableBody = tableRenderOptions.tbody[layoutType]
-  return renderTableBody({ children, ...props })
-}
+import { tableHooks, blockTableHooks } from "./table-hooks"
 
 // Docs aren't clear about that, but the actual difference is,
 // that "id" is string for individual column filtering,
@@ -74,7 +22,7 @@ interface TableInstanceState {
   globalFilter?: any
 }
 
-interface TableProps<T, RT = any> {
+export interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
