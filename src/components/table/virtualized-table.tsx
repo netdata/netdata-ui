@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from "react"
+import React, { useEffect, useMemo, useCallback, MutableRefObject } from "react"
 import { useTable, Row } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
@@ -26,6 +26,8 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     verticalGutter?: number
     itemKey?: (index: number, data: any) => string
     rendererHash?: string
+    innerRef?: any
+    outerRef?: any
   }
 }
 
@@ -57,6 +59,8 @@ export function VirtualizedTable<T extends object>({
     verticalGutter = 0,
     itemKey = itemKeyFallback,
     rendererHash,
+    innerRef,
+    outerRef,
   },
   callbackRef,
   ...customProps
@@ -172,6 +176,8 @@ export function VirtualizedTable<T extends object>({
         callbackRef={callbackRef}
         itemKey={itemKey}
         orderedRows={orderedRows}
+        innerRef={innerRef}
+        outerRef={outerRef}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>
