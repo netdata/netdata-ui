@@ -6,7 +6,7 @@ import { StyledFixedList, StyledVariableList } from "./styled"
 
 const ItemWrapper = ({ data, index, style }: any) => {
   const { ItemRenderer } = data
-  return <ItemRenderer index={index} style={style} />
+  return <ItemRenderer index={index} style={style} data={data} />
 }
 
 const innerElementType = forwardRef(
