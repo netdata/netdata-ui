@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { useMeasure } from "react-use"
+import { useEffect, useCallback } from "@storybook/addons"
 import { VirtualizedTable } from "./virtualized-table"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
@@ -81,9 +82,6 @@ const getItemKey = (index, data) => {
   const row = data.orderedRows[index]
   return `${(row.original && row.original.node.name) || row.id} ${index}`
 }
-
-const nodeHeights = virtualNodesData.map(() => 25 + Math.round(Math.random() * 50))
-const getItemHeight = (index: number) => nodeHeights[index] + 8
 
 const groupsOrderSettings = {
   groupsOrder: {
@@ -191,6 +189,9 @@ virtualizedTableStory.add(
 
     const [ref, { width, height }] = useMeasure()
 
+    const nodeHeights = useMemo(() => nodes.map(() => 25 + Math.round(Math.random() * 50)), [nodes])
+    const getItemHeight = useCallback((index: number) => nodeHeights[index] + 8, [nodeHeights])
+
     const virtualizedSettings = useMemo(
       () => ({
         width,
@@ -203,8 +204,15 @@ virtualizedTableStory.add(
           return `${acc}${current.node.name}`
         }, ""),
       }),
-      [width, height, nodes]
+      [width, height, getItemHeight, nodes]
     )
+
+    useEffect(() => {
+      if (tableRef.current) {
+        tableRef.current.resetAfterIndex(0, false)
+      }
+      // eslint-disable-next-line
+    }, [nodes])
 
     return (
       <div>
@@ -232,6 +240,16 @@ virtualizedTableStory.add(
             }}
           >
             delete first
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              const [first, second, ...rest] = nodes
+
+              setNodes([first, { ...second, alarm: { critical: 1, warning: 0 } }, ...rest])
+            }}
+          >
+            change status
           </button>
         </div>
         <NoScrollContainer ref={ref}>

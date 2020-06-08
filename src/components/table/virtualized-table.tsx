@@ -132,17 +132,16 @@ export function VirtualizedTable<T extends object>({
   )
 
   // TODO
-  // find out what place selectedRowsIds have there
-  // and if rendererHash is the better tradeoff
-
+  // is rendererHash a better tradeoff?
+  // Callback could potentially be a React component
   const renderVirtualizedRow = useCallback(
-    ({ index, style }) => {
-      const row = orderedRows[index]
+    ({ index, style, data }) => {
+      const row = data.orderedRows[index]
       prepareRow(row)
       return (
         <TableRow
           key={row.id}
-          style={generateRowStyle({ index, style, verticalGutter, rows: orderedRows })}
+          style={generateRowStyle({ index, style, verticalGutter, rows: data.orderedRows })}
           customProps={customProps}
           row={row}
           prepareRow={prepareRow}
@@ -152,7 +151,7 @@ export function VirtualizedTable<T extends object>({
       )
     },
     // eslint-disable-next-line
-    [controlledState, selectedRowIds, renderGroupHead, verticalGutter, protectedRendererHash]
+    [controlledState, renderGroupHead, verticalGutter, protectedRendererHash]
   )
   return (
     <LayoutContextProvider value={layoutType}>
