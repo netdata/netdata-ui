@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useRef } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { useMeasure } from "react-use"
@@ -176,6 +176,7 @@ virtualizedTableStory.add(
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
     const [tableRef, setTableRef] = useState({ current: null }) as any
+    const [virtualContainerRef, setVirtualContainerRef] = useState({ current: null })
     const [nodes, setNodes] = useState(virtualNodesData)
 
     const virtualizedData = useMemo(() => prepareData(nodes), [nodes])
@@ -203,8 +204,13 @@ virtualizedTableStory.add(
         rendererHash: nodes.reduce((acc, current) => {
           return `${acc}${current.node.name}`
         }, ""),
+        outerRef: node => {
+          if (virtualContainerRef.current === null && node !== null) {
+            setVirtualContainerRef({ current: node })
+          }
+        },
       }),
-      [width, height, getItemHeight, nodes]
+      [width, height, getItemHeight, nodes, virtualContainerRef]
     )
 
     useEffect(() => {

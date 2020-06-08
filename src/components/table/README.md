@@ -123,6 +123,8 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     verticalGutter?: number
     itemKey?: (index: number, data: any) => string
     rendererHash?: string
+    innerRef?: any
+    outerRef?: any
   }
 }
 ```

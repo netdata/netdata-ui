@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from "react"
+import React, { forwardRef, ReactNode, MutableRefObject } from "react"
 import { StickyListContextProvider, StickyListContextConsumer } from "../../layout-context"
 import { TableContainer, TableBody } from "../table-container"
 import { TableHead } from "../table-head"
@@ -62,6 +62,8 @@ interface Props {
   callbackRef: any
   itemKey?: (index: number, data: any) => string
   orderedRows: []
+  innerRef?: any
+  outerRef?: any
 }
 
 export const StickyVirtualList = ({
