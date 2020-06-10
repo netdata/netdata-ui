@@ -42,6 +42,7 @@ import chevron_left from "./assets/chevron_left.svg"
 import view_list from "./assets/view_list.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import dashboard from "./assets/dashboard.svg"
+import chevron_right_s from "./assets/chevron_right_s.svg"
 
 export const iconsList = {
   alarm,
@@ -52,6 +53,7 @@ export const iconsList = {
   check,
   checkmark_s,
   chevron_left,
+  chevron_right_s,
   cross_s,
   dashboard,
   error,
