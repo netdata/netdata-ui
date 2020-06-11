@@ -64,6 +64,18 @@ interface Props {
   orderedRows: []
   innerRef?: any
   outerRef?: any
+  onItemsRendered?: (renderData: {
+    overscanStartIndex: number
+    overscanStopIndex: number
+    visibleStartIndex: number
+    visibleStopIndex: number
+  }) => void
+  onScroll?: (scrollData: {
+    scrollDirection: "forward" | "backward"
+    scrollOffset: number
+    scrollUpdateWasRequested: boolean
+  }) => void
+  useIsScrolling?: boolean
 }
 
 export const StickyVirtualList = ({

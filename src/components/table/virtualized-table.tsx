@@ -28,6 +28,18 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     rendererHash?: string
     innerRef?: any
     outerRef?: any
+    onItemsRendered?: (renderData: {
+      overscanStartIndex: number
+      overscanStopIndex: number
+      visibleStartIndex: number
+      visibleStopIndex: number
+    }) => void
+    onScroll?: (scrollData: {
+      scrollDirection: "forward" | "backward"
+      scrollOffset: number
+      scrollUpdateWasRequested: boolean
+    }) => void
+    useIsScrolling?: boolean
   }
 }
 
@@ -61,6 +73,9 @@ export function VirtualizedTable<T extends object>({
     rendererHash,
     innerRef,
     outerRef,
+    onItemsRendered,
+    onScroll,
+    useIsScrolling,
   },
   callbackRef,
   ...customProps
@@ -178,6 +193,9 @@ export function VirtualizedTable<T extends object>({
         orderedRows={orderedRows}
         innerRef={innerRef}
         outerRef={outerRef}
+        onItemsRendered={onItemsRendered}
+        onScroll={onScroll}
+        useIsScrolling={useIsScrolling}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>
