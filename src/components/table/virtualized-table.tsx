@@ -39,6 +39,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
       scrollOffset: number
       scrollUpdateWasRequested: boolean
     }) => void
+    useIsScrolling?: boolean
   }
 }
 
@@ -74,6 +75,7 @@ export function VirtualizedTable<T extends object>({
     outerRef,
     onItemsRendered,
     onScroll,
+    useIsScrolling,
   },
   callbackRef,
   ...customProps
@@ -193,6 +195,7 @@ export function VirtualizedTable<T extends object>({
         outerRef={outerRef}
         onItemsRendered={onItemsRendered}
         onScroll={onScroll}
+        useIsScrolling={useIsScrolling}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>

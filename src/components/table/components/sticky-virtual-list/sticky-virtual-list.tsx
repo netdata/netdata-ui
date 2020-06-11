@@ -75,6 +75,7 @@ interface Props {
     scrollOffset: number
     scrollUpdateWasRequested: boolean
   }) => void
+  useIsScrolling?: boolean
 }
 
 export const StickyVirtualList = ({

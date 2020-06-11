@@ -136,6 +136,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
       scrollOffset: number
       scrollUpdateWasRequested: boolean
     }) => void
+    useIsScrolling?: boolean
   }
 }
 ```
