@@ -30,6 +30,7 @@ import search_s from "./assets/search_s.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import triangle_down from "./assets/triangle_down.svg"
 import nav_dots from "./assets/nav_dots.svg"
+import dots_2x3 from "./assets/dots_2x3.svg"
 import space from "./assets/space.svg"
 import nodes from "./assets/nodes.svg"
 import room from "./assets/room.svg"
@@ -42,6 +43,7 @@ import chevron_left from "./assets/chevron_left.svg"
 import view_list from "./assets/view_list.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import dashboard from "./assets/dashboard.svg"
+import dashboards from "./assets/dashboards.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
 
 export const iconsList = {
@@ -56,6 +58,7 @@ export const iconsList = {
   chevron_right_s,
   cross_s,
   dashboard,
+  dashboards,
   error,
   expand,
   gear,
@@ -83,6 +86,7 @@ export const iconsList = {
   arrow_down,
   triangle_down,
   nav_dots,
+  dots_2x3,
   space,
   nodes,
   room,
