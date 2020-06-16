@@ -8,9 +8,10 @@ export type RawColorsT = {
   }
   gray: {
     limedSpruce: string
+    bombay: string
     silverSand: string
     gallery: string
-    bombay: string
+    guyabano: string
   }
   green: {
     malachite: string
