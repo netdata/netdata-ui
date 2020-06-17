@@ -2,6 +2,7 @@ import alarm from "./assets/alarm.svg"
 import alarmCritical from "./assets/alarm_c.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
+import chart_added from "./assets/chart_added.svg"
 import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
 import cross_s from "./assets/cross_s.svg"
@@ -52,6 +53,7 @@ export const iconsList = {
   alarmCritical,
   alarmCriticalWarning,
   alarmWarning,
+  chart_added,
   check,
   checkmark_s,
   chevron_left,
