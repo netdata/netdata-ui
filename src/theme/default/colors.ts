@@ -42,6 +42,7 @@ const rawColors: RawColorsT = {
 
 const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
+  separatorColor: rawColors.gray.gallery,
   controlFocused: rawColors.gray.limedSpruce,
   error: rawColors.red.redOrange,
   warning: rawColors.yellow.amber,
