@@ -137,6 +137,8 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
       scrollUpdateWasRequested: boolean
     }) => void
     useIsScrolling?: boolean
+    renderCallback?: (orderedRows: any[], overscanValues: { start: number; end: number }) => void
+    renderCallbackWaitTime?: number
   }
 }
 ```
@@ -164,6 +166,11 @@ Exclusions:
 - `rendererHash` - hash used as dependency for memoizing virtualized row renderer callback function.
   Could be used to determine, if the function should be re-created to render a changed data, but without
   direct connection to the data object on instance level
+
+- `renderCallback` - with debounce time equal to `renderCallbackWaitTime` prop (or `600` as default),
+  will call passed function, with flattened rows list and overscan values as argument. Useful for cases,
+  when you want to do things after user has scrolled the list and new entities are shown. Flattened rows
+  required for filtering out group headers and other auxiliary stuff.
 
 **Note on tradeoffs and usage**
 

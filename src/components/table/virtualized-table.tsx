@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useCallback, MutableRefObject } from "react"
+import React, { useEffect, useMemo, useCallback, useState } from "react"
+import { useDebounce } from "react-use"
 import { useTable, Row } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
@@ -40,6 +41,8 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
       scrollUpdateWasRequested: boolean
     }) => void
     useIsScrolling?: boolean
+    renderCallback?: (orderedRows: any[], overscanValues: { start: number; end: number }) => void
+    renderCallbackWaitTime?: number
   }
 }
 
@@ -76,10 +79,13 @@ export function VirtualizedTable<T extends object>({
     onItemsRendered,
     onScroll,
     useIsScrolling,
+    renderCallback,
+    renderCallbackWaitTime = 600,
   },
   callbackRef,
   ...customProps
 }: VTableProps<T>) {
+  const [overscanValues, setOverscanValues] = useState({ start: 0, end: 0 })
   // preserve column order to override default grouping behaviour
   const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
     columns,
@@ -172,6 +178,33 @@ export function VirtualizedTable<T extends object>({
     // eslint-disable-next-line
     [controlledState, renderGroupHead, verticalGutter, protectedRendererHash]
   )
+
+  const itemsRenderHandler = useCallback(
+    (renderData: {
+      overscanStartIndex: number
+      overscanStopIndex: number
+      visibleStartIndex: number
+      visibleStopIndex: number
+    }) => {
+      const { overscanStartIndex, overscanStopIndex } = renderData
+      setOverscanValues({ start: overscanStartIndex, end: overscanStopIndex })
+      if (onItemsRendered) {
+        onItemsRendered(renderData)
+      }
+    },
+    [onItemsRendered]
+  )
+
+  useDebounce(
+    () => {
+      if (renderCallback) {
+        renderCallback(orderedRows, overscanValues)
+      }
+    },
+    renderCallbackWaitTime,
+    [overscanValues]
+  )
+
   return (
     <LayoutContextProvider value={layoutType}>
       <StickyVirtualList
@@ -193,7 +226,7 @@ export function VirtualizedTable<T extends object>({
         orderedRows={orderedRows}
         innerRef={innerRef}
         outerRef={outerRef}
-        onItemsRendered={onItemsRendered}
+        onItemsRendered={itemsRenderHandler}
         onScroll={onScroll}
         useIsScrolling={useIsScrolling}
       >
