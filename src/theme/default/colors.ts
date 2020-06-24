@@ -14,6 +14,7 @@ const rawColors: RawColorsT = {
     silverSand: "#B5B9BC",
     gallery: "#EFEFEF",
     guyabano: "#F7F8F8",
+    gainsboro: "#D8D8D8",
   },
   green: {
     malachite: "#00CB51",
