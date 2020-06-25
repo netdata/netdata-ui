@@ -1,315 +1,121 @@
-import React from "react"
-import styled, { css } from "styled-components"
-import { CircularProgress } from "@rmwc/circular-progress"
-import { getColor, getSizeBy, getBorderedSizeBy } from "../../theme/utils"
-import { ButtonProps } from "./button"
-import { Icon } from "../icon"
+import styled from "styled-components"
+import { getColor, getSizeBy } from "../../theme/utils"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
+import { ButtonProps } from "./button"
 
 const getGreenHaze = getColor(["green", "greenHaze"])
 const getRedOrange = getColor(["red", "redOrange"])
-const getOutrageousOrange = getColor(["red", "outrageousOrange"])
+const getYellowAmber = getColor(["yellow", "amber"])
 const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 
-const buttonPropsMap = new Map<string, (props: ButtonProps) => any>([
-  [
-    "buttonWidthHover",
-    ({ label, disabled, type }) => {
-      if (label) {
-        return disabled || getSizeBy(type !== DEFAULT ? 16 : 17)
-      }
-      return disabled || getSizeBy(type !== DEFAULT ? 5 : 6)
-    },
-  ],
-  ["buttonWidthNormal", ({ label }) => getSizeBy(label ? 16 : 5)],
-  ["buttonHeightHover", ({ disabled, type }) => disabled || getSizeBy(type !== DEFAULT ? 5 : 6)],
-  [
-    "buttonColorNormal",
-    ({ type, danger, disabled }) => {
-      if (type === BORDER_LESS) {
-        return getColor(["transparent", "full"])
-      }
-      if (type === HOLLOW) {
-        return getWhitePure
-      }
-      if (danger) {
-        return disabled ? getOutrageousOrange : getRedOrange
-      }
-      return getGreenHaze
-    },
-  ],
-  [
-    "buttonColorHover",
-    ({ type, disabled, danger }) => {
-      if (type === BORDER_LESS) {
-        return disabled ? getGreenHaze : getColor(["transparent", "full"])
-      }
-      if (danger) {
-        return disabled ? getRedOrange : getOutrageousOrange
-      }
-      return disabled ? getGreenHaze : getGreenMalachite
-    },
-  ],
-  [
-    "buttonTextColor",
-    ({ type, danger }) => {
-      if (type === HOLLOW) {
-        return danger ? getRedOrange : getGreenHaze
-      }
-      return getWhitePure
-    },
-  ],
-  [
-    "buttonTextColorHover",
-    ({ type, disabled, danger }) => {
-      if (type === HOLLOW) {
-        return danger ? getRedOrange : getGreenHaze
-      }
-      if (type === BORDER_LESS) {
-        return disabled ? getWhitePure : getGreenMalachite
-      }
-      return getWhitePure
-    },
-  ],
-  ["buttonTextColorActive", () => getWhitePure],
-  ["borderWidthNormal", ({ type }) => (type === HOLLOW ? "1px" : "0")],
-  [
-    "borderWidthHover",
-    ({ type, disabled }) => {
-      if (type === HOLLOW) {
-        return "1px"
-      }
-      if (type === BORDER_LESS) {
-        return "0"
-      }
-      return disabled ? "0" : "3px"
-    },
-  ],
-  [
-    "borderColor",
-    ({ disabled, danger }) => {
-      if (danger) {
-        return disabled ? getRedOrange : getOutrageousOrange
-      }
-      return disabled ? getGreenHaze : getGreenMalachite
-    },
-  ],
-  [
-    "borderColorHover",
-    ({ disabled, danger }) => {
-      if (danger) {
-        return disabled ? getRedOrange : getOutrageousOrange
-      }
-      return disabled ? getGreenHaze : getGreenMalachite
-    },
-  ],
-])
+const colorsByFlavor = ({ flavor = DEFAULT, danger, warning }: ButtonProps) => {
+  const getDangerColor = danger ? getRedOrange : undefined
+  const getWarningColor = warning ? getYellowAmber : undefined
+  const getSpecialColor = getDangerColor || getWarningColor
 
-const buttonProps = (propertyName: string, props: ButtonProps): string => {
-  const propertyFunction = buttonPropsMap.get(propertyName) as (a: ButtonProps) => string
-  if (propertyFunction) {
-    return propertyFunction(props)
+  const flavors = {
+    [DEFAULT]: {
+      color: getWhitePure,
+      colorHover: getWhitePure,
+      colorActive: getWhitePure,
+      bg: getSpecialColor || getGreenHaze,
+      bgHover: getSpecialColor || getGreenHaze,
+      bgActive: getSpecialColor || getGreenMalachite,
+      border: getSpecialColor || getGreenHaze,
+      borderHover: getSpecialColor || getGreenMalachite,
+      borderActive: getSpecialColor || getGreenMalachite,
+    },
+    [HOLLOW]: {
+      color: getSpecialColor || getGreenHaze,
+      colorHover: getSpecialColor || getGreenMalachite,
+      colorActive: getWhitePure,
+      bg: getWhitePure,
+      bgHover: getWhitePure,
+      bgActive: getSpecialColor || getGreenMalachite,
+      border: getSpecialColor || getGreenHaze,
+      borderHover: getSpecialColor || getGreenMalachite,
+      borderActive: getSpecialColor || getGreenMalachite,
+    },
+    [BORDER_LESS]: {
+      color: getSpecialColor || getGreenHaze,
+      colorHover: getSpecialColor || getGreenMalachite,
+      colorActive: getSpecialColor || getGreenHaze,
+      bg: getWhitePure,
+      bgHover: getWhitePure,
+      bgActive: getWhitePure,
+      border: getWhitePure,
+      borderHover: getWhitePure,
+      borderActive: getWhitePure,
+    },
   }
-  return "1px"
+
+  return flavors[flavor] || flavors[DEFAULT]
 }
 
-export const StyledButtonWrapper = styled.div<{ label: string }>`
-  ${props => {
-    return css<{ label: string }>`
-      height: ${getBorderedSizeBy(5)};
-      width: ${getBorderedSizeBy(props.label ? 16 : 5)};
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    `
-  }};
-`
+type StyledButtonProps = {
+  colors: object
+  hasLabel: boolean
+}
 
-export const StyledButton = styled(({ label, icon, danger, ...otherProps }) => (
-  <StyledButtonWrapper label={label}>
-    <button type="button" danger={danger.toString()} {...otherProps}>
-      {icon ? <Icon className="button-icon" name={icon} /> : null}
-      {label}
-    </button>
-  </StyledButtonWrapper>
-))`
-  ${props => {
-    return css`
-    &:focus {
-      outline: none;
-    }
-    &button {
-      padding: 0;
-    }
-    padding: ${getSizeBy(1)};
-    opacity: ${props.disabled ? 0.6 : 1.0};
-    cursor: ${props.disabled ? "not-allowed" : "pointer"};
-    background-color: ${buttonProps("buttonColorNormal", props)};
-    border-color: ${props.danger ? getRedOrange : getGreenHaze}
-    border-style: solid;
-    border-radius: 3px;
-    border-width: ${buttonProps("borderWidthNormal", props)};
-    width: ${buttonProps("buttonWidthNormal", props)};
-    height: ${getSizeBy(5)};
-    font-weight: bold;
-    font-size: 12px;
-    color: ${buttonProps("buttonTextColor", props)};
-    &:hover {
-      color: ${buttonProps("buttonTextColorHover", props)};
-      border-color: ${buttonProps("borderColor", props)};
-      border-width: ${buttonProps("borderWidthHover", props)};
-      border-radius: ${props.disabled ? "2px" : "4px"};
-      width: ${buttonProps("buttonWidthHover", props)};
-      height: ${buttonProps("buttonHeightHover", props)};
-    }
-    &:active {
-      color: ${buttonProps("buttonTextColorActive", props)};
-      background-color: ${buttonProps("buttonColorHover", props)};
-      border-color: ${buttonProps("borderColorHover", props)};
-      border-width: ${buttonProps("borderWidthHover", props)};
-      border-radius: ${props.disabled ? "2px" : "4px"};
-      width: ${buttonProps("buttonWidthHover", props)};
-      height: ${buttonProps("buttonHeightHover", props)};
-      .button-icon {
-        fill: ${buttonProps("buttonTextColorActive", props)};
-      }
-    }
-    display: ${props.icon || props.isLoading ? "flex" : "block"};
-    flex-flow: row nowrap;
-    align-items: center;
+export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
+  colors: colorsByFlavor(props),
+}))<ButtonProps & StyledButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  width: ${props => (props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4))};
+  height: ${props => (props.hasLabel ? getSizeBy(5) : getSizeBy(props.small ? 3 : 4))};
+
+  font-weight: bold;
+  font-size: 12px;
+  line-height: ${getSizeBy(2)};
+  white-space: nowrap;
+  word-break: keep-all;
+
+  cursor: pointer;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+
+  padding: ${getSizeBy(1)};
+  transition: all 150ms;
+
+  background-color: ${props => props.colors.bg(props)};
+  color: ${props => props.colors.color(props)};
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${props => props.colors.border(props)};
+  border-radius: 2px;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: ${props => props.colors.borderHover(props)};
+    background-color: ${props => props.colors.bgHover(props)};
+    color: ${props => props.colors.colorHover(props)};
+
     .button-icon {
-      margin-right: ${(props.label && props.icon) || props.isLoading ? getSizeBy(2) : "0"};
-      height: ${getSizeBy(3)};
-      width: ${getSizeBy(3)};
-      fill: ${buttonProps("buttonTextColor", props)};
+      fill: ${props => props.colors.colorHover(props)};
     }
-    --mdc-ripple-upgraded
-  `
-  }};
+  }
+
+  &:active {
+    border-color: ${props => props.colors.borderActive(props)};
+    background-color: ${props => props.colors.bgActive(props)};
+    color: ${props => props.colors.colorActive(props)};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .button-icon {
+    position: absolute;
+    left: ${props => (props.hasLabel ? "4px" : "auto")};
+    height: ${getSizeBy(2)};
+    width: ${getSizeBy(2)};
+    fill: ${props => props.colors.color(props)};
+  }
 `
-
-export const StyledCircularProgress = styled(({ size, ...otherProps }) => (
-  <CircularProgress size={size} {...otherProps} />
-))`
-  ${() => {
-    return css`
-      .rmwc-circular-progress {
-        font-size: 1.5rem;
-        position: relative;
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        -webkit-transform: rotate(-90deg);
-        transform: rotate(-90deg);
-        color: ${getColor(["white", "pure"])};
-      }
-
-      .rmwc-circular-progress--size-xsmall {
-        font-size: 1.125rem;
-      }
-
-      .rmwc-circular-progress--size-small {
-        font-size: 1.25rem;
-      }
-
-      .rmwc-circular-progress--size-medium {
-        font-size: 1.5rem;
-      }
-
-      .rmwc-circular-progress--size-large {
-        font-size: 2.25rem;
-      }
-
-      .rmwc-circular-progress--size-xlarge {
-        font-size: 3rem;
-      }
-
-      .rmwc-circular-progress--indeterminate .rmwc-circular-progress__circle {
-        animation: rmwc-circular-progress-indeterminate-bar-rotate 2s linear infinite;
-      }
-
-      .rmwc-circular-progress--indeterminate .rmwc-circular-progress__path {
-        animation: rmwc-circular-progress-indeterminate-bar-dash 1.5s ease-in-out infinite;
-
-        stroke-dasharray: 2.08%, 416%;
-        stroke-dashoffset: 0;
-      }
-
-      .rmwc-circular-progress__circle {
-        height: 100%;
-        width: 100%;
-      }
-
-      .rmwc-circular-progress__path {
-        -webkit-transition: stroke-dasharray 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        transition: stroke-dasharray 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        fill: none;
-        stroke-dasharray: 0, 416%;
-        stroke-dashoffset: 0;
-        stroke-linecap: round;
-        stroke-miterlimit: 20;
-        stroke-width: 0.125rem;
-        stroke: currentColor;
-      }
-
-      .rmwc-circular-progress--thickerstroke .rmwc-circular-progress__path {
-        stroke-width: 0.25rem;
-      }
-
-      /** Overrides for icons */
-      .rmwc-icon .rmwc-circular-progress {
-        font-size: inherit;
-      }
-
-      @keyframes rmwc-circular-progress-indeterminate-bar-rotate {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      @keyframes rmwc-circular-progress-indeterminate-bar-dash {
-        0% {
-          stroke-dasharray: 2.08%, 416%;
-          stroke-dashoffset: 0%;
-        }
-        50% {
-          stroke-dasharray: 185.4%, 416%;
-          stroke-dashoffset: -72.9%;
-        }
-        to {
-          stroke-dasharray: 185.4%, 416%;
-          stroke-dashoffset: -258.33%;
-        }
-      }
-    `
-  }};
-`
-
-/*
-RMWC ThemeProvider vars
-          --mdc-theme-primary: ${getColor(["green", "greenHaze"])};
-          --mdc-theme-secondary: ${getColor(["green", "greenHaze"])};
-          --mdc-theme-error: ${getColor(["green", "greenHaze"])};
-          --mdc-theme-background: ${getColor(["green", "greenHaze"])};
-          --mdc-theme-surface: #37474f;
-          --mdc-theme-on-primary: rgba(255, 255, 255, 0.87);
-          --mdc-theme-on-secondary: rgba(0, 0, 0, 0.87);
-          --mdc-theme-on-surface: rgba(255, 255, 255, 0.87);
-          --mdc-theme-on-error: #fff;
-          --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 1);
-          --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.7);
-          --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.5);
-          --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.5);
-          --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.5);
-          --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
-          --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
-          --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
-          --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
-          --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
-          --mdc-theme-text-primary-on-dark: white;
-          --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
-          --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
-          --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
-          --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
-*/

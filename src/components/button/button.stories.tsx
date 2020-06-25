@@ -161,6 +161,7 @@ buttonStory.add(
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
       danger={boolean("Danger", false)}
+      small={boolean("Small", false)}
     />
   ),
   subData
@@ -175,6 +176,53 @@ buttonStory.add(
       onClick={action("clicked")}
       type="hollow"
       danger={boolean("Danger", false)}
+      small={boolean("Small", false)}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button loading",
+  () => (
+    <Button
+      disabled={boolean("Disabled", false)}
+      label={text("Label prop", "LABEL")}
+      loadingLabel={text("Loading label prop", "LOADING...")}
+      onClick={action("clicked")}
+      isLoading={boolean("Is loading", true)}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button with Icon Loading",
+  () => (
+    <Button
+      icon={select("Name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      type="hollow"
+      onClick={action("clicked")}
+      label={text("Label", "LABEL")}
+      loadingLabel={text("Loading label prop", "LOADING...")}
+      danger={boolean("Danger", false)}
+      isLoading={boolean("Is loading", true)}
+    />
+  ),
+  subData
+)
+
+buttonStory.add(
+  "Button Action Loading",
+  () => (
+    <Button
+      icon={select("Name", icons, "plus")}
+      disabled={boolean("Disabled", false)}
+      onClick={action("clicked")}
+      type="hollow"
+      danger={boolean("Danger", false)}
+      isLoading={boolean("Is loading", true)}
     />
   ),
   subData
@@ -186,7 +234,7 @@ const OverridedButton = styled(Button)`
 `
 
 buttonStory.add(
-  "Button with CSS overriede",
+  "Button with CSS override",
   () => (
     <OverridedButton
       icon={select("Name", icons, "plus")}
