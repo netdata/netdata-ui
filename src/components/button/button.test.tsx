@@ -79,7 +79,7 @@ describe("Button states", () => {
     )
 
     expect(getByText(/prop text/)).toBeInTheDocument()
-    expect(getByTitle("loading")).toBeInTheDocument()
+    expect(getByTitle("loader")).toBeInTheDocument()
   })
 
   it(" * should be clickable", () => {

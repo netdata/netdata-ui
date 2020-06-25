@@ -21,6 +21,7 @@ export interface ButtonWrapperProps extends ButtonProps {
   icon?: any
   isLoading?: boolean
   loadingLabel?: string | JSX.Element
+  loadingIcon?: any
 }
 
 export const Button: FC<ButtonWrapperProps> = ({
@@ -30,14 +31,15 @@ export const Button: FC<ButtonWrapperProps> = ({
   flavor,
   isLoading,
   loadingLabel,
+  loadingIcon,
   ...rest
 }: ButtonWrapperProps) => (
   <StyledButton flavor={type || flavor} hasLabel={!!label} {...rest}>
     {icon && (
       <Icon
         className="button-icon"
-        title={isLoading ? "loading" : icon}
-        name={isLoading ? icon : icon}
+        title={isLoading ? loadingIcon : icon}
+        name={isLoading ? loadingIcon : icon}
       />
     )}
     {label && <span>{(isLoading && loadingLabel) || label}</span>}
@@ -47,4 +49,5 @@ export const Button: FC<ButtonWrapperProps> = ({
 Button.defaultProps = {
   onClick: () => {},
   icon: null,
+  loadingIcon: "loader",
 }
