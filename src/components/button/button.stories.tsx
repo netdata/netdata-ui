@@ -21,208 +21,19 @@ const subData = {
 }
 
 buttonStory.add(
-  "Button Default",
+  "Button",
   () => (
     <Button
-      disabled={boolean("Disabled", false)}
-      label={text("Label prop", "LABEL")}
-      onClick={action("clicked")}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Default Danger",
-  () => (
-    <Button
-      disabled={boolean("Disabled", false)}
-      label={text("Label prop", "LABEL")}
-      onClick={action("clicked")}
-      danger={boolean("Danger", true)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Hollow",
-  () => (
-    <Button
-      disabled={boolean("Disabled", false)}
-      type="hollow"
-      onClick={action("clicked")}
       label={text("Label", "LABEL")}
-      danger={boolean("Danger", false)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Hollow Danger",
-  () => (
-    <Button
-      disabled={boolean("Disabled", false)}
-      type="hollow"
-      onClick={action("clicked")}
-      label={text("Label", "LABEL")}
-      danger={boolean("Danger", true)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Borderless",
-  () => (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        background: "#1a1a1a",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-      }}
-    >
-      <Button
-        disabled={boolean("Disabled", false)}
-        type="borderless"
-        onClick={action("clicked")}
-        label={text("Label", "LABEL")}
-        danger={boolean("Danger", false)}
-      />
-    </div>
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Icon Borderless",
-  () => (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        background: "#1a1a1a",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-      }}
-    >
-      <Button
-        icon={select("Name", icons, "plus")}
-        disabled={boolean("Disabled", false)}
-        type="borderless"
-        onClick={action("clicked")}
-        label={text("Label", "LABEL")}
-        danger={boolean("Danger", false)}
-      />
-    </div>
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Icon",
-  () => (
-    <Button
-      icon={select("Name", icons, "plus")}
+      icon={select("Name", ["No icon", ...icons], "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      label={text("Label", "LABEL")}
+      flavor={select("Name", ["default", "hollow", "borderless"], "default")}
       danger={boolean("Danger", false)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Icon Hollow",
-  () => (
-    <Button
-      icon={select("Name", icons, "plus")}
-      disabled={boolean("Disabled", false)}
-      type="hollow"
-      onClick={action("clicked")}
-      label={text("Label", "LABEL")}
-      danger={boolean("Danger", false)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Action",
-  () => (
-    <Button
-      icon={select("Name", icons, "plus")}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-      danger={boolean("Danger", false)}
-      small={boolean("Small", false)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Action Hollow",
-  () => (
-    <Button
-      icon={select("Name", icons, "plus")}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-      type="hollow"
-      danger={boolean("Danger", false)}
-      small={boolean("Small", false)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button loading",
-  () => (
-    <Button
-      disabled={boolean("Disabled", false)}
-      label={text("Label prop", "LABEL")}
+      warning={boolean("Warning", false)}
+      small={boolean("Small (works when icon only)", false)}
+      isLoading={boolean("Is loading", false)}
       loadingLabel={text("Loading label prop", "LOADING...")}
-      onClick={action("clicked")}
-      isLoading={boolean("Is loading", true)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button with Icon Loading",
-  () => (
-    <Button
-      icon={select("Name", icons, "plus")}
-      disabled={boolean("Disabled", false)}
-      type="hollow"
-      onClick={action("clicked")}
-      label={text("Label", "LABEL")}
-      loadingLabel={text("Loading label prop", "LOADING...")}
-      danger={boolean("Danger", false)}
-      isLoading={boolean("Is loading", true)}
-    />
-  ),
-  subData
-)
-
-buttonStory.add(
-  "Button Action Loading",
-  () => (
-    <Button
-      icon={select("Name", icons, "plus")}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-      type="hollow"
-      danger={boolean("Danger", false)}
-      isLoading={boolean("Is loading", true)}
     />
   ),
   subData
@@ -237,11 +48,16 @@ buttonStory.add(
   "Button with CSS override",
   () => (
     <OverridedButton
-      icon={select("Name", icons, "plus")}
+      label={text("Label", "LABEL")}
+      icon={select("Name", ["No icon", ...icons], "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      label="The text"
-      type="hollow"
+      flavor={select("Name", ["default", "hollow", "borderless"], "default")}
+      danger={boolean("Danger", false)}
+      warning={boolean("Warning", false)}
+      small={boolean("Small (works when icon only)", false)}
+      isLoading={boolean("Is loading", false)}
+      loadingLabel={text("Loading label prop", "LOADING...")}
     />
   ),
   subData
