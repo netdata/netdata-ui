@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react"
 import { storiesOf } from "@storybook/react"
+import { action } from "@storybook/addon-actions"
 import styled from "styled-components"
 import { Table } from "./table"
 import { EnhancedTable } from "./mocks/styled"
@@ -31,6 +32,7 @@ const initialState = [
     user: { photo: "https://i.pravatar.cc/31", name: "Amy" },
     email: "amy@vong.com",
     dots: "123",
+    disabled: true,
   },
   {
     user: {
@@ -53,9 +55,7 @@ tableStory.add(
           type="button"
           style={{ marginRight: "15px" }}
           onClick={() => {
-            const changedName = Math.random()
-              .toString()
-              .slice(0, 4)
+            const changedName = Math.random().toString().slice(0, 4)
             setState([
               {
                 user: { photo: "https://i.pravatar.cc/30", name: "Fry" },
@@ -110,7 +110,14 @@ tableStory.add(
           initialState={{ sortBy: [{ id: "user", desc: false }] }}
           columns={UserTableSchema}
           data={state}
-          selectedItemsClb={() => {}}
+          itemIsDisabled={item => item.disabled}
+          selectedItemsClb={items => {
+            action(JSON.stringify(items.filter(item => item.disabled)))
+          }}
+          toggleSelectedItemClb={(item, checked) => {
+            action(JSON.stringify(item))
+            action(checked ? "selected" : "deselected")
+          }}
         />
       </div>
     )

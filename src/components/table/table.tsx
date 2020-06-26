@@ -31,6 +31,8 @@ export interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
+  toggleSelectedItemClb?: (item: T, selected: boolean) => T | void
+  itemIsDisabled?: (item: T) => boolean
   columns: RT
   data: T[]
   sortableBy?: string[]
@@ -58,13 +60,19 @@ export interface TableProps<T, RT = any> {
   dataResultsCallback?: (rows: T[]) => void
 }
 
-export function Table<T extends object>({
+type Item = {
+  [key: string]: any
+}
+
+export function Table<T extends Item>({
   groupsOrderSettings,
   layoutType = "table",
   columns,
   data,
   sortableBy = [],
   selectedItemsClb,
+  toggleSelectedItemClb,
+  itemIsDisabled,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
@@ -96,6 +104,7 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
+    isAllRowsSelected,
     state: { selectedRowIds, groupBy },
   } = useTable(
     {
@@ -121,15 +130,17 @@ export function Table<T extends object>({
         )
       },
       groupByFn,
+      toggleSelectedItemClb,
+      itemIsDisabled,
     },
     ...reactTableHooks
   )
 
   useEffect(() => {
-    if (selectedItemsClb) {
+    if (isAllRowsSelected && selectedItemsClb) {
       selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
     }
-  }, [selectedFlatRows, selectedItemsClb])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb])
 
   const orderedRows = useMemo(() => {
     if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {

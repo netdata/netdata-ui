@@ -20,13 +20,23 @@ export const UserTableSchema = [
       const { checked, onChange, indeterminate } = getToggleAllRowsSelectedProps()
       return <Checkbox checked={checked} onChange={onChange} indeterminate={indeterminate} />
     },
-    Cell: ({ row, selectedRowIds }: any) => {
+    Cell: ({ row, itemIsDisabled, toggleSelectedItemClb }: any) => {
       // @ts-ignore | TBD: IMPROVE PROPS
       const { onChange } = row.getToggleRowSelectedProps()
-      const checked = selectedRowIds[row.id] || false
+
+      const isDisabled = itemIsDisabled(row.original)
+      const checked = isDisabled ? false : row.isSelected
+
+      const onToggle = e => {
+        if (!isDisabled && toggleSelectedItemClb) {
+          toggleSelectedItemClb(row.original, e.target.checked)
+        }
+        onChange(e)
+      }
+
       return (
         <CellBox>
-          <Checkbox checked={checked} onChange={onChange} />
+          <Checkbox checked={checked} onChange={onToggle} disabled={isDisabled} />
         </CellBox>
       )
     },

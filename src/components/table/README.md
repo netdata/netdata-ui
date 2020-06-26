@@ -55,7 +55,7 @@ interface TableProps<T, RT = any> {
 }
 ```
 
-- `selectedItemClb` - selected item callback. This one used for calling something whenever any row in table is selected
+- `toggleSelectedItemClb` - selected item callback. This one used for calling something whenever any row in table is selected or deselected
 - `columns` - This is where all the layout happens. As example user table `columns` provided below. As basis `react-table` **columns** used here.
 - `data` - collection of table rows as js objects. Each first level key of object should reference to `accessor` fild described in columns.
 - `sortableBy` - describes which columns could provide sorting API. Values should be referenced to `columns` `accessor`
