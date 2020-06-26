@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from "react"
-import { useTable, Row } from "react-table"
+import { useTable } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
 import { LayoutContextProvider } from "./layout-context"
@@ -35,7 +35,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     rendererHash?: string
     innerRef?: any
     outerRef?: any
-    onItemsRendered?: (renderData: RenderData, orderedRows: Row<T>[]) => void
+    onItemsRendered?: (renderData: RenderData, orderedRows: any[]) => void
     onScroll?: (scrollData: {
       scrollDirection: "forward" | "backward"
       scrollOffset: number
@@ -130,7 +130,7 @@ export function VirtualizedTable<T extends object>({
 
   useEffect(() => {
     if (selectedItemsClb) {
-      selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
+      selectedItemsClb(selectedFlatRows.map((r: any) => r.original))
     }
   }, [selectedFlatRows, selectedItemsClb])
 
