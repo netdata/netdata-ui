@@ -14,6 +14,13 @@ import { tableHooks, blockTableHooks } from "./table-hooks"
 
 type GetItemSize = (index: number, orderedRows: any) => number
 
+type RenderData = {
+  overscanStartIndex: number
+  overscanStopIndex: number
+  visibleStartIndex: number
+  visibleStopIndex: number
+}
+
 const itemKeyFallback = (index: number) => String(index)
 
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
@@ -28,15 +35,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     rendererHash?: string
     innerRef?: any
     outerRef?: any
-    onItemsRendered?: (
-      renderData: {
-        overscanStartIndex: number
-        overscanStopIndex: number
-        visibleStartIndex: number
-        visibleStopIndex: number
-      },
-      orderedRows: Row<T>[]
-    ) => void
+    onItemsRendered?: (renderData: RenderData, orderedRows: Row<T>[]) => void
     onScroll?: (scrollData: {
       scrollDirection: "forward" | "backward"
       scrollOffset: number
@@ -177,12 +176,7 @@ export function VirtualizedTable<T extends object>({
   )
 
   const itemsRenderHandler = useCallback(
-    (renderData: {
-      overscanStartIndex: number
-      overscanStopIndex: number
-      visibleStartIndex: number
-      visibleStopIndex: number
-    }) => {
+    (renderData: RenderData) => {
       if (onItemsRendered) {
         onItemsRendered(renderData, orderedRows)
       }
