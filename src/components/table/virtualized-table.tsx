@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback, MutableRefObject } from "react"
+import React, { useEffect, useMemo, useCallback } from "react"
 import { useTable, Row } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
@@ -14,6 +14,13 @@ import { tableHooks, blockTableHooks } from "./table-hooks"
 
 type GetItemSize = (index: number, orderedRows: any) => number
 
+type RenderData = {
+  overscanStartIndex: number
+  overscanStopIndex: number
+  visibleStartIndex: number
+  visibleStopIndex: number
+}
+
 const itemKeyFallback = (index: number) => String(index)
 
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
@@ -28,12 +35,7 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     rendererHash?: string
     innerRef?: any
     outerRef?: any
-    onItemsRendered?: (renderData: {
-      overscanStartIndex: number
-      overscanStopIndex: number
-      visibleStartIndex: number
-      visibleStopIndex: number
-    }) => void
+    onItemsRendered?: (renderData: RenderData, orderedRows: Row<T>[]) => void
     onScroll?: (scrollData: {
       scrollDirection: "forward" | "backward"
       scrollOffset: number
@@ -172,6 +174,16 @@ export function VirtualizedTable<T extends object>({
     // eslint-disable-next-line
     [controlledState, renderGroupHead, verticalGutter, protectedRendererHash]
   )
+
+  const itemsRenderHandler = useCallback(
+    (renderData: RenderData) => {
+      if (onItemsRendered) {
+        onItemsRendered(renderData, orderedRows)
+      }
+    },
+    [onItemsRendered, orderedRows]
+  )
+
   return (
     <LayoutContextProvider value={layoutType}>
       <StickyVirtualList
@@ -193,7 +205,7 @@ export function VirtualizedTable<T extends object>({
         orderedRows={orderedRows}
         innerRef={innerRef}
         outerRef={outerRef}
-        onItemsRendered={onItemsRendered}
+        onItemsRendered={itemsRenderHandler}
         onScroll={onScroll}
         useIsScrolling={useIsScrolling}
       >

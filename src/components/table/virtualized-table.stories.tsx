@@ -262,6 +262,7 @@ virtualizedTableStory.add(
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable<Node>
               callbackRef={node => {
+                console.log("table rerender")
                 if (tableRef.current === null && node !== null) {
                   setTableRef({ current: node })
                 }

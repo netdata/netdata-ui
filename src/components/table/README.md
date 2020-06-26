@@ -125,12 +125,15 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     rendererHash?: string
     innerRef?: any
     outerRef?: any
-    onItemsRendered?: (renderData: {
-      overscanStartIndex: number
-      overscanStopIndex: number
-      visibleStartIndex: number
-      visibleStopIndex: number
-    }) => void
+    onItemsRendered?: (
+      renderData: {
+        overscanStartIndex: number
+        overscanStopIndex: number
+        visibleStartIndex: number
+        visibleStopIndex: number
+      },
+      orderedRows: Row<T>[]
+    ) => void
     onScroll?: (scrollData: {
       scrollDirection: "forward" | "backward"
       scrollOffset: number
@@ -164,6 +167,9 @@ Exclusions:
 - `rendererHash` - hash used as dependency for memoizing virtualized row renderer callback function.
   Could be used to determine, if the function should be re-created to render a changed data, but without
   direct connection to the data object on instance level
+
+- `onItemsRendered` - we add the flattened `orderedRows` to callback args, so the app-level component
+  is able to interact with them.
 
 **Note on tradeoffs and usage**
 
