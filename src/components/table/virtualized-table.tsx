@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo, useCallback, useState } from "react"
-import { useDebounce } from "react-use"
+import React, { useEffect, useMemo, useCallback } from "react"
 import { useTable, Row } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
@@ -29,20 +28,21 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     rendererHash?: string
     innerRef?: any
     outerRef?: any
-    onItemsRendered?: (renderData: {
-      overscanStartIndex: number
-      overscanStopIndex: number
-      visibleStartIndex: number
-      visibleStopIndex: number
-    }) => void
+    onItemsRendered?: (
+      renderData: {
+        overscanStartIndex: number
+        overscanStopIndex: number
+        visibleStartIndex: number
+        visibleStopIndex: number
+      },
+      orderedRows: Row<T>[]
+    ) => void
     onScroll?: (scrollData: {
       scrollDirection: "forward" | "backward"
       scrollOffset: number
       scrollUpdateWasRequested: boolean
     }) => void
     useIsScrolling?: boolean
-    renderCallback?: (orderedRows: any[], overscanValues: { start: number; end: number }) => void
-    renderCallbackWaitTime?: number
   }
 }
 
@@ -79,13 +79,10 @@ export function VirtualizedTable<T extends object>({
     onItemsRendered,
     onScroll,
     useIsScrolling,
-    renderCallback,
-    renderCallbackWaitTime = 600,
   },
   callbackRef,
   ...customProps
 }: VTableProps<T>) {
-  const [overscanValues, setOverscanValues] = useState({ start: 0, end: 0 })
   // preserve column order to override default grouping behaviour
   const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
     columns,
@@ -186,23 +183,11 @@ export function VirtualizedTable<T extends object>({
       visibleStartIndex: number
       visibleStopIndex: number
     }) => {
-      const { overscanStartIndex, overscanStopIndex } = renderData
-      setOverscanValues({ start: overscanStartIndex, end: overscanStopIndex })
       if (onItemsRendered) {
-        onItemsRendered(renderData)
+        onItemsRendered(renderData, orderedRows)
       }
     },
-    [onItemsRendered]
-  )
-
-  useDebounce(
-    () => {
-      if (renderCallback) {
-        renderCallback(orderedRows, overscanValues)
-      }
-    },
-    renderCallbackWaitTime,
-    [overscanValues]
+    [onItemsRendered, orderedRows]
   )
 
   return (

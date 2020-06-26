@@ -193,10 +193,6 @@ virtualizedTableStory.add(
     const nodeHeights = useMemo(() => nodes.map(() => 25 + Math.round(Math.random() * 50)), [nodes])
     const getItemHeight = useCallback((index: number) => nodeHeights[index] + 8, [nodeHeights])
 
-    const renderCallback = (
-      orderedRows: any[],
-      overscanValues: { start: number; end: number }
-    ) => {}
     const virtualizedSettings = useMemo(
       () => ({
         width,
@@ -213,7 +209,6 @@ virtualizedTableStory.add(
             setVirtualContainerRef({ current: node })
           }
         },
-        renderCallback,
       }),
       [width, height, getItemHeight, nodes, virtualContainerRef]
     )
