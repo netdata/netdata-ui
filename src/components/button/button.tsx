@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, FC } from "react"
 import { StyledButton } from "./styled"
 import { Icon } from "../icon"
+import { LoaderIcon } from "../icon/components"
 
 export type ButtonType = "default" | "hollow" | "borderless"
 
@@ -35,12 +36,9 @@ export const Button: FC<ButtonWrapperProps> = ({
   ...rest
 }: ButtonWrapperProps) => (
   <StyledButton flavor={type || flavor} hasLabel={!!label} {...rest}>
-    {icon && (
-      <Icon
-        className="button-icon"
-        title={isLoading ? loadingIcon : icon}
-        name={isLoading ? loadingIcon : icon}
-      />
+    {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
+    {icon && !isLoading && !loadingIcon && (
+      <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />
     )}
     {label && <span>{(isLoading && loadingLabel) || label}</span>}
   </StyledButton>
@@ -49,5 +47,5 @@ export const Button: FC<ButtonWrapperProps> = ({
 Button.defaultProps = {
   onClick: () => {},
   icon: null,
-  loadingIcon: "loader",
+  loadingIcon: null,
 }

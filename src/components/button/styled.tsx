@@ -118,4 +118,24 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     width: ${getSizeBy(2)};
     fill: ${props => props.colors.color(props)};
   }
+
+  .ntd-spinner {
+    fill: none;
+    stroke-width: 17px;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: ntd-draw 1s linear infinite;
+    stroke: #fff;
+    width: 24px;
+  }
+
+  .path {
+    stroke: #fff;
+  }
+
+  @keyframes ntd-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 `

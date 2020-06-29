@@ -71,15 +71,16 @@ describe("Button states", () => {
   })
 
   it(" * should render loading icon", () => {
-    const { getByText, getByTitle } = testWrapper<ButtonWrapperProps>(
+    const { container, getByText, queryByTitle } = testWrapper<ButtonWrapperProps>(
       Button,
       { label: "Test prop text", icon: "plus", isLoading: true },
       DefaultTheme,
       null
     )
 
+    expect(container.firstChild).toMatchSnapshot()
     expect(getByText(/prop text/)).toBeInTheDocument()
-    expect(getByTitle("loader")).toBeInTheDocument()
+    expect(queryByTitle("plus")).not.toBeInTheDocument()
   })
 
   it(" * should be clickable", () => {
