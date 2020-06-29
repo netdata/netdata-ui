@@ -41,6 +41,7 @@ export interface TableProps<T, RT = any> {
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
+  autoResetExpanded?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: TableInstanceState
   controlledState?: TableInstanceState
@@ -77,6 +78,7 @@ export function Table<T extends Item>({
   autoResetSortBy = false,
   autoResetGroupBy = false,
   autoResetFilters = false,
+  autoResetExpanded = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
@@ -106,6 +108,8 @@ export function Table<T extends Item>({
     selectedFlatRows,
     isAllRowsSelected,
     state: { selectedRowIds, groupBy },
+    toggleAllRowsExpanded,
+    isAllRowsExpanded,
   } = useTable(
     {
       columns,
@@ -115,9 +119,11 @@ export function Table<T extends Item>({
       autoResetSortBy,
       autoResetGroupBy,
       autoResetFilters,
+      autoResetExpanded,
       disableGlobalFilter,
       globalFilter,
       filterTypes,
+      groupByFn,
       useControlledState: state => {
         return React.useMemo(
           () => ({
@@ -129,7 +135,6 @@ export function Table<T extends Item>({
           [state, controlledState]
         )
       },
-      groupByFn,
       toggleSelectedItemClb,
       itemIsDisabled,
     },
@@ -137,10 +142,21 @@ export function Table<T extends Item>({
   )
 
   useEffect(() => {
-    if (isAllRowsSelected && selectedItemsClb) {
-      selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
+    if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
+      const isGrouped = groupBy.length > 0
+      selectedItemsClb(
+        selectedFlatRows.reduce(
+          (h: Item[], r: Row<T>) => (isGrouped && r.isGrouped ? h : [...h, r.values]),
+          []
+        )
+      )
     }
-  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy])
+
+  useEffect(() => {
+    if (isAllRowsExpanded) return
+    toggleAllRowsExpanded()
+  }, [isAllRowsExpanded, toggleAllRowsExpanded])
 
   const orderedRows = useMemo(() => {
     if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {

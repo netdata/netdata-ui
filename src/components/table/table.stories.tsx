@@ -111,13 +111,8 @@ tableStory.add(
           columns={UserTableSchema}
           data={state}
           itemIsDisabled={item => item.disabled}
-          selectedItemsClb={items => {
-            action(JSON.stringify(items.filter(item => item.disabled)))
-          }}
-          toggleSelectedItemClb={(item, checked) => {
-            action(JSON.stringify(item))
-            action(checked ? "selected" : "deselected")
-          }}
+          selectedItemsClb={action("selected-all")}
+          toggleSelectedItemClb={action("toggled")}
         />
       </div>
     )
