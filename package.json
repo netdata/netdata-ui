@@ -31,7 +31,7 @@
     "ramda": "^0.26.1",
     "react-filter-box": "^3.4.1",
     "react-portal": "^4.2.0",
-    "react-table": "^7.0.4",
+    "react-table": "^7.2.1",
     "react-use": "^12.7.1",
     "react-window": "^1.8.5"
   },
