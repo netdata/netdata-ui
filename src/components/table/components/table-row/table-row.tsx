@@ -23,7 +23,7 @@ const RowLayout = ({ children, layoutType, ...props }: any) => {
 const DefaultGroupHead = ({ row, layoutType, style }: any) => {
   const rowProps = row.getRowProps()
   return layoutType === "table" ? (
-    <tr {...rowProps} style={style}>
+    <tr title="group-head" {...rowProps} style={style}>
       <td colSpan={row.cells.length}>{row.groupByVal}</td>
     </tr>
   ) : (

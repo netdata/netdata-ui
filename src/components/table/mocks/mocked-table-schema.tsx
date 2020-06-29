@@ -16,20 +16,18 @@ export const UserTableSchema = [
   {
     id: "selection",
     Header: ({ getToggleAllRowsSelectedProps }: any) => {
-      // @ts-ignore | TBD: IMPROVE PROPS
-      const { checked, onChange, indeterminate } = getToggleAllRowsSelectedProps()
-      return <Checkbox checked={checked} onChange={onChange} indeterminate={indeterminate} />
+      return <Checkbox {...getToggleAllRowsSelectedProps()} />
     },
     Cell: ({ row, itemIsDisabled, toggleSelectedItemClb }: any) => {
-      const { checked, onChange } = row.getToggleRowSelectedProps()
+      const { checked, onChange, ...rest } = row.getToggleRowSelectedProps()
 
-      const isDisabled = itemIsDisabled ? itemIsDisabled(row.values) : false
+      const isDisabled = itemIsDisabled ? itemIsDisabled(row.original) : false
       const isChecked = isDisabled ? false : checked
 
       const onToggle = useCallback(
         e => {
           if (!isDisabled && toggleSelectedItemClb) {
-            toggleSelectedItemClb(row.values, e.target.checked)
+            toggleSelectedItemClb(row.original, e.target.checked)
           }
 
           onChange(e)
@@ -39,7 +37,7 @@ export const UserTableSchema = [
 
       return (
         <CellBox>
-          <Checkbox checked={isChecked} onChange={onToggle} disabled={isDisabled} />
+          <Checkbox {...rest} checked={isChecked} onChange={onToggle} disabled={isDisabled} />
         </CellBox>
       )
     },

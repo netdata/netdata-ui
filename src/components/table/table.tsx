@@ -73,7 +73,7 @@ export function Table<T extends Item>({
   sortableBy = [],
   selectedItemsClb,
   toggleSelectedItemClb,
-  itemIsDisabled,
+  itemIsDisabled = () => false,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
@@ -144,14 +144,16 @@ export function Table<T extends Item>({
   useEffect(() => {
     if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
       const isGrouped = groupBy.length > 0
-      selectedItemsClb(
-        selectedFlatRows.reduce(
-          (h: Item[], r: Row<T>) => (isGrouped && r.isGrouped ? h : [...h, r.values]),
-          []
-        )
-      )
+      const validRows = selectedFlatRows.reduce((acc: Item[], row: Row<T>) => {
+        if (isGrouped && row.isGrouped) return acc
+        if (itemIsDisabled(row.original)) return acc
+        acc.push(row.original)
+        return acc
+      }, [])
+
+      selectedItemsClb(validRows)
     }
-  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
 
   useEffect(() => {
     if (isAllRowsExpanded) return
