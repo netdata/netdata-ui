@@ -30,7 +30,7 @@ exports[`Borderless Button  * should render 1`] = `
   transition: all 150ms;
   background-color: #FFF;
   color: #00AB44;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #FFF;
   border-radius: 2px;
@@ -119,7 +119,7 @@ exports[`Button states  * should render loading icon 1`] = `
   transition: all 150ms;
   background-color: #00AB44;
   color: #FFF;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
@@ -243,7 +243,7 @@ exports[`Button states  * should render only icon 1`] = `
   transition: all 150ms;
   background-color: #FFF;
   color: #00AB44;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
@@ -342,7 +342,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
   transition: all 150ms;
   background-color: #FFF;
   color: #00AB44;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
@@ -441,7 +441,7 @@ exports[`Default Button  * should render 1`] = `
   transition: all 150ms;
   background-color: #00AB44;
   color: #FFF;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
@@ -530,7 +530,7 @@ exports[`Hollow Button  * should render 1`] = `
   transition: all 150ms;
   background-color: #FFF;
   color: #00AB44;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;

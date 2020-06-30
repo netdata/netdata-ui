@@ -28,13 +28,43 @@ buttonStory.add(
       icon={select("Name", ["No icon", ...icons], "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      flavor={select("Name", ["default", "hollow", "borderless"], "default")}
+      flavor={select("Flavor", ["default", "hollow", "borderless"], "default")}
       danger={boolean("Danger", false)}
       warning={boolean("Warning", false)}
       small={boolean("Small (works when icon only)", false)}
       isLoading={boolean("Is loading", false)}
       loadingLabel={text("Loading label prop", "LOADING...")}
     />
+  ),
+  subData
+)
+
+const DarkBackground = styled.div`
+  background-color: black;
+  height: 50vh;
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+buttonStory.add(
+  "Button on dark background",
+  () => (
+    <DarkBackground>
+      <Button
+        label={text("Label", "LABEL")}
+        icon={select("Name", ["No icon", ...icons], "plus")}
+        disabled={boolean("Disabled", false)}
+        onClick={action("clicked")}
+        flavor={select("Flavor", ["default", "hollow", "borderless"], "default")}
+        danger={boolean("Danger", false)}
+        warning={boolean("Warning", false)}
+        small={boolean("Small (works when icon only)", false)}
+        isLoading={boolean("Is loading", false)}
+        loadingLabel={text("Loading label prop", "LOADING...")}
+      />
+    </DarkBackground>
   ),
   subData
 )
@@ -52,7 +82,7 @@ buttonStory.add(
       icon={select("Name", ["No icon", ...icons], "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      flavor={select("Name", ["default", "hollow", "borderless"], "default")}
+      flavor={select("Flavor", ["default", "hollow", "borderless"], "default")}
       danger={boolean("Danger", false)}
       warning={boolean("Warning", false)}
       small={boolean("Small (works when icon only)", false)}

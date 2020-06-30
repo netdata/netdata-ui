@@ -8,6 +8,7 @@ const getRedOrange = getColor(["red", "redOrange"])
 const getYellowAmber = getColor(["yellow", "amber"])
 const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
+const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavor = ({ flavor = DEFAULT, danger, warning }: ButtonProps) => {
   const getDangerColor = danger ? getRedOrange : undefined
@@ -30,23 +31,23 @@ const colorsByFlavor = ({ flavor = DEFAULT, danger, warning }: ButtonProps) => {
       color: getSpecialColor || getGreenHaze,
       colorHover: getSpecialColor || getGreenMalachite,
       colorActive: getWhitePure,
-      bg: getWhitePure,
-      bgHover: getWhitePure,
-      bgActive: getSpecialColor || getGreenMalachite,
+      bg: getTransparent,
+      bgHover: getTransparent,
+      bgActive: getSpecialColor || getTransparent,
       border: getSpecialColor || getGreenHaze,
       borderHover: getSpecialColor || getGreenMalachite,
       borderActive: getSpecialColor || getGreenMalachite,
     },
     [BORDER_LESS]: {
-      color: getSpecialColor || getGreenHaze,
+      color: getSpecialColor || getWhitePure,
       colorHover: getSpecialColor || getGreenMalachite,
       colorActive: getSpecialColor || getGreenHaze,
-      bg: getWhitePure,
-      bgHover: getWhitePure,
-      bgActive: getWhitePure,
-      border: getWhitePure,
-      borderHover: getWhitePure,
-      borderActive: getWhitePure,
+      bg: getTransparent,
+      bgHover: getTransparent,
+      bgActive: getTransparent,
+      border: getTransparent,
+      borderHover: getTransparent,
+      borderActive: getTransparent,
     },
   }
 
@@ -85,7 +86,7 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
   background-color: ${props => props.colors.bg(props)};
   color: ${props => props.colors.color(props)};
 
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: ${props => props.colors.border(props)};
   border-radius: 2px;
