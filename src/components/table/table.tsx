@@ -61,7 +61,7 @@ export interface TableProps<T, RT = any> {
   dataResultsCallback?: (rows: T[]) => void
 }
 
-type Item = {
+export type Item = {
   [key: string]: any
 }
 

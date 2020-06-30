@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { UnreachableNodeMask } from "./styled"
+import { Toggle } from "../../toggle"
 
 export const NodesTableSchema = [
   {
@@ -9,8 +10,44 @@ export const NodesTableSchema = [
     Header: () => {
       return <div />
     },
-    Cell: ({ row, cell }: any) => {
+    Cell: ({ cell }: any) => {
       return <div>{cell.value === "critical" && "X"}</div>
+    },
+  },
+  {
+    id: "selection",
+    Header: ({ getToggleAllRowsSelectedProps }: any) => {
+      const { indeterminate, ...rest } = getToggleAllRowsSelectedProps()
+      return <Toggle {...rest} labelLeft="off" labelRight="on" colored={!indeterminate} />
+    },
+    Cell: ({ row, itemIsDisabled, toggleSelectedItemClb }: any) => {
+      const { checked, onChange, ...rest } = row.getToggleRowSelectedProps()
+
+      const isDisabled = itemIsDisabled ? itemIsDisabled(row.original) : false
+      const isChecked = isDisabled ? false : checked
+
+      const onToggle = useCallback(
+        e => {
+          if (!isDisabled && toggleSelectedItemClb) {
+            toggleSelectedItemClb(row.original, e.target.checked)
+          }
+
+          onChange(e)
+        },
+        [row, isDisabled, toggleSelectedItemClb, onChange]
+      )
+
+      return (
+        <Toggle
+          {...rest}
+          checked={isChecked}
+          onChange={onToggle}
+          disabled={isDisabled}
+          labelLeft="off"
+          labelRight="on"
+          colored={checked}
+        />
+      )
     },
   },
   { id: "services", accessor: "services" },
@@ -20,10 +57,10 @@ export const NodesTableSchema = [
       return row.node.name
     },
     width: 160,
-    Header: ({ column }: any) => {
+    Header: () => {
       return <div>Node name</div>
     },
-    Cell: ({ cell, row }: any) => {
+    Cell: ({ row }: any) => {
       const {
         node: { name },
         status,
@@ -45,27 +82,27 @@ export const NodesTableSchema = [
     accessor: "chart",
     width: 200,
     Header: () => <div>Chart Name</div>,
-    Cell: (props: any) => <div>Chart placeholder</div>,
+    Cell: () => <div>Chart placeholder</div>,
   },
   {
     id: "chart2",
     accessor: "chart2",
     width: 200,
     Header: () => <div>Chart Name</div>,
-    Cell: (props: any) => <div>Chart placeholder</div>,
+    Cell: () => <div>Chart placeholder</div>,
   },
   {
     id: "chart3",
     accessor: "chart3",
     width: 200,
     Header: () => <div>Chart Name</div>,
-    Cell: (props: any) => <div>Chart placeholder</div>,
+    Cell: () => <div>Chart placeholder</div>,
   },
   {
     id: "chart4",
     accessor: "chart4",
     width: 200,
     Header: () => <div>Chart Name</div>,
-    Cell: (props: any) => <div>Chart placeholder</div>,
+    Cell: () => <div>Chart placeholder</div>,
   },
 ]
