@@ -1,0 +1,590 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Borderless Button  * should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 128px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  word-break: keep-all;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  background-color: #FFF;
+  color: #00AB44;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FFF;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.c0:hover {
+  border-color: #FFF;
+  background-color: #FFF;
+  color: #00CB51;
+}
+
+.c0:hover .button-icon {
+  fill: #00CB51;
+}
+
+.c0:active {
+  border-color: #FFF;
+  background-color: #FFF;
+  color: #00AB44;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0 .button-icon {
+  position: absolute;
+  left: 4px;
+  height: 16px;
+  width: 16px;
+  fill: #00AB44;
+}
+
+.c0 .ntd-spinner {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c0 .path {
+  stroke: #fff;
+}
+
+<button
+  class="c0"
+>
+  <span>
+    Test prop text
+  </span>
+</button>
+`;
+
+exports[`Button states  * should render loading icon 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 128px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  word-break: keep-all;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  background-color: #00AB44;
+  color: #FFF;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00AB44;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.c0:hover {
+  border-color: #00CB51;
+  background-color: #00AB44;
+  color: #FFF;
+}
+
+.c0:hover .button-icon {
+  fill: #FFF;
+}
+
+.c0:active {
+  border-color: #00CB51;
+  background-color: #00CB51;
+  color: #FFF;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0 .button-icon {
+  position: absolute;
+  left: 4px;
+  height: 16px;
+  width: 16px;
+  fill: #FFF;
+}
+
+.c0 .ntd-spinner {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c0 .path {
+  stroke: #fff;
+}
+
+.c1 {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c1 .path {
+  stroke: #fff;
+}
+
+<button
+  class="c0"
+>
+  <svg
+    class="c1 button-icon"
+    version="1.1"
+    viewBox="0 0 21 17"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      class="path"
+      fill="none"
+      fill-rule="evenodd"
+      stroke="none"
+      stroke-width="1"
+    >
+      <path
+        d="M2,1 C8.25086152,1 11.9367136,1 13.0575562,1 C14.73882,1 19.6834591,2 19.9614325,7.72050108 C20.239406,13.4410022 15.7459591,15.1224845 13.6463763,15.1224845 C12.2466545,15.1224845 10.0279195,15.1224845 6.9901715,15.1224845 L2,1 Z"
+        id="Path-2"
+        stroke-width="2"
+      />
+    </g>
+  </svg>
+  <span>
+    Test prop text
+  </span>
+</button>
+`;
+
+exports[`Button states  * should render only icon 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  word-break: keep-all;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  background-color: #FFF;
+  color: #00AB44;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00AB44;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.c0:hover {
+  border-color: #00CB51;
+  background-color: #FFF;
+  color: #00CB51;
+}
+
+.c0:hover .button-icon {
+  fill: #00CB51;
+}
+
+.c0:active {
+  border-color: #00CB51;
+  background-color: #00CB51;
+  color: #FFF;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0 .button-icon {
+  position: absolute;
+  left: auto;
+  height: 16px;
+  width: 16px;
+  fill: #00AB44;
+}
+
+.c0 .ntd-spinner {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c0 .path {
+  stroke: #fff;
+}
+
+.c1 {
+  height: 24px;
+  width: 24px;
+}
+
+<button
+  class="c0"
+>
+  <svg
+    class="c1 button-icon"
+    title="plus"
+  >
+    <use
+      xlink:href="#undefined"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Button states  * should render smaller only icon 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  word-break: keep-all;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  background-color: #FFF;
+  color: #00AB44;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00AB44;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.c0:hover {
+  border-color: #00CB51;
+  background-color: #FFF;
+  color: #00CB51;
+}
+
+.c0:hover .button-icon {
+  fill: #00CB51;
+}
+
+.c0:active {
+  border-color: #00CB51;
+  background-color: #00CB51;
+  color: #FFF;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0 .button-icon {
+  position: absolute;
+  left: auto;
+  height: 16px;
+  width: 16px;
+  fill: #00AB44;
+}
+
+.c0 .ntd-spinner {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c0 .path {
+  stroke: #fff;
+}
+
+.c1 {
+  height: 24px;
+  width: 24px;
+}
+
+<button
+  class="c0"
+>
+  <svg
+    class="c1 button-icon"
+    title="plus"
+  >
+    <use
+      xlink:href="#undefined"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Default Button  * should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 128px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  word-break: keep-all;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  background-color: #00AB44;
+  color: #FFF;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00AB44;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.c0:hover {
+  border-color: #00CB51;
+  background-color: #00AB44;
+  color: #FFF;
+}
+
+.c0:hover .button-icon {
+  fill: #FFF;
+}
+
+.c0:active {
+  border-color: #00CB51;
+  background-color: #00CB51;
+  color: #FFF;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0 .button-icon {
+  position: absolute;
+  left: 4px;
+  height: 16px;
+  width: 16px;
+  fill: #FFF;
+}
+
+.c0 .ntd-spinner {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c0 .path {
+  stroke: #fff;
+}
+
+<button
+  class="c0"
+>
+  <span>
+    Test prop text
+  </span>
+</button>
+`;
+
+exports[`Hollow Button  * should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 128px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  word-break: keep-all;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 8px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  background-color: #FFF;
+  color: #00AB44;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #00AB44;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.c0:hover {
+  border-color: #00CB51;
+  background-color: #FFF;
+  color: #00CB51;
+}
+
+.c0:hover .button-icon {
+  fill: #00CB51;
+}
+
+.c0:active {
+  border-color: #00CB51;
+  background-color: #00CB51;
+  color: #FFF;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0 .button-icon {
+  position: absolute;
+  left: 4px;
+  height: 16px;
+  width: 16px;
+  fill: #00AB44;
+}
+
+.c0 .ntd-spinner {
+  fill: none;
+  stroke-width: 17px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  -webkit-animation: ntd-draw 1s linear infinite;
+  animation: ntd-draw 1s linear infinite;
+  stroke: #fff;
+  width: 24px;
+}
+
+.c0 .path {
+  stroke: #fff;
+}
+
+<button
+  class="c0"
+>
+  <span>
+    Test prop text
+  </span>
+</button>
+`;

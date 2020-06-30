@@ -7,6 +7,7 @@ export interface IconProps {
   size?: "small" | "medium" | "large"
   className?: string
   onClick?: (arg?: any) => void
+  title?: string
 }
 
 const getSize = filename => {
