@@ -10,9 +10,11 @@ const rawColors: RawColorsT = {
   },
   gray: {
     limedSpruce: "#35414A",
+    bombay: "#AEB3B7",
     silverSand: "#B5B9BC",
     gallery: "#EFEFEF",
-    bombay: "#AEB3B7",
+    guyabano: "#F7F8F8",
+    gainsboro: "#D8D8D8",
   },
   green: {
     malachite: "#00CB51",
@@ -41,6 +43,7 @@ const rawColors: RawColorsT = {
 
 const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
+  separatorColor: rawColors.gray.gallery,
   controlFocused: rawColors.gray.limedSpruce,
   error: rawColors.red.redOrange,
   warning: rawColors.yellow.amber,

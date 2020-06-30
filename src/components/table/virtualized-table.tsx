@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from "react"
-import { useTable, Row } from "react-table"
+import { useTable } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
 import { LayoutContextProvider } from "./layout-context"
@@ -14,6 +14,15 @@ import { tableHooks, blockTableHooks } from "./table-hooks"
 
 type GetItemSize = (index: number, orderedRows: any) => number
 
+type RenderData = {
+  overscanStartIndex: number
+  overscanStopIndex: number
+  visibleStartIndex: number
+  visibleStopIndex: number
+}
+
+const itemKeyFallback = (index: number) => String(index)
+
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
     width: number
@@ -23,6 +32,16 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
     overscanCount?: number
     verticalGutter?: number
     itemKey?: (index: number, data: any) => string
+    rendererHash?: string
+    innerRef?: any
+    outerRef?: any
+    onItemsRendered?: (renderData: RenderData, orderedRows: any[]) => void
+    onScroll?: (scrollData: {
+      scrollDirection: "forward" | "backward"
+      scrollOffset: number
+      scrollUpdateWasRequested: boolean
+    }) => void
+    useIsScrolling?: boolean
   }
 }
 
@@ -52,7 +71,13 @@ export function VirtualizedTable<T extends object>({
     overscanCount,
     itemSize,
     verticalGutter = 0,
-    itemKey,
+    itemKey = itemKeyFallback,
+    rendererHash,
+    innerRef,
+    outerRef,
+    onItemsRendered,
+    onScroll,
+    useIsScrolling,
   },
   callbackRef,
   ...customProps
@@ -62,6 +87,8 @@ export function VirtualizedTable<T extends object>({
     columns,
     controlledState.columnOrder,
   ])
+
+  const protectedRendererHash = useMemo(() => rendererHash || "stableFallback", [rendererHash])
 
   const reactTableHooks = layoutType === "block" ? blockTableHooks : tableHooks
 
@@ -103,7 +130,7 @@ export function VirtualizedTable<T extends object>({
 
   useEffect(() => {
     if (selectedItemsClb) {
-      selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
+      selectedItemsClb(selectedFlatRows.map((r: any) => r.original))
     }
   }, [selectedFlatRows, selectedItemsClb])
 
@@ -126,22 +153,16 @@ export function VirtualizedTable<T extends object>({
   )
 
   // TODO
-  // We can come up with declarative API for that, but now the solution is
-  // to depend on anything that can change order of items (grouping, filtering),
-  // so the indexes won't represent same items.
-
-  // This overall introduces some implicit details of how list rendering works,
-  // but its unclear what is the desired abstraction.
-  // Better tradeoff TBD.
-
+  // is rendererHash a better tradeoff?
+  // Callback could potentially be a React component
   const renderVirtualizedRow = useCallback(
-    ({ index, style }) => {
-      const row = orderedRows[index]
+    ({ index, style, data }) => {
+      const row = data.orderedRows[index]
       prepareRow(row)
       return (
         <TableRow
           key={row.id}
-          style={generateRowStyle({ index, style, verticalGutter, rows: orderedRows })}
+          style={generateRowStyle({ index, style, verticalGutter, rows: data.orderedRows })}
           customProps={customProps}
           row={row}
           prepareRow={prepareRow}
@@ -151,8 +172,18 @@ export function VirtualizedTable<T extends object>({
       )
     },
     // eslint-disable-next-line
-    [controlledState, selectedRowIds, renderGroupHead, verticalGutter]
+    [controlledState, renderGroupHead, verticalGutter, protectedRendererHash]
   )
+
+  const itemsRenderHandler = useCallback(
+    (renderData: RenderData) => {
+      if (onItemsRendered) {
+        onItemsRendered(renderData, orderedRows)
+      }
+    },
+    [onItemsRendered, orderedRows]
+  )
+
   return (
     <LayoutContextProvider value={layoutType}>
       <StickyVirtualList
@@ -171,6 +202,12 @@ export function VirtualizedTable<T extends object>({
         overscanCount={overscanCount}
         callbackRef={callbackRef}
         itemKey={itemKey}
+        orderedRows={orderedRows}
+        innerRef={innerRef}
+        outerRef={outerRef}
+        onItemsRendered={itemsRenderHandler}
+        onScroll={onScroll}
+        useIsScrolling={useIsScrolling}
       >
         {renderVirtualizedRow}
       </StickyVirtualList>

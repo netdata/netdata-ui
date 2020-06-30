@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from "react"
+import React, { forwardRef, ReactNode, MutableRefObject } from "react"
 import { StickyListContextProvider, StickyListContextConsumer } from "../../layout-context"
 import { TableContainer, TableBody } from "../table-container"
 import { TableHead } from "../table-head"
@@ -6,7 +6,7 @@ import { StyledFixedList, StyledVariableList } from "./styled"
 
 const ItemWrapper = ({ data, index, style }: any) => {
   const { ItemRenderer } = data
-  return <ItemRenderer index={index} style={style} />
+  return <ItemRenderer index={index} style={style} data={data} />
 }
 
 const innerElementType = forwardRef(
@@ -61,6 +61,21 @@ interface Props {
   customProps: unknown
   callbackRef: any
   itemKey?: (index: number, data: any) => string
+  orderedRows: []
+  innerRef?: any
+  outerRef?: any
+  onItemsRendered?: (renderData: {
+    overscanStartIndex: number
+    overscanStopIndex: number
+    visibleStartIndex: number
+    visibleStopIndex: number
+  }) => void
+  onScroll?: (scrollData: {
+    scrollDirection: "forward" | "backward"
+    scrollOffset: number
+    scrollUpdateWasRequested: boolean
+  }) => void
+  useIsScrolling?: boolean
 }
 
 export const StickyVirtualList = ({
@@ -74,6 +89,8 @@ export const StickyVirtualList = ({
   layoutType,
   variableSize,
   callbackRef,
+  itemKey,
+  orderedRows,
   ...rest
 }: Props) => (
   <StickyListContextProvider
@@ -89,11 +106,21 @@ export const StickyVirtualList = ({
     }}
   >
     {variableSize ? (
-      <StyledVariableList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
+      <StyledVariableList
+        itemData={{ ItemRenderer: children, orderedRows }}
+        ref={callbackRef}
+        itemKey={itemKey}
+        {...rest}
+      >
         {ItemWrapper}
       </StyledVariableList>
     ) : (
-      <StyledFixedList itemData={{ ItemRenderer: children }} ref={callbackRef} {...rest}>
+      <StyledFixedList
+        itemData={{ ItemRenderer: children, orderedRows }}
+        ref={callbackRef}
+        itemKey={itemKey}
+        {...rest}
+      >
         {ItemWrapper}
       </StyledFixedList>
     )}

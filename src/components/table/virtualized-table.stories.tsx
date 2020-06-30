@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useRef } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { useMeasure } from "react-use"
+import { useEffect, useCallback } from "@storybook/addons"
 import { VirtualizedTable } from "./virtualized-table"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
-import { webkitVisibleScrollbar } from "../../mixins"
 import { customGroupBy } from "./mocks/utils"
 
 const subData = {
@@ -78,8 +78,10 @@ const nodesData = [
 
 const virtualNodesData = [...nodesData, ...sampleNodes]
 
-const nodeHeights = virtualNodesData.map(() => 25 + Math.round(Math.random() * 50))
-const getItemHeight = (index: number) => nodeHeights[index] + 8
+const getItemKey = (index, data) => {
+  const row = data.orderedRows[index]
+  return `${(row.original && row.original.node.name) || row.id} ${index}`
+}
 
 const groupsOrderSettings = {
   groupsOrder: {
@@ -113,8 +115,6 @@ const prepareData = (arr: any) =>
     }
     return [...a, { ...c, status }]
   }, [])
-
-const virtualizedData = prepareData(virtualNodesData)
 
 const NoScrollContainer = styled.div`
   position: relative;
@@ -176,6 +176,10 @@ virtualizedTableStory.add(
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
     const [tableRef, setTableRef] = useState({ current: null }) as any
+    const [virtualContainerRef, setVirtualContainerRef] = useState({ current: null })
+    const [nodes, setNodes] = useState(virtualNodesData)
+
+    const virtualizedData = useMemo(() => prepareData(nodes), [nodes])
 
     const controlledState = useMemo(
       () => ({
@@ -186,6 +190,9 @@ virtualizedTableStory.add(
 
     const [ref, { width, height }] = useMeasure()
 
+    const nodeHeights = useMemo(() => nodes.map(() => 25 + Math.round(Math.random() * 50)), [nodes])
+    const getItemHeight = useCallback((index: number) => nodeHeights[index] + 8, [nodeHeights])
+
     const virtualizedSettings = useMemo(
       () => ({
         width,
@@ -193,9 +200,25 @@ virtualizedTableStory.add(
         itemSize: getItemHeight,
         variableSize: true,
         verticalGutter: 8,
+        itemKey: getItemKey,
+        rendererHash: nodes.reduce((acc, current) => {
+          return `${acc}${current.node.name}`
+        }, ""),
+        outerRef: node => {
+          if (virtualContainerRef.current === null && node !== null) {
+            setVirtualContainerRef({ current: node })
+          }
+        },
       }),
-      [width, height]
+      [width, height, getItemHeight, nodes, virtualContainerRef]
     )
+
+    useEffect(() => {
+      if (tableRef.current) {
+        tableRef.current.resetAfterIndex(0, false)
+      }
+      // eslint-disable-next-line
+    }, [nodes])
 
     return (
       <div>
@@ -215,11 +238,31 @@ virtualizedTableStory.add(
               <option value="services"> Services </option>
             </select>
           </label>
+          <button
+            type="button"
+            onClick={() => {
+              const [first, ...rest] = nodes
+              setNodes(rest)
+            }}
+          >
+            delete first
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              const [first, second, ...rest] = nodes
+
+              setNodes([first, { ...second, alarm: { critical: 1, warning: 0 } }, ...rest])
+            }}
+          >
+            change status
+          </button>
         </div>
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable<Node>
               callbackRef={node => {
+                console.log("table rerender")
                 if (tableRef.current === null && node !== null) {
                   setTableRef({ current: node })
                 }
