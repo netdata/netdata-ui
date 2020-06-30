@@ -28,7 +28,7 @@ buttonStory.add(
       icon={select("Name", ["No icon", ...icons], "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      flavor={select("Flavor", ["default", "hollow", "borderless"], "default")}
+      flavour={select("Flavour", ["default", "hollow", "borderless"], "default")}
       danger={boolean("Danger", false)}
       warning={boolean("Warning", false)}
       small={boolean("Small (works when icon only)", false)}
@@ -57,7 +57,7 @@ buttonStory.add(
         icon={select("Name", ["No icon", ...icons], "plus")}
         disabled={boolean("Disabled", false)}
         onClick={action("clicked")}
-        flavor={select("Flavor", ["default", "hollow", "borderless"], "default")}
+        flavour={select("Flavour", ["default", "hollow", "borderless"], "default")}
         danger={boolean("Danger", false)}
         warning={boolean("Warning", false)}
         small={boolean("Small (works when icon only)", false)}
@@ -82,7 +82,7 @@ buttonStory.add(
       icon={select("Name", ["No icon", ...icons], "plus")}
       disabled={boolean("Disabled", false)}
       onClick={action("clicked")}
-      flavor={select("Flavor", ["default", "hollow", "borderless"], "default")}
+      flavour={select("Flavour", ["default", "hollow", "borderless"], "default")}
       danger={boolean("Danger", false)}
       warning={boolean("Warning", false)}
       small={boolean("Small (works when icon only)", false)}

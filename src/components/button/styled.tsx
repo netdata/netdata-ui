@@ -10,12 +10,12 @@ const getWhitePure = getColor(["white", "pure"])
 const getGreenMalachite = getColor(["green", "malachite"])
 const getTransparent = getColor(["transparent", "full"])
 
-const colorsByFlavor = ({ flavor = DEFAULT, danger, warning }: ButtonProps) => {
+const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) => {
   const getDangerColor = danger ? getRedOrange : undefined
   const getWarningColor = warning ? getYellowAmber : undefined
   const getSpecialColor = getDangerColor || getWarningColor
 
-  const flavors = {
+  const flavours = {
     [DEFAULT]: {
       color: getWhitePure,
       colorHover: getWhitePure,
@@ -51,7 +51,7 @@ const colorsByFlavor = ({ flavor = DEFAULT, danger, warning }: ButtonProps) => {
     },
   }
 
-  return flavors[flavor] || flavors[DEFAULT]
+  return flavours[flavour] || flavours[DEFAULT]
 }
 
 type StyledButtonProps = {
@@ -60,7 +60,7 @@ type StyledButtonProps = {
 }
 
 export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
-  colors: colorsByFlavor(props),
+  colors: colorsByFlavour(props),
 }))<ButtonProps & StyledButtonProps>`
   display: flex;
   justify-content: center;
