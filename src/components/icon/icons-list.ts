@@ -46,7 +46,6 @@ import alarm_bell from "./assets/alarm_bell.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboards from "./assets/dashboards.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
-import loader from "./assets/loader.svg"
 
 export const iconsList = {
   alarm,
@@ -70,7 +69,6 @@ export const iconsList = {
   hamburger,
   holder,
   logo_s,
-  loader,
   magnify,
   node_default_l,
   node_notification_l,
