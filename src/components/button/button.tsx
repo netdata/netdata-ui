@@ -1,41 +1,51 @@
 import React, { SyntheticEvent, FC } from "react"
-import { StyledButton, StyledCircularProgress } from "./styled"
-import { DEFAULT } from "./constants"
+import { StyledButton } from "./styled"
+import { Icon } from "../icon"
+import { LoaderIcon } from "../icon/components"
 
-type ButtonType = "default" | "hollow" | "borderless"
+export type ButtonType = "default" | "hollow" | "borderless"
 
 export interface ButtonProps {
   id?: string
-  ref?: React.MutableRefObject<HTMLInputElement>
   className?: string
-  label?: string | JSX.Element
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
-  icon?: any
   danger?: boolean
-  isLoading?: boolean
-  type?: ButtonType
+  warning?: boolean
+  type?: ButtonType | undefined
+  flavor?: ButtonType
   disabled?: boolean
+  small?: boolean
 }
 
-export const Button: FC<ButtonProps> = ({
+export interface ButtonWrapperProps extends ButtonProps {
+  label?: string | JSX.Element
+  icon?: any
+  isLoading?: boolean
+  loadingLabel?: string | JSX.Element
+  loadingIcon?: any
+}
+
+export const Button: FC<ButtonWrapperProps> = ({
   label,
-  onClick = () => {},
-  icon = null,
-  isLoading = false,
-  type = DEFAULT,
-  disabled = false,
-  danger = false,
-  ...props
-}: ButtonProps) => {
-  return (
-    <StyledButton
-      label={label}
-      onClick={onClick}
-      icon={isLoading ? <StyledCircularProgress /> : icon}
-      type={type}
-      disabled={disabled}
-      danger={danger}
-      {...props}
-    />
-  )
+  icon,
+  type,
+  flavor,
+  isLoading,
+  loadingLabel,
+  loadingIcon,
+  ...rest
+}: ButtonWrapperProps) => (
+  <StyledButton flavor={type || flavor} hasLabel={!!label} {...rest}>
+    {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
+    {icon && !isLoading && !loadingIcon && (
+      <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />
+    )}
+    {label && <span>{(isLoading && loadingLabel) || label}</span>}
+  </StyledButton>
+)
+
+Button.defaultProps = {
+  onClick: () => {},
+  icon: null,
+  loadingIcon: null,
 }
