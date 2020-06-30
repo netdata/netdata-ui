@@ -85,7 +85,7 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
   background-color: ${props => props.colors.bg(props)};
   color: ${props => props.colors.color(props)};
 
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
   border-color: ${props => props.colors.border(props)};
   border-radius: 2px;
