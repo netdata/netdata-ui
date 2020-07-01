@@ -161,7 +161,7 @@ describe("Hollow Button", () => {
     expect(button).toMatchSnapshot()
     expect(button).toHaveStyleRule("width", "128px")
     expect(button).toHaveStyleRule("height", "40px")
-    expect(button).toHaveStyleRule("background-color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
     expect(button).toHaveStyleRule("border-color", "#00AB44")
     expect(button).toHaveStyleRule("color", "#00AB44")
     expect(button).toHaveStyleRule("opacity", "1")
@@ -176,7 +176,7 @@ describe("Hollow Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
     expect(button).toHaveStyleRule("border-color", "#FF4136")
     expect(button).toHaveStyleRule("color", "#FF4136")
   })
@@ -189,7 +189,7 @@ describe("Hollow Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
     expect(button).toHaveStyleRule("border-color", "#FFC300")
     expect(button).toHaveStyleRule("color", "#FFC300")
   })
@@ -210,9 +210,9 @@ describe("Borderless Button", () => {
     expect(button).toMatchSnapshot()
     expect(button).toHaveStyleRule("width", "128px")
     expect(button).toHaveStyleRule("height", "40px")
-    expect(button).toHaveStyleRule("background-color", "#FFF")
-    expect(button).toHaveStyleRule("border-color", "#FFF")
-    expect(button).toHaveStyleRule("color", "#00AB44")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)")
+    expect(button).toHaveStyleRule("color", "#FFF")
     expect(button).toHaveStyleRule("opacity", "1")
     expect(button).toHaveStyleRule("pointer-events", "auto")
   })
@@ -225,8 +225,8 @@ describe("Borderless Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF")
-    expect(button).toHaveStyleRule("border-color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)")
     expect(button).toHaveStyleRule("color", "#FF4136")
   })
 
@@ -238,8 +238,8 @@ describe("Borderless Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF")
-    expect(button).toHaveStyleRule("border-color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)")
     expect(button).toHaveStyleRule("color", "#FFC300")
   })
 })

@@ -12,7 +12,7 @@ export interface ButtonProps {
   danger?: boolean
   warning?: boolean
   type?: ButtonType | undefined
-  flavor?: ButtonType
+  flavour?: ButtonType
   disabled?: boolean
   small?: boolean
 }
@@ -29,13 +29,13 @@ export const Button: FC<ButtonWrapperProps> = ({
   label,
   icon,
   type,
-  flavor,
+  flavour,
   isLoading,
   loadingLabel,
   loadingIcon,
   ...rest
 }: ButtonWrapperProps) => (
-  <StyledButton flavor={type || flavor} hasLabel={!!label} {...rest}>
+  <StyledButton flavour={type || flavour} hasLabel={!!label} {...rest}>
     {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
     {icon && !isLoading && !loadingIcon && (
       <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />
