@@ -52,7 +52,7 @@ const SidebarContent = styled.div`
   overflow: scroll;
   align-items: center;
   justify-content: first baseline;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0);
   height: 100%;
   width: 100%;
   color: #3a3a3a;
