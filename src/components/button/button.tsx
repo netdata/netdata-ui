@@ -33,9 +33,15 @@ export const Button: FC<ButtonWrapperProps> = ({
   isLoading,
   loadingLabel,
   loadingIcon,
+  onClick,
   ...rest
 }: ButtonWrapperProps) => (
-  <StyledButton flavour={type || flavour} hasLabel={!!label} {...rest}>
+  <StyledButton
+    flavour={type || flavour}
+    hasLabel={!!label}
+    onClick={isLoading ? undefined : onClick}
+    {...rest}
+  >
     {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
     {icon && !isLoading && !loadingIcon && (
       <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />

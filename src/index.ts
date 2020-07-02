@@ -39,3 +39,4 @@ export * from "./components/input"
 export { webkitVisibleScrollbar } from "./mixins"
 
 export { Table, VirtualizedTable } from "./components/table"
+export { Toggle, ToggleProps } from "./components/toggle"
