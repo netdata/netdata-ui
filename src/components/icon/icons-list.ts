@@ -12,7 +12,9 @@ import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import google from "./assets/google.svg"
 import hamburger from "./assets/hamburger.svg"
+import help from "./assets/help.svg"
 import holder from "./assets/holder.svg"
+import line_chart from "./assets/line_chart.svg"
 import magnify from "./assets/magnify.svg"
 import node_default_l from "./assets/node_default_l.svg"
 import node_notification_l from "./assets/node_notification_l.svg"
@@ -22,6 +24,8 @@ import plus_mini_s from "./assets/plus_mini_s.svg"
 import plus from "./assets/plus.svg"
 import reload from "./assets/reload.svg"
 import sad from "./assets/sad.svg"
+import save from "./assets/save.svg"
+import text_add from "./assets/text_add.svg"
 import trashcan from "./assets/trashcan.svg"
 import user from "./assets/user.svg"
 import warning from "./assets/warning.svg"
@@ -67,7 +71,9 @@ export const iconsList = {
   github,
   google,
   hamburger,
+  help,
   holder,
+  line_chart,
   logo_s,
   magnify,
   node_default_l,
@@ -78,6 +84,8 @@ export const iconsList = {
   plus,
   reload,
   sad,
+  save,
+  text_add,
   trashcan,
   user,
   warning,
