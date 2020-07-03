@@ -43,6 +43,8 @@ const rawColors: RawColorsT = {
 
 const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
+  borderSecondaryColor: rawColors.gray.limedSpruce, // neutral color
+
   separatorColor: rawColors.gray.gallery,
   controlFocused: rawColors.gray.limedSpruce,
   error: rawColors.red.redOrange,
