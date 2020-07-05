@@ -51,6 +51,7 @@ const appColors: AppColorsT = {
   warning: rawColors.yellow.amber,
   success: rawColors.green.greenHaze,
   text: rawColors.gray.limedSpruce,
+  sectionHeaderBackground: rawColors.gray.limedSpruce,
 }
 
 export const colors: RawColorsT & AppColorsT = {
