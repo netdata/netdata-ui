@@ -49,6 +49,7 @@ import view_list from "./assets/view_list.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboards from "./assets/dashboards.svg"
+import dashboard_add from "./assets/dashboard_add.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
 
 export const iconsList = {
@@ -65,6 +66,7 @@ export const iconsList = {
   cross_s,
   dashboard,
   dashboards,
+  dashboard_add,
   error,
   expand,
   gear,
