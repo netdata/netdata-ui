@@ -43,12 +43,15 @@ const rawColors: RawColorsT = {
 
 const appColors: AppColorsT = {
   borderColor: rawColors.gray.bombay,
+  borderSecondaryColor: rawColors.gray.limedSpruce, // neutral color
+
   separatorColor: rawColors.gray.gallery,
   controlFocused: rawColors.gray.limedSpruce,
   error: rawColors.red.redOrange,
   warning: rawColors.yellow.amber,
   success: rawColors.green.greenHaze,
   text: rawColors.gray.limedSpruce,
+  sectionHeaderBackground: rawColors.gray.limedSpruce,
 }
 
 export const colors: RawColorsT & AppColorsT = {

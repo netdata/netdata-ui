@@ -15,8 +15,10 @@ import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import google from "./assets/google.svg"
 import hamburger from "./assets/hamburger.svg"
+import help from "./assets/help.svg"
 import holder from "./assets/holder.svg"
 import insights from "./assets/insights.svg"
+import line_chart from "./assets/line_chart.svg"
 import magnify from "./assets/magnify.svg"
 import node_default_l from "./assets/node_default_l.svg"
 import node_notification_l from "./assets/node_notification_l.svg"
@@ -26,6 +28,8 @@ import plus_mini_s from "./assets/plus_mini_s.svg"
 import plus from "./assets/plus.svg"
 import reload from "./assets/reload.svg"
 import sad from "./assets/sad.svg"
+import save from "./assets/save.svg"
+import text_add from "./assets/text_add.svg"
 import trashcan from "./assets/trashcan.svg"
 import user from "./assets/user.svg"
 import warning from "./assets/warning.svg"
@@ -49,6 +53,7 @@ import view_list from "./assets/view_list.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboards from "./assets/dashboards.svg"
+import dashboard_add from "./assets/dashboard_add.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
 
 export const iconsList = {
@@ -67,14 +72,17 @@ export const iconsList = {
   cross_s,
   dashboard,
   dashboards,
+  dashboard_add,
   error,
   expand,
   gear,
   github,
   google,
   hamburger,
+  help,
   holder,
   insights,
+  line_chart,
   logo_s,
   magnify,
   node_default_l,
@@ -85,6 +93,8 @@ export const iconsList = {
   plus,
   reload,
   sad,
+  save,
+  text_add,
   trashcan,
   user,
   warning,
