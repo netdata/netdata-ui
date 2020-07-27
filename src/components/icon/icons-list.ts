@@ -1,7 +1,10 @@
+/* eslint-disable camelcase */
 import alarm from "./assets/alarm.svg"
 import alarmCritical from "./assets/alarm_c.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
+import correlation from "./assets/correlation.svg"
+import correlation_inv from "./assets/correlation_inv.svg"
 import chart_added from "./assets/chart_added.svg"
 import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
@@ -13,6 +16,7 @@ import github from "./assets/github.svg"
 import google from "./assets/google.svg"
 import hamburger from "./assets/hamburger.svg"
 import holder from "./assets/holder.svg"
+import insights from "./assets/insights.svg"
 import magnify from "./assets/magnify.svg"
 import node_default_l from "./assets/node_default_l.svg"
 import node_notification_l from "./assets/node_notification_l.svg"
@@ -53,6 +57,8 @@ export const iconsList = {
   alarmCritical,
   alarmCriticalWarning,
   alarmWarning,
+  correlation,
+  correlation_inv,
   chart_added,
   check,
   checkmark_s,
@@ -68,6 +74,7 @@ export const iconsList = {
   google,
   hamburger,
   holder,
+  insights,
   logo_s,
   magnify,
   node_default_l,
