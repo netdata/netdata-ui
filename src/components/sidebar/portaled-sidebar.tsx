@@ -41,7 +41,7 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
 
   return (
     <Portal>
-      <DisabledOverlay className={className} onClick={handleOverlayClick} />
+      <DisabledOverlay onClick={handleOverlayClick} />
       <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
         {children}
       </PortalSidebox>
