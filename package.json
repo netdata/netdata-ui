@@ -29,6 +29,7 @@
     "@rmwc/circular-progress": "^5.7",
     "polished": "^3.4.1",
     "ramda": "^0.26.1",
+    "react-filter-box": "^3.4.1",
     "react-portal": "^4.2.0",
     "react-table": "^7.0.4",
     "react-use": "^12.7.1",
