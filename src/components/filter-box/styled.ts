@@ -19,4 +19,8 @@ export const Container = styled.div`
     border-color: ${getColor(["error"])};
     box-shadow: none;
   }
+
+  .react-filter-box.focus {
+    box-shadow: none;
+  }
 `

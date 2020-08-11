@@ -8,7 +8,8 @@ import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
-import { customGroupBy } from "./mocks/utils"
+import { customGroupBy, filterByExpressions, filterOptions } from "./mocks/utils"
+import { FilterBox, FilterExpression } from "../filter-box"
 
 const subData = {
   readme: {
@@ -35,7 +36,7 @@ const sampleNode = {
   chart4: { chartName: "Zoom Chart" },
 }
 
-const sampleNodes = new Array(200).fill(sampleNode)
+const sampleNodes = new Array(10).fill(sampleNode)
 
 const nodesData = [
   {
@@ -175,6 +176,7 @@ virtualizedTableStory.add(
   "Virtualized table",
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
+    const [globalFilter, setGlobalFilter] = useState({ expressions: [] as FilterExpression[] })
     const [tableRef, setTableRef] = useState({ current: null }) as any
     const [virtualContainerRef, setVirtualContainerRef] = useState({ current: null })
     const [nodes, setNodes] = useState(virtualNodesData)
@@ -184,8 +186,9 @@ virtualizedTableStory.add(
     const controlledState = useMemo(
       () => ({
         groupBy,
+        globalFilter,
       }),
-      [groupBy]
+      [globalFilter, groupBy]
     )
 
     const [ref, { width, height }] = useMeasure()
@@ -219,6 +222,10 @@ virtualizedTableStory.add(
       }
       // eslint-disable-next-line
     }, [nodes])
+
+    const handleFilterExpressions = (expressions: FilterExpression[]) => {
+      setGlobalFilter({ expressions })
+    }
 
     return (
       <div>
@@ -258,6 +265,13 @@ virtualizedTableStory.add(
             change status
           </button>
         </div>
+        <div>
+          <FilterBox
+            data={virtualizedData}
+            options={filterOptions}
+            onParseOk={handleFilterExpressions}
+          />
+        </div>
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable<Node>
@@ -275,6 +289,7 @@ virtualizedTableStory.add(
               data={virtualizedData}
               groupByFn={customGroupBy}
               virtualizedSettings={virtualizedSettings}
+              globalFilter={filterByExpressions}
             />
           )}
         </NoScrollContainer>

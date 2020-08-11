@@ -1,4 +1,5 @@
 import { defaultGroupByFn } from "../utils"
+import { FilterBoxProcessing, FilterBoxOption } from "../../filter-box"
 
 const groupByService = (rows: any, columnId: string) => {
   const result = rows.reduce((prev: { [service: string]: any[] }, row: any) => {
@@ -18,3 +19,13 @@ const groupByService = (rows: any, columnId: string) => {
 
 export const customGroupBy = (rows, columnId) =>
   columnId === "services" ? groupByService(rows, columnId) : defaultGroupByFn(rows, columnId)
+
+export const filterOptions = [
+  { columnField: "node", type: "selection" },
+  { columnField: "status", type: "selection" },
+] as FilterBoxOption[]
+
+const FilterInstance = new FilterBoxProcessing(filterOptions, ["values"])
+
+export const filterByExpressions = (rows, columnsIDs, { expressions }): any[] =>
+  FilterInstance.process(rows, expressions)

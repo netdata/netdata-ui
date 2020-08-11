@@ -46,11 +46,20 @@ filterBoxStory.add(
       setEmployees(newData)
     }
 
+    const handleChange = query => {
+      console.log(query)
+    }
+
     return (
       <>
-        <StyledFilterBox options={options} onParseOk={handleParse} data={employees} />
+        <StyledFilterBox
+          options={options}
+          onParseOk={handleParse}
+          data={employees}
+          onChange={handleChange}
+        />
         {employees.map(({ name, position }) => (
-          <div>
+          <div key={name}>
             <Text>{`${name} ${position}`}</Text>
           </div>
         ))}

@@ -1,2 +1,4 @@
-export { SimpleResultProcessing as FilterBoxProcessing } from "react-filter-box"
-export { FilterBox } from "./filter-box"
+export { FilterBox, Expression as FilterExpression } from "./filter-box"
+export { FilterBoxProcessing } from "./filter-box-processing"
+export { Option as FilterBoxOption } from "./types"
+export { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
