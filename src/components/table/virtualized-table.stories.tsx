@@ -270,6 +270,7 @@ virtualizedTableStory.add(
             data={virtualizedData}
             options={filterOptions}
             onParseOk={handleFilterExpressions}
+            accessorPaths={{ node: ["node", "name"] }}
           />
         </div>
         <NoScrollContainer ref={ref}>

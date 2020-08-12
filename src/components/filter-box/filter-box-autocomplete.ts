@@ -15,9 +15,6 @@ export class FilterBoxAutocompleteHandler extends GridDataAutoCompleteHandler {
   }
 
   needValues(parsedCategory: string, parsedOperator: string): any[] {
-    console.log("need values")
-    console.info(parsedCategory, parsedOperator)
-    console.info(this.data)
     const accessorPath = this.accessorPaths[parsedCategory]
     const found = this.options.find(
       f => f.columnField == parsedCategory || f.columnText == parsedCategory
@@ -32,8 +29,6 @@ export class FilterBoxAutocompleteHandler extends GridDataAutoCompleteHandler {
           uniq,
           identity
         )(this.data)
-        console.log("result:")
-        console.info(this.cache[parsedCategory])
       }
       return this.cache[parsedCategory]
     }
