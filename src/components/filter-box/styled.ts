@@ -22,5 +22,10 @@ export const Container = styled.div`
 
   .react-filter-box.focus {
     box-shadow: none;
+    border-color: #35414a;
+  }
+
+  .react-filter-box.error.focus {
+    box-shadow: none;
   }
 `

@@ -34,7 +34,7 @@ export class FilterBoxProcessing extends SimpleResultProcessing {
     const field = tryToGetFieldCategory(fieldOrLabel)
     const rowValues = accessor ? path(accessor, row) : row
     const focusedValue = rowValues[field]
-    const lowcaseFilterValue = value.toLowerCase
+    const lowcaseFilterValue = value.toLowerCase()
     switch (operator) {
       case "==": {
         if (Array.isArray(focusedValue)) {
@@ -54,14 +54,14 @@ export class FilterBoxProcessing extends SimpleResultProcessing {
         if (Array.isArray(focusedValue)) {
           return focusedValue.some(element => castValue(element).includes(lowcaseFilterValue))
         }
-        return castValue(focusedValue).indexOf(lowcaseFilterValue) >= 0
+        return castValue(focusedValue).includes(lowcaseFilterValue)
       }
 
       case "!contains":
         if (Array.isArray(focusedValue)) {
           return !focusedValue.some(element => castValue(element).includes(lowcaseFilterValue))
         }
-        return castValue(focusedValue).indexOf(lowcaseFilterValue) < 0
+        return !castValue(focusedValue).includes(lowcaseFilterValue)
       default:
         return false
     }
