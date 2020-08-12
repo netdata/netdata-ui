@@ -23,6 +23,7 @@ export const customGroupBy = (rows, columnId) =>
 export const filterOptions = [
   { columnField: "node", type: "selection" },
   { columnField: "status", type: "selection" },
+  { columnField: "services", type: "selection" },
 ] as FilterBoxOption[]
 
 const FilterInstance = new FilterBoxProcessing(filterOptions, ["values"])

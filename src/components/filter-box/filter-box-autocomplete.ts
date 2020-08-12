@@ -1,5 +1,5 @@
 import { GridDataAutoCompleteHandler } from "react-filter-box"
-import { map, uniq, pipe, identity, path } from "ramda"
+import { map, uniq, pipe, identity, path, flatten } from "ramda"
 import { Option } from "./types"
 
 interface AccessorsData {
@@ -26,10 +26,12 @@ export class FilterBoxAutocompleteHandler extends GridDataAutoCompleteHandler {
           map((dataRow: any) =>
             accessorPath ? path(accessorPath, dataRow) : dataRow[parsedCategory]
           ),
+          flatten,
           uniq,
           identity
         )(this.data)
       }
+
       return this.cache[parsedCategory]
     }
 
