@@ -1,7 +1,12 @@
 import styled from "styled-components"
-import { getColor, getSizeBy } from "../../theme/utils"
+import { controlFocused } from "../../mixins"
+import { getColor, getSizeBy, getSizeUnit } from "../../theme/utils"
 
 export const Container = styled.div`
+  width: 100%;
+`
+
+export const FilterContainer = styled.div`
   width: 100%;
   height: ${getSizeBy(5)};
   .react-filter-box {
@@ -22,10 +27,21 @@ export const Container = styled.div`
 
   .react-filter-box.focus {
     box-shadow: none;
-    border-color: #35414a;
+    ${controlFocused}
   }
 
   .react-filter-box.error.focus {
-    box-shadow: none;
+    border-color: ${getColor(["error"])};
+    box-shadow: 0 0 0 1px ${getColor(["error"])};
   }
+`
+
+export const MetaContainer = styled.div`
+  height: 40px;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 `

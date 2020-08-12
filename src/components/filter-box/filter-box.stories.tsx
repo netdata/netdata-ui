@@ -46,9 +46,7 @@ filterBoxStory.add(
       setEmployees(newData)
     }
 
-    const handleChange = query => {
-      console.log(query)
-    }
+    const handleChange = query => {}
 
     return (
       <>
