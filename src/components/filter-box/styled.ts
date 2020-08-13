@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import { controlFocused } from "../../mixins"
-import { getColor, getSizeBy, getSizeUnit } from "../../theme/utils"
+import { getColor, getSizeBy, getValidatedControlColor } from "../../theme/utils"
 
 export const Container = styled.div`
   width: 100%;
 `
 
-export const FilterContainer = styled.div`
+export const FilterContainer = styled.div<{ error?: boolean }>`
   width: 100%;
   height: ${getSizeBy(5)};
   .react-filter-box {
@@ -21,7 +21,7 @@ export const FilterContainer = styled.div`
   }
 
   .react-filter-box.error {
-    border-color: ${getColor(["error"])};
+    border-color: ${getValidatedControlColor("text")};
     box-shadow: none;
   }
 
@@ -31,8 +31,8 @@ export const FilterContainer = styled.div`
   }
 
   .react-filter-box.error.focus {
-    border-color: ${getColor(["error"])};
-    box-shadow: 0 0 0 1px ${getColor(["error"])};
+    border-color: ${getValidatedControlColor("text")};
+    box-shadow: 0 0 0 1px ${getValidatedControlColor("text")};
   }
 `
 

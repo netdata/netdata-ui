@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react"
+import { useDebounce } from "react-use"
 import ReactFilterBox from "react-filter-box"
 import "react-filter-box/lib/react-filter-box.css"
 import { Option } from "./types"
@@ -41,10 +42,14 @@ export const FilterBox = ({
   accessorPaths = {},
   onParseOk,
   onParseError,
+  onChange,
   ...props
 }: Props) => {
-  const [parseError, setParseError] = useState(false)
-  const [displayError, setDisplayError] = useState(false)
+  const [{ parsedError, displayedError }, setState] = useState({
+    parsedError: false,
+    displayedError: false,
+  })
+  const [debouncedError, setDebouncedError] = useState(false)
 
   const autoCompleteInstance = useMemo(
     () => new AutoCompleteHandler(data, options, accessorPaths),
@@ -54,31 +59,69 @@ export const FilterBox = ({
     if (onParseError) {
       onParseError(error, validationResult)
     }
-    setParseError(true)
+    setState(state => ({ ...state, parsedError: true }))
   }
-  const handleParseOk = expressions => {
+  const handleParseOk = (expressions: Expression[]) => {
     if (onParseOk) {
       onParseOk(expressions)
     }
-    setParseError(false)
+    setState({ parsedError: false, displayedError: false })
   }
 
   const handleBlur = () => {
-    console.log("blur")
+    if (parsedError) {
+      setState(state => ({ ...state, displayedError: true }))
+    }
   }
+
+  const handleFocus = () => {
+    if (displayedError) {
+      setState(state => ({ ...state, displayedError: false }))
+    }
+  }
+
+  const handleOnChange = (
+    query: string,
+    expOrError: Expression[] | Error,
+    validationResult: { isValid: boolean; message?: string }
+  ) => {
+    if (onChange) {
+      onChange(query, expOrError, validationResult)
+    }
+    // @ts-ignore
+    if (expOrError && expOrError.isError) {
+      setState(state => ({ ...state, parsedError: true }))
+    }
+    const expressionsParsed = Array.isArray(expOrError)
+    if (expressionsParsed) {
+      setState({ parsedError: false, displayedError: false })
+    }
+  }
+
+  useDebounce(
+    () => {
+      setDebouncedError(displayedError)
+    },
+    300,
+    [displayedError]
+  )
   return (
     <Container className={className}>
-      <FilterContainer onBlur={handleBlur}>
+      <FilterContainer onBlur={handleBlur} onFocus={handleFocus} error={debouncedError}>
         <ReactFilterBox
           {...props}
           autoCompleteHandler={autoCompleteInstance}
           onParseError={handleError}
           onParseOk={handleParseOk}
+          onChange={handleOnChange}
           options={options}
           data={data}
         />
       </FilterContainer>
-      <MetaContainer> {parseError && <FieldInfo error>Invalid input</FieldInfo>}</MetaContainer>
+      <MetaContainer>
+        {parsedError && !debouncedError && <FieldInfo>The filter is not complete</FieldInfo>}
+        {debouncedError && <FieldInfo error>Invalid filter</FieldInfo>}
+      </MetaContainer>
     </Container>
   )
 }
