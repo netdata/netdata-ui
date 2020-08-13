@@ -7,6 +7,17 @@ import { Container, FilterContainer, MetaContainer } from "./styled"
 import { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
 import { FieldInfo } from "../input"
 
+// Assumed top-level pegjs error type for convenience, not reliable
+export interface ParseError {
+  expected: any[]
+  found: null | any
+  isError: boolean
+  location: { start: any; end: any }
+  message: string
+  name: string
+  stack: string
+}
+
 export interface Expression {
   conditionType?: "OR" | "AND"
   category?: string
@@ -23,15 +34,20 @@ interface Props {
   query?: string
   onChange?: (
     query: string,
-    expressions: Expression[] | Error,
+    expressions: Expression[] | ParseError,
     validationResult: { isValid: boolean; message?: string }
   ) => void
   onParseOk?: (expressions: Expression[]) => void
-  onParseError?: (error: Error, validationResult: { isValid: boolean; message?: string }) => void
+  onParseError?: (
+    error: ParseError,
+    validationResult: { isValid: boolean; message?: string }
+  ) => void
   AutoCompleteHandler?: any
   accessorPaths?: {
     [fieldName: string]: string[]
   }
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 export const FilterBox = ({
@@ -43,6 +59,8 @@ export const FilterBox = ({
   onParseOk,
   onParseError,
   onChange,
+  onFocus,
+  onBlur,
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -69,12 +87,18 @@ export const FilterBox = ({
   }
 
   const handleBlur = () => {
+    if (onBlur) {
+      onBlur()
+    }
     if (parsedError) {
       setState(state => ({ ...state, displayedError: true }))
     }
   }
 
   const handleFocus = () => {
+    if (onFocus) {
+      onFocus()
+    }
     if (displayedError) {
       setState(state => ({ ...state, displayedError: false }))
     }
@@ -82,7 +106,7 @@ export const FilterBox = ({
 
   const handleOnChange = (
     query: string,
-    expOrError: Expression[] | Error,
+    expOrError: Expression[] | ParseError,
     validationResult: { isValid: boolean; message?: string }
   ) => {
     if (onChange) {
