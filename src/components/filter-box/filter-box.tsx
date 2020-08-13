@@ -3,9 +3,8 @@ import { useDebounce } from "react-use"
 import ReactFilterBox from "react-filter-box"
 import "react-filter-box/lib/react-filter-box.css"
 import { Option } from "./types"
-import { Container, FilterContainer, MetaContainer } from "./styled"
+import { Container, FilterContainer, MetaContainer, ResultsCount, FilterInfo } from "./styled"
 import { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
-import { FieldInfo } from "../input"
 
 // Assumed top-level pegjs error type for convenience, not reliable
 export interface ParseError {
@@ -48,6 +47,7 @@ interface Props {
   }
   onFocus?: () => void
   onBlur?: () => void
+  resultsQty?: number
 }
 
 export const FilterBox = ({
@@ -61,6 +61,7 @@ export const FilterBox = ({
   onChange,
   onFocus,
   onBlur,
+  resultsQty,
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -112,8 +113,8 @@ export const FilterBox = ({
     if (onChange) {
       onChange(query, expOrError, validationResult)
     }
-    // @ts-ignore
-    if (expOrError && expOrError.isError) {
+
+    if (expOrError && !Array.isArray(expOrError) && expOrError.isError) {
       setState(state => ({ ...state, parsedError: true }))
     }
     const expressionsParsed = Array.isArray(expOrError)
@@ -143,8 +144,14 @@ export const FilterBox = ({
         />
       </FilterContainer>
       <MetaContainer>
-        {parsedError && !debouncedError && <FieldInfo>The filter is not complete</FieldInfo>}
-        {debouncedError && <FieldInfo error>Invalid filter</FieldInfo>}
+        {parsedError && !debouncedError && <FilterInfo>The filter is not complete</FilterInfo>}
+        {debouncedError && <FilterInfo error>Invalid filter</FilterInfo>}
+        {!debouncedError && resultsQty && (
+          <ResultsCount>
+            Results:
+            {resultsQty}
+          </ResultsCount>
+        )}
       </MetaContainer>
     </Container>
   )

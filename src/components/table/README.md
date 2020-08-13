@@ -51,6 +51,7 @@ interface TableProps<T, RT = any> {
   globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
   filterTypes?: { [filterID: string]: FilterFunction<T> }
+  dataResultsCallback: (rows: T[]) => void
 }
 ```
 
@@ -72,6 +73,7 @@ interface TableProps<T, RT = any> {
   object, should be bigger that `0` to avoid JS falsy value condition.
 - `filterTypes` - custom set of filtering functions
 - `globalFilter` - custom function for global filtering
+- `dataResultsCallback` - callback with unwrapped results array, excluding group headers
 
 This is setup of first **column** with the selection checkbox
 

@@ -1,8 +1,7 @@
-import React, { useState, useMemo, useRef } from "react"
+import React, { useState, useMemo, useCallback, useEffect } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { useMeasure } from "react-use"
-import { useEffect, useCallback } from "@storybook/addons"
 import { VirtualizedTable } from "./virtualized-table"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
@@ -36,7 +35,7 @@ const sampleNode = {
   chart4: { chartName: "Zoom Chart" },
 }
 
-const sampleNodes = new Array(10).fill(sampleNode)
+const sampleNodes = new Array(200).fill(sampleNode)
 
 const nodesData = [
   {
@@ -180,6 +179,7 @@ virtualizedTableStory.add(
     const [tableRef, setTableRef] = useState({ current: null }) as any
     const [virtualContainerRef, setVirtualContainerRef] = useState({ current: null })
     const [nodes, setNodes] = useState(virtualNodesData)
+    const [resultsQty, setResultsQty] = useState(undefined)
 
     const virtualizedData = useMemo(() => prepareData(nodes), [nodes])
 
@@ -227,6 +227,10 @@ virtualizedTableStory.add(
       setGlobalFilter({ expressions })
     }
 
+    const logResults = useCallback(results => {
+      setResultsQty(results.length)
+    }, [])
+
     return (
       <div>
         <div>
@@ -271,6 +275,7 @@ virtualizedTableStory.add(
             options={filterOptions}
             onParseOk={handleFilterExpressions}
             accessorPaths={{ node: ["node", "name"] }}
+            resultsQty={resultsQty}
           />
         </div>
         <NoScrollContainer ref={ref}>
@@ -291,6 +296,7 @@ virtualizedTableStory.add(
               groupByFn={customGroupBy}
               virtualizedSettings={virtualizedSettings}
               globalFilter={filterByExpressions}
+              dataResultsCallback={logResults}
             />
           )}
         </NoScrollContainer>

@@ -4,7 +4,12 @@ import { TableContainer, TableBody } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
-import { defaultGroupByFn, GroupsOrderSettings, sortGroupsByPriority } from "./utils"
+import {
+  defaultGroupByFn,
+  GroupsOrderSettings,
+  sortGroupsByPriority,
+  unwrapGroupedRows,
+} from "./utils"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
 // Docs aren't clear about that, but the actual difference is,
@@ -50,6 +55,7 @@ export interface TableProps<T, RT = any> {
   globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
   filterTypes?: { [filterID: string]: FilterFunction<T> }
+  dataResultsCallback?: (rows: T[]) => void
 }
 
 export function Table<T extends object>({
@@ -72,6 +78,7 @@ export function Table<T extends object>({
   disableGlobalFilter = false,
   globalFilter,
   filterTypes,
+  dataResultsCallback,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -130,6 +137,15 @@ export function Table<T extends object>({
     }
     return rows
   }, [groupBy, groupsOrderSettings, rows])
+
+  useEffect(() => {
+    if (dataResultsCallback) {
+      const renderedData = unwrapGroupedRows(orderedRows).filter(
+        ({ isVirtualGroupHeader }) => !isVirtualGroupHeader
+      )
+      dataResultsCallback(renderedData)
+    }
+  }, [orderedRows, dataResultsCallback])
 
   return (
     <LayoutContextProvider value={layoutType}>

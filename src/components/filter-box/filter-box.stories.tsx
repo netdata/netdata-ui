@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
 import { readmeCleanup } from "../../../utils/readme"
-import { FilterBox, FilterBoxProcessing } from "."
+import { FilterBox, FilterBoxProcessing, FilterBoxOption } from "."
 import { Text } from "../typography"
 
 // @ts-ignore
@@ -27,14 +27,10 @@ const data = [
   { name: "May", position: "Back End" },
 ]
 
-interface Option {
-  columnField: string
-  type: "text" | "selection"
-}
 const options = [
   { columnField: "name", type: "text" },
   { columnField: "position", type: "selection" },
-] as Option[]
+] as FilterBoxOption[]
 
 filterBoxStory.add(
   "Simple filter box",

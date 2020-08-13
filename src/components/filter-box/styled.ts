@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { controlFocused } from "../../mixins"
 import { getColor, getSizeBy, getValidatedControlColor } from "../../theme/utils"
+import { MetaInfo } from "../input"
 
 export const Container = styled.div`
   width: 100%;
@@ -44,4 +45,17 @@ export const MetaContainer = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+`
+
+export const ResultsCount = styled(MetaInfo)`
+  color: ${getColor(["text"])};
+  margin-left: auto;
+`
+
+export const FilterInfo = styled(MetaInfo)<{
+  error?: boolean | string
+  success?: boolean | string
+}>`
+  color: ${getValidatedControlColor()};
+  flex-shrink: 1;
 `
