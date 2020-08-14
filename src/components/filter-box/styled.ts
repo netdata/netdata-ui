@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { controlFocused } from "../../mixins"
 import { getColor, getSizeBy, getValidatedControlColor } from "../../theme/utils"
-import { MetaInfo } from "../input"
+import { MetaInfo } from "../input/styled"
 
 export const Container = styled.div`
   width: 100%;
