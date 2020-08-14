@@ -80,6 +80,7 @@ export function VirtualizedTable<T extends object>({
     useIsScrolling,
   },
   callbackRef,
+  dataResultsCallback,
   ...customProps
 }: VTableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -183,6 +184,13 @@ export function VirtualizedTable<T extends object>({
     },
     [onItemsRendered, orderedRows]
   )
+
+  useEffect(() => {
+    if (dataResultsCallback) {
+      const renderedData = orderedRows.filter(({ isVirtualGroupHeader }) => !isVirtualGroupHeader)
+      dataResultsCallback(renderedData)
+    }
+  }, [orderedRows, dataResultsCallback])
 
   return (
     <LayoutContextProvider value={layoutType}>

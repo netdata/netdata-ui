@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useRef } from "react"
+import React, { useState, useMemo, useCallback, useEffect } from "react"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { useMeasure } from "react-use"
-import { useEffect, useCallback } from "@storybook/addons"
 import { VirtualizedTable } from "./virtualized-table"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "../../../utils/readme"
 // @ts-ignore
 import readme from "./README.md"
-import { customGroupBy } from "./mocks/utils"
+import { customGroupBy, filterByExpressions, filterOptions } from "./mocks/utils"
+import { FilterBox, FilterExpression } from "../filter-box"
 
 const subData = {
   readme: {
@@ -175,17 +175,20 @@ virtualizedTableStory.add(
   "Virtualized table",
   () => {
     const [groupBy, setGroupBy] = useState([] as string[])
+    const [globalFilter, setGlobalFilter] = useState({ expressions: [] as FilterExpression[] })
     const [tableRef, setTableRef] = useState({ current: null }) as any
     const [virtualContainerRef, setVirtualContainerRef] = useState({ current: null })
     const [nodes, setNodes] = useState(virtualNodesData)
+    const [resultsQty, setResultsQty] = useState(undefined)
 
     const virtualizedData = useMemo(() => prepareData(nodes), [nodes])
 
     const controlledState = useMemo(
       () => ({
         groupBy,
+        globalFilter,
       }),
-      [groupBy]
+      [globalFilter, groupBy]
     )
 
     const [ref, { width, height }] = useMeasure()
@@ -219,6 +222,14 @@ virtualizedTableStory.add(
       }
       // eslint-disable-next-line
     }, [nodes])
+
+    const handleFilterExpressions = (expressions: FilterExpression[]) => {
+      setGlobalFilter({ expressions })
+    }
+
+    const logResults = useCallback(results => {
+      setResultsQty(results.length)
+    }, [])
 
     return (
       <div>
@@ -258,6 +269,15 @@ virtualizedTableStory.add(
             change status
           </button>
         </div>
+        <div>
+          <FilterBox
+            data={virtualizedData}
+            options={filterOptions}
+            onParseOk={handleFilterExpressions}
+            accessorPaths={{ node: ["node", "name"] }}
+            resultsQty={resultsQty}
+          />
+        </div>
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable<Node>
@@ -275,6 +295,8 @@ virtualizedTableStory.add(
               data={virtualizedData}
               groupByFn={customGroupBy}
               virtualizedSettings={virtualizedSettings}
+              globalFilter={filterByExpressions}
+              dataResultsCallback={logResults}
             />
           )}
         </NoScrollContainer>

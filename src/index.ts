@@ -40,3 +40,5 @@ export { webkitVisibleScrollbar } from "./mixins"
 
 export { Table, VirtualizedTable } from "./components/table"
 export { Toggle, ToggleProps } from "./components/toggle"
+
+export * from "./components/filter-box"
