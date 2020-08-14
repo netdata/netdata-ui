@@ -9,6 +9,13 @@ export interface ButtonProps {
   id?: string
   className?: string
   onClick?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseDown?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseEnter?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseLeave?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseMove?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseOut?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseOver?: (e: SyntheticEvent<HTMLButtonElement>) => void
+  onMouseUp?: (e: SyntheticEvent<HTMLButtonElement>) => void
   danger?: boolean
   warning?: boolean
   type?: ButtonType | undefined
