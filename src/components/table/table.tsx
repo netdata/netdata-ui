@@ -9,6 +9,7 @@ import {
   GroupsOrderSettings,
   sortGroupsByPriority,
   unwrapGroupedRows,
+  getValidRows,
 } from "./utils"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
@@ -144,13 +145,7 @@ export function Table<T extends Item>({
   useEffect(() => {
     if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
       const isGrouped = groupBy.length > 0
-      const validRows = selectedFlatRows.reduce((acc: Item[], row: Row<T>) => {
-        if (isGrouped && row.isGrouped) return acc
-        if (itemIsDisabled(row.original)) return acc
-        acc.push(row.original)
-        return acc
-      }, [])
-
+      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
       selectedItemsClb(validRows)
     }
   }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])

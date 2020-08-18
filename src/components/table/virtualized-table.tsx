@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from "react"
-import { useTable } from "react-table"
+import { useTable, Row } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
 import { LayoutContextProvider } from "./layout-context"

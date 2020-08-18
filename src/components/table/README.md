@@ -2,12 +2,6 @@
 
 Implementation based on `react-table` lib.
 
-**KNOWN ISSUES**
-
-`Row selection plugin doesn't work well with grouping right now.`
-The solution might be to fake materialized sub rows with real ones
-from flattened array, or to render groups some other way.
-
 ### Props:
 
 ```typescript
@@ -27,6 +21,8 @@ interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
+  toggleSelectedItemClb?: (item: T, selected: boolean) => T | void
+  itemIsDisabled?: (item: T) => boolean
   columns: RT
   data: T[]
   sortableBy?: string[]
@@ -35,6 +31,7 @@ interface TableProps<T, RT = any> {
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
+  autoResetExpanded?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: TableInstanceState
   controlledState?: TableInstanceState
@@ -51,7 +48,7 @@ interface TableProps<T, RT = any> {
   globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
   filterTypes?: { [filterID: string]: FilterFunction<T> }
-  dataResultsCallback: (rows: T[]) => void
+  dataResultsCallback?: (rows: T[]) => void
 }
 ```
 
