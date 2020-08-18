@@ -69,6 +69,8 @@ export const FilterBox = ({
     displayedError: false,
   })
   const [debouncedError, setDebouncedError] = useState(false)
+  const [filterQuery, setFilterQuery] = useState("")
+  const [parsedQuery, setParsedQuery] = useState("")
 
   const autoCompleteInstance = useMemo(
     () => new AutoCompleteHandler(data, options, accessorPaths),
@@ -93,6 +95,8 @@ export const FilterBox = ({
     }
     if (parsedError) {
       setState(state => ({ ...state, displayedError: true }))
+    } else {
+      setParsedQuery(filterQuery)
     }
   }
 
@@ -113,6 +117,7 @@ export const FilterBox = ({
     if (onChange) {
       onChange(query, expOrError, validationResult)
     }
+    setFilterQuery(query)
 
     if (expOrError && !Array.isArray(expOrError) && expOrError.isError) {
       setState(state => ({ ...state, parsedError: true }))
@@ -146,7 +151,7 @@ export const FilterBox = ({
       <MetaContainer>
         {parsedError && !debouncedError && <FilterInfo>The filter is not complete</FilterInfo>}
         {debouncedError && <FilterInfo error>Invalid filter</FilterInfo>}
-        {!debouncedError && resultsQty && (
+        {!debouncedError && resultsQty && parsedQuery && (
           <ResultsCount>
             Results:
             {resultsQty}
