@@ -43,7 +43,7 @@ global.document.body.createTextRange = () => ({
   },
 })
 
-const MockedFilterBox = ({getResultsQty, ...rest}) => {
+const MockedFilterBox = ({ getResultsQty, ...rest }) => {
   const [employees, setEmployees] = useState(data)
 
   const handleParse = expressions => {
@@ -55,7 +55,13 @@ const MockedFilterBox = ({getResultsQty, ...rest}) => {
 
   return (
     <>
-      <FilterBox options={options} onParseOk={handleParse} data={employees} resultsQty={resultsQty} {...rest} />
+      <FilterBox
+        options={options}
+        onParseOk={handleParse}
+        data={employees}
+        resultsQty={resultsQty}
+        {...rest}
+      />
       {employees.map(({ name, position }) => (
         <div key={name}>
           <Text className="contentClass">{`${name} ${position}`}</Text>
@@ -72,14 +78,14 @@ describe("Filter Box test", () => {
     const onChange = jest.fn()
     const utils = testWrapper<any>(
       MockedFilterBox,
-      { onBlur, onFocus, onChange, getResultsQty: data => data.length },
+      { onBlur, onFocus, onChange, getResultsQty: results => results.length },
       DefaultTheme,
       null
     )
 
     const results = utils.container.querySelectorAll(".contentClass")
     expect(results.length).toBe(4)
-    expect(utils.getByText(/4/)).toBeInTheDocument()
+    expect(utils.queryByText(/Results:/)).not.toBeInTheDocument()
 
     const input = utils.container.querySelectorAll("textarea")[0]
     expect(onBlur).not.toBeCalled()
@@ -100,6 +106,7 @@ describe("Filter Box test", () => {
 
     const newResults = utils.container.querySelectorAll(".contentClass")
     expect(newResults.length).toBe(1)
+    expect(utils.getByText(/Results:/)).toBeInTheDocument()
     expect(utils.getByText(/1/)).toBeInTheDocument()
     expect(onChange).toBeCalledTimes(3)
   })
