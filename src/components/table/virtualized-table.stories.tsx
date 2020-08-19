@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react"
+import { action } from "@storybook/addon-actions"
 import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { useMeasure } from "react-use"
@@ -297,6 +298,9 @@ virtualizedTableStory.add(
               virtualizedSettings={virtualizedSettings}
               globalFilter={filterByExpressions}
               dataResultsCallback={logResults}
+              itemIsDisabled={item => item.status === "unreachable"}
+              selectedItemsClb={action("selected-all")}
+              toggleSelectedItemClb={action("toggled")}
             />
           )}
         </NoScrollContainer>

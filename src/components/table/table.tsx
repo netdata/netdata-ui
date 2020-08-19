@@ -9,6 +9,7 @@ import {
   GroupsOrderSettings,
   sortGroupsByPriority,
   unwrapGroupedRows,
+  getValidRows,
 } from "./utils"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
@@ -31,6 +32,8 @@ export interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
+  toggleSelectedItemClb?: (item: T, selected: boolean) => T | void
+  itemIsDisabled?: (item: T) => boolean
   columns: RT
   data: T[]
   sortableBy?: string[]
@@ -39,6 +42,7 @@ export interface TableProps<T, RT = any> {
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
+  autoResetExpanded?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: TableInstanceState
   controlledState?: TableInstanceState
@@ -58,17 +62,24 @@ export interface TableProps<T, RT = any> {
   dataResultsCallback?: (rows: T[]) => void
 }
 
-export function Table<T extends object>({
+export type Item = {
+  [key: string]: any
+}
+
+export function Table<T extends Item>({
   groupsOrderSettings,
   layoutType = "table",
   columns,
   data,
   sortableBy = [],
   selectedItemsClb,
+  toggleSelectedItemClb,
+  itemIsDisabled = () => false,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
   autoResetFilters = false,
+  autoResetExpanded = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
@@ -96,7 +107,10 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
+    isAllRowsSelected,
     state: { selectedRowIds, groupBy },
+    toggleAllRowsExpanded,
+    isAllRowsExpanded,
   } = useTable(
     {
       columns,
@@ -106,9 +120,11 @@ export function Table<T extends object>({
       autoResetSortBy,
       autoResetGroupBy,
       autoResetFilters,
+      autoResetExpanded,
       disableGlobalFilter,
       globalFilter,
       filterTypes,
+      groupByFn,
       useControlledState: state => {
         return React.useMemo(
           () => ({
@@ -120,16 +136,26 @@ export function Table<T extends object>({
           [state, controlledState]
         )
       },
-      groupByFn,
+      toggleSelectedItemClb,
+      itemIsDisabled,
     },
     ...reactTableHooks
   )
 
   useEffect(() => {
-    if (selectedItemsClb) {
-      selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
+    if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
+      const isGrouped = groupBy.length > 0
+      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
+      selectedItemsClb(validRows)
     }
-  }, [selectedFlatRows, selectedItemsClb])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
+
+  useEffect(() => {
+    if (isAllRowsExpanded) {
+      return
+    }
+    toggleAllRowsExpanded()
+  }, [isAllRowsExpanded, toggleAllRowsExpanded])
 
   const orderedRows = useMemo(() => {
     if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {

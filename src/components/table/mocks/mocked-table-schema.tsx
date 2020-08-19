@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { Checkbox } from "../../checkbox"
 import {
   StyledIcon,
@@ -16,17 +16,28 @@ export const UserTableSchema = [
   {
     id: "selection",
     Header: ({ getToggleAllRowsSelectedProps }: any) => {
-      // @ts-ignore | TBD: IMPROVE PROPS
-      const { checked, onChange, indeterminate } = getToggleAllRowsSelectedProps()
-      return <Checkbox checked={checked} onChange={onChange} indeterminate={indeterminate} />
+      return <Checkbox {...getToggleAllRowsSelectedProps()} />
     },
-    Cell: ({ row, selectedRowIds }: any) => {
-      // @ts-ignore | TBD: IMPROVE PROPS
-      const { onChange } = row.getToggleRowSelectedProps()
-      const checked = selectedRowIds[row.id] || false
+    Cell: ({ row, itemIsDisabled, toggleSelectedItemClb }: any) => {
+      const { checked, onChange, ...rest } = row.getToggleRowSelectedProps()
+
+      const isDisabled = itemIsDisabled ? itemIsDisabled(row.original) : false
+      const isChecked = isDisabled ? false : checked
+
+      const onToggle = useCallback(
+        e => {
+          if (!isDisabled && toggleSelectedItemClb) {
+            toggleSelectedItemClb(row.original, e.target.checked)
+          }
+
+          onChange(e)
+        },
+        [row, isDisabled, toggleSelectedItemClb, onChange]
+      )
+
       return (
         <CellBox>
-          <Checkbox checked={checked} onChange={onChange} />
+          <Checkbox {...rest} checked={isChecked} onChange={onToggle} disabled={isDisabled} />
         </CellBox>
       )
     },
