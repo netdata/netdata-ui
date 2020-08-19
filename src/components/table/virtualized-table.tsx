@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useCallback } from "react"
-import { useTable, Row } from "react-table"
+import { useTable } from "react-table"
 import { TableRow } from "./components/table-row"
 import { StickyVirtualList } from "./components/sticky-virtual-list"
 import { LayoutContextProvider } from "./layout-context"
@@ -8,6 +8,7 @@ import {
   sortGroupsByPriority,
   unwrapGroupedRows,
   generateRowStyle,
+  getValidRows,
 } from "./utils"
 import { TableProps, Item } from "./table"
 import { tableHooks, blockTableHooks } from "./table-hooks"
@@ -22,6 +23,7 @@ type RenderData = {
 }
 
 const itemKeyFallback = (index: number) => String(index)
+const defaultItemIsDisabled = () => false
 
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
@@ -53,7 +55,7 @@ export function VirtualizedTable<T extends Item>({
   sortableBy = [],
   selectedItemsClb,
   toggleSelectedItemClb,
-  itemIsDisabled = () => false,
+  itemIsDisabled = defaultItemIsDisabled,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
@@ -141,12 +143,7 @@ export function VirtualizedTable<T extends Item>({
   useEffect(() => {
     if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
       const isGrouped = groupBy.length > 0
-      const validRows = selectedFlatRows.reduce((acc: Item[], row: Row<T>) => {
-        if (isGrouped && row.isGrouped) return acc
-        if (itemIsDisabled(row.original)) return acc
-        acc.push(row.original)
-        return acc
-      }, [])
+      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
 
       selectedItemsClb(validRows)
     }
