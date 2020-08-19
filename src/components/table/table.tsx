@@ -151,7 +151,9 @@ export function Table<T extends Item>({
   }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
 
   useEffect(() => {
-    if (isAllRowsExpanded) return
+    if (isAllRowsExpanded) {
+      return
+    }
     toggleAllRowsExpanded()
   }, [isAllRowsExpanded, toggleAllRowsExpanded])
 
