@@ -1,5 +1,4 @@
 import { pipe, sort, concat, map, path } from "ramda"
-import { Row } from "react-table"
 
 // default  grouping function from the react-table utils
 
@@ -85,7 +84,7 @@ export const generateRowStyle = ({ index, style, rows, verticalGutter }: StyleDe
 }
 
 interface IGetValidRows {
-  selectedFlatRows: Row[]
+  selectedFlatRows: any[]
   isGrouped: boolean
   itemIsDisabled: (item: any) => boolean
 }
@@ -93,8 +92,8 @@ export const getValidRows = ({
   selectedFlatRows,
   isGrouped,
   itemIsDisabled,
-}: IGetValidRows): Row[] =>
-  selectedFlatRows.reduce((acc: Row[], row: Row) => {
+}: IGetValidRows): any[] =>
+  selectedFlatRows.reduce((acc: any[], row: any) => {
     if (isGrouped && row.isGrouped) return acc
     if (itemIsDisabled(row.original)) return acc
     acc.push(row.original)

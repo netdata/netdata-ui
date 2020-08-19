@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, ReactNode } from "react"
-import { useTable, Row } from "react-table"
+import { useTable } from "react-table"
 import { TableContainer, TableBody } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
@@ -12,6 +12,8 @@ import {
   getValidRows,
 } from "./utils"
 import { tableHooks, blockTableHooks } from "./table-hooks"
+
+const defaultItemIsDisabled = () => false
 
 // Docs aren't clear about that, but the actual difference is,
 // that "id" is string for individual column filtering,
@@ -60,6 +62,7 @@ export interface TableProps<T, RT = any> {
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
   filterTypes?: { [filterID: string]: FilterFunction<T> }
   dataResultsCallback?: (rows: T[]) => void
+  [key: string]: any
 }
 
 export type Item = {
@@ -74,7 +77,7 @@ export function Table<T extends Item>({
   sortableBy = [],
   selectedItemsClb,
   toggleSelectedItemClb,
-  itemIsDisabled = () => false,
+  itemIsDisabled = defaultItemIsDisabled,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
