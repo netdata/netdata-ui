@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from "react"
+import React, { FC, Fragment, ReactNode, useEffect } from "react"
 import { StyledTabsWrapper, StyledTabs } from "./styled"
 import { useSetActive, useBuildTabs, OnChange } from "./tabs-hooks"
 
@@ -15,7 +15,7 @@ export const Tabs: FC<TabsProps> = ({
   onChange,
   selected,
   children,
-  TabContent = "div",
+  TabContent = Fragment,
 }: TabsProps) => {
   const [activeIndex, setActiveIndex] = useSetActive(selected, onChange)
 
