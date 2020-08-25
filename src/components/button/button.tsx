@@ -22,6 +22,7 @@ export interface ButtonProps {
   flavour?: ButtonType
   disabled?: boolean
   small?: boolean
+  [s: string]: any
 }
 
 export interface ButtonWrapperProps extends ButtonProps {
