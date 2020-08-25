@@ -62,81 +62,86 @@ type StyledButtonProps = {
 export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
   colors: colorsByFlavour(props),
 }))<ButtonProps & StyledButtonProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  && {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 
-  width: ${props => (props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4))};
-  height: ${props => (props.hasLabel ? getSizeBy(5) : getSizeBy(props.small ? 3 : 4))};
+    width: ${props => (props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4))};
+    height: ${props => (props.hasLabel ? getSizeBy(5) : getSizeBy(props.small ? 3 : 4))};
 
-  font-weight: bold;
-  font-size: 12px;
-  line-height: ${getSizeBy(2)};
-  white-space: nowrap;
-  word-break: keep-all;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: ${getSizeBy(2)};
+    white-space: nowrap;
+    word-break: keep-all;
 
-  cursor: pointer;
-  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+    cursor: pointer;
+    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
-  padding: ${getSizeBy(1)};
-  transition: all 150ms;
+    padding: ${getSizeBy(1)};
+    transition: all 150ms;
 
-  background-color: ${props => props.colors.bg(props)};
-  color: ${props => props.colors.color(props)};
+    background-color: ${props => props.colors.bg(props)};
+    color: ${props => props.colors.color(props)};
 
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${props => props.colors.border(props)};
-  border-radius: 2px;
-  box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${props => props.colors.border(props)};
+    border-radius: 2px;
+    box-sizing: border-box;
 
-  &:hover {
-    border-color: ${props => props.colors.borderHover(props)};
-    background-color: ${props => props.colors.bgHover(props)};
-    color: ${props => props.colors.colorHover(props)};
+    text-decoration: none;
+
+    &:hover {
+      border-color: ${props => props.colors.borderHover(props)};
+      background-color: ${props => props.colors.bgHover(props)};
+      color: ${props => props.colors.colorHover(props)};
+      text-decoration: none;
+
+      .button-icon {
+        fill: ${props => props.colors.colorHover(props)};
+      }
+    }
+
+    &:active {
+      border-color: ${props => props.colors.borderActive(props)};
+      background-color: ${props => props.colors.bgActive(props)};
+      color: ${props => props.colors.colorActive(props)};
+    }
+
+    &:focus {
+      outline: none;
+    }
 
     .button-icon {
-      fill: ${props => props.colors.colorHover(props)};
+      position: absolute;
+      left: ${props => (props.hasLabel ? "4px" : "auto")};
+      height: ${getSizeBy(2)};
+      width: ${getSizeBy(2)};
+      fill: ${props => props.colors.color(props)};
     }
-  }
 
-  &:active {
-    border-color: ${props => props.colors.borderActive(props)};
-    background-color: ${props => props.colors.bgActive(props)};
-    color: ${props => props.colors.colorActive(props)};
-  }
+    .ntd-spinner {
+      fill: none;
+      stroke-width: 17px;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: ntd-draw 1s linear infinite;
+      stroke: #fff;
+      width: 24px;
+    }
 
-  &:focus {
-    outline: none;
-  }
+    .path {
+      stroke: #fff;
+    }
 
-  .button-icon {
-    position: absolute;
-    left: ${props => (props.hasLabel ? "4px" : "auto")};
-    height: ${getSizeBy(2)};
-    width: ${getSizeBy(2)};
-    fill: ${props => props.colors.color(props)};
-  }
-
-  .ntd-spinner {
-    fill: none;
-    stroke-width: 17px;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: ntd-draw 1s linear infinite;
-    stroke: #fff;
-    width: 24px;
-  }
-
-  .path {
-    stroke: #fff;
-  }
-
-  @keyframes ntd-draw {
-    to {
-      stroke-dashoffset: 0;
+    @keyframes ntd-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
     }
   }
 `
