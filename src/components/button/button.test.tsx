@@ -18,8 +18,12 @@ describe("Button states", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("opacity", "0.4")
-    expect(button).toHaveStyleRule("pointer-events", "none")
+    expect(button).toHaveStyleRule("opacity", "0.4", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("pointer-events", "none", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render loading text", () => {
@@ -53,8 +57,12 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "32px")
-    expect(button).toHaveStyleRule("height", "32px")
+    expect(button).toHaveStyleRule("width", "32px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("height", "32px", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render smaller only icon", () => {
@@ -66,8 +74,12 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "24px")
-    expect(button).toHaveStyleRule("height", "24px")
+    expect(button).toHaveStyleRule("width", "24px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("height", "24px", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render loading icon", () => {
@@ -110,13 +122,27 @@ describe("Default Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "128px")
-    expect(button).toHaveStyleRule("height", "40px")
-    expect(button).toHaveStyleRule("background-color", "#00AB44")
-    expect(button).toHaveStyleRule("border-color", "#00AB44")
-    expect(button).toHaveStyleRule("color", "#FFF")
-    expect(button).toHaveStyleRule("opacity", "1")
-    expect(button).toHaveStyleRule("pointer-events", "auto")
+    expect(button).toHaveStyleRule("width", "128px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("height", "40px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("background-color", "#00AB44", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#00AB44", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FFF", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("opacity", "1", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("pointer-events", "auto", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render for danger", () => {
@@ -127,9 +153,15 @@ describe("Default Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FF4136")
-    expect(button).toHaveStyleRule("border-color", "#FF4136")
-    expect(button).toHaveStyleRule("color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "#FF4136", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#FF4136", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FFF", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render for warning", () => {
@@ -140,9 +172,15 @@ describe("Default Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFC300")
-    expect(button).toHaveStyleRule("border-color", "#FFC300")
-    expect(button).toHaveStyleRule("color", "#FFF")
+    expect(button).toHaveStyleRule("background-color", "#FFC300", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#FFC300", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FFF", {
+      modifier: "&&",
+    })
   })
 })
 
@@ -159,13 +197,27 @@ describe("Hollow Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "128px")
-    expect(button).toHaveStyleRule("height", "40px")
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("border-color", "#00AB44")
-    expect(button).toHaveStyleRule("color", "#00AB44")
-    expect(button).toHaveStyleRule("opacity", "1")
-    expect(button).toHaveStyleRule("pointer-events", "auto")
+    expect(button).toHaveStyleRule("width", "128px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("height", "40px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#00AB44", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#00AB44", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("opacity", "1", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("pointer-events", "auto", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render for danger", () => {
@@ -176,9 +228,15 @@ describe("Hollow Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("border-color", "#FF4136")
-    expect(button).toHaveStyleRule("color", "#FF4136")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#FF4136", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FF4136", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render for warning", () => {
@@ -189,9 +247,15 @@ describe("Hollow Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("border-color", "#FFC300")
-    expect(button).toHaveStyleRule("color", "#FFC300")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#FFC300", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FFC300", {
+      modifier: "&&",
+    })
   })
 })
 
@@ -208,13 +272,27 @@ describe("Borderless Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "128px")
-    expect(button).toHaveStyleRule("height", "40px")
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("color", "#FFF")
-    expect(button).toHaveStyleRule("opacity", "1")
-    expect(button).toHaveStyleRule("pointer-events", "auto")
+    expect(button).toHaveStyleRule("width", "128px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("height", "40px", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FFF", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("opacity", "1", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("pointer-events", "auto", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render for danger", () => {
@@ -225,9 +303,15 @@ describe("Borderless Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("color", "#FF4136")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FF4136", {
+      modifier: "&&",
+    })
   })
 
   it(" * should render for warning", () => {
@@ -238,8 +322,14 @@ describe("Borderless Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)")
-    expect(button).toHaveStyleRule("color", "#FFC300")
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FFC300", {
+      modifier: "&&",
+    })
   })
 })
