@@ -25,7 +25,10 @@ export const calcSize = (expr?: string) => (props: WrappedTheme) => {
   return getSizeUnit(props)
 }
 
-export const getColor = (colorPath: string[]) => getOrElse(["colors", ...colorPath], "#fff")
+export const getColor = (colorPath: string[] | string) => {
+  const colorPaths: string[] = Array.isArray(colorPath) ? colorPath : [colorPath]
+  return getOrElse(["colors", ...colorPaths], "#fff")
+}
 
 export const getSizeBy = (multiplier: number = 1) => (props: WrappedTheme) => {
   const size = (getSizeUnit(props) || 0) * multiplier
