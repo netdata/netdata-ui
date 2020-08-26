@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Icon } from "../icon"
-import { getColor, getSizeUnit } from "../../theme/utils"
+import { getValidatedControlColor, getColor, getSizeUnit } from "../../theme/utils"
 import { controlFocused } from "../../mixins"
 
 export const CheckboxContainer = styled.div`
@@ -13,8 +13,7 @@ export const CheckboxContainer = styled.div`
 export const StyledIcon = styled(Icon)<{ disabled?: boolean }>`
   flex-grow: 0;
   flex-shrink: 0;
-  fill: ${({ disabled }) =>
-    disabled ? getColor(["gray", "silverSand"]) : getColor(["green", "greenHaze"])};
+  fill: ${getValidatedControlColor("primary")};
 `
 
 export const HiddenCheckboxInput = styled.input.attrs({
@@ -44,10 +43,8 @@ export const StyledCheckbox = styled.div<{
   width: 20px;
   height: 20px;
   background: ${({ disabled }) =>
-    disabled ? getColor(["gray", "gallery"]) : getColor(["white", "pure"])};
-  border: 1px solid;
-  border-color: ${({ disabled }) =>
-    disabled ? getColor(["gray", "silverSand"]) : getColor(["gray", "limedSpruce"])};
+    disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
+  border: 1px solid ${getValidatedControlColor()};
   transition: all 150ms;
 
   ${HiddenCheckboxInput}:focus + & {
