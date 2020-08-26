@@ -3,9 +3,16 @@ import { getColor, getSizeBy } from "../../theme/utils"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
-const getPrimaryColor = getColor("primary")
-const getTextColor = getColor("mainBackground")
-const getAccentColor = getColor("accent")
+const getPrimaryColor = props =>
+  props.neutral ? getColor("border")(props) : getColor("primary")(props)
+const getTextColor = props =>
+  props.neutral ? getColor("main")(props) : getColor("mainBackground")(props)
+const getAccentColor = props =>
+  props.neutral ? getColor("borderSecondary")(props) : getColor("accent")(props)
+const getMain = props =>
+  props.neutral
+    ? getColor(props.disabled ? "disabled" : "border")(props)
+    : getColor("mainBackground")(props)
 const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) => {
@@ -29,9 +36,9 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) =>
       color: getSpecialColor || getPrimaryColor,
       colorHover: getSpecialColor || getAccentColor,
       colorActive: getTextColor,
-      bg: getTransparent,
-      bgHover: getTransparent,
-      bgActive: getSpecialColor || getTransparent,
+      bg: getMain,
+      bgHover: getMain,
+      bgActive: getSpecialColor || getMain,
       border: getSpecialColor || getPrimaryColor,
       borderHover: getSpecialColor || getAccentColor,
       borderActive: getSpecialColor || getAccentColor,
@@ -76,7 +83,10 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     word-break: keep-all;
 
     cursor: pointer;
-    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+    opacity: ${({ disabled, neutral }) => {
+      if (neutral) return 1
+      return disabled ? 0.4 : 1
+    }};
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
     padding: ${getSizeBy(1)};

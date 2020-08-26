@@ -22,6 +22,7 @@ export interface ButtonProps {
   flavour?: ButtonType
   disabled?: boolean
   small?: boolean
+  neutral?: boolean
   [s: string]: any
 }
 
