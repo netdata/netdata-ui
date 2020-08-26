@@ -37,7 +37,7 @@ export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   return `${gutterValue}px`
 }
 
-export const getValidatedControlColor = (defaultColorPath = "borderColor") => ({
+export const getValidatedControlColor = (defaultColorPath = "border") => ({
   theme,
   success,
   error,
@@ -48,14 +48,8 @@ export const getValidatedControlColor = (defaultColorPath = "borderColor") => ({
   success?: string | boolean
   theme: ContstructedTheme
 }) => {
-  if (success) {
-    return getColor(["success"])({ theme })
-  }
-  if (error) {
-    return getColor(["error"])({ theme })
-  }
-  if (disabled) {
-    return getColor(["gray", "silverSand"])({ theme })
-  }
+  if (success) return getColor(["success"])({ theme })
+  if (error) return getColor(["error"])({ theme })
+  if (disabled) return getColor(["disabled"])({ theme })
   return getColor([defaultColorPath])({ theme })
 }
