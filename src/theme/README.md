@@ -101,11 +101,11 @@ calcSize("_ / n") /* or */ calcSize("n / _")
 
 ```typescript
 const Div = styled.div`
-  color: ${getColor(["white", "pure"])};
+  color: ${getColor("mainBackground")};
 `
 
 const AnotherDiv = styled.div`
-  color: ${getColor(["success"])};
+  color: ${getColor("success")};
 `
 ```
 

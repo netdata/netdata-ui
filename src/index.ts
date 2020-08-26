@@ -32,6 +32,7 @@ export {
   getGutterHeight,
 } from "./theme"
 export { DefaultTheme } from "./theme/default"
+export { DarkTheme } from "./theme/dark"
 export { devices, breakpoints } from "./media"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
