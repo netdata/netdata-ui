@@ -20,7 +20,7 @@ const StyledSvg = styled.svg`
   }
 `
 
-export const LoaderIcon = ({ className }: { className?: string }) => (
+export const LoaderIcon = ({ className }: { className: string | undefined }) => (
   <StyledSvg
     className={className}
     viewBox="0 0 21 17"
