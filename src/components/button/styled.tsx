@@ -3,45 +3,43 @@ import { getColor, getSizeBy } from "../../theme/utils"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
-const getGreenHaze = getColor(["green", "greenHaze"])
-const getRedOrange = getColor(["red", "redOrange"])
-const getYellowAmber = getColor(["yellow", "amber"])
-const getWhitePure = getColor(["white", "pure"])
-const getGreenMalachite = getColor(["green", "malachite"])
+const getPrimaryColor = getColor("primary")
+const getTextColor = getColor("mainBackground")
+const getAccentColor = getColor("accent")
 const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) => {
-  const getDangerColor = danger ? getRedOrange : undefined
-  const getWarningColor = warning ? getYellowAmber : undefined
-  const getSpecialColor = getDangerColor || getWarningColor
+  const getErrorColor = danger ? getColor("error") : undefined
+  const getWarningColor = warning ? getColor("warning") : undefined
+  const getSpecialColor = getErrorColor || getWarningColor
 
   const flavours = {
     [DEFAULT]: {
-      color: getWhitePure,
-      colorHover: getWhitePure,
-      colorActive: getWhitePure,
-      bg: getSpecialColor || getGreenHaze,
-      bgHover: getSpecialColor || getGreenHaze,
-      bgActive: getSpecialColor || getGreenMalachite,
-      border: getSpecialColor || getGreenHaze,
-      borderHover: getSpecialColor || getGreenMalachite,
-      borderActive: getSpecialColor || getGreenMalachite,
+      color: getTextColor,
+      colorHover: getTextColor,
+      colorActive: getTextColor,
+      bg: getSpecialColor || getPrimaryColor,
+      bgHover: getSpecialColor || getPrimaryColor,
+      bgActive: getSpecialColor || getAccentColor,
+      border: getSpecialColor || getPrimaryColor,
+      borderHover: getSpecialColor || getAccentColor,
+      borderActive: getSpecialColor || getAccentColor,
     },
     [HOLLOW]: {
-      color: getSpecialColor || getGreenHaze,
-      colorHover: getSpecialColor || getGreenMalachite,
-      colorActive: getWhitePure,
+      color: getSpecialColor || getPrimaryColor,
+      colorHover: getSpecialColor || getAccentColor,
+      colorActive: getTextColor,
       bg: getTransparent,
       bgHover: getTransparent,
       bgActive: getSpecialColor || getTransparent,
-      border: getSpecialColor || getGreenHaze,
-      borderHover: getSpecialColor || getGreenMalachite,
-      borderActive: getSpecialColor || getGreenMalachite,
+      border: getSpecialColor || getPrimaryColor,
+      borderHover: getSpecialColor || getAccentColor,
+      borderActive: getSpecialColor || getAccentColor,
     },
     [BORDER_LESS]: {
-      color: getSpecialColor || getWhitePure,
-      colorHover: getSpecialColor || getGreenMalachite,
-      colorActive: getSpecialColor || getGreenHaze,
+      color: getSpecialColor || getTextColor,
+      colorHover: getSpecialColor || getAccentColor,
+      colorActive: getSpecialColor || getPrimaryColor,
       bg: getTransparent,
       bgHover: getTransparent,
       bgActive: getTransparent,
