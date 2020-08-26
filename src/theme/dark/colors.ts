@@ -21,6 +21,7 @@ const appColors: AppColorsT = {
   tooltip: rawColors.gray.tangaroa,
   bright: rawColors.white.almost,
   text: rawColors.white.pure,
+  textFocus: rawColors.gray.arsenic,
   sectionHeaderBackground: rawColors.white.pure,
   placeholder: rawColors.gray.slate,
 

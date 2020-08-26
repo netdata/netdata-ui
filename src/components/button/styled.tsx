@@ -8,7 +8,7 @@ const getPrimaryColor = props =>
 const getTextColor = props =>
   props.neutral ? getColor("main")(props) : getColor("mainBackground")(props)
 const getAccentColor = props =>
-  props.neutral ? getColor("borderSecondary")(props) : getColor("accent")(props)
+  props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
 const getMain = props =>
   props.neutral
     ? getColor(props.disabled ? "disabled" : "border")(props)
