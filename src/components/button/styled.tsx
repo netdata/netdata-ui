@@ -44,9 +44,9 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) =>
       borderActive: getSpecialColor || getAccentColor,
     },
     [BORDER_LESS]: {
-      color: getSpecialColor || getTextColor,
+      color: getSpecialColor || getPrimaryColor,
       colorHover: getSpecialColor || getAccentColor,
-      colorActive: getSpecialColor || getPrimaryColor,
+      colorActive: getSpecialColor || getAccentColor,
       bg: getTransparent,
       bgHover: getTransparent,
       bgActive: getTransparent,
