@@ -55,6 +55,7 @@ import dashboard from "./assets/dashboard.svg"
 import dashboards from "./assets/dashboards.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
+import collapse from "./assets/collapse.svg"
 
 export const iconsList = {
   alarm,
@@ -64,6 +65,7 @@ export const iconsList = {
   alarmWarning,
   correlation,
   correlation_inv,
+  collapse,
   chart_added,
   check,
   checkmark_s,
