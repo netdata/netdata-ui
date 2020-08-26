@@ -23,6 +23,7 @@ export interface ButtonProps {
   disabled?: boolean
   small?: boolean
   neutral?: boolean
+  uppercase?: boolean
   [s: string]: any
 }
 

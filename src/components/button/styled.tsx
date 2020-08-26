@@ -102,6 +102,7 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     box-sizing: border-box;
 
     text-decoration: none;
+    ${props => props.uppercase && "text-transform: uppercase;"}
 
     &:hover {
       border-color: ${props => props.colors.borderHover(props)};
