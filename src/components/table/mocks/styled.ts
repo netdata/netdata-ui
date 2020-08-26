@@ -6,15 +6,15 @@ import { Table } from ".."
 
 export const StyledIcon = styled(Icon)<{ descending: boolean }>`
   transform: ${({ descending }) => (descending ? "" : "rotate(180deg)")};
-  color: ${getColor(["gray", "limedSpruce"])};
+  color: ${getColor("borderSecondary")};
 `
 export const ArrowIcon = styled(Icon)`
-  color: ${getColor(["gray", "limedSpruce"])};
+  color: ${getColor("borderSecondary")};
   width: 10px;
 `
 
 export const OptionsBtn = styled(Button)`
-  color: ${getColor(["gray", "limedSpruce"])};
+  color: ${getColor("borderSecondary")};
   margin-left: 60px;
 `
 export const IconPlaceholder = styled.div`
@@ -37,7 +37,7 @@ export const NestedCell = styled.div`
   justify-content: center;
   align-items: center;
   &:not(:first-child) {
-    border-top: 1px solid ${getColor(["borderColor"])};
+    border-top: 1px solid ${getColor("border")};
   }
 `
 

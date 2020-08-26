@@ -13,7 +13,7 @@ export const StyledTabs = styled.nav`
   justify-content: flex-start;
   align-items: center;
 
-  border-bottom: 1px solid ${getColor(["gray", "bombay"])};
+  border-bottom: 1px solid ${getColor("border")};
   box-sizing: border-box;
 
   padding: 0 2px;
@@ -31,8 +31,7 @@ export const StyledTab = styled.div<TabProps | StyledTabProps>`
   align-items: center;
 
   border-bottom: 4px solid
-    ${props =>
-      props.active ? getColor(["green", "greenHaze"]) : getColor(["transparent", "full"])};
+    ${props => (props.active ? getColor("primary") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
   width: ${getSizeBy(26)};
@@ -43,6 +42,6 @@ export const StyledTab = styled.div<TabProps | StyledTabProps>`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
-    border-bottom: 4px solid ${getColor(["green", "malachite"])};
+    border-bottom: 4px solid ${getColor("accent")};
   }
 `

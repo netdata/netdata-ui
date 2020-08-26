@@ -25,14 +25,21 @@ export const StyledInput = styled.input<InputProps>`
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: 14px;
   line-height: 18px;
-  color: ${getColor(["text"])};
+  color: ${getColor("text")};
+  background: ${getColor("mainBackground")};
+
   &::placeholder {
     font-size: 14px;
     line-height: 18px;
-    color: ${getColor(["gray", "silverSand"])};
+    color: ${getColor("placeholder")};
     opacity: 1;
   }
-  ${({ disabled, theme }) => disabled && `background: ${getColor(["gray", "gallery"])({ theme })}`};
+  ${({ disabled }) =>
+    disabled &&
+    `
+      background: ${getColor("mainBackgroundDisabled")}
+      color: ${getColor("disabled")};
+    `};
   ${disabledCursorSupport};
 `
 
@@ -50,7 +57,7 @@ export const LabelRow = styled.div`
   font-weight: bold;
   font-size: 14px;
   line-height: 18px;
-  color: ${getColor(["text"])};
+  color: ${getColor("text")};
   display: flex;
   align-items: center;
 `
@@ -64,8 +71,7 @@ export const InputContainer = styled.div<{
   width: 100%;
   height: 40px;
   ${borderRadius}
-  border: 1px solid;
-  border-color: ${getValidatedControlColor()};
+  border: 1px solid ${getValidatedControlColor()};
   ${({ focused }) => focused && controlFocused};
   display: flex;
   flex-flow: row nowrap;
@@ -80,11 +86,11 @@ export const StyledIcon = styled(Icon)<{ success?: boolean }>`
   flex-shrink: 0;
 `
 export const ErrorIcon = styled(Icon)`
-  fill: ${getColor(["error"])};
+  fill: ${getColor("error")};
 `
 
 export const SuccessIcon = styled(StyledIcon)`
-  fill: ${getColor(["success"])};
+  fill: ${getColor("success")};
 `
 
 export const IconContainer = styled.div<{ disabled?: boolean }>`
@@ -94,7 +100,7 @@ export const IconContainer = styled.div<{ disabled?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ disabled, theme }) => disabled && `background: ${getColor(["gray", "gallery"])({ theme })}`};
+  ${({ disabled }) => disabled && `background: ${getColor("mainBackgroundDisabled")}`};
 `
 
 export const MetaContainer = styled.div`
@@ -117,7 +123,7 @@ export const MetaInfo = styled.span`
   overflow: hidden;
   flex-grow: 0;
   flex-shrink: 0;
-  color: ${getColor(["gray", "silverSand"])};
+  color: ${getColor("placeholder")};
 `
 
 export const FieldInfo = styled(MetaInfo)<{

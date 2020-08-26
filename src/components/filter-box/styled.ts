@@ -22,7 +22,7 @@ export const FilterContainer = styled.div<{ error?: boolean }>`
   }
 
   .react-filter-box.error {
-    border-color: ${getValidatedControlColor("text")};
+    border-color: ${getValidatedControlColor()};
     box-shadow: none;
   }
 
@@ -32,7 +32,7 @@ export const FilterContainer = styled.div<{ error?: boolean }>`
   }
 
   .react-filter-box.error.focus {
-    border-color: ${getValidatedControlColor("text")};
+    border-color: ${getValidatedControlColor("controlFocused")};
     box-shadow: 0 0 0 1px ${getValidatedControlColor("text")};
   }
 `
@@ -48,7 +48,7 @@ export const MetaContainer = styled.div`
 `
 
 export const ResultsCount = styled(MetaInfo)`
-  color: ${getColor(["text"])};
+  color: ${getColor("text")};
   margin-left: auto;
 `
 
