@@ -83,7 +83,7 @@ sidebarStory.add(
 )
 const Header = styled.div`
   width: 100%;
-  background-color: ${getColor(["gray", "gallery"])};
+  background-color: ${getColor("separator")};
 `
 
 const StyledPortalSidebar = styled(PortalSidebar)`
@@ -116,7 +116,7 @@ const Underlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${getColor(["green", "greenHaze"])};
+  background-color: ${getColor("primary")};
   height: 100vh;
   width: 100vw;
 `

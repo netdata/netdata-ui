@@ -27,7 +27,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border-bottom: 1px solid #AEB3B7;
+  border-bottom: 1px solid #93A3B0;
   box-sizing: border-box;
   padding: 0 2px;
 }

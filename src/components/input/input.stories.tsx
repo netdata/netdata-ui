@@ -157,7 +157,7 @@ inputStory.add(
 )
 
 const StyledIcon = styled(Icon)`
-  fill: ${getColor(["text"])};
+  fill: ${getColor("text")};
 `
 
 const SearchIcon = <StyledIcon name="search_s" />
