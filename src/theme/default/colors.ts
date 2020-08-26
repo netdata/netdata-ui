@@ -80,6 +80,7 @@ const appColors: AppColorsT = {
   tooltip: rawColors.blue.nile,
   bright: rawColors.white.almost,
   text: rawColors.gray.arsenic,
+  textFocus: rawColors.gray.silverSand,
   sectionHeaderBackground: rawColors.gray.arsenic,
   placeholder: rawColors.gray.gallery,
 
