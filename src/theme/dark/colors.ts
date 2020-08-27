@@ -23,7 +23,7 @@ const appColors: AppColorsT = {
   text: rawColors.white.pure,
   textFocus: rawColors.gray.arsenic,
   sectionHeaderBackground: rawColors.white.pure,
-  placeholder: rawColors.gray.slate,
+  placeholder: rawColors.gray.chambray,
 
   // Depreacted
   borderColor: rawColors.blue.polo,

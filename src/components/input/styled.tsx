@@ -6,6 +6,7 @@ import { InputProps } from "./input"
 // @ts-ignore
 const disabledCursorSupport = css<any>`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "")};
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `
 
 export const StyledContainer = styled.div`
@@ -25,8 +26,9 @@ export const StyledInput = styled.input<InputProps>`
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: 14px;
   line-height: 18px;
-  color: ${getColor("text")};
-  background: ${getColor("mainBackground")};
+  color: ${({ disabled }) => (disabled ? getColor("border") : getColor("text"))};
+  background: ${({ disabled }) =>
+    disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
 
   &::placeholder {
     font-size: 14px;
@@ -34,12 +36,6 @@ export const StyledInput = styled.input<InputProps>`
     color: ${getColor("placeholder")};
     opacity: 1;
   }
-  ${({ disabled }) =>
-    disabled &&
-    `
-      background: ${getColor("mainBackgroundDisabled")}
-      color: ${getColor("disabled")};
-    `};
   ${disabledCursorSupport};
 `
 
