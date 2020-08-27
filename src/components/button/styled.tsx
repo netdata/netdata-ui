@@ -1,17 +1,31 @@
 import styled from "styled-components"
-import { getColor, getSizeBy } from "../../theme/utils"
+import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "../../theme"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
+const themes = {
+  light: DefaultTheme,
+  dark: DarkTheme,
+}
+
+const withTheme = props => {
+  if (props.themeType) {
+    return {
+      ...props,
+      theme: themes[props.themeType],
+    }
+  }
+  return { ...props, theme: props.theme }
+}
+
 const getPrimaryColor = props =>
-  props.neutral ? getColor("border")(props) : getColor("primary")(props)
-const getTextColor = props =>
-  props.neutral ? getColor("main")(props) : getColor("mainBackground")(props)
+  props.neutral ? getColor("text")(props) : getColor("primary")(props)
+const getTextColor = getColor("bright")
 const getAccentColor = props =>
   props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
 const getMain = props =>
   props.neutral
-    ? getColor(props.disabled ? "disabled" : "border")(props)
+    ? getColor(props.disabled ? "disabled" : "mainBackground")(props)
     : getColor("mainBackground")(props)
 const getTransparent = getColor(["transparent", "full"])
 
@@ -35,7 +49,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) =>
     [HOLLOW]: {
       color: getSpecialColor || getPrimaryColor,
       colorHover: getSpecialColor || getAccentColor,
-      colorActive: getTextColor,
+      colorActive: getSpecialColor || getAccentColor,
       bg: getMain,
       bgHover: getMain,
       bgActive: getSpecialColor || getMain,
@@ -66,6 +80,7 @@ type StyledButtonProps = {
 
 export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
   colors: colorsByFlavour(props),
+  ...withTheme(props),
 }))<ButtonProps & StyledButtonProps>`
   && {
     display: flex;
