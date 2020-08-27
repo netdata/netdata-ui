@@ -4,6 +4,7 @@ import { Icon } from "../icon"
 import { LoaderIcon } from "../icon/components"
 
 export type ButtonType = "default" | "hollow" | "borderless"
+export type ThemeType = "light" | "dark"
 
 export interface ButtonProps {
   id?: string
@@ -24,6 +25,7 @@ export interface ButtonProps {
   small?: boolean
   neutral?: boolean
   uppercase?: boolean
+  themeType?: ThemeType | undefined
   [s: string]: any
 }
 

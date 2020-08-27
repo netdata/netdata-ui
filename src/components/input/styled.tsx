@@ -26,7 +26,7 @@ export const StyledInput = styled.input<InputProps>`
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: 14px;
   line-height: 18px;
-  color: ${({ disabled }) => (disabled ? getColor("border") : getColor("text"))};
+  color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("border"))};
   background: ${({ disabled }) =>
     disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
 
@@ -78,6 +78,7 @@ export const InputContainer = styled.div<{
 `
 
 export const StyledIcon = styled(Icon)<{ success?: boolean }>`
+  fill: ${getColor("main")};
   flex-grow: 0;
   flex-shrink: 0;
 `
