@@ -82,7 +82,7 @@ const appColors: AppColorsT = {
   text: rawColors.gray.arsenic,
   textFocus: rawColors.gray.silverSand,
   sectionHeaderBackground: rawColors.gray.arsenic,
-  placeholder: rawColors.gray.gallery,
+  placeholder: rawColors.gray.gainsboro,
 
   // Depreacted - use the names above
   borderColor: rawColors.gray.nepal,
