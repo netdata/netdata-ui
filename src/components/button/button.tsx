@@ -3,7 +3,8 @@ import { StyledButton } from "./styled"
 import { Icon } from "../icon"
 import { LoaderIcon } from "../icon/components"
 
-export type ButtonType = "default" | "hollow" | "borderless"
+export type ButtonFlavour = "default" | "hollow" | "borderless"
+export type ThemeType = "light" | "dark"
 
 export interface ButtonProps {
   id?: string
@@ -18,10 +19,13 @@ export interface ButtonProps {
   onMouseUp?: (e: SyntheticEvent<HTMLButtonElement>) => void
   danger?: boolean
   warning?: boolean
-  type?: ButtonType | undefined
-  flavour?: ButtonType
+  type?: string
+  flavour?: ButtonFlavour
   disabled?: boolean
   small?: boolean
+  neutral?: boolean
+  uppercase?: boolean
+  themeType?: ThemeType | undefined
   [s: string]: any
 }
 
@@ -36,7 +40,6 @@ export interface ButtonWrapperProps extends ButtonProps {
 export const Button: FC<ButtonWrapperProps> = ({
   label,
   icon,
-  type,
   flavour,
   isLoading,
   loadingLabel,
@@ -45,7 +48,7 @@ export const Button: FC<ButtonWrapperProps> = ({
   ...rest
 }: ButtonWrapperProps) => (
   <StyledButton
-    flavour={type || flavour}
+    flavour={flavour}
     hasLabel={!!label}
     onClick={isLoading ? undefined : onClick}
     {...rest}

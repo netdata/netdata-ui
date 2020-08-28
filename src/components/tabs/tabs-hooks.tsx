@@ -15,7 +15,9 @@ export const useBuildTabs = (
     let firstActiveIndex: number = -1
     let activeIsDisabled: boolean = false
 
-    Children.forEach(children, ({ props }, index) => {
+    Children.forEach(children, (tab, index) => {
+      if (!tab) return
+      const { props } = tab
       if (firstActiveIndex < 0 && !props.disabled) firstActiveIndex = index
 
       const isActive = activeIndex === indeces.length

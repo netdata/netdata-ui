@@ -10,9 +10,9 @@ This component implements splitscrean view
 ```typescript
 interface SidebarProps {
   info?: ReactNode
-  right?: boolean  
+  right?: boolean
   children?: ReactNode
-  className?: string    
+  className?: string
 }
 ```
 
@@ -61,7 +61,7 @@ const Underlay = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: ${getColor(["green", "greenHaze"])};
+  background-color: ${getColor("primary")};
 `
 ```
 

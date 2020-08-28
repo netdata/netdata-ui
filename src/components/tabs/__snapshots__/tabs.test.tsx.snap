@@ -27,7 +27,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border-bottom: 1px solid #AEB3B7;
+  border-bottom: 1px solid #93A3B0;
   box-sizing: border-box;
   padding: 0 2px;
 }
@@ -37,6 +37,9 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex: 1 1 100%;
+  -ms-flex: 1 1 100%;
+  flex: 1 1 100%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -45,17 +48,19 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border-bottom: 4px solid #00AB44;
+  border-bottom: 4px solid #00CB51;
   box-sizing: border-box;
-  width: 208px;
+  min-width: 80px;
+  max-width: 208px;
   height: 48px;
+  color: #35414A;
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
 }
 
 .c2:hover {
-  border-bottom: 4px solid #00CB51;
+  border-bottom: 4px solid #00AB44;
 }
 
 .c3 {
@@ -63,6 +68,9 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex: 1 1 100%;
+  -ms-flex: 1 1 100%;
+  flex: 1 1 100%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -73,15 +81,17 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   align-items: center;
   border-bottom: 4px solid rgba(255,255,255,0.0);
   box-sizing: border-box;
-  width: 208px;
+  min-width: 80px;
+  max-width: 208px;
   height: 48px;
+  color: #35414A;
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
 }
 
 .c3:hover {
-  border-bottom: 4px solid #00CB51;
+  border-bottom: 4px solid #00AB44;
 }
 
 <div

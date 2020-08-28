@@ -1,47 +1,66 @@
 import styled from "styled-components"
-import { getColor, getSizeBy } from "../../theme/utils"
+import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "../../theme"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
-const getGreenHaze = getColor(["green", "greenHaze"])
-const getRedOrange = getColor(["red", "redOrange"])
-const getYellowAmber = getColor(["yellow", "amber"])
-const getWhitePure = getColor(["white", "pure"])
-const getGreenMalachite = getColor(["green", "malachite"])
+const themes = {
+  light: DefaultTheme,
+  dark: DarkTheme,
+}
+
+const withTheme = props => {
+  if (props.themeType) {
+    return {
+      ...props,
+      theme: themes[props.themeType],
+    }
+  }
+  return { ...props, theme: props.theme }
+}
+
+const getPrimaryColor = props =>
+  props.neutral ? getColor("text")(props) : getColor("primary")(props)
+const getTextColor = getColor("bright")
+const getAccentColor = props =>
+  props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
+const getMain = props =>
+  props.neutral
+    ? getColor(props.disabled ? "disabled" : "mainBackground")(props)
+    : getColor("mainBackground")(props)
 const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) => {
-  const getDangerColor = danger ? getRedOrange : undefined
-  const getWarningColor = warning ? getYellowAmber : undefined
-  const getSpecialColor = getDangerColor || getWarningColor
+  const getErrorColor = danger ? getColor("error") : undefined
+  const getWarningColor = warning ? getColor("warning") : undefined
+  const getSpecialColor = getErrorColor || getWarningColor
 
   const flavours = {
     [DEFAULT]: {
-      color: getWhitePure,
-      colorHover: getWhitePure,
-      colorActive: getWhitePure,
-      bg: getSpecialColor || getGreenHaze,
-      bgHover: getSpecialColor || getGreenHaze,
-      bgActive: getSpecialColor || getGreenMalachite,
-      border: getSpecialColor || getGreenHaze,
-      borderHover: getSpecialColor || getGreenMalachite,
-      borderActive: getSpecialColor || getGreenMalachite,
+      color: getTextColor,
+      colorHover: getTextColor,
+      colorActive: getTextColor,
+      bg: getSpecialColor || getPrimaryColor,
+      bgHover: getSpecialColor || getPrimaryColor,
+      bgActive: getSpecialColor || getAccentColor,
+      border: getSpecialColor || getPrimaryColor,
+      borderHover: getSpecialColor || getAccentColor,
+      borderActive: getSpecialColor || getAccentColor,
     },
     [HOLLOW]: {
-      color: getSpecialColor || getGreenHaze,
-      colorHover: getSpecialColor || getGreenMalachite,
-      colorActive: getWhitePure,
-      bg: getTransparent,
-      bgHover: getTransparent,
-      bgActive: getSpecialColor || getTransparent,
-      border: getSpecialColor || getGreenHaze,
-      borderHover: getSpecialColor || getGreenMalachite,
-      borderActive: getSpecialColor || getGreenMalachite,
+      color: getSpecialColor || getPrimaryColor,
+      colorHover: getSpecialColor || getAccentColor,
+      colorActive: getSpecialColor || getAccentColor,
+      bg: getMain,
+      bgHover: getMain,
+      bgActive: getSpecialColor || getMain,
+      border: getSpecialColor || getPrimaryColor,
+      borderHover: getSpecialColor || getAccentColor,
+      borderActive: getSpecialColor || getAccentColor,
     },
     [BORDER_LESS]: {
-      color: getSpecialColor || getWhitePure,
-      colorHover: getSpecialColor || getGreenMalachite,
-      colorActive: getSpecialColor || getGreenHaze,
+      color: getSpecialColor || getPrimaryColor,
+      colorHover: getSpecialColor || getAccentColor,
+      colorActive: getSpecialColor || getAccentColor,
       bg: getTransparent,
       bgHover: getTransparent,
       bgActive: getTransparent,
@@ -61,6 +80,7 @@ type StyledButtonProps = {
 
 export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
   colors: colorsByFlavour(props),
+  ...withTheme(props),
 }))<ButtonProps & StyledButtonProps>`
   && {
     display: flex;
@@ -78,7 +98,10 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     word-break: keep-all;
 
     cursor: pointer;
-    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+    opacity: ${({ disabled, neutral }) => {
+      if (neutral) return 1
+      return disabled ? 0.4 : 1
+    }};
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
     padding: ${getSizeBy(1)};
@@ -94,6 +117,7 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     box-sizing: border-box;
 
     text-decoration: none;
+    ${props => props.uppercase && "text-transform: uppercase;"}
 
     &:hover {
       border-color: ${props => props.colors.borderHover(props)};
@@ -130,12 +154,12 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: ntd-draw 1s linear infinite;
-      stroke: #fff;
+      stroke: ${props => props.colors.bg(props)};
       width: 24px;
     }
 
     .path {
-      stroke: #fff;
+      stroke: ${props => props.colors.bg(props)};
     }
 
     @keyframes ntd-draw {

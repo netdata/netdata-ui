@@ -25,7 +25,10 @@ export const calcSize = (expr?: string) => (props: WrappedTheme) => {
   return getSizeUnit(props)
 }
 
-export const getColor = (colorPath: string[]) => getOrElse(["colors", ...colorPath], "#fff")
+export const getColor = (colorPath: string[] | string) => {
+  const colorPaths: string[] = Array.isArray(colorPath) ? colorPath : [colorPath]
+  return getOrElse(["colors", ...colorPaths], "#fff")
+}
 
 export const getSizeBy = (multiplier: number = 1) => (props: WrappedTheme) => {
   const size = (getSizeUnit(props) || 0) * multiplier
@@ -37,7 +40,7 @@ export const getGutterHeight = ({ theme }: WrappedTheme): string => {
   return `${gutterValue}px`
 }
 
-export const getValidatedControlColor = (defaultColorPath = "borderColor") => ({
+export const getValidatedControlColor = (defaultColorPath = "border") => ({
   theme,
   success,
   error,
@@ -48,14 +51,8 @@ export const getValidatedControlColor = (defaultColorPath = "borderColor") => ({
   success?: string | boolean
   theme: ContstructedTheme
 }) => {
-  if (success) {
-    return getColor(["success"])({ theme })
-  }
-  if (error) {
-    return getColor(["error"])({ theme })
-  }
-  if (disabled) {
-    return getColor(["gray", "silverSand"])({ theme })
-  }
+  if (success) return getColor(["success"])({ theme })
+  if (error) return getColor(["error"])({ theme })
+  if (disabled) return getColor(["disabled"])({ theme })
   return getColor([defaultColorPath])({ theme })
 }
