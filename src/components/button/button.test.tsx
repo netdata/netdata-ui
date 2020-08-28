@@ -64,7 +64,7 @@ describe("Button states", () => {
   it(" * should render only icon", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { type: "hollow", icon: "plus" },
+      { flavour: "hollow", icon: "plus" },
       DefaultTheme,
       null
     )
@@ -81,7 +81,7 @@ describe("Button states", () => {
   it(" * should render smaller only icon", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { type: "hollow", icon: "plus", small: true },
+      { flavour: "hollow", icon: "plus", small: true },
       DefaultTheme,
       null
     )
@@ -220,7 +220,7 @@ describe("Hollow Button", () => {
   it(" * should render", () => {
     const { container, getByText } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "hollow" },
+      { label: "Test prop text", flavour: "hollow" },
       DefaultTheme,
       null
     )
@@ -255,7 +255,7 @@ describe("Hollow Button", () => {
   it(" * should render for danger", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "hollow", danger: true },
+      { label: "Test prop text", flavour: "hollow", danger: true },
       DefaultTheme,
       null
     )
@@ -274,7 +274,7 @@ describe("Hollow Button", () => {
   it(" * should render for warning", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "hollow", warning: true },
+      { label: "Test prop text", flavour: "hollow", warning: true },
       DefaultTheme,
       null
     )
@@ -293,7 +293,7 @@ describe("Hollow Button", () => {
   it(" * should render for neutral", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "hollow", neutral: true },
+      { label: "Test prop text", flavour: "hollow", neutral: true },
       DefaultTheme,
       null
     )
@@ -314,7 +314,7 @@ describe("Borderless Button", () => {
   it(" * should render", () => {
     const { container, getByText } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "borderless" },
+      { label: "Test prop text", flavour: "borderless" },
       DefaultTheme,
       null
     )
@@ -349,7 +349,7 @@ describe("Borderless Button", () => {
   it(" * should render for danger", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "borderless", danger: true },
+      { label: "Test prop text", flavour: "borderless", danger: true },
       DefaultTheme,
       null
     )
@@ -368,7 +368,7 @@ describe("Borderless Button", () => {
   it(" * should render for warning", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "borderless", warning: true },
+      { label: "Test prop text", flavour: "borderless", warning: true },
       DefaultTheme,
       null
     )
@@ -387,7 +387,7 @@ describe("Borderless Button", () => {
   it(" * should render for neutral", () => {
     const { container } = testWrapper<ButtonWrapperProps>(
       Button,
-      { label: "Test prop text", type: "borderless", neutral: true },
+      { label: "Test prop text", flavour: "borderless", neutral: true },
       DefaultTheme,
       null
     )
