@@ -51,6 +51,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid #00CB51;
   box-sizing: border-box;
   min-width: 80px;
+  max-width: 208px;
   height: 48px;
   color: #35414A;
   cursor: pointer;
@@ -81,6 +82,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid rgba(255,255,255,0.0);
   box-sizing: border-box;
   min-width: 80px;
+  max-width: 208px;
   height: 48px;
   color: #35414A;
   cursor: pointer;
