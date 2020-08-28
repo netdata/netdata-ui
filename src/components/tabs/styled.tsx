@@ -27,21 +27,23 @@ type StyledTabProps = {
 
 export const StyledTab = styled.div<TabProps | StyledTabProps>`
   display: flex;
+  flex: 1 1 100%;
   justify-content: center;
   align-items: center;
 
   border-bottom: 4px solid
-    ${props => (props.active ? getColor("primary") : getColor(["transparent", "full"]))};
+    ${props => (props.active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
-  width: ${getSizeBy(26)};
+  min-width: ${getSizeBy(10)};
   height: ${getSizeBy(6)};
+  color: ${getColor("text")};
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
-    border-bottom: 4px solid ${getColor("accent")};
+    border-bottom: 4px solid ${getColor("primary")};
   }
 `
