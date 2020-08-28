@@ -78,11 +78,10 @@ export const InputContainer = styled.div<{
 `
 
 export const StyledIcon = styled(Icon)<{ success?: boolean }>`
-  fill: ${getColor("main")};
   flex-grow: 0;
   flex-shrink: 0;
 `
-export const ErrorIcon = styled(Icon)`
+export const ErrorIcon = styled(StyledIcon)`
   fill: ${getColor("error")};
 `
 
@@ -97,7 +96,8 @@ export const IconContainer = styled.div<{ disabled?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ disabled }) => disabled && `background: ${getColor("mainBackgroundDisabled")}`};
+  background: ${({ disabled }) =>
+    disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
 `
 
 export const MetaContainer = styled.div`
