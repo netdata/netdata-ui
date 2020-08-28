@@ -26,6 +26,19 @@ describe("Button states", () => {
     })
   })
 
+  it(" * should render with uppercase", () => {
+    const { container } = testWrapper<ButtonWrapperProps>(
+      Button,
+      { label: "Test prop text", uppercase: true },
+      DefaultTheme,
+      null
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "uppercase", {
+      modifier: "&&",
+    })
+  })
+
   it(" * should render loading text", () => {
     const { getByText } = testWrapper<ButtonWrapperProps>(
       Button,
@@ -134,7 +147,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#00AB44", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FDFDFD", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("opacity", "1", {
@@ -159,7 +172,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#FF4136", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FDFDFD", {
       modifier: "&&",
     })
   })
@@ -178,7 +191,26 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#FFC300", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FDFDFD", {
+      modifier: "&&",
+    })
+  })
+
+  it(" * should render neutral", () => {
+    const { container } = testWrapper<ButtonWrapperProps>(
+      Button,
+      { label: "Test prop text", neutral: true },
+      DefaultTheme,
+      null
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("background-color", "#35414A", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#35414A", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#FDFDFD", {
       modifier: "&&",
     })
   })
@@ -203,7 +235,7 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("height", "40px", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "#FFF", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#00AB44", {
@@ -228,7 +260,7 @@ describe("Hollow Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "#FFF", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#FF4136", {
@@ -247,13 +279,32 @@ describe("Hollow Button", () => {
       null
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "#FFF", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#FFC300", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#FFC300", {
+      modifier: "&&",
+    })
+  })
+
+  it(" * should render for neutral", () => {
+    const { container } = testWrapper<ButtonWrapperProps>(
+      Button,
+      { label: "Test prop text", type: "hollow", neutral: true },
+      DefaultTheme,
+      null
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("background-color", "#FFF", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "#35414A", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#35414A", {
       modifier: "&&",
     })
   })
@@ -284,7 +335,7 @@ describe("Borderless Button", () => {
     expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#00AB44", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("opacity", "1", {
@@ -329,6 +380,25 @@ describe("Borderless Button", () => {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#FFC300", {
+      modifier: "&&",
+    })
+  })
+
+  it(" * should render for neutral", () => {
+    const { container } = testWrapper<ButtonWrapperProps>(
+      Button,
+      { label: "Test prop text", type: "borderless", neutral: true },
+      DefaultTheme,
+      null
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+      modifier: "&&",
+    })
+    expect(button).toHaveStyleRule("color", "#35414A", {
       modifier: "&&",
     })
   })

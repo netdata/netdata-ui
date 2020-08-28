@@ -53,7 +53,7 @@ describe("Toggle test", () => {
     expect(checkbox).toBeDisabled()
 
     const toggle = getByRole("switch")
-    expect(toggle).toHaveStyleRule("background-color", "#F7F8F8", { modifier: ":after" })
+    expect(toggle).toHaveStyleRule("background-color", "#93A3B0", { modifier: ":after" })
   })
 
   it(" * should be colored", () => {

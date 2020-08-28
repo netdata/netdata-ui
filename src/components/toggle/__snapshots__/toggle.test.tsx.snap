@@ -5,6 +5,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   font-family: "IBM Plex Sans",sans-serif;
   font-weight: normal;
   font-style: normal;
+  color: #35414A;
   font-size: 14px;
   line-height: 18px;
 }
@@ -39,6 +40,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   -ms-flex-item-align: start;
   align-self: flex-start;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .c6:after {
@@ -148,6 +150,7 @@ exports[`Toggle test  * should render with required props 1`] = `
   -ms-flex-item-align: start;
   align-self: flex-start;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .c4:after {
