@@ -41,8 +41,10 @@ import triangle_down from "./assets/triangle_down.svg"
 import nav_dots from "./assets/nav_dots.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
 import space from "./assets/space.svg"
+import space_new from "./assets/space_new.svg"
 import nodes from "./assets/nodes.svg"
 import room from "./assets/room.svg"
+import room_new from "./assets/room_new.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
 import node from "./assets/node.svg"
 import question from "./assets/question.svg"
@@ -110,8 +112,10 @@ export const iconsList = {
   nav_dots,
   dots_2x3,
   space,
+  space_new,
   nodes,
   room,
+  room_new,
   node,
   question,
   pencil,
