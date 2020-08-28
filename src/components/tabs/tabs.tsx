@@ -7,6 +7,7 @@ export interface TabsProps {
   onChange?: OnChange
   selected?: number
   children?: ReactNode
+  TabsHeader?: string | React.ComponentType<any>
   TabContent?: string | React.ComponentType<any>
 }
 
@@ -15,6 +16,7 @@ export const Tabs: FC<TabsProps> = ({
   onChange,
   selected,
   children,
+  TabsHeader = Fragment,
   TabContent = Fragment,
 }: TabsProps) => {
   const [activeIndex, setActiveIndex] = useSetActive(selected, onChange)
@@ -31,7 +33,9 @@ export const Tabs: FC<TabsProps> = ({
 
   return (
     <StyledTabsWrapper className={className}>
-      <StyledTabs className="tabs">{nav}</StyledTabs>
+      <TabsHeader>
+        <StyledTabs className="tabs">{nav}</StyledTabs>
+      </TabsHeader>
       <TabContent>{content}</TabContent>
     </StyledTabsWrapper>
   )
