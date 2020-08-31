@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { getColor } from "../../../theme"
 
 const StyledSvg = styled.svg`
   fill: none;
@@ -7,10 +8,10 @@ const StyledSvg = styled.svg`
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: ${getColor("bright")};
   width: 24px;
   .path {
-    stroke: #fff;
+    stroke: ${getColor("bright")};
   }
 
   @keyframes ntd-draw {

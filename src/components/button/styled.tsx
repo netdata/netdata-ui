@@ -154,12 +154,12 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: ntd-draw 1s linear infinite;
-      stroke: ${props => props.colors.bg(props)};
+      stroke: ${props => props.colors.color(props)};
       width: 24px;
     }
 
     .path {
-      stroke: ${props => props.colors.bg(props)};
+      stroke: ${props => props.colors.color(props)};
     }
 
     @keyframes ntd-draw {

@@ -76,12 +76,12 @@ exports[`Borderless Button  * should render 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: rgba(255,255,255,0.0);
+  stroke: #00AB44;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: rgba(255,255,255,0.0);
+  stroke: #00AB44;
 }
 
 <button
@@ -169,12 +169,12 @@ exports[`Button states  * should render loading icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #00AB44;
+  stroke: #FDFDFD;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #00AB44;
+  stroke: #FDFDFD;
 }
 
 .c1 {
@@ -184,12 +184,12 @@ exports[`Button states  * should render loading icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: #FDFDFD;
   width: 24px;
 }
 
 .c1 .path {
-  stroke: #fff;
+  stroke: #FDFDFD;
 }
 
 <button
@@ -297,12 +297,12 @@ exports[`Button states  * should render only icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFF;
+  stroke: #00AB44;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFF;
+  stroke: #00AB44;
 }
 
 .c1 {
@@ -400,12 +400,12 @@ exports[`Button states  * should render smaller only icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFF;
+  stroke: #00AB44;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFF;
+  stroke: #00AB44;
 }
 
 .c1 {
@@ -503,12 +503,12 @@ exports[`Default Button  * should render 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #00AB44;
+  stroke: #FDFDFD;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #00AB44;
+  stroke: #FDFDFD;
 }
 
 <button
@@ -596,12 +596,12 @@ exports[`Hollow Button  * should render 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFF;
+  stroke: #00AB44;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFF;
+  stroke: #00AB44;
 }
 
 <button
