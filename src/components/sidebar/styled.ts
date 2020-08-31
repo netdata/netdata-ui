@@ -49,7 +49,7 @@ export const PortalSidebox = styled.aside<PortalSidebarboxT>`
 export const InfoBox = styled.div`
   display: flex;
   width: 50%;
-  background-color: ${getColor(["green", "greenHaze"])};
+  background-color: ${getColor("primary")};
   box-shadow: inset 0px ${propOrElse<SidebarBoxT, boolean>(["shadowSide"], true) ? LEFT : RIGHT}px
     68px rgba(0, 0, 0, 0.288);
 `

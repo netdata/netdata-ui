@@ -1,7 +1,6 @@
 export { Button, ButtonProps } from "./components/button"
 export { Sidebar, PortalSidebar } from "./components/sidebar"
 export { Icon, IconProps, iconsList } from "./components/icon"
-export { TextInput, useTouchedState, useFocusedState, useInputValue } from "./components/input"
 
 export {
   H0,
@@ -33,10 +32,18 @@ export {
   getGutterHeight,
 } from "./theme"
 export { DefaultTheme } from "./theme/default"
+export { DarkTheme } from "./theme/dark"
 export { devices, breakpoints } from "./media"
 export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
 export { webkitVisibleScrollbar } from "./mixins"
-
 export { Table, VirtualizedTable } from "./components/table"
 export { Toggle, ToggleProps } from "./components/toggle"
+export { Tabs, Tab } from "./components/tabs"
+export {
+  FilterBox,
+  FilterExpression,
+  FilterBoxProcessing,
+  FilterBoxOption,
+  FilterBoxAutocompleteHandler,
+} from "./components/filter-box"

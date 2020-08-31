@@ -8,8 +8,9 @@ import {
   sortGroupsByPriority,
   unwrapGroupedRows,
   generateRowStyle,
+  getValidRows,
 } from "./utils"
-import { TableProps } from "./table"
+import { TableProps, Item } from "./table"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
 type GetItemSize = (index: number, orderedRows: any) => number
@@ -22,6 +23,7 @@ type RenderData = {
 }
 
 const itemKeyFallback = (index: number) => String(index)
+const defaultItemIsDisabled = () => false
 
 interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   virtualizedSettings: {
@@ -45,17 +47,20 @@ interface VTableProps<T, RT = any> extends TableProps<T, RT> {
   }
 }
 
-export function VirtualizedTable<T extends object>({
+export function VirtualizedTable<T extends Item>({
   groupsOrderSettings,
   layoutType = "table",
   columns,
   data,
   sortableBy = [],
   selectedItemsClb,
+  toggleSelectedItemClb,
+  itemIsDisabled = defaultItemIsDisabled,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
   autoResetFilters = false,
+  autoResetExpanded = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
@@ -80,6 +85,7 @@ export function VirtualizedTable<T extends object>({
     useIsScrolling,
   },
   callbackRef,
+  dataResultsCallback,
   ...customProps
 }: VTableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -99,7 +105,10 @@ export function VirtualizedTable<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
+    isAllRowsSelected,
     state: { selectedRowIds, groupBy },
+    toggleAllRowsExpanded,
+    isAllRowsExpanded,
   } = useTable(
     {
       columns,
@@ -112,6 +121,7 @@ export function VirtualizedTable<T extends object>({
       disableGlobalFilter,
       globalFilter,
       filterTypes,
+      autoResetExpanded,
       useControlledState: state => {
         return React.useMemo(
           () => ({
@@ -124,15 +134,27 @@ export function VirtualizedTable<T extends object>({
         )
       },
       groupByFn,
+      toggleSelectedItemClb,
+      itemIsDisabled,
     },
     ...reactTableHooks
   )
 
   useEffect(() => {
-    if (selectedItemsClb) {
-      selectedItemsClb(selectedFlatRows.map((r: any) => r.original))
+    if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
+      const isGrouped = groupBy.length > 0
+      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
+
+      selectedItemsClb(validRows)
     }
-  }, [selectedFlatRows, selectedItemsClb])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
+
+  useEffect(() => {
+    if (isAllRowsExpanded) {
+      return
+    }
+    toggleAllRowsExpanded()
+  }, [isAllRowsExpanded, toggleAllRowsExpanded])
 
   const orderedRows = useMemo(() => {
     if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {
@@ -183,6 +205,13 @@ export function VirtualizedTable<T extends object>({
     },
     [onItemsRendered, orderedRows]
   )
+
+  useEffect(() => {
+    if (dataResultsCallback) {
+      const renderedData = orderedRows.filter(({ isVirtualGroupHeader }) => !isVirtualGroupHeader)
+      dataResultsCallback(renderedData)
+    }
+  }, [orderedRows, dataResultsCallback])
 
   return (
     <LayoutContextProvider value={layoutType}>

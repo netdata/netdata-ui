@@ -5,6 +5,7 @@ export type RawColorsT = {
   }
   white: {
     pure: string
+    almost: string
   }
   gray: {
     limedSpruce: string
@@ -13,6 +14,15 @@ export type RawColorsT = {
     gallery: string
     guyabano: string
     gainsboro: string
+    midnight: string
+    nepal: string
+    solitude: string
+    shuttle: string
+    tangaroa: string
+    chambray: string
+    wedgewood: string
+    arsenic: string
+    slate: string
   }
   green: {
     malachite: string
@@ -36,6 +46,15 @@ export type RawColorsT = {
     anakiwa: string
     anakiwaLight: string
     patternsBlue: string
+    catalina: string
+    pattens: string
+    nile: string
+    polo: string
+    matisse: string
+    teal: string
+  }
+  purple: {
+    mauve: string
   }
 }
 

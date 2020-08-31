@@ -1,11 +1,19 @@
 import React, { useEffect, useMemo, ReactNode } from "react"
-import { useTable, Row } from "react-table"
+import { useTable } from "react-table"
 import { TableContainer, TableBody } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
-import { defaultGroupByFn, GroupsOrderSettings, sortGroupsByPriority } from "./utils"
+import {
+  defaultGroupByFn,
+  GroupsOrderSettings,
+  sortGroupsByPriority,
+  unwrapGroupedRows,
+  getValidRows,
+} from "./utils"
 import { tableHooks, blockTableHooks } from "./table-hooks"
+
+const defaultItemIsDisabled = () => false
 
 // Docs aren't clear about that, but the actual difference is,
 // that "id" is string for individual column filtering,
@@ -26,6 +34,8 @@ export interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
+  toggleSelectedItemClb?: (item: T, selected: boolean) => T | void
+  itemIsDisabled?: (item: T) => boolean
   columns: RT
   data: T[]
   sortableBy?: string[]
@@ -34,6 +44,7 @@ export interface TableProps<T, RT = any> {
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
+  autoResetExpanded?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: TableInstanceState
   controlledState?: TableInstanceState
@@ -50,19 +61,28 @@ export interface TableProps<T, RT = any> {
   globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
   filterTypes?: { [filterID: string]: FilterFunction<T> }
+  dataResultsCallback?: (rows: T[]) => void
+  [key: string]: any
 }
 
-export function Table<T extends object>({
+export type Item = {
+  [key: string]: any
+}
+
+export function Table<T extends Item>({
   groupsOrderSettings,
   layoutType = "table",
   columns,
   data,
   sortableBy = [],
   selectedItemsClb,
+  toggleSelectedItemClb,
+  itemIsDisabled = defaultItemIsDisabled,
   autoResetSelectedRows = false,
   autoResetSortBy = false,
   autoResetGroupBy = false,
   autoResetFilters = false,
+  autoResetExpanded = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
@@ -72,6 +92,7 @@ export function Table<T extends object>({
   disableGlobalFilter = false,
   globalFilter,
   filterTypes,
+  dataResultsCallback,
   ...customProps
 }: TableProps<T>) {
   // preserve column order to override default grouping behaviour
@@ -89,7 +110,10 @@ export function Table<T extends object>({
     rows,
     prepareRow,
     selectedFlatRows,
+    isAllRowsSelected,
     state: { selectedRowIds, groupBy },
+    toggleAllRowsExpanded,
+    isAllRowsExpanded,
   } = useTable(
     {
       columns,
@@ -99,9 +123,11 @@ export function Table<T extends object>({
       autoResetSortBy,
       autoResetGroupBy,
       autoResetFilters,
+      autoResetExpanded,
       disableGlobalFilter,
       globalFilter,
       filterTypes,
+      groupByFn,
       useControlledState: state => {
         return React.useMemo(
           () => ({
@@ -113,16 +139,26 @@ export function Table<T extends object>({
           [state, controlledState]
         )
       },
-      groupByFn,
+      toggleSelectedItemClb,
+      itemIsDisabled,
     },
     ...reactTableHooks
   )
 
   useEffect(() => {
-    if (selectedItemsClb) {
-      selectedItemsClb(selectedFlatRows.map((r: Row<T>) => r.original))
+    if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
+      const isGrouped = groupBy.length > 0
+      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
+      selectedItemsClb(validRows)
     }
-  }, [selectedFlatRows, selectedItemsClb])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
+
+  useEffect(() => {
+    if (isAllRowsExpanded) {
+      return
+    }
+    toggleAllRowsExpanded()
+  }, [isAllRowsExpanded, toggleAllRowsExpanded])
 
   const orderedRows = useMemo(() => {
     if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {
@@ -130,6 +166,15 @@ export function Table<T extends object>({
     }
     return rows
   }, [groupBy, groupsOrderSettings, rows])
+
+  useEffect(() => {
+    if (dataResultsCallback) {
+      const renderedData = unwrapGroupedRows(orderedRows).filter(
+        ({ isVirtualGroupHeader }) => !isVirtualGroupHeader
+      )
+      dataResultsCallback(renderedData)
+    }
+  }, [orderedRows, dataResultsCallback])
 
   return (
     <LayoutContextProvider value={layoutType}>

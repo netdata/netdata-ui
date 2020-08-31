@@ -5,6 +5,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   font-family: "IBM Plex Sans",sans-serif;
   font-weight: normal;
   font-style: normal;
+  color: #35414A;
   font-size: 14px;
   line-height: 18px;
 }
@@ -25,7 +26,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   width: 40px;
   height: 20px;
   background: #FFF;
-  border: 1px solid #AEB3B7;
+  border: 1px solid #93A3B0;
   border-radius: 100px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
@@ -39,6 +40,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   -ms-flex-item-align: start;
   align-self: flex-start;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .c6:after {
@@ -134,7 +136,7 @@ exports[`Toggle test  * should render with required props 1`] = `
   width: 40px;
   height: 20px;
   background: #FFF;
-  border: 1px solid #AEB3B7;
+  border: 1px solid #93A3B0;
   border-radius: 100px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
@@ -148,6 +150,7 @@ exports[`Toggle test  * should render with required props 1`] = `
   -ms-flex-item-align: start;
   align-self: flex-start;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .c4:after {

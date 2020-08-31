@@ -2,12 +2,6 @@
 
 Implementation based on `react-table` lib.
 
-**KNOWN ISSUES**
-
-`Row selection plugin doesn't work well with grouping right now.`
-The solution might be to fake materialized sub rows with real ones
-from flattened array, or to render groups some other way.
-
 ### Props:
 
 ```typescript
@@ -27,6 +21,8 @@ interface TableProps<T, RT = any> {
   groupsOrderSettings?: GroupsOrderSettings
   layoutType?: "table" | "block"
   selectedItemsClb?: (items: T[]) => T[] | void
+  toggleSelectedItemClb?: (item: T, selected: boolean) => T | void
+  itemIsDisabled?: (item: T) => boolean
   columns: RT
   data: T[]
   sortableBy?: string[]
@@ -35,6 +31,7 @@ interface TableProps<T, RT = any> {
   autoResetSortBy?: boolean
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
+  autoResetExpanded?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: TableInstanceState
   controlledState?: TableInstanceState
@@ -51,10 +48,11 @@ interface TableProps<T, RT = any> {
   globalFilter?: string | FilterFunction<T> // string can refer to one of filterTypes
   // https://github.com/tannerlinsley/react-table/blob/master/src/filterTypes.js
   filterTypes?: { [filterID: string]: FilterFunction<T> }
+  dataResultsCallback?: (rows: T[]) => void
 }
 ```
 
-- `selectedItemClb` - selected item callback. This one used for calling something whenever any row in table is selected
+- `toggleSelectedItemClb` - selected item callback. This one used for calling something whenever any row in table is selected or deselected
 - `columns` - This is where all the layout happens. As example user table `columns` provided below. As basis `react-table` **columns** used here.
 - `data` - collection of table rows as js objects. Each first level key of object should reference to `accessor` fild described in columns.
 - `sortableBy` - describes which columns could provide sorting API. Values should be referenced to `columns` `accessor`
@@ -72,6 +70,7 @@ interface TableProps<T, RT = any> {
   object, should be bigger that `0` to avoid JS falsy value condition.
 - `filterTypes` - custom set of filtering functions
 - `globalFilter` - custom function for global filtering
+- `dataResultsCallback` - callback with unwrapped results array, excluding group headers
 
 This is setup of first **column** with the selection checkbox
 

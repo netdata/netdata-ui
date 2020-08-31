@@ -23,7 +23,7 @@ const RowLayout = ({ children, layoutType, ...props }: any) => {
 const DefaultGroupHead = ({ row, layoutType, style }: any) => {
   const rowProps = row.getRowProps()
   return layoutType === "table" ? (
-    <tr {...rowProps} style={style}>
+    <tr title="group-head" {...rowProps} style={style}>
       <td colSpan={row.cells.length}>{row.groupByVal}</td>
     </tr>
   ) : (
@@ -60,7 +60,7 @@ export const TableRow = ({
   const layoutType = useContext(LayoutContext) as "block" | "table"
   const { subRows, isVirtualGroupHeader } = row
 
-  if (isVirtualGroupHeader) {
+  if (isVirtualGroupHeader || subRows.length > 0) {
     return renderGroupHead ? (
       <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps, style })}</>
     ) : (
@@ -68,28 +68,6 @@ export const TableRow = ({
     )
   }
 
-  if (subRows.length > 0) {
-    return renderGroupHead ? (
-      <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps, style })}</>
-    ) : (
-      <>
-        <DefaultGroupHead row={row} layoutType={layoutType} style={style} />
-        {subRows.map(subRow => {
-          prepareRow(subRow)
-          return (
-            <TableRow
-              style={style}
-              key={subRow.id}
-              row={subRow}
-              prepareRow={prepareRow}
-              customProps={customProps}
-              selectedRowIds={selectedRowIds}
-            />
-          )
-        })}
-      </>
-    )
-  }
   return (
     <RowLayout layoutType={layoutType} {...row.getRowProps({ style })}>
       {row.cells.map(cell => {

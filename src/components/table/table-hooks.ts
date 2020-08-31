@@ -10,10 +10,10 @@ import {
 
 export const tableHooks = [
   useGlobalFilter,
-  useGroupBy,
   useColumnOrder,
+  useGroupBy,
   useSortBy,
-  useRowSelect,
   useExpanded,
+  useRowSelect,
 ]
 export const blockTableHooks = [...tableHooks, useBlockLayout]

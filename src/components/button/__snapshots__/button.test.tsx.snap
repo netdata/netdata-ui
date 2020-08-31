@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Borderless Button  * should render 1`] = `
-.c0 {
+.c0.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29,55 +29,59 @@ exports[`Borderless Button  * should render 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
-  color: #FFF;
+  color: #00AB44;
   border-width: 1px;
   border-style: solid;
   border-color: rgba(255,255,255,0.0);
   border-radius: 2px;
   box-sizing: border-box;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover {
+.c0.c0:hover {
+  border-color: rgba(255,255,255,0.0);
+  background-color: rgba(255,255,255,0.0);
+  color: #00CB51;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0.c0:hover .button-icon {
+  fill: #00CB51;
+}
+
+.c0.c0:active {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
   color: #00CB51;
 }
 
-.c0:hover .button-icon {
-  fill: #00CB51;
-}
-
-.c0:active {
-  border-color: rgba(255,255,255,0.0);
-  background-color: rgba(255,255,255,0.0);
-  color: #00AB44;
-}
-
-.c0:focus {
+.c0.c0:focus {
   outline: none;
 }
 
-.c0 .button-icon {
+.c0.c0 .button-icon {
   position: absolute;
   left: 4px;
   height: 16px;
   width: 16px;
-  fill: #FFF;
+  fill: #00AB44;
 }
 
-.c0 .ntd-spinner {
+.c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: rgba(255,255,255,0.0);
   width: 24px;
 }
 
-.c0 .path {
-  stroke: #fff;
+.c0.c0 .path {
+  stroke: rgba(255,255,255,0.0);
 }
 
 <button
@@ -90,7 +94,7 @@ exports[`Borderless Button  * should render 1`] = `
 `;
 
 exports[`Button states  * should render loading icon 1`] = `
-.c0 {
+.c0.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,55 +122,59 @@ exports[`Button states  * should render loading icon 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
-  color: #FFF;
+  color: #FDFDFD;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
   box-sizing: border-box;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover {
+.c0.c0:hover {
   border-color: #00CB51;
   background-color: #00AB44;
-  color: #FFF;
+  color: #FDFDFD;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover .button-icon {
-  fill: #FFF;
+.c0.c0:hover .button-icon {
+  fill: #FDFDFD;
 }
 
-.c0:active {
+.c0.c0:active {
   border-color: #00CB51;
   background-color: #00CB51;
-  color: #FFF;
+  color: #FDFDFD;
 }
 
-.c0:focus {
+.c0.c0:focus {
   outline: none;
 }
 
-.c0 .button-icon {
+.c0.c0 .button-icon {
   position: absolute;
   left: 4px;
   height: 16px;
   width: 16px;
-  fill: #FFF;
+  fill: #FDFDFD;
 }
 
-.c0 .ntd-spinner {
+.c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: #00AB44;
   width: 24px;
 }
 
-.c0 .path {
-  stroke: #fff;
+.c0.c0 .path {
+  stroke: #00AB44;
 }
 
 .c1 {
@@ -214,7 +222,7 @@ exports[`Button states  * should render loading icon 1`] = `
 `;
 
 exports[`Button states  * should render only icon 1`] = `
-.c0 {
+.c0.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -241,36 +249,40 @@ exports[`Button states  * should render only icon 1`] = `
   padding: 8px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
-  background-color: rgba(255,255,255,0.0);
+  background-color: #FFF;
   color: #00AB44;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
   box-sizing: border-box;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover {
+.c0.c0:hover {
   border-color: #00CB51;
-  background-color: rgba(255,255,255,0.0);
+  background-color: #FFF;
   color: #00CB51;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover .button-icon {
+.c0.c0:hover .button-icon {
   fill: #00CB51;
 }
 
-.c0:active {
+.c0.c0:active {
   border-color: #00CB51;
-  background-color: rgba(255,255,255,0.0);
-  color: #FFF;
+  background-color: #FFF;
+  color: #00CB51;
 }
 
-.c0:focus {
+.c0.c0:focus {
   outline: none;
 }
 
-.c0 .button-icon {
+.c0.c0 .button-icon {
   position: absolute;
   left: auto;
   height: 16px;
@@ -278,19 +290,19 @@ exports[`Button states  * should render only icon 1`] = `
   fill: #00AB44;
 }
 
-.c0 .ntd-spinner {
+.c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: #FFF;
   width: 24px;
 }
 
-.c0 .path {
-  stroke: #fff;
+.c0.c0 .path {
+  stroke: #FFF;
 }
 
 .c1 {
@@ -313,7 +325,7 @@ exports[`Button states  * should render only icon 1`] = `
 `;
 
 exports[`Button states  * should render smaller only icon 1`] = `
-.c0 {
+.c0.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -340,36 +352,40 @@ exports[`Button states  * should render smaller only icon 1`] = `
   padding: 8px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
-  background-color: rgba(255,255,255,0.0);
+  background-color: #FFF;
   color: #00AB44;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
   box-sizing: border-box;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover {
+.c0.c0:hover {
   border-color: #00CB51;
-  background-color: rgba(255,255,255,0.0);
+  background-color: #FFF;
   color: #00CB51;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover .button-icon {
+.c0.c0:hover .button-icon {
   fill: #00CB51;
 }
 
-.c0:active {
+.c0.c0:active {
   border-color: #00CB51;
-  background-color: rgba(255,255,255,0.0);
-  color: #FFF;
+  background-color: #FFF;
+  color: #00CB51;
 }
 
-.c0:focus {
+.c0.c0:focus {
   outline: none;
 }
 
-.c0 .button-icon {
+.c0.c0 .button-icon {
   position: absolute;
   left: auto;
   height: 16px;
@@ -377,19 +393,19 @@ exports[`Button states  * should render smaller only icon 1`] = `
   fill: #00AB44;
 }
 
-.c0 .ntd-spinner {
+.c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: #FFF;
   width: 24px;
 }
 
-.c0 .path {
-  stroke: #fff;
+.c0.c0 .path {
+  stroke: #FFF;
 }
 
 .c1 {
@@ -412,7 +428,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
 `;
 
 exports[`Default Button  * should render 1`] = `
-.c0 {
+.c0.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -440,55 +456,59 @@ exports[`Default Button  * should render 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
-  color: #FFF;
+  color: #FDFDFD;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
   box-sizing: border-box;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover {
+.c0.c0:hover {
   border-color: #00CB51;
   background-color: #00AB44;
-  color: #FFF;
+  color: #FDFDFD;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover .button-icon {
-  fill: #FFF;
+.c0.c0:hover .button-icon {
+  fill: #FDFDFD;
 }
 
-.c0:active {
+.c0.c0:active {
   border-color: #00CB51;
   background-color: #00CB51;
-  color: #FFF;
+  color: #FDFDFD;
 }
 
-.c0:focus {
+.c0.c0:focus {
   outline: none;
 }
 
-.c0 .button-icon {
+.c0.c0 .button-icon {
   position: absolute;
   left: 4px;
   height: 16px;
   width: 16px;
-  fill: #FFF;
+  fill: #FDFDFD;
 }
 
-.c0 .ntd-spinner {
+.c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: #00AB44;
   width: 24px;
 }
 
-.c0 .path {
-  stroke: #fff;
+.c0.c0 .path {
+  stroke: #00AB44;
 }
 
 <button
@@ -501,7 +521,7 @@ exports[`Default Button  * should render 1`] = `
 `;
 
 exports[`Hollow Button  * should render 1`] = `
-.c0 {
+.c0.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -528,36 +548,40 @@ exports[`Hollow Button  * should render 1`] = `
   padding: 8px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
-  background-color: rgba(255,255,255,0.0);
+  background-color: #FFF;
   color: #00AB44;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
   border-radius: 2px;
   box-sizing: border-box;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover {
+.c0.c0:hover {
   border-color: #00CB51;
-  background-color: rgba(255,255,255,0.0);
+  background-color: #FFF;
   color: #00CB51;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
-.c0:hover .button-icon {
+.c0.c0:hover .button-icon {
   fill: #00CB51;
 }
 
-.c0:active {
+.c0.c0:active {
   border-color: #00CB51;
-  background-color: rgba(255,255,255,0.0);
-  color: #FFF;
+  background-color: #FFF;
+  color: #00CB51;
 }
 
-.c0:focus {
+.c0.c0:focus {
   outline: none;
 }
 
-.c0 .button-icon {
+.c0.c0 .button-icon {
   position: absolute;
   left: 4px;
   height: 16px;
@@ -565,19 +589,19 @@ exports[`Hollow Button  * should render 1`] = `
   fill: #00AB44;
 }
 
-.c0 .ntd-spinner {
+.c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #fff;
+  stroke: #FFF;
   width: 24px;
 }
 
-.c0 .path {
-  stroke: #fff;
+.c0.c0 .path {
+  stroke: #FFF;
 }
 
 <button

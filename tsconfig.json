@@ -24,6 +24,7 @@
     "/dist",
     "**/*.mock.tsx",
     "**/*.test.ts",
+    "**/*.tst.tsx",
     "**/*.test.tsx",
     "test-utils.ts",
     "**/*.stories.tsx"

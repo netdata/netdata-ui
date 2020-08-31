@@ -41,8 +41,10 @@ import triangle_down from "./assets/triangle_down.svg"
 import nav_dots from "./assets/nav_dots.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
 import space from "./assets/space.svg"
+import space_new from "./assets/space_new.svg"
 import nodes from "./assets/nodes.svg"
 import room from "./assets/room.svg"
+import room_new from "./assets/room_new.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
 import node from "./assets/node.svg"
 import question from "./assets/question.svg"
@@ -55,6 +57,8 @@ import dashboard from "./assets/dashboard.svg"
 import dashboards from "./assets/dashboards.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
+import collapse from "./assets/collapse.svg"
+import pin_element from "./assets/pin_element.svg"
 
 export const iconsList = {
   alarm,
@@ -64,6 +68,7 @@ export const iconsList = {
   alarmWarning,
   correlation,
   correlation_inv,
+  collapse,
   chart_added,
   check,
   checkmark_s,
@@ -107,10 +112,13 @@ export const iconsList = {
   nav_dots,
   dots_2x3,
   space,
+  space_new,
   nodes,
   room,
+  room_new,
   node,
   question,
   pencil,
+  pin_element,
   view_list,
 }
