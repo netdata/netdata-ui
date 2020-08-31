@@ -58,7 +58,33 @@ export type RawColorsT = {
   }
 }
 
-export type AppColorsT = {}
+export type AppColorsT = {
+  primary: string
+  accent: string
+  main: string
+  border: string
+  borderSecondary: string
+  disabled: string
+  elementBackground: string
+  mainBackground: string
+  mainBackgroundDisabled: string
+  success: string
+  warning: string
+  error: string
+  attention: string
+  separator: string
+  controlFocused: string
+  selected: string
+  tooltip: string
+  bright: string
+  text: string
+  textFocus: string
+  sectionHeaderBackground: string
+  placeholder: string
+  borderColor: string
+  borderSecondaryColor: string
+  separatorColor: string
+}
 
 export type NumberOrStringT = number | string
 
