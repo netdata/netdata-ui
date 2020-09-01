@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 import { useDebounce } from "react-use"
-import ReactFilterBox from "react-filter-box"
+import { ExtendedFilterBox } from "./extended-filter-box"
 import "react-filter-box/lib/react-filter-box.css"
 import { Option } from "./types"
 import { Container, FilterContainer, MetaContainer, ResultsCount, FilterInfo } from "./styled"
@@ -72,10 +72,9 @@ export const FilterBox = ({
   const [filterQuery, setFilterQuery] = useState("")
   const [parsedQuery, setParsedQuery] = useState("")
 
-  const autoCompleteInstance = useMemo(
-    () => new AutoCompleteHandler(data, options, accessorPaths),
-    [AutoCompleteHandler, accessorPaths, data, options]
-  )
+  const autoCompleteInstance = useMemo(() => {
+    return new AutoCompleteHandler(data, options, accessorPaths)
+  }, [AutoCompleteHandler, accessorPaths, data, options])
   const handleError = (error, validationResult) => {
     if (onParseError) {
       onParseError(error, validationResult)
@@ -135,10 +134,11 @@ export const FilterBox = ({
     300,
     [displayedError]
   )
+
   return (
     <Container className={className}>
       <FilterContainer onBlur={handleBlur} onFocus={handleFocus} error={debouncedError}>
-        <ReactFilterBox
+        <ExtendedFilterBox
           {...props}
           autoCompleteHandler={autoCompleteInstance}
           onParseError={handleError}
