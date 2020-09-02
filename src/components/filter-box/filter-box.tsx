@@ -72,9 +72,11 @@ export const FilterBox = ({
   const [filterQuery, setFilterQuery] = useState("")
   const [parsedQuery, setParsedQuery] = useState("")
 
-  const autoCompleteInstance = useMemo(() => {
-    return new AutoCompleteHandler(data, options, accessorPaths)
-  }, [AutoCompleteHandler, accessorPaths, data, options])
+  const autoCompleteInstance = useMemo(
+    () => new AutoCompleteHandler(data, options, accessorPaths),
+    [AutoCompleteHandler, accessorPaths, data, options]
+  )
+
   const handleError = (error, validationResult) => {
     if (onParseError) {
       onParseError(error, validationResult)
