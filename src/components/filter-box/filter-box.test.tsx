@@ -85,7 +85,6 @@ describe("Filter Box test", () => {
 
     const results = utils.container.querySelectorAll(".contentClass")
     expect(results.length).toBe(4)
-    expect(utils.queryByText(/Results:/)).not.toBeInTheDocument()
 
     const input = utils.container.querySelectorAll("textarea")[0]
     expect(onBlur).not.toBeCalled()

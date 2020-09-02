@@ -153,7 +153,7 @@ export const FilterBox = ({
       <MetaContainer>
         {parsedError && !debouncedError && <FilterInfo>The filter is not complete</FilterInfo>}
         {debouncedError && <FilterInfo error>Invalid filter</FilterInfo>}
-        {!debouncedError && resultsQty !== undefined && parsedQuery && (
+        {!debouncedError && resultsQty !== undefined && (
           <ResultsCount>{`Results: ${resultsQty}`}</ResultsCount>
         )}
       </MetaContainer>
