@@ -1,4 +1,4 @@
-import React, { FC, useEffect, ReactNode } from "react"
+import React, { FC, Fragment, useEffect, ReactNode } from "react"
 import { Portal } from "react-portal"
 import { PortalSidebox, DisabledOverlay } from "./styled"
 
@@ -11,6 +11,7 @@ interface PortalSidebarProps<T = any> {
   right?: boolean
   children?: ReactNode
   className?: string
+  Wrapper?: string | React.ComponentType<any>
 }
 
 export const PortalSidebar: FC<PortalSidebarProps> = ({
@@ -20,6 +21,7 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
   closeOnOverlayClick = false,
   onClose = () => {},
   right = false,
+  Wrapper = Fragment,
 }: PortalSidebarProps) => {
   useEffect(() => {
     const evHandler = (event: KeyboardEvent) => {
@@ -42,9 +44,11 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
   return (
     <Portal>
       <DisabledOverlay onClick={handleOverlayClick} />
-      <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
-        {children}
-      </PortalSidebox>
+      <Wrapper>
+        <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
+          {children}
+        </PortalSidebox>
+      </Wrapper>
     </Portal>
   )
 }
