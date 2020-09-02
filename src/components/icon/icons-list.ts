@@ -59,6 +59,8 @@ import dashboard_add from "./assets/dashboard_add.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
 import collapse from "./assets/collapse.svg"
 import pin_element from "./assets/pin_element.svg"
+import hide from "./assets/hide.svg"
+import services from "./assets/services.svg"
 
 export const iconsList = {
   alarm,
@@ -121,4 +123,6 @@ export const iconsList = {
   pencil,
   pin_element,
   view_list,
+  hide,
+  services,
 }
