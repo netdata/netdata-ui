@@ -1,4 +1,4 @@
-import { pipe, sort, concat, map, path } from "ramda"
+import { pipe, sort, concat, map, path, filter } from "ramda"
 
 // default  grouping function from the react-table utils
 
@@ -42,6 +42,9 @@ const getPriority = (
 
 export const sortGroupsByPriority = (groups: any[], groupsOrderSettings: GroupsOrderSettings) =>
   pipe(
+    // TODO - find out why react-table outputs groups together with ungrouped rows
+    // was it an API change? Or there is an error in our table hooks config / anywhere else
+    (rows: any[]) => rows.filter(row => row.subRows.length),
     map((group: any) => ({
       ...group,
       priority:
