@@ -1,4 +1,4 @@
-import { pipe, sort, concat, map, path, filter } from "ramda"
+import { pipe, sort, concat, map, path } from "ramda"
 
 // default  grouping function from the react-table utils
 
