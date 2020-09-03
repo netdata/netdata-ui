@@ -26,6 +26,7 @@ export interface ButtonProps {
   neutral?: boolean
   uppercase?: boolean
   themeType?: ThemeType | undefined
+  active?: boolean
   [s: string]: any
 }
 
