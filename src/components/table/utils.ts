@@ -42,8 +42,9 @@ const getPriority = (
 
 export const sortGroupsByPriority = (groups: any[], groupsOrderSettings: GroupsOrderSettings) =>
   pipe(
-    // TODO - find out why react-table outputs groups together with ungrouped rows
-    // was it an API change? Or there is an error in our table hooks config / anywhere else
+    // TODO - find out if the whole process can be simplified
+    // to work well with toggleAllRowsExpanded that we use for selection
+    // and remove the filter
     (rows: any[]) => rows.filter(row => row.subRows.length),
     map((group: any) => ({
       ...group,
