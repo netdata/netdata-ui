@@ -18,11 +18,19 @@ export type RawColorsT = {
     nepal: string
     solitude: string
     shuttle: string
+    shuttleGray: string
     tangaroa: string
     chambray: string
     wedgewood: string
     arsenic: string
     slate: string
+    blackPearl: string
+    aluminium: string
+    vulcan: string
+    bunker: string
+    cod: string
+    trout: string
+    blackRussian: string
   }
   green: {
     malachite: string
@@ -52,6 +60,7 @@ export type RawColorsT = {
     polo: string
     matisse: string
     teal: string
+    madison: string
   }
   purple: {
     mauve: string
