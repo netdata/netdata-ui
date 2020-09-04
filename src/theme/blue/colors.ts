@@ -5,30 +5,30 @@ const appColors: AppColorsT = {
   primary: rawColors.green.greenHaze,
   accent: rawColors.green.malachite,
   main: rawColors.white.pure,
-  border: rawColors.gray.aluminium,
-  borderSecondary: rawColors.gray.vulcan, // neutral color
-  disabled: rawColors.gray.vulcan,
-  elementBackground: rawColors.gray.bunker,
-  mainBackground: rawColors.gray.cod,
-  mainBackgroundDisabled: rawColors.gray.bunker,
+  border: rawColors.blue.polo,
+  borderSecondary: rawColors.blue.matisse, // neutral color
+  disabled: rawColors.blue.madison,
+  elementBackground: rawColors.gray.midnight,
+  mainBackground: rawColors.blue.catalina,
+  mainBackgroundDisabled: rawColors.gray.midnight,
   success: rawColors.green.greenHaze,
   warning: rawColors.yellow.amber,
   error: rawColors.red.redOrange,
   attention: rawColors.purple.mauve,
-  separator: rawColors.gray.shuttleGray,
+  separator: rawColors.gray.chambray,
   controlFocused: rawColors.white.pure, // obsolete?
-  selected: rawColors.gray.trout,
-  tooltip: rawColors.gray.blackRussian,
+  selected: rawColors.gray.wedgewood,
+  tooltip: rawColors.gray.blackPearl,
   bright: rawColors.white.almost,
   text: rawColors.white.pure,
   textFocus: rawColors.gray.solitude,
   sectionHeaderBackground: rawColors.white.pure,
-  placeholder: rawColors.gray.shuttleGray,
+  placeholder: rawColors.gray.chambray,
 
   // Depreacted
-  borderColor: rawColors.gray.aluminium,
-  borderSecondaryColor: rawColors.gray.vulcan, // neutral color
-  separatorColor: rawColors.gray.shuttleGray,
+  borderColor: rawColors.blue.polo,
+  borderSecondaryColor: rawColors.blue.matisse, // neutral color
+  separatorColor: rawColors.gray.chambray,
 }
 
 export const colors: RawColorsT & AppColorsT = {

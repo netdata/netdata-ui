@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components"
-import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "../../theme"
+import { getColor, getSizeBy, DefaultTheme, DarkTheme, BlueTheme } from "../../theme"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
 const themes = {
   light: DefaultTheme,
   dark: DarkTheme,
+  blue: BlueTheme,
 }
 
 const activeStyles = css<any>`
