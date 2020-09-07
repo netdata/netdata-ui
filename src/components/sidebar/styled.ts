@@ -22,7 +22,7 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
   width: 50%;
 `
 
-export const DisabledOverlay = styled.aside`
+export const DisabledOverlay = styled.aside<{ overlayZIndex: string }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -32,6 +32,7 @@ export const DisabledOverlay = styled.aside`
   max-width: 100vw;
   background-color: black;
   opacity: 0.3;
+  z-index: ${({ overlayZIndex }) => overlayZIndex};
 `
 
 export const PortalSidebox = styled.aside<PortalSidebarboxT>`
