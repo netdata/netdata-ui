@@ -61,6 +61,9 @@ import collapse from "./assets/collapse.svg"
 import pin_element from "./assets/pin_element.svg"
 import hide from "./assets/hide.svg"
 import services from "./assets/services.svg"
+import download from "./assets/download.svg"
+import upload from "./assets/upload.svg"
+import print from "./assets/print.svg"
 
 export const iconsList = {
   alarm,
@@ -125,4 +128,7 @@ export const iconsList = {
   view_list,
   hide,
   services,
+  download,
+  upload,
+  print,
 }
