@@ -64,6 +64,8 @@ import services from "./assets/services.svg"
 import download from "./assets/download.svg"
 import upload from "./assets/upload.svg"
 import print from "./assets/print.svg"
+import thumb_up from "./assets/thumb_up.svg"
+import thumb_down from "./assets/thumb_down.svg"
 
 export const iconsList = {
   alarm,
@@ -105,6 +107,8 @@ export const iconsList = {
   sad,
   save,
   text_add,
+  thumb_up,
+  thumb_down,
   trashcan,
   user,
   warning,
