@@ -18,11 +18,19 @@ export type RawColorsT = {
     nepal: string
     solitude: string
     shuttle: string
+    shuttleGray: string
     tangaroa: string
     chambray: string
     wedgewood: string
     arsenic: string
     slate: string
+    blackPearl: string
+    aluminium: string
+    vulcan: string
+    bunker: string
+    cod: string
+    trout: string
+    blackRussian: string
   }
   green: {
     malachite: string
@@ -52,13 +60,40 @@ export type RawColorsT = {
     polo: string
     matisse: string
     teal: string
+    madison: string
   }
   purple: {
     mauve: string
   }
 }
 
-export type AppColorsT = {}
+export type AppColorsT = {
+  primary: string
+  accent: string
+  main: string
+  border: string
+  borderSecondary: string
+  disabled: string
+  elementBackground: string
+  mainBackground: string
+  mainBackgroundDisabled: string
+  success: string
+  warning: string
+  error: string
+  attention: string
+  separator: string
+  controlFocused: string
+  selected: string
+  tooltip: string
+  bright: string
+  text: string
+  textFocus: string
+  sectionHeaderBackground: string
+  placeholder: string
+  borderColor: string
+  borderSecondaryColor: string
+  separatorColor: string
+}
 
 export type NumberOrStringT = number | string
 

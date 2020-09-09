@@ -1,5 +1,6 @@
-import React, { FC, useEffect, ReactNode } from "react"
+import React, { FC, Fragment, useEffect, ReactNode, useState, useRef } from "react"
 import { Portal } from "react-portal"
+import { useMount } from "react-use"
 import { PortalSidebox, DisabledOverlay } from "./styled"
 
 const ESCAPE_KEY = 27
@@ -11,6 +12,7 @@ interface PortalSidebarProps<T = any> {
   right?: boolean
   children?: ReactNode
   className?: string
+  Wrapper?: string | React.ComponentType<any>
 }
 
 export const PortalSidebar: FC<PortalSidebarProps> = ({
@@ -20,7 +22,11 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
   closeOnOverlayClick = false,
   onClose = () => {},
   right = false,
+  Wrapper = Fragment,
 }: PortalSidebarProps) => {
+  const sidebarRef = useRef<HTMLElement>(null)
+  const [overlayZIndex, setOverlayZIndex] = useState("auto")
+
   useEffect(() => {
     const evHandler = (event: KeyboardEvent) => {
       if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
@@ -39,12 +45,28 @@ export const PortalSidebar: FC<PortalSidebarProps> = ({
     }
   }
 
+  useMount(() => {
+    if (sidebarRef?.current) {
+      const element = sidebarRef.current as HTMLElement
+      const style = window.getComputedStyle(element)
+      const zIndex = style.getPropertyValue("z-index") || "auto"
+      setOverlayZIndex(zIndex)
+    }
+  })
+
   return (
     <Portal>
-      <DisabledOverlay onClick={handleOverlayClick} />
-      <PortalSidebox className={className} shadowSide={right} side={right ? "right" : "left"}>
-        {children}
-      </PortalSidebox>
+      <DisabledOverlay overlayZIndex={overlayZIndex} onClick={handleOverlayClick} />
+      <Wrapper>
+        <PortalSidebox
+          ref={sidebarRef}
+          className={className}
+          shadowSide={right}
+          side={right ? "right" : "left"}
+        >
+          {children}
+        </PortalSidebox>
+      </Wrapper>
     </Portal>
   )
 }

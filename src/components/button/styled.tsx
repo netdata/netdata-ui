@@ -1,12 +1,19 @@
-import styled from "styled-components"
-import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "../../theme"
+import styled, { css } from "styled-components"
+import { getColor, getSizeBy, DefaultTheme, DarkTheme, BlueTheme } from "../../theme"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
 const themes = {
   light: DefaultTheme,
   dark: DarkTheme,
+  blue: BlueTheme,
 }
+
+const activeStyles = css<any>`
+  border-color: ${props => props.colors.borderActive(props)};
+  background-color: ${props => props.colors.bgActive(props)};
+  color: ${props => props.colors.colorActive(props)};
+`
 
 const withTheme = props => {
   if (props.themeType) {
@@ -131,10 +138,13 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     }
 
     &:active {
-      border-color: ${props => props.colors.borderActive(props)};
-      background-color: ${props => props.colors.bgActive(props)};
-      color: ${props => props.colors.colorActive(props)};
+      ${activeStyles}
     }
+    ${props =>
+      props.active &&
+      `
+      ${activeStyles}
+    `}
 
     &:focus {
       outline: none;
