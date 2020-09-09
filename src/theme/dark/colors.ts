@@ -15,6 +15,7 @@ const appColors: AppColorsT = {
   warning: rawColors.yellow.amber,
   error: rawColors.red.redOrange,
   attention: rawColors.purple.mauve,
+  attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.gray.shuttleGray,
   controlFocused: rawColors.white.pure, // obsolete?
   selected: rawColors.gray.trout,

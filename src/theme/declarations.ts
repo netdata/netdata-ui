@@ -64,6 +64,7 @@ export type RawColorsT = {
   }
   purple: {
     mauve: string
+    daisy: string
   }
 }
 
@@ -81,6 +82,7 @@ export type AppColorsT = {
   warning: string
   error: string
   attention: string
+  attentionSecondary: string
   separator: string
   controlFocused: string
   selected: string
