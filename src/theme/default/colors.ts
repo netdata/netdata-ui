@@ -66,6 +66,7 @@ export const rawColors: RawColorsT = {
   },
   purple: {
     mauve: "#DB94F4",
+    daisy: "#563D7C",
   },
 }
 
@@ -83,6 +84,7 @@ const appColors: AppColorsT = {
   warning: rawColors.yellow.amber,
   error: rawColors.red.redOrange,
   attention: rawColors.purple.mauve,
+  attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.gray.shuttle,
   controlFocused: rawColors.gray.arsenic, // obsolete?
   selected: rawColors.blue.pattens,
