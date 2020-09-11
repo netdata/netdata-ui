@@ -21,7 +21,7 @@ export const customGroupBy = (rows, columnId) =>
   columnId === "services" ? groupByService(rows, columnId) : defaultGroupByFn(rows, columnId)
 
 export const filterOptions = [
-  { columnField: "node", type: "selection" },
+  { columnField: "node", columnText: "node_name", type: "selection" },
   { columnField: "status", type: "selection" },
   { columnField: "services", type: "selection" },
 ] as FilterBoxOption[]

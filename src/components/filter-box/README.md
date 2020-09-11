@@ -65,6 +65,9 @@ interface Props {
   accessorPaths?: {
     [fieldName: string]: string[]
   }
+  fieldValueGetters?: {
+    [fieldName: string]: (any) => string
+  }
   onFocus?: () => void
   onBlur?: () => void
 }
