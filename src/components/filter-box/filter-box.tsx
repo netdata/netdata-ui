@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react"
 import { useDebounce } from "react-use"
 import { ExtendedFilterBox } from "./extended-filter-box"
 import "react-filter-box/lib/react-filter-box.css"
-import { Option } from "./types"
+import { Option, FieldValueGetters, AccessorsData } from "./types"
 import { Container, FilterContainer, MetaContainer, ResultsCount, FilterInfo } from "./styled"
 import { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
 
@@ -42,9 +42,8 @@ interface Props {
     validationResult: { isValid: boolean; message?: string }
   ) => void
   AutoCompleteHandler?: any
-  accessorPaths?: {
-    [fieldName: string]: string[]
-  }
+  accessorPaths?: AccessorsData
+  fieldValueGetters?: FieldValueGetters
   onFocus?: () => void
   onBlur?: () => void
   resultsQty?: number
@@ -62,6 +61,7 @@ export const FilterBox = ({
   onFocus,
   onBlur,
   resultsQty,
+  fieldValueGetters,
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -73,8 +73,8 @@ export const FilterBox = ({
   const [parsedQuery, setParsedQuery] = useState("")
 
   const autoCompleteInstance = useMemo(
-    () => new AutoCompleteHandler(data, options, accessorPaths),
-    [AutoCompleteHandler, accessorPaths, data, options]
+    () => new AutoCompleteHandler(data, options, accessorPaths, fieldValueGetters),
+    [AutoCompleteHandler, accessorPaths, fieldValueGetters, data, options]
   )
 
   const handleError = (error, validationResult) => {
