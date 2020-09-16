@@ -64,6 +64,7 @@ import services from "./assets/services.svg"
 import download from "./assets/download.svg"
 import upload from "./assets/upload.svg"
 import print from "./assets/print.svg"
+import room_overview from "./assets/room_overview.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import thumb_down from "./assets/thumb_down.svg"
 
