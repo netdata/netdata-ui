@@ -16,14 +16,15 @@ export const useBuildTabs = (
     let activeIsDisabled: boolean = false
 
     Children.forEach(children, (tab, index) => {
-      if (!tab) return
-      const { props } = tab
+      const props = tab?.props || {}
       if (firstActiveIndex < 0 && !props.disabled) firstActiveIndex = index
 
       const isActive = activeIndex === indeces.length
       const key = `${index}-${props.label}`
 
-      nav.push(<Tab key={key} {...props} onChange={onChange} index={index} active={isActive} />)
+      if (tab) {
+        nav.push(<Tab key={key} {...props} onChange={onChange} index={index} active={isActive} />)
+      }
 
       if (isActive) {
         activeIsDisabled = !!props.disabled
