@@ -127,6 +127,8 @@ export const iconsList = {
   nodes,
   room,
   room_new,
+  room_overview,
+  system_overview,
   node,
   question,
   pencil,
