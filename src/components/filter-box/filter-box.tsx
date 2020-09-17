@@ -1,10 +1,14 @@
 import React, { useMemo, useState } from "react"
 import { useDebounce } from "react-use"
 import { ExtendedFilterBox } from "./extended-filter-box"
-import "react-filter-box/lib/react-filter-box.css"
+import "@netdata/react-filter-box/lib/react-filter-box.css"
 import { Option, FieldValueGetters, AccessorsData } from "./types"
 import { Container, FilterContainer, MetaContainer, ResultsCount, FilterInfo } from "./styled"
 import { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
+
+const codeMirrorConfig = {
+  scrollbarStyle: "null",
+}
 
 // Assumed top-level pegjs error type for convenience, not reliable
 export interface ParseError {
@@ -47,6 +51,7 @@ interface Props {
   onFocus?: () => void
   onBlur?: () => void
   resultsQty?: number
+  editorConfig?: Object
 }
 
 export const FilterBox = ({
@@ -62,6 +67,7 @@ export const FilterBox = ({
   onBlur,
   resultsQty,
   fieldValueGetters,
+  editorConfig = {},
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -137,6 +143,8 @@ export const FilterBox = ({
     [displayedError]
   )
 
+  const config = useMemo(() => ({ ...codeMirrorConfig, ...editorConfig }), [editorConfig])
+
   return (
     <Container className={className}>
       <FilterContainer onBlur={handleBlur} onFocus={handleFocus} error={debouncedError}>
@@ -148,6 +156,7 @@ export const FilterBox = ({
           onChange={handleOnChange}
           options={options}
           data={data}
+          editorConfig={config}
         />
       </FilterContainer>
       <MetaContainer>

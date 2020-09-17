@@ -1,5 +1,5 @@
 import { path } from "ramda"
-import { SimpleResultProcessing } from "react-filter-box"
+import { SimpleResultProcessing } from "@netdata/react-filter-box"
 import { Option, FieldValueGetters } from "./types"
 
 const castValue = (value: any) => String(value).toLowerCase()
