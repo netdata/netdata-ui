@@ -70,5 +70,6 @@ interface Props {
   }
   onFocus?: () => void
   onBlur?: () => void
+  editorConfig?: Object
 }
 ```

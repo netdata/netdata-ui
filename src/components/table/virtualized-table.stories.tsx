@@ -123,6 +123,10 @@ const NoScrollContainer = styled.div`
   width: 400px;
 `
 
+const StyledFilterBox = styled(FilterBox)`
+  width: 400px;
+`
+
 const VirtualizedBlockTable = styled(VirtualizedTable)`
   border: 1px solid black;
   border-bottom: 0;
@@ -271,7 +275,7 @@ virtualizedTableStory.add(
           </button>
         </div>
         <div>
-          <FilterBox
+          <StyledFilterBox
             data={virtualizedData}
             options={filterOptions}
             onParseOk={handleFilterExpressions}
