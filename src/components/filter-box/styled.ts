@@ -19,6 +19,10 @@ export const FilterContainer = styled.div<{ error?: boolean }>`
     border-radius: 4px;
     border: 1px solid ${getColor(["controlFocused"])};
     box-shadow: none;
+
+    .CodeMirror {
+      height: 38px;
+    }
   }
 
   .react-filter-box.error {
