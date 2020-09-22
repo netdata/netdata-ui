@@ -3,13 +3,16 @@ import { controlFocused } from "../../mixins"
 import { getColor, getSizeBy, getValidatedControlColor } from "../../theme/utils"
 import { MetaInfo } from "../input/styled"
 
-export const Container = styled.div`
+export const Container = styled.div<{ inline: boolean }>`
   width: 100%;
+  height: ${({ inline }) => (inline ? "40px" : "unset")};
+  position: relative;
 `
 
-export const FilterContainer = styled.div<{ error?: boolean }>`
+export const FilterContainer = styled.div<{ error?: boolean; inline: boolean }>`
   width: 100%;
-  height: ${getSizeBy(5)};
+  ${({ inline }) => inline && "height: 100%;"}
+  height: 100%;
   .react-filter-box {
     height: 38px;
     padding: 4px 6px;
@@ -41,11 +44,20 @@ export const FilterContainer = styled.div<{ error?: boolean }>`
   }
 `
 
-export const MetaContainer = styled.div`
-  height: 40px;
+export const MetaContainer = styled.div<{
+  inline: boolean
+  metaDisplay?: "normal" | "compact" | "none"
+}>`
+  ${({ inline }) =>
+    inline &&
+    `
+  position: absolute;
+  left: 0;
+`}
+  height: ${({ metaDisplay }) => (metaDisplay === "normal" ? "40px" : "20px")};
   width: 100%;
   max-width: 100%;
-  display: flex;
+  display: ${({ metaDisplay }) => (metaDisplay === "none" ? "none" : "flex")};
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;

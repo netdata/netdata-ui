@@ -17,7 +17,17 @@ const subData = {
 }
 
 const StyledFilterBox = styled(FilterBox)`
-  width: 400px;
+  width: 200px;
+  flex-grow: 0;
+  flex-shrink: 0;
+`
+
+const InlineContainer = styled.div`
+  height: 60px;
+  width: 600px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 `
 
 const data = [
@@ -46,12 +56,20 @@ filterBoxStory.add(
 
     return (
       <>
-        <StyledFilterBox
-          options={options}
-          onParseOk={handleParse}
-          data={employees}
-          onChange={handleChange}
-        />
+        <InlineContainer>
+          <button type="button" style={{ marginRight: "10px" }}>
+            Sample text
+          </button>
+          <StyledFilterBox
+            options={options}
+            onParseOk={handleParse}
+            data={data}
+            onChange={handleChange}
+            inline
+            resultsQty={employees.length}
+            metaDisplay="compact"
+          />
+        </InlineContainer>
         {employees.map(({ name, position }) => (
           <div key={name}>
             <Text>{`${name} ${position}`}</Text>

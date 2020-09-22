@@ -52,6 +52,8 @@ interface Props {
   onBlur?: () => void
   resultsQty?: number
   editorConfig?: Object
+  inline?: boolean
+  metaDisplay?: "normal" | "compact" | "none"
 }
 
 export const FilterBox = ({
@@ -68,6 +70,8 @@ export const FilterBox = ({
   resultsQty,
   fieldValueGetters,
   editorConfig = {},
+  inline = false,
+  metaDisplay = "normal",
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -146,8 +150,13 @@ export const FilterBox = ({
   const config = useMemo(() => ({ ...codeMirrorConfig, ...editorConfig }), [editorConfig])
 
   return (
-    <Container className={className}>
-      <FilterContainer onBlur={handleBlur} onFocus={handleFocus} error={debouncedError}>
+    <Container className={className} inline={inline}>
+      <FilterContainer
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        error={debouncedError}
+        inline={inline}
+      >
         <ExtendedFilterBox
           {...props}
           autoCompleteHandler={autoCompleteInstance}
@@ -159,7 +168,7 @@ export const FilterBox = ({
           editorConfig={config}
         />
       </FilterContainer>
-      <MetaContainer>
+      <MetaContainer inline={inline} metaDisplay={metaDisplay}>
         {parsedError && !debouncedError && <FilterInfo>The filter is not complete</FilterInfo>}
         {debouncedError && <FilterInfo error>Invalid filter</FilterInfo>}
         {!debouncedError && resultsQty !== undefined && (

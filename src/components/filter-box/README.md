@@ -71,5 +71,7 @@ interface Props {
   onFocus?: () => void
   onBlur?: () => void
   editorConfig?: Object
+  inline?: boolean
+  metaDisplay?: "normal" | "compact" | "none"
 }
 ```
