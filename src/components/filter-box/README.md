@@ -68,8 +68,11 @@ interface Props {
   fieldValueGetters?: {
     [fieldName: string]: (any) => string
   }
+  resultsQty?: number | ReactNode
   onFocus?: () => void
   onBlur?: () => void
   editorConfig?: Object
+  inline?: boolean
+  metaDisplay?: "normal" | "compact" | "none"
 }
 ```

@@ -10,6 +10,8 @@ import { readmeCleanup } from "../../../utils/readme"
 import readme from "./README.md"
 import { customGroupBy, filterByExpressions, filterOptions } from "./mocks/utils"
 import { FilterBox, FilterExpression } from "../filter-box"
+import { getColor } from "../.."
+import { Text } from "../typography"
 
 const subData = {
   readme: {
@@ -127,6 +129,9 @@ const StyledFilterBox = styled(FilterBox)`
   width: 400px;
 `
 
+const StyledResults = styled(Text)`
+  color: ${getColor("success")};
+`
 const VirtualizedBlockTable = styled(VirtualizedTable)`
   border: 1px solid black;
   border-bottom: 0;
@@ -280,7 +285,7 @@ virtualizedTableStory.add(
             options={filterOptions}
             onParseOk={handleFilterExpressions}
             accessorPaths={{ node: ["node", "name"] }}
-            resultsQty={resultsQty}
+            resultsQty={<StyledResults>{resultsQty} Nodes</StyledResults>}
           />
         </div>
         <NoScrollContainer ref={ref}>
