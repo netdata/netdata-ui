@@ -1,9 +1,16 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo, useState, ReactNode } from "react"
 import { useDebounce } from "react-use"
 import { ExtendedFilterBox } from "./extended-filter-box"
 import "@netdata/react-filter-box/lib/react-filter-box.css"
 import { Option, FieldValueGetters, AccessorsData } from "./types"
-import { Container, FilterContainer, MetaContainer, ResultsCount, FilterInfo } from "./styled"
+import {
+  Container,
+  FilterContainer,
+  MetaContainer,
+  ResultsCount,
+  FilterInfo,
+  PlaceholderText,
+} from "./styled"
 import { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
 
 const codeMirrorConfig = {
@@ -50,10 +57,11 @@ interface Props {
   fieldValueGetters?: FieldValueGetters
   onFocus?: () => void
   onBlur?: () => void
-  resultsQty?: number
+  resultsQty?: number | ReactNode
   editorConfig?: Object
   inline?: boolean
   metaDisplay?: "normal" | "compact" | "none"
+  placeholder?: string
 }
 
 export const FilterBox = ({
@@ -72,6 +80,7 @@ export const FilterBox = ({
   editorConfig = {},
   inline = false,
   metaDisplay = "normal",
+  placeholder,
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -81,6 +90,7 @@ export const FilterBox = ({
   const [debouncedError, setDebouncedError] = useState(false)
   const [filterQuery, setFilterQuery] = useState("")
   const [parsedQuery, setParsedQuery] = useState("")
+  const [focused, setFocused] = useState(false)
 
   const autoCompleteInstance = useMemo(
     () => new AutoCompleteHandler(data, options, accessorPaths, fieldValueGetters),
@@ -104,6 +114,7 @@ export const FilterBox = ({
     if (onBlur) {
       onBlur()
     }
+    setFocused(false)
     if (parsedError) {
       setState(state => ({ ...state, displayedError: true }))
     } else {
@@ -115,6 +126,7 @@ export const FilterBox = ({
     if (onFocus) {
       onFocus()
     }
+    setFocused(true)
     if (displayedError) {
       setState(state => ({ ...state, displayedError: false }))
     }
@@ -157,6 +169,7 @@ export const FilterBox = ({
         error={debouncedError}
         inline={inline}
       >
+        {placeholder && !focused && <PlaceholderText>{placeholder}</PlaceholderText>}
         <ExtendedFilterBox
           {...props}
           autoCompleteHandler={autoCompleteInstance}
@@ -172,7 +185,10 @@ export const FilterBox = ({
         {parsedError && !debouncedError && <FilterInfo>The filter is not complete</FilterInfo>}
         {debouncedError && <FilterInfo error>Invalid filter</FilterInfo>}
         {!debouncedError && resultsQty !== undefined && (
-          <ResultsCount>{`Results: ${resultsQty}`}</ResultsCount>
+          <ResultsCount>
+            Results:&nbsp;
+            {resultsQty}
+          </ResultsCount>
         )}
       </MetaContainer>
     </Container>

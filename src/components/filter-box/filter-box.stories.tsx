@@ -68,6 +68,7 @@ filterBoxStory.add(
             inline
             resultsQty={employees.length}
             metaDisplay="compact"
+            placeholder="Filter employees"
           />
         </InlineContainer>
         {employees.map(({ name, position }) => (

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { controlFocused } from "../../mixins"
 import { getColor, getSizeBy, getValidatedControlColor } from "../../theme/utils"
 import { MetaInfo } from "../input/styled"
+import { Text } from "../typography"
 
 export const Container = styled.div<{ inline: boolean }>`
   width: 100%;
@@ -9,11 +10,26 @@ export const Container = styled.div<{ inline: boolean }>`
   position: relative;
 `
 
+export const PlaceholderText = styled(Text)`
+  position: absolute;
+  left: 0;
+  height: 38px;
+  padding: 4px 6px;
+  font-size: 14px;
+  line-height: 30px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1;
+  color: ${getColor("placeholder")};
+`
+
 export const FilterContainer = styled.div<{ error?: boolean; inline: boolean }>`
   width: 100%;
   ${({ inline }) => inline && "height: 100%;"}
+  position: relative;
   height: 100%;
   .react-filter-box {
+    pointer-events: auto;
     height: 38px;
     padding: 4px 6px;
     margin-bottom: 0;
