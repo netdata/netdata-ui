@@ -169,7 +169,9 @@ export const FilterBox = ({
         error={debouncedError}
         inline={inline}
       >
-        {placeholder && !focused && <PlaceholderText>{placeholder}</PlaceholderText>}
+        {placeholder && !focused && !filterQuery.length && (
+          <PlaceholderText>{placeholder}</PlaceholderText>
+        )}
         <ExtendedFilterBox
           {...props}
           autoCompleteHandler={autoCompleteInstance}
