@@ -82,6 +82,7 @@ export const MetaContainer = styled.div<{
 export const ResultsCount = styled(MetaInfo)`
   color: ${getColor(["text"])};
   margin-left: auto;
+  overflow: visible;
 `
 
 export const FilterInfo = styled(MetaInfo)<{
