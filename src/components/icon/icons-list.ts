@@ -33,6 +33,7 @@ import text_add from "./assets/text_add.svg"
 import trashcan from "./assets/trashcan.svg"
 import user from "./assets/user.svg"
 import warning from "./assets/warning.svg"
+import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import search_s from "./assets/search_s.svg"
@@ -114,6 +115,7 @@ export const iconsList = {
   trashcan,
   user,
   warning,
+  warning_triangle,
   x,
   checkmark_partial_s,
   search_s,
