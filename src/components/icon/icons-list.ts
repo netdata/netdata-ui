@@ -69,6 +69,7 @@ import room_overview from "./assets/room_overview.svg"
 import system_overview from "./assets/system_overview.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import thumb_down from "./assets/thumb_down.svg"
+import nav_arrow_goto from "./assets/nav_arrow_goto.svg"
 
 export const iconsList = {
   alarm,
@@ -141,4 +142,5 @@ export const iconsList = {
   download,
   upload,
   print,
+  nav_arrow_goto,
 }
