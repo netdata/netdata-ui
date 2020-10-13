@@ -70,6 +70,10 @@ import system_overview from "./assets/system_overview.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import thumb_down from "./assets/thumb_down.svg"
 import nav_arrow_goto from "./assets/nav_arrow_goto.svg"
+import bullet_one from "./assets/bullet_one.svg"
+import bullet_two from "./assets/bullet_two.svg"
+import bullet_three from "./assets/bullet_three.svg"
+import charts from "./assets/charts.svg"
 
 export const iconsList = {
   alarm,
@@ -143,4 +147,8 @@ export const iconsList = {
   upload,
   print,
   nav_arrow_goto,
+  bullet_one,
+  bullet_two,
+  bullet_three,
+  charts,
 }
