@@ -1,6 +1,6 @@
 export { Button, ButtonProps } from "./components/button"
 export { Sidebar, PortalSidebar } from "./components/sidebar"
-export { Icon, IconProps, iconsList } from "./components/icon"
+export { Icon, IconProps, iconsList, IconComponents } from "./components/icon"
 
 export {
   H0,
