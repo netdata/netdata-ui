@@ -15,6 +15,7 @@ export {
   TextBig,
   Text,
   TextSmall,
+  TextMicro,
   TextNano,
   TextFemto,
   List,
