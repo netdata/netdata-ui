@@ -74,8 +74,21 @@ import bullet_one from "./assets/bullet_one.svg"
 import bullet_two from "./assets/bullet_two.svg"
 import bullet_three from "./assets/bullet_three.svg"
 import charts from "./assets/charts.svg"
+import aggregation_avg from "./assets/aggregation_avg.svg"
+import aggregation_max from "./assets/aggregation_max.svg"
+import aggregation_med from "./assets/aggregation_med.svg"
+import aggregation_min from "./assets/aggregation_min.svg"
+import aggregation_sum_abs from "./assets/aggregation_sum_abs.svg"
+import aggregation_sum from "./assets/aggregation_sum.svg"
+import none_selected from "./assets/none_selected.svg"
 
 export const iconsList = {
+  aggregation_avg,
+  aggregation_max,
+  aggregation_med,
+  aggregation_min,
+  aggregation_sum_abs,
+  aggregation_sum,
   alarm,
   alarm_bell,
   alarmCritical,
@@ -108,6 +121,7 @@ export const iconsList = {
   node_default_l,
   node_notification_l,
   node_selected_l,
+  none_selected,
   notification,
   plus_mini_s,
   plus,
