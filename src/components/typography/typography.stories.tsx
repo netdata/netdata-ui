@@ -13,6 +13,7 @@ import { List, ListItem } from "./List"
 import { Button } from "../button"
 import { TextFemto } from "./TextFemto"
 import { TextNano } from "./TextNano"
+import { TextMicro } from "./TextMicro"
 import { TextBig } from "./TextBig"
 import { TextBigger } from "./TextBigger"
 import { TextHuge } from "./TextHuge"
@@ -54,6 +55,9 @@ const texts = (
     </div>
     <div>
       <TextSmall>TextSmall: The five boxing wizards jump quickly.</TextSmall>
+    </div>
+    <div>
+      <TextMicro>TextMicro: The five boxing wizards jump quickly.</TextMicro>
     </div>
     <div>
       <TextNano>TextNano: The five boxing wizards jump quickly.</TextNano>
