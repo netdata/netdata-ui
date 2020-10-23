@@ -31,6 +31,8 @@ import sad from "./assets/sad.svg"
 import save from "./assets/save.svg"
 import text_add from "./assets/text_add.svg"
 import trashcan from "./assets/trashcan.svg"
+import update from "./assets/update.svg"
+import update_pending from "./assets/update_pending.svg"
 import user from "./assets/user.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
@@ -132,6 +134,8 @@ export const iconsList = {
   thumb_up,
   thumb_down,
   trashcan,
+  update,
+  update_pending,
   user,
   warning,
   warning_triangle,
