@@ -23,7 +23,7 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
 `
 
 export const DisabledOverlay = styled.aside<{ overlayZIndex: string }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   height: 100vh;
@@ -36,7 +36,7 @@ export const DisabledOverlay = styled.aside<{ overlayZIndex: string }>`
 `
 
 export const PortalSidebox = styled.aside<PortalSidebarboxT>`
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   top: 0;
   ${propOrElse<PortalSidebarboxT, string>(["side"], "left")}: 0;
