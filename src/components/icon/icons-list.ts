@@ -8,6 +8,7 @@ import correlation_inv from "./assets/correlation_inv.svg"
 import chart_added from "./assets/chart_added.svg"
 import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
+import chevron_down from "./assets/chevron_down.svg"
 import cross_s from "./assets/cross_s.svg"
 import error from "./assets/error.svg"
 import expand from "./assets/expand.svg"
@@ -102,6 +103,7 @@ export const iconsList = {
   chart_added,
   check,
   checkmark_s,
+  chevron_down,
   chevron_left,
   chevron_right_s,
   cross_s,
