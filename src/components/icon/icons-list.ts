@@ -41,6 +41,7 @@ import x from "./assets/x.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import search_s from "./assets/search_s.svg"
 import arrow_down from "./assets/arrow_down.svg"
+import arrow_left from "./assets/arrow_left.svg"
 import triangle_down from "./assets/triangle_down.svg"
 import nav_dots from "./assets/nav_dots.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
@@ -145,6 +146,7 @@ export const iconsList = {
   checkmark_partial_s,
   search_s,
   sorting_vertical,
+  arrow_left,
   arrow_down,
   triangle_down,
   nav_dots,
