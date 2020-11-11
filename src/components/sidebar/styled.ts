@@ -26,6 +26,7 @@ export const DisabledOverlay = styled.aside<{ overlayZIndex: string }>`
   position: fixed;
   top: 0;
   bottom: 0;
+  left: 0; // needed for dashboard where body has some left-padding
   height: 100vh;
   width: 100vw;
   min-width: 100vw;
