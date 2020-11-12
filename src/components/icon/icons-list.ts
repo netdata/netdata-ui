@@ -3,6 +3,7 @@ import alarm from "./assets/alarm.svg"
 import alarmCritical from "./assets/alarm_c.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
+import around_clock from "./assets/around_clock.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
 import chart_added from "./assets/chart_added.svg"
@@ -32,6 +33,7 @@ import sad from "./assets/sad.svg"
 import save from "./assets/save.svg"
 import text_add from "./assets/text_add.svg"
 import trashcan from "./assets/trashcan.svg"
+import unreachable from "./assets/unreachable.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import user from "./assets/user.svg"
@@ -42,6 +44,7 @@ import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import search_s from "./assets/search_s.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import arrow_left from "./assets/arrow_left.svg"
+import arrows_vertical from "./assets/arrows_vertical.svg"
 import triangle_down from "./assets/triangle_down.svg"
 import nav_dots from "./assets/nav_dots.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
@@ -98,6 +101,7 @@ export const iconsList = {
   alarmCritical,
   alarmCriticalWarning,
   alarmWarning,
+  around_clock,
   correlation,
   correlation_inv,
   collapse,
@@ -137,6 +141,7 @@ export const iconsList = {
   thumb_up,
   thumb_down,
   trashcan,
+  unreachable,
   update,
   update_pending,
   user,
@@ -148,6 +153,7 @@ export const iconsList = {
   sorting_vertical,
   arrow_left,
   arrow_down,
+  arrows_vertical,
   triangle_down,
   nav_dots,
   dots_2x3,
