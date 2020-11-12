@@ -23,9 +23,10 @@ export const SidebarBox = styled.aside<SidebarBoxT>`
 `
 
 export const DisabledOverlay = styled.aside<{ overlayZIndex: string }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
+  left: 0; // needed for dashboard where body has some left-padding
   height: 100vh;
   width: 100vw;
   min-width: 100vw;
@@ -36,7 +37,7 @@ export const DisabledOverlay = styled.aside<{ overlayZIndex: string }>`
 `
 
 export const PortalSidebox = styled.aside<PortalSidebarboxT>`
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   top: 0;
   ${propOrElse<PortalSidebarboxT, string>(["side"], "left")}: 0;
