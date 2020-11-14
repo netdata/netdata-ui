@@ -107,7 +107,7 @@ describe("Filter Box test", () => {
     expect(newResults.length).toBe(1)
     expect(utils.getByText(/Results:/)).toBeInTheDocument()
     expect(utils.getByText(/1/)).toBeInTheDocument()
-    expect(onChange).toBeCalledTimes(3)
+    expect(onChange).toBeCalledTimes(6)
   })
 
   it(" * should filter results by selection", async () => {
