@@ -308,6 +308,8 @@ exports[`Button states  * should render only icon 1`] = `
 .c1 {
   height: 24px;
   width: 24px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 <button
@@ -411,6 +413,8 @@ exports[`Button states  * should render smaller only icon 1`] = `
 .c1 {
   height: 24px;
   width: 24px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 <button
