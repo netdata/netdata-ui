@@ -12,7 +12,7 @@ export const StyledIcon = styled.svg<{ size: string; disabled: boolean }>`
   height: ${({ size }) => SIZES[size]};
   width: ${({ size }) => SIZES[size]};
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "unset")};
 `
 
 export const StyledIconButton = styled(({ ...otherProps }) => <Button {...otherProps} />)``

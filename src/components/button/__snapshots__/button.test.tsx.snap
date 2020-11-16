@@ -309,7 +309,7 @@ exports[`Button states  * should render only icon 1`] = `
   height: 24px;
   width: 24px;
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: unset;
 }
 
 <button
@@ -414,7 +414,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
   height: 24px;
   width: 24px;
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: unset;
 }
 
 <button
