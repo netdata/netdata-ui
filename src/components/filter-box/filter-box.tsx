@@ -81,6 +81,7 @@ export const FilterBox = ({
   inline = false,
   metaDisplay = "normal",
   placeholder,
+  query,
   ...props
 }: Props) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -88,7 +89,7 @@ export const FilterBox = ({
     displayedError: false,
   })
   const [debouncedError, setDebouncedError] = useState(false)
-  const [filterQuery, setFilterQuery] = useState("")
+  const [filterQuery, setFilterQuery] = useState(query || "")
   const [parsedQuery, setParsedQuery] = useState("")
   const [focused, setFocused] = useState(false)
 
@@ -133,14 +134,14 @@ export const FilterBox = ({
   }
 
   const handleOnChange = (
-    query: string,
+    q: string,
     expOrError: Expression[] | ParseError,
     validationResult: { isValid: boolean; message?: string }
   ) => {
     if (onChange) {
-      onChange(query, expOrError, validationResult)
+      onChange(q, expOrError, validationResult)
     }
-    setFilterQuery(query)
+    setFilterQuery(q)
 
     if (expOrError && !Array.isArray(expOrError) && expOrError.isError) {
       setState(state => ({ ...state, parsedError: true }))
@@ -181,6 +182,7 @@ export const FilterBox = ({
           options={options}
           data={data}
           editorConfig={config}
+          query={filterQuery}
         />
       </FilterContainer>
       <MetaContainer inline={inline} metaDisplay={metaDisplay}>
