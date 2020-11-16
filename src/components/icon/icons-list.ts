@@ -37,6 +37,7 @@ import unreachable from "./assets/unreachable.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import user from "./assets/user.svg"
+import users from "./assets/users.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
@@ -88,6 +89,11 @@ import aggregation_min from "./assets/aggregation_min.svg"
 import aggregation_sum_abs from "./assets/aggregation_sum_abs.svg"
 import aggregation_sum from "./assets/aggregation_sum.svg"
 import none_selected from "./assets/none_selected.svg"
+import bookmark from "./assets/bookmark.svg"
+import switch_off from "./assets/switch_off.svg"
+import settings from "./assets/settings.svg"
+import more from "./assets/more.svg"
+import alarms_new from "./assets/alarms_new.svg"
 
 export const iconsList = {
   aggregation_avg,
@@ -97,11 +103,13 @@ export const iconsList = {
   aggregation_sum_abs,
   aggregation_sum,
   alarm,
+  alarms_new,
   alarm_bell,
   alarmCritical,
   alarmCriticalWarning,
   alarmWarning,
   around_clock,
+  bookmark,
   correlation,
   correlation_inv,
   collapse,
@@ -127,6 +135,7 @@ export const iconsList = {
   line_chart,
   logo_s,
   magnify,
+  more,
   node_default_l,
   node_notification_l,
   node_selected_l,
@@ -145,6 +154,7 @@ export const iconsList = {
   update,
   update_pending,
   user,
+  users,
   warning,
   warning_triangle,
   x,
@@ -159,6 +169,8 @@ export const iconsList = {
   dots_2x3,
   space,
   space_new,
+  switch_off,
+  settings,
   nodes,
   room,
   room_new,
