@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
-import { select } from "@storybook/addon-knobs"
+import { boolean, select } from "@storybook/addon-knobs"
 import { readmeCleanup } from "../../../utils/readme"
 import { iconsList } from "./icons-list"
 import { Icon } from "."
@@ -36,7 +36,7 @@ iconStory.add(
   () => {
     return (
       <StyledContainer>
-        <Icon name={select("name", icons, "x")} />
+        <Icon name={select("name", icons, "x")} disabled={boolean("Disabled", false)} />
       </StyledContainer>
     )
   },
@@ -51,6 +51,7 @@ iconStory.add(
         <Icon
           name={select("name", icons, "gear")}
           size={select("size", sizes, "large") as SizePropT}
+          disabled={boolean("Disabled", false)}
         />
       </StyledContainer>
     )
@@ -68,7 +69,7 @@ iconStory.add(
   () => {
     return (
       <StyledContainer>
-        <StyledPlus name={select("name", icons, "plus")} />
+        <StyledPlus name={select("name", icons, "plus")} disabled={boolean("Disabled", false)} />
       </StyledContainer>
     )
   },

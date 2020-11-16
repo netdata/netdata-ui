@@ -8,6 +8,7 @@ export interface IconProps {
   className?: string
   onClick?: (arg?: any) => void
   title?: string
+  disabled?: boolean
 }
 
 const getSize = filename => {
@@ -20,7 +21,13 @@ const getSize = filename => {
   return "medium"
 }
 
-export const Icon: FC<IconProps> = ({ name, className, size, ...props }: IconProps) => {
+export const Icon: FC<IconProps> = ({
+  name,
+  className,
+  size,
+  disabled = false,
+  ...props
+}: IconProps) => {
   const iconSymbol = iconsList[name]
 
   if (!iconSymbol) {
@@ -30,7 +37,13 @@ export const Icon: FC<IconProps> = ({ name, className, size, ...props }: IconPro
   const iconSize = size || getSize(name)
 
   return (
-    <StyledIcon {...props} size={iconSize} className={className} viewBox={iconSymbol.viewBox}>
+    <StyledIcon
+      {...props}
+      size={iconSize}
+      className={className}
+      viewBox={iconSymbol.viewBox}
+      disabled={disabled}
+    >
       <use xlinkHref={`#${iconSymbol.id}`} />
     </StyledIcon>
   )
