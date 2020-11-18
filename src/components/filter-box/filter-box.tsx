@@ -163,7 +163,7 @@ export const FilterBox = ({
   const config = useMemo(() => ({ ...codeMirrorConfig, ...editorConfig }), [editorConfig])
 
   return (
-    <Container className={className} inline={inline} >
+    <Container className={className} inline={inline}>
       <FilterContainer
         onBlur={handleBlur}
         onFocus={handleFocus}

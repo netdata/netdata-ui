@@ -11,3 +11,5 @@ export interface RadioButtonProps extends MarginProps {
 declare const RadioButton: React.FC<RadioButtonProps & JSX.IntrinsicElements["input"]>
 
 export { RadioButton }
+
+export default RadioButton
