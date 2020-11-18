@@ -4,7 +4,7 @@
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
-    "allowJs": false,
+    "allowJs": true,
     "alwaysStrict": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
@@ -27,10 +27,13 @@
   "exclude": [
     "node_modules",
     "/dist",
+    "/jest",
     "**/*.mock.tsx",
+    "**/*.test.js",
     "**/*.test.ts",
     "**/*.tst.tsx",
     "**/*.test.tsx",
+    "**/*.stories.js",
     "**/*.stories.tsx"
   ]
 }
