@@ -11,6 +11,7 @@ import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import cross_s from "./assets/cross_s.svg"
+import dot from "./assets/dot.svg"
 import error from "./assets/error.svg"
 import expand from "./assets/expand.svg"
 import gear from "./assets/gear.svg"
@@ -120,6 +121,7 @@ export const iconsList = {
   chevron_left,
   chevron_right_s,
   cross_s,
+  dot,
   dashboard,
   dashboards,
   dashboard_add,
