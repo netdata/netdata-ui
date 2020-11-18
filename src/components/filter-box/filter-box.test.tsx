@@ -3,9 +3,7 @@
  */
 
 import React, { useState } from "react"
-import { fireEvent, waitForDomChange } from "@testing-library/react"
-import { DefaultTheme } from "../../theme/default"
-import { testWrapper } from "../../../test-utils"
+import { renderWithProviders, fireEvent, waitForDomChange } from "testUtilities"
 import "@testing-library/jest-dom/extend-expect"
 import "jest-styled-components"
 import { FilterBox, FilterBoxProcessing, FilterBoxOption } from "."
@@ -43,7 +41,7 @@ global.document.body.createTextRange = () => ({
   },
 })
 
-const MockedFilterBox = ({ getResultsQty, ...rest }) => {
+const MockedFilterBox = (({ getResultsQty, ...rest }) => {
   const [employees, setEmployees] = useState(data)
 
   const handleParse = expressions => {
@@ -69,18 +67,20 @@ const MockedFilterBox = ({ getResultsQty, ...rest }) => {
       ))}
     </>
   )
-}
+}) as any
 
 describe("Filter Box test", () => {
   it(" * should filter results by expression", async () => {
     const onBlur = jest.fn()
     const onFocus = jest.fn()
     const onChange = jest.fn()
-    const utils = testWrapper<any>(
-      MockedFilterBox,
-      { onBlur, onFocus, onChange, getResultsQty: results => results.length },
-      DefaultTheme,
-      null
+    const utils = renderWithProviders(
+      <MockedFilterBox
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onChange={onChange}
+        getResultsQty={results => results.length}
+      />
     )
 
     const results = utils.container.querySelectorAll(".contentClass")
@@ -112,7 +112,7 @@ describe("Filter Box test", () => {
 
   it(" * should filter results by selection", async () => {
     const onParseError = jest.fn()
-    const utils = testWrapper<any>(MockedFilterBox, { onParseError }, DefaultTheme, null)
+    const utils = renderWithProviders(<MockedFilterBox onParseError={onParseError} />)
 
     const results = utils.container.querySelectorAll(".contentClass")
     expect(results.length).toBe(4)
@@ -135,7 +135,7 @@ describe("Filter Box test", () => {
   })
 
   it(" * should show warning when filter not completed", async () => {
-    const utils = testWrapper<null>(MockedFilterBox, null, DefaultTheme, null)
+    const utils = renderWithProviders(<MockedFilterBox />)
 
     const results = utils.container.querySelectorAll(".contentClass")
     expect(results.length).toBe(4)
@@ -157,7 +157,9 @@ describe("Filter Box test", () => {
   it(" * should show error when filter is wrong", async () => {
     const onParseError = jest.fn()
     const onParseOk = jest.fn()
-    const utils = testWrapper<any>(MockedFilterBox, { onParseError, onParseOk }, DefaultTheme, null)
+    const utils = renderWithProviders(
+      <MockedFilterBox onParseError={onParseError} onParseOk={onParseOk} />
+    )
 
     const results = utils.container.querySelectorAll(".contentClass")
     expect(results.length).toBe(4)

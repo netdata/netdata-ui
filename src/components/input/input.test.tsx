@@ -2,21 +2,20 @@
  * @jest-environment jsdom
  */
 
+import React from "react"
 import "@testing-library/jest-dom/extend-expect"
-import { fireEvent } from "@testing-library/react"
-import { DefaultTheme } from "../../theme/default"
-import { testWrapper } from "../../../test-utils"
+import { renderWithProviders, fireEvent } from "testUtilities"
 import { TextInputMock, errorMsg, successMsg } from "./input.mock"
 
 describe("TextInput test", () => {
   it(" * should render with required props", () => {
-    const { container } = testWrapper<null>(TextInputMock, null, DefaultTheme, null)
+    const { container } = renderWithProviders(<TextInputMock />)
     const result = container.querySelectorAll("input")
     expect(result).not.toBeNull()
   })
 
   it(" * should change value and transition to success state", () => {
-    const utils = testWrapper<null>(TextInputMock, null, DefaultTheme, null)
+    const utils = renderWithProviders(<TextInputMock />)
     const input = utils.getByLabelText("testInput") as HTMLInputElement
     fireEvent.change(input, { target: { value: "Jira or Zenhub?" } })
     fireEvent.blur(input)
@@ -26,7 +25,7 @@ describe("TextInput test", () => {
   })
 
   it(" * should transition to error state if lost focus while empty", () => {
-    const utils = testWrapper<null>(TextInputMock, null, DefaultTheme, null)
+    const utils = renderWithProviders(<TextInputMock />)
     const input = utils.getByLabelText("testInput") as HTMLInputElement
     fireEvent.focus(input)
     fireEvent.blur(input)

@@ -1,28 +1,40 @@
 const { pathsToModuleNameMapper } = require("ts-jest/utils")
 
-const tsPathConfig = {
-  compilerOptions: {
-    baseUrl: ".",
-    paths: {
-      "@/*": ["./*"],
-    },
-  },
+const paths = {
+  "@/*": ["./*"],
 }
 
-const { compilerOptions } = tsPathConfig
-
 module.exports = {
-  preset: "ts-jest",
-  testEnvironment: "node",
-  testPathIgnorePatterns: ["<rootDir>/test/", "<rootDir>/node_modules/", "lib"],
-  moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
+    "^src/(.*)$": "<rootDir>/src/$1",
     "^.+\\.(css|less|scss)$": "identity-obj-proxy",
-    ...pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/" }),
+    ...pathsToModuleNameMapper(paths, { prefix: "<rootDir>/" }),
     "\\.svg": "<rootDir>/src/__mocks__/filemock.tsx",
   },
-  globals: {
-    // All globals should be in upper case due webpack configuration
-    DEVELOPMENT: true,
+  testURL: "https://www.netdata.cloud",
+  testRegex: ".*\\.test\\.(tsx?|js)$",
+  setupFiles: ["<rootDir>/jest/setup.js"],
+  setupFilesAfterEnv: [
+    "@testing-library/jest-dom/extend-expect",
+    "jest-styled-components",
+    "<rootDir>/jest/setupForEach.js",
+  ],
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.js$": "babel-jest",
   },
+  verbose: true,
+  moduleDirectories: ["node_modules", "src", "jest"],
+  roots: ["src/"],
+  coverageDirectory: "<rootDir>/coverage",
+  coveragePathIgnorePatterns: ["/node_modules/", "/jest/"],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+    },
+  },
+  testPathIgnorePatterns: ["/node_modules/"],
+  reporters: ["default"],
+  cacheDirectory: "<rootDir>/.jest-tmp",
 }

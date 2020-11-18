@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
-    "allowJs": false,
+    "allowJs": true,
     "alwaysStrict": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
@@ -14,7 +15,11 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "outDir": "./lib"
+    "outDir": "./lib",
+    "paths": {
+      "src/*": ["./src/*"],
+      "testUtilities": ["./jest/testUtilities"]
+    }
   },
   "lib": ["es2015", "dom"],
   "files": ["@typings/typings.d.ts", "custom.d.ts"],
@@ -22,11 +27,13 @@
   "exclude": [
     "node_modules",
     "/dist",
+    "/jest",
     "**/*.mock.tsx",
+    "**/*.test.js",
     "**/*.test.ts",
     "**/*.tst.tsx",
     "**/*.test.tsx",
-    "test-utils.ts",
+    "**/*.stories.js",
     "**/*.stories.tsx"
   ]
 }

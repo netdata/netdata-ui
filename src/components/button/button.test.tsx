@@ -4,19 +4,13 @@
 
 import "@testing-library/jest-dom/extend-expect"
 import "jest-styled-components"
-import { fireEvent } from "@testing-library/react"
-import { Button, ButtonWrapperProps } from "./button"
-import { DefaultTheme } from "../../theme/default"
-import { testWrapper } from "../../../test-utils"
+import React from "react"
+import { renderWithProviders, fireEvent } from "testUtilities"
+import { Button } from "./button"
 
 describe("Button states", () => {
   it(" * should render disabled", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", disabled: true },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button label="Test prop text" disabled />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("opacity", "0.4", {
       modifier: "&&",
@@ -27,12 +21,7 @@ describe("Button states", () => {
   })
 
   it(" * should render with uppercase", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", uppercase: true },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button label="Test prop text" uppercase />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
       modifier: "&&",
@@ -40,21 +29,15 @@ describe("Button states", () => {
   })
 
   it(" * should render loading text", () => {
-    const { getByText } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", loadingLabel: "loading...", isLoading: true },
-      DefaultTheme,
-      null
+    const { getByText } = renderWithProviders(
+      <Button label="Test prop text" loadingLabel="loading..." isLoading />
     )
     expect(getByText(/loading/)).toBeInTheDocument()
   })
 
   it(" * should render with icon", () => {
-    const { getByText, getByTitle } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", icon: "plus" },
-      DefaultTheme,
-      null
+    const { getByText, getByTitle } = renderWithProviders(
+      <Button label="Test prop text" icon="plus" />
     )
 
     expect(getByText(/prop text/)).toBeInTheDocument()
@@ -62,12 +45,7 @@ describe("Button states", () => {
   })
 
   it(" * should render only icon", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { flavour: "hollow", icon: "plus" },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button flavour="hollow" icon="plus" />)
     const button = container.firstChild
     expect(button).toMatchSnapshot()
     expect(button).toHaveStyleRule("width", "32px", {
@@ -79,12 +57,7 @@ describe("Button states", () => {
   })
 
   it(" * should render smaller only icon", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { flavour: "hollow", icon: "plus", small: true },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button flavour="hollow" icon="plus" small />)
     const button = container.firstChild
     expect(button).toMatchSnapshot()
     expect(button).toHaveStyleRule("width", "24px", {
@@ -96,11 +69,8 @@ describe("Button states", () => {
   })
 
   it(" * should render loading icon", () => {
-    const { container, getByText, queryByTitle } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", icon: "plus", isLoading: true },
-      DefaultTheme,
-      null
+    const { container, getByText, queryByTitle } = renderWithProviders(
+      <Button label="Test prop text" icon="plus" isLoading />
     )
 
     expect(container.firstChild).toMatchSnapshot()
@@ -110,12 +80,7 @@ describe("Button states", () => {
 
   it(" * should be clickable", () => {
     const onClickFn = jest.fn()
-    const { getByText } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", onClick: onClickFn },
-      DefaultTheme,
-      null
-    )
+    const { getByText } = renderWithProviders(<Button label="Test prop text" onClick={onClickFn} />)
 
     fireEvent.click(getByText(/prop text/))
     expect(onClickFn).toBeCalled()
@@ -124,12 +89,7 @@ describe("Button states", () => {
 
 describe("Default Button", () => {
   it(" * should render", () => {
-    const { container, getByText } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text" },
-      DefaultTheme,
-      null
-    )
+    const { container, getByText } = renderWithProviders(<Button label="Test prop text" />)
 
     expect(getByText(/prop text/)).toBeInTheDocument()
 
@@ -159,12 +119,7 @@ describe("Default Button", () => {
   })
 
   it(" * should render for danger", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", danger: true },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button label="Test prop text" danger />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#FF4136", {
       modifier: "&&",
@@ -178,12 +133,7 @@ describe("Default Button", () => {
   })
 
   it(" * should render for warning", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", warning: true },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button label="Test prop text" warning />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#FFC300", {
       modifier: "&&",
@@ -197,12 +147,7 @@ describe("Default Button", () => {
   })
 
   it(" * should render neutral", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", neutral: true },
-      DefaultTheme,
-      null
-    )
+    const { container } = renderWithProviders(<Button label="Test prop text" neutral />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#35414A", {
       modifier: "&&",
@@ -218,11 +163,8 @@ describe("Default Button", () => {
 
 describe("Hollow Button", () => {
   it(" * should render", () => {
-    const { container, getByText } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "hollow" },
-      DefaultTheme,
-      null
+    const { container, getByText } = renderWithProviders(
+      <Button label="Test prop text" flavour="hollow" />
     )
 
     expect(getByText(/prop text/)).toBeInTheDocument()
@@ -253,11 +195,8 @@ describe("Hollow Button", () => {
   })
 
   it(" * should render for danger", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "hollow", danger: true },
-      DefaultTheme,
-      null
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" flavour="hollow" danger />
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#FFF", {
@@ -272,11 +211,8 @@ describe("Hollow Button", () => {
   })
 
   it(" * should render for warning", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "hollow", warning: true },
-      DefaultTheme,
-      null
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" flavour="hollow" warning />
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#FFF", {
@@ -291,11 +227,8 @@ describe("Hollow Button", () => {
   })
 
   it(" * should render for neutral", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "hollow", neutral: true },
-      DefaultTheme,
-      null
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" flavour="hollow" neutral />
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#FFF", {
@@ -312,11 +245,8 @@ describe("Hollow Button", () => {
 
 describe("Borderless Button", () => {
   it(" * should render", () => {
-    const { container, getByText } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "borderless" },
-      DefaultTheme,
-      null
+    const { container, getByText } = renderWithProviders(
+      <Button label="Test prop text" flavour="borderless" />
     )
 
     expect(getByText(/prop text/)).toBeInTheDocument()
@@ -347,11 +277,8 @@ describe("Borderless Button", () => {
   })
 
   it(" * should render for danger", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "borderless", danger: true },
-      DefaultTheme,
-      null
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" flavour="borderless" danger />
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
@@ -366,11 +293,8 @@ describe("Borderless Button", () => {
   })
 
   it(" * should render for warning", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "borderless", warning: true },
-      DefaultTheme,
-      null
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" flavour="borderless" warning />
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
@@ -385,11 +309,8 @@ describe("Borderless Button", () => {
   })
 
   it(" * should render for neutral", () => {
-    const { container } = testWrapper<ButtonWrapperProps>(
-      Button,
-      { label: "Test prop text", flavour: "borderless", neutral: true },
-      DefaultTheme,
-      null
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" flavour="borderless" neutral />
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
