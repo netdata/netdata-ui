@@ -3,11 +3,9 @@
  */
 
 import React, { useState } from "react"
-import { fireEvent } from "@testing-library/react"
-import { DefaultTheme } from "../../theme/default"
-import { testWrapper } from "../../../test-utils"
 import "@testing-library/jest-dom/extend-expect"
 import "jest-styled-components"
+import { renderWithProviders, fireEvent } from "testUtilities"
 import { Toggle } from "."
 
 const MockedToggle = props => {
@@ -20,7 +18,7 @@ const MockedToggle = props => {
 
 describe("Toggle test", () => {
   it(" * should render with required props", () => {
-    const { container, getByRole } = testWrapper<object>(MockedToggle, {}, DefaultTheme, null)
+    const { container, getByRole } = renderWithProviders(<MockedToggle />)
     const checkbox = container.querySelectorAll("input")[0]
     expect(checkbox).toBeInTheDocument()
 
@@ -31,11 +29,8 @@ describe("Toggle test", () => {
   })
 
   it(" * should render with labels", () => {
-    const { container, getByText } = testWrapper<object>(
-      MockedToggle,
-      { labelRight: "Light theme", labelLeft: "Dark theme" },
-      DefaultTheme,
-      null
+    const { container, getByText } = renderWithProviders(
+      <MockedToggle labelRight="Light theme" labelLeft="Dark theme" />
     )
     expect(getByText(/Light theme/)).toBeInTheDocument()
     expect(getByText(/Dark theme/)).toBeInTheDocument()
@@ -43,12 +38,7 @@ describe("Toggle test", () => {
   })
 
   it(" * should be disabled", () => {
-    const { container, getByRole } = testWrapper<object>(
-      MockedToggle,
-      { disabled: true },
-      DefaultTheme,
-      null
-    )
+    const { container, getByRole } = renderWithProviders(<MockedToggle disabled />)
     const checkbox = container.querySelectorAll("input")[0]
     expect(checkbox).toBeDisabled()
 
@@ -57,12 +47,7 @@ describe("Toggle test", () => {
   })
 
   it(" * should be colored", () => {
-    const { container, getByRole } = testWrapper<object>(
-      MockedToggle,
-      { colored: true },
-      DefaultTheme,
-      null
-    )
+    const { container, getByRole } = renderWithProviders(<MockedToggle colored />)
     const toggle = getByRole("switch")
     expect(toggle).toHaveStyleRule("background-color", "#FF4136", { modifier: ":after" })
 
@@ -72,7 +57,7 @@ describe("Toggle test", () => {
   })
 
   it(" * should check the checkbox on interaction", () => {
-    const { container } = testWrapper<object>(MockedToggle, {}, DefaultTheme, null)
+    const { container } = renderWithProviders(<MockedToggle />)
     const checkbox = container.querySelectorAll("input")[0]
     fireEvent.click(checkbox)
     expect(checkbox.checked).toBe(true)

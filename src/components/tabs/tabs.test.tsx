@@ -5,25 +5,18 @@
 import React, { useState } from "react"
 import "@testing-library/jest-dom/extend-expect"
 import "jest-styled-components"
-import { fireEvent } from "@testing-library/react"
-import { Tabs, Tab, TabsProps } from "."
-import { DefaultTheme } from "../../theme/default"
-import { testWrapper } from "../../../test-utils"
+import { renderWithProviders, fireEvent } from "testUtilities"
+import { Tabs, Tab } from "."
 
 describe("Tabs states", () => {
   it(" * should render uncontrolled", () => {
-    const { container, getByText, queryByText } = testWrapper<TabsProps>(
-      props => (
-        <Tabs {...props}>
-          <Tab label="hi">Hello</Tab>
-          <Tab label="Hi again">Hello again</Tab>
-          <Tab label="Bye">Goodbye</Tab>
-          <Tab label="Bye Bye">Fairwell</Tab>
-        </Tabs>
-      ),
-      {},
-      DefaultTheme,
-      null
+    const { container, getByText, queryByText } = renderWithProviders(
+      <Tabs>
+        <Tab label="hi">Hello</Tab>
+        <Tab label="Hi again">Hello again</Tab>
+        <Tab label="Bye">Goodbye</Tab>
+        <Tab label="Bye Bye">Fairwell</Tab>
+      </Tabs>
     )
 
     const tabs = container.firstChild
@@ -41,28 +34,23 @@ describe("Tabs states", () => {
 
   it(" * should render controlled", () => {
     const onChange = jest.fn()
+    const Component = () => {
+      const [selected, setSelected] = useState(2)
 
-    const { queryByText, getByText } = testWrapper<TabsProps>(
-      props => {
-        const [selected, setSelected] = useState(2)
+      return (
+        <Tabs
+          selected={selected}
+          onChange={onChange.mockImplementation(index => setSelected(index))}
+        >
+          <Tab label="hi">Hello</Tab>
+          <Tab label="Hi again">Hello again</Tab>
+          <Tab label="Bye">Goodbye</Tab>
+          <Tab label="Bye Bye">Fairwell</Tab>
+        </Tabs>
+      )
+    }
 
-        return (
-          <Tabs
-            {...props}
-            selected={selected}
-            onChange={onChange.mockImplementation(index => setSelected(index))}
-          >
-            <Tab label="hi">Hello</Tab>
-            <Tab label="Hi again">Hello again</Tab>
-            <Tab label="Bye">Goodbye</Tab>
-            <Tab label="Bye Bye">Fairwell</Tab>
-          </Tabs>
-        )
-      },
-      {},
-      DefaultTheme,
-      null
-    )
+    const { queryByText, getByText } = renderWithProviders(<Component />)
 
     expect(queryByText("Hello")).not.toBeInTheDocument()
     expect(queryByText("Hello again")).not.toBeInTheDocument()
@@ -76,21 +64,17 @@ describe("Tabs states", () => {
   })
 
   it(" * should not allow disabled to be selected", () => {
-    const { queryByText, getByText } = testWrapper<TabsProps>(
-      props => (
-        <Tabs {...props}>
-          <Tab label="hi" disabled>
-            Hello
-          </Tab>
-          <Tab label="Hi again">Hello again</Tab>
-          <Tab label="Bye">Goodbye</Tab>
-          <Tab label="Bye Bye">Fairwell</Tab>
-        </Tabs>
-      ),
-      {},
-      DefaultTheme,
-      null
+    const Component = () => (
+      <Tabs>
+        <Tab label="hi" disabled>
+          Hello
+        </Tab>
+        <Tab label="Hi again">Hello again</Tab>
+        <Tab label="Bye">Goodbye</Tab>
+        <Tab label="Bye Bye">Fairwell</Tab>
+      </Tabs>
     )
+    const { queryByText, getByText } = renderWithProviders(<Component />)
 
     expect(queryByText("Hello")).not.toBeInTheDocument()
     expect(queryByText("Hello again")).toBeInTheDocument()

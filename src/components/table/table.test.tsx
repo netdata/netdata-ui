@@ -4,10 +4,8 @@
 
 import "@testing-library/jest-dom/extend-expect"
 import React, { useState } from "react"
-import { fireEvent } from "@testing-library/react"
+import { renderWithProviders, fireEvent } from "testUtilities"
 import { UserTableSchema } from "./mocks/mocked-table-schema"
-import { DefaultTheme } from "../../theme/default"
-import { testWrapper } from "../../../test-utils"
 import { EnhancedTable } from "./mocks/styled"
 
 const initialState = [
@@ -63,7 +61,7 @@ const makeComponent = () => {
 describe("Table component test", () => {
   it(" * should render", () => {
     const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByText, getAllByText } = testWrapper(Component, null, DefaultTheme, null)
+    const { getByText, getAllByText } = renderWithProviders(<Component />)
     expect(selectedItemsClb).toBeCalledWith([])
     expect(toggleSelectedItemClb).not.toBeCalled()
 
@@ -73,7 +71,7 @@ describe("Table component test", () => {
 
   it(" * should select all rows", () => {
     const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByTitle } = testWrapper(Component, null, DefaultTheme, null)
+    const { getByTitle } = renderWithProviders(<Component />)
 
     fireEvent.click(getByTitle("Toggle All Rows Selected"))
     expect(selectedItemsClb).toBeCalledWith([
@@ -93,7 +91,7 @@ describe("Table component test", () => {
 
   it(" * should select rows", () => {
     const { Component, toggleSelectedItemClb } = makeComponent()
-    const { getAllByTitle } = testWrapper(Component, null, DefaultTheme, null)
+    const { getAllByTitle } = renderWithProviders(<Component />)
 
     fireEvent.click(getAllByTitle("Toggle Row Selected")[1])
     expect(toggleSelectedItemClb).not.toBeCalled()
@@ -114,12 +112,7 @@ describe("Table component test", () => {
 
   it(" * should group", () => {
     const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByText, getAllByTitle, getByTitle } = testWrapper(
-      Component,
-      null,
-      DefaultTheme,
-      null
-    )
+    const { getByText, getAllByTitle, getByTitle } = renderWithProviders(<Component />)
 
     fireEvent.click(getByText("Group by email"))
     expect(getAllByTitle("group-head")).toHaveLength(2)
