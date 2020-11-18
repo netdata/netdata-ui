@@ -14,7 +14,7 @@ module.exports = async ({ config }) => {
         ],
       },
       {
-        test: /\.stories\.tsx?$/,
+        test: /\.stories\.(tsx?|js)$/,
         loaders: [
           {
             loader: require.resolve("@storybook/source-loader"),

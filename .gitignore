@@ -1,6 +1,7 @@
 .DS_Store
 .vscode/
 .jest-test-results.json
+.jest-tmp
 storybook-static
 node_modules
 public
