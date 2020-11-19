@@ -4,27 +4,14 @@ import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
 import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { withKnobs } from "@storybook/addon-knobs"
-import { setIntlConfig, withIntl } from "storybook-addon-intl"
 import centered from "@storybook/addon-centered/react"
 import { DefaultTheme } from "../src/theme/default"
 import { GlobalStyles } from "../src/global-styles"
 
-import { messages } from "./localeMessages"
-
 const results = require("../.jest-test-results.json")
-
-const getMessages = locale => messages[locale]
-
-setIntlConfig({
-  locales: ["ru", "en", "de", "el"],
-  defaultLocale: "en",
-  getMessages,
-})
 
 // @ts-ignore
 addDecorator(centered)
-
-addDecorator(withIntl)
 
 addDecorator(withKnobs)
 // @ts-ignore
