@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { Icon } from "../icon"
-import { getValidatedControlColor, getColor, getSizeUnit } from "../../theme/utils"
-import { controlFocused } from "../../mixins"
+import { Icon } from "src/components/icon"
+import { getValidatedControlColor, getColor, getSizeUnit } from "src/theme/utils"
+import { controlFocused } from "src/mixins"
 
 export const CheckboxContainer = styled.div`
   display: block;

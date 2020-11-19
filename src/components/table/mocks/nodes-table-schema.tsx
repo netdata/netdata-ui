@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import { UnreachableNodeMask } from "./styled"
-import { Toggle } from "../../toggle"
+import { Toggle } from "src/components/toggle"
 
 export const NodesTableSchema = [
   {

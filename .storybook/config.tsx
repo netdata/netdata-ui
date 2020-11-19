@@ -5,8 +5,8 @@ import { withTests } from "@storybook/addon-jest"
 import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { withKnobs } from "@storybook/addon-knobs"
 import centered from "@storybook/addon-centered/react"
-import { DefaultTheme } from "../src/theme/default"
-import { GlobalStyles } from "../src/global-styles"
+import { DefaultTheme } from "src/theme/default"
+import { GlobalStyles } from "src/global-styles"
 
 const results = require("../.jest-test-results.json")
 

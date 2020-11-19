@@ -3,8 +3,8 @@ import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
 import { text, select, boolean } from "@storybook/addon-knobs"
 import { Checkbox, useCheckboxesList } from "."
-import { getGutterHeight } from "../../theme/utils"
-import { readmeCleanup } from "../../../utils/readme"
+import { getGutterHeight } from "src/theme/utils"
+import { readmeCleanup } from "utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 

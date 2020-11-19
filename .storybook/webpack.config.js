@@ -1,3 +1,5 @@
+const path = require("path")
+
 module.exports = async ({ config }) => {
   config.module.rules.push(
     ...[
@@ -46,6 +48,14 @@ module.exports = async ({ config }) => {
     ]
   )
 
+  config.resolve = {
+    ...config.resolve,
+    alias: {
+      ...(config.resolve.alias || {}),
+      src: path.resolve("./src"),
+      utils: path.resolve("./utils"),
+    },
+  }
   config.resolve.extensions.push(".ts", ".tsx", ".md")
   // Workaround to make storybook serve raw svg, not static path
   config.module.rules = config.module.rules.map(data => {

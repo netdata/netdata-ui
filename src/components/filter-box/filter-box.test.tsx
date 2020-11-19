@@ -5,7 +5,7 @@
 import React, { useState } from "react"
 import { renderWithProviders, fireEvent, waitForDomChange } from "testUtilities"
 import { FilterBox, FilterBoxProcessing, FilterBoxOption } from "."
-import { Text } from "../typography"
+import { Text } from "src/components/typography"
 
 export const data = [
   { name: "Bob", position: "Front End" },

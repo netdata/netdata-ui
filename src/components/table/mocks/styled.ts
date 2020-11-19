@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { getSizeBy, getColor } from "../../../theme/utils"
-import { Icon } from "../../icon"
-import { Button } from "../../button"
+import { getSizeBy, getColor } from "src/theme/utils"
+import { Icon } from "src/components/icon"
+import { Button } from "src/components/button"
 import { Table } from ".."
 
 export const StyledIcon = styled(Icon)<{ descending: boolean }>`

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { getColor, getSizeUnit } from "../../theme/utils"
-import { controlFocused } from "../../mixins"
+import { getColor, getSizeUnit } from "src/theme/utils"
+import { controlFocused } from "src/mixins"
 
 export const ToggleContainer = styled.div`
   display: block;

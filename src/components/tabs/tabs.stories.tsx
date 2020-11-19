@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react"
 
 import { action } from "@storybook/addon-actions"
 import { text, boolean, select, number } from "@storybook/addon-knobs"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 import { Tabs, Tab } from "."
 // @ts-ignore
 import readme from "./README.md"

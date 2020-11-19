@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import { text, boolean } from "@storybook/addon-knobs"
 import { Toggle } from "."
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 

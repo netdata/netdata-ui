@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getColor, getSizeBy } from "../../theme/utils"
+import { getColor, getSizeBy } from "src/theme/utils"
 import { TabProps } from "./tab"
 
 export const StyledTabsWrapper = styled.div`

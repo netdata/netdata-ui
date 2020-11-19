@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 import { FilterBox, FilterBoxProcessing, FilterBoxOption } from "."
-import { Text } from "../typography"
+import { Text } from "src/components/typography"
 
 // @ts-ignore
 import readme from "./README.md"

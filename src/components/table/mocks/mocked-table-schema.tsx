@@ -1,5 +1,5 @@
 import React, { useCallback } from "react"
-import { Checkbox } from "../../checkbox"
+import { Checkbox } from "src/components/checkbox"
 import {
   StyledIcon,
   CellBox,
@@ -10,7 +10,7 @@ import {
   NestedCellContainer,
   NestedCell,
 } from "./styled"
-import { Button } from "../../button"
+import { Button } from "src/components/button"
 
 export const UserTableSchema = [
   {

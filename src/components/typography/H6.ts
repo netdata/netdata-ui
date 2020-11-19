@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { title } from "../../mixins"
+import { title } from "src/mixins"
 
 export const H6 = styled.h6`
   font-family: "IBM Plex Sans", sans-serif;

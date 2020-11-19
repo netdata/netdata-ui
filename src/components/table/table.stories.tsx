@@ -6,11 +6,11 @@ import { Table } from "./table"
 import { EnhancedTable } from "./mocks/styled"
 import { UserTableSchema } from "./mocks/mocked-table-schema"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 // @ts-ignore
 import readme from "./README.md"
-import { getColor } from "../../theme"
-import { webkitVisibleScrollbar } from "../../mixins"
+import { getColor } from "src/theme"
+import { webkitVisibleScrollbar } from "src/mixins"
 import { customGroupBy } from "./mocks/utils"
 
 const subData = {
