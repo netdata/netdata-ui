@@ -1,6 +1,4 @@
-import React from "react"
 import styled from "styled-components"
-import { Button } from "@rmwc/button"
 
 const SIZES = {
   small: "16px",
@@ -14,5 +12,3 @@ export const StyledIcon = styled.svg<{ size: string; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "unset")};
 `
-
-export const StyledIconButton = styled(({ ...otherProps }) => <Button {...otherProps} />)``
