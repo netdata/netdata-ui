@@ -3,10 +3,8 @@
  */
 
 import React from "react"
-import "@testing-library/jest-dom/extend-expect"
 import { Sidebar } from "./sidebar"
 import { renderWithProviders, fireEvent } from "testUtilities"
-import "jest-styled-components"
 
 const TEST_ANCHOR = "some text"
 const TEST_INFO_ANCHOR = "some info text"

@@ -3,8 +3,6 @@
  */
 
 import React, { useState } from "react"
-import "@testing-library/jest-dom/extend-expect"
-import "jest-styled-components"
 import { renderWithProviders, fireEvent } from "testUtilities"
 import { Toggle } from "."
 
