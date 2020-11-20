@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { DefaultTheme as theme } from "../theme/default"
+import { DefaultTheme as theme } from "src/theme/default"
 import margin from "./margin"
 
 it("renders nothing", () => {

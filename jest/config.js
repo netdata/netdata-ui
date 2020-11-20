@@ -5,6 +5,8 @@ const paths = {
 }
 
 module.exports = {
+  rootDir: "../",
+  moduleDirectories: ["<rootDir>/node_modules", "./node_modules", "<rootDir>/jest"],
   moduleNameMapper: {
     "^src/(.*)$": "<rootDir>/src/$1",
     "^.+\\.(css|less|scss)$": "identity-obj-proxy",
@@ -14,17 +16,12 @@ module.exports = {
   testURL: "https://www.netdata.cloud",
   testRegex: ".*\\.test\\.(tsx?|js)$",
   setupFiles: ["<rootDir>/jest/setup.js"],
-  setupFilesAfterEnv: [
-    "@testing-library/jest-dom/extend-expect",
-    "jest-styled-components",
-    "<rootDir>/jest/setupForEach.js",
-  ],
+  setupFilesAfterEnv: ["<rootDir>/jest/setupForEach.js"],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
     "^.+\\.js$": "babel-jest",
   },
   verbose: true,
-  moduleDirectories: ["node_modules", "src", "jest"],
   roots: ["src/"],
   coverageDirectory: "<rootDir>/coverage",
   coveragePathIgnorePatterns: ["/node_modules/", "/jest/"],

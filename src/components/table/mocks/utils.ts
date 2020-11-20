@@ -1,5 +1,5 @@
 import { defaultGroupByFn } from "../utils"
-import { FilterBoxProcessing, FilterBoxOption } from "../../filter-box"
+import { FilterBoxProcessing, FilterBoxOption } from "src/components/filter-box"
 
 const groupByService = (rows: any, columnId: string) => {
   const result = rows.reduce((prev: { [service: string]: any[] }, row: any) => {

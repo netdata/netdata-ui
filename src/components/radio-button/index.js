@@ -1,5 +1,5 @@
 import React from "react"
-import { Text } from "../typography"
+import { Text } from "src/components/typography"
 import { Input, Container, IconContainer, StyledIcon } from "./styled"
 
 const RadioButton = ({ label, checked, disabled, children, margin, ...rest }) => (

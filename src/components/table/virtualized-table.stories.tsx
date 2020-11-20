@@ -5,13 +5,13 @@ import styled from "styled-components"
 import { useMeasure } from "react-use"
 import { VirtualizedTable } from "./virtualized-table"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 // @ts-ignore
 import readme from "./README.md"
 import { customGroupBy, filterByExpressions, filterOptions } from "./mocks/utils"
 import { FilterBox, FilterExpression } from "../filter-box"
 import { getColor } from "../.."
-import { Text } from "../typography"
+import { Text } from "src/components/typography"
 
 const subData = {
   readme: {

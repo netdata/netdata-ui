@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { propOrElse, getColor } from "../../theme/utils"
+import { propOrElse, getColor } from "src/theme/utils"
 import { ComponentBoxT, SidebarBoxT, PortalSidebarboxT } from "./types"
 
 const LEFT = 2

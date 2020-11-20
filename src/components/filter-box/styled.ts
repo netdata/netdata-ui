@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { controlFocused } from "../../mixins"
-import { getColor, getSizeBy, getValidatedControlColor } from "../../theme/utils"
-import { MetaInfo } from "../input/styled"
-import { Text } from "../typography"
+import { controlFocused } from "src/mixins"
+import { getColor, getSizeBy, getValidatedControlColor } from "src/theme/utils"
+import { MetaInfo } from "src/components/input/styled"
+import { Text } from "src/components/typography"
 
 export const Container = styled.div<{ inline: boolean }>`
   width: 100%;

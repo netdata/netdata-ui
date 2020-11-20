@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, FC } from "react"
 import { StyledButton } from "./styled"
-import { Icon } from "../icon"
-import { LoaderIcon } from "../icon/components"
+import { Icon } from "src/components/icon"
+import { LoaderIcon } from "src/components/icon/components"
 
 export type ButtonFlavour = "default" | "hollow" | "borderless"
 export type ThemeType = "light" | "dark"

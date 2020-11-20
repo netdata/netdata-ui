@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { Text } from "../typography"
+import { Text } from "src/components/typography"
 import { ToggleContainer, HiddenToggleInput, StyledToggle, StyledLabel, LabelText } from "./styled"
 
 export interface ToggleProps {

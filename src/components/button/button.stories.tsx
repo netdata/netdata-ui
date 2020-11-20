@@ -4,11 +4,11 @@ import styled from "styled-components"
 
 import { action } from "@storybook/addon-actions"
 import { text, boolean, select } from "@storybook/addon-knobs"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 import { Button } from "."
 // @ts-ignore
 import readme from "./README.md"
-import { iconsList } from "../icon"
+import { iconsList } from "src/components/icon"
 
 const buttonStory = storiesOf("COMPONENTS|Controls/Button", module)
 const icons: string[] = Object.keys(iconsList)

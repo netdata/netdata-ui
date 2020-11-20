@@ -10,7 +10,7 @@ import { H5 } from "./H5"
 import { Text } from "./Text"
 import { TextSmall } from "./TextSmall"
 import { List, ListItem } from "./List"
-import { Button } from "../button"
+import { Button } from "src/components/button"
 import { TextFemto } from "./TextFemto"
 import { TextNano } from "./TextNano"
 import { TextMicro } from "./TextMicro"
@@ -19,7 +19,7 @@ import { TextBigger } from "./TextBigger"
 import { TextHuge } from "./TextHuge"
 // @ts-ignore
 import readme from "./README.md"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 
 const subData = {
   readme: {

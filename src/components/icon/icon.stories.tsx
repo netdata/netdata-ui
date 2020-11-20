@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { storiesOf } from "@storybook/react"
 import { boolean, select } from "@storybook/addon-knobs"
-import { readmeCleanup } from "../../../utils/readme"
+import { readmeCleanup } from "utils/readme"
 import { iconsList } from "./icons-list"
 import { Icon } from "."
 // @ts-ignore

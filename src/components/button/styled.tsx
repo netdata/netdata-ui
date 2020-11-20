@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import { getColor, getSizeBy, DefaultTheme, DarkTheme, BlueTheme } from "../../theme"
+import { getColor, getSizeBy, DefaultTheme, DarkTheme, BlueTheme } from "src/theme"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 

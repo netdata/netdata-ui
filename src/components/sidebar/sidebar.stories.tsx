@@ -6,9 +6,9 @@ import { text, boolean } from "@storybook/addon-knobs"
 import { action } from "@storybook/addon-actions"
 import { Sidebar } from "./sidebar"
 import { PortalSidebar } from "./portaled-sidebar"
-import { getColor } from "../../theme/utils"
-import { readmeCleanup } from "../../../utils/readme"
-import { Button } from "../button"
+import { getColor } from "src/theme/utils"
+import { readmeCleanup } from "utils/readme"
+import { Button } from "src/components/button"
 
 // @ts-ignore
 import readme from "./README.md"

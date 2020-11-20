@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
-import { Icon } from "../icon"
-import { getColor, getSizeBy, getValidatedControlColor, getSizeUnit } from "../../theme/utils"
-import { controlReset, borderRadius, controlFocused } from "../../mixins"
+import { Icon } from "src/components/icon"
+import { getColor, getSizeBy, getValidatedControlColor, getSizeUnit } from "src/theme/utils"
+import { controlReset, borderRadius, controlFocused } from "src/mixins"
 import { InputProps } from "./input"
 // @ts-ignore
 const disabledCursorSupport = css<any>`
