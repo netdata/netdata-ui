@@ -27,6 +27,8 @@ import node_default_l from "./assets/node_default_l.svg"
 import node_notification_l from "./assets/node_notification_l.svg"
 import node_selected_l from "./assets/node_selected_l.svg"
 import notification from "./assets/notification.svg"
+import node_hollow from "./assets/node_hollow.svg"
+import nodes_hollow from "./assets/nodes_hollow.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import plus from "./assets/plus.svg"
 import reload from "./assets/reload.svg"
@@ -37,6 +39,7 @@ import trashcan from "./assets/trashcan.svg"
 import unreachable from "./assets/unreachable.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
+import add_user from "./assets/add_user.svg"
 import user from "./assets/user.svg"
 import users from "./assets/users.svg"
 import warning from "./assets/warning.svg"
@@ -93,10 +96,13 @@ import none_selected from "./assets/none_selected.svg"
 import bookmark from "./assets/bookmark.svg"
 import switch_off from "./assets/switch_off.svg"
 import settings from "./assets/settings.svg"
+import settings_h from "./assets/settings_h.svg"
 import more from "./assets/more.svg"
 import alarms_new from "./assets/alarms_new.svg"
+import chevron_double from "./assets/chevron_double.svg"
 
 export const iconsList = {
+  add_user,
   aggregation_avg,
   aggregation_max,
   aggregation_med,
@@ -117,6 +123,7 @@ export const iconsList = {
   chart_added,
   check,
   checkmark_s,
+  chevron_double,
   chevron_down,
   chevron_left,
   chevron_right_s,
@@ -139,6 +146,8 @@ export const iconsList = {
   magnify,
   more,
   node_default_l,
+  node_hollow,
+  nodes_hollow,
   node_notification_l,
   node_selected_l,
   none_selected,
@@ -173,6 +182,7 @@ export const iconsList = {
   space_new,
   switch_off,
   settings,
+  settings_h,
   nodes,
   room,
   room_new,
