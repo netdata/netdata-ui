@@ -1,14 +1,17 @@
 const getUnit = value => (value === 0 ? "0" : `${value}px`)
 
+export const getDimensions = (theme, value) =>
+  value
+    .map(size =>
+      typeof size === "number" ? getUnit(theme.constants.SIZE_SUB_UNIT * size) : "auto"
+    )
+    .join(" ")
+
 export default ({ theme, margin }) => {
   if (!margin) return ""
 
   if (Array.isArray(margin) && margin.length >= 1 && margin.length <= 4) {
-    return `margin: ${margin
-      .map(size =>
-        typeof size === "number" ? getUnit(theme.constants.SIZE_SUB_UNIT * size) : "auto"
-      )
-      .join(" ")};`
+    return `margin: ${getDimensions(theme, margin)};`
   }
 
   // eslint-disable-next-line no-console

@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components"
 import { Icon } from "src/components/icon"
 import { getColor, getSizeBy, getValidatedControlColor, getSizeUnit } from "src/theme/utils"
-import { controlReset, borderRadius, controlFocused } from "src/mixins"
+import { controlReset, controlFocused } from "src/mixins"
+import round from "src/mixins/round"
 import { InputProps } from "./input"
 // @ts-ignore
 const disabledCursorSupport = css<any>`
@@ -15,9 +16,9 @@ export const StyledContainer = styled.div`
   width: 100%;
 `
 
-export const StyledInput = styled.input<InputProps>`
+export const StyledInput = styled.input.attrs({ round: true })<InputProps>`
   ${controlReset}
-  ${borderRadius}
+  ${round}
   height: 38px;
   width: 100%;
   flex-grow: 0;
@@ -58,7 +59,7 @@ export const LabelRow = styled.div`
   align-items: center;
 `
 
-export const InputContainer = styled.div<{
+export const InputContainer = styled.div.attrs({ round: true })<{
   focused: boolean
   disabled?: boolean
   error?: boolean | string
@@ -66,7 +67,7 @@ export const InputContainer = styled.div<{
 }>`
   width: 100%;
   height: 40px;
-  ${borderRadius}
+  ${round}
   border: 1px solid ${getValidatedControlColor()};
   ${({ focused }) => focused && controlFocused};
   display: flex;
@@ -89,8 +90,8 @@ export const SuccessIcon = styled(StyledIcon)`
   fill: ${getColor("success")};
 `
 
-export const IconContainer = styled.div<{ disabled?: boolean }>`
-  ${borderRadius}
+export const IconContainer = styled.div.attrs({ round: true })<{ disabled?: boolean }>`
+  ${round}
   height: 38px;
   width: 38px;
   display: flex;
