@@ -52,3 +52,6 @@ export {
   FilterBoxOption,
   FilterBoxAutocompleteHandler,
 } from "./components/filter-box"
+
+export { default as Flex } from "./components/templates/flex"
+export { default as makeFlex } from "./components/templates/flex/flex"
