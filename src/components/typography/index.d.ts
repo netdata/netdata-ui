@@ -1,8 +1,15 @@
-import { ColorType, AlignSelfProps, MarginProps, PaddingProps } from "../../mixins/types"
+import {
+  StyledComponentProps,
+  ColorType,
+  AlignSelfProps,
+  MarginProps,
+  PaddingProps,
+} from "../../mixins/types"
 import { TextAlignType, WordBreakProps } from "./mixins"
 
 export interface TypographyProps
-  extends AlignSelfProps,
+  extends StyledComponentProps,
+    AlignSelfProps,
     TextAlignType,
     WordBreakProps,
     MarginProps,
@@ -57,11 +64,11 @@ declare const makeHuge: (Component: any) => TextType
 
 interface ListProps extends AlignSelfProps, MarginProps, PaddingProps {}
 
-type List = React.FC<
+declare const List: React.FC<
   ListProps & React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>
 >
 
-type ListItem = React.FC<
+declare const ListItem: React.FC<
   ListProps & React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>
 >
 

@@ -1,4 +1,5 @@
 import {
+  StyledComponentProps,
   ColorType,
   AlignSelfProps,
   PaddingProps,
@@ -21,7 +22,8 @@ import {
 } from "../mixins"
 
 export interface FlexProps
-  extends DirectionProps,
+  extends StyledComponentProps,
+    DirectionProps,
     FlexibleProps,
     WrapProps,
     AlignItemsProps,

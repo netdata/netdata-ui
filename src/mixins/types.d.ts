@@ -1,5 +1,9 @@
 import { CSSProperties } from "react"
 
+export interface StyledComponentProps {
+  as?: any
+}
+
 export type DimensionsType = CSSProperties | { min?: CSSProperties; max?: CSSProperties }
 
 export type MultiplierType = number
