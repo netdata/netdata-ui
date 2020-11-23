@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { Icon } from "src/components/icon"
 import { getValidatedControlColor, getColor, getSizeUnit } from "src/theme/utils"
+import margin from "src/mixins/margin"
+import alignSelf from "src/mixins/alignSelf"
 import { controlFocused } from "src/mixins"
 
 export const CheckboxContainer = styled.div`
@@ -59,7 +61,9 @@ export const StyledCheckbox = styled.div<{
   }
 `
 
-export const StyledLabel = styled.label`
+export const StyledLabel = styled.label<any>`
+  ${margin}
+  ${alignSelf}
   position: relative;
   cursor: pointer;
   display: flex;

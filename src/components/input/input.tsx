@@ -1,5 +1,6 @@
 import React, { ChangeEvent, MutableRefObject, FocusEvent, ReactNode, KeyboardEvent } from "react"
 import { usePreviousDistinct } from "react-use"
+import { MarginProps, AlignSelfProps } from "src/mixins/types"
 import {
   StyledInput,
   StyledLabel,
@@ -44,7 +45,7 @@ export interface MetaOptions {
   focused?: boolean
 }
 
-export interface ComponentProps {
+export interface ComponentProps extends MarginProps, AlignSelfProps {
   fieldMessage?: string
   error?: boolean | string
   success?: boolean | string

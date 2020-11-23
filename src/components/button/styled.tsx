@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components"
 import { getColor, getSizeBy, DefaultTheme, DarkTheme, BlueTheme } from "src/theme"
+import margin from "src/mixins/margin"
+import padding from "src/mixins/padding"
+import alignSelf from "src/mixins/alignSelf"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 import { ButtonProps } from "./button"
 
@@ -86,6 +89,7 @@ type StyledButtonProps = {
 }
 
 export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
+  padding: props.padding || [2],
   colors: colorsByFlavour(props),
   ...withTheme(props),
 }))<ButtonProps & StyledButtonProps>`
@@ -94,6 +98,7 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     justify-content: center;
     align-items: center;
     position: relative;
+    ${alignSelf}
 
     width: ${props => (props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4))};
     height: ${props => (props.hasLabel ? getSizeBy(5) : getSizeBy(props.small ? 3 : 4))};
@@ -111,7 +116,8 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     }};
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
-    padding: ${getSizeBy(1)};
+    ${margin}
+    ${padding}
     transition: all 150ms;
 
     background-color: ${props => props.colors.bg(props)};

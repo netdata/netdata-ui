@@ -1,6 +1,6 @@
-import { MarginProps } from "../../mixins/types"
+import { MarginProps, AlignSelfProps } from "../../mixins/types"
 
-export interface RadioButtonProps extends MarginProps {
+export interface RadioButtonProps extends MarginProps, AlignSelfProps {
   label?: React.ReactNode
   checked?: boolean
   disabled?: boolean

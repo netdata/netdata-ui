@@ -1,8 +1,9 @@
 import React, { FC } from "react"
 import { Text } from "src/components/typography"
+import { MarginProps, AlignSelfProps } from "src/mixins/types"
 import { ToggleContainer, HiddenToggleInput, StyledToggle, StyledLabel, LabelText } from "./styled"
 
-export interface ToggleProps {
+export interface ToggleProps extends MarginProps, AlignSelfProps {
   checked: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   id?: string
@@ -23,9 +24,11 @@ export const Toggle: FC<ToggleProps> = ({
   labelRight,
   Label,
   colored,
+  margin,
+  alignSelf,
   ...props
 }: ToggleProps) => (
-  <StyledLabel className={className}>
+  <StyledLabel className={className} margin={margin} alignSelf={alignSelf}>
     {labelLeft && (
       <LabelText as={Label} left>
         {labelLeft}

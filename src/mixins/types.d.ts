@@ -10,7 +10,7 @@ export type MultiplierType = number
 
 export type ColorType = string[] | string
 
-type MarginType =
+export type MarginType =
   | [MultiplierType]
   | [MultiplierType, MultiplierType]
   | [MultiplierType, MultiplierType, MultiplierType]

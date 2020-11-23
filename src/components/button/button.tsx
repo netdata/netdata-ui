@@ -2,6 +2,7 @@ import React, { SyntheticEvent, FC } from "react"
 import { StyledButton } from "./styled"
 import { Icon } from "src/components/icon"
 import { LoaderIcon } from "src/components/icon/components"
+import { MarginProps, PaddingProps, AlignSelfProps } from "src/mixins/types"
 
 export type ButtonFlavour = "default" | "hollow" | "borderless"
 export type ThemeType = "light" | "dark"
@@ -30,7 +31,7 @@ export interface ButtonProps {
   [s: string]: any
 }
 
-export interface ButtonWrapperProps extends ButtonProps {
+export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingProps, AlignSelfProps {
   label?: string | JSX.Element
   icon?: any
   isLoading?: boolean

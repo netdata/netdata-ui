@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { getColor, getSizeUnit } from "src/theme/utils"
 import { controlFocused } from "src/mixins"
+import margin from "src/mixins/margin"
+import alignSelf from "src/mixins/alignSelf"
 
 export const ToggleContainer = styled.div`
   display: block;
@@ -70,7 +72,9 @@ export const StyledToggle = styled.div<{
   }
 `
 
-export const StyledLabel = styled.label`
+export const StyledLabel = styled.label<any>`
+  ${margin}
+  ${alignSelf}
   position: relative;
   cursor: pointer;
   display: flex;

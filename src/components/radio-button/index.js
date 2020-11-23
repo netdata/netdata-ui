@@ -2,8 +2,8 @@ import React from "react"
 import { Text } from "src/components/typography"
 import { Input, Container, IconContainer, StyledIcon } from "./styled"
 
-const RadioButton = ({ label, checked, disabled, children, margin, ...rest }) => (
-  <Container disabled={disabled} margin={margin}>
+const RadioButton = ({ label, checked, disabled, children, margin, alignSelf, ...rest }) => (
+  <Container disabled={disabled} margin={margin} alignSelf={alignSelf}>
     <Input type="radio" disabled={disabled} checked={checked} {...rest} />
     <IconContainer
       borderColor={disabled ? "selected" : "border"}
