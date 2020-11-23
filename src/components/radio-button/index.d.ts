@@ -1,4 +1,4 @@
-import { MarginProps } from "src/mixins/types"
+import { MarginProps } from "../../mixins/types"
 
 export interface RadioButtonProps extends MarginProps {
   label?: React.ReactNode
