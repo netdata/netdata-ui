@@ -1,22 +1,26 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
-import { H0 } from "./H0"
-import { H1 } from "./H1"
-import { H2 } from "./H2"
-import { H6 } from "./H6"
-import { H3 } from "./H3"
-import { H4 } from "./H4"
-import { H5 } from "./H5"
-import { Text } from "./Text"
-import { TextSmall } from "./TextSmall"
-import { List, ListItem } from "./List"
 import { Button } from "src/components/button"
-import { TextFemto } from "./TextFemto"
-import { TextNano } from "./TextNano"
-import { TextMicro } from "./TextMicro"
-import { TextBig } from "./TextBig"
-import { TextBigger } from "./TextBigger"
-import { TextHuge } from "./TextHuge"
+import {
+  H0,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  TextHuge,
+  TextBigger,
+  TextBig,
+  Text,
+  TextSmall,
+  TextMicro,
+  TextNano,
+  TextFemto,
+  List,
+  ListItem,
+} from "./index"
+
 // @ts-ignore
 import readme from "./README.md"
 import { readmeCleanup } from "utils/readme"
