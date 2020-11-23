@@ -3,11 +3,11 @@
 exports[`Toggle test  * should render with labels 1`] = `
 .c1 {
   font-family: "IBM Plex Sans",sans-serif;
-  font-weight: normal;
   font-style: normal;
-  color: #35414A;
   font-size: 14px;
   line-height: 18px;
+  font-weight: normal;
+  color: #35414A;
 }
 
 .c3 {
