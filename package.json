@@ -14,9 +14,10 @@
     "build-storybook": "build-storybook -c .storybook -o public",
     "build": "yarn _drop_native && yarn testOut && build-storybook",
     "clean": "./node_modules/rimraf/bin.js ./lib",
-    "ts-bundle": "yarn _drop_native && yarn clean && tsc && tsc -m es6 && node copy-assets",
+    "ts-bundle": "yarn _drop_native && yarn clean && tsc && tsc -m es6 && node copy-assets && yarn resolveAlias",
     "test": "jest --config ./jest/config.js",
-    "prepare": "install-peers && yarn ts-bundle"
+    "prepare": "install-peers && yarn ts-bundle",
+    "resolveAlias": "tscpaths -p tsconfig.json -s ./src -o ./lib"
   },
   "keywords": [
     "uikit",
@@ -95,6 +96,7 @@
     "svgo": "^1.3.0",
     "svgo-loader": "^2.2.1",
     "ts-jest": "^26.4.4",
+    "tscpaths": "^0.0.9",
     "typescript": "^4.0.5",
     "url-loader": "^4.1.1"
   }
