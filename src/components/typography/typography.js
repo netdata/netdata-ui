@@ -25,7 +25,7 @@ const typography = css`
   ${padding}
 `
 
-const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
+export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
   font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   ${makeFontSize(fontSize)}

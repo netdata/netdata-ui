@@ -6,6 +6,7 @@ import {
   makeH4,
   makeH5,
   makeH6,
+  makeTypography,
   makeFemto,
   makeNano,
   makeMicro,
@@ -17,6 +18,7 @@ import {
 } from "./typography"
 
 export {
+  makeTypography,
   makeH0,
   makeH1,
   makeH2,

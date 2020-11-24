@@ -20,6 +20,7 @@ export {
   TextFemto,
   List,
   ListItem,
+  makeTypography,
   makeH0,
   makeH1,
   makeH2,
