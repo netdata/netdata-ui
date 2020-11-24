@@ -1,10 +1,12 @@
-import { CSSProperties } from "react"
-
 export interface StyledComponentProps {
   as?: any
 }
 
-export type DimensionsType = CSSProperties | { min?: CSSProperties; max?: CSSProperties }
+export type CSSPropertiesValueType = number | string
+
+export type DimensionsType =
+  | CSSPropertiesValueType
+  | { min?: CSSPropertiesValueType; max?: CSSPropertiesValueType }
 
 export type MultiplierType = number
 
