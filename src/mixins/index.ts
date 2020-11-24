@@ -1,5 +1,3 @@
-export { title } from "./title"
-export { text } from "./text"
 export { controlReset } from "./control-reset"
 export { controlFocused } from "./control-focused"
 export { webkitVisibleScrollbar } from "./webkit-visible-scrollbar"

@@ -20,6 +20,21 @@ export {
   TextFemto,
   List,
   ListItem,
+  makeH0,
+  makeH1,
+  makeH2,
+  makeH3,
+  makeH4,
+  makeH5,
+  makeH6,
+  makeFemto,
+  makeNano,
+  makeMicro,
+  makeSmall,
+  makeText,
+  makeBig,
+  makeBigger,
+  makeHuge,
 } from "./components/typography"
 
 export {
