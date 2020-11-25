@@ -2,6 +2,8 @@ import styled, { css } from "styled-components"
 import { Icon } from "src/components/icon"
 import { getColor, getSizeBy, getValidatedControlColor, getSizeUnit } from "src/theme/utils"
 import { controlReset, controlFocused } from "src/mixins"
+import margin from "src/mixins/margin"
+import alignSelf from "src/mixins/alignSelf"
 import round from "src/mixins/round"
 import { InputProps } from "./input"
 // @ts-ignore
@@ -10,7 +12,9 @@ const disabledCursorSupport = css<any>`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.div<any>`
+  ${margin}
+  ${alignSelf}
   position: relative;
   min-width: 144px;
   width: 100%;

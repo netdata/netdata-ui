@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { getColor } from "src/theme/utils"
 import margin from "src/mixins/margin"
+import alignSelf from "src/mixins/alignSelf"
 import { Icon } from "src/components/icon"
 import disabled from "./mixins/disabled"
 
@@ -19,6 +20,7 @@ export const Container = styled.label`
   display: flex;
   flex-direction: row;
   align-items: center;
+  ${alignSelf}
 
   ${margin}
   ${disabled}

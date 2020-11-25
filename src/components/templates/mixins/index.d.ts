@@ -11,7 +11,10 @@ export interface AlignItemsProps {
 type BorderSizeType = "all" | "horizontal" | "vertical" | "top" | "right" | "bottom" | "left"
 
 export interface BorderProps {
-  border?: boolean | BorderSizeType | { size?: BorderSizeType; color?: ColorType }
+  border?:
+    | boolean
+    | BorderSizeType
+    | { side: BorderSizeType; color?: ColorType; size?: DimensionsType; type?: string }
 }
 
 export interface DirectionProps {

@@ -4,6 +4,7 @@ import {
   AlignSelfProps,
   MarginProps,
   PaddingProps,
+  CSSPropertiesValueType,
 } from "../../mixins/types"
 import { TextAlignType, WordBreakProps } from "./mixins"
 
@@ -46,6 +47,10 @@ declare const TextBig: TextType
 declare const TextBigger: TextType
 declare const TextHuge: TextType
 
+declare const makeTypography: (
+  Component: any,
+  options: { fontSize: CSSPropertiesValueType; lineHeight: CSSPropertiesValueType; strong: boolean }
+) => HeadingType
 declare const makeH0: (Component: any) => HeadingType
 declare const makeH1: (Component: any) => HeadingType
 declare const makeH2: (Component: any) => HeadingType
@@ -88,6 +93,7 @@ export {
   TextBig,
   TextBigger,
   TextHuge,
+  makeTypography,
   makeH0,
   makeH1,
   makeH2,

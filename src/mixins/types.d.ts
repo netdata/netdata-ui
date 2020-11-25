@@ -1,20 +1,24 @@
-import { CSSProperties } from "react"
-
 export interface StyledComponentProps {
   as?: any
 }
 
-export type DimensionsType = CSSProperties | { min?: CSSProperties; max?: CSSProperties }
+export type CSSPropertiesValueType = number | string
+
+export type DimensionsType =
+  | CSSPropertiesValueType
+  | { min?: CSSPropertiesValueType; max?: CSSPropertiesValueType }
 
 export type MultiplierType = number
 
+export type MarginValueType = MultiplierType | "auto"
+
 export type ColorType = string[] | string
 
-type MarginType =
-  | [MultiplierType]
-  | [MultiplierType, MultiplierType]
-  | [MultiplierType, MultiplierType, MultiplierType]
-  | [MultiplierType, MultiplierType, MultiplierType, MultiplierType]
+export type MarginType =
+  | [MarginValueType]
+  | [MarginValueType, MarginValueType]
+  | [MarginValueType, MarginValueType, MarginValueType]
+  | [MarginValueType, MarginValueType, MarginValueType, MarginValueType]
 
 export interface MarginProps {
   margin?: MarginType

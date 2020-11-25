@@ -1,4 +1,5 @@
 import React, { useRef, FC } from "react"
+import { MarginProps, AlignSelfProps } from "src/mixins/types"
 
 import {
   CheckboxContainer,
@@ -10,7 +11,7 @@ import {
   AccessibleArea,
 } from "./styled"
 
-export interface CheckboxProps {
+export interface CheckboxProps extends MarginProps, AlignSelfProps {
   checked: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   id?: string
@@ -30,6 +31,8 @@ export const Checkbox: FC<CheckboxProps> = ({
   label,
   indeterminate,
   ref,
+  margin,
+  alignSelf,
   ...props
 }: CheckboxProps) => {
   const preparedRef = useRef(null)
@@ -40,7 +43,7 @@ export const Checkbox: FC<CheckboxProps> = ({
   }
 
   return (
-    <StyledLabel className={className}>
+    <StyledLabel className={className} margin={margin} alignSelf={alignSelf}>
       <AccessibleArea />
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>

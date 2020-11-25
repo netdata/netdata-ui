@@ -1,14 +1,17 @@
 import React, { FC } from "react"
+import { MarginProps, AlignSelfProps, ColorType } from "src/mixins/types"
 import { iconsList } from "./icons-list"
 import { StyledIcon } from "./styled"
 
-export interface IconProps {
+export interface IconProps extends MarginProps, AlignSelfProps {
   name: string
   size?: "small" | "medium" | "large"
   className?: string
   onClick?: (arg?: any) => void
   title?: string
   disabled?: boolean
+  color?: ColorType
+  hoverColor?: ColorType
 }
 
 const getSize = filename => {
