@@ -10,13 +10,15 @@ export type DimensionsType =
 
 export type MultiplierType = number
 
+export type MarginValueType = MultiplierType | "auto"
+
 export type ColorType = string[] | string
 
 export type MarginType =
-  | [MultiplierType]
-  | [MultiplierType, MultiplierType]
-  | [MultiplierType, MultiplierType, MultiplierType]
-  | [MultiplierType, MultiplierType, MultiplierType, MultiplierType]
+  | [MarginValueType]
+  | [MarginValueType, MarginValueType]
+  | [MarginValueType, MarginValueType, MarginValueType]
+  | [MarginValueType, MarginValueType, MarginValueType, MarginValueType]
 
 export interface MarginProps {
   margin?: MarginType
