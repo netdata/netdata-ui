@@ -29,6 +29,8 @@ import node_selected_l from "./assets/node_selected_l.svg"
 import notification from "./assets/notification.svg"
 import node_hollow from "./assets/node_hollow.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
+import node_parent from "./assets/node_parent.svg"
+import node_child from "./assets/node_child.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import plus from "./assets/plus.svg"
 import reload from "./assets/reload.svg"
@@ -56,6 +58,7 @@ import dots_2x3 from "./assets/dots_2x3.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import nodes from "./assets/nodes.svg"
+import padlock from "./assets/padlock.svg"
 import room from "./assets/room.svg"
 import room_new from "./assets/room_new.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
@@ -148,10 +151,13 @@ export const iconsList = {
   node_default_l,
   node_hollow,
   nodes_hollow,
+  node_child,
+  node_parent,
   node_notification_l,
   node_selected_l,
   none_selected,
   notification,
+  padlock,
   plus_mini_s,
   plus,
   reload,
