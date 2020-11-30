@@ -6,6 +6,7 @@ import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import around_clock from "./assets/around_clock.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
+import correlation_inv_alt from "./assets/correlation_inv_alt.svg"
 import chart_added from "./assets/chart_added.svg"
 import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
@@ -68,6 +69,7 @@ import logo_s from "./assets/logo_s.svg"
 import pencil from "./assets/pencil.svg"
 import chevron_left from "./assets/chevron_left.svg"
 import view_list from "./assets/view_list.svg"
+import view_list_alt from "./assets/view_list_alt.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboards from "./assets/dashboards.svg"
@@ -122,6 +124,7 @@ export const iconsList = {
   bookmark,
   correlation,
   correlation_inv,
+  correlation_inv_alt,
   collapse,
   chart_added,
   check,
