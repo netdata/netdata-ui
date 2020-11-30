@@ -12,6 +12,7 @@ export const rawColors: RawColorsT = {
   gray: {
     limedSpruce: "#35414A",
     bombay: "#AEB3B7",
+    bombayLite: "#B4B8BD", // https://chir.ag/projects/name-that-color/ shows "bombay", too
     silverSand: "#B5B9BC",
     gallery: "#EFEFEF",
     guyabano: "#F7F8F8",
@@ -25,6 +26,8 @@ export const rawColors: RawColorsT = {
     chambray: "#445C79",
     wedgewood: "#486385",
     arsenic: "#35414A",
+    pigeonPost: "#B8C9DF",
+    slateGray: "#76838E",
     slate: "#677F9D",
     blackPearl: "#122432",
     aluminium: "#878B90",
@@ -94,6 +97,7 @@ const appColors: AppColorsT = {
   textFocus: rawColors.gray.silverSand,
   sectionHeaderBackground: rawColors.gray.arsenic,
   placeholder: rawColors.gray.gainsboro,
+  key: rawColors.gray.slateGray,
 
   // Depreacted - use the names above
   borderColor: rawColors.gray.nepal,

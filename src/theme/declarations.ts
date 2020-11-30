@@ -10,6 +10,7 @@ export type RawColorsT = {
   gray: {
     limedSpruce: string
     bombay: string
+    bombayLite: string
     silverSand: string
     gallery: string
     guyabano: string
@@ -22,7 +23,9 @@ export type RawColorsT = {
     tangaroa: string
     chambray: string
     wedgewood: string
+    pigeonPost: string
     arsenic: string
+    slateGray: string
     slate: string
     blackPearl: string
     aluminium: string
@@ -90,6 +93,7 @@ export type AppColorsT = {
   bright: string
   text: string
   textFocus: string
+  key: string
   sectionHeaderBackground: string
   placeholder: string
   borderColor: string

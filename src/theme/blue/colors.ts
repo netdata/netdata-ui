@@ -25,6 +25,7 @@ const appColors: AppColorsT = {
   textFocus: rawColors.gray.solitude,
   sectionHeaderBackground: rawColors.white.pure,
   placeholder: rawColors.gray.chambray,
+  key: rawColors.gray.pigeonPost,
 
   // Depreacted
   borderColor: rawColors.blue.polo,
