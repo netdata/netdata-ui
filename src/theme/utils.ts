@@ -30,6 +30,18 @@ export const getColor = (colorPath: string[] | string) => {
   return getOrElse(["colors", ...colorPaths], "#fff")
 }
 
+export const getRgbColor = (colorPath: string[] | string, opacity: number = 1) => {
+  return ({ theme }) => {
+    const color = getColor(colorPath)({ theme }) as string
+    const bigint = parseInt(color.substring(1), 16)
+    const r = (bigint >> 16) & 255
+    const g = (bigint >> 8) & 255
+    const b = bigint & 255
+
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`
+  }
+}
+
 export const getSizeBy = (multiplier: number = 1) => (props: WrappedTheme) => {
   const size = (getSizeUnit(props) || 0) * multiplier
   return `${size}px`

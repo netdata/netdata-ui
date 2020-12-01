@@ -47,6 +47,7 @@ export {
   extendTheme,
   getSizeUnit,
   getSizeBy,
+  getRgbColor,
   calcSize,
   getOrElse,
   propOrElse,
