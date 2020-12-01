@@ -20,7 +20,7 @@ export const PlaceholderText = styled(Text)`
   border-radius: 4px;
   pointer-events: none;
   z-index: 1;
-  color: ${getColor("placeholder")};
+  color: ${getColor("main")};
 `
 
 export const FilterContainer = styled.div<{ error?: boolean; inline: boolean }>`
@@ -36,11 +36,17 @@ export const FilterContainer = styled.div<{ error?: boolean; inline: boolean }>`
     font-size: 14px;
     line-height: 20px;
     border-radius: 4px;
-    border: 1px solid ${getColor(["controlFocused"])};
+    border: 1px solid ${getColor("selected")};
     box-shadow: none;
+    background-color: ${getColor("elementBackground")};
 
     .CodeMirror {
       height: 38px;
+      background-color: ${getColor("elementBackground")};
+    }
+
+    .CodeMirror-cursor {
+      border-left: 1px solid ${getColor("border")};
     }
   }
 
@@ -51,7 +57,12 @@ export const FilterContainer = styled.div<{ error?: boolean; inline: boolean }>`
 
   .react-filter-box.focus {
     box-shadow: none;
-    ${controlFocused}
+    background-color: ${getColor("mainBackground")};
+    border: 1px solid ${getColor("main")};
+
+    .CodeMirror {
+      background-color: ${getColor("mainBackground")};
+    }
   }
 
   .react-filter-box.error.focus {
