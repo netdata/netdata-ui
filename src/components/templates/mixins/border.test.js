@@ -28,13 +28,31 @@ it("renders border vertically", () => {
   `)
 })
 
-it("renders custom border bottom", () => {
+it("renders custom border on one side", () => {
+  expect(
+    styledBorder({
+      theme,
+      border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
+    }).trim()
+  ).toBe(`border-top: 1rem dashed ${theme.colors.disabled};`)
+  expect(
+    styledBorder({
+      theme,
+      border: { color: "disabled", side: "right", size: "1rem", type: "dashed" },
+    }).trim()
+  ).toBe(`border-right: 1rem dashed ${theme.colors.disabled};`)
   expect(
     styledBorder({
       theme,
       border: { color: "disabled", side: "bottom", size: "1rem", type: "dashed" },
     }).trim()
   ).toBe(`border-bottom: 1rem dashed ${theme.colors.disabled};`)
+  expect(
+    styledBorder({
+      theme,
+      border: { color: "disabled", side: "left", size: "1rem", type: "dashed" },
+    }).trim()
+  ).toBe(`border-left: 1rem dashed ${theme.colors.disabled};`)
 })
 
 it("renders custom border vertically", () => {

@@ -31,6 +31,20 @@ it("renders left round", () => {
   `)
 })
 
+it("renders bottom round", () => {
+  expect(styledRound({ theme, round: { side: "bottom", size: 3 } })).toBe(`
+    border-bottom-left-radius: ${theme.constants.SIZE_SUB_UNIT * 3}px;
+    border-bottom-right-radius: ${theme.constants.SIZE_SUB_UNIT * 3}px;
+  `)
+})
+
+it("renders right round", () => {
+  expect(styledRound({ theme, round: { side: "right", size: 3 } })).toBe(`
+    border-top-right-radius: ${theme.constants.SIZE_SUB_UNIT * 3}px;
+    border-bottom-right-radius: ${theme.constants.SIZE_SUB_UNIT * 3}px;
+  `)
+})
+
 it("renders invalid", () => {
   expect(styledRound({ theme, round: "invalid" })).toBe("")
 })
