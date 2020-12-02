@@ -5,7 +5,7 @@ import { ToggleContainer, HiddenToggleInput, StyledToggle, StyledLabel, LabelTex
 
 export interface ToggleProps extends MarginProps, AlignSelfProps {
   checked: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (e: any) => void
   id?: string
   labelLeft?: string
   labelRight?: string

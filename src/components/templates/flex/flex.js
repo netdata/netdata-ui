@@ -21,13 +21,13 @@ const Flex = Component => styled(Component)`
   display: flex;
 
   ${flex}
-  ${direction}  
+  ${direction}
   ${wrap}
   ${alignItems}
   ${alignContent}
   ${justifyContent}
   ${alignSelf}
-  
+
   ${margin}
   ${padding}
   ${gap}
@@ -37,7 +37,7 @@ const Flex = Component => styled(Component)`
   ${background}
   ${opacity}
   ${border}
-  ${round}  
+  ${round}
   ${overflow}
 `
 
