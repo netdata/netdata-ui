@@ -12,6 +12,8 @@ export interface IconProps extends MarginProps, AlignSelfProps {
   disabled?: boolean
   color?: ColorType
   hoverColor?: ColorType
+  width?: string
+  height?: string
 }
 
 const getSize = filename => {
@@ -29,7 +31,7 @@ export const Icon: FC<IconProps> = ({
   className,
   size,
   disabled = false,
-  ...props
+  ...rest
 }: IconProps) => {
   const iconSymbol = iconsList[name]
 
@@ -41,10 +43,10 @@ export const Icon: FC<IconProps> = ({
 
   return (
     <StyledIcon
-      {...props}
+      viewBox={iconSymbol.viewBox}
+      {...rest}
       size={iconSize}
       className={className}
-      viewBox={iconSymbol.viewBox}
       disabled={disabled}
     >
       <use xlinkHref={`#${iconSymbol.id}`} />
