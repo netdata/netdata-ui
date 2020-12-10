@@ -28,6 +28,10 @@ export interface PaddingProps {
   padding?: MarginType
 }
 
+export interface OpacityProps {
+  opacity?: "weak" | "medium" | "strong"
+}
+
 export interface AlignSelfProps {
   alignSelf?: "end" | "start" | "center" | "stretch"
 }
