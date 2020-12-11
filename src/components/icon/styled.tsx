@@ -20,9 +20,11 @@ export const StyledIcon = styled.svg<{
   alignSelf?: any
   color?: any
   hoverColor?: any
+  height?: string
+  width?: string
 }>`
-  height: ${({ size }) => SIZES[size]};
-  width: ${({ size }) => SIZES[size]};
+  height: ${({ size, height }) => height || SIZES[size]};
+  width: ${({ size, width }) => width || SIZES[size]};
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "unset")};
   ${styledColor as any}

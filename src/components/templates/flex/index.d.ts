@@ -5,6 +5,7 @@ import {
   PaddingProps,
   MarginProps,
   RoundProps,
+  OpacityProps,
 } from "../../../mixins/types"
 import {
   DirectionProps,
@@ -15,7 +16,6 @@ import {
   JustifyContentProps,
   GapProps,
   BorderProps,
-  OpacityProps,
   WidthProps,
   HeightProps,
   OverflowProps,

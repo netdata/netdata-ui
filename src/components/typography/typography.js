@@ -6,6 +6,7 @@ import padding from "src/mixins/padding"
 import textAlign from "./mixins/textAlign"
 import truncate from "./mixins/truncate"
 import wordBreak from "./mixins/wordBreak"
+import opacity from "src/mixins/opacity"
 
 const makeFontSize = size => () => `font-size: ${size};`
 const makeLineHeight = size => () => `line-height: ${size};`
@@ -23,13 +24,14 @@ const typography = css`
   ${wordBreak}
   ${margin}
   ${padding}
+  ${opacity}
 `
 
 export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
   font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   ${makeFontSize(fontSize)}
-  ${makeLineHeight(lineHeight)}  
+  ${makeLineHeight(lineHeight)}
   ${makeFontWeight(strong)}
   ${typography}
 `

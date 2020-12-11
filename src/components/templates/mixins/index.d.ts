@@ -38,10 +38,6 @@ export interface HeightProps {
   height?: DimensionsType
 }
 
-export interface OpacityProps {
-  opacity?: "weak" | "medium" | "strong"
-}
-
 export interface JustifyContentProps {
   justifyContent?: "start" | "center" | "end" | "between" | "around" | "stretch"
 }

@@ -4,6 +4,7 @@ import {
   AlignSelfProps,
   MarginProps,
   PaddingProps,
+  OpacityProps,
   CSSPropertiesValueType,
 } from "../../mixins/types"
 import { TextAlignType, WordBreakProps } from "./mixins"
@@ -14,7 +15,8 @@ export interface TypographyProps
     TextAlignType,
     WordBreakProps,
     MarginProps,
-    PaddingProps {
+    PaddingProps,
+    OpacityProps {
   strong?: boolean
   color?: ColorType
   truncate?: boolean
