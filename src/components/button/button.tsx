@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, FC } from "react"
+import React, { SyntheticEvent, forwardRef, FC } from "react"
 import { StyledButton } from "./styled"
 import { Icon } from "src/components/icon"
 import { LoaderIcon } from "src/components/icon/components"
@@ -39,28 +39,34 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
   loadingIcon?: any
 }
 
-export const Button: FC<ButtonWrapperProps> = ({
-  label,
-  icon,
-  flavour,
-  isLoading,
-  loadingLabel,
-  loadingIcon,
-  onClick,
-  ...rest
-}: ButtonWrapperProps) => (
-  <StyledButton
-    flavour={flavour}
-    hasLabel={!!label}
-    onClick={isLoading ? undefined : onClick}
-    {...rest}
-  >
-    {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
-    {icon && !isLoading && !loadingIcon && (
-      <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />
-    )}
-    {label && <span>{(isLoading && loadingLabel) || label}</span>}
-  </StyledButton>
+export const Button: FC<ButtonWrapperProps> = forwardRef(
+  (
+    {
+      label,
+      icon,
+      flavour,
+      isLoading,
+      loadingLabel,
+      loadingIcon,
+      onClick,
+      ...rest
+    }: ButtonWrapperProps,
+    ref
+  ) => (
+    <StyledButton
+      flavour={flavour}
+      hasLabel={!!label}
+      onClick={isLoading ? undefined : onClick}
+      ref={ref}
+      {...rest}
+    >
+      {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
+      {icon && !isLoading && !loadingIcon && (
+        <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />
+      )}
+      {label && <span>{(isLoading && loadingLabel) || label}</span>}
+    </StyledButton>
+  )
 )
 
 Button.defaultProps = {

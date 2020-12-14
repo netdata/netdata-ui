@@ -7,6 +7,9 @@ export type RawColorsT = {
     pure: string
     almost: string
   }
+  black: {
+    pure: string
+  }
   gray: {
     limedSpruce: string
     bombay: string
