@@ -1,5 +1,5 @@
 import { useRef, useCallback } from "react"
-import setRef from "./setRef"
+import setRef from "src/mixins/set-ref"
 
 export default ref => {
   const innerRef = useRef(null)

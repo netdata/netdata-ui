@@ -76,3 +76,5 @@ export { default as Menu } from "./components/drops/menu"
 
 export { default as Flex } from "./components/templates/flex"
 export { default as makeFlex } from "./components/templates/flex/flex"
+
+export { default as Collapsible } from "./components/collapsible"
