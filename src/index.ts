@@ -70,5 +70,11 @@ export {
   FilterBoxAutocompleteHandler,
 } from "./components/filter-box"
 
+export { default as Drop } from "./components/drops/drop"
+export { default as Toolip } from "./components/drops/tooltip"
+export { default as Menu } from "./components/drops/menu"
+
 export { default as Flex } from "./components/templates/flex"
 export { default as makeFlex } from "./components/templates/flex/flex"
+
+export { default as Collapsible } from "./components/collapsible"

@@ -53,6 +53,7 @@ import arrow_down from "./assets/arrow_down.svg"
 import arrow_left from "./assets/arrow_left.svg"
 import arrows_vertical from "./assets/arrows_vertical.svg"
 import triangle_down from "./assets/triangle_down.svg"
+import triangle from "./assets/triangle.svg"
 import nav_dots from "./assets/nav_dots.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
 import space from "./assets/space.svg"
@@ -182,6 +183,7 @@ export const iconsList = {
   arrow_down,
   arrows_vertical,
   triangle_down,
+  triangle,
   nav_dots,
   dots_2x3,
   space,

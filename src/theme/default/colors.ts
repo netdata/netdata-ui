@@ -9,6 +9,9 @@ export const rawColors: RawColorsT = {
     pure: "#FFF",
     almost: "#FDFDFD",
   },
+  black: {
+    pure: "#000",
+  },
   gray: {
     limedSpruce: "#35414A",
     bombay: "#AEB3B7",

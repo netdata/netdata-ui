@@ -1,5 +1,5 @@
 import React from "react"
-import { renderHook } from "@testing-library/react"
+import { renderHook } from "@testing-library/react-hooks"
 import { ThemeProvider } from "styled-components"
 import { DefaultTheme } from "src/theme/default"
 
