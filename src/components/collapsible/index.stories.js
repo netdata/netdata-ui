@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react"
+import React from "react"
 import { storiesOf } from "@storybook/react"
-import { action } from "@storybook/addon-actions"
 import { boolean, number } from "@storybook/addon-knobs"
 import { useToggle } from "react-use"
 import { readmeCleanup } from "utils/readme"

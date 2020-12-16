@@ -1,4 +1,4 @@
-## Drop component
+## Tooltip component
 
 A tooltip flavored drop that is activating hovering a target element.
 
