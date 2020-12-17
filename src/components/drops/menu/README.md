@@ -1,4 +1,4 @@
-## Drop component
+## Menu component
 
 A dropdown flavored drop that displays a list of items or a custom view.
 

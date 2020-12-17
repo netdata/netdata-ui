@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react"
 import ReactDOM from "react-dom"
-import useOutsideClick from "./useOutsideClick"
-import useKeyboardEsc from "./useKeyboardEsc"
+import useDropElement from "src/hooks/use-drop-element"
+import useKeyboardEsc from "src/hooks/use-keyboard-esc"
+import useOutsideClick from "src/hooks/use-outside-click"
 import useDimensionChange from "./useDimensionChange"
 import useMakeUpdatePosition from "./useMakeUpdatePosition"
-import useDropElement from "./useDropElement"
 import Container from "./container"
 
 const defaultAlign = { top: "bottom", left: "left" }

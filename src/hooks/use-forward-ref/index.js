@@ -2,7 +2,7 @@ import { useRef, useCallback } from "react"
 import setRef from "src/mixins/set-ref"
 
 export default ref => {
-  const innerRef = useRef(null)
+  const innerRef = useRef()
 
   const forwardRef = useCallback(node => {
     innerRef.current = node
