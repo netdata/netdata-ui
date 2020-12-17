@@ -100,7 +100,8 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
     position: relative;
     ${alignSelf}
 
-    width: ${props => (props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4))};
+    width: ${props =>
+      props.width ? props.width : props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4)};
     height: ${props => (props.hasLabel ? getSizeBy(5) : getSizeBy(props.small ? 3 : 4))};
 
     font-weight: bold;

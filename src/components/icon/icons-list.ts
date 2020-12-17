@@ -65,6 +65,7 @@ import room_new from "./assets/room_new.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
 import node from "./assets/node.svg"
 import question from "./assets/question.svg"
+import questionFilled from "./assets/questionFilled.svg"
 import logo_s from "./assets/logo_s.svg"
 import pencil from "./assets/pencil.svg"
 import chevron_left from "./assets/chevron_left.svg"
@@ -104,6 +105,9 @@ import settings_h from "./assets/settings_h.svg"
 import more from "./assets/more.svg"
 import alarms_new from "./assets/alarms_new.svg"
 import chevron_double from "./assets/chevron_double.svg"
+import documentation from "./assets/documentation.svg"
+import unknownError from "./assets/unknownError.svg"
+import community from "./assets/community.svg"
 
 export const iconsList = {
   add_user,
@@ -198,6 +202,7 @@ export const iconsList = {
   system_overview,
   node,
   question,
+  questionFilled,
   pencil,
   pin_element,
   view_list,
@@ -211,4 +216,7 @@ export const iconsList = {
   bullet_two,
   bullet_three,
   charts,
+  documentation,
+  unknownError,
+  community,
 }
