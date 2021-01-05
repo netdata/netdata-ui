@@ -20,13 +20,22 @@ story.add(
   "Cloud Documentation",
   () => {
     return (
-      <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
+      <Flex background="mainBackgroundDisabled" gap={4} width="100vw" height="100vh">
         <Documentation app="cloud">
           {(toggle, isOpen) => (
             <Button
               width="auto"
               onClick={toggle}
-              label={`${isOpen ? "hide" : "show"} documentation modal`}
+              label={`${isOpen ? "hide" : "show"} cloud documentation modal`}
+            />
+          )}
+        </Documentation>
+        <Documentation app="agent">
+          {(toggle, isOpen) => (
+            <Button
+              width="auto"
+              onClick={toggle}
+              label={`${isOpen ? "hide" : "show"} agent documentation modal`}
             />
           )}
         </Documentation>
