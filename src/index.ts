@@ -80,3 +80,5 @@ export { default as makeFlex } from "./components/templates/flex/flex"
 export { default as Layer } from "./components/templates/layer"
 
 export { default as Collapsible } from "./components/collapsible"
+
+export { default as Documentation } from "./organisms/documentation"
