@@ -38,7 +38,7 @@ const propsByApp = {
     otherIssuesUrl: "https://github.com/netdata/netdata/issues/new",
     otherIssuesLabel: "an Agent",
     communityUrl: "https://community.netdata.cloud/c/support/13",
-    communitySupportUrl: "https://community.netdata.cloud/",
+    communitySupportUrl: "https://community.netdata.cloud/c/support/13/none",
   },
   agent: {
     documentationUrl: "https://learn.netdata.cloud/",
@@ -46,7 +46,7 @@ const propsByApp = {
     otherIssuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
     otherIssuesLabel: "a Cloud",
     communityUrl: "https://community.netdata.cloud/c/support/13",
-    communitySupportUrl: "https://community.netdata.cloud/",
+    communitySupportUrl: "https://community.netdata.cloud/c/support/13/none",
   },
 }
 
