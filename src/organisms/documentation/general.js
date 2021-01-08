@@ -35,6 +35,7 @@ const propsByApp = {
   cloud: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
+    issuesLabel: "Raise a bug about Netdata Cloud",
     otherIssuesUrl: "https://github.com/netdata/netdata/issues/new",
     otherIssuesLabel: "an Agent",
     communityUrl: "https://community.netdata.cloud/c/support/13",
@@ -43,6 +44,7 @@ const propsByApp = {
   agent: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl: "https://github.com/netdata/netdata/issues/new",
+    issuesLabel: "Raise a bug about the Netdata Agent",
     otherIssuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
     otherIssuesLabel: "a Cloud",
     communityUrl: "https://community.netdata.cloud/c/support/13",
@@ -54,6 +56,7 @@ const General = ({ app, onDashboardClick }) => {
   const {
     documentationUrl,
     issuesUrl,
+    issuesLabel,
     communityUrl,
     communitySupportUrl,
     otherIssuesUrl,
@@ -87,7 +90,7 @@ const General = ({ app, onDashboardClick }) => {
       <Section
         icon="unknownError"
         title="Report a Bug"
-        content="Raise a bug about Netdata Cloud or inform us for any issue you face."
+        content={issuesLabel}
         url={issuesUrl}
         testid="documentation-report-bug-link"
         label="Open a new Issue in Github"
