@@ -11,9 +11,8 @@ const Container = ({ children, align, ...rest }) => (
     columnReverse={align === "bottom"}
     rowReverse={align === "right"}
     margin={[1]}
-    {...rest}
   >
-    <Flex background={["black", "pure"]} padding={[1, 2]} round column>
+    <Flex background={["black", "pure"]} padding={[1, 2]} round column {...rest}>
       {typeof children === "string" ? <Text color={["white", "pure"]}>{children}</Text> : children}
     </Flex>
     {align && (

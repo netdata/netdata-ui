@@ -1,45 +1,43 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, forwardRef } from "react"
 import ReactDOM from "react-dom"
 import useDropElement from "src/hooks/use-drop-element"
 import useKeyboardEsc from "src/hooks/use-keyboard-esc"
 import useOutsideClick from "src/hooks/use-outside-click"
+import useForwardRef from "src/hooks/use-forward-ref"
 import useDimensionChange from "./useDimensionChange"
 import useMakeUpdatePosition from "./useMakeUpdatePosition"
 import Container from "./container"
 
 const defaultAlign = { top: "bottom", left: "left" }
 
-const Drop = ({
-  target,
-  align = defaultAlign,
-  stretch = "width",
-  onClickOutside,
-  onEsc,
-  children,
-  ...rest
-}) => {
-  const ref = useRef()
+const Drop = forwardRef(
+  (
+    { target, align = defaultAlign, stretch = "width", onClickOutside, onEsc, children, ...rest },
+    parentRef
+  ) => {
+    const [ref, setRef] = useForwardRef(parentRef)
 
-  const updatePosition = useMakeUpdatePosition(target, ref, align, stretch)
+    const updatePosition = useMakeUpdatePosition(target, ref, align, stretch)
 
-  useEffect(() => {
-    const id = requestAnimationFrame(updatePosition)
-    return () => cancelAnimationFrame(id)
-  }, [updatePosition])
+    useEffect(() => {
+      const id = requestAnimationFrame(updatePosition)
+      return () => cancelAnimationFrame(id)
+    }, [updatePosition])
 
-  useDimensionChange(target, updatePosition)
+    useDimensionChange(target, updatePosition)
 
-  useOutsideClick(ref, onClickOutside)
-  useKeyboardEsc(onEsc)
+    useOutsideClick(ref, onClickOutside)
+    useKeyboardEsc(onEsc)
 
-  const el = useDropElement()
+    const el = useDropElement()
 
-  return ReactDOM.createPortal(
-    <Container ref={ref} width={{ max: "100%" }} column data-testid="drop" {...rest}>
-      {children}
-    </Container>,
-    el
-  )
-}
+    return ReactDOM.createPortal(
+      <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
+        {children}
+      </Container>,
+      el
+    )
+  }
+)
 
 export default Drop
