@@ -11,6 +11,8 @@ import check from "./assets/check.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import cross_s from "./assets/cross_s.svg"
+import cluster from "./assets/cluster.svg"
+import cluster_spaces from "./assets/cluster_spaces.svg"
 import dot from "./assets/dot.svg"
 import error from "./assets/error.svg"
 import expand from "./assets/expand.svg"
@@ -33,6 +35,7 @@ import node_parent from "./assets/node_parent.svg"
 import node_child from "./assets/node_child.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import plus from "./assets/plus.svg"
+import pod from "./assets/pod.svg"
 import reload from "./assets/reload.svg"
 import sad from "./assets/sad.svg"
 import save from "./assets/save.svg"
@@ -136,6 +139,8 @@ export const iconsList = {
   chevron_left,
   chevron_right_s,
   cross_s,
+  cluster,
+  cluster_spaces,
   dot,
   dashboard,
   dashboards,
@@ -205,6 +210,7 @@ export const iconsList = {
   questionFilled,
   pencil,
   pin_element,
+  pod,
   view_list,
   hide,
   services,
