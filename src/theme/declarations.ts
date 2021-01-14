@@ -2,6 +2,7 @@ export type RawColorsT = {
   transparent: {
     full: string
     semi: string
+    popover: string
   }
   white: {
     pure: string

@@ -57,7 +57,7 @@ it("align", () => {
     </Tooltip>
   )
   fireEvent.mouseOver(queryByText("tooltip target"))
-  expect(getByTestId("tooltip-arrow")).not.toHaveStyleRule("transform")
+  expect(getByTestId("drop-arrow")).not.toHaveStyleRule("transform")
 
   rerender(
     <Tooltip align="right" content="tooltip content">
@@ -65,7 +65,7 @@ it("align", () => {
     </Tooltip>
   )
 
-  expect(getByTestId("tooltip-arrow")).toHaveStyleRule("transform", "rotate(90deg)")
+  expect(getByTestId("drop-arrow")).toHaveStyleRule("transform", "rotate(90deg)")
 
   rerender(
     <Tooltip align="bottom" content="tooltip content">
@@ -73,7 +73,7 @@ it("align", () => {
     </Tooltip>
   )
 
-  expect(getByTestId("tooltip-arrow")).toHaveStyleRule("transform", "rotate(180deg)")
+  expect(getByTestId("drop-arrow")).toHaveStyleRule("transform", "rotate(180deg)")
 
   rerender(
     <Tooltip align="left" content="tooltip content">
@@ -81,5 +81,5 @@ it("align", () => {
     </Tooltip>
   )
 
-  expect(getByTestId("tooltip-arrow")).toHaveStyleRule("transform", "rotate(270deg)")
+  expect(getByTestId("drop-arrow")).toHaveStyleRule("transform", "rotate(270deg)")
 })
