@@ -32,6 +32,7 @@ const Menu = forwardRef(
       items,
       renderItem = defaultRenderItem,
       renderDropdown = defaultRenderDropdown,
+      animation,
       ...rest
     },
     parentRef
@@ -87,7 +88,13 @@ const Menu = forwardRef(
           />
         )}
         {isOpen && ref.current && (
-          <Drop target={ref.current} onEsc={close} onClickOutside={onClickOutside} {...dropProps}>
+          <Drop
+            target={ref.current}
+            onEsc={close}
+            onClickOutside={onClickOutside}
+            animation={animation}
+            {...dropProps}
+          >
             {renderDropdown({ value, onItemClick, items, renderItem })}
           </Drop>
         )}

@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes, css } from "styled-components"
 import Flex from "src/components/templates/flex"
 
 const dropKeyFrames = keyframes`
@@ -12,12 +12,16 @@ const dropKeyFrames = keyframes`
   }
 `
 
-const Container = styled(Flex)`
-  position: fixed;
-
+const styledAnimation = css`
   opacity: 0;
   animation: ${dropKeyFrames} 0.1s forwards;
   animation-delay: 0.01s;
+`
+
+const Container = styled(Flex)`
+  position: fixed;
+
+  ${({ animation }) => animation && styledAnimation}
 
   z-index: 60;
 

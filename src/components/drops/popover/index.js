@@ -11,7 +11,16 @@ const getContent = content => (typeof content === "function" ? content() : conte
 
 const Popover = forwardRef(
   (
-    { plain, open: initialOpen = false, align = "top", dropProps, content, children, ...rest },
+    {
+      plain,
+      open: initialOpen = false,
+      align = "top",
+      dropProps,
+      content,
+      animation,
+      children,
+      ...rest
+    },
     parentRef
   ) => {
     const id = useDescribedId(rest["aria-describedby"])
@@ -55,6 +64,7 @@ const Popover = forwardRef(
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             onEsc={close}
+            animation={animation}
           >
             {plain ? (
               getContent(content)

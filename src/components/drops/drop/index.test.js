@@ -11,7 +11,11 @@ it("renders", async () => {
   const div = document.createElement("div")
   div.getBoundingClientRect = jest.fn(() => ({ bottom: 200, left: 300, width: 100, height: 100 }))
 
-  const { getByTestId, getByText } = renderWithProviders(<Drop target={div}>Drop content</Drop>)
+  const { getByTestId, getByText } = renderWithProviders(
+    <Drop target={div} animation>
+      Drop content
+    </Drop>
+  )
   expect(getByTestId("drop")).toBeInTheDocument()
   expect(getByTestId("drop")).not.toBeVisible()
   expect(getByTestId("drop").parentNode.parentNode).toBe(document.body)

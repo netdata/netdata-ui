@@ -11,7 +11,16 @@ const getContent = content => (typeof content === "function" ? content() : conte
 
 const Tooltip = forwardRef(
   (
-    { plain, open: initialOpen = false, align = "top", dropProps, content, children, ...rest },
+    {
+      plain,
+      open: initialOpen = false,
+      align = "top",
+      dropProps,
+      content,
+      animation,
+      children,
+      ...rest
+    },
     parentRef
   ) => {
     const id = useDescribedId(rest["aria-describedby"])
@@ -38,6 +47,7 @@ const Tooltip = forwardRef(
             {...dropProps}
             align={dropProps?.align || dropAlignMap[align]}
             onEsc={close}
+            animation={animation}
           >
             {plain ? (
               getContent(content)
