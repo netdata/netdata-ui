@@ -36,6 +36,7 @@ const Popover = forwardRef(
     const [ref, setRef] = useForwardRef(parentRef)
 
     const targetElement = useClonedChildren(children, setRef, {
+      isOpen,
       onMouseOver: open,
       onMouseLeave: closeDrop,
       onFocus: open,

@@ -13,6 +13,9 @@ import chevron_down from "./assets/chevron_down.svg"
 import cross_s from "./assets/cross_s.svg"
 import cluster from "./assets/cluster.svg"
 import cluster_spaces from "./assets/cluster_spaces.svg"
+import controller_kind from "./assets/controller_kind.svg"
+import controller_name from "./assets/controller_name.svg"
+import container from "./assets/container.svg"
 import dot from "./assets/dot.svg"
 import error from "./assets/error.svg"
 import expand from "./assets/expand.svg"
@@ -141,6 +144,9 @@ export const iconsList = {
   cross_s,
   cluster,
   cluster_spaces,
+  controller_kind,
+  controller_name,
+  container,
   dot,
   dashboard,
   dashboards,
