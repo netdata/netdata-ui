@@ -20,6 +20,7 @@ const styledAnimation = css`
 
 const Container = styled(Flex)`
   position: fixed;
+  left: -99999px;
 
   ${({ animation }) => animation && styledAnimation}
 
