@@ -26,5 +26,6 @@ copyFileSync("src/components/drops/mixins/index.d.ts", "lib/components/drops/mix
 copyFileSync("src/components/drops/drop/index.d.ts", "lib/components/drops/drop/index.d.ts")
 copyFileSync("src/components/drops/menu/index.d.ts", "lib/components/drops/menu/index.d.ts")
 copyFileSync("src/components/drops/tooltip/index.d.ts", "lib/components/drops/tooltip/index.d.ts")
+copyFileSync("src/components/drops/popover/index.d.ts", "lib/components/drops/popover/index.d.ts")
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")

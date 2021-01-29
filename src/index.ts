@@ -71,7 +71,9 @@ export {
 } from "./components/filter-box"
 
 export { default as Drop } from "./components/drops/drop"
-export { default as Toolip } from "./components/drops/tooltip"
+export { default as DropContainer } from "./components/drops/container"
+export { default as Tooltip } from "./components/drops/tooltip"
+export { default as Popover } from "./components/drops/popover"
 export { default as Menu } from "./components/drops/menu"
 
 export { default as Flex } from "./components/templates/flex"

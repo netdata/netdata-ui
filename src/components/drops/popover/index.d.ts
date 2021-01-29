@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import { DropProps } from "../drop"
 
-export interface PopoverProps {
+export interface TooltipProps {
   plain?: boolean
   open?: boolean
   align?: "top" | "right" | "bottom" | "left"
@@ -11,8 +11,8 @@ export interface PopoverProps {
   [key: string]: any
 }
 
-declare const Popover: React.FC<PopoverProps & JSX.IntrinsicElements["div"]>
+declare const Tooltip: React.FC<TooltipProps & JSX.IntrinsicElements["div"]>
 
-export { Popover }
+export { Tooltip }
 
-export default Popover
+export default Tooltip
