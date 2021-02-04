@@ -20,7 +20,7 @@ const Container = styled(Flex).attrs({
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 
-const Header = ({ children, toggle }) => {
+const Header = ({ children, onClose }) => {
   return (
     <Flex
       width="100%"
@@ -36,7 +36,7 @@ const Header = ({ children, toggle }) => {
         icon="x"
         neutral
         small
-        onClick={toggle}
+        onClick={onClose}
         flavour="borderless"
         data-testid="documentation-help-close"
       />
@@ -47,13 +47,33 @@ const Header = ({ children, toggle }) => {
 const views = { general: "general", dashboard: "dashboard" }
 const titles = { general: "Netdata Help", dashboard: "Dashboard Help" }
 
-const Documentation = ({ app = "cloud", children }) => {
+const Documentation = ({
+  app = "cloud",
+  onClickOut,
+  onCloseClick,
+  onVisitDocumentClick,
+  onOpenIssueClick,
+  onOpenBugClick,
+  onContributeClick,
+  onSupportClick,
+  children,
+}) => {
   const [isOpen, toggle] = useToggle()
   const [view, setView] = useState(views.general)
 
   const isGeneral = view === views.general
   const setDashboardView = useCallback(() => setView(views.dashboard), [])
   const setGeneralView = useCallback(() => setView(views.general), [])
+
+  const closeClicked = useCallback(() => {
+    toggle()
+    if (onCloseClick) onCloseClick()
+  }, [])
+
+  const clickedOut = useCallback(() => {
+    toggle()
+    if (onClickOut) onClickOut()
+  }, [])
 
   return (
     <>
@@ -63,14 +83,14 @@ const Documentation = ({ app = "cloud", children }) => {
           position="bottom-right"
           backdrop
           margin={[5, 1]}
-          onClickOutside={toggle}
-          onEsc={toggle}
+          onClickOutside={clickedOut}
+          onEsc={clickedOut}
         >
           <Container
             width={{ max: isGeneral ? "325px" : "600px" }}
             data-testid="documentation-layer"
           >
-            <Header toggle={toggle}>
+            <Header onClose={closeClicked}>
               {isGeneral && <Icon color="text" name="questionFilled" width="18px" height="18px" />}
               {!isGeneral && (
                 <Button
@@ -86,7 +106,15 @@ const Documentation = ({ app = "cloud", children }) => {
             </Header>
             {isGeneral && (
               <Flex gap={6} overflow={{ vertical: "auto" }} column>
-                <General app={app} onDashboardClick={setDashboardView} />{" "}
+                <General
+                  app={app}
+                  onDashboardClick={setDashboardView}
+                  onVisitDocumentClick={onVisitDocumentClick}
+                  onOpenIssueClick={onOpenIssueClick}
+                  onOpenBugClick={onOpenBugClick}
+                  onContributeClick={onContributeClick}
+                  onSupportClick={onSupportClick}
+                />
               </Flex>
             )}
             {!isGeneral && <Dashboard />}
