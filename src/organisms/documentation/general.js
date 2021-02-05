@@ -6,11 +6,15 @@ import { Icon } from "src/components/icon"
 import { Button } from "src/components/button"
 import Flex from "src/components/templates/flex"
 
-const Anchor = styled(Text).attrs({ as: "a", color: "primary", target: "_blank" })`
-  text-decoration: none;
-  &:hover {
-    ${getColor("accent")}
+const Anchor = styled(Text).attrs({ as: "a", target: "_blank" })`
+  &&& {
     text-decoration: none;
+    color: ${getColor("primary")};
+
+    &:hover {
+      color: ${getColor("accent")};
+      text-decoration: none;
+    }
   }
 `
 
@@ -35,20 +39,20 @@ const propsByApp = {
   cloud: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
-    issuesLabel: "Raise a bug about Netdata Cloud",
+    issuesLabel: "Raise a bug about Netdata Cloud or inform us for any issue you face.",
     otherIssuesUrl: "https://github.com/netdata/netdata/issues/new",
-    otherIssuesLabel: "an Agent",
+    otherIssuesLabel: "Agent",
     communityUrl: "https://community.netdata.cloud/c/support/13",
-    communitySupportUrl: "https://community.netdata.cloud/c/support/13/none",
+    communitySupportUrl: "https://www.netdata.cloud/community/",
   },
   agent: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl: "https://github.com/netdata/netdata/issues/new",
-    issuesLabel: "Raise a bug about the Netdata Agent",
+    issuesLabel: "Raise a bug about the Netdata Agent or inform us for any issue you face.",
     otherIssuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
-    otherIssuesLabel: "a Cloud",
+    otherIssuesLabel: "Cloud",
     communityUrl: "https://community.netdata.cloud/c/support/13",
-    communitySupportUrl: "https://community.netdata.cloud/c/support/13/none",
+    communitySupportUrl: "https://www.netdata.cloud/community/",
   },
 }
 
@@ -96,7 +100,8 @@ const General = ({ app, onDashboardClick }) => {
         label="Open a new Issue in Github"
       >
         <Text>
-          Or <Anchor href={otherIssuesUrl}>click here</Anchor> to raise {otherIssuesLabel} bug.
+          Open an issue for the Netdata {otherIssuesLabel} on{" "}
+          <Anchor href={otherIssuesUrl}>Github</Anchor>
         </Text>
       </Section>
       <Section
@@ -110,7 +115,7 @@ const General = ({ app, onDashboardClick }) => {
       >
         <Button
           width="100%"
-          label="Community support"
+          label="Read more about the community"
           flavour="hollow"
           as="a"
           target="_blank"
