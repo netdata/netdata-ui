@@ -1,12 +1,30 @@
 module.exports = {
   env: {
     browser: true,
+    commonjs: true,
     es6: true,
+    jest: true,
+    node: true,
   },
-  extends: ["@netdata/eslint-config-netdata"],
+  extends: ["eslint:recommended", "plugin:react/recommended"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+    DEVELOPMENT: "readonly",
+    DOCKER: "readonly",
+  },
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: "module",
+  },
+  plugins: ["react", "react-hooks"],
   rules: {
-    "react/jsx-filename-extension": 0,
-    "import/extensions": 0,
-    "react/prop-types": 0,
+    "react/prop-types": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "react/display-name": 0,
   },
 }
