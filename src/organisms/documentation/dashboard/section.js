@@ -9,7 +9,7 @@ const borderProps = {
 }
 
 const Section = ({ title, children, topBorder = true, ...rest }) => (
-  <Flex column column {...(topBorder && borderProps)} {...rest}>
+  <Flex column {...(topBorder && borderProps)} {...rest}>
     <Flex margin={[0, 0, 2]} gap={2}>
       <Icon name="insights" color="text" width="18px" height="18px" />
       <Text strong>{title}</Text>
