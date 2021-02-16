@@ -5,6 +5,7 @@ import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
 import textAlign from "./mixins/textAlign"
 import truncate from "./mixins/truncate"
+import whiteSpace from "./mixins/whiteSpace"
 import wordBreak from "./mixins/wordBreak"
 import opacity from "src/mixins/opacity"
 
@@ -21,7 +22,8 @@ const typography = css`
   ${textAlign}
   ${textTransform}
   ${truncate}
-  ${wordBreak}
+  ${whiteSpace}
+  ${wordBreak}  
   ${margin}
   ${padding}
   ${opacity}
