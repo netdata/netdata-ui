@@ -30,6 +30,7 @@ const Flex = Component => styled(Component)`
   ${justifyContent}
   ${alignSelf}
 
+  ${position}
   ${margin}
   ${padding}
   ${gap}
