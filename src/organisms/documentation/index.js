@@ -80,11 +80,11 @@ const Documentation = ({
       {children(toggle, isOpen)}
       {isOpen && (
         <Layer
-          position="bottom-right"
+          position="bottom-left"
           backdrop
-          margin={[5, 1]}
-          onClickOutside={clickedOut}
-          onEsc={clickedOut}
+          margin={[5, 17]}
+          onClickOutside={toggle}
+          onEsc={toggle}
         >
           <Container
             width={{ max: isGeneral ? "325px" : "600px" }}
