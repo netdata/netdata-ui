@@ -7,6 +7,7 @@ import {
   RoundProps,
   OpacityProps,
   ElevationProps,
+  PositionProps,
 } from "../../../mixins/types"
 import {
   DirectionProps,
@@ -40,7 +41,8 @@ export interface FlexProps
     WidthProps,
     HeightProps,
     OverflowProps,
-    ElevationProps {
+    ElevationProps,
+    PositionProps {
   background?: ColorType
 }
 
