@@ -57,3 +57,7 @@ export interface RoundProps {
 export interface ElevationProps {
   elevation?: number
 }
+
+export interface PositionProps {
+  position?: "static" | "absolute" | "fixed" | "relative" | "sticky" | "initial" | "inherit"
+}
