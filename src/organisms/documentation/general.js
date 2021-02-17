@@ -26,10 +26,13 @@ const Section = ({ icon, title, content, url, children, testid, label, onClick }
     </Flex>
     <Flex column gap={4} padding={[0, 2]}>
       <Text>{content}</Text>
-      {onClick && <Button width="100%" onClick={onClick} label={label} data-testid={testid} />}
-      {!onClick && (
-        <Button width="100%" label={label} as="a" target="_blank" href={url} data-testid={testid} />
-      )}
+      <Button
+        width="100%"
+        onClick={onClick}
+        label={label}
+        data-testid={testid}
+        {...(url && { as: "a", target: "_blank", href: url })}
+      />
       {children}
     </Flex>
   </Flex>
@@ -56,7 +59,15 @@ const propsByApp = {
   },
 }
 
-const General = ({ app, onDashboardClick }) => {
+const General = ({
+  app,
+  onDashboardClick,
+  onVisitDocumentClick,
+  onOpenIssueClick,
+  onOpenBugClick,
+  onContributeClick,
+  onSupportClick,
+}) => {
   const {
     documentationUrl,
     issuesUrl,
@@ -90,6 +101,7 @@ const General = ({ app, onDashboardClick }) => {
         url={documentationUrl}
         testid="documentation-link"
         label="Visit Documentation"
+        onClick={onVisitDocumentClick}
       />
       <Section
         icon="unknownError"
@@ -98,10 +110,13 @@ const General = ({ app, onDashboardClick }) => {
         url={issuesUrl}
         testid="documentation-report-bug-link"
         label="Open a new Issue in Github"
+        onClick={onOpenIssueClick}
       >
         <Text>
           Open an issue for the Netdata {otherIssuesLabel} on{" "}
-          <Anchor href={otherIssuesUrl}>Github</Anchor>
+          <Anchor href={otherIssuesUrl} onClick={onOpenBugClick}>
+            Github
+          </Anchor>
         </Text>
       </Section>
       <Section
@@ -112,6 +127,7 @@ const General = ({ app, onDashboardClick }) => {
         url={communityUrl}
         testid="documentation-community-link"
         label="Contribute to the Community"
+        onClick={onContributeClick}
       >
         <Button
           width="100%"
@@ -121,6 +137,7 @@ const General = ({ app, onDashboardClick }) => {
           target="_blank"
           href={communitySupportUrl}
           data-testid="documentation-community-support-link"
+          onClick={onSupportClick}
         />
       </Section>
     </Fragment>

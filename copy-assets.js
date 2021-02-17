@@ -29,3 +29,5 @@ copyFileSync("src/components/drops/tooltip/index.d.ts", "lib/components/drops/to
 copyFileSync("src/components/drops/popover/index.d.ts", "lib/components/drops/popover/index.d.ts")
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
+
+copyFileSync("src/organisms/documentation/index.d.ts", "lib/organisms/documentation/index.d.ts")
