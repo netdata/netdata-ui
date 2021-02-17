@@ -29,6 +29,7 @@
     "@netdata/react-filter-box": "^1.0.0",
     "polished": "^4.0.3",
     "ramda": "^0.27.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-portal": "^4.2.0",
     "react-table": "^7.2.1",
     "react-use": "^15.3.4",
