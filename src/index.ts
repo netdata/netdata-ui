@@ -87,5 +87,5 @@ export { default as Documentation } from "./organisms/documentation"
 
 export { default as NavigationTabs } from "./organisms/navigation/tabs"
 export { default as NavigationTab } from "./organisms/navigation/tab"
-export { default as TabSeparator } from "./organisms/navigation/tabSeparator"
-export { default as DraggableTabs } from "./organisms/navigation/draggableTabs"
+export { default as TabSeparator } from "./organisms/navigation/tab/tabSeparator"
+export { default as DraggableTabs } from "./organisms/navigation/draggable"

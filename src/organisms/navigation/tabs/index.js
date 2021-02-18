@@ -1,47 +1,31 @@
-import React, { useRef, useLayoutEffect, useState, useMemo, useCallback } from "react"
-import { useDebounce } from "react-use"
+import React, { useRef, useMemo, useCallback } from "react"
 import setRef from "src/mixins/set-ref"
 import Flex from "src/components/templates/flex"
+import useOnResize from "src/organisms/navigation/hooks/useOnResize"
 
 const Tabs = ({ children }) => {
   const innerRef = useRef()
-  const [shrink, setShrink] = useState()
-  const [shrinkDebounced, setShrinkDebounced] = useState()
 
-  useDebounce(
-    () => {
-      setShrinkDebounced(shrink)
-    },
-    250,
-    [shrink]
-  )
-
-  const onResize = useCallback(() => {
+  const onResize = useCallback(setValue => {
     const clientWidth = innerRef.current.clientWidth
     const scrollWidth = innerRef.current.scrollWidth
 
-    if (clientWidth < scrollWidth) setShrink(true)
-    if (clientWidth > scrollWidth) setShrink(false)
+    if (clientWidth < scrollWidth) setValue(true)
+    if (clientWidth >= scrollWidth) setValue(false)
   }, [])
 
-  useLayoutEffect(() => {
-    onResize()
-    window.addEventListener("resize", onResize)
-    return () => {
-      window.removeEventListener("resize", onResize)
-    }
-  }, [children])
+  const [shrink] = useOnResize(onResize, [children])
 
   const tabs = useMemo(() => {
     return React.Children.map(children, child => {
       const shrinkable = child.type.name !== "TabSeparator"
       const draggable = child.type.name === "DraggableTabs"
       return React.cloneElement(child, {
-        shrink: shrinkable && shrinkDebounced,
+        shrink: shrinkable && shrink,
         ...(draggable && { ref: node => setRef(innerRef, node) }),
       })
     })
-  }, [shrinkDebounced, children])
+  }, [shrink, children])
 
   return (
     <Flex column width="100%">

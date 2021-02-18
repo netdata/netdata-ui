@@ -1,40 +1,16 @@
 import React, { forwardRef, useMemo, useCallback, useRef } from "react"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import styled from "styled-components"
 import Flex from "src/components/templates/flex"
 import { Icon } from "src/components/icon/icon"
-import { getColor } from "src/theme"
-import useNavigationArrows from "./useNavigationArrows"
-import useNavigationScroll from "./useNavigationScroll"
+import useNavigationArrows from "src/organisms/navigation/hooks/useNavigationArrows"
+import useNavigationScroll from "src/organisms/navigation/hooks/useNavigationScroll"
+import Wrapper from "./container"
 
-const Wrapper = styled(Flex).attrs({
-  width: "100%",
-  height: "100%",
-  overflow: "hidden",
-  flex: true,
-  basis: "0%",
-})`
-  position: relative;
-  overflow-y: hidden;
-  overflow-x: auto;
-
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-
-  &::-webkit-scrollbar {
-    height: 1px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: ${getColor("selected")};
-  }
-`
-
-const DraggableTabs = forwardRef(({ children, onDragEnd: dragEnd }, parentRef) => {
+const DraggableTabs = forwardRef(({ children, onDragEnd: dragEnd, onTabClose }, parentRef) => {
   const containerRef = useRef()
   const tabsRef = useRef([])
 
-  const [arrowLeft, arrowRight] = useNavigationArrows(containerRef, tabsRef, children)
+  const [arrowLeft, arrowRight] = useNavigationArrows(containerRef, tabsRef, [children])
   useNavigationScroll(containerRef)
 
   const scrollLeft = e => {
@@ -69,18 +45,17 @@ const DraggableTabs = forwardRef(({ children, onDragEnd: dragEnd }, parentRef) =
             React.cloneElement(child, {
               ...draggableProps,
               ...dragHandleProps,
-
               draggableRef: innerRef,
               tabRef: setTabRef,
               tabIndex: index,
-
+              onClose: onTabClose,
               ...child.props,
             })
           }
         </Draggable>
       )
     })
-  }, [children])
+  }, [children, onTabClose])
 
   const onDragEnd = useCallback(
     result => {
@@ -91,7 +66,7 @@ const DraggableTabs = forwardRef(({ children, onDragEnd: dragEnd }, parentRef) =
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Flex flex="grow" basis="0%" height="100%" width="100%" alignItems="center">
+      <Flex flex="grow" basis="0%" height="100%" width="100%" alignItems="center" overflow="hidden">
         {arrowLeft && (
           <Icon name="navLeft" height={8} width={8} onClick={scrollLeft} margin={[0, 2]} />
         )}
