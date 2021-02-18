@@ -31,11 +31,8 @@ const initialDynamicTabs = [
 
 story.add("Tabbed navigation", () => {
   const [dynamicTabs, setDynamicTabs] = useState(() => initialDynamicTabs)
-  const [index, setIndex] = useState(0)
 
-  const onActive = nextIndex => setIndex(nextIndex)
-
-  const onClose = tabIndex => {
+  const onClose = (tabIndex) => {
     const result = Array.from(dynamicTabs)
     result.splice(tabIndex, 1)
     setDynamicTabs(result)
@@ -57,18 +54,17 @@ story.add("Tabbed navigation", () => {
         Add +
       </button>
       <Flex width="100vw">
-        <Tabs onActive={onActive}>
+        <Tabs>
           {staticTabs.map(({ icon, title }) => (
             <Tab icon={<Icon name={icon} size="small" />} key={title}>
               <Text>{title}</Text>
             </Tab>
           ))}
           <TabSeparator />
-          <DraggableTabs onDragEnd={onDragEnd}>
+          <DraggableTabs onDragEnd={onDragEnd} onTabClose={onClose}>
             {dynamicTabs.map(({ icon, title }, i) => (
               <Tab
                 icon={<Icon name={icon} size="small" />}
-                onClose={onClose}
                 key={title}
                 tabIndex={i}
                 active={false}
