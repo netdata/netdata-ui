@@ -1,6 +1,6 @@
 import { useCallback, useState, useLayoutEffect } from "react"
 
-export default (ref, childrenRef, ...deps) => {
+export default (ref, childrenRef, deps) => {
   const [arrowLeft, setArrowLeft] = useState(false)
   const [arrowRight, setArrowRight] = useState(false)
 
@@ -29,7 +29,7 @@ export default (ref, childrenRef, ...deps) => {
     onScroll()
     container.addEventListener("scroll", onScroll)
     return () => container.removeEventListener("scroll", onScroll)
-  }, [...deps])
+  }, deps)
 
   return [arrowLeft, arrowRight]
 }
