@@ -14,7 +14,7 @@ const Container = styled(Flex).attrs({
   overflow: -moz-scrollbars-none;
 
   &::-webkit-scrollbar {
-    height: 1px;
+    height: 0px;
   }
 
   ::-webkit-scrollbar-thumb {
