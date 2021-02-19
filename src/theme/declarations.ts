@@ -98,6 +98,7 @@ export type AppColorsT = {
   text: string
   textFocus: string
   key: string
+  panel: string
   sectionHeaderBackground: string
   placeholder: string
   borderColor: string

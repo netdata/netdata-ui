@@ -5,7 +5,6 @@ import { getColor } from "src/theme"
 const Container = styled(Flex).attrs({
   width: "100%",
   height: "100%",
-  overflow: "hidden",
   flex: true,
   basis: "0%",
   position: "relative",
