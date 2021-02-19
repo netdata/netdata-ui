@@ -1,98 +1,93 @@
-import React, { useState, useCallback, forwardRef } from "react"
+import React, { useState, useCallback } from "react"
 import { Icon } from "src/components/icon/icon"
-import useForwardRef from "src/hooks/use-forward-ref"
+import Flex from "src/components/templates/flex"
 import StyledTab from "./styledTab"
 
-const Tab = forwardRef(
-  (
-    {
-      active,
-      onActivate,
-      activeIndex,
-      tabIndex,
-      onMouseOver: mouseOver,
-      onMouseOut: mouseOut,
-      onClose,
-      fixed,
-      shrink,
-      icon,
-      children,
-      reverse,
-      draggableRef,
-      dragHandleProps,
-      tabRef,
-      ...rest
+const Tab = ({
+  active,
+  onActivate,
+  activeIndex,
+  tabIndex,
+  onMouseOver: mouseOver,
+  onMouseOut: mouseOut,
+  onClose,
+  fixed,
+  small,
+  icon,
+  children,
+  draggableRef,
+  dragHandleProps,
+  tabRef,
+  ...rest
+}) => {
+  const [hover, setHover] = useState()
+
+  const onClickTab = useCallback(
+    event => {
+      if (event) event.preventDefault()
+      if (onActivate) onActivate()
     },
-    parentRef
-  ) => {
-    const [hover, setHover] = useState()
+    [onActivate]
+  )
 
-    const [, setRef] = useForwardRef(parentRef)
+  const onMouseOver = useCallback(
+    event => {
+      setHover(true)
+      if (mouseOver) mouseOver(event)
+    },
+    [mouseOver]
+  )
 
-    const onClickTab = useCallback(
-      event => {
-        if (event) event.preventDefault()
-        if (onActivate) onActivate()
-      },
-      [onActivate]
-    )
+  const onMouseOut = useCallback(
+    event => {
+      setHover(false)
+      if (mouseOut) mouseOut(event)
+    },
+    [mouseOut]
+  )
 
-    const onMouseOver = useCallback(
-      event => {
-        setHover(true)
-        if (mouseOver) mouseOver(event)
-      },
-      [mouseOver]
-    )
+  const onCloseTab = useCallback(
+    event => {
+      event.preventDefault()
+      event.stopPropagation()
+      if (onClose) onClose(tabIndex, active)
+    },
+    [onClose, tabIndex, active]
+  )
 
-    const onMouseOut = useCallback(
-      event => {
-        setHover(false)
-        if (mouseOut) mouseOut(event)
-      },
-      [mouseOut]
-    )
+  const onRef = useCallback(
+    node => {
+      if (draggableRef) draggableRef(node)
+      if (tabRef) tabRef(node)
+    },
+    [draggableRef, tabRef]
+  )
 
-    const onCloseTab = useCallback(
-      event => {
-        event.preventDefault()
-        event.stopPropagation()
-        if (onClose) onClose(tabIndex, active)
-      },
-      [onClose, tabIndex, active]
-    )
+  const renderIcon = iconProp => React.cloneElement(iconProp, { color: active ? "text" : "border" })
 
-    const onRef = useCallback(
-      node => {
-        if (!tabRef || !draggableRef) return
-        if (setRef) setRef(node)
+  const closable = hover && !fixed
 
-        draggableRef(node)
-        tabRef(node)
-      },
-      [tabRef, draggableRef]
-    )
+  return (
+    <StyledTab
+      ref={onRef}
+      active={active}
+      onClick={onClickTab}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseOut}
+      fixed={fixed}
+      {...rest}
+    >
+      <Flex>
+        {closable && (
+          <Icon name="x" size="small" color={active ? "text" : "border"} onClick={onCloseTab} />
+        )}
+        {!closable && icon && renderIcon(icon)}
+      </Flex>
+      {!small && <div {...dragHandleProps}>{children}</div>}
+    </StyledTab>
+  )
+}
 
-    const renderIcon = iconProp => React.cloneElement(iconProp, !active && { color: "border" })
-    const closable = hover && !fixed
-
-    return (
-      <StyledTab
-        ref={onRef}
-        active={active}
-        onClick={onClickTab}
-        onMouseOver={onMouseOver}
-        onMouseLeave={onMouseOut}
-        {...rest}
-      >
-        {reverse && !shrink && <span {...dragHandleProps}>{children}</span>}
-        {closable ? <Icon name="x" size="small" onClick={onCloseTab} /> : icon && renderIcon(icon)}
-        {!reverse && !shrink && <span {...dragHandleProps}>{children}</span>}
-      </StyledTab>
-    )
-  }
-)
-
-Tab.name = "Tab"
+Tab.displayName = "Tab"
 
 export default Tab
