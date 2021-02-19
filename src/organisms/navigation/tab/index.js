@@ -19,6 +19,7 @@ const Tab = forwardRef(
       children,
       reverse,
       draggableRef,
+      dragHandleProps,
       tabRef,
       ...rest
     },
@@ -84,9 +85,9 @@ const Tab = forwardRef(
         onMouseLeave={onMouseOut}
         {...rest}
       >
-        {reverse && !shrink && children}
+        {reverse && !shrink && <span {...dragHandleProps}>{children}</span>}
         {closable ? <Icon name="x" size="small" onClick={onCloseTab} /> : icon && renderIcon(icon)}
-        {!reverse && !shrink && children}
+        {!reverse && !shrink && <span {...dragHandleProps}>{children}</span>}
       </StyledTab>
     )
   }
