@@ -7,7 +7,7 @@ export default (callback, deps) => {
 
   const onResize = useCallback(() => callback(setValue), [setValue])
 
-  useDebounce(() => setValueDebounced(value), 250, [value])
+  useDebounce(() => setValueDebounced(value), 100, [value])
 
   useLayoutEffect(() => {
     onResize()
