@@ -19,8 +19,8 @@ export default (ref, childrenRef, deps) => {
     if (left > scroll) setArrowRight(true)
     if (left < scroll || left < width) setArrowRight(false)
 
-    if (scroll > firstTabWidth) setArrowLeft(true)
-    if (scroll < firstTabWidth) setArrowLeft(false)
+    if (scroll > 0) setArrowLeft(true)
+    if (scroll === 0) setArrowLeft(false)
   }, [])
 
   useLayoutEffect(() => {
@@ -31,5 +31,5 @@ export default (ref, childrenRef, deps) => {
     return () => container.removeEventListener("scroll", onScroll)
   }, deps)
 
-  return [arrowLeft, arrowRight]
+  return [false, false, setArrowRight]
 }
