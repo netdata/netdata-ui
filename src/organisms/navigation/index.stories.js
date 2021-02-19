@@ -56,7 +56,7 @@ story.add("Tabbed navigation", () => {
       <Flex width="100vw">
         <Tabs>
           {staticTabs.map(({ icon, title }) => (
-            <Tab icon={<Icon name={icon} size="small" />} key={title}>
+            <Tab fixed icon={<Icon name={icon} size="small" />} key={title}>
               <Text>{title}</Text>
             </Tab>
           ))}
