@@ -44,7 +44,7 @@ const DraggableTabs = forwardRef(({ children, onDragEnd: dragEnd, onTabClose }, 
           {({ innerRef, draggableProps, dragHandleProps }) =>
             React.cloneElement(child, {
               ...draggableProps,
-              ...dragHandleProps,
+              dragHandleProps,
               draggableRef: innerRef,
               tabRef: setTabRef,
               tabIndex: index,

@@ -102,6 +102,7 @@ const appColors: AppColorsT = {
   sectionHeaderBackground: rawColors.gray.arsenic,
   placeholder: rawColors.gray.gainsboro,
   key: rawColors.gray.slateGray,
+  panel: rawColors.gray.arsenic,
 
   // Depreacted - use the names above
   borderColor: rawColors.gray.nepal,
