@@ -82,7 +82,7 @@ const Tab = ({
     >
       <Flex>
         {closable && (
-          <Icon name="x" size="collapsed" color={active ? "text" : "border"} onClick={onCloseTab} />
+          <Icon name="x" size="small" color={active ? "text" : "border"} onClick={onCloseTab} />
         )}
         {!closable && icon && renderIcon(icon)}
       </Flex>
