@@ -12,7 +12,7 @@ const Tab = ({
   onMouseOut: mouseOut,
   onClose,
   fixed,
-  small,
+  collapsed,
   icon,
   children,
   draggableRef,
@@ -63,7 +63,10 @@ const Tab = ({
     [draggableRef, tabRef]
   )
 
-  const renderIcon = iconProp => React.cloneElement(iconProp, { color: active ? "text" : "border" })
+  const renderIcon = useCallback(
+    iconProp => React.cloneElement(iconProp, { color: active ? "text" : "border" }),
+    [active]
+  )
 
   const closable = hover && !fixed
 
@@ -79,11 +82,11 @@ const Tab = ({
     >
       <Flex>
         {closable && (
-          <Icon name="x" size="small" color={active ? "text" : "border"} onClick={onCloseTab} />
+          <Icon name="x" size="collapsed" color={active ? "text" : "border"} onClick={onCloseTab} />
         )}
         {!closable && icon && renderIcon(icon)}
       </Flex>
-      {!small && <div {...dragHandleProps}>{children}</div>}
+      {!collapsed && <div {...dragHandleProps}>{children}</div>}
     </StyledTab>
   )
 }
