@@ -1,19 +1,15 @@
-import { useLayoutEffect, useState, useCallback } from "react"
-import { useDebounce } from "react-use"
+import { useCallback } from "react"
 
-export default (callback, deps) => {
-  const [value, setValue] = useState()
-  const [valueDebounced, setValueDebounced] = useState()
+export default (ref, target, callback, deps) =>
+  useCallback(() => {
+    if (!ref.current || !target.current.length) return
 
-  const onResize = useCallback(() => callback(setValue), [setValue])
+    const container = ref.current
+    const { right: containerRight } = container.getBoundingClientRect()
 
-  useDebounce(() => setValueDebounced(value), 100, [value])
+    const lastTab = target.current[target.current.length - 1]
+    const { right: tabRight, width: tabWidth } = lastTab.getBoundingClientRect()
 
-  useLayoutEffect(() => {
-    onResize()
-    window.addEventListener("resize", onResize)
-    return () => window.removeEventListener("resize", onResize)
-  }, [callback, ...deps])
-
-  return [valueDebounced]
-}
+    if (tabRight > containerRight) callback(true)
+    if (tabRight + tabWidth <= containerRight) callback(false)
+  }, deps)

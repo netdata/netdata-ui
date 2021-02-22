@@ -2,18 +2,17 @@ import React, { useMemo, useState } from "react"
 import Flex from "src/components/templates/flex"
 
 const Tabs = ({ children }) => {
-  const [small, setSmall] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
 
   const tabs = useMemo(() => {
     return React.Children.map(children, child => {
-      const shrinkable = child.type.name !== "TabSeparator"
       const draggable = child.type.displayName === "DraggableTabs"
       return React.cloneElement(child, {
-        ...(shrinkable && { small }),
-        ...(draggable && { onResize: setSmall }),
+        collapsed,
+        ...(draggable && { onResize: setCollapsed }),
       })
     })
-  }, [small, children])
+  }, [collapsed, children])
 
   return (
     <Flex column width="100%" position="relative">
