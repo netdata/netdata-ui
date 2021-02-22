@@ -3,7 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import Flex from "src/components/templates/flex"
 import useNavigationArrows from "src/organisms/navigation/hooks/useNavigationArrows"
 import useNavigationScroll from "src/organisms/navigation/hooks/useNavigationScroll"
-import useOnTabsResize from "src/organisms/navigation/hooks/useOnResize"
+import useOnTabsResize from "src/organisms/navigation/hooks/useOnTabsResize"
 import Container from "./container"
 import Arrow from "./arrow"
 
