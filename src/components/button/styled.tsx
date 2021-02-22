@@ -30,6 +30,9 @@ const withTheme = props => {
 
 const getPrimaryColor = props =>
   props.neutral ? getColor("text")(props) : getColor("primary")(props)
+
+const getBorderColor = props =>
+  props.neutral ? getColor("border")(props) : getColor("primary")(props)
 const getTextColor = getColor("bright")
 const getAccentColor = props =>
   props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
@@ -63,7 +66,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) =>
       bg: getMain,
       bgHover: getMain,
       bgActive: getSpecialColor || getMain,
-      border: getSpecialColor || getPrimaryColor,
+      border: getSpecialColor || getBorderColor,
       borderHover: getSpecialColor || getAccentColor,
       borderActive: getSpecialColor || getAccentColor,
     },
