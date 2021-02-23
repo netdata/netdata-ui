@@ -30,6 +30,9 @@ const withTheme = props => {
 
 const getPrimaryColor = props =>
   props.neutral ? getColor("text")(props) : getColor("primary")(props)
+
+const getBorderColor = props =>
+  props.neutral ? getColor("border")(props) : getColor("primary")(props)
 const getTextColor = getColor("bright")
 const getAccentColor = props =>
   props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
@@ -63,7 +66,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }: ButtonProps) =>
       bg: getMain,
       bgHover: getMain,
       bgActive: getSpecialColor || getMain,
-      border: getSpecialColor || getPrimaryColor,
+      border: getSpecialColor || getBorderColor,
       borderHover: getSpecialColor || getAccentColor,
       borderActive: getSpecialColor || getAccentColor,
     },
@@ -102,7 +105,7 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
 
     width: ${props =>
       props.width ? props.width : props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4)};
-    height: ${props => (props.hasLabel ? getSizeBy(5) : getSizeBy(props.small ? 3 : 4))};
+    height: ${props => (props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.small ? 3 : 4))};
 
     font-weight: bold;
     font-size: 12px;
