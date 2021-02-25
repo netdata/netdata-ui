@@ -1,7 +1,7 @@
-import { useCallback } from "react"
+import { useCallback, useRef } from "react"
 
-export default (ref, target, callback, deps) =>
-  useCallback(() => {
+export default (ref, target, callback, deps) => {
+  return useCallback(() => {
     if (!ref.current || !target.current.length) return
 
     const container = ref.current
@@ -10,6 +10,7 @@ export default (ref, target, callback, deps) =>
     const lastTab = target.current[target.current.length - 1]
     const { right: tabRight, width: tabWidth } = lastTab.getBoundingClientRect()
 
-    if (tabRight > containerRight) callback(true)
-    if (tabRight + tabWidth <= containerRight) callback(false)
-  }, deps)
+    if (tabRight >= containerRight) return callback(true)
+    if (tabRight + tabWidth < containerRight) return callback(false)
+  }, [deps])
+}

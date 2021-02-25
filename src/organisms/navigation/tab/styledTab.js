@@ -11,7 +11,7 @@ const StyledTab = styled(Flex).attrs(({ active, fixed }) => ({
   alignItems: "center",
   justifyContent: "start",
   overflow: "hidden",
-  width: { min: !fixed && 40, max: 10 },
+  width: { min: !fixed ? (active ? 50 : 30) : null },
   position: "relative",
   elevation: active ? 2 : 0,
 }))`
