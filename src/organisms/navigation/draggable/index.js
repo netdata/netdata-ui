@@ -15,13 +15,16 @@ const DraggableTabs = ({ children, onDragEnd: dragEnd, onTabClose, onResize, col
   const onTabsResize = useOnTabsResize(ref, tabsRef, onResize, [children])
   const [arrowLeft, arrowRight, onScroll] = useNavigationArrows(ref, tabsRef, children, collapsed)
 
-  const handlers = () => {
+  const handlers = useCallback(() => {
     onTabsResize()
     onScroll()
-  }
+  }, [collapsed])
 
   useLayoutEffect(() => {
+    if (!ref.current) return
+
     const container = ref.current
+    handlers()
 
     container.addEventListener("scroll", onScroll)
     window.addEventListener("resize", handlers)
@@ -29,7 +32,7 @@ const DraggableTabs = ({ children, onDragEnd: dragEnd, onTabClose, onResize, col
       container.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", handlers)
     }
-  }, [collapsed, children])
+  }, [children, collapsed])
 
   const scrollLeft = e => {
     e.preventDefault()

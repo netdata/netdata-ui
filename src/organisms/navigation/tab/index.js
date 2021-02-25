@@ -86,7 +86,7 @@ const Tab = ({
         )}
         {!closable && icon && renderIcon(icon)}
       </Flex>
-      {!collapsed && <div {...dragHandleProps}>{children}</div>}
+      {!collapsed && <Flex {...dragHandleProps}>{children}</Flex>}
     </StyledTab>
   )
 }
