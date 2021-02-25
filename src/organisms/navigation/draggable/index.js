@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useRef, useLayoutEffect } from "react"
+import React, { useMemo, useCallback, useRef, useEffect } from "react"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import Flex from "src/components/templates/flex"
 import useNavigationArrows from "src/organisms/navigation/hooks/useNavigationArrows"
@@ -20,7 +20,7 @@ const DraggableTabs = ({ children, onDragEnd: dragEnd, onTabClose, onResize, col
     onScroll()
   }, [collapsed])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) return
 
     const container = ref.current
