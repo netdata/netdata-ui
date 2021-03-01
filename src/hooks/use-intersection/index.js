@@ -52,11 +52,13 @@ const observe = (callback, element, options) => {
 }
 
 export default ({ root, rootMargin, threshold }) => {
+  const ref = useRef()
   const unObserveRef = useRef()
   const [visible, setVisible] = useState(false)
 
   const setRef = useCallback(
     element => {
+      ref.current = element
       unObserveRef.current?.()
       unObserveRef.current = null
       if (!element) return
@@ -75,5 +77,5 @@ export default ({ root, rootMargin, threshold }) => {
     []
   )
 
-  return [setRef, visible]
+  return [setRef, ref, visible]
 }
