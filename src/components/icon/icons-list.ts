@@ -114,6 +114,8 @@ import chevron_double from "./assets/chevron_double.svg"
 import documentation from "./assets/documentation.svg"
 import unknownError from "./assets/unknownError.svg"
 import community from "./assets/community.svg"
+import navRight from "./assets/nav_right.svg"
+import navLeft from "./assets/nav_left.svg"
 
 export const iconsList = {
   add_user,
@@ -231,4 +233,6 @@ export const iconsList = {
   documentation,
   unknownError,
   community,
+  navRight,
+  navLeft
 }

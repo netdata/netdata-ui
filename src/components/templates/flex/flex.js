@@ -4,6 +4,8 @@ import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
 import round from "src/mixins/round"
 import opacity from "src/mixins/opacity"
+import position from "src/mixins/position"
+import elevation from "src/mixins/elevation"
 import height from "src/components/templates/mixins/height"
 import width from "src/components/templates/mixins/width"
 import overflow from "src/components/templates/mixins/overflow"
@@ -28,6 +30,7 @@ const Flex = Component => styled(Component)`
   ${justifyContent}
   ${alignSelf}
 
+  ${position}
   ${margin}
   ${padding}
   ${gap}
@@ -39,6 +42,7 @@ const Flex = Component => styled(Component)`
   ${border}
   ${round}
   ${overflow}
+  ${elevation}
 `
 
 export default Flex

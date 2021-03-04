@@ -21,7 +21,8 @@ export interface FlexProps
     RoundProps,
     WidthProps,
     HeightProps,
-    OverflowProps {
+    OverflowProps,
+    ElevationProps {
   background?: ColorType
 }
 ```

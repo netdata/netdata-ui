@@ -26,6 +26,7 @@ const appColors: AppColorsT = {
   sectionHeaderBackground: rawColors.white.pure,
   placeholder: rawColors.gray.shuttleGray,
   key: rawColors.gray.bombayLite,
+  panel: rawColors.gray.arsenic,
 
   // Depreacted
   borderColor: rawColors.gray.aluminium,

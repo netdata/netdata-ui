@@ -53,3 +53,11 @@ export interface RoundProps {
         size?: MultiplierType
       }
 }
+
+export interface ElevationProps {
+  elevation?: number
+}
+
+export interface PositionProps {
+  position?: "static" | "absolute" | "fixed" | "relative" | "sticky" | "initial" | "inherit"
+}
