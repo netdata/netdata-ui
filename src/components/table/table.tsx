@@ -108,6 +108,7 @@ export function Table<T extends Item>({
     getTableBodyProps,
     headerGroups,
     rows,
+    initialRows,
     prepareRow,
     selectedFlatRows,
     isAllRowsSelected,
@@ -148,10 +149,10 @@ export function Table<T extends Item>({
   useEffect(() => {
     if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
       const isGrouped = groupBy.length > 0
-      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
+      const validRows = getValidRows({ initialRows, isGrouped, itemIsDisabled })
       selectedItemsClb(validRows)
     }
-  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
+  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled, initialRows])
 
   useEffect(() => {
     if (isAllRowsExpanded) {

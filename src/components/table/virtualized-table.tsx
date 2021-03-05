@@ -103,6 +103,7 @@ export function VirtualizedTable<T extends Item>({
     getTableBodyProps,
     headerGroups,
     rows,
+    initialRows,
     prepareRow,
     selectedFlatRows,
     isAllRowsSelected,
@@ -143,11 +144,11 @@ export function VirtualizedTable<T extends Item>({
   useEffect(() => {
     if ((selectedFlatRows.length === 0 || isAllRowsSelected) && selectedItemsClb) {
       const isGrouped = groupBy.length > 0
-      const validRows = getValidRows({ selectedFlatRows, isGrouped, itemIsDisabled })
+      const validRows = getValidRows({ initialRows, isGrouped, itemIsDisabled })
 
       selectedItemsClb(validRows)
     }
-  }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
+  }, [initialRows, selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
 
   useEffect(() => {
     if (isAllRowsExpanded) {

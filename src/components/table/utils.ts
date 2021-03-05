@@ -88,18 +88,14 @@ export const generateRowStyle = ({ index, style, rows, verticalGutter }: StyleDe
 }
 
 interface IGetValidRows {
-  selectedFlatRows: any[]
+  initialRows: any[]
   isGrouped: boolean
   itemIsDisabled: (item: any) => boolean
 }
-export const getValidRows = ({
-  selectedFlatRows,
-  isGrouped,
-  itemIsDisabled,
-}: IGetValidRows): any[] =>
-  selectedFlatRows.reduce((acc: any[], row: any) => {
+export const getValidRows = ({ initialRows, isGrouped, itemIsDisabled }: IGetValidRows): any[] =>
+  initialRows.reduce((acc: any[], row: any) => {
     if (isGrouped && row.isGrouped) return acc
     if (itemIsDisabled(row.original)) return acc
-    acc.push(row.original)
+    if (row.isSelected) acc.push(row.original)
     return acc
   }, [])
