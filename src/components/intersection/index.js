@@ -22,7 +22,12 @@ const Intersection = ({
   }
 
   return (
-    <Flex ref={setRef} height={!visible && { min: lastHeightRef.current }} width={width} {...rest}>
+    <Flex
+      ref={setRef}
+      width={width}
+      {...(!visible && {height: { min: lastHeightRef.current }})}
+      {...rest}
+    >
       {visible ? children() : fallback}
     </Flex>
   )
