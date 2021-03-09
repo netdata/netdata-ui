@@ -9,7 +9,12 @@ export default (target, callback) =>
       const scrollAncestors = getAncestors(target).filter(
         node => node.scrollHeight > node.clientHeight
       )
-      scrollAncestors.forEach(node => node.addEventListener("scroll", callback))
+      scrollAncestors.forEach(node =>
+        node.addEventListener("scroll", callback, {
+          capture: false,
+          passive: true,
+        })
+      )
       return () => scrollAncestors.forEach(node => node.removeEventListener("scroll", callback))
     }
 
