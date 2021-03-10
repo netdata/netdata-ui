@@ -3,6 +3,8 @@ import { usePrevious } from "react-use"
 import Flex from "src/components/templates/flex"
 import useIntersection from "src/hooks/use-intersection"
 
+const getContent = value => (typeof value === "function" ? value() : value)
+
 const Intersection = ({
   height = "100%",
   width = "100%",
@@ -25,10 +27,10 @@ const Intersection = ({
     <Flex
       ref={setRef}
       width={width}
-      {...(!visible && {height: { min: lastHeightRef.current }})}
+      {...(!visible && { height: { min: lastHeightRef.current } })}
       {...rest}
     >
-      {visible ? children() : fallback}
+      {getContent(visible ? children : fallback)}
     </Flex>
   )
 }
