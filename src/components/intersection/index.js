@@ -1,6 +1,9 @@
-import React from "react"
+import React, { useRef } from "react"
+import { usePrevious } from "react-use"
 import Flex from "src/components/templates/flex"
 import useIntersection from "src/hooks/use-intersection"
+
+const getContent = value => (typeof value === "function" ? value() : value)
 
 const Intersection = ({
   height = "100%",
@@ -12,11 +15,22 @@ const Intersection = ({
   children,
   ...rest
 }) => {
-  const [ref, visible] = useIntersection({ root, rootMargin, threshold })
+  const [setRef, ref, visible] = useIntersection({ root, rootMargin, threshold })
+  const prevVisible = usePrevious(visible)
+  const lastHeightRef = useRef(height)
+
+  if (visible !== prevVisible && !visible && ref.current) {
+    lastHeightRef.current = `${ref.current.clientHeight}px`
+  }
 
   return (
-    <Flex ref={ref} height={{ min: height }} width={width} {...rest}>
-      {visible ? children() : fallback}
+    <Flex
+      ref={setRef}
+      width={width}
+      {...(!visible && { height: { min: lastHeightRef.current } })}
+      {...rest}
+    >
+      {getContent(visible ? children : fallback)}
     </Flex>
   )
 }

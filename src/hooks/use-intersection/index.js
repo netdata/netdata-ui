@@ -24,7 +24,6 @@ const intersectionCallback = entries => {
 }
 
 const observe = (callback, element, options) => {
-  const {} = options
   const id = getId(options)
 
   if (!(id in observers)) {

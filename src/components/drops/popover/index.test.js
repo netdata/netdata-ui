@@ -1,5 +1,5 @@
 import React from "react"
-import { renderWithProviders, fireEvent, waitFor } from "testUtilities"
+import { renderWithProviders, fireEvent } from "testUtilities"
 import { Text } from "src/components/typography"
 import Popover from "./index"
 
