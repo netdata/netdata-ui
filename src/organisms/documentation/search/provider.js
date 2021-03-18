@@ -34,19 +34,17 @@ const config = {
   alwaysSearchOnInitialLoad: false,
 }
 
+const mapContextToProps = ({ searchTerm, setSearchTerm, results, reset }) => ({
+  searchTerm,
+  setSearchTerm,
+  results,
+  reset,
+})
+
 const SearchProvider = ({ children }) => {
   return (
     <ElasticSearchProvider config={config}>
-      <WithSearch
-        mapContextToProps={({ searchTerm, setSearchTerm, results, reset }) => ({
-          searchTerm,
-          setSearchTerm,
-          results,
-          reset,
-        })}
-      >
-        {props => children(props)}
-      </WithSearch>
+      <WithSearch mapContextToProps={mapContextToProps}>{props => children(props)}</WithSearch>
     </ElasticSearchProvider>
   )
 }

@@ -10,8 +10,19 @@ const Link = styled.a`
 
 const Section = ({ title, description, url }) => (
   <Flex gap={2} column>
-    <Text strong>{title?.snippet || "Untitled"}</Text>
-    {!!description && <Text>{description?.snippet || "No description"}&hellip;</Text>}
+    <Text
+      strong
+      dangerouslySetInnerHTML={{
+        __html: title?.snippet || "Untitled",
+      }}
+    />
+    {!!description && (
+      <Text
+        dangerouslySetInnerHTML={{
+          __html: `${description?.snippet}&hellip;` || "No description&hellip;",
+        }}
+      />
+    )}
     <Flex alignSelf="end">
       <Text as={Link} color="primary" href={url} target="_blank">
         Read &rarr;
@@ -78,7 +89,7 @@ const SearchResults = ({ results }) => {
                   const { id, url, title, description } = result
 
                   return (
-                    <Section key={id.raw} url={url?.raw} title={title} description={description} />
+                    <Section key={id.raw} url={url.raw} title={title} description={description} />
                   )
                 })}
               </Container>
