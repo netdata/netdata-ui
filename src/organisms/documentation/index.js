@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { Fragment, useState, useCallback } from "react"
 import styled from "styled-components"
 import { useToggle } from "react-use"
 import { H5 } from "src/components/typography"
@@ -8,6 +8,7 @@ import Flex from "src/components/templates/flex"
 import Layer from "src/components/templates/layer"
 import General from "./general"
 import Dashboard from "./dashboard"
+import SearchProvider, { SearchInput, SearchResults } from "./search"
 
 const Container = styled(Flex).attrs({
   padding: [6],
@@ -44,12 +45,11 @@ const Header = ({ children, onClose }) => {
   )
 }
 
-const views = { general: "general", dashboard: "dashboard" }
+const views = { general: "general", dashboard: "dashboard", search: "search" }
 const titles = { general: "Netdata Help", dashboard: "Dashboard Help" }
 
 const Documentation = ({
   app = "cloud",
-  onClickOut,
   onCloseClick,
   onVisitDocumentClick,
   onOpenIssueClick,
@@ -64,19 +64,15 @@ const Documentation = ({
   const isGeneral = view === views.general
   const setDashboardView = useCallback(() => setView(views.dashboard), [])
   const setGeneralView = useCallback(() => setView(views.general), [])
+  const setSearchView = useCallback(() => setView(views.search), [])
 
   const closeClicked = useCallback(() => {
     toggle()
     if (onCloseClick) onCloseClick()
   }, [])
 
-  const clickedOut = useCallback(() => {
-    toggle()
-    if (onClickOut) onClickOut()
-  }, [])
-
   return (
-    <>
+    <Fragment>
       {children(toggle, isOpen)}
       {isOpen && (
         <Layer
@@ -86,42 +82,66 @@ const Documentation = ({
           onClickOutside={toggle}
           onEsc={toggle}
         >
-          <Container
-            width={{ max: isGeneral ? "325px" : "600px" }}
-            data-testid="documentation-layer"
-          >
-            <Header onClose={closeClicked}>
-              {isGeneral && <Icon color="text" name="questionFilled" width="18px" height="18px" />}
-              {!isGeneral && (
-                <Button
-                  icon="arrow_left"
-                  neutral
-                  small
-                  onClick={setGeneralView}
-                  flavour="borderless"
-                  data-testid="dashboard-back"
-                />
-              )}
-              <H5 margin={[0]}>{titles[view]}</H5>
-            </Header>
-            {isGeneral && (
-              <Flex gap={6} overflow={{ vertical: "auto" }} column>
-                <General
-                  app={app}
-                  onDashboardClick={setDashboardView}
-                  onVisitDocumentClick={onVisitDocumentClick}
-                  onOpenIssueClick={onOpenIssueClick}
-                  onOpenBugClick={onOpenBugClick}
-                  onContributeClick={onContributeClick}
-                  onSupportClick={onSupportClick}
-                />
-              </Flex>
-            )}
-            {!isGeneral && <Dashboard />}
-          </Container>
+          <SearchProvider>
+            {({ searchTerm, setSearchTerm, results, reset }) => {
+              return (
+                <Fragment>
+                  <Container
+                    width={{
+                      max: isGeneral ? "325px" : view === views.dashboard ? "600px" : "100%",
+                    }}
+                    data-testid="documentation-layer"
+                  >
+                    <Header onClose={closeClicked}>
+                      {isGeneral && (
+                        <Icon color="text" name="questionFilled" width="18px" height="18px" />
+                      )}
+                      {!isGeneral && (
+                        <Button
+                          icon="arrow_left"
+                          neutral
+                          small
+                          onClick={() => {
+                            setGeneralView()
+                            reset()
+                          }}
+                          flavour="borderless"
+                          data-testid="dashboard-back"
+                        />
+                      )}
+                      <H5 margin={[0]}>{titles[view] || titles.general}</H5>
+                    </Header>
+
+                    {view !== views.dashboard && (
+                      <SearchInput
+                        defaultValue={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        setSearchView={setSearchView}
+                      />
+                    )}
+                    {isGeneral && (
+                      <Flex gap={6} overflow={{ vertical: "auto" }} column padding={[1]}>
+                        <General
+                          app={app}
+                          onDashboardClick={setDashboardView}
+                          onVisitDocumentClick={onVisitDocumentClick}
+                          onOpenIssueClick={onOpenIssueClick}
+                          onOpenBugClick={onOpenBugClick}
+                          onContributeClick={onContributeClick}
+                          onSupportClick={onSupportClick}
+                        />
+                      </Flex>
+                    )}
+                    {view === views.dashboard && <Dashboard />}
+                    {view === views.search && <SearchResults results={results} />}
+                  </Container>
+                </Fragment>
+              )
+            }}
+          </SearchProvider>
         </Layer>
       )}
-    </>
+    </Fragment>
   )
 }
 
