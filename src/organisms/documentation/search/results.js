@@ -19,7 +19,7 @@ const Section = ({ title, description, url }) => (
     {!!description && (
       <Text
         dangerouslySetInnerHTML={{
-          __html: `${description?.snippet}&hellip;` || "No description&hellip;",
+          __html: `${description.snippet || "No description"}&hellip;`,
         }}
       />
     )}
