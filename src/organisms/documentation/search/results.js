@@ -76,22 +76,37 @@ const SearchResults = ({ results }) => {
   const tabbedResults = useTabbedResults(results)
 
   return (
-    <Flex overflow={{ vertical: "auto" }} data-testid="searchResults" flex>
+    <Flex
+      overflow={{ vertical: "auto" }}
+      data-testid="searchResults"
+      flex
+      width="1000px"
+      height="60vh"
+    >
       <StyledTabs>
         {keys.map(key => {
           const tabResults = tabbedResults[tabValuesByKey[key]]
-          if (!tabResults?.length) return
+          const tabResultsCount = tabResults?.length
 
           return (
-            <Tab key={key} label={tabNameByKey[key]}>
+            <Tab
+              key={key}
+              label={`${tabNameByKey[key]}${tabResultsCount ? `  (${tabResultsCount})` : ""}`}
+            >
               <Container>
-                {tabResults.map(result => {
-                  const { id, url, title, description } = result
+                {!tabResultsCount ? (
+                  <Flex padding={[4]}>
+                    <Text strong>No results</Text>
+                  </Flex>
+                ) : (
+                  tabResults.map(result => {
+                    const { id, url, title, description } = result
 
-                  return (
-                    <Section key={id.raw} url={url.raw} title={title} description={description} />
-                  )
-                })}
+                    return (
+                      <Section key={id.raw} url={url.raw} title={title} description={description} />
+                    )
+                  })
+                )}
               </Container>
             </Tab>
           )
