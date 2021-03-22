@@ -13,13 +13,13 @@ const Section = ({ title, description, url }) => (
     <Text
       strong
       dangerouslySetInnerHTML={{
-        __html: title?.snippet || "Untitled",
+        __html: title?.snippet || title?.raw || "Untitled",
       }}
     />
     {!!description && (
       <Text
         dangerouslySetInnerHTML={{
-          __html: `${description.snippet || "No description"}&hellip;`,
+          __html: `${description?.snippet || description?.raw || "No description"}&hellip;`,
         }}
       />
     )}
@@ -101,7 +101,6 @@ const SearchResults = ({ results }) => {
                 ) : (
                   tabResults.map(result => {
                     const { id, url, title, description } = result
-
                     return (
                       <Section key={id.raw} url={url.raw} title={title} description={description} />
                     )
