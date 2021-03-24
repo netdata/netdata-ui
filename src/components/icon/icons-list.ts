@@ -36,6 +36,7 @@ import node_hollow from "./assets/node_hollow.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import node_parent from "./assets/node_parent.svg"
 import node_child from "./assets/node_child.svg"
+import node_import_export from "./assets/node_import_export.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import plus from "./assets/plus.svg"
 import pod from "./assets/pod.svg"
@@ -170,6 +171,7 @@ export const iconsList = {
   node_hollow,
   nodes_hollow,
   node_child,
+  node_import_export,
   node_parent,
   node_notification_l,
   node_selected_l,
