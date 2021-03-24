@@ -3,9 +3,15 @@ import styled from "styled-components"
 import { Tabs, Tab } from "src/components/tabs"
 import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
+import { getColor } from "src/theme"
 
 const Link = styled.a`
   text-decoration: none;
+
+  &:hover,
+  &:visited {
+    color: ${getColor("primary")};
+  }
 `
 
 const Section = ({ title, description, url }) => (
@@ -46,7 +52,12 @@ const StyledTabs = styled(Tabs)`
 
 const domainRegexp = /^https:\/\/((learn.netdata).cloud|www.(netdata.cloud)|github.com\/netdata\/(netdata-cloud)|github.com\/netdata\/(netdata))/
 
-const keys = ["learn", "github-cloud", "github-agent", "community"]
+const keys = [
+  "learn",
+  // "github-cloud",
+  // "github-agent",
+  "community",
+]
 const tabValuesByKey = {
   learn: "learn.netdata",
   community: "netdata.cloud",
