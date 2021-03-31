@@ -4,6 +4,7 @@ import { FlexProps } from "../templates/flex"
 export interface CollapsibleProps {
   open?: boolean
   duration?: number
+  persist?: boolean
   children: ReactNode | (() => ReactNode)
   [rest: string]: any
 }
