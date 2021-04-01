@@ -18,7 +18,7 @@ const Animated = styled(Flex).attrs({
 `
 
 const Collapsible = forwardRef(
-  ({ open = false, duration = 150, children, direction, ...rest }, parentRef) => {
+  ({ open = false, duration = 150, children, direction, persist = false, ...rest }, parentRef) => {
     duration = process.env.NODE_ENV === "test" ? 0 : duration
 
     const [dimension, setDimension] = useState(open ? "initial" : 0)
@@ -51,8 +51,8 @@ const Collapsible = forwardRef(
     }, [open])
 
     const child = useMemo(
-      () => animatedOpen && (typeof children === "function" ? children() : children),
-      [animatedOpen, children]
+      () => ((animatedOpen || persist) && typeof children === "function" ? children() : children),
+      [animatedOpen, persist, children]
     )
 
     return (
