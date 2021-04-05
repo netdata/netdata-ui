@@ -11,7 +11,7 @@ const StyledTab = styled(Flex).attrs(({ active, fixed }) => ({
   alignItems: "center",
   justifyContent: "start",
   position: "relative",
-  elevation: active ? 2 : 0,
+  zIndex: active ? 2 : 0,
 }))`
   top: ${({ active }) => !active && "2px"};
   border-bottom-color: ${({ active }) => active && getColor("mainBackground")};

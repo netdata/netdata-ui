@@ -54,8 +54,8 @@ export interface RoundProps {
       }
 }
 
-export interface ElevationProps {
-  elevation?: number
+export interface ZIndexProps {
+  zIndex?: number
 }
 
 export interface PositionProps {

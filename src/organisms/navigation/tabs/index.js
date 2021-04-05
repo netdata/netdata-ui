@@ -34,7 +34,7 @@ const Tabs = ({ children }) => {
         width="100%"
         position="absolute"
         style={{ bottom: 0 }}
-        elevation={1}
+        zIndex={1}
       />
     </Flex>
   )
