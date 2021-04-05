@@ -22,7 +22,7 @@ export interface FlexProps
     WidthProps,
     HeightProps,
     OverflowProps,
-    ElevationProps {
+    ZIndexProps {
   background?: ColorType
 }
 ```
