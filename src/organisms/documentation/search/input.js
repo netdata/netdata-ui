@@ -22,7 +22,7 @@ const SearchInput = ({ defaultValue, setSearchTerm, setSearchView }) => {
     <TextInput
       value={value}
       onChange={onChange}
-      placeholder="Search Help"
+      placeholder="Search Netdata’s docs & community"
       autoFocus
       metaShrinked
       iconLeft={<Icon name="search_s" size="small" color={value ? "text" : "border"} />}

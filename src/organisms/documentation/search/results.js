@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React from "react"
 import styled from "styled-components"
 import { Tabs, Tab } from "src/components/tabs"
 import Flex from "src/components/templates/flex"
@@ -50,8 +50,6 @@ const StyledTabs = styled(Tabs)`
   }
 `
 
-const domainRegexp = /^https:\/\/((learn.netdata).cloud|www.(netdata.cloud)|github.com\/netdata\/(netdata-cloud)|github.com\/netdata\/(netdata))/
-
 const keys = [
   "learn",
   // "github-cloud",
@@ -60,10 +58,11 @@ const keys = [
 ]
 const tabValuesByKey = {
   learn: "learn.netdata",
-  community: "netdata.cloud",
+  community: "discourse",
   "github-cloud": "netdata-cloud",
   "github-agent": "netdata",
 }
+
 const tabNameByKey = {
   learn: "Documentation",
   community: "Community",
@@ -71,21 +70,7 @@ const tabNameByKey = {
   "github-agent": "Github / Agent",
 }
 
-const useTabbedResults = results => {
-  return useMemo(() => {
-    return results.reduce((acc, result) => {
-      const matched = result.url.raw.match(domainRegexp)
-      const key = matched.find((s, i) => i > 1 && !!s)
-      acc[key] = acc[key] || []
-      acc[key].push(result)
-      return acc
-    }, {})
-  }, [results])
-}
-
 const SearchResults = ({ results }) => {
-  const tabbedResults = useTabbedResults(results)
-
   return (
     <Flex
       overflow={{ vertical: "auto" }}
@@ -96,7 +81,7 @@ const SearchResults = ({ results }) => {
     >
       <StyledTabs>
         {keys.map(key => {
-          const tabResults = tabbedResults[tabValuesByKey[key]]
+          const tabResults = results[tabValuesByKey[key]]
           const tabResultsCount = tabResults?.length
 
           return (

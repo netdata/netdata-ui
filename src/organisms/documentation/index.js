@@ -46,7 +46,7 @@ const Header = ({ children, onClose }) => {
 }
 
 const views = { general: "general", dashboard: "dashboard", search: "search" }
-const titles = { general: "Netdata Help", dashboard: "Dashboard Help" }
+const titles = { general: "Need help?", dashboard: "Need help?" }
 
 const Documentation = ({
   app = "cloud",
