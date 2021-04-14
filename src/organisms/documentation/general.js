@@ -42,19 +42,19 @@ const propsByApp = {
   cloud: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
-    issuesLabel: "Raise a bug about Netdata Cloud or inform us for any issue you face.",
+    issuesLabel: "Let us know about any bugs you’ve encountered in Netdata Cloud.",
     otherIssuesUrl: "https://github.com/netdata/netdata/issues/new",
     otherIssuesLabel: "Agent",
-    communityUrl: "https://community.netdata.cloud/c/support/13",
+    communityUrl: "https://community.netdata.cloud/c/support/cloud-support/15",
     communitySupportUrl: "https://www.netdata.cloud/community/",
   },
   agent: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl: "https://github.com/netdata/netdata/issues/new",
-    issuesLabel: "Raise a bug about the Netdata Agent or inform us for any issue you face.",
+    issuesLabel: "Let us know about any bugs you’ve encountered in Netdata Agent.",
     otherIssuesUrl: "https://github.com/netdata/netdata-cloud/issues/new",
     otherIssuesLabel: "Cloud",
-    communityUrl: "https://community.netdata.cloud/c/support/13",
+    communityUrl: "https://community.netdata.cloud/c/support/agent-support/14",
     communitySupportUrl: "https://www.netdata.cloud/community/",
   },
 }
@@ -96,11 +96,11 @@ const General = ({
       <Section
         icon="documentation"
         title="Documentation"
-        content="View documentation, guides, and videos for single-node and infrastructure
-      monitoring with Netdata."
+        content="View how-tos, reference docs, and tutorials to help you get the most out of Netdata Cloud.
+        "
         url={documentationUrl}
         testid="documentation-link"
-        label="Visit Documentation"
+        label="Visit the docs"
         onClick={onVisitDocumentClick}
       />
       <Section
@@ -113,25 +113,25 @@ const General = ({
         onClick={onOpenIssueClick}
       >
         <Text>
-          Open an issue for the Netdata {otherIssuesLabel} on{" "}
+          Found a bug with the Netdata {otherIssuesLabel}?
           <Anchor href={otherIssuesUrl} onClick={onOpenBugClick}>
-            Github
-          </Anchor>
+            Open an issue
+          </Anchor>{" "}
+          on Github
         </Text>
       </Section>
       <Section
         icon="community"
         title="Community"
-        content="Join the Netdata Community, ask questions, discuss with users and the Netdata
-      team, make feature requests."
+        content="If you still need help, join Netdata’s community forums to ask questions, discuss features, or make feature requests."
         url={communityUrl}
         testid="documentation-community-link"
-        label="Contribute to the Community"
+        label="Ask the community"
         onClick={onContributeClick}
       >
         <Button
           width="100%"
-          label="Read more about the community"
+          label="Read more about Netdata’s community"
           flavour="hollow"
           as="a"
           target="_blank"
