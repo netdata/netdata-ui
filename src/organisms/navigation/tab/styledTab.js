@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Flex from "src/components/templates/flex"
 import { getColor } from "src/theme"
 
-const StyledTab = styled(Flex).attrs(({ active, fixed }) => ({
+const StyledTab = styled(Flex).attrs(({ active }) => ({
   gap: 1,
   background: active ? "mainBackground" : "elementBackground",
   padding: [2, 3],

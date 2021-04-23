@@ -47,6 +47,8 @@ const styles = ["top", "right", "bottom", "right", "width"]
 
 export default (target, dropRef, align, stretch) =>
   useCallback(() => {
+    if (!dropRef.current) return
+
     styles.forEach(position => (dropRef.current.style[position] = ""))
 
     const targetRect = target.getBoundingClientRect()
