@@ -6,7 +6,6 @@ import StyledTab from "./styledTab"
 const Tab = ({
   active,
   onActivate,
-  activeIndex,
   tabIndex,
   onMouseOver: mouseOver,
   onMouseOut: mouseOut,
@@ -77,7 +76,6 @@ const Tab = ({
       onClick={onClickTab}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseOut}
-      fixed={fixed}
       {...rest}
     >
       <Flex>

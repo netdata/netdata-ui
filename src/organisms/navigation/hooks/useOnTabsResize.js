@@ -1,7 +1,12 @@
 import { useCallback, useRef } from "react"
 
+const initialRect = {
+  prevContainerRight: -1,
+  prevTabWidth: -1,
+}
+
 export default (ref, target, callback, deps) => {
-  const prevValuesRef = useRef({})
+  const prevValuesRef = useRef(initialRect)
 
   return useCallback(() => {
     if (!ref.current || !target.current.length) return
