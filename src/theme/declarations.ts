@@ -1,6 +1,89 @@
-import { rawColors } from "src/theme/default/colors"
-
-export type RawColorsT = typeof rawColors
+export type RawColorsT = {
+  transparent: {
+    full: string
+    semi: string
+    popover: string
+  }
+  white: {
+    pure: string
+    almost: string
+  }
+  black: {
+    pure: string
+  }
+  gray: {
+    limedSpruce: string
+    bombay: string
+    bombayLite: string
+    silverSand: string
+    gallery: string
+    guyabano: string
+    gainsboro: string
+    midnight: string
+    nepal: string
+    solitude: string
+    shuttle: string
+    shuttleGray: string
+    tangaroa: string
+    chambray: string
+    wedgewood: string
+    pigeonPost: string
+    arsenic: string
+    slateGray: string
+    slate: string
+    blackPearl: string
+    aluminium: string
+    vulcan: string
+    bunker: string
+    cod: string
+    trout: string
+    blackRussian: string
+    porcelain: string
+    regentGray: string
+    iron: string
+  }
+  green: {
+    malachite: string
+    greenHaze: string
+    algaeGreen: string
+    clearDay: string
+    frostee: string
+    deYork: string
+  }
+  red: {
+    outrageousOrange: string
+    redOrange: string
+    roseWhite: string
+    lavender: string
+    wewak: string
+  }
+  yellow: {
+    amber: string
+    safron: string
+    orangeYellow: string
+    safronMango: string
+    ginFizz: string
+    seaBuckthorn: string
+  }
+  blue: {
+    blueBerry: string
+    anakiwa: string
+    anakiwaLight: string
+    patternsBlue: string
+    catalina: string
+    pattens: string
+    nile: string
+    polo: string
+    matisse: string
+    teal: string
+    madison: string
+    blueBayoux: string
+  }
+  purple: {
+    mauve: string
+    daisy: string
+  }
+}
 
 export type AppColorsT = {
   primary: string
@@ -41,6 +124,7 @@ export type AppColorsT = {
   borderColor: string
   borderSecondaryColor: string
   separatorColor: string
+  pill: any
 }
 
 export type NumberOrStringT = number | string
