@@ -12,8 +12,18 @@ const appColors: AppColorsT = {
   mainBackground: rawColors.blue.catalina,
   mainBackgroundDisabled: rawColors.gray.midnight,
   success: rawColors.green.greenHaze,
+  successLite: rawColors.green.deYork,
+
   warning: rawColors.yellow.amber,
+  warningLite: rawColors.yellow.sunglow,
+  warningBackground: rawColors.yellow.ginFizz,
+  warningText: rawColors.yellow.seaBuckthorn,
+
   error: rawColors.red.redOrange,
+  errorLite: rawColors.red.apricot,
+  errorBackground: rawColors.red.lavender,
+  errorText: rawColors.red.redOrange,
+
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.gray.chambray,
