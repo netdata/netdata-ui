@@ -92,3 +92,5 @@ export { default as DraggableTabs } from "./organisms/navigation/draggable"
 
 export { default as Intersection } from "./components/intersection"
 export { default as useIntersection } from "./hooks/use-intersection"
+
+export { default as Pill } from "./components/pill"
