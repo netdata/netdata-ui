@@ -37,6 +37,32 @@ const appColors: AppColorsT = {
   placeholder: rawColors.gray.chambray,
   key: rawColors.gray.pigeonPost,
   panel: rawColors.gray.arsenic,
+  pill: {
+    background: {
+      neutral: rawColors.gray.regentGray,
+      success: rawColors.green.greenHaze,
+      warning: rawColors.yellow.amber,
+      error: rawColors.red.redOrange,
+    },
+    hollow: {
+      neutral: rawColors.gray.porcelain,
+      success: rawColors.green.frostee,
+      warning: rawColors.yellow.ginFizz,
+      error: rawColors.red.lavender,
+    },
+    border: {
+      neutral: rawColors.gray.iron,
+      success: rawColors.green.deYork,
+      warning: rawColors.yellow.amber,
+      error: rawColors.red.wewak,
+    },
+    color: {
+      neutral: rawColors.blue.blueBayoux,
+      success: rawColors.green.greenHaze,
+      warning: rawColors.yellow.seaBuckthorn,
+      error: rawColors.red.redOrange,
+    },
+  },
 
   // Depreacted
   borderColor: rawColors.blue.polo,

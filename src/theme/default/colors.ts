@@ -40,6 +40,9 @@ export const rawColors = {
     cod: "#2B3136",
     trout: "#4B5358",
     blackRussian: "#1C1E22",
+    porcelain: "#ECEEEF",
+    regentGray: "#8F9EAA",
+    iron: "#CFD5DA",
   },
   green: {
     malachite: "#00CB51",
@@ -47,6 +50,8 @@ export const rawColors = {
     deYork: "#68C47D",
     algaeGreen: "#99DDB4",
     clearDay: "#F7FFFC",
+    frostee: "#E5F5E8",
+    deYork: "#68C47D",
   },
   red: {
     apricot: "#ED7374",
@@ -54,6 +59,7 @@ export const rawColors = {
     redOrange: "#FF4136", // Aka. Pomegranate
     roseWhite: "#FFF8F7",
     lavender: "#FFEBEF",
+    wewak: "#F59B9B",
   },
   yellow: {
     sunglow: "#FFCC26",
@@ -63,6 +69,8 @@ export const rawColors = {
     ginFizz: "#FFF8E1",
     seaBuckthorn: "#F9A825",
     safronMango: "#FDF1CE",
+    ginFizz: "#FFF8E1",
+    seaBuckthorn: "#F9A825",
   },
   blue: {
     blueBerry: "#56B2FF",
@@ -74,8 +82,9 @@ export const rawColors = {
     nile: "#2D404F",
     polo: "#92ACCD",
     matisse: "#415F84",
-    teal: "#175260",
+    teal: "#000",
     madison: "#293C53",
+    blueBayoux: "#536775",
   },
   purple: {
     mauve: "#DB94F4",
@@ -119,6 +128,32 @@ const appColors: AppColorsT = {
   placeholder: rawColors.gray.gainsboro,
   key: rawColors.gray.slateGray,
   panel: rawColors.gray.arsenic,
+  pill: {
+    background: {
+      neutral: rawColors.gray.regentGray,
+      success: rawColors.green.greenHaze,
+      warning: rawColors.yellow.amber,
+      error: rawColors.red.redOrange,
+    },
+    hollow: {
+      neutral: rawColors.gray.porcelain,
+      success: rawColors.green.frostee,
+      warning: rawColors.yellow.ginFizz,
+      error: rawColors.red.lavender,
+    },
+    border: {
+      neutral: rawColors.gray.iron,
+      success: rawColors.green.deYork,
+      warning: rawColors.yellow.amber,
+      error: rawColors.red.wewak,
+    },
+    color: {
+      neutral: rawColors.blue.blueBayoux,
+      success: rawColors.green.greenHaze,
+      warning: rawColors.yellow.seaBuckthorn,
+      error: rawColors.red.redOrange,
+    },
+  },
 
   // Depreacted - use the names above
   borderColor: rawColors.gray.nepal,
