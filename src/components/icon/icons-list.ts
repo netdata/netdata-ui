@@ -117,6 +117,8 @@ import unknownError from "./assets/unknownError.svg"
 import community from "./assets/community.svg"
 import navRight from "./assets/nav_right.svg"
 import navLeft from "./assets/nav_left.svg"
+import pauseSolid from "./assets/pause_solid.svg"
+import playSolid from './assets/play_solid.svg'
 
 export const iconsList = {
   add_user,
@@ -236,5 +238,7 @@ export const iconsList = {
   unknownError,
   community,
   navRight,
-  navLeft
+  navLeft,
+  pauseSolid,
+  playSolid
 }
