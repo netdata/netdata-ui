@@ -9,11 +9,21 @@ const getAbsoluteXPosition = (align, targetRect, dropRect) => {
   return targetRect.left + targetRect.width / 2 - dropRect.width / 2
 }
 
-const getXPostition = (align, targetRect, dropRect) => {
+const reverseXPosition = align => {
+  if (align.left === "left") return { right: "right" }
+  if (align.left === "right") return { right: "left" }
+  if (align.right === "right") return { left: "left" }
+  if (align.right === "left") return { left: "right" }
+}
+
+const getXPostition = (align, targetRect, dropRect, canHideTarget = true) => {
   let x = getAbsoluteXPosition(align, targetRect, dropRect)
 
-  x = Math.max(0, x)
-  x = Math.min(window.innerWidth - dropRect.width, x)
+  const minX = Math.max(0, x)
+  x = Math.min(window.innerWidth - dropRect.width, minX)
+
+  if (!canHideTarget && minX !== x)
+    return getXPostition(reverseXPosition(align), targetRect, dropRect)
 
   return x
 }
@@ -27,11 +37,21 @@ const getAbsoluteYPosition = (align, targetRect, dropRect) => {
   return targetRect.top + targetRect.height / 2 - dropRect.height / 2
 }
 
-const getYPosition = (align, targetRect, dropRect) => {
+const reverseYPosition = align => {
+  if (align.top === "top") return { bottom: "bottom" }
+  if (align.top === "bottom") return { bottom: "top" }
+  if (align.bottom === "bottom") return { top: "top" }
+  if (align.bottom === "top") return { top: "bottom" }
+}
+
+const getYPosition = (align, targetRect, dropRect, canHideTarget = true) => {
   let y = getAbsoluteYPosition(align, targetRect, dropRect)
 
-  y = Math.max(0, y)
-  y = Math.min(window.innerHeight - dropRect.height, y)
+  const minY = Math.max(0, y)
+  y = Math.min(window.innerHeight - dropRect.height, minY)
+
+  if (!canHideTarget && minY !== y)
+    return getYPosition(reverseYPosition(align), targetRect, dropRect)
 
   return y
 }
@@ -45,7 +65,7 @@ const getWidth = (stretch, targetRect, dropRect) => {
 
 const styles = ["top", "right", "bottom", "right", "width"]
 
-export default (target, dropRef, align, stretch) =>
+export default (target, dropRef, align, stretch, canHideTarget) =>
   useCallback(() => {
     if (!dropRef.current) return
 
@@ -57,8 +77,8 @@ export default (target, dropRef, align, stretch) =>
     const width = getWidth(stretch, targetRect, dropRect)
     dropRect.width = width
 
-    const x = getXPostition(align, targetRect, dropRect)
-    const y = getYPosition(align, targetRect, dropRect)
+    const x = getXPostition(align, targetRect, dropRect, canHideTarget)
+    const y = getYPosition(align, targetRect, dropRect, canHideTarget)
 
     dropRef.current.style.left = `${x}px`
     dropRef.current.style.top = `${y}px`
