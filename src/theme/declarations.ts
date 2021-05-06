@@ -1,79 +1,6 @@
-export type RawColorsT = {
-  transparent: {
-    full: string
-    semi: string
-    popover: string
-  }
-  white: {
-    pure: string
-    almost: string
-  }
-  black: {
-    pure: string
-  }
-  gray: {
-    limedSpruce: string
-    bombay: string
-    bombayLite: string
-    silverSand: string
-    gallery: string
-    guyabano: string
-    gainsboro: string
-    midnight: string
-    nepal: string
-    solitude: string
-    shuttle: string
-    shuttleGray: string
-    tangaroa: string
-    chambray: string
-    wedgewood: string
-    pigeonPost: string
-    arsenic: string
-    slateGray: string
-    slate: string
-    blackPearl: string
-    aluminium: string
-    vulcan: string
-    bunker: string
-    cod: string
-    trout: string
-    blackRussian: string
-  }
-  green: {
-    malachite: string
-    greenHaze: string
-    algaeGreen: string
-    clearDay: string
-  }
-  red: {
-    outrageousOrange: string
-    redOrange: string
-    roseWhite: string
-  }
-  yellow: {
-    amber: string
-    safron: string
-    orangeYellow: string
-    safronMango: string
-  }
-  blue: {
-    blueBerry: string
-    anakiwa: string
-    anakiwaLight: string
-    patternsBlue: string
-    catalina: string
-    pattens: string
-    nile: string
-    polo: string
-    matisse: string
-    teal: string
-    madison: string
-  }
-  purple: {
-    mauve: string
-    daisy: string
-  }
-}
+import { rawColors } from "src/theme/default/colors"
+
+export type RawColorsT = typeof rawColors
 
 export type AppColorsT = {
   primary: string
@@ -86,8 +13,18 @@ export type AppColorsT = {
   mainBackground: string
   mainBackgroundDisabled: string
   success: string
+  successLite: string
+
   warning: string
+  warningLite: string
+  warningBackground: string
+  warningText: string
+
   error: string
+  errorLite: string
+  errorBackground: string
+  errorText: string
+
   attention: string
   attentionSecondary: string
   separator: string

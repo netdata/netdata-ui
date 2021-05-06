@@ -5,7 +5,7 @@ it("renders", () => {
 })
 
 it("renders weak opacity", () => {
-  expect(styledOpacity({ opacity: "weak" })).toBe(`opacity: 0.2;`)
+  expect(styledOpacity({ opacity: "weak" })).toBe(`opacity: 0.3;`)
 })
 
 it("renders invalid opacity", () => {

@@ -1,6 +1,6 @@
 import { RawColorsT, AppColorsT } from "../declarations"
 
-export const rawColors: RawColorsT = {
+export const rawColors = {
   transparent: {
     full: "rgba(255, 255, 255, 0.0)",
     semi: "rgba(255, 255, 255, 0.5)",
@@ -43,19 +43,25 @@ export const rawColors: RawColorsT = {
   },
   green: {
     malachite: "#00CB51",
-    greenHaze: "#00AB44",
+    greenHaze: "#00AB44", // Aka. Netdata
+    deYork: "#68C47D",
     algaeGreen: "#99DDB4",
     clearDay: "#F7FFFC",
   },
   red: {
+    apricot: "#ED7374",
     outrageousOrange: "#FF6037",
-    redOrange: "#FF4136",
+    redOrange: "#FF4136", // Aka. Pomegranate
     roseWhite: "#FFF8F7",
+    lavender: "#FFEBEF",
   },
   yellow: {
+    sunglow: "#FFCC26",
     amber: "#FFC300",
     safron: "#F1BB28",
     orangeYellow: "#F8D36D",
+    ginFizz: "#FFF8E1",
+    seaBuckthorn: "#F9A825",
     safronMango: "#FDF1CE",
   },
   blue: {
@@ -88,8 +94,18 @@ const appColors: AppColorsT = {
   mainBackground: rawColors.white.pure,
   mainBackgroundDisabled: rawColors.gray.guyabano,
   success: rawColors.green.greenHaze,
+  successLite: rawColors.green.deYork,
+
   warning: rawColors.yellow.amber,
+  warningLite: rawColors.yellow.sunglow,
+  warningBackground: rawColors.yellow.ginFizz,
+  warningText: rawColors.yellow.seaBuckthorn,
+
   error: rawColors.red.redOrange,
+  errorLite: rawColors.red.apricot,
+  errorBackground: rawColors.red.lavender,
+  errorText: rawColors.red.redOrange,
+
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.gray.shuttle,
