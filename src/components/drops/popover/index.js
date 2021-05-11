@@ -60,6 +60,7 @@ const Popover = forwardRef(
         {isOpen && ref.current && (
           <Drop
             id={id}
+            {...dropProps}
             align={dropProps?.align || dropAlignMap[align]}
             target={ref.current}
             onMouseEnter={onMouseEnter}
