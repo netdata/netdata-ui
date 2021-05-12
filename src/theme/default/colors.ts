@@ -51,7 +51,6 @@ export const rawColors = {
     algaeGreen: "#99DDB4",
     clearDay: "#F7FFFC",
     frostee: "#E5F5E8",
-    deYork: "#68C47D",
   },
   red: {
     apricot: "#ED7374",
@@ -69,8 +68,6 @@ export const rawColors = {
     ginFizz: "#FFF8E1",
     seaBuckthorn: "#F9A825",
     safronMango: "#FDF1CE",
-    ginFizz: "#FFF8E1",
-    seaBuckthorn: "#F9A825",
   },
   blue: {
     blueBerry: "#56B2FF",
