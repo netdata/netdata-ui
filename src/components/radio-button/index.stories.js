@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import { boolean, text } from "@storybook/addon-knobs"
 import { readmeCleanup } from "utils/readme"
-// @ts-ignore
 import readme from "./README.md"
 
 import RadioButton from "./index"

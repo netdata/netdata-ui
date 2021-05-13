@@ -1,4 +1,4 @@
-const rawColors = {
+export const rawColors = {
   transparent: {
     full: "rgba(255, 255, 255, 0.0)",
     semi: "rgba(255, 255, 255, 0.5)",
@@ -41,7 +41,6 @@ const rawColors = {
     shark: "#1C1E22",
     tuna: "#383B40",
     outerSpace: "#2B3136",
-    shark: "#1C1E22",
   },
   purple: {
     mauve: "#DB94F4",

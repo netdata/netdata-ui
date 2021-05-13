@@ -21,7 +21,6 @@ import {
   ListItem,
 } from "./index"
 
-// @ts-ignore
 import readme from "./README.md"
 import { readmeCleanup } from "utils/readme"
 

@@ -1,6 +1,6 @@
-export { Button, ButtonProps } from "./components/button"
+export { Button } from "./components/button"
 export { Sidebar, PortalSidebar } from "./components/sidebar"
-export { Icon, IconProps, iconsList, IconComponents } from "./components/icon"
+export { Icon, iconsList, IconComponents } from "./components/icon"
 
 export {
   H0,
@@ -42,7 +42,6 @@ export {
   // Themes
   DefaultTheme,
   DarkTheme,
-  BlueTheme,
   // Theme helpers
   extendTheme,
   getSizeUnit,
@@ -55,18 +54,16 @@ export {
   getGutterHeight,
 } from "./theme"
 export { devices, breakpoints } from "./media"
-export { Checkbox, CheckboxProps, useCheckboxesList } from "./components/checkbox"
+export { Checkbox, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
 export { webkitVisibleScrollbar } from "./mixins"
 export { Table, VirtualizedTable } from "./components/table"
-export { Toggle, ToggleProps } from "./components/toggle"
+export { Toggle } from "./components/toggle"
 export { default as RadioButton } from "./components/radio-button"
 export { Tabs, Tab } from "./components/tabs"
 export {
   FilterBox,
-  FilterExpression,
   FilterBoxProcessing,
-  FilterBoxOption,
   FilterBoxAutocompleteHandler,
 } from "./components/filter-box"
 
