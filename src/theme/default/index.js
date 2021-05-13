@@ -1,4 +1,4 @@
-import { colors } from "./colors"
+import colors from "./colors"
 import * as constants from "./constants"
 
 const root = {

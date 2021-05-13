@@ -14,17 +14,14 @@ export type AppColorsT = {
   mainBackgroundDisabled: string
   success: string
   successLite: string
-
   warning: string
   warningLite: string
   warningBackground: string
   warningText: string
-
   error: string
   errorLite: string
   errorBackground: string
   errorText: string
-
   attention: string
   attentionSecondary: string
   separator: string
@@ -34,10 +31,10 @@ export type AppColorsT = {
   bright: string
   text: string
   textFocus: string
-  key: string
-  panel: string
   sectionHeaderBackground: string
   placeholder: string
+  key: string
+  panel: string
   borderColor: string
   borderSecondaryColor: string
   separatorColor: string

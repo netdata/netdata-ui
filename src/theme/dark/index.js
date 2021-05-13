@@ -1,12 +1,12 @@
-import { colors } from "./colors"
+import colors from "./colors"
 import * as constants from "../default/constants"
 
 const root = {
-  name: "Blue",
+  name: "Dark",
   version: "0.0.1",
 }
 
-export const BlueTheme = {
+export const DarkTheme = {
   ...root,
   constants,
   colors,

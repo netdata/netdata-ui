@@ -9,7 +9,6 @@ import { ButtonProps } from "./button"
 const themes = {
   light: DefaultTheme,
   dark: DarkTheme,
-  blue: BlueTheme,
 }
 
 const activeStyles = css<any>`
@@ -105,7 +104,8 @@ export const StyledButton = styled.button.attrs((props: ButtonProps) => ({
 
     width: ${props =>
       props.width ? props.width : props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4)};
-    height: ${props => (props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.small ? 3 : 4))};
+    height: ${props =>
+      props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.small ? 3 : 4)};
 
     font-weight: bold;
     font-size: 12px;

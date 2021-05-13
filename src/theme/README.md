@@ -11,34 +11,57 @@ This UI-KIT arcitecture is **theme** centered, so a lot of utils and constants p
 There are a collection of colors in theme, they could be accessed `raw` way or with `utils`
 
 - transparent
+
   - full
   - semi
-- white
-  - pure
-- gray
-  - limedSpruce
-  - silverSand
-  - gallery
-  - bombay
+  - popover
+
 - green
-  - malachite
-  - greenHaze
-  - algaeGreen
-  - clearDay
+
+  - chateau
+  - netdata
+  - deyork
+  - vista
+  - fringyFlower
+  - frostee
+
 - red
-  - outrageousOrange
-  - redOrange
-  - roseWhite
-  - yellow
+
+  - pomegranate
+  - carnation
+  - apricot
+  - wewak
+  - pastelpink
+  - lavender
+
+- yellow
+
   - amber
-  - safron
-  - orangeYellow
-  - safronMango
-- blue
-  - blueBerry
-  - anakiwa
-  - anakiwaLight
-  - patternsBlue
+  - sunglow
+  - seaBuckthorn
+  - mustard
+  - salomie
+  - buttermilk
+  - ginfizz
+
+- neutral
+
+  - white
+  - black
+  - limedSpruce
+  - regentgrey
+  - blackhaze
+  - iron
+  - porcelain
+  - bluebayoux
+  - shark
+  - tuna
+  - outerSpace
+  - shark
+
+- purple
+  - mauve
+  - daisy
 
 **next ones is just shortcuts**
 
