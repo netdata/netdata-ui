@@ -1,8 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 import { storiesOf } from "@storybook/react"
 import { readmeCleanup } from "utils/readme"
 import { H4, Text, TextSmall } from "src/components/typography"
-// @ts-ignore
 import readme from "./README.md"
 
 import Flex from "./index"

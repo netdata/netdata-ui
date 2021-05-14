@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toggle test  * should render with labels 1`] = `
+.c1 {
+  font-family: "IBM Plex Sans",sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: normal;
+  color: #35414A;
+}
+
+.c3 {
+  display: block;
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+}
+
+.c5 {
+  display: none;
+}
+
+.c7 {
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+  background: #FFF;
+  border: 1px solid #8F9EAA;
+  border-radius: 100px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  display: block;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c7:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  left: 5%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+  background-color: #35414A;
+}
+
+.c4:focus + .c6 {
+  border-color: #35414A;
+  box-shadow: 0 0 0 1px #35414A;
+}
+
+.c0 {
+  position: relative;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  margin-right: 8px;
+}
+
+.c8 {
+  margin-left: 8px;
+}
+
+<div>
+  <label
+    class="c0"
+  >
+    <span
+      class="c1 c2"
+    >
+      Dark theme
+    </span>
+    <div
+      class="c3"
+    >
+      <input
+        class="c4 c5"
+        type="checkbox"
+      />
+      <div
+        class="c6 c7"
+        role="switch"
+      />
+    </div>
+    <span
+      class="c1 c8"
+    >
+      Light theme
+    </span>
+  </label>
+</div>
+`;
+
+exports[`Toggle test  * should render with required props 1`] = `
+.c1 {
+  display: block;
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+}
+
+.c3 {
+  display: none;
+}
+
+.c5 {
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+  background: #FFF;
+  border: 1px solid #8F9EAA;
+  border-radius: 100px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+  display: block;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c5:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  left: 5%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+  background-color: #35414A;
+}
+
+.c2:focus + .c4 {
+  border-color: #35414A;
+  box-shadow: 0 0 0 1px #35414A;
+}
+
+.c0 {
+  position: relative;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div>
+  <label
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <input
+        class="c2 c3"
+        type="checkbox"
+      />
+      <div
+        class="c4 c5"
+        role="switch"
+      />
+    </div>
+  </label>
+</div>
+`;

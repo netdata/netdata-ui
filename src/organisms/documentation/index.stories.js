@@ -1,9 +1,8 @@
-import React, { useState } from "react"
+import React from "react"
 import { storiesOf } from "@storybook/react"
 import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { Button } from "src/components/button"
-// @ts-ignore
 import readme from "./README.md"
 import Documentation from "./index"
 

@@ -1,0 +1,130 @@
+import { rawColors } from "src/theme/default/colors"
+
+export type RawColorsT = typeof rawColors
+
+export type AppColorsT = {
+  primary: string
+  accent: string
+  main: string
+  border: string
+  borderSecondary: string
+  disabled: string
+  elementBackground: string
+  mainBackground: string
+  mainBackgroundDisabled: string
+  success: string
+  successLite: string
+  warning: string
+  warningLite: string
+  warningBackground: string
+  warningText: string
+  error: string
+  errorLite: string
+  errorBackground: string
+  errorText: string
+  attention: string
+  attentionSecondary: string
+  separator: string
+  controlFocused: string
+  selected: string
+  tooltip: string
+  bright: string
+  text: string
+  textFocus: string
+  sectionHeaderBackground: string
+  placeholder: string
+  key: string
+  panel: string
+  borderColor: string
+  borderSecondaryColor: string
+  separatorColor: string
+}
+
+export type NumberOrStringT = number | string
+
+export type ThemeAtom = string | number | { [key: string]: string | number | ThemeAtom }
+
+export interface ContstructedTheme {
+  name: string
+  version: string
+  [key: string]: ThemeAtom
+}
+
+export interface WrappedTheme {
+  theme: ContstructedTheme
+}
+
+interface IDefaultTheme {
+  name: string
+  version: string
+  constants: {
+    SIZE_SUB_UNIT: number
+    SIZE_UNIT: number
+    GUTTER_HEIGHT: number
+  }
+  colors: AppColorsT
+}
+
+interface IDarkTheme {
+  name: string
+  version: string
+  constants: {
+    SIZE_SUB_UNIT: number
+    SIZE_UNIT: number
+    GUTTER_HEIGHT: number
+  }
+  colors: AppColorsT
+}
+
+declare const DefaultTheme: IDefaultTheme
+declare const DarkTheme: IDarkTheme
+
+export { DefaultTheme, DarkTheme }
+
+declare function extendTheme(
+  theme: ContstructedTheme,
+  extension: ContstructedTheme
+): ContstructedTheme
+
+declare function propOrElse<T = any, R = any>(pathName: string[], defaultValue: R): any
+
+declare function getOrElse(pathName: string[], defaultValue: NumberOrStringT): any
+
+declare function getSizeUnit({ theme }: WrappedTheme): number | undefined
+
+declare function calcSize(expr?: string): (props: WrappedTheme) => any
+
+declare function getColor(colorPath: string[] | string): any
+
+declare function getRgbColor(colorPath: string[] | string, opacity: number): any
+
+declare function getSizeBy(multiplier?: number): (props: WrappedTheme) => any
+
+declare function getGutterHeight({ theme }: WrappedTheme): string
+
+declare function getValidatedControlColor(
+  defaultColorPath: string
+): ({
+  theme,
+  success,
+  error,
+  disabled,
+}: {
+  disabled?: boolean
+  error?: string | boolean
+  success?: string | boolean
+  theme: ContstructedTheme
+}) => any
+
+export {
+  extendTheme,
+  propOrElse,
+  getOrElse,
+  getSizeUnit,
+  calcSize,
+  getColor,
+  getRgbColor,
+  getSizeBy,
+  getGutterHeight,
+  getValidatedControlColor,
+}

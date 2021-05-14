@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useToggle } from "react-use"
 import { storiesOf } from "@storybook/react"
 import { readmeCleanup } from "utils/readme"
@@ -6,7 +6,6 @@ import { H2, H3, Text } from "src/components/typography"
 import { Icon } from "src/components/icon"
 import { Button } from "src/components/button"
 import Flex from "src/components/templates/flex"
-// @ts-ignore
 import readme from "./README.md"
 import Layer from "./index"
 
