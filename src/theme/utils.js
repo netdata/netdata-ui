@@ -35,7 +35,7 @@ export const getRgbColor = (colorPath, opacity = 1) => {
   }
 }
 
-export const getSizeBy = multiplier => props => {
+export const getSizeBy = (multiplier = 1) => props => {
   const size = (getSizeUnit(props) || 0) * multiplier
   return `${size}px`
 }
