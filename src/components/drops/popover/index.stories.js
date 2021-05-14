@@ -21,11 +21,11 @@ const PopoverContent = () => {
   const [clicked, toggle] = useToggle()
   return (
     <Flex padding={[2, 4]} gap={2} column>
-      <Text color={["white", "pure"]}>
+      <Text color={["neutral", "white"]}>
         This is a popover that you can hover with you mouse and interact with the elements.
       </Text>
       <Button label={clicked ? "close" : "click me"} onClick={toggle} alignSelf="end" />
-      {clicked && <Text color={["white", "pure"]}>Hello</Text>}
+      {clicked && <Text color={["neutral", "white"]}>Hello</Text>}
     </Flex>
   )
 }
@@ -55,10 +55,10 @@ story.add(
 
 const CustomContent = () => (
   <Flex width="200px" gap={1} column>
-    <H5 color={["white", "pure"]} margin={[0]}>
+    <H5 color={["neutral", "white"]} margin={[0]}>
       Title
     </H5>
-    <Text color={["white", "pure"]}>
+    <Text color={["neutral", "white"]}>
       This is the details, you can hover your mouse in the popover
     </Text>
   </Flex>

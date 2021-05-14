@@ -47,10 +47,10 @@ story.add(
 
 const CustomContent = () => (
   <Flex gap={1} column>
-    <H5 color={["white", "pure"]} margin={[0]}>
+    <H5 color={["neutral", "white"]} margin={[0]}>
       Title
     </H5>
-    <Text color={["white", "pure"]}>This is the details</Text>
+    <Text color={["neutral", "white"]}>This is the details</Text>
   </Flex>
 )
 
