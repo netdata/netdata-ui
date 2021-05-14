@@ -61,7 +61,7 @@ const appColors = {
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
   warning: rawColors.yellow.amber,
-  warningLite: rawColors.yellow.sunglow,
+  warningLite: rawColors.yellow.mustard,
   warningBackground: rawColors.yellow.ginfizz,
   warningText: rawColors.yellow.seaBuckthorn,
   error: rawColors.red.pomegranate,
