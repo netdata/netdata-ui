@@ -8,7 +8,7 @@ const appColors = {
   borderSecondary: rawColors.neutral.tuna,
   disabled: rawColors.neutral.tuna,
   elementBackground: rawColors.neutral.shark,
-  mainBackground: rawColors.neutral.outerSpace,
+  mainBackground: rawColors.neutral.shark,
   mainBackgroundDisabled: rawColors.neutral.shark,
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
