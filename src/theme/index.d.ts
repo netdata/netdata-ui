@@ -9,6 +9,7 @@ export type AppColorsT = {
   border: string
   borderSecondary: string
   disabled: string
+  dropdown: string
   elementBackground: string
   mainBackground: string
   mainBackgroundDisabled: string

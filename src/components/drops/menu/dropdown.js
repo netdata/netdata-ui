@@ -12,7 +12,7 @@ const Dropdown = ({ value, onItemClick, items, renderItem }) => (
   <Container
     as="ul"
     role="listbox"
-    background="mainBackground"
+    background="dropdown"
     padding={[0]}
     margin={[1, 0]}
     column

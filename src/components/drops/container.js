@@ -5,13 +5,7 @@ import { Icon } from "src/components/icon"
 
 const rotateMap = { right: 1, bottom: 2, left: 3 }
 
-const Container = ({
-  children,
-  align,
-  margin = [1],
-  background = ["neutral", "black"],
-  ...rest
-}) => (
+const Container = ({ children, align, margin = [1], background = "tooltip", ...rest }) => (
   <Flex
     column={align === "top"}
     columnReverse={align === "bottom"}
@@ -19,11 +13,7 @@ const Container = ({
     margin={margin}
   >
     <Flex background={background} padding={[1, 2]} round column {...rest}>
-      {typeof children === "string" ? (
-        <Text color={["neutral", "white"]}>{children}</Text>
-      ) : (
-        children
-      )}
+      {typeof children === "string" ? <Text color="bright">{children}</Text> : children}
     </Flex>
     {align && (
       <Icon
