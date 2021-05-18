@@ -56,6 +56,7 @@ const appColors = {
   borderSecondary: rawColors.neutral.porcelain,
   disabled: rawColors.neutral.porcelain,
   elementBackground: rawColors.neutral.blackhaze,
+  elementBackgroundHover: rawColors.neutral.white,
   mainBackground: rawColors.neutral.white,
   mainBackgroundDisabled: rawColors.neutral.blackhaze,
   success: rawColors.green.netdata,
