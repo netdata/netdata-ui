@@ -55,6 +55,7 @@ const appColors = {
   border: rawColors.neutral.regentgrey,
   borderSecondary: rawColors.neutral.porcelain,
   disabled: rawColors.neutral.porcelain,
+  dropdown: rawColors.neutral.white,
   elementBackground: rawColors.neutral.blackhaze,
   elementBackgroundHover: rawColors.neutral.white,
   mainBackground: rawColors.neutral.white,

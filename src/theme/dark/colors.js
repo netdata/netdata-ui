@@ -7,6 +7,7 @@ const appColors = {
   border: rawColors.neutral.regentgrey,
   borderSecondary: rawColors.neutral.tuna,
   disabled: rawColors.neutral.tuna,
+  dropdown: rawColors.neutral.outerSpace,
   elementBackground: rawColors.neutral.outerSpace,
   elementBackgroundHover: rawColors.neutral.tuna,
   mainBackground: rawColors.neutral.shark,
