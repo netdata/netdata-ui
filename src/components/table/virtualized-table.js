@@ -10,7 +10,6 @@ import {
   generateRowStyle,
   getValidRows,
 } from "./utils"
-import { TableProps, Item } from "./table"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
 const itemKeyFallback = index => String(index)
@@ -58,10 +57,10 @@ export function VirtualizedTable({
   ...customProps
 }) {
   // preserve column order to override default grouping behaviour
-  const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
-    columns,
-    controlledState.columnOrder,
-  ])
+  const columnOrder = useMemo(
+    () => controlledState.columnOrder || columns.map(({ id }) => id),
+    [columns, controlledState.columnOrder]
+  )
 
   const protectedRendererHash = useMemo(() => rendererHash || "stableFallback", [rendererHash])
 
@@ -133,15 +132,9 @@ export function VirtualizedTable({
     return rows
   }, [groupBy, groupsOrderSettings, rows])
 
-  const getItemSize = useCallback(
-    index => {
-      if (typeof itemSize === "number") {
-        return itemSize
-      }
-      return itemSize(index, orderedRows)
-    },
-    [itemSize, orderedRows]
-  )
+  const getItemSize = useCallback(index => itemSize(index, orderedRows), [itemSize, orderedRows])
+
+  const listItemSize = variableSize ? getItemSize : itemSize
 
   // TODO
   // is rendererHash a better tradeoff?
@@ -187,7 +180,7 @@ export function VirtualizedTable({
       <StickyVirtualList
         height={height}
         itemCount={orderedRows.length}
-        itemSize={getItemSize}
+        itemSize={listItemSize}
         width={width}
         getTableProps={getTableProps}
         getTableBodyProps={getTableBodyProps}
