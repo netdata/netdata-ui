@@ -12,7 +12,7 @@ import SearchProvider, { SearchInput, SearchResults } from "./search"
 
 const Container = styled(Flex).attrs({
   padding: [6],
-  background: "mainBackground",
+  background: "dropdown",
   gap: 6,
   column: true,
   round: true,
