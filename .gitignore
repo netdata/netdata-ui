@@ -2,6 +2,7 @@
 .vscode/
 .jest-test-results.json
 .jest-tmp
+.idea
 storybook-static
 node_modules
 public
