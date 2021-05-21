@@ -7,7 +7,7 @@ const StyledTab = styled(Flex).attrs(({ active }) => ({
   background: active ? "mainBackground" : "elementBackground",
   padding: [2, 3],
   round: { side: "top" },
-  border: { side: "all", color: "selected" },
+  border: { side: "all", color: "tabsBorder" },
   alignItems: "center",
   justifyContent: "start",
   position: "relative",

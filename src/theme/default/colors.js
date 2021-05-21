@@ -54,6 +54,7 @@ const appColors = {
   main: rawColors.neutral.limedSpruce,
   border: rawColors.neutral.regentgrey,
   borderSecondary: rawColors.neutral.porcelain,
+  tabsBorder: rawColors.neutral.iron,
   disabled: rawColors.neutral.porcelain,
   dropdown: rawColors.neutral.white,
   elementBackground: rawColors.neutral.blackhaze,
