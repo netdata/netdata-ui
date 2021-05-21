@@ -36,9 +36,6 @@ const appColors = {
   placeholder: rawColors.neutral.bluebayoux,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
-  borderColor: rawColors.neutral.regentgrey,
-  borderSecondaryColor: rawColors.neutral.tuna,
-  separatorColor: rawColors.neutral.bluebayoux,
 }
 
 export default {

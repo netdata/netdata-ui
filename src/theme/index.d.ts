@@ -36,9 +36,6 @@ export type AppColorsT = {
   placeholder: string
   key: string
   panel: string
-  borderColor: string
-  borderSecondaryColor: string
-  separatorColor: string
 }
 
 export type NumberOrStringT = number | string
