@@ -30,7 +30,7 @@ const Tabs = ({ children }) => {
       </Flex>
       <Flex
         height="1px"
-        background="selected"
+        background="tabsBorder"
         width="100%"
         position="absolute"
         style={{ bottom: 0 }}
