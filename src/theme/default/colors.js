@@ -82,6 +82,7 @@ const appColors = {
   tooltip: rawColors.neutral.shark,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.limedSpruce,
+  textLite: rawColors.neutral.regentgrey,
   textFocus: rawColors.neutral.regentgrey,
   textDescription: rawColors.neutral.bluebayoux,
   sectionHeaderBackground: rawColors.neutral.limedSpruce,
