@@ -30,7 +30,7 @@ const appColors = {
   attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.neutral.bluebayoux,
   controlFocused: rawColors.neutral.white,
-  selected: rawColors.neutral.regentgrey,
+  selected: rawColors.neutral.bluebayoux,
   tooltip: rawColors.neutral.outerSpace,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.white,
