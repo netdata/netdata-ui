@@ -6,6 +6,7 @@ import round from "src/mixins/round"
 import opacity from "src/mixins/opacity"
 import position from "src/mixins/position"
 import zIndex from "src/mixins/zIndex"
+import cursor from "src/mixins/cursor"
 import height from "src/components/templates/mixins/height"
 import width from "src/components/templates/mixins/width"
 import overflow from "src/components/templates/mixins/overflow"
@@ -43,6 +44,7 @@ const Flex = Component => styled(Component)`
   ${round}
   ${overflow}
   ${zIndex}
+  ${cursor}
 `
 
 export default Flex
