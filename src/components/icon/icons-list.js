@@ -4,6 +4,10 @@ import alarmCritical from "./assets/alarm_c.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import around_clock from "./assets/around_clock.svg"
+import classError from "./assets/class_error.svg"
+import classLatency from "./assets/class_latency.svg"
+import classUtilization from "./assets/class_utilization.svg"
+import classWorkload from "./assets/class_workload.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
 import chart_added from "./assets/chart_added.svg"
@@ -140,6 +144,10 @@ export const iconsList = {
   alarmWarning,
   around_clock,
   bookmark,
+  classError,
+  classLatency,
+  classUtilization,
+  classWorkload,
   correlation,
   correlation_inv,
   collapse,
