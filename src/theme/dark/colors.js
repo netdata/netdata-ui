@@ -16,6 +16,7 @@ const appColors = {
   modalHeaderBackground: rawColors.neutral.shark,
   modalTabsBackground: rawColors.neutral.tuna,
   modalBackground: rawColors.neutral.outerSpace,
+  modalInfoBackground: rawColors.neutral.bluebayoux,
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
   warning: rawColors.yellow.amber,
