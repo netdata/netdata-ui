@@ -28,7 +28,7 @@ const withTheme = props => {
 
 const getPrimaryColor = props =>
   props.neutral ? getColor("text")(props) : getColor("primary")(props)
-const getTransparentBackground = () => "transparent"
+
 const getBorderColor = props =>
   props.neutral ? getColor("border")(props) : getColor("primary")(props)
 const getTextColor = getColor("bright")
@@ -61,8 +61,8 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
       color: getSpecialColor || getPrimaryColor,
       colorHover: getSpecialColor || getAccentColor,
       colorActive: getSpecialColor || getAccentColor,
-      bg: getTransparentBackground,
-      bgHover: getTransparentBackground,
+      bg: getTransparent,
+      bgHover: getTransparent,
       bgActive: getSpecialColor || getMain,
       border: getSpecialColor || getBorderColor,
       borderHover: getSpecialColor || getAccentColor,
