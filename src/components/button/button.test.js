@@ -174,7 +174,7 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("height", "40px", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("background-color", "#FFF", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#00AB44", {
@@ -196,7 +196,7 @@ describe("Hollow Button", () => {
       <Button label="Test prop text" flavour="hollow" danger />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#FF4136", {
@@ -212,7 +212,7 @@ describe("Hollow Button", () => {
       <Button label="Test prop text" flavour="hollow" warning />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#FFC300", {
@@ -228,7 +228,7 @@ describe("Hollow Button", () => {
       <Button label="Test prop text" flavour="hollow" neutral />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FFF", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#8F9EAA", {
