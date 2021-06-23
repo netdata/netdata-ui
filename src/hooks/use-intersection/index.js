@@ -50,7 +50,7 @@ const observe = (callback, element, options) => {
   }
 }
 
-export default ({ root, rootMargin, threshold }) => {
+export default ({ root, rootMargin, threshold, onVisibility }) => {
   const ref = useRef()
   const unObserveRef = useRef()
   const [visible, setVisible] = useState(false)
@@ -63,7 +63,14 @@ export default ({ root, rootMargin, threshold }) => {
       if (!element) return
 
       const options = { root, rootMargin, threshold }
-      unObserveRef.current = observe(setVisible, element, options)
+      unObserveRef.current = observe(
+        value => {
+          setVisible(value)
+          if (onVisibility) onVisibility(value)
+        },
+        element,
+        options
+      )
     },
     [root, rootMargin, threshold]
   )
