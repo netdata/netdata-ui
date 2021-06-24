@@ -31,6 +31,7 @@
     "@elastic/react-search-ui": "^1.5.1",
     "@elastic/search-ui-site-search-connector": "^1.5.1",
     "@netdata/react-filter-box": "^1.0.0",
+    "@prismicio/client": "^5.1.0",
     "axios": "^0.21.1",
     "polished": "^4.0.3",
     "ramda": "^0.27.1",
