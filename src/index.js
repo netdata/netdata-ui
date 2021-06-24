@@ -81,6 +81,7 @@ export { default as Layer } from "./components/templates/layer"
 export { default as Collapsible } from "./components/collapsible"
 
 export { default as Documentation } from "./organisms/documentation"
+export { default as News } from "./organisms/news"
 
 export { default as NavigationTabs } from "./organisms/navigation/tabs"
 export { default as NavigationTab } from "./organisms/navigation/tab"
