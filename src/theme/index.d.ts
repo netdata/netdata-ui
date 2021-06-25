@@ -1,4 +1,4 @@
-import { rawColors } from "src/theme/default/colors"
+import rawColors from "./rawColors"
 
 export type RawColorsT = typeof rawColors
 

@@ -1,4 +1,4 @@
-import { rawColors } from "../default/colors"
+import rawColors from "../rawColors"
 
 const appColors = {
   primary: rawColors.green.netdata,
