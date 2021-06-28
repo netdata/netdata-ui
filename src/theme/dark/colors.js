@@ -8,6 +8,7 @@ const appColors = {
   borderSecondary: rawColors.neutral.tuna,
   tabsBorder: rawColors.neutral.bluebayoux,
   disabled: rawColors.neutral.tuna,
+  disabledBackground: rawColors.neutral.outerSpace,
   dropdown: rawColors.neutral.outerSpace,
   elementBackground: rawColors.neutral.outerSpace,
   elementBackgroundHover: rawColors.neutral.tuna,
