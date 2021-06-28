@@ -8,6 +8,7 @@ const appColors = {
   borderSecondary: rawColors.neutral.porcelain,
   tabsBorder: rawColors.neutral.iron,
   disabled: rawColors.neutral.porcelain,
+  disabledBackground: rawColors.neutral.porcelain,
   dropdown: rawColors.neutral.white,
   elementBackground: rawColors.neutral.blackhaze,
   elementBackgroundHover: rawColors.neutral.white,
