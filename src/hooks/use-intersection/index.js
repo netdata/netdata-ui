@@ -65,8 +65,8 @@ export default ({ root, rootMargin, threshold, onVisibility }) => {
       const options = { root, rootMargin, threshold }
       unObserveRef.current = observe(
         value => {
-          setVisible(value)
           if (onVisibility) onVisibility(value)
+          setVisible(value)
         },
         element,
         options
