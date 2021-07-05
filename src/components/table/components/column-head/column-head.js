@@ -6,17 +6,13 @@ import { LayoutContext } from "../../layout-context"
 export const ColumnHead = ({ column, sortableBy, customProps }) => {
   const [hover, setHover] = useState(false)
   const layoutType = useContext(LayoutContext)
-  const {
-    id,
-    getSortByToggleProps,
-    getHeaderProps,
-    render,
-    canSort,
-    isSorted,
-    isSortedDesc,
-  } = column
-  const showHoverIndicator = canSort && hover
-  const sortProps = useMemo(() => (sortableBy.includes(id) ? getSortByToggleProps() : {}), [id])
+  const { id, getSortByToggleProps, getHeaderProps, render, isSorted, isSortedDesc } = column
+
+  const isColumnSortable = sortableBy.includes(id)
+  const showHoverIndicator = isColumnSortable && hover
+  const sortProps = useMemo(() => (isColumnSortable ? getSortByToggleProps() : {}), [
+    isColumnSortable,
+  ])
   return layoutType === "table" ? (
     <th
       {...sortProps}
