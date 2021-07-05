@@ -4,7 +4,12 @@ import { getColor } from "src/theme"
 import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
 
-export const ItemContainer = styled(Flex).attrs({ as: "li", role: "option", padding: [2, 4] })`
+export const ItemContainer = styled(Flex).attrs({
+  as: "li",
+  role: "option",
+  padding: [2, 4],
+  justifyItems: "center",
+})`
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
