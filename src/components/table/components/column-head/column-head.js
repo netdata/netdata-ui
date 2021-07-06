@@ -20,19 +20,23 @@ export const ColumnHead = ({ column, sortableBy, customProps }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Flex alignItems="center" justifyContent="start" height={{ min: 6 }} gap={2}>
-        {render("Header", { ...customProps })}
-        {isSorted ? (
-          <Icon
-            name="arrow_down"
-            color="selected"
-            rotate={isSortedDesc ? null : 2}
-            data-testid="columnHhead-sortingIcon"
-          />
-        ) : (
-          showHoverIndicator && <Icon name="arrow_down" color="selected" rotate={2} />
-        )}
-      </Flex>
+      {isColumnSortable ? (
+        <Flex alignItems="center" justifyContent="start" height={{ min: 6 }} gap={2}>
+          {render("Header", { ...customProps })}
+          {isSorted ? (
+            <Icon
+              name="arrow_down"
+              color="selected"
+              rotate={isSortedDesc ? null : 2}
+              data-testid="columnHhead-sortingIcon"
+            />
+          ) : (
+            showHoverIndicator && <Icon name="arrow_down" color="selected" rotate={2} />
+          )}
+        </Flex>
+      ) : (
+        render("Header", { ...customProps })
+      )}
     </th>
   ) : (
     <div {...sortProps} {...getHeaderProps()} className="column-head">
