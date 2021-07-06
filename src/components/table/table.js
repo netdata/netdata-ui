@@ -1,16 +1,10 @@
-import React, { useEffect, useMemo, ReactNode } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useTable } from "react-table"
 import { TableContainer, TableBody } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
-import {
-  defaultGroupByFn,
-  GroupsOrderSettings,
-  sortGroupsByPriority,
-  unwrapGroupedRows,
-  getValidRows,
-} from "./utils"
+import { defaultGroupByFn, sortGroupsByPriority, unwrapGroupedRows, getValidRows } from "./utils"
 import { tableHooks, blockTableHooks } from "./table-hooks"
 
 const defaultItemIsDisabled = () => false
