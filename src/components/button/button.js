@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, forwardRef, FC } from "react"
+import React, { forwardRef } from "react"
 import { StyledButton } from "./styled"
 import { Icon } from "src/components/icon"
 import { LoaderIcon } from "src/components/icon/components"
