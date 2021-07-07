@@ -60,6 +60,8 @@ import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import search_s from "./assets/search_s.svg"
+import arrow_s_down from "./assets/arrow-s_down.svg"
+import arrow_s_left from "./assets/arrow-s_left.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import arrow_left from "./assets/arrow_left.svg"
 import arrows_vertical from "./assets/arrows_vertical.svg"
@@ -126,7 +128,7 @@ import pauseOutline from "./assets/pause_outline.svg"
 import playSolid from "./assets/play_solid.svg"
 import playOutline from "./assets/play_outline.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
-import forcePlay from './assets/force_play.svg'
+import forcePlay from "./assets/force_play.svg"
 
 export const iconsList = {
   add_user,
@@ -212,6 +214,8 @@ export const iconsList = {
   checkmark_partial_s,
   search_s,
   sorting_vertical,
+  arrow_s_left,
+  arrow_s_down,
   arrow_left,
   arrow_down,
   arrows_vertical,
