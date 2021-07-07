@@ -33,7 +33,7 @@ export const ColumnHead = ({ column, sortableBy, customProps }) => {
           {isSorted ? (
             <Icon
               name="arrow_s_down"
-              color="selected"
+              color="text"
               width="10"
               height="10"
               rotate={isSortedDesc ? null : 2}
@@ -41,7 +41,7 @@ export const ColumnHead = ({ column, sortableBy, customProps }) => {
             />
           ) : (
             showHoverIndicator && (
-              <Icon name="arrow_s_down" color="selected" width="10" height="10" rotate={2} />
+              <Icon name="arrow_s_down" color="text" width="10" height="10" rotate={2} />
             )
           )}
         </StyledColumnHead>
