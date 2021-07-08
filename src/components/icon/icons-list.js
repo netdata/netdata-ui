@@ -130,6 +130,9 @@ import view_list from "./assets/view_list.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
+import firewallSolid from './assets/firewall_solid.svg'
+import qualityOfServiceSolid from './assets/qualityOfService_solid.svg'
+import applicationsSolid from './assets/applications_solid.svg'
 
 export const iconsList = {
   add_user,
@@ -145,6 +148,7 @@ export const iconsList = {
   alarmWarning,
   alarm_bell,
   alarms_new,
+  applicationsSolid,
   around_clock,
   arrow_down,
   arrow_left,
@@ -188,6 +192,7 @@ export const iconsList = {
   error,
   expand,
   filterList,
+  firewallSolid,
   forcePlay,
   forcePlayOutline,
   gear,
@@ -229,6 +234,7 @@ export const iconsList = {
   plus_mini_s,
   pod,
   print,
+  qualityOfServiceSolid,
   question,
   questionFilled,
   reload,
