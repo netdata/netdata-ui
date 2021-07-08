@@ -130,9 +130,9 @@ import view_list from "./assets/view_list.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
-import firewallSolid from './assets/firewall_solid'
-import qualtyOfServiceSolid from './assets/qualtyOfService_solid'
-import applicationsSolid from './assets/applications_solid'
+import firewallSolid from './assets/firewall_solid.svg'
+import qualtyOfServiceSolid from './assets/qualtyOfService_solid.svg'
+import applicationsSolid from './assets/applications_solid.svg'
 
 export const iconsList = {
   add_user,
