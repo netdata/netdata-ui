@@ -8,7 +8,7 @@ export const ItemContainer = styled(Flex).attrs({
   as: "li",
   role: "option",
   padding: [2, 4],
-  justifyItems: "center",
+  alignItems: "center",
 })`
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
