@@ -51,7 +51,7 @@ const Collapsible = forwardRef(
     }, [open])
 
     const child = useMemo(
-      () => ((animatedOpen || persist) && typeof children === "function" ? children() : children),
+      () => (animatedOpen || persist) && (typeof children === "function" ? children() : children),
       [animatedOpen, persist, children]
     )
 
