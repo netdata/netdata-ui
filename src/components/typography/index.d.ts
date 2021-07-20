@@ -7,12 +7,20 @@ import {
   OpacityProps,
   CSSPropertiesValueType,
 } from "../../mixins/types"
-import { TextAlignType, WhiteSpaceProps, WordBreakProps } from "./mixins"
+import {
+  TextAlignType,
+  TextDecorationType,
+  TruncateType,
+  WhiteSpaceProps,
+  WordBreakProps,
+} from "./mixins"
 
 export interface TypographyProps
   extends StyledComponentProps,
     AlignSelfProps,
     TextAlignType,
+    TextDecorationType,
+    TruncateType,
     WhiteSpaceProps,
     WordBreakProps,
     MarginProps,
