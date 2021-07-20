@@ -4,6 +4,7 @@ import alignSelf from "src/mixins/alignSelf"
 import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
 import textAlign from "./mixins/textAlign"
+import textDecoration from "./mixins/textDecoration"
 import truncate from "./mixins/truncate"
 import whiteSpace from "./mixins/whiteSpace"
 import wordBreak from "./mixins/wordBreak"
@@ -20,6 +21,7 @@ const typography = css`
   ${fontColor}
   ${alignSelf}
   ${textAlign}
+  ${textDecoration}
   ${textTransform}
   ${truncate}
   ${whiteSpace}
