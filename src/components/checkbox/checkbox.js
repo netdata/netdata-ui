@@ -20,6 +20,7 @@ export const Checkbox = ({
   ref,
   margin,
   alignSelf,
+  iconProps,
   ...props
 }) => {
   const preparedRef = useRef(null)
@@ -39,6 +40,7 @@ export const Checkbox = ({
           <StyledIcon
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
             disabled={disabled}
+            {...iconProps}
           />
         </StyledCheckbox>
       </CheckboxContainer>
