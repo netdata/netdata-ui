@@ -61,7 +61,8 @@ const Menu = forwardRef(
     const clonedChildren = useClonedChildren(children, setRef, {
       onClick: toggleIsOpen,
       "aria-haspopup": "listbox",
-      "aria-expanded": open,
+      "aria-expanded": isOpen,
+      open: isOpen,
       ...rest,
     })
 
