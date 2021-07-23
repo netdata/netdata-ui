@@ -8,6 +8,7 @@ import {
   OpacityProps,
   ZIndexProps,
   PositionProps,
+  CursorProps,
 } from "../../../mixins/types"
 import {
   DirectionProps,
@@ -42,7 +43,8 @@ export interface FlexProps
     HeightProps,
     OverflowProps,
     ZIndexProps,
-    PositionProps {
+    PositionProps,
+    CursorProps {
   background?: ColorType
 }
 
