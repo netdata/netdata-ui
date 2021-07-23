@@ -28,6 +28,19 @@ export interface PaddingProps {
   padding?: MarginType
 }
 
+export interface CursorProps {
+  cursor?:
+    | "pointer"
+    | "default"
+    | "grab"
+    | "move"
+    | "none"
+    | "text"
+    | "wait"
+    | "initial"
+    | "inherit"
+}
+
 export interface OpacityProps {
   opacity?: "weak" | "medium" | "strong"
 }
