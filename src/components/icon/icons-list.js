@@ -130,9 +130,10 @@ import view_list from "./assets/view_list.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
-import firewallSolid from './assets/firewall_solid.svg'
-import qualityOfServiceSolid from './assets/qualityOfService_solid.svg'
-import applicationsSolid from './assets/applications_solid.svg'
+import firewallSolid from "./assets/firewall_solid.svg"
+import qualityOfServiceSolid from "./assets/qualityOfService_solid.svg"
+import applicationsSolid from "./assets/applications_solid.svg"
+import networkingStack from "./assets/networking_stack.svg"
 
 export const iconsList = {
   add_user,
@@ -211,6 +212,7 @@ export const iconsList = {
   navRight,
   nav_arrow_goto,
   nav_dots,
+  networkingStack,
   node,
   node_child,
   node_default_l,
