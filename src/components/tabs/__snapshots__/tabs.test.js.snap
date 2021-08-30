@@ -102,21 +102,25 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   >
     <div
       class="c2"
+      label="hi"
     >
       hi
     </div>
     <div
       class="c3"
+      label="Hi again"
     >
       Hi again
     </div>
     <div
       class="c3"
+      label="Bye"
     >
       Bye
     </div>
     <div
       class="c3"
+      label="Bye Bye"
     >
       Bye Bye
     </div>
