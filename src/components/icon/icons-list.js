@@ -37,11 +37,13 @@ import classUtilization from "./assets/class_utilization.svg"
 import classWorkload from "./assets/class_workload.svg"
 import cluster from "./assets/cluster.svg"
 import cluster_spaces from "./assets/cluster_spaces.svg"
+import code from "./assets/code.svg"
 import collapse from "./assets/collapse.svg"
 import community from "./assets/community.svg"
 import container from "./assets/container.svg"
 import controller_kind from "./assets/controller_kind.svg"
 import controller_name from "./assets/controller_name.svg"
+import copy from "./assets/copy.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
 import cross_s from "./assets/cross_s.svg"
@@ -175,11 +177,13 @@ export const iconsList = {
   classWorkload,
   cluster,
   cluster_spaces,
+  code,
   collapse,
   community,
   container,
   controller_kind,
   controller_name,
+  copy,
   correlation,
   correlation_inv,
   cross_s,
