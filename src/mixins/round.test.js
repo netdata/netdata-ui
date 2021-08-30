@@ -17,6 +17,10 @@ it("renders fixed round", () => {
   )
 })
 
+it("renders string", () => {
+  expect(styledRound({ theme, round: "10rem" })).toBe(`border-radius: 10rem;`)
+})
+
 it("renders top round", () => {
   expect(styledRound({ theme, round: { side: "top", size: 3 } })).toBe(`
     border-top-left-radius: ${theme.constants.SIZE_SUB_UNIT * 3}px;
@@ -46,5 +50,5 @@ it("renders right round", () => {
 })
 
 it("renders invalid", () => {
-  expect(styledRound({ theme, round: "invalid" })).toBe("")
+  expect(styledRound({ theme, round: null })).toBe("")
 })
