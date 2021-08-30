@@ -1,37 +1,39 @@
-const topLeft = size => `border-top-left-radius: ${size}px;`
-const topRight = size => `border-top-right-radius: ${size}px;`
-const bottomLeft = size => `border-bottom-left-radius: ${size}px;`
-const bottomRight = size => `border-bottom-right-radius: ${size}px;`
+const getRadius = (baseUnit, round) => {
+  if (round === true) return `${baseUnit}px`
+
+  if (typeof round === "number") return `${baseUnit * round}px`
+
+  if (typeof round === "string") return round
+
+  return ""
+}
+
+const topLeft = (baseUnit, size) => `border-top-left-radius: ${getRadius(baseUnit, size)};`
+const topRight = (baseUnit, size) => `border-top-right-radius: ${getRadius(baseUnit, size)};`
+const bottomLeft = (baseUnit, size) => `border-bottom-left-radius: ${getRadius(baseUnit, size)};`
+const bottomRight = (baseUnit, size) => `border-bottom-right-radius: ${getRadius(baseUnit, size)};`
 
 const radiusMap = {
-  top: size => `
-    ${topLeft(size)}
-    ${topRight(size)}
+  top: (baseUnit, size) => `
+    ${topLeft(baseUnit, size)}
+    ${topRight(baseUnit, size)}
   `,
-  left: size => `
-    ${topLeft(size)}
-    ${bottomLeft(size)}
+  left: (baseUnit, size) => `
+    ${topLeft(baseUnit, size)}
+    ${bottomLeft(baseUnit, size)}
   `,
-  bottom: size => `
-    ${bottomLeft(size)}
-    ${bottomRight(size)}
+  bottom: (baseUnit, size) => `
+    ${bottomLeft(baseUnit, size)}
+    ${bottomRight(baseUnit, size)}
   `,
-  right: size => `
-    ${topRight(size)}
-    ${bottomRight(size)}
+  right: (baseUnit, size) => `
+    ${topRight(baseUnit, size)}
+    ${bottomRight(baseUnit, size)}
   `,
   "top-left": topLeft,
   "top-right": topRight,
   "bottom-left": bottomLeft,
   "bottom-right": bottomRight,
-}
-
-const getRadius = (baseUnit, round) => {
-  if (round === true) return baseUnit
-
-  if (typeof round === "number") return baseUnit * round
-
-  return ""
 }
 
 export default ({
@@ -43,8 +45,8 @@ export default ({
   if (!round) return ""
 
   const value = getRadius(baseUnit, round)
-  if (value) return `border-radius: ${value}px;`
+  if (value) return `border-radius: ${value};`
 
   const { side, size = 1 } = round
-  return side in radiusMap ? `${radiusMap[side](baseUnit * size)}` : ""
+  return side in radiusMap ? `${radiusMap[side](baseUnit, size)}` : ""
 }
