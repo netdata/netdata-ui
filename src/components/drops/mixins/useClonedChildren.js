@@ -25,4 +25,4 @@ export default (children, ref, childProps) =>
         setRef(child.ref, node)
       },
     })
-  }, [children])
+  }, [children, childProps.open])
