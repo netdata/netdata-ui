@@ -5,6 +5,9 @@ export interface RadioButtonProps extends MarginProps, AlignSelfProps {
   checked?: boolean
   disabled?: boolean
   name?: string
+  iconProps?: {
+    [key: string]: any
+  }
   children?: React.ReactNode
 }
 
