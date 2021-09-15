@@ -55,6 +55,7 @@ import dot from "./assets/dot.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
 import download from "./assets/download.svg"
 import error from "./assets/error.svg"
+import exclamation from "./assets/exclamation.svg"
 import expand from "./assets/expand.svg"
 import filterList from "./assets/filterList.svg"
 import forcePlay from "./assets/force_play.svg"
@@ -195,6 +196,7 @@ export const iconsList = {
   dots_2x3,
   download,
   error,
+  exclamation,
   expand,
   filterList,
   firewallSolid,
