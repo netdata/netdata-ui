@@ -14,6 +14,8 @@ import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
 import around_clock from "./assets/around_clock.svg"
 import arrow_down from "./assets/arrow_down.svg"
+import arrow_w_line_left from "./assets/arrow_w_line_left.svg"
+import arrow_w_line_right from "./assets/arrow_w_line_right.svg"
 import arrow_left from "./assets/arrow_left.svg"
 import arrow_s_down from "./assets/arrow-s_down.svg"
 import arrow_s_left from "./assets/arrow-s_left.svg"
@@ -155,6 +157,8 @@ export const iconsList = {
   applicationsSolid,
   around_clock,
   arrow_down,
+  arrow_w_line_left,
+  arrow_w_line_right,
   arrow_left,
   arrow_s_down,
   arrow_s_left,
