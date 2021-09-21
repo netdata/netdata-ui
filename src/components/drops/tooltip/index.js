@@ -29,7 +29,7 @@ const Tooltip = forwardRef(
     const [ref, setRef] = useForwardRef(parentRef)
 
     const targetElement = useClonedChildren(children, setRef, {
-      onMouseOver: open,
+      onMouseEnter: open,
       onMouseLeave: close,
       onFocus: open,
       onBlur: close,
