@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef } from "react"
+import React, { Fragment, forwardRef, useLayoutEffect } from "react"
 import Drop from "src/components/drops/drop"
 import useForwardRef from "src/hooks/use-forward-ref"
 import useToggle from "src/hooks/use-toggle"
@@ -24,7 +24,7 @@ const Tooltip = forwardRef(
     parentRef
   ) => {
     const id = useDescribedId(rest["aria-describedby"])
-    const [isOpen, , open, close] = useToggle(initialOpen)
+    const [isOpen, , open, close] = useToggle(false)
 
     const [ref, setRef] = useForwardRef(parentRef)
 
@@ -36,6 +36,10 @@ const Tooltip = forwardRef(
       ...(isOpen && { "aria-describedby": id }),
       ...rest,
     })
+
+    useLayoutEffect(() => {
+      if (ref.current && initialOpen) open()
+    }, [])
 
     return (
       <Fragment>
