@@ -36,7 +36,7 @@ const Intersection = forwardRef(
           setParentRef(parentRef, element)
         }}
         width={width}
-        {...(!visible && { height: { min: lastHeightRef.current } })}
+        {...{ height: visible ? height : { min: lastHeightRef.current } }}
         {...rest}
       >
         {getContent(visible ? children : fallback)}
