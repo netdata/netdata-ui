@@ -16,6 +16,7 @@ export type AppColorsT = {
   mainBackgroundDisabled: string
   success: string
   successLite: string
+  successBackground: string
   warning: string
   warningLite: string
   warningBackground: string
