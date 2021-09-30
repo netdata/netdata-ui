@@ -11,3 +11,7 @@ it("renders normal", () => {
 it("renders nowrap", () => {
   expect(whiteSpace({ whiteSpace: "nowrap" })).toBe("white-space: nowrap;")
 })
+
+it("renders pre-line", () => {
+  expect(whiteSpace({ whiteSpace: "pre-line" })).toBe("white-space: pre-line;")
+})

@@ -11,7 +11,7 @@ export interface TruncateType {
 }
 
 export interface WhiteSpaceProps {
-  whiteSpace?: "normal" | "nowrap"
+  whiteSpace?: "normal" | "nowrap" | "pre-line"
 }
 
 export interface WordBreakProps {
