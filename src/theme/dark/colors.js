@@ -20,6 +20,7 @@ const appColors = {
   modalInfoBackground: rawColors.neutral.bluebayoux,
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
+  successBackground: rawColors.green.frostee,
   warning: rawColors.yellow.amber,
   warningLite: rawColors.yellow.sunglow,
   warningBackground: rawColors.yellow.ginfizz,
