@@ -18,13 +18,11 @@ const styledAnimation = css`
   animation-delay: 0.01s;
 `
 
-const Container = styled(Flex)`
+const Container = styled(Flex).attrs(({ zIndex = 60 }) => ({ zIndex }))`
   position: fixed;
   left: -99999px;
 
   ${({ animation }) => animation && styledAnimation}
-
-  z-index: 60;
 
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;

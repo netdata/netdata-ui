@@ -19,6 +19,7 @@ const Popover = forwardRef(
       content,
       animation,
       children,
+      zIndex = 70,
       ...rest
     },
     parentRef
@@ -67,6 +68,7 @@ const Popover = forwardRef(
             onMouseLeave={onMouseLeave}
             onEsc={close}
             animation={animation}
+            zIndex={zIndex}
           >
             {plain ? (
               getContent(content)

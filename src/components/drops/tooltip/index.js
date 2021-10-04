@@ -18,7 +18,7 @@ const Tooltip = forwardRef(
       dropProps,
       content,
       animation,
-      children,
+      zIndex = 80,      children,
       ...rest
     },
     parentRef
@@ -52,6 +52,7 @@ const Tooltip = forwardRef(
             align={dropProps?.align || dropAlignMap[align]}
             onEsc={close}
             animation={animation}
+            zIndex={zIndex}
           >
             {plain ? (
               getContent(content)
