@@ -18,7 +18,9 @@ const Tooltip = forwardRef(
       dropProps,
       content,
       animation,
-      zIndex = 80,      children,
+      disabled,
+      zIndex = 80,
+      children,
       ...rest
     },
     parentRef
@@ -44,7 +46,7 @@ const Tooltip = forwardRef(
     return (
       <Fragment>
         {targetElement}
-        {isOpen && ref.current && (
+        {isOpen && ref.current && !disabled && (
           <Drop
             target={ref.current}
             id={id}
