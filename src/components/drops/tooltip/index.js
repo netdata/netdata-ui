@@ -18,6 +18,8 @@ const Tooltip = forwardRef(
       dropProps,
       content,
       animation,
+      disabled,
+      zIndex = 80,
       children,
       ...rest
     },
@@ -44,7 +46,7 @@ const Tooltip = forwardRef(
     return (
       <Fragment>
         {targetElement}
-        {isOpen && ref.current && (
+        {isOpen && ref.current && !disabled && (
           <Drop
             target={ref.current}
             id={id}
@@ -52,6 +54,7 @@ const Tooltip = forwardRef(
             align={dropProps?.align || dropAlignMap[align]}
             onEsc={close}
             animation={animation}
+            zIndex={zIndex}
           >
             {plain ? (
               getContent(content)
