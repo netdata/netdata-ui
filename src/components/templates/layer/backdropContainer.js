@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import backdropBlur from "src/components/templates/layer/mixins/backdropBlur"
 
 const Container = styled.div`
   position: fixed;
@@ -14,11 +15,13 @@ const Backdrop = styled.div`
   inset: 0px;
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.3);
+  ${backdropBlur};
+}
 `
 
-const BackdropContainer = ({ children }) => (
+const BackdropContainer = ({ children, backdropProps }) => (
   <Container data-testid="layer-backdropContainer">
-    <Backdrop data-testid="layer-backdrop" />
+    <Backdrop data-testid="layer-backdrop" {...backdropProps} />
     {children}
   </Container>
 )
