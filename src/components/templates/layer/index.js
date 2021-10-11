@@ -17,6 +17,7 @@ const Layer = ({
   onEsc,
   borderShadow,
   children,
+  backdropProps,
 }) => {
   const ref = useRef()
 
@@ -40,7 +41,11 @@ const Layer = ({
   )
 
   return ReactDOM.createPortal(
-    backdrop ? <BackdropContainer>{content}</BackdropContainer> : content,
+    backdrop ? (
+      <BackdropContainer backdropProps={backdropProps}>{content}</BackdropContainer>
+    ) : (
+      content
+    ),
     el
   )
 }

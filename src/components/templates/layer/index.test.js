@@ -1,5 +1,5 @@
 import React from "react"
-import { renderWithProviders, fireEvent, waitFor } from "testUtilities"
+import { renderWithProviders, fireEvent } from "testUtilities"
 import { DefaultTheme as theme } from "src/theme/default"
 import Layer from "./index"
 
@@ -17,6 +17,17 @@ it("renders without backdrop", () => {
   )
   expect(queryByTestId("layer-backdropContainer")).not.toBeInTheDocument()
   expect(getByText("layer content")).toBeVisible()
+})
+
+it("renders with backdrop blur", () => {
+  const { queryByTestId } = renderWithProviders(
+    <Layer backdrop backdropProps={{ backdropBlur: true }}>
+      layer content
+    </Layer>
+  )
+  expect(queryByTestId("layer-backdropContainer")).toBeInTheDocument()
+  expect(queryByTestId("layer-backdrop")).toBeInTheDocument()
+  expect(queryByTestId("layer-backdrop")).toHaveStyleRule("backdrop-filter", "blur(10px)")
 })
 
 const positions = [
