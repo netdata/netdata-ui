@@ -12,6 +12,7 @@ const Layer = ({
   position = "center",
   full = false,
   backdrop = true,
+  backdropBlur = false,
   margin = emptyArray,
   onClickOutside,
   onEsc,
@@ -40,7 +41,7 @@ const Layer = ({
   )
 
   return ReactDOM.createPortal(
-    backdrop ? <BackdropContainer>{content}</BackdropContainer> : content,
+    backdrop ? <BackdropContainer backdropBlur={backdropBlur}>{content}</BackdropContainer> : content,
     el
   )
 }
