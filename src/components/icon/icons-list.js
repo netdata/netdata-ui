@@ -105,6 +105,7 @@ import print from "./assets/print.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
 import reload from "./assets/reload.svg"
+import resize_handler from "./aasets/resize_handler.svg"
 import room from "./assets/room.svg"
 import room_new from "./assets/room_new.svg"
 import room_overview from "./assets/room_overview.svg"
@@ -253,6 +254,7 @@ export const iconsList = {
   question,
   questionFilled,
   reload,
+  resize_handler,
   room,
   room_new,
   room_overview,
