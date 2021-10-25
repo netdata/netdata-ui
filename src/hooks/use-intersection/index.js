@@ -72,7 +72,7 @@ export default ({ root, rootMargin, threshold, onVisibility }) => {
         options
       )
     },
-    [root, rootMargin, threshold]
+    [root, rootMargin, threshold, onVisibility]
   )
 
   useEffect(
