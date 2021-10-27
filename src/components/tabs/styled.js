@@ -25,13 +25,14 @@ export const StyledTab = styled.div`
   align-items: center;
 
   border-bottom: 4px solid
-    ${props => (props.active ? getColor("accent") : getColor(["transparent", "full"]))};
+    ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
   min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
   height: ${getSizeBy(6)};
   color: ${getColor("text")};
+  font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};

@@ -54,6 +54,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   max-width: 208px;
   height: 48px;
   color: #35414A;
+  font-weight: bold;
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
@@ -85,6 +86,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   max-width: 208px;
   height: 48px;
   color: #35414A;
+  font-weight: normal;
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
