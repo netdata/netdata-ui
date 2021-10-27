@@ -28,8 +28,8 @@ export const StyledTab = styled.div`
     ${props => (props.active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
-  min-width: ${getSizeBy(10)};
-  max-width: ${getSizeBy(26)};
+  min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
+  max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
   height: ${getSizeBy(6)};
   color: ${getColor("text")};
 
