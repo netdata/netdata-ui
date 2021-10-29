@@ -41,4 +41,8 @@ export const StyledTab = styled.div`
   &:hover {
     border-bottom: 4px solid ${getColor("primary")};
   }
+
+  & > span {
+    font-weight: ${({ active }) => (active ? "bold" : "normal")};
+  }
 `
