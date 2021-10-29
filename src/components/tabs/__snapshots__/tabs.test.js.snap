@@ -64,6 +64,10 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid #00AB44;
 }
 
+.c2 > span {
+  font-weight: bold;
+}
+
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -94,6 +98,10 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 
 .c3:hover {
   border-bottom: 4px solid #00AB44;
+}
+
+.c3 > span {
+  font-weight: normal;
 }
 
 <div
