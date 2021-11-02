@@ -29,6 +29,7 @@ import charts from "./assets/charts.svg"
 import check from "./assets/check.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
+import checkmark from "./assets/checkmark.svg"
 import chevron_double from "./assets/chevron_double.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import chevron_left from "./assets/chevron_left.svg"
@@ -175,6 +176,7 @@ export const iconsList = {
   check,
   checkmark_partial_s,
   checkmark_s,
+  checkmark,
   chevron_double,
   chevron_down,
   chevron_left,
