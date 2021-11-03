@@ -14,7 +14,7 @@ const getPillHeight = (height, tiny) => {
 }
 
 const Container = styled(Flex).attrs(
-  ({ round = 999, hollow, flavour, borderColor, tiny, width, height }) => ({
+  ({ round = 999, hollow, flavour, borderColor, tiny, width, height, isDisabled }) => ({
     padding: !tiny && [1, 2],
     round,
     border: {
@@ -24,12 +24,12 @@ const Container = styled(Flex).attrs(
     },
     height: getPillHeight(height, tiny),
     width: getPillWidth(width, tiny),
+    cursor: isDisabled ? "not-allowed" : "pointer",
     justifyContent: "center",
     alignItems: "center",
   })
 )`
   ${getBackground};
-  cursor: pointer;
 `
 
 export default Container

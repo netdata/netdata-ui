@@ -39,6 +39,7 @@ export interface CursorProps {
     | "wait"
     | "initial"
     | "inherit"
+    | "not-allowed"
 }
 
 export interface OpacityProps {
