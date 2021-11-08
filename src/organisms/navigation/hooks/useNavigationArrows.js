@@ -10,6 +10,8 @@ export default (ref, childrenRef, children, collapsed) => {
 
     const container = ref.current
     const tabs = childrenRef.current
+
+    if (!Array.isArray(tabs) || !tabs.length) return
     const lastTab = tabs[tabs.length - 1]
 
     const scroll = container.scrollLeft
