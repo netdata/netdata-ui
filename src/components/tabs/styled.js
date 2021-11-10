@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { getColor, getSizeBy } from "src/theme/utils"
+import Flex from "src/components/templates/flex"
 
 export const StyledTabsWrapper = styled.div`
   display: flex;
@@ -18,12 +19,7 @@ export const StyledTabs = styled.nav`
   padding: 0 2px;
 `
 
-export const StyledTab = styled.div`
-  display: flex;
-  flex: 1 1 100%;
-  justify-content: center;
-  align-items: center;
-
+export const StyledTab = styled(Flex)`
   border-bottom: 4px solid
     ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;

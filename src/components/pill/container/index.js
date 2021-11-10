@@ -29,7 +29,6 @@ const Container = styled(Flex).attrs(
   })
 )`
   ${getBackground};
-  cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
 `
 
 export default Container
