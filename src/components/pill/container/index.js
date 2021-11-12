@@ -29,6 +29,7 @@ const Container = styled(Flex).attrs(
   })
 )`
   ${getBackground};
+  cursor: pointer;
 `
 
 export default Container
