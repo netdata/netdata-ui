@@ -125,6 +125,7 @@ import text_add from "./assets/text_add.svg"
 import thumb_down from "./assets/thumb_down.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import tiny_buttons from "./assets/tiny_buttons.svg"
+import training from "./assets/training.svg"
 import trashcan from "./assets/trashcan.svg"
 import triangle from "./assets/triangle.svg"
 import triangle_down from "./assets/triangle_down.svg"
@@ -275,6 +276,7 @@ export const iconsList = {
   thumb_down,
   thumb_up,
   tiny_buttons,
+  training,
   trashcan,
   triangle,
   triangle_down,
