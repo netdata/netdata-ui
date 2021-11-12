@@ -6,11 +6,12 @@ const cursorMap = {
   none: "none",
   text: "text",
   wait: "wait",
+  notAllowed: "not-allowed",
   initial: "initial",
   inherit: "inherit",
 }
 
 export default ({ cursor }) => {
   if (!cursor) return ""
-  return cursor in cursorMap ? `cursor: ${cursor};` : ""
+  return cursor in cursorMap ? `cursor: ${cursorMap[cursor]};` : ""
 }

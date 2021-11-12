@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { getColor, getSizeBy } from "src/theme/utils"
+import Flex from "src/components/templates/flex"
 
 export const StyledTabsWrapper = styled.div`
   display: flex;
@@ -18,20 +19,16 @@ export const StyledTabs = styled.nav`
   padding: 0 2px;
 `
 
-export const StyledTab = styled.div`
-  display: flex;
-  flex: 1 1 100%;
-  justify-content: center;
-  align-items: center;
-
+export const StyledTab = styled(Flex)`
   border-bottom: 4px solid
-    ${props => (props.active ? getColor("accent") : getColor(["transparent", "full"]))};
+    ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
-  min-width: ${getSizeBy(10)};
-  max-width: ${getSizeBy(26)};
+  min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
+  max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
   height: ${getSizeBy(6)};
   color: ${getColor("text")};
+  font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
@@ -39,5 +36,9 @@ export const StyledTab = styled.div`
 
   &:hover {
     border-bottom: 4px solid ${getColor("primary")};
+  }
+
+  & > span {
+    font-weight: ${({ active }) => (active ? "bold" : "normal")};
   }
 `

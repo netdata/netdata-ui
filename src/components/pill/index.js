@@ -8,16 +8,7 @@ const Pill = forwardRef(
   ({ children, background, color, hollow, icon, reverse, tiny, ...rest }, ref) => {
     const { flavour } = rest
 
-    if (tiny)
-      return (
-        <Container
-          tiny
-          background={background}
-          hollow={hollow}
-          ref={ref}
-          {...rest}
-        />
-      )
+    if (tiny) return <Container tiny background={background} hollow={hollow} ref={ref} {...rest} />
 
     return (
       <Container background={background} hollow={hollow} ref={ref} {...rest} gap={1}>
