@@ -41,8 +41,8 @@ export const makeTypography = (Component, { fontSize, lineHeight, strong }) => s
 `
 export const makeH0 = Component =>
   makeTypography(Component, {
-    fontSize: "36px",
-    lineHeight: "44px",
+    fontSize: "26px",
+    lineHeight: "32px",
     strong: true,
   })
 
@@ -63,7 +63,7 @@ export const makeH2 = Component =>
 export const makeH3 = Component =>
   makeTypography(Component, {
     fontSize: "20px",
-    lineHeight: "26px",
+    lineHeight: "24px",
     strong: true,
   })
 
@@ -117,7 +117,7 @@ export const makeSmall = Component =>
 export const makeText = Component =>
   makeTypography(Component, {
     fontSize: "14px",
-    lineHeight: "18px",
+    lineHeight: "20px",
   })
 
 export const makeBig = Component =>

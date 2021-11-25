@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "1.7.16",
+  "version": "1.7.18",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
@@ -18,6 +18,8 @@
     "test": "jest --config ./jest/config.js",
     "cp-cloud": "cp -R ./lib ../cloud-frontend/node_modules/@netdata/netdata-ui/",
     "to-cloud": "yarn ts-bundle && yarn cp-cloud",
+    "cp-dashboard": "cp -R ./lib ../dashboard/node_modules/@netdata/netdata-ui/",
+    "to-dashboard": "yarn ts-bundle && yarn cp-dashboard",
     "prepare": "install-peers && yarn ts-bundle",
     "resolveAlias": "tscpaths -p tsconfig.json -s ./src -o ./lib"
   },
