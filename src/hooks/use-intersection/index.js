@@ -19,7 +19,8 @@ const getId = ({ root, rootMargin, threshold }) => `${getRootId(root)}|${rootMar
 const intersectionCallback = entries => {
   entries.forEach(entry => {
     const { target, isIntersecting } = entry
-    callbacks.get(target)(isIntersecting)
+    const cb = callbacks.get(target)
+    cb?.(isIntersecting)
   })
 }
 
