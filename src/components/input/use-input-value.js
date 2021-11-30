@@ -1,13 +1,13 @@
 import { useState, useCallback } from "react"
 
-export const useInputValue = ({ value = "", onChange, maxChars }) => {
+export const useInputValue = ({ value = "", onChange, maxChars, minChars }) => {
   const [inputValue, setValue] = useState(value)
   const [isDirty, setIsDirty] = useState(false)
 
   const handleChange = useCallback(
     e => {
       const newValue = e.target.value
-      if (maxChars && newValue.length > maxChars) {
+      if ((maxChars && newValue.length > maxChars) || (minChars && newValue.length < minChars)) {
         e.preventDefault()
         e.stopPropagation()
         return
