@@ -39,6 +39,14 @@ exports[`Borderless Button  * should render 1`] = `
   text-decoration: none;
 }
 
+.c0.c0 > span {
+  text-transform: lowercase;
+}
+
+.c0.c0 > span::first-letter {
+  text-transform: uppercase;
+}
+
 .c0.c0:hover {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
@@ -130,6 +138,14 @@ exports[`Button states  * should render loading icon 1`] = `
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c0.c0 > span {
+  text-transform: lowercase;
+}
+
+.c0.c0 > span::first-letter {
+  text-transform: uppercase;
 }
 
 .c0.c0:hover {
@@ -260,6 +276,14 @@ exports[`Button states  * should render only icon 1`] = `
   text-decoration: none;
 }
 
+.c0.c0 > span {
+  text-transform: lowercase;
+}
+
+.c0.c0 > span::first-letter {
+  text-transform: uppercase;
+}
+
 .c0.c0:hover {
   border-color: #42b861;
   background-color: rgba(255,255,255,0.0);
@@ -363,6 +387,14 @@ exports[`Button states  * should render smaller only icon 1`] = `
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c0.c0 > span {
+  text-transform: lowercase;
+}
+
+.c0.c0 > span::first-letter {
+  text-transform: uppercase;
 }
 
 .c0.c0:hover {
@@ -470,6 +502,14 @@ exports[`Default Button  * should render 1`] = `
   text-decoration: none;
 }
 
+.c0.c0 > span {
+  text-transform: lowercase;
+}
+
+.c0.c0 > span::first-letter {
+  text-transform: uppercase;
+}
+
 .c0.c0:hover {
   border-color: #42b861;
   background-color: #00AB44;
@@ -561,6 +601,14 @@ exports[`Hollow Button  * should render 1`] = `
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
+}
+
+.c0.c0 > span {
+  text-transform: lowercase;
+}
+
+.c0.c0 > span::first-letter {
+  text-transform: uppercase;
 }
 
 .c0.c0:hover {
