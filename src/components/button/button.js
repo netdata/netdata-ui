@@ -4,9 +4,23 @@ import { Icon } from "src/components/icon"
 import { LoaderIcon } from "src/components/icon/components"
 
 export const Button = forwardRef(
-  ({ label, icon, flavour, isLoading, loadingLabel, loadingIcon, onClick, ...rest }, ref) => (
+  (
+    {
+      label,
+      icon,
+      flavour,
+      isLoading,
+      loadingLabel,
+      loadingIcon,
+      onClick,
+      textTransform = "firstLetter",
+      ...rest
+    },
+    ref
+  ) => (
     <StyledButton
       flavour={flavour}
+      textTransform={textTransform}
       hasLabel={!!label}
       onClick={isLoading ? undefined : onClick}
       ref={ref}

@@ -3,6 +3,7 @@ import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "src/theme"
 import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
 import alignSelf from "src/mixins/alignSelf"
+import textTransform from "src/mixins/textTransform"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 
 const themes = {
@@ -128,7 +129,9 @@ export const StyledButton = styled.button.attrs(props => ({
     box-sizing: border-box;
 
     text-decoration: none;
-    ${props => props.uppercase && "text-transform: uppercase;"}
+    & > span {
+      ${textTransform}
+    }
 
     &:hover {
       border-color: ${props => props.colors.borderHover(props)};
