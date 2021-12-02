@@ -159,7 +159,7 @@ export const StyledButton = styled.button.attrs(props => ({
 
     .button-icon {
       position: absolute;
-      left: ${props => (props.hasLabel ? "4px" : "auto")};
+      left: ${props => (props.hasLabel ? "8px" : "auto")};
       height: ${getSizeBy(2)};
       width: ${getSizeBy(2)};
       fill: ${props => props.colors.color(props)};
