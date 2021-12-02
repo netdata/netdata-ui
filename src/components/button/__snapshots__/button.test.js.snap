@@ -71,7 +71,7 @@ exports[`Borderless Button  * should render 1`] = `
 
 .c0.c0 .button-icon {
   position: absolute;
-  left: 4px;
+  left: 8px;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -172,7 +172,7 @@ exports[`Button states  * should render loading icon 1`] = `
 
 .c0.c0 .button-icon {
   position: absolute;
-  left: 4px;
+  left: 8px;
   height: 16px;
   width: 16px;
   fill: #FFF;
@@ -534,7 +534,7 @@ exports[`Default Button  * should render 1`] = `
 
 .c0.c0 .button-icon {
   position: absolute;
-  left: 4px;
+  left: 8px;
   height: 16px;
   width: 16px;
   fill: #FFF;
@@ -635,7 +635,7 @@ exports[`Hollow Button  * should render 1`] = `
 
 .c0.c0 .button-icon {
   position: absolute;
-  left: 4px;
+  left: 8px;
   height: 16px;
   width: 16px;
   fill: #00AB44;
