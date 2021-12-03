@@ -17,11 +17,77 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render with uppercase", () => {
-    const { container } = renderWithProviders(<Button label="Test prop text" uppercase />)
+  it(" * should render a button with text being in default format", () => {
+    const { container } = renderWithProviders(<Button label="Test prop text" />)
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "lowercase", {
+      modifier: "&& > span",
+    })
+    expect(button).toHaveStyleRule("text-transform", "uppercase", {
+      modifier: "&& > span::first-letter",
+    })
+  })
+
+  it(" * should render a button with text that has no text-transform", () => {
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" textTransform="none" />
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "none", {
+      modifier: "&& > span",
+    })
+  })
+
+  it(" * should render a button with text being capitalized", () => {
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" textTransform="capitalize" />
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "capitalize", {
+      modifier: "&& > span",
+    })
+  })
+
+  it(" * should render a button with text being in uppercase", () => {
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" textTransform="uppercase" />
+    )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&&",
+      modifier: "&& > span",
+    })
+  })
+
+  it(" * should render a button with text being in lowercase", () => {
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" textTransform="lowercase" />
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "lowercase", {
+      modifier: "&& > span",
+    })
+  })
+
+  it(" * should render a button with text being in full-width", () => {
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" textTransform="fullWidth" />
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "full-width", {
+      modifier: "&& > span",
+    })
+  })
+
+  it(" * should render a text with only one capital letter, the first one", () => {
+    const { container } = renderWithProviders(
+      <Button label="Test prop text" textTransform="firstLetter" />
+    )
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("text-transform", "lowercase", {
+      modifier: "&& > span",
+    })
+    expect(button).toHaveStyleRule("text-transform", "uppercase", {
+      modifier: "&& > span::first-letter",
     })
   })
 
