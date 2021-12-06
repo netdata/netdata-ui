@@ -99,11 +99,15 @@ describe("Button states", () => {
   })
 
   it(" * should render with icon", () => {
-    const { getByText, getByTitle } = renderWithProviders(
+    const { container, getByText, getByTitle } = renderWithProviders(
       <Button label="Test prop text" icon="plus" />
     )
+    const button = container.firstChild
 
     expect(getByText(/prop text/)).toBeInTheDocument()
+    expect(button).toHaveStyleRule("margin-left", "12px", {
+      modifier: "&& > span",
+    })
     expect(getByTitle("plus")).toBeInTheDocument()
   })
 
