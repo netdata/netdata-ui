@@ -33,8 +33,10 @@ const getPrimaryColor = props =>
 const getBorderColor = props =>
   props.neutral ? getColor("border")(props) : getColor("primary")(props)
 const getTextColor = getColor("bright")
-const getAccentColor = props =>
+const getHoverColor = props =>
   props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
+const getAccentColor = props =>
+  props.neutral ? getColor("textFocus")(props) : getColor("successLite")(props)
 const getMain = props =>
   props.neutral
     ? getColor(props.disabled ? "disabled" : "mainBackground")(props)
@@ -52,10 +54,10 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
       colorHover: getTextColor,
       colorActive: getTextColor,
       bg: getSpecialColor || getPrimaryColor,
-      bgHover: getSpecialColor || getPrimaryColor,
+      bgHover: getSpecialColor || getHoverColor,
       bgActive: getSpecialColor || getAccentColor,
       border: getSpecialColor || getPrimaryColor,
-      borderHover: getSpecialColor || getAccentColor,
+      borderHover: getSpecialColor || getHoverColor,
       borderActive: getSpecialColor || getAccentColor,
     },
     [HOLLOW]: {
@@ -66,7 +68,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
       bgHover: getTransparent,
       bgActive: getSpecialColor || getMain,
       border: getSpecialColor || getBorderColor,
-      borderHover: getSpecialColor || getAccentColor,
+      borderHover: getSpecialColor || getHoverColor,
       borderActive: getSpecialColor || getAccentColor,
     },
     [BORDER_LESS]: {
@@ -103,7 +105,7 @@ export const StyledButton = styled.button.attrs(props => ({
       props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.small ? 3 : 4)};
 
     font-weight: bold;
-    font-size: 12px;
+    font-size: ${({ small }) => (small ? "12px" : "14px")};
     line-height: ${getSizeBy(2)};
     white-space: nowrap;
     word-break: keep-all;
@@ -125,7 +127,7 @@ export const StyledButton = styled.button.attrs(props => ({
     border-width: 1px;
     border-style: solid;
     border-color: ${props => props.colors.border(props)};
-    border-radius: 2px;
+    border-radius: 4px;
     box-sizing: border-box;
 
     text-decoration: none;
