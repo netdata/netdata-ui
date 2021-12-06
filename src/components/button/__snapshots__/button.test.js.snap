@@ -41,6 +41,7 @@ exports[`Borderless Button  * should render 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 0px;
 }
 
 .c0.c0 > span::first-letter {
@@ -70,8 +71,6 @@ exports[`Borderless Button  * should render 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -142,6 +141,7 @@ exports[`Button states  * should render loading icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 12px;
 }
 
 .c0.c0 > span::first-letter {
@@ -171,8 +171,6 @@ exports[`Button states  * should render loading icon 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #FFF;
@@ -278,6 +276,7 @@ exports[`Button states  * should render only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 12px;
 }
 
 .c0.c0 > span::first-letter {
@@ -307,8 +306,6 @@ exports[`Button states  * should render only icon 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: auto;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -329,24 +326,50 @@ exports[`Button states  * should render only icon 1`] = `
   stroke: #00AB44;
 }
 
-.c1 {
+.c2 {
   height: 24px;
   width: 24px;
   opacity: 1;
   pointer-events: unset;
 }
 
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+}
+
 <button
   class="c0"
 >
-  <svg
-    class="c1 button-icon"
-    title="plus"
+  <div
+    class="c1"
+    height="100%"
+    width="auto"
   >
-    <use
-      xlink:href="#undefined"
-    />
-  </svg>
+    <svg
+      class="c2 button-icon"
+      title="plus"
+    >
+      <use
+        xlink:href="#undefined"
+      />
+    </svg>
+  </div>
 </button>
 `;
 
@@ -391,6 +414,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 12px;
 }
 
 .c0.c0 > span::first-letter {
@@ -420,8 +444,6 @@ exports[`Button states  * should render smaller only icon 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: auto;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -442,24 +464,50 @@ exports[`Button states  * should render smaller only icon 1`] = `
   stroke: #00AB44;
 }
 
-.c1 {
+.c2 {
   height: 24px;
   width: 24px;
   opacity: 1;
   pointer-events: unset;
 }
 
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+}
+
 <button
   class="c0"
 >
-  <svg
-    class="c1 button-icon"
-    title="plus"
+  <div
+    class="c1"
+    height="100%"
+    width="auto"
   >
-    <use
-      xlink:href="#undefined"
-    />
-  </svg>
+    <svg
+      class="c2 button-icon"
+      title="plus"
+    >
+      <use
+        xlink:href="#undefined"
+      />
+    </svg>
+  </div>
 </button>
 `;
 
@@ -504,6 +552,7 @@ exports[`Default Button  * should render 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 0px;
 }
 
 .c0.c0 > span::first-letter {
@@ -533,8 +582,6 @@ exports[`Default Button  * should render 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #FFF;
@@ -605,6 +652,7 @@ exports[`Hollow Button  * should render 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 0px;
 }
 
 .c0.c0 > span::first-letter {
@@ -634,8 +682,6 @@ exports[`Hollow Button  * should render 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #00AB44;
