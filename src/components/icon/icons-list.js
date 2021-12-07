@@ -105,6 +105,7 @@ import pod from "./assets/pod.svg"
 import print from "./assets/print.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
+import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import resize_handler from "./assets/resize_handler.svg"
 import room from "./assets/room.svg"
@@ -256,6 +257,7 @@ export const iconsList = {
   qualityOfServiceSolid,
   question,
   questionFilled,
+  refresh,
   reload,
   resize_handler,
   room,
