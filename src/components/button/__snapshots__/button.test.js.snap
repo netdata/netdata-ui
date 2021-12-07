@@ -18,7 +18,7 @@ exports[`Borderless Button  * should render 1`] = `
   width: 128px;
   height: 40px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
   word-break: keep-all;
@@ -33,7 +33,7 @@ exports[`Borderless Button  * should render 1`] = `
   border-width: 1px;
   border-style: solid;
   border-color: rgba(255,255,255,0.0);
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -41,6 +41,7 @@ exports[`Borderless Button  * should render 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 0px;
 }
 
 .c0.c0 > span::first-letter {
@@ -50,19 +51,19 @@ exports[`Borderless Button  * should render 1`] = `
 .c0.c0:hover {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
-  color: #42b861;
+  color: #68C47D;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #42b861;
+  fill: #68C47D;
 }
 
 .c0.c0:active {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
-  color: #42b861;
+  color: #68C47D;
 }
 
 .c0.c0:focus {
@@ -70,8 +71,6 @@ exports[`Borderless Button  * should render 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -119,7 +118,7 @@ exports[`Button states  * should render loading icon 1`] = `
   width: 128px;
   height: 40px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
   word-break: keep-all;
@@ -134,7 +133,7 @@ exports[`Button states  * should render loading icon 1`] = `
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -142,6 +141,7 @@ exports[`Button states  * should render loading icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 12px;
 }
 
 .c0.c0 > span::first-letter {
@@ -150,7 +150,7 @@ exports[`Button states  * should render loading icon 1`] = `
 
 .c0.c0:hover {
   border-color: #42b861;
-  background-color: #00AB44;
+  background-color: #42b861;
   color: #FFF;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -161,8 +161,8 @@ exports[`Button states  * should render loading icon 1`] = `
 }
 
 .c0.c0:active {
-  border-color: #42b861;
-  background-color: #42b861;
+  border-color: #68C47D;
+  background-color: #68C47D;
   color: #FFF;
 }
 
@@ -171,8 +171,6 @@ exports[`Button states  * should render loading icon 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #FFF;
@@ -255,7 +253,7 @@ exports[`Button states  * should render only icon 1`] = `
   width: 32px;
   height: 32px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
   word-break: keep-all;
@@ -270,7 +268,7 @@ exports[`Button states  * should render only icon 1`] = `
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -278,6 +276,7 @@ exports[`Button states  * should render only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 12px;
 }
 
 .c0.c0 > span::first-letter {
@@ -287,19 +286,19 @@ exports[`Button states  * should render only icon 1`] = `
 .c0.c0:hover {
   border-color: #42b861;
   background-color: rgba(255,255,255,0.0);
-  color: #42b861;
+  color: #68C47D;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #42b861;
+  fill: #68C47D;
 }
 
 .c0.c0:active {
-  border-color: #42b861;
+  border-color: #68C47D;
   background-color: #FFF;
-  color: #42b861;
+  color: #68C47D;
 }
 
 .c0.c0:focus {
@@ -307,8 +306,6 @@ exports[`Button states  * should render only icon 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: auto;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -329,24 +326,50 @@ exports[`Button states  * should render only icon 1`] = `
   stroke: #00AB44;
 }
 
-.c1 {
+.c2 {
   height: 24px;
   width: 24px;
   opacity: 1;
   pointer-events: unset;
 }
 
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+}
+
 <button
   class="c0"
 >
-  <svg
-    class="c1 button-icon"
-    title="plus"
+  <div
+    class="c1"
+    height="100%"
+    width="auto"
   >
-    <use
-      xlink:href="#undefined"
-    />
-  </svg>
+    <svg
+      class="c2 button-icon"
+      title="plus"
+    >
+      <use
+        xlink:href="#undefined"
+      />
+    </svg>
+  </div>
 </button>
 `;
 
@@ -383,7 +406,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -391,6 +414,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 12px;
 }
 
 .c0.c0 > span::first-letter {
@@ -400,19 +424,19 @@ exports[`Button states  * should render smaller only icon 1`] = `
 .c0.c0:hover {
   border-color: #42b861;
   background-color: rgba(255,255,255,0.0);
-  color: #42b861;
+  color: #68C47D;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #42b861;
+  fill: #68C47D;
 }
 
 .c0.c0:active {
-  border-color: #42b861;
+  border-color: #68C47D;
   background-color: #FFF;
-  color: #42b861;
+  color: #68C47D;
 }
 
 .c0.c0:focus {
@@ -420,8 +444,6 @@ exports[`Button states  * should render smaller only icon 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: auto;
   height: 16px;
   width: 16px;
   fill: #00AB44;
@@ -442,24 +464,50 @@ exports[`Button states  * should render smaller only icon 1`] = `
   stroke: #00AB44;
 }
 
-.c1 {
+.c2 {
   height: 24px;
   width: 24px;
   opacity: 1;
   pointer-events: unset;
 }
 
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+}
+
 <button
   class="c0"
 >
-  <svg
-    class="c1 button-icon"
-    title="plus"
+  <div
+    class="c1"
+    height="100%"
+    width="auto"
   >
-    <use
-      xlink:href="#undefined"
-    />
-  </svg>
+    <svg
+      class="c2 button-icon"
+      title="plus"
+    >
+      <use
+        xlink:href="#undefined"
+      />
+    </svg>
+  </div>
 </button>
 `;
 
@@ -481,7 +529,7 @@ exports[`Default Button  * should render 1`] = `
   width: 128px;
   height: 40px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
   word-break: keep-all;
@@ -496,7 +544,7 @@ exports[`Default Button  * should render 1`] = `
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -504,6 +552,7 @@ exports[`Default Button  * should render 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 0px;
 }
 
 .c0.c0 > span::first-letter {
@@ -512,7 +561,7 @@ exports[`Default Button  * should render 1`] = `
 
 .c0.c0:hover {
   border-color: #42b861;
-  background-color: #00AB44;
+  background-color: #42b861;
   color: #FFF;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -523,8 +572,8 @@ exports[`Default Button  * should render 1`] = `
 }
 
 .c0.c0:active {
-  border-color: #42b861;
-  background-color: #42b861;
+  border-color: #68C47D;
+  background-color: #68C47D;
   color: #FFF;
 }
 
@@ -533,8 +582,6 @@ exports[`Default Button  * should render 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #FFF;
@@ -582,7 +629,7 @@ exports[`Hollow Button  * should render 1`] = `
   width: 128px;
   height: 40px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
   word-break: keep-all;
@@ -597,7 +644,7 @@ exports[`Hollow Button  * should render 1`] = `
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -605,6 +652,7 @@ exports[`Hollow Button  * should render 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
+  margin-left: 0px;
 }
 
 .c0.c0 > span::first-letter {
@@ -614,19 +662,19 @@ exports[`Hollow Button  * should render 1`] = `
 .c0.c0:hover {
   border-color: #42b861;
   background-color: rgba(255,255,255,0.0);
-  color: #42b861;
+  color: #68C47D;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #42b861;
+  fill: #68C47D;
 }
 
 .c0.c0:active {
-  border-color: #42b861;
+  border-color: #68C47D;
   background-color: #FFF;
-  color: #42b861;
+  color: #68C47D;
 }
 
 .c0.c0:focus {
@@ -634,8 +682,6 @@ exports[`Hollow Button  * should render 1`] = `
 }
 
 .c0.c0 .button-icon {
-  position: absolute;
-  left: 8px;
   height: 16px;
   width: 16px;
   fill: #00AB44;
