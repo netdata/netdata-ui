@@ -12,7 +12,6 @@ export const Button = forwardRef(
       flavour,
       isLoading,
       loadingLabel,
-      loadingIcon,
       onClick,
       textTransform = "firstLetter",
       ...rest
@@ -23,15 +22,15 @@ export const Button = forwardRef(
       flavour={flavour}
       textTransform={textTransform}
       hasLabel={!!label}
-      hasIcon={!!icon || !!loadingIcon}
+      hasIcon={!!icon || isLoading}
       onClick={isLoading ? undefined : onClick}
       ref={ref}
       {...rest}
     >
-      {isLoading && !loadingIcon && !loadingIcon && <LoaderIcon className="button-icon" />}
-      {icon && !isLoading && !loadingIcon && (
+      {isLoading && <LoaderIcon className="button-icon" />}
+      {icon && !isLoading && (
         <Flex justifyContent="center" alignItems="center" width="auto" height="100%">
-          <Icon className="button-icon" title={isLoading ? loadingIcon : icon} name={icon} />
+          <Icon className="button-icon" title={icon} name={icon} />
         </Flex>
       )}
       {label && <span>{(isLoading && loadingLabel) || label}</span>}

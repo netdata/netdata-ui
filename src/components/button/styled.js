@@ -104,7 +104,7 @@ export const StyledButton = styled.button.attrs(props => ({
     height: ${props =>
       props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.small ? 3 : 4)};
 
-    font-weight: bold;
+    font-weight: 500;
     font-size: ${({ small }) => (small ? "12px" : "14px")};
     line-height: ${getSizeBy(2)};
     white-space: nowrap;
