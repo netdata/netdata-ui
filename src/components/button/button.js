@@ -40,6 +40,5 @@ export const Button = forwardRef(
 
 Button.defaultProps = {
   onClick: () => {},
-  icon: null,
-  loadingIcon: null,
+  icon: null
 }
