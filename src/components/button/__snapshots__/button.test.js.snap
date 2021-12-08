@@ -17,7 +17,7 @@ exports[`Borderless Button  * should render 1`] = `
   position: relative;
   width: 128px;
   height: 40px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
@@ -117,7 +117,7 @@ exports[`Button states  * should render loading icon 1`] = `
   position: relative;
   width: 128px;
   height: 40px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
@@ -252,7 +252,7 @@ exports[`Button states  * should render only icon 1`] = `
   position: relative;
   width: 32px;
   height: 32px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
@@ -390,7 +390,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
   position: relative;
   width: 24px;
   height: 24px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   white-space: nowrap;
@@ -528,7 +528,7 @@ exports[`Default Button  * should render 1`] = `
   position: relative;
   width: 128px;
   height: 40px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
@@ -628,7 +628,7 @@ exports[`Hollow Button  * should render 1`] = `
   position: relative;
   width: 128px;
   height: 40px;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   line-height: 16px;
   white-space: nowrap;
