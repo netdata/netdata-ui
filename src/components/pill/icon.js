@@ -1,6 +1,6 @@
 import React from "react"
 import { Icon } from "src/components/icon"
-import getPillColor from "./colors"
+import getPillColor from "./mixins/colors"
 
 const PillIcon = ({ icon, color, hollow, flavour }) => {
   if (!icon) return null

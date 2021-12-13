@@ -1,25 +1,34 @@
 import React, { forwardRef } from "react"
-import { TextMicro } from "src/components/typography"
+import { Text, TextBig, TextMicro, TextSmall } from "src/components/typography"
 import Container from "./container"
-import getPillColor from "./colors"
+import getPillColor from "./mixins/colors"
 import PillIcon from "./icon"
 
-const Pill = forwardRef(
-  ({ children, background, color, hollow, icon, reverse, tiny, ...rest }, ref) => {
-    const { flavour } = rest
+const TextComponents = {
+  default: TextMicro,
+  large: TextBig,
+  normal: Text,
+  small: TextSmall,
+}
 
-    if (tiny) return <Container tiny background={background} hollow={hollow} ref={ref} {...rest} />
+const Pill = forwardRef(
+  ({ children, background, color, flavour, hollow, icon, normal, reverse, size, tiny, ...rest }, ref) => {
+    const iconProps = { color, flavour, hollow, icon }
+
+    if (tiny) return <Container tiny background={background} flavour={flavour} hollow={hollow} ref={ref} {...rest} />
+
+    const Text = TextComponents?.[size] || TextComponents.default
 
     return (
-      <Container background={background} hollow={hollow} ref={ref} {...rest} gap={1}>
-        {!reverse && <PillIcon icon={icon} color={color} hollow={hollow} flavour={flavour} />}
-        <TextMicro
+      <Container background={background} flavour={flavour} gap={1} hollow={hollow} ref={ref} size={size} {...rest}>
+        {!reverse && <PillIcon {...iconProps} />}
+        <Text
           color={color ? color : hollow ? getPillColor("color", flavour) : "bright"}
-          strong
+          strong={!normal}
         >
           {children}
-        </TextMicro>
-        {reverse && <PillIcon icon={icon} color={color} hollow={hollow} flavour={flavour} />}
+        </Text>
+        {reverse && <PillIcon {...iconProps} />}
       </Container>
     )
   }
