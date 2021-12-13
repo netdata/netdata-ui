@@ -2,6 +2,7 @@ import React from "react"
 import { storiesOf } from "@storybook/react"
 import Flex from "src/components/templates/flex"
 import Pill from "./index"
+import MasterCard from "./mastercard";
 
 const story = storiesOf("COMPONENTS|Pills")
 
@@ -218,8 +219,16 @@ const PillsTiny = () => (
   </Flex>
 )
 
+const MasterCards = () => (
+  <Flex gap={2} alignItems="center">
+    <MasterCard texts={["1", "3"]} />
+    <MasterCard size="large" texts={["5", "6"]} />
+  </Flex>
+)
+
 story.add("Custom", Custom)
 story.add("Pills", Pills)
 story.add("Pills Hollow", PillsHollow)
 story.add("Pills Icon", PillsIcon)
 story.add("Pills Tiny", PillsTiny)
+story.add("MasterCards", MasterCards)
