@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import add_node from "./assets/add_node.svg"
 import add_user from "./assets/add_user.svg"
 import aggregation_avg from "./assets/aggregation_avg.svg"
 import aggregation_max from "./assets/aggregation_max.svg"
@@ -24,6 +25,8 @@ import bookmark from "./assets/bookmark.svg"
 import bullet_one from "./assets/bullet_one.svg"
 import bullet_three from "./assets/bullet_three.svg"
 import bullet_two from "./assets/bullet_two.svg"
+import calendarFull from "./assets/calendar_full.svg"
+import calendarFullPress from "./assets/calendar_full_press.svg"
 import chart_added from "./assets/chart_added.svg"
 import charts from "./assets/charts.svg"
 import check from "./assets/check.svg"
@@ -38,6 +41,8 @@ import classError from "./assets/class_error.svg"
 import classLatency from "./assets/class_latency.svg"
 import classUtilization from "./assets/class_utilization.svg"
 import classWorkload from "./assets/class_workload.svg"
+import clock5Min from "./assets/clock_5_min.svg"
+import clock5MinPress from "./assets/clock_5_min_press.svg"
 import cluster from "./assets/cluster.svg"
 import cluster_spaces from "./assets/cluster_spaces.svg"
 import code from "./assets/code.svg"
@@ -147,6 +152,7 @@ import applicationsSolid from "./assets/applications_solid.svg"
 import networkingStack from "./assets/networking_stack.svg"
 
 export const iconsList = {
+  add_node,
   add_user,
   aggregation_avg,
   aggregation_max,
@@ -173,6 +179,8 @@ export const iconsList = {
   bullet_one,
   bullet_three,
   bullet_two,
+  calendarFull,
+  calendarFullPress,
   chart_added,
   charts,
   check,
@@ -187,6 +195,8 @@ export const iconsList = {
   classLatency,
   classUtilization,
   classWorkload,
+  clock5Min,
+  clock5MinPress,
   cluster,
   cluster_spaces,
   code,
