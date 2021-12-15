@@ -21,27 +21,21 @@ const Pills = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning">Warning</Pill>
-      <Pill flavour="warningStrong">Warning Strong</Pill>
       <Pill flavour="error">Error</Pill>
       <Pill flavour="success">Success</Pill>
       <Pill flavour="neutral">Neutral</Pill>
-      <Pill flavour="neutralLight">Neutral Light</Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" size="small">Warning</Pill>
-      <Pill flavour="warningStrong" size="small">Warning Strong</Pill>
       <Pill flavour="error" size="small">Error</Pill>
       <Pill flavour="success" size="small">Success</Pill>
       <Pill flavour="neutral" size="small">Neutral</Pill>
-      <Pill flavour="neutralLight" size="small">Neutral Light</Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" size="large">Warning</Pill>
-      <Pill flavour="warningStrong" size="large">Warning Strong</Pill>
       <Pill flavour="error" size="large">Error</Pill>
       <Pill flavour="success" size="large">Success</Pill>
       <Pill flavour="neutral" size="large">Neutral</Pill>
-      <Pill flavour="neutralLight" size="large">Neutral Light</Pill>
     </Flex>
   </Flex>
 )
@@ -52,9 +46,6 @@ const PillsHollow = () => (
       <Pill flavour="warning" hollow>
         Warning
       </Pill>
-      <Pill flavour="warningStrong" hollow>
-        Warning Strong
-      </Pill>
       <Pill flavour="error" hollow>
         Error
       </Pill>
@@ -64,16 +55,10 @@ const PillsHollow = () => (
       <Pill flavour="neutral" hollow>
         Neutral
       </Pill>
-      <Pill flavour="neutralLight" hollow>
-        Neutral Light
-      </Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" hollow size="small">
         Warning
-      </Pill>
-      <Pill flavour="warningStrong" hollow size="small">
-        Warning Strong
       </Pill>
       <Pill flavour="error" hollow size="small">
         Error
@@ -84,16 +69,10 @@ const PillsHollow = () => (
       <Pill flavour="neutral" hollow size="small">
         Neutral
       </Pill>
-      <Pill flavour="neutralLight" hollow size="small">
-        Neutral Light
-      </Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" hollow size="large">
         Warning
-      </Pill>
-      <Pill flavour="warningStrong" hollow size="large">
-        Warning Strong
       </Pill>
       <Pill flavour="error" hollow size="large">
         Error
@@ -103,9 +82,6 @@ const PillsHollow = () => (
       </Pill>
       <Pill flavour="neutral" hollow size="large">
         Neutral
-      </Pill>
-      <Pill flavour="neutralLight" hollow size="large">
-        Neutral Light
       </Pill>
     </Flex>
   </Flex>
@@ -117,9 +93,6 @@ const PillsIcon = () => (
       <Pill flavour="warning" hollow icon="alarm">
         Warning
       </Pill>
-      <Pill flavour="warningStrong" hollow icon="alarm">
-        Warning Strong
-      </Pill>
       <Pill flavour="error" hollow icon="warning_triangle">
         Error
       </Pill>
@@ -129,16 +102,10 @@ const PillsIcon = () => (
       <Pill flavour="neutral" hollow icon="question">
         Neutral
       </Pill>
-      <Pill flavour="neutralLight" hollow icon="question">
-        Neutral Light
-      </Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" icon="alarm">
         Warning
-      </Pill>
-      <Pill flavour="warningStrong" icon="alarm">
-        Warning Strong
       </Pill>
       <Pill flavour="error" icon="warning_triangle">
         Error
@@ -149,16 +116,10 @@ const PillsIcon = () => (
       <Pill flavour="neutral" icon="question">
         Neutral
       </Pill>
-      <Pill flavour="neutralLight" icon="question">
-        Neutral Light
-      </Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" hollow icon="alarm" reverse>
         Warning
-      </Pill>
-      <Pill flavour="warningStrong" hollow icon="alarm" reverse>
-        Warning Strong
       </Pill>
       <Pill flavour="error" hollow icon="warning_triangle" reverse>
         Error
@@ -169,16 +130,10 @@ const PillsIcon = () => (
       <Pill flavour="neutral" hollow icon="question" reverse>
         Neutral
       </Pill>
-      <Pill flavour="neutralLight" hollow icon="question" reverse>
-        Neutral Light
-      </Pill>
     </Flex>
     <Flex gap={4}>
       <Pill flavour="warning" icon="alarm" reverse>
         Warning
-      </Pill>
-      <Pill flavour="warningStrong" icon="alarm" reverse>
-        Warning Strong
       </Pill>
       <Pill flavour="error" icon="warning_triangle" reverse>
         Error
@@ -189,9 +144,6 @@ const PillsIcon = () => (
       <Pill flavour="neutral" icon="question" reverse>
         Neutral
       </Pill>
-      <Pill flavour="neutralLight" icon="question" reverse>
-        Neutral Light
-      </Pill>
     </Flex>
   </Flex>
 )
@@ -200,9 +152,6 @@ const PillsTiny = () => (
   <Flex gap={2}>
     <Pill flavour="warning" tiny>
       Warning
-    </Pill>
-    <Pill flavour="warningStrong" tiny>
-      Warning Strong
     </Pill>
     <Pill flavour="error" tiny>
       Error
@@ -213,16 +162,19 @@ const PillsTiny = () => (
     <Pill flavour="neutral" tiny>
       Neutral
     </Pill>
-    <Pill flavour="neutralLight" tiny>
-      Neutral Light
-    </Pill>
   </Flex>
 )
 
 const MasterCards = () => (
-  <Flex gap={2} alignItems="center">
-    <MasterCard texts={["1", "3"]} />
-    <MasterCard size="large" texts={["5", "6"]} />
+  <Flex column gap={4}>
+    <Flex gap={2}>
+      <MasterCard flavours={["red", "yellow"]} texts={["3", "2"]} />
+      <MasterCard />
+    </Flex>
+    <Flex gap={2}>
+      <MasterCard flavours={["red", "yellow"]} size="large" texts={["3", "2"]} />
+      <MasterCard size="large" />
+    </Flex>
   </Flex>
 )
 

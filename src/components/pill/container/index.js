@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Flex from "src/components/templates/flex"
 import getPillBackground from "../mixins/background"
-import getPillColor from "../mixins/colors"
+import { getPillColor } from "../mixins/colors"
 import getPillHeight from "../mixins/height"
 import getPillPadding from "../mixins/padding"
 import getPillWidth from "../mixins/width"

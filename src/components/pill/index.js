@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react"
 import { Text, TextBig, TextMicro, TextSmall } from "src/components/typography"
 import Container from "./container"
-import getPillColor from "./mixins/colors"
+import { getPillColor } from "./mixins/colors"
 import PillIcon from "./icon"
 
 const TextComponents = {

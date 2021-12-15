@@ -1,5 +1,5 @@
 import { getColor } from "src/theme"
-import getPillColor from "./colors"
+import { getPillColor } from "./colors"
 
 const getPillBackground = ({ theme, background, flavour = "neutral", hollow }) => {
   if (background) return
