@@ -44,6 +44,8 @@ const appColors = {
   placeholder: rawColors.neutral.bluebayoux,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
+  //Input colors
+  inputBorder: rawColors.neutral.regentgrey,
 }
 
 export default {
