@@ -48,7 +48,7 @@ export const StyledToggle = styled.div`
     transform: translateY(-50%);
     transition: left 0.2s ease;
     background-color: ${({ disabled, colored, checked }) => {
-      if (disabled) return getColor("disabled")
+      if (disabled) return getColor("border")
       if (!colored) return getColor("controlFocused")
       return checked ? getColor("primary") : getColor("error")
     }};
