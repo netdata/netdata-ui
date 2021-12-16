@@ -35,26 +35,6 @@ toggleStory.add(
 )
 
 toggleStory.add(
-  "Toggle Disabled",
-  () => {
-    const [checked, setChecked] = useState(false)
-    const handleChange = e => {
-      setChecked(e.currentTarget.checked)
-    }
-    return (
-      <Toggle
-        labelRight={text("Label right", "Do you like greek salad?")}
-        disabled={boolean("Disabled", true)}
-        onChange={handleChange}
-        checked={checked}
-        colored={boolean("Colored", true)}
-      />
-    )
-  },
-  subData
-)
-
-toggleStory.add(
   "Two options Toggle",
   () => {
     const [checked, setChecked] = useState(false)
