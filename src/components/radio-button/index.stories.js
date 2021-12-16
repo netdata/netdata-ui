@@ -31,6 +31,36 @@ radioButtonStory.add(
 )
 
 radioButtonStory.add(
+  "RadioButton Disabled And Checked",
+  () => {
+    return (
+      <RadioButton
+        disabled={boolean("Disabled", true)}
+        onChange={() => {}}
+        checked={boolean("Checked", true)}
+        label={text("Label", "Toggle field")}
+      />
+    )
+  },
+  subData
+)
+
+radioButtonStory.add(
+  "RadioButton Checked",
+  () => {
+    return (
+      <RadioButton
+        disabled={boolean("Disabled", false)}
+        onChange={() => {}}
+        checked={boolean("Checked", true)}
+        label={text("Label", "Toggle field")}
+      />
+    )
+  },
+  subData
+)
+
+radioButtonStory.add(
   "Controlled RadioButtons",
   () => {
     const [checked, setChecked] = useState("radio1")
