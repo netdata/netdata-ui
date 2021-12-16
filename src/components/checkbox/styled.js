@@ -40,6 +40,7 @@ export const StyledCheckbox = styled.div`
   align-items: center;
   width: 20px;
   height: 20px;
+  border-radius: 4px;
   background: ${({ disabled }) =>
     disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
   border: 1px solid ${getValidatedControlColor()};
