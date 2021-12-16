@@ -15,7 +15,7 @@ const RadioButton = ({
   <Container disabled={disabled} margin={margin} alignSelf={alignSelf}>
     <Input type="radio" disabled={disabled} checked={checked} {...rest} />
     <IconContainer
-      borderColor={disabled ? "selected" : "border"}
+      borderColor={disabled ? "selected" : "inputBorder"}
       margin={children || label ? [0, 4, 0, 0] : null}
     >
       {checked && (
