@@ -4,7 +4,7 @@ const appColors = {
   primary: rawColors.green.netdata,
   accent: rawColors.green.chateau,
   main: rawColors.neutral.limedSpruce,
-  border: rawColors.neutral.iron,
+  border: rawColors.neutral.regentgrey,
   borderSecondary: rawColors.neutral.porcelain,
   tabsBorder: rawColors.neutral.iron,
   disabled: rawColors.neutral.porcelain,
