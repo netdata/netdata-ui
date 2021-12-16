@@ -45,7 +45,7 @@ const appColors = {
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
   //Input colors
-  inputBorder: rawColors.neutral.regentgrey,
+  inputBorder: rawColors.neutral.bluebayoux,
 }
 
 export default {
