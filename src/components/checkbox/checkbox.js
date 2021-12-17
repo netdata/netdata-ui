@@ -1,5 +1,4 @@
 import React, { useRef } from "react"
-
 import {
   CheckboxContainer,
   HiddenCheckboxInput,
@@ -9,6 +8,7 @@ import {
   StyledIcon,
   AccessibleArea,
 } from "./styled"
+import useCheckBox from "./useCheckBox"
 
 export const Checkbox = ({
   checked,
@@ -25,6 +25,7 @@ export const Checkbox = ({
 }) => {
   const preparedRef = useRef(null)
   const checkboxInput = ref || preparedRef
+  const { styles } = useCheckBox({ disabled })
 
   if (checkboxInput.current) {
     checkboxInput.current.indeterminate = Boolean(indeterminate)
@@ -36,8 +37,10 @@ export const Checkbox = ({
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>
         <HiddenCheckboxInput disabled={disabled} checked={checked} ref={checkboxInput} {...props} />
-        <StyledCheckbox indeterminate={indeterminate} checked={checked} disabled={disabled}>
+        <StyledCheckbox {...styles.checkBox}>
           <StyledIcon
+            indeterminate={indeterminate}
+            checked={checked}
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
             disabled={disabled}
             {...iconProps}
