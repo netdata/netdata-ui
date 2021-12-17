@@ -43,7 +43,7 @@ export const StyledCheckbox = styled.div`
   border-radius: 4px;
   background: ${({ disabled }) =>
     disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
-  border: 1px solid ${getValidatedControlColor("inputBorder")};
+  border: 1px solid ${getValidatedControlColor("inputBorder", "inputBorder")};
   transition: all 150ms;
 
   ${HiddenCheckboxInput}:focus + & {
