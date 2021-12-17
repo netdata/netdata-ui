@@ -1,6 +1,5 @@
 import React from "react"
 import useTheme from "src/hooks/use-theme"
-import { getColor } from "src/theme/utils"
 
 const makeBorderColor = () => ({
   success: "success",
@@ -9,17 +8,14 @@ const makeBorderColor = () => ({
   default: "inputBorder",
 })
 
-const makeStyles = ({ theme, disabled, success, error }) => {
-  const status = success || error || disabled || "default"
+const makeStyles = ({ theme, status }) => {
   return {
     checkBox: {
       alignItems: "center",
       width: "20px",
       height: "20px",
       justifyContent: "center",
-      background: disabled
-        ? getColor("mainBackgroundDisabled")({ theme })
-        : getColor("mainBackground")({ theme }),
+      background: status === "disabled" ? "mainBackgroundDisabled" : "mainBackground",
       border: {
         size: "1px",
         type: "solid",
@@ -33,7 +29,8 @@ const makeStyles = ({ theme, disabled, success, error }) => {
 
 const useCheckBox = ({ disabled, success, error }) => {
   const theme = useTheme()
-  const styles = makeStyles({ theme, disabled, success, error })
+  const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
+  const styles = makeStyles({ theme, status, disabled })
 
   return { styles }
 }
