@@ -14,7 +14,7 @@ it("renders", () => {
   const { container } = renderWithProviders(<RadioButton />)
   const { input, iconContainer, svg } = getSelectors(container)
   expect(input).not.toHaveAttribute("checked")
-  expect(iconContainer).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.border}`)
+  expect(iconContainer).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.inputBorder}`)
   expect(svg).toBe(null)
 })
 
@@ -22,7 +22,7 @@ it("renders checked", () => {
   const { container } = renderWithProviders(<RadioButton checked onChange={jest.fn()} />)
   const { input, iconContainer, svg } = getSelectors(container)
   expect(input).toHaveAttribute("checked")
-  expect(iconContainer).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.border}`)
+  expect(iconContainer).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.inputBorder}`)
   expect(svg).toHaveStyleRule("fill", DefaultTheme.colors.primary)
 })
 

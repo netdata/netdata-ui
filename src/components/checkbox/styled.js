@@ -16,6 +16,10 @@ export const StyledIcon = styled(Icon)`
   flex-grow: 0;
   flex-shrink: 0;
   fill: ${getValidatedControlColor("primary")};
+  visibility: ${props => {
+    if (props.indeterminate) return "visible"
+    return props.checked ? "visible" : "hidden"
+  }};
 `
 
 export const HiddenCheckboxInput = styled.input.attrs({
@@ -48,13 +52,6 @@ export const StyledCheckbox = styled.div`
 
   ${HiddenCheckboxInput}:focus + & {
     ${controlFocused}
-  }
-
-  ${StyledIcon} {
-    visibility: ${props => {
-      if (props.indeterminate) return "visible"
-      return props.checked ? "visible" : "hidden"
-    }};
   }
 `
 
