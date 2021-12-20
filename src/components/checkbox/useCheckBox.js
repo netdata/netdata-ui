@@ -9,6 +9,13 @@ const makeBorderColor = () => ({
   default: "inputBorder",
 })
 
+const makeShadowColor = () => ({
+  success: "success",
+  error: "error",
+  disabled: "inputBorder",
+  default: "controlFocused",
+})
+
 const makeStyles = ({ theme, status, isFocused }) => {
   return {
     checkBox: {
@@ -17,10 +24,11 @@ const makeStyles = ({ theme, status, isFocused }) => {
       height: "20px",
       justifyContent: "center",
       background: status === "disabled" ? "mainBackgroundDisabled" : "mainBackground",
+      boxShadow: isFocused ? { size: "0 0 0 1px", color: makeShadowColor[status] } : null,
       border: {
         size: "1px",
         type: "solid",
-        color: !isFocused ? makeBorderColor({ theme })[status] : "warningText",
+        color: makeBorderColor({ theme })[status],
         side: "all",
       },
       round: "4px",
