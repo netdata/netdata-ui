@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "1.7.25",
+  "version": "1.7.26",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
