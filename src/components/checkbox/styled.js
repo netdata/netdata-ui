@@ -3,7 +3,6 @@ import { Icon } from "src/components/icon"
 import { getValidatedControlColor, getSizeUnit } from "src/theme/utils"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
-import { controlFocused } from "src/mixins"
 import Flex from "src/components/templates/flex"
 
 export const CheckboxContainer = styled.div`
@@ -41,10 +40,6 @@ export const HiddenCheckboxInput = styled.input.attrs({
 export const StyledCheckbox = styled(Flex)`
   box-sizing: border-box;
   transition: all 150ms;
-
-  ${HiddenCheckboxInput}:focus + & {
-    ${controlFocused}
-  }
 `
 
 export const StyledLabel = styled.label`
