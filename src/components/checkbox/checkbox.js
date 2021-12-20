@@ -25,7 +25,7 @@ export const Checkbox = ({
 }) => {
   const preparedRef = useRef(null)
   const checkboxInput = ref || preparedRef
-  const { styles } = useCheckBox({ disabled })
+  const { styles, getInputProps } = useCheckBox({ disabled })
 
   if (checkboxInput.current) {
     checkboxInput.current.indeterminate = Boolean(indeterminate)
@@ -36,7 +36,10 @@ export const Checkbox = ({
       <AccessibleArea />
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>
-        <HiddenCheckboxInput disabled={disabled} checked={checked} ref={checkboxInput} {...props} />
+        <HiddenCheckboxInput
+          {...getInputProps({ checked, disabled, ...props })}
+          ref={checkboxInput}
+        />
         <StyledCheckbox {...styles.checkBox}>
           <StyledIcon
             indeterminate={indeterminate}
