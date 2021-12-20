@@ -1,5 +1,6 @@
 import React from "react"
 import useTheme from "src/hooks/use-theme"
+import useBoolean from "src/hooks/use-boolean"
 
 const makeBorderColor = () => ({
   success: "success",
@@ -8,7 +9,7 @@ const makeBorderColor = () => ({
   default: "inputBorder",
 })
 
-const makeStyles = ({ theme, status }) => {
+const makeStyles = ({ theme, status, isFocused }) => {
   return {
     checkBox: {
       alignItems: "center",
@@ -19,20 +20,29 @@ const makeStyles = ({ theme, status }) => {
       border: {
         size: "1px",
         type: "solid",
-        color: makeBorderColor({ theme })[status],
+        color: !isFocused ? makeBorderColor({ theme })[status] : "warningText",
         side: "all",
       },
       round: "4px",
     },
   }
 }
+;` `
+const useCheckBox = ({ disabled, success, error, onFocus }) => {
+  const [isFocused, setFocused] = useBoolean()
+  const handleOnFocus = e => {
+    setFocused.on()
+    if (onFocus) onFocus(e)
+  }
 
-const useCheckBox = ({ disabled, success, error }) => {
   const theme = useTheme()
   const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
-  const styles = makeStyles({ theme, status, disabled })
+  const styles = makeStyles({ theme, status, disabled, isFocused })
+  const getInputProps = React.useCallback((props = {}) => {
+    return { ...props, onFocus: e => handleOnFocus(e), onBlur: () => setFocused.off() }
+  })
 
-  return { styles }
+  return { styles, getInputProps }
 }
 
 export default useCheckBox
