@@ -54,10 +54,12 @@ import controller_name from "./assets/controller_name.svg"
 import copy from "./assets/copy.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
+import cpu from "./assets/cpu.svg"
 import cross_s from "./assets/cross_s.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
 import dashboards from "./assets/dashboards.svg"
+import disk from "./assets/disk.svg"
 import documentation from "./assets/documentation.svg"
 import dot from "./assets/dot.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
@@ -71,6 +73,7 @@ import forcePlayOutline from "./assets/force_play_outline.svg"
 import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import google from "./assets/google.svg"
+import group_by from "./assets/group_by.svg"
 import hamburger from "./assets/hamburger.svg"
 import help from "./assets/help.svg"
 import hide from "./assets/hide.svg"
@@ -78,9 +81,11 @@ import holder from "./assets/holder.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
+import integrations from "./assets/integrations.svg"
 import line_chart from "./assets/line_chart.svg"
 import logo_s from "./assets/logo_s.svg"
 import magnify from "./assets/magnify.svg"
+import metrics_explorer from "./assets/metrics_explorer.svg"
 import more from "./assets/more.svg"
 import navLeft from "./assets/nav_left.svg"
 import navRight from "./assets/nav_right.svg"
@@ -110,6 +115,7 @@ import plus from "./assets/plus.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import pod from "./assets/pod.svg"
 import print from "./assets/print.svg"
+import ram from "./assets/ram.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
 import refresh from "./assets/refresh.svg"
@@ -145,6 +151,7 @@ import upload from "./assets/upload.svg"
 import user from "./assets/user.svg"
 import users from "./assets/users.svg"
 import view_list from "./assets/view_list.svg"
+import virtualization from "./assets/virtualization.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
 import x from "./assets/x.svg"
@@ -210,10 +217,12 @@ export const iconsList = {
   copy,
   correlation,
   correlation_inv,
+  cpu,
   cross_s,
   dashboard,
   dashboard_add,
   dashboards,
+  disk,
   documentation,
   dot,
   dots_2x3,
@@ -228,6 +237,7 @@ export const iconsList = {
   gear,
   github,
   google,
+  group_by,
   hamburger,
   help,
   hide,
@@ -235,9 +245,11 @@ export const iconsList = {
   information,
   informationPress,
   insights,
+  integrations,
   line_chart,
   logo_s,
   magnify,
+  metrics_explorer,
   more,
   navLeft,
   navRight,
@@ -268,6 +280,7 @@ export const iconsList = {
   plus_mini_s,
   pod,
   print,
+  ram,
   qualityOfServiceSolid,
   question,
   questionFilled,
@@ -304,6 +317,7 @@ export const iconsList = {
   user,
   users,
   view_list,
+  virtualization,
   warning,
   warning_triangle,
   x,
