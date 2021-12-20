@@ -5,5 +5,7 @@ export default ({ boxShadow, theme }) => {
 
   const color = boxShadow.color ? getColor(boxShadow.color)({ theme }) : ""
   const size = boxShadow.size ? boxShadow.size : ""
+
+  if (!size) return ""
   return `box-shadow:${size} ${color}`
 }
