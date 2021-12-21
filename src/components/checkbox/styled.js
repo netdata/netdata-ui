@@ -61,7 +61,7 @@ export const StyledLabel = styled.label`
   ${margin}
   ${alignSelf}
   position: relative;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
