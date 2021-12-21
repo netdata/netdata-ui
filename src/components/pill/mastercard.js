@@ -45,13 +45,13 @@ const MasterCard = ({
           flavour={flavours?.[index]}
           height={height}
           key={`${flavours?.[index]}_${index}`}
-          marginLeft={index === 1 && (margins?.[size] || margins.default)}
+          marginLeft={index === 1 && (margins[size] || margins.default)}
           normal={normal}
           position={index === 0 && "relative"}
           ref={refs?.[index]}
           round={round}
           size={size}
-          width={{ min: minWidths?.[size] || minWidths.default }}
+          width={{ min: minWidths[size] || minWidths.default }}
           {...rest}>
           {texts?.[index] || "-"}
         </Pill>

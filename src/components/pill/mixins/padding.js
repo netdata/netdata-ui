@@ -6,7 +6,7 @@ const paddings = {
 const getPillPadding = (padding, size, tiny) => {
   if (padding) return padding;
   if (tiny) return [0];
-  return paddings?.[size] || paddings.default;
+  return paddings[size] || paddings.default;
 }
 
 export default getPillPadding
