@@ -12,8 +12,8 @@ const TextComponents = {
 }
 
 const Pill = forwardRef(
-  ({ children, background, color, flavour, hollow, icon, normal, reverse, size, tiny, ...rest }, ref) => {
-    const iconProps = { color, flavour, hollow, icon }
+  ({ children, background, color, flavour, hollow, icon, iconSize, normal, reverse, size, tiny, ...rest }, ref) => {
+    const iconProps = { color, flavour, hollow, icon, size: iconSize }
 
     if (tiny) return <Container tiny background={background} flavour={flavour} hollow={hollow} ref={ref} {...rest} />
 
@@ -22,12 +22,14 @@ const Pill = forwardRef(
     return (
       <Container background={background} flavour={flavour} gap={1} hollow={hollow} ref={ref} size={size} {...rest}>
         {!reverse && <PillIcon {...iconProps} />}
-        <Text
-          color={color ? color : hollow ? getPillColor("color", flavour) : "bright"}
-          strong={!normal}
-        >
-          {children}
-        </Text>
+        {children && (
+          <Text
+            color={color ? color : hollow ? getPillColor("color", flavour) : "bright"}
+            strong={!normal}
+          >
+            {children}
+          </Text>
+        )}
         {reverse && <PillIcon {...iconProps} />}
       </Container>
     )

@@ -14,6 +14,9 @@ const Custom = () => (
     <Pill hollow flavour="warning" borderColor="panel" round={5} height={5} width={5}>
       2
     </Pill>
+    <Pill hollow flavour="neutral" borderColor="tabsBorder">
+      Offline
+    </Pill>
   </Flex>
 )
 
@@ -87,7 +90,7 @@ const PillsHollow = () => (
   </Flex>
 )
 
-const PillsIcon = () => (
+const PillsLabelIcon = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning" hollow icon="alarm">
@@ -148,6 +151,23 @@ const PillsIcon = () => (
   </Flex>
 )
 
+const PillsIcon = () => (
+  <Flex column gap={4}>
+    <Flex gap={4}>
+      <Pill flavour="warning" hollow icon="alarm" iconSize="18px" />
+      <Pill flavour="error" hollow icon="warning_triangle" iconSize="18px" />
+      <Pill flavour="success" hollow icon="checkmark_s" iconSize="18px" />
+      <Pill flavour="neutral" hollow icon="information" iconSize="18px" />
+    </Flex>
+    <Flex gap={4}>
+      <Pill flavour="warning" icon="alarm" iconSize="18px" />
+      <Pill flavour="error" icon="warning_triangle" iconSize="18px" />
+      <Pill flavour="success" icon="checkmark_s" iconSize="18px" />
+      <Pill flavour="neutral" icon="information" iconSize="18px" />
+    </Flex>
+  </Flex>
+)
+
 const PillsTiny = () => (
   <Flex gap={2}>
     <Pill flavour="warning" tiny>
@@ -181,6 +201,7 @@ const MasterCards = () => (
 story.add("Custom", Custom)
 story.add("Pills", Pills)
 story.add("Pills Hollow", PillsHollow)
+story.add("Pills Icon with Label", PillsLabelIcon)
 story.add("Pills Icon", PillsIcon)
 story.add("Pills Tiny", PillsTiny)
 story.add("MasterCards", MasterCards)

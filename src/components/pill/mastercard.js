@@ -4,11 +4,6 @@ import Pill from "./index"
 import { getMasterCardColor } from "./mixins/colors"
 import getPillHeight from "./mixins/height";
 
-const margins = {
-  default: "-3px",
-  large: "-5px",
-}
-
 const minWidths = {
   default: "29px",
   large: "37px",
@@ -45,13 +40,14 @@ const MasterCard = ({
           flavour={flavours?.[index]}
           height={height}
           key={`${flavours?.[index]}_${index}`}
-          marginLeft={index === 1 && (margins[size] || margins.default)}
+          marginLeft={index === 1 && "-4px"}
           normal={normal}
           position={index === 0 && "relative"}
           ref={refs?.[index]}
           round={round}
           size={size}
-          width={{ min: minWidths[size] || minWidths.default }}
+          width={index === 0 && { min: minWidths[size] || minWidths.default }}
+          padding={index === 0 ? [1, 3] : [1, 2]}
           {...rest}>
           {texts?.[index] || "-"}
         </Pill>
