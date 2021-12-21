@@ -38,6 +38,7 @@ export const IconContainer = styled.div`
   box-sizing: border-box;
   border: 1px solid ${props => getColor(props.borderColor)(props)};
   border-radius: 100%;
+  background: ${props => getColor(props.background)(props)};
 
   ${margin}
 `
