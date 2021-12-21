@@ -31,7 +31,7 @@ it("renders disabled", () => {
   const { input, iconContainer, svg } = getSelectors(container)
   expect(input).not.toHaveAttribute("checked")
   expect(input).toHaveAttribute("disabled")
-  expect(iconContainer).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.selected}`)
+  expect(iconContainer).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.disabled}`)
   expect(svg).toBe(null)
 })
 
