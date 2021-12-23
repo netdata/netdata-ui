@@ -22,10 +22,9 @@ export const StyledContainer = styled.div`
 export const StyledInput = styled.input.attrs({ round: true })`
   ${controlReset}
   ${round}
-  height: 38px;
+  height: 100%;
   width: 100%;
   flex-grow: 0;
-  padding: ${getSizeBy()};
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: 14px;
@@ -64,7 +63,8 @@ export const LabelRow = styled.div`
 
 export const InputContainer = styled.div.attrs({ round: true })`
   width: 100%;
-  height: 40px;
+  height: ${({ height }) => height};
+  padding: ${({ padding }) => padding};
   ${round}
   border: 1px solid ${getValidatedControlColor()};
   ${({ focused }) => focused && controlFocused};
@@ -90,7 +90,7 @@ export const SuccessIcon = styled(StyledIcon)`
 
 export const IconContainer = styled.div.attrs({ round: true })`
   ${round}
-  height: 38px;
+  height: 100%;
   width: 38px;
   display: flex;
   justify-content: center;
