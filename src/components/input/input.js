@@ -14,6 +14,7 @@ import {
   ErrorIcon,
 } from "./styled"
 import { useFocusedState } from "./use-focused-state"
+import useInputStyles from "./use-input-styles"
 
 const defaultHandleMetaDisplay = ({
   isDirty,
@@ -55,10 +56,12 @@ export const TextInput = ({
   isDirty,
   value,
   inputRef,
+  size = "regular",
   handleMetaDisplay = defaultHandleMetaDisplay,
   ...props
 }) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
+  const styles = useInputStyles({ size })
 
   const prevValue = usePreviousDistinct(value)
 
@@ -86,7 +89,13 @@ export const TextInput = ({
             <span>{label}</span>
           </LabelRow>
         )}
-        <InputContainer focused={focused} success={isSuccess} error={isError} disabled={disabled}>
+        <InputContainer
+          {...styles}
+          focused={focused}
+          success={isSuccess}
+          error={isError}
+          disabled={disabled}
+        >
           {iconLeft && <IconContainer disabled={disabled}>{iconLeft}</IconContainer>}
           <StyledInput
             {...props}
