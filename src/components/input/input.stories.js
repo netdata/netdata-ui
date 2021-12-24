@@ -290,3 +290,64 @@ inputStory.add(
   },
   subData
 )
+
+inputStory.add(
+  "Input with all sizes",
+  () => {
+    const disabled = boolean("Disabled", false)
+    const charLimit = number("Max characters", 20)
+    const label = text("Label", "Label")
+    const [value, handleChange] = useInputValue({ maxChars: charLimit })
+
+    // lazy ref workaround example
+    const inputElement = useCallback(input => {
+      if (input !== null) {
+        // do some imperative stuff
+      }
+    }, [])
+
+    return (
+      <>
+        <Container>
+          <TextInput
+            disabled={disabled}
+            label={"Large"}
+            placeholder={text("Placeholder", "Enter something")}
+            fieldMessage={text("Default field message", "Fun input with icon")}
+            value={value}
+            onChange={handleChange}
+            iconRight={SearchIcon}
+            inputRef={inputElement}
+          />
+        </Container>
+        <Container>
+          <TextInput
+            size="small"
+            disabled={disabled}
+            label={"Small"}
+            placeholder={text("Placeholder", "Enter something")}
+            fieldMessage={text("Default field message", "Fun input with icon")}
+            value={value}
+            onChange={handleChange}
+            iconRight={SearchIcon}
+            inputRef={inputElement}
+          />
+        </Container>
+        <Container>
+          <TextInput
+            size="tiny"
+            disabled={disabled}
+            label={"Tiny"}
+            placeholder={text("Placeholder", "Enter something")}
+            fieldMessage={text("Default field message", "Fun input with icon")}
+            value={value}
+            onChange={handleChange}
+            iconRight={SearchIcon}
+            inputRef={inputElement}
+          />
+        </Container>
+      </>
+    )
+  },
+  subData
+)
