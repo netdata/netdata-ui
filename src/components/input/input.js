@@ -56,12 +56,12 @@ export const TextInput = ({
   isDirty,
   value,
   inputRef,
-  size = "regular",
+  size = "large ",
   handleMetaDisplay = defaultHandleMetaDisplay,
   ...props
 }) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
-  const styles = useInputStyles({ size })
+  const { styles } = useInputStyles({ size })
 
   const prevValue = usePreviousDistinct(value)
 
@@ -90,7 +90,7 @@ export const TextInput = ({
           </LabelRow>
         )}
         <InputContainer
-          {...styles}
+          {...styles.inputContainer}
           focused={focused}
           success={isSuccess}
           error={isError}
