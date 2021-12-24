@@ -39,6 +39,9 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
     return {
       width: "100%",
       ...sizeStyles(),
+      background: makeColor({ defaultColor: "mainBackground", disabled: "mainBackgroundDisabled" })[
+        status
+      ],
       border: {
         size: "1px",
         type: "solid",
