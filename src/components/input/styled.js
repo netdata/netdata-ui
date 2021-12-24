@@ -63,9 +63,6 @@ export const LabelRow = styled.div`
 `
 
 export const InputContainer = styled(Flex)`
-  &:hover {
-    ${controlFocused};
-  }
   ${disabledCursorSupport};
 `
 
