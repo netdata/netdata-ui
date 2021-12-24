@@ -1,19 +1,16 @@
 import React from "react"
 
-const makeBorderColor = () => ({
-  success: "success",
-  error: "error",
-  disabled: "inputBorder",
-  default: "inputBorder",
+const makeColor = ({
+  defaultColor = "inputBorder",
+  success = "success",
+  error = "error",
+  disabled = "inputBorder",
+}) => ({
+  success: success,
+  error: error,
+  disabled: disabled,
+  default: defaultColor,
 })
-
-const makeShadowColor = () => ({
-  success: "success",
-  error: "error",
-  disabled: "inputBorder",
-  default: "controlFocused",
-})
-
 const useInputStyles = ({ size, disabled, success, error, focused }) => {
   const defaultStyles = {
     width: "100%",
@@ -49,19 +46,18 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
         border: {
           size: "1px",
           type: "solid",
-          color: makeBorderColor()[status],
+          color: makeColor({})[status],
           side: "all",
         },
-        boxShadow: focused ? { size: "0 0 0 1px", color: makeShadowColor()[status] } : null,
+        boxShadow: focused ? { size: "0 0 0 1px", color: makeColor({})[status] } : null,
         round: true,
         _hover: {
           border: {
             size: "1px",
             type: "solid",
-            color: makeBorderColor()[status],
+            color: makeColor({ defaultColor: "inputHover" })[status],
             side: "all",
           },
-          boxShadow: { size: "0 0 0 1px", color: makeShadowColor()[status] },
         },
       },
     }
