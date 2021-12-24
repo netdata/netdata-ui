@@ -78,16 +78,7 @@ export const SuccessIcon = styled(StyledIcon)`
   fill: ${getColor("success")};
 `
 
-export const IconContainer = styled.div.attrs({ round: true })`
-  ${round}
-  height: 100%;
-  width: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${({ disabled }) =>
-    disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
-`
+export const IconContainer = styled(Flex)``
 
 export const MetaContainer = styled.div`
   height: 40px;
