@@ -54,6 +54,15 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
         },
         boxShadow: focused ? { size: "0 0 0 1px", color: makeShadowColor()[status] } : null,
         round: true,
+        _hover: {
+          border: {
+            size: "1px",
+            type: "solid",
+            color: makeBorderColor()[status],
+            side: "all",
+          },
+          boxShadow: { size: "0 0 0 1px", color: makeShadowColor()[status] },
+        },
       },
     }
   }, [status, sizeStyles])
