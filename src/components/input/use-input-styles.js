@@ -46,10 +46,11 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
         border: {
           size: "1px",
           type: "solid",
-          color: makeColor({})[status],
+          color: focused
+            ? makeColor({ defaultColor: "inputFocus" })[status]
+            : makeColor({})[status],
           side: "all",
         },
-        boxShadow: focused ? { size: "0 0 0 1px", color: makeColor({})[status] } : null,
         round: true,
         _hover: {
           border: {
@@ -61,7 +62,7 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
         },
       },
     }
-  }, [status, sizeStyles])
+  }, [status, sizeStyles, focused])
 
   return { styles }
 }
