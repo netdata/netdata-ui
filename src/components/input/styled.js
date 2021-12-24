@@ -5,6 +5,7 @@ import { controlReset, controlFocused } from "src/mixins"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
 import round from "src/mixins/round"
+import Flex from "src/components/templates/flex"
 
 const disabledCursorSupport = css`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "")};
@@ -61,15 +62,7 @@ export const LabelRow = styled.div`
   align-items: center;
 `
 
-export const InputContainer = styled.div.attrs({ round: true })`
-  width: 100%;
-  height: ${({ height }) => height};
-  padding: ${({ padding }) => padding};
-  ${round}
-  border: 1px solid ${getValidatedControlColor()};
-  ${({ focused }) => focused && controlFocused};
-  display: flex;
-  flex-flow: row nowrap;
+export const InputContainer = styled(Flex)`
   &:hover {
     ${controlFocused};
   }
