@@ -103,7 +103,9 @@ export const TextInput = ({
           error={isError}
           disabled={disabled}
         >
-          {iconLeft && <IconContainer disabled={disabled}>{iconLeft}</IconContainer>}
+          {iconLeft && (
+            <IconContainer {...styles.iconContainer({ iconLeft })}>{iconLeft}</IconContainer>
+          )}
           <StyledInput
             {...props}
             disabled={disabled}
@@ -118,14 +120,16 @@ export const TextInput = ({
             value={value}
             ref={inputRef}
           />
-          {iconRight && <IconContainer disabled={disabled}>{iconRight}</IconContainer>}
+          {iconRight && (
+            <IconContainer {...styles.iconContainer({ iconRight })}>{iconRight}</IconContainer>
+          )}
           {metaDisplayed && error && (
-            <IconContainer disabled={disabled}>
+            <IconContainer {...styles.iconContainer({ iconRight: true })}>
               <ErrorIcon name="cross_s" />
             </IconContainer>
           )}
           {metaDisplayed && success && (
-            <IconContainer disabled={disabled}>
+            <IconContainer {...styles.iconContainer({ iconRight: true })}>
               <SuccessIcon name="checkmark_s" />
             </IconContainer>
           )}
