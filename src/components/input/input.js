@@ -61,7 +61,6 @@ export const TextInput = ({
   ...props
 }) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
-  const { styles } = useInputStyles({ size })
 
   const prevValue = usePreviousDistinct(value)
 
@@ -80,6 +79,13 @@ export const TextInput = ({
   const isError = metaDisplayed && error
   const errorMessage = isError && error !== true && error
   const successMessage = isSuccess && success !== true && success
+
+  const { styles } = useInputStyles({
+    size,
+    error: isError,
+    success: isSuccess,
+    disabled,
+  })
 
   return (
     <StyledContainer className={className}>
