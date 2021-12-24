@@ -85,6 +85,7 @@ export const TextInput = ({
     error: isError,
     success: isSuccess,
     disabled,
+    focused,
   })
 
   return (
