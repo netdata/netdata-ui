@@ -257,3 +257,36 @@ inputStory.add(
   },
   subData
 )
+
+inputStory.add(
+  "Input disabled",
+  () => {
+    const disabled = boolean("Disabled", true)
+    const charLimit = number("Max characters", 20)
+    const label = text("Label", "Label")
+    const [value, handleChange] = useInputValue({ maxChars: charLimit })
+
+    // lazy ref workaround example
+    const inputElement = useCallback(input => {
+      if (input !== null) {
+        // do some imperative stuff
+      }
+    }, [])
+
+    return (
+      <Container>
+        <TextInput
+          disabled={disabled}
+          label={label}
+          placeholder={text("Placeholder", "Enter something")}
+          fieldMessage={text("Default field message", "Fun input with icon")}
+          value={value}
+          onChange={handleChange}
+          iconLeft={SearchIcon}
+          inputRef={inputElement}
+        />
+      </Container>
+    )
+  },
+  subData
+)
