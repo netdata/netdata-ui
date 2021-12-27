@@ -31,7 +31,7 @@ export const Checkbox = ({
   }
 
   return (
-    <StyledLabel className={className} margin={margin} alignSelf={alignSelf}>
+    <StyledLabel disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
       <AccessibleArea />
       {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
       <CheckboxContainer>

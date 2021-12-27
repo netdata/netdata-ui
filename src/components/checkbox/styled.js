@@ -40,9 +40,10 @@ export const StyledCheckbox = styled.div`
   align-items: center;
   width: 20px;
   height: 20px;
+  border-radius: 4px;
   background: ${({ disabled }) =>
     disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
-  border: 1px solid ${getValidatedControlColor()};
+  border: 1px solid ${getValidatedControlColor("inputBorder", "inputBorder")};
   transition: all 150ms;
 
   ${HiddenCheckboxInput}:focus + & {
@@ -54,14 +55,13 @@ export const StyledCheckbox = styled.div`
       if (props.indeterminate) return "visible"
       return props.checked ? "visible" : "hidden"
     }};
-  }
 `
 
 export const StyledLabel = styled.label`
   ${margin}
   ${alignSelf}
   position: relative;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
