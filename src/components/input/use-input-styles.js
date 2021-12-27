@@ -43,7 +43,7 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
       border: {
         size: "1px",
         type: "solid",
-        color: focused ? makeColor({ defaultColor: "inputFocus" })[status] : makeColor({})[status],
+        color: focused ? makeColor({ defaultColor: "inputBorderFocus" })[status] : makeColor({})[status],
         side: "all",
       },
       round: true,
@@ -51,7 +51,7 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
         border: {
           size: "1px",
           type: "solid",
-          color: makeColor({ defaultColor: "inputHover" })[status],
+          color: makeColor({ defaultColor: "inputBorderHover" })[status],
           side: "all",
         },
       },
