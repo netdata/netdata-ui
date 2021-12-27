@@ -11,7 +11,7 @@ const makeColor = ({
   disabled: disabled,
   default: defaultColor,
 })
-const useInputStyles = ({ size, disabled, success, error, focused }) => {
+const useInputStyles = ({ size = "large", disabled, success, error, focused }) => {
   const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
 
   const sizeStyles = React.useCallback(() => {
@@ -43,7 +43,9 @@ const useInputStyles = ({ size, disabled, success, error, focused }) => {
       border: {
         size: "1px",
         type: "solid",
-        color: focused ? makeColor({ defaultColor: "inputBorderFocus" })[status] : makeColor({})[status],
+        color: focused
+          ? makeColor({ defaultColor: "inputBorderFocus" })[status]
+          : makeColor({})[status],
         side: "all",
       },
       round: true,
