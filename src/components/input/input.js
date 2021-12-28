@@ -88,6 +88,19 @@ export const TextInput = ({
     focused,
   })
 
+  const LeftIcon = React.useCallback(
+    ({ icon }) => (
+      <IconContainer {...styles.iconContainer({ iconLeft: true })}>{icon}</IconContainer>
+    ),
+    []
+  )
+  const RightIcon = React.useCallback(
+    ({ icon }) => (
+      <IconContainer {...styles.iconContainer({ iconRight: true })}>{icon}</IconContainer>
+    ),
+    []
+  )
+
   return (
     <StyledContainer className={className}>
       <StyledLabel disabled={disabled}>
@@ -103,9 +116,7 @@ export const TextInput = ({
           error={isError}
           disabled={disabled}
         >
-          {iconLeft && (
-            <IconContainer {...styles.iconContainer({ iconLeft })}>{iconLeft}</IconContainer>
-          )}
+          {iconLeft && <LeftIcon icon={iconLeft} />}
           <StyledInput
             {...props}
             disabled={disabled}
@@ -120,19 +131,9 @@ export const TextInput = ({
             value={value}
             ref={inputRef}
           />
-          {iconRight && (
-            <IconContainer {...styles.iconContainer({ iconRight })}>{iconRight}</IconContainer>
-          )}
-          {metaDisplayed && error && (
-            <IconContainer {...styles.iconContainer({ iconRight: true })}>
-              <ErrorIcon name="cross_s" />
-            </IconContainer>
-          )}
-          {metaDisplayed && success && (
-            <IconContainer {...styles.iconContainer({ iconRight: true })}>
-              <SuccessIcon name="checkmark_s" />
-            </IconContainer>
-          )}
+          {iconRight && <RightIcon icon={iconRight} />}
+          {metaDisplayed && error && <RightIcon icon={<ErrorIcon name="cross_s" />} />}
+          {metaDisplayed && success && <RightIcon icon={<SuccessIcon name="checkmark_s" />} />}
         </InputContainer>
       </StyledLabel>
 
