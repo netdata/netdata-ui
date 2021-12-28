@@ -1,4 +1,4 @@
-import React from "react"
+import { useMemo, useCallback } from "react"
 
 const makeColor = ({
   defaultColor = "inputBorder",
@@ -14,7 +14,7 @@ const makeColor = ({
 const useInputStyles = ({ size = "large", disabled, success, error, focused }) => {
   const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
 
-  const sizeStyles = React.useCallback(() => {
+  const sizeStyles = useMemo(() => {
     switch (size) {
       case "tiny":
         return {
@@ -35,10 +35,10 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
     }
   }, [size])
 
-  const inputContainer = React.useMemo(() => {
+  const inputContainer = useMemo(() => {
     return {
       width: "100%",
-      ...sizeStyles(),
+      ...sizeStyles,
       background: disabled ? "mainBackgroundDisabled" : "mainBackground",
       border: {
         size: "1px",
@@ -60,7 +60,7 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
     }
   }, [status, sizeStyles, focused])
 
-  const iconContainer = React.useCallback(
+  const iconContainer = useCallback(
     ({ iconRight = false, iconLeft = false }) => {
       return {
         height: "100%",
