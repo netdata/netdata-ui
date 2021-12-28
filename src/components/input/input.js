@@ -56,7 +56,7 @@ export const TextInput = ({
   isDirty,
   value,
   inputRef,
-  size = "large ",
+  size = "large",
   handleMetaDisplay = defaultHandleMetaDisplay,
   ...props
 }) => {
