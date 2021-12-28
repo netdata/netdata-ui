@@ -1,35 +1,30 @@
 import styled from "styled-components"
 import Flex from "src/components/templates/flex"
-import getBackground from "./background"
-import getPillColor from "../colors"
-
-const getPillWidth = (width, tiny) => {
-  if (width) return width
-  return tiny && "8px"
-}
-
-const getPillHeight = (height, tiny) => {
-  if (height) return height
-  return tiny ? "8px" : "20px"
-}
+import getPillBackground from "../mixins/background"
+import { getPillColor } from "../mixins/colors"
+import getPillHeight from "../mixins/height"
+import getPillPadding from "../mixins/padding"
+import getPillWidth from "../mixins/width"
 
 const Container = styled(Flex).attrs(
-  ({ round = 999, hollow, flavour, borderColor, tiny, width, height }) => ({
-    padding: !tiny && [1, 2],
+  ({ round = 999, hollow, flavour, borderColor, padding, size, tiny, width, height }) => ({
+    padding: getPillPadding(padding, size, tiny),
     round,
     border: {
       side: "all",
-      color: borderColor ? borderColor : getPillColor(hollow ? "border" : "background", flavour),
+      color: borderColor || getPillColor(hollow ? "border" : "background", flavour),
       size: "1px",
     },
-    height: getPillHeight(height, tiny),
+    height: getPillHeight(height, size, tiny),
     width: getPillWidth(width, tiny),
     justifyContent: "center",
     alignItems: "center",
   })
 )`
-  ${getBackground};
+  ${getPillBackground};
   cursor: pointer;
+  ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft};`}
+  ${({ position }) => position && `position: ${position};`}
 `
 
 export default Container

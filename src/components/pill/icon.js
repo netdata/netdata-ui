@@ -1,17 +1,17 @@
 import React from "react"
 import { Icon } from "src/components/icon"
-import getPillColor from "./colors"
+import { getPillColor } from "./mixins/colors"
 
-const PillIcon = ({ icon, color, hollow, flavour }) => {
+const PillIcon = ({ icon, color, hollow, flavour, size }) => {
   if (!icon) return null
   if (typeof icon !== "string") return icon
 
   return (
     <Icon
-      width="14px"
-      height="14px"
+      width={size || "14px"}
+      height={size || "14px"}
       name={icon}
-      color={color ? color : hollow ? getPillColor("color", flavour) : "bright"}
+      color={color || (hollow ? getPillColor("color", flavour) : "bright")}
     />
   )
 }

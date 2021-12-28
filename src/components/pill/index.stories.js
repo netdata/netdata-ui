@@ -1,8 +1,8 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
-import { action } from "@storybook/addon-actions"
 import Flex from "src/components/templates/flex"
 import Pill from "./index"
+import MasterCard from "./mastercard";
 
 const story = storiesOf("COMPONENTS|Pills")
 
@@ -14,36 +14,83 @@ const Custom = () => (
     <Pill hollow flavour="warning" borderColor="panel" round={5} height={5} width={5}>
       2
     </Pill>
+    <Pill hollow flavour="neutral" borderColor="tabsBorder">
+      Offline
+    </Pill>
   </Flex>
 )
 
 const Pills = () => (
-  <Flex gap={4}>
-    <Pill flavour="warning">Warning</Pill>
-    <Pill flavour="error">Error</Pill>
-    <Pill flavour="success">Success</Pill>
-    <Pill flavour="neutral">Neutral</Pill>
+  <Flex column gap={4}>
+    <Flex gap={4}>
+      <Pill flavour="warning">Warning</Pill>
+      <Pill flavour="error">Error</Pill>
+      <Pill flavour="success">Success</Pill>
+      <Pill flavour="neutral">Neutral</Pill>
+    </Flex>
+    <Flex gap={4}>
+      <Pill flavour="warning" size="small">Warning</Pill>
+      <Pill flavour="error" size="small">Error</Pill>
+      <Pill flavour="success" size="small">Success</Pill>
+      <Pill flavour="neutral" size="small">Neutral</Pill>
+    </Flex>
+    <Flex gap={4}>
+      <Pill flavour="warning" size="large">Warning</Pill>
+      <Pill flavour="error" size="large">Error</Pill>
+      <Pill flavour="success" size="large">Success</Pill>
+      <Pill flavour="neutral" size="large">Neutral</Pill>
+    </Flex>
   </Flex>
 )
 
 const PillsHollow = () => (
-  <Flex gap={4}>
-    <Pill flavour="warning" hollow>
-      Warning
-    </Pill>
-    <Pill flavour="error" hollow>
-      Error
-    </Pill>
-    <Pill flavour="success" hollow>
-      Success
-    </Pill>
-    <Pill flavour="neutral" hollow>
-      Neutral
-    </Pill>
+  <Flex column gap={4}>
+    <Flex gap={4}>
+      <Pill flavour="warning" hollow>
+        Warning
+      </Pill>
+      <Pill flavour="error" hollow>
+        Error
+      </Pill>
+      <Pill flavour="success" hollow>
+        Success
+      </Pill>
+      <Pill flavour="neutral" hollow>
+        Neutral
+      </Pill>
+    </Flex>
+    <Flex gap={4}>
+      <Pill flavour="warning" hollow size="small">
+        Warning
+      </Pill>
+      <Pill flavour="error" hollow size="small">
+        Error
+      </Pill>
+      <Pill flavour="success" hollow size="small">
+        Success
+      </Pill>
+      <Pill flavour="neutral" hollow size="small">
+        Neutral
+      </Pill>
+    </Flex>
+    <Flex gap={4}>
+      <Pill flavour="warning" hollow size="large">
+        Warning
+      </Pill>
+      <Pill flavour="error" hollow size="large">
+        Error
+      </Pill>
+      <Pill flavour="success" hollow size="large">
+        Success
+      </Pill>
+      <Pill flavour="neutral" hollow size="large">
+        Neutral
+      </Pill>
+    </Flex>
   </Flex>
 )
 
-const PillsIcon = () => (
+const PillsLabelIcon = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning" hollow icon="alarm">
@@ -104,6 +151,23 @@ const PillsIcon = () => (
   </Flex>
 )
 
+const PillsIcon = () => (
+  <Flex column gap={4}>
+    <Flex gap={4}>
+      <Pill flavour="warning" hollow icon="alarm" iconSize="18px" />
+      <Pill flavour="error" hollow icon="warning_triangle" iconSize="18px" />
+      <Pill flavour="success" hollow icon="checkmark_s" iconSize="18px" />
+      <Pill flavour="neutral" hollow icon="information" iconSize="18px" />
+    </Flex>
+    <Flex gap={4}>
+      <Pill flavour="warning" icon="alarm" iconSize="18px" />
+      <Pill flavour="error" icon="warning_triangle" iconSize="18px" />
+      <Pill flavour="success" icon="checkmark_s" iconSize="18px" />
+      <Pill flavour="neutral" icon="information" iconSize="18px" />
+    </Flex>
+  </Flex>
+)
+
 const PillsTiny = () => (
   <Flex gap={2}>
     <Pill flavour="warning" tiny>
@@ -121,8 +185,23 @@ const PillsTiny = () => (
   </Flex>
 )
 
+const MasterCards = () => (
+  <Flex column gap={4}>
+    <Flex gap={2}>
+      <MasterCard flavours={["red", "yellow"]} texts={["3", "2"]} />
+      <MasterCard />
+    </Flex>
+    <Flex gap={2}>
+      <MasterCard flavours={["red", "yellow"]} size="large" texts={["3", "2"]} />
+      <MasterCard size="large" />
+    </Flex>
+  </Flex>
+)
+
 story.add("Custom", Custom)
 story.add("Pills", Pills)
 story.add("Pills Hollow", PillsHollow)
+story.add("Pills Icon with Label", PillsLabelIcon)
 story.add("Pills Icon", PillsIcon)
 story.add("Pills Tiny", PillsTiny)
+story.add("MasterCards", MasterCards)

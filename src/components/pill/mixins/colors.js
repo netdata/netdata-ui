@@ -25,6 +25,14 @@ const colorMap = {
   },
 }
 
-const getPillColor = (type, flavour) => colorMap[type][flavour]
+const masterCardColorMap = {
+  neutralGrey: ["neutral", "regentgrey"],
+  neutralIron: ["neutral", "iron"],
+  red: ["red", "pomegranate"],
+  yellow: ["yellow", "seaBuckthorn"],
+}
 
-export default getPillColor
+const getPillColor = (type, flavour) => colorMap[type][flavour]
+const getMasterCardColor = flavour => masterCardColorMap[flavour]
+
+export { getPillColor, getMasterCardColor }
