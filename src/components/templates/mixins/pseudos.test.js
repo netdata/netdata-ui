@@ -42,3 +42,27 @@ border-top: 1rem dashed ${disabledColor};
 
   expect(pseudos({ theme, _hover })).toBe(pseudo)
 })
+
+it("render border and box shadow with multiple selectors (hover,active)", () => {
+  const size = "0 0 0 1px"
+
+  const _hover = {
+    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
+    boxShadow: { size, color: "disabled" },
+  }
+  const _active = {
+    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
+    boxShadow: { size, color: "disabled" },
+  }
+  const pseudo = `
+${pseudoSelectors["_hover"]}{
+box-shadow:${size} ${disabledColor};
+border-top: 1rem dashed ${disabledColor};
+}
+${pseudoSelectors["_active"]}{
+box-shadow:${size} ${disabledColor};
+border-top: 1rem dashed ${disabledColor};
+}`
+
+  expect(pseudos({ theme, _hover, _active })).toBe(pseudo)
+})
