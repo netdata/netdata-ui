@@ -56,7 +56,9 @@ export default ({ theme, ...props }) => {
         background
       )({ theme, ...pseudoStyles })
 
-      pseudo = `
+      pseudo =
+        pseudo +
+        `
       ${pseudoSelectors[pseudoProp]}{ 
         ${styles} 
       }`
