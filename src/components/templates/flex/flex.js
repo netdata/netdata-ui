@@ -19,6 +19,8 @@ import justifyContent from "src/components/templates/mixins/justifyContent"
 import gap from "src/components/templates/mixins/gap"
 import direction from "src/components/templates/mixins/direction"
 import border from "src/components/templates/mixins/border"
+import shadow from "src/components/templates/mixins/shadow"
+import pseudos from "src/components/templates/mixins/pseudos"
 
 const Flex = Component => styled(Component)`
   display: flex;
@@ -45,6 +47,8 @@ const Flex = Component => styled(Component)`
   ${overflow}
   ${zIndex}
   ${cursor}
+  ${shadow}
+  ${pseudos}
 `
 
 export default Flex

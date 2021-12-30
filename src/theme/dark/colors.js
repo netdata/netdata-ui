@@ -46,6 +46,8 @@ const appColors = {
   panel: rawColors.neutral.limedSpruce,
   //Input colors
   inputBorder: rawColors.neutral.bluebayoux,
+  inputBorderHover: rawColors.neutral.white,
+  inputBorderFocus: rawColors.neutral.white,
 }
 
 export default {

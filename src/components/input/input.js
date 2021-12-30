@@ -14,6 +14,7 @@ import {
   ErrorIcon,
 } from "./styled"
 import { useFocusedState } from "./use-focused-state"
+import useInputStyles from "./use-input-styles"
 
 const defaultHandleMetaDisplay = ({
   isDirty,
@@ -55,6 +56,7 @@ export const TextInput = ({
   isDirty,
   value,
   inputRef,
+  size = "large",
   handleMetaDisplay = defaultHandleMetaDisplay,
   ...props
 }) => {
@@ -78,6 +80,27 @@ export const TextInput = ({
   const errorMessage = isError && error !== true && error
   const successMessage = isSuccess && success !== true && success
 
+  const { styles } = useInputStyles({
+    size,
+    error: isError,
+    success: isSuccess,
+    disabled,
+    focused,
+  })
+
+  const LeftIcon = React.useCallback(
+    ({ icon }) => (
+      <IconContainer {...styles.iconContainer({ iconLeft: true })}>{icon}</IconContainer>
+    ),
+    []
+  )
+  const RightIcon = React.useCallback(
+    ({ icon }) => (
+      <IconContainer {...styles.iconContainer({ iconRight: true })}>{icon}</IconContainer>
+    ),
+    []
+  )
+
   return (
     <StyledContainer className={className}>
       <StyledLabel disabled={disabled}>
@@ -86,8 +109,14 @@ export const TextInput = ({
             <span>{label}</span>
           </LabelRow>
         )}
-        <InputContainer focused={focused} success={isSuccess} error={isError} disabled={disabled}>
-          {iconLeft && <IconContainer disabled={disabled}>{iconLeft}</IconContainer>}
+        <InputContainer
+          {...styles.inputContainer}
+          focused={focused}
+          success={isSuccess}
+          error={isError}
+          disabled={disabled}
+        >
+          {iconLeft && <LeftIcon icon={iconLeft} />}
           <StyledInput
             {...props}
             disabled={disabled}
@@ -102,17 +131,9 @@ export const TextInput = ({
             value={value}
             ref={inputRef}
           />
-          {iconRight && <IconContainer disabled={disabled}>{iconRight}</IconContainer>}
-          {metaDisplayed && error && (
-            <IconContainer disabled={disabled}>
-              <ErrorIcon name="cross_s" />
-            </IconContainer>
-          )}
-          {metaDisplayed && success && (
-            <IconContainer disabled={disabled}>
-              <SuccessIcon name="checkmark_s" />
-            </IconContainer>
-          )}
+          {iconRight && <RightIcon icon={iconRight} />}
+          {metaDisplayed && error && <RightIcon icon={<ErrorIcon name="cross_s" />} />}
+          {metaDisplayed && success && <RightIcon icon={<SuccessIcon name="checkmark_s" />} />}
         </InputContainer>
       </StyledLabel>
 
