@@ -24,11 +24,9 @@ const StyledContainer = styled.div`
   align-items: center;
 `
 
-type SizePropT = "small" | "medium" | "large"
+const sizes = ["small", "medium", "large"]
 
-const sizes: SizePropT[] = ["small", "medium", "large"]
-
-const icons: string[] = Object.keys(iconsList)
+const icons = Object.keys(iconsList)
 
 iconStory.add(
   "The X icon (pls change name)",
