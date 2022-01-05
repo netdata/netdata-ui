@@ -22,7 +22,7 @@ const Container = styled(Flex).attrs(
   })
 )`
   ${getPillBackground};
-  cursor: pointer;
+  cursor: ${({ onClick }) => onClick ? 'pointer' : 'default'};
   ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft};`}
   ${({ position }) => position && `position: ${position};`}
 `
