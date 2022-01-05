@@ -92,3 +92,5 @@ export { default as Intersection } from "./components/intersection"
 export { default as useIntersection } from "./hooks/use-intersection"
 
 export { default as Pill } from "./components/pill"
+
+export { default as MasterCard } from "./components/pill/mastercard"

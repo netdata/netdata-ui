@@ -14,9 +14,11 @@ const getBackground = (background, flavour) => background || getMasterCardColor(
 const MasterCard = ({
   backgrounds,
   colors,
+  'data-testids': dataTestids,
   flavours = ["neutralGrey", "neutralIron"],
   height,
   normal,
+  onClicks,
   refs,
   round,
   size,
@@ -24,24 +26,27 @@ const MasterCard = ({
   ...rest
 }) => (
   <Flex
-    background={getBackground(backgrounds?.[1], flavours?.[1])}
+    background={getBackground(backgrounds?.[1], flavours?.[1] || "neutralIron")}
     height={getPillHeight(height, size)}
     round={round || 999}
     size={size}
   >
     {flavours.map((flavour, index) => {
-      const background = getBackground(backgrounds?.[index], flavour)
+      const elementFlavour = flavour || (index === 0 ? "neutralGrey" : "neutralIron")
+      const background = getBackground(backgrounds?.[index], elementFlavour)
 
       return (
         <Pill
           background={background}
           borderColor={background}
           color={colors?.[index]}
-          flavour={flavours?.[index]}
+          data-testid={dataTestids?.[index]}
+          flavour={elementFlavour}
           height={height}
-          key={`${flavours?.[index]}_${index}`}
+          key={`${elementFlavour}_${index}`}
           marginLeft={index === 1 && "-4px"}
           normal={normal}
+          onClick={onClicks?.[index]}
           position={index === 0 && "relative"}
           ref={refs?.[index]}
           round={round}
