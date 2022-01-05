@@ -13,6 +13,9 @@ import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
+import alpineLinux from "./assets/alpine_linux.svg"
+import amazonLinux from "./assets/amazon_linux.svg"
+import archLinux from "./assets/arch_linux.svg"
 import around_clock from "./assets/around_clock.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import arrow_w_line_left from "./assets/arrow_w_line_left.svg"
@@ -27,6 +30,9 @@ import bullet_three from "./assets/bullet_three.svg"
 import bullet_two from "./assets/bullet_two.svg"
 import calendarFull from "./assets/calendar_full.svg"
 import calendarFullPress from "./assets/calendar_full_press.svg"
+import celarOS from "./assets/celarOS.svg"
+import centos from "./assets/centos.svg"
+import centosColor from "./assets/centos_color.svg"
 import chart_added from "./assets/chart_added.svg"
 import charts from "./assets/charts.svg"
 import check from "./assets/check.svg"
@@ -52,6 +58,7 @@ import container from "./assets/container.svg"
 import controller_kind from "./assets/controller_kind.svg"
 import controller_name from "./assets/controller_name.svg"
 import copy from "./assets/copy.svg"
+import coreOS from "./assets/coreOS.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
 import cpu from "./assets/cpu.svg"
@@ -59,6 +66,8 @@ import cross_s from "./assets/cross_s.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
 import dashboards from "./assets/dashboards.svg"
+import debian from "./assets/debian.svg"
+import debianColor from "./assets/debian_color.svg"
 import disk from "./assets/disk.svg"
 import documentation from "./assets/documentation.svg"
 import dot from "./assets/dot.svg"
@@ -67,11 +76,15 @@ import download from "./assets/download.svg"
 import error from "./assets/error.svg"
 import exclamation from "./assets/exclamation.svg"
 import expand from "./assets/expand.svg"
+import fedora from "./assets/fedora.svg"
 import filterList from "./assets/filterList.svg"
 import forcePlay from "./assets/force_play.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
+import freeBSD from "./assets/freeBSD.svg"
 import gear from "./assets/gear.svg"
+import gentoo from "./assets/gentoo.svg"
 import github from "./assets/github.svg"
+import goToNode from "./assets/go_to_node.svg"
 import google from "./assets/google.svg"
 import group_by from "./assets/group_by.svg"
 import hamburger from "./assets/hamburger.svg"
@@ -83,7 +96,10 @@ import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
 import integrations from "./assets/integrations.svg"
 import line_chart from "./assets/line_chart.svg"
+import linux from "./assets/linux.svg"
+import linuxColor from "./assets/linux_color.svg"
 import logo_s from "./assets/logo_s.svg"
+import macOSX from "./assets/macOSX.svg"
 import magnify from "./assets/magnify.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
 import more from "./assets/more.svg"
@@ -103,6 +119,10 @@ import node_selected_l from "./assets/node_selected_l.svg"
 import nodes from "./assets/nodes.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import none_selected from "./assets/none_selected.svg"
+import oracle from "./assets/oracle.svg"
+import oracleColor from "./assets/oracle_color.svg"
+import os from "./assets/os.svg"
+import osPress from "./assets/os_press.svg"
 import notification from "./assets/notification.svg"
 import padlock from "./assets/padlock.svg"
 import pauseOutline from "./assets/pause_outline.svg"
@@ -115,9 +135,11 @@ import plus from "./assets/plus.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import pod from "./assets/pod.svg"
 import print from "./assets/print.svg"
-import ram from "./assets/ram.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
+import ram from "./assets/ram.svg"
+import raspbian from "./assets/raspbian.svg"
+import redHat from "./assets/red_hat.svg"
 import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import resize_handler from "./assets/resize_handler.svg"
@@ -133,6 +155,7 @@ import settings_h from "./assets/settings_h.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
+import suseLinux from "./assets/suse_linux.svg"
 import switch_off from "./assets/switch_off.svg"
 import system_overview from "./assets/system_overview.svg"
 import text_add from "./assets/text_add.svg"
@@ -143,6 +166,8 @@ import training from "./assets/training.svg"
 import trashcan from "./assets/trashcan.svg"
 import triangle from "./assets/triangle.svg"
 import triangle_down from "./assets/triangle_down.svg"
+import ubuntu from "./assets/ubuntu.svg"
+import ubuntuColor from "./assets/ubuntu_color.svg"
 import unknownError from "./assets/unknownError.svg"
 import unreachable from "./assets/unreachable.svg"
 import update from "./assets/update.svg"
@@ -175,6 +200,9 @@ export const iconsList = {
   alarmWarning,
   alarm_bell,
   alarms_new,
+  alpineLinux,
+  amazonLinux,
+  archLinux,
   applicationsSolid,
   around_clock,
   arrow_down,
@@ -190,6 +218,9 @@ export const iconsList = {
   bullet_two,
   calendarFull,
   calendarFullPress,
+  celarOS,
+  centos,
+  centosColor,
   chart_added,
   charts,
   check,
@@ -215,6 +246,7 @@ export const iconsList = {
   controller_kind,
   controller_name,
   copy,
+  coreOS,
   correlation,
   correlation_inv,
   cpu,
@@ -222,6 +254,8 @@ export const iconsList = {
   dashboard,
   dashboard_add,
   dashboards,
+  debian,
+  debianColor,
   disk,
   documentation,
   dot,
@@ -230,13 +264,17 @@ export const iconsList = {
   error,
   exclamation,
   expand,
+  fedora,
   filterList,
   firewallSolid,
   forcePlay,
   forcePlayOutline,
+  freeBSD,
   gear,
+  gentoo,
   github,
   google,
+  goToNode,
   group_by,
   hamburger,
   help,
@@ -247,7 +285,10 @@ export const iconsList = {
   insights,
   integrations,
   line_chart,
+  linux,
+  linuxColor,
   logo_s,
+  macOSX,
   magnify,
   metrics_explorer,
   more,
@@ -269,6 +310,10 @@ export const iconsList = {
   nodes_hollow,
   none_selected,
   notification,
+  oracle,
+  oracleColor,
+  os,
+  osPress,
   padlock,
   pauseOutline,
   pauseSolid,
@@ -281,6 +326,8 @@ export const iconsList = {
   pod,
   print,
   ram,
+  raspbian,
+  redHat,
   qualityOfServiceSolid,
   question,
   questionFilled,
@@ -299,6 +346,7 @@ export const iconsList = {
   sorting_vertical,
   space,
   space_new,
+  suseLinux,
   switch_off,
   system_overview,
   text_add,
@@ -309,6 +357,8 @@ export const iconsList = {
   trashcan,
   triangle,
   triangle_down,
+  ubuntu,
+  ubuntuColor,
   unknownError,
   unreachable,
   update,
