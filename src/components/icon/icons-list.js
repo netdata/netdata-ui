@@ -72,6 +72,7 @@ import forcePlay from "./assets/force_play.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
 import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
+import goToNode from "./assets/go_to_node.svg"
 import google from "./assets/google.svg"
 import group_by from "./assets/group_by.svg"
 import hamburger from "./assets/hamburger.svg"
@@ -103,6 +104,30 @@ import node_selected_l from "./assets/node_selected_l.svg"
 import nodes from "./assets/nodes.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import none_selected from "./assets/none_selected.svg"
+import osAlpineLinux from "./assets/os/alpine_linux.svg"
+import osAmazonLinux from "./assets/os/amazon_linux.svg"
+import osArchLinux from "./assets/os/arch_linux.svg"
+import osCelarOS from "./assets/os/celarOS.svg"
+import osCentos from "./assets/os/centos.svg"
+import osCentosColor from "./assets/os/centos_color.svg"
+import osCoreOS from "./assets/os/coreOS.svg"
+import osDebian from "./assets/os/debian.svg"
+import osDebianColor from "./assets/os/debian_color.svg"
+import osFedora from "./assets/os/fedora.svg"
+import osFreeBSD from "./assets/os/freeBSD.svg"
+import osGentoo from "./assets/os/gentoo.svg"
+import osLinux from "./assets/os/linux.svg"
+import osLinuxColor from "./assets/os/linux_color.svg"
+import osMacOSX from "./assets/os/macOSX.svg"
+import osOracle from "./assets/os/oracle.svg"
+import osOracleColor from "./assets/os/oracle_color.svg"
+import osOs from "./assets/os/os.svg"
+import osOsPress from "./assets/os/os_press.svg"
+import osRaspbian from "./assets/os/raspbian.svg"
+import osRedHat from "./assets/os/red_hat.svg"
+import osSuseLinux from "./assets/os/suse_linux.svg"
+import osUbuntu from "./assets/os/ubuntu.svg"
+import osUbuntuColor from "./assets/os/ubuntu_color.svg"
 import notification from "./assets/notification.svg"
 import padlock from "./assets/padlock.svg"
 import pauseOutline from "./assets/pause_outline.svg"
@@ -115,9 +140,9 @@ import plus from "./assets/plus.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import pod from "./assets/pod.svg"
 import print from "./assets/print.svg"
-import ram from "./assets/ram.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
+import ram from "./assets/ram.svg"
 import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import resize_handler from "./assets/resize_handler.svg"
@@ -237,6 +262,7 @@ export const iconsList = {
   gear,
   github,
   google,
+  goToNode,
   group_by,
   hamburger,
   help,
@@ -269,6 +295,30 @@ export const iconsList = {
   nodes_hollow,
   none_selected,
   notification,
+  osAlpineLinux,
+  osAmazonLinux,
+  osArchLinux,
+  osCelarOS,
+  osCentos,
+  osCentosColor,
+  osCoreOS,
+  osDebian,
+  osDebianColor,
+  osFedora,
+  osFreeBSD,
+  osGentoo,
+  osLinux,
+  osLinuxColor,
+  osMacOSX,
+  osOracle,
+  osOracleColor,
+  osOs,
+  osOsPress,
+  osRaspbian,
+  osRedHat,
+  osSuseLinux,
+  osUbuntu,
+  osUbuntuColor,
   padlock,
   pauseOutline,
   pauseSolid,

@@ -7,7 +7,7 @@ import getPillPadding from "../mixins/padding"
 import getPillWidth from "../mixins/width"
 
 const Container = styled(Flex).attrs(
-  ({ round = 999, hollow, flavour, borderColor, padding, size, tiny, width, height }) => ({
+  ({ round = 999, hollow, flavour, borderColor, onClick, padding, size, tiny, width, height, position }) => ({
     padding: getPillPadding(padding, size, tiny),
     round,
     border: {
@@ -15,16 +15,16 @@ const Container = styled(Flex).attrs(
       color: borderColor || getPillColor(hollow ? "border" : "background", flavour),
       size: "1px",
     },
+    cursor: onClick ? "pointer" : "default",
     height: getPillHeight(height, size, tiny),
     width: getPillWidth(width, tiny),
     justifyContent: "center",
     alignItems: "center",
+    position,
   })
 )`
   ${getPillBackground};
-  cursor: pointer;
   ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft};`}
-  ${({ position }) => position && `position: ${position};`}
 `
 
 export default Container
