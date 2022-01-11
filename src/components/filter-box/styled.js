@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { getColor, getValidatedControlColor } from "src/theme/utils"
 import { MetaInfo } from "src/components/input/styled"
 import { Text } from "src/components/typography"
+import Flex from "src/components/templates/flex"
 
 export const Container = styled.div`
   width: 100%;
@@ -9,64 +10,53 @@ export const Container = styled.div`
   position: relative;
 `
 
-export const PlaceholderText = styled(Text)`
+export const PlaceholderContainer = styled.div`
+  height: 100%;
   position: absolute;
+  top: 0;
   left: 0;
-  height: 38px;
-  padding: 4px 6px;
+  right: 0;
+  bottom: 0;
+  padding-left: 6px;
+`
+
+export const PlaceholderText = styled(Text)`
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 14px;
-  line-height: 30px;
   border-radius: 4px;
   pointer-events: none;
   z-index: 1;
   color: ${getColor("main")};
 `
 
-export const FilterContainer = styled.div`
-  width: 100%;
-  ${({ inline }) => inline && "height: 100%;"}
+export const FilterContainer = styled(Flex)`
   position: relative;
-  height: 100%;
   .react-filter-box {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
     pointer-events: auto;
-    height: 38px;
-    padding: 4px 6px;
-    margin-bottom: 0;
     font-size: 14px;
-    line-height: 20px;
     border-radius: 4px;
-    border: 1px solid ${getColor("selected")};
     box-shadow: none;
-    background-color: ${getColor("elementBackground")};
-
-    .CodeMirror {
-      height: 38px;
-      background-color: ${getColor("elementBackground")};
-    }
-
-    .CodeMirror-cursor {
-      border-left: 1px solid ${getColor("border")};
-    }
+    border: 0px solid ${getColor("selected")};
   }
-
-  .react-filter-box.error {
-    border-color: ${getValidatedControlColor()};
-    box-shadow: none;
-  }
-
-  .react-filter-box.focus {
-    box-shadow: none;
-    background-color: ${getColor("mainBackground")};
-    border: 1px solid ${getColor("main")};
-
-    .CodeMirror {
-      background-color: ${getColor("mainBackground")};
-    }
-  }
-
   .react-filter-box.error.focus {
-    border-color: ${getValidatedControlColor("controlFocused")};
-    box-shadow: 0 0 0 1px ${getValidatedControlColor("controlFocused")};
+    border-color: transparent;
+    box-shadow: 0 0 0 0px ${getValidatedControlColor("controlFocused")};
+  }
+  .react-codemirror2 {
+    height: 100%;
+    .CodeMirror {
+      height: 100%;
+    }
   }
 `
 
