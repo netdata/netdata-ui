@@ -34,10 +34,11 @@ iconListStory.add("Svgs", () => {
             padding={[3, 3]}
             flex="grow"
             basis="33%"
-            justifyContent="between"
+            justifyContent="start"
+            gap={2}
           >
-            <Text>{name}</Text>
             <Icon name={name} />
+            <Text>{name}</Text>
           </Item>
         ))}
       </Flex>
