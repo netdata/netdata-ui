@@ -79,3 +79,71 @@ filterBoxStory.add(
   },
   subData
 )
+
+filterBoxStory.add(
+  "All filter sizes",
+  () => {
+    const [employees, setEmployees] = useState(data)
+
+    const handleParse = expressions => {
+      const newData = new FilterBoxProcessing(options).process(data, expressions)
+      setEmployees(newData)
+    }
+
+    const handleChange = query => {}
+
+    return (
+      <>
+        <InlineContainer>
+          <button type="button" style={{ marginRight: "10px" }}>
+            Sample text
+          </button>
+          <StyledFilterBox
+            size="tiny"
+            options={options}
+            onParseOk={handleParse}
+            data={data}
+            onChange={handleChange}
+            inline
+            resultsQty={employees.length}
+            metaDisplay="compact"
+            placeholder="Filter employees"
+          />
+        </InlineContainer>
+        <InlineContainer>
+          <button type="button" style={{ marginRight: "10px" }}>
+            Sample text
+          </button>
+          <StyledFilterBox
+            size="small"
+            options={options}
+            onParseOk={handleParse}
+            data={data}
+            onChange={handleChange}
+            inline
+            resultsQty={employees.length}
+            metaDisplay="compact"
+            placeholder="Filter employees"
+          />
+        </InlineContainer>
+        <InlineContainer>
+          <button type="button" style={{ marginRight: "10px" }}>
+            Sample text
+          </button>
+          <StyledFilterBox
+            size="large"
+            options={options}
+            onParseOk={handleParse}
+            data={data}
+            onChange={handleChange}
+            inline
+            resultsQty={employees.length}
+            metaDisplay="compact"
+            placeholder="Filter employees"
+          />
+        </InlineContainer>
+      </>
+    )
+  },
+  subData
+)
