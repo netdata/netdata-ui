@@ -56,6 +56,7 @@ import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
 import cpu from "./assets/cpu.svg"
 import cross_s from "./assets/cross_s.svg"
+import database from "./assets/database.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
 import dashboards from "./assets/dashboards.svg"
@@ -244,6 +245,7 @@ export const iconsList = {
   correlation_inv,
   cpu,
   cross_s,
+  database,
   dashboard,
   dashboard_add,
   dashboards,
