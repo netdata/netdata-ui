@@ -105,6 +105,7 @@ import node_selected_l from "./assets/node_selected_l.svg"
 import nodes from "./assets/nodes.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import none_selected from "./assets/none_selected.svg"
+import os from "./assets/os/os.svg"
 import osAlpineLinux from "./assets/os/alpine_linux.svg"
 import osAmazonLinux from "./assets/os/amazon_linux.svg"
 import osArchLinux from "./assets/os/arch_linux.svg"
@@ -122,7 +123,6 @@ import osLinuxColor from "./assets/os/linux_color.svg"
 import osMacOSX from "./assets/os/macOSX.svg"
 import osOracle from "./assets/os/oracle.svg"
 import osOracleColor from "./assets/os/oracle_color.svg"
-import osOs from "./assets/os/os.svg"
 import osOsPress from "./assets/os/os_press.svg"
 import osRaspbian from "./assets/os/raspbian.svg"
 import osRedHat from "./assets/os/red_hat.svg"
@@ -153,7 +153,60 @@ import room_overview from "./assets/room_overview.svg"
 import sad from "./assets/sad.svg"
 import save from "./assets/save.svg"
 import search_s from "./assets/search_s.svg"
-import services from "./assets/services.svg"
+import serviceApache from "./assets/services/apache.svg"
+import serviceApacheTomcat from "./assets/services/apache_tomcat.svg"
+import serviceBeanstalk from "./assets/services/beanstalk.svg"
+import serviceCouchDB from "./assets/services/couchDB.svg"
+import serviceDatabase from "./assets/services/database.svg"
+import serviceDockerHub from "./assets/services/docker_hub.svg"
+import serviceDockerHubPress from "./assets/services/docker_hub_press.svg"
+import serviceEBPF from "./assets/services/eBPF.svg"
+import serviceElasticSearch from "./assets/services/elasticSearch.svg"
+import serviceFreeNAS from "./assets/services/freeNAS.svg"
+import serviceHAProxy from "./assets/services/haProxy.svg"
+import serviceHTTPCheck from "./assets/services/httpCheck.svg"
+import serviceIceCast from "./assets/services/iceCast.svg"
+import serviceInfluxDB from "./assets/services/influxDB.svg"
+import serviceIPFS from "./assets/services/ipfs.svg"
+import serviceIPVS from "./assets/services/ipvs.svg"
+import serviceKubernetes from "./assets/services/kubermetes.svg"
+import serviceLighthttpd from "./assets/services/lighthttpd.svg"
+import serviceLighthttpd2 from "./assets/services/lighthttpd2.svg"
+import serviceLiteSpeed from "./assets/services/liteSpeed.svg"
+import serviceLxc from "./assets/services/lxc.svg"
+import serviceMariaDB from "./assets/services/mariaDB.svg"
+import serviceMemCached from "./assets/services/memCached.svg"
+import serviceMongoDB from "./assets/services/mongoDB.svg"
+import serviceMySQL from "./assets/services/mySQL.svg"
+import serviceMySQLPress from "./assets/services/mySQL_press.svg"
+import serviceNginx from "./assets/services/nginx.svg"
+import serviceNginxLocal from "./assets/services/nginx_local.svg"
+import serviceNginxPlus from "./assets/services/nginx+.svg"
+import serviceNtpd from "./assets/services/ntpd.svg"
+import serviceNtpdPress from "./assets/services/ntpd_press.svg"
+import serviceOpenStack from "./assets/services/openStack.svg"
+import serviceOpenWrt from "./assets/services/openWrt.svg"
+import servicePan from "./assets/services/pan.svg"
+import servicePercona from "./assets/services/percona.svg"
+import servicePfSense from "./assets/services/pfSense.svg"
+import servicePhpFpm from "./assets/services/php_fpm.svg"
+import servicePostgreSQL from "./assets/services/postgreSQL.svg"
+import serviceProxySQL from "./assets/services/postgreSQL.svg"
+import serviceRabbitMQ from "./assets/services/rabbitMQ.svg"
+import serviceRedis from "./assets/services/redis.svg"
+import serviceRethinkDB from "./assets/services/rethinkDB.svg"
+import serviceRetroShare from "./assets/services/retroShare.svg"
+import services from "./assets/services/services.svg"
+import serviceSelectedArea from "./assets/services/selected_area.svg"
+import serviceSolr from "./assets/services/solr.svg"
+import serviceSquid from "./assets/services/squid.svg"
+import serviceSummaryStatistic from "./assets/services/summary_statistic.svg"
+import serviceTraefik from "./assets/services/traefik.svg"
+import serviceVarnish from "./assets/services/varnish.svg"
+import serviceWebLog from "./assets/services/webLog.svg"
+import serviceWebLogNginx from "./assets/services/webLog_nginx.svg"
+import serviceX509Check from "./assets/services/x509_check.svg"
+import serviceXen from "./assets/services/xen.svg"
 import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
@@ -297,6 +350,7 @@ export const iconsList = {
   nodes_hollow,
   none_selected,
   notification,
+  os,
   osAlpineLinux,
   osAmazonLinux,
   osArchLinux,
@@ -314,7 +368,6 @@ export const iconsList = {
   osMacOSX,
   osOracle,
   osOracleColor,
-  osOs,
   osOsPress,
   osRaspbian,
   osRedHat,
@@ -345,7 +398,60 @@ export const iconsList = {
   sad,
   save,
   search_s,
+  serviceApache,
+  serviceApacheTomcat,
+  serviceBeanstalk,
+  serviceCouchDB,
+  serviceDatabase,
+  serviceDockerHub,
+  serviceDockerHubPress,
+  serviceEBPF,
+  serviceElasticSearch,
+  serviceFreeNAS,
+  serviceHAProxy,
+  serviceHTTPCheck,
+  serviceIceCast,
+  serviceInfluxDB,
+  serviceIPFS,
+  serviceIPVS,
+  serviceKubernetes,
+  serviceLighthttpd,
+  serviceLighthttpd2,
+  serviceLiteSpeed,
+  serviceLxc,
+  serviceMariaDB,
+  serviceMemCached,
+  serviceMongoDB,
+  serviceMySQL,
+  serviceMySQLPress,
+  serviceNginx,
+  serviceNginxLocal,
+  serviceNginxPlus,
+  serviceNtpd,
+  serviceNtpdPress,
+  serviceOpenStack,
+  serviceOpenWrt,
+  servicePan,
+  servicePercona,
+  servicePfSense,
+  servicePhpFpm,
+  servicePostgreSQL,
+  serviceProxySQL,
+  serviceRabbitMQ,
+  serviceRedis,
+  serviceRethinkDB,
+  serviceRetroShare,
   services,
+  serviceSelectedArea,
+  serviceSolr,
+  serviceSquid,
+  serviceSummaryStatistic,
+  serviceTraefik,
+  serviceVarnish,
+  serviceWebLog,
+  serviceWebLogNginx,
+  serviceX509Check,
+  serviceXen,
   settings,
   settings_h,
   sorting_vertical,
