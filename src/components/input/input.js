@@ -138,7 +138,12 @@ export const TextInput = ({
       </StyledLabel>
 
       {!metaShrinked && (
-        <MetaContainer>
+        <MetaContainer
+          margin={[1, 0, 0, 0]}
+          width="100%"
+          justifyContent="between"
+          alignItems="center"
+        >
           <FieldInfo success={isSuccess} error={isError}>
             {(isError && errorMessage) || (isSuccess && successMessage) || fieldMessage}
           </FieldInfo>

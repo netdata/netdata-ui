@@ -80,18 +80,8 @@ export const SuccessIcon = styled(StyledIcon)`
 
 export const IconContainer = styled(Flex)``
 
-export const MetaContainer = styled.div`
-  height: 40px;
-  width: 100%;
-  max-width: 100%;
-  padding: ${({ theme }) => {
-    const sizeUnit = getSizeUnit({ theme })
-    return `${sizeUnit}px 0 ${sizeUnit}px ${sizeUnit}px`
-  }};
-  display: flex;
+export const MetaContainer = styled(Flex)`
   flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
 `
 
 export const MetaInfo = styled.span`

@@ -9,9 +9,10 @@ import {
   ResultsCount,
   FilterInfo,
   PlaceholderText,
+  PlaceholderContainer,
 } from "./styled"
 import { FilterBoxAutocompleteHandler } from "./filter-box-autocomplete"
-
+import { useInputStyles } from "../input"
 const codeMirrorConfig = {
   scrollbarStyle: "null",
 }
@@ -34,6 +35,7 @@ export const FilterBox = ({
   metaDisplay = "normal",
   placeholder,
   query,
+  size = "large",
   ...props
 }) => {
   const [{ parsedError, displayedError }, setState] = useState({
@@ -49,6 +51,14 @@ export const FilterBox = ({
     () => new AutoCompleteHandler(data, options, accessorPaths, fieldValueGetters),
     [AutoCompleteHandler, accessorPaths, fieldValueGetters, data, options]
   )
+
+  const { styles } = useInputStyles({
+    size,
+    error: displayedError,
+    success: false,
+    disabled: false,
+    focused,
+  })
 
   const handleError = (error, validationResult) => {
     if (onParseError) {
@@ -113,13 +123,16 @@ export const FilterBox = ({
   return (
     <Container className={className} inline={inline}>
       <FilterContainer
+        {...styles.inputContainer}
         onBlur={handleBlur}
         onFocus={handleFocus}
         error={debouncedError}
         inline={inline}
       >
         {placeholder && !focused && !filterQuery.length && (
-          <PlaceholderText>{placeholder}</PlaceholderText>
+          <PlaceholderContainer>
+            <PlaceholderText>{placeholder}</PlaceholderText>
+          </PlaceholderContainer>
         )}
         <ExtendedFilterBox
           {...props}
