@@ -47,6 +47,10 @@ export const FilterContainer = styled(Flex)`
     border-radius: 4px;
     box-shadow: none;
     border: 0px solid ${getColor("selected")};
+    background-color: transparent;
+  }
+  .CodeMirror {
+    background-color: transparent;
   }
   .react-filter-box.error.focus {
     border-color: transparent;
