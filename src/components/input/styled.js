@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 import { Icon } from "src/components/icon"
 import { getColor, getValidatedControlColor, getSizeUnit } from "src/theme/utils"
-import { controlReset, controlFocused } from "src/mixins"
+import { controlReset } from "src/mixins"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
 import round from "src/mixins/round"
