@@ -22,13 +22,13 @@ export const StyledTabs = styled.nav`
 `
 
 export const StyledTab = styled(Flex)`
-  border-bottom: 4px solid
+  border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid
     ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
   min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
-  height: ${getSizeBy(6)};
+  height: ${({ small }) => (small ? getSizeBy(4) : getSizeBy(6))};
   color: ${getColor("text")};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
@@ -37,7 +37,7 @@ export const StyledTab = styled(Flex)`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
-    border-bottom: 4px solid ${getColor("primary")};
+    border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid ${getColor("primary")};
   }
 
   & > span {
