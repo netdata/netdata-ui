@@ -9,6 +9,7 @@ export const Tabs = ({
   children,
   TabsHeader = Fragment,
   TabContent = Fragment,
+  noDefaultBorder,
 }) => {
   const [activeIndex, setActiveIndex] = useSetActive(selected, onChange)
 
@@ -25,7 +26,9 @@ export const Tabs = ({
   return (
     <StyledTabsWrapper className={className}>
       <TabsHeader>
-        <StyledTabs className="tabs">{nav}</StyledTabs>
+        <StyledTabs className="tabs" noDefaultBorder={noDefaultBorder}>
+          {nav}
+        </StyledTabs>
       </TabsHeader>
       <TabContent>{content}</TabContent>
     </StyledTabsWrapper>

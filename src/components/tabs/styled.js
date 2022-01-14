@@ -13,7 +13,9 @@ export const StyledTabs = styled.nav`
   justify-content: flex-start;
   align-items: center;
 
-  border-bottom: 1px solid ${getColor("border")};
+  border-bottom: 1px solid
+    ${({ noDefaultBorder }) =>
+      noDefaultBorder ? getColor(["transparent", "full"]) : getColor("border")};
   box-sizing: border-box;
 
   padding: 0 2px;

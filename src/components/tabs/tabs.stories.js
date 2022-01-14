@@ -38,6 +38,7 @@ tabsStory.add(
         onChange={makeOnChange[hasOnChange]}
         selected={number("Selected tab", 0, { min: 0, max: 3 })}
         TabContent={makeTabContentSelect[selectTabContent]}
+        noDefaultBorder={boolean("noDefaultBorder", false)}
       >
         <Tab label={text("Tab label", "LABEL")} disabled={boolean("Tab is disabled", false)}>
           Hello
