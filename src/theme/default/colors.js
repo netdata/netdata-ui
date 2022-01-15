@@ -48,6 +48,10 @@ const appColors = {
   inputBorder: rawColors.neutral.iron,
   inputBorderHover: rawColors.neutral.regentgrey,
   inputBorderFocus: rawColors.neutral.bluebayoux,
+  // Badges
+  nodeBadgeBackground: rawColors.neutral.porcelain,
+  nodeBadgeBorder: rawColors.neutral.iron,
+  nodeBadgeColor: rawColors.neutral.bluebayoux,
 }
 
 export default {
