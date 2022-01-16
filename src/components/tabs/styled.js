@@ -13,20 +13,22 @@ export const StyledTabs = styled.nav`
   justify-content: flex-start;
   align-items: center;
 
-  border-bottom: 1px solid ${getColor("border")};
+  border-bottom: 1px solid
+    ${({ noDefaultBorder }) =>
+      noDefaultBorder ? getColor(["transparent", "full"]) : getColor("border")};
   box-sizing: border-box;
 
   padding: 0 2px;
 `
 
 export const StyledTab = styled(Flex)`
-  border-bottom: 4px solid
+  border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid
     ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
   min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
-  height: ${getSizeBy(6)};
+  height: ${({ small }) => (small ? getSizeBy(4) : getSizeBy(6))};
   color: ${getColor("text")};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
@@ -35,7 +37,7 @@ export const StyledTab = styled(Flex)`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
-    border-bottom: 4px solid ${getColor("primary")};
+    border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid ${getColor("primary")};
   }
 
   & > span {
