@@ -10,7 +10,7 @@ import { DarkTheme } from "src/theme/dark"
 import { GlobalStyles } from "src/global-styles"
 import { ThemeProvider } from "styled-components"
 import Flex from "../src/components/templates/flex"
-import { Button } from "../src/components/button"
+import { Toggle } from "../src/components/toggle"
 const results = require("../.jest-test-results.json")
 
 // @ts-ignore
@@ -39,17 +39,28 @@ addDecorator(addReadme)
 
 addDecorator(story => {
   const [theme, setTheme] = useState("dark")
-
+  const [isDarkTheme, setIsDarkThem] = useState(false)
+  const handleChange = e => {
+    setIsDarkThem(e.currentTarget.checked)
+  }
   return (
     <>
-      <ThemeProvider theme={theme === "light" ? DefaultTheme : DarkTheme}>
+      <ThemeProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
         <GlobalStyles />
         <div id="story-wrapper" style={{ minHeight: "100vh" }}>
           {story()}
           <Flex>
-            <Button
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              label={"Change theme"}
+            <Toggle
+              labelRight={"Dark theme"}
+              labelLeft={"Light theme"}
+              onChange={handleChange}
+              checked={isDarkTheme}
+              colored={false}
+              disabled={false}
+              Label={"asdas"}
+              margin={""}
+              alignSelf={""}
+              className={""}
             />
           </Flex>
         </div>
