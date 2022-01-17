@@ -123,7 +123,7 @@ import osLinuxColor from "./assets/os/linux_color.svg"
 import osMacOSX from "./assets/os/macOSX.svg"
 import osOracle from "./assets/os/oracle.svg"
 import osOracleColor from "./assets/os/oracle_color.svg"
-import osOsPress from "./assets/os/os_press.svg"
+import osPress from "./assets/os/os_press.svg"
 import osRaspbian from "./assets/os/raspbian.svg"
 import osRedHat from "./assets/os/red_hat.svg"
 import osSuseLinux from "./assets/os/suse_linux.svg"
@@ -368,7 +368,7 @@ export const iconsList = {
   osMacOSX,
   osOracle,
   osOracleColor,
-  osOsPress,
+  osPress,
   osRaspbian,
   osRedHat,
   osSuseLinux,
