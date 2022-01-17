@@ -11,6 +11,8 @@ import { GlobalStyles } from "src/global-styles"
 import { ThemeProvider } from "styled-components"
 import Flex from "../src/components/templates/flex"
 import { Toggle } from "../src/components/toggle"
+import { useLocalStorage } from "react-use"
+
 const results = require("../.jest-test-results.json")
 
 // @ts-ignore
@@ -38,8 +40,7 @@ addParameters({
 addDecorator(addReadme)
 
 addDecorator(story => {
-  const [theme, setTheme] = useState("dark")
-  const [isDarkTheme, setIsDarkThem] = useState(false)
+  const [isDarkTheme, setIsDarkThem] = useLocalStorage("is_dark_theme")
   const handleChange = e => {
     setIsDarkThem(e.currentTarget.checked)
   }
