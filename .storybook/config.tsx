@@ -1,13 +1,16 @@
-import React from "react"
+import React, { useState } from "react"
 import { addParameters, addDecorator, configure } from "@storybook/react"
 import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
-import { withThemesProvider } from "storybook-addon-styled-component-theme"
 import { withKnobs } from "@storybook/addon-knobs"
 import centered from "@storybook/addon-centered/react"
 import { DefaultTheme } from "src/theme/default"
-import { GlobalStyles } from "src/global-styles"
+import { DarkTheme } from "src/theme/dark"
 
+import { GlobalStyles } from "src/global-styles"
+import { ThemeProvider } from "styled-components"
+import Flex from "../src/components/templates/flex"
+import { Button } from "../src/components/button"
 const results = require("../.jest-test-results.json")
 
 // @ts-ignore
@@ -34,14 +37,26 @@ addParameters({
 
 addDecorator(addReadme)
 
-addDecorator(story => (
-  <>
-    <GlobalStyles />
-    {story()}
-  </>
-))
+addDecorator(story => {
+  const [theme, setTheme] = useState("dark")
 
-addDecorator(withThemesProvider([DefaultTheme]))
+  return (
+    <>
+      <ThemeProvider theme={theme === "light" ? DefaultTheme : DarkTheme}>
+        <GlobalStyles />
+        <div id="story-wrapper" style={{ minHeight: "100vh" }}>
+          {story()}
+          <Flex>
+            <Button
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              label={"Change theme"}
+            />
+          </Flex>
+        </div>
+      </ThemeProvider>
+    </>
+  )
+})
 
 const loadStories = () => {
   const req = require.context("../src", true, /\.stories\.(tsx|js)$/)
