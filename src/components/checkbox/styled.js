@@ -39,10 +39,6 @@ export const StyledCheckbox = styled(Flex)`
   box-sizing: border-box;
   transition: all 150ms;
 
-  ${HiddenCheckboxInput}:focus + & {
-    ${controlFocused}
-  }
-
   ${StyledIcon} {
     visibility: ${props => {
       if (props.indeterminate) return "visible"
