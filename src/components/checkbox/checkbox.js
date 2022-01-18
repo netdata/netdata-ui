@@ -1,4 +1,5 @@
 import React, { useRef } from "react"
+import { Text } from "src/components/typography"
 
 import {
   CheckboxContainer,
@@ -21,6 +22,7 @@ export const Checkbox = ({
   margin,
   alignSelf,
   iconProps,
+  Label,
   ...props
 }) => {
   const preparedRef = useRef(null)
@@ -33,7 +35,11 @@ export const Checkbox = ({
   return (
     <StyledLabel disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
       <AccessibleArea />
-      {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
+      {label && labelPosition === "left" && (
+        <LabelText as={Label} left>
+          {label}
+        </LabelText>
+      )}
       <CheckboxContainer>
         <HiddenCheckboxInput disabled={disabled} checked={checked} ref={checkboxInput} {...props} />
         <StyledCheckbox indeterminate={indeterminate} checked={checked} disabled={disabled}>
@@ -44,11 +50,16 @@ export const Checkbox = ({
           />
         </StyledCheckbox>
       </CheckboxContainer>
-      {label && labelPosition === "right" && <LabelText right>{label}</LabelText>}
+      {label && labelPosition === "right" && (
+        <LabelText as={Label} right>
+          {label}
+        </LabelText>
+      )}
     </StyledLabel>
   )
 }
 
 Checkbox.defaultProps = {
   labelPosition: "right",
+  Label: Text,
 }
