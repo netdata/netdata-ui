@@ -44,7 +44,7 @@ export const Checkbox = ({
         </LabelText>
       )}
       <CheckboxContainer>
-        <HiddenCheckboxInput {...getInputProps(ref)} />
+        <HiddenCheckboxInput {...getInputProps(ref, props)} />
         <StyledCheckbox {...styles.styledCheckbox} {...getCheckBoxProps()}>
           <StyledIcon
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}

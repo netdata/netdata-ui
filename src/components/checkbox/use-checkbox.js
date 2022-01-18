@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect } from "react"
+import { useCallback, useRef, useEffect } from "react"
 import useToggle from "src/hooks/use-toggle"
 import { mergeRefs } from "utils"
 
@@ -34,8 +34,9 @@ const useCheckbox = ({ onChange, indeterminate, disabled, checked }) => {
   }, [isFocused, disabled, checked, indeterminate])
 
   const getInputProps = useCallback(
-    (forwardedRef = null) => {
+    (forwardedRef = null, ...props) => {
       return {
+        ...props,
         type: "checkbox",
         ref: mergeRefs(checkboxInputRef, forwardedRef),
         onChange: handleChange,
