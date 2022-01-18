@@ -14,12 +14,12 @@ const StyledCheckbox = styled(Checkbox)`
 
 const CheckboxGroup = styled.div``
 
-export const MockedCheckbox = () => {
+export const MockedCheckbox = ({ disabled = false }) => {
   const [checked, setChecked] = useState(false)
   const handleChange = e => {
     setChecked(e.currentTarget.checked)
   }
-  return <Checkbox onChange={handleChange} checked={checked} />
+  return <Checkbox onChange={handleChange} checked={checked} disabled={disabled} />
 }
 
 export const MockedCheckboxList = () => {

@@ -1,6 +1,7 @@
 import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
 import { MockedCheckbox, MockedCheckboxList } from "./checkbox.mock"
+import userEvent from "@testing-library/user-event"
 
 describe("Checkbox test", () => {
   it(" * should render with required props", () => {
@@ -34,5 +35,21 @@ describe("Checkbox test", () => {
     const childCheckbox = checkboxesList[1]
     fireEvent.click(childCheckbox)
     expect(mainCheckbox.indeterminate).toBe(true)
+  })
+
+  it(" * should have data-focus attribute on focus", () => {
+    const { getByTestId } = renderWithProviders(<MockedCheckbox />)
+    userEvent.click(getByTestId("checkbox-input"))
+    const styledCheckBox = getByTestId("styled-checkbox")
+    expect(styledCheckBox).toHaveAttribute("data-focus")
+  })
+
+  it(" * should not be clickable when we are at disabled", () => {
+    const { getByTestId } = renderWithProviders(<MockedCheckbox disabled={true} />)
+    const input = getByTestId("checkbox-input")
+    userEvent.click(input)
+    const styledCheckBox = getByTestId("styled-checkbox")
+    expect(styledCheckBox).toHaveAttribute("data-disabled")
+    expect(styledCheckBox).not.toHaveAttribute("data-focus")
   })
 })
