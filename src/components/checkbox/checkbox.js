@@ -1,5 +1,6 @@
 import React, { useRef } from "react"
 import { Text } from "src/components/typography"
+import useCheckBoxStyles from "./use-styles-checkbox"
 
 import {
   CheckboxContainer,
@@ -27,6 +28,7 @@ export const Checkbox = ({
 }) => {
   const preparedRef = useRef(null)
   const checkboxInput = ref || preparedRef
+  const { styles } = useCheckBoxStyles({ disabled })
 
   if (checkboxInput.current) {
     checkboxInput.current.indeterminate = Boolean(indeterminate)
@@ -42,7 +44,7 @@ export const Checkbox = ({
       )}
       <CheckboxContainer>
         <HiddenCheckboxInput disabled={disabled} checked={checked} ref={checkboxInput} {...props} />
-        <StyledCheckbox indeterminate={indeterminate} checked={checked} disabled={disabled}>
+        <StyledCheckbox {...styles.styledCheckbox} indeterminate={indeterminate} checked={checked}>
           <StyledIcon
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
             disabled={disabled}
