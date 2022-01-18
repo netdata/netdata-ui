@@ -44,8 +44,12 @@ export const Checkbox = ({
         </LabelText>
       )}
       <CheckboxContainer>
-        <HiddenCheckboxInput {...getInputProps(ref, props)} />
-        <StyledCheckbox {...styles.styledCheckbox} {...getCheckBoxProps()}>
+        <HiddenCheckboxInput data-testid="checkbox-input" {...getInputProps(ref, props)} />
+        <StyledCheckbox
+          data-testid="styled-checkbox"
+          {...styles.styledCheckbox}
+          {...getCheckBoxProps()}
+        >
           <StyledIcon
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
             disabled={disabled}
