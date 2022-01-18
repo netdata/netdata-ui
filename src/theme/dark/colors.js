@@ -50,7 +50,7 @@ const appColors = {
   inputBorderFocus: rawColors.neutral.white,
   // Badges
   nodeBadgeBackground: rawColors.neutral.limedSpruce,
-  nodeBadgeBorder: rawColors.neutral.iron,
+  nodeBadgeBorder: rawColors.neutral.bluebayoux,
   nodeBadgeColor: rawColors.neutral.white,
 }
 
