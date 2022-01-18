@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect } from "react"
 import useToggle from "src/hooks/use-toggle"
-import { mergeRefs } from "utils"
+import { mergeRefs } from "src/utils"
 
 const useCheckbox = ({ onChange, indeterminate, disabled, checked }) => {
   const [isFocused, , focusOn, focusOff] = useToggle()
@@ -43,9 +43,10 @@ const useCheckbox = ({ onChange, indeterminate, disabled, checked }) => {
         onFocus: focusOn,
         onBlur: focusOff,
         checked,
+        disabled,
       }
     },
-    [focusOff, focusOn, handleChange, checked]
+    [focusOff, focusOn, handleChange, checked, disabled]
   )
 
   const state = {
