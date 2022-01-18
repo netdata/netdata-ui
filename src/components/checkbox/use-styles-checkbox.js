@@ -30,6 +30,18 @@ const useCheckboxStyles = ({ disabled, success, error, focused }) => {
         side: "all",
       },
       round: true,
+      _focus: {
+        border: {
+          size: "1px",
+          type: "solid",
+          color: makeColor({ defaultColor: "controlFocused" })[status],
+          side: "all",
+        },
+        shadow: {
+          color: makeColor({ defaultColor: "controlFocused" })[status],
+          size: "0 0 0 1px",
+        },
+      },
     }
   }, [status, focused])
 
