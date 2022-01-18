@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react"
-import Flex from "src/components/templates/flex";
 import Pill from "./index"
 import { getMasterCardColor } from "./mixins/colors"
 import { MasterCardContainer } from "./styled"
