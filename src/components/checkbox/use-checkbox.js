@@ -34,7 +34,7 @@ const useCheckbox = ({ onChange, indeterminate, disabled, checked }) => {
   }, [isFocused, disabled, checked, indeterminate])
 
   const getInputProps = useCallback(
-    (forwardedRef = null, ...props) => {
+    (forwardedRef = null, props) => {
       return {
         ...props,
         type: "checkbox",
