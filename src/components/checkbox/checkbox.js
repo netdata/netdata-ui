@@ -1,4 +1,7 @@
 import React, { useRef } from "react"
+import { Text } from "src/components/typography"
+import useCheckBoxStyles from "./use-styles-checkbox"
+import useCheckbox from "./use-checkbox"
 
 import {
   CheckboxContainer,
@@ -21,22 +24,32 @@ export const Checkbox = ({
   margin,
   alignSelf,
   iconProps,
+  Label,
   ...props
 }) => {
-  const preparedRef = useRef(null)
-  const checkboxInput = ref || preparedRef
-
-  if (checkboxInput.current) {
-    checkboxInput.current.indeterminate = Boolean(indeterminate)
-  }
+  const { styles } = useCheckBoxStyles({ disabled })
+  const { getInputProps, getCheckBoxProps } = useCheckbox({
+    disabled,
+    checked,
+    indeterminate,
+    ...props,
+  })
 
   return (
     <StyledLabel disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
       <AccessibleArea />
-      {label && labelPosition === "left" && <LabelText left>{label}</LabelText>}
+      {label && labelPosition === "left" && (
+        <LabelText as={Label} left>
+          {label}
+        </LabelText>
+      )}
       <CheckboxContainer>
-        <HiddenCheckboxInput disabled={disabled} checked={checked} ref={checkboxInput} {...props} />
-        <StyledCheckbox indeterminate={indeterminate} checked={checked} disabled={disabled}>
+        <HiddenCheckboxInput data-testid="checkbox-input" {...getInputProps(ref, props)} />
+        <StyledCheckbox
+          data-testid="styled-checkbox"
+          {...styles.styledCheckbox}
+          {...getCheckBoxProps()}
+        >
           <StyledIcon
             name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
             disabled={disabled}
@@ -44,11 +57,16 @@ export const Checkbox = ({
           />
         </StyledCheckbox>
       </CheckboxContainer>
-      {label && labelPosition === "right" && <LabelText right>{label}</LabelText>}
+      {label && labelPosition === "right" && (
+        <LabelText as={Label} right>
+          {label}
+        </LabelText>
+      )}
     </StyledLabel>
   )
 }
 
 Checkbox.defaultProps = {
   labelPosition: "right",
+  Label: Text,
 }

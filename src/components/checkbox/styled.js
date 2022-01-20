@@ -5,6 +5,8 @@ import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
 import { controlFocused } from "src/mixins"
 
+import Flex from "src/components/templates/flex"
+
 export const CheckboxContainer = styled.div`
   display: block;
   box-sizing: border-box;
@@ -33,22 +35,9 @@ export const HiddenCheckboxInput = styled.input.attrs({
   width: 1px;
 `
 
-export const StyledCheckbox = styled.div`
+export const StyledCheckbox = styled(Flex)`
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  background: ${({ disabled }) =>
-    disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
-  border: 1px solid ${getValidatedControlColor("inputBorder", "inputBorder")};
   transition: all 150ms;
-
-  ${HiddenCheckboxInput}:focus + & {
-    ${controlFocused}
-  }
 
   ${StyledIcon} {
     visibility: ${props => {
