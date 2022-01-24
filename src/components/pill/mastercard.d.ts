@@ -4,7 +4,7 @@ import { HeightProps } from "src/components/templates/mixins"
 import { PillProps } from "src/components/pill/index"
 
 export type MasterCardFlavour = "disabledError" | "disabledWarning" | "error" | "warning"
-export type MasterCardRef = { [key: string]: (Element) }
+export type MasterCardRef = { [key: string]: Element }
 export type MasterCardSize = "default" | "large"
 
 type OnClickType = (e: SyntheticEvent<HTMLButtonElement>) => void
@@ -15,7 +15,7 @@ export interface MasterCardProps extends HeightProps, RoundProps {
   pillLeft?: PillProps
   pillRight?: PillProps
   ref?: MasterCardRef
-  size?: MasterCardSize,
+  size?: MasterCardSize
   [s: string]: any
 }
 

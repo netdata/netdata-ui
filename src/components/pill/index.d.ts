@@ -3,16 +3,22 @@ import { MarginProps, PaddingProps, PositionProps, RoundProps } from "src/mixins
 import { HeightProps, WidthProps } from "src/components/templates/mixins"
 
 export type PillFlavour = "error" | "neutral" | "success" | "warning"
-export type PillRef = { [key: string]: (Element) }
+export type PillRef = { [key: string]: Element }
 export type PillSize = "default" | "large" | "normal" | "small"
 
 type OnClickType = (e: SyntheticEvent<HTMLButtonElement>) => void
 
-export interface PillProps extends HeightProps, MarginProps, PaddingProps, PositionProps, RoundProps, WidthProps {
+export interface PillProps
+  extends HeightProps,
+    MarginProps,
+    PaddingProps,
+    PositionProps,
+    RoundProps,
+    WidthProps {
   background?: string
   borderColor?: string
   color?: string
-  'data-testid'?: string
+  "data-testid"?: string
   flavour?: PillFlavour
   hollow?: boolean
   icon?: string
