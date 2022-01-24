@@ -1,8 +1,5 @@
-import Box from "../box"
-import styled from "styled-components"
+import makeFlex from "./flex"
 
-export const Flex = styled(Box)({
-  display: "flex",
-})
+const Flex = makeFlex("div")
 
 export default Flex
