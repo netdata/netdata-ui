@@ -29,6 +29,9 @@ copyFileSync("src/components/drops/menu/index.d.ts", "lib/components/drops/menu/
 copyFileSync("src/components/drops/tooltip/index.d.ts", "lib/components/drops/tooltip/index.d.ts")
 copyFileSync("src/components/drops/popover/index.d.ts", "lib/components/drops/popover/index.d.ts")
 copyFileSync("src/components/icon/index.d.ts", "lib/components/icon/index.d.ts")
+copyFileSync("src/components/input/input.d.ts", "lib/components/input/input.d.ts")
+copyFileSync("src/components/pill/index.d.ts", "lib/components/pill/index.d.ts")
+copyFileSync("src/components/pill/mastercard.d.ts", "lib/components/pill/mastercard.d.ts")
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
 
