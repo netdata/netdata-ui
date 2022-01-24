@@ -42,7 +42,8 @@
     "react-portal": "^4.2.0",
     "react-table": "^7.2.1",
     "react-use": "^15.3.4",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "styled-system": "^5.1.5"
   },
   "peerDependencies": {
     "react": "^16.14.0",
