@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react"
-import { Text, TextBig, TextMicro, TextSmall } from "src/components/typography"
+import { Text, TextMicro, TextSmall } from "src/components/typography"
 import Container from "./container"
 import { getPillColor } from "./mixins/colors"
 import PillIcon from "./icon"
@@ -24,7 +24,7 @@ const Pill = forwardRef(
         {!reverse && <PillIcon {...iconProps} />}
         {children && (
           <Text
-            color={color ? color : hollow ? getPillColor("color", flavour) : "bright"}
+            color={color || (hollow ? getPillColor("color", flavour) : "bright")}
             strong={!normal}
           >
             {children}
