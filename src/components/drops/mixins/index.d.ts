@@ -26,5 +26,5 @@ export interface AlignProps {
 }
 
 export interface StretchProps {
-  streach?: boolean | "width" | "align"
+  stretch?: boolean | "width" | "align"
 }
