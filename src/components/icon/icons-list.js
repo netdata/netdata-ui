@@ -226,6 +226,7 @@ import triangle from "./assets/triangle.svg"
 import triangle_down from "./assets/triangle_down.svg"
 import unknownError from "./assets/unknownError.svg"
 import unreachable from "./assets/unreachable.svg"
+import unreachableNode from "./assets/unreachableNode.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import upload from "./assets/upload.svg"
@@ -473,6 +474,7 @@ export const iconsList = {
   triangle_down,
   unknownError,
   unreachable,
+  unreachableNode,
   update,
   update_pending,
   upload,
