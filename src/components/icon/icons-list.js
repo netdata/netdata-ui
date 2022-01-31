@@ -241,7 +241,7 @@ import firewallSolid from "./assets/firewall_solid.svg"
 import qualityOfServiceSolid from "./assets/qualityOfService_solid.svg"
 import applicationsSolid from "./assets/applications_solid.svg"
 import networkingStack from "./assets/networking_stack.svg"
-import view_charts from "./assets/view_charts.svg"
+import charts_view from "./assets/charts_view.svg"
 
 export const iconsList = {
   add_node,
@@ -275,6 +275,7 @@ export const iconsList = {
   calendarFullPress,
   chart_added,
   charts,
+  charts_view,
   check,
   checkmark_partial_s,
   checkmark_s,
@@ -486,5 +487,4 @@ export const iconsList = {
   warning,
   warning_triangle,
   x,
-  view_charts,
 }
