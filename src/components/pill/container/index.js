@@ -24,7 +24,6 @@ const Container = styled(Flex).attrs(
   })
 )`
   ${getPillBackground};
-  ${({ marginLeft }) => marginLeft && `margin-left: ${marginLeft};`}
 `
 
 export default Container

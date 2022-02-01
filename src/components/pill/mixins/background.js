@@ -1,5 +1,7 @@
 import { getColor } from "src/theme"
-import { getPillColor } from "./colors"
+import { getMasterCardColor, getPillColor } from "./colors"
+
+export const getMasterCardBackground = (background, flavour) => background || getMasterCardColor(flavour)
 
 const getPillBackground = ({ theme, background, flavour = "neutral", hollow }) => {
   if (background) return
