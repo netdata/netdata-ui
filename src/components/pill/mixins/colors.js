@@ -26,10 +26,10 @@ const colorMap = {
 }
 
 const masterCardColorMap = {
+  error: ["red", "pomegranate"],
   neutralGrey: ["neutral", "regentgrey"],
   neutralIron: ["neutral", "iron"],
-  red: ["red", "pomegranate"],
-  yellow: ["yellow", "seaBuckthorn"],
+  warning: ["yellow", "seaBuckthorn"],
 }
 
 const getPillColor = (type, flavour) => colorMap[type][flavour]

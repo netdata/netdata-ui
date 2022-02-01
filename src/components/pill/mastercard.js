@@ -12,55 +12,51 @@ const getBackground = (background, flavour) => background || getMasterCardColor(
 
 const MasterCard = forwardRef(
   ({
-    backgrounds,
-    colors,
-    'data-testids': dataTestids,
-    flavours = ["neutralGrey", "neutralIron"],
     height,
     normal,
     onClick,
-    onClicks,
-    refs,
+    pillLeft = {},
+    pillRight = {},
     round,
     size,
-    texts,
     ...rest
   }, ref) => (
     <MasterCardContainer
-      background={getBackground(backgrounds?.[1], flavours?.[1] || "neutralIron")}
+      background={getBackground(pillRight.background, pillRight.flavour || "neutralIron")}
       height={height}
       onClick={onClick}
       round={round}
       size={size}
       ref={ref}
     >
-      {flavours.map((flavour, index) => {
-        const elementFlavour = flavour || (index === 0 ? "neutralGrey" : "neutralIron")
-        const background = getBackground(backgrounds?.[index], elementFlavour)
+      {[pillLeft, pillRight].map(({ background, flavour, onClick: pillOnClick, text, ...pillRest }, index) => {
+        const pillFlavour = flavour || (index === 0 ? "neutralGrey" : "neutralIron")
+        const pillBackground = getBackground(background, pillFlavour)
         const pillProps = {
+          background: pillBackground,
+          borderColor: pillBackground,
+          height,
+          normal,
+          round,
+          size,
+          ...(!onClick && { onClick: pillOnClick }),
+          ...(index === 0 ? {
+            padding: [1, 3],
+            position: "relative",
+            width: { min: minWidths[size] || minWidths.default }
+          } : {
+            margin: [0, 0, 0, -1],
+            padding: [1, 2],
+          }),
+          ...pillRest,
           ...rest,
-          ...(!onClick && { onClick: onClicks?.[index] })
         }
 
         return (
           <Pill
-            background={background}
-            borderColor={background}
-            color={colors?.[index]}
-            data-testid={dataTestids?.[index]}
-            flavour={elementFlavour}
-            height={height}
-            key={`${elementFlavour}_${index}`}
-            marginLeft={index === 1 && "-4px"}
-            normal={normal}
-            position={index === 0 && "relative"}
-            ref={refs?.[index]}
-            round={round}
-            size={size}
-            width={index === 0 && { min: minWidths[size] || minWidths.default }}
-            padding={index === 0 ? [1, 3] : [1, 2]}
+            key={`${pillFlavour}_${index}`}
             {...pillProps}>
-            {texts?.[index] || "-"}
+            {text || "-"}
           </Pill>
         )
       })}

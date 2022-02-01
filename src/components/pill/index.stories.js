@@ -188,11 +188,11 @@ const PillsTiny = () => (
 const MasterCards = () => (
   <Flex column gap={4}>
     <Flex gap={2}>
-      <MasterCard flavours={["red", "yellow"]} texts={["3", "2"]} />
+      <MasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} />
       <MasterCard />
     </Flex>
     <Flex gap={2}>
-      <MasterCard flavours={["red", "yellow"]} size="large" texts={["3", "2"]} />
+      <MasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} size="large" />
       <MasterCard size="large" />
     </Flex>
   </Flex>
