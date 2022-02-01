@@ -3,7 +3,7 @@ import { RoundProps } from "src/mixins/types"
 import { HeightProps } from "src/components/templates/mixins"
 import { PillProps } from "src/components/pill/index"
 
-export type MasterCardFlavour = "error" | "neutralGrey" | "neutralIron" | "warning"
+export type MasterCardFlavour = "disabledError" | "disabledWarning" | "error" | "warning"
 export type MasterCardRef = { [key: string]: (Element) }
 export type MasterCardSize = "default" | "large"
 

@@ -26,9 +26,9 @@ const colorMap = {
 }
 
 const masterCardColorMap = {
+  disabledError: ["neutral", "regentgrey"],
+  disabledWarning: ["neutral", "iron"],
   error: ["red", "pomegranate"],
-  neutralGrey: ["neutral", "regentgrey"],
-  neutralIron: ["neutral", "iron"],
   warning: ["yellow", "seaBuckthorn"],
 }
 

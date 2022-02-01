@@ -9,7 +9,7 @@ const minWidths = {
 
 const MasterCardPill = forwardRef(
   ({ isClickable, flavour, onClick, side, text, ...rest }, ref) => {
-    const background = getMasterCardBackground(rest.background, flavour || (side === "left" ? "neutralGrey" : "neutralIron"))
+    const background = getMasterCardBackground(rest.background, flavour || (side === "left" ? "disabledError" : "disabledWarning"))
     const positionProps = side === "left" ? {
       padding: [1, 3],
       position: "relative",

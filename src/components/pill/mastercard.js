@@ -26,7 +26,7 @@ const MasterCard = forwardRef(
 
     return (
       <MasterCardContainer
-        background={getMasterCardBackground(pillRight.background, pillRight.flavour || "neutralIron")}
+        background={getMasterCardBackground(pillRight.background, pillRight.flavour || "disabledWarning")}
         height={height}
         onClick={onClick}
         round={round}
