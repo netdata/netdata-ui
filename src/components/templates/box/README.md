@@ -1,6 +1,6 @@
-## Flex
+## Box
 
-A flexbox container with all the frequently used properties.
+A Box container with all the frequently used properties.
 
 ### Props:
 
@@ -26,7 +26,7 @@ export const Container = () => {
           <Component1>
           <Component2>
           <Component1>
-        </Flex>
+        </Box>
       </Box>
     )
 }
