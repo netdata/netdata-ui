@@ -1,4 +1,4 @@
-import makeBox from "./Box"
+import makeBox from "./box"
 
 const Box = makeBox("div")
 

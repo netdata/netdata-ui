@@ -11,13 +11,9 @@ import height from "src/components/templates/mixins/height"
 import width from "src/components/templates/mixins/width"
 import overflow from "src/components/templates/mixins/overflow"
 import background from "src/components/templates/mixins/background"
-import flex from "src/components/templates/mixins/flex"
-import wrap from "src/components/templates/mixins/wrap"
-import alignItems from "src/components/templates/mixins/alignItems"
+
 import alignContent from "src/components/templates/mixins/alignContent"
-import justifyContent from "src/components/templates/mixins/justifyContent"
 import gap from "src/components/templates/mixins/gap"
-import direction from "src/components/templates/mixins/direction"
 import border from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
 import pseudos from "src/components/templates/mixins/pseudos"
@@ -30,12 +26,7 @@ export const sx = props => css(props.sx)(props)
 const Box = Component => styled(Component)`
   box-sizing: border-box;
 
-  ${flex}
-  ${direction}
-  ${wrap}
-  ${alignItems}
   ${alignContent}
-  ${justifyContent}
   ${alignSelf}
 
   ${position}

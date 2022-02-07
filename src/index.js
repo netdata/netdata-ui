@@ -77,7 +77,7 @@ export { default as Flex } from "./components/templates/flex"
 export { default as makeFlex } from "./components/templates/flex/flex"
 
 export { default as Box } from "./components/templates/box"
-export { default as makeBox } from "./components/templates/box/Box"
+export { default as makeBox } from "./components/templates/box/box"
 
 export { default as Layer } from "./components/templates/layer"
 
