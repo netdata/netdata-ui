@@ -54,7 +54,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 }
 
 .c3 {
-  border-bottom: 4px solid #42b861;
+  border-bottom: 4px solid #42B861;
   box-sizing: border-box;
   min-width: 80px;
   max-width: 208px;
