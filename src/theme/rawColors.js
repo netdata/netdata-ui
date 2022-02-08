@@ -5,7 +5,7 @@ const rawColors = {
     popover: "rgba(18, 36, 50, 0.9)",
   },
   green: {
-    chateau: "#42b861",
+    chateau: "#42B861",
     netdata: "#00AB44",
     deyork: "#68C47D",
     vista: "#96D4A2",
@@ -22,12 +22,12 @@ const rawColors = {
   },
   yellow: {
     amber: "#FFC300",
-    sunglow: "#F1BB28",
+    sunglow: "#FFCC26",
     seaBuckthorn: "#F9A825",
-    mustard: "#F8D36D",
+    mustard: "#FFD74F",
     salomie: "#FFE182",
-    buttermilk: "#F8D36D",
-    ginfizz: "#FDF1CE",
+    buttermilk: "#FFEDB3",
+    ginfizz: "#FFF8E1",
   },
   neutral: {
     white: "#FFF",
