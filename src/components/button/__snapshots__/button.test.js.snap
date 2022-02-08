@@ -149,8 +149,8 @@ exports[`Button states  * should render loading icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42b861;
-  background-color: #42b861;
+  border-color: #42B861;
+  background-color: #42B861;
   color: #FFF;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -284,7 +284,7 @@ exports[`Button states  * should render only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42b861;
+  border-color: #42B861;
   background-color: rgba(255,255,255,0.0);
   color: #68C47D;
   -webkit-text-decoration: none;
@@ -422,7 +422,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42b861;
+  border-color: #42B861;
   background-color: rgba(255,255,255,0.0);
   color: #68C47D;
   -webkit-text-decoration: none;
@@ -560,8 +560,8 @@ exports[`Default Button  * should render 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42b861;
-  background-color: #42b861;
+  border-color: #42B861;
+  background-color: #42B861;
   color: #FFF;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -660,7 +660,7 @@ exports[`Hollow Button  * should render 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42b861;
+  border-color: #42B861;
   background-color: rgba(255,255,255,0.0);
   color: #68C47D;
   -webkit-text-decoration: none;
