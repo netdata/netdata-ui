@@ -12,8 +12,7 @@ const SIZES = {
 const styledColor = ({ theme, color }) => color && `fill: ${getColor(color)({ theme })};`
 const styledhoverColor = ({ theme, hoverColor }) =>
   hoverColor && `&:hover { fill: ${getColor(hoverColor)({ theme })}; }`
-const styledRotate = ({ rotate }) =>
-  rotate > 0 && rotate < 4 && `transform: rotate(${rotate * 90}deg);`
+const styledRotate = ({ rotate }) => !isNaN(rotate) && `transform: rotate(${rotate * 90}deg);`
 
 export const StyledIcon = styled.svg`
   height: ${({ size, height }) => height || SIZES[size]};
