@@ -34,6 +34,7 @@
     "@elastic/search-ui-site-search-connector": "^1.5.1",
     "@netdata/react-filter-box": "^1.0.0",
     "@prismicio/client": "^5.1.0",
+    "@styled-system/css": "^5.1.5",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.21.1",
     "polished": "^4.0.3",
@@ -42,7 +43,8 @@
     "react-portal": "^4.2.0",
     "react-table": "^7.2.1",
     "react-use": "^15.3.4",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "styled-system": "^5.1.5"
   },
   "peerDependencies": {
     "react": "^16.14.0",
@@ -78,6 +80,8 @@
     "@types/react-portal": "^4.0.2",
     "@types/storybook__react": "^5.2.1",
     "@types/styled-components": "^5.1.2",
+    "@types/styled-system": "^5.1.15",
+    "@types/styled-system__css": "^5.0.16",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
     "awesome-typescript-loader": "^5.2.1",
