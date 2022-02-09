@@ -1,3 +1,5 @@
+import React from "react"
+
 import {
   StyledComponentProps,
   ColorType,
@@ -9,7 +11,8 @@ import {
   ZIndexProps,
   PositionProps,
   CursorProps,
-} from "../../../mixins/types"
+} from "src/mixins/types"
+
 import {
   DirectionProps,
   FlexibleProps,
