@@ -33,3 +33,9 @@ export type BoxProps<T extends React.ElementType = any> = CombinedStyledProps<T>
   as?: React.ElementType
   sx?: CombinedStyledProps<T>
 }
+
+declare const Box: React.FC<BoxProps & JSX.IntrinsicElements["div"]>
+
+export { Box }
+
+export default Box
