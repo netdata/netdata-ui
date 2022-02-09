@@ -16,14 +16,14 @@ const reverseXPosition = align => {
   if (align.right === "left") return { left: "right" }
 }
 
-const getXPostition = (align, targetRect, dropRect, canHideTarget = true) => {
+const getXPosition = (align, targetRect, dropRect, canHideTarget = true) => {
   let x = getAbsoluteXPosition(align, targetRect, dropRect)
 
   const minX = Math.max(0, x)
   x = Math.min(window.innerWidth - dropRect.width, minX)
 
   if (!canHideTarget && minX !== x)
-    return getXPostition(reverseXPosition(align), targetRect, dropRect)
+    return getXPosition(reverseXPosition(align), targetRect, dropRect)
 
   return x
 }
@@ -48,7 +48,6 @@ const getYPosition = (align, targetRect, dropRect, canHideTarget = true) => {
   let y = getAbsoluteYPosition(align, targetRect, dropRect)
 
   const minY = Math.max(0, y)
-  y = Math.min(window.innerHeight - dropRect.height, minY)
 
   if (!canHideTarget && minY !== y)
     return getYPosition(reverseYPosition(align), targetRect, dropRect)
@@ -77,7 +76,7 @@ export default (target, dropRef, align, stretch, canHideTarget) =>
     const width = getWidth(stretch, targetRect, dropRect)
     dropRect.width = width
 
-    const x = getXPostition(align, targetRect, dropRect, canHideTarget)
+    const x = getXPosition(align, targetRect, dropRect, canHideTarget)
     const y = getYPosition(align, targetRect, dropRect, canHideTarget)
 
     dropRef.current.style.left = `${x}px`
