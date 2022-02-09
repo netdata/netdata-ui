@@ -10,6 +10,7 @@ copyFileSync(
   "src/components/templates/mixins/index.d.ts",
   "lib/components/templates/mixins/index.d.ts"
 )
+copyFileSync("src/components/templates/box/index.d.ts", "lib/components/templates/box/index.d.ts")
 copyFileSync("src/components/templates/flex/index.d.ts", "lib/components/templates/flex/index.d.ts")
 copyFileSync(
   "src/components/templates/layer/index.d.ts",

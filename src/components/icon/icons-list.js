@@ -236,6 +236,7 @@ import view_list from "./assets/view_list.svg"
 import virtualization from "./assets/virtualization.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
+import warning_triangle_hollow from "./assets/warning_triangle_hollow.svg"
 import x from "./assets/x.svg"
 import firewallSolid from "./assets/firewall_solid.svg"
 import qualityOfServiceSolid from "./assets/qualityOfService_solid.svg"
@@ -486,5 +487,6 @@ export const iconsList = {
   virtualization,
   warning,
   warning_triangle,
+  warning_triangle_hollow,
   x,
 }
