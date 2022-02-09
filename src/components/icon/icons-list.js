@@ -105,6 +105,7 @@ import node_selected_l from "./assets/node_selected_l.svg"
 import nodes from "./assets/nodes.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import none_selected from "./assets/none_selected.svg"
+import notificationWarning from "./assets/notifications/warning.svg"
 import os from "./assets/os/os.svg"
 import osAlpineLinux from "./assets/os/alpine_linux.svg"
 import osAmazonLinux from "./assets/os/amazon_linux.svg"
@@ -355,6 +356,7 @@ export const iconsList = {
   nodes_hollow,
   none_selected,
   notification,
+  notificationWarning,
   os,
   osAlpineLinux,
   osAmazonLinux,
