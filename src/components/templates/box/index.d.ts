@@ -34,7 +34,7 @@ export type BoxProps<T extends React.ElementType = any> = CombinedStyledProps<T>
   sx?: CombinedStyledProps<T>
 }
 
-declare const Box: React.FC<BoxProps>
+declare const Box: React.FC<BoxProps<"div">>
 
 export { Box }
 
