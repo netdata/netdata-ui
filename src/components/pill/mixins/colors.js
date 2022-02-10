@@ -2,7 +2,7 @@ const colorMap = {
   background: {
     neutral: ["neutral", "regentgrey"],
     success: ["green", "netdata"],
-    warning: ["yellow", "amber"],
+    warning: ["yellow", "seaBuckthorn"],
     error: ["red", "pomegranate"],
   },
   hollow: {
@@ -14,7 +14,7 @@ const colorMap = {
   border: {
     neutral: ["neutral", "regentgrey"],
     success: ["green", "deyork"],
-    warning: ["yellow", "amber"],
+    warning: ["yellow", "seaBuckthorn"],
     error: ["red", "wewak"],
   },
   color: {
