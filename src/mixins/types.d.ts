@@ -20,6 +20,8 @@ export type MarginType =
   | [MarginValueType, MarginValueType, MarginValueType]
   | [MarginValueType, MarginValueType, MarginValueType, MarginValueType]
 
+export type RefType = { [key: string]: Element }
+
 export interface MarginProps {
   margin?: MarginType
 }
