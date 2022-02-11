@@ -17,6 +17,7 @@ import gap from "src/components/templates/mixins/gap"
 import border from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
 import pseudos from "src/components/templates/mixins/pseudos"
+import { typography } from "src/components/typography/typography"
 //styled system custom
 import { position as styledSystemPosition } from "styled-system"
 import css from "@styled-system/css"
@@ -35,7 +36,7 @@ const Box = Component => styled(Component)`
   ${gap}
   ${width}
   ${height}
-
+  ${typography}
   ${background}
   ${opacity}
   ${border}

@@ -41,6 +41,27 @@ flexStory.add(
   ),
   subData
 )
+
+flexStory.add(
+  "Box using typography styles",
+  () => (
+    <Box position="relative" width="500px" height="500px" border={{ size: "1px", side: "all" }}>
+      <Box
+        as="a"
+        cursor="pointer"
+        color="primary"
+        border={{ size: "1px", side: "all" }}
+        position="absolute"
+        left="25px"
+        top="25px"
+      >
+        Look at me i am link and i inherit both from box and typography
+      </Box>
+    </Box>
+  ),
+  subData
+)
+
 flexStory.add(
   "Styled with sx prop",
   () => (

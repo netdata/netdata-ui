@@ -17,7 +17,7 @@ const makeFontWeight = defaultStrong => ({ strong = defaultStrong }) =>
 const fontColor = ({ theme, color = "text" }) => `color: ${getColor(color)({ theme })};`
 const textTransform = ({ textTransform: value }) => value && `text-transform: ${value};`
 
-const typography = css`
+export const typography = css`
   ${fontColor}
   ${alignSelf}
   ${textAlign}
