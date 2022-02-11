@@ -1,20 +1,22 @@
-import { ReactNode } from "react"
-import { MarginProps, AlignSelfProps, ColorType } from "src/mixins/types"
+import { FC } from "react"
+import { AlignSelfProps, ColorType, MarginProps, RefType } from "src/mixins/types"
 
 export interface IconProps extends MarginProps, AlignSelfProps {
-  name: string
-  size?: "small" | "medium" | "large"
   className?: string
-  onClick?: (arg?: any) => void
-  title?: string
-  disabled?: boolean
   color?: ColorType
-  hoverColor?: ColorType
-  width?: string
+  disabled?: boolean
+  "data-testid"?: string
   height?: string
+  hoverColor?: ColorType
+  name: string
+  onClick?: (arg?: any) => void
+  ref?: RefType
+  size?: "small" | "medium" | "large"
+  title?: string
+  width?: string
 }
 
-declare const Icon: React.FC<IconProps>
+declare const Icon: FC<IconProps>
 
 export { Icon }
 

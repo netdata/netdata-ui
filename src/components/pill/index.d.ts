@@ -1,9 +1,8 @@
 import { FC, SyntheticEvent } from "react"
-import { MarginProps, PaddingProps, PositionProps, RoundProps } from "src/mixins/types"
+import { MarginProps, PaddingProps, PositionProps, RoundProps, RefType } from "src/mixins/types"
 import { HeightProps, WidthProps } from "src/components/templates/mixins"
 
 export type PillFlavour = "error" | "neutral" | "success" | "warning"
-export type PillRef = { [key: string]: Element }
 export type PillSize = "default" | "large" | "normal" | "small"
 
 type OnClickType = (e: SyntheticEvent<HTMLButtonElement>) => void
@@ -25,7 +24,7 @@ export interface PillProps
   iconSize?: string
   normal?: boolean
   onClick?: OnClickType
-  ref?: PillRef
+  ref?: RefType
   reverse?: boolean
   size?: PillSize
   textSize?: PillSize

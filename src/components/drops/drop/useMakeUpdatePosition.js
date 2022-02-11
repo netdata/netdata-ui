@@ -49,6 +49,8 @@ const getYPosition = (align, targetRect, dropRect, canHideTarget = true) => {
 
   const minY = Math.max(0, y)
 
+  y = Math.min(window.innerHeight - dropRect.height, minY)
+
   if (!canHideTarget && minY !== y)
     return getYPosition(reverseYPosition(align), targetRect, dropRect)
 
