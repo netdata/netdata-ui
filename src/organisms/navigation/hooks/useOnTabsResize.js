@@ -1,31 +1,63 @@
 import { useCallback, useRef } from "react"
 
 const initialRect = {
-  prevContainerRight: -1,
-  prevTabWidth: -1,
+  width: -1,
+  tabRight: -1,
 }
 
-export default (ref, target, callback, deps) => {
+const hasChanged = (prevValues, values) => {
+  if (prevValues.width === initialRect.width) return true
+  if (prevValues.width === values.width && prevValues.tabRight !== values.tabRight) return true
+  return prevValues.width !== values.width
+}
+
+export default (parentRef, ref, target, callback, deps) => {
   const prevValuesRef = useRef(initialRect)
 
   return useCallback(() => {
     if (!ref.current || !target.current.length) return
 
-    const container = ref.current
-    const { right: containerRight } = container.getBoundingClientRect()
+    const width = document.body.clientWidth
+
+    const draggableTabs = ref.current
+    const container = parentRef.current
+    const { right: containerRight, left: containerLeft } = container.getBoundingClientRect()
+
+    if (!prevValuesRef.current.expandedStaticWidth) {
+      prevValuesRef.current.expandedStaticWidth =
+        draggableTabs.getBoundingClientRect().left - containerLeft
+    }
 
     const lastTab = target.current[target.current.length - 1]
     const { right: tabRight, width: tabWidth } = lastTab.getBoundingClientRect()
 
-    const { prevContainerRight, prevTabWidth } = prevValuesRef.current
-    if (prevContainerRight === containerRight && prevTabWidth === tabWidth) return
+    if (!hasChanged(prevValuesRef.current, { width, tabRight })) return
+    if (
+      tabRight < width &&
+      containerLeft +
+        prevValuesRef.current.expandedStaticWidth +
+        (tabRight - draggableTabs.getBoundingClientRect().left) >
+        width
+    )
+      return
 
     prevValuesRef.current = {
-      prevContainerRight: containerRight,
-      prevTabWidth: tabWidth,
+      ...prevValuesRef.current,
+      width,
+      tabRight,
+      containerRight,
     }
 
-    if (tabRight >= containerRight) return callback(true)
-    if (tabRight + tabWidth < containerRight) return callback(false)
+    if (tabRight >= containerRight && !prevValuesRef.current.collapse) {
+      prevValuesRef.current.collapse = true
+      return callback(true)
+    }
+    if (
+      tabRight + tabWidth < containerRight &&
+      (prevValuesRef.current.collapse || typeof prevValuesRef.current.collapse === "undefined")
+    ) {
+      prevValuesRef.current.collapse = false
+      return callback(false)
+    }
   }, deps)
 }

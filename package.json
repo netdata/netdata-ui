@@ -44,7 +44,8 @@
     "react-table": "^7.2.1",
     "react-use": "^15.3.4",
     "react-window": "^1.8.5",
-    "styled-system": "^5.1.5"
+    "styled-system": "^5.1.5",
+    "throttle-debounce": "^3.0.1"
   },
   "peerDependencies": {
     "react": "^16.14.0",
