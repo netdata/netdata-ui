@@ -243,6 +243,7 @@ import qualityOfServiceSolid from "./assets/qualityOfService_solid.svg"
 import applicationsSolid from "./assets/applications_solid.svg"
 import networkingStack from "./assets/networking_stack.svg"
 import charts_view from "./assets/charts_view.svg"
+import nodes_update from "./assets/nodes_update.svg"
 
 export const iconsList = {
   add_node,
@@ -355,6 +356,7 @@ export const iconsList = {
   nodes,
   nodes_hollow,
   none_selected,
+  nodes_update,
   notification,
   os,
   osAlpineLinux,
