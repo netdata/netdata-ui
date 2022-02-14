@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from "react"
+import React, { forwardRef, useEffect } from "react"
 import ReactDOM from "react-dom"
 import useDropElement from "src/hooks/use-drop-element"
 import useKeyboardEsc from "src/hooks/use-keyboard-esc"
@@ -35,7 +35,7 @@ const Drop = forwardRef(
 
     useDimensionChange(target, updatePosition)
 
-    useOutsideClick(ref, onClickOutside)
+    useOutsideClick(ref, onClickOutside, target)
     useKeyboardEsc(onEsc)
 
     const el = useDropElement()
