@@ -1,7 +1,7 @@
-import React, { ReactNode, useContext } from "react"
+import React, { useContext } from "react"
 import { LayoutContext } from "../../layout-context"
 import { TableCell } from "../table-cell"
-import { StyledRow, StyledBlockRow } from "./styled"
+import { StyledBlockRow, StyledRow } from "./styled"
 
 const rowRenderOptions = {
   row: {
@@ -51,9 +51,13 @@ export const TableRow = ({
       <DefaultGroupHead row={row} layoutType={layoutType} style={style} />
     )
   }
-
+  const { hasStickyHeader } = customProps
   return (
-    <RowLayout layoutType={layoutType} {...row.getRowProps({ style })}>
+    <RowLayout
+      layoutType={layoutType}
+      hasStickyHeader={hasStickyHeader}
+      {...row.getRowProps({ style })}
+    >
       {row.cells.map(cell => {
         const { key, ...cellProps } = cell.getCellProps()
         return (

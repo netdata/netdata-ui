@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo } from "react"
 import { useTable } from "react-table"
-import { TableContainer, TableBody } from "./components/table-container"
+import { TableBody, TableContainer } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
 import { LayoutContextProvider } from "./layout-context"
-import { defaultGroupByFn, sortGroupsByPriority, unwrapGroupedRows, getValidRows } from "./utils"
-import { tableHooks, blockTableHooks } from "./table-hooks"
+import { defaultGroupByFn, getValidRows, sortGroupsByPriority, unwrapGroupedRows } from "./utils"
+import { blockTableHooks, tableHooks } from "./table-hooks"
 
 const defaultItemIsDisabled = () => false
 
@@ -123,6 +123,7 @@ export function Table({
         {...getTableProps()}
         className={className}
         callbackRef={callbackRef}
+        hasStickyHeader={customProps.hasStickyHeader}
       >
         <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
         <TableBody layoutType={layoutType} {...getTableBodyProps()}>

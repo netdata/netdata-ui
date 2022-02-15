@@ -1,5 +1,6 @@
-import React, { useContext, useState, useMemo } from "react"
-import styled from "styled-components"
+import React, { useContext, useMemo, useState } from "react"
+import styled, { css } from "styled-components"
+import { getColor } from "src/theme"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import { LayoutContext } from "../../layout-context"
@@ -8,6 +9,16 @@ const StyledColumnHead = styled(Flex)`
   &:hover {
     opacity: 0.7;
   }
+`
+const StyledTh = styled.th`
+  position: ${({ hasStickyHeader }) => hasStickyHeader && "relative"};
+  ${({ background = "mainBackground", hasStickyHeader }) =>
+    hasStickyHeader &&
+    css`
+      position: sticky;
+      top: 0;
+      background: ${getColor(background)};
+    `};
 `
 
 export const ColumnHead = ({ column, sortableBy, customProps }) => {
@@ -20,8 +31,10 @@ export const ColumnHead = ({ column, sortableBy, customProps }) => {
   const sortProps = useMemo(() => (isColumnSortable ? getSortByToggleProps() : {}), [
     isColumnSortable,
   ])
+  const { hasStickyHeader } = customProps
   return layoutType === "table" ? (
-    <th
+    <StyledTh
+      hasStickyHeader={hasStickyHeader}
       {...sortProps}
       {...getHeaderProps()}
       onMouseEnter={() => setHover(true)}
@@ -48,7 +61,7 @@ export const ColumnHead = ({ column, sortableBy, customProps }) => {
       ) : (
         render("Header", { ...customProps })
       )}
-    </th>
+    </StyledTh>
   ) : (
     <div {...sortProps} {...getHeaderProps()} className="column-head">
       {render("Header", { ...customProps })}

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const StyledRow = styled.tr`
-  position: relative;
+  position: ${({ hasStickyHeader }) => (hasStickyHeader ? "static" : "relative")};
 `
 
 export const StyledBlockRow = styled.div`
