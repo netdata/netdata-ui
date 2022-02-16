@@ -9,8 +9,7 @@ const Tabs = ({ children }) => {
       const draggable = child.type.displayName === "DraggableTabs"
       return React.cloneElement(child, {
         collapsed,
-        ...(draggable && { onResize: setCollapsed }),
-        ref,
+        ...(draggable && { onResize: setCollapsed, ref }),
       })
     })
   }, [collapsed, children])
