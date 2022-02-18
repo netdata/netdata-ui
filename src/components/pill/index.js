@@ -26,6 +26,7 @@ const Pill = forwardRef(
           <Text
             color={color || (hollow ? getPillColor("color", flavour) : "bright")}
             strong={!normal}
+            whiteSpace="nowrap"
           >
             {children}
           </Text>
