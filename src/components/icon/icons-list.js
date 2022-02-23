@@ -86,6 +86,7 @@ import insights from "./assets/insights.svg"
 import integrations from "./assets/integrations.svg"
 import line_chart from "./assets/line_chart.svg"
 import logo_s from "./assets/logo_s.svg"
+import loading from "./assets/loading.svg"
 import magnify from "./assets/magnify.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
 import more from "./assets/more.svg"
@@ -336,6 +337,7 @@ export const iconsList = {
   integrations,
   line_chart,
   logo_s,
+  loading,
   magnify,
   metrics_explorer,
   more,
