@@ -97,3 +97,12 @@ export { default as useIntersection } from "./hooks/use-intersection"
 export { default as Pill } from "./components/pill"
 
 export { default as MasterCard } from "./components/pill/mastercard"
+
+export {
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+} from "./components/modal"
+export { default as Modal } from "./components/modal"
