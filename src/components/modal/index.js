@@ -1,5 +1,8 @@
 import React from "react"
-import { Layer, Flex, Box, Icon } from "../"
+import Layer from "../templates/layer"
+import Box from "../templates/box"
+import Flex from "../templates/flex"
+import { Icon } from "../icon"
 
 export const ModalContent = ({ children, height, width, testId }) => {
   return (
