@@ -33,9 +33,9 @@ describe("Modal", () => {
             Header
             <ModalCloseButton onClose={onClose} testId="close-button" />
           </ModalHeader>
+          <ModalBody>Body</ModalBody>
+          <ModalFooter>Footer</ModalFooter>
         </ModalContent>
-        <ModalBody>Body</ModalBody>
-        <ModalFooter>Footer</ModalFooter>
       </Modal>
     )
 
