@@ -23,7 +23,7 @@ const MasterCardPill = forwardRef(
       <Pill
         background={background}
         borderColor={background}
-        onClick={isClickable && onClick}
+        onClick={isClickable ? onClick : null}
         ref={ref}
         {...positionProps}
         {...rest}
