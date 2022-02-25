@@ -1,26 +1,26 @@
 import React from "react"
 
 export type ModalContentProps = {
-  height: number | string
-  width: number | string
-  testId: string
+  height?: number | string
+  width?: number | string
+  testId?: string
 }
 
 export type ModalHeaderProps = {
-  testId: string
+  testId?: string
 }
 
 export type ModalBodyProps = {
-  testId: string
+  testId?: string
 }
 
 export type ModalFooterProps = {
-  testId: string
+  testId?: string
 }
 
 export type ModalCloseButtonProps = {
   onClose: () => void
-  testId: string
+  testId?: string
 }
 
 declare const Modal: React.FC
