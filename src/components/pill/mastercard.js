@@ -5,7 +5,18 @@ import { MasterCardContainer } from "./styled"
 
 const MasterCard = forwardRef(
   (
-    { children, height, normal, onClick, pillLeft = {}, pillRight = {}, round, size, ...rest },
+    {
+      children,
+      height,
+      normal,
+      onClick,
+      pillLeft = {},
+      pillRight = {},
+      round,
+      size,
+      "data-testid": dataTestId,
+      ...rest
+    },
     ref
   ) => {
     const pillProps = {
@@ -28,6 +39,7 @@ const MasterCard = forwardRef(
         round={round}
         size={size}
         ref={ref}
+        {...(dataTestId && { "data-testid": dataTestId })}
       >
         {children || (
           <>
