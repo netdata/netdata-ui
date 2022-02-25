@@ -4,16 +4,15 @@ import Box from "../templates/box"
 import Flex from "../templates/flex"
 import { Icon } from "../icon"
 
-export const ModalContent = ({ children, height, width, testId }) => {
+export const ModalContent = ({
+  children,
+  height,
+  width,
+  testId,
+  background = "mainBackground",
+}) => {
   return (
-    <Flex
-      data-testid={testId}
-      height={height}
-      width={width}
-      background={"mainBackground"}
-      round
-      column
-    >
+    <Flex data-testid={testId} height={height} width={width} background={background} round column>
       {children}
     </Flex>
   )
@@ -62,8 +61,8 @@ export const ModalCloseButton = ({ onClose, testId }) => (
   />
 )
 
-const Modal = ({ children }) => {
-  return <Layer>{children}</Layer>
+const Modal = ({ children, ...layerprops }) => {
+  return <Layer {...layerprops}>{children}</Layer>
 }
 
 export default Modal

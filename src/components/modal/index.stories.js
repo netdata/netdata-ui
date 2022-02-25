@@ -27,3 +27,24 @@ modalStory.add("Modal", () => {
     </Modal>
   )
 })
+
+modalStory.add("Modal without backdrop", () => {
+  return (
+    <Modal backdrop={false}>
+      <ModalContent background="selected">
+        <ModalHeader>
+          Header
+          <ModalCloseButton testId="close-button" />
+        </ModalHeader>
+        <ModalBody>
+          <Flex height={60} width={80}>
+            Here is body
+          </Flex>
+        </ModalBody>
+        <ModalFooter>
+          <Button label="Footer button" />
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+})
