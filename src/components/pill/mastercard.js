@@ -4,34 +4,42 @@ import { getMasterCardBackground } from "./mixins/background"
 import { MasterCardContainer } from "./styled"
 
 const MasterCard = forwardRef(
-  ({
-    children,
-    height,
-    normal,
-    onClick,
-    pillLeft = {},
-    pillRight = {},
-    round,
-    size,
-    ...rest
-  }, ref) => {
+  (
+    {
+      children,
+      height,
+      normal,
+      onClick,
+      pillLeft = {},
+      pillRight = {},
+      round,
+      size,
+      "data-testid": dataTestId,
+      ...rest
+    },
+    ref
+  ) => {
     const pillProps = {
       height,
       isClickable: !onClick,
       normal,
       round,
       size,
-      ...rest
+      ...rest,
     }
 
     return (
       <MasterCardContainer
-        background={getMasterCardBackground(pillRight.background, pillRight.flavour || "disabledWarning")}
+        background={getMasterCardBackground(
+          pillRight.background,
+          pillRight.flavour || "disabledWarning"
+        )}
         height={height}
         onClick={onClick}
         round={round}
         size={size}
         ref={ref}
+        {...(dataTestId && { "data-testid": dataTestId })}
       >
         {children || (
           <>
