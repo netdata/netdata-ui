@@ -13,9 +13,9 @@ describe("Modal", () => {
             Header
             <ModalCloseButton testId="close-button" />
           </ModalHeader>
+          <ModalBody>Body</ModalBody>
+          <ModalFooter>Footer</ModalFooter>
         </ModalContent>
-        <ModalBody>Body</ModalBody>
-        <ModalFooter>Footer</ModalFooter>
       </Modal>
     )
     expect(screen.getByText("Header")).toBeInTheDocument()
