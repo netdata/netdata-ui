@@ -35,6 +35,7 @@ copyFileSync("src/components/pill/index.d.ts", "lib/components/pill/index.d.ts")
 copyFileSync("src/components/pill/mastercard.d.ts", "lib/components/pill/mastercard.d.ts")
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
+copyFileSync("src/components/modal/index.d.ts", "lib/components/modal/index.d.ts")
 
 copyFileSync("src/organisms/documentation/index.d.ts", "lib/organisms/documentation/index.d.ts")
 copyFileSync("src/theme/index.d.ts", "lib/theme/index.d.ts")
