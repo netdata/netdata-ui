@@ -234,6 +234,8 @@ import upload from "./assets/upload.svg"
 import user from "./assets/user.svg"
 import users from "./assets/users.svg"
 import view_list from "./assets/view_list.svg"
+import viewSingleNode from "./assets/views/single_node_view.svg"
+import viewSingleNodePress from "./assets/views/single_node_view_press.svg"
 import virtualization from "./assets/virtualization.svg"
 import warning from "./assets/warning.svg"
 import warning_triangle from "./assets/warning_triangle.svg"
@@ -488,6 +490,8 @@ export const iconsList = {
   user,
   users,
   view_list,
+  viewSingleNode,
+  viewSingleNodePress,
   virtualization,
   warning,
   warning_triangle,
