@@ -10,6 +10,7 @@ import {
   PositionProps,
   CursorProps,
 } from "src/mixins/types"
+import { CSSProperties } from "styled-components"
 
 import {
   AlignContentProps,
@@ -58,7 +59,7 @@ export type CombinedStyledProps<El extends React.ElementType> = NativeAttributes
 
 export type BoxProps<T extends React.ElementType = any> = CombinedStyledProps<T> & {
   as?: React.ElementType
-  sx?: CombinedStyledProps<T>
+  sx?: CSSProperties
 }
 
 declare const Box: React.FC<BoxProps<"div">>
