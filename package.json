@@ -2,6 +2,7 @@
   "name": "@netdata/netdata-ui",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.7.53",
 =======
   "version": "1.7.52",
@@ -9,6 +10,9 @@
 =======
   "version": "1.7.53",
 >>>>>>> 59d95b6 (1.7.53)
+=======
+  "version": "1.7.54",
+>>>>>>> 0749efc (1.7.54)
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
