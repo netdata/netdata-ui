@@ -7,13 +7,14 @@ const minWidths = {
   large: "37px",
 }
 
-const MasterCardPill = forwardRef(({ flavour, isAlert, isClickable, onClick, side, text, ...rest }, ref) => {
+const MasterCardPill = forwardRef(({ 'data-testid': dataTestId, flavour, isAlert, isClickable, onClick, side, text, ...rest }, ref) => {
+  const isLeft = side === "left"
   const background = getMasterCardBackground(
     rest.background,
-    flavour || (side === "left" ? "disabledError" : "disabledWarning")
+    flavour || (isLeft ? "disabledError" : "disabledWarning")
   )
   const sideProps =
-    side === "left"
+    isLeft
       ? {
           padding: isAlert ? [1, 2] : [1, 3],
           position: "relative",
@@ -28,6 +29,7 @@ const MasterCardPill = forwardRef(({ flavour, isAlert, isClickable, onClick, sid
     <Pill
       background={background}
       borderColor={background}
+      data-testid={dataTestId || "mastercard-pill"}
       onClick={isClickable ? onClick : null}
       ref={ref}
       {...sideProps}
