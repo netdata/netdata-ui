@@ -7,17 +7,17 @@ const minWidths = {
   large: "37px",
 }
 
-const MasterCardPill = forwardRef(({ isClickable, flavour, onClick, side, text, ...rest }, ref) => {
+const MasterCardPill = forwardRef(({ flavour, isAlert, isClickable, onClick, side, text, ...rest }, ref) => {
   const background = getMasterCardBackground(
     rest.background,
     flavour || (side === "left" ? "disabledError" : "disabledWarning")
   )
-  const positionProps =
+  const sideProps =
     side === "left"
       ? {
-          padding: [1, 3],
+          padding: isAlert ? [1, 2] : [1, 3],
           position: "relative",
-          width: { min: minWidths[rest.size] || minWidths.default },
+          ...(!isAlert && { width: { min: minWidths[rest.size] || minWidths.default } }),
         }
       : {
           margin: [0, 0, 0, -1],
@@ -30,7 +30,7 @@ const MasterCardPill = forwardRef(({ isClickable, flavour, onClick, side, text, 
       borderColor={background}
       onClick={isClickable ? onClick : null}
       ref={ref}
-      {...positionProps}
+      {...sideProps}
       {...rest}
     >
       {text || "-"}

@@ -195,6 +195,14 @@ const MasterCards = () => (
       <MasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} size="large" />
       <MasterCard size="large" />
     </Flex>
+    <Flex gap={2}>
+      <MasterCard isAlert pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} />
+      <MasterCard isAlert />
+    </Flex>
+    <Flex gap={2}>
+      <MasterCard isAlert pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} size="large" />
+      <MasterCard isAlert size="large" />
+    </Flex>
   </Flex>
 )
 
