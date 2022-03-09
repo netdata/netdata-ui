@@ -1,0 +1,65 @@
+import React from "react"
+import { renderWithProviders, screen } from "testUtilities"
+import Pill from "./index"
+
+describe("Pill component", () => {
+  test("should render default component", () => {
+    renderWithProviders(<Pill>Test</Pill>)
+
+    expect(screen.queryByTestId("pill")).toBeInTheDocument()
+    expect(screen.queryByTestId("pill-text")).toBeInTheDocument()
+    expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "bright")
+    expect(screen.queryByTestId("pill-text")).toHaveStyle("font-size: 11px;")
+    expect(screen.queryByTestId("pill-tiny")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("pill-icon-left")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("pill-icon-right")).not.toBeInTheDocument()
+  })
+
+  test("should render tiny component", () => {
+    renderWithProviders(<Pill tiny />)
+
+    expect(screen.queryByTestId("pill-tiny")).toBeInTheDocument()
+    expect(screen.queryByTestId("pill")).not.toBeInTheDocument()
+  })
+
+  test("should render component with left icon only", () => {
+    renderWithProviders(<Pill icon="alarm_bell" />)
+
+    expect(screen.queryByTestId("pill-icon-left")).toBeInTheDocument()
+    expect(screen.queryByTestId("pill-text")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("pill-icon-right")).not.toBeInTheDocument()
+  })
+
+  test("should render component with right icon only", () => {
+    renderWithProviders(<Pill icon="alarm_bell" reverse />)
+
+    expect(screen.queryByTestId("pill-icon-left")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("pill-text")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("pill-icon-right")).toBeInTheDocument()
+  })
+
+  test("should render component with small text", () => {
+    renderWithProviders(<Pill textSize="small">Test</Pill>)
+
+    expect(screen.queryByTestId("pill-text")).toHaveStyle("font-size: 12px;")
+  })
+
+  test("should render component with small text", () => {
+    renderWithProviders(<Pill size="normal">Test</Pill>)
+
+    expect(screen.queryByTestId("pill-text")).toHaveStyle("font-size: 14px;")
+  })
+
+  test("should render component with custom colored text", () => {
+    const mockedColor = "primary"
+    renderWithProviders(<Pill color={mockedColor}>Test</Pill>)
+
+    expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", mockedColor)
+  })
+
+  test("should render component with hollowed warning colored text", () => {
+    renderWithProviders(<Pill hollow flavour="warning">Test</Pill>)
+
+    expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "yellow,seaBuckthorn")
+  })
+})
