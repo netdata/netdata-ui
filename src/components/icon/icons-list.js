@@ -14,6 +14,7 @@ import alarmWarning from "./assets/alarm_w.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
+import anomaliesLens from "./assets/anomalies_lens.svg"
 import around_clock from "./assets/around_clock.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import arrow_w_line_left from "./assets/arrow_w_line_left.svg"
@@ -265,6 +266,7 @@ export const iconsList = {
   alarm_bell,
   alarms_new,
   anomaliesBrain,
+  anomaliesLens,
   applicationsSolid,
   around_clock,
   arrow_down,
