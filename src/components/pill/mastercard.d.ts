@@ -10,7 +10,6 @@ export type MasterCardSize = "default" | "large"
 type OnClickType = (e: SyntheticEvent<HTMLButtonElement>) => void
 
 export interface MasterCardProps extends HeightProps, RoundProps {
-  isAlert?: boolean
   "data-testid"?: string
   normal?: boolean
   onClick?: OnClickType

@@ -17,7 +17,7 @@ const Pill = forwardRef(
       children,
       background,
       color,
-      "data-testid": dataTestId,
+      "data-testid": testId = "pill",
       flavour,
       hollow,
       icon,
@@ -31,7 +31,6 @@ const Pill = forwardRef(
     },
     ref
   ) => {
-    const testId = dataTestId || "pill"
     const iconProps = { color, flavour, hollow, icon, size: iconSize }
 
     if (tiny)

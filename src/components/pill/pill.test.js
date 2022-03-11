@@ -15,6 +15,15 @@ describe("Pill component", () => {
     expect(screen.queryByTestId("pill-icon-right")).not.toBeInTheDocument()
   })
 
+  test("should render component with custom test id", () => {
+    renderWithProviders(<Pill data-testid="custom-pill">Test</Pill>)
+
+    expect(screen.queryByTestId("pill")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("pill-text")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("custom-pill")).toBeInTheDocument()
+    expect(screen.queryByTestId("custom-pill-text")).toBeInTheDocument()
+  })
+
   test("should render tiny component", () => {
     renderWithProviders(<Pill tiny />)
 
@@ -61,5 +70,12 @@ describe("Pill component", () => {
     renderWithProviders(<Pill hollow flavour="warning">Test</Pill>)
 
     expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "yellow,seaBuckthorn")
+  })
+
+  test("should render clickable component", () => {
+    const mockedOnClick = jest.fn()
+    renderWithProviders(<Pill onClick={mockedOnClick}>Test</Pill>)
+
+    expect(screen.queryByTestId("pill")).toHaveAttribute("cursor", "pointer")
   })
 })
