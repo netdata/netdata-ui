@@ -3,10 +3,16 @@ import MasterCardPill from "./mastercardPill"
 import { getMasterCardBackground } from "./mixins/background"
 import { MasterCardContainer } from "./styled"
 
+const minWidths = {
+  default: "29px",
+  large: "37px",
+}
+
 const MasterCard = forwardRef(
   (
     {
       children,
+      "data-testid": testId = "mastercard",
       height,
       normal,
       onClick,
@@ -14,37 +20,47 @@ const MasterCard = forwardRef(
       pillRight = {},
       round,
       size,
-      "data-testid": dataTestId,
       ...rest
     },
     ref
   ) => {
-    const pillProps = {
-      height,
-      isClickable: !onClick,
-      normal,
-      round,
-      size,
-      ...rest,
+    const commonProps = { height, round, size }
+    const pillProps = { normal, ...commonProps, ...rest }
+    const pillRightBackground = getMasterCardBackground(
+      pillRight.background,
+      pillRight.flavour || "disabledWarning"
+    )
+    const pillLeftProps = {
+      background: getMasterCardBackground(
+        pillLeft.background,
+        pillLeft.flavour || "disabledError"
+      ),
+      padding: [1, 3],
+      position: "relative",
+      width: { min: minWidths[rest.size] || minWidths.default },
+      ...pillProps,
+      ...pillLeft,
+    }
+    const pillRightProps = {
+      background: pillRightBackground,
+      margin: [0, 0, 0, -1],
+      padding: [1, 2],
+      ...pillProps,
+      ...pillRight,
     }
 
     return (
       <MasterCardContainer
-        background={getMasterCardBackground(
-          pillRight.background,
-          pillRight.flavour || "disabledWarning"
-        )}
-        height={height}
+        background={pillRightBackground}
+        data-testid={testId}
         onClick={onClick}
-        round={round}
-        size={size}
         ref={ref}
-        {...(dataTestId && { "data-testid": dataTestId })}
+        {...commonProps}
       >
         {children || (
           <>
-            <MasterCardPill side="left" {...pillProps} {...pillLeft} />
-            <MasterCardPill side="right" {...pillProps} {...pillRight} />
+            <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />
+            <MasterCardPill data-testid={`${testId}-right-pill`} {...pillRightProps} />
           </>
         )}
       </MasterCardContainer>

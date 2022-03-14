@@ -25,14 +25,15 @@ const colorMap = {
   },
 }
 
-const masterCardColorMap = {
+export const masterCardColorMap = {
+  alert: ["neutral", "porcelain"],
   disabledError: ["neutral", "regentgrey"],
   disabledWarning: ["neutral", "iron"],
   error: ["red", "pomegranate"],
   warning: ["yellow", "seaBuckthorn"],
 }
 
-const getPillColor = (type, flavour) => colorMap[type][flavour]
 const getMasterCardColor = flavour => masterCardColorMap[flavour]
+const getPillColor = (type, flavour) => colorMap[type][flavour]
 
-export { getPillColor, getMasterCardColor }
+export { getMasterCardColor, getPillColor }

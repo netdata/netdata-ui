@@ -1,8 +1,10 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
+import AlertMasterCard from "./alertMastercard"
 import Flex from "src/components/templates/flex"
 import Pill from "./index"
-import MasterCard from "./mastercard";
+import MasterCard from "./mastercard"
+
 
 const story = storiesOf("COMPONENTS|Pills")
 
@@ -198,6 +200,19 @@ const MasterCards = () => (
   </Flex>
 )
 
+const AlertMasterCards = () => (
+  <Flex column gap={4}>
+    <Flex gap={2}>
+      <AlertMasterCard onClick={() => console.log("test")} pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} />
+      <AlertMasterCard />
+    </Flex>
+    <Flex gap={2}>
+      <AlertMasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} size="large" />
+      <AlertMasterCard size="large" />
+    </Flex>
+  </Flex>
+)
+
 story.add("Custom", Custom)
 story.add("Pills", Pills)
 story.add("Pills Hollow", PillsHollow)
@@ -205,3 +220,4 @@ story.add("Pills Icon with Label", PillsLabelIcon)
 story.add("Pills Icon", PillsIcon)
 story.add("Pills Tiny", PillsTiny)
 story.add("MasterCards", MasterCards)
+story.add("Alert MasterCards", AlertMasterCards)
