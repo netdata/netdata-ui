@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useRef } from "react"
 import Flex from "src/components/templates/flex"
 
-const Tabs = ({ children, gap = 2 }) => {
+const Tabs = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
   const ref = useRef()
   const tabs = useMemo(() => {
@@ -18,26 +18,26 @@ const Tabs = ({ children, gap = 2 }) => {
     <Flex column width="100%" position="relative" ref={ref}>
       <Flex
         height="1px"
-        background="tabsBorder"
+        background="borderSecondary"
         width="100%"
         position="absolute"
         style={{ top: 0 }}
-        zIndex={1}
+        zIndex={3}
       />
       <Flex
         justifyContent="start"
         alignSelf="start"
         alignItems="end"
-        gap={gap}
         width="100%"
         height="100%"
         overflow="hidden"
+        background="elementBackground"
       >
         {tabs}
       </Flex>
       <Flex
         height="1px"
-        background="tabsBorder"
+        background="borderSecondary"
         width="100%"
         position="absolute"
         style={{ bottom: 0 }}
