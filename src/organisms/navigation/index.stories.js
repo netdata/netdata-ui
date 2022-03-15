@@ -48,6 +48,8 @@ story.add("Tabbed navigation", () => {
     setDynamicTabs([...dynamicTabs, item])
   }
 
+  const [activeTab, setActiveTab] = React.useState(0)
+
   return (
     <>
       <button style={{ position: "absolute", top: 0, left: 0 }} onClick={onAddClick}>
@@ -63,7 +65,14 @@ story.add("Tabbed navigation", () => {
           <TabSeparator />
           <DraggableTabs onDragEnd={onDragEnd} onTabClose={onClose}>
             {dynamicTabs.map(({ icon, title }, i) => (
-              <Tab icon={<Icon name={icon} size="small" />} key={title} tabIndex={i} active={false}>
+              <Tab
+                showBorderLeft={i === 0}
+                onActivate={() => setActiveTab(i)}
+                icon={<Icon name={icon} size="small" />}
+                key={title}
+                tabIndex={i}
+                active={i === activeTab}
+              >
                 <Text truncate>{title}</Text>
               </Tab>
             ))}
@@ -79,7 +88,7 @@ story.add("Static tabs with activate functionallity", () => {
   return (
     <>
       <Flex width="100vw">
-        <Tabs gap={0}>
+        <Tabs>
           {staticTabs.map(({ icon, title }, index) => (
             <Tab
               active={index === activeTab}
@@ -91,7 +100,6 @@ story.add("Static tabs with activate functionallity", () => {
               <Text>{title}</Text>
             </Tab>
           ))}
-          <TabSeparator />
         </Tabs>
       </Flex>
     </>
