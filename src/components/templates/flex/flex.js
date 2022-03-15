@@ -21,6 +21,9 @@ import direction from "src/components/templates/mixins/direction"
 import border from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
 import pseudos from "src/components/templates/mixins/pseudos"
+import css from "@styled-system/css"
+
+export const sx = props => css(props.sx)(props)
 
 const Flex = Component => styled(Component)`
   display: flex;
@@ -49,6 +52,7 @@ const Flex = Component => styled(Component)`
   ${cursor}
   ${shadow}
   ${pseudos}
+  ${sx}
 `
 
 export default Flex
