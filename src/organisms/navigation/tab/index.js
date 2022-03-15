@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react"
 import { Icon } from "src/components/icon/icon"
 import Flex from "src/components/templates/flex"
-import Box from "src/components/templates/box"
 
 import useStylesTab from "./use-styles-tab"
 
@@ -19,10 +18,11 @@ const Tab = ({
   draggableRef,
   dragHandleProps,
   tabRef,
+  showBorderLeft,
   ...rest
 }) => {
   const [hover, setHover] = useState()
-  const { rootStyles } = useStylesTab({ active })
+  const { rootStyles } = useStylesTab({ active, showBorderLeft })
 
   const onClickTab = useCallback(
     event => {
