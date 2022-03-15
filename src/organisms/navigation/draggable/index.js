@@ -121,7 +121,6 @@ const DraggableTabs = forwardRef(
                     innerRef(node)
                   }}
                   {...droppableProps}
-                  gap={2}
                   flex="grow"
                   basis="0%"
                   position="relative"
