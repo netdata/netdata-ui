@@ -3,7 +3,7 @@ import useColor from "src/hooks/use-color"
 
 const border = ({ borderRightColor, borderTopColor, showBorderLeft }) => ({
   borderRight: `1px solid ${borderRightColor}`,
-  borderTop: `2px solid ${borderTopColor}`,
+  borderTop: `3px solid ${borderTopColor}`,
   ...(showBorderLeft ? { borderLeft: `1px solid ${borderRightColor}` } : {}),
 })
 
