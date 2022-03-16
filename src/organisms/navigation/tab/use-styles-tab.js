@@ -1,15 +1,15 @@
 import { useMemo } from "react"
 import useColor from "src/hooks/use-color"
 
-const border = ({ borderRightColor, borderTopColor, showBorderLeft }) => ({
-  borderRight: `1px solid ${borderRightColor}`,
+const border = ({ borderSideColor, borderTopColor, showBorderLeft }) => ({
+  borderRight: `1px solid ${borderSideColor}`,
   borderTop: `3px solid ${borderTopColor}`,
-  ...(showBorderLeft ? { borderLeft: `1px solid ${borderRightColor}` } : {}),
+  ...(showBorderLeft ? { borderLeft: `1px solid ${borderSideColor}` } : {}),
 })
 
 const useStyleTabs = ({ active = false, showBorderLeft = false }) => {
   const pickColor = useColor()
-  const borderRightColor = pickColor("borderSecondary")
+  const borderSideColor = pickColor("borderSecondary")
   const borderTopColor = active ? pickColor("primary") : "transparent"
 
   const rootStyles = useMemo(() => {
@@ -23,9 +23,9 @@ const useStyleTabs = ({ active = false, showBorderLeft = false }) => {
       background: active ? "mainBackground" : "elementBackground",
       zIndex: active ? 2 : 1,
       height: 8,
-      sx: { ...border({ borderRightColor, borderTopColor, showBorderLeft }) },
+      sx: { ...border({ borderSideColor, borderTopColor, showBorderLeft }) },
     }
-  }, [borderTopColor, borderRightColor, active])
+  }, [borderTopColor, borderSideColor, active])
 
   return { rootStyles }
 }
