@@ -64,3 +64,29 @@ export const getValidRows = ({ selectedFlatRows, isGrouped, itemIsDisabled }) =>
     acc.push(row.original)
     return acc
   }, [])
+
+export const getGroupedCells = cells => cells.reduce((accumulator, cell) => {
+  if (cell.column.InnerRow) {
+    return {
+      ...accumulator,
+      [cell.column.id]: {
+        ...(Object.prototype.hasOwnProperty.call(accumulator, cell.column.id) && accumulator[cell.column.id]),
+        parentRow: cell
+      }
+    }
+  }
+
+  if (cell.column.parentRow) {
+    return {
+      ...accumulator,
+      [cell.column.parentRow]: {
+        ...(Object.prototype.hasOwnProperty.call(accumulator, cell.column.parentRow) && accumulator[cell.column.parentRow]),
+        children: Object.prototype.hasOwnProperty.call(accumulator[cell.column.parentRow], "children")
+          ? [...accumulator[cell.column.parentRow].children, cell]
+          : [cell]
+      }
+    }
+  }
+
+  return accumulator
+}, {})
