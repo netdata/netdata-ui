@@ -17,20 +17,27 @@ const Tabs = ({ children }) => {
   return (
     <Flex column width="100%" position="relative" ref={ref}>
       <Flex
+        height="1px"
+        background="borderSecondary"
+        width="100%"
+        position="absolute"
+        style={{ top: 0 }}
+        zIndex={3}
+      />
+      <Flex
         justifyContent="start"
         alignSelf="start"
         alignItems="end"
-        gap={2}
         width="100%"
         height="100%"
-        padding={[0, 4]}
         overflow="hidden"
+        background="elementBackground"
       >
         {tabs}
       </Flex>
       <Flex
         height="1px"
-        background="tabsBorder"
+        background="borderSecondary"
         width="100%"
         position="absolute"
         style={{ bottom: 0 }}

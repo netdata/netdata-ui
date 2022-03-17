@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from "react"
 import { Icon } from "src/components/icon/icon"
 import Flex from "src/components/templates/flex"
-import StyledTab from "./styledTab"
+
+import useStylesTab from "./use-styles-tab"
 
 const Tab = ({
   active,
@@ -17,9 +18,11 @@ const Tab = ({
   draggableRef,
   dragHandleProps,
   tabRef,
+  showBorderLeft,
   ...rest
 }) => {
   const [hover, setHover] = useState()
+  const { rootStyles } = useStylesTab({ active, showBorderLeft })
 
   const onClickTab = useCallback(
     event => {
@@ -70,9 +73,9 @@ const Tab = ({
   const closable = hover && !fixed
 
   return (
-    <StyledTab
+    <Flex
+      {...rootStyles}
       ref={onRef}
-      active={active}
       onClick={onClickTab}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseOut}
@@ -85,7 +88,7 @@ const Tab = ({
         {!closable && icon && renderIcon(icon)}
       </Flex>
       {!collapsed && <Flex {...dragHandleProps}>{children}</Flex>}
-    </StyledTab>
+    </Flex>
   )
 }
 
