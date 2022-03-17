@@ -4,6 +4,7 @@ const justifyContentMap = {
   end: "flex-end",
   between: "space-between",
   around: "space-around",
+  evenly: "space-evenly",
   stretch: "stretch",
 }
 
