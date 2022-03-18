@@ -65,28 +65,28 @@ export const getValidRows = ({ selectedFlatRows, isGrouped, itemIsDisabled }) =>
     return acc
   }, [])
 
-export const getGroupedCells = cells => cells.reduce((accumulator, cell) => {
-  if (cell.column.InnerRow) {
-    return {
-      ...accumulator,
-      [cell.column.id]: {
-        ...(Object.prototype.hasOwnProperty.call(accumulator, cell.column.id) && accumulator[cell.column.id]),
-        parentRow: cell
-      }
-    }
-  }
+const updateParentRow = (prev, innerRow) => ({
+  ...prev,
+  [innerRow.column.id]: {
+    ...(Object.prototype.hasOwnProperty.call(prev, innerRow.column.id) && prev[innerRow.column.id]),
+    parentRow: innerRow,
+  },
+})
 
-  if (cell.column.parentRow) {
-    return {
-      ...accumulator,
-      [cell.column.parentRow]: {
-        ...(Object.prototype.hasOwnProperty.call(accumulator, cell.column.parentRow) && accumulator[cell.column.parentRow]),
-        children: Object.prototype.hasOwnProperty.call(accumulator[cell.column.parentRow], "children")
-          ? [...accumulator[cell.column.parentRow].children, cell]
-          : [cell]
-      }
-    }
-  }
+const updateRowChildren = (prev, child) => ({
+  ...prev,
+  [child.column.parentRow]: {
+    ...(Object.prototype.hasOwnProperty.call(prev, child.column.parentRow) && prev[child.column.parentRow]),
+    children: Object.prototype.hasOwnProperty.call(prev[child.column.parentRow], "children")
+      ? [...prev[child.column.parentRow].children, child]
+      : [child]
+  },
+})
+
+export const getGroupedCells = cells => cells.reduce((accumulator, cell) => {
+  if (cell.column.InnerRow) return updateParentRow(accumulator, cell)
+
+  if (cell.column.parentRow) return updateRowChildren(accumulator, cell)
 
   return accumulator
 }, {})

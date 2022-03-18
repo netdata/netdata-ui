@@ -60,6 +60,18 @@ export const TableRow = ({
     )
   })
 
+  const renderInnerRows = innerRows =>
+    Object.values(innerRows).map(innerRow => (
+      <TableInnerRow
+        row={innerRow.parentRow}
+        customProps={customProps}
+        key={innerRow.parentRow}
+        selectedRowIds={selectedRowIds}
+      >
+        {renderCells(innerRow.children)}
+      </TableInnerRow>
+    ))
+
   if (isVirtualGroupHeader || subRows.length > 0) {
     return renderGroupHead ? (
       <>{renderGroupHead({ row, layoutType, prepareRow, selectedRowIds, customProps, style })}</>
@@ -74,18 +86,9 @@ export const TableRow = ({
       hasStickyHeader={hasStickyHeader}
       {...row.getRowProps({ style })}
     >
-      {Object.keys(groupedRows).length ? (
-          Object.values(groupedRows).map(groupedRow => (
-            <TableInnerRow
-              row={groupedRow.parentRow}
-              customProps={customProps}
-              key={groupedRow.parentRow}
-              selectedRowIds={selectedRowIds}
-            >
-              {renderCells(groupedRow.children)}
-            </TableInnerRow>
-          ))
-      ) : renderCells(row.cells)}
+      {Object.keys(groupedRows).length
+        ? renderInnerRows(groupedRows)
+        : renderCells(row.cells)}
     </RowLayout>
   )
 }
