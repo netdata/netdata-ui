@@ -39,7 +39,7 @@ export interface HeightProps {
 }
 
 export interface JustifyContentProps {
-  justifyContent?: "start" | "center" | "end" | "between" | "around" | "stretch"
+  justifyContent?: "start" | "center" | "end" | "between" | "evenly" | "around" | "stretch"
 }
 
 export interface OverflowProps {
