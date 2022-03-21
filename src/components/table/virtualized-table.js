@@ -33,6 +33,7 @@ export function VirtualizedTable({
   renderGroupHead,
   initialState = {},
   className,
+  hideHeader = false,
   groupByFn = defaultGroupByFn,
   disableGlobalFilter = false,
   globalFilter,
@@ -126,8 +127,7 @@ export function VirtualizedTable({
 
   const orderedRows = useMemo(() => {
     if (groupBy.length > 0 && groupsOrderSettings && groupsOrderSettings.groupsOrder[groupBy[0]]) {
-      const result = unwrapGroupedRows(sortGroupsByPriority(rows, groupsOrderSettings))
-      return result
+      return unwrapGroupedRows(sortGroupsByPriority(rows, groupsOrderSettings))
     }
     return rows
   }, [groupBy, groupsOrderSettings, rows])
@@ -185,6 +185,7 @@ export function VirtualizedTable({
         getTableProps={getTableProps}
         getTableBodyProps={getTableBodyProps}
         headerGroups={headerGroups}
+        hideHeader={hideHeader}
         sortableBy={sortableBy}
         className={className}
         customProps={customProps}

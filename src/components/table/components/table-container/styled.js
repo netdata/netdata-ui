@@ -8,6 +8,6 @@ export const StyledTable = styled.table`
 `
 
 export const BlockLayout = styled.div`
-  display: inline-block;
+  display: ${({ hideHeader }) => (hideHeader ? "block" : "inline-block")};
   border-spacing: 0;
 `

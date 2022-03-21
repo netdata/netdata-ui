@@ -11,34 +11,40 @@ const ItemWrapper = ({ data, index, style }) => {
 
 const innerElementType = forwardRef(
   // width shouldn't be taken from react-window prop source
-  ({ children, style: { width, ...restStyles } }, ref) => (
+  ({ children, style: { width, ...restStyles }, ...rest }, ref) => (
     <StickyListContextConsumer>
       {({
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        sortableBy,
-        className,
-        customProps,
-        layoutType,
-      }) => (
-        <TableContainer
-          style={restStyles}
-          layoutType={layoutType}
-          {...getTableProps()}
-          className={className}
-          callbackRef={ref}
-        >
-          <TableHead
-            headerGroups={headerGroups}
-            sortableBy={sortableBy}
-            customProps={customProps}
-          />
-          <TableBody layoutType={layoutType} {...getTableBodyProps()}>
-            {children}
-          </TableBody>
-        </TableContainer>
-      )}
+          getTableProps,
+          getTableBodyProps,
+          headerGroups,
+          hideHeader,
+          sortableBy,
+          className,
+          customProps,
+          layoutType,
+        }) => {
+        return (
+          <TableContainer
+            style={restStyles}
+            layoutType={layoutType}
+            hideHeader={hideHeader}
+            {...getTableProps()}
+            className={className}
+            callbackRef={ref}
+          >
+            {!hideHeader && (
+              <TableHead
+                headerGroups={headerGroups}
+                sortableBy={sortableBy}
+                customProps={customProps}
+              />
+            )}
+            <TableBody layoutType={layoutType} {...getTableBodyProps()}>
+              {children}
+            </TableBody>
+          </TableContainer>
+        )
+      }}
     </StickyListContextConsumer>
   )
 )
@@ -48,6 +54,7 @@ export const StickyVirtualList = ({
   getTableProps,
   getTableBodyProps,
   headerGroups,
+  hideHeader,
   sortableBy,
   className,
   customProps,
@@ -57,40 +64,43 @@ export const StickyVirtualList = ({
   itemKey,
   orderedRows,
   ...rest
-}) => (
-  <StickyListContextProvider
-    value={{
-      ItemRenderer: children,
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      sortableBy,
-      className,
-      customProps,
-      layoutType,
-    }}
-  >
-    {variableSize ? (
-      <StyledVariableList
-        itemData={{ ItemRenderer: children, orderedRows }}
-        ref={callbackRef}
-        itemKey={itemKey}
-        {...rest}
-      >
-        {ItemWrapper}
-      </StyledVariableList>
-    ) : (
-      <StyledFixedList
-        itemData={{ ItemRenderer: children, orderedRows }}
-        ref={callbackRef}
-        itemKey={itemKey}
-        {...rest}
-      >
-        {ItemWrapper}
-      </StyledFixedList>
-    )}
-  </StickyListContextProvider>
-)
+}) => {
+  return (
+    <StickyListContextProvider
+      value={{
+        ItemRenderer: children,
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        hideHeader,
+        sortableBy,
+        className,
+        customProps,
+        layoutType,
+      }}
+    >
+      {variableSize ? (
+        <StyledVariableList
+          itemData={{ ItemRenderer: children, orderedRows }}
+          ref={callbackRef}
+          itemKey={itemKey}
+          {...rest}
+        >
+          {ItemWrapper}
+        </StyledVariableList>
+      ) : (
+        <StyledFixedList
+          itemData={{ ItemRenderer: children, orderedRows }}
+          ref={callbackRef}
+          itemKey={itemKey}
+          {...rest}
+        >
+          {ItemWrapper}
+        </StyledFixedList>
+      )}
+    </StickyListContextProvider>
+  )
+}
 
 // TODO - decide if we want to expose innerElementType
 // Right now we assume, that we only want to virtualize existing table component,

@@ -64,3 +64,29 @@ export const getValidRows = ({ selectedFlatRows, isGrouped, itemIsDisabled }) =>
     acc.push(row.original)
     return acc
   }, [])
+
+const updateParentRow = (prev, innerRow) => ({
+  ...prev,
+  [innerRow.column.id]: {
+    ...(Object.prototype.hasOwnProperty.call(prev, innerRow.column.id) && prev[innerRow.column.id]),
+    parentRow: innerRow,
+  },
+})
+
+const updateRowChildren = (prev, child) => ({
+  ...prev,
+  [child.column.parentRow]: {
+    ...(Object.prototype.hasOwnProperty.call(prev, child.column.parentRow) && prev[child.column.parentRow]),
+    children: Object.prototype.hasOwnProperty.call(prev[child.column.parentRow], "children")
+      ? [...prev[child.column.parentRow].children, child]
+      : [child]
+  },
+})
+
+export const getGroupedCells = cells => cells.reduce((accumulator, cell) => {
+  if (cell.column.InnerRow) return updateParentRow(accumulator, cell)
+
+  if (cell.column.parentRow) return updateRowChildren(accumulator, cell)
+
+  return accumulator
+}, {})

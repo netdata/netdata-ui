@@ -1,6 +1,8 @@
-import React, { useContext } from "react"
+import React, { useContext, useMemo } from "react"
 import { LayoutContext } from "../../layout-context"
+import { getGroupedCells } from "../../utils"
 import { TableCell } from "../table-cell"
+import { TableInnerRow } from "../table-inner-row"
 import { StyledBlockRow, StyledRow } from "./styled"
 
 const rowRenderOptions = {
@@ -43,6 +45,32 @@ export const TableRow = ({
 }) => {
   const layoutType = useContext(LayoutContext)
   const { subRows, isVirtualGroupHeader } = row
+  const groupedRows = useMemo(() => getGroupedCells(row.cells), [row.cells])
+
+  const renderCells = cells => cells.map(cell => {
+    const { key, ...cellProps } = cell.getCellProps()
+    return (
+      <TableCell
+        key={key}
+        cell={cell}
+        selectedRowIds={selectedRowIds}
+        {...cellProps}
+        customProps={customProps}
+      />
+    )
+  })
+
+  const renderInnerRows = innerRows =>
+    Object.values(innerRows).map(innerRow => (
+      <TableInnerRow
+        row={innerRow.parentRow}
+        customProps={customProps}
+        key={innerRow.parentRow}
+        selectedRowIds={selectedRowIds}
+      >
+        {renderCells(innerRow.children)}
+      </TableInnerRow>
+    ))
 
   if (isVirtualGroupHeader || subRows.length > 0) {
     return renderGroupHead ? (
@@ -58,18 +86,9 @@ export const TableRow = ({
       hasStickyHeader={hasStickyHeader}
       {...row.getRowProps({ style })}
     >
-      {row.cells.map(cell => {
-        const { key, ...cellProps } = cell.getCellProps()
-        return (
-          <TableCell
-            key={key}
-            cell={cell}
-            selectedRowIds={selectedRowIds}
-            {...cellProps}
-            customProps={customProps}
-          />
-        )
-      })}
+      {Object.keys(groupedRows).length
+        ? renderInnerRows(groupedRows)
+        : renderCells(row.cells)}
     </RowLayout>
   )
 }
