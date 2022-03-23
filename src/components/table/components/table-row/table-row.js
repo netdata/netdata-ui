@@ -68,7 +68,7 @@ export const TableRow = ({
         key={innerRow.parentRow}
         selectedRowIds={selectedRowIds}
       >
-        {renderCells(innerRow.children)}
+        {renderCells(innerRow.children || [])}
       </TableInnerRow>
     ))
 
