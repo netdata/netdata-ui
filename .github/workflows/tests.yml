@@ -42,7 +42,7 @@ jobs:
 
       - name: Gain access to test-reports bucket
         if: (steps.run-tests.outcome == 'failure' || steps.run-tests.outcome == 'success') && github.ref == 'refs/heads/develop'
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           project_id: "netdata-cloud-testing"
           service_account_key: ${{ secrets.TEST_AUTOMATION_SERVICE_ACCOUNT }}
