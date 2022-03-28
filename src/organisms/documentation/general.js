@@ -69,14 +69,12 @@ const General = ({
   onVisitDocumentClick,
   onOpenIssueClick,
   onOpenBugClick,
-  onContributeClick,
   onSupportClick,
 }) => {
   const {
     documentationUrl,
     issuesUrl,
     issuesLabel,
-    communityUrl,
     communitySupportUrl,
     otherIssuesUrl,
     otherIssuesLabel,
@@ -94,7 +92,7 @@ const General = ({
             label="Learn to use the Dashboard"
             onClick={onDashboardClick}
           />
-          <Flex width="100%" height={{ min: "1px" }} background="disabled"></Flex>
+          <Flex width="100%" height={{ min: "1px" }} background="disabled" />
         </Fragment>
       )}
       <Section
@@ -127,23 +125,12 @@ const General = ({
       <Section
         icon="community"
         title="Community"
-        content="If you still need help, join Netdata’s community forums to ask questions, discuss features, or make feature requests."
-        url={communityUrl}
-        testid="documentation-community-link"
-        label="Ask the community"
-        onClick={onContributeClick}
-      >
-        <Button
-          width="100%"
-          label="Read more about Netdata’s community"
-          flavour="hollow"
-          as="a"
-          target="_blank"
-          href={communitySupportUrl}
-          data-testid="documentation-community-support-link"
-          onClick={onSupportClick}
-        />
-      </Section>
+        content="If you need help or would like to contribute to Netdata, join our Community and ask questions, discuss topics, or propose feature requests."
+        url={communitySupportUrl}
+        testid="documentation-community-support-link"
+        label="Join the Community"
+        onClick={onSupportClick}
+      />
     </Fragment>
   )
 }
