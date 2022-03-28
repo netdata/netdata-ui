@@ -42,23 +42,21 @@ const propsByApp = {
   cloud: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl:
-      "https://github.com/netdata/netdata-cloud/issues/new?assignees=manos-saratsis&labels=bug&template=submig-a-bug-for-netdata-cloud.md&title=%5BBUG%5D",
+      "https://github.com/netdata/netdata-cloud/issues/new?labels=bug&template=submig-a-bug-for-netdata-cloud.md&title=%5BBUG%5D",
     issuesLabel: "Let us know about any bugs you’ve encountered in Netdata Cloud.",
     otherIssuesUrl:
-      "https://github.com/netdata/netdata/issues/new?assignees=&labels=bug%2C+needs+triage&template=bug_report.md",
+      "https://github.com/netdata/netdata/issues/new?labels=bug%2C+needs+triage&template=bug_report.md",
     otherIssuesLabel: "Agent",
-    communityUrl: "https://community.netdata.cloud/c/support/cloud-support/15",
     communitySupportUrl: "https://www.netdata.cloud/community/",
   },
   agent: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl:
-      "https://github.com/netdata/netdata/issues/new?assignees=&labels=bug%2C+needs+triage&template=bug_report.md",
+      "https://github.com/netdata/netdata/issues/new?labels=bug%2C+needs+triage&template=bug_report.md",
     issuesLabel: "Let us know about any bugs you’ve encountered in Netdata Agent.",
     otherIssuesUrl:
-      "https://github.com/netdata/netdata-cloud/issues/new?assignees=manos-saratsis&labels=bug&template=submig-a-bug-for-netdata-cloud.md&title=%5BBUG%5D",
+      "https://github.com/netdata/netdata-cloud/issues/new?labels=bug&template=submig-a-bug-for-netdata-cloud.md&title=%5BBUG%5D",
     otherIssuesLabel: "Cloud",
-    communityUrl: "https://community.netdata.cloud/c/support/agent-support/14",
     communitySupportUrl: "https://www.netdata.cloud/community/",
   },
 }
