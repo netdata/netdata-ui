@@ -25,6 +25,7 @@ const AlertMasterCard = forwardRef(
       background: masterCardColorMap.alert,
       color: "neutral",
       icon: "alarm_bell",
+      margin: [0, 0, 0, -0.25],
       zIndex: 1,
       ...commonProps,
     }
