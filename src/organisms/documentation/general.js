@@ -45,14 +45,14 @@ const propsByApp = {
       "https://github.com/netdata/netdata-cloud/issues/new?labels=bug&template=submig-a-bug-for-netdata-cloud.md&title=%5BBUG%5D",
     issuesLabel: "Let us know about any bugs you’ve encountered in Netdata Cloud.",
     otherIssuesUrl:
-      "https://github.com/netdata/netdata/issues/new?labels=bug%2C+needs+triage&template=bug_report.md",
+      "https://github.com/netdata/netdata/issues/new?assignees=&labels=bug%2Cneeds+triage&template=BUG_REPORT.yml&title=%5BBug%5D%3A+",
     otherIssuesLabel: "Agent",
     communitySupportUrl: "https://www.netdata.cloud/community/",
   },
   agent: {
     documentationUrl: "https://learn.netdata.cloud/",
     issuesUrl:
-      "https://github.com/netdata/netdata/issues/new?labels=bug%2C+needs+triage&template=bug_report.md",
+      "https://github.com/netdata/netdata/issues/new?assignees=&labels=bug%2Cneeds+triage&template=BUG_REPORT.yml&title=%5BBug%5D%3A+",
     issuesLabel: "Let us know about any bugs you’ve encountered in Netdata Agent.",
     otherIssuesUrl:
       "https://github.com/netdata/netdata-cloud/issues/new?labels=bug&template=submig-a-bug-for-netdata-cloud.md&title=%5BBUG%5D",
