@@ -18,7 +18,7 @@ const Anchor = styled(Text).attrs({ as: "a", target: "_blank" })`
   }
 `
 
-const Section = ({ icon, title, content, url, children, testid, label, onClick }) => (
+const Section = ({ icon, title, content, url, children, testid, label, labelTransform, onClick }) => (
   <Flex width="100%" column gap={2}>
     <Flex gap={2} alignItems="center">
       <Icon color="text" name={icon} width="18px" height="18px" />
@@ -31,6 +31,7 @@ const Section = ({ icon, title, content, url, children, testid, label, onClick }
         onClick={onClick}
         label={label}
         data-testid={testid}
+        {...labelTransform && { textTransform: labelTransform }}
         {...(url && { as: "a", target: "_blank", href: url })}
       />
       {children}
@@ -109,7 +110,8 @@ const General = ({
         content={issuesLabel}
         url={issuesUrl}
         testid="documentation-report-bug-link"
-        label="Open a new Issue in Github"
+        label="Open a new Issue in GitHub"
+        labelTransform="none"
         onClick={onOpenIssueClick}
       >
         <Text>
@@ -117,7 +119,7 @@ const General = ({
           <Anchor href={otherIssuesUrl} onClick={onOpenBugClick}>
             Open an issue
           </Anchor>{" "}
-          on Github
+          on GitHub
         </Text>
       </Section>
       <Section
