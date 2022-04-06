@@ -33,6 +33,7 @@ export function Table({
   globalFilter,
   filterTypes,
   dataResultsCallback,
+  renderRowSubComponent,
   ...customProps
 }) {
   // preserve column order to override default grouping behaviour
@@ -54,6 +55,7 @@ export function Table({
     state: { selectedRowIds, groupBy },
     toggleAllRowsExpanded,
     isAllRowsExpanded,
+    visibleColumns,
   } = useTable(
     {
       columns,
@@ -94,9 +96,10 @@ export function Table({
   }, [selectedFlatRows, isAllRowsSelected, selectedItemsClb, groupBy, itemIsDisabled])
 
   useEffect(() => {
-    if (isAllRowsExpanded) {
+    if (isAllRowsExpanded || renderRowSubComponent) {
       return
     }
+    // todo check if this is really necessary?
     toggleAllRowsExpanded()
   }, [isAllRowsExpanded, toggleAllRowsExpanded])
 
@@ -131,14 +134,20 @@ export function Table({
             prepareRow(row)
 
             return (
-              <TableRow
-                key={row.id}
-                customProps={customProps}
-                row={row}
-                prepareRow={prepareRow}
-                selectedRowIds={selectedRowIds}
-                renderGroupHead={renderGroupHead}
-              />
+              <React.Fragment key={row.id}>
+                <TableRow
+                  customProps={customProps}
+                  row={row}
+                  prepareRow={prepareRow}
+                  selectedRowIds={selectedRowIds}
+                  renderGroupHead={renderGroupHead}
+                />
+                {row.isExpanded && renderRowSubComponent ? (
+                  <tr>
+                    <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
+                  </tr>
+                ) : null}
+              </React.Fragment>
             )
           })}
         </TableBody>
