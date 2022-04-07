@@ -40,6 +40,7 @@ export const TableRow = ({
   prepareRow,
   selectedRowIds,
   renderGroupHead,
+  canToggleExpand,
   customProps,
   style,
 }) => {
@@ -47,18 +48,19 @@ export const TableRow = ({
   const { subRows, isVirtualGroupHeader } = row
   const groupedRows = useMemo(() => getGroupedCells(row.cells), [row.cells])
 
-  const renderCells = cells => cells.map(cell => {
-    const { key, ...cellProps } = cell.getCellProps()
-    return (
-      <TableCell
-        key={key}
-        cell={cell}
-        selectedRowIds={selectedRowIds}
-        {...cellProps}
-        customProps={customProps}
-      />
-    )
-  })
+  const renderCells = cells =>
+    cells.map(cell => {
+      const { key, ...cellProps } = cell.getCellProps()
+      return (
+        <TableCell
+          key={key}
+          cell={cell}
+          selectedRowIds={selectedRowIds}
+          {...cellProps}
+          customProps={customProps}
+        />
+      )
+    })
 
   const renderInnerRows = innerRows =>
     Object.values(innerRows).map(innerRow => (
@@ -85,10 +87,9 @@ export const TableRow = ({
       layoutType={layoutType}
       hasStickyHeader={hasStickyHeader}
       {...row.getRowProps({ style })}
+      {...(canToggleExpand && row.getToggleRowExpandedProps())}
     >
-      {Object.keys(groupedRows).length
-        ? renderInnerRows(groupedRows)
-        : renderCells(row.cells)}
+      {Object.keys(groupedRows).length ? renderInnerRows(groupedRows) : renderCells(row.cells)}
     </RowLayout>
   )
 }
