@@ -89,6 +89,8 @@ import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
 import integrations from "./assets/integrations.svg"
+import ipNetworking from "./assets/ipNetworking.svg"
+import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import line_chart from "./assets/line_chart.svg"
 import logo_s from "./assets/logo_s.svg"
 import loading from "./assets/loading.svg"
@@ -232,6 +234,7 @@ import trashcan from "./assets/trashcan.svg"
 import triangle from "./assets/triangle.svg"
 import triangle_down from "./assets/triangle_down.svg"
 import unknownError from "./assets/unknownError.svg"
+import universe from "./assets/universe.svg"
 import unreachable from "./assets/unreachable.svg"
 import unreachableNode from "./assets/unreachableNode.svg"
 import update from "./assets/update.svg"
@@ -348,6 +351,8 @@ export const iconsList = {
   informationPress,
   insights,
   integrations,
+  ipNetworking,
+  ipNetworkingPress,
   line_chart,
   logo_s,
   loading,
@@ -494,6 +499,7 @@ export const iconsList = {
   triangle,
   triangle_down,
   unknownError,
+  universe,
   unreachable,
   unreachableNode,
   update,
