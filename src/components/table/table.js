@@ -136,6 +136,7 @@ export function Table({
             return (
               <React.Fragment key={row.id}>
                 <TableRow
+                  canToggleExpand={!!renderRowSubComponent}
                   customProps={customProps}
                   row={row}
                   prepareRow={prepareRow}
