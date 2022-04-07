@@ -15,7 +15,7 @@ export const StyledTabs = styled.nav`
 
   border-bottom: 1px solid
     ${({ noDefaultBorder }) =>
-      noDefaultBorder ? getColor(["transparent", "full"]) : getColor("border")};
+      noDefaultBorder ? getColor(["transparent", "full"]) : getColor("tabsBorder")};
   box-sizing: border-box;
 
   padding: 0 2px;
