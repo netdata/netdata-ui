@@ -164,7 +164,6 @@ import save from "./assets/save.svg"
 import search from "./assets/search.svg"
 import search_s from "./assets/search_s.svg"
 import searchPress from "./assets/search_press.svg"
-import chartToolboxSelectedArea from "./assets/selected_area.svg"
 import serviceApache from "./assets/services/apache.svg"
 import serviceApacheTomcat from "./assets/services/apache_tomcat.svg"
 import serviceBeanstalk from "./assets/services/beanstalk.svg"
@@ -293,7 +292,6 @@ export const iconsList = {
   chart_added,
   charts,
   charts_view,
-  chartToolboxSelectedArea,
   check,
   checkmark_partial_s,
   checkmark_s,
