@@ -157,6 +157,7 @@ import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import resize_handler from "./assets/resize_handler.svg"
 import room from "./assets/room.svg"
+import room_home from "./assets/room_home.svg"
 import room_new from "./assets/room_new.svg"
 import room_overview from "./assets/room_overview.svg"
 import sad from "./assets/sad.svg"
@@ -422,6 +423,7 @@ export const iconsList = {
   reload,
   resize_handler,
   room,
+  room_home,
   room_new,
   room_overview,
   sad,
