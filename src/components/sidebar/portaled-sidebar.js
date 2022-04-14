@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, ReactNode, useState, useRef } from "react"
+import React, { Fragment, useEffect, useState, useRef } from "react"
 import { Portal } from "react-portal"
 import { useMount } from "react-use"
 import { PortalSidebox, DisabledOverlay } from "./styled"
@@ -13,6 +13,7 @@ export const PortalSidebar = ({
   onClose = () => {},
   right = false,
   Wrapper = Fragment,
+  ...rest
 }) => {
   const sidebarRef = useRef(null)
   const [overlayZIndex, setOverlayZIndex] = useState("auto")
@@ -53,6 +54,7 @@ export const PortalSidebar = ({
           className={className}
           shadowSide={right}
           side={right ? "right" : "left"}
+          {...rest}
         >
           {children}
         </PortalSidebox>
