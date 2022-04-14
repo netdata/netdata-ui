@@ -1,4 +1,4 @@
-import { FC, MutableRefObject, SyntheticEvent } from "react"
+import { FC, SyntheticEvent } from "react"
 import { MarginProps, PaddingProps, AlignSelfProps } from "src/mixins/types"
 
 export type ButtonFlavour = "default" | "hollow" | "borderless"

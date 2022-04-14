@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { forwardRef } from "react"
 import { Text } from "src/components/typography"
 import useCheckBoxStyles from "./use-styles-checkbox"
 import useCheckbox from "./use-checkbox"
@@ -13,20 +13,23 @@ import {
   AccessibleArea,
 } from "./styled"
 
-export const Checkbox = ({
-  checked,
-  disabled,
-  className,
-  labelPosition,
-  label,
-  indeterminate,
-  ref,
-  margin,
-  alignSelf,
-  iconProps,
-  Label,
-  ...props
-}) => {
+export const Checkbox = forwardRef((
+  {
+    checked,
+    'data-testid': testId,
+    disabled,
+    className,
+    labelPosition,
+    label,
+    indeterminate,
+    margin,
+    alignSelf,
+    iconProps,
+    Label,
+    ...props
+  },
+    ref
+) => {
   const { styles } = useCheckBoxStyles({ disabled })
   const { getInputProps, getCheckBoxProps } = useCheckbox({
     disabled,
@@ -36,7 +39,7 @@ export const Checkbox = ({
   })
 
   return (
-    <StyledLabel disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
+    <StyledLabel data-testid={testId} disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
       <AccessibleArea />
       {label && labelPosition === "left" && (
         <LabelText as={Label} left>
@@ -64,7 +67,7 @@ export const Checkbox = ({
       )}
     </StyledLabel>
   )
-}
+})
 
 Checkbox.defaultProps = {
   labelPosition: "right",
