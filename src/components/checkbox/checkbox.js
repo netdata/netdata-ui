@@ -16,6 +16,7 @@ import {
 export const Checkbox = forwardRef((
   {
     checked,
+    'data-testid': testId,
     disabled,
     className,
     labelPosition,
@@ -38,7 +39,7 @@ export const Checkbox = forwardRef((
   })
 
   return (
-    <StyledLabel disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
+    <StyledLabel data-testid={testId} disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
       <AccessibleArea />
       {label && labelPosition === "left" && (
         <LabelText as={Label} left>
