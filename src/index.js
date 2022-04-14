@@ -90,6 +90,7 @@ export { default as NavigationTabs } from "./organisms/navigation/tabs"
 export { default as NavigationTab } from "./organisms/navigation/tab"
 export { default as TabSeparator } from "./organisms/navigation/tab/tabSeparator"
 export { default as DraggableTabs } from "./organisms/navigation/draggable"
+export { default as useNavigationArrow } from "./organisms/navigation/hooks/useNavigationArrows"
 
 export { default as Intersection } from "./components/intersection"
 export { default as useIntersection } from "./hooks/use-intersection"
