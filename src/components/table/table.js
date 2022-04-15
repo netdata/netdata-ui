@@ -1,5 +1,8 @@
-import React, { useEffect, useMemo } from "react"
+import React, { useCallback, useEffect, useMemo } from "react"
 import { useTable } from "react-table"
+import Flex from "src/components/templates/flex"
+import { Text } from "src/components/typography"
+import { Icon } from "src/components/icon"
 import { TableBody, TableContainer } from "./components/table-container"
 import { TableRow } from "./components/table-row"
 import { TableHead } from "./components/table-head"
@@ -23,6 +26,7 @@ export function Table({
   autoResetGroupBy = false,
   autoResetFilters = false,
   autoResetExpanded = false,
+  withPagination = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
@@ -52,10 +56,16 @@ export function Table({
     prepareRow,
     selectedFlatRows,
     isAllRowsSelected,
-    state: { selectedRowIds, groupBy },
+    state: { selectedRowIds, groupBy, pageIndex },
     toggleAllRowsExpanded,
     isAllRowsExpanded,
     visibleColumns,
+    page,
+    canPreviousPage,
+    canNextPage,
+    nextPage,
+    previousPage,
+    pageCount,
   } = useTable(
     {
       columns,
@@ -110,6 +120,16 @@ export function Table({
     return rows
   }, [groupBy, groupsOrderSettings, rows])
 
+  const tableRows = useMemo(() => (withPagination ? page : orderedRows), [
+    withPagination,
+    page,
+    orderedRows,
+  ])
+
+  const showPagination = withPagination && pageCount > 1
+  const goToPreviousPage = useCallback(() => previousPage(), [previousPage])
+  const goToNextPage = useCallback(() => nextPage(), [nextPage])
+
   useEffect(() => {
     if (dataResultsCallback) {
       const renderedData = unwrapGroupedRows(orderedRows).filter(
@@ -119,7 +139,7 @@ export function Table({
     }
   }, [orderedRows, dataResultsCallback])
 
-  return (
+  const TableComponent = () => (
     <LayoutContextProvider value={layoutType}>
       <TableContainer
         layoutType={layoutType}
@@ -130,7 +150,7 @@ export function Table({
       >
         <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
         <TableBody layoutType={layoutType} {...getTableBodyProps()}>
-          {orderedRows.map(row => {
+          {tableRows.map(row => {
             prepareRow(row)
 
             return (
@@ -154,5 +174,31 @@ export function Table({
         </TableBody>
       </TableContainer>
     </LayoutContextProvider>
+  )
+
+  if (!showPagination) return <TableComponent />
+
+  return (
+    <Flex column justifyContent="between" alignItems="center" gap={1} height="150px">
+      <TableComponent />
+      <Flex justifyContent="between" alignItems="center" gap={6} data-testid="table-pagination">
+        <Icon
+          name="chevron_left"
+          color="text"
+          cursor="pointer"
+          disabled={!canPreviousPage}
+          onClick={goToPreviousPage}
+        />
+        <Text color="textDescription">{pageIndex + 1}</Text>
+        <Icon
+          name="chevron_left"
+          color="text"
+          cursor="pointer"
+          disabled={!canNextPage}
+          onClick={goToNextPage}
+          rotate={2}
+        />
+      </Flex>
+    </Flex>
   )
 }
