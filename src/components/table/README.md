@@ -32,6 +32,7 @@ interface TableProps<T, RT = any> {
   autoResetGroupBy?: boolean
   autoResetFilters?: boolean
   autoResetExpanded?: boolean
+  withPagination?: boolean
   // initializer for table instance state, according to react-table signature
   initialState?: TableInstanceState
   controlledState?: TableInstanceState

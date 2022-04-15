@@ -6,6 +6,7 @@ import {
   useColumnOrder,
   useBlockLayout,
   useGlobalFilter,
+  usePagination,
 } from "react-table"
 
 export const tableHooks = [
@@ -14,6 +15,7 @@ export const tableHooks = [
   useGroupBy,
   useSortBy,
   useExpanded,
+  usePagination,
   useRowSelect,
 ]
 export const blockTableHooks = [...tableHooks, useBlockLayout]

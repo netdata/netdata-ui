@@ -35,7 +35,7 @@ const makeComponent = () => {
   const toggleSelectedItemClb = jest.fn()
   const selectedItemsClb = jest.fn()
 
-  const Component = () => {
+  const Component = props => {
     const [groupBy, setGroupBy] = useState([])
 
     return (
@@ -51,6 +51,7 @@ const makeComponent = () => {
           itemIsDisabled={item => !!item.disabled}
           selectedItemsClb={selectedItemsClb}
           toggleSelectedItemClb={toggleSelectedItemClb}
+          {...props}
         />
       </>
     )
@@ -59,14 +60,15 @@ const makeComponent = () => {
   return { toggleSelectedItemClb, selectedItemsClb, Component }
 }
 describe("Table component test", () => {
-  it(" * should render", () => {
+  it(" * should render a table", () => {
     const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByText, getAllByText } = renderWithProviders(<Component />)
+    const { getByText, getAllByText, queryByTestId } = renderWithProviders(<Component />)
     expect(selectedItemsClb).toBeCalledWith([])
     expect(toggleSelectedItemClb).not.toBeCalled()
 
     expect(getByText("noway@noway.com")).toBeInTheDocument()
     expect(getAllByText("amy@vong.com")).toHaveLength(2)
+    expect(queryByTestId("table-pagination")).not.toBeInTheDocument()
   })
 
   it(" * should select all rows", () => {
@@ -143,5 +145,14 @@ describe("Table component test", () => {
       },
       false
     )
+  })
+
+  it(" * should render a table with pagination", () => {
+    const { Component } = makeComponent()
+    const { getByTestId } = renderWithProviders(
+      <Component initialState={{ pageSize: 2 }} withPagination />
+    )
+
+    expect(getByTestId("table-pagination")).toBeInTheDocument()
   })
 })
