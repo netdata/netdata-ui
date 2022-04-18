@@ -84,6 +84,7 @@ import group_by from "./assets/group_by.svg"
 import hamburger from "./assets/hamburger.svg"
 import help from "./assets/help.svg"
 import hide from "./assets/hide.svg"
+import highlightArea from "./assets/highlight_area.svg"
 import holder from "./assets/holder.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
@@ -347,6 +348,7 @@ export const iconsList = {
   hamburger,
   help,
   hide,
+  highlightArea,
   holder,
   information,
   informationPress,
