@@ -31,6 +31,7 @@ export function Table({
   renderGroupHead,
   initialState = {},
   className,
+  paginationContainerStyles = {},
   callbackRef,
   groupByFn = defaultGroupByFn,
   disableGlobalFilter = false,
@@ -179,7 +180,13 @@ export function Table({
   if (!showPagination) return <TableComponent />
 
   return (
-    <Flex column justifyContent="between" alignItems="center" gap={1} height="150px">
+    <Flex
+      column
+      justifyContent="between"
+      alignItems="center"
+      gap={1}
+      {...paginationContainerStyles}
+    >
       <TableComponent />
       <Flex justifyContent="between" alignItems="center" gap={6} data-testid="table-pagination">
         <Icon
