@@ -97,15 +97,15 @@ export const StyledButton = styled.button.attrs(props => ({
     justify-content: center;
     align-items: center;
     position: relative;
-    ${alignSelf}
+    ${alignSelf};
 
     width: ${props =>
-      props.width ? props.width : props.hasLabel ? getSizeBy(16) : getSizeBy(props.small ? 3 : 4)};
+      props.width ? props.width : props.hasLabel ? getSizeBy(16) : getSizeBy(props.tiny ? 2.75 : props.small ? 3 : 4)};
     height: ${props =>
-      props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.small ? 3 : 4)};
+      props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.tiny ? 2.75 : props.small ? 3 : 4)};
 
     font-weight: 500;
-    font-size: ${({ small }) => (small ? "12px" : "14px")};
+    font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};
     line-height: ${getSizeBy(2)};
     white-space: nowrap;
     word-break: keep-all;
@@ -132,7 +132,7 @@ export const StyledButton = styled.button.attrs(props => ({
 
     text-decoration: none;
     & > span {
-      ${textTransform}
+      ${textTransform};
       margin-left: ${({ hasIcon }) => (hasIcon ? getSizeBy(1.5) : "0px")};
     }
 
