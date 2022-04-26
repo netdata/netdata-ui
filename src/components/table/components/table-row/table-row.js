@@ -39,6 +39,7 @@ export const TableRow = ({
   row,
   prepareRow,
   selectedRowIds,
+  onRowClick,
   renderGroupHead,
   canToggleExpand,
   customProps,
@@ -47,6 +48,12 @@ export const TableRow = ({
   const layoutType = useContext(LayoutContext)
   const { subRows, isVirtualGroupHeader } = row
   const groupedRows = useMemo(() => getGroupedCells(row.cells), [row.cells])
+  const handleRowClick = useMemo(() => {
+    if (!onRowClick) return onRowClick
+    return event => {
+      onRowClick(row, event)
+    }
+  }, [onRowClick, row])
 
   const renderCells = cells =>
     cells.map(cell => {
@@ -86,6 +93,7 @@ export const TableRow = ({
     <RowLayout
       layoutType={layoutType}
       hasStickyHeader={hasStickyHeader}
+      {...(handleRowClick && { onClick: handleRowClick })}
       {...row.getRowProps({ style })}
       {...(canToggleExpand && row.getToggleRowExpandedProps())}
     >

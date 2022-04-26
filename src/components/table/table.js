@@ -39,6 +39,7 @@ export function Table({
   filterTypes,
   dataResultsCallback,
   renderRowSubComponent,
+  onRowClick,
   ...customProps
 }) {
   // preserve column order to override default grouping behaviour
@@ -161,6 +162,7 @@ export function Table({
                   customProps={customProps}
                   row={row}
                   prepareRow={prepareRow}
+                  onRowClick={onRowClick}
                   selectedRowIds={selectedRowIds}
                   renderGroupHead={renderGroupHead}
                 />
