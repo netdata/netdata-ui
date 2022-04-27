@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react"
+import { FC } from "react"
 import { AlignSelfProps, MarginProps } from "src/mixins/types"
 
 export interface ToggleProps extends AlignSelfProps, MarginProps {
@@ -7,7 +7,7 @@ export interface ToggleProps extends AlignSelfProps, MarginProps {
   colored?: boolean
   "data-testid"?: string
   disabled?: boolean
-  Label: ReactNode
+  Label: JSX.Element
   labelLeft?: string
   labelRight?: string
   [s: string]: any
