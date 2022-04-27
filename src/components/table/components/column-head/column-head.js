@@ -12,11 +12,11 @@ const StyledColumnHead = styled(Flex)`
 `
 const StyledTh = styled.th`
   position: ${({ hasStickyHeader }) => hasStickyHeader && "relative"};
-  ${({ background = "mainBackground", hasStickyHeader }) =>
+  ${({ background = "mainBackground", hasStickyHeader, stickyTop = 0 }) =>
     hasStickyHeader &&
     css`
       position: sticky;
-      top: 0;
+      top: ${stickyTop};
       background: ${getColor(background)};
     `};
 `
@@ -31,10 +31,11 @@ export const ColumnHead = ({ column, sortableBy, customProps }) => {
   const sortProps = useMemo(() => (isColumnSortable ? getSortByToggleProps() : {}), [
     isColumnSortable,
   ])
-  const { hasStickyHeader } = customProps
+  const { hasStickyHeader, stickyTop } = customProps
   return layoutType === "table" ? (
     <StyledTh
       hasStickyHeader={hasStickyHeader}
+      stickyTop={stickyTop}
       {...sortProps}
       {...getHeaderProps()}
       onMouseEnter={() => setHover(true)}
