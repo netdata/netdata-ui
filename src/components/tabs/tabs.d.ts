@@ -1,4 +1,4 @@
-import { ChangeEvent, ExoticComponent, FC, ReactNode } from "react"
+import { ChangeEvent, FC, ReactNode } from "react"
 
 export interface TabsProps {
   className?: string
@@ -6,8 +6,8 @@ export interface TabsProps {
   noDefaultBorder?: boolean
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   selected: boolean
-  TabContent?: ExoticComponent<{ children?: ReactNode }> | JSX.Element | undefined
-  TabsHeader?: ExoticComponent<{ children?: ReactNode }> | JSX.Element | undefined
+  TabContent?: ReactNode
+  TabsHeader?: ReactNode
   [s: string]: any
 }
 
