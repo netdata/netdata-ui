@@ -1,14 +1,13 @@
-import { ChangeEvent, ExoticComponent, FC, ReactNode } from "react"
+import { ChangeEvent, FC, ReactNode } from "react"
 
 export interface TabsProps {
-  children: ReactNode
   className?: string
   "data-testid"?: string
   noDefaultBorder?: boolean
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   selected: boolean
-  TabContent?: ExoticComponent<{ children?: ReactNode }> | undefined
-  TabsHeader?: ExoticComponent<{ children?: ReactNode }> | undefined
+  TabContent?: ReactNode
+  TabsHeader?: ReactNode
   [s: string]: any
 }
 

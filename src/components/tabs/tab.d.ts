@@ -1,9 +1,8 @@
-import { ChangeEvent, FC, ReactNode } from "react"
+import { ChangeEvent, FC } from "react"
 
 export interface TabProps {
   active?: boolean
   disabled?: boolean
-  children?: ReactNode
   "data-testid"?: string
   index?: number
   label: JSX.Element | string
