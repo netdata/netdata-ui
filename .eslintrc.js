@@ -10,6 +10,9 @@ module.exports = {
   overrides: [
     {
       files: ["*.ts", "*.tsx"],
+      globals: {
+        JSX: true,
+      },
       parser: "@typescript-eslint/parser",
       plugins: ["@typescript-eslint"],
       parserOptions: {
