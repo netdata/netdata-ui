@@ -39,6 +39,7 @@ copyFileSync("src/components/pill/mastercard.d.ts", "lib/components/pill/masterc
 copyFileSync("src/components/sidebar/portaled-sidebar.d.ts", "lib/components/sidebar/portaled-sidebar.d.ts")
 copyFileSync("src/components/tabs/tab.d.ts", "lib/components/tabs/tab.d.ts")
 copyFileSync("src/components/tabs/tabs.d.ts", "lib/components/tabs/tabs.d.ts")
+copyFileSync("src/components/toggle/toggle.d.ts", "lib/components/toggle/toggle.d.ts")
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
 copyFileSync("src/components/modal/index.d.ts", "lib/components/modal/index.d.ts")
