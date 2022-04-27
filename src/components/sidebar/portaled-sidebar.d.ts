@@ -1,4 +1,4 @@
-import { FC } from "react"
+import {ExoticComponent, FC, ReactNode} from "react"
 
 export interface PortalSidebarProps {
   className?: string
@@ -7,7 +7,7 @@ export interface PortalSidebarProps {
   "data-testid"?: string
   onClose?: () => {}
   right?: boolean
-  Wrapper: JSX.Element
+  Wrapper: ExoticComponent<{ children?: ReactNode }> | JSX.Element | undefined
   [s: string]: any
 }
 
