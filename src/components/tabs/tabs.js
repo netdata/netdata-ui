@@ -1,36 +1,41 @@
-import React, { Fragment, useEffect } from "react"
-import { StyledTabsWrapper, StyledTabs } from "./styled"
-import { useSetActive, useBuildTabs } from "./tabs-hooks"
+import React, { forwardRef, Fragment, useEffect } from "react"
+import { StyledTabs, StyledTabsWrapper } from "./styled"
+import { useBuildTabs, useSetActive } from "./tabs-hooks"
 
-export const Tabs = ({
-  className,
-  onChange,
-  selected,
-  children,
-  TabsHeader = Fragment,
-  TabContent = Fragment,
-  noDefaultBorder,
-}) => {
-  const [activeIndex, setActiveIndex] = useSetActive(selected, onChange)
+export const Tabs = forwardRef(
+  (
+    {
+      className,
+      onChange,
+      selected,
+      children,
+      TabsHeader = Fragment,
+      TabContent = Fragment,
+      noDefaultBorder,
+    },
+    ref
+  ) => {
+    const [activeIndex, setActiveIndex] = useSetActive(selected, onChange)
 
-  const [nav, content, firstActiveIndex, activeIsDisabled] = useBuildTabs(
-    children,
-    activeIndex,
-    setActiveIndex
-  )
+    const [nav, content, firstActiveIndex, activeIsDisabled] = useBuildTabs(
+      children,
+      activeIndex,
+      setActiveIndex
+    )
 
-  useEffect(() => {
-    if (activeIsDisabled && activeIndex !== firstActiveIndex) setActiveIndex(firstActiveIndex)
-  }, [activeIndex, firstActiveIndex, activeIsDisabled, setActiveIndex])
+    useEffect(() => {
+      if (activeIsDisabled && activeIndex !== firstActiveIndex) setActiveIndex(firstActiveIndex)
+    }, [activeIndex, firstActiveIndex, activeIsDisabled, setActiveIndex])
 
-  return (
-    <StyledTabsWrapper className={className}>
-      <TabsHeader>
-        <StyledTabs className="tabs" noDefaultBorder={noDefaultBorder}>
-          {nav}
-        </StyledTabs>
-      </TabsHeader>
-      <TabContent>{content}</TabContent>
-    </StyledTabsWrapper>
-  )
-}
+    return (
+      <StyledTabsWrapper className={className}>
+        <TabsHeader ref={ref}>
+          <StyledTabs className="tabs" noDefaultBorder={noDefaultBorder}>
+            {nav}
+          </StyledTabs>
+        </TabsHeader>
+        <TabContent>{content}</TabContent>
+      </StyledTabsWrapper>
+    )
+  }
+)

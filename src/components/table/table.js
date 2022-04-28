@@ -149,6 +149,7 @@ export function Table({
         className={className}
         callbackRef={callbackRef}
         hasStickyHeader={customProps.hasStickyHeader}
+        stickyTop={customProps.stickyTop}
       >
         <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
         <TableBody layoutType={layoutType} {...getTableBodyProps()}>
