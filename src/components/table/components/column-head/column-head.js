@@ -18,6 +18,7 @@ const StyledTh = styled.th`
       position: sticky;
       top: ${stickyTop};
       background: ${getColor(background)};
+      z-index: 1;
     `};
 `
 
