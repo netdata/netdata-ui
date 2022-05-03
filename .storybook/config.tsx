@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { addParameters, addDecorator, configure } from "@storybook/react"
 import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
@@ -41,9 +41,9 @@ addParameters({
 addDecorator(addReadme)
 
 addDecorator(story => {
-  const [isDarkTheme, setIsDarkThem] = useLocalStorage("is_dark_theme")
+  const [isDarkTheme, setIsDarkTheme] = useLocalStorage("is_dark_theme")
   const handleChange = e => {
-    setIsDarkThem(e.currentTarget.checked)
+    setIsDarkTheme(e.currentTarget.checked)
   }
   return (
     <>
@@ -56,13 +56,10 @@ addDecorator(story => {
               labelRight={"Dark theme"}
               labelLeft={"Light theme"}
               onChange={handleChange}
-              checked={isDarkTheme}
+              checked={!!isDarkTheme}
               colored={false}
               disabled={false}
               Label={Text}
-              margin={""}
-              alignSelf={""}
-              className={[]}
             />
           </Flex>
         </div>

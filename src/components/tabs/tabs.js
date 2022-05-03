@@ -12,6 +12,7 @@ export const Tabs = forwardRef(
       TabsHeader = Fragment,
       TabContent = Fragment,
       noDefaultBorder,
+      ...rest
     },
     ref
   ) => {
@@ -28,7 +29,7 @@ export const Tabs = forwardRef(
     }, [activeIndex, firstActiveIndex, activeIsDisabled, setActiveIndex])
 
     return (
-      <StyledTabsWrapper className={className}>
+      <StyledTabsWrapper className={className} {...rest}>
         <TabsHeader ref={ref}>
           <StyledTabs className="tabs" noDefaultBorder={noDefaultBorder}>
             {nav}
