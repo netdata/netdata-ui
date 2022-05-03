@@ -45,6 +45,7 @@ import classUtilization from "./assets/class_utilization.svg"
 import classWorkload from "./assets/class_workload.svg"
 import clock5Min from "./assets/clock_5_min.svg"
 import clock5MinPress from "./assets/clock_5_min_press.svg"
+import close_circle from "./assets/close_circle.svg"
 import cluster from "./assets/cluster.svg"
 import cluster_spaces from "./assets/cluster_spaces.svg"
 import code from "./assets/code.svg"
@@ -308,6 +309,7 @@ export const iconsList = {
   classWorkload,
   clock5Min,
   clock5MinPress,
+  close_circle,
   cluster,
   cluster_spaces,
   code,
