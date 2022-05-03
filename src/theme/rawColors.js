@@ -11,6 +11,7 @@ const rawColors = {
     vista: "#96D4A2",
     fringyFlower: "#BFE5C6",
     frostee: "#E5F5E8",
+    limeGreen: "#48E499",
   },
   red: {
     pomegranate: "#FF4136",
@@ -45,6 +46,12 @@ const rawColors = {
   purple: {
     mauve: "#DB94F4",
     daisy: "#563D7C",
+    lilac: "#B596F8",
+  },
+  blue: {
+    aquamarine: "#19C89E",
+    indigo: "#5790FF",
+    cyan: "#00BAE2",
   },
 }
 
