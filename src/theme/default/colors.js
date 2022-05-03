@@ -52,12 +52,6 @@ const appColors = {
   nodeBadgeBackground: rawColors.neutral.porcelain,
   nodeBadgeBorder: rawColors.neutral.iron,
   nodeBadgeColor: rawColors.neutral.bluebayoux,
-  // PieCharts
-  strokeColorAqua: rawColors.blue.aquamarine,
-  strokeColorIndigo: rawColors.blue.indigo,
-  strokeColorCyan: rawColors.blue.cyan,
-  strokeColorLilac: rawColors.purple.lilac,
-  strokeColorLimeGreen: rawColors.green.limeGreen,
 }
 
 export default {
