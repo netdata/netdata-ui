@@ -17,6 +17,7 @@ export function Table({
   layoutType = "table",
   columns,
   data,
+  'data-testid': dataTestId,
   sortableBy = [],
   selectedItemsClb,
   toggleSelectedItemClb,
@@ -144,6 +145,7 @@ export function Table({
   const TableComponent = () => (
     <LayoutContextProvider value={layoutType}>
       <TableContainer
+        data-testid={dataTestId}
         layoutType={layoutType}
         {...getTableProps()}
         className={className}
