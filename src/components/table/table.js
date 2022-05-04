@@ -17,7 +17,7 @@ export function Table({
   layoutType = "table",
   columns,
   data,
-  'data-testid': dataTestId,
+  "data-testid": dataTestId,
   sortableBy = [],
   selectedItemsClb,
   toggleSelectedItemClb,
@@ -142,47 +142,50 @@ export function Table({
     }
   }, [orderedRows, dataResultsCallback])
 
-  const TableComponent = () => (
-    <LayoutContextProvider value={layoutType}>
-      <TableContainer
-        data-testid={dataTestId}
-        layoutType={layoutType}
-        {...getTableProps()}
-        className={className}
-        callbackRef={callbackRef}
-        hasStickyHeader={customProps.hasStickyHeader}
-        stickyTop={customProps.stickyTop}
-      >
-        <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
-        <TableBody layoutType={layoutType} {...getTableBodyProps()}>
-          {tableRows.map(row => {
-            prepareRow(row)
+  if (!showPagination)
+    return (
+      <LayoutContextProvider value={layoutType}>
+        <TableContainer
+          data-testid={dataTestId}
+          layoutType={layoutType}
+          {...getTableProps()}
+          className={className}
+          callbackRef={callbackRef}
+          hasStickyHeader={customProps.hasStickyHeader}
+          stickyTop={customProps.stickyTop}
+        >
+          <TableHead
+            headerGroups={headerGroups}
+            sortableBy={sortableBy}
+            customProps={customProps}
+          />
+          <TableBody layoutType={layoutType} {...getTableBodyProps()}>
+            {tableRows.map(row => {
+              prepareRow(row)
 
-            return (
-              <React.Fragment key={row.id}>
-                <TableRow
-                  canToggleExpand={!!renderRowSubComponent}
-                  customProps={customProps}
-                  row={row}
-                  prepareRow={prepareRow}
-                  onRowClick={onRowClick}
-                  selectedRowIds={selectedRowIds}
-                  renderGroupHead={renderGroupHead}
-                />
-                {row.isExpanded && renderRowSubComponent ? (
-                  <tr>
-                    <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
-                  </tr>
-                ) : null}
-              </React.Fragment>
-            )
-          })}
-        </TableBody>
-      </TableContainer>
-    </LayoutContextProvider>
-  )
-
-  if (!showPagination) return <TableComponent />
+              return (
+                <React.Fragment key={row.id}>
+                  <TableRow
+                    canToggleExpand={!!renderRowSubComponent}
+                    customProps={customProps}
+                    row={row}
+                    prepareRow={prepareRow}
+                    onRowClick={onRowClick}
+                    selectedRowIds={selectedRowIds}
+                    renderGroupHead={renderGroupHead}
+                  />
+                  {row.isExpanded && renderRowSubComponent ? (
+                    <tr>
+                      <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
+                    </tr>
+                  ) : null}
+                </React.Fragment>
+              )
+            })}
+          </TableBody>
+        </TableContainer>
+      </LayoutContextProvider>
+    )
 
   return (
     <Flex
