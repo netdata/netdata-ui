@@ -12,6 +12,63 @@ import { blockTableHooks, tableHooks } from "./table-hooks"
 
 const defaultItemIsDisabled = () => false
 
+const TableComponent = ({
+  layoutType,
+  dataTestId,
+  getTableProps,
+  getTableBodyProps,
+  prepareRow,
+  renderRowSubComponent,
+  className,
+  callbackRef,
+  customProps = {},
+  headerGroups,
+  sortableBy,
+  tableRows,
+  onRowClick,
+  selectedRowIds,
+  renderGroupHead,
+  visibleColumns,
+}) => (
+  <LayoutContextProvider value={layoutType}>
+    <TableContainer
+      data-testid={dataTestId}
+      layoutType={layoutType}
+      {...getTableProps()}
+      className={className}
+      callbackRef={callbackRef}
+      hasStickyHeader={customProps.hasStickyHeader}
+      stickyTop={customProps.stickyTop}
+    >
+      <TableHead headerGroups={headerGroups} sortableBy={sortableBy} customProps={customProps} />
+      <TableBody layoutType={layoutType} {...getTableBodyProps()}>
+        {tableRows.map(row => {
+          prepareRow(row)
+
+          return (
+            <React.Fragment key={row.id}>
+              <TableRow
+                canToggleExpand={!!renderRowSubComponent}
+                customProps={customProps}
+                row={row}
+                prepareRow={prepareRow}
+                onRowClick={onRowClick}
+                selectedRowIds={selectedRowIds}
+                renderGroupHead={renderGroupHead}
+              />
+              {row.isExpanded && renderRowSubComponent ? (
+                <tr>
+                  <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
+                </tr>
+              ) : null}
+            </React.Fragment>
+          )
+        })}
+      </TableBody>
+    </TableContainer>
+  </LayoutContextProvider>
+)
+
 export function Table({
   groupsOrderSettings,
   layoutType = "table",
@@ -144,47 +201,24 @@ export function Table({
 
   if (!showPagination)
     return (
-      <LayoutContextProvider value={layoutType}>
-        <TableContainer
-          data-testid={dataTestId}
-          layoutType={layoutType}
-          {...getTableProps()}
-          className={className}
-          callbackRef={callbackRef}
-          hasStickyHeader={customProps.hasStickyHeader}
-          stickyTop={customProps.stickyTop}
-        >
-          <TableHead
-            headerGroups={headerGroups}
-            sortableBy={sortableBy}
-            customProps={customProps}
-          />
-          <TableBody layoutType={layoutType} {...getTableBodyProps()}>
-            {tableRows.map(row => {
-              prepareRow(row)
-
-              return (
-                <React.Fragment key={row.id}>
-                  <TableRow
-                    canToggleExpand={!!renderRowSubComponent}
-                    customProps={customProps}
-                    row={row}
-                    prepareRow={prepareRow}
-                    onRowClick={onRowClick}
-                    selectedRowIds={selectedRowIds}
-                    renderGroupHead={renderGroupHead}
-                  />
-                  {row.isExpanded && renderRowSubComponent ? (
-                    <tr>
-                      <td colSpan={visibleColumns.length}>{renderRowSubComponent({ row })}</td>
-                    </tr>
-                  ) : null}
-                </React.Fragment>
-              )
-            })}
-          </TableBody>
-        </TableContainer>
-      </LayoutContextProvider>
+      <TableComponent
+        layoutType={layoutType}
+        dataTestId={dataTestId}
+        getTableProps={getTableProps}
+        getTableBodyProps={getTableBodyProps}
+        prepareRow={prepareRow}
+        renderRowSubComponent={renderRowSubComponent}
+        className={className}
+        callbackRef={callbackRef}
+        customProps={customProps}
+        headerGroups={headerGroups}
+        sortableBy={sortableBy}
+        tableRows={tableRows}
+        onRowClick={onRowClick}
+        selectedRowIds={selectedRowIds}
+        renderGroupHead={renderGroupHead}
+        visibleColumns={visibleColumns}
+      />
     )
 
   return (
@@ -195,7 +229,24 @@ export function Table({
       gap={1}
       {...paginationContainerStyles}
     >
-      <TableComponent />
+      <TableComponent
+        layoutType={layoutType}
+        dataTestId={dataTestId}
+        getTableProps={getTableProps}
+        getTableBodyProps={getTableBodyProps}
+        prepareRow={prepareRow}
+        renderRowSubComponent={renderRowSubComponent}
+        className={className}
+        callbackRef={callbackRef}
+        customProps={customProps}
+        headerGroups={headerGroups}
+        sortableBy={sortableBy}
+        tableRows={tableRows}
+        onRowClick={onRowClick}
+        selectedRowIds={selectedRowIds}
+        renderGroupHead={renderGroupHead}
+        visibleColumns={visibleColumns}
+      />
       <Flex justifyContent="between" alignItems="center" gap={6} data-testid="table-pagination">
         <Icon
           name="chevron_left"
