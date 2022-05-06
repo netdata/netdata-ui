@@ -98,6 +98,8 @@ export function Table({
   dataResultsCallback,
   renderRowSubComponent,
   onRowClick,
+  onGoToPrevious = () => {},
+  onGoToNext = () => {},
   ...customProps
 }) {
   // preserve column order to override default grouping behaviour
@@ -187,8 +189,14 @@ export function Table({
   ])
 
   const showPagination = withPagination && pageCount > 1
-  const goToPreviousPage = useCallback(() => previousPage(), [previousPage])
-  const goToNextPage = useCallback(() => nextPage(), [nextPage])
+  const goToPreviousPage = useCallback(() => {
+    onGoToPrevious()
+    previousPage()
+  }, [previousPage])
+  const goToNextPage = useCallback(() => {
+    onGoToNext()
+    nextPage()
+  }, [nextPage])
 
   useEffect(() => {
     if (dataResultsCallback) {
