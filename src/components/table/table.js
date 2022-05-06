@@ -192,11 +192,11 @@ export function Table({
   const goToPreviousPage = useCallback(() => {
     onGoToPrevious()
     previousPage()
-  }, [previousPage])
+  }, [previousPage, onGoToPrevious])
   const goToNextPage = useCallback(() => {
     onGoToNext()
     nextPage()
-  }, [nextPage])
+  }, [nextPage, onGoToNext])
 
   useEffect(() => {
     if (dataResultsCallback) {
