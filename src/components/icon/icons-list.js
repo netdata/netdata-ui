@@ -144,7 +144,8 @@ import notification from "./assets/notification.svg"
 import padlock from "./assets/padlock.svg"
 import pauseOutline from "./assets/pause_outline.svg"
 import pauseSolid from "./assets/pause_solid.svg"
-import pencil from "./assets/pencil.svg"
+import pencilOutline from "./assets/pencil_outline.svg"
+import pencilSolid from "./assets/pencil_solid.svg"
 import pie_chart_skeleton from "./assets/pie_chart_skeleton.svg"
 import pin_element from "./assets/pin_element.svg"
 import playOutline from "./assets/play_outline.svg"
@@ -413,7 +414,8 @@ export const iconsList = {
   padlock,
   pauseOutline,
   pauseSolid,
-  pencil,
+  pencilSolid,
+  pencilOutline,
   pie_chart_skeleton,
   pin_element,
   playOutline,
