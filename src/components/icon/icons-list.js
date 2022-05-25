@@ -158,6 +158,7 @@ import questionFilled from "./assets/questionFilled.svg"
 import ram from "./assets/ram.svg"
 import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
+import removeNode from "./assets/remove_node.svg"
 import resize_handler from "./assets/resize_handler.svg"
 import room from "./assets/room.svg"
 import room_home from "./assets/room_home.svg"
@@ -427,6 +428,7 @@ export const iconsList = {
   questionFilled,
   refresh,
   reload,
+  removeNode,
   resize_handler,
   room,
   room_home,
