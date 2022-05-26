@@ -23,7 +23,7 @@ const Item = styled(Flex)`
 iconListStory.add("Svgs", () => {
   const [, copyToClipboard] = useCopyToClipboard()
   return (
-    <Flex column padding={[2, 4]} gap={4}>
+    <Flex column padding={[10, 4, 2]} gap={4}>
       <TextBigger>Click item to copy icon name</TextBigger>
       <Flex flexWrap>
         {iconsExposed.map(name => (
