@@ -15,6 +15,7 @@ import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
+import applications_hollow from "./assets/applications_hollow.svg"
 import around_clock from "./assets/around_clock.svg"
 import arrow_down from "./assets/arrow_down.svg"
 import arrow_w_line_left from "./assets/arrow_w_line_left.svg"
@@ -43,6 +44,7 @@ import classError from "./assets/class_error.svg"
 import classLatency from "./assets/class_latency.svg"
 import classUtilization from "./assets/class_utilization.svg"
 import classWorkload from "./assets/class_workload.svg"
+import clock_hollow from "./assets/clock_hollow.svg"
 import clock5Min from "./assets/clock_5_min.svg"
 import clock5MinPress from "./assets/clock_5_min_press.svg"
 import close_circle from "./assets/close_circle.svg"
@@ -62,6 +64,7 @@ import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
 import cpu from "./assets/cpu.svg"
 import cross_s from "./assets/cross_s.svg"
+import data_retention from "./assets/data_retention.svg"
 import database from "./assets/database.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
@@ -87,17 +90,21 @@ import help from "./assets/help.svg"
 import hide from "./assets/hide.svg"
 import highlightArea from "./assets/highlight_area.svg"
 import holder from "./assets/holder.svg"
+import incident_manager from "./assets/incident_manager.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
 import integrations from "./assets/integrations.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
+import last_week from "./assets/last_week.svg"
 import line_chart from "./assets/line_chart.svg"
 import logo_s from "./assets/logo_s.svg"
 import loading from "./assets/loading.svg"
 import magnify from "./assets/magnify.svg"
+import metrics from "./assets/metrics.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
+import monitoring from "./assets/monitoring.svg"
 import more from "./assets/more.svg"
 import navLeft from "./assets/nav_left.svg"
 import navRight from "./assets/nav_right.svg"
@@ -280,6 +287,7 @@ export const iconsList = {
   alarms_new,
   anomaliesBrain,
   anomaliesLens,
+  applications_hollow,
   applicationsSolid,
   around_clock,
   arrow_down,
@@ -310,6 +318,7 @@ export const iconsList = {
   classLatency,
   classUtilization,
   classWorkload,
+  clock_hollow,
   clock5Min,
   clock5MinPress,
   close_circle,
@@ -329,6 +338,7 @@ export const iconsList = {
   correlation_inv,
   cpu,
   cross_s,
+  data_retention,
   database,
   dashboard,
   dashboard_add,
@@ -355,17 +365,21 @@ export const iconsList = {
   hide,
   highlightArea,
   holder,
+  incident_manager,
   information,
   informationPress,
   insights,
   integrations,
   ipNetworking,
   ipNetworkingPress,
+  last_week,
   line_chart,
   logo_s,
   loading,
   magnify,
+  metrics,
   metrics_explorer,
+  monitoring,
   more,
   navLeft,
   navRight,
