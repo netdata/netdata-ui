@@ -21,6 +21,7 @@ const styledAnimation = css`
 const Container = styled(Flex).attrs(({ zIndex = 60 }) => ({ zIndex }))`
   position: fixed;
   left: -99999px;
+  z-index: 36;
 
   ${({ animation }) => animation && styledAnimation}
 

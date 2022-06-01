@@ -7,7 +7,17 @@ import useForwardRef from "src/hooks/use-forward-ref"
 import useDimensionChange from "./useDimensionChange"
 import useMakeUpdatePosition from "./useMakeUpdatePosition"
 import Container from "./container"
-import BackdropContainer from "src/components/templates/layer/backdropContainer"
+import backdropBlur from "src/components/templates/layer/mixins/backdropBlur"
+import styled from "styled-components"
+
+const Backdrop = styled.div`
+  position: absolute;
+  inset: 0px;
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.3);
+  ${backdropBlur};
+}
+`
 
 const defaultAlign = { top: "bottom", left: "left" }
 
@@ -22,7 +32,6 @@ const Drop = forwardRef(
       onEsc,
       children,
       canHideTarget = true,
-      backdropProps,
       ...rest
     },
     parentRef
@@ -45,11 +54,12 @@ const Drop = forwardRef(
 
     return ReactDOM.createPortal(
       backdrop ? (
-        <BackdropContainer backdropProps={backdropProps}>
+        <>
           <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
             {children}
           </Container>
-        </BackdropContainer>
+          <Backdrop />
+        </>
       ) : (
         <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
           {children}
