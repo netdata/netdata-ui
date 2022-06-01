@@ -31,8 +31,8 @@ const rawColors = {
     ginfizz: "#FFF8E1",
   },
   neutral: {
-    white: "#FFF",
-    black: "#000",
+    white: "#FFFFFF",
+    black: "#000000",
     limedSpruce: "#35414A",
     regentgrey: "#8F9EAA",
     blackhaze: "#F7F8F8",
