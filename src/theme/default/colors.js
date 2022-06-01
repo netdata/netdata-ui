@@ -41,6 +41,8 @@ const appColors = {
   textFocus: rawColors.neutral.regentgrey,
   textDescription: rawColors.neutral.bluebayoux,
   sectionHeaderBackground: rawColors.neutral.limedSpruce,
+  sectionTitle: rawColors.neutral.bluebayoux,
+  sectionDescription: rawColors.neutral.regentgrey,
   placeholder: rawColors.neutral.iron,
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
