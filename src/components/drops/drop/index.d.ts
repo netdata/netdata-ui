@@ -8,6 +8,8 @@ export interface DropProps extends FlexProps, AlignProps, StretchProps {
   children: any
   canHideTarget?: boolean
   [key: string]: any
+  backdrop: boolean
+  backdropProps: any
 }
 
 declare const Drop: React.FC<DropProps & JSX.IntrinsicElements["div"]>
