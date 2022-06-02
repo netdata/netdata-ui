@@ -44,6 +44,7 @@ const appColors = {
   placeholder: rawColors.neutral.bluebayoux,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
+  nodesViewMiniCharts: rawColors.neutral.limedSpruce,
   //Input colors
   inputBorder: rawColors.neutral.bluebayoux,
   inputBorderHover: rawColors.neutral.white,
