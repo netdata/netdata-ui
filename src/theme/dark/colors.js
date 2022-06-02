@@ -43,6 +43,7 @@ const appColors = {
   sectionHeaderBackground: rawColors.neutral.white,
   sectionTitle: rawColors.neutral.iron,
   sectionDescription: rawColors.neutral.regentgrey,
+  menuItem: rawColors.neutral.iron,
   placeholder: rawColors.neutral.bluebayoux,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
