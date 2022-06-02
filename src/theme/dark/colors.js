@@ -50,8 +50,8 @@ const appColors = {
   nodesViewMiniCharts: rawColors.neutral.limedSpruce,
   //Input colors
   inputBorder: rawColors.neutral.bluebayoux,
-  inputBorderHover: rawColors.neutral.white,
-  inputBorderFocus: rawColors.neutral.white,
+  inputBorderHover: rawColors.neutral.bluebayoux,
+  inputBorderFocus: rawColors.neutral.limedSpruce,
   // Badges
   nodeBadgeBackground: rawColors.neutral.limedSpruce,
   nodeBadgeBorder: rawColors.neutral.bluebayoux,

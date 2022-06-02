@@ -1,3 +1,4 @@
+import { normalize } from "path"
 import { useMemo, useCallback } from "react"
 
 const makeColor = ({
