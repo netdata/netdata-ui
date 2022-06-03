@@ -8,7 +8,6 @@ export const Tab = ({ index, onChange, ...rest }) => {
     <StyledTab
       justifyContent="center"
       alignItems="center"
-      flex={{ grow: 1, shrink: 1 }}
       basis="100%"
       onClick={rest.disabled ? undefined : onClick}
       {...rest}
