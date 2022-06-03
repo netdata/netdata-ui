@@ -13,4 +13,7 @@ export const webkitVisibleScrollbar = css`
     border-radius: ${getSizeBy(1)};
     background-color: ${getRgbColor("border", 0.6)};
   }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: ${getRgbColor("border", 0.8)};
+  }
 `
