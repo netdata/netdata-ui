@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const StyledTable = styled.table`
   width: 100%;
   height: 100%;
-  border-collapse: collapse;
+  border-collapse: ${({ hasStickyHeader }) => (hasStickyHeader ? "separate" : "collapse")};
   position: ${({ hasStickyHeader }) => hasStickyHeader && "relative"};
 `
 
