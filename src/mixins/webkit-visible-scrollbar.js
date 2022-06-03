@@ -7,13 +7,13 @@ export const webkitVisibleScrollbar = css`
   }
   &::-webkit-scrollbar-track {
     border-radius: ${getSizeBy(0.5)};
-    background-color: ${getRgbColor("border", 0.2)};
+    background-color: ${getRgbColor("border", 0.1)};
   }
   &::-webkit-scrollbar-thumb {
     border-radius: ${getSizeBy(1)};
-    background-color: ${getRgbColor("border", 0.6)};
+    background-color: ${getRgbColor("border", 0.3)};
   }
   &::-webkit-scrollbar-thumb:hover {
-    background-color: ${getRgbColor("border", 0.8)};
+    background-color: ${getRgbColor("border", 0.5)};
   }
 `
