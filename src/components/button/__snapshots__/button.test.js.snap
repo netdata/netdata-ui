@@ -129,7 +129,7 @@ exports[`Button states  * should render loading icon 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
-  color: #FFF;
+  color: #FFFFFF;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
@@ -151,19 +151,19 @@ exports[`Button states  * should render loading icon 1`] = `
 .c0.c0:hover {
   border-color: #42B861;
   background-color: #42B861;
-  color: #FFF;
+  color: #FFFFFF;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #FFF;
+  fill: #FFFFFF;
 }
 
 .c0.c0:active {
   border-color: #68C47D;
   background-color: #68C47D;
-  color: #FFF;
+  color: #FFFFFF;
 }
 
 .c0.c0:focus {
@@ -173,7 +173,7 @@ exports[`Button states  * should render loading icon 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
-  fill: #FFF;
+  fill: #FFFFFF;
 }
 
 .c0.c0 .ntd-spinner {
@@ -183,12 +183,12 @@ exports[`Button states  * should render loading icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFF;
+  stroke: #FFFFFF;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFF;
+  stroke: #FFFFFF;
 }
 
 .c1 {
@@ -198,12 +198,12 @@ exports[`Button states  * should render loading icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFF;
+  stroke: #FFFFFF;
   width: 24px;
 }
 
 .c1 .path {
-  stroke: #FFF;
+  stroke: #FFFFFF;
 }
 
 <button
@@ -297,7 +297,7 @@ exports[`Button states  * should render only icon 1`] = `
 
 .c0.c0:active {
   border-color: #68C47D;
-  background-color: #FFF;
+  background-color: #FFFFFF;
   color: #68C47D;
 }
 
@@ -435,7 +435,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
 
 .c0.c0:active {
   border-color: #68C47D;
-  background-color: #FFF;
+  background-color: #FFFFFF;
   color: #68C47D;
 }
 
@@ -540,7 +540,7 @@ exports[`Default Button  * should render 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
-  color: #FFF;
+  color: #FFFFFF;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
@@ -562,19 +562,19 @@ exports[`Default Button  * should render 1`] = `
 .c0.c0:hover {
   border-color: #42B861;
   background-color: #42B861;
-  color: #FFF;
+  color: #FFFFFF;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #FFF;
+  fill: #FFFFFF;
 }
 
 .c0.c0:active {
   border-color: #68C47D;
   background-color: #68C47D;
-  color: #FFF;
+  color: #FFFFFF;
 }
 
 .c0.c0:focus {
@@ -584,7 +584,7 @@ exports[`Default Button  * should render 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
-  fill: #FFF;
+  fill: #FFFFFF;
 }
 
 .c0.c0 .ntd-spinner {
@@ -594,12 +594,12 @@ exports[`Default Button  * should render 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFF;
+  stroke: #FFFFFF;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFF;
+  stroke: #FFFFFF;
 }
 
 <button
@@ -673,7 +673,7 @@ exports[`Hollow Button  * should render 1`] = `
 
 .c0.c0:active {
   border-color: #68C47D;
-  background-color: #FFF;
+  background-color: #FFFFFF;
   color: #68C47D;
 }
 

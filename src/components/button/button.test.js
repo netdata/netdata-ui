@@ -174,7 +174,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#00AB44", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("opacity", "1", {
@@ -194,7 +194,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#FF4136", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
   })
@@ -208,7 +208,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#FFC300", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
   })
@@ -222,7 +222,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#35414A", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FFF", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
   })

@@ -21,7 +21,7 @@ describe("Toggle test", () => {
     expect(checkbox).toBeInTheDocument()
 
     const toggle = getByRole("switch")
-    expect(toggle).toHaveStyleRule("background", "#FFF")
+    expect(toggle).toHaveStyleRule("background", "#FFFFFF")
     expect(toggle).toHaveStyleRule("background-color", "#35414A", { modifier: ":after" })
     expect(container).toMatchSnapshot()
   })

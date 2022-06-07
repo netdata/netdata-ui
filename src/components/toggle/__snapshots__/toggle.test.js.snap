@@ -25,7 +25,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-  background: #FFF;
+  background: #FFFFFF;
   border: 1px solid #8F9EAA;
   border-radius: 100px;
   -webkit-transition: all 150ms;
@@ -135,7 +135,7 @@ exports[`Toggle test  * should render with required props 1`] = `
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-  background: #FFF;
+  background: #FFFFFF;
   border: 1px solid #8F9EAA;
   border-radius: 100px;
   -webkit-transition: all 150ms;
