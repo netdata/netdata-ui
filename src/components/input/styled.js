@@ -25,12 +25,13 @@ export const StyledInput = styled.input.attrs({ round: true })`
   ${round}
   height: 100%;
   width: 100%;
+  font-weight: normal;
   flex-grow: 0;
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: 14px;
   line-height: 18px;
-  color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("border"))};
+  color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textDescription"))};
   background: ${({ disabled }) =>
     disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
 
@@ -39,6 +40,7 @@ export const StyledInput = styled.input.attrs({ round: true })`
     line-height: 18px;
     color: ${getColor("placeholder")};
     opacity: 1;
+    font-weight: normal;
   }
   ${disabledCursorSupport};
 `
