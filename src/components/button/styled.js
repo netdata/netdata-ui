@@ -104,11 +104,11 @@ export const StyledButton = styled.button.attrs(props => ({
         ? props.width
         : props.hasLabel
         ? getSizeBy(16)
-        : getSizeBy(props.tiny ? 2.75 : props.small ? 3 : 4)};
+        : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
     height: ${props =>
       props.hasLabel
         ? getSizeBy(props.small ? 4 : 5)
-        : getSizeBy(props.tiny ? 2.75 : props.small ? 3 : 4)};
+        : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
 
     font-weight: 500;
     font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};
