@@ -46,7 +46,7 @@ const rawColors = {
     outerSpace: "#2B3136",
     gunmetal: "#282C34",
     darkGunmetal: "#21252B",
-    eerieBlack: "#16191D",
+    eerieBlack: "#181c20",
   },
   purple: {
     mauve: "#DB94F4",
