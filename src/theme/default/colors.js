@@ -51,6 +51,7 @@ const appColors = {
   sideBarMini: rawColors.neutral.chineseWhite,
   menuItem: rawColors.neutral.bluebayoux,
   nodesViewMiniCharts: rawColors.neutral.iron,
+  topBarBg: rawColors.neutral.blackhaze,
   //Input colors
   inputBorder: rawColors.neutral.iron,
   inputBorderHover: rawColors.neutral.regentgrey,

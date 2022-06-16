@@ -20,7 +20,7 @@ const useStyleTabs = ({ active = false, showBorderLeft = false }) => {
       justifyContent: "start",
       position: "relative",
       padding: [2, 3],
-      background: active ? "mainBackground" : "elementBackground",
+      background: active ? "mainBackground" : "topBarBg",
       zIndex: active ? 2 : 1,
       height: 8,
       sx: { ...border({ borderSideColor, borderTopColor, showBorderLeft }) },

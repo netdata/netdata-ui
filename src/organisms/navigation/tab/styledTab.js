@@ -4,7 +4,7 @@ import { getColor } from "src/theme"
 
 const StyledTab = styled(Flex).attrs(({ active }) => ({
   gap: 1,
-  background: active ? "mainBackground" : "elementBackground",
+  background: active ? "mainBackground" : "topBarBg",
   padding: [2, 3],
   round: { side: "top" },
   border: { side: "all", color: "tabsBorder" },
