@@ -44,6 +44,8 @@ const rawColors = {
     shark: "#1C1E22",
     tuna: "#383B40",
     outerSpace: "#2B3136",
+    verysoftmetal: "#3E4551",
+    softmetal: "#353B45",
     gunmetal: "#282C34",
     darkGunmetal: "#21252B",
     eerieBlack: "#181c20",

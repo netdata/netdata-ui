@@ -47,10 +47,11 @@ const appColors = {
   placeholder: rawColors.neutral.bluebayoux,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
-  panelBg: rawColors.neutral.limedSpruce,
+  panelBg: rawColors.neutral.softmetal,
   sideBar: rawColors.neutral.darkGunmetal,
   sideBarMini: rawColors.neutral.eerieBlack,
   nodesViewMiniCharts: rawColors.neutral.limedSpruce,
+  topBarBg: rawColors.neutral.softmetal,
   //Input colors
   inputBorder: rawColors.neutral.bluebayoux,
   inputBorderHover: rawColors.neutral.bluebayoux,
