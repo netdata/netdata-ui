@@ -31,7 +31,7 @@ const appColors = {
   errorText: rawColors.red.pomegranate,
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
-  separator: rawColors.neutral.bluebayoux,
+  separator: rawColors.neutral.porcelain,
   controlFocused: rawColors.neutral.limedSpruce,
   selected: rawColors.neutral.iron,
   tooltip: rawColors.neutral.shark,
