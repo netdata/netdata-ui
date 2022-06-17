@@ -160,7 +160,9 @@ import playSolid from "./assets/play_solid.svg"
 import plus from "./assets/plus.svg"
 import plus_mini_s from "./assets/plus_mini_s.svg"
 import pod from "./assets/pod.svg"
+import pricing from "./assets/pricing.svg"
 import print from "./assets/print.svg"
+import privacy from "./assets/privacy.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
 import ram from "./assets/ram.svg"
@@ -437,7 +439,9 @@ export const iconsList = {
   plus,
   plus_mini_s,
   pod,
+  pricing,
   print,
+  privacy,
   ram,
   qualityOfServiceSolid,
   question,
