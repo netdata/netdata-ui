@@ -3,6 +3,7 @@ import { getColor } from "src/theme"
 import alignSelf from "src/mixins/alignSelf"
 import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
+import textTransform from "src/mixins/textTransform"
 import textAlign from "./mixins/textAlign"
 import textDecoration from "./mixins/textDecoration"
 import truncate from "./mixins/truncate"
@@ -15,7 +16,6 @@ const makeLineHeight = size => () => `line-height: ${size};`
 const makeFontWeight = defaultStrong => ({ strong = defaultStrong }) =>
   `font-weight: ${strong ? "bold" : "normal"};`
 const fontColor = ({ theme, color = "text" }) => `color: ${getColor(color)({ theme })};`
-const textTransform = ({ textTransform: value }) => value && `text-transform: ${value};`
 
 const typography = css`
   ${fontColor}
