@@ -1,5 +1,20 @@
-import { Select } from "../../select"
+import React from "react"
 
-const FilteringOptions = () => {}
+import { Select } from "src/components/select"
+
+const FilteringOptions = ({ onChange, value, options }) => {
+  const all = { value: "all", label: "All" }
+  const selectedValue = value || all
+
+  return (
+    <Select
+      options={[all, ...options]}
+      value={selectedValue}
+      onChange={option => {
+        onChange(option)
+      }}
+    />
+  )
+}
 
 export default FilteringOptions
