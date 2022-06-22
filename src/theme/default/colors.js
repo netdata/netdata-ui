@@ -14,7 +14,7 @@ const appColors = {
   elementBackgroundHover: rawColors.neutral.white,
   mainBackground: rawColors.neutral.white,
   mainBackgroundDisabled: rawColors.neutral.blackhaze,
-  modalHeaderBackground: rawColors.neutral.shark,
+  modalHeaderBackground: rawColors.neutral.porcelain,
   modalTabsBackground: rawColors.neutral.blackhaze,
   modalBackground: rawColors.neutral.white,
   modalInfoBackground: rawColors.neutral.blackhaze,

@@ -49,3 +49,15 @@ export const StyledTab = styled(Flex)`
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
   }
 `
+export const StyledTabMenu = styled(Flex)`
+  padding: 4px 8px;
+  background: ${({ active }) =>
+    active ? getColor("borderSecondary") : getColor(["transparent", "full"])};
+  width: 100%;
+  border-radius: 4px;
+  cursor: ${({ active }) => (active ? "default" : "pointer")};
+  justify-content: flex-start;
+  &:hover {
+    background: ${getColor("borderSecondary")};
+  }
+`

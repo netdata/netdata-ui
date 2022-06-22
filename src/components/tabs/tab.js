@@ -1,11 +1,13 @@
 import React, { useCallback } from "react"
-import { StyledTab } from "./styled"
+import { StyledTab, StyledTabMenu } from "./styled"
 
-export const Tab = ({ index, onChange, ...rest }) => {
+export const Tab = ({ index, isMenuItem, onChange, ...rest }) => {
   const onClick = useCallback(() => onChange && onChange(index || 0), [index, onChange])
+  console.log(isMenuItem)
 
+  const TabComponent = isMenuItem ? StyledTabMenu : StyledTab
   return (
-    <StyledTab
+    <TabComponent
       justifyContent="center"
       alignItems="center"
       basis="100%"
@@ -13,6 +15,6 @@ export const Tab = ({ index, onChange, ...rest }) => {
       {...rest}
     >
       {rest.label}
-    </StyledTab>
+    </TabComponent>
   )
 }
