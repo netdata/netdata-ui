@@ -71,14 +71,14 @@ StoryTable.add("Simple Netdata Table", () => {
 
 StoryTable.add("Filters at header cell", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", enableColumnFilter: true },
-    { id: "alerts", header: () => <Text>Alerts</Text>, enableColumnFilter: false },
+    { header: "Nodes", id: "nodes", enableFilter: true },
+    { id: "alerts", header: () => <Text>Alerts</Text>, enableFilter: false },
   ]
 
   const mockData = () => [
-    { nodes: 10, alerts: 15 },
-    { nodes: 11, alerts: 11 },
-    { nodes: 23, alerts: 22 },
+    { nodes: "node1", alerts: 15 },
+    { nodes: "node2", alerts: 11 },
+    { nodes: "node3", alerts: 22 },
   ]
   return (
     <Box width="800px">

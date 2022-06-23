@@ -28,14 +28,14 @@ const table = createTable()
 const NetdataTable = ({ dataColumns, data }) => {
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
-    return dataColumns.map(({ header, id, cell, enableColumnFilter = false }, index) => {
+    return dataColumns.map(({ header, id, cell, enableFilter = false }, index) => {
       if (!id) throw new Error(`Please provide id  at ${index}`)
 
       return table.createDataColumn(id, {
         ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
         ...(header && { header: typeof header === "function" ? () => header() : header }),
         footer: props => props.column.id,
-        enableColumnFilter,
+        enableColumnFilter: enableFilter,
       })
     })
   }, [dataColumns])
