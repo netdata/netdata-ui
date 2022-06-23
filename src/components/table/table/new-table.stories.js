@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 
-import Table from "./table"
+import Table from "./base-table"
 import Box from "src/components/templates/box"
 
 const colorFilter = {
