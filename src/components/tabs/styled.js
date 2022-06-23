@@ -50,14 +50,15 @@ export const StyledTab = styled(Flex)`
   }
 `
 export const StyledTabMenu = styled(Flex)`
+  color: ${getColor("text")};
   padding: 4px 8px;
   background: ${({ active }) =>
-    active ? getColor("borderSecondary") : getColor(["transparent", "full"])};
+    active ? getColor("nodeBadgeBackground") : getColor(["transparent", "full"])};
   width: 100%;
   border-radius: 4px;
   cursor: ${({ active }) => (active ? "default" : "pointer")};
   justify-content: flex-start;
   &:hover {
-    background: ${getColor("borderSecondary")};
+    background: ${getColor("nodeBadgeBackground")};
   }
 `
