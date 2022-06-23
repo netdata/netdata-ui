@@ -16,9 +16,9 @@ const colorFilter = {
   value: "",
 }
 
-const NewTableStory = storiesOf("COMPONENTS|new-table")
+const NewTableStory = storiesOf("COMPONENTS|base-table")
 
-NewTableStory.add("Table", () => {
+NewTableStory.add("Base Table", () => {
   const [value, setValue] = useState()
   const filteringOptions = [{ ...colorFilter, onChange: value => setValue(value), value }]
 
