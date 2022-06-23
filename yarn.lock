@@ -2722,6 +2722,11 @@
   dependencies:
     ts-toolbelt "^9.6.0"
 
+"@tanstack/table-core@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0.tgz#866252c5baf2da6b4e2a5db6a4a7787d29486c1e"
+  integrity sha512-8bpAQHIOUs6DiDkXFVkWYM5ti9lLGvDBR4EzRwWbwLSxAevFIuikNRLDxe8WsF8mSx2sO014A8KYPJPD6/VmZg==
+
 "@testing-library/dom@^7.27.1":
   version "7.27.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.27.1.tgz#b760182513357e4448a8461f9565d733a88d71d0"

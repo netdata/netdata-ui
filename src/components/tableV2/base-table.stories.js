@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 
 import Table from "./base-table"
+import NetdataTable from "./netdataTable"
+
 import Box from "src/components/templates/box"
 
 const colorFilter = {
@@ -44,6 +46,14 @@ NewTableStory.add("Base Table", () => {
           </Table.Row>
         </Table.Body>
       </Table>
+    </Box>
+  )
+})
+
+NewTableStory.add("Netdata Table", () => {
+  return (
+    <Box width="800px">
+      <NetdataTable />
     </Box>
   )
 })
