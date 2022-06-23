@@ -53,6 +53,7 @@ const appColors = {
   nodesViewMiniCharts: rawColors.neutral.limedSpruce,
   topBarBg: rawColors.neutral.arsenic,
   //Input colors
+  inputBg: rawColors.neutral.arsenic,
   inputBorder: rawColors.neutral.bluebayoux,
   inputBorderHover: rawColors.neutral.bluebayoux,
   inputBorderFocus: rawColors.neutral.limedSpruce,

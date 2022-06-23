@@ -4,9 +4,9 @@ import { Input, Container, IconContainer, StyledIcon } from "./styled"
 
 const radioButtonStyles = {
   disabled: { containerColor: "disabled", dotColor: "disabled", borderColor: "disabled" },
-  checked: { containerColor: "bright", dotColor: "primary", borderColor: "inputBorder" },
-  checkedDisabled: { containerColor: "bright", dotColor: "disabled", borderColor: "inputBorder" },
-  default: { containerColor: "bright", dotColor: "bright", borderColor: "inputBorder" },
+  checked: { containerColor: "inputBg", dotColor: "primary", borderColor: "inputBorder" },
+  checkedDisabled: { containerColor: "inputBg", dotColor: "disabled", borderColor: "inputBorder" },
+  default: { containerColor: "inputBg", dotColor: "bright", borderColor: "inputBorder" },
 }
 
 const RadioButton = ({
@@ -40,7 +40,7 @@ const RadioButton = ({
       <IconContainer
         background={radioStyles.containerColor}
         borderColor={radioStyles.borderColor}
-        margin={children || label ? [0, 4, 0, 0] : null}
+        margin={children || label ? [0, 2, 0, 0] : null}
       >
         {showIcon && <StyledIcon name="dot" color={radioStyles.dotColor} {...iconProps} />}
       </IconContainer>
