@@ -57,7 +57,7 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} width={10} as="th" {...props}>
+  <Box ref={ref} width={{ max: 30 }} as="th" {...props}>
     {children}
   </Box>
 ))

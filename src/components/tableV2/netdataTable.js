@@ -1,9 +1,18 @@
 import React, { useMemo } from "react"
-import { Text } from "src/components/typography"
 
 import Table from "./base-table"
 
-import { createTable, useTableInstance, getCoreRowModel } from "./react-table.js"
+import {
+  createTable,
+  useTableInstance,
+  getCoreRowModel,
+  getFilteredRowModel,
+} from "./react-table.js"
+
+import { Icon } from "src/components/icon"
+import Box from "src/components/templates/box"
+
+import SearchInput from "src/components/search"
 
 const table = createTable()
 
@@ -16,38 +25,27 @@ const table = createTable()
  *
  */
 
-const mockDataColumns = [
-  { header: "Nodes", id: "nodes" },
-  { id: "alerts", header: () => <Text>Alerts</Text> },
-]
-
-const mockData = () => [
-  { nodes: 10, alerts: 15 },
-  { nodes: 11, alerts: 11 },
-  { nodes: 23, alerts: 22 },
-]
-
-const NetdataTable = ({ dataColumns = mockDataColumns }) => {
+const NetdataTable = ({ dataColumns, data }) => {
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
-    return dataColumns.map(({ header, id, cell }, index) => {
+    return dataColumns.map(({ header, id, cell, enableColumnFilter = false }, index) => {
       if (!id) throw new Error(`Please provide id  at ${index}`)
 
       return table.createDataColumn(id, {
         ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
         ...(header && { header: typeof header === "function" ? () => header() : header }),
         footer: props => props.column.id,
+        enableColumnFilter,
       })
     })
   }, [dataColumns])
 
   const instance = useTableInstance(table, {
     columns: makeDataColumns,
-    data: mockData(),
+    data: data,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   })
-
-  debugger
 
   const headers = instance.getFlatHeaders()
 
@@ -55,9 +53,14 @@ const NetdataTable = ({ dataColumns = mockDataColumns }) => {
     <Table>
       <Table.Head>
         <Table.HeadRow>
-          {headers.map(({ id, colSpan, renderHeader, isPlaceholder }) => (
+          {headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
             <Table.HeadCell colSpan={colSpan} key={id}>
               {isPlaceholder ? null : renderHeader()}
+              {column.getCanFilter() ? (
+                <div>
+                  <Filter column={column} />
+                </div>
+              ) : null}
             </Table.HeadCell>
           ))}
         </Table.HeadRow>
@@ -72,6 +75,21 @@ const NetdataTable = ({ dataColumns = mockDataColumns }) => {
         ))}
       </Table.Body>
     </Table>
+  )
+}
+
+const Filter = ({ column }) => {
+  const columnFilterValue = column.getFilterValue()
+
+  return (
+    <Box
+      as={SearchInput}
+      width={{ max: 50 }}
+      value={columnFilterValue ?? ""}
+      placeholder={"...Search"}
+      iconRight={<Icon name="magnify" />}
+      onChange={e => column.setFilterValue(e.target.value)}
+    ></Box>
   )
 }
 

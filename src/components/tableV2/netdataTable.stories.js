@@ -5,6 +5,7 @@ import Table from "./base-table"
 import NetdataTable from "./netdataTable"
 
 import Box from "src/components/templates/box"
+import { Text } from "src/components/typography"
 
 const colorFilter = {
   id: "colorFilter",
@@ -18,9 +19,9 @@ const colorFilter = {
   value: "",
 }
 
-const NewTableStory = storiesOf("COMPONENTS|base-table")
+const StoryTable = storiesOf("COMPONENTS|NetdaTable")
 
-NewTableStory.add("Base Table", () => {
+StoryTable.add("Base Table", () => {
   const [value, setValue] = useState()
   const filteringOptions = [{ ...colorFilter, onChange: value => setValue(value), value }]
 
@@ -50,10 +51,38 @@ NewTableStory.add("Base Table", () => {
   )
 })
 
-NewTableStory.add("Netdata Table", () => {
+StoryTable.add("Simple Netdata Table", () => {
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes" },
+    { id: "alerts", header: () => <Text>Alerts</Text> },
+  ]
+
+  const mockData = () => [
+    { nodes: 10, alerts: 15 },
+    { nodes: 11, alerts: 11 },
+    { nodes: 23, alerts: 22 },
+  ]
   return (
     <Box width="800px">
-      <NetdataTable />
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+    </Box>
+  )
+})
+
+StoryTable.add("Filters at header cell", () => {
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes", enableColumnFilter: true },
+    { id: "alerts", header: () => <Text>Alerts</Text>, enableColumnFilter: false },
+  ]
+
+  const mockData = () => [
+    { nodes: 10, alerts: 15 },
+    { nodes: 11, alerts: 11 },
+    { nodes: 23, alerts: 22 },
+  ]
+  return (
+    <Box width="800px">
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
 })
