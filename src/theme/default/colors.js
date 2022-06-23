@@ -18,17 +18,22 @@ const appColors = {
   modalTabsBackground: rawColors.neutral.blackhaze,
   modalBackground: rawColors.neutral.white,
   modalInfoBackground: rawColors.neutral.blackhaze,
+
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
   successBackground: rawColors.green.frostee,
-  warning: rawColors.yellow.amber,
+  successText: rawColors.green.netdata,
+
+  warning: rawColors.yellow.seaBuckthorn,
   warningLite: rawColors.yellow.mustard,
-  warningBackground: rawColors.yellow.ginfizz,
+  warningBackground: rawColors.yellow.buttermilk,
   warningText: rawColors.yellow.seaBuckthorn,
+
   error: rawColors.red.pomegranate,
   errorLite: rawColors.red.apricot,
   errorBackground: rawColors.red.lavender,
   errorText: rawColors.red.pomegranate,
+
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.neutral.porcelain,
