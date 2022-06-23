@@ -236,6 +236,7 @@ import serviceXen from "./assets/services/xen.svg"
 import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
+import sorting_desc from "./assets/sorting_desc.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import switch_off from "./assets/switch_off.svg"
@@ -516,6 +517,7 @@ export const iconsList = {
   settings,
   settings_h,
   sorting_vertical,
+  sorting_desc,
   space,
   space_new,
   switch_off,
