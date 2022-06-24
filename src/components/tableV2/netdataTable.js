@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 
 import Table from "./base-table"
 
@@ -13,38 +13,47 @@ import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
 
 import SearchInput from "src/components/search"
+import { Checkbox } from "src/components/checkbox"
 
 const table = createTable()
 
-/**
- *
- * @param {object} dataColumns - Display column options
- * @param {object} columnOptions.header -
- * @param {object} columnOptions.cell
- *
- *
- */
+const NetdataTable = ({ dataColumns, data, onRowSelected }) => {
+  const [rowSelection, setRowSelection] = useState({})
 
-const NetdataTable = ({ dataColumns, data }) => {
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
-    return dataColumns.map(({ header, id, cell, enableFilter = false }, index) => {
+    return dataColumns.map(({ header, id, cell, enableFilter = false, isPlaceholder }, index) => {
       if (!id) throw new Error(`Please provide id  at ${index}`)
+      const isCheckbox = id === "checkbox"
+
+      if (isCheckbox) {
+        return renderCheckBox()
+      }
 
       return table.createDataColumn(id, {
         ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
         ...(header && { header: typeof header === "function" ? () => header() : header }),
         footer: props => props.column.id,
         enableColumnFilter: enableFilter,
+        isPlaceholder,
       })
     })
   }, [dataColumns])
 
+  const handleRowSelection = data => {
+    onRowSelected?.(data)
+    setRowSelection(data)
+  }
+
   const instance = useTableInstance(table, {
     columns: makeDataColumns,
     data: data,
+    state: {
+      rowSelection,
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    onRowSelectionChange: handleRowSelection,
   })
 
   const headers = instance.getFlatHeaders()
@@ -78,6 +87,30 @@ const NetdataTable = ({ dataColumns, data }) => {
   )
 }
 
+const renderCheckBox = () => {
+  return table.createDataColumn("checkbox", {
+    header: ({ instance }) => {
+      return (
+        <ColumnCheckbox
+          checked={instance.getIsAllRowsSelected()}
+          indeterminate={instance.getIsSomeRowsSelected()}
+          onChange={instance.getToggleAllRowsSelectedHandler()}
+        />
+      )
+    },
+    cell: ({ row }) => {
+      return (
+        <ColumnCheckbox
+          checked={row.getIsSelected()}
+          indeterminate={row.getIsSomeSelected()}
+          onChange={row.getToggleSelectedHandler()}
+        />
+      )
+    },
+    enableColumnFilter: false,
+  })
+}
+
 const Filter = ({ column }) => {
   const columnFilterValue = column.getFilterValue()
 
@@ -91,6 +124,10 @@ const Filter = ({ column }) => {
       onChange={e => column.setFilterValue(e.target.value)}
     ></Box>
   )
+}
+
+const ColumnCheckbox = ({ checked, indeterminate, onChange }) => {
+  return <Checkbox checked={checked} indeterminate={indeterminate} onChange={onChange} />
 }
 
 export default NetdataTable

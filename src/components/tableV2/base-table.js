@@ -105,7 +105,6 @@ Table.Body = forwardRef(({ children, props }, ref) => (
 Table.Cell = forwardRef(({ children, props }, ref) => {
   const onClick = e => {
     e.stopPropagation()
-    console.log("clicked row")
   }
   return (
     <Box height={12} as="td" ref={ref} {...props} onClick={onClick}>
@@ -115,17 +114,10 @@ Table.Cell = forwardRef(({ children, props }, ref) => {
 })
 
 Table.Row = forwardRef(({ children, props, actions }, ref) => {
-  const onClick = () => {
-    console.log("clicked row")
-  }
   return (
-    <Box height={12} as="tr" ref={ref} {...props} onClick={onClick}>
+    <Box height={12} as="tr" ref={ref} {...props}>
       {children}
-      {actions && (
-        <Table.Cell onClick={e => e.stopPropagation()} className="w-[32px]">
-          here is action
-        </Table.Cell>
-      )}
+      {actions && <Table.Cell onClick={e => e.stopPropagation()}>here is action</Table.Cell>}
     </Box>
   )
 })

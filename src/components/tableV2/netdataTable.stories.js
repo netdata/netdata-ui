@@ -86,3 +86,41 @@ StoryTable.add("Filters at header cell", () => {
     </Box>
   )
 })
+
+StoryTable.add("Row selections", () => {
+  const [selectedRows, onRowSelected] = useState({})
+  const mockDataColumns = [
+    { id: "checkbox" },
+    { header: "Nodes", id: "nodes" },
+    { id: "alerts", header: () => <Text>Alerts</Text> },
+  ]
+
+  const mockData = () => [
+    { nodes: 10, alerts: 15 },
+    { nodes: 11, alerts: 11 },
+    { nodes: 23, alerts: 22 },
+  ]
+  return (
+    <Box width="800px">
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} onRowSelected={onRowSelected} />
+    </Box>
+  )
+})
+
+StoryTable.add("Filters at header cell", () => {
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes" },
+    { id: "alerts", header: () => <Text>Alerts</Text> },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15 },
+    { nodes: "node2", alerts: 11 },
+    { nodes: "node3", alerts: 22 },
+  ]
+  return (
+    <Box width="800px">
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+    </Box>
+  )
+})
