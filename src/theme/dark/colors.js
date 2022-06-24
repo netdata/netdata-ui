@@ -18,7 +18,7 @@ const appColors = {
   modalTabsBackground: rawColors.neutral.darkGunmetal,
   modalBackground: rawColors.neutral.outerSpace,
   modalInfoBackground: rawColors.neutral.bluebayoux,
-  
+
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
   successBackground: rawColors.green.deyork,
@@ -67,6 +67,12 @@ const appColors = {
   nodeBadgeBackground: rawColors.neutral.limedSpruce,
   nodeBadgeBorder: rawColors.neutral.bluebayoux,
   nodeBadgeColor: rawColors.neutral.white,
+
+  //Default pills
+  neutralPillBg: rawColors.neutral.limedSpruce,
+  neutralPillBorder: rawColors.neutral.limedSpruce,
+  neutralPillColor: rawColors.neutral.regentgrey,
+
   //Table
   tableRowBg: rawColors.neutral.shark,
 }

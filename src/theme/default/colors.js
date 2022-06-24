@@ -63,10 +63,16 @@ const appColors = {
   inputBorder: rawColors.neutral.iron,
   inputBorderHover: rawColors.neutral.regentgrey,
   inputBorderFocus: rawColors.neutral.bluebayoux,
-  // Badges
+  //Badges
   nodeBadgeBackground: rawColors.neutral.porcelain,
   nodeBadgeBorder: rawColors.neutral.iron,
   nodeBadgeColor: rawColors.neutral.bluebayoux,
+
+  //Default pills
+  neutralPillBg: rawColors.neutral.porcelain,
+  neutralPillBorder: rawColors.neutral.porcelain,
+  neutralPillColor: rawColors.neutral.bluebayoux,
+
   //Table
   tableRowBg: rawColors.neutral.blackhaze,
 }
