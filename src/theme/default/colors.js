@@ -57,6 +57,7 @@ const appColors = {
   menuItem: rawColors.neutral.bluebayoux,
   nodesViewMiniCharts: rawColors.neutral.iron,
   topBarBg: rawColors.neutral.blackhaze,
+  elevationLevelOne: rawColors.neutral.porcelain,
   //Input colors
   inputBg: rawColors.neutral.blackhaze,
   inputBorder: rawColors.neutral.iron,

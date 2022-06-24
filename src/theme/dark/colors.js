@@ -9,13 +9,13 @@ const appColors = {
   tabsBorder: rawColors.neutral.ratsbane,
   disabled: rawColors.neutral.tuna,
   disabledBackground: rawColors.neutral.outerSpace,
-  dropdown: rawColors.neutral.outerSpace,
+  dropdown: rawColors.neutral.ratsbane,
   elementBackground: rawColors.neutral.outerSpace,
   elementBackgroundHover: rawColors.neutral.tuna,
   mainBackground: rawColors.neutral.gunmetal,
   mainBackgroundDisabled: rawColors.neutral.outerSpace,
   modalHeaderBackground: rawColors.neutral.shark,
-  modalTabsBackground: rawColors.neutral.tuna,
+  modalTabsBackground: rawColors.neutral.darkGunmetal,
   modalBackground: rawColors.neutral.outerSpace,
   modalInfoBackground: rawColors.neutral.bluebayoux,
   
@@ -57,6 +57,7 @@ const appColors = {
   sideBarMini: rawColors.neutral.eerieBlack,
   nodesViewMiniCharts: rawColors.neutral.limedSpruce,
   topBarBg: rawColors.neutral.arsenic,
+  elevationLevelOne: rawColors.neutral.ratsbane,
   //Input colors
   inputBg: rawColors.neutral.arsenic,
   inputBorder: rawColors.neutral.bluebayoux,
