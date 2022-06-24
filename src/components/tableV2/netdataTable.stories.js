@@ -5,6 +5,7 @@ import Table from "./base-table"
 import NetdataTable from "./netdataTable"
 
 import Box from "src/components/templates/box"
+import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
 
 const colorFilter = {
@@ -88,7 +89,7 @@ StoryTable.add("Filters at header cell", () => {
 })
 
 StoryTable.add("Row selections", () => {
-  const [selectedRows, onRowSelected] = useState({})
+  const [selectedRows, onRowSelected] = useState([])
   const mockDataColumns = [
     { id: "checkbox" },
     { header: "Nodes", id: "nodes" },
@@ -103,24 +104,20 @@ StoryTable.add("Row selections", () => {
   return (
     <Box width="800px">
       <NetdataTable dataColumns={mockDataColumns} data={mockData()} onRowSelected={onRowSelected} />
-    </Box>
-  )
-})
-
-StoryTable.add("Filters at header cell", () => {
-  const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
-  ]
-
-  const mockData = () => [
-    { nodes: "node1", alerts: 15 },
-    { nodes: "node2", alerts: 11 },
-    { nodes: "node3", alerts: 22 },
-  ]
-  return (
-    <Box width="800px">
-      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+      <Flex column gap={2}>
+        Selected Rows:
+        {selectedRows.map(row => {
+          return (
+            <Flex gap={2} key={row}>
+              {Object.keys(row).map(key => (
+                <Box key={`${key}:${row[key]}`}>
+                  {key}:{row[key]}
+                </Box>
+              ))}
+            </Flex>
+          )
+        })}
+      </Flex>
     </Box>
   )
 })

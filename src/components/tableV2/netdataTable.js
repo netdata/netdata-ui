@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import React, { useMemo, useState, useEffect } from "react"
 
 import Table from "./base-table"
 
@@ -40,11 +40,6 @@ const NetdataTable = ({ dataColumns, data, onRowSelected }) => {
     })
   }, [dataColumns])
 
-  const handleRowSelection = data => {
-    onRowSelected?.(data)
-    setRowSelection(data)
-  }
-
   const instance = useTableInstance(table, {
     columns: makeDataColumns,
     data: data,
@@ -53,8 +48,19 @@ const NetdataTable = ({ dataColumns, data, onRowSelected }) => {
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    onRowSelectionChange: handleRowSelection,
+    onRowSelectionChange: setRowSelection,
   })
+
+  useEffect(() => {
+    const { rows } = instance.getSelectedRowModel()
+    if (rows) {
+      const selectedRows = rows.reduce((acc, { original }) => {
+        acc.push(original)
+        return acc
+      }, [])
+      onRowSelected?.(selectedRows)
+    }
+  }, [rowSelection, instance])
 
   const headers = instance.getFlatHeaders()
 
