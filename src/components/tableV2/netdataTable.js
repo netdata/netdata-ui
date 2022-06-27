@@ -23,6 +23,7 @@ const NetdataTable = ({
   onRowSelected,
   onGlobalSearchChange,
   enableSelection,
+  globalFilterFn,
   tableRef,
 }) => {
   const [rowSelection, setRowSelection] = useState({})
@@ -30,18 +31,32 @@ const NetdataTable = ({
 
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
-    return dataColumns.map(({ header, id, cell, enableFilter = false, isPlaceholder }, index) => {
-      if (!id) throw new Error(`Please provide id  at ${index}`)
+    return dataColumns.map(
+      (
+        {
+          header,
+          id,
+          cell,
+          enableFilter = false,
+          isPlaceholder,
+          filterFn,
+          enableGlobalFilter = true,
+        },
+        index
+      ) => {
+        if (!id) throw new Error(`Please provide id  at ${index}`)
 
-      return table.createDataColumn(id, {
-        ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
-        ...(header && { header: typeof header === "function" ? () => header() : header }),
-        footer: props => props.column.id,
-        enableColumnFilter: enableFilter,
-        enableGlobalFilter: true,
-        isPlaceholder,
-      })
-    })
+        return table.createDataColumn(id, {
+          ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
+          ...(header && { header: typeof header === "function" ? () => header() : header }),
+          ...(filterFn ? { filterFn } : {}),
+          footer: props => props.column.id,
+          enableColumnFilter: enableFilter,
+          enableGlobalFilter,
+          isPlaceholder,
+        })
+      }
+    )
   }, [dataColumns])
 
   const makeSelectionColumn = enableSelection ? [renderCheckBox()] : []
@@ -58,6 +73,7 @@ const NetdataTable = ({
       rowSelection,
       globalFilter,
     },
+    ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
@@ -132,7 +148,6 @@ const renderCheckBox = () => {
 
 const Filter = ({ column }) => {
   const columnFilterValue = column.getFilterValue()
-
   return (
     <Box
       as={SearchInput}

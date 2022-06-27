@@ -73,7 +73,17 @@ StoryTable.add("Simple Netdata Table", () => {
 StoryTable.add("Filters at header cell", () => {
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", enableFilter: true },
-    { id: "alerts", header: () => <Text>Alerts</Text>, enableFilter: false },
+    {
+      id: "alerts",
+      header: () => <Text>Alerts</Text>,
+      enableFilter: true,
+      filterFn: (row, columnId, value) => {
+        const { original } = row
+        const rowValue = original[columnId]
+
+        return rowValue.toString().includes(value.toString())
+      },
+    },
   ]
 
   const mockData = () => [
@@ -127,24 +137,30 @@ StoryTable.add("Row selections", () => {
 })
 
 StoryTable.add("Global Filters", () => {
+  const [value, setValue] = useState()
+
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { id: "alerts", header: () => <Text strong>Alerts</Text> },
+    { id: "user", header: () => <Text strong>Users</Text> },
   ]
 
   const mockData = () => [
-    { nodes: "node1", alerts: 15 },
-    { nodes: "node2", alerts: 11 },
-    { nodes: "node3", alerts: 22 },
+    { nodes: "node1", alerts: 15, user: "nic" },
+    { nodes: "node2", alerts: 11, user: "alex" },
+    { nodes: "node3", alerts: 22, user: "manolis" },
   ]
 
   const onGlobalSearchChange = value => {
     console.log(value)
   }
 
+  const filteringOptions = [{ ...colorFilter, onChange: value => setValue(value), value }]
+
   return (
     <Box width="800px">
       <NetdataTable
+        filteringOptions={filteringOptions}
         onGlobalSearchChange={onGlobalSearchChange}
         dataColumns={mockDataColumns}
         data={mockData()}
