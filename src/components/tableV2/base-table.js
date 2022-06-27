@@ -119,11 +119,10 @@ Table.Cell = forwardRef(({ children, props }, ref) => {
   )
 })
 
-Table.Row = forwardRef(({ children, props, actions }, ref) => {
+Table.Row = forwardRef(({ children, props }, ref) => {
   return (
     <Box height={12} as="tr" ref={ref} {...props}>
       {children}
-      {actions && <Table.Cell onClick={e => e.stopPropagation()}>here is action</Table.Cell>}
     </Box>
   )
 })
