@@ -7,6 +7,7 @@ import {
   useTableInstance,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
 } from "./react-table.js"
 
 import { Icon } from "src/components/icon"
@@ -82,6 +83,7 @@ const NetdataTable = ({
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: handleGlobalSearch,
     onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
   })
 
   useEffect(() => {
