@@ -123,7 +123,6 @@ StoryTable.add("Row selections", () => {
 })
 
 StoryTable.add("Global Filters", () => {
-  const [globalFilter, setGlobalSearch] = useState("")
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text>Alerts</Text> },
@@ -135,15 +134,14 @@ StoryTable.add("Global Filters", () => {
     { nodes: "node3", alerts: 22 },
   ]
 
-  const handleGlobalSearch = value => {
-    setGlobalSearch(value)
+  const onGlobalSearchChange = value => {
+    console.log(value)
   }
 
   return (
     <Box width="800px">
       <NetdataTable
-        globalFilter={globalFilter}
-        handleGlobalSearch={handleGlobalSearch}
+        onGlobalSearchChange={onGlobalSearchChange}
         dataColumns={mockDataColumns}
         data={mockData()}
       />
