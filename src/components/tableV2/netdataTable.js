@@ -17,7 +17,7 @@ import { Checkbox } from "src/components/checkbox"
 
 const table = createTable()
 
-const NetdataTable = ({ dataColumns, data, onRowSelected }) => {
+const NetdataTable = ({ dataColumns, data, onRowSelected, handleGlobalSearch, tableRef }) => {
   const [rowSelection, setRowSelection] = useState({})
 
   const makeDataColumns = useMemo(() => {
@@ -65,7 +65,7 @@ const NetdataTable = ({ dataColumns, data, onRowSelected }) => {
   const headers = instance.getFlatHeaders()
 
   return (
-    <Table>
+    <Table handleSearch={handleGlobalSearch} ref={tableRef}>
       <Table.Head>
         <Table.HeadRow>
           {headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (

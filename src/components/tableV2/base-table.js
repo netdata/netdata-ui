@@ -26,7 +26,14 @@ const Table = forwardRef(
 
           {handleSearch && (
             <Box width={{ max: 50 }}>
-              <SearchInput placeholder={seachPlaceholder} iconRight={<Icon name="magnify" />} />
+              <SearchInput
+                onChange={e => {
+                  e.persist()
+                  handleSearch(e.target.value)
+                }}
+                placeholder={seachPlaceholder}
+                iconRight={<Icon name="magnify" />}
+              />
             </Box>
           )}
         </Flex>
