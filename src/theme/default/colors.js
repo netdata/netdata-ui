@@ -69,8 +69,8 @@ const appColors = {
   nodeBadgeColor: rawColors.neutral.bluebayoux,
 
   //Default pills
-  neutralPillBg: rawColors.neutral.porcelain,
-  neutralPillBorder: rawColors.neutral.porcelain,
+  neutralPillBg: rawColors.neutral.iron,
+  neutralPillBorder: rawColors.neutral.iron,
   neutralPillColor: rawColors.neutral.bluebayoux,
 
   //Table
