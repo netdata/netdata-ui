@@ -17,7 +17,14 @@ import { Checkbox } from "src/components/checkbox"
 
 const table = createTable()
 
-const NetdataTable = ({ dataColumns, data, onRowSelected, handleGlobalSearch, tableRef }) => {
+const NetdataTable = ({
+  dataColumns,
+  data,
+  onRowSelected,
+  handleGlobalSearch,
+  globalFilter,
+  tableRef,
+}) => {
   const [rowSelection, setRowSelection] = useState({})
 
   const makeDataColumns = useMemo(() => {
@@ -35,6 +42,7 @@ const NetdataTable = ({ dataColumns, data, onRowSelected, handleGlobalSearch, ta
         ...(header && { header: typeof header === "function" ? () => header() : header }),
         footer: props => props.column.id,
         enableColumnFilter: enableFilter,
+        enableGlobalFilter: true,
         isPlaceholder,
       })
     })
@@ -45,10 +53,12 @@ const NetdataTable = ({ dataColumns, data, onRowSelected, handleGlobalSearch, ta
     data: data,
     state: {
       rowSelection,
+      globalFilter,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: handleGlobalSearch,
   })
 
   useEffect(() => {
