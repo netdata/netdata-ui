@@ -10,7 +10,7 @@ import FilteringOptions from "./filteringOptions"
 const Table = forwardRef(
   ({ handleSearch, filteringOptions, children, seachPlaceholder = "search", ...props }, ref) => {
     return (
-      <Flex column>
+      <Flex width="100%" height="100%" column>
         <Flex width="100%" justifyContent="between" margin={[0, 0, 1, 0]}>
           {filteringOptions ? (
             <Flex alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
@@ -40,6 +40,9 @@ const Table = forwardRef(
         <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
           {children}
         </Box>
+        <Flex>
+          <Box></Box>
+        </Flex>
       </Flex>
     )
   }
