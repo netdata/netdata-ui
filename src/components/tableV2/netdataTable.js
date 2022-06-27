@@ -16,6 +16,8 @@ import Box from "src/components/templates/box"
 import SearchInput from "src/components/search"
 import { Checkbox } from "src/components/checkbox"
 
+const supportedActions = { delete: { icon: "trashcan" } }
+
 const table = createTable()
 
 const NetdataTable = ({
@@ -27,10 +29,20 @@ const NetdataTable = ({
   globalFilterFn,
   tableRef,
   isSortingEnabled,
+  actions = {},
 }) => {
   const [sorting, setSorting] = useState([])
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
+
+  const availableActions = Object.keys(actions).reduce((acc, currentActionKey) => {
+    const isActionSupported = supportedActions[currentActionKey]
+    if (!isActionSupported) return []
+    const { icon } = supportedActions[currentActionKey]
+    const currentAction = actions[currentActionKey]
+    acc.push({ ...currentAction, icon })
+    return acc
+  }, [])
 
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
@@ -106,7 +118,7 @@ const NetdataTable = ({
       </Table.Head>
       <Table.Body>
         {instance.getRowModel().rows.map(row => (
-          <Table.Row key={row.id}>
+          <Table.Row actions={availableActions} key={row.id}>
             {row.getVisibleCells().map(cell => (
               <Table.Cell key={cell.id}>{cell.renderCell()}</Table.Cell>
             ))}

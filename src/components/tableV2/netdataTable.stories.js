@@ -183,3 +183,27 @@ StoryTable.add("Sorting", () => {
     </Box>
   )
 })
+
+StoryTable.add("Actions", () => {
+  const handleAction = data => {
+    console.log(data)
+  }
+  const actions = { delete: { handleAction } }
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes" },
+    { id: "alerts", header: () => <Text strong>Alerts</Text> },
+    { id: "user", header: () => <Text strong>Users</Text> },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15, user: "nic" },
+    { nodes: "node2", alerts: 11, user: "alex" },
+    { nodes: "node3", alerts: 22, user: "manolis" },
+  ]
+
+  return (
+    <Box width="800px">
+      <NetdataTable actions={actions} dataColumns={mockDataColumns} data={mockData()} />
+    </Box>
+  )
+})
