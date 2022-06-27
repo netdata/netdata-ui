@@ -1,3 +1,4 @@
+//TODO ADD CONFIRMATION DIALOG COMPONENT
 import React, { useMemo, useState, useEffect } from "react"
 
 import Table from "./base-table"
@@ -17,7 +18,10 @@ import Flex from "src/components/templates/flex"
 import SearchInput from "src/components/search"
 import { Checkbox } from "src/components/checkbox"
 
-const supportedActions = { delete: { icon: "trashcan" }, info: { icon: "information" } }
+const supportedActions = {
+  delete: { icon: "trashcan", confirmation: false },
+  info: { icon: "information", confirmation: false },
+}
 
 const table = createTable()
 
@@ -39,9 +43,9 @@ const NetdataTable = ({
   const availableActions = Object.keys(actions).reduce((acc, currentActionKey) => {
     const isActionSupported = supportedActions[currentActionKey]
     if (!isActionSupported) return []
-    const { icon } = supportedActions[currentActionKey]
+    const { icon, confirmation } = supportedActions[currentActionKey]
     const currentAction = actions[currentActionKey]
-    acc.push({ ...currentAction, icon, id: currentActionKey })
+    acc.push({ confirmation, icon, id: currentActionKey, ...currentAction })
     return acc
   }, [])
 
