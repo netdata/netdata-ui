@@ -17,7 +17,14 @@ import { Checkbox } from "src/components/checkbox"
 
 const table = createTable()
 
-const NetdataTable = ({ dataColumns, data, onRowSelected, onGlobalSearchChange, tableRef }) => {
+const NetdataTable = ({
+  dataColumns,
+  data,
+  onRowSelected,
+  onGlobalSearchChange,
+  enableSelection,
+  tableRef,
+}) => {
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
 
@@ -25,11 +32,6 @@ const NetdataTable = ({ dataColumns, data, onRowSelected, onGlobalSearchChange, 
     if (!dataColumns || dataColumns.length < 1) return []
     return dataColumns.map(({ header, id, cell, enableFilter = false, isPlaceholder }, index) => {
       if (!id) throw new Error(`Please provide id  at ${index}`)
-      const isCheckbox = id === "checkbox"
-
-      if (isCheckbox) {
-        return renderCheckBox()
-      }
 
       return table.createDataColumn(id, {
         ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
@@ -42,13 +44,15 @@ const NetdataTable = ({ dataColumns, data, onRowSelected, onGlobalSearchChange, 
     })
   }, [dataColumns])
 
+  const makeSelectionColumn = enableSelection ? [renderCheckBox()] : []
+
   const handleGlobalSearch = value => {
     onGlobalSearchChange?.(value)
     setGlobalFilter(String(value))
   }
 
   const instance = useTableInstance(table, {
-    columns: makeDataColumns,
+    columns: [...makeSelectionColumn, ...makeDataColumns],
     data: data,
     state: {
       rowSelection,

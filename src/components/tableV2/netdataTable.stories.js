@@ -91,7 +91,6 @@ StoryTable.add("Filters at header cell", () => {
 StoryTable.add("Row selections", () => {
   const [selectedRows, onRowSelected] = useState([])
   const mockDataColumns = [
-    { id: "checkbox" },
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text>Alerts</Text> },
   ]
@@ -103,7 +102,12 @@ StoryTable.add("Row selections", () => {
   ]
   return (
     <Box width="800px">
-      <NetdataTable dataColumns={mockDataColumns} data={mockData()} onRowSelected={onRowSelected} />
+      <NetdataTable
+        enableSelection
+        dataColumns={mockDataColumns}
+        data={mockData()}
+        onRowSelected={onRowSelected}
+      />
       <Flex column gap={2}>
         Selected Rows:
         {selectedRows.map(row => {
