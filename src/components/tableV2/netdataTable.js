@@ -25,7 +25,9 @@ const NetdataTable = ({
   enableSelection,
   globalFilterFn,
   tableRef,
+  isSortingEnabled,
 }) => {
+  const [sorting, setSorting] = useState([])
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
 
@@ -72,12 +74,14 @@ const NetdataTable = ({
     state: {
       rowSelection,
       globalFilter,
+      sorting,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: handleGlobalSearch,
+    onSortingChange: setSorting,
   })
 
   useEffect(() => {
@@ -96,18 +100,7 @@ const NetdataTable = ({
   return (
     <Table handleSearch={onGlobalSearchChange ? handleGlobalSearch : null} ref={tableRef}>
       <Table.Head>
-        <Table.HeadRow>
-          {headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
-            <Table.HeadCell colSpan={colSpan} key={id}>
-              {isPlaceholder ? null : renderHeader()}
-              {column.getCanFilter() ? (
-                <div>
-                  <Filter column={column} />
-                </div>
-              ) : null}
-            </Table.HeadCell>
-          ))}
-        </Table.HeadRow>
+        <Table.HeadRow>{renderHeadCell({ headers, isSortingEnabled })}</Table.HeadRow>
       </Table.Head>
       <Table.Body>
         {instance.getRowModel().rows.map(row => (
@@ -120,6 +113,37 @@ const NetdataTable = ({
       </Table.Body>
     </Table>
   )
+}
+
+const renderHeadCell = ({ headers, isSortingEnabled }) => {
+  const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
+    <Table.HeadCell colSpan={colSpan} key={id}>
+      {isPlaceholder ? null : renderHeader()}
+      {column.getCanFilter() ? (
+        <div>
+          <Filter column={column} />
+        </div>
+      ) : null}
+    </Table.HeadCell>
+  ))
+
+  const SortingHeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
+    <Table.SortingHeadCell
+      sortDirection={column.getIsSorted()}
+      onSortClicked={column.getToggleSortingHandler()}
+      colSpan={colSpan}
+      key={id}
+    >
+      {isPlaceholder ? null : renderHeader()}
+      {column.getCanFilter() ? (
+        <div>
+          <Filter column={column} />
+        </div>
+      ) : null}
+    </Table.SortingHeadCell>
+  ))
+
+  return isSortingEnabled ? SortingHeadCell : HeadCell
 }
 
 const renderCheckBox = () => {

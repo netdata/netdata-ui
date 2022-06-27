@@ -69,34 +69,31 @@ Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.SortingHeadeCell = forwardRef(
+Table.SortingHeadCell = forwardRef(
   ({ children, onSortClicked, setSortDirection, sortDirection, props }, ref) => {
     const onClick = useCallback(
       e => {
         e.preventDefault()
-        if (!sortDirection) {
-          setSortDirection("ASC")
-        } else {
-          if (sortDirection === "ASC") {
-            setSortDirection("DESC")
-          } else {
-            setSortDirection(undefined)
-          }
-        }
-        onSortClicked()
+
+        onSortClicked?.(e)
       },
       [sortDirection, setSortDirection, onSortClicked]
     )
 
+    const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
+
     return (
       <Box as="th" ref={ref} {...props} onClick={onClick}>
-        <Flex cursor="pointer" gap={1}>
-          {children}
-          <Box
-            as="icon"
-            name="sorting_desc"
-            sx={{ transform: sortDirection === "ASC" ? "rotate(180)" : "rotate(0)" }}
-          />
+        <Flex position="relative" cursor="pointer" gap={1}>
+          <Box position="relative">
+            {children}
+            <Box
+              position="absolute"
+              width={4}
+              as={Icon}
+              name={sortingIcons[sortDirection] ?? null}
+            />
+          </Box>
         </Flex>
       </Box>
     )

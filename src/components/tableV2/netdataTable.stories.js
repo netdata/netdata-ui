@@ -137,8 +137,6 @@ StoryTable.add("Row selections", () => {
 })
 
 StoryTable.add("Global Filters", () => {
-  const [value, setValue] = useState()
-
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text strong>Alerts</Text> },
@@ -155,16 +153,33 @@ StoryTable.add("Global Filters", () => {
     console.log(value)
   }
 
-  const filteringOptions = [{ ...colorFilter, onChange: value => setValue(value), value }]
-
   return (
     <Box width="800px">
       <NetdataTable
-        filteringOptions={filteringOptions}
         onGlobalSearchChange={onGlobalSearchChange}
         dataColumns={mockDataColumns}
         data={mockData()}
       />
+    </Box>
+  )
+})
+
+StoryTable.add("Sorting", () => {
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes" },
+    { id: "alerts", header: () => <Text strong>Alerts</Text> },
+    { id: "user", header: () => <Text strong>Users</Text> },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15, user: "nic" },
+    { nodes: "node2", alerts: 11, user: "alex" },
+    { nodes: "node3", alerts: 22, user: "manolis" },
+  ]
+
+  return (
+    <Box width="800px">
+      <NetdataTable isSortingEnabled={true} dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
 })
