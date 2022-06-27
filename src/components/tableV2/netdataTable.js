@@ -12,11 +12,12 @@ import {
 
 import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
+import Flex from "src/components/templates/flex"
 
 import SearchInput from "src/components/search"
 import { Checkbox } from "src/components/checkbox"
 
-const supportedActions = { delete: { icon: "trashcan" } }
+const supportedActions = { delete: { icon: "trashcan" }, info: { icon: "information" } }
 
 const table = createTable()
 
@@ -40,7 +41,7 @@ const NetdataTable = ({
     if (!isActionSupported) return []
     const { icon } = supportedActions[currentActionKey]
     const currentAction = actions[currentActionKey]
-    acc.push({ ...currentAction, icon })
+    acc.push({ ...currentAction, icon, id: currentActionKey })
     return acc
   }, [])
 
@@ -75,6 +76,8 @@ const NetdataTable = ({
   }, [dataColumns])
 
   const makeSelectionColumn = enableSelection ? [renderCheckBox()] : []
+  const makeActionsColumn =
+    availableActions.length > 0 ? [renderActions({ actions: availableActions })] : []
 
   const handleGlobalSearch = value => {
     onGlobalSearchChange?.(value)
@@ -82,7 +85,7 @@ const NetdataTable = ({
   }
 
   const instance = useTableInstance(table, {
-    columns: [...makeSelectionColumn, ...makeDataColumns],
+    columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     state: {
       rowSelection,
@@ -118,7 +121,7 @@ const NetdataTable = ({
       </Table.Head>
       <Table.Body>
         {instance.getRowModel().rows.map(row => (
-          <Table.Row actions={availableActions} key={row.id}>
+          <Table.Row key={row.id}>
             {row.getVisibleCells().map(cell => (
               <Table.Cell key={cell.id}>{cell.renderCell()}</Table.Cell>
             ))}
@@ -158,6 +161,35 @@ const renderHeadCell = ({ headers, isSortingEnabled }) => {
   ))
 
   return isSortingEnabled ? SortingHeadCell : HeadCell
+}
+
+const renderActions = ({ actions }) => {
+  return table.createDataColumn("actions", {
+    header: () => {
+      return "Actions"
+    },
+    cell: ({ row }) => {
+      return (
+        <Flex data-testId="action-cell" height="100%" gap={2}>
+          {actions.map(({ id, icon, handleAction }) => (
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              height={"100%"}
+              _hover={{ background: "borderSecondary" }}
+              cursor="pointer"
+              key={id}
+              width={10}
+              onClick={() => handleAction(row.original)}
+            >
+              <Box as={Icon} name={icon} />
+            </Flex>
+          ))}
+        </Flex>
+      )
+    },
+    enableColumnFilter: false,
+  })
 }
 
 const renderCheckBox = () => {

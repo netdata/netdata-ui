@@ -112,7 +112,9 @@ Table.Cell = forwardRef(({ children, props }, ref) => {
   }
   return (
     <Box height={12} as="td" ref={ref} {...props} onClick={onClick}>
-      <Flex>{children}</Flex>
+      <Flex alignItems="center" height="100%">
+        {children}
+      </Flex>
     </Box>
   )
 })

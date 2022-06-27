@@ -188,7 +188,7 @@ StoryTable.add("Actions", () => {
   const handleAction = data => {
     console.log(data)
   }
-  const actions = { delete: { handleAction } }
+  const actions = { delete: { handleAction }, info: { handleAction } }
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text strong>Alerts</Text> },
