@@ -8,13 +8,10 @@ import { Text } from "src/components/typography"
 import Action from "./action"
 import { Button } from "src/components/button"
 
-import FilteringOptions from "./filteringOptions"
-
 const Table = forwardRef(
   (
     {
       handleSearch,
-      filteringOptions,
       children,
       seachPlaceholder = "search",
       Pagination,
@@ -88,7 +85,7 @@ Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.SortingHeadCell = forwardRef(
-  ({ children, onSortClicked, setSortDirection, sortDirection, props }, ref) => {
+  ({ children, onSortClicked, setSortDirection, sortDirection, filter, props }, ref) => {
     const onClick = useCallback(
       e => {
         e.preventDefault()
@@ -102,7 +99,7 @@ Table.SortingHeadCell = forwardRef(
 
     return (
       <Box as="th" ref={ref} {...props} onClick={onClick}>
-        <Flex position="relative" cursor="pointer" gap={1}>
+        <Flex column position="relative" cursor="pointer" gap={1}>
           <Box position="relative">
             {children}
             <Box
@@ -112,6 +109,7 @@ Table.SortingHeadCell = forwardRef(
               name={sortingIcons[sortDirection] ?? null}
             />
           </Box>
+          {filter}
         </Flex>
       </Box>
     )

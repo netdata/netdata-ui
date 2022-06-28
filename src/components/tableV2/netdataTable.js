@@ -194,13 +194,9 @@ const renderHeadCell = ({ headers, enableSorting }) => {
       onSortClicked={column.getToggleSortingHandler()}
       colSpan={colSpan}
       key={id}
+      filter={column.getCanFilter() && <Filter column={column} />}
     >
       {isPlaceholder ? null : renderHeader()}
-      {column.getCanFilter() ? (
-        <div>
-          <Filter column={column} />
-        </div>
-      ) : null}
     </Table.SortingHeadCell>
   ))
 
