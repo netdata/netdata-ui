@@ -177,30 +177,35 @@ const NetdataTable = ({
 }
 
 const renderHeadCell = ({ headers, enableSorting }) => {
-  const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
-    <Table.HeadCell colSpan={colSpan} key={id}>
-      {isPlaceholder ? null : renderHeader()}
-      {column.getCanFilter() ? (
-        <div>
-          <Filter column={column} />
-        </div>
-      ) : null}
-    </Table.HeadCell>
-  ))
+  const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => {
+    const { getCanSort } = column
+    if (getCanSort() && enableSorting) {
+      return (
+        <Table.SortingHeadCell
+          sortDirection={column.getIsSorted()}
+          onSortClicked={column.getToggleSortingHandler()}
+          colSpan={colSpan}
+          key={id}
+          filter={column.getCanFilter() && <Filter column={column} />}
+        >
+          {isPlaceholder ? null : renderHeader()}
+        </Table.SortingHeadCell>
+      )
+    }
 
-  const SortingHeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
-    <Table.SortingHeadCell
-      sortDirection={column.getIsSorted()}
-      onSortClicked={column.getToggleSortingHandler()}
-      colSpan={colSpan}
-      key={id}
-      filter={column.getCanFilter() && <Filter column={column} />}
-    >
-      {isPlaceholder ? null : renderHeader()}
-    </Table.SortingHeadCell>
-  ))
+    return (
+      <Table.HeadCell colSpan={colSpan} key={id}>
+        {isPlaceholder ? null : renderHeader()}
+        {column.getCanFilter() ? (
+          <div>
+            <Filter column={column} />
+          </div>
+        ) : null}
+      </Table.HeadCell>
+    )
+  })
 
-  return enableSorting ? SortingHeadCell : HeadCell
+  return HeadCell
 }
 
 const renderPagination = ({ instance }) => {
@@ -266,6 +271,7 @@ const renderCheckBox = () => {
       )
     },
     enableColumnFilter: false,
+    enableSorting: false,
   })
 }
 

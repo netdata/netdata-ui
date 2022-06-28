@@ -100,9 +100,9 @@ Table.SortingHeadCell = forwardRef(
     const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
 
     return (
-      <Box as="th" ref={ref} {...props} onClick={onClick}>
+      <Box as="th" ref={ref} {...props}>
         <Flex column position="relative" cursor="pointer" gap={1}>
-          <Box position="relative">
+          <Box onClick={onClick} position="relative">
             {children}
             <Box
               position="absolute"
