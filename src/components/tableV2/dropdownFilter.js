@@ -2,7 +2,7 @@ import React from "react"
 
 import { Select } from "src/components/select"
 
-const FilteringOptions = ({ onChange, value, options }) => {
+const DropdownFilter = ({ onChange, value, options }) => {
   const all = { value: "all", label: "All" }
   const selectedValue = value || all
 
@@ -17,4 +17,4 @@ const FilteringOptions = ({ onChange, value, options }) => {
   )
 }
 
-export default FilteringOptions
+export default DropdownFilter
