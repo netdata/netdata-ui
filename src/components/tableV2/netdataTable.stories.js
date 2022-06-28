@@ -209,7 +209,7 @@ StoryTable.add("Actions", () => {
 })
 
 StoryTable.add("Pagination", () => {
-  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 2 })
+  const paginationOptions = { pageIndex: 0, pageSize: 2 }
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text strong>Alerts</Text> },
@@ -228,8 +228,7 @@ StoryTable.add("Pagination", () => {
   return (
     <Box width="800px">
       <NetdataTable
-        setPagination={setPagination}
-        pagination={pagination}
+        paginationOptions={paginationOptions}
         enablePagination={true}
         dataColumns={mockDataColumns}
         data={mockData()}

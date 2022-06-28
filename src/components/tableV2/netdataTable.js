@@ -37,12 +37,15 @@ const NetdataTable = ({
   enableSorting,
   actions = {},
   enablePagination,
-  setPagination,
-  pagination,
+  paginationOptions,
 }) => {
   const [sorting, setSorting] = useState([])
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
+  const [pagination, setPagination] = useState({
+    pageIndex: paginationOptions.pageIndex,
+    pageSize: paginationOptions.pageSize,
+  })
 
   const availableActions = Object.keys(actions).reduce((acc, currentActionKey) => {
     const isActionSupported = supportedActions[currentActionKey]
@@ -191,7 +194,7 @@ const renderPagination = ({ instance }) => {
       onNextPage={nextPage}
       onPreviousPage={previousPage}
       pageSize={pageSize}
-      pageIndex={pageIndex}
+      pageIndex={pageIndex + 1}
     />
   )
 }
