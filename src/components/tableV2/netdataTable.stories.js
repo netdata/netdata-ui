@@ -326,18 +326,19 @@ StoryTable.add("Full Table functionallity", () => {
         return rowValue.toString().includes(value.toString())
       },
     },
+    { header: "user", id: "user", enableFilter: true },
   ]
 
   const mockData = () => [
+    { nodes: "node8", alerts: 15, user: "mitsos" },
+    { nodes: "node9", alerts: 11, user: "koukouroukou" },
+    { nodes: "node10", alerts: 22, user: "reena" },
     { nodes: "node1", alerts: 15, user: "nic" },
     { nodes: "node2", alerts: 11, user: "alex" },
     { nodes: "node34", alerts: 22, user: "manolis" },
     { nodes: "node5", alerts: 15, user: "achile" },
     { nodes: "node6", alerts: 11, user: "barba" },
     { nodes: "node7", alerts: 22, user: "decker" },
-    { nodes: "node8", alerts: 15, user: "mitsos" },
-    { nodes: "node9", alerts: 11, user: "kokouroukou" },
-    { nodes: "node10", alerts: 22, user: "reena" },
   ]
 
   return (
