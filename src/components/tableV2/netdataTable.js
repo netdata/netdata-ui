@@ -109,7 +109,7 @@ const NetdataTable = ({
     )
   }, [dataColumns])
 
-  const makeSelectionColumn = enableSelection ? [renderCheckBox()] : []
+  const makeSelectionColumn = enableSelection ? [renderRowSelection()] : []
   const makeActionsColumn =
     availableRowActions.length > 0 ? [renderActions({ actions: availableRowActions })] : []
 
@@ -247,10 +247,11 @@ const renderActions = ({ actions }) => {
       )
     },
     enableColumnFilter: false,
+    enableSorting: false,
   })
 }
 
-const renderCheckBox = () => {
+const renderRowSelection = () => {
   return table.createDataColumn("checkbox", {
     header: ({ instance }) => {
       return (
