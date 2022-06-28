@@ -255,9 +255,9 @@ const renderCheckBox = () => {
     header: ({ instance }) => {
       return (
         <ColumnCheckbox
-          checked={instance.getIsAllRowsSelected()}
-          indeterminate={instance.getIsSomeRowsSelected()}
-          onChange={instance.getToggleAllRowsSelectedHandler()}
+          checked={instance.getIsAllPageRowsSelected()}
+          indeterminate={instance.getIsSomePageRowsSelected()}
+          onChange={instance.getToggleAllPageRowsSelectedHandler()}
         />
       )
     },
