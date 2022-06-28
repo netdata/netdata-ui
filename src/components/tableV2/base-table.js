@@ -143,7 +143,12 @@ export const Pagination = ({
   pageSize,
 }) => (
   <Flex>
-    <Box cursor="pointer" onClick={onPreviousPage} as={Icon} name="chevron_left_small" />
+    <Box
+      cursor="pointer"
+      onClick={hasPrevious && onPreviousPage}
+      as={Icon}
+      name="chevron_left_small"
+    />
     {pageIndex}
     <Box cursor="pointer" onClick={hasNext && onNextPage} as={Icon} name="chevron_right_small" />
     <Text>

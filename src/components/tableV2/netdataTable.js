@@ -17,11 +17,12 @@ import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"
 
 import SearchInput from "src/components/search"
+import Tooltip from "src/components/drops/tooltip"
 import { Checkbox } from "src/components/checkbox"
 
 const supportedActions = {
-  delete: { icon: "trashcan", confirmation: false },
-  info: { icon: "information", confirmation: false },
+  delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
+  info: { icon: "information", confirmation: false, tooltipText: "Information" },
 }
 
 const table = createTable()
@@ -53,9 +54,9 @@ const NetdataTable = ({
   const availableActions = Object.keys(actions).reduce((acc, currentActionKey) => {
     const isActionSupported = supportedActions[currentActionKey]
     if (!isActionSupported) return []
-    const { icon, confirmation } = supportedActions[currentActionKey]
+    const { icon, confirmation, tooltipText } = supportedActions[currentActionKey]
     const currentAction = actions[currentActionKey]
-    acc.push({ confirmation, icon, id: currentActionKey, ...currentAction })
+    acc.push({ confirmation, tooltipText, icon, id: currentActionKey, ...currentAction })
     return acc
   }, [])
 
@@ -210,19 +211,21 @@ const renderActions = ({ actions }) => {
     cell: ({ row }) => {
       return (
         <Flex data-testId="action-cell" height="100%" gap={2}>
-          {actions.map(({ id, icon, handleAction }) => (
-            <Flex
-              alignItems="center"
-              justifyContent="center"
-              height={"100%"}
-              _hover={{ background: "borderSecondary" }}
-              cursor="pointer"
-              key={id}
-              width={10}
-              onClick={() => handleAction(row.original)}
-            >
-              <Box as={Icon} name={icon} />
-            </Flex>
+          {actions.map(({ id, icon, handleAction, tooltipText }) => (
+            <Tooltip key={id} content={tooltipText}>
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                height={"100%"}
+                _hover={{ background: "borderSecondary" }}
+                cursor="pointer"
+                key={id}
+                width={10}
+                onClick={() => handleAction(row.original)}
+              >
+                <Box as={Icon} name={icon} />
+              </Flex>
+            </Tooltip>
           ))}
         </Flex>
       )
