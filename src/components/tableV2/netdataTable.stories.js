@@ -179,7 +179,7 @@ StoryTable.add("Sorting", () => {
 
   return (
     <Box width="800px">
-      <NetdataTable isSortingEnabled={true} dataColumns={mockDataColumns} data={mockData()} />
+      <NetdataTable enableSorting={true} dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
 })
@@ -204,6 +204,36 @@ StoryTable.add("Actions", () => {
   return (
     <Box width="800px">
       <NetdataTable actions={actions} dataColumns={mockDataColumns} data={mockData()} />
+    </Box>
+  )
+})
+
+StoryTable.add("Pagination", () => {
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 2 })
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes" },
+    { id: "alerts", header: () => <Text strong>Alerts</Text> },
+    { id: "user", header: () => <Text strong>Users</Text> },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15, user: "nic" },
+    { nodes: "node2", alerts: 11, user: "alex" },
+    { nodes: "node34", alerts: 22, user: "manolis" },
+    { nodes: "node5", alerts: 15, user: "achile" },
+    { nodes: "node6", alerts: 11, user: "barba" },
+    { nodes: "node7", alerts: 22, user: "decker" },
+  ]
+
+  return (
+    <Box width="800px">
+      <NetdataTable
+        setPagination={setPagination}
+        pagination={pagination}
+        enablePagination={true}
+        dataColumns={mockDataColumns}
+        data={mockData()}
+      />
     </Box>
   )
 })

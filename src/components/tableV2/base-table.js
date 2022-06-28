@@ -4,11 +4,16 @@ import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
+import { Text } from "src/components/typography"
+import { Button } from "src/components/button"
 
 import FilteringOptions from "./filteringOptions"
 
 const Table = forwardRef(
-  ({ handleSearch, filteringOptions, children, seachPlaceholder = "search", ...props }, ref) => {
+  (
+    { handleSearch, filteringOptions, children, seachPlaceholder = "search", Pagination, ...props },
+    ref
+  ) => {
     return (
       <Flex width="100%" height="100%" column>
         <Flex width="100%" justifyContent="between" margin={[0, 0, 1, 0]}>
@@ -40,9 +45,7 @@ const Table = forwardRef(
         <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
           {children}
         </Box>
-        <Flex>
-          <Box></Box>
-        </Flex>
+        {Pagination}
       </Flex>
     )
   }
@@ -129,5 +132,24 @@ Table.Row = forwardRef(({ children, props }, ref) => {
     </Box>
   )
 })
+
+export const Pagination = ({
+  pageIndex,
+  pageCount,
+  hasNext,
+  hasPrevious,
+  onNextPage,
+  onPreviousPage,
+  pageSize,
+}) => (
+  <Flex>
+    <Box cursor="pointer" onClick={onPreviousPage} as={Icon} name="chevron_left_small" />
+    {pageIndex}
+    <Box cursor="pointer" onClick={onNextPage} as={Icon} name="chevron_right_small" />
+    <Text>
+      Page {pageIndex} of {pageCount}
+    </Text>
+  </Flex>
+)
 
 export default Table

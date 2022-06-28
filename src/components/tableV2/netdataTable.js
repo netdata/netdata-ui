@@ -1,7 +1,7 @@
 //TODO ADD CONFIRMATION DIALOG COMPONENT
 import React, { useMemo, useState, useEffect } from "react"
 
-import Table from "./base-table"
+import Table, { Pagination } from "./base-table"
 
 import {
   createTable,
@@ -9,6 +9,7 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  getPaginationRowModel,
 } from "./react-table.js"
 
 import { Icon } from "src/components/icon"
@@ -33,8 +34,11 @@ const NetdataTable = ({
   enableSelection,
   globalFilterFn,
   tableRef,
-  isSortingEnabled,
+  enableSorting,
   actions = {},
+  enablePagination,
+  setPagination,
+  pagination,
 }) => {
   const [sorting, setSorting] = useState([])
   const [rowSelection, setRowSelection] = useState({})
@@ -95,6 +99,7 @@ const NetdataTable = ({
       rowSelection,
       globalFilter,
       sorting,
+      pagination,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
@@ -103,6 +108,8 @@ const NetdataTable = ({
     onGlobalFilterChange: handleGlobalSearch,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
   })
 
   useEffect(() => {
@@ -119,9 +126,13 @@ const NetdataTable = ({
   const headers = instance.getFlatHeaders()
 
   return (
-    <Table handleSearch={onGlobalSearchChange ? handleGlobalSearch : null} ref={tableRef}>
+    <Table
+      Pagination={enablePagination && renderPagination({ instance })}
+      handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+      ref={tableRef}
+    >
       <Table.Head>
-        <Table.HeadRow>{renderHeadCell({ headers, isSortingEnabled })}</Table.HeadRow>
+        <Table.HeadRow>{renderHeadCell({ headers, enableSorting })}</Table.HeadRow>
       </Table.Head>
       <Table.Body>
         {instance.getRowModel().rows.map(row => (
@@ -136,7 +147,7 @@ const NetdataTable = ({
   )
 }
 
-const renderHeadCell = ({ headers, isSortingEnabled }) => {
+const renderHeadCell = ({ headers, enableSorting }) => {
   const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => (
     <Table.HeadCell colSpan={colSpan} key={id}>
       {isPlaceholder ? null : renderHeader()}
@@ -164,7 +175,25 @@ const renderHeadCell = ({ headers, isSortingEnabled }) => {
     </Table.SortingHeadCell>
   ))
 
-  return isSortingEnabled ? SortingHeadCell : HeadCell
+  return enableSorting ? SortingHeadCell : HeadCell
+}
+
+const renderPagination = ({ instance }) => {
+  const { nextPage, previousPage, getCanPreviousPage, getCanNextPage, getPageCount } = instance
+  const pageSize = instance.getState().pagination.pageSize
+  const pageIndex = instance.getState().pagination.pageIndex
+
+  return (
+    <Pagination
+      pageCount={getPageCount()}
+      hasNext={getCanNextPage()}
+      hasPrevious={getCanPreviousPage()}
+      onNextPage={nextPage}
+      onPreviousPage={previousPage}
+      pageSize={pageSize}
+      pageIndex={pageIndex}
+    />
+  )
 }
 
 const renderActions = ({ actions }) => {
