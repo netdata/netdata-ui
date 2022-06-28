@@ -179,7 +179,7 @@ StoryTable.add("Sorting", () => {
 
   return (
     <Box width="800px">
-      <NetdataTable enableSorting={true} dataColumns={mockDataColumns} data={mockData()} />
+      <NetdataTable enableSorting dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
 })
@@ -276,6 +276,80 @@ StoryTable.add("Pagination", () => {
       <NetdataTable
         paginationOptions={paginationOptions}
         enablePagination={true}
+        dataColumns={mockDataColumns}
+        data={mockData()}
+      />
+    </Box>
+  )
+})
+
+StoryTable.add("Full Table functionallity", () => {
+  const onGlobalSearchChange = value => {
+    console.log(value)
+  }
+  const paginationOptions = { pageIndex: 0, pageSize: 5 }
+
+  const handleDelete = data => {
+    console.log("Delete has been clicked", data)
+  }
+
+  const handleDownload = data => {
+    console.log("Download has been clicked", data)
+  }
+
+  const handleToggleAlarms = data => {
+    console.log("Toggle alarm has been clicked", data)
+  }
+
+  const handleInfo = data => {
+    console.log("Info Clicked", data)
+  }
+
+  const bulkActions = {
+    delete: { handleAction: handleDelete },
+    download: { handleAction: handleDownload },
+    toggleAlarm: { handleAction: handleToggleAlarms },
+  }
+
+  const rowActions = { delete: { handleAction: handleDelete }, info: { handleAction: handleInfo } }
+
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes", enableFilter: true },
+    {
+      id: "alerts",
+      header: () => <Text>Alerts</Text>,
+      enableFilter: true,
+      filterFn: (row, columnId, value) => {
+        const { original } = row
+        const rowValue = original[columnId]
+
+        return rowValue.toString().includes(value.toString())
+      },
+    },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15, user: "nic" },
+    { nodes: "node2", alerts: 11, user: "alex" },
+    { nodes: "node34", alerts: 22, user: "manolis" },
+    { nodes: "node5", alerts: 15, user: "achile" },
+    { nodes: "node6", alerts: 11, user: "barba" },
+    { nodes: "node7", alerts: 22, user: "decker" },
+    { nodes: "node8", alerts: 15, user: "mitsos" },
+    { nodes: "node9", alerts: 11, user: "kokouroukou" },
+    { nodes: "node10", alerts: 22, user: "reena" },
+  ]
+
+  return (
+    <Box width="800px">
+      <NetdataTable
+        onGlobalSearchChange={onGlobalSearchChange}
+        enableSorting
+        paginationOptions={paginationOptions}
+        enablePagination
+        rowActions={rowActions}
+        bulkActions={bulkActions}
+        enableSelection
         dataColumns={mockDataColumns}
         data={mockData()}
       />
