@@ -37,7 +37,10 @@ const NetdataTable = ({
   enableSorting,
   actions = {},
   enablePagination,
-  paginationOptions,
+  paginationOptions = {
+    pageIndex: 0,
+    pageSize: 0,
+  },
 }) => {
   const [sorting, setSorting] = useState([])
   const [rowSelection, setRowSelection] = useState({})
@@ -102,7 +105,7 @@ const NetdataTable = ({
       rowSelection,
       globalFilter,
       sorting,
-      pagination,
+      ...(enablePagination ? { pagination } : {}),
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
