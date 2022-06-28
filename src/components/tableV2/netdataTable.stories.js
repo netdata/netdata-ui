@@ -208,8 +208,12 @@ StoryTable.add("Actions", () => {
   )
 })
 
-StoryTable.add("Pagination", () => {
-  const paginationOptions = { pageIndex: 0, pageSize: 2 }
+StoryTable.add("Bulk Actions", () => {
+  const handleDelete = data => {
+    console.log(data)
+  }
+  const bulkActions = { delete: { handleAction: handleDelete } }
+
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text strong>Alerts</Text> },
@@ -228,8 +232,8 @@ StoryTable.add("Pagination", () => {
   return (
     <Box width="800px">
       <NetdataTable
-        paginationOptions={paginationOptions}
-        enablePagination={true}
+        bulkActions={bulkActions}
+        enableSelection
         dataColumns={mockDataColumns}
         data={mockData()}
       />
@@ -237,7 +241,7 @@ StoryTable.add("Pagination", () => {
   )
 })
 
-StoryTable.add("Bulk Actions", () => {
+StoryTable.add("Pagination", () => {
   const paginationOptions = { pageIndex: 0, pageSize: 2 }
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },

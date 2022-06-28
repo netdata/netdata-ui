@@ -17,8 +17,9 @@ import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"
 
 import SearchInput from "src/components/search"
-import Tooltip from "src/components/drops/tooltip"
 import { Checkbox } from "src/components/checkbox"
+
+import Action from "./action"
 
 const supportedBulkActions = {
   delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
@@ -51,6 +52,7 @@ const NetdataTable = ({
     pageSize: 0,
   },
 }) => {
+  const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState([])
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
@@ -143,6 +145,7 @@ const NetdataTable = ({
         acc.push(original)
         return acc
       }, [])
+      setOriginalSelectedRow(selectedRows)
       onRowSelected?.(selectedRows)
     }
   }, [rowSelection, instance])
@@ -151,6 +154,7 @@ const NetdataTable = ({
 
   return (
     <Table
+      selectedRows={originalSelectedRows}
       bulkActions={availableBulkActions}
       Pagination={enablePagination && renderPagination({ instance })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
@@ -230,20 +234,13 @@ const renderActions = ({ actions }) => {
       return (
         <Flex data-testId="action-cell" height="100%" gap={2}>
           {actions.map(({ id, icon, handleAction, tooltipText }) => (
-            <Tooltip key={id} content={tooltipText}>
-              <Flex
-                alignItems="center"
-                justifyContent="center"
-                height={"100%"}
-                _hover={{ background: "borderSecondary" }}
-                cursor="pointer"
-                key={id}
-                width={10}
-                onClick={() => handleAction(row.original)}
-              >
-                <Box as={Icon} name={icon} />
-              </Flex>
-            </Tooltip>
+            <Action
+              key={id}
+              icon={icon}
+              handleAction={handleAction}
+              tooltipText={tooltipText}
+              row={row}
+            />
           ))}
         </Flex>
       )
