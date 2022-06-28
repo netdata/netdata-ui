@@ -3,7 +3,7 @@ import { addParameters, addDecorator, configure } from "@storybook/react"
 import { addReadme } from "storybook-readme"
 import { withTests } from "@storybook/addon-jest"
 import { withKnobs } from "@storybook/addon-knobs"
-// import centered from "@storybook/addon-centered/react"
+import centered from "@storybook/addon-centered/react"
 import { DefaultTheme } from "src/theme/default"
 import { DarkTheme } from "src/theme/dark"
 
@@ -17,24 +17,24 @@ import { useLocalStorage } from "react-use"
 import { Text } from "src/components/typography"
 
 const results = require("../.jest-test-results.json")
-const centered = story => {
-  return (
-    <Box
-      sx={{
-        flexDirection: "column",
-        position: "fixed",
-        inset: "0px",
-        display: "flex",
-        alignItems: "center",
-        overflow: "auto",
-        justifyContent: "center",
-      }}
-    >
-      {story()}
-    </Box>
-  )
-}
-// @ts-ignore
+// const centered = story => {
+//   return (
+//     <Box
+//       sx={{
+//         flexDirection: "column",
+//         position: "fixed",
+//         inset: "0px",
+//         display: "flex",
+//         alignItems: "center",
+//         overflow: "auto",
+//         justifyContent: "center",
+//       }}
+//     >
+//       {story()}
+//     </Box>
+//   )
+// }
+// // @ts-ignore
 addDecorator(centered)
 
 addDecorator(withKnobs)
