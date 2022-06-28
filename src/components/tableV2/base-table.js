@@ -23,33 +23,35 @@ const Table = forwardRef(
   ) => {
     return (
       <Flex width="100%" height="100%" column>
-        {handleSearch && (
-          <Box width={{ max: 50 }}>
-            <SearchInput
-              onChange={e => {
-                e.persist()
-                handleSearch(e.target.value)
-              }}
-              placeholder={seachPlaceholder}
-              iconRight={<Icon name="magnify" />}
-            />
-          </Box>
-        )}
-        <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
-          {bulkActions ? (
-            <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
-              {bulkActions.map(({ id, icon, handleAction, tooltipText }) => (
-                <Action
-                  key={id}
-                  icon={icon}
-                  handleAction={() => handleAction(selectedRows)}
-                  tooltipText={tooltipText}
-                />
-              ))}
-            </Flex>
-          ) : (
-            <Box aria-hidden as="span" />
+        <Flex width="100%">
+          {handleSearch && (
+            <Box width={{ max: 50 }}>
+              <SearchInput
+                onChange={e => {
+                  e.persist()
+                  handleSearch(e.target.value)
+                }}
+                placeholder={seachPlaceholder}
+                iconRight={<Icon name="magnify" />}
+              />
+            </Box>
           )}
+          <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
+            {bulkActions ? (
+              <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
+                {bulkActions.map(({ id, icon, handleAction, tooltipText }) => (
+                  <Action
+                    key={id}
+                    icon={icon}
+                    handleAction={() => handleAction(selectedRows)}
+                    tooltipText={tooltipText}
+                  />
+                ))}
+              </Flex>
+            ) : (
+              <Box aria-hidden as="span" />
+            )}
+          </Flex>
         </Flex>
         <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
           {children}
