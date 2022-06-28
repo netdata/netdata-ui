@@ -13,6 +13,7 @@ import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
+import alarm_off from "./assets/alarm_off.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
 import applications_hollow from "./assets/applications_hollow.svg"
@@ -291,6 +292,7 @@ export const iconsList = {
   alarmWarning,
   alarm_bell,
   alarms_new,
+  alarm_off,
   anomaliesBrain,
   anomaliesLens,
   applications_hollow,

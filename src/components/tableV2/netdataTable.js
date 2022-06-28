@@ -20,9 +20,16 @@ import SearchInput from "src/components/search"
 import Tooltip from "src/components/drops/tooltip"
 import { Checkbox } from "src/components/checkbox"
 
-const supportedActions = {
+const supportedBulkActions = {
+  delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
+  download: { icon: "download", confirmation: false, tooltipText: "Download" },
+  alarm_off: { icon: "alarm_off", confirmation: false, tooltipText: "Turn off notifications" },
+}
+
+const supportedRowActions = {
   delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
+  alarm_off: { icon: "alarm_off", confirmation: false, tooltipText: "Turn off notifications" },
 }
 
 const table = createTable()
@@ -36,7 +43,8 @@ const NetdataTable = ({
   globalFilterFn,
   tableRef,
   enableSorting,
-  actions = {},
+  rowActions = {},
+  bulkActions = {},
   enablePagination,
   paginationOptions = {
     pageIndex: 0,
@@ -51,11 +59,20 @@ const NetdataTable = ({
     pageSize: paginationOptions.pageSize,
   })
 
-  const availableActions = Object.keys(actions).reduce((acc, currentActionKey) => {
-    const isActionSupported = supportedActions[currentActionKey]
+  const availableRowActions = Object.keys(rowActions).reduce((acc, currentActionKey) => {
+    const isActionSupported = supportedRowActions[currentActionKey]
     if (!isActionSupported) return []
-    const { icon, confirmation, tooltipText } = supportedActions[currentActionKey]
-    const currentAction = actions[currentActionKey]
+    const { icon, confirmation, tooltipText } = supportedRowActions[currentActionKey]
+    const currentAction = rowActions[currentActionKey]
+    acc.push({ confirmation, tooltipText, icon, id: currentActionKey, ...currentAction })
+    return acc
+  }, [])
+
+  const availableBulkActions = Object.keys(bulkActions).reduce((acc, currentActionKey) => {
+    const isBulkActionSupported = supportedBulkActions[currentActionKey]
+    if (!isBulkActionSupported) return []
+    const { icon, confirmation, tooltipText } = supportedBulkActions[currentActionKey]
+    const currentAction = bulkActions[currentActionKey]
     acc.push({ confirmation, tooltipText, icon, id: currentActionKey, ...currentAction })
     return acc
   }, [])
@@ -92,7 +109,7 @@ const NetdataTable = ({
 
   const makeSelectionColumn = enableSelection ? [renderCheckBox()] : []
   const makeActionsColumn =
-    availableActions.length > 0 ? [renderActions({ actions: availableActions })] : []
+    availableRowActions.length > 0 ? [renderActions({ actions: availableRowActions })] : []
 
   const handleGlobalSearch = value => {
     onGlobalSearchChange?.(value)
@@ -134,6 +151,7 @@ const NetdataTable = ({
 
   return (
     <Table
+      bulkActions={availableBulkActions}
       Pagination={enablePagination && renderPagination({ instance })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
