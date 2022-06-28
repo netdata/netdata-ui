@@ -24,13 +24,13 @@ import Action from "./action"
 const supportedBulkActions = {
   delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
-  alarm_off: { icon: "alarm_off", confirmation: false, tooltipText: "Turn off notifications" },
+  toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
 
 const supportedRowActions = {
   delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
-  alarm_off: { icon: "alarm_off", confirmation: false, tooltipText: "Turn off notifications" },
+  toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
 
 const table = createTable()
@@ -232,12 +232,12 @@ const renderActions = ({ actions }) => {
     },
     cell: ({ row }) => {
       return (
-        <Flex data-testId="action-cell" height="100%" gap={2}>
+        <Flex data-testid="action-cell" height="100%" gap={2}>
           {actions.map(({ id, icon, handleAction, tooltipText }) => (
             <Action
               key={id}
               icon={icon}
-              handleAction={handleAction}
+              handleAction={() => handleAction(row.original)}
               tooltipText={tooltipText}
               row={row}
             />

@@ -5,41 +5,53 @@ import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
+import Action from "./action"
 import { Button } from "src/components/button"
 
 import FilteringOptions from "./filteringOptions"
 
 const Table = forwardRef(
   (
-    { handleSearch, filteringOptions, children, seachPlaceholder = "search", Pagination, ...props },
+    {
+      handleSearch,
+      filteringOptions,
+      children,
+      seachPlaceholder = "search",
+      Pagination,
+      selectedRows,
+      bulkActions,
+      ...props
+    },
     ref
   ) => {
     return (
       <Flex width="100%" height="100%" column>
-        <Flex width="100%" justifyContent="between" margin={[0, 0, 1, 0]}>
-          {filteringOptions ? (
-            <Flex alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
-              {filteringOptions.map(({ onChange, value, options, id }) => (
-                <Box key={id}>
-                  <FilteringOptions value={value} options={options} onChange={onChange} />
-                </Box>
+        {handleSearch && (
+          <Box width={{ max: 50 }}>
+            <SearchInput
+              onChange={e => {
+                e.persist()
+                handleSearch(e.target.value)
+              }}
+              placeholder={seachPlaceholder}
+              iconRight={<Icon name="magnify" />}
+            />
+          </Box>
+        )}
+        <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
+          {bulkActions ? (
+            <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
+              {bulkActions.map(({ id, icon, handleAction, tooltipText }) => (
+                <Action
+                  key={id}
+                  icon={icon}
+                  handleAction={() => handleAction(selectedRows)}
+                  tooltipText={tooltipText}
+                />
               ))}
             </Flex>
           ) : (
             <Box aria-hidden as="span" />
-          )}
-
-          {handleSearch && (
-            <Box width={{ max: 50 }}>
-              <SearchInput
-                onChange={e => {
-                  e.persist()
-                  handleSearch(e.target.value)
-                }}
-                placeholder={seachPlaceholder}
-                iconRight={<Icon name="magnify" />}
-              />
-            </Box>
           )}
         </Flex>
         <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>

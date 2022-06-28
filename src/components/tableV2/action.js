@@ -5,7 +5,7 @@ import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Icon } from "src/components/icon"
 
-const Action = ({ id, icon, handleAction, tooltipText, row }) => {
+const Action = ({ id, icon, handleAction, tooltipText }) => {
   return (
     <Tooltip content={tooltipText}>
       <Flex
@@ -16,7 +16,7 @@ const Action = ({ id, icon, handleAction, tooltipText, row }) => {
         cursor="pointer"
         key={id}
         width={10}
-        onClick={() => handleAction(row.original)}
+        onClick={handleAction}
       >
         <Box as={Icon} name={icon} />
       </Flex>

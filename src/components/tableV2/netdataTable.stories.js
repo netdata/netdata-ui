@@ -210,9 +210,22 @@ StoryTable.add("Actions", () => {
 
 StoryTable.add("Bulk Actions", () => {
   const handleDelete = data => {
-    console.log(data)
+    console.log("Delete has been clicked", data)
   }
-  const bulkActions = { delete: { handleAction: handleDelete } }
+
+  const handleDownload = data => {
+    console.log("Download has been clicked", data)
+  }
+
+  const handleToggleAlarms = data => {
+    console.log("Toggle alarm has been clicked", data)
+  }
+
+  const bulkActions = {
+    delete: { handleAction: handleDelete },
+    download: { handleAction: handleDownload },
+    toggleAlarm: { handleAction: handleToggleAlarms },
+  }
 
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
