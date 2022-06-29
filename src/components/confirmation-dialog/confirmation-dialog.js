@@ -10,6 +10,27 @@ import Modal, {
 import Flex from "src/components/templates/flex"
 import { Button } from "src/components/button"
 
+const actionButtonStyles = {
+  default: {
+    confirm: { flavour: "defalut" },
+    decline: { flavour: "hollow", danger: true },
+  },
+  reverse: {
+    decline: { flavour: "default" },
+    confirm: { flavour: "hollow", danger: true },
+  },
+}
+
+const flexProperties = {
+  default: {
+    justifyContent: "end",
+  },
+  reverse: {
+    rowReverse: true,
+    justifyContent: "start",
+  },
+}
+
 const ConfirmationDialog = ({
   title,
   message,
@@ -17,7 +38,13 @@ const ConfirmationDialog = ({
   declineLabel,
   handleConfirm,
   handleDecline,
+  actionButtonDirection = "default",
 }) => {
+  const { confirm: confirmStyles, decline: declineStyles } = actionButtonStyles[
+    actionButtonDirection
+  ]
+  const flexProps = flexProperties[actionButtonDirection]
+
   return (
     <Modal>
       <ModalContent>
@@ -27,9 +54,9 @@ const ConfirmationDialog = ({
         </ModalHeader>
         <ModalBody>{message}</ModalBody>
         <ModalFooter hasBorder={false}>
-          <Flex gap={4} width="100%" justifyContent="end">
-            <Button label={confirmLabel} onClick={handleConfirm} />
-            <Button danger flavour="hollow" label={declineLabel} onClick={handleDecline} />
+          <Flex gap={4} width="100%" {...flexProps}>
+            <Button {...confirmStyles} label={confirmLabel} onClick={handleConfirm} />
+            <Button {...declineStyles} label={declineLabel} onClick={handleDecline} />
           </Flex>
         </ModalFooter>
       </ModalContent>

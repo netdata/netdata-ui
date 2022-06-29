@@ -18,6 +18,7 @@ const Action = ({
   handleDecline,
   confirmLabel,
   declineLabel,
+  actionButtonDirection,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
@@ -44,6 +45,7 @@ const Action = ({
     <>
       {isConfirmationOpen && (
         <ConfirmationDialog
+          actionButtonDirection={actionButtonDirection}
           declineLabel={declineLabel}
           confirmLabel={confirmLabel}
           title={confirmationTitle}

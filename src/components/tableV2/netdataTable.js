@@ -30,6 +30,7 @@ const supportedBulkActions = {
     confirmationMessage: "You are about to delete a row, are you sure you want to continue?",
     confirmLabel: "Yes",
     declineLabel: "No",
+    actionButtonDirection: "reverse",
   },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
@@ -44,6 +45,7 @@ const supportedRowActions = {
     confirmationMessage: "You are about to delete a row, are you sure?",
     confirmLabel: "Yes",
     declineLabel: "No",
+    actionButtonDirection: "reverse",
   },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
@@ -89,6 +91,7 @@ const NetdataTable = ({
       confirmLabel,
       declineLabel,
       handleDecline,
+      actionButtonDirection,
     } = supportedRowActions[currentActionKey]
     const currentAction = rowActions[currentActionKey]
     acc.push({
@@ -101,6 +104,7 @@ const NetdataTable = ({
       confirmLabel,
       declineLabel,
       handleDecline,
+      actionButtonDirection,
       ...currentAction,
     })
     return acc
@@ -118,6 +122,7 @@ const NetdataTable = ({
       confirmLabel,
       declineLabel,
       handleDecline,
+      actionButtonDirection,
     } = supportedBulkActions[currentActionKey]
     const currentAction = bulkActions[currentActionKey]
     acc.push({
@@ -130,6 +135,7 @@ const NetdataTable = ({
       confirmLabel,
       declineLabel,
       handleDecline,
+      actionButtonDirection,
       ...currentAction,
     })
     return acc
@@ -302,8 +308,10 @@ const renderActions = ({ actions }) => {
               confirmLabel,
               declineLabel,
               handleDecline,
+              actionButtonDirection,
             }) => (
               <Action
+                actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}
                 declineLabel={declineLabel}
                 confirmLabel={confirmLabel}

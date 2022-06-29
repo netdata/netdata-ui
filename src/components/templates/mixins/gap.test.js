@@ -21,6 +21,14 @@ it("renders gap", () => {
   `)
 })
 
+it("renders gap with rowReversed", () => {
+  expect(styledGap({ theme, gap: 2, rowReverse: true })).toBe(`
+    &> *:not(:last-child) {
+      margin-left: ${theme.constants.SIZE_SUB_UNIT * 2}px;
+    }
+  `)
+})
+
 it("renders invalid", () => {
   expect(styledGap({ theme, gap: "invalid" })).toBe("")
 })
