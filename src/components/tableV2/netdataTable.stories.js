@@ -326,7 +326,12 @@ StoryTable.add("Full Table functionallity", () => {
         return rowValue.toString().includes(value.toString())
       },
     },
-    { header: "user", id: "user", enableFilter: true },
+    {
+      header: "user",
+      id: "user",
+      enableFilter: true,
+      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+    },
   ]
 
   const mockData = () => [

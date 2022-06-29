@@ -87,7 +87,7 @@ Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.SortingHeadCell = forwardRef(
-  ({ children, onSortClicked, setSortDirection, sortDirection, filter, props }, ref) => {
+  ({ children, onSortClicked, setSortDirection, sortDirection, filter, ...props }, ref) => {
     const onClick = useCallback(
       e => {
         e.preventDefault()
@@ -118,13 +118,13 @@ Table.SortingHeadCell = forwardRef(
   }
 )
 
-Table.Body = forwardRef(({ children, props }, ref) => (
+Table.Body = forwardRef(({ children, ...props }, ref) => (
   <Box ref={ref} as="tbody" {...props}>
     {children}
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, props }, ref) => {
+Table.Cell = forwardRef(({ children, ...props }, ref) => {
   const onClick = e => {
     e.stopPropagation()
   }
@@ -137,9 +137,9 @@ Table.Cell = forwardRef(({ children, props }, ref) => {
   )
 })
 
-Table.Row = forwardRef(({ children, props }, ref) => {
+Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
   return (
-    <Box height={12} as="tr" ref={ref} {...props}>
+    <Box height={12} as="tr" ref={ref} onClick={onClick} {...props}>
       {children}
     </Box>
   )
