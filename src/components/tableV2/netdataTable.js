@@ -64,6 +64,7 @@ const NetdataTable = ({
   enableSorting,
   rowActions = {},
   bulkActions = {},
+  onClickRow,
   enablePagination,
   paginationOptions = {
     pageIndex: 0,
@@ -227,7 +228,7 @@ const NetdataTable = ({
       </Table.Head>
       <Table.Body>
         {instance.getRowModel().rows.map(row => (
-          <Table.Row key={row.id}>
+          <Table.Row onClick={() => onClickRow(row.original, row)} key={row.id}>
             {row.getVisibleCells().map(cell => (
               <Table.Cell key={cell.id}>{cell.renderCell()}</Table.Cell>
             ))}

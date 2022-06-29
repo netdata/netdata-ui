@@ -124,12 +124,12 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, ...props }, ref) => {
-  const onClick = e => {
-    e.stopPropagation()
+Table.Cell = forwardRef(({ children, onClick, ...props }, ref) => {
+  const handleClick = () => {
+    onClick?.()
   }
   return (
-    <Box height={12} as="td" ref={ref} {...props} onClick={onClick}>
+    <Box height={12} as="td" ref={ref} {...props} onClick={handleClick}>
       <Flex alignItems="center" height="100%">
         {children}
       </Flex>
@@ -138,8 +138,11 @@ Table.Cell = forwardRef(({ children, ...props }, ref) => {
 })
 
 Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
+  const handleClick = () => {
+    onClick?.()
+  }
   return (
-    <Box height={12} as="tr" ref={ref} onClick={onClick} {...props}>
+    <Box onClick={handleClick} height={12} as="tr" ref={ref} {...props}>
       {children}
     </Box>
   )
