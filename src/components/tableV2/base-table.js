@@ -6,7 +6,6 @@ import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
 import Action from "./action"
-import { Button } from "src/components/button"
 
 const Table = forwardRef(
   (
@@ -39,8 +38,9 @@ const Table = forwardRef(
           <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
             {bulkActions ? (
               <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
-                {bulkActions.map(({ id, icon, handleAction, tooltipText }) => (
+                {bulkActions.map(({ id, icon, handleAction, tooltipText, ...rest }) => (
                   <Action
+                    {...rest}
                     key={id}
                     icon={icon}
                     handleAction={() => handleAction(selectedRows)}
