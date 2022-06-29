@@ -22,13 +22,31 @@ import { Checkbox } from "src/components/checkbox"
 import Action from "./action"
 
 const supportedBulkActions = {
-  delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
+  delete: {
+    icon: "trashcan",
+    confirmation: true,
+    tooltipText: "Delete",
+    confirmationTitle: "Delete Row",
+    confirmationMessage: "You are about to delete a row, are you sure you want to continue?",
+    confirmLabel: "Yes",
+    declineLabel: "No",
+    handleDecline: () => console.log("decline pressed"),
+  },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
 
 const supportedRowActions = {
-  delete: { icon: "trashcan", confirmation: false, tooltipText: "Delete" },
+  delete: {
+    icon: "trashcan",
+    confirmation: true,
+    tooltipText: "Delete",
+    confirmationTitle: "Delete Row",
+    confirmationMessage: "You are about to delete a row, are you sure?",
+    confirmLabel: "Yes",
+    declineLabel: "No",
+    handleDecline: () => console.log("decline pressed"),
+  },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
@@ -64,18 +82,58 @@ const NetdataTable = ({
   const availableRowActions = Object.keys(rowActions).reduce((acc, currentActionKey) => {
     const isActionSupported = supportedRowActions[currentActionKey]
     if (!isActionSupported) return []
-    const { icon, confirmation, tooltipText } = supportedRowActions[currentActionKey]
+    const {
+      icon,
+      confirmation,
+      tooltipText,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+    } = supportedRowActions[currentActionKey]
     const currentAction = rowActions[currentActionKey]
-    acc.push({ confirmation, tooltipText, icon, id: currentActionKey, ...currentAction })
+    acc.push({
+      confirmation,
+      tooltipText,
+      icon,
+      id: currentActionKey,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+      ...currentAction,
+    })
     return acc
   }, [])
 
   const availableBulkActions = Object.keys(bulkActions).reduce((acc, currentActionKey) => {
     const isBulkActionSupported = supportedBulkActions[currentActionKey]
     if (!isBulkActionSupported) return []
-    const { icon, confirmation, tooltipText } = supportedBulkActions[currentActionKey]
+    const {
+      icon,
+      confirmation,
+      tooltipText,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+    } = supportedBulkActions[currentActionKey]
     const currentAction = bulkActions[currentActionKey]
-    acc.push({ confirmation, tooltipText, icon, id: currentActionKey, ...currentAction })
+    acc.push({
+      confirmation,
+      tooltipText,
+      icon,
+      id: currentActionKey,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+      ...currentAction,
+    })
     return acc
   }, [])
 
@@ -234,15 +292,34 @@ const renderActions = ({ actions }) => {
     cell: ({ row }) => {
       return (
         <Flex data-testid="action-cell" height="100%" gap={2}>
-          {actions.map(({ id, icon, handleAction, tooltipText }) => (
-            <Action
-              key={id}
-              icon={icon}
-              handleAction={() => handleAction(row.original)}
-              tooltipText={tooltipText}
-              row={row}
-            />
-          ))}
+          {actions.map(
+            ({
+              id,
+              icon,
+              handleAction,
+              tooltipText,
+              confirmation,
+              confirmationTitle,
+              confirmationMessage,
+              confirmLabel,
+              declineLabel,
+              handleDecline,
+            }) => (
+              <Action
+                handleDecline={handleDecline}
+                declineLabel={declineLabel}
+                confirmLabel={confirmLabel}
+                confirmationMessage={confirmationMessage}
+                confirmationTitle={confirmationTitle}
+                confirmation={confirmation}
+                key={id}
+                icon={icon}
+                handleAction={() => handleAction(row.original)}
+                tooltipText={tooltipText}
+                row={row}
+              />
+            )
+          )}
         </Flex>
       )
     },
