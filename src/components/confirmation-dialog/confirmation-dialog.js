@@ -27,9 +27,9 @@ const ConfirmationDialog = ({
         </ModalHeader>
         <ModalBody>{message}</ModalBody>
         <ModalFooter hasBorder={false}>
-          <Flex width="100%" justifyContent="end">
+          <Flex gap={4} width="100%" justifyContent="end">
             <Button label={confirmLabel} onClick={handleConfirm} />
-            <Button label={declineLabel} onClick={handleDecline} />
+            <Button danger flavour="hollow" label={declineLabel} onClick={handleDecline} />
           </Flex>
         </ModalFooter>
       </ModalContent>
