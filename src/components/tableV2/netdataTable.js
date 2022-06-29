@@ -1,4 +1,4 @@
-//TODO ADD CONFIRMATION DIALOG COMPONENT
+//TODO refactor bulk action and row action to single funtion to decrease repeatabillity
 import React, { useMemo, useState, useEffect } from "react"
 
 import Table, { Pagination } from "./base-table"
@@ -30,7 +30,6 @@ const supportedBulkActions = {
     confirmationMessage: "You are about to delete a row, are you sure you want to continue?",
     confirmLabel: "Yes",
     declineLabel: "No",
-    handleDecline: () => console.log("decline pressed"),
   },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
@@ -45,7 +44,6 @@ const supportedRowActions = {
     confirmationMessage: "You are about to delete a row, are you sure?",
     confirmLabel: "Yes",
     declineLabel: "No",
-    handleDecline: () => console.log("decline pressed"),
   },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },

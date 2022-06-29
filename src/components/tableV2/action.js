@@ -31,13 +31,13 @@ const Action = ({
 
   const onActionDeclined = () => {
     setConfirmationOpen(false)
-    handleDecline()
+    handleDecline?.()
   }
 
   const onActionConfrimed = () => {
     setConfirmationOpen(false)
 
-    handleAction()
+    handleAction?.()
   }
 
   return (
