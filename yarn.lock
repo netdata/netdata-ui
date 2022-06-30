@@ -2715,13 +2715,6 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tanstack/react-table@^0.0.1-alpha.0":
-  version "0.0.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-0.0.1-alpha.0.tgz#d22fe4960ac14ad8f291e2a4af5e4ea6dcdcd4f5"
-  integrity sha512-5I0sKKJyboRff4eq2YNDCS0/Zh9dvdn3l9Kzyc/m/eDorblccpJu4DeTitjjolaLu/VY5e2NjSKd2NgDhI+Erw==
-  dependencies:
-    ts-toolbelt "^9.6.0"
-
 "@tanstack/table-core@^8.0.0":
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0.tgz#866252c5baf2da6b4e2a5db6a4a7787d29486c1e"
@@ -14317,11 +14310,6 @@ ts-toolbelt@^6.15.1:
   version "6.15.5"
   resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-6.15.5.tgz#cb3b43ed725cb63644782c64fbcad7d8f28c0a83"
   integrity sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==
-
-ts-toolbelt@^9.6.0:
-  version "9.6.0"
-  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-9.6.0.tgz#50a25426cfed500d4a09bd1b3afb6f28879edfd5"
-  integrity sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==
 
 tsconfig-paths@^3.9.0:
   version "3.9.0"

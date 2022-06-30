@@ -21,7 +21,7 @@ import { Checkbox } from "src/components/checkbox"
 
 import Action from "./action"
 
-const supportedBulkActions = {
+export const supportedBulkActions = {
   delete: {
     icon: "trashcan",
     confirmation: true,
@@ -36,7 +36,7 @@ const supportedBulkActions = {
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
 
-const supportedRowActions = {
+export const supportedRowActions = {
   delete: {
     icon: "trashcan",
     confirmation: true,
