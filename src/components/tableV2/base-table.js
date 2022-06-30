@@ -27,6 +27,7 @@ const Table = forwardRef(
           {handleSearch && (
             <Box width={{ max: 50 }}>
               <SearchInput
+                data-testid="table-global-search-filter"
                 onChange={e => {
                   e.persist()
                   handleSearch(e.target.value)

@@ -87,7 +87,7 @@ describe("Netdata table", () => {
     expect(screen.queryAllByTestId(cellTestid)).toHaveLength(15)
   })
 
-  it("should filter the columns with", () => {
+  it("should filter the columns when changing the column search filter", () => {
     renderNetdataTable()
     const filterParams = "node8"
     const nodesFilter = screen.getByTestId(nodesColumnFilter)
@@ -147,5 +147,16 @@ describe("Netdata table", () => {
     userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
 
     expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
+  })
+
+  it("should change global search and filter nodes", () => {
+    renderNetdataTable()
+    const filterParams = "node8"
+    const globalSearchFilter = screen.getByTestId("table-global-search-filter")
+
+    userEvent.type(globalSearchFilter, filterParams)
+
+    expect(globalSearchFilter).toBeInTheDocument()
+    expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
   })
 })
