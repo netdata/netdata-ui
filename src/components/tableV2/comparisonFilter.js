@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import DropdownFilter from "./dropdownFilter"
 
 import Box from "src/components/templates/box"
@@ -13,7 +13,14 @@ const Comparisons = [
 ]
 
 const ComparisonFilter = ({ column }) => {
-  const { setFilterValue, filterValue } = column
+  const { setFilterValue, getFilterValue } = column
+
+  const filterValue = getFilterValue()
+
+  useEffect(() => {
+    setFilterValue(old => [Comparisons[0], old?.[1]])
+  }, [])
+
   return (
     <Flex gap={2}>
       <DropdownFilter
@@ -26,7 +33,10 @@ const ComparisonFilter = ({ column }) => {
         as={TextInput}
         width={{ max: 50 }}
         value={filterValue ? filterValue[1] : null}
-        onChange={e => setFilterValue(old => [old?.[0], e.target.value])}
+        onChange={e => {
+          e.persist()
+          setFilterValue(old => [old?.[0], e.target.value])
+        }}
         pattern="[0-9]*(.[0-9]+)?"
         inputMode="decimal"
       />

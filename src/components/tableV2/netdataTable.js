@@ -23,6 +23,8 @@ import Action from "./action"
 
 import ComparisonFilter from "./comparisonFilter"
 
+import { comparison } from "./filterFns"
+
 export const supportedBulkActions = {
   delete: {
     icon: "trashcan",
@@ -53,7 +55,7 @@ export const supportedRowActions = {
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
 
-const table = createTable()
+const table = createTable().setOptions({ filterFns: { comparison } })
 
 const NetdataTable = ({
   dataColumns,
