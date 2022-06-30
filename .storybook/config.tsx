@@ -10,7 +10,6 @@ import { DarkTheme } from "src/theme/dark"
 import { GlobalStyles } from "src/global-styles"
 import { ThemeProvider } from "styled-components"
 import Flex from "../src/components/templates/flex"
-import Box from "../src/components/templates/box"
 
 import { Toggle } from "../src/components/toggle"
 import { useLocalStorage } from "react-use"
