@@ -241,7 +241,9 @@ const NetdataTable = ({
             key={row.id}
           >
             {row.getVisibleCells().map(cell => (
-              <Table.Cell key={cell.id}>{cell.renderCell()}</Table.Cell>
+              <Table.Cell data-testid={`netdata-table-cell${testPrefix}`} key={cell.id}>
+                {cell.renderCell()}
+              </Table.Cell>
             ))}
           </Table.Row>
         ))}
@@ -381,9 +383,10 @@ const renderRowSelection = ({ testPrefix }) => {
 
 const Filter = ({ column, testPrefix }) => {
   const columnFilterValue = column.getFilterValue()
+  const { id = "" } = column
   return (
     <Box
-      data-testid={`netdata-table-filter${testPrefix}`}
+      data-testid={`netdata-table-filter-${id}${testPrefix}`}
       as={SearchInput}
       width={{ max: 50 }}
       value={columnFilterValue ?? ""}

@@ -1,6 +1,7 @@
 import React from "react"
 import NetdataTable from "./netdataTable"
-import { renderWithProviders, screen } from "testUtilities"
+import { renderWithProviders, screen, act } from "testUtilities"
+import userEvent from "@testing-library/user-event"
 
 const onGlobalSearchChange = jest.fn()
 const handleDelete = jest.fn()
@@ -48,7 +49,14 @@ const paginationOptions = { pageIndex: 0, pageSize: 5 }
 const testPrefix = "-mock"
 const testName = "netdata-table-"
 
-const makeTestId = elementName => `${testName}`
+const makeTestId = elementName => `${testName}${elementName}${testPrefix}`
+
+const rowTestId = makeTestId("row")
+const headTestid = makeTestId("head")
+const cellTestid = makeTestId("cell")
+const headeRowTestid = makeTestId("headRow")
+const headCellTestid = makeTestId("head-cell")
+const nodesColumnFilter = makeTestId("filter-nodes")
 
 const renderNetdataTable = () => {
   renderWithProviders(
@@ -68,6 +76,21 @@ const renderNetdataTable = () => {
 describe("Netdata table", () => {
   it("Should render netdata table", () => {
     renderNetdataTable()
-    expect(screen.queryAllByTestId())
+    expect(screen.queryAllByTestId(rowTestId)).toHaveLength(3)
+    expect(screen.getByTestId(headTestid)).toBeInTheDocument()
+    expect(screen.getByTestId(headeRowTestid)).toBeInTheDocument()
+    expect(screen.queryAllByTestId(headCellTestid)).toHaveLength(5)
+    expect(screen.queryAllByTestId(cellTestid)).toHaveLength(15)
+  })
+
+  it("should filter the columns with", () => {
+    renderNetdataTable()
+    const filterParams = "node8"
+    const nodesFilter = screen.getByTestId(nodesColumnFilter)
+
+    userEvent.type(nodesFilter, filterParams)
+
+    expect(nodesFilter).toBeInTheDocument()
+    expect(screen.queryAllByTestId(rowTestId)).toHaveLength(1)
   })
 })
