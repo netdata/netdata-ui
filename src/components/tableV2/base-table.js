@@ -41,7 +41,7 @@ const Table = forwardRef(
               <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
                 {bulkActions.map(({ id, icon, handleAction, tooltipText, ...rest }) => (
                   <Action
-                    testPrefix={testPrefix}
+                    testPrefix={`-bulk${testPrefix}`}
                     {...rest}
                     key={id}
                     id={id}

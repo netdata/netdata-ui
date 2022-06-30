@@ -59,6 +59,8 @@ const headCellTestid = makeTestId("head-cell")
 const nodesColumnFilter = makeTestId("filter-nodes")
 const deleteActionTestid = makeTestId("action-delete")
 const infoActionTestid = makeTestId("action-info")
+const headerCheckBoxTestid = makeTestId("header-checkbox")
+const bulkDeleteActionTestid = makeTestId("action-delete-bulk")
 
 const renderNetdataTable = () => {
   renderWithProviders(
@@ -99,14 +101,14 @@ describe("Netdata table", () => {
   it("should trigger confirmation dialog when clicking delete and hanlde confirm", () => {
     renderNetdataTable()
     const deleteAction = screen.queryAllByTestId(deleteActionTestid)
-
+    const expectedDeletedItem = mockData()[0]
     userEvent.click(deleteAction[0])
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
     userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
 
-    expect(handleDelete).toHaveBeenCalled()
+    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
   })
 
   it("should trigger confirmation dialog when clicking delete and hanlde decline", () => {
@@ -129,5 +131,21 @@ describe("Netdata table", () => {
     userEvent.click(infoAction[0])
 
     expect(handleInfo).toHaveBeenCalled()
+  })
+
+  it("should select multiple rows and handle delete bulk action", () => {
+    renderNetdataTable()
+    const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
+    const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+    const expectedDeletedItem = mockData()
+
+    userEvent.click(headerCheckbox)
+    userEvent.click(deleteBulkAction)
+
+    expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+
+    userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+
+    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
   })
 })
