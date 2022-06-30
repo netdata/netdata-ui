@@ -108,3 +108,4 @@ export {
   ModalCloseButton,
 } from "./components/modal"
 export { default as Modal } from "./components/modal"
+export { NetdataTable } from "./components/tableV2"

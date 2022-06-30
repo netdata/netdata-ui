@@ -1,1 +1,1 @@
-export { default as NetdaTable } from "./netdataTable"
+export { default as NetdataTable } from "./netdataTable"
