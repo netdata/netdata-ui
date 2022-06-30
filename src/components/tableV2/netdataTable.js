@@ -393,7 +393,7 @@ const Filter = ({ column, testPrefix }) => {
       placeholder={"...Search"}
       iconRight={<Icon name="magnify" />}
       onChange={e => column.setFilterValue(e.target.value)}
-    ></Box>
+    />
   )
 }
 
