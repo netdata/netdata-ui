@@ -1,6 +1,6 @@
 import React from "react"
 import NetdataTable from "./netdataTable"
-import { renderWithProviders, screen, act } from "testUtilities"
+import { renderWithProviders, screen } from "testUtilities"
 import userEvent from "@testing-library/user-event"
 
 const onGlobalSearchChange = jest.fn()
@@ -51,12 +51,14 @@ const testName = "netdata-table-"
 
 const makeTestId = elementName => `${testName}${elementName}${testPrefix}`
 
-const rowTestId = makeTestId("row")
+const rowTestid = makeTestId("row")
 const headTestid = makeTestId("head")
 const cellTestid = makeTestId("cell")
 const headeRowTestid = makeTestId("headRow")
 const headCellTestid = makeTestId("head-cell")
 const nodesColumnFilter = makeTestId("filter-nodes")
+const deleteActionTestid = makeTestId("action-delete")
+const infoActionTestid = makeTestId("action-info")
 
 const renderNetdataTable = () => {
   renderWithProviders(
@@ -76,7 +78,7 @@ const renderNetdataTable = () => {
 describe("Netdata table", () => {
   it("Should render netdata table", () => {
     renderNetdataTable()
-    expect(screen.queryAllByTestId(rowTestId)).toHaveLength(3)
+    expect(screen.queryAllByTestId(rowTestid)).toHaveLength(3)
     expect(screen.getByTestId(headTestid)).toBeInTheDocument()
     expect(screen.getByTestId(headeRowTestid)).toBeInTheDocument()
     expect(screen.queryAllByTestId(headCellTestid)).toHaveLength(5)
@@ -91,17 +93,41 @@ describe("Netdata table", () => {
     userEvent.type(nodesFilter, filterParams)
 
     expect(nodesFilter).toBeInTheDocument()
-    expect(screen.queryAllByTestId(rowTestId)).toHaveLength(1)
+    expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
   })
 
-  it("should trigger action when we are clicking it", () => {
+  it("should trigger confirmation dialog when clicking delete and hanlde confirm", () => {
     renderNetdataTable()
-    const filterParams = "node8"
-    const nodesFilter = screen.getByTestId(nodesColumnFilter)
+    const deleteAction = screen.queryAllByTestId(deleteActionTestid)
 
-    userEvent.type(nodesFilter, filterParams)
+    userEvent.click(deleteAction[0])
 
-    expect(nodesFilter).toBeInTheDocument()
-    expect(screen.queryAllByTestId(rowTestId)).toHaveLength(1)
+    expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+
+    userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+
+    expect(handleDelete).toHaveBeenCalled()
+  })
+
+  it("should trigger confirmation dialog when clicking delete and hanlde decline", () => {
+    renderNetdataTable()
+    const deleteAction = screen.queryAllByTestId(deleteActionTestid)
+
+    userEvent.click(deleteAction[0])
+
+    expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+
+    userEvent.click(screen.getByTestId("confirmation-dialog-decline"))
+
+    expect(handleDelete).not.toHaveBeenCalled()
+  })
+
+  it("should trigger info action when clicking it", () => {
+    renderNetdataTable()
+    const infoAction = screen.queryAllByTestId(infoActionTestid)
+
+    userEvent.click(infoAction[0])
+
+    expect(handleInfo).toHaveBeenCalled()
   })
 })

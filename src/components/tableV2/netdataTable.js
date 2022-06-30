@@ -342,7 +342,6 @@ const renderActions = ({ actions, testPrefix }) => {
                 icon={icon}
                 handleAction={() => handleAction(row.original)}
                 tooltipText={tooltipText}
-                row={row}
                 testPrefix={testPrefix}
               />
             )

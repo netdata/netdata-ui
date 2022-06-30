@@ -55,8 +55,18 @@ const ConfirmationDialog = ({
         <ModalBody>{message}</ModalBody>
         <ModalFooter hasBorder={false}>
           <Flex gap={4} width="100%" {...flexProps}>
-            <Button {...confirmStyles} label={confirmLabel} onClick={handleConfirm} />
-            <Button {...declineStyles} label={declineLabel} onClick={handleDecline} />
+            <Button
+              data-testid="confirmation-dialog-confirm"
+              {...confirmStyles}
+              label={confirmLabel}
+              onClick={handleConfirm}
+            />
+            <Button
+              data-testid="confirmation-dialog-decline"
+              {...declineStyles}
+              label={declineLabel}
+              onClick={handleDecline}
+            />
           </Flex>
         </ModalFooter>
       </ModalContent>
