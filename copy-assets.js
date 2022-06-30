@@ -31,18 +31,28 @@ copyFileSync("src/components/drops/tooltip/index.d.ts", "lib/components/drops/to
 copyFileSync("src/components/drops/popover/index.d.ts", "lib/components/drops/popover/index.d.ts")
 copyFileSync("src/components/icon/index.d.ts", "lib/components/icon/index.d.ts")
 copyFileSync("src/components/input/input.d.ts", "lib/components/input/input.d.ts")
-copyFileSync("src/components/input/use-input-value.d.ts", "lib/components/input/use-input-value.d.ts")
-copyFileSync("src/components/input/use-touched-state.d.ts", "lib/components/input/use-touched-state.d.ts")
+copyFileSync(
+  "src/components/input/use-input-value.d.ts",
+  "lib/components/input/use-input-value.d.ts"
+)
+copyFileSync(
+  "src/components/input/use-touched-state.d.ts",
+  "lib/components/input/use-touched-state.d.ts"
+)
 copyFileSync("src/components/pill/index.d.ts", "lib/components/pill/index.d.ts")
 copyFileSync("src/components/pill/alertMastercard.d.ts", "lib/components/pill/alertMastercard.d.ts")
 copyFileSync("src/components/pill/mastercard.d.ts", "lib/components/pill/mastercard.d.ts")
-copyFileSync("src/components/sidebar/portaled-sidebar.d.ts", "lib/components/sidebar/portaled-sidebar.d.ts")
+copyFileSync(
+  "src/components/sidebar/portaled-sidebar.d.ts",
+  "lib/components/sidebar/portaled-sidebar.d.ts"
+)
 copyFileSync("src/components/tabs/tab.d.ts", "lib/components/tabs/tab.d.ts")
 copyFileSync("src/components/tabs/tabs.d.ts", "lib/components/tabs/tabs.d.ts")
 copyFileSync("src/components/toggle/toggle.d.ts", "lib/components/toggle/toggle.d.ts")
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
 copyFileSync("src/components/modal/index.d.ts", "lib/components/modal/index.d.ts")
+copyFileSync("src/components/tableV2/index.d.ts", "lib/components/tableV2/index.d.ts")
 
 copyFileSync("src/organisms/documentation/index.d.ts", "lib/organisms/documentation/index.d.ts")
 copyFileSync("src/theme/index.d.ts", "lib/theme/index.d.ts")
