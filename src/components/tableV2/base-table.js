@@ -43,12 +43,12 @@ const Table = forwardRef(
                 {bulkActions.map(({ id, icon, handleAction, tooltipText, ...rest }) => (
                   <Action
                     testPrefix={`-bulk${testPrefix}`}
-                    {...rest}
                     key={id}
                     id={id}
                     icon={icon}
                     handleAction={() => handleAction(selectedRows)}
                     tooltipText={tooltipText}
+                    {...rest}
                   />
                 ))}
               </Flex>
