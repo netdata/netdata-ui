@@ -17,23 +17,7 @@ import { useLocalStorage } from "react-use"
 import { Text } from "src/components/typography"
 
 const results = require("../.jest-test-results.json")
-// const centered = story => {
-//   return (
-//     <Box
-//       sx={{
-//         flexDirection: "column",
-//         position: "fixed",
-//         inset: "0px",
-//         display: "flex",
-//         alignItems: "center",
-//         overflow: "auto",
-//         justifyContent: "center",
-//       }}
-//     >
-//       {story()}
-//     </Box>
-//   )
-// }
+
 // // @ts-ignore
 addDecorator(centered)
 
