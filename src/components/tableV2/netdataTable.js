@@ -21,6 +21,8 @@ import { Checkbox } from "src/components/checkbox"
 
 import Action from "./action"
 
+import ComparisonFilter from "./comparisonFilter"
+
 export const supportedBulkActions = {
   delete: {
     icon: "trashcan",
@@ -155,6 +157,7 @@ const NetdataTable = ({
           isPlaceholder,
           filterFn,
           enableGlobalFilter = true,
+          meta,
         },
         index
       ) => {
@@ -168,6 +171,7 @@ const NetdataTable = ({
           enableColumnFilter: enableFilter,
           enableGlobalFilter,
           isPlaceholder,
+          meta,
         })
       }
     )
@@ -254,7 +258,13 @@ const NetdataTable = ({
 
 const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
   const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => {
-    const { getCanSort } = column
+    const { getCanSort, columnDef } = column
+    const { meta } = columnDef
+
+    const availableFilters = { comparison: ComparisonFilter, default: SearchFilter }
+    const selectedFilter = meta && meta.filter ? meta.filter : "default"
+    const Filter = availableFilters[selectedFilter]
+
     if (getCanSort() && enableSorting) {
       return (
         <Table.SortingHeadCell
@@ -279,7 +289,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
         {isPlaceholder ? null : renderHeader()}
         {column.getCanFilter() ? (
           <div>
-            <Filter column={column} />
+            <Filter column={column} testPrefix={testPrefix} />
           </div>
         ) : null}
       </Table.HeadCell>
@@ -381,7 +391,7 @@ const renderRowSelection = ({ testPrefix }) => {
   })
 }
 
-const Filter = ({ column, testPrefix }) => {
+const SearchFilter = ({ column, testPrefix }) => {
   const columnFilterValue = column.getFilterValue()
   const { id = "" } = column
   return (
