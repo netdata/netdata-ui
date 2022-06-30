@@ -34,7 +34,7 @@ export const ModalBody = ({ children, testId }) => {
   )
 }
 
-export const ModalFooter = ({ children, testId }) => (
+export const ModalFooter = ({ children, testId, hasBorder = true }) => (
   <Flex column padding={[0, 6]} flex={1}>
     <Flex
       data-testid={testId}
@@ -42,7 +42,9 @@ export const ModalFooter = ({ children, testId }) => (
       padding={[6, 0]}
       alignItems="center"
       justifyContent="end"
-      border={{ size: "1px", type: "solid", side: "top", color: "borderSecondary" }}
+      border={
+        hasBorder ? { size: "1px", type: "solid", side: "top", color: "borderSecondary" } : {}
+      }
     >
       {children}
     </Flex>

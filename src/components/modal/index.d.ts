@@ -20,6 +20,7 @@ export type ModalBodyProps = {
 
 export type ModalFooterProps = {
   testId?: string
+  hasBorder?: boolean
 }
 
 export type ModalCloseButtonProps = {

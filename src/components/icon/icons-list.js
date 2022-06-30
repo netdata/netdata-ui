@@ -13,6 +13,7 @@ import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
+import alarm_off from "./assets/alarm_off.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
 import applications_hollow from "./assets/applications_hollow.svg"
@@ -40,6 +41,8 @@ import chevron_double from "./assets/chevron_double.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import chevron_left from "./assets/chevron_left.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
+import chevron_right_small from "./assets/chevron_right_small.svg"
+import chevron_left_small from "./assets/chevron_left_small.svg"
 import classError from "./assets/class_error.svg"
 import classLatency from "./assets/class_latency.svg"
 import classUtilization from "./assets/class_utilization.svg"
@@ -236,6 +239,8 @@ import serviceXen from "./assets/services/xen.svg"
 import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
+import sorting_desc from "./assets/sorting_desc.svg"
+import sorting_asc from "./assets/sorting_asc.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import switch_off from "./assets/switch_off.svg"
@@ -287,6 +292,7 @@ export const iconsList = {
   alarmWarning,
   alarm_bell,
   alarms_new,
+  alarm_off,
   anomaliesBrain,
   anomaliesLens,
   applications_hollow,
@@ -316,6 +322,8 @@ export const iconsList = {
   chevron_down,
   chevron_left,
   chevron_right_s,
+  chevron_right_small,
+  chevron_left_small,
   classError,
   classLatency,
   classUtilization,
@@ -516,6 +524,8 @@ export const iconsList = {
   settings,
   settings_h,
   sorting_vertical,
+  sorting_asc,
+  sorting_desc,
   space,
   space_new,
   switch_off,

@@ -10,13 +10,14 @@ import { DarkTheme } from "src/theme/dark"
 import { GlobalStyles } from "src/global-styles"
 import { ThemeProvider } from "styled-components"
 import Flex from "../src/components/templates/flex"
+
 import { Toggle } from "../src/components/toggle"
 import { useLocalStorage } from "react-use"
 import { Text } from "src/components/typography"
 
 const results = require("../.jest-test-results.json")
 
-// @ts-ignore
+// // @ts-ignore
 addDecorator(centered)
 
 addDecorator(withKnobs)
