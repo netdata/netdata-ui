@@ -19,6 +19,7 @@ const Action = ({
   confirmLabel,
   declineLabel,
   actionButtonDirection,
+  testPrefix,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
@@ -56,6 +57,7 @@ const Action = ({
       )}
       <Tooltip content={tooltipText}>
         <Flex
+          data-testid={`netdata-table-action${testPrefix}`}
           alignItems="center"
           justifyContent="center"
           height={"100%"}

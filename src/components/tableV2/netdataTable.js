@@ -70,6 +70,7 @@ const NetdataTable = ({
     pageIndex: 0,
     pageSize: 0,
   },
+  testPrefix = "",
 }) => {
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState([])
@@ -172,9 +173,11 @@ const NetdataTable = ({
     )
   }, [dataColumns])
 
-  const makeSelectionColumn = enableSelection ? [renderRowSelection()] : []
+  const makeSelectionColumn = enableSelection ? [renderRowSelection({ testPrefix })] : []
   const makeActionsColumn =
-    availableRowActions.length > 0 ? [renderActions({ actions: availableRowActions })] : []
+    availableRowActions.length > 0
+      ? [renderActions({ actions: availableRowActions, testPrefix })]
+      : []
 
   const handleGlobalSearch = value => {
     onGlobalSearchChange?.(value)
@@ -222,13 +225,21 @@ const NetdataTable = ({
       Pagination={enablePagination && renderPagination({ instance })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
+      data-testid={`netdata-table${testPrefix}`}
+      testPrefix={testPrefix}
     >
-      <Table.Head>
-        <Table.HeadRow>{renderHeadCell({ headers, enableSorting })}</Table.HeadRow>
+      <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
+        <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
+          {renderHeadCell({ headers, enableSorting, testPrefix })}
+        </Table.HeadRow>
       </Table.Head>
-      <Table.Body>
+      <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         {instance.getRowModel().rows.map(row => (
-          <Table.Row onClick={() => onClickRow(row.original, row)} key={row.id}>
+          <Table.Row
+            data-testid={`netdata-table-row${testPrefix}`}
+            onClick={() => onClickRow?.(row.original, row)}
+            key={row.id}
+          >
             {row.getVisibleCells().map(cell => (
               <Table.Cell key={cell.id}>{cell.renderCell()}</Table.Cell>
             ))}
@@ -239,17 +250,18 @@ const NetdataTable = ({
   )
 }
 
-const renderHeadCell = ({ headers, enableSorting }) => {
+const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
   const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => {
     const { getCanSort } = column
     if (getCanSort() && enableSorting) {
       return (
         <Table.SortingHeadCell
+          data-testid={`netdata-table-head-cell${testPrefix}`}
           sortDirection={column.getIsSorted()}
           onSortClicked={column.getToggleSortingHandler()}
           colSpan={colSpan}
           key={id}
-          filter={column.getCanFilter() && <Filter column={column} />}
+          filter={column.getCanFilter() && <Filter column={column} testPrefix={testPrefix} />}
         >
           {isPlaceholder ? null : renderHeader()}
         </Table.SortingHeadCell>
@@ -257,7 +269,11 @@ const renderHeadCell = ({ headers, enableSorting }) => {
     }
 
     return (
-      <Table.HeadCell colSpan={colSpan} key={id}>
+      <Table.HeadCell
+        data-testid={`netdata-table-head-cell${testPrefix}`}
+        colSpan={colSpan}
+        key={id}
+      >
         {isPlaceholder ? null : renderHeader()}
         {column.getCanFilter() ? (
           <div>
@@ -289,7 +305,7 @@ const renderPagination = ({ instance }) => {
   )
 }
 
-const renderActions = ({ actions }) => {
+const renderActions = ({ actions, testPrefix }) => {
   return table.createDataColumn("actions", {
     header: () => {
       return "Actions"
@@ -324,6 +340,7 @@ const renderActions = ({ actions }) => {
                 handleAction={() => handleAction(row.original)}
                 tooltipText={tooltipText}
                 row={row}
+                testPrefix={testPrefix}
               />
             )
           )}
@@ -335,11 +352,12 @@ const renderActions = ({ actions }) => {
   })
 }
 
-const renderRowSelection = () => {
+const renderRowSelection = ({ testPrefix }) => {
   return table.createDataColumn("checkbox", {
     header: ({ instance }) => {
       return (
         <ColumnCheckbox
+          data-testid={`netdata-table-header-checkbox${testPrefix}`}
           checked={instance.getIsAllPageRowsSelected()}
           indeterminate={instance.getIsSomePageRowsSelected()}
           onChange={instance.getToggleAllPageRowsSelectedHandler()}
@@ -349,6 +367,7 @@ const renderRowSelection = () => {
     cell: ({ row }) => {
       return (
         <ColumnCheckbox
+          data-testid={`netdata-table-cell-checkbox${testPrefix}`}
           checked={row.getIsSelected()}
           indeterminate={row.getIsSomeSelected()}
           onChange={row.getToggleSelectedHandler()}
@@ -360,10 +379,11 @@ const renderRowSelection = () => {
   })
 }
 
-const Filter = ({ column }) => {
+const Filter = ({ column, testPrefix }) => {
   const columnFilterValue = column.getFilterValue()
   return (
     <Box
+      data-testid={`netdata-table-filter${testPrefix}`}
       as={SearchInput}
       width={{ max: 50 }}
       value={columnFilterValue ?? ""}
@@ -374,8 +394,8 @@ const Filter = ({ column }) => {
   )
 }
 
-const ColumnCheckbox = ({ checked, indeterminate, onChange }) => {
-  return <Checkbox checked={checked} indeterminate={indeterminate} onChange={onChange} />
+const ColumnCheckbox = ({ checked, indeterminate, onChange, ...rest }) => {
+  return <Checkbox checked={checked} indeterminate={indeterminate} onChange={onChange} {...rest} />
 }
 
 export default NetdataTable
