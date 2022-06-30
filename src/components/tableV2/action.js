@@ -57,7 +57,7 @@ const Action = ({
       )}
       <Tooltip content={tooltipText}>
         <Flex
-          data-testid={`netdata-table-action${testPrefix}`}
+          data-testid={`netdata-table-action-${id}${testPrefix}`}
           alignItems="center"
           justifyContent="center"
           height={"100%"}

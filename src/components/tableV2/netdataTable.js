@@ -338,6 +338,7 @@ const renderActions = ({ actions, testPrefix }) => {
                 confirmationTitle={confirmationTitle}
                 confirmation={confirmation}
                 key={id}
+                id={id}
                 icon={icon}
                 handleAction={() => handleAction(row.original)}
                 tooltipText={tooltipText}

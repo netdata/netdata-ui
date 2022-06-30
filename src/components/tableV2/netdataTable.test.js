@@ -93,4 +93,15 @@ describe("Netdata table", () => {
     expect(nodesFilter).toBeInTheDocument()
     expect(screen.queryAllByTestId(rowTestId)).toHaveLength(1)
   })
+
+  it("should trigger action when we are clicking it", () => {
+    renderNetdataTable()
+    const filterParams = "node8"
+    const nodesFilter = screen.getByTestId(nodesColumnFilter)
+
+    userEvent.type(nodesFilter, filterParams)
+
+    expect(nodesFilter).toBeInTheDocument()
+    expect(screen.queryAllByTestId(rowTestId)).toHaveLength(1)
+  })
 })

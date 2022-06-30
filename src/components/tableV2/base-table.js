@@ -44,6 +44,7 @@ const Table = forwardRef(
                     testPrefix={testPrefix}
                     {...rest}
                     key={id}
+                    id={id}
                     icon={icon}
                     handleAction={() => handleAction(selectedRows)}
                     tooltipText={tooltipText}
