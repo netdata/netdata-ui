@@ -44,8 +44,6 @@ const mockData = () => [
   { nodes: "node10", alerts: 22, user: "reena" },
 ]
 
-const paginationOptions = { pageIndex: 0, pageSize: 5 }
-
 const testPrefix = "-mock"
 const testName = "netdata-table-"
 
