@@ -1,9 +1,10 @@
 import { ColumnDef, PaginationState, FilterFnOption } from "@tanstack/table-core"
 import { supportedRowActions, supportedBulkActions } from "./netdataTable"
+import React from "react"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
 
-export type NetdataTable<T = any> = {
+export type NetdataTableProps<T = any> = {
   data: Array<any>
   dataColumns: Array<NetdataCoreColumns<T>>
   enableSorting?: boolean
@@ -40,3 +41,8 @@ export type NetdataTable<T = any> = {
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
 }
+
+declare const NetdataTable: (props: NetdataTableProps) => JSX.Element
+
+export { NetdataTable }
+export default NetdataTable
