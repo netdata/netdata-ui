@@ -331,7 +331,7 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   const mockData = () => [
-    { nodes: "node8", alerts: 15, user: "mitsos" },
+    { nodes: "node8", alerts: 15, user: "mitsos", disabled: true },
     { nodes: "node9", alerts: 11, user: "koukouroukou" },
     { nodes: "node10", alerts: 22, user: "reena" },
     { nodes: "node1", alerts: 15, user: "nic" },
