@@ -319,12 +319,8 @@ StoryTable.add("Full Table functionallity", () => {
       id: "alerts",
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
-      filterFn: (row, columnId, value) => {
-        const { original } = row
-        const rowValue = original[columnId]
-
-        return rowValue.toString().includes(value.toString())
-      },
+      filterFn: "comparison",
+      meta: { filter: "comparison" },
     },
     {
       header: "user",
@@ -347,18 +343,16 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <Box width="800px">
-      <NetdataTable
-        onGlobalSearchChange={onGlobalSearchChange}
-        enableSorting
-        paginationOptions={paginationOptions}
-        enablePagination
-        rowActions={rowActions}
-        bulkActions={bulkActions}
-        enableSelection
-        dataColumns={mockDataColumns}
-        data={mockData()}
-      />
-    </Box>
+    <NetdataTable
+      onGlobalSearchChange={onGlobalSearchChange}
+      enableSorting
+      paginationOptions={paginationOptions}
+      enablePagination
+      rowActions={rowActions}
+      bulkActions={bulkActions}
+      enableSelection
+      dataColumns={mockDataColumns}
+      data={mockData()}
+    />
   )
 })
