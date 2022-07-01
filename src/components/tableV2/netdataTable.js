@@ -214,6 +214,7 @@ const NetdataTable = ({
     const { rows } = instance.getSelectedRowModel()
     if (rows) {
       const selectedRows = rows.reduce((acc, { original }) => {
+        if (original?.disabled === true) return acc
         acc.push(original)
         return acc
       }, [])
@@ -325,6 +326,7 @@ const renderActions = ({ actions, testPrefix }) => {
       return "Actions"
     },
     cell: ({ row }) => {
+      const isDisabled = row.original?.disabled ?? false
       return (
         <Flex data-testid="action-cell" height="100%" gap={2}>
           {actions.map(
@@ -342,6 +344,7 @@ const renderActions = ({ actions, testPrefix }) => {
               actionButtonDirection,
             }) => (
               <Action
+                disabled={isDisabled}
                 actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}
                 declineLabel={declineLabel}
@@ -379,12 +382,14 @@ const renderRowSelection = ({ testPrefix }) => {
       )
     },
     cell: ({ row }) => {
+      const isDisabled = row.original?.disabled ?? false
       return (
         <ColumnCheckbox
           data-testid={`netdata-table-cell-checkbox${testPrefix}`}
           checked={row.getIsSelected()}
           indeterminate={row.getIsSomeSelected()}
           onChange={row.getToggleSelectedHandler()}
+          disabled={isDisabled}
         />
       )
     },
@@ -409,8 +414,16 @@ const SearchFilter = ({ column, testPrefix }) => {
   )
 }
 
-const ColumnCheckbox = ({ checked, indeterminate, onChange, ...rest }) => {
-  return <Checkbox checked={checked} indeterminate={indeterminate} onChange={onChange} {...rest} />
+const ColumnCheckbox = ({ checked, indeterminate, onChange, disabled, ...rest }) => {
+  return (
+    <Checkbox
+      disabled={disabled}
+      checked={checked}
+      indeterminate={indeterminate}
+      onChange={onChange}
+      {...rest}
+    />
+  )
 }
 
 export default NetdataTable
