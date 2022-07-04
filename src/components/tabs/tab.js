@@ -3,7 +3,6 @@ import { StyledTab, StyledTabMenu } from "./styled"
 
 export const Tab = ({ index, isMenuItem, onChange, ...rest }) => {
   const onClick = useCallback(() => onChange && onChange(index || 0), [index, onChange])
-  console.log(isMenuItem)
 
   const TabComponent = isMenuItem ? StyledTabMenu : StyledTab
   return (
