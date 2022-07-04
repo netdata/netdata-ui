@@ -3,7 +3,6 @@ import React, { useState } from "react"
 import Tooltip from "src/components/drops/tooltip"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
-import { Icon } from "src/components/icon"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
 import { Button } from "src/components/button"
@@ -21,6 +20,7 @@ const Action = ({
   declineLabel,
   actionButtonDirection,
   testPrefix,
+  disabled,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
@@ -67,7 +67,13 @@ const Action = ({
           key={id}
           width={10}
         >
-          <Box onClick={onActionClicked} as={Button} icon={icon} flavour="borderless" />
+          <Box
+            disabled={disabled}
+            onClick={onActionClicked}
+            as={Button}
+            icon={icon}
+            flavour="borderless"
+          />
         </Flex>
       </Tooltip>
     </>
