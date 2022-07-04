@@ -62,8 +62,8 @@ const Action = ({
           alignItems="center"
           justifyContent="center"
           height={"100%"}
-          _hover={{ background: "borderSecondary" }}
-          cursor="pointer"
+          _hover={{ background: disabled ? null : "borderSecondary" }}
+          cursor={disabled ? "auto" : "pointer"}
           key={id}
           width={10}
         >
