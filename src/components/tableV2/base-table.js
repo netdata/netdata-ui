@@ -9,14 +9,18 @@ import { Text } from "src/components/typography"
 import Action from "./action"
 
 const StyledRow = styled.tr`
+  font-size: 14px;
+  color: ${getColor("text")};
   &:nth-child(2n) {
     background: ${getColor("elementBackground")};
   }
 `
 const StyledHeader = styled.tr`
   background: ${getColor("elementBackground")};
+  color: ${getColor("text")};
 `
 const StyledHeaderCell = styled(Box)`
+  padding: 12px;
   &:not(:last-child) {
     border-right: 1px solid ${getColor("borderSecondary")};
   }
@@ -38,7 +42,7 @@ const Table = forwardRef(
   ) => {
     return (
       <Flex width="100%" height="100%" column>
-        <Flex width="100%">
+        <Flex width="100%" margin={[0, 0, 3, 0]}>
           {handleSearch && (
             <Box width={{ max: 50 }}>
               <SearchInput
@@ -103,7 +107,6 @@ Table.HeadCell = forwardRef(({ children, align = "left", ...props }, ref) => (
   <StyledHeaderCell
     ref={ref}
     sx={{ textAlign: align, fontSize: "14px" }}
-    padding={[4]}
     width={{ max: 30 }}
     {...props}
     as="th"
@@ -126,7 +129,7 @@ Table.SortingHeadCell = forwardRef(
     const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
 
     return (
-      <Box as="th" ref={ref} {...props}>
+      <StyledHeaderCell as="th" ref={ref} {...props}>
         <Flex column position="relative" cursor="pointer" gap={1}>
           <Box onClick={onClick} position="relative">
             {children}
@@ -139,7 +142,7 @@ Table.SortingHeadCell = forwardRef(
           </Box>
           {filter}
         </Flex>
-      </Box>
+      </StyledHeaderCell>
     )
   }
 )
@@ -155,7 +158,7 @@ Table.Cell = forwardRef(({ children, align = "left", onClick, ...props }, ref) =
     onClick?.()
   }
   return (
-    <Box padding={[4]} sx={{ textAlign: align }} as="td" ref={ref} onClick={handleClick} {...props}>
+    <Box padding={[3]} sx={{ textAlign: align }} as="td" ref={ref} {...props} onClick={handleClick}>
       {children}
     </Box>
   )
