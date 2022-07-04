@@ -38,6 +38,7 @@ export const supportedBulkActions = {
   },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
+  userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
 }
 
 export const supportedRowActions = {
