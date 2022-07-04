@@ -74,6 +74,7 @@ const NetdataTable = ({
     pageIndex: 0,
     pageSize: 0,
   },
+  columnVisibility,
   testPrefix = "",
 }) => {
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
@@ -194,6 +195,7 @@ const NetdataTable = ({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     state: {
+      columnVisibility,
       rowSelection,
       globalFilter,
       sorting,
