@@ -8,6 +8,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   line-height: 20px;
   font-weight: normal;
   color: #35414A;
+  text-transform: none;
 }
 
 .c3 {

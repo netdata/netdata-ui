@@ -1,11 +1,26 @@
 import React, { forwardRef, useCallback } from "react"
-
+import styled from "styled-components"
+import { getColor } from "src/theme/utils"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
 import Action from "./action"
+
+const StyledRow = styled.tr`
+  &:nth-child(2n) {
+    background: ${getColor("elementBackground")};
+  }
+`
+const StyledHeader = styled.tr`
+  background: ${getColor("elementBackground")};
+`
+const StyledHeaderCell = styled(Box)`
+  &:not(:last-child) {
+    border-right: 1px solid ${getColor("borderSecondary")};
+  }
+`
 
 const Table = forwardRef(
   (
@@ -79,15 +94,22 @@ Table.Head = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
-  <Box as="tr" sx={{ textAlign: "left" }} height={12} ref={ref} {...props}>
+  <StyledHeader ref={ref} {...props}>
     {children}
-  </Box>
+  </StyledHeader>
 ))
-
-Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} width={{ max: 30 }} as="th" {...props}>
+//Make cell alignment a prop with default set to left
+Table.HeadCell = forwardRef(({ children, align = "left", ...props }, ref) => (
+  <StyledHeaderCell
+    ref={ref}
+    sx={{ textAlign: align, fontSize: "14px" }}
+    padding={[4]}
+    width={{ max: 30 }}
+    {...props}
+    as="th"
+  >
     {children}
-  </Box>
+  </StyledHeaderCell>
 ))
 
 Table.SortingHeadCell = forwardRef(
@@ -128,15 +150,13 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, onClick, ...props }, ref) => {
+Table.Cell = forwardRef(({ children, align = "left", onClick, ...props }, ref) => {
   const handleClick = () => {
     onClick?.()
   }
   return (
-    <Box height={12} as="td" ref={ref} {...props} onClick={handleClick}>
-      <Flex alignItems="center" height="100%">
-        {children}
-      </Flex>
+    <Box padding={[4]} sx={{ textAlign: align }} as="td" ref={ref} onClick={handleClick} {...props}>
+      {children}
     </Box>
   )
 })
@@ -146,9 +166,9 @@ Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
     onClick?.()
   }
   return (
-    <Box onClick={handleClick} height={12} as="tr" ref={ref} {...props}>
+    <StyledRow handleClick={handleClick} ref={ref} {...props}>
       {children}
-    </Box>
+    </StyledRow>
   )
 })
 
