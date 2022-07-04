@@ -326,6 +326,7 @@ StoryTable.add("Full Table functionallity", () => {
       header: "user",
       id: "user",
       enableFilter: true,
+      enableSorting: false,
       cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
     },
   ]

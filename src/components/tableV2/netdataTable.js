@@ -161,6 +161,7 @@ const NetdataTable = ({
           isPlaceholder,
           filterFn,
           enableGlobalFilter = true,
+          enableSorting = true,
           meta,
         },
         index
@@ -173,6 +174,7 @@ const NetdataTable = ({
           ...(filterFn ? { filterFn } : {}),
           footer: props => props.column.id,
           enableColumnFilter: enableFilter,
+          enableSorting,
           enableGlobalFilter,
           isPlaceholder,
           meta,
