@@ -21,6 +21,7 @@ const Action = ({
   actionButtonDirection,
   testPrefix,
   disabled,
+  currentRow,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
@@ -50,8 +51,16 @@ const Action = ({
           actionButtonDirection={actionButtonDirection}
           declineLabel={declineLabel}
           confirmLabel={confirmLabel}
-          title={confirmationTitle}
-          message={confirmationMessage}
+          title={
+            typeof confirmationTitle === "function"
+              ? confirmationTitle(currentRow?.original)
+              : confirmationTitle
+          }
+          message={
+            typeof confirmationMessage === "function"
+              ? confirmationMessage(currentRow?.original)
+              : confirmationMessage
+          }
           handleDecline={onActionDeclined}
           handleConfirm={onActionConfrimed}
         />
