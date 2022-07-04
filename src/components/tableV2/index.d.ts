@@ -1,4 +1,9 @@
-import { ColumnDef, PaginationState, FilterFnOption } from "@tanstack/table-core"
+import {
+  ColumnDef,
+  PaginationState,
+  FilterFnOption,
+  VisibilityTableState,
+} from "@tanstack/table-core"
 import { supportedRowActions, supportedBulkActions } from "./netdataTable"
 import React from "react"
 
@@ -37,6 +42,7 @@ export type NetdataTableProps<T = any> = {
   }
   testPrefix?: string
   globalFilterFn?: FilterFnOption<T>
+  columnVisibility: VisibilityTableState
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
