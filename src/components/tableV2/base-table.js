@@ -48,6 +48,7 @@ const Table = forwardRef(
                     icon={icon}
                     handleAction={() => handleAction(selectedRows)}
                     tooltipText={tooltipText}
+                    disabled={selectedRows?.length < 1}
                     {...rest}
                   />
                 ))}
