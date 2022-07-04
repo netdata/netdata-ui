@@ -6,6 +6,7 @@ import Box from "src/components/templates/box"
 import { Icon } from "src/components/icon"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
+import { Button } from "src/components/button"
 
 const Action = ({
   id,
@@ -65,9 +66,8 @@ const Action = ({
           cursor="pointer"
           key={id}
           width={10}
-          onClick={onActionClicked}
         >
-          <Box as={Icon} name={icon} />
+          <Box onClick={onActionClicked} as={Button} icon={icon} flavour="borderless" />
         </Flex>
       </Tooltip>
     </>
