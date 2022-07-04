@@ -60,14 +60,14 @@ const Action = ({
           data-testid={`netdata-table-action-${id}${testPrefix}`}
           alignItems="center"
           justifyContent="center"
-          height={"100%"}
           _hover={{ background: "borderSecondary" }}
           cursor="pointer"
           key={id}
-          width={10}
           onClick={onActionClicked}
+          padding={[1.5]}
+          round
         >
-          <Box as={Icon} name={icon} />
+          <Box as={Icon} name={icon} width={4} height={4} />
         </Flex>
       </Tooltip>
     </>

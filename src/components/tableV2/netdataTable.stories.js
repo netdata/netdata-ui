@@ -69,7 +69,7 @@ StoryTable.add("Base Table", () => {
 StoryTable.add("Simple Netdata Table", () => {
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { id: "alerts", header: "Alerts" },
   ]
 
   const mockData = () => [
@@ -78,7 +78,7 @@ StoryTable.add("Simple Netdata Table", () => {
     { nodes: 23, alerts: 22 },
   ]
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
@@ -89,7 +89,7 @@ StoryTable.add("Filters at header cell", () => {
     { header: "Nodes", id: "nodes", enableFilter: true },
     {
       id: "alerts",
-      header: () => <Text>Alerts</Text>,
+      header: "Alerts",
       enableFilter: true,
       filterFn: (row, columnId, value) => {
         const { original } = row
@@ -106,7 +106,7 @@ StoryTable.add("Filters at header cell", () => {
     { nodes: "node3", alerts: 22 },
   ]
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
@@ -116,7 +116,7 @@ StoryTable.add("Row selections", () => {
   const [selectedRows, onRowSelected] = useState([])
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { id: "alerts", header: "Alerts" },
   ]
 
   const mockData = () => [
@@ -125,7 +125,7 @@ StoryTable.add("Row selections", () => {
     { nodes: 23, alerts: 22 },
   ]
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable
         enableSelection
         dataColumns={mockDataColumns}
@@ -168,7 +168,7 @@ StoryTable.add("Global Filters", () => {
   }
 
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable
         onGlobalSearchChange={onGlobalSearchChange}
         dataColumns={mockDataColumns}
@@ -180,9 +180,9 @@ StoryTable.add("Global Filters", () => {
 
 StoryTable.add("Sorting", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { id: "nodes", header: "Nodes" },
+    { id: "alerts", header: "Alerts" },
+    { id: "user", header: "Users" },
   ]
 
   const mockData = () => [
@@ -192,7 +192,7 @@ StoryTable.add("Sorting", () => {
   ]
 
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable enableSorting dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
@@ -216,7 +216,7 @@ StoryTable.add("Actions", () => {
   ]
 
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable rowActions={rowActions} dataColumns={mockDataColumns} data={mockData()} />
     </Box>
   )
@@ -257,7 +257,7 @@ StoryTable.add("Bulk Actions", () => {
   ]
 
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable
         bulkActions={bulkActions}
         enableSelection
@@ -271,9 +271,9 @@ StoryTable.add("Bulk Actions", () => {
 StoryTable.add("Pagination", () => {
   const paginationOptions = { pageIndex: 0, pageSize: 2 }
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { id: "nodes", header: "Nodes" },
+    { id: "alerts", header: "Alerts" },
+    { id: "user", header: "Users" },
   ]
 
   const mockData = () => [
@@ -286,7 +286,7 @@ StoryTable.add("Pagination", () => {
   ]
 
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable
         paginationOptions={paginationOptions}
         enablePagination={true}
@@ -331,7 +331,7 @@ StoryTable.add("Full Table functionallity", () => {
     { header: "Nodes", id: "nodes", enableFilter: true },
     {
       id: "alerts",
-      header: () => <Text>Alerts</Text>,
+      header: "Alerts",
       enableFilter: true,
       filterFn: (row, columnId, value) => {
         const { original } = row
@@ -340,12 +340,7 @@ StoryTable.add("Full Table functionallity", () => {
         return rowValue.toString().includes(value.toString())
       },
     },
-    {
-      header: "user",
-      id: "user",
-      enableFilter: true,
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
-    },
+    { header: "User", id: "user", enableFilter: true },
   ]
 
   const mockData = () => [
@@ -361,7 +356,7 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <Box width="800px">
+    <Box width="1000px">
       <NetdataTable
         onGlobalSearchChange={onGlobalSearchChange}
         enableSorting
