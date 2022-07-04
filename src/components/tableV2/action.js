@@ -70,13 +70,15 @@ const Action = ({
           data-testid={`netdata-table-action-${id}${testPrefix}`}
           alignItems="center"
           justifyContent="center"
-          height={"100%"}
           _hover={{ background: disabled ? null : "borderSecondary" }}
           cursor={disabled ? "auto" : "pointer"}
           key={id}
-          width={10}
+          round
+          padding={[1.5]}
         >
           <Box
+            width={4}
+            height={4}
             disabled={disabled}
             onClick={onActionClicked}
             as={Button}

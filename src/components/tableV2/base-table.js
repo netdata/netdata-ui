@@ -1,11 +1,38 @@
 import React, { forwardRef, useCallback } from "react"
-
+import styled from "styled-components"
+import { getColor } from "src/theme/utils"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
 import Action from "./action"
+
+const StyledRow = styled.tr`
+  font-size: 14px;
+  color: ${getColor("text")};
+  &:nth-child(2n) {
+    background: ${getColor("elementBackground")};
+  }
+`
+const StyledHeader = styled.tr`
+  background: ${getColor("elementBackground")};
+  color: ${getColor("text")};
+`
+const StyledHeaderCell = styled(Box)`
+  padding: 12px;
+  &:not(:last-child) {
+    border-right: 1px solid ${getColor("borderSecondary")};
+  }
+`
+const StyledSortIcon = styled(Icon)`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  height: 12px;
+  margin: auto;
+`
 
 const Table = forwardRef(
   (
@@ -23,7 +50,7 @@ const Table = forwardRef(
   ) => {
     return (
       <Flex width="100%" height="100%" column>
-        <Flex width="100%">
+        <Flex width="100%" margin={[0, 0, 3, 0]}>
           {handleSearch && (
             <Box width={{ max: 50 }}>
               <SearchInput
@@ -39,7 +66,7 @@ const Table = forwardRef(
           )}
           <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
             {bulkActions ? (
-              <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
+              <Flex height={12} alignSelf="end" gap={1} margin={[0, 0, 1, 0]}>
                 {bulkActions.map(({ id, icon, handleAction, tooltipText, ...rest }) => (
                   <Action
                     testPrefix={`-bulk${testPrefix}`}
@@ -80,19 +107,28 @@ Table.Head = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
-  <Box as="tr" sx={{ textAlign: "left" }} height={12} ref={ref} {...props}>
+  <StyledHeader ref={ref} {...props}>
     {children}
-  </Box>
+  </StyledHeader>
 ))
 
-Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} width={{ max: 30 }} as="th" {...props}>
+Table.HeadCell = forwardRef(({ children, align = "left", ...props }, ref) => (
+  <StyledHeaderCell
+    ref={ref}
+    sx={{ textAlign: align, fontSize: "14px" }}
+    width={{ max: 30 }}
+    {...props}
+    as="th"
+  >
     {children}
-  </Box>
+  </StyledHeaderCell>
 ))
 
 Table.SortingHeadCell = forwardRef(
-  ({ children, onSortClicked, setSortDirection, sortDirection, filter, ...props }, ref) => {
+  (
+    { children, onSortClicked, setSortDirection, sortDirection, filter, align = "left", ...props },
+    ref
+  ) => {
     const onClick = useCallback(
       e => {
         e.preventDefault()
@@ -105,20 +141,13 @@ Table.SortingHeadCell = forwardRef(
     const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
 
     return (
-      <Box as="th" ref={ref} {...props}>
-        <Flex column position="relative" cursor="pointer" gap={1}>
-          <Box onClick={onClick} position="relative">
-            {children}
-            <Box
-              position="absolute"
-              width={4}
-              as={Icon}
-              name={sortingIcons[sortDirection] ?? null}
-            />
-          </Box>
-          {filter}
-        </Flex>
-      </Box>
+      <StyledHeaderCell as="th" ref={ref} {...props} sx={{ textAlign: align, fontSize: "14px" }}>
+        <Box onClick={onClick} position="relative" cursor="pointer">
+          {children}
+          <StyledSortIcon name={sortingIcons[sortDirection] ?? null} />
+        </Box>
+        {filter}
+      </StyledHeaderCell>
     )
   }
 )
@@ -129,15 +158,13 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, onClick, ...props }, ref) => {
+Table.Cell = forwardRef(({ children, onClick, align = "left", ...props }, ref) => {
   const handleClick = () => {
     onClick?.()
   }
   return (
-    <Box height={12} as="td" ref={ref} {...props} onClick={handleClick}>
-      <Flex alignItems="center" height="100%">
-        {children}
-      </Flex>
+    <Box padding={[3]} sx={{ textAlign: align }} as="td" ref={ref} {...props} onClick={handleClick}>
+      {children}
     </Box>
   )
 })
@@ -147,9 +174,9 @@ Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
     onClick?.()
   }
   return (
-    <Box onClick={handleClick} height={12} as="tr" ref={ref} {...props}>
+    <StyledRow onClick={handleClick} ref={ref} {...props}>
       {children}
-    </Box>
+    </StyledRow>
   )
 })
 
