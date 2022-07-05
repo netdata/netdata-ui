@@ -25,6 +25,8 @@ import ComparisonFilter from "./comparisonFilter"
 
 import { comparison } from "./filterFns"
 
+const ROW_SELECTION_SIZE = 7
+
 export const supportedBulkActions = {
   delete: {
     icon: "trashcan",
@@ -164,6 +166,9 @@ const NetdataTable = ({
           enableGlobalFilter = true,
           enableSorting = true,
           meta,
+          size = 20,
+          maxSize = 300,
+          minSize = 20,
         },
         index
       ) => {
@@ -179,6 +184,9 @@ const NetdataTable = ({
           enableGlobalFilter,
           isPlaceholder,
           meta,
+          size,
+          maxSize,
+          minSize,
         })
       }
     )
@@ -253,11 +261,18 @@ const NetdataTable = ({
             onClick={() => onClickRow?.(row.original, row)}
             key={row.id}
           >
-            {row.getVisibleCells().map(cell => (
-              <Table.Cell data-testid={`netdata-table-cell${testPrefix}`} key={cell.id}>
-                {cell.renderCell()}
-              </Table.Cell>
-            ))}
+            {row.getVisibleCells().map(cell => {
+              return (
+                <Table.Cell
+                  width={cell.column.getSize()}
+                  maxWidth={cell.column.columnDef.maxSize}
+                  data-testid={`netdata-table-cell${testPrefix}`}
+                  key={cell.id}
+                >
+                  {cell.renderCell()}
+                </Table.Cell>
+              )
+            })}
           </Table.Row>
         ))}
       </Table.Body>
@@ -277,6 +292,8 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
     if (getCanSort() && enableSorting) {
       return (
         <Table.SortingHeadCell
+          width={column.getSize()}
+          maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}
           sortDirection={column.getIsSorted()}
           onSortClicked={column.getToggleSortingHandler()}
@@ -291,6 +308,8 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
 
     return (
       <Table.HeadCell
+        width={column.getSize()}
+        maxWidth={column.columnDef.maxSize}
         data-testid={`netdata-table-head-cell${testPrefix}`}
         colSpan={colSpan}
         key={id}
@@ -402,6 +421,9 @@ const renderRowSelection = ({ testPrefix }) => {
     },
     enableColumnFilter: false,
     enableSorting: false,
+    size: ROW_SELECTION_SIZE,
+    maxSize: ROW_SELECTION_SIZE,
+    minSize: ROW_SELECTION_SIZE,
   })
 }
 

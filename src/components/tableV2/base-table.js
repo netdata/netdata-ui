@@ -112,11 +112,11 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   </StyledHeader>
 ))
 
-Table.HeadCell = forwardRef(({ children, align = "left", ...props }, ref) => (
+Table.HeadCell = forwardRef(({ children, align = "left", width, maxWidth, ...props }, ref) => (
   <StyledHeaderCell
+    width={{ max: maxWidth, min: width }}
     ref={ref}
     sx={{ textAlign: align, fontSize: "14px" }}
-    width={{ max: 30 }}
     {...props}
     as="th"
   >
@@ -126,7 +126,17 @@ Table.HeadCell = forwardRef(({ children, align = "left", ...props }, ref) => (
 
 Table.SortingHeadCell = forwardRef(
   (
-    { children, onSortClicked, setSortDirection, sortDirection, filter, align = "left", ...props },
+    {
+      children,
+      onSortClicked,
+      setSortDirection,
+      maxWidth,
+      width,
+      sortDirection,
+      filter,
+      align = "left",
+      ...props
+    },
     ref
   ) => {
     const onClick = useCallback(
@@ -141,7 +151,13 @@ Table.SortingHeadCell = forwardRef(
     const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
 
     return (
-      <StyledHeaderCell as="th" ref={ref} {...props} sx={{ textAlign: align, fontSize: "14px" }}>
+      <StyledHeaderCell
+        width={{ max: maxWidth, min: width }}
+        as="th"
+        ref={ref}
+        {...props}
+        sx={{ textAlign: align, fontSize: "14px" }}
+      >
         <Box onClick={onClick} position="relative" cursor="pointer">
           {children}
           <StyledSortIcon name={sortingIcons[sortDirection] ?? null} />
@@ -158,12 +174,20 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, onClick, align = "left", ...props }, ref) => {
+Table.Cell = forwardRef(({ children, onClick, width, maxWidth, align = "left", ...props }, ref) => {
   const handleClick = () => {
     onClick?.()
   }
   return (
-    <Box padding={[3]} sx={{ textAlign: align }} as="td" ref={ref} {...props} onClick={handleClick}>
+    <Box
+      width={{ max: maxWidth, min: width }}
+      padding={[3]}
+      sx={{ textAlign: align }}
+      as="td"
+      ref={ref}
+      {...props}
+      onClick={handleClick}
+    >
       {children}
     </Box>
   )
