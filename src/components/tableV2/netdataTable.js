@@ -25,7 +25,7 @@ import ComparisonFilter from "./comparisonFilter"
 
 import { comparison } from "./filterFns"
 
-const ROW_SELECTION_SIZE = 7
+const ROW_SELECTION_SIZE = 9
 
 export const supportedBulkActions = {
   delete: {
