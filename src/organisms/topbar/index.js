@@ -1,13 +1,5 @@
-import React, { useState, useCallback } from "react"
-import styled from "styled-components"
-import { useToggle } from "react-use"
-import { H5 } from "src/components/typography"
-import { Icon } from "src/components/icon"
-import { Button } from "src/components/button"
+import React from "react"
 import Flex from "src/components/templates/flex"
-import Layer from "src/components/templates/layer"
-import General from "./general"
-import Dashboard from "./dashboard"
 
 const Topbar = ({ extended = false, children, mainChild }) => {
   return (

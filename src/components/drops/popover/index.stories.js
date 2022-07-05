@@ -1,6 +1,6 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
-import { useToggle } from "react-use"
+import useToggle from "react-use/lib/useToggle"
 import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { H5, Text } from "src/components/typography"

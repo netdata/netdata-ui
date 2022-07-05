@@ -1,5 +1,5 @@
 import React from "react"
-import { usePreviousDistinct } from "react-use"
+import usePreviousDistinct from "react-use/lib/usePreviousDistinct"
 import {
   StyledInput,
   StyledLabel,

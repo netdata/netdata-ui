@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useState, forwardRef } from "react"
-import { useUpdateEffect } from "react-use"
+import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import styled from "styled-components"
 import useForwardRef from "src/hooks/use-forward-ref"
 import Flex from "src/components/templates/flex"

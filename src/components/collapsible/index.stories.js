@@ -1,7 +1,7 @@
 import React from "react"
 import { storiesOf } from "@storybook/react"
 import { boolean, number } from "@storybook/addon-knobs"
-import { useToggle } from "react-use"
+import useToggle from "react-use/lib/useToggle"
 import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { H2, Text } from "src/components/typography"

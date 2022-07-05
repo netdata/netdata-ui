@@ -1,8 +1,7 @@
 import { ColumnDef, PaginationState, FilterFnOption } from "@tanstack/table-core"
 import { supportedRowActions, supportedBulkActions } from "./netdataTable"
-import React from "react"
 
-type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
+type NetdataCoreColumns<T = any> = Pick<ColumnDef<Array<any>>, "id" | "header" | "cell" | "filterFn">
 
 export type NetdataTableProps<T = any> = {
   data: Array<any>
@@ -36,7 +35,7 @@ export type NetdataTableProps<T = any> = {
     }
   }
   testPrefix?: string
-  globalFilterFn?: FilterFnOption<T>
+  globalFilterFn?: FilterFnOption<Array<any>>
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
