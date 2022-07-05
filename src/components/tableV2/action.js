@@ -75,6 +75,7 @@ const Action = ({
           padding={[1, 0]}
         >
           <IconButton
+            iconSize="small"
             data-testid={`netdata-table-action-${id}${testPrefix}`}
             disabled={disabled}
             onClick={onActionClicked}
