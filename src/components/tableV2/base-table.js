@@ -12,11 +12,11 @@ const StyledRow = styled.tr`
   font-size: 14px;
   color: ${getColor("text")};
   &:nth-child(2n) {
-    background: ${getColor("elementBackground")};
+    background: ${getColor("tableRowBg")};
   }
 `
 const StyledHeader = styled.tr`
-  background: ${getColor("elementBackground")};
+  background: ${getColor("tableRowBg")};
   color: ${getColor("text")};
 `
 const StyledHeaderCell = styled(Box)`
