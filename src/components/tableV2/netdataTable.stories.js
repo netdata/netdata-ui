@@ -344,16 +344,18 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <NetdataTable
-      onGlobalSearchChange={onGlobalSearchChange}
-      enableSorting
-      paginationOptions={paginationOptions}
-      enablePagination
-      rowActions={rowActions}
-      bulkActions={bulkActions}
-      enableSelection
-      dataColumns={mockDataColumns}
-      data={mockData()}
-    />
+    <Box width="1200px">
+      <NetdataTable
+        onGlobalSearchChange={onGlobalSearchChange}
+        enableSorting
+        paginationOptions={paginationOptions}
+        enablePagination
+        rowActions={rowActions}
+        bulkActions={bulkActions}
+        enableSelection
+        dataColumns={mockDataColumns}
+        data={mockData()}
+      />
+    </Box>
   )
 })
