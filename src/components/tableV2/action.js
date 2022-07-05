@@ -2,10 +2,9 @@ import React, { useState } from "react"
 
 import Tooltip from "src/components/drops/tooltip"
 import Flex from "src/components/templates/flex"
-import Box from "src/components/templates/box"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
-import { Button } from "src/components/button"
+import { IconButton } from "src/components/button"
 
 const Action = ({
   id,
@@ -76,10 +75,9 @@ const Action = ({
           round
           padding={[1, 0]}
         >
-          <Box
+          <IconButton
             disabled={disabled}
             onClick={onActionClicked}
-            as={Button}
             icon={icon}
             flavour="borderless"
             sx={{
