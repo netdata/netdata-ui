@@ -66,7 +66,6 @@ const Action = ({
       )}
       <Tooltip content={tooltipText}>
         <Flex
-          data-testid={`netdata-table-action-${id}${testPrefix}`}
           alignItems="center"
           justifyContent="center"
           _hover={{ background: disabled ? null : "borderSecondary" }}
@@ -76,6 +75,7 @@ const Action = ({
           padding={[1, 0]}
         >
           <IconButton
+            data-testid={`netdata-table-action-${id}${testPrefix}`}
             disabled={disabled}
             onClick={onActionClicked}
             icon={icon}
