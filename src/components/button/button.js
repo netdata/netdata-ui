@@ -15,6 +15,7 @@ export const Button = forwardRef(
       onClick,
       textTransform = "firstLetter",
       iconColor,
+      iconSize,
       ...rest
     },
     ref
@@ -31,7 +32,12 @@ export const Button = forwardRef(
       {isLoading && <LoaderIcon className="button-icon" />}
       {icon && !isLoading && (
         <Flex justifyContent="center" alignItems="center" width="auto" height="100%">
-          <Icon className={iconColor ? null : "button-icon"} title={icon} name={icon} />
+          <Icon
+            size={iconSize}
+            className={iconColor ? null : "button-icon"}
+            title={icon}
+            name={icon}
+          />
         </Flex>
       )}
 

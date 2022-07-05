@@ -11,6 +11,7 @@ const IconButton = ({
   onClick,
   width = "16px",
   height = "18px",
+  iconSize,
   ...props
 }) => {
   return (
@@ -23,6 +24,7 @@ const IconButton = ({
       disabled={disabled}
       icon={icon}
       iconColor={iconColor}
+      iconSize={iconSize}
       {...props}
     ></Box>
   )

@@ -25,6 +25,7 @@ export interface ButtonProps {
   uppercase?: boolean
   themeType?: ThemeType | undefined
   active?: boolean
+  iconSize?: string
   [s: string]: any
 }
 
@@ -39,7 +40,7 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
 
 type IconButtonProps = Pick<
   ButtonWrapperProps,
-  "iconColor" | "flavour" | "icon" | "disabled" | "onClick"
+  "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize"
 > & { width?: string; height?: string }
 
 declare const Button: FC<ButtonWrapperProps>
