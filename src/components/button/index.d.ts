@@ -37,8 +37,13 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
   iconColor?: string
 }
 
+type IconButtonProps = Pick<
+  ButtonWrapperProps,
+  "iconColor" | "flavour" | "icon" | "disabled" | "onClick"
+> & { width?: string; height?: string }
+
 declare const Button: FC<ButtonWrapperProps>
-declare const IconButton: FC<ButtonWrapperProps>
+declare const IconButton: FC<IconButtonProps>
 
 export { Button, IconButton }
 
