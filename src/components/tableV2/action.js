@@ -74,16 +74,18 @@ const Action = ({
           cursor={disabled ? "auto" : "pointer"}
           key={id}
           round
-          padding={[1.5]}
+          padding={[1, 0]}
         >
           <Box
-            width={4}
-            height={4}
             disabled={disabled}
             onClick={onActionClicked}
             as={Button}
             icon={icon}
             flavour="borderless"
+            sx={{
+              width: "16px",
+              height: "18px !important",
+            }}
           />
         </Flex>
       </Tooltip>
