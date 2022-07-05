@@ -34,10 +34,12 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
   isLoading?: boolean
   loadingLabel?: string | JSX.Element
   loadingIcon?: any
+  iconColor?: string
 }
 
 declare const Button: FC<ButtonWrapperProps>
+declare const IconButton: FC<ButtonWrapperProps>
 
-export { Button }
+export { Button, IconButton }
 
 export default Button
