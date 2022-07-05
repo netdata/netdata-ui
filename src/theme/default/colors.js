@@ -56,6 +56,8 @@ const appColors = {
   nodeBadgeBackground: rawColors.neutral.porcelain,
   nodeBadgeBorder: rawColors.neutral.iron,
   nodeBadgeColor: rawColors.neutral.bluebayoux,
+  //Table
+  tableRowBg: rawColors.neutral.blackhaze,
 }
 
 export default {
