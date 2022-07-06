@@ -46,7 +46,7 @@ const ConfirmationDialog = ({
   const flexProps = flexProperties[actionButtonDirection]
 
   return (
-    <Modal>
+    <Modal onEsc={handleDecline}>
       <ModalContent>
         <ModalHeader>
           {title}
