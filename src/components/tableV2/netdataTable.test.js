@@ -1,7 +1,7 @@
 import React from "react"
-import NetdataTable from "./netdataTable"
 import { renderWithProviders, screen } from "testUtilities"
 import userEvent from "@testing-library/user-event"
+import NetdataTable from "./netdataTable"
 
 const onGlobalSearchChange = jest.fn()
 const handleDelete = jest.fn()
@@ -34,7 +34,7 @@ const mockDataColumns = [
     header: "user",
     id: "user",
     enableFilter: true,
-    cell: ({ getValue }) => "Text",
+    cell: () => "Text",
   },
 ]
 

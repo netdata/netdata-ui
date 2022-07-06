@@ -1,16 +1,16 @@
-//TODO refactor bulk action and row action to single funtion to decrease repeatabillity
+//TODO refactor bulk action and row action to single function to decrease repeatability
 import React, { useMemo, useState, useEffect } from "react"
 
 import Table, { Pagination } from "./base-table"
 
 import {
-  createTable,
-  useTableInstance,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
   getPaginationRowModel,
-} from "./react-table.js"
+  getSortedRowModel,
+  flexRender,
+  useReactTable,
+} from "@tanstack/react-table"
 
 import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
@@ -22,8 +22,6 @@ import { Checkbox } from "src/components/checkbox"
 import Action from "./action"
 
 import ComparisonFilter from "./comparisonFilter"
-
-import { comparison } from "./filterFns"
 
 export const supportedBulkActions = {
   delete: {
@@ -54,8 +52,6 @@ export const supportedRowActions = {
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
 }
-
-const table = createTable().setOptions({ filterFns: { comparison } })
 
 const NetdataTable = ({
   dataColumns,
@@ -165,7 +161,8 @@ const NetdataTable = ({
       ) => {
         if (!id) throw new Error(`Please provide id  at ${index}`)
 
-        return table.createDataColumn(id, {
+        return {
+          id,
           ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
           ...(header && { header: typeof header === "function" ? () => header() : header }),
           ...(filterFn ? { filterFn } : {}),
@@ -174,7 +171,7 @@ const NetdataTable = ({
           enableGlobalFilter,
           isPlaceholder,
           meta,
-        })
+        }
       }
     )
   }, [dataColumns])
@@ -190,9 +187,9 @@ const NetdataTable = ({
     setGlobalFilter(String(value))
   }
 
-  const instance = useTableInstance(table, {
+  const instance = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
-    data: data,
+    data,
     state: {
       rowSelection,
       globalFilter,
@@ -249,7 +246,7 @@ const NetdataTable = ({
           >
             {row.getVisibleCells().map(cell => (
               <Table.Cell data-testid={`netdata-table-cell${testPrefix}`} key={cell.id}>
-                {cell.renderCell()}
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Table.Cell>
             ))}
           </Table.Row>
@@ -259,14 +256,15 @@ const NetdataTable = ({
   )
 }
 
-const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
-  const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => {
+const renderHeadCell = ({ headers, enableSorting, testPrefix }) =>
+  headers.map(({ id, colSpan, getContext, isPlaceholder, column }) => {
     const { getCanSort, columnDef } = column
     const { meta } = columnDef
 
     const availableFilters = { comparison: ComparisonFilter, default: SearchFilter }
     const selectedFilter = meta && meta.filter ? meta.filter : "default"
     const Filter = availableFilters[selectedFilter]
+    const headerCell = isPlaceholder ? null : flexRender(column.columnDef.header, getContext())
 
     if (getCanSort() && enableSorting) {
       return (
@@ -278,7 +276,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
           key={id}
           filter={column.getCanFilter() && <Filter column={column} testPrefix={testPrefix} />}
         >
-          {isPlaceholder ? null : renderHeader()}
+          {headerCell}
         </Table.SortingHeadCell>
       )
     }
@@ -289,7 +287,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
         colSpan={colSpan}
         key={id}
       >
-        {isPlaceholder ? null : renderHeader()}
+        {headerCell}
         {column.getCanFilter() ? (
           <div>
             <Filter column={column} testPrefix={testPrefix} />
@@ -298,9 +296,6 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
       </Table.HeadCell>
     )
   })
-
-  return HeadCell
-}
 
 const renderPagination = ({ instance }) => {
   const { nextPage, previousPage, getCanPreviousPage, getCanNextPage, getPageCount } = instance
@@ -320,83 +315,81 @@ const renderPagination = ({ instance }) => {
   )
 }
 
-const renderActions = ({ actions, testPrefix }) => {
-  return table.createDataColumn("actions", {
-    header: () => {
-      return "Actions"
-    },
-    cell: ({ row }) => {
-      const isDisabled = row.original?.disabled ?? false
-      return (
-        <Flex data-testid="action-cell" height="100%" gap={2}>
-          {actions.map(
-            ({
-              id,
-              icon,
-              handleAction,
-              tooltipText,
-              confirmation,
-              confirmationTitle,
-              confirmationMessage,
-              confirmLabel,
-              declineLabel,
-              handleDecline,
-              actionButtonDirection,
-            }) => (
-              <Action
-                disabled={isDisabled}
-                actionButtonDirection={actionButtonDirection}
-                handleDecline={handleDecline}
-                declineLabel={declineLabel}
-                confirmLabel={confirmLabel}
-                confirmationMessage={confirmationMessage}
-                confirmationTitle={confirmationTitle}
-                confirmation={confirmation}
-                key={id}
-                id={id}
-                icon={icon}
-                handleAction={() => handleAction(row.original)}
-                tooltipText={tooltipText}
-                testPrefix={testPrefix}
-              />
-            )
-          )}
-        </Flex>
-      )
-    },
-    enableColumnFilter: false,
-    enableSorting: false,
-  })
-}
+const renderActions = ({ actions, testPrefix }) => ({
+  id: "actions",
+  header: () => {
+    return "Actions"
+  },
+  cell: ({ row }) => {
+    const isDisabled = row.original?.disabled ?? false
+    return (
+      <Flex data-testid="action-cell" height="100%" gap={2}>
+        {actions.map(
+          ({
+             id,
+             icon,
+             handleAction,
+             tooltipText,
+             confirmation,
+             confirmationTitle,
+             confirmationMessage,
+             confirmLabel,
+             declineLabel,
+             handleDecline,
+             actionButtonDirection,
+           }) => (
+            <Action
+              disabled={isDisabled}
+              actionButtonDirection={actionButtonDirection}
+              handleDecline={handleDecline}
+              declineLabel={declineLabel}
+              confirmLabel={confirmLabel}
+              confirmationMessage={confirmationMessage}
+              confirmationTitle={confirmationTitle}
+              confirmation={confirmation}
+              key={id}
+              id={id}
+              icon={icon}
+              handleAction={() => handleAction(row.original)}
+              tooltipText={tooltipText}
+              testPrefix={testPrefix}
+            />
+          )
+        )}
+      </Flex>
+    )
+  },
+  enableColumnFilter: false,
+  enableSorting: false,
+})
 
-const renderRowSelection = ({ testPrefix }) => {
-  return table.createDataColumn("checkbox", {
-    header: ({ instance }) => {
-      return (
-        <ColumnCheckbox
-          data-testid={`netdata-table-header-checkbox${testPrefix}`}
-          checked={instance.getIsAllPageRowsSelected()}
-          indeterminate={instance.getIsSomePageRowsSelected()}
-          onChange={instance.getToggleAllPageRowsSelectedHandler()}
-        />
-      )
-    },
-    cell: ({ row }) => {
-      const isDisabled = row.original?.disabled ?? false
-      return (
-        <ColumnCheckbox
-          data-testid={`netdata-table-cell-checkbox${testPrefix}`}
-          checked={row.getIsSelected()}
-          indeterminate={row.getIsSomeSelected()}
-          onChange={row.getToggleSelectedHandler()}
-          disabled={isDisabled}
-        />
-      )
-    },
-    enableColumnFilter: false,
-    enableSorting: false,
-  })
-}
+const renderRowSelection = ({ testPrefix }) => ({
+  id: "checkbox",
+  header: ({ table }) => {
+    return (
+      <ColumnCheckbox
+        data-testid={`netdata-table-header-checkbox${testPrefix}`}
+        checked={table.getIsAllPageRowsSelected()}
+        indeterminate={table.getIsSomePageRowsSelected()}
+        onChange={table.getToggleAllPageRowsSelectedHandler()}
+      />
+    )
+  },
+  cell: ({ row }) => {
+    const isDisabled = row.original?.disabled ?? false
+    return (
+      <ColumnCheckbox
+        data-testid={`netdata-table-cell-checkbox${testPrefix}`}
+        checked={row.getIsSelected()}
+        indeterminate={row.getIsSomeSelected()}
+        onChange={row.getToggleSelectedHandler()}
+        disabled={isDisabled}
+      />
+    )
+  },
+  enableColumnFilter: false,
+  enableSorting: false,
+})
 
 const SearchFilter = ({ column, testPrefix }) => {
   const columnFilterValue = column.getFilterValue()
@@ -414,16 +407,14 @@ const SearchFilter = ({ column, testPrefix }) => {
   )
 }
 
-const ColumnCheckbox = ({ checked, indeterminate, onChange, disabled, ...rest }) => {
-  return (
-    <Checkbox
-      disabled={disabled}
-      checked={checked}
-      indeterminate={indeterminate}
-      onChange={onChange}
-      {...rest}
-    />
-  )
-}
+const ColumnCheckbox = ({ checked, indeterminate, onChange, disabled, ...rest }) => (
+  <Checkbox
+    disabled={disabled}
+    checked={checked}
+    indeterminate={indeterminate}
+    onChange={onChange}
+    {...rest}
+  />
+)
 
 export default NetdataTable
