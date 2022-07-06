@@ -77,7 +77,7 @@ const NetdataTable = ({
   enablePagination,
   paginationOptions = {
     pageIndex: 0,
-    pageSize: 0,
+    pageSize: 100,
   },
   columnVisibility,
   testPrefix = "",
@@ -214,7 +214,7 @@ const NetdataTable = ({
       rowSelection,
       globalFilter,
       sorting,
-      ...(enablePagination ? { pagination } : {}),
+      pagination,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
