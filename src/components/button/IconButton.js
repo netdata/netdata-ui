@@ -25,8 +25,9 @@ const IconButton = ({
       icon={icon}
       iconColor={iconColor}
       iconSize={iconSize}
+      neutral
       {...props}
-    />
+    ></Box>
   )
 }
 
