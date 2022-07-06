@@ -2,6 +2,7 @@ import React, { useState } from "react"
 
 import Tooltip from "src/components/drops/tooltip"
 import Flex from "src/components/templates/flex"
+import { Text } from "src/components/typography"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
 import { IconButton } from "src/components/button"
@@ -52,14 +53,18 @@ const Action = ({
           declineLabel={declineLabel}
           confirmLabel={confirmLabel}
           title={
-            typeof confirmationTitle === "function"
-              ? confirmationTitle(currentRow?.original)
-              : confirmationTitle
+            typeof confirmationTitle === "function" ? (
+              <Text>{confirmationTitle(currentRow?.original)}</Text>
+            ) : (
+              <Text>confirmationTitle</Text>
+            )
           }
           message={
-            typeof confirmationMessage === "function"
-              ? confirmationMessage(currentRow?.original)
-              : confirmationMessage
+            typeof confirmationMessage === "function" ? (
+              <Text>{confirmationMessage(currentRow?.original)}</Text>
+            ) : (
+              <Text>{confirmationMessage}</Text>
+            )
           }
           handleDecline={onActionDeclined}
           handleConfirm={onActionConfrimed}
