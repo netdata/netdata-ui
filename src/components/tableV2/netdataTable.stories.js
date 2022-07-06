@@ -309,6 +309,11 @@ StoryTable.add("Full Table functionallity", () => {
     delete: { handleAction: handleDelete },
     download: { handleAction: handleDownload },
     toggleAlarm: { handleAction: handleToggleAlarms },
+    addEntry: {
+      handleAction: () => {
+        console.log("clicked")
+      },
+    },
   }
 
   const rowActions = { delete: { handleAction: handleDelete }, info: { handleAction: handleInfo } }

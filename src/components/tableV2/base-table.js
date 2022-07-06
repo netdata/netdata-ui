@@ -67,18 +67,20 @@ const Table = forwardRef(
           <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
             {bulkActions ? (
               <Flex alignSelf="end" gap={1} margin={[0, 0, 1, 0]}>
-                {bulkActions.map(({ id, icon, handleAction, tooltipText, ...rest }) => (
-                  <Action
-                    testPrefix={`-bulk${testPrefix}`}
-                    key={id}
-                    id={id}
-                    icon={icon}
-                    handleAction={() => handleAction(selectedRows)}
-                    tooltipText={tooltipText}
-                    disabled={selectedRows?.length < 1}
-                    {...rest}
-                  />
-                ))}
+                {bulkActions.map(
+                  ({ id, icon, handleAction, tooltipText, alwaysEnabled, ...rest }) => (
+                    <Action
+                      testPrefix={`-bulk${testPrefix}`}
+                      key={id}
+                      id={id}
+                      icon={icon}
+                      handleAction={() => handleAction(selectedRows)}
+                      tooltipText={tooltipText}
+                      disabled={!alwaysEnabled && selectedRows?.length < 1}
+                      {...rest}
+                    />
+                  )
+                )}
               </Flex>
             ) : (
               <Box aria-hidden as="span" />

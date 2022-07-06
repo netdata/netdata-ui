@@ -41,6 +41,7 @@ export const supportedBulkActions = {
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
+  addEntry: { icon: "plus", alwaysEnabled: true },
 }
 
 export const supportedRowActions = {
@@ -57,7 +58,6 @@ export const supportedRowActions = {
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
-  addEntry: { icon: "plus" },
 }
 
 const table = createTable().setOptions({ filterFns: { comparison } })
@@ -135,6 +135,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      alwaysEnabled,
     } = supportedBulkActions[currentActionKey]
     const currentAction = bulkActions[currentActionKey]
     acc.push({
@@ -148,6 +149,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      alwaysEnabled,
       ...currentAction,
     })
     return acc
