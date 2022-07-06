@@ -4,13 +4,13 @@ import React, { useMemo, useState, useEffect } from "react"
 import Table, { Pagination } from "./base-table"
 
 import {
-  createTable,
-  useTableInstance,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
   getPaginationRowModel,
-} from "./react-table.js"
+  getSortedRowModel,
+  flexRender,
+  useReactTable,
+} from "@tanstack/react-table"
 
 import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
@@ -59,8 +59,6 @@ export const supportedRowActions = {
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
 }
-
-const table = createTable().setOptions({ filterFns: { comparison } })
 
 const NetdataTable = ({
   dataColumns,
@@ -157,6 +155,7 @@ const NetdataTable = ({
 
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
+    console.log(dataColumns)
     return dataColumns.map(
       (
         {
@@ -177,7 +176,7 @@ const NetdataTable = ({
       ) => {
         if (!id) throw new Error(`Please provide id  at ${index}`)
 
-        return table.createDataColumn(id, {
+        return {
           ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
           ...(header && { header: typeof header === "function" ? () => header() : header }),
           ...(filterFn ? { filterFn } : {}),
@@ -190,7 +189,7 @@ const NetdataTable = ({
           size,
           maxSize,
           minSize,
-        })
+        }
       }
     )
   }, [dataColumns])
@@ -206,8 +205,10 @@ const NetdataTable = ({
     setGlobalFilter(String(value))
   }
 
-  const instance = useTableInstance(table, {
-    columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
+  const instance = useReactTable({
+    columns: [...makeDataColumns],
+
+    // columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     state: {
       columnVisibility,
@@ -225,6 +226,9 @@ const NetdataTable = ({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    debugTable: true,
+    debugHeaders: true,
+    debugColumns: false,
   })
 
   useEffect(() => {
@@ -240,7 +244,8 @@ const NetdataTable = ({
     }
   }, [rowSelection, instance])
 
-  const headers = instance.getFlatHeaders()
+  const headers = instance.getHeaderGroups()
+  debugger
 
   return (
     <Table
@@ -272,7 +277,7 @@ const NetdataTable = ({
                   data-testid={`netdata-table-cell${testPrefix}`}
                   key={cell.id}
                 >
-                  {cell.renderCell()}
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </Table.Cell>
               )
             })}
@@ -284,7 +289,7 @@ const NetdataTable = ({
 }
 
 const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
-  const HeadCell = headers.map(({ id, colSpan, renderHeader, isPlaceholder, column }) => {
+  const HeadCell = headers.map(({ id, colSpan, getContext, isPlaceholder, column }) => {
     const { getCanSort, columnDef } = column
     const { meta } = columnDef
 
@@ -304,7 +309,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
           key={id}
           filter={column.getCanFilter() && <Filter column={column} testPrefix={testPrefix} />}
         >
-          {isPlaceholder ? null : renderHeader()}
+          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
         </Table.SortingHeadCell>
       )
     }
@@ -317,7 +322,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
         colSpan={colSpan}
         key={id}
       >
-        {isPlaceholder ? null : renderHeader()}
+        {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
         {column.getCanFilter() ? (
           <div>
             <Filter column={column} testPrefix={testPrefix} />
@@ -349,7 +354,8 @@ const renderPagination = ({ instance }) => {
 }
 
 const renderActions = ({ actions, testPrefix }) => {
-  return table.createDataColumn("actions", {
+  return {
+    id: "actions",
     header: () => {
       return "Actions"
     },
@@ -395,18 +401,19 @@ const renderActions = ({ actions, testPrefix }) => {
     },
     enableColumnFilter: false,
     enableSorting: false,
-  })
+  }
 }
 
 const renderRowSelection = ({ testPrefix }) => {
-  return table.createDataColumn("checkbox", {
-    header: ({ instance }) => {
+  return {
+    id: "checkbox",
+    header: ({ table }) => {
       return (
         <ColumnCheckbox
           data-testid={`netdata-table-header-checkbox${testPrefix}`}
-          checked={instance.getIsAllPageRowsSelected()}
-          indeterminate={instance.getIsSomePageRowsSelected()}
-          onChange={instance.getToggleAllPageRowsSelectedHandler()}
+          checked={table.getIsAllPageRowsSelected()}
+          indeterminate={table.getIsSomePageRowsSelected()}
+          onChange={table.getToggleAllPageRowsSelectedHandler()}
         />
       )
     },
@@ -427,7 +434,7 @@ const renderRowSelection = ({ testPrefix }) => {
     size: ROW_SELECTION_SIZE,
     maxSize: ROW_SELECTION_SIZE,
     minSize: ROW_SELECTION_SIZE,
-  })
+  }
 }
 
 const SearchFilter = ({ column, testPrefix }) => {

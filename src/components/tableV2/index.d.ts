@@ -7,7 +7,7 @@ import {
 import { supportedRowActions, supportedBulkActions } from "./netdataTable"
 import React from "react"
 
-type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
+type NetdataCoreColumns<T = any> = Pick<ColumnDef<any>, "id" | "header" | "cell" | "filterFn">
 
 export type NetdataTableProps<T = any> = {
   data: Array<any>
@@ -41,7 +41,7 @@ export type NetdataTableProps<T = any> = {
     }
   }
   testPrefix?: string
-  globalFilterFn?: FilterFnOption<T>
+  globalFilterFn?: FilterFnOption<any>
   columnVisibility: VisibilityTableState
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
