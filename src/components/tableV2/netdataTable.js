@@ -57,6 +57,7 @@ export const supportedRowActions = {
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
+  addEntry: { icon: "plus" },
 }
 
 const table = createTable().setOptions({ filterFns: { comparison } })
