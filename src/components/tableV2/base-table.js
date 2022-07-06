@@ -64,9 +64,9 @@ const Table = forwardRef(
               />
             </Box>
           )}
-          <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
+          <Flex data-testid="bulk-actions" width="100%" justifyContent="end">
             {bulkActions ? (
-              <Flex alignSelf="end" gap={1} margin={[0, 0, 1, 0]}>
+              <Flex alignSelf="end" gap={1}>
                 {bulkActions.map(
                   ({ id, icon, handleAction, tooltipText, alwaysEnabled, ...rest }) => (
                     <Action
@@ -77,6 +77,8 @@ const Table = forwardRef(
                       handleAction={() => handleAction(selectedRows)}
                       tooltipText={tooltipText}
                       disabled={!alwaysEnabled && selectedRows?.length < 1}
+                      background="elementBackground"
+                      iconColor="elementBackground"
                       {...rest}
                     />
                   )

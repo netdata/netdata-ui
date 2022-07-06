@@ -9,6 +9,7 @@ import { IconButton } from "src/components/button"
 const Action = ({
   id,
   icon,
+  background,
   handleAction,
   tooltipText,
   confirmation,
@@ -73,6 +74,7 @@ const Action = ({
           key={id}
           round
           padding={[1, 0]}
+          background={background}
         >
           <IconButton
             iconSize="small"

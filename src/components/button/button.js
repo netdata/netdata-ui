@@ -34,7 +34,7 @@ export const Button = forwardRef(
         <Flex justifyContent="center" alignItems="center" width="auto" height="100%">
           <Icon
             size={iconSize}
-            className={iconColor ? null : "button-icon"}
+            className={iconColor ? "button-icon__color" : "button-icon"}
             title={icon}
             name={icon}
           />
