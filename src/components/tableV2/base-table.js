@@ -39,7 +39,7 @@ const Table = forwardRef(
     {
       handleSearch,
       children,
-      seachPlaceholder = "search",
+      seachPlaceholder = "Search",
       Pagination,
       selectedRows,
       bulkActions,
@@ -60,7 +60,7 @@ const Table = forwardRef(
                   handleSearch(e.target.value)
                 }}
                 placeholder={seachPlaceholder}
-                iconRight={<Icon name="magnify" />}
+                iconRight={<Icon name="magnify" color="textLite" />}
               />
             </Box>
           )}
