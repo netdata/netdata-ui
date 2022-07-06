@@ -74,7 +74,7 @@ const appColors = {
   neutralPillColor: rawColors.neutral.regentgrey,
 
   //Table
-  tableRowBg: rawColors.neutral.shark,
+  tableRowBg: rawColors.neutral.arsenic,
 }
 
 export default {
