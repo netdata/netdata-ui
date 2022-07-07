@@ -155,7 +155,6 @@ const NetdataTable = ({
 
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
-    console.log(dataColumns)
     return dataColumns.map(
       (
         {
@@ -244,8 +243,9 @@ const NetdataTable = ({
     }
   }, [rowSelection, instance])
 
-  const headers = instance.getHeaderGroups()
   debugger
+
+  const headers = instance.getLeafHeaders()
 
   return (
     <Table

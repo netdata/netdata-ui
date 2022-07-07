@@ -54,14 +54,27 @@ StoryTable.add("Base Table", () => {
 
 StoryTable.add("Simple Netdata Table", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", accessorKey: "nodes" },
     {
-      id: "alerts",
-      accessorKey: "alerts",
+      id: "1",
+      header: "Name",
       footer: props => props.column.id,
       columns: [
         {
           accessorKey: "firstName",
+          cell: info => info.getValue(),
+          footer: props => props.column.id,
+        },
+        {
+          accessorFn: row => row.lastName,
+          id: "lastName",
+          cell: info => info.getValue(),
+          header: () => <span>Last Name</span>,
+          footer: props => props.column.id,
+        },
+        {
+          accessorFn: row => `${row.firstName} ${row.lastName}`,
+          id: "fullName",
+          header: "Full Name",
           cell: info => info.getValue(),
           footer: props => props.column.id,
         },
