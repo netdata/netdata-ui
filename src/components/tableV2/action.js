@@ -23,6 +23,7 @@ const Action = ({
   testPrefix,
   disabled,
   currentRow,
+  selectedRows,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
@@ -54,14 +55,14 @@ const Action = ({
           confirmLabel={confirmLabel}
           title={
             typeof confirmationTitle === "function" ? (
-              <Text>{confirmationTitle(currentRow?.original)}</Text>
+              <Text>{confirmationTitle(currentRow?.original, selectedRows)}</Text>
             ) : (
               <Text>confirmationTitle</Text>
             )
           }
           message={
             typeof confirmationMessage === "function" ? (
-              <Text>{confirmationMessage(currentRow?.original)}</Text>
+              <Text>{confirmationMessage(currentRow?.original, selectedRows)}</Text>
             ) : (
               <Text>{confirmationMessage}</Text>
             )

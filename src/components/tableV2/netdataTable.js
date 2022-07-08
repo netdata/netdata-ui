@@ -191,7 +191,7 @@ const NetdataTable = ({
           size,
           maxSize,
           minSize,
-          sortingFn: sortingFn,
+          ...(sortingFn ? { sortingFn } : {}),
         })
       }
     )

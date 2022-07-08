@@ -79,6 +79,7 @@ const Table = forwardRef(
                       disabled={!alwaysEnabled && selectedRows?.length < 1}
                       background="elementBackground"
                       iconColor="elementBackground"
+                      selectedRows={selectedRows}
                       {...rest}
                     />
                   )
