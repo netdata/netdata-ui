@@ -6,7 +6,6 @@ import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
-import Action from "./action"
 
 const StyledRow = styled.tr`
   font-size: 14px;
