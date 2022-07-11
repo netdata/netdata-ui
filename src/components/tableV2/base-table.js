@@ -54,7 +54,7 @@ const Table = forwardRef(
               />
             </Box>
           )}
-          <Flex data-testid="bulk-actions" width="100%" justifyContent="end">
+          <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
             {bulkActions && bulkActions()}
           </Flex>
         </Flex>
