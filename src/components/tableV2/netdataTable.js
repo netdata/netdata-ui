@@ -247,7 +247,14 @@ const NetdataTable = ({
   return (
     <Table
       selectedRows={originalSelectedRows}
-      bulkActions={availableBulkActions}
+      bulkActions={() =>
+        renderBulkActions({
+          bulkActions: availableBulkActions,
+          testPrefix,
+          instance,
+          selectedRows: originalSelectedRows,
+        })
+      }
       Pagination={enablePagination && renderPagination({ instance })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
@@ -355,7 +362,7 @@ const renderActions = ({ actions, testPrefix }) => {
     header: () => {
       return "Actions"
     },
-    cell: ({ row }) => {
+    cell: ({ row, instance }) => {
       const isDisabled = row.original?.disabled ?? false
       return (
         <Flex data-testid="action-cell" height="100%" gap={2}>
@@ -385,7 +392,7 @@ const renderActions = ({ actions, testPrefix }) => {
                 key={id}
                 id={id}
                 icon={icon}
-                handleAction={() => handleAction(row.original)}
+                handleAction={() => handleAction(row.original, instance)}
                 tooltipText={tooltipText}
                 testPrefix={testPrefix}
                 currentRow={row}
@@ -398,6 +405,25 @@ const renderActions = ({ actions, testPrefix }) => {
     enableColumnFilter: false,
     enableSorting: false,
   })
+}
+
+const renderBulkActions = ({ bulkActions, instance, testPrefix, selectedRows }) => {
+  if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" />
+  return bulkActions.map(({ id, icon, handleAction, tooltipText, alwaysEnabled, ...rest }) => (
+    <Action
+      testPrefix={`-bulk${testPrefix}`}
+      key={id}
+      id={id}
+      icon={icon}
+      handleAction={() => handleAction(selectedRows, instance)}
+      tooltipText={tooltipText}
+      disabled={!alwaysEnabled && selectedRows?.length < 1}
+      background="elementBackground"
+      iconColor="elementBackground"
+      selectedRows={selectedRows}
+      {...rest}
+    />
+  ))
 }
 
 const renderRowSelection = ({ testPrefix }) => {
