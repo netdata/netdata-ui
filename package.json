@@ -35,7 +35,7 @@
     "@netdata/react-filter-box": "^1.0.0",
     "@prismicio/client": "^5.1.0",
     "@styled-system/css": "^5.1.5",
-    "@tanstack/react-table": "^8.1.3",
+    "@tanstack/react-table": "^8.2.3",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.21.1",
     "polished": "^4.0.3",
