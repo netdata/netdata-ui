@@ -106,7 +106,7 @@ describe("Netdata table", () => {
 
     await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
 
-    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
+    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
 
   it("should trigger confirmation dialog when clicking delete and hanlde decline", async () => {
@@ -144,7 +144,7 @@ describe("Netdata table", () => {
 
     await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
 
-    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
+    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
 
   it("should change global search and filter nodes", async () => {
