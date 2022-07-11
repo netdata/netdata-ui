@@ -170,14 +170,17 @@ const NetdataTable = ({
           size = 20,
           maxSize = 300,
           minSize = 20,
+          accessorKey,
         },
         index
       ) => {
         if (!id) throw new Error(`Please provide id  at ${index}`)
 
         return {
-          ...(cell && { cell: typeof cell === "function" ? props => cell(props) : cell }),
-          ...(header && { header: typeof header === "function" ? () => header() : header }),
+          id,
+          cell,
+          accessorKey: accessorKey ? accessorKey : id,
+          header,
           ...(filterFn ? { filterFn } : {}),
           footer: props => props.column.id,
           enableColumnFilter: enableFilter,
@@ -204,10 +207,10 @@ const NetdataTable = ({
     setGlobalFilter(String(value))
   }
 
-  const instance = useReactTable({
-    columns: [...makeDataColumns],
+  console.log(makeDataColumns)
 
-    // columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
+  const instance = useReactTable({
+    columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     state: {
       columnVisibility,
@@ -243,9 +246,7 @@ const NetdataTable = ({
     }
   }, [rowSelection, instance])
 
-  debugger
-
-  const headers = instance.getLeafHeaders()
+  const headers = instance.getFlatHeaders()
 
   return (
     <Table
