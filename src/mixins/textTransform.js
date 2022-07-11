@@ -7,7 +7,7 @@ const textTransformMap = {
   fullWidth: "full-width",
 }
 
-const textTransform = ({ textTransform = "none" } = {}) => {
+const textTransform = ({ textTransform = textTransformMap.none } = {}) => {
   if (textTransform === textTransformMap.firstLetter)
     return `text-transform: lowercase;
     &::first-letter {
