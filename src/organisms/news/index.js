@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect, useMemo, useCallback } from "react"
-import { useToggle, useLocalStorage } from "react-use"
+import useToggle from "react-use/lib/useToggle"
+import useLocalStorage from "react-use/lib/useLocalStorage"
 import { TextSmall } from "src/components/typography"
 import Flex from "src/components/templates/flex"
 import Layer from "src/components/templates/layer"

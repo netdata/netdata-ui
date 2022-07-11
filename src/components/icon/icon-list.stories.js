@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { useCopyToClipboard } from "react-use"
+import useCopyToClipboard from "react-use/lib/useCopyToClipboard"
 import { storiesOf } from "@storybook/react"
 
 import Flex from "src/components/templates/flex"
