@@ -36,16 +36,7 @@ const StyledSortIcon = styled(Icon)`
 
 const Table = forwardRef(
   (
-    {
-      handleSearch,
-      children,
-      seachPlaceholder = "Search",
-      Pagination,
-      selectedRows,
-      bulkActions,
-      testPrefix,
-      ...props
-    },
+    { handleSearch, children, seachPlaceholder = "Search", Pagination, bulkActions, ...props },
     ref
   ) => {
     return (
@@ -65,29 +56,7 @@ const Table = forwardRef(
             </Box>
           )}
           <Flex data-testid="bulk-actions" width="100%" justifyContent="end">
-            {bulkActions ? (
-              <Flex alignSelf="end" gap={1}>
-                {bulkActions.map(
-                  ({ id, icon, handleAction, tooltipText, alwaysEnabled, ...rest }) => (
-                    <Action
-                      testPrefix={`-bulk${testPrefix}`}
-                      key={id}
-                      id={id}
-                      icon={icon}
-                      handleAction={() => handleAction(selectedRows)}
-                      tooltipText={tooltipText}
-                      disabled={!alwaysEnabled && selectedRows?.length < 1}
-                      background="elementBackground"
-                      iconColor="elementBackground"
-                      selectedRows={selectedRows}
-                      {...rest}
-                    />
-                  )
-                )}
-              </Flex>
-            ) : (
-              <Box aria-hidden as="span" />
-            )}
+            {bulkActions && bulkActions()}
           </Flex>
         </Flex>
         <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
