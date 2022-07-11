@@ -85,74 +85,74 @@ describe("Netdata table", () => {
     expect(screen.queryAllByTestId(cellTestid)).toHaveLength(15)
   })
 
-  it("should filter the columns when changing the column search filter", () => {
+  it("should filter the columns when changing the column search filter", async () => {
     renderNetdataTable()
     const filterParams = "node8"
     const nodesFilter = screen.getByTestId(nodesColumnFilter)
 
-    userEvent.type(nodesFilter, filterParams)
+    await userEvent.type(nodesFilter, filterParams)
 
     expect(nodesFilter).toBeInTheDocument()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
   })
 
-  it("should trigger confirmation dialog when clicking delete and hanlde confirm", () => {
+  it("should trigger confirmation dialog when clicking delete and hanlde confirm", async () => {
     renderNetdataTable()
     const deleteAction = screen.queryAllByTestId(deleteActionTestid)
     const expectedDeletedItem = mockData()[0]
-    userEvent.click(deleteAction[0])
+    await userEvent.click(deleteAction[0])
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+    await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
 
     expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
   })
 
-  it("should trigger confirmation dialog when clicking delete and hanlde decline", () => {
+  it("should trigger confirmation dialog when clicking delete and hanlde decline", async () => {
     renderNetdataTable()
     const deleteAction = screen.queryAllByTestId(deleteActionTestid)
 
-    userEvent.click(deleteAction[0])
+    await userEvent.click(deleteAction[0])
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    userEvent.click(screen.getByTestId("confirmation-dialog-decline"))
+    await userEvent.click(screen.getByTestId("confirmation-dialog-decline"))
 
     expect(handleDelete).not.toHaveBeenCalled()
   })
 
-  it("should trigger info action when clicking it", () => {
+  it("should trigger info action when clicking it", async () => {
     renderNetdataTable()
     const infoAction = screen.queryAllByTestId(infoActionTestid)
 
-    userEvent.click(infoAction[0])
+    await userEvent.click(infoAction[0])
 
     expect(handleInfo).toHaveBeenCalled()
   })
 
-  it("should select multiple rows and handle delete bulk action", () => {
+  it("should select multiple rows and handle delete bulk action", async () => {
     renderNetdataTable()
     const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
     const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
     const expectedDeletedItem = mockData()
 
-    userEvent.click(headerCheckbox)
-    userEvent.click(deleteBulkAction)
+    await userEvent.click(headerCheckbox)
+    await userEvent.click(deleteBulkAction)
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+    await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
 
     expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
   })
 
-  it("should change global search and filter nodes", () => {
+  it("should change global search and filter nodes", async () => {
     renderNetdataTable()
     const filterParams = "node8"
     const globalSearchFilter = screen.getByTestId("table-global-search-filter")
 
-    userEvent.type(globalSearchFilter, filterParams)
+    await userEvent.type(globalSearchFilter, filterParams)
 
     expect(globalSearchFilter).toBeInTheDocument()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)

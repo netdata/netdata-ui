@@ -37,9 +37,9 @@ describe("Checkbox test", () => {
     expect(mainCheckbox.indeterminate).toBe(true)
   })
 
-  it(" * should have data-focus attribute on focus", () => {
+  it(" * should have data-focus attribute on focus", async () => {
     const { getByTestId } = renderWithProviders(<MockedCheckbox />)
-    userEvent.click(getByTestId("checkbox-input"))
+    await userEvent.click(getByTestId("checkbox-input"))
     const styledCheckBox = getByTestId("styled-checkbox")
     expect(styledCheckBox).toHaveAttribute("data-focus")
   })
