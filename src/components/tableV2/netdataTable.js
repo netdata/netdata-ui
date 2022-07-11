@@ -207,8 +207,6 @@ const NetdataTable = ({
     setGlobalFilter(String(value))
   }
 
-  console.log(makeDataColumns)
-
   const instance = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
