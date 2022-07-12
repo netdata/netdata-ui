@@ -81,7 +81,6 @@ const Action = ({
           cursor={disabled ? "auto" : "pointer"}
           key={id}
           round
-          padding={[1, 0]}
           background={background}
         >
           <IconButton
@@ -91,10 +90,6 @@ const Action = ({
             onClick={onActionClicked}
             icon={icon}
             flavour="borderless"
-            sx={{
-              width: "16px",
-              height: "18px !important",
-            }}
           />
         </Flex>
       </Tooltip>

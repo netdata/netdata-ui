@@ -34,7 +34,22 @@ const StyledSortIcon = styled(Icon)`
   height: 12px;
   margin: auto;
 `
-
+const StyledPagination = styled(Flex)`
+  position: sticky;
+  bottom: -15px;
+  height: 45px;
+  background: ${getColor("mainBackground")};
+  border-top: 1px solid ${getColor("borderSecondary")};
+`
+const StyledTableControls = styled(Flex)`
+  position: sticky;
+  width: 100%;
+  top: -16px;
+  z-index: 10;
+  background: #fff;
+  padding: 16px 0;
+  margin: -16px 0 0;
+`
 const Table = forwardRef(
   (
     { handleSearch, children, seachPlaceholder = "Search", Pagination, bulkActions, ...props },
@@ -42,7 +57,7 @@ const Table = forwardRef(
   ) => {
     return (
       <Flex width="100%" height="100%" column>
-        <Flex width="100%" margin={[0, 0, 3, 0]}>
+        <StyledTableControls>
           {handleSearch && (
             <Box width={{ max: 50 }}>
               <SearchInput
@@ -59,7 +74,7 @@ const Table = forwardRef(
           <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
             {bulkActions && bulkActions()}
           </Flex>
-        </Flex>
+        </StyledTableControls>
         <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
           {children}
         </Box>
@@ -201,14 +216,57 @@ export const Pagination = ({
   }, [hasNext])
 
   return (
-    <Flex>
-      <Box cursor="pointer" onClick={handleOnPrevious} as={Icon} name="chevron_left_small" />
-      {pageIndex}
-      <Box cursor="pointer" onClick={handleOnNextPage} as={Icon} name="chevron_right_small" />
+    <StyledPagination alignItems="center" justifyContent="end">
+      <Tooltip content="First">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleOnPrevious}
+            icon="chevron_left_start"
+            iconSize="small"
+            tooltip="test"
+            disabled={!hasPrevious}
+          />
+        </Flex>
+      </Tooltip>
+      <Tooltip content="Previous">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleOnPrevious}
+            icon="chevron_left"
+            iconSize="small"
+            tooltip="Previous"
+            disabled={!hasPrevious}
+          />
+        </Flex>
+      </Tooltip>
       <Text>
         Page {pageIndex} of {pageCount}
       </Text>
-    </Flex>
+      <Tooltip content="Next">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleOnNextPage}
+            icon="chevron_right"
+            iconSize="small"
+            disabled={!hasNext}
+          />
+        </Flex>
+      </Tooltip>
+      <Tooltip content="Last">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleOnNextPage}
+            icon="chevron_right_end"
+            iconSize="small"
+            disabled={!hasNext}
+          />
+        </Flex>
+      </Tooltip>
+    </StyledPagination>
   )
 }
 
