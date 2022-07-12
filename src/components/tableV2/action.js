@@ -26,7 +26,6 @@ const Action = ({
   selectedRows,
   disabledTooltipText,
 }) => {
-  console.log({ disabledTooltipText })
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
   const onActionClicked = () => {

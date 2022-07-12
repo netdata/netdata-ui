@@ -13,8 +13,6 @@ export const comparison = (row, columnId, value) => {
 
   if (isNaN(numberToCompareWith) || numberToCompareWith === "") return true
 
-  console.log(filterValue)
-
   return operators[operator](Number(rowValue), Number(numberToCompareWith))
 }
 
