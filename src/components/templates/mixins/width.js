@@ -5,7 +5,7 @@ export default ({
   width,
 }) => {
   if (typeof width === "object") {
-    const { min = "", max = "", base } = width
+    const { min = "", max = "", base = "" } = width
     return `
       ${min && `min-width: ${typeof min === "number" ? `${baseUnit * min}px` : min};`}
       ${max && `max-width: ${typeof max === "number" ? `${baseUnit * max}px` : max};`}
