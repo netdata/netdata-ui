@@ -27,7 +27,9 @@ import { comparison, select } from "./filterFns"
 
 import SelectFilter from "./selectFilter"
 
-const ROW_SELECTION_SIZE = 10
+const ROW_SELECTION_MAX_SIZE = 12
+const ROW_SELECTION_MIN_SIZE = 5
+const ROW_SELECTION_SIZE = 5
 
 export const supportedBulkActions = {
   delete: {
@@ -478,8 +480,8 @@ const renderRowSelection = ({ testPrefix }) => {
     enableColumnFilter: false,
     enableSorting: false,
     size: ROW_SELECTION_SIZE,
-    maxSize: ROW_SELECTION_SIZE,
-    minSize: ROW_SELECTION_SIZE,
+    maxSize: ROW_SELECTION_MAX_SIZE,
+    minSize: ROW_SELECTION_MIN_SIZE,
     meta: { stopPropagation: true },
   })
 }
