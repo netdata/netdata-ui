@@ -28,8 +28,8 @@ import { comparison, select } from "./filterFns"
 import SelectFilter from "./selectFilter"
 
 const ROW_SELECTION_MAX_SIZE = 10
-const ROW_SELECTION_MIN_SIZE = 5
-const ROW_SELECTION_SIZE = 5
+const ROW_SELECTION_MIN_SIZE = 10
+const ROW_SELECTION_SIZE = 10
 
 export const supportedBulkActions = {
   delete: {
