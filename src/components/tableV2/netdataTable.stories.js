@@ -395,6 +395,9 @@ StoryTable.add("Full Table functionallity", () => {
 
   return (
     <NetdataTable
+      onClickRow={({ data, table, fullRow }) => {
+        console.log(data, table, fullRow)
+      }}
       sortBy={[{ id: "nodes", desc: false }]}
       onGlobalSearchChange={onGlobalSearchChange}
       enableSorting
