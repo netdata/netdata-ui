@@ -12,7 +12,11 @@ module.exports = {
   ],
   core: { builder: "webpack5" },
   framework: "@storybook/react",
+  // @todo enable stories of "exampleStories directory as examples
+  //  for replacing knobs addon with controls (essentials addon)
   stories: [
+    // "../exampleStories/**/*.stories.mdx",
+    // "../exampleStories/**/*.stories.@(js|jsx|ts|tsx)",
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
