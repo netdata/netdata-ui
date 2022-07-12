@@ -325,7 +325,7 @@ StoryTable.add("Full Table functionallity", () => {
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
       filterFn: "comparison",
-      meta: { filter: "comparison" },
+      meta: { filter: { component: "comparison" } },
     },
     {
       header: "user",
@@ -334,18 +334,40 @@ StoryTable.add("Full Table functionallity", () => {
       enableSorting: false,
       cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
     },
+    {
+      header: "status",
+      id: "status",
+      enableFilter: true,
+      enableSorting: false,
+      filterFn: "select",
+      size: 80,
+      maxSize: 80,
+      minSize: 80,
+      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      meta: {
+        filter: {
+          component: "select",
+          isMulti: true,
+          options: [
+            { value: "offline", label: "Offline" },
+            { value: "online", label: "Online" },
+            { value: "stale", label: "Stale" },
+          ],
+        },
+      },
+    },
   ]
 
   const mockData = () => [
-    { nodes: "node8", alerts: 15, user: "mitsos", disabled: true },
-    { nodes: "node9", alerts: 11, user: "koukouroukou" },
-    { nodes: "node10", alerts: 22, user: "reena" },
-    { nodes: "node1", alerts: 15, user: "nic" },
-    { nodes: "node2", alerts: 11, user: "alex" },
-    { nodes: "node34", alerts: 22, user: "manolis" },
-    { nodes: "node5", alerts: 15, user: "achile" },
-    { nodes: "node6", alerts: 11, user: "barba" },
-    { nodes: "node7", alerts: 22, user: "decker" },
+    { nodes: "node8", alerts: 15, user: "mitsos", disabled: true, status: "stale" },
+    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline" },
+    { nodes: "node10", alerts: 22, user: "reena", status: "online" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline" },
+    { nodes: "node34", alerts: 22, user: "manolis", status: "offline" },
+    { nodes: "node5", alerts: 15, user: "achile", status: "stale" },
+    { nodes: "node6", alerts: 11, user: "barba", status: "stale" },
+    { nodes: "node7", alerts: 22, user: "decker", status: "online" },
   ]
 
   return (

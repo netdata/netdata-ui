@@ -1,14 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tabs states  * should render uncontrolled 1`] = `
-.c2 {
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 1 1 100%;
-  -ms-flex: 1 1 100%;
-  flex: 1 1 100%;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  padding: 0 2px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -22,38 +60,13 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   justify-content: center;
 }
 
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column nowrap;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.c2 {
   border-bottom: 1px solid #ECEEEF;
   box-sizing: border-box;
   padding: 0 2px;
 }
 
-.c3 {
+.c4 {
   border-bottom: 4px solid #42B861;
   box-sizing: border-box;
   min-width: 80px;
@@ -66,15 +79,15 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   pointer-events: auto;
 }
 
-.c3:hover {
+.c4:hover {
   border-bottom: 4px solid #00AB44;
 }
 
-.c3 > span {
+.c4 > span {
   font-weight: bold;
 }
 
-.c4 {
+.c5 {
   border-bottom: 4px solid rgba(255,255,255,0.0);
   box-sizing: border-box;
   min-width: 80px;
@@ -87,11 +100,11 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   pointer-events: auto;
 }
 
-.c4:hover {
+.c5:hover {
   border-bottom: 4px solid #00AB44;
 }
 
-.c4 > span {
+.c5 > span {
   font-weight: normal;
 }
 
@@ -99,28 +112,28 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   class="c0"
 >
   <nav
-    class="c1 tabs"
+    class="c1 c2 tabs tabs"
   >
     <div
-      class="c2 c3"
+      class="c3 c4"
       label="hi"
     >
       hi
     </div>
     <div
-      class="c2 c4"
+      class="c3 c5"
       label="Hi again"
     >
       Hi again
     </div>
     <div
-      class="c2 c4"
+      class="c3 c5"
       label="Bye"
     >
       Bye
     </div>
     <div
-      class="c2 c4"
+      class="c3 c5"
       label="Bye Bye"
     >
       Bye Bye
