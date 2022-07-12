@@ -338,7 +338,6 @@ StoryTable.add("Full Table functionallity", () => {
       header: "status",
       id: "status",
       enableFilter: true,
-      enableSorting: false,
       filterFn: "select",
       size: 80,
       maxSize: 80,
@@ -396,6 +395,7 @@ StoryTable.add("Full Table functionallity", () => {
 
   return (
     <NetdataTable
+      sortBy={[{ id: "nodes", desc: false }]}
       onGlobalSearchChange={onGlobalSearchChange}
       enableSorting
       paginationOptions={paginationOptions}

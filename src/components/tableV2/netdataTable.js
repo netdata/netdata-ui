@@ -83,9 +83,10 @@ const NetdataTable = ({
   },
   columnVisibility,
   testPrefix = "",
+  sortBy = [],
 }) => {
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
-  const [sorting, setSorting] = useState([])
+  const [sorting, setSorting] = useState(sortBy)
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
   const [pagination, setPagination] = useState({
