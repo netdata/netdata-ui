@@ -16,12 +16,13 @@ const StyledRow = styled.tr`
     background: ${getColor("tableRowBg")};
   }
 `
-const StyledHeader = styled.tr`
+const StyledHeaderRow = styled.tr`
   background: ${getColor("tableRowBg")};
   color: ${getColor("text")};
 `
 const StyledHeaderCell = styled(Box)`
   padding: 12px;
+  border-bottom: 1px solid ${getColor("borderSecondary")};
   &:not(:last-child) {
     border-right: 1px solid ${getColor("borderSecondary")};
   }
@@ -75,7 +76,7 @@ const Table = forwardRef(
             {bulkActions && bulkActions()}
           </Flex>
         </StyledTableControls>
-        <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
+        <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
           {children}
         </Box>
         {Pagination}
@@ -87,9 +88,8 @@ const Table = forwardRef(
 Table.Head = forwardRef(({ children, ...props }, ref) => (
   <Box
     ref={ref}
-    sx={{ whiteSpace: "nowrap" }}
+    sx={{ whiteSpace: "nowrap", position: "sticky", top: "50px", zIndex: "10" }}
     as="thead"
-    border={{ size: "1px", type: "solid", side: "bottom", color: "borderSecondary" }}
     {...props}
   >
     {children}
@@ -97,9 +97,9 @@ Table.Head = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
-  <StyledHeader ref={ref} {...props}>
+  <StyledHeaderRow ref={ref} {...props}>
     {children}
-  </StyledHeader>
+  </StyledHeaderRow>
 ))
 
 Table.HeadCell = forwardRef(({ children, align = "left", width, maxWidth, ...props }, ref) => (
@@ -259,7 +259,7 @@ export const Pagination = ({
         <Flex>
           <IconButton
             cursor="pointer"
-            onClick={handleOnNextPage}
+            onClick={pageCount}
             icon="chevron_right_end"
             iconSize="small"
             disabled={!hasNext}
