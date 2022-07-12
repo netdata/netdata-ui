@@ -5,7 +5,7 @@ import { DefaultTheme } from "../../../theme/index"
 describe("useStyleTabs", () => {
   it("should return the correct styles when tab is not active", () => {
     const { result } = renderHookWithProviders(() => useStyleTabs({ active: false }))
-    expect(result.current.rootStyles.background).toBe("elementBackground")
+    expect(result.current.rootStyles.background).toBe("topBarBg")
     expect(result.current.rootStyles.zIndex).toBe(1)
     expect(result.current.rootStyles.sx.borderTop).toBe("3px solid transparent")
   })
