@@ -178,7 +178,7 @@ const NetdataTable = ({
           enableSorting = true,
           meta,
           size = 30,
-          maxSize,
+          maxSize = 1000,
           minSize = 10,
           sortingFn,
         },
@@ -285,6 +285,7 @@ const NetdataTable = ({
               return (
                 <Table.Cell
                   width={cell.column.getSize()}
+                  minWidth={cell.column.columnDef.minSize}
                   maxWidth={cell.column.columnDef.maxSize}
                   data-testid={`netdata-table-cell${testPrefix}`}
                   key={cell.id}
@@ -319,6 +320,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
       return (
         <Table.SortingHeadCell
           width={column.getSize()}
+          minWidth={column.columnDef.minSize}
           maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}
           sortDirection={column.getIsSorted()}
@@ -339,6 +341,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
     return (
       <Table.HeadCell
         width={column.getSize()}
+        minWidth={column.columnDef.minSize}
         maxWidth={column.columnDef.maxSize}
         data-testid={`netdata-table-head-cell${testPrefix}`}
         colSpan={colSpan}

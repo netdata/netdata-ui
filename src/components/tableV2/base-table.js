@@ -102,17 +102,19 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   </StyledHeaderRow>
 ))
 
-Table.HeadCell = forwardRef(({ children, align = "left", width, maxWidth, ...props }, ref) => (
-  <StyledHeaderCell
-    width={{ max: maxWidth, base: width, min: width }}
-    ref={ref}
-    sx={{ textAlign: align, fontSize: "14px" }}
-    {...props}
-    as="th"
-  >
-    {children}
-  </StyledHeaderCell>
-))
+Table.HeadCell = forwardRef(
+  ({ children, align = "left", width, maxWidth, minWidth, ...props }, ref) => (
+    <StyledHeaderCell
+      width={{ max: maxWidth, base: width, min: minWidth }}
+      ref={ref}
+      sx={{ textAlign: align, fontSize: "14px" }}
+      {...props}
+      as="th"
+    >
+      {children}
+    </StyledHeaderCell>
+  )
+)
 
 Table.SortingHeadCell = forwardRef(
   (
@@ -122,6 +124,7 @@ Table.SortingHeadCell = forwardRef(
       setSortDirection,
       maxWidth,
       width,
+      minWidth,
       sortDirection,
       filter,
       align = "left",
@@ -142,7 +145,7 @@ Table.SortingHeadCell = forwardRef(
 
     return (
       <StyledHeaderCell
-        width={{ max: maxWidth, base: width, min: width }}
+        width={{ max: maxWidth, base: width, min: minWidth }}
         as="th"
         ref={ref}
         {...props}
@@ -164,26 +167,28 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, onClick, width, maxWidth, align = "left", ...props }, ref) => {
-  const handleClick = e => {
-    e.persist()
-    if (props.stopPropagation) e.stopPropagation()
-    onClick?.()
+Table.Cell = forwardRef(
+  ({ children, onClick, width, maxWidth, minWidth, align = "left", ...props }, ref) => {
+    const handleClick = e => {
+      e.persist()
+      if (props.stopPropagation) e.stopPropagation()
+      onClick?.()
+    }
+    return (
+      <Box
+        width={{ max: maxWidth, base: width, min: minWidth }}
+        padding={[3]}
+        sx={{ textAlign: align }}
+        as="td"
+        ref={ref}
+        {...props}
+        onClick={handleClick}
+      >
+        {children}
+      </Box>
+    )
   }
-  return (
-    <Box
-      width={{ max: maxWidth, base: width, min: width }}
-      padding={[3]}
-      sx={{ textAlign: align }}
-      as="td"
-      ref={ref}
-      {...props}
-      onClick={handleClick}
-    >
-      {children}
-    </Box>
-  )
-})
+)
 
 Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
   const handleClick = e => {
