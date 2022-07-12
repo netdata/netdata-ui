@@ -432,7 +432,6 @@ const renderActions = ({ actions, testPrefix }) => {
     enableColumnFilter: false,
     enableSorting: false,
     meta: { stopPropagation: true },
-    size: 30,
   })
 }
 
