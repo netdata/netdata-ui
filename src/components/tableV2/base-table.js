@@ -185,20 +185,25 @@ export const Pagination = ({
   onNextPage,
   onPreviousPage,
   pageSize,
-}) => (
-  <Flex>
-    <Box
-      cursor="pointer"
-      onClick={hasPrevious && onPreviousPage}
-      as={Icon}
-      name="chevron_left_small"
-    />
-    {pageIndex}
-    <Box cursor="pointer" onClick={hasNext && onNextPage} as={Icon} name="chevron_right_small" />
-    <Text>
-      Page {pageIndex} of {pageCount}
-    </Text>
-  </Flex>
-)
+}) => {
+  const handleOnPrevious = useCallback(() => {
+    if (hasPrevious) onPreviousPage()
+  }, [hasPrevious])
+
+  const handleOnNextPage = useCallback(() => {
+    if (hasNext) onNextPage()
+  }, [hasNext])
+
+  return (
+    <Flex>
+      <Box cursor="pointer" onClick={handleOnPrevious} as={Icon} name="chevron_left_small" />
+      {pageIndex}
+      <Box cursor="pointer" onClick={handleOnNextPage} as={Icon} name="chevron_right_small" />
+      <Text>
+        Page {pageIndex} of {pageCount}
+      </Text>
+    </Flex>
+  )
+}
 
 export default Table
