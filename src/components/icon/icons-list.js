@@ -40,10 +40,12 @@ import checkmark from "./assets/checkmark.svg"
 import chevron_double from "./assets/chevron_double.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import chevron_left from "./assets/chevron_left.svg"
+import chevron_left_start from "./assets/chevron_left_start.svg"
+import chevron_left_small from "./assets/chevron_left_small.svg"
 import chevron_right from "./assets/chevron_right.svg"
 import chevron_right_s from "./assets/chevron_right_s.svg"
+import chevron_right_end from "./assets/chevron_right_end.svg"
 import chevron_right_small from "./assets/chevron_right_small.svg"
-import chevron_left_small from "./assets/chevron_left_small.svg"
 import classError from "./assets/class_error.svg"
 import classLatency from "./assets/class_latency.svg"
 import classUtilization from "./assets/class_utilization.svg"
@@ -322,10 +324,12 @@ export const iconsList = {
   chevron_double,
   chevron_down,
   chevron_left,
+  chevron_left_small,
+  chevron_left_start,
   chevron_right,
+  chevron_right_end,
   chevron_right_s,
   chevron_right_small,
-  chevron_left_small,
   classError,
   classLatency,
   classUtilization,
