@@ -56,6 +56,7 @@ export const supportedRowActions = {
     confirmLabel: "Yes",
     declineLabel: "No",
     actionButtonDirection: "reverse",
+    disabledTooltipText: "Delete is disabled",
   },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
@@ -107,6 +108,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      disabledTooltipText,
     } = supportedRowActions[currentActionKey]
     const currentAction = rowActions[currentActionKey]
     acc.push({
@@ -120,6 +122,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      disabledTooltipText,
       ...currentAction,
     })
     return acc
@@ -392,6 +395,7 @@ const renderActions = ({ actions, testPrefix }) => {
               handleDecline,
               actionButtonDirection,
               isDisabled,
+              disabledTooltipText,
             }) => (
               <Action
                 disabled={
@@ -413,6 +417,7 @@ const renderActions = ({ actions, testPrefix }) => {
                 tooltipText={tooltipText}
                 testPrefix={testPrefix}
                 currentRow={row}
+                disabledTooltipText={disabledTooltipText}
               />
             )
           )}

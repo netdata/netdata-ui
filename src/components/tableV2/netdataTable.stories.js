@@ -317,7 +317,10 @@ StoryTable.add("Full Table functionallity", () => {
   }
 
   const rowActions = {
-    delete: { handleAction: handleDelete, isDisabled: row => row.disabled },
+    delete: {
+      handleAction: handleDelete,
+      isDisabled: row => row.disabled,
+    },
     info: { handleAction: handleInfo },
   }
 

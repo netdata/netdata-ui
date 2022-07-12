@@ -24,7 +24,9 @@ const Action = ({
   disabled,
   currentRow,
   selectedRows,
+  disabledTooltipText,
 }) => {
+  console.log({ disabledTooltipText })
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
 
   const onActionClicked = () => {
@@ -71,7 +73,7 @@ const Action = ({
           handleConfirm={onActionConfrimed}
         />
       )}
-      <Tooltip content={tooltipText}>
+      <Tooltip content={disabled ? disabledTooltipText : tooltipText}>
         <Flex
           alignItems="center"
           justifyContent="center"
