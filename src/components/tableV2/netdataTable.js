@@ -177,9 +177,9 @@ const NetdataTable = ({
           enableGlobalFilter = true,
           enableSorting = true,
           meta,
-          size = 150,
+          size = 30,
           maxSize,
-          minSize = 20,
+          minSize = 10,
           sortingFn,
         },
         index
@@ -429,7 +429,7 @@ const renderActions = ({ actions, testPrefix }) => {
     enableColumnFilter: false,
     enableSorting: false,
     meta: { stopPropagation: true },
-    minSize: 9,
+    size: 30,
   })
 }
 
