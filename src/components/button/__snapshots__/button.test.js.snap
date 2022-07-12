@@ -76,6 +76,10 @@ exports[`Borderless Button  * should render 1`] = `
   fill: #00AB44;
 }
 
+.c0.c0 .button-icon__color {
+  fill: #00AB44;
+}
+
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -173,6 +177,10 @@ exports[`Button states  * should render loading icon 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
+  fill: #FFFFFF;
+}
+
+.c0.c0 .button-icon__color {
   fill: #FFFFFF;
 }
 
@@ -308,6 +316,10 @@ exports[`Button states  * should render only icon 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
+  fill: #00AB44;
+}
+
+.c0.c0 .button-icon__color {
   fill: #00AB44;
 }
 
@@ -449,6 +461,10 @@ exports[`Button states  * should render smaller only icon 1`] = `
   fill: #00AB44;
 }
 
+.c0.c0 .button-icon__color {
+  fill: #00AB44;
+}
+
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -587,6 +603,10 @@ exports[`Default Button  * should render 1`] = `
   fill: #FFFFFF;
 }
 
+.c0.c0 .button-icon__color {
+  fill: #FFFFFF;
+}
+
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -684,6 +704,10 @@ exports[`Hollow Button  * should render 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
+  fill: #00AB44;
+}
+
+.c0.c0 .button-icon__color {
   fill: #00AB44;
 }
 

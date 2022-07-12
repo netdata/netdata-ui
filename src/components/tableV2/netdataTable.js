@@ -23,7 +23,9 @@ import Action from "./action"
 
 import ComparisonFilter from "./comparisonFilter"
 
-import { comparison } from "./filterFns"
+import { comparison, select } from "./filterFns"
+
+import SelectFilter from "./selectFilter"
 
 const ROW_SELECTION_SIZE = 9
 
@@ -60,7 +62,7 @@ export const supportedRowActions = {
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
 }
 
-const table = createTable().setOptions({ filterFns: { comparison } })
+const table = createTable().setOptions({ filterFns: { comparison, select } })
 
 const NetdataTable = ({
   dataColumns,
@@ -297,8 +299,13 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
     const { getCanSort, columnDef } = column
     const { meta } = columnDef
 
-    const availableFilters = { comparison: ComparisonFilter, default: SearchFilter }
-    const selectedFilter = meta && meta.filter ? meta.filter : "default"
+    const availableFilters = {
+      comparison: ComparisonFilter,
+      select: SelectFilter,
+      default: SearchFilter,
+    }
+    const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
+    const filterOptions = meta && meta?.filter ? meta?.filter : {}
     const Filter = availableFilters[selectedFilter]
 
     if (getCanSort() && enableSorting) {
@@ -311,7 +318,11 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
           onSortClicked={column.getToggleSortingHandler()}
           colSpan={colSpan}
           key={id}
-          filter={column.getCanFilter() && <Filter column={column} testPrefix={testPrefix} />}
+          filter={
+            column.getCanFilter() && (
+              <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+            )
+          }
         >
           {isPlaceholder ? null : renderHeader()}
         </Table.SortingHeadCell>
@@ -329,7 +340,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
         {isPlaceholder ? null : renderHeader()}
         {column.getCanFilter() ? (
           <div>
-            <Filter column={column} testPrefix={testPrefix} />
+            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
           </div>
         ) : null}
       </Table.HeadCell>
