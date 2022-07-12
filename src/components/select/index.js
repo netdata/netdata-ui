@@ -36,10 +36,12 @@ const makeCustomStyles = (theme, providedStyles) => ({
   option: (styles, state) => ({
     ...styles,
     color: getOptionColor(theme, state),
+    fontWeight: "normal",
   }),
   control: styles => ({
     ...styles,
     minWidth: 160,
+    fontWeight: "normal",
   }),
   menu: styles => ({
     ...styles,
