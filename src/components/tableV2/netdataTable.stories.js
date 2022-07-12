@@ -316,7 +316,10 @@ StoryTable.add("Full Table functionallity", () => {
     },
   }
 
-  const rowActions = { delete: { handleAction: handleDelete }, info: { handleAction: handleInfo } }
+  const rowActions = {
+    delete: { handleAction: handleDelete, isDisabled: row => row.disabled },
+    info: { handleAction: handleInfo },
+  }
 
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", enableFilter: true },

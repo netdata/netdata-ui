@@ -376,7 +376,6 @@ const renderActions = ({ actions, testPrefix }) => {
       return "Actions"
     },
     cell: ({ row, instance }) => {
-      const isDisabled = row.original?.disabled ?? false
       return (
         <Flex data-testid="action-cell" height="100%" gap={2}>
           {actions.map(
@@ -392,9 +391,14 @@ const renderActions = ({ actions, testPrefix }) => {
               declineLabel,
               handleDecline,
               actionButtonDirection,
+              isDisabled,
             }) => (
               <Action
-                disabled={isDisabled}
+                disabled={
+                  isDisabled && typeof isDisabled === "function"
+                    ? isDisabled(row.original)
+                    : isDisabled
+                }
                 actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}
                 declineLabel={declineLabel}
