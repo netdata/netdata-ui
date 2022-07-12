@@ -21,6 +21,7 @@ export const comparison = (row, columnId, value) => {
 export const select = (row, columnId, value) => {
   const isMulti = Array.isArray(value)
   if (isMulti) return multiSelect(row, columnId, value)
+  return singleSelect(row, columnId, value)
 }
 
 const multiSelect = (row, columnId, value) => {
@@ -33,4 +34,10 @@ const multiSelect = (row, columnId, value) => {
   })
 }
 
-const singleSelect = () => {}
+const singleSelect = (row, columnId, value) => {
+  const rowValue = row.getValue(columnId)
+  const { value: filterValue } = value
+  if (filterValue === "all") return true
+
+  return filterValue === rowValue
+}

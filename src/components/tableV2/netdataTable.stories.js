@@ -356,33 +356,55 @@ StoryTable.add("Full Table functionallity", () => {
         },
       },
     },
+    {
+      header: "Untouchable",
+      id: "untouchable",
+      enableFilter: true,
+      enableSorting: false,
+      filterFn: "select",
+      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      meta: {
+        filter: {
+          component: "select",
+          options: [
+            { value: "true", label: "Yes" },
+            { value: "false", label: "No" },
+          ],
+        },
+      },
+    },
   ]
 
   const mockData = () => [
-    { nodes: "node8", alerts: 15, user: "mitsos", disabled: true, status: "stale" },
-    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline" },
-    { nodes: "node10", alerts: 22, user: "reena", status: "online" },
-    { nodes: "node1", alerts: 15, user: "nic", status: "online" },
-    { nodes: "node2", alerts: 11, user: "alex", status: "offline" },
-    { nodes: "node34", alerts: 22, user: "manolis", status: "offline" },
-    { nodes: "node5", alerts: 15, user: "achile", status: "stale" },
-    { nodes: "node6", alerts: 11, user: "barba", status: "stale" },
-    { nodes: "node7", alerts: 22, user: "decker", status: "online" },
+    {
+      nodes: "node8",
+      alerts: 15,
+      user: "mitsos",
+      disabled: true,
+      status: "stale",
+      untouchable: "true",
+    },
+    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node10", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node34", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node5", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node6", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node7", alerts: 22, user: "decker", status: "online", untouchable: "false" },
   ]
 
   return (
-    <Box width="1200px">
-      <NetdataTable
-        onGlobalSearchChange={onGlobalSearchChange}
-        enableSorting
-        paginationOptions={paginationOptions}
-        enablePagination
-        rowActions={rowActions}
-        bulkActions={bulkActions}
-        enableSelection
-        dataColumns={mockDataColumns}
-        data={mockData()}
-      />
-    </Box>
+    <NetdataTable
+      onGlobalSearchChange={onGlobalSearchChange}
+      enableSorting
+      paginationOptions={paginationOptions}
+      enablePagination
+      rowActions={rowActions}
+      bulkActions={bulkActions}
+      enableSelection
+      dataColumns={mockDataColumns}
+      data={mockData()}
+    />
   )
 })
