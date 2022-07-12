@@ -87,7 +87,7 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
 
 Table.HeadCell = forwardRef(({ children, align = "left", width, maxWidth, ...props }, ref) => (
   <StyledHeaderCell
-    width={{ max: maxWidth, min: width }}
+    width={{ max: maxWidth, base: width, min: width }}
     ref={ref}
     sx={{ textAlign: align, fontSize: "14px" }}
     {...props}
@@ -125,7 +125,7 @@ Table.SortingHeadCell = forwardRef(
 
     return (
       <StyledHeaderCell
-        width={{ max: maxWidth, min: width }}
+        width={{ max: maxWidth, base: width, min: width }}
         as="th"
         ref={ref}
         {...props}
@@ -155,7 +155,7 @@ Table.Cell = forwardRef(({ children, onClick, width, maxWidth, align = "left", .
   }
   return (
     <Box
-      width={{ max: maxWidth, min: width }}
+      width={{ max: maxWidth, base: width, min: width }}
       padding={[3]}
       sx={{ textAlign: align }}
       as="td"
