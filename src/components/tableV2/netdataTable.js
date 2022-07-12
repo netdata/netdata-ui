@@ -27,7 +27,7 @@ import { comparison, select } from "./filterFns"
 
 import SelectFilter from "./selectFilter"
 
-const ROW_SELECTION_MAX_SIZE = 12
+const ROW_SELECTION_MAX_SIZE = 10
 const ROW_SELECTION_MIN_SIZE = 5
 const ROW_SELECTION_SIZE = 5
 
@@ -177,8 +177,8 @@ const NetdataTable = ({
           enableGlobalFilter = true,
           enableSorting = true,
           meta,
-          size = 20,
-          maxSize = 300,
+          size = 150,
+          maxSize,
           minSize = 20,
           sortingFn,
         },
@@ -197,7 +197,7 @@ const NetdataTable = ({
           isPlaceholder,
           meta,
           size,
-          maxSize,
+          ...(maxSize ? { maxSize } : {}),
           minSize,
           ...(sortingFn ? { sortingFn } : {}),
         })
@@ -430,7 +430,6 @@ const renderActions = ({ actions, testPrefix }) => {
     enableSorting: false,
     meta: { stopPropagation: true },
     minSize: 9,
-    maxSize: 40,
   })
 }
 
