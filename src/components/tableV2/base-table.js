@@ -148,7 +148,9 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.Cell = forwardRef(({ children, onClick, width, maxWidth, align = "left", ...props }, ref) => {
-  const handleClick = () => {
+  const handleClick = e => {
+    e.persist()
+    if (props.stopPropagation) e.stopPropagation()
     onClick?.()
   }
   return (
@@ -167,7 +169,9 @@ Table.Cell = forwardRef(({ children, onClick, width, maxWidth, align = "left", .
 })
 
 Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
-  const handleClick = () => {
+  const handleClick = e => {
+    e.persist()
+    e.stopPropagation()
     onClick?.()
   }
   return (

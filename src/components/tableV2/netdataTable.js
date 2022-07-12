@@ -27,7 +27,7 @@ import { comparison, select } from "./filterFns"
 
 import SelectFilter from "./selectFilter"
 
-const ROW_SELECTION_SIZE = 9
+const ROW_SELECTION_SIZE = 10
 
 export const supportedBulkActions = {
   delete: {
@@ -273,7 +273,7 @@ const NetdataTable = ({
         {instance.getRowModel().rows.map(row => (
           <Table.Row
             data-testid={`netdata-table-row${testPrefix}`}
-            onClick={() => onClickRow?.(row.original, row)}
+            onClick={() => onClickRow?.({ data: row.original, table: instance, fullRow: row })}
             key={row.id}
           >
             {row.getVisibleCells().map(cell => {
@@ -283,6 +283,7 @@ const NetdataTable = ({
                   maxWidth={cell.column.columnDef.maxSize}
                   data-testid={`netdata-table-cell${testPrefix}`}
                   key={cell.id}
+                  {...cell.column.columnDef.meta}
                 >
                   {cell.renderCell()}
                 </Table.Cell>
@@ -416,6 +417,9 @@ const renderActions = ({ actions, testPrefix }) => {
     },
     enableColumnFilter: false,
     enableSorting: false,
+    meta: { stopPropagation: true },
+    minSize: 9,
+    maxSize: 40,
   })
 }
 
@@ -467,6 +471,7 @@ const renderRowSelection = ({ testPrefix }) => {
     size: ROW_SELECTION_SIZE,
     maxSize: ROW_SELECTION_SIZE,
     minSize: ROW_SELECTION_SIZE,
+    meta: { stopPropagation: true },
   })
 }
 
