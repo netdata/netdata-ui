@@ -363,12 +363,22 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
 }
 
 const renderPagination = ({ instance }) => {
-  const { nextPage, previousPage, getCanPreviousPage, getCanNextPage, getPageCount } = instance
+  const {
+    nextPage,
+    previousPage,
+    getCanPreviousPage,
+    getCanNextPage,
+    getPageCount,
+    setPageIndex,
+    resetPageIndex,
+  } = instance
   const pageSize = instance.getState().pagination.pageSize
   const pageIndex = instance.getState().pagination.pageIndex
 
   return (
     <Pagination
+      setPageIndex={setPageIndex}
+      resetPageIndex={resetPageIndex}
       pageCount={getPageCount()}
       hasNext={getCanNextPage()}
       hasPrevious={getCanPreviousPage()}

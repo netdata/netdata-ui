@@ -210,6 +210,8 @@ export const Pagination = ({
   hasPrevious,
   onNextPage,
   onPreviousPage,
+  setPageIndex,
+  resetPageIndex,
   pageSize,
 }) => {
   const handleOnPrevious = useCallback(() => {
@@ -220,13 +222,21 @@ export const Pagination = ({
     if (hasNext) onNextPage()
   }, [hasNext])
 
+  const handleGoToLastPage = useCallback(() => {
+    setPageIndex(pageCount - 1)
+  }, [pageCount, setPageIndex])
+
+  const handleGoToFirstPage = useCallback(() => {
+    resetPageIndex()
+  }, [resetPageIndex])
+
   return (
     <StyledPagination alignItems="center" justifyContent="end">
       <Tooltip content="First">
         <Flex>
           <IconButton
             cursor="pointer"
-            onClick={handleOnPrevious}
+            onClick={handleGoToFirstPage}
             icon="chevron_left_start"
             iconSize="small"
             tooltip="test"
@@ -264,7 +274,7 @@ export const Pagination = ({
         <Flex>
           <IconButton
             cursor="pointer"
-            onClick={pageCount}
+            onClick={handleGoToLastPage}
             icon="chevron_right_end"
             iconSize="small"
             disabled={!hasNext}
