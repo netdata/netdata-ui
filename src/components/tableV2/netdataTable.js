@@ -46,6 +46,7 @@ export const supportedBulkActions = {
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
   addEntry: { icon: "plus", alwaysEnabled: true },
+  remove: { icon: "removeNode", confirmation: true },
 }
 
 export const supportedRowActions = {
@@ -63,6 +64,7 @@ export const supportedRowActions = {
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
+  remove: { icon: "removeNode", confirmation: true },
 }
 
 const table = createTable().setOptions({ filterFns: { comparison, select } })
