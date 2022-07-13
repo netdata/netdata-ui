@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState, useRef } from "react"
 import { Portal } from "react-portal"
-import { useMount } from "react-use"
+import useMount from "react-use/lib/useMount"
 import { PortalSidebox, DisabledOverlay } from "./styled"
 
 const ESCAPE_KEY = 27

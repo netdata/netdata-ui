@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react"
-import { useDebounce } from "react-use"
+import useDebounce from "react-use/lib/useDebounce"
 import { ExtendedFilterBox } from "./extended-filter-box"
 import "@netdata/react-filter-box/lib/react-filter-box.css"
 import {

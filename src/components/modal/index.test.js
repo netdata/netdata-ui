@@ -24,7 +24,7 @@ describe("Modal", () => {
     expect(screen.getByText("Footer")).toBeInTheDocument()
   })
 
-  it("Should click the close button", () => {
+  it("Should click the close button", async () => {
     const onClose = jest.fn()
     renderWithProviders(
       <Modal>
@@ -39,7 +39,7 @@ describe("Modal", () => {
       </Modal>
     )
 
-    userEvent.click(screen.getByTestId("close-button"))
+    await userEvent.click(screen.getByTestId("close-button"))
 
     expect(onClose).toHaveBeenCalled()
   })

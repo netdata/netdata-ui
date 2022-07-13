@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useCallback } from "react"
 import styled from "styled-components"
-import { useToggle } from "react-use"
+import useToggle from "react-use/lib/useToggle"
 import { H5 } from "src/components/typography"
 import { Icon } from "src/components/icon"
 import { Button } from "src/components/button"

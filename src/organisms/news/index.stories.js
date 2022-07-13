@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useLocalStorage } from "react-use"
+import useLocalStorage from "react-use/lib/useLocalStorage"
 import { storiesOf } from "@storybook/react"
 import { readmeCleanup } from "utils/readme"
 import Pill from "src/components/pill"

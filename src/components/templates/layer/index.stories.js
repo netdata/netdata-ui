@@ -1,5 +1,5 @@
 import React from "react"
-import { useToggle } from "react-use"
+import useToggle from "react-use/lib/useMeasure"
 import { storiesOf } from "@storybook/react"
 import { readmeCleanup } from "utils/readme"
 import { H2, H3, Text } from "src/components/typography"

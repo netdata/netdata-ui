@@ -62,7 +62,7 @@ it("renders typography default mixins", () => {
     expect(container.firstChild).not.toHaveStyleRule("text-align")
     expect(container.firstChild).not.toHaveStyleRule("truncate")
     expect(container.firstChild).not.toHaveStyleRule("word-break")
-    expect(container.firstChild).not.toHaveStyleRule("text-transform")
+    expect(container.firstChild).toHaveStyleRule("text-transform: none")
 
     unmount()
   })

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react"
-import { useDebounce } from "react-use"
+import useDebounce from "react-use/lib/useDebounce"
 import { TextInput } from "src/components/input"
 import { Icon } from "src/components/icon"
 

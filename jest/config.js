@@ -1,4 +1,4 @@
-const { pathsToModuleNameMapper } = require("ts-jest/utils")
+const { pathsToModuleNameMapper } = require("ts-jest")
 
 const paths = {
   "@/*": ["./*"],
@@ -13,7 +13,10 @@ module.exports = {
     ...pathsToModuleNameMapper(paths, { prefix: "<rootDir>/" }),
     "\\.svg": "<rootDir>/src/__mocks__/filemock.tsx",
   },
-  testURL: "https://www.netdata.cloud",
+  testEnvironment: "jsdom",
+  testEnvironmentOptions: {
+    url: "https://www.netdata.cloud"
+  },
   testRegex: ".*\\.test\\.(tsx?|js)$",
   setupFiles: ["<rootDir>/jest/setup.js"],
   setupFilesAfterEnv: ["<rootDir>/jest/setupForEach.js"],
