@@ -1,16 +1,10 @@
-import {
-  ColumnDef,
-  PaginationState,
-  FilterFnOption,
-  VisibilityTableState,
-} from "@tanstack/table-core"
-import { supportedRowActions, supportedBulkActions } from "./netdataTable"
-import React from "react"
+import { ColumnDef, FilterFnOption, PaginationState, VisibilityTableState } from "@tanstack/table-core"
+import { supportedBulkActions, supportedRowActions } from "./netdataTable"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
 
-export type NetdataTableProps<T = any> = {
-  data: Array<any>
+export type NetdataTableProps<T = any, D = any> = {
+  data: Array<D>
   dataColumns: Array<NetdataCoreColumns<T>>
   enableSorting?: boolean
   paginationOptions?: PaginationState
@@ -38,6 +32,8 @@ export type NetdataTableProps<T = any> = {
       confirmLabel: string
       declineLabel: string
       actionButtonDirection: "default" | "reverse"
+      isDisabled?: boolean | ((rowData: D) => boolean )
+      isVisible?: boolean | ((rowData: D) => boolean )
     }
   }
   testPrefix?: string

@@ -1,15 +1,15 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
-import React, { useMemo, useState, useEffect } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 
 import Table, { Pagination } from "./base-table"
 
 import {
   createTable,
-  useTableInstance,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  useTableInstance,
 } from "./react-table.js"
 
 import { Icon } from "src/components/icon"
@@ -412,6 +412,7 @@ const renderActions = ({ actions, testPrefix }) => {
               handleDecline,
               actionButtonDirection,
               isDisabled,
+              isVisible = true,
               disabledTooltipText,
             }) => (
               <Action
@@ -419,6 +420,10 @@ const renderActions = ({ actions, testPrefix }) => {
                   isDisabled && typeof isDisabled === "function"
                     ? isDisabled(row.original)
                     : isDisabled
+                }
+                visible={isVisible && typeof isVisible === "function"
+                  ? isVisible(row.original)
+                  : isVisible
                 }
                 actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}

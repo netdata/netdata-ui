@@ -22,11 +22,13 @@ const Action = ({
   actionButtonDirection,
   testPrefix,
   disabled,
+  visible,
   currentRow,
   selectedRows,
   disabledTooltipText,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
+  if (!visible) return null
 
   const onActionClicked = () => {
     if (confirmation) {
