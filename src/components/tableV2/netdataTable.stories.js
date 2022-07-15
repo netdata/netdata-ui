@@ -65,7 +65,7 @@ StoryTable.add("Simple Netdata Table", () => {
   ]
   return (
     <Box width="800px">
-      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} onClickRow={() => {}} />
     </Box>
   )
 })

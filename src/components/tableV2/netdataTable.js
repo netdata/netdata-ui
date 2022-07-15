@@ -280,7 +280,10 @@ const NetdataTable = ({
         {instance.getRowModel().rows.map(row => (
           <Table.Row
             data-testid={`netdata-table-row${testPrefix}`}
-            onClick={() => onClickRow?.({ data: row.original, table: instance, fullRow: row })}
+            onClick={
+              onClickRow &&
+              (() => onClickRow({ data: row.original, table: instance, fullRow: row }))
+            }
             key={row.id}
           >
             {row.getVisibleCells().map(cell => {
@@ -421,9 +424,8 @@ const renderActions = ({ actions, testPrefix }) => {
                     ? isDisabled(row.original)
                     : isDisabled
                 }
-                visible={isVisible && typeof isVisible === "function"
-                  ? isVisible(row.original)
-                  : isVisible
+                visible={
+                  isVisible && typeof isVisible === "function" ? isVisible(row.original) : isVisible
                 }
                 actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}
