@@ -28,7 +28,7 @@ const Action = ({
   disabledTooltipText,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
-  if (!visible) return null
+  if (visible === false) return null
 
   const onActionClicked = () => {
     if (confirmation) {
