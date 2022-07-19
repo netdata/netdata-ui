@@ -36,8 +36,7 @@ const StyledSortIcon = styled(Icon)`
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 14px;
-  height: 12px;
+  height: 20px;
   margin: auto;
 `
 const StyledPagination = styled(Flex)`
@@ -139,7 +138,11 @@ Table.SortingHeadCell = forwardRef(
   ) => {
     const [isHovering, , onMouseOver, onMouseOut] = useToggle(false)
 
-    const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
+    const sortingIcons = {
+      asc: "sort_ascending",
+      desc: "sort_descending",
+      indicator: "sort_indicator",
+    }
     const showHoveringIcon = isHovering && !sortDirection
 
     const onClick = useCallback(
@@ -163,10 +166,8 @@ Table.SortingHeadCell = forwardRef(
       >
         <Box onClick={onClick} position="relative" cursor="pointer">
           {children}
-          <StyledSortIcon name={sortingIcons[sortDirection] ?? null} />
-          {showHoveringIcon && (
-            <StyledSortIcon color="attentionSecondary" name={sortingIcons["asc"]} />
-          )}
+          <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
+          {showHoveringIcon && <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />}
         </Box>
         {filter}
       </StyledHeaderCell>
