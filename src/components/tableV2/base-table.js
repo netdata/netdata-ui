@@ -8,6 +8,7 @@ import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
 import { IconButton } from "src/components/button"
 import Tooltip from "src/components/drops/tooltip"
+import useToggle from "src/hooks/use-toggle"
 
 const StyledRow = styled.tr`
   font-size: 14px;
@@ -136,6 +137,11 @@ Table.SortingHeadCell = forwardRef(
     },
     ref
   ) => {
+    const [isHovering, , onMouseOver, onMouseOut] = useToggle(false)
+
+    const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
+    const showHoveringIcon = isHovering && !sortDirection
+
     const onClick = useCallback(
       e => {
         e.preventDefault()
@@ -145,8 +151,6 @@ Table.SortingHeadCell = forwardRef(
       [sortDirection, setSortDirection, onSortClicked]
     )
 
-    const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
-
     return (
       <StyledHeaderCell
         width={{ max: maxWidth, base: width, min: minWidth }}
@@ -154,10 +158,15 @@ Table.SortingHeadCell = forwardRef(
         ref={ref}
         {...props}
         sx={{ textAlign: align, fontSize: "14px" }}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
       >
         <Box onClick={onClick} position="relative" cursor="pointer">
           {children}
           <StyledSortIcon name={sortingIcons[sortDirection] ?? null} />
+          {showHoveringIcon && (
+            <StyledSortIcon color="attentionSecondary" name={sortingIcons["asc"]} />
+          )}
         </Box>
         {filter}
       </StyledHeaderCell>
