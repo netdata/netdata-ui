@@ -136,7 +136,7 @@ Table.SortingHeadCell = forwardRef(
     },
     ref
   ) => {
-    const [isHovering, , onMouseOver, onMouseOut] = useToggle(false)
+    const [isHovering, , onMouseEnter, onMouseLeave] = useToggle(false)
 
     const sortingIcons = {
       asc: "sort_ascending",
@@ -161,10 +161,14 @@ Table.SortingHeadCell = forwardRef(
         ref={ref}
         {...props}
         sx={{ textAlign: align, fontSize: "14px" }}
-        onMouseOver={onMouseOver}
-        onMouseOut={onMouseOut}
       >
-        <Box onClick={onClick} position="relative" cursor="pointer">
+        <Box
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+          position="relative"
+          cursor="pointer"
+        >
           {children}
           <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
           {showHoveringIcon && <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />}
