@@ -275,7 +275,7 @@ export const Pagination = ({
         </Flex>
       </Tooltip>
       <Text>
-        Page {pageIndex} of {pageCount}
+        Page {pageCount === 0 ? 0 : pageIndex} of {pageCount}
       </Text>
       <Tooltip content="Next">
         <Flex>
