@@ -108,4 +108,7 @@ export {
   ModalCloseButton,
 } from "./components/modal"
 export { default as Modal } from "./components/modal"
+
+export { ConfirmationDialog } from "./components/confirmation-dialog"
+
 export { NetdataTable } from "./components/tableV2"
