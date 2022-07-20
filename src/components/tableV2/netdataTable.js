@@ -46,7 +46,7 @@ export const supportedBulkActions = {
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
   addEntry: { icon: "plus", alwaysEnabled: true },
-  remove: { icon: "removeNode", confirmation: true },
+  remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
 }
 
 export const supportedRowActions = {
