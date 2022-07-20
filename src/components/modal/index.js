@@ -4,38 +4,26 @@ import Box from "../templates/box"
 import Flex from "../templates/flex"
 import { Icon } from "../icon"
 
-export const ModalContent = ({
-  children,
-  height,
-  width,
-  testId,
-  background = "mainBackground",
-}) => {
-  return (
-    <Flex data-testid={testId} height={height} width={width} background={background} round column>
-      {children}
-    </Flex>
-  )
-}
+export const ModalContent = ({ background = "mainBackground", children, testId, ...rest }) => (
+  <Flex background={background} column data-testid={testId} round {...rest}>
+    {children}
+  </Flex>
+)
 
-export const ModalHeader = ({ children, testId }) => {
-  return (
-    <Flex data-testid={testId} padding={[6]}>
-      {children}
-    </Flex>
-  )
-}
+export const ModalHeader = ({ children, testId, ...rest }) => (
+  <Flex data-testid={testId} padding={[6]} {...rest}>
+    {children}
+  </Flex>
+)
 
-export const ModalBody = ({ children, testId }) => {
-  return (
-    <Flex data-testid={testId} padding={[0, 6]} column>
-      {children}
-    </Flex>
-  )
-}
+export const ModalBody = ({ children, testId, ...rest }) => (
+  <Flex data-testid={testId} padding={[0, 6]} column {...rest}>
+    {children}
+  </Flex>
+)
 
-export const ModalFooter = ({ children, testId, hasBorder = true }) => (
-  <Flex column padding={[0, 6]} flex={1}>
+export const ModalFooter = ({ children, hasBorder = true, parentPadding, testId, ...rest }) => (
+  <Flex column padding={parentPadding || [0, 6]} flex={1}>
     <Flex
       data-testid={testId}
       flex={1}
@@ -45,13 +33,14 @@ export const ModalFooter = ({ children, testId, hasBorder = true }) => (
       border={
         hasBorder ? { size: "1px", type: "solid", side: "top", color: "borderSecondary" } : {}
       }
+      {...rest}
     >
       {children}
     </Flex>
   </Flex>
 )
 
-export const ModalCloseButton = ({ onClose, testId }) => (
+export const ModalCloseButton = ({ onClose, testId, ...rest }) => (
   <Box
     data-testid={testId}
     sx={{ marginLeft: "auto" }}
@@ -60,11 +49,10 @@ export const ModalCloseButton = ({ onClose, testId }) => (
     color="border"
     onClick={onClose}
     cursor="pointer"
+    {...rest}
   />
 )
 
-const Modal = ({ children, ...layerprops }) => {
-  return <Layer {...layerprops}>{children}</Layer>
-}
+const Modal = ({ children, ...rest }) => <Layer {...rest}>{children}</Layer>
 
 export default Modal
