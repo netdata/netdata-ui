@@ -4,6 +4,9 @@ import { Button } from "src/components/button"
 import { Text } from "src/components/typography"
 import { Actions, Body, CloseButton, Content, Dialog, Header, Title, TitleIcon } from "./styled"
 
+const BodyMessage = ({ children, ...rest }) =>
+  typeof children === "object" ? children : <Text {...rest}>{children}</Text>
+
 const ConfirmationDialog = ({
   confirmLabel = "Yes, remove",
   confirmWidth = "128px",
@@ -19,11 +22,6 @@ const ConfirmationDialog = ({
   message,
   title,
 }) => {
-  const BodyMessage =
-    typeof message === "object"
-      ? () => message
-      : () => <Text data-testid={`${dataTestId}-bodyMessage`}>{message}</Text>
-
   return (
     <Dialog onEsc={handleDecline}>
       <Content data-testid={dataTestId}>
@@ -35,7 +33,7 @@ const ConfirmationDialog = ({
           <CloseButton data-testid={`${dataTestId}-headerClose`} onClose={handleDecline} />
         </Header>
         <Body data-testid={`${dataTestId}-body`}>
-          <BodyMessage />
+          <BodyMessage data-testid={`${dataTestId}-bodyMessage`}>{message}</BodyMessage>
         </Body>
         <Actions data-testid={`${dataTestId}-actions`}>
           <Button

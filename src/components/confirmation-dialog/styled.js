@@ -7,7 +7,7 @@ import Modal, {
   ModalFooter,
   ModalHeader,
 } from "src/components/modal"
-import { H3 } from "src/components/typography"
+import { H3, Text } from "src/components/typography"
 import { getColor } from "src/theme"
 
 export const Actions = styled(ModalFooter).attrs({
@@ -27,9 +27,9 @@ export const CloseButton = styled(ModalCloseButton).attrs({
   }
 `
 
-export const Content = styled(ModalContent).attrs({
+export const Content = styled(Text).attrs({
+  as: ModalContent,
   background: "dropdown",
-  color: "text",
   gap: 6,
   height: { max: "calc(100vh - 32px)", min: 45 },
   padding: [6],
@@ -41,8 +41,6 @@ export const Body = styled(ModalBody).attrs({
   padding: [0],
 })`
   display: block;
-  font-size: 14px;
-  line-height: 20px;
 `
 
 export const Dialog = styled(Modal).attrs({

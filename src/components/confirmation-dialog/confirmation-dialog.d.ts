@@ -16,7 +16,6 @@ export interface ConfirmationDialogProps {
   isConfirmPositive?: boolean
   message: JSX.Element | string
   title: string
-  [s: string]: any
 }
 
 declare const ConfirmationDialog: FC<ConfirmationDialogProps>
