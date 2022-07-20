@@ -12,6 +12,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+  color: #35414A;
 }
 
 .c1 {
@@ -37,6 +38,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -ms-flex-pack: start;
   justify-content: flex-start;
   padding: 0 2px;
+  color: #35414A;
 }
 
 .c3 {
@@ -58,6 +60,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  color: #35414A;
 }
 
 .c2 {

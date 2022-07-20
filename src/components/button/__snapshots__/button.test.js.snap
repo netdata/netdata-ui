@@ -363,6 +363,7 @@ exports[`Button states  * should render only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
+  color: #35414A;
 }
 
 <button
@@ -505,6 +506,7 @@ exports[`Button states  * should render smaller only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
+  color: #35414A;
 }
 
 <button

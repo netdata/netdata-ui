@@ -34,7 +34,7 @@ const mockDataColumns = [
     header: "user",
     id: "user",
     enableFilter: true,
-    cell: ({ getValue }) => "Text",
+    cell: () => "Text",
   },
 ]
 
@@ -52,7 +52,7 @@ const makeTestId = elementName => `${testName}${elementName}${testPrefix}`
 const rowTestid = makeTestId("row")
 const headTestid = makeTestId("head")
 const cellTestid = makeTestId("cell")
-const headeRowTestid = makeTestId("headRow")
+const headRowTestid = makeTestId("headRow")
 const headCellTestid = makeTestId("head-cell")
 const nodesColumnFilter = makeTestId("filter-nodes")
 const deleteActionTestid = makeTestId("action-delete")
@@ -80,7 +80,7 @@ describe("Netdata table", () => {
     renderNetdataTable()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(3)
     expect(screen.getByTestId(headTestid)).toBeInTheDocument()
-    expect(screen.getByTestId(headeRowTestid)).toBeInTheDocument()
+    expect(screen.getByTestId(headRowTestid)).toBeInTheDocument()
     expect(screen.queryAllByTestId(headCellTestid)).toHaveLength(5)
     expect(screen.queryAllByTestId(cellTestid)).toHaveLength(15)
   })
@@ -104,7 +104,7 @@ describe("Netdata table", () => {
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+    await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
 
     expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
@@ -117,7 +117,7 @@ describe("Netdata table", () => {
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmation-dialog-decline"))
+    await userEvent.click(screen.getByTestId("confirmationDialog-cancelAction"))
 
     expect(handleDelete).not.toHaveBeenCalled()
   })
@@ -142,7 +142,7 @@ describe("Netdata table", () => {
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+    await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
 
     expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
