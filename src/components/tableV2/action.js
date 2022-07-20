@@ -21,6 +21,7 @@ const Action = ({
   declineLabel,
   actionButtonDirection,
   testPrefix,
+  dataGa,
   disabled,
   visible,
   currentRow,
@@ -87,6 +88,7 @@ const Action = ({
           <IconButton
             iconSize="small"
             data-testid={`netdata-table-action-${id}${testPrefix}`}
+            data-ga={dataGa}
             disabled={disabled}
             onClick={onActionClicked}
             icon={icon}

@@ -423,6 +423,7 @@ const renderActions = ({ actions, testPrefix }) => {
               isDisabled,
               isVisible = true,
               disabledTooltipText,
+              dataGa,
             }) => (
               <Action
                 disabled={
@@ -433,6 +434,7 @@ const renderActions = ({ actions, testPrefix }) => {
                 visible={
                   isVisible && typeof isVisible === "function" ? isVisible(row.original) : isVisible
                 }
+                dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
                 actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}
                 declineLabel={declineLabel}
