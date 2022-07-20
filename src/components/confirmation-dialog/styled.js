@@ -28,6 +28,7 @@ export const CloseButton = styled(ModalCloseButton).attrs({
 `
 
 export const Content = styled(ModalContent).attrs({
+  background: "dropdown",
   color: "text",
   gap: 6,
   height: { max: "calc(100vh - 32px)", min: 45 },
@@ -36,15 +37,16 @@ export const Content = styled(ModalContent).attrs({
 })``
 
 export const Body = styled(ModalBody).attrs({
+  column: false,
   padding: [0],
 })`
+  display: block;
   font-size: 14px;
   line-height: 20px;
 `
 
 export const Dialog = styled(Modal).attrs({
   backdropProps: { backdropBlur: 8 },
-  modalBackground: "modalBackground",
 })`
   box-shadow: 0 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%),
     0px 9px 46px 8px rgb(0 0 0 / 12%);
