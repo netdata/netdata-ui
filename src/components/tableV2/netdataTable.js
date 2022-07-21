@@ -302,7 +302,7 @@ const NetdataTable = ({
                   width={cell.column.getSize()}
                   minWidth={cell.column.columnDef.minSize}
                   maxWidth={cell.column.columnDef.maxSize}
-                  data-testid={`netdata-table-cell${testPrefix}`}
+                  data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
                   key={cell.id}
                   {...cell.column.columnDef.meta}
                 >

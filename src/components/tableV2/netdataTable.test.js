@@ -51,7 +51,11 @@ const makeTestId = elementName => `${testName}${elementName}${testPrefix}`
 
 const rowTestid = makeTestId("row")
 const headTestid = makeTestId("head")
-const cellTestid = makeTestId("cell")
+const nodeCellTestid = makeTestId("cell-nodes")
+const checkboxCellTestid = makeTestId("cell-checkbox")
+const alertsCellTestid = makeTestId("cell-alerts")
+const userCellTestid = makeTestId("cell-user")
+
 const headRowTestid = makeTestId("headRow")
 const headCellTestid = makeTestId("head-cell")
 const nodesColumnFilter = makeTestId("filter-nodes")
@@ -82,7 +86,11 @@ describe("Netdata table", () => {
     expect(screen.getByTestId(headTestid)).toBeInTheDocument()
     expect(screen.getByTestId(headRowTestid)).toBeInTheDocument()
     expect(screen.queryAllByTestId(headCellTestid)).toHaveLength(5)
-    expect(screen.queryAllByTestId(cellTestid)).toHaveLength(15)
+
+    expect(screen.queryAllByTestId(nodeCellTestid)).toHaveLength(3)
+    expect(screen.queryAllByTestId(checkboxCellTestid)).toHaveLength(6)
+    expect(screen.queryAllByTestId(alertsCellTestid)).toHaveLength(3)
+    expect(screen.queryAllByTestId(userCellTestid)).toHaveLength(3)
   })
 
   it("should filter the columns when changing the column search filter", async () => {
