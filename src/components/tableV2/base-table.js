@@ -57,7 +57,15 @@ const StyledTableControls = styled(Flex)`
 `
 const Table = forwardRef(
   (
-    { handleSearch, children, seachPlaceholder = "Search", Pagination, bulkActions, ...props },
+    {
+      handleSearch,
+      children,
+      seachPlaceholder = "Search",
+      Pagination,
+      bulkActions,
+      dataGa,
+      ...props
+    },
     ref
   ) => {
     return (
@@ -67,6 +75,7 @@ const Table = forwardRef(
             <Box width={{ max: 50 }}>
               <SearchInput
                 data-testid="table-global-search-filter"
+                data-ga={`${dataGa}::search::table-filter`}
                 onChange={e => {
                   e.persist()
                   handleSearch(e.target.value)

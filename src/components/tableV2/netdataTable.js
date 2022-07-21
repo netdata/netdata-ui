@@ -97,6 +97,7 @@ const NetdataTable = ({
   testPrefix = "",
   sortBy = [],
   testPrefixCallback,
+  dataGa,
 }) => {
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
@@ -278,6 +279,7 @@ const NetdataTable = ({
       ref={tableRef}
       data-testid={`netdata-table${testPrefix}`}
       testPrefix={testPrefix}
+      dataGa={dataGa}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
