@@ -44,6 +44,10 @@ export type NetdataTableProps<T = any, D = any> = {
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
+  /**This is an escape hatch test id generator, we use this when we want to have 
+   * dynamic generator tesids depending on the row values
+   */
+  testPrefixCallback?: (rowData: D) => void
 }
 
 declare const NetdataTable: (props: NetdataTableProps) => JSX.Element

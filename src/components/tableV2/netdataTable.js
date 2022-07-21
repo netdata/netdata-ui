@@ -96,6 +96,7 @@ const NetdataTable = ({
   columnVisibility,
   testPrefix = "",
   sortBy = [],
+  testPrefixCallback,
 }) => {
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
@@ -286,7 +287,9 @@ const NetdataTable = ({
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         {instance.getRowModel().rows.map(row => (
           <Table.Row
-            data-testid={`netdata-table-row${testPrefix}`}
+            data-testid={`netdata-table-row${testPrefix}${
+              testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
+            }`}
             onClick={
               onClickRow &&
               (() => onClickRow({ data: row.original, table: instance, fullRow: row }))

@@ -415,6 +415,7 @@ StoryTable.add("Full Table functionallity", () => {
       enableSelection
       dataColumns={mockDataColumns}
       data={mockData()}
+      testPrefixCallback={row => row.nodes}
     />
   )
 })
