@@ -1,4 +1,4 @@
-import { ColumnDef, FilterFnOption, PaginationState, VisibilityTableState } from "@tanstack/table-core"
+import { ColumnDef, FilterFnOption, PaginationState, VisibilityTableState, TableInstance } from "@tanstack/table-core"
 import { supportedBulkActions, supportedRowActions } from "./netdataTable"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
@@ -11,34 +11,36 @@ export type NetdataTableProps<T = any, D = any> = {
   enableSelection?: boolean
   enablePagination?: boolean
   bulkActions?: {
-    [K in keyof typeof supportedBulkActions]: {
-      icon: string
-      confirmation: boolean
-      tooltipText: string
-      confirmationTitle: string
-      confirmationMessage: string
-      confirmLabel: string
-      declineLabel: string
-      actionButtonDirection: "default" | "reverse"
+    [K in keyof typeof supportedBulkActions]?: {
+      handleAction: ((rowData: D, instance: TableInstance<D>) => void ),
+      icon?: string
+      confirmation?: boolean
+      tooltipText?: string
+      confirmationTitle?: string
+      confirmationMessage?: string
+      confirmLabel?: string
+      declineLabel?: string
+      actionButtonDirection?: "default" | "reverse"
     }
   }
   rowActions?: {
-    [K in keyof typeof supportedRowActions]: {
-      icon: string
-      confirmation: boolean
-      tooltipText: string
-      confirmationTitle: string
-      confirmationMessage: string
-      confirmLabel: string
-      declineLabel: string
-      actionButtonDirection: "default" | "reverse"
+    [K in keyof typeof supportedRowActions]?: {
+      handleAction: ((rowData: D, instance: TableInstance<D>) => void ),
+      icon?: string
+      confirmation?: boolean
+      tooltipText?: string
+      confirmationTitle?: string
+      confirmationMessage?: string
+      confirmLabel?: string
+      declineLabel?: string
+      actionButtonDirection?: "default" | "reverse"
       isDisabled?: boolean | ((rowData: D) => boolean )
       isVisible?: boolean | ((rowData: D) => boolean )
     }
   }
   testPrefix?: string
   globalFilterFn?: FilterFnOption<T>
-  columnVisibility: VisibilityTableState
+  columnVisibility?: VisibilityTableState
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
