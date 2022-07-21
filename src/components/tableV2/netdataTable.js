@@ -12,7 +12,6 @@ import {
   useTableInstance,
 } from "./react-table.js"
 
-import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"
 
