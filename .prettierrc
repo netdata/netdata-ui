@@ -5,5 +5,5 @@
   "printWidth": 100,
   "useTabs": false,
   "singleQuote": false,
-  "arrowParens": "avoid",
+  "arrowParens": "avoid"
 }

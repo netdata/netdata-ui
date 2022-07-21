@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import { Icon } from "src/components/icon"
-import { getColor, getValidatedControlColor, getSizeUnit } from "src/theme/utils"
+import { getColor, getValidatedControlColor } from "src/theme/utils"
 import { controlReset } from "src/mixins"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"

@@ -2,7 +2,6 @@ import React, { useState } from "react"
 
 import Tooltip from "src/components/drops/tooltip"
 import Flex from "src/components/templates/flex"
-import { Text } from "src/components/typography"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
 import { IconButton } from "src/components/button"
@@ -44,7 +43,7 @@ const Action = ({
     handleDecline?.()
   }
 
-  const onActionConfrimed = () => {
+  const onActionConfirmed = () => {
     setConfirmationOpen(false)
 
     handleAction?.()
@@ -58,21 +57,17 @@ const Action = ({
           declineLabel={declineLabel}
           confirmLabel={confirmLabel}
           title={
-            typeof confirmationTitle === "function" ? (
-              <Text>{confirmationTitle(currentRow?.original, selectedRows)}</Text>
-            ) : (
-              <Text>confirmationTitle</Text>
-            )
+            typeof confirmationTitle === "function"
+              ? confirmationTitle(currentRow?.original, selectedRows)
+              : confirmationTitle
           }
           message={
-            typeof confirmationMessage === "function" ? (
-              <Text>{confirmationMessage(currentRow?.original, selectedRows)}</Text>
-            ) : (
-              <Text>{confirmationMessage}</Text>
-            )
+            typeof confirmationMessage === "function"
+              ? confirmationMessage(currentRow?.original, selectedRows)
+              : confirmationMessage
           }
           handleDecline={onActionDeclined}
-          handleConfirm={onActionConfrimed}
+          handleConfirm={onActionConfirmed}
         />
       )}
       <Tooltip content={disabled ? disabledTooltipText : tooltipText}>
