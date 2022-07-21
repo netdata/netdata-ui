@@ -11,14 +11,18 @@ it("renders value", () => {
 })
 
 it("renders min max", () => {
-  expect(width({ theme, width: { min: "20rem", max: "45rem" } })).toBe(`
+  expect(width({ theme, width: { min: "20rem", max: "45rem" } }).trim()).toBe(
+    `
       min-width: 20rem;
       max-width: 45rem;
-    `)
-  expect(width({ theme, width: { min: 0.5, max: 1 } })).toBe(`
+    `.trim()
+  )
+  expect(width({ theme, width: { min: 0.5, max: 1 } }).trim()).toBe(
+    `
       min-width: 2px;
       max-width: 4px;
-    `)
+    `.trim()
+  )
 })
 
 it("renders max", () => {
