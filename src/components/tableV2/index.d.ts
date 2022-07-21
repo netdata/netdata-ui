@@ -47,7 +47,7 @@ export type NetdataTableProps<T = any, D = any> = {
   /**This is an escape hatch test id generator, we use this when we want to have 
    * dynamic generator tesids depending on the row values
    */
-  testPrefixCallback?: (rowData: D) => void
+  testPrefixCallback?: (rowData: D) => string
 }
 
 declare const NetdataTable: (props: NetdataTableProps) => JSX.Element
