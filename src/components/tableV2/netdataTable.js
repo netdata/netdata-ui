@@ -354,7 +354,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
           <Box position="absolute" right={0}>
             {tooltipText && (
               <Tooltip align="bottom" content={tooltipText}>
-                <Icon size="small" name="information"></Icon>
+                <Icon color="nodeBadgeColor" size="small" name="information"></Icon>
               </Tooltip>
             )}
           </Box>
