@@ -350,6 +350,7 @@ StoryTable.add("Full Table functionallity", () => {
       minSize: 80,
       cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
       meta: {
+        tooltip: "Information",
         filter: {
           component: "select",
           isMulti: true,

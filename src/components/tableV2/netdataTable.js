@@ -26,6 +26,8 @@ import ComparisonFilter from "./comparisonFilter"
 import { comparison, select } from "./filterFns"
 
 import SelectFilter from "./selectFilter"
+import Tooltip from "src/components/drops/tooltip"
+import { Icon } from "src/components/icon"
 
 const ROW_SELECTION_MAX_SIZE = 10
 const ROW_SELECTION_MIN_SIZE = 10
@@ -325,6 +327,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
     }
     const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
     const filterOptions = meta && meta?.filter ? meta?.filter : {}
+    const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
     const Filter = availableFilters[selectedFilter]
 
     if (getCanSort() && enableSorting) {
@@ -344,6 +347,13 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
             )
           }
         >
+          <Box position="absolute" right={0}>
+            {tooltipText && (
+              <Tooltip align="bottom" content={tooltipText}>
+                <Icon size="small" name="information"></Icon>
+              </Tooltip>
+            )}
+          </Box>
           {isPlaceholder ? null : renderHeader()}
         </Table.SortingHeadCell>
       )
