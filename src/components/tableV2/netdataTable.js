@@ -474,12 +474,14 @@ const renderActions = ({ actions, testPrefix }) => {
 const renderBulkActions = ({ bulkActions, instance, testPrefix, selectedRows }) => {
   if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" />
   return bulkActions.map(
-    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, ...rest }) => {
+    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
+      const visible = typeof isVisible === "function" ? isVisible() : isVisible
       return (
         <Action
           testPrefix={`-bulk${testPrefix}`}
           key={id}
+          visible={visible}
           id={id}
           icon={icon}
           handleAction={() => handleAction(selectedRows, instance)}
