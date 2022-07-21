@@ -473,21 +473,26 @@ const renderActions = ({ actions, testPrefix }) => {
 
 const renderBulkActions = ({ bulkActions, instance, testPrefix, selectedRows }) => {
   if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" />
-  return bulkActions.map(({ id, icon, handleAction, tooltipText, alwaysEnabled, ...rest }) => (
-    <Action
-      testPrefix={`-bulk${testPrefix}`}
-      key={id}
-      id={id}
-      icon={icon}
-      handleAction={() => handleAction(selectedRows, instance)}
-      tooltipText={tooltipText}
-      disabled={!alwaysEnabled && selectedRows?.length < 1}
-      background="elementBackground"
-      iconColor="elementBackground"
-      selectedRows={selectedRows}
-      {...rest}
-    />
-  ))
+  return bulkActions.map(
+    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, ...rest }) => {
+      const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
+      return (
+        <Action
+          testPrefix={`-bulk${testPrefix}`}
+          key={id}
+          id={id}
+          icon={icon}
+          handleAction={() => handleAction(selectedRows, instance)}
+          tooltipText={tooltipText}
+          disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
+          background="elementBackground"
+          iconColor="elementBackground"
+          selectedRows={selectedRows}
+          {...rest}
+        />
+      )
+    }
+  )
 }
 
 const renderRowSelection = ({ testPrefix }) => {
