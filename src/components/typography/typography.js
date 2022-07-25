@@ -13,9 +13,11 @@ import opacity from "src/mixins/opacity"
 
 const makeFontSize = size => () => `font-size: ${size};`
 const makeLineHeight = size => () => `line-height: ${size};`
-const makeFontWeight = defaultStrong => ({ strong = defaultStrong }) =>
-  `font-weight: ${strong ? "bold" : "normal"};`
-const fontColor = ({ theme, color = "text" }) => `color: ${getColor(color)({ theme })};`
+const makeFontWeight =
+  defaultStrong =>
+  ({ strong = defaultStrong }) =>
+    `font-weight: ${strong ? "bold" : "normal"};`
+export const fontColor = ({ theme, color = "text" }) => `color: ${getColor(color)({ theme })};`
 
 const typography = css`
   ${fontColor}

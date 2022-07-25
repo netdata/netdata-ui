@@ -2,14 +2,14 @@ import React, { useState } from "react"
 
 import Tooltip from "src/components/drops/tooltip"
 import Flex from "src/components/templates/flex"
-import Box from "src/components/templates/box"
-import { Icon } from "src/components/icon"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
+import { IconButton } from "src/components/button"
 
 const Action = ({
   id,
   icon,
+  background,
   handleAction,
   tooltipText,
   confirmation,
@@ -20,8 +20,15 @@ const Action = ({
   declineLabel,
   actionButtonDirection,
   testPrefix,
+  dataGa,
+  disabled,
+  visible,
+  currentRow,
+  selectedRows,
+  disabledTooltipText,
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
+  if (visible === false) return null
 
   const onActionClicked = () => {
     if (confirmation) {
@@ -36,7 +43,7 @@ const Action = ({
     handleDecline?.()
   }
 
-  const onActionConfrimed = () => {
+  const onActionConfirmed = () => {
     setConfirmationOpen(false)
 
     handleAction?.()
@@ -49,25 +56,39 @@ const Action = ({
           actionButtonDirection={actionButtonDirection}
           declineLabel={declineLabel}
           confirmLabel={confirmLabel}
-          title={confirmationTitle}
-          message={confirmationMessage}
+          title={
+            typeof confirmationTitle === "function"
+              ? confirmationTitle(currentRow?.original, selectedRows)
+              : confirmationTitle
+          }
+          message={
+            typeof confirmationMessage === "function"
+              ? confirmationMessage(currentRow?.original, selectedRows)
+              : confirmationMessage
+          }
           handleDecline={onActionDeclined}
-          handleConfirm={onActionConfrimed}
+          handleConfirm={onActionConfirmed}
         />
       )}
-      <Tooltip content={tooltipText}>
+      <Tooltip content={disabled ? disabledTooltipText : tooltipText}>
         <Flex
-          data-testid={`netdata-table-action-${id}${testPrefix}`}
           alignItems="center"
           justifyContent="center"
-          height={"100%"}
-          _hover={{ background: "borderSecondary" }}
-          cursor="pointer"
+          _hover={{ background: disabled ? null : "borderSecondary" }}
+          cursor={disabled ? "auto" : "pointer"}
           key={id}
-          width={10}
-          onClick={onActionClicked}
+          round
+          background={background}
         >
-          <Box as={Icon} name={icon} />
+          <IconButton
+            iconSize="small"
+            data-testid={`netdata-table-action-${id}${testPrefix}`}
+            data-ga={dataGa}
+            disabled={disabled}
+            onClick={onActionClicked}
+            icon={icon}
+            flavour="borderless"
+          />
         </Flex>
       </Tooltip>
     </>

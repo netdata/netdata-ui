@@ -25,6 +25,7 @@ export interface ButtonProps {
   uppercase?: boolean
   themeType?: ThemeType | undefined
   active?: boolean
+  iconSize?: string
   [s: string]: any
 }
 
@@ -34,10 +35,17 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
   isLoading?: boolean
   loadingLabel?: string | JSX.Element
   loadingIcon?: any
+  iconColor?: string
 }
 
-declare const Button: FC<ButtonWrapperProps>
+type IconButtonProps = Pick<
+  ButtonWrapperProps,
+  "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize"
+> & { width?: string; height?: string }
 
-export { Button }
+declare const Button: FC<ButtonWrapperProps>
+declare const IconButton: FC<IconButtonProps>
+
+export { Button, IconButton }
 
 export default Button

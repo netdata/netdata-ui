@@ -21,6 +21,7 @@ import direction from "src/components/templates/mixins/direction"
 import border from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
 import pseudos from "src/components/templates/mixins/pseudos"
+import { fontColor } from "src/components/typography/typography"
 import css from "@styled-system/css"
 
 export const sx = props => css(props.sx)(props)
@@ -43,6 +44,7 @@ const Flex = Component => styled(Component)`
   ${width}
   ${height}
 
+  ${fontColor}
   ${background}
   ${opacity}
   ${border}

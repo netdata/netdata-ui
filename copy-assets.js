@@ -52,6 +52,10 @@ copyFileSync("src/components/toggle/toggle.d.ts", "lib/components/toggle/toggle.
 
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
 copyFileSync("src/components/modal/index.d.ts", "lib/components/modal/index.d.ts")
+copyFileSync(
+  "src/components/confirmation-dialog/confirmation-dialog.d.ts",
+  "lib/components/confirmation-dialog/confirmation-dialog.d.ts"
+)
 copyFileSync("src/components/tableV2/index.d.ts", "lib/components/tableV2/index.d.ts")
 
 copyFileSync("src/organisms/documentation/index.d.ts", "lib/organisms/documentation/index.d.ts")

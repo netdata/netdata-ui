@@ -1,18 +1,17 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
-import React, { useMemo, useState, useEffect } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 
 import Table, { Pagination } from "./base-table"
 
 import {
   createTable,
-  useTableInstance,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  useTableInstance,
 } from "./react-table.js"
 
-import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"
 
@@ -23,7 +22,15 @@ import Action from "./action"
 
 import ComparisonFilter from "./comparisonFilter"
 
-import { comparison } from "./filterFns"
+import { comparison, select } from "./filterFns"
+
+import SelectFilter from "./selectFilter"
+import Tooltip from "src/components/drops/tooltip"
+import { Icon } from "src/components/icon"
+
+const ROW_SELECTION_MAX_SIZE = 10
+const ROW_SELECTION_MIN_SIZE = 10
+const ROW_SELECTION_SIZE = 10
 
 export const supportedBulkActions = {
   delete: {
@@ -38,6 +45,9 @@ export const supportedBulkActions = {
   },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
+  userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
+  addEntry: { icon: "plus", alwaysEnabled: true },
+  remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
 }
 
 export const supportedRowActions = {
@@ -50,12 +60,21 @@ export const supportedRowActions = {
     confirmLabel: "Yes",
     declineLabel: "No",
     actionButtonDirection: "reverse",
+    disabledTooltipText: "Delete is disabled",
   },
   info: { icon: "information", confirmation: false, tooltipText: "Information" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
+  userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
+  remove: {
+    icon: "removeNode",
+    confirmation: true,
+    actionButtonDirection: "reverse",
+    confirmLabel: "Yes",
+    declineLabel: "No",
+  },
 }
 
-const table = createTable().setOptions({ filterFns: { comparison } })
+const table = createTable().setOptions({ filterFns: { comparison, select } })
 
 const NetdataTable = ({
   dataColumns,
@@ -72,12 +91,16 @@ const NetdataTable = ({
   enablePagination,
   paginationOptions = {
     pageIndex: 0,
-    pageSize: 0,
+    pageSize: 100,
   },
+  columnVisibility,
   testPrefix = "",
+  sortBy = [],
+  testPrefixCallback,
+  dataGa,
 }) => {
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
-  const [sorting, setSorting] = useState([])
+  const [sorting, setSorting] = useState(sortBy)
   const [rowSelection, setRowSelection] = useState({})
   const [globalFilter, setGlobalFilter] = useState("")
   const [pagination, setPagination] = useState({
@@ -98,6 +121,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      disabledTooltipText,
     } = supportedRowActions[currentActionKey]
     const currentAction = rowActions[currentActionKey]
     acc.push({
@@ -111,6 +135,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      disabledTooltipText,
       ...currentAction,
     })
     return acc
@@ -129,6 +154,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      alwaysEnabled,
     } = supportedBulkActions[currentActionKey]
     const currentAction = bulkActions[currentActionKey]
     acc.push({
@@ -142,6 +168,7 @@ const NetdataTable = ({
       declineLabel,
       handleDecline,
       actionButtonDirection,
+      alwaysEnabled,
       ...currentAction,
     })
     return acc
@@ -159,7 +186,12 @@ const NetdataTable = ({
           isPlaceholder,
           filterFn,
           enableGlobalFilter = true,
+          enableSorting = true,
           meta,
+          size = 30,
+          maxSize = 1000,
+          minSize = 10,
+          sortingFn,
         },
         index
       ) => {
@@ -171,9 +203,14 @@ const NetdataTable = ({
           ...(filterFn ? { filterFn } : {}),
           footer: props => props.column.id,
           enableColumnFilter: enableFilter,
+          enableSorting,
           enableGlobalFilter,
           isPlaceholder,
           meta,
+          size,
+          ...(maxSize ? { maxSize } : {}),
+          minSize,
+          ...(sortingFn ? { sortingFn } : {}),
         })
       }
     )
@@ -194,10 +231,11 @@ const NetdataTable = ({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     state: {
+      columnVisibility,
       rowSelection,
       globalFilter,
       sorting,
-      ...(enablePagination ? { pagination } : {}),
+      pagination,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
@@ -228,12 +266,20 @@ const NetdataTable = ({
   return (
     <Table
       selectedRows={originalSelectedRows}
-      bulkActions={availableBulkActions}
+      bulkActions={() =>
+        renderBulkActions({
+          bulkActions: availableBulkActions,
+          testPrefix,
+          instance,
+          selectedRows: originalSelectedRows,
+        })
+      }
       Pagination={enablePagination && renderPagination({ instance })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
       data-testid={`netdata-table${testPrefix}`}
       testPrefix={testPrefix}
+      dataGa={dataGa}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
@@ -243,15 +289,29 @@ const NetdataTable = ({
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         {instance.getRowModel().rows.map(row => (
           <Table.Row
-            data-testid={`netdata-table-row${testPrefix}`}
-            onClick={() => onClickRow?.(row.original, row)}
+            data-testid={`netdata-table-row${testPrefix}${
+              testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
+            }`}
+            onClick={
+              onClickRow &&
+              (() => onClickRow({ data: row.original, table: instance, fullRow: row }))
+            }
             key={row.id}
           >
-            {row.getVisibleCells().map(cell => (
-              <Table.Cell data-testid={`netdata-table-cell${testPrefix}`} key={cell.id}>
-                {cell.renderCell()}
-              </Table.Cell>
-            ))}
+            {row.getVisibleCells().map(cell => {
+              return (
+                <Table.Cell
+                  width={cell.column.getSize()}
+                  minWidth={cell.column.columnDef.minSize}
+                  maxWidth={cell.column.columnDef.maxSize}
+                  data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
+                  key={cell.id}
+                  {...cell.column.columnDef.meta}
+                >
+                  {cell.renderCell()}
+                </Table.Cell>
+              )
+            })}
           </Table.Row>
         ))}
       </Table.Body>
@@ -264,20 +324,40 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
     const { getCanSort, columnDef } = column
     const { meta } = columnDef
 
-    const availableFilters = { comparison: ComparisonFilter, default: SearchFilter }
-    const selectedFilter = meta && meta.filter ? meta.filter : "default"
+    const availableFilters = {
+      comparison: ComparisonFilter,
+      select: SelectFilter,
+      default: SearchFilter,
+    }
+    const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
+    const filterOptions = meta && meta?.filter ? meta?.filter : {}
+    const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
     const Filter = availableFilters[selectedFilter]
 
     if (getCanSort() && enableSorting) {
       return (
         <Table.SortingHeadCell
+          width={column.getSize()}
+          minWidth={column.columnDef.minSize}
+          maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}
           sortDirection={column.getIsSorted()}
           onSortClicked={column.getToggleSortingHandler()}
           colSpan={colSpan}
           key={id}
-          filter={column.getCanFilter() && <Filter column={column} testPrefix={testPrefix} />}
+          filter={
+            column.getCanFilter() && (
+              <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+            )
+          }
         >
+          <Box position="absolute" right={0}>
+            {tooltipText && (
+              <Tooltip align="bottom" content={tooltipText}>
+                <Icon color="nodeBadgeColor" size="small" name="information"></Icon>
+              </Tooltip>
+            )}
+          </Box>
           {isPlaceholder ? null : renderHeader()}
         </Table.SortingHeadCell>
       )
@@ -285,6 +365,9 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
 
     return (
       <Table.HeadCell
+        width={column.getSize()}
+        minWidth={column.columnDef.minSize}
+        maxWidth={column.columnDef.maxSize}
         data-testid={`netdata-table-head-cell${testPrefix}`}
         colSpan={colSpan}
         key={id}
@@ -292,7 +375,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
         {isPlaceholder ? null : renderHeader()}
         {column.getCanFilter() ? (
           <div>
-            <Filter column={column} testPrefix={testPrefix} />
+            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
           </div>
         ) : null}
       </Table.HeadCell>
@@ -303,12 +386,22 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
 }
 
 const renderPagination = ({ instance }) => {
-  const { nextPage, previousPage, getCanPreviousPage, getCanNextPage, getPageCount } = instance
+  const {
+    nextPage,
+    previousPage,
+    getCanPreviousPage,
+    getCanNextPage,
+    getPageCount,
+    setPageIndex,
+    resetPageIndex,
+  } = instance
   const pageSize = instance.getState().pagination.pageSize
   const pageIndex = instance.getState().pagination.pageIndex
 
   return (
     <Pagination
+      setPageIndex={setPageIndex}
+      resetPageIndex={resetPageIndex}
       pageCount={getPageCount()}
       hasNext={getCanNextPage()}
       hasPrevious={getCanPreviousPage()}
@@ -325,8 +418,7 @@ const renderActions = ({ actions, testPrefix }) => {
     header: () => {
       return "Actions"
     },
-    cell: ({ row }) => {
-      const isDisabled = row.original?.disabled ?? false
+    cell: ({ row, instance }) => {
       return (
         <Flex data-testid="action-cell" height="100%" gap={2}>
           {actions.map(
@@ -342,9 +434,21 @@ const renderActions = ({ actions, testPrefix }) => {
               declineLabel,
               handleDecline,
               actionButtonDirection,
+              isDisabled,
+              isVisible = true,
+              disabledTooltipText,
+              dataGa,
             }) => (
               <Action
-                disabled={isDisabled}
+                disabled={
+                  isDisabled && typeof isDisabled === "function"
+                    ? isDisabled(row.original)
+                    : isDisabled
+                }
+                visible={
+                  isVisible && typeof isVisible === "function" ? isVisible(row.original) : isVisible
+                }
+                dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
                 actionButtonDirection={actionButtonDirection}
                 handleDecline={handleDecline}
                 declineLabel={declineLabel}
@@ -355,9 +459,11 @@ const renderActions = ({ actions, testPrefix }) => {
                 key={id}
                 id={id}
                 icon={icon}
-                handleAction={() => handleAction(row.original)}
+                handleAction={() => handleAction(row.original, instance)}
                 tooltipText={tooltipText}
                 testPrefix={testPrefix}
+                currentRow={row}
+                disabledTooltipText={disabledTooltipText}
               />
             )
           )}
@@ -366,7 +472,34 @@ const renderActions = ({ actions, testPrefix }) => {
     },
     enableColumnFilter: false,
     enableSorting: false,
+    meta: { stopPropagation: true },
   })
+}
+
+const renderBulkActions = ({ bulkActions, instance, testPrefix, selectedRows }) => {
+  if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" />
+  return bulkActions.map(
+    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
+      const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
+      const visible = typeof isVisible === "function" ? isVisible() : isVisible
+      return (
+        <Action
+          testPrefix={`-bulk${testPrefix}`}
+          key={id}
+          visible={visible}
+          id={id}
+          icon={icon}
+          handleAction={() => handleAction(selectedRows, instance)}
+          tooltipText={tooltipText}
+          disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
+          background="elementBackground"
+          iconColor="elementBackground"
+          selectedRows={selectedRows}
+          {...rest}
+        />
+      )
+    }
+  )
 }
 
 const renderRowSelection = ({ testPrefix }) => {
@@ -395,6 +528,10 @@ const renderRowSelection = ({ testPrefix }) => {
     },
     enableColumnFilter: false,
     enableSorting: false,
+    size: ROW_SELECTION_SIZE,
+    maxSize: ROW_SELECTION_MAX_SIZE,
+    minSize: ROW_SELECTION_MIN_SIZE,
+    meta: { stopPropagation: true },
   })
 }
 

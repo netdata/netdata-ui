@@ -2,17 +2,22 @@ import styled from "styled-components"
 import { getColor, getSizeBy } from "src/theme/utils"
 import Flex from "src/components/templates/flex"
 
-export const StyledTabsWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-`
+export const StyledTabsWrapper = styled(Flex).attrs(props => ({
+  column: true,
+  flexWrap: false,
+  ...props,
+}))``
 
-export const StyledTabs = styled.nav`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-
+export const StyledTabs = styled(Flex).attrs(props => ({
+  as: "nav",
+  row: true,
+  flexWrap: false,
+  justifyContent: "start",
+  alignItems: "center",
+  padding: [0, 0.5],
+  flex: true,
+  ...props,
+}))`
   border-bottom: 1px solid
     ${({ noDefaultBorder }) =>
       noDefaultBorder ? getColor(["transparent", "full"]) : getColor("borderSecondary")};
@@ -42,5 +47,18 @@ export const StyledTab = styled(Flex)`
 
   & > span {
     font-weight: ${({ active }) => (active ? "bold" : "normal")};
+  }
+`
+export const StyledTabMenu = styled(Flex)`
+  color: ${getColor("text")};
+  padding: 4px 8px;
+  background: ${({ active }) =>
+    active ? getColor("nodeBadgeBackground") : getColor(["transparent", "full"])};
+  width: 100%;
+  border-radius: 4px;
+  cursor: ${({ active }) => (active ? "default" : "pointer")};
+  justify-content: flex-start;
+  &:hover {
+    background: ${getColor("nodeBadgeBackground")};
   }
 `

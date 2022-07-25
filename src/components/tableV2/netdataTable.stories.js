@@ -65,7 +65,7 @@ StoryTable.add("Simple Netdata Table", () => {
   ]
   return (
     <Box width="800px">
-      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} onClickRow={() => {}} />
     </Box>
   )
 })
@@ -309,9 +309,20 @@ StoryTable.add("Full Table functionallity", () => {
     delete: { handleAction: handleDelete },
     download: { handleAction: handleDownload },
     toggleAlarm: { handleAction: handleToggleAlarms },
+    addEntry: {
+      handleAction: () => {
+        console.log("clicked")
+      },
+    },
   }
 
-  const rowActions = { delete: { handleAction: handleDelete }, info: { handleAction: handleInfo } }
+  const rowActions = {
+    delete: {
+      handleAction: handleDelete,
+      isDisabled: row => row.disabled,
+    },
+    info: { handleAction: handleInfo },
+  }
 
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", enableFilter: true },
@@ -320,30 +331,81 @@ StoryTable.add("Full Table functionallity", () => {
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
       filterFn: "comparison",
-      meta: { filter: "comparison" },
+      meta: { filter: { component: "comparison" } },
     },
     {
       header: "user",
       id: "user",
       enableFilter: true,
+      enableSorting: false,
       cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+    },
+    {
+      header: "status",
+      id: "status",
+      enableFilter: true,
+      filterFn: "select",
+      size: 80,
+      maxSize: 80,
+      minSize: 80,
+      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      meta: {
+        tooltip: "Information",
+        filter: {
+          component: "select",
+          isMulti: true,
+          options: [
+            { value: "offline", label: "Offline" },
+            { value: "online", label: "Online" },
+            { value: "stale", label: "Stale" },
+          ],
+        },
+      },
+    },
+    {
+      header: "Untouchable",
+      id: "untouchable",
+      enableFilter: true,
+      enableSorting: false,
+      filterFn: "select",
+      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      meta: {
+        filter: {
+          component: "select",
+          options: [
+            { value: "true", label: "Yes" },
+            { value: "false", label: "No" },
+          ],
+        },
+      },
     },
   ]
 
   const mockData = () => [
-    { nodes: "node8", alerts: 15, user: "mitsos", disabled: true },
-    { nodes: "node9", alerts: 11, user: "koukouroukou" },
-    { nodes: "node10", alerts: 22, user: "reena" },
-    { nodes: "node1", alerts: 15, user: "nic" },
-    { nodes: "node2", alerts: 11, user: "alex" },
-    { nodes: "node34", alerts: 22, user: "manolis" },
-    { nodes: "node5", alerts: 15, user: "achile" },
-    { nodes: "node6", alerts: 11, user: "barba" },
-    { nodes: "node7", alerts: 22, user: "decker" },
+    {
+      nodes: "node8",
+      alerts: 15,
+      user: "mitsos",
+      disabled: true,
+      status: "stale",
+      untouchable: "true",
+    },
+    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node10", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node34", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node5", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node6", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node7", alerts: 22, user: "decker", status: "online", untouchable: "false" },
   ]
 
   return (
     <NetdataTable
+      onClickRow={({ data, table, fullRow }) => {
+        console.log(data, table, fullRow)
+      }}
+      sortBy={[{ id: "nodes", desc: false }]}
       onGlobalSearchChange={onGlobalSearchChange}
       enableSorting
       paginationOptions={paginationOptions}
@@ -353,6 +415,7 @@ StoryTable.add("Full Table functionallity", () => {
       enableSelection
       dataColumns={mockDataColumns}
       data={mockData()}
+      testPrefixCallback={row => row.nodes}
     />
   )
 })

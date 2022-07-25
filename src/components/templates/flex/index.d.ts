@@ -49,6 +49,7 @@ export interface FlexProps
     PositionProps,
     CursorProps {
   background?: ColorType
+  color?: ColorType
 }
 
 declare const Flex: React.FC<FlexProps & JSX.IntrinsicElements["div"]>

@@ -100,9 +100,15 @@ export const StyledButton = styled.button.attrs(props => ({
     ${alignSelf};
 
     width: ${props =>
-      props.width ? props.width : props.hasLabel ? getSizeBy(16) : getSizeBy(props.tiny ? 2.75 : props.small ? 3 : 4)};
+      props.width
+        ? props.width
+        : props.hasLabel
+        ? getSizeBy(16)
+        : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
     height: ${props =>
-      props.hasLabel ? getSizeBy(props.small ? 4 : 5) : getSizeBy(props.tiny ? 2.75 : props.small ? 3 : 4)};
+      props.hasLabel
+        ? getSizeBy(props.small ? 4 : 5)
+        : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
 
     font-weight: 500;
     font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};
@@ -111,10 +117,7 @@ export const StyledButton = styled.button.attrs(props => ({
     word-break: keep-all;
 
     cursor: pointer;
-    opacity: ${({ disabled, neutral }) => {
-      if (neutral) return 1
-      return disabled ? 0.4 : 1
-    }};
+    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
     ${margin}
@@ -166,6 +169,9 @@ export const StyledButton = styled.button.attrs(props => ({
       fill: ${props => props.colors.color(props)};
     }
 
+    .button-icon__color {
+      fill: ${props => props.colors.color(props)};
+    }
     .ntd-spinner {
       fill: none;
       stroke-width: 17px;

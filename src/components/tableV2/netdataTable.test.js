@@ -34,7 +34,7 @@ const mockDataColumns = [
     header: "user",
     id: "user",
     enableFilter: true,
-    cell: ({ getValue }) => "Text",
+    cell: () => "Text",
   },
 ]
 
@@ -51,8 +51,12 @@ const makeTestId = elementName => `${testName}${elementName}${testPrefix}`
 
 const rowTestid = makeTestId("row")
 const headTestid = makeTestId("head")
-const cellTestid = makeTestId("cell")
-const headeRowTestid = makeTestId("headRow")
+const nodeCellTestid = makeTestId("cell-nodes")
+const checkboxCellTestid = makeTestId("cell-checkbox")
+const alertsCellTestid = makeTestId("cell-alerts")
+const userCellTestid = makeTestId("cell-user")
+
+const headRowTestid = makeTestId("headRow")
 const headCellTestid = makeTestId("head-cell")
 const nodesColumnFilter = makeTestId("filter-nodes")
 const deleteActionTestid = makeTestId("action-delete")
@@ -80,9 +84,13 @@ describe("Netdata table", () => {
     renderNetdataTable()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(3)
     expect(screen.getByTestId(headTestid)).toBeInTheDocument()
-    expect(screen.getByTestId(headeRowTestid)).toBeInTheDocument()
+    expect(screen.getByTestId(headRowTestid)).toBeInTheDocument()
     expect(screen.queryAllByTestId(headCellTestid)).toHaveLength(5)
-    expect(screen.queryAllByTestId(cellTestid)).toHaveLength(15)
+
+    expect(screen.queryAllByTestId(nodeCellTestid)).toHaveLength(3)
+    expect(screen.queryAllByTestId(checkboxCellTestid)).toHaveLength(6)
+    expect(screen.queryAllByTestId(alertsCellTestid)).toHaveLength(3)
+    expect(screen.queryAllByTestId(userCellTestid)).toHaveLength(3)
   })
 
   it("should filter the columns when changing the column search filter", async () => {
@@ -104,9 +112,9 @@ describe("Netdata table", () => {
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+    await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
 
-    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
+    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
 
   it("should trigger confirmation dialog when clicking delete and hanlde decline", async () => {
@@ -117,7 +125,7 @@ describe("Netdata table", () => {
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmation-dialog-decline"))
+    await userEvent.click(screen.getByTestId("confirmationDialog-cancelAction"))
 
     expect(handleDelete).not.toHaveBeenCalled()
   })
@@ -142,9 +150,9 @@ describe("Netdata table", () => {
 
     expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmation-dialog-confirm"))
+    await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
 
-    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem)
+    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
 
   it("should change global search and filter nodes", async () => {

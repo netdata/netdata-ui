@@ -40,9 +40,12 @@ import checkmark from "./assets/checkmark.svg"
 import chevron_double from "./assets/chevron_double.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import chevron_left from "./assets/chevron_left.svg"
-import chevron_right_s from "./assets/chevron_right_s.svg"
-import chevron_right_small from "./assets/chevron_right_small.svg"
+import chevron_left_start from "./assets/chevron_left_start.svg"
 import chevron_left_small from "./assets/chevron_left_small.svg"
+import chevron_right from "./assets/chevron_right.svg"
+import chevron_right_s from "./assets/chevron_right_s.svg"
+import chevron_right_end from "./assets/chevron_right_end.svg"
+import chevron_right_small from "./assets/chevron_right_small.svg"
 import classError from "./assets/class_error.svg"
 import classLatency from "./assets/class_latency.svg"
 import classUtilization from "./assets/class_utilization.svg"
@@ -239,8 +242,11 @@ import serviceXen from "./assets/services/xen.svg"
 import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
-import sorting_desc from "./assets/sorting_desc.svg"
 import sorting_asc from "./assets/sorting_asc.svg"
+import sort_ascending from "./assets/sort_ascending.svg"
+import sorting_desc from "./assets/sorting_desc.svg"
+import sort_descending from "./assets/sort_descending.svg"
+import sort_indicator from "./assets/sort_indicator.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import switch_off from "./assets/switch_off.svg"
@@ -321,9 +327,12 @@ export const iconsList = {
   chevron_double,
   chevron_down,
   chevron_left,
+  chevron_left_small,
+  chevron_left_start,
+  chevron_right,
+  chevron_right_end,
   chevron_right_s,
   chevron_right_small,
-  chevron_left_small,
   classError,
   classLatency,
   classUtilization,
@@ -524,8 +533,11 @@ export const iconsList = {
   settings,
   settings_h,
   sorting_vertical,
+  sort_ascending,
   sorting_asc,
+  sort_descending,
   sorting_desc,
+  sort_indicator,
   space,
   space_new,
   switch_off,

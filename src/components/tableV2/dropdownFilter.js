@@ -2,13 +2,13 @@ import React from "react"
 
 import { Select } from "src/components/select"
 
-const DropdownFilter = ({ onChange, value, options }) => {
-  const all = { value: "all", label: "All" }
-  const selectedValue = value || all
+const DropdownFilter = ({ onChange, value, options, isMulti }) => {
+  const selectedValue = value
 
   return (
     <Select
-      options={[all, ...options]}
+      isMulti={isMulti}
+      options={options}
       value={selectedValue}
       onChange={option => {
         onChange(option)

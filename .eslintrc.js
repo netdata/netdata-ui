@@ -34,6 +34,11 @@ module.exports = {
   },
   parser: "@babel/eslint-parser",
   parserOptions: {
+    babelOptions: {
+      parserOpts: {
+        plugins: ["jsx"]
+      }
+    },
     ecmaFeatures: {
       jsx: true,
     },

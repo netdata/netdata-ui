@@ -7,6 +7,7 @@ import Flex from "src/components/templates/flex"
 import { TextInput } from "src/components/input"
 
 const Comparisons = [
+  { value: "all", label: "All" },
   { value: "gt", label: "Greater than" },
   { value: "eq", label: "Equal" },
   { value: "lt", label: "Less than" },

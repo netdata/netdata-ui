@@ -1,63 +1,95 @@
 import React, { forwardRef, useCallback } from "react"
-
+import styled from "styled-components"
+import { getColor } from "src/theme/utils"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
-import Action from "./action"
+import { IconButton } from "src/components/button"
+import Tooltip from "src/components/drops/tooltip"
+import useToggle from "src/hooks/use-toggle"
 
+const StyledRow = styled.tr`
+  font-size: 14px;
+  color: ${getColor("text")};
+  &:nth-child(2n) {
+    background: ${getColor("tableRowBg")};
+  }
+  cursor: ${({ isClickable }) => isClickable && "pointer"};
+  &:hover {
+    background: ${getColor("borderSecondary")};
+  }
+`
+const StyledHeaderRow = styled.tr`
+  background: ${getColor("tableRowBg")};
+  color: ${getColor("text")};
+`
+const StyledHeaderCell = styled(Box)`
+  padding: 12px;
+  border-bottom: 1px solid ${getColor("borderSecondary")};
+  &:not(:last-child) {
+    border-right: 1px solid ${getColor("borderSecondary")};
+  }
+`
+const StyledSortIcon = styled(Icon)`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 20px;
+  margin: auto;
+`
+const StyledPagination = styled(Flex)`
+  position: sticky;
+  bottom: -15px;
+  height: 45px;
+  background: ${getColor("mainBackground")};
+  border-top: 1px solid ${getColor("borderSecondary")};
+`
+const StyledTableControls = styled(Flex)`
+  position: sticky;
+  width: 100%;
+  top: -16px;
+  z-index: 10;
+  background: ${getColor("mainBackground")};
+  padding: 16px 0;
+  margin: -16px 0 0;
+`
 const Table = forwardRef(
   (
     {
       handleSearch,
       children,
-      seachPlaceholder = "search",
+      seachPlaceholder = "Search",
       Pagination,
-      selectedRows,
       bulkActions,
-      testPrefix,
+      dataGa,
       ...props
     },
     ref
   ) => {
     return (
       <Flex width="100%" height="100%" column>
-        <Flex width="100%">
+        <StyledTableControls>
           {handleSearch && (
             <Box width={{ max: 50 }}>
               <SearchInput
                 data-testid="table-global-search-filter"
+                data-ga={`${dataGa}::search::table-filter`}
                 onChange={e => {
                   e.persist()
                   handleSearch(e.target.value)
                 }}
                 placeholder={seachPlaceholder}
-                iconRight={<Icon name="magnify" />}
+                iconRight={<Icon name="magnify" color="textLite" />}
               />
             </Box>
           )}
-          <Flex data-testid="bulk-actions" width="100%" justifyContent="end" margin={[0, 0, 1, 0]}>
-            {bulkActions ? (
-              <Flex height={12} alignSelf="end" gap={1} ali margin={[0, 0, 1, 0]}>
-                {bulkActions.map(({ id, icon, handleAction, tooltipText, ...rest }) => (
-                  <Action
-                    testPrefix={`-bulk${testPrefix}`}
-                    key={id}
-                    id={id}
-                    icon={icon}
-                    handleAction={() => handleAction(selectedRows)}
-                    tooltipText={tooltipText}
-                    {...rest}
-                  />
-                ))}
-              </Flex>
-            ) : (
-              <Box aria-hidden as="span" />
-            )}
+          <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
+            {bulkActions && bulkActions()}
           </Flex>
-        </Flex>
-        <Box sx={{ borderCollapse: "collapse" }} ref={ref} as="table" {...props}>
+        </StyledTableControls>
+        <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
           {children}
         </Box>
         {Pagination}
@@ -69,9 +101,8 @@ const Table = forwardRef(
 Table.Head = forwardRef(({ children, ...props }, ref) => (
   <Box
     ref={ref}
-    sx={{ whiteSpace: "nowrap" }}
+    sx={{ whiteSpace: "nowrap", position: "sticky", top: "50px", zIndex: "10" }}
     as="thead"
-    border={{ size: "1px", type: "solid", side: "bottom", color: "borderSecondary" }}
     {...props}
   >
     {children}
@@ -79,19 +110,50 @@ Table.Head = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
-  <Box as="tr" sx={{ textAlign: "left" }} height={12} ref={ref} {...props}>
+  <StyledHeaderRow ref={ref} {...props}>
     {children}
-  </Box>
+  </StyledHeaderRow>
 ))
 
-Table.HeadCell = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} width={{ max: 30 }} as="th" {...props}>
-    {children}
-  </Box>
-))
+Table.HeadCell = forwardRef(
+  ({ children, align = "left", width, maxWidth, minWidth, ...props }, ref) => (
+    <StyledHeaderCell
+      width={{ max: maxWidth, base: width, min: minWidth }}
+      ref={ref}
+      sx={{ textAlign: align, fontSize: "14px" }}
+      {...props}
+      as="th"
+    >
+      {children}
+    </StyledHeaderCell>
+  )
+)
 
 Table.SortingHeadCell = forwardRef(
-  ({ children, onSortClicked, setSortDirection, sortDirection, filter, ...props }, ref) => {
+  (
+    {
+      children,
+      onSortClicked,
+      setSortDirection,
+      maxWidth,
+      width,
+      minWidth,
+      sortDirection,
+      filter,
+      align = "left",
+      ...props
+    },
+    ref
+  ) => {
+    const [isHovering, , onMouseEnter, onMouseLeave] = useToggle(false)
+
+    const sortingIcons = {
+      asc: "sort_ascending",
+      desc: "sort_descending",
+      indicator: "sort_indicator",
+    }
+    const showHoveringIcon = isHovering && !sortDirection
+
     const onClick = useCallback(
       e => {
         e.preventDefault()
@@ -101,23 +163,27 @@ Table.SortingHeadCell = forwardRef(
       [sortDirection, setSortDirection, onSortClicked]
     )
 
-    const sortingIcons = { asc: "sorting_asc", desc: "sorting_desc" }
-
     return (
-      <Box as="th" ref={ref} {...props}>
-        <Flex column position="relative" cursor="pointer" gap={1}>
-          <Box onClick={onClick} position="relative">
-            {children}
-            <Box
-              position="absolute"
-              width={4}
-              as={Icon}
-              name={sortingIcons[sortDirection] ?? null}
-            />
-          </Box>
-          {filter}
-        </Flex>
-      </Box>
+      <StyledHeaderCell
+        width={{ max: maxWidth, base: width, min: minWidth }}
+        as="th"
+        ref={ref}
+        {...props}
+        sx={{ textAlign: align, fontSize: "14px" }}
+      >
+        <Box
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+          position="relative"
+          cursor="pointer"
+        >
+          {children}
+          <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
+          {showHoveringIcon && <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />}
+        </Box>
+        {filter}
+      </StyledHeaderCell>
     )
   }
 )
@@ -128,27 +194,39 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
   </Box>
 ))
 
-Table.Cell = forwardRef(({ children, onClick, ...props }, ref) => {
-  const handleClick = () => {
-    onClick?.()
-  }
-  return (
-    <Box height={12} as="td" ref={ref} {...props} onClick={handleClick}>
-      <Flex alignItems="center" height="100%">
+Table.Cell = forwardRef(
+  ({ children, onClick, width, maxWidth, minWidth, align = "left", ...props }, ref) => {
+    const handleClick = e => {
+      e.persist()
+      if (props.stopPropagation) e.stopPropagation()
+      onClick?.()
+    }
+    return (
+      <Box
+        width={{ max: maxWidth, base: width, min: minWidth }}
+        padding={[3]}
+        sx={{ textAlign: align }}
+        as="td"
+        ref={ref}
+        {...props}
+        onClick={handleClick}
+      >
         {children}
-      </Flex>
-    </Box>
-  )
-})
+      </Box>
+    )
+  }
+)
 
 Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
-  const handleClick = () => {
+  const handleClick = e => {
+    e.persist()
+    e.stopPropagation()
     onClick?.()
   }
   return (
-    <Box onClick={handleClick} height={12} as="tr" ref={ref} {...props}>
+    <StyledRow isClickable={!!onClick} onClick={handleClick} ref={ref} {...props}>
       {children}
-    </Box>
+    </StyledRow>
   )
 })
 
@@ -159,21 +237,79 @@ export const Pagination = ({
   hasPrevious,
   onNextPage,
   onPreviousPage,
+  setPageIndex,
+  resetPageIndex,
   pageSize,
-}) => (
-  <Flex>
-    <Box
-      cursor="pointer"
-      onClick={hasPrevious && onPreviousPage}
-      as={Icon}
-      name="chevron_left_small"
-    />
-    {pageIndex}
-    <Box cursor="pointer" onClick={hasNext && onNextPage} as={Icon} name="chevron_right_small" />
-    <Text>
-      Page {pageIndex} of {pageCount}
-    </Text>
-  </Flex>
-)
+}) => {
+  const handleOnPrevious = useCallback(() => {
+    if (hasPrevious) onPreviousPage()
+  }, [hasPrevious])
+
+  const handleOnNextPage = useCallback(() => {
+    if (hasNext) onNextPage()
+  }, [hasNext])
+
+  const handleGoToLastPage = useCallback(() => {
+    setPageIndex(pageCount - 1)
+  }, [pageCount, setPageIndex])
+
+  const handleGoToFirstPage = useCallback(() => {
+    resetPageIndex()
+  }, [resetPageIndex])
+
+  return (
+    <StyledPagination alignItems="center" justifyContent="end">
+      <Tooltip content="First">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleGoToFirstPage}
+            icon="chevron_left_start"
+            iconSize="small"
+            tooltip="test"
+            disabled={!hasPrevious}
+          />
+        </Flex>
+      </Tooltip>
+      <Tooltip content="Previous">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleOnPrevious}
+            icon="chevron_left"
+            iconSize="small"
+            tooltip="Previous"
+            disabled={!hasPrevious}
+          />
+        </Flex>
+      </Tooltip>
+      <Text>
+        Page {pageCount === 0 ? 0 : pageIndex} of {pageCount}
+      </Text>
+      <Tooltip content="Next">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleOnNextPage}
+            icon="chevron_right"
+            iconSize="small"
+            disabled={!hasNext}
+          />
+        </Flex>
+      </Tooltip>
+      <Tooltip content="Last">
+        <Flex>
+          <IconButton
+            cursor="pointer"
+            onClick={handleGoToLastPage}
+            icon="chevron_right_end"
+            iconSize="small"
+            disabled={!hasNext}
+          />
+        </Flex>
+      </Tooltip>
+    </StyledPagination>
+  )
+}
 
 export default Table
