@@ -141,6 +141,8 @@ Table.SortingHeadCell = forwardRef(
       sortDirection,
       filter,
       align = "left",
+      "data-testid": dataTestid,
+      "sortby-testid": sortbyTestid,
       ...props
     },
     ref
@@ -170,6 +172,7 @@ Table.SortingHeadCell = forwardRef(
         ref={ref}
         {...props}
         sx={{ textAlign: align, fontSize: "14px" }}
+        data-testid={dataTestid}
       >
         <Box
           onMouseEnter={onMouseEnter}
@@ -177,6 +180,7 @@ Table.SortingHeadCell = forwardRef(
           onClick={onClick}
           position="relative"
           cursor="pointer"
+          data-testid={sortbyTestid}
         >
           {children}
           <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />

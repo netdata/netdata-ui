@@ -341,6 +341,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
           minWidth={column.columnDef.minSize}
           maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}
+          sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
           sortDirection={column.getIsSorted()}
           onSortClicked={column.getToggleSortingHandler()}
           colSpan={colSpan}
