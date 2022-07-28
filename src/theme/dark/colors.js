@@ -22,17 +22,17 @@ const appColors = {
   success: rawColors.green.netdata,
   successLite: rawColors.green.deyork,
   successBackground: rawColors.green.deyork,
-  successText: rawColors.neutral.limedSpruce,
+  successText: rawColors.green.netdata,
 
   warning: rawColors.yellow.seaBuckthorn,
   warningLite: rawColors.yellow.sunglow,
   warningBackground: rawColors.yellow.salomie,
-  warningText: rawColors.neutral.limedSpruce,
+  warningText: rawColors.yellow.seaBuckthorn,
 
   error: rawColors.red.pomegranate,
   errorLite: rawColors.red.apricot,
   errorBackground: rawColors.red.wewak,
-  errorText: rawColors.neutral.limedSpruce,
+  errorText: rawColors.red.pomegranate,
 
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
