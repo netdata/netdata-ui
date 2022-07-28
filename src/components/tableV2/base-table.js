@@ -60,7 +60,7 @@ const Table = forwardRef(
     {
       handleSearch,
       children,
-      seachPlaceholder = "Search",
+      searchPlaceholder = "Search",
       Pagination,
       bulkActions,
       dataGa,
@@ -80,7 +80,7 @@ const Table = forwardRef(
                   e.persist()
                   handleSearch(e.target.value)
                 }}
-                placeholder={seachPlaceholder}
+                placeholder={searchPlaceholder}
                 iconRight={<Icon name="magnify" color="textLite" />}
               />
             </Box>
