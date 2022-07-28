@@ -72,6 +72,11 @@ export const supportedRowActions = {
     confirmLabel: "Yes",
     declineLabel: "No",
   },
+  goto: {
+    icon: "nav_arrow_goto",
+    confirmation: false,
+    tooltipText: "Go to",
+  },
 }
 
 const table = createTable().setOptions({ filterFns: { comparison, select } })
