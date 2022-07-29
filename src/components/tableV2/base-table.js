@@ -9,6 +9,7 @@ import { Text } from "src/components/typography"
 import { IconButton } from "src/components/button"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
+import { debounce } from "throttle-debounce"
 
 const StyledRow = styled.tr`
   font-size: 14px;
@@ -76,10 +77,10 @@ const Table = forwardRef(
               <SearchInput
                 data-testid="table-global-search-filter"
                 data-ga={`${dataGa}::search::table-filter`}
-                onChange={e => {
+                onChange={debounce(300, e => {
                   e.persist()
                   handleSearch(e.target.value)
-                }}
+                })}
                 placeholder={searchPlaceholder}
                 iconRight={<Icon name="magnify" color="textLite" />}
               />
