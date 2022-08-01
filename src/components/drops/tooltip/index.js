@@ -21,6 +21,7 @@ const Tooltip = forwardRef(
       disabled,
       zIndex = 80,
       children,
+      onClickOutside,
       ...rest
     },
     parentRef
@@ -52,6 +53,7 @@ const Tooltip = forwardRef(
         {targetElement}
         {isOpen && ref.current && !disabled && (
           <Drop
+            onClickOutside={close}
             target={ref.current}
             id={id}
             {...dropProps}
