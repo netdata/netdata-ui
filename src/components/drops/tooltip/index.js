@@ -53,13 +53,15 @@ const Tooltip = forwardRef(
       if (ref.current && initialOpen) open()
     }, [])
 
+    useLayoutEffect(() => {
+      if (hasPopUpHovered && closeWithDelayTimeout.current) {
+        clearTimeout(closeWithDelayTimeout.current)
+      }
+    }, [hasPopUpHovered])
+
     if (!content) {
       return children
     }
-
-    useLayoutEffect(() => {
-      hasPopUpHovered && clearTimeout(closeWithDelayTimeout.current)
-    }, [hasPopUpHovered])
 
     return (
       <Fragment>
