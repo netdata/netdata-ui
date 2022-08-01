@@ -1,6 +1,6 @@
 import React from "react"
 import NetdataTable from "./netdataTable"
-import { renderWithProviders, screen } from "testUtilities"
+import { renderWithProviders, screen, act } from "testUtilities"
 import userEvent from "@testing-library/user-event"
 
 const onGlobalSearchChange = jest.fn()
@@ -155,15 +155,18 @@ describe("Netdata table", () => {
     expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
   })
 
-  it.skip("should change global search and filter nodes", async () => {
+  it("should change global search and filter nodes", async () => {
     jest.useFakeTimers({ advanceTimers: true })
     renderNetdataTable()
     const filterParams = "node8"
     const globalSearchFilter = screen.getByTestId("table-global-search-filter")
 
-    userEvent.type(globalSearchFilter, filterParams)
-    jest.runOnlyPendingTimers()
+    await act(async () => {
+      await userEvent.type(globalSearchFilter, filterParams)
+      jest.runOnlyPendingTimers()
+    })
 
+    expect(onGlobalSearchChange).toHaveBeenCalledWith(filterParams)
     expect(globalSearchFilter).toBeInTheDocument()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
   })
