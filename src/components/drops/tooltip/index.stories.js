@@ -65,6 +65,9 @@ story.add(
   "Custom",
   () => (
     <Flex gap={4}>
+      <Tooltip allowHoverOnTooltip align="top" content={<CustomContent />}>
+        <Button label="allow hover tooltip" />
+      </Tooltip>
       <Tooltip align="top" content={<CustomContent />}>
         <Button label="hover me" />
       </Tooltip>
