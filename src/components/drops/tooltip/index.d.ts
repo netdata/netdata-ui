@@ -8,6 +8,7 @@ export interface PopoverProps {
   dropProps?: DropProps
   content: ReactNode | (() => ReactNode)
   children: any
+  allowHoverOnTooltip?: boolean
   [key: string]: any
 }
 
