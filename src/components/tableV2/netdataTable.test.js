@@ -219,7 +219,6 @@ describe("Netdata table", () => {
   describe("Sorting", () => {
     it("should allow as to sort the table", async () => {
       renderNetdataTable(true)
-      const expectedValue = mockData()[0]
 
       const headCell = screen.getByTestId(headeCellNodesSortTestId)
       const beforeClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
