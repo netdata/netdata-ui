@@ -17,10 +17,6 @@ const StyledRow = styled.tr`
   &:nth-child(2n) {
     background: ${getColor("tableRowBg")};
   }
-  cursor: ${({ isClickable }) => isClickable && "pointer"};
-  &:hover {
-    background: ${getColor("borderSecondary")};
-  }
 `
 const StyledHeaderRow = styled.tr`
   background: ${getColor("tableRowBg")};
@@ -222,16 +218,27 @@ Table.Cell = forwardRef(
   }
 )
 
-Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
+Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) => {
+  const isRowDisabledForClick = disableClickRow()
   const handleClick = e => {
+    if (isRowDisabledForClick) return
     e.persist()
     e.stopPropagation()
     onClick?.()
   }
+  const cursor = isRowDisabledForClick || onClick === "undefined" ? "intial" : "pointer"
   return (
-    <StyledRow isClickable={!!onClick} onClick={handleClick} ref={ref} {...props}>
+    <Box
+      as={StyledRow}
+      _hover={{ background: "borderSecondary" }}
+      cursor={cursor}
+      isClickable={!!onClick}
+      onClick={handleClick}
+      ref={ref}
+      {...props}
+    >
       {children}
-    </StyledRow>
+    </Box>
   )
 })
 

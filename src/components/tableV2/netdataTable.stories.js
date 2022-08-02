@@ -416,6 +416,7 @@ StoryTable.add("Full Table functionallity", () => {
       dataColumns={mockDataColumns}
       data={mockData()}
       testPrefixCallback={row => row.nodes}
+      disableClickRow={({ data }) => data.alerts > 15}
     />
   )
 })

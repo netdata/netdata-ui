@@ -93,6 +93,7 @@ const NetdataTable = ({
   rowActions = {},
   bulkActions = {},
   onClickRow,
+  disableClickRow,
   enablePagination,
   paginationOptions = {
     pageIndex: 0,
@@ -302,6 +303,10 @@ const NetdataTable = ({
               (() => onClickRow({ data: row.original, table: instance, fullRow: row }))
             }
             key={row.id}
+            disableClickRow={() =>
+              disableClickRow &&
+              disableClickRow({ data: row.original, table: instance, fullRow: row })
+            }
           >
             {row.getVisibleCells().map(cell => {
               return (
