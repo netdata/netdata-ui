@@ -227,7 +227,7 @@ Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) =
     onClick?.()
   }
 
-  const isRowClickable = isRowDisabledForClick === true || onClick !== undefined
+  const isRowClickable = !isRowDisabledForClick && onClick !== undefined
   const cursor = isRowClickable ? "pointer" : "intial"
 
   return (

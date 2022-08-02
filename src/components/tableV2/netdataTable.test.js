@@ -2,7 +2,7 @@ import React from "react"
 import NetdataTable from "./netdataTable"
 import { renderWithProviders, screen, act } from "testUtilities"
 import userEvent from "@testing-library/user-event"
-
+//TODO WRITE TEST TO CHECK IF ROW IS DISABLED
 const onGlobalSearchChange = jest.fn()
 const handleDelete = jest.fn()
 const handleDownload = jest.fn()
