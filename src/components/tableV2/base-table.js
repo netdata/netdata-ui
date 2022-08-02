@@ -277,6 +277,7 @@ export const Pagination = ({
       <Tooltip content="First">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-first"}
             cursor="pointer"
             onClick={handleGoToFirstPage}
             icon="chevron_left_start"
@@ -289,6 +290,7 @@ export const Pagination = ({
       <Tooltip content="Previous">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-previous"}
             cursor="pointer"
             onClick={handleOnPrevious}
             icon="chevron_left"
@@ -298,12 +300,13 @@ export const Pagination = ({
           />
         </Flex>
       </Tooltip>
-      <Text>
+      <Text data-testid={"pagination-counter"}>
         Page {pageCount === 0 ? 0 : pageIndex} of {pageCount}
       </Text>
       <Tooltip content="Next">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-next"}
             cursor="pointer"
             onClick={handleOnNextPage}
             icon="chevron_right"
@@ -315,6 +318,7 @@ export const Pagination = ({
       <Tooltip content="Last">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-last"}
             cursor="pointer"
             onClick={handleGoToLastPage}
             icon="chevron_right_end"

@@ -70,16 +70,24 @@ const infoActionTestid = makeTestId("action-info")
 const headerCheckBoxTestid = makeTestId("header-checkbox")
 const bulkDeleteActionTestid = makeTestId("action-delete-bulk")
 
-const renderNetdataTable = ({ disableRow, rowActions, bulkActions }) => {
+const renderNetdataTable = ({
+  disableRow,
+  rowActions,
+  bulkActions,
+  paginationOptions,
+  data = mockData(),
+}) => {
   renderWithProviders(
     <NetdataTable
+      enablePagination
+      paginationOptions={paginationOptions}
       onGlobalSearchChange={onGlobalSearchChange}
       enableSorting
       rowActions={rowActions || mockRowActions}
       bulkActions={bulkActions || mockBulkActions}
       enableSelection
       dataColumns={mockDataColumns}
-      data={mockData()}
+      data={data}
       testPrefix={testPrefix}
       onClickRow={({ data }) => {
         onClickRow(data)
@@ -263,6 +271,79 @@ describe("Netdata table", () => {
 
       expect(beforeClickNodeCell).toHaveTextContent("node8")
       expect(afterClickNodeCell).toHaveTextContent("node10")
+    })
+  })
+
+  describe("Pagination", () => {
+    it("should go to next page", async () => {
+      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 0, pageSize: 3 }
+
+      renderNetdataTable({ disableRow: true, data, paginationOptions })
+
+      const goToNext = screen.getByTestId("pagination-go-to-next")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("node8")
+
+      await userEvent.click(goToNext)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("node15")
+    })
+    it("should go to previous page", async () => {
+      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 1, pageSize: 3 }
+
+      renderNetdataTable({ disableRow: true, data, paginationOptions })
+
+      const goToPrevious = screen.getByTestId("pagination-go-to-previous")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("node15")
+
+      await userEvent.click(goToPrevious)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("node8")
+    })
+
+    it("should go to last page", async () => {
+      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 0, pageSize: 1 }
+
+      renderNetdataTable({ disableRow: true, data, paginationOptions })
+
+      const goToLast = screen.getByTestId("pagination-go-to-last")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("node8")
+
+      await userEvent.click(goToLast)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("node15")
+    })
+
+    it("should go to first page", async () => {
+      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 3, pageSize: 1 }
+
+      renderNetdataTable({ disableRow: true, data, paginationOptions })
+
+      const goToFirst = screen.getByTestId("pagination-go-to-first")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("node15")
+
+      await userEvent.click(goToFirst)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("node8")
     })
   })
 })
