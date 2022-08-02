@@ -11,13 +11,16 @@ const handleInfo = jest.fn()
 const onClickRow = jest.fn()
 const mockDisableRow = jest.fn()
 
-const bulkActions = {
+const mockBulkActions = {
   delete: { handleAction: handleDelete },
   download: { handleAction: handleDownload },
   toggleAlarm: { handleAction: handleToggleAlarms },
 }
 
-const rowActions = { delete: { handleAction: handleDelete }, info: { handleAction: handleInfo } }
+const mockRowActions = {
+  delete: { handleAction: handleDelete },
+  info: { handleAction: handleInfo },
+}
 
 const mockDataColumns = [
   { header: "Nodes", id: "nodes", enableFilter: true },
@@ -67,13 +70,13 @@ const infoActionTestid = makeTestId("action-info")
 const headerCheckBoxTestid = makeTestId("header-checkbox")
 const bulkDeleteActionTestid = makeTestId("action-delete-bulk")
 
-const renderNetdataTable = disableRow => {
+const renderNetdataTable = ({ disableRow, rowActions, bulkActions }) => {
   renderWithProviders(
     <NetdataTable
       onGlobalSearchChange={onGlobalSearchChange}
       enableSorting
-      rowActions={rowActions}
-      bulkActions={bulkActions}
+      rowActions={rowActions || mockRowActions}
+      bulkActions={bulkActions || mockBulkActions}
       enableSelection
       dataColumns={mockDataColumns}
       data={mockData()}
@@ -94,7 +97,7 @@ describe("Netdata table", () => {
     jest.useRealTimers()
   })
   it("Should render netdata table", () => {
-    renderNetdataTable()
+    renderNetdataTable({})
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(3)
     expect(screen.getByTestId(headTestid)).toBeInTheDocument()
     expect(screen.getByTestId(headRowTestid)).toBeInTheDocument()
@@ -108,7 +111,7 @@ describe("Netdata table", () => {
 
   describe("Column filter", () => {
     it("should filter the columns when changing the column search filter", async () => {
-      renderNetdataTable()
+      renderNetdataTable({})
       const filterParams = "node8"
       const nodesFilter = screen.getByTestId(nodesColumnFilter)
 
@@ -121,7 +124,7 @@ describe("Netdata table", () => {
 
   describe("Row Action", () => {
     it("should trigger confirmation dialog when clicking delete and hanlde confirm", async () => {
-      renderNetdataTable()
+      renderNetdataTable({})
       const deleteAction = screen.queryAllByTestId(deleteActionTestid)
       const expectedDeletedItem = mockData()[0]
       await userEvent.click(deleteAction[0])
@@ -134,7 +137,7 @@ describe("Netdata table", () => {
     })
 
     it("should trigger confirmation dialog when clicking delete and hanlde decline", async () => {
-      renderNetdataTable()
+      renderNetdataTable({})
       const deleteAction = screen.queryAllByTestId(deleteActionTestid)
 
       await userEvent.click(deleteAction[0])
@@ -147,18 +150,29 @@ describe("Netdata table", () => {
     })
 
     it("should trigger info action when clicking it", async () => {
-      renderNetdataTable()
+      renderNetdataTable({})
       const infoAction = screen.queryAllByTestId(infoActionTestid)
 
       await userEvent.click(infoAction[0])
 
       expect(handleInfo).toHaveBeenCalled()
     })
+
+    it("should disable row action when it meets the requirements", async () => {
+      const rowActions = {
+        delete: { handleAction: handleDelete, isDisabled: true },
+      }
+      renderNetdataTable({ rowActions })
+
+      const deleteAction = screen.queryAllByTestId(deleteActionTestid)[0]
+
+      expect(deleteAction).toBeDisabled()
+    })
   })
 
   describe("Bulk Actions", () => {
     it("should select multiple rows and handle delete bulk action", async () => {
-      renderNetdataTable()
+      renderNetdataTable({})
       const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
       const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
       const expectedDeletedItem = mockData()
@@ -172,12 +186,32 @@ describe("Netdata table", () => {
 
       expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
     })
+    it("should disable bulk action when no rows are selected", async () => {
+      renderNetdataTable({})
+      const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+
+      expect(deleteBulkAction).toBeDisabled()
+    })
+
+    it("should disable bulk action when it meets the requirements", async () => {
+      const bulkActions = {
+        delete: { handleAction: handleDelete, isDisabled: true },
+      }
+      renderNetdataTable({ bulkActions })
+
+      const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+      const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
+
+      await userEvent.click(headerCheckbox)
+
+      expect(deleteBulkAction).toBeDisabled()
+    })
   })
 
   describe("Global Search Filter", () => {
     it("should change global search and filter nodes", async () => {
       jest.useFakeTimers({ advanceTimers: true })
-      renderNetdataTable()
+      renderNetdataTable({})
       const filterParams = "node8"
       const globalSearchFilter = screen.getByTestId("table-global-search-filter")
 
@@ -194,7 +228,7 @@ describe("Netdata table", () => {
 
   describe("OnClickRow", () => {
     it("should allow as to click a row", async () => {
-      renderNetdataTable()
+      renderNetdataTable({})
       const expectedValue = mockData()[0]
       const row = screen.queryAllByTestId(rowTestid)[0]
 
@@ -204,7 +238,7 @@ describe("Netdata table", () => {
     })
 
     it("should not  allow to click a row when is disabled", async () => {
-      renderNetdataTable(true)
+      renderNetdataTable({ disableRow: true })
       const expectedValue = mockData()[0]
 
       const row = screen.queryAllByTestId(rowTestid)[0]
@@ -218,7 +252,7 @@ describe("Netdata table", () => {
 
   describe("Sorting", () => {
     it("should allow as to sort the table", async () => {
-      renderNetdataTable(true)
+      renderNetdataTable({ disableRow: true })
 
       const headCell = screen.getByTestId(headeCellNodesSortTestId)
       const beforeClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
