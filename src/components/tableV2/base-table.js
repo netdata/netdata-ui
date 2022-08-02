@@ -17,10 +17,6 @@ const StyledRow = styled.tr`
   &:nth-child(2n) {
     background: ${getColor("tableRowBg")};
   }
-  cursor: ${({ isClickable }) => isClickable && "pointer"};
-  &:hover {
-    background: ${getColor("borderSecondary")};
-  }
 `
 const StyledHeaderRow = styled.tr`
   background: ${getColor("tableRowBg")};
@@ -222,16 +218,30 @@ Table.Cell = forwardRef(
   }
 )
 
-Table.Row = forwardRef(({ children, onClick, ...props }, ref) => {
+Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) => {
+  const isRowDisabledForClick = disableClickRow()
   const handleClick = e => {
+    if (isRowDisabledForClick) return
     e.persist()
     e.stopPropagation()
     onClick?.()
   }
+
+  const isRowClickable = isRowDisabledForClick === true || onClick !== undefined
+  const cursor = isRowClickable ? "pointer" : "intial"
+
   return (
-    <StyledRow isClickable={!!onClick} onClick={handleClick} ref={ref} {...props}>
+    <Box
+      as={StyledRow}
+      _hover={isRowClickable && { background: "borderSecondary" }}
+      cursor={cursor}
+      isClickable={!!onClick}
+      onClick={handleClick}
+      ref={ref}
+      {...props}
+    >
       {children}
-    </StyledRow>
+    </Box>
   )
 })
 
@@ -267,6 +277,7 @@ export const Pagination = ({
       <Tooltip content="First">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-first"}
             cursor="pointer"
             onClick={handleGoToFirstPage}
             icon="chevron_left_start"
@@ -279,6 +290,7 @@ export const Pagination = ({
       <Tooltip content="Previous">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-previous"}
             cursor="pointer"
             onClick={handleOnPrevious}
             icon="chevron_left"
@@ -288,12 +300,13 @@ export const Pagination = ({
           />
         </Flex>
       </Tooltip>
-      <Text>
+      <Text data-testid={"pagination-counter"}>
         Page {pageCount === 0 ? 0 : pageIndex} of {pageCount}
       </Text>
       <Tooltip content="Next">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-next"}
             cursor="pointer"
             onClick={handleOnNextPage}
             icon="chevron_right"
@@ -305,6 +318,7 @@ export const Pagination = ({
       <Tooltip content="Last">
         <Flex>
           <IconButton
+            data-testid={"pagination-go-to-last"}
             cursor="pointer"
             onClick={handleGoToLastPage}
             icon="chevron_right_end"
