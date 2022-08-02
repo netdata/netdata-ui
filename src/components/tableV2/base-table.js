@@ -226,11 +226,14 @@ Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) =
     e.stopPropagation()
     onClick?.()
   }
-  const cursor = isRowDisabledForClick || onClick === "undefined" ? "intial" : "pointer"
+
+  const isRowClickable = isRowDisabledForClick === true || onClick !== undefined
+  const cursor = isRowClickable ? "pointer" : "intial"
+
   return (
     <Box
       as={StyledRow}
-      _hover={{ background: "borderSecondary" }}
+      _hover={isRowClickable && { background: "borderSecondary" }}
       cursor={cursor}
       isClickable={!!onClick}
       onClick={handleClick}
