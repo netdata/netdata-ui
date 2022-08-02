@@ -8,6 +8,8 @@ const handleDelete = jest.fn()
 const handleDownload = jest.fn()
 const handleToggleAlarms = jest.fn()
 const handleInfo = jest.fn()
+const onClickRow = jest.fn()
+const mockDisableRow = jest.fn()
 
 const bulkActions = {
   delete: { handleAction: handleDelete },
@@ -64,7 +66,7 @@ const infoActionTestid = makeTestId("action-info")
 const headerCheckBoxTestid = makeTestId("header-checkbox")
 const bulkDeleteActionTestid = makeTestId("action-delete-bulk")
 
-const renderNetdataTable = () => {
+const renderNetdataTable = disableRow => {
   renderWithProviders(
     <NetdataTable
       onGlobalSearchChange={onGlobalSearchChange}
@@ -75,11 +77,21 @@ const renderNetdataTable = () => {
       dataColumns={mockDataColumns}
       data={mockData()}
       testPrefix={testPrefix}
+      onClickRow={({ data }) => {
+        onClickRow(data)
+      }}
+      disableClickRow={({ data }) => {
+        mockDisableRow(data)
+        return disableRow
+      }}
     />
   )
 }
 
 describe("Netdata table", () => {
+  afterEach(() => {
+    jest.useRealTimers()
+  })
   it("Should render netdata table", () => {
     renderNetdataTable()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(3)
@@ -169,5 +181,27 @@ describe("Netdata table", () => {
     expect(onGlobalSearchChange).toHaveBeenCalledWith(filterParams)
     expect(globalSearchFilter).toBeInTheDocument()
     expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+  })
+
+  it("should allow as to click a row", async () => {
+    renderNetdataTable()
+    const expectedValue = mockData()[0]
+    const row = screen.queryAllByTestId(rowTestid)[0]
+
+    await userEvent.click(row)
+
+    expect(onClickRow).toHaveBeenCalledWith(expectedValue)
+  })
+
+  it("should not  allow to click a row when is disabled", async () => {
+    renderNetdataTable(true)
+    const expectedValue = mockData()[0]
+
+    const row = screen.queryAllByTestId(rowTestid)[0]
+
+    await userEvent.click(row)
+
+    expect(onClickRow).not.toHaveBeenCalled()
+    expect(mockDisableRow).toHaveBeenCalledWith(expectedValue)
   })
 })
