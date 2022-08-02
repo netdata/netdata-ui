@@ -57,6 +57,7 @@ const nodeCellTestid = makeTestId("cell-nodes")
 const checkboxCellTestid = makeTestId("cell-checkbox")
 const alertsCellTestid = makeTestId("cell-alerts")
 const userCellTestid = makeTestId("cell-user")
+const headeCellNodesSortTestId = makeTestId("head-cell-sortyBy-nodes")
 
 const headRowTestid = makeTestId("headRow")
 const headCellTestid = makeTestId("head-cell")
@@ -105,103 +106,130 @@ describe("Netdata table", () => {
     expect(screen.queryAllByTestId(userCellTestid)).toHaveLength(3)
   })
 
-  it("should filter the columns when changing the column search filter", async () => {
-    renderNetdataTable()
-    const filterParams = "node8"
-    const nodesFilter = screen.getByTestId(nodesColumnFilter)
+  describe("Column filter", () => {
+    it("should filter the columns when changing the column search filter", async () => {
+      renderNetdataTable()
+      const filterParams = "node8"
+      const nodesFilter = screen.getByTestId(nodesColumnFilter)
 
-    await userEvent.type(nodesFilter, filterParams)
+      await userEvent.type(nodesFilter, filterParams)
 
-    expect(nodesFilter).toBeInTheDocument()
-    expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+      expect(nodesFilter).toBeInTheDocument()
+      expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+    })
   })
 
-  it("should trigger confirmation dialog when clicking delete and hanlde confirm", async () => {
-    renderNetdataTable()
-    const deleteAction = screen.queryAllByTestId(deleteActionTestid)
-    const expectedDeletedItem = mockData()[0]
-    await userEvent.click(deleteAction[0])
+  describe("Row Action", () => {
+    it("should trigger confirmation dialog when clicking delete and hanlde confirm", async () => {
+      renderNetdataTable()
+      const deleteAction = screen.queryAllByTestId(deleteActionTestid)
+      const expectedDeletedItem = mockData()[0]
+      await userEvent.click(deleteAction[0])
 
-    expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+      expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
+      await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
 
-    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
-  })
-
-  it("should trigger confirmation dialog when clicking delete and hanlde decline", async () => {
-    renderNetdataTable()
-    const deleteAction = screen.queryAllByTestId(deleteActionTestid)
-
-    await userEvent.click(deleteAction[0])
-
-    expect(screen.getByTestId("layer-container")).toBeInTheDocument()
-
-    await userEvent.click(screen.getByTestId("confirmationDialog-cancelAction"))
-
-    expect(handleDelete).not.toHaveBeenCalled()
-  })
-
-  it("should trigger info action when clicking it", async () => {
-    renderNetdataTable()
-    const infoAction = screen.queryAllByTestId(infoActionTestid)
-
-    await userEvent.click(infoAction[0])
-
-    expect(handleInfo).toHaveBeenCalled()
-  })
-
-  it("should select multiple rows and handle delete bulk action", async () => {
-    renderNetdataTable()
-    const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
-    const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
-    const expectedDeletedItem = mockData()
-
-    await userEvent.click(headerCheckbox)
-    await userEvent.click(deleteBulkAction)
-
-    expect(screen.getByTestId("layer-container")).toBeInTheDocument()
-
-    await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
-
-    expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
-  })
-
-  it("should change global search and filter nodes", async () => {
-    jest.useFakeTimers({ advanceTimers: true })
-    renderNetdataTable()
-    const filterParams = "node8"
-    const globalSearchFilter = screen.getByTestId("table-global-search-filter")
-
-    await act(async () => {
-      await userEvent.type(globalSearchFilter, filterParams)
-      jest.runOnlyPendingTimers()
+      expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
     })
 
-    expect(onGlobalSearchChange).toHaveBeenCalledWith(filterParams)
-    expect(globalSearchFilter).toBeInTheDocument()
-    expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+    it("should trigger confirmation dialog when clicking delete and hanlde decline", async () => {
+      renderNetdataTable()
+      const deleteAction = screen.queryAllByTestId(deleteActionTestid)
+
+      await userEvent.click(deleteAction[0])
+
+      expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+
+      await userEvent.click(screen.getByTestId("confirmationDialog-cancelAction"))
+
+      expect(handleDelete).not.toHaveBeenCalled()
+    })
+
+    it("should trigger info action when clicking it", async () => {
+      renderNetdataTable()
+      const infoAction = screen.queryAllByTestId(infoActionTestid)
+
+      await userEvent.click(infoAction[0])
+
+      expect(handleInfo).toHaveBeenCalled()
+    })
   })
 
-  it("should allow as to click a row", async () => {
-    renderNetdataTable()
-    const expectedValue = mockData()[0]
-    const row = screen.queryAllByTestId(rowTestid)[0]
+  describe("Bulk Actions", () => {
+    it("should select multiple rows and handle delete bulk action", async () => {
+      renderNetdataTable()
+      const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
+      const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+      const expectedDeletedItem = mockData()
 
-    await userEvent.click(row)
+      await userEvent.click(headerCheckbox)
+      await userEvent.click(deleteBulkAction)
 
-    expect(onClickRow).toHaveBeenCalledWith(expectedValue)
+      expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+
+      await userEvent.click(screen.getByTestId("confirmationDialog-confirmAction"))
+
+      expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
+    })
   })
 
-  it("should not  allow to click a row when is disabled", async () => {
-    renderNetdataTable(true)
-    const expectedValue = mockData()[0]
+  describe("Global Search Filter", () => {
+    it("should change global search and filter nodes", async () => {
+      jest.useFakeTimers({ advanceTimers: true })
+      renderNetdataTable()
+      const filterParams = "node8"
+      const globalSearchFilter = screen.getByTestId("table-global-search-filter")
 
-    const row = screen.queryAllByTestId(rowTestid)[0]
+      await act(async () => {
+        await userEvent.type(globalSearchFilter, filterParams)
+        jest.runOnlyPendingTimers()
+      })
 
-    await userEvent.click(row)
+      expect(onGlobalSearchChange).toHaveBeenCalledWith(filterParams)
+      expect(globalSearchFilter).toBeInTheDocument()
+      expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+    })
+  })
 
-    expect(onClickRow).not.toHaveBeenCalled()
-    expect(mockDisableRow).toHaveBeenCalledWith(expectedValue)
+  describe("OnClickRow", () => {
+    it("should allow as to click a row", async () => {
+      renderNetdataTable()
+      const expectedValue = mockData()[0]
+      const row = screen.queryAllByTestId(rowTestid)[0]
+
+      await userEvent.click(row)
+
+      expect(onClickRow).toHaveBeenCalledWith(expectedValue)
+    })
+
+    it("should not  allow to click a row when is disabled", async () => {
+      renderNetdataTable(true)
+      const expectedValue = mockData()[0]
+
+      const row = screen.queryAllByTestId(rowTestid)[0]
+
+      await userEvent.click(row)
+
+      expect(onClickRow).not.toHaveBeenCalled()
+      expect(mockDisableRow).toHaveBeenCalledWith(expectedValue)
+    })
+  })
+
+  describe("Sorting", () => {
+    it("should allow as to sort the table", async () => {
+      renderNetdataTable(true)
+      const expectedValue = mockData()[0]
+
+      const headCell = screen.getByTestId(headeCellNodesSortTestId)
+      const beforeClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      await userEvent.click(headCell)
+
+      const afterClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforeClickNodeCell).toHaveTextContent("node8")
+      expect(afterClickNodeCell).toHaveTextContent("node10")
+    })
   })
 })
