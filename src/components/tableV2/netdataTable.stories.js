@@ -324,7 +324,9 @@ StoryTable.add("Full Table functionallity", () => {
 
   const rowActions = {
     replace: {
-      handleAction: handleDelete,
+      handleAction: () => {
+        console.log("replaced!")
+      },
       isDisabled: row => row.disabled,
     },
     delete: {
