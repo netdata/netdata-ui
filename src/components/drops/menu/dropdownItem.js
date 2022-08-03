@@ -8,10 +8,10 @@ export const ItemContainer = styled(Flex).attrs({
   as: "li",
   role: "option",
   padding: [2, 4],
-  alignItems: "center",
 })`
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+  alignitems: ${({ alignItems }) => alignItems ?? "center"};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
