@@ -188,7 +188,13 @@ StoryTable.add("Actions", () => {
   const handleAction = data => {
     console.log(data)
   }
-  const rowActions = { delete: { handleAction }, info: { handleAction } }
+  const rowActions = {
+    delete: { handleAction },
+    info: { handleAction },
+    replace: {
+      handleAction,
+    },
+  }
   const mockDataColumns = [
     { header: "Nodes", id: "nodes" },
     { id: "alerts", header: () => <Text strong>Alerts</Text> },
@@ -317,6 +323,10 @@ StoryTable.add("Full Table functionallity", () => {
   }
 
   const rowActions = {
+    replace: {
+      handleAction: handleDelete,
+      isDisabled: row => row.disabled,
+    },
     delete: {
       handleAction: handleDelete,
       isDisabled: row => row.disabled,
