@@ -9,7 +9,7 @@ export const ItemContainer = styled(Flex).attrs({
   role: "option",
   padding: [2, 4],
 })`
-  cursor: pointer;
+  cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   alignitems: ${({ alignItems }) => alignItems ?? "center"};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
