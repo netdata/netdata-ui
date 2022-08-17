@@ -247,6 +247,10 @@ const NetdataTable = ({
   const instance = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
+    filterFns: {
+      comparison,
+      select,
+    },
     state: {
       columnVisibility,
       rowSelection,

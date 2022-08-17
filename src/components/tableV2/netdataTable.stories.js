@@ -337,13 +337,19 @@ StoryTable.add("Full Table functionallity", () => {
   }
 
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", enableFilter: true },
+    {
+      header: "Nodes",
+      id: "nodes",
+      enableFilter: true,
+      cell: ({ getValue }) => getValue(),
+    },
     {
       id: "alerts",
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
+      cell: ({ getValue }) => getValue(),
     },
     {
       header: "user",
