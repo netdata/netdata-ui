@@ -250,7 +250,7 @@ const NetdataTable = ({
     setGlobalFilter(String(value))
   }
 
-  const instance = useReactTable({
+  const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     filterFns: {
@@ -276,7 +276,7 @@ const NetdataTable = ({
   })
 
   useEffect(() => {
-    const { rows } = instance.getSelectedRowModel()
+    const { rows } = table.getSelectedRowModel()
     if (rows) {
       const selectedRows = rows.reduce((acc, { original }) => {
         if (original?.disabled === true) return acc
@@ -286,9 +286,9 @@ const NetdataTable = ({
       setOriginalSelectedRow(selectedRows)
       onRowSelected?.(selectedRows)
     }
-  }, [rowSelection, instance])
+  }, [rowSelection, table])
 
-  const headers = instance.getFlatHeaders()
+  const headers = table.getFlatHeaders()
 
   return (
     <Table
@@ -297,11 +297,11 @@ const NetdataTable = ({
         renderBulkActions({
           bulkActions: availableBulkActions,
           testPrefix,
-          instance,
+          table,
           selectedRows: originalSelectedRows,
         })
       }
-      Pagination={enablePagination && renderPagination({ instance })}
+      Pagination={enablePagination && renderPagination({ table })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
       data-testid={`netdata-table${testPrefix}`}
@@ -314,19 +314,17 @@ const NetdataTable = ({
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-        {instance.getRowModel().rows.map(row => (
+        {table.getRowModel().rows.map(row => (
           <Table.Row
             data-testid={`netdata-table-row${testPrefix}${
               testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
             }`}
             onClick={
-              onClickRow &&
-              (() => onClickRow({ data: row.original, table: instance, fullRow: row }))
+              onClickRow && (() => onClickRow({ data: row.original, table: table, fullRow: row }))
             }
             key={row.id}
             disableClickRow={() =>
-              disableClickRow &&
-              disableClickRow({ data: row.original, table: instance, fullRow: row })
+              disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
             }
           >
             {row.getVisibleCells().map(cell => {
@@ -417,7 +415,7 @@ const renderHeadCell = ({ headers, enableSorting, testPrefix }) => {
   return HeadCell
 }
 
-const renderPagination = ({ instance }) => {
+const renderPagination = ({ table }) => {
   const {
     nextPage,
     previousPage,
@@ -426,9 +424,9 @@ const renderPagination = ({ instance }) => {
     getPageCount,
     setPageIndex,
     resetPageIndex,
-  } = instance
-  const pageSize = instance.getState().pagination.pageSize
-  const pageIndex = instance.getState().pagination.pageIndex
+  } = table
+  const pageSize = table.getState().pagination.pageSize
+  const pageIndex = table.getState().pagination.pageIndex
 
   return (
     <Pagination
@@ -452,7 +450,7 @@ const renderActions = ({ actions, testPrefix }) => {
     header: () => {
       return "Actions"
     },
-    cell: ({ row, instance }) => {
+    cell: ({ row, table }) => {
       return (
         <Flex data-testid="action-cell" height="100%" gap={2}>
           {actions.map(
@@ -493,7 +491,7 @@ const renderActions = ({ actions, testPrefix }) => {
                 key={id}
                 id={id}
                 icon={icon}
-                handleAction={() => handleAction(row.original, instance)}
+                handleAction={() => handleAction(row.original, table)}
                 tooltipText={tooltipText}
                 testPrefix={testPrefix}
                 currentRow={row}
@@ -510,7 +508,7 @@ const renderActions = ({ actions, testPrefix }) => {
   }
 }
 
-const renderBulkActions = ({ bulkActions, instance, testPrefix, selectedRows }) => {
+const renderBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => {
   if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" />
   return bulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
@@ -523,7 +521,7 @@ const renderBulkActions = ({ bulkActions, instance, testPrefix, selectedRows }) 
           visible={visible}
           id={id}
           icon={icon}
-          handleAction={() => handleAction(selectedRows, instance)}
+          handleAction={() => handleAction(selectedRows, table)}
           tooltipText={tooltipText}
           disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
           background="elementBackground"
