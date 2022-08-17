@@ -54,8 +54,8 @@ StoryTable.add("Base Table", () => {
 
 StoryTable.add("Simple Netdata Table", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -72,11 +72,12 @@ StoryTable.add("Simple Netdata Table", () => {
 
 StoryTable.add("Filters at header cell", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", enableFilter: true },
+    { header: "Nodes", id: "nodes", enableFilter: true, cell: ({ getValue }) => getValue() },
     {
       id: "alerts",
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
+      cell: ({ getValue }) => getValue(),
       filterFn: (row, columnId, value) => {
         const { original } = row
         const rowValue = original[columnId]
@@ -101,8 +102,8 @@ StoryTable.add("Filters at header cell", () => {
 StoryTable.add("Row selections", () => {
   const [selectedRows, onRowSelected] = useState([])
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -138,9 +139,9 @@ StoryTable.add("Row selections", () => {
 
 StoryTable.add("Global Filters", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -166,9 +167,9 @@ StoryTable.add("Global Filters", () => {
 
 StoryTable.add("Sorting", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -196,9 +197,9 @@ StoryTable.add("Actions", () => {
     },
   }
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -234,9 +235,9 @@ StoryTable.add("Bulk Actions", () => {
   }
 
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -263,9 +264,9 @@ StoryTable.add("Bulk Actions", () => {
 StoryTable.add("Pagination", () => {
   const paginationOptions = { pageIndex: 0, pageSize: 2 }
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
