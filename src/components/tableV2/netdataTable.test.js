@@ -23,7 +23,7 @@ const mockRowActions = {
 }
 
 const mockDataColumns = [
-  { header: "Nodes", id: "nodes", enableFilter: true },
+  { header: "Nodes", id: "nodes", enableFilter: true, cell: ({ getValue }) => getValue() },
   {
     id: "alerts",
     header: "Text",
@@ -34,6 +34,7 @@ const mockDataColumns = [
 
       return rowValue.toString().includes(value.toString())
     },
+    cell: ({ getValue }) => getValue(),
   },
   {
     header: "user",

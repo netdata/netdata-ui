@@ -54,8 +54,8 @@ StoryTable.add("Base Table", () => {
 
 StoryTable.add("Simple Netdata Table", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -72,11 +72,12 @@ StoryTable.add("Simple Netdata Table", () => {
 
 StoryTable.add("Filters at header cell", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", enableFilter: true },
+    { header: "Nodes", id: "nodes", enableFilter: true, cell: ({ getValue }) => getValue() },
     {
       id: "alerts",
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
+      cell: ({ getValue }) => getValue(),
       filterFn: (row, columnId, value) => {
         const { original } = row
         const rowValue = original[columnId]
@@ -101,8 +102,8 @@ StoryTable.add("Filters at header cell", () => {
 StoryTable.add("Row selections", () => {
   const [selectedRows, onRowSelected] = useState([])
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text>Alerts</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -138,9 +139,9 @@ StoryTable.add("Row selections", () => {
 
 StoryTable.add("Global Filters", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -166,9 +167,9 @@ StoryTable.add("Global Filters", () => {
 
 StoryTable.add("Sorting", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -196,9 +197,9 @@ StoryTable.add("Actions", () => {
     },
   }
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -234,9 +235,9 @@ StoryTable.add("Bulk Actions", () => {
   }
 
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -263,9 +264,9 @@ StoryTable.add("Bulk Actions", () => {
 StoryTable.add("Pagination", () => {
   const paginationOptions = { pageIndex: 0, pageSize: 2 }
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes" },
-    { id: "alerts", header: () => <Text strong>Alerts</Text> },
-    { id: "user", header: () => <Text strong>Users</Text> },
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
   ]
 
   const mockData = () => [
@@ -337,22 +338,35 @@ StoryTable.add("Full Table functionallity", () => {
   }
 
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", enableFilter: true },
     {
+      accessorKey: "nodes",
+
+      header: "Nodes",
+      id: "nodes",
+      enableFilter: true,
+      cell: ({ getValue }) => getValue(),
+    },
+    {
+      accessorKey: "alerts",
+
       id: "alerts",
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
+      cell: ({ getValue }) => getValue(),
     },
     {
+      accessorKey: "user",
+
       header: "user",
       id: "user",
       enableFilter: true,
       enableSorting: false,
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      cell: ({ getValue }) => getValue(),
     },
     {
+      accessorKey: "status",
       header: "status",
       id: "status",
       enableFilter: true,
@@ -360,7 +374,7 @@ StoryTable.add("Full Table functionallity", () => {
       size: 80,
       maxSize: 80,
       minSize: 80,
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      cell: ({ getValue }) => getValue(),
       meta: {
         tooltip: "Information",
         filter: {
@@ -375,12 +389,13 @@ StoryTable.add("Full Table functionallity", () => {
       },
     },
     {
+      accessorKey: "untouchable",
       header: "Untouchable",
       id: "untouchable",
       enableFilter: true,
       enableSorting: false,
       filterFn: "select",
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      cell: ({ getValue }) => getValue(),
       meta: {
         filter: {
           component: "select",

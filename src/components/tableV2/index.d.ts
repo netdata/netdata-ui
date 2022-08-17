@@ -1,4 +1,10 @@
-import { ColumnDef, FilterFnOption, PaginationState, VisibilityTableState, TableInstance } from "@tanstack/table-core"
+import {
+  ColumnDef,
+  FilterFnOption,
+  PaginationState,
+  VisibilityTableState,
+  Table,
+} from "@tanstack/table-core"
 import { supportedBulkActions, supportedRowActions } from "./netdataTable"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
@@ -12,7 +18,7 @@ export type NetdataTableProps<T = any, D = any> = {
   enablePagination?: boolean
   bulkActions?: {
     [K in keyof typeof supportedBulkActions]?: {
-      handleAction: ((rowData: D, instance: TableInstance<D>) => void ),
+      handleAction: (rowData: D, instance: Table<D>) => void
       icon?: string
       confirmation?: boolean
       tooltipText?: string
@@ -25,7 +31,7 @@ export type NetdataTableProps<T = any, D = any> = {
   }
   rowActions?: {
     [K in keyof typeof supportedRowActions]?: {
-      handleAction: ((rowData: D, instance: TableInstance<D>) => void ),
+      handleAction: (rowData: D, instance: Table<D>) => void
       icon?: string
       confirmation?: boolean
       tooltipText?: string
@@ -34,8 +40,8 @@ export type NetdataTableProps<T = any, D = any> = {
       confirmLabel?: string
       declineLabel?: string
       actionButtonDirection?: "default" | "reverse"
-      isDisabled?: boolean | ((rowData: D) => boolean )
-      isVisible?: boolean | ((rowData: D) => boolean )
+      isDisabled?: boolean | ((rowData: D) => boolean)
+      isVisible?: boolean | ((rowData: D) => boolean)
     }
   }
   testPrefix?: string
@@ -46,7 +52,7 @@ export type NetdataTableProps<T = any, D = any> = {
   onClickRow?: (value: any) => void
   disableClickRow?: (value: any) => void
 
-  /**This is an escape hatch test id generator, we use this when we want to have 
+  /**This is an escape hatch test id generator, we use this when we want to have
    * dynamic generator tesids depending on the row values
    */
   testPrefixCallback?: (rowData: D) => string

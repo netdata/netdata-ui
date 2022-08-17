@@ -219,7 +219,7 @@ Table.Cell = forwardRef(
 )
 
 Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) => {
-  const isRowDisabledForClick = disableClickRow()
+  const isRowDisabledForClick = disableClickRow && disableClickRow()
   const handleClick = e => {
     if (isRowDisabledForClick) return
     e.persist()
