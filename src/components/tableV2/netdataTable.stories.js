@@ -339,12 +339,16 @@ StoryTable.add("Full Table functionallity", () => {
 
   const mockDataColumns = [
     {
+      accessorKey: "nodes",
+
       header: "Nodes",
       id: "nodes",
       enableFilter: true,
       cell: ({ getValue }) => getValue(),
     },
     {
+      accessorKey: "alerts",
+
       id: "alerts",
       header: () => <Text>Alerts</Text>,
       enableFilter: true,
@@ -353,13 +357,16 @@ StoryTable.add("Full Table functionallity", () => {
       cell: ({ getValue }) => getValue(),
     },
     {
+      accessorKey: "user",
+
       header: "user",
       id: "user",
       enableFilter: true,
       enableSorting: false,
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      cell: ({ getValue }) => getValue(),
     },
     {
+      accessorKey: "status",
       header: "status",
       id: "status",
       enableFilter: true,
@@ -367,7 +374,7 @@ StoryTable.add("Full Table functionallity", () => {
       size: 80,
       maxSize: 80,
       minSize: 80,
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      cell: ({ getValue }) => getValue(),
       meta: {
         tooltip: "Information",
         filter: {
@@ -382,12 +389,13 @@ StoryTable.add("Full Table functionallity", () => {
       },
     },
     {
+      accessorKey: "untouchable",
       header: "Untouchable",
       id: "untouchable",
       enableFilter: true,
       enableSorting: false,
       filterFn: "select",
-      cell: ({ getValue }) => <Text strong>{getValue()}</Text>,
+      cell: ({ getValue }) => getValue(),
       meta: {
         filter: {
           component: "select",

@@ -89,13 +89,19 @@ export const supportedRowActions = {
   },
 }
 
+const includesString = (row, columnId, filterValue) => {
+  const search = filterValue.toLowerCase()
+
+  return String(row.getValue(columnId))?.toLowerCase().includes(search)
+}
+
 const NetdataTable = ({
   dataColumns,
   data,
   onRowSelected,
   onGlobalSearchChange,
   enableSelection,
-  globalFilterFn,
+  globalFilterFn = includesString,
   tableRef,
   enableSorting,
   rowActions = {},
