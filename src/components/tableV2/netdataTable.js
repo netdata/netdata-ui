@@ -1,5 +1,5 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 
 import Table, { Pagination } from "./base-table"
 
@@ -27,6 +27,7 @@ import { comparison, select } from "./filterFns"
 import SelectFilter from "./selectFilter"
 import Tooltip from "src/components/drops/tooltip"
 import { Icon } from "src/components/icon"
+import ColumnsMenu from "./columnsMenu"
 
 const ROW_SELECTION_MAX_SIZE = 10
 const ROW_SELECTION_MIN_SIZE = 10
@@ -48,6 +49,7 @@ export const supportedBulkActions = {
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
   addEntry: { icon: "plus", alwaysEnabled: true },
   remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
+  columnVisibillity: { icon: "gear", alwaysEnabled: true },
 }
 
 export const supportedRowActions = {
@@ -113,12 +115,25 @@ const NetdataTable = ({
     pageIndex: 0,
     pageSize: 100,
   },
-  columnVisibility,
+  columnVisibility: intialColumnVisibility,
   testPrefix = "",
   sortBy = [],
   testPrefixCallback,
   dataGa,
+  areColumnsTriggerable = false,
 }) => {
+  const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
+  const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
+
+  const makeColumnVisibilityAction = useMemo(
+    () => ({
+      handleAction: () => setIsColumnDropdownVisible(true),
+      visible: areColumnsTriggerable,
+      icon: "gear",
+      alwaysEnabled: true,
+    }),
+    [areColumnsTriggerable]
+  )
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
   const [rowSelection, setRowSelection] = useState({})
@@ -163,7 +178,7 @@ const NetdataTable = ({
 
   const availableBulkActions = Object.keys(bulkActions).reduce((acc, currentActionKey) => {
     const isBulkActionSupported = supportedBulkActions[currentActionKey]
-    if (!isBulkActionSupported) return []
+    if (!isBulkActionSupported) return acc
     const {
       icon,
       confirmation,
@@ -273,6 +288,7 @@ const NetdataTable = ({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    onColumnVisibilityChange: setColumnVisibility,
   })
 
   useEffect(() => {
@@ -293,14 +309,24 @@ const NetdataTable = ({
   return (
     <Table
       selectedRows={originalSelectedRows}
-      bulkActions={() =>
-        renderBulkActions({
-          bulkActions: availableBulkActions,
-          testPrefix,
-          table,
-          selectedRows: originalSelectedRows,
-        })
-      }
+      bulkActions={() => {
+        return [
+          ...renderBulkActions({
+            bulkActions: availableBulkActions,
+            testPrefix,
+            table,
+            selectedRows: originalSelectedRows,
+          }),
+          ...renderActionWithDropdown({
+            actions: [makeColumnVisibilityAction],
+            table,
+            testPrefix,
+            isOpen: isColumnDropdownVisible,
+            onClose: () => setIsColumnDropdownVisible(false),
+            selectedRows: originalSelectedRows,
+          }),
+        ]
+      }}
       Pagination={enablePagination && renderPagination({ table })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
@@ -514,8 +540,10 @@ const renderBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => 
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
       const visible = typeof isVisible === "function" ? isVisible() : isVisible
+      const actionRef = useRef()
       return (
         <Action
+          ref={actionRef}
           testPrefix={`-bulk${testPrefix}`}
           key={id}
           visible={visible}
@@ -593,6 +621,50 @@ const ColumnCheckbox = ({ checked, indeterminate, onChange, disabled, ...rest })
       onChange={onChange}
       {...rest}
     />
+  )
+}
+
+const renderActionWithDropdown = ({
+  actions,
+  table,
+  testPrefix,
+  selectedRows,
+  isOpen,
+  onClose,
+}) => {
+  if (!actions || !actions.length) return <Box aria-hidden as="span" />
+  return actions.map(
+    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
+      const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
+      const visible = typeof isVisible === "function" ? isVisible() : isVisible
+      const actionRef = useRef()
+
+      return (
+        <>
+          <Action
+            ref={actionRef}
+            testPrefix={`-bulk${testPrefix}`}
+            key={id}
+            visible={visible}
+            id={id}
+            icon={icon}
+            handleAction={() => handleAction(selectedRows, table)}
+            tooltipText={tooltipText}
+            disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
+            background="elementBackground"
+            iconColor="elementBackground"
+            selectedRows={selectedRows}
+            {...rest}
+          />
+          <ColumnsMenu
+            parentRef={actionRef}
+            isOpen={isOpen}
+            columns={table.getAllLeafColumns()}
+            onClose={onClose}
+          />
+        </>
+      )
+    }
   )
 }
 
