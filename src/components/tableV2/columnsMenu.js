@@ -9,15 +9,21 @@ const ColumnsMenu = ({ parentRef, isOpen, columns, onClose }) => {
     return (
       <Drop target={parentRef.current} onClickOutside={onClose}>
         <Flex column gap={2}>
-          {columns.map(column => (
-            <ListItem key={column.id}>
-              <Checkbox
-                checked={column.getIsVisible()}
-                onChange={column.getToggleVisibilityHandler()}
-                label={column.id}
-              />
-            </ListItem>
-          ))}
+          {columns.map(column => {
+            {
+              return (
+                column.getCanHide() && (
+                  <ListItem key={column.id}>
+                    <Checkbox
+                      checked={column.getIsVisible()}
+                      onChange={column.getToggleVisibilityHandler()}
+                      label={column.id}
+                    />
+                  </ListItem>
+                )
+              )
+            }
+          })}
         </Flex>
       </Drop>
     )

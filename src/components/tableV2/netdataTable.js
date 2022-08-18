@@ -472,6 +472,7 @@ const renderPagination = ({ table }) => {
 const renderActions = ({ actions, testPrefix }) => {
   return {
     id: "actions",
+    enableHiding: false,
 
     header: () => {
       return "Actions"
@@ -565,6 +566,7 @@ const renderBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => 
 const renderRowSelection = ({ testPrefix }) => {
   return {
     id: "checkbox",
+    enableHiding: false,
     header: ({ table }) => {
       return (
         <ColumnCheckbox
