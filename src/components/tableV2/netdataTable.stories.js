@@ -345,6 +345,7 @@ StoryTable.add("Full Table functionallity", () => {
       id: "nodes",
       enableFilter: true,
       cell: ({ getValue }) => getValue(),
+      enableHiding: false,
     },
     {
       accessorKey: "alerts",
@@ -444,7 +445,7 @@ StoryTable.add("Full Table functionallity", () => {
       data={mockData()}
       testPrefixCallback={row => row.nodes}
       disableClickRow={({ data }) => data.alerts > 15}
-      areColumnsTriggerable={true}
+      enableColumnVisibility
     />
   )
 })

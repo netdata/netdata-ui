@@ -120,7 +120,7 @@ const NetdataTable = ({
   sortBy = [],
   testPrefixCallback,
   dataGa,
-  areColumnsTriggerable = false,
+  enableColumnVisibility = false,
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
@@ -128,11 +128,11 @@ const NetdataTable = ({
   const makeColumnVisibilityAction = useMemo(
     () => ({
       handleAction: () => setIsColumnDropdownVisible(true),
-      visible: areColumnsTriggerable,
+      visible: enableColumnVisibility,
       icon: "gear",
       alwaysEnabled: true,
     }),
-    [areColumnsTriggerable]
+    [enableColumnVisibility]
   )
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
