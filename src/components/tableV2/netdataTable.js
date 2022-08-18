@@ -308,27 +308,35 @@ const NetdataTable = ({
 
   const headers = table.getFlatHeaders()
 
-  return (
-    <Table
-      selectedRows={originalSelectedRows}
-      bulkActions={() => {
-        return [
-          ...renderBulkActions({
+  const makeBulkActions = () => {
+    const columnVisibillityAction = renderActionWithDropdown({
+      actions: [makeColumnVisibilityAction],
+      table,
+      testPrefix,
+      isOpen: isColumnDropdownVisible,
+      onClose: () => setIsColumnDropdownVisible(false),
+      selectedRows: originalSelectedRows,
+    })
+
+    const bulkActions = [
+      availableBulkActions
+        ? renderBulkActions({
             bulkActions: availableBulkActions,
             testPrefix,
             table,
             selectedRows: originalSelectedRows,
-          }),
-          ...renderActionWithDropdown({
-            actions: [makeColumnVisibilityAction],
-            table,
-            testPrefix,
-            isOpen: isColumnDropdownVisible,
-            onClose: () => setIsColumnDropdownVisible(false),
-            selectedRows: originalSelectedRows,
-          }),
-        ]
-      }}
+          })
+        : [],
+      columnVisibillityAction,
+    ]
+
+    return bulkActions
+  }
+
+  return (
+    <Table
+      selectedRows={originalSelectedRows}
+      bulkActions={() => makeBulkActions()}
       Pagination={enablePagination && renderPagination({ table })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
