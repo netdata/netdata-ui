@@ -228,6 +228,7 @@ const NetdataTable = ({
           minSize = 10,
           sortingFn,
           accessorKey,
+          enableHiding = true,
         },
         index
       ) => {
@@ -245,6 +246,7 @@ const NetdataTable = ({
           enableGlobalFilter,
           isPlaceholder,
           meta,
+          enableHiding,
           size,
           ...(maxSize ? { maxSize } : {}),
           minSize,
