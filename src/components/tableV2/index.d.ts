@@ -47,6 +47,7 @@ export type NetdataTableProps<T = any, D = any> = {
   testPrefix?: string
   globalFilterFn?: FilterFnOption<T>
   columnVisibility?: VisibilityTableState
+  enableColumnVisibility?: boolean
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
