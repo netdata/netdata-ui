@@ -290,6 +290,35 @@ StoryTable.add("Pagination", () => {
   )
 })
 
+StoryTable.add("Expand Functionallity", () => {
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
+  ]
+
+  const mockData = () => [
+    {
+      nodes: "node1",
+      alerts: "",
+      user: "",
+      subRows: [
+        { nodes: "node2", alerts: 11, user: "alex" },
+        { nodes: "node34", alerts: 22, user: "manolis" },
+        { nodes: "node5", alerts: 15, user: "achile" },
+        { nodes: "node6", alerts: 11, user: "barba" },
+        { nodes: "node7", alerts: 22, user: "decker" },
+      ],
+    },
+  ]
+
+  return (
+    <Box width="800px">
+      <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+    </Box>
+  )
+})
+
 StoryTable.add("Full Table functionallity", () => {
   const onGlobalSearchChange = value => {
     console.log(value)

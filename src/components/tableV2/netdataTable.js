@@ -8,6 +8,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  getExpandedRowModel,
   flexRender,
   useReactTable,
 } from "@tanstack/react-table"
@@ -122,6 +123,8 @@ const NetdataTable = ({
   dataGa,
   enableColumnVisibility = false,
 }) => {
+  const [expanded, setExpanded] = useState({})
+
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
 
@@ -268,6 +271,8 @@ const NetdataTable = ({
   }
 
   const table = useReactTable({
+    onExpandedChange: setExpanded,
+    getSubRows: row => row.subRows,
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
     filterFns: {
@@ -280,6 +285,7 @@ const NetdataTable = ({
       globalFilter,
       sorting,
       pagination,
+      expanded,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
@@ -291,6 +297,7 @@ const NetdataTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
     onColumnVisibilityChange: setColumnVisibility,
+    getExpandedRowModel: getExpandedRowModel(),
   })
 
   useEffect(() => {
