@@ -1,6 +1,6 @@
 import React from "react"
 import Drop from "src/components/drops/drop/index.js"
-import { ListItem } from "src/components/typography"
+import { Text, ListItem } from "src/components/typography"
 import { Checkbox } from "src/components/checkbox"
 import Flex from "src/components/templates/flex"
 
@@ -15,7 +15,19 @@ const ColumnsMenu = ({ parentRef, isOpen, columns, onClose }) => {
     return (
       <Drop target={parentRef.current} onClickOutside={onClose}>
         <Dropdown background="dropdown" column round={1} width={50}>
-          <Flex column gap={2}>
+          <Flex column>
+            <Flex
+              padding={[2]}
+              border={{
+                size: "1px",
+                type: "solid",
+                side: "bottom",
+                color: "borderSecondary",
+              }}
+            >
+              <Text strong>Columns</Text>
+            </Flex>
+
             {columns.map(column => {
               {
                 return (
@@ -26,6 +38,12 @@ const ColumnsMenu = ({ parentRef, isOpen, columns, onClose }) => {
                       alignItems="center"
                       justifyContent="between"
                       key={column.id}
+                      border={{
+                        size: "1px",
+                        type: "solid",
+                        side: "bottom",
+                        color: "borderSecondary",
+                      }}
                     >
                       <Checkbox
                         checked={column.getIsVisible()}
