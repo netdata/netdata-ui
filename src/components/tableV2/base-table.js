@@ -33,7 +33,8 @@ const StyledSortIcon = styled(Icon)`
   position: absolute;
   top: 0;
   bottom: 0;
-  height: 20px;
+  height: 16px;
+  width: 16px;
   margin: auto;
 `
 const StyledPagination = styled(Flex)`
