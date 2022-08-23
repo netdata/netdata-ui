@@ -29,6 +29,7 @@ const Action = forwardRef(
       selectedRows,
       disabledTooltipText,
       iconColor,
+      flavour = "borderless",
     },
     ref
   ) => {
@@ -93,7 +94,7 @@ const Action = forwardRef(
               disabled={disabled}
               onClick={onActionClicked}
               icon={icon}
-              flavour="borderless"
+              flavour={flavour}
               iconColor={iconColor}
             />
           </Flex>

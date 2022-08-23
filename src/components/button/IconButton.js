@@ -14,6 +14,7 @@ const IconButton = ({
   iconSize,
   ...props
 }) => {
+  const isDefaultFlavour = flavour === "default"
   return (
     <Box
       cursor="pointer"
@@ -23,9 +24,9 @@ const IconButton = ({
       flavour={flavour}
       disabled={disabled}
       icon={icon}
-      iconColor={iconColor}
+      iconColor={isDefaultFlavour ? "white" : iconColor}
       iconSize={iconSize}
-      neutral
+      neutral={!isDefaultFlavour}
       {...props}
     ></Box>
   )

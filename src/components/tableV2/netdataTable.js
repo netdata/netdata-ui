@@ -47,7 +47,7 @@ export const supportedBulkActions = {
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
-  addEntry: { icon: "plus", alwaysEnabled: true, iconColor: "primary" },
+  addEntry: { icon: "plus", alwaysEnabled: true, flavour: "default" },
   remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
   columnVisibillity: { icon: "gear", alwaysEnabled: true },
 }
@@ -157,6 +157,8 @@ const NetdataTable = ({
       handleDecline,
       actionButtonDirection,
       disabledTooltipText,
+      flavour,
+      iconColor,
     } = supportedRowActions[currentActionKey]
     const currentAction = rowActions[currentActionKey]
     acc.push({
@@ -171,6 +173,8 @@ const NetdataTable = ({
       handleDecline,
       actionButtonDirection,
       disabledTooltipText,
+      flavour,
+      iconColor,
       ...currentAction,
     })
     return acc
@@ -191,6 +195,7 @@ const NetdataTable = ({
       actionButtonDirection,
       alwaysEnabled,
       iconColor,
+      flavour,
     } = supportedBulkActions[currentActionKey]
     const currentAction = bulkActions[currentActionKey]
     acc.push({
@@ -206,6 +211,7 @@ const NetdataTable = ({
       actionButtonDirection,
       alwaysEnabled,
       iconColor,
+      flavour,
       ...currentAction,
     })
     return acc
