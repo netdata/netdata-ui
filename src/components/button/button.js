@@ -27,6 +27,7 @@ export const Button = forwardRef(
       hasIcon={!!icon || isLoading}
       onClick={isLoading ? undefined : onClick}
       ref={ref}
+      iconColor={iconColor}
       {...rest}
     >
       {isLoading && <LoaderIcon className="button-icon" />}

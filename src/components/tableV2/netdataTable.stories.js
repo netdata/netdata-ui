@@ -313,14 +313,14 @@ StoryTable.add("Full Table functionallity", () => {
   }
 
   const bulkActions = {
-    delete: { handleAction: handleDelete },
-    download: { handleAction: handleDownload },
-    toggleAlarm: { handleAction: handleToggleAlarms },
     addEntry: {
       handleAction: () => {
         console.log("clicked")
       },
     },
+    delete: { handleAction: handleDelete },
+    download: { handleAction: handleDownload },
+    toggleAlarm: { handleAction: handleToggleAlarms },
   }
 
   const rowActions = {

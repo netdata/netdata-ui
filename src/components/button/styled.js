@@ -43,10 +43,11 @@ const getMain = props =>
     : getColor("mainBackground")(props)
 const getTransparent = getColor(["transparent", "full"])
 
-const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
+const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
   const getErrorColor = danger ? getColor("error") : undefined
   const getWarningColor = warning ? getColor("warning") : undefined
   const getSpecialColor = getErrorColor || getWarningColor
+  const specialIconColor = iconColor ? getColor(iconColor) : undefined
 
   const flavours = {
     [DEFAULT]: {
@@ -59,6 +60,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
       border: getSpecialColor || getPrimaryColor,
       borderHover: getSpecialColor || getHoverColor,
       borderActive: getSpecialColor || getAccentColor,
+      iconColor: specialIconColor || getTextColor,
     },
     [HOLLOW]: {
       color: getSpecialColor || getPrimaryColor,
@@ -70,6 +72,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
       border: getSpecialColor || getBorderColor,
       borderHover: getSpecialColor || getHoverColor,
       borderActive: getSpecialColor || getAccentColor,
+      iconColor: specialIconColor || getTextColor,
     },
     [BORDER_LESS]: {
       color: getSpecialColor || getPrimaryColor,
@@ -81,6 +84,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning }) => {
       border: getTransparent,
       borderHover: getTransparent,
       borderActive: getTransparent,
+      iconColor: specialIconColor || getTextColor,
     },
   }
 
@@ -170,7 +174,7 @@ export const StyledButton = styled.button.attrs(props => ({
     }
 
     .button-icon__color {
-      fill: ${props => props.colors.color(props)};
+      fill: ${props => props.colors.iconColor(props)};
     }
     .ntd-spinner {
       fill: none;
