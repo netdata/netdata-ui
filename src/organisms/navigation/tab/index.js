@@ -20,7 +20,7 @@ const Tab = ({
   dragHandleProps,
   tabRef,
   showBorderLeft,
-  tooltip = "",
+  tooltip,
   ...rest
 }) => {
   const [hover, setHover] = useState()
