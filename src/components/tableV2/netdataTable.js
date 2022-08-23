@@ -47,7 +47,7 @@ export const supportedBulkActions = {
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
-  addEntry: { icon: "plus", alwaysEnabled: true },
+  addEntry: { icon: "plus", alwaysEnabled: true, iconColor: "primary" },
   remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
   columnVisibillity: { icon: "gear", alwaysEnabled: true },
 }
@@ -190,6 +190,7 @@ const NetdataTable = ({
       handleDecline,
       actionButtonDirection,
       alwaysEnabled,
+      iconColor,
     } = supportedBulkActions[currentActionKey]
     const currentAction = bulkActions[currentActionKey]
     acc.push({
@@ -204,6 +205,7 @@ const NetdataTable = ({
       handleDecline,
       actionButtonDirection,
       alwaysEnabled,
+      iconColor,
       ...currentAction,
     })
     return acc
@@ -564,7 +566,6 @@ const renderBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => 
           tooltipText={tooltipText}
           disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
           background="elementBackground"
-          iconColor="elementBackground"
           selectedRows={selectedRows}
           {...rest}
         />
@@ -664,7 +665,6 @@ const renderActionWithDropdown = ({
             tooltipText={tooltipText}
             disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
             background="elementBackground"
-            iconColor="elementBackground"
             selectedRows={selectedRows}
             {...rest}
           />
