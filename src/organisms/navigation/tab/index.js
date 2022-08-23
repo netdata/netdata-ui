@@ -3,6 +3,7 @@ import { Icon } from "src/components/icon/icon"
 import Flex from "src/components/templates/flex"
 
 import useStylesTab from "./use-styles-tab"
+import Tooltip from "src/components/drops/tooltip"
 
 const Tab = ({
   active,
@@ -19,6 +20,7 @@ const Tab = ({
   dragHandleProps,
   tabRef,
   showBorderLeft,
+  tooltip = "",
   ...rest
 }) => {
   const [hover, setHover] = useState()
@@ -85,7 +87,9 @@ const Tab = ({
         {closable && (
           <Icon name="x" size="small" color={active ? "text" : "border"} onClick={onCloseTab} />
         )}
-        {!closable && icon && renderIcon(icon)}
+        <Tooltip content={tooltip} align={tooltip ? "bottom" : "top"} isBasic>
+          {!closable && icon && renderIcon(icon)}
+        </Tooltip>
       </Flex>
       {!collapsed && <Flex {...dragHandleProps}>{children}</Flex>}
     </Flex>
