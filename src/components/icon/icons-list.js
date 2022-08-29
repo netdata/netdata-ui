@@ -145,6 +145,7 @@ import osFreeBSD from "./assets/os/freeBSD.svg"
 import osGentoo from "./assets/os/gentoo.svg"
 import osLinux from "./assets/os/linux.svg"
 import osLinuxColor from "./assets/os/linux_color.svg"
+import osLinuxManjaro from "./assets/os/linux_manjaro.svg"
 import osMacOSX from "./assets/os/macOSX.svg"
 import osOracle from "./assets/os/oracle.svg"
 import osOracleColor from "./assets/os/oracle_color.svg"
@@ -437,6 +438,7 @@ export const iconsList = {
   osGentoo,
   osLinux,
   osLinuxColor,
+  osLinuxManjaro,
   osMacOSX,
   osOracle,
   osOracleColor,
