@@ -23,16 +23,14 @@ const AlertMasterCard = forwardRef(
     const commonProps = { height, round, size }
     const iconProps = {
       background: masterCardColorMap.alert,
-      color: "neutral",
+      color: "text",
       icon: "alarm_bell",
-      margin: [0, 0, 0, -0.25],
       zIndex: 1,
       ...commonProps,
+      height: "18px",
     }
     const pillProps = {
       normal,
-      padding: [1, 2],
-      margin: [0, 0, 0, -1],
       ...commonProps,
       ...rest,
     }
@@ -47,42 +45,33 @@ const AlertMasterCard = forwardRef(
     const pillLeftProps = {
       background: pillLeftBackground,
       position: "relative",
+      margin: [0, 0, 0, -3],
+      padding: [1, 2, 1, 4],
       ...pillProps,
       ...pillLeft,
+      height: "18px",
     }
     const pillRightProps = {
       background: pillRightBackground,
+      margin: [0, 0, 0, -3],
+      padding: [1, 2, 1, 4],
       ...pillProps,
       ...pillRight,
+      height: "18px",
     }
 
     return (
       <MasterCardContainer
-        background={pillLeftBackground}
         data-testid={`${testId}-container`}
         onClick={onClick}
         ref={ref}
         {...commonProps}
       >
         <MasterCardPill data-testid={`${testId}-icon-pill`} {...iconProps} />
-        <MasterCardContainer
-          background={pillRightBackground}
-          data-testid={testId}
-          {...commonProps}
-        >
-          {children || (
-            <>
-              <MasterCardPill
-                data-testid={`${testId}-left-pill`}
-                {...pillLeftProps}
-              />
-              <MasterCardPill
-                data-testid={`${testId}-right-pill`}
-                {...pillRightProps}
-              />
-            </>
-          )}
-        </MasterCardContainer>
+        <>
+          <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />
+          <MasterCardPill data-testid={`${testId}-right-pill`} {...pillRightProps} />
+        </>
       </MasterCardContainer>
     )
   }

@@ -10,9 +10,10 @@ export const MasterCardContainer = styled(Flex).attrs(
   ({ background, height, onClick, round = 999, size }) => ({
     background,
     ...(onClick && { cursor: "pointer" }),
-    height: getPillHeight(height, size),
+    position: "relative",
     round,
     size,
+    border: { side: "all", color: "alertBorder" },
   })
 )`
   * {
@@ -21,20 +22,32 @@ export const MasterCardContainer = styled(Flex).attrs(
 `
 
 export const PillContainer = styled(Flex).attrs(
-  ({ round = 999, hollow, flavour, borderColor, onClick, padding, size, tiny, width, height, position }) => ({
-      padding: getPillPadding(padding, size, tiny),
-      round,
-      border: {
-          side: "all",
-          color: borderColor || getPillColor(hollow ? "border" : "background", flavour),
-          size: "1px",
-      },
-      ...(onClick && { cursor: "pointer" }),
-      height: getPillHeight(height, size, tiny),
-      width: getPillWidth(width, tiny),
-      justifyContent: "center",
-      alignItems: "center",
-      position,
+  ({
+    round = 999,
+    hollow,
+    flavour,
+    borderColor,
+    onClick,
+    padding,
+    size,
+    tiny,
+    width,
+    height,
+    position,
+  }) => ({
+    padding: getPillPadding(padding, size, tiny),
+    round,
+    border: {
+      side: "all",
+      color: borderColor || getPillColor(hollow ? "border" : "background", flavour),
+      size: "1px",
+    },
+    ...(onClick && { cursor: "pointer" }),
+    height: getPillHeight(height, size, tiny),
+    width: getPillWidth(width, tiny),
+    justifyContent: "center",
+    alignItems: "center",
+    position,
   })
 )`
   ${getPillBackground};

@@ -73,6 +73,14 @@ const appColors = {
   neutralPillBorder: rawColors.neutral.iron,
   neutralPillColor: rawColors.neutral.bluebayoux,
 
+  //Alert MasterCard
+  alertBorder: rawColors.neutral.porcelain,
+  alertIcon: rawColors.neutral.porcelain,
+  idleError: rawColors.neutral.regentgrey,
+  idleWarning: rawColors.neutral.iron,
+  error: rawColors.red.apricot,
+  warning: rawColors.yellow.mustard,
+
   //Table
   tableRowBg: rawColors.neutral.blackhaze,
 }

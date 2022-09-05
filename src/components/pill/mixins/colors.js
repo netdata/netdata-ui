@@ -26,11 +26,11 @@ const colorMap = {
 }
 
 export const masterCardColorMap = {
-  alert: ["neutral", "porcelain"],
-  disabledError: ["neutral", "regentgrey"],
-  disabledWarning: ["neutral", "iron"],
-  error: ["red", "pomegranate"],
-  warning: ["yellow", "seaBuckthorn"],
+  alert: "alertIcon",
+  disabledError: "idleError",
+  disabledWarning: "idleWarning",
+  error: "errorLite",
+  warning: "warningLite",
 }
 
 const getMasterCardColor = flavour => masterCardColorMap[flavour]
