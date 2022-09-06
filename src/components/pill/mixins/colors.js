@@ -1,27 +1,27 @@
 const colorMap = {
   background: {
-    neutral: "neutralPillBg",
+    neutral: "nodeBadgeBackground",
     success: ["green", "netdata"],
     warning: ["yellow", "seaBuckthorn"],
     error: ["red", "pomegranate"],
   },
   hollow: {
-    neutral: "neutralPillBg",
-    success: ["green", "frostee"],
-    warning: ["yellow", "ginfizz"],
-    error: ["red", "lavender"],
+    neutral: "nodeBadgeBackground",
+    success: "nodeBadgeBackground",
+    warning: "nodeBadgeBackground",
+    error: "nodeBadgeBackground",
   },
   border: {
     neutral: "neutralPillBorder",
     success: ["green", "deyork"],
     warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "wewak"],
+    error: ["red", "apricot"],
   },
   color: {
     neutral: "neutralPillColor",
     success: ["green", "netdata"],
     warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "pomegranate"],
+    error: ["red", "apricot"],
   },
 }
 
