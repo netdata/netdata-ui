@@ -243,6 +243,7 @@ import serviceX509Check from "./assets/services/x509_check.svg"
 import serviceXen from "./assets/services/xen.svg"
 import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
+import sign_in from "./assets/sign_in.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
 import sorting_asc from "./assets/sorting_asc.svg"
 import sort_ascending from "./assets/sort_ascending.svg"
@@ -536,6 +537,7 @@ export const iconsList = {
   serviceXen,
   settings,
   settings_h,
+  sign_in,
   sorting_vertical,
   sort_ascending,
   sorting_asc,
