@@ -515,6 +515,7 @@ const renderActions = ({ actions, testPrefix }) => {
               isVisible = true,
               disabledTooltipText,
               dataGa,
+              CustomUIAction,
             }) => (
               <Action
                 disabled={
@@ -541,6 +542,7 @@ const renderActions = ({ actions, testPrefix }) => {
                 testPrefix={testPrefix}
                 currentRow={row}
                 disabledTooltipText={disabledTooltipText}
+                CustomUIAction={CustomUIAction}
               />
             )
           )}

@@ -30,6 +30,7 @@ const Action = forwardRef(
       disabledTooltipText,
       iconColor,
       flavour = "borderless",
+      CustomUIAction,
     },
     ref
   ) => {
@@ -37,7 +38,7 @@ const Action = forwardRef(
     if (visible === false) return null
 
     const onActionClicked = () => {
-      if (confirmation) {
+      if (confirmation || CustomUIAction) {
         setConfirmationOpen(true)
         return
       }
@@ -57,7 +58,14 @@ const Action = forwardRef(
 
     return (
       <>
-        {isConfirmationOpen && (
+        {isConfirmationOpen && CustomUIAction && (
+          <CustomUIAction
+            handleAction={handleAction()}
+            onClose={() => setConfirmationOpen(false)}
+            data={currentRow.original}
+          />
+        )}
+        {isConfirmationOpen && !CustomUIAction && (
           <ConfirmationDialog
             actionButtonDirection={actionButtonDirection}
             declineLabel={declineLabel}
