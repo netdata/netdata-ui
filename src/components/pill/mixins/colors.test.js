@@ -2,7 +2,7 @@ import { getMasterCardColor, getPillColor } from "./colors"
 
 describe("getMasterCardColor mixin", () => {
   test("should return warning color", () => {
-    expect(getMasterCardColor("warning")).toEqual(["yellow", "seaBuckthorn"])
+    expect(getMasterCardColor("warning")).toEqual("warningLite")
   })
 })
 
