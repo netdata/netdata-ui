@@ -31,15 +31,13 @@ const MasterCard = forwardRef(
       pillRight.flavour || "disabledWarning"
     )
     const pillLeftProps = {
-      background: getMasterCardBackground(
-        pillLeft.background,
-        pillLeft.flavour || "disabledError"
-      ),
+      background: getMasterCardBackground(pillLeft.background, pillLeft.flavour || "disabledError"),
       padding: [1, 3],
       position: "relative",
       width: { min: minWidths[rest.size] || minWidths.default },
       ...pillProps,
       ...pillLeft,
+      height: "18px",
     }
     const pillRightProps = {
       background: pillRightBackground,
@@ -47,6 +45,7 @@ const MasterCard = forwardRef(
       padding: [1, 2],
       ...pillProps,
       ...pillRight,
+      height: "18px",
     }
 
     return (

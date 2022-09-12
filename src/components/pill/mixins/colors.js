@@ -1,36 +1,36 @@
 const colorMap = {
   background: {
-    neutral: "neutralPillBg",
+    neutral: "nodeBadgeBackground",
     success: ["green", "netdata"],
     warning: ["yellow", "seaBuckthorn"],
     error: ["red", "pomegranate"],
   },
   hollow: {
-    neutral: "neutralPillBg",
-    success: ["green", "frostee"],
-    warning: ["yellow", "ginfizz"],
-    error: ["red", "lavender"],
+    neutral: "nodeBadgeBackground",
+    success: "nodeBadgeBackground",
+    warning: "nodeBadgeBackground",
+    error: "nodeBadgeBackground",
   },
   border: {
     neutral: "neutralPillBorder",
     success: ["green", "deyork"],
     warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "wewak"],
+    error: ["red", "apricot"],
   },
   color: {
     neutral: "neutralPillColor",
     success: ["green", "netdata"],
     warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "pomegranate"],
+    error: ["red", "apricot"],
   },
 }
 
 export const masterCardColorMap = {
-  alert: ["neutral", "porcelain"],
-  disabledError: ["neutral", "regentgrey"],
-  disabledWarning: ["neutral", "iron"],
-  error: ["red", "pomegranate"],
-  warning: ["yellow", "seaBuckthorn"],
+  alert: "alertIcon",
+  disabledError: "idleError",
+  disabledWarning: "idleWarning",
+  error: "errorLite",
+  warning: "warningLite",
 }
 
 const getMasterCardColor = flavour => masterCardColorMap[flavour]
