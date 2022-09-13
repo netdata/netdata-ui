@@ -11,10 +11,10 @@ describe("getPillHeight mixin", () => {
   })
 
   test("should return height for large sized pill", () => {
-    expect(getPillHeight(undefined, "large", undefined)).toEqual("24px")
+    expect(getPillHeight(undefined, "large", undefined)).toEqual("22px")
   })
 
   test("should return default height", () => {
-    expect(getPillHeight(undefined, undefined, undefined)).toEqual("20px")
+    expect(getPillHeight(undefined, undefined, undefined)).toEqual("18px")
   })
 })
