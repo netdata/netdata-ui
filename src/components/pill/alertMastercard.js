@@ -27,7 +27,6 @@ const AlertMasterCard = forwardRef(
       icon: "alarm_bell",
       zIndex: 1,
       ...commonProps,
-      height: "18px",
     }
     const pillProps = {
       normal,
@@ -49,7 +48,7 @@ const AlertMasterCard = forwardRef(
       padding: [1, 2, 1, 4],
       ...pillProps,
       ...pillLeft,
-      height: "18px",
+      round: "0 12px 12px 0",
     }
     const pillRightProps = {
       background: pillRightBackground,
@@ -57,7 +56,6 @@ const AlertMasterCard = forwardRef(
       padding: [1, 2, 1, 4],
       ...pillProps,
       ...pillRight,
-      height: "18px",
     }
 
     return (
