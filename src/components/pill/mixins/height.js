@@ -1,6 +1,6 @@
 const pillHeights = {
-  default: '20px',
-  large: '24px',
+  default: "18px",
+  large: "22px",
 }
 
 const getPillHeight = (height, size, tiny) => {
