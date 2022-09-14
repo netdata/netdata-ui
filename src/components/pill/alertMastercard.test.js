@@ -6,7 +6,7 @@ describe("MasterCardPill component", () => {
   test("should render default component", () => {
     renderWithProviders(<AlertMasterCard />)
 
-    expect(screen.queryByTestId("alert-mastercard-container")).toBeInTheDocument()
+    expect(screen.queryByTestId("alert-mastercard")).toBeInTheDocument()
     expect(screen.queryByTestId("alert-mastercard-icon-pill")).toBeInTheDocument()
     expect(screen.queryByTestId("alert-mastercard-left-pill")).toBeInTheDocument()
     expect(screen.queryByTestId("alert-mastercard-right-pill")).toBeInTheDocument()
@@ -15,7 +15,7 @@ describe("MasterCardPill component", () => {
   test("should render component with custom test id", () => {
     renderWithProviders(<AlertMasterCard data-testid="custom-alert-mastercard" />)
 
-    expect(screen.queryByTestId("alert-mastercard-container")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("alert-mastercard")).not.toBeInTheDocument()
     expect(screen.queryByTestId("alert-mastercard-icon-pill")).not.toBeInTheDocument()
     expect(screen.queryByTestId("alert-mastercard")).not.toBeInTheDocument()
     expect(screen.queryByTestId("alert-mastercard-left-pill")).not.toBeInTheDocument()

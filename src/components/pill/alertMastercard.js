@@ -59,12 +59,7 @@ const AlertMasterCard = forwardRef(
     }
 
     return (
-      <MasterCardContainer
-        data-testid={`${testId}-container`}
-        onClick={onClick}
-        ref={ref}
-        {...commonProps}
-      >
+      <MasterCardContainer data-testid={testId} onClick={onClick} ref={ref} {...commonProps}>
         <MasterCardPill data-testid={`${testId}-icon-pill`} {...iconProps} />
         <>
           <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />
