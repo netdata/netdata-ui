@@ -7,7 +7,6 @@ import { MasterCardContainer } from "./styled"
 const AlertMasterCard = forwardRef(
   (
     {
-      children,
       "data-testid": testId = "alert-mastercard",
       height,
       normal,
@@ -59,12 +58,7 @@ const AlertMasterCard = forwardRef(
     }
 
     return (
-      <MasterCardContainer
-        data-testid={`${testId}-container`}
-        onClick={onClick}
-        ref={ref}
-        {...commonProps}
-      >
+      <MasterCardContainer data-testid={testId} onClick={onClick} ref={ref} {...commonProps}>
         <MasterCardPill data-testid={`${testId}-icon-pill`} {...iconProps} />
         <>
           <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />
