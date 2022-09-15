@@ -7,7 +7,6 @@ import { MasterCardContainer } from "./styled"
 const AlertMasterCard = forwardRef(
   (
     {
-      children,
       "data-testid": testId = "alert-mastercard",
       height,
       normal,
