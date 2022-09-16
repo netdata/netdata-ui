@@ -52,7 +52,6 @@ const Action = forwardRef(
 
     const onActionConfirmed = () => {
       setConfirmationOpen(false)
-
       handleAction?.()
     }
 
@@ -62,7 +61,7 @@ const Action = forwardRef(
           <CustomUIAction
             handleAction={handleAction()}
             onClose={() => setConfirmationOpen(false)}
-            data={currentRow.original}
+            data={currentRow?.original || selectedRows}
           />
         )}
         {isConfirmationOpen && !CustomUIAction && (
