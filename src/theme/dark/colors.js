@@ -78,8 +78,6 @@ const appColors = {
   alertIcon: rawColors.neutral.gunmetal,
   idleError: rawColors.neutral.tuna,
   idleWarning: rawColors.neutral.ratsbane,
-  error: rawColors.red.apricot,
-  warning: rawColors.yellow.mustard,
 
   //Table
   tableRowBg: rawColors.neutral.arsenic,
