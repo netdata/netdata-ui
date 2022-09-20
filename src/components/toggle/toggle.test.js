@@ -47,7 +47,7 @@ describe("Toggle test", () => {
   it(" * should be colored", () => {
     const { container, getByRole } = renderWithProviders(<MockedToggle colored />)
     const toggle = getByRole("switch")
-    expect(toggle).toHaveStyleRule("background-color", "#ED7374", { modifier: ":after" })
+    expect(toggle).toHaveStyleRule("background-color", "#FF4136", { modifier: ":after" })
 
     const checkbox = container.querySelectorAll("input")[0]
     fireEvent.click(checkbox)
