@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useCallback } from "react"
+import React, { Fragment, useCallback, useState } from "react"
 import styled from "styled-components"
 import useToggle from "react-use/lib/useToggle"
 import { H5 } from "src/components/typography"
@@ -56,7 +56,9 @@ const Documentation = ({
   onOpenBugClick,
   onContributeClick,
   onSupportClick,
+  onGoToDemoClick,
   children,
+  demoUrl,
 }) => {
   const [isOpen, toggle] = useToggle()
   const [view, setView] = useState(views.general)
@@ -129,6 +131,8 @@ const Documentation = ({
                           onOpenBugClick={onOpenBugClick}
                           onContributeClick={onContributeClick}
                           onSupportClick={onSupportClick}
+                          onGoToDemoClick={onGoToDemoClick}
+                          demoUrl={demoUrl}
                         />
                       </Flex>
                     )}

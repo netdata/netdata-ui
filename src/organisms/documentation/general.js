@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import styled from "styled-components"
 import { getColor } from "src/theme"
-import { Text, H5 } from "src/components/typography"
+import { H5, Text } from "src/components/typography"
 import { Icon } from "src/components/icon"
 import { Button } from "src/components/button"
 import Flex from "src/components/templates/flex"
@@ -18,7 +18,17 @@ const Anchor = styled(Text).attrs({ as: "a", target: "_blank" })`
   }
 `
 
-const Section = ({ icon, title, content, url, children, testid, label, labelTransform, onClick }) => (
+const Section = ({
+  icon,
+  title,
+  content,
+  url,
+  children,
+  testid,
+  label,
+  labelTransform,
+  onClick,
+}) => (
   <Flex width="100%" column gap={2}>
     <Flex gap={2} alignItems="center">
       <Icon color="text" name={icon} width="18px" height="18px" />
@@ -31,7 +41,7 @@ const Section = ({ icon, title, content, url, children, testid, label, labelTran
         onClick={onClick}
         label={label}
         data-testid={testid}
-        {...labelTransform && { textTransform: labelTransform }}
+        {...(labelTransform && { textTransform: labelTransform })}
         {...(url && { as: "a", target: "_blank", href: url })}
       />
       {children}
@@ -69,6 +79,8 @@ const General = ({
   onOpenIssueClick,
   onOpenBugClick,
   onSupportClick,
+  onGoToDemoClick,
+  demoUrl = "https://app.netdata.cloud/spaces/netdata-demor", // for dashboard, todo
 }) => {
   const {
     documentationUrl,
@@ -130,6 +142,15 @@ const General = ({
         testid="documentation-community-support-link"
         label="Join the Community"
         onClick={onSupportClick}
+      />
+      <Section
+        icon="spaces_v2"
+        title="Public demo space"
+        content="Netdata has a public demo space where you can explore different monitoring use-cases. Jump into any that might interest you and put your hands-on our monitoring solution!"
+        url={demoUrl}
+        testid="demo-link"
+        label="Go to demo"
+        onClick={onGoToDemoClick}
       />
     </Fragment>
   )

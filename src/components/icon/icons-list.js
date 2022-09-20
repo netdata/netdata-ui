@@ -252,6 +252,7 @@ import sort_descending from "./assets/sort_descending.svg"
 import sort_indicator from "./assets/sort_indicator.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
+import spaces_v2 from "./assets/spaces_v2.svg"
 import switch_off from "./assets/switch_off.svg"
 import system_overview from "./assets/system_overview.svg"
 import text_add from "./assets/text_add.svg"
@@ -546,6 +547,7 @@ export const iconsList = {
   sort_indicator,
   space,
   space_new,
+  spaces_v2,
   switch_off,
   system_overview,
   text_add,
