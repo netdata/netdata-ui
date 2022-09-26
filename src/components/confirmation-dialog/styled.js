@@ -41,6 +41,10 @@ export const Body = styled(ModalBody).attrs({
   padding: [0],
 })`
   display: block;
+
+  strong {
+    font-weight: bold;
+  }
 `
 
 export const Dialog = styled(Modal).attrs({
