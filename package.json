@@ -21,7 +21,8 @@
     "cp-dashboard": "cp -R ./lib ../dashboard/node_modules/@netdata/netdata-ui/",
     "to-dashboard": "yarn ts-bundle && yarn cp-dashboard",
     "prepare": "install-peers && yarn ts-bundle",
-    "resolveAlias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib"
+    "resolveAlias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib",
+    "deploy-storybook": "storybook-to-ghpages  --existing-output-dir=public"
   },
   "keywords": [
     "uikit",
@@ -35,6 +36,7 @@
     "@elastic/search-ui-site-search-connector": "^1.15.0",
     "@netdata/react-filter-box": "^1.0.0",
     "@prismicio/client": "5.1.1",
+    "@storybook/storybook-deployer": "^2.8.12",
     "@styled-system/css": "^5.1.5",
     "@tanstack/react-table": "^8.5.11",
     "@tanstack/react-virtual": "^3.0.0-beta.23",
