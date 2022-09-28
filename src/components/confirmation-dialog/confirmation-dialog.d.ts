@@ -10,9 +10,10 @@ export interface ConfirmationDialogProps {
   declineLabel?: string
   declineWidth?: string
   handleConfirm: OnClickType
-  handleDecline: OnClickType
+  handleDecline?: OnClickType
   hideIcon?: boolean
   iconName?: string
+  isConfirmDisabled?: boolean
   isConfirmPositive?: boolean
   message: JSX.Element | string
   title: string
