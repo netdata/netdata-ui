@@ -6,6 +6,7 @@
 - after any merge, NPM version should be published (in future to be moved to CI)
 - versions are `major` (breaking changes, large refactors), `minor` (new component added), and `patch` (small changes)
 - please add declaration of exported components to provide nice typings for users.
+- To deploy on  gh-pages checkout to deploy/storybook branch, rebase with master and run deploy-storybook
 
 ```typescript
 // BAD
