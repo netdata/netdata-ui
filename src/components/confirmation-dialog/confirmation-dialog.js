@@ -18,6 +18,7 @@ const ConfirmationDialog = ({
   handleDecline,
   hideIcon,
   iconName = "warning_triangle_hollow",
+  isConfirmDisabled,
   isConfirmPositive,
   message,
   title,
@@ -30,24 +31,29 @@ const ConfirmationDialog = ({
             {!hideIcon && <TitleIcon data-testid={`${dataTestId}-headerIcon`} name={iconName} />}
             <Title data-testid={`${dataTestId}-headerText`}>{title}</Title>
           </Flex>
-          <CloseButton data-testid={`${dataTestId}-headerClose`} onClose={handleDecline} />
+          {handleDecline && (
+            <CloseButton data-testid={`${dataTestId}-headerClose`} onClose={handleDecline} />
+          )}
         </Header>
         <Body data-testid={`${dataTestId}-body`}>
           <BodyMessage data-testid={`${dataTestId}-bodyMessage`}>{message}</BodyMessage>
         </Body>
         <Actions data-testid={`${dataTestId}-actions`}>
-          <Button
-            data-ga={`${dataGA}-::click-cancel::global-view`}
-            data-testid={`${dataTestId}-cancelAction`}
-            flavour="hollow"
-            label={declineLabel}
-            onClick={handleDecline}
-            width={declineWidth}
-          />
+          {handleDecline && (
+            <Button
+              data-ga={`${dataGA}-::click-cancel::global-view`}
+              data-testid={`${dataTestId}-cancelAction`}
+              flavour="hollow"
+              label={declineLabel}
+              onClick={handleDecline}
+              width={declineWidth}
+            />
+          )}
           <Button
             data-ga={`${dataGA}-::click-confirm::global-view`}
             data-testid={`${dataTestId}-confirmAction`}
             danger={!isConfirmPositive && true}
+            disabled={isConfirmDisabled}
             label={confirmLabel}
             onClick={handleConfirm}
             width={confirmWidth}
