@@ -8,7 +8,7 @@ const Container = styled(Flex)`
   list-style-type: none;
 `
 
-const Dropdown = ({ value, onItemClick, items, renderItem }) => (
+const Dropdown = ({ value, onItemClick, items, itemProps, renderItem }) => (
   <Container
     as="ul"
     role="listbox"
@@ -18,7 +18,7 @@ const Dropdown = ({ value, onItemClick, items, renderItem }) => (
     column
     tabindex="-1"
   >
-    {items.map(item => renderItem({ item, value, onItemClick }))}
+    {items.map(item => renderItem({ item, itemProps, value, onItemClick }))}
   </Container>
 )
 

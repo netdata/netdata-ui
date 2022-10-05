@@ -1,4 +1,4 @@
-import React, { useMemo, Fragment, useCallback, forwardRef } from "react"
+import React, { forwardRef, Fragment, useCallback, useMemo } from "react"
 import Drop from "src/components/drops/drop"
 import useClonedChildren from "src/components/drops/mixins/useClonedChildren"
 import getAncestors from "src/components/drops/mixins/getAncestors"
@@ -29,6 +29,7 @@ const Menu = forwardRef(
       caret = true,
       children,
       dropProps,
+      itemProps,
       items,
       renderItem = defaultRenderItem,
       renderDropdown = defaultRenderDropdown,
@@ -96,7 +97,7 @@ const Menu = forwardRef(
             animation={animation}
             {...dropProps}
           >
-            {renderDropdown({ value, onItemClick, items, renderItem })}
+            {renderDropdown({ value, onItemClick, items, itemProps, renderItem })}
           </Drop>
         )}
       </Fragment>
