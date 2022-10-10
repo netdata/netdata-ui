@@ -12,7 +12,7 @@ import styled from "styled-components"
 
 const Backdrop = styled.div`
   position: absolute;
-  inset: 0px;
+  inset: 0;
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.3);
   ${backdropBlur};
