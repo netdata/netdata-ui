@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "2.3.15",
+  "version": "2.3.16",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "_drop_native": "./node_modules/rimraf/bin.js node_modules/@types/react-native/",
-    "start": "yarn _drop_native && yarn testOut && yarn storybook-start",
+    "start": "yarn _drop_native && yarn storybook-start",
     "storybook-start": "bash start.sh",
     "testOut": "yarn test --env=jsdom --json --outputFile=.jest-test-results.json",
     "build-storybook": "build-storybook -c .storybook -o public",
