@@ -25,9 +25,10 @@ const Container = styled(Flex).attrs(({ zIndex = 60 }) => ({ zIndex }))`
 
   ${({ animation }) => animation && styledAnimation}
 
-  transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+  box-shadow: 2px 2px 6px rgb(0 0 0 / 15%);
   perspective: 1000;
+  transform: translate3d(0, 0, 0);
   will-change: left, top, transform;
 `
 
