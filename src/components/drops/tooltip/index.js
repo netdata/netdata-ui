@@ -68,18 +68,19 @@ const Tooltip = forwardRef(
         {targetElement}
         {isOpen && ref.current && !disabled && (
           <Drop
+            align={dropProps?.align || dropAlignMap[align]}
+            hideShadow
+            id={id}
+            onClickOutside={close}
             onMouseLeave={() => {
               setHasPopUpHovered(false)
               close()
             }}
             onMouseEnter={() => setHasPopUpHovered(true)}
-            onClickOutside={close}
             target={ref.current}
-            id={id}
             {...dropProps}
-            align={dropProps?.align || dropAlignMap[align]}
-            onEsc={close}
             animation={animation}
+            onEsc={close}
             zIndex={zIndex}
           >
             {plain ? (
