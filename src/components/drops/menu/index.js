@@ -91,10 +91,11 @@ const Menu = forwardRef(
         )}
         {isOpen && ref.current && (
           <Drop
-            target={ref.current}
+            animation={animation}
             onEsc={close}
             onClickOutside={onClickOutside}
-            animation={animation}
+            hideShadow
+            target={ref.current}
             {...dropProps}
           >
             {renderDropdown({ value, onItemClick, items, itemProps, renderItem })}

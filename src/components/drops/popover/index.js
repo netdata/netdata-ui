@@ -61,13 +61,14 @@ const Popover = forwardRef(
         {isOpen && ref.current && (
           <Drop
             id={id}
+            hideShadow
             {...dropProps}
             align={dropProps?.align || dropAlignMap[align]}
-            target={ref.current}
+            animation={animation}
+            onEsc={close}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            onEsc={close}
-            animation={animation}
+            target={ref.current}
             zIndex={zIndex}
           >
             {plain ? (
