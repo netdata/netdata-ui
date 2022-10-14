@@ -225,7 +225,8 @@ import servicePercona from "./assets/services/percona.svg"
 import servicePfSense from "./assets/services/pfSense.svg"
 import servicePhpFpm from "./assets/services/php_fpm.svg"
 import servicePostgreSQL from "./assets/services/postgreSQL.svg"
-import serviceProxySQL from "./assets/services/postgreSQL.svg"
+import servicePrometheus from "./assets/services/prometheus.svg"
+import serviceProxySQL from "./assets/services/proxySQL.svg"
 import serviceRabbitMQ from "./assets/services/rabbitMQ.svg"
 import serviceRedis from "./assets/services/redis.svg"
 import serviceRethinkDB from "./assets/services/rethinkDB.svg"
@@ -520,6 +521,7 @@ export const iconsList = {
   servicePfSense,
   servicePhpFpm,
   servicePostgreSQL,
+  servicePrometheus,
   serviceProxySQL,
   serviceRabbitMQ,
   serviceRedis,
