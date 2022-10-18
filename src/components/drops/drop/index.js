@@ -32,13 +32,21 @@ const Drop = forwardRef(
       onEsc,
       children,
       canHideTarget = true,
+      keepHorizontal,
       ...rest
     },
     parentRef
   ) => {
     const [ref, setRef] = useForwardRef(parentRef)
 
-    const updatePosition = useMakeUpdatePosition(target, ref, align, stretch, canHideTarget)
+    const updatePosition = useMakeUpdatePosition(
+      target,
+      ref,
+      align,
+      stretch,
+      canHideTarget,
+      keepHorizontal
+    )
 
     useEffect(() => {
       const id = requestAnimationFrame(updatePosition)

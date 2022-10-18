@@ -66,7 +66,7 @@ const getWidth = (stretch, targetRect, dropRect) => {
 
 const styles = ["top", "right", "bottom", "right", "width"]
 
-export default (target, dropRef, align, stretch, canHideTarget) =>
+export default (target, dropRef, align, stretch, canHideTarget, keepHorizontal) =>
   useCallback(() => {
     if (!dropRef.current) return
 
@@ -81,7 +81,9 @@ export default (target, dropRef, align, stretch, canHideTarget) =>
     const x = getXPosition(align, targetRect, dropRect, canHideTarget)
     const y = getYPosition(align, targetRect, dropRect, canHideTarget)
 
-    dropRef.current.style.left = `${x}px`
+    if (!keepHorizontal || !dropRef.current.style.left) {
+      dropRef.current.style.left = `${x}px`
+    }
     dropRef.current.style.top = `${y}px`
     if (stretch) {
       dropRef.current.style.width = `${width}px`
