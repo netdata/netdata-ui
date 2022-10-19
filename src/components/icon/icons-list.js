@@ -84,6 +84,7 @@ import download from "./assets/download.svg"
 import error from "./assets/error.svg"
 import exclamation from "./assets/exclamation.svg"
 import expand from "./assets/expand.svg"
+import feed from "./assets/feed.svg"
 import filterList from "./assets/filterList.svg"
 import forcePlay from "./assets/force_play.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
@@ -376,6 +377,7 @@ export const iconsList = {
   error,
   exclamation,
   expand,
+  feed,
   filterList,
   firewallSolid,
   forcePlay,
