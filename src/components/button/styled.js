@@ -110,7 +110,9 @@ export const StyledButton = styled.button.attrs(props => ({
         ? getSizeBy(16)
         : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
     height: ${props =>
-      props.hasLabel
+      props.height
+        ? props.height
+        : props.hasLabel
         ? getSizeBy(props.small ? 4 : 5)
         : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
 
