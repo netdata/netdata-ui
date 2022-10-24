@@ -67,6 +67,8 @@ export {
   FilterBoxAutocompleteHandler,
 } from "./components/filter-box"
 
+export { default as InputRange } from "./components/input/range"
+
 export { default as Drop } from "./components/drops/drop"
 export { default as DropContainer } from "./components/drops/container"
 export { default as Tooltip } from "./components/drops/tooltip"
