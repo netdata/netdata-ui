@@ -9,7 +9,6 @@ export interface RangeInputProps {
   onInput?: (e: SyntheticEvent<HTMLButtonElement>) => void
   step?: number
   value: number
-  [key: string]: any
 }
 
 declare const RangeInput: FC<RangeInputProps>
