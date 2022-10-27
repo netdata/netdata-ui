@@ -1,4 +1,5 @@
-export { Button } from "./components/button"
+export { Button, IconButton } from "./components/button"
+
 export { Sidebar, PortalSidebar } from "./components/sidebar"
 export { Icon, iconsList, IconComponents } from "./components/icon"
 
