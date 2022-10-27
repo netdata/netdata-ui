@@ -4,11 +4,11 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import Table, { Pagination } from "./base-table"
 
 import {
+  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  flexRender,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -127,6 +127,7 @@ const NetdataTable = ({
 
   const makeColumnVisibilityAction = useMemo(
     () => ({
+      id: "columnVisibility",
       handleAction: () => setIsColumnDropdownVisible(true),
       visible: enableColumnVisibility,
       icon: "gear",
@@ -556,7 +557,7 @@ const renderActions = ({ actions, testPrefix }) => {
 }
 
 const renderBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => {
-  if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" />
+  if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" key="empty-box" />
   return bulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
@@ -661,11 +662,10 @@ const renderActionWithDropdown = ({
       const actionRef = useRef()
 
       return (
-        <>
+        <React.Fragment key={id}>
           <Action
             ref={actionRef}
             testPrefix={`-bulk${testPrefix}`}
-            key={id}
             visible={visible}
             id={id}
             icon={icon}
@@ -682,7 +682,7 @@ const renderActionWithDropdown = ({
             columns={table.getAllLeafColumns()}
             onClose={onClose}
           />
-        </>
+        </React.Fragment>
       )
     }
   )
