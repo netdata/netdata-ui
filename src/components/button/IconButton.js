@@ -6,7 +6,7 @@ import React from "react"
 import Tooltip from "src/components/drops/tooltip"
 import { TextSmall } from "src/components/typography"
 
-//this is addition here has been done to be aligned with our current implemetation at cloud-frontend src/components/tooltips/customTooltip.js
+//this  addition here has been done to be aligned with our current implemetation at cloud-frontend src/components/tooltips/customTooltip.js
 
 const tooltipBackground = ["neutral", "black"]
 
