@@ -1,8 +1,20 @@
 import { Button } from "./button"
 import Box from "src/components/templates/box"
+import Flex from "src/components/templates/flex"
 
 import React from "react"
 import Tooltip from "src/components/drops/tooltip"
+import { TextSmall } from "src/components/typography"
+
+//this is addition here has been done to be aligned with our current implemetation at cloud-frontend src/components/tooltips/customTooltip.js
+
+const tooltipBackground = ["neutral", "black"]
+
+const CustomTooltipContent = ({ content }) => (
+  <Flex padding={[1.5, 2]} margin={[2]} background={tooltipBackground} round={1} alignSelf="start">
+    <TextSmall color="bright">{content}</TextSmall>
+  </Flex>
+)
 
 const IconButton = ({
   iconColor = "nodeBadgeColor",
@@ -18,7 +30,7 @@ const IconButton = ({
 }) => {
   const isDefaultFlavour = flavour === "default"
   return (
-    <Tooltip content={tooltip}>
+    <Tooltip plain animation content={<CustomTooltipContent content={tooltip} />}>
       <Box
         cursor="pointer"
         iconWidth={width}
