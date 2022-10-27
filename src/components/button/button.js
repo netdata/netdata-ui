@@ -16,6 +16,8 @@ export const Button = forwardRef(
       textTransform = "firstLetter",
       iconColor,
       iconSize,
+      iconWidth,
+      iconHeight,
       ...rest
     },
     ref
@@ -38,6 +40,8 @@ export const Button = forwardRef(
             className={iconColor ? "button-icon__color" : "button-icon"}
             title={icon}
             name={icon}
+            width={iconWidth}
+            height={iconHeight}
           />
         </Flex>
       )}
