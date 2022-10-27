@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { action } from "@storybook/addon-actions"
 import { text, boolean, select } from "@storybook/addon-knobs"
 import { readmeCleanup } from "utils/readme"
-import { Button } from "."
+import { Button, IconButton } from "."
 import readme from "./README.md"
 import { iconsList } from "src/components/icon"
 
@@ -89,5 +89,11 @@ buttonStory.add(
       loadingLabel={text("Loading label prop", "LOADING...")}
     />
   ),
+  subData
+)
+
+buttonStory.add(
+  "Icon Button",
+  () => <IconButton cursor="pointer" icon="chevron_left" iconSize="small" tooltip="Previous" />,
   subData
 )
