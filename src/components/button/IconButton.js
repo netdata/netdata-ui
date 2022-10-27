@@ -30,7 +30,7 @@ const IconButton = ({
 }) => {
   const isDefaultFlavour = flavour === "default"
   return (
-    <Tooltip plain animation content={<CustomTooltipContent content={tooltip} />}>
+    <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
       <Box
         cursor="pointer"
         iconWidth={width}
