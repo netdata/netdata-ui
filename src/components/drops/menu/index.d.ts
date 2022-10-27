@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { FC, ReactNode } from "react"
 import { DropProps } from "../drop"
 
 export interface Item {
@@ -27,6 +27,9 @@ export interface MenuProps {
   caret?: boolean | JSX.Element
   children?: ReactNode
   dropProps?: DropProps
+  dropdownProps?: {
+    [key: string]: any
+  }
   items?: Item[]
   renderItem?: RenderItemType
   renderDropdown?: (props: {
@@ -39,7 +42,7 @@ export interface MenuProps {
   [key: string]: any
 }
 
-declare const Menu: React.FC<MenuProps & JSX.IntrinsicElements["div"]>
+declare const Menu: FC<MenuProps & JSX.IntrinsicElements["div"]>
 
 export { Menu }
 

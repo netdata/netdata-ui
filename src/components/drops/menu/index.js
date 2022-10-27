@@ -29,6 +29,7 @@ const Menu = forwardRef(
       caret = true,
       children,
       dropProps,
+      dropdownProps,
       itemProps,
       items,
       renderItem = defaultRenderItem,
@@ -38,7 +39,7 @@ const Menu = forwardRef(
     },
     parentRef
   ) => {
-    const [isOpen, toggleIsOpen, open, close] = useToggle(initialOpen, { on: onOpen, off: onClose })
+    const [isOpen, toggleIsOpen, , close] = useToggle(initialOpen, { on: onOpen, off: onClose })
 
     const [ref, setRef] = useForwardRef(parentRef)
 
@@ -98,7 +99,7 @@ const Menu = forwardRef(
             target={ref.current}
             {...dropProps}
           >
-            {renderDropdown({ value, onItemClick, items, itemProps, renderItem })}
+            {renderDropdown({ value, onItemClick, items, itemProps, renderItem, ...dropdownProps })}
           </Drop>
         )}
       </Fragment>

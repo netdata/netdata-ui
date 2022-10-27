@@ -9,7 +9,7 @@ const Container = styled(Flex)`
   list-style-type: none;
 `
 
-const Dropdown = ({ hideShadow, itemProps, items, onItemClick, renderItem, value }) => (
+const Dropdown = ({ hideShadow, itemProps, items, onItemClick, renderItem, value, ...rest }) => (
   <Container
     as="ul"
     role="listbox"
@@ -19,6 +19,7 @@ const Dropdown = ({ hideShadow, itemProps, items, onItemClick, renderItem, value
     margin={[1, 0]}
     column
     tabindex="-1"
+    {...rest}
   >
     {items.map(item => renderItem({ item, itemProps, value, onItemClick }))}
   </Container>
