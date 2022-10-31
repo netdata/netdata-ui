@@ -40,7 +40,7 @@ const IconButton = ({
         flavour={flavour}
         disabled={disabled}
         icon={icon}
-        iconColor={isDefaultFlavour ? "white" : iconColor}
+        iconColor={isDefaultFlavour ? "iconColor" : iconColor}
         iconSize={iconSize}
         neutral={!isDefaultFlavour}
         {...props}

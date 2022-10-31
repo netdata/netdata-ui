@@ -81,6 +81,9 @@ const appColors = {
 
   //Table
   tableRowBg: rawColors.neutral.blackhaze,
+
+  //IconButton
+  iconColor: rawColors.neutral.limedSpruce,
 }
 
 export default {
