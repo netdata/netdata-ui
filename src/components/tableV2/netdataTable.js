@@ -27,8 +27,9 @@ import { comparison, select } from "./filterFns"
 import SelectFilter from "./selectFilter"
 import Tooltip from "src/components/drops/tooltip"
 import { Icon } from "src/components/icon"
-import ColumnsMenu from "./columnsMenu"
+
 import BulkAction from "./bulkAction"
+import ActionWithDropdown from "./actionWithDropdown"
 
 const ROW_SELECTION_MAX_SIZE = 10
 const ROW_SELECTION_MIN_SIZE = 10
@@ -656,32 +657,22 @@ const renderActionWithDropdown = ({
   if (!actions || !actions.length) return <Box aria-hidden as="span" />
   return actions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
-      const actionRef = useRef()
-      const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
-      const visible = typeof isVisible === "function" ? isVisible() : isVisible
-
       return (
-        <React.Fragment key={id}>
-          <Action
-            ref={actionRef}
-            testPrefix={`-bulk${testPrefix}`}
-            visible={visible}
-            id={id}
-            icon={icon}
-            handleAction={() => handleAction(selectedRows, table)}
-            tooltipText={tooltipText}
-            disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
-            background="elementBackground"
-            selectedRows={selectedRows}
-            {...rest}
-          />
-          <ColumnsMenu
-            parentRef={actionRef}
-            isOpen={isOpen}
-            columns={table.getAllLeafColumns()}
-            onClose={onClose}
-          />
-        </React.Fragment>
+        <ActionWithDropdown
+          key={id}
+          isVisible={isVisible}
+          alwaysEnabled={alwaysEnabled}
+          isDisabled={isDisabled}
+          tooltipText={tooltipText}
+          icon={icon}
+          handleAction={handleAction}
+          table={table}
+          testPrefix={testPrefix}
+          selectedRows={selectedRows}
+          isOpen={isOpen}
+          onClose={onClose}
+          {...rest}
+        />
       )
     }
   )
