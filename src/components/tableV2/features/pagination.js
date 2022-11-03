@@ -1,5 +1,5 @@
 import React from "react"
-import { Pagination } from "../components/base-table"
+import { Pagination } from "../core/base-table"
 
 const makePagination = ({ table }) => {
   const {

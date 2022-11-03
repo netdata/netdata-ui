@@ -1,7 +1,7 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
 import React, { useEffect, useMemo, useState } from "react"
 
-import Table from "./components/base-table"
+import Table from "./core/base-table"
 
 import {
   flexRender,
