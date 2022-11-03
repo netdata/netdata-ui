@@ -5,7 +5,8 @@ import {
   VisibilityTableState,
   Table,
 } from "@tanstack/table-core"
-import { supportedBulkActions, supportedRowActions } from "./netdataTable"
+import { supportedBulkActions } from "./features/bulkActions"
+import { supportedRowActions } from "./features/rowActions"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
 

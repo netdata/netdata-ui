@@ -42,72 +42,113 @@ export const supportedRowActions = {
   },
 }
 
-const makeRowActions = ({ actions, testPrefix }) => {
-  return {
-    id: "actions",
-    enableHiding: false,
+const makeRowActions = ({ rowActions, testPrefix }) => {
+  const availableRowActions = Object.keys(rowActions).reduce((acc, currentActionKey) => {
+    const isActionSupported = supportedRowActions[currentActionKey]
+    if (!isActionSupported) return []
+    const {
+      icon,
+      confirmation,
+      tooltipText,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+      actionButtonDirection,
+      disabledTooltipText,
+      flavour,
+      iconColor,
+    } = supportedRowActions[currentActionKey]
+    const currentAction = rowActions[currentActionKey]
+    acc.push({
+      confirmation,
+      tooltipText,
+      icon,
+      id: currentActionKey,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+      actionButtonDirection,
+      disabledTooltipText,
+      flavour,
+      iconColor,
+      ...currentAction,
+    })
+    return acc
+  }, [])
+  if (!availableRowActions || availableRowActions.length < 1) return []
+  return [
+    {
+      id: "actions",
+      enableHiding: false,
 
-    header: () => {
-      return "Actions"
+      header: () => {
+        return "Actions"
+      },
+      cell: ({ row, table }) => {
+        return (
+          <Flex data-testid="action-cell" height="100%" gap={2}>
+            {availableRowActions.map(
+              ({
+                id,
+                icon,
+                handleAction,
+                tooltipText,
+                confirmation,
+                confirmationTitle,
+                confirmationMessage,
+                confirmLabel,
+                declineLabel,
+                handleDecline,
+                actionButtonDirection,
+                isDisabled,
+                isVisible = true,
+                disabledTooltipText,
+                dataGa,
+                CustomUIAction,
+              }) => (
+                <Action
+                  disabled={
+                    isDisabled && typeof isDisabled === "function"
+                      ? isDisabled(row.original)
+                      : isDisabled
+                  }
+                  visible={
+                    isVisible && typeof isVisible === "function"
+                      ? isVisible(row.original)
+                      : isVisible
+                  }
+                  dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
+                  actionButtonDirection={actionButtonDirection}
+                  handleDecline={handleDecline}
+                  declineLabel={declineLabel}
+                  confirmLabel={confirmLabel}
+                  confirmationMessage={confirmationMessage}
+                  confirmationTitle={confirmationTitle}
+                  confirmation={confirmation}
+                  key={id}
+                  id={id}
+                  icon={icon}
+                  handleAction={() => handleAction(row.original, table)}
+                  tooltipText={tooltipText}
+                  testPrefix={testPrefix}
+                  currentRow={row}
+                  disabledTooltipText={disabledTooltipText}
+                  CustomUIAction={CustomUIAction}
+                />
+              )
+            )}
+          </Flex>
+        )
+      },
+      enableColumnFilter: false,
+      enableSorting: false,
+      meta: { stopPropagation: true },
     },
-    cell: ({ row, table }) => {
-      return (
-        <Flex data-testid="action-cell" height="100%" gap={2}>
-          {actions.map(
-            ({
-              id,
-              icon,
-              handleAction,
-              tooltipText,
-              confirmation,
-              confirmationTitle,
-              confirmationMessage,
-              confirmLabel,
-              declineLabel,
-              handleDecline,
-              actionButtonDirection,
-              isDisabled,
-              isVisible = true,
-              disabledTooltipText,
-              dataGa,
-              CustomUIAction,
-            }) => (
-              <Action
-                disabled={
-                  isDisabled && typeof isDisabled === "function"
-                    ? isDisabled(row.original)
-                    : isDisabled
-                }
-                visible={
-                  isVisible && typeof isVisible === "function" ? isVisible(row.original) : isVisible
-                }
-                dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
-                actionButtonDirection={actionButtonDirection}
-                handleDecline={handleDecline}
-                declineLabel={declineLabel}
-                confirmLabel={confirmLabel}
-                confirmationMessage={confirmationMessage}
-                confirmationTitle={confirmationTitle}
-                confirmation={confirmation}
-                key={id}
-                id={id}
-                icon={icon}
-                handleAction={() => handleAction(row.original, table)}
-                tooltipText={tooltipText}
-                testPrefix={testPrefix}
-                currentRow={row}
-                disabledTooltipText={disabledTooltipText}
-                CustomUIAction={CustomUIAction}
-              />
-            )
-          )}
-        </Flex>
-      )
-    },
-    enableColumnFilter: false,
-    enableSorting: false,
-    meta: { stopPropagation: true },
-  }
+  ]
 }
 
 export default makeRowActions

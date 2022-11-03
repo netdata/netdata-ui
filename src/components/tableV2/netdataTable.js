@@ -12,23 +12,14 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
-import Box from "src/components/templates/box"
+import { comparison, select, includesString } from "./filterFns"
 
-import { comparison, select } from "./filterFns"
-
-import ActionWithDropdown from "./actionWithDropdown"
+import makeHeadCell from "./core/headCell"
 
 import makeRowSelection from "./features/rowSelection"
-import makeHeadCell from "./core/headCell"
 import makePagination from "./features/pagination"
-import makeRowActions, { supportedRowActions } from "./features/rowActions"
+import makeRowActions from "./features/rowActions"
 import makeBulkActions from "./features/bulkActions"
-
-const includesString = (row, columnId, filterValue) => {
-  const search = filterValue.toLowerCase()
-
-  return String(row.getValue(columnId))?.toLowerCase().includes(search)
-}
 
 const NetdataTable = ({
   dataColumns,
@@ -58,6 +49,22 @@ const NetdataTable = ({
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
 
+  const [originalSelectedRows, setOriginalSelectedRow] = useState([])
+  const [sorting, setSorting] = useState(sortBy)
+  const [rowSelection, setRowSelection] = useState({})
+  const [globalFilter, setGlobalFilter] = useState("")
+  const [pagination, setPagination] = useState({
+    pageIndex: paginationOptions.pageIndex,
+    pageSize: paginationOptions.pageSize,
+  })
+
+  const handleGlobalSearch = value => {
+    onGlobalSearchChange?.(value)
+    setGlobalFilter(String(value))
+  }
+
+  const makeActionsColumn = makeRowActions({ rowActions, testPrefix })
+
   const renderBulkActions = () => {
     const bulkActionsArray = [
       makeBulkActions({
@@ -77,51 +84,7 @@ const NetdataTable = ({
     return bulkActionsArray
   }
 
-  const [originalSelectedRows, setOriginalSelectedRow] = useState([])
-  const [sorting, setSorting] = useState(sortBy)
-  const [rowSelection, setRowSelection] = useState({})
-  const [globalFilter, setGlobalFilter] = useState("")
-  const [pagination, setPagination] = useState({
-    pageIndex: paginationOptions.pageIndex,
-    pageSize: paginationOptions.pageSize,
-  })
-
-  const availableRowActions = Object.keys(rowActions).reduce((acc, currentActionKey) => {
-    const isActionSupported = supportedRowActions[currentActionKey]
-    if (!isActionSupported) return []
-    const {
-      icon,
-      confirmation,
-      tooltipText,
-      confirmationTitle,
-      confirmationMessage,
-      confirmLabel,
-      declineLabel,
-      handleDecline,
-      actionButtonDirection,
-      disabledTooltipText,
-      flavour,
-      iconColor,
-    } = supportedRowActions[currentActionKey]
-    const currentAction = rowActions[currentActionKey]
-    acc.push({
-      confirmation,
-      tooltipText,
-      icon,
-      id: currentActionKey,
-      confirmationTitle,
-      confirmationMessage,
-      confirmLabel,
-      declineLabel,
-      handleDecline,
-      actionButtonDirection,
-      disabledTooltipText,
-      flavour,
-      iconColor,
-      ...currentAction,
-    })
-    return acc
-  }, [])
+  const makeSelectionColumn = enableSelection ? [makeRowSelection({ testPrefix })] : []
 
   const makeDataColumns = useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
@@ -169,17 +132,6 @@ const NetdataTable = ({
       }
     )
   }, [dataColumns])
-
-  const makeSelectionColumn = enableSelection ? [makeRowSelection({ testPrefix })] : []
-  const makeActionsColumn =
-    availableRowActions.length > 0
-      ? [makeRowActions({ actions: availableRowActions, testPrefix })]
-      : []
-
-  const handleGlobalSearch = value => {
-    onGlobalSearchChange?.(value)
-    setGlobalFilter(String(value))
-  }
 
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],

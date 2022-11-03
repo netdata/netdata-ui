@@ -36,7 +36,6 @@ const renderActionWithDropdown = ({
   if (!actions || !actions.length) return <Box aria-hidden as="span" />
   return actions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible }) => {
-      console.log({ icon })
       return (
         <ActionWithDropdown
           key={id}
