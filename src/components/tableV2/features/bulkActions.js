@@ -24,6 +24,7 @@ export const supportedBulkActions = {
   columnVisibillity: { icon: "gear", alwaysEnabled: true },
 }
 
+//TODO THIS NEEDS TO BE REFACTORED NOW IS WORKING ONLY FOR COLUMN VISIBILLITY
 const renderActionWithDropdown = ({
   actions,
   table,
