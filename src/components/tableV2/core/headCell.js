@@ -1,14 +1,14 @@
 import React from "react"
 
-import ComparisonFilter from "../comparisonFilter"
-import SelectFilter from "../selectFilter"
+import ComparisonFilter from "../components/comparisonFilter"
+import SelectFilter from "../components/selectFilter"
 
 import SearchInput from "src/components/search"
 import Box from "src/components/templates/box"
 import Tooltip from "src/components/drops/tooltip"
 import { Icon } from "src/components/icon"
 
-import Table from "../base-table"
+import Table from "../components/base-table"
 
 import { flexRender } from "@tanstack/react-table"
 

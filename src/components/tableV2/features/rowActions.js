@@ -1,7 +1,7 @@
 import React from "react"
 import Flex from "src/components/templates/flex"
 
-import Action from "../action"
+import Action from "../components/action"
 
 export const supportedRowActions = {
   delete: {

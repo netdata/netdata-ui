@@ -1,7 +1,7 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
 import React, { useEffect, useMemo, useState } from "react"
 
-import Table from "./base-table"
+import Table from "./components/base-table"
 
 import {
   flexRender,
@@ -12,7 +12,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
-import { comparison, select, includesString } from "./filterFns"
+import { comparison, select, includesString } from "./helpers/filterFns"
 
 import makeHeadCell from "./core/headCell"
 

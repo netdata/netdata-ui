@@ -2,8 +2,8 @@ import React from "react"
 
 import Box from "src/components/templates/box"
 
-import BulkAction from "../bulkAction"
-import ActionWithDropdown from "../actionWithDropdown"
+import BulkAction from "../components/bulkAction"
+import ActionWithDropdown from "../components/actionWithDropdown"
 
 export const supportedBulkActions = {
   delete: {
