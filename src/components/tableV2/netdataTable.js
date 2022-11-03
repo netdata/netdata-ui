@@ -58,35 +58,20 @@ const NetdataTable = ({
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
 
-  const makeColumnVisibilityAction = useMemo(
-    () => ({
-      id: "columnVisibility",
-      handleAction: () => setIsColumnDropdownVisible(true),
-      visible: enableColumnVisibility,
-      icon: "gear",
-      alwaysEnabled: true,
-    }),
-    [enableColumnVisibility]
-  )
-
   const renderBulkActions = () => {
-    const columnVisibillityAction = renderActionWithDropdown({
-      actions: [makeColumnVisibilityAction],
-      table,
-      testPrefix,
-      isOpen: isColumnDropdownVisible,
-      onClose: () => setIsColumnDropdownVisible(false),
-      selectedRows: originalSelectedRows,
-    })
-
     const bulkActionsArray = [
       makeBulkActions({
+        columnVisibilityOptions: {
+          isOpen: isColumnDropdownVisible,
+          onClose: () => setIsColumnDropdownVisible(false),
+          handleAction: () => setIsColumnDropdownVisible(true),
+          visible: enableColumnVisibility,
+        },
         bulkActions,
         testPrefix,
         table,
         selectedRows: originalSelectedRows,
       }),
-      ...columnVisibillityAction,
     ]
 
     return bulkActionsArray
@@ -285,38 +270,6 @@ const NetdataTable = ({
         ))}
       </Table.Body>
     </Table>
-  )
-}
-
-const renderActionWithDropdown = ({
-  actions,
-  table,
-  testPrefix,
-  selectedRows,
-  isOpen,
-  onClose,
-}) => {
-  if (!actions || !actions.length) return <Box aria-hidden as="span" />
-  return actions.map(
-    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
-      return (
-        <ActionWithDropdown
-          key={id}
-          isVisible={isVisible}
-          alwaysEnabled={alwaysEnabled}
-          isDisabled={isDisabled}
-          tooltipText={tooltipText}
-          icon={icon}
-          handleAction={handleAction}
-          table={table}
-          testPrefix={testPrefix}
-          selectedRows={selectedRows}
-          isOpen={isOpen}
-          onClose={onClose}
-          {...rest}
-        />
-      )
-    }
   )
 }
 

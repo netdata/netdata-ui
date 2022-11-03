@@ -1,7 +1,9 @@
 import React from "react"
 
-import BulkAction from "../bulkAction"
 import Box from "src/components/templates/box"
+
+import BulkAction from "../bulkAction"
+import ActionWithDropdown from "../actionWithDropdown"
 
 export const supportedBulkActions = {
   delete: {
@@ -22,46 +24,108 @@ export const supportedBulkActions = {
   columnVisibillity: { icon: "gear", alwaysEnabled: true },
 }
 
-const makeBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => {
-  const availableBulkActions = Object.keys(bulkActions).reduce((acc, currentActionKey) => {
-    const isBulkActionSupported = supportedBulkActions[currentActionKey]
-    if (!isBulkActionSupported) return acc
-    const {
-      icon,
-      confirmation,
-      tooltipText,
-      confirmationTitle,
-      confirmationMessage,
-      confirmLabel,
-      declineLabel,
-      handleDecline,
-      actionButtonDirection,
-      alwaysEnabled,
-      iconColor,
-      flavour,
-    } = supportedBulkActions[currentActionKey]
-    const currentAction = bulkActions[currentActionKey]
-    acc.push({
-      confirmation,
-      tooltipText,
-      icon,
-      id: currentActionKey,
-      confirmationTitle,
-      confirmationMessage,
-      confirmLabel,
-      declineLabel,
-      handleDecline,
-      actionButtonDirection,
-      alwaysEnabled,
-      iconColor,
-      flavour,
-      ...currentAction,
-    })
-    return acc
-  }, [])
+const renderActionWithDropdown = ({
+  actions,
+  table,
+  testPrefix,
+  selectedRows,
+  isOpen,
+  onClose,
+}) => {
+  if (!actions || !actions.length) return <Box aria-hidden as="span" />
+  return actions.map(
+    ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible }) => {
+      console.log({ icon })
+      return (
+        <ActionWithDropdown
+          key={id}
+          isVisible={isVisible}
+          alwaysEnabled={alwaysEnabled}
+          isDisabled={isDisabled}
+          tooltipText={tooltipText}
+          icon={icon}
+          handleAction={handleAction}
+          table={table}
+          testPrefix={testPrefix}
+          selectedRows={selectedRows}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+      )
+    }
+  )
+}
+
+const makeColumnVisibillityAction = ({ handleAction, visible }) => {
+  const prepareColumnVisibilityAction = {
+    id: "columnVisibility",
+    handleAction,
+    visible,
+    icon: "gear",
+    alwaysEnabled: true,
+  }
+
+  return prepareColumnVisibilityAction
+}
+
+const makeBulkActions = ({
+  bulkActions,
+  table,
+  testPrefix,
+  selectedRows,
+  columnVisibilityOptions,
+}) => {
+  const columnVisibility = makeColumnVisibillityAction({ ...columnVisibilityOptions })
+  const actionsWithDropdown = renderActionWithDropdown({
+    actions: [columnVisibility],
+    ...columnVisibilityOptions,
+    testPrefix,
+    table,
+    selectedRows,
+  })
+
+  const availableBulkActions = Object.keys({ ...bulkActions, columnVisibility }).reduce(
+    (acc, currentActionKey) => {
+      const isBulkActionSupported = supportedBulkActions[currentActionKey]
+      if (!isBulkActionSupported) return acc
+      const {
+        icon,
+        confirmation,
+        tooltipText,
+        confirmationTitle,
+        confirmationMessage,
+        confirmLabel,
+        declineLabel,
+        handleDecline,
+        actionButtonDirection,
+        alwaysEnabled,
+        iconColor,
+        flavour,
+      } = supportedBulkActions[currentActionKey]
+      const currentAction = bulkActions[currentActionKey]
+      acc.push({
+        confirmation,
+        tooltipText,
+        icon,
+        id: currentActionKey,
+        confirmationTitle,
+        confirmationMessage,
+        confirmLabel,
+        declineLabel,
+        handleDecline,
+        actionButtonDirection,
+        alwaysEnabled,
+        iconColor,
+        flavour,
+        ...currentAction,
+      })
+      return acc
+    },
+    []
+  )
 
   if (!availableBulkActions || !availableBulkActions.length) return []
-  return availableBulkActions.map(
+  const actions = availableBulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (
         <BulkAction
@@ -81,6 +145,7 @@ const makeBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => {
       )
     }
   )
+  return [...actions, ...actionsWithDropdown]
 }
 
 export default makeBulkActions
