@@ -22,7 +22,7 @@ import makeRowSelection from "./features/rowSelection"
 import makeHeadCell from "./core/headCell"
 import makePagination from "./features/pagination"
 import makeRowActions, { supportedRowActions } from "./features/rowActions"
-import makeBulkActions, { supportedBulkActions } from "./features/bulkActions"
+import makeBulkActions from "./features/bulkActions"
 
 const includesString = (row, columnId, filterValue) => {
   const search = filterValue.toLowerCase()
@@ -79,19 +79,17 @@ const NetdataTable = ({
       selectedRows: originalSelectedRows,
     })
 
-    const bulkActions = [
-      availableBulkActions
-        ? makeBulkActions({
-            bulkActions: availableBulkActions,
-            testPrefix,
-            table,
-            selectedRows: originalSelectedRows,
-          })
-        : [],
+    const bulkActionsArray = [
+      makeBulkActions({
+        bulkActions,
+        testPrefix,
+        table,
+        selectedRows: originalSelectedRows,
+      }),
       ...columnVisibillityAction,
     ]
 
-    return bulkActions
+    return bulkActionsArray
   }
 
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
@@ -135,43 +133,6 @@ const NetdataTable = ({
       disabledTooltipText,
       flavour,
       iconColor,
-      ...currentAction,
-    })
-    return acc
-  }, [])
-
-  const availableBulkActions = Object.keys(bulkActions).reduce((acc, currentActionKey) => {
-    const isBulkActionSupported = supportedBulkActions[currentActionKey]
-    if (!isBulkActionSupported) return acc
-    const {
-      icon,
-      confirmation,
-      tooltipText,
-      confirmationTitle,
-      confirmationMessage,
-      confirmLabel,
-      declineLabel,
-      handleDecline,
-      actionButtonDirection,
-      alwaysEnabled,
-      iconColor,
-      flavour,
-    } = supportedBulkActions[currentActionKey]
-    const currentAction = bulkActions[currentActionKey]
-    acc.push({
-      confirmation,
-      tooltipText,
-      icon,
-      id: currentActionKey,
-      confirmationTitle,
-      confirmationMessage,
-      confirmLabel,
-      declineLabel,
-      handleDecline,
-      actionButtonDirection,
-      alwaysEnabled,
-      iconColor,
-      flavour,
       ...currentAction,
     })
     return acc

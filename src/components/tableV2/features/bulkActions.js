@@ -23,8 +23,45 @@ export const supportedBulkActions = {
 }
 
 const makeBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => {
-  if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" key="empty-box" />
-  return bulkActions.map(
+  const availableBulkActions = Object.keys(bulkActions).reduce((acc, currentActionKey) => {
+    const isBulkActionSupported = supportedBulkActions[currentActionKey]
+    if (!isBulkActionSupported) return acc
+    const {
+      icon,
+      confirmation,
+      tooltipText,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+      actionButtonDirection,
+      alwaysEnabled,
+      iconColor,
+      flavour,
+    } = supportedBulkActions[currentActionKey]
+    const currentAction = bulkActions[currentActionKey]
+    acc.push({
+      confirmation,
+      tooltipText,
+      icon,
+      id: currentActionKey,
+      confirmationTitle,
+      confirmationMessage,
+      confirmLabel,
+      declineLabel,
+      handleDecline,
+      actionButtonDirection,
+      alwaysEnabled,
+      iconColor,
+      flavour,
+      ...currentAction,
+    })
+    return acc
+  }, [])
+
+  if (!availableBulkActions || !availableBulkActions.length) return []
+  return availableBulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (
         <BulkAction
