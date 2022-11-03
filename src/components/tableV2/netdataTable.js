@@ -28,6 +28,7 @@ import SelectFilter from "./selectFilter"
 import Tooltip from "src/components/drops/tooltip"
 import { Icon } from "src/components/icon"
 import ColumnsMenu from "./columnsMenu"
+import BulkAction from "./bulkAction"
 
 const ROW_SELECTION_MAX_SIZE = 10
 const ROW_SELECTION_MIN_SIZE = 10
@@ -135,6 +136,32 @@ const NetdataTable = ({
     }),
     [enableColumnVisibility]
   )
+
+  const makeBulkActions = () => {
+    const columnVisibillityAction = renderActionWithDropdown({
+      actions: [makeColumnVisibilityAction],
+      table,
+      testPrefix,
+      isOpen: isColumnDropdownVisible,
+      onClose: () => setIsColumnDropdownVisible(false),
+      selectedRows: originalSelectedRows,
+    })
+
+    const bulkActions = [
+      availableBulkActions
+        ? renderBulkActions({
+            bulkActions: availableBulkActions,
+            testPrefix,
+            table,
+            selectedRows: originalSelectedRows,
+          })
+        : [],
+      ...columnVisibillityAction,
+    ]
+
+    return bulkActions
+  }
+
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
   const [rowSelection, setRowSelection] = useState({})
@@ -316,31 +343,6 @@ const NetdataTable = ({
   }, [rowSelection, table])
 
   const headers = table.getFlatHeaders()
-
-  const makeBulkActions = () => {
-    const columnVisibillityAction = renderActionWithDropdown({
-      actions: [makeColumnVisibilityAction],
-      table,
-      testPrefix,
-      isOpen: isColumnDropdownVisible,
-      onClose: () => setIsColumnDropdownVisible(false),
-      selectedRows: originalSelectedRows,
-    })
-
-    const bulkActions = [
-      availableBulkActions
-        ? renderBulkActions({
-            bulkActions: availableBulkActions,
-            testPrefix,
-            table,
-            selectedRows: originalSelectedRows,
-          })
-        : [],
-      columnVisibillityAction,
-    ]
-
-    return bulkActions
-  }
 
   return (
     <Table
@@ -560,21 +562,18 @@ const renderBulkActions = ({ bulkActions, table, testPrefix, selectedRows }) => 
   if (!bulkActions || !bulkActions.length) return <Box aria-hidden as="span" key="empty-box" />
   return bulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
-      const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
-      const visible = typeof isVisible === "function" ? isVisible() : isVisible
-      const actionRef = useRef()
       return (
-        <Action
-          ref={actionRef}
-          testPrefix={`-bulk${testPrefix}`}
+        <BulkAction
           key={id}
-          visible={visible}
           id={id}
           icon={icon}
-          handleAction={() => handleAction(selectedRows, table)}
+          handleAction={handleAction}
           tooltipText={tooltipText}
-          disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
-          background="elementBackground"
+          alwaysEnabled={alwaysEnabled}
+          isDisabled={isDisabled}
+          isVisible={isVisible}
+          table={table}
+          testPrefix={testPrefix}
           selectedRows={selectedRows}
           {...rest}
         />
@@ -657,9 +656,9 @@ const renderActionWithDropdown = ({
   if (!actions || !actions.length) return <Box aria-hidden as="span" />
   return actions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
+      const actionRef = useRef()
       const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
       const visible = typeof isVisible === "function" ? isVisible() : isVisible
-      const actionRef = useRef()
 
       return (
         <React.Fragment key={id}>
