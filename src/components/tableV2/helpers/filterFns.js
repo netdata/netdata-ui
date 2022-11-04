@@ -39,3 +39,9 @@ const singleSelect = (row, columnId, value) => {
 
   return filterValue === rowValue
 }
+
+export const includesString = (row, columnId, filterValue) => {
+  const search = filterValue.toLowerCase()
+
+  return String(row.getValue(columnId))?.toLowerCase().includes(search)
+}
