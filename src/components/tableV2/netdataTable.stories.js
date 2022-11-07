@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 
-import Table from "./base-table"
+import Table from "./core/base-table"
 import NetdataTable from "./netdataTable"
 
 import Box from "src/components/templates/box"
@@ -445,7 +445,6 @@ StoryTable.add("Full Table functionallity", () => {
       data={mockData()}
       testPrefixCallback={row => row.nodes}
       disableClickRow={({ data }) => data.alerts > 15}
-      enableColumnVisibility
     />
   )
 })
