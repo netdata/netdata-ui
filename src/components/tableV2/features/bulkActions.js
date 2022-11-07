@@ -19,7 +19,7 @@ export const supportedBulkActions = {
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
   toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
-  addEntry: { icon: "plus", alwaysEnabled: true, flavour: "default" },
+  addEntry: { icon: "plus", alwaysEnabled: true, flavour: "default", iconColor: "white" },
   remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
   columnVisibillity: { icon: "gear", alwaysEnabled: true },
 }
