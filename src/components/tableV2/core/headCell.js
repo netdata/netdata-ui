@@ -11,6 +11,8 @@ import Table from "./base-table"
 
 import { flexRender } from "@tanstack/react-table"
 
+import { SIZE_SUB_UNIT } from "src/theme/default/constants.js"
+
 const SearchFilter = ({ column, testPrefix }) => {
   const columnFilterValue = column.getFilterValue()
   const { id = "" } = column
@@ -35,7 +37,7 @@ const availableFilters = {
 
 const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize }) => {
   const HeadCell = headers.map(
-    ({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler }) => {
+    ({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
       const { getCanSort, columnDef, getCanResize } = column
       const { meta } = columnDef
       const styles = meta?.styles || {}
@@ -49,10 +51,12 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize }) => {
           ? { onMouseDown: getResizeHandler(), onTouchStart: getResizeHandler() }
           : {}
 
+      const headWidth = getSize() / SIZE_SUB_UNIT
+
       if (getCanSort() && enableSorting) {
         return (
           <Table.SortingHeadCell
-            width={column.getSize()}
+            width={headWidth}
             minWidth={column.columnDef.minSize}
             maxWidth={column.columnDef.maxSize}
             data-testid={`netdata-table-head-cell${testPrefix}`}
@@ -77,7 +81,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize }) => {
 
       return (
         <Table.HeadCell
-          width={column.getSize()}
+          width={headWidth}
           minWidth={column.columnDef.minSize}
           maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}

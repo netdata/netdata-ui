@@ -72,7 +72,7 @@ const Table = forwardRef(
       <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
         <StyledTableControls>
           {handleSearch && (
-            <Box width={{ max: 50 }}>
+            <Box width={{ base: 30, max: 30 }}>
               <SearchInput
                 data-testid="table-global-search-filter"
                 data-ga={`${dataGa}::search::table-filter`}
@@ -119,12 +119,11 @@ Table.Resizer = ({ onMouseDown, onTouchStart }) => {
   if (!onMouseDown) return
   return (
     <Box
-      sx={{ userSelect: "none", touchAction: "none", cursor: "col-resize" }}
+      sx={{ width: "2px", userSelect: "none", touchAction: "none", cursor: "col-resize" }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
       background="nodeBadgeColor"
       position="absolute"
-      width={1}
       top={0}
       right={0}
       bottom={0}
