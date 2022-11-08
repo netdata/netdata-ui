@@ -45,6 +45,7 @@ const NetdataTable = ({
   testPrefixCallback,
   dataGa,
   enableColumnVisibility = false,
+  enableResize = false,
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
@@ -106,6 +107,7 @@ const NetdataTable = ({
           sortingFn,
           accessorKey,
           enableHiding = true,
+          enableResize = true,
         },
         index
       ) => {
@@ -124,6 +126,7 @@ const NetdataTable = ({
           isPlaceholder,
           meta,
           enableHiding,
+          enableResize,
           size,
           ...(maxSize ? { maxSize } : {}),
           minSize,
@@ -136,6 +139,7 @@ const NetdataTable = ({
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
+    columnResizeMode: enableResize ? "onChange" : "",
     filterFns: {
       comparison,
       select,
@@ -187,7 +191,7 @@ const NetdataTable = ({
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({ headers, enableSorting, testPrefix })}
+          {makeHeadCell({ headers, enableSorting, testPrefix, enableResize })}
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>

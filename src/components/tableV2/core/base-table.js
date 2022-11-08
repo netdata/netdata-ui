@@ -23,6 +23,7 @@ const StyledHeaderRow = styled.tr`
   color: ${getColor("text")};
 `
 const StyledHeaderCell = styled(Box)`
+  position: relative;
   padding: 12px;
   border-bottom: 1px solid ${getColor("borderSecondary")};
   &:not(:last-child) {
@@ -53,6 +54,7 @@ const StyledTableControls = styled(Flex)`
   padding: 16px 0;
   margin: -16px 0 0;
 `
+
 const Table = forwardRef(
   (
     {
@@ -113,15 +115,44 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   </StyledHeaderRow>
 ))
 
+Table.Resizer = ({ onMouseDown, onTouchStart }) => {
+  if (!onMouseDown) return
+  return (
+    <Box
+      sx={{ userSelect: "none", touchAction: "none", cursor: "col-resize" }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+      background="nodeBadgeColor"
+      position="absolute"
+      width={1}
+      top={0}
+      right={0}
+      bottom={0}
+    />
+  )
+}
+
 Table.HeadCell = forwardRef(
   (
-    { children, align = "left", width, maxWidth, styles = {}, tooltipText, filter, ...props },
+    {
+      children,
+      align = "left",
+      width,
+      maxWidth,
+      styles = {},
+      tooltipText,
+      filter,
+      onMouseDown,
+      onTouchStart,
+      ...props
+    },
     ref
   ) => (
     <StyledHeaderCell ref={ref} as="th">
       <Box
         sx={{ textAlign: align, fontSize: "14px", ...styles }}
         width={{ max: maxWidth, base: width, min: "fit-content" }}
+        position="relative"
         {...props}
       >
         <Flex>
@@ -137,6 +168,7 @@ Table.HeadCell = forwardRef(
 
         {filter}
       </Box>
+      <Table.Resizer onMouseDown={onMouseDown} onTouchStart={onTouchStart} />
     </StyledHeaderCell>
   )
 )

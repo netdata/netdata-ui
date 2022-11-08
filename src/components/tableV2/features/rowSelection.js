@@ -21,6 +21,7 @@ const makeRowSelection = ({ testPrefix }) => {
   return {
     id: "checkbox",
     enableHiding: false,
+    enableResizing: false,
     header: ({ table }) => {
       return (
         <ColumnCheckbox

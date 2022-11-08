@@ -33,62 +33,70 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
-  const HeadCell = headers.map(({ id, colSpan, getContext, isPlaceholder, column }) => {
-    const { getCanSort, columnDef } = column
-    const { meta } = columnDef
-    const styles = meta?.styles || {}
+const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize }) => {
+  const HeadCell = headers.map(
+    ({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler }) => {
+      const { getCanSort, columnDef, getCanResize } = column
+      const { meta } = columnDef
+      const styles = meta?.styles || {}
 
-    const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
-    const filterOptions = meta && meta?.filter ? meta?.filter : {}
-    const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
-    const Filter = availableFilters[selectedFilter]
+      const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
+      const filterOptions = meta && meta?.filter ? meta?.filter : {}
+      const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
+      const Filter = availableFilters[selectedFilter]
+      const resizeFuntions =
+        enableResize && getCanResize()
+          ? { onMouseDown: getResizeHandler(), onTouchStart: getResizeHandler() }
+          : {}
 
-    if (getCanSort() && enableSorting) {
+      if (getCanSort() && enableSorting) {
+        return (
+          <Table.SortingHeadCell
+            width={column.getSize()}
+            minWidth={column.columnDef.minSize}
+            maxWidth={column.columnDef.maxSize}
+            data-testid={`netdata-table-head-cell${testPrefix}`}
+            sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
+            sortDirection={column.getIsSorted()}
+            onSortClicked={column.getToggleSortingHandler()}
+            colSpan={colSpan}
+            key={id}
+            filter={
+              column.getCanFilter() && (
+                <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+              )
+            }
+            styles={styles}
+            tooltipText={tooltipText}
+            {...resizeFuntions}
+          >
+            {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
+          </Table.SortingHeadCell>
+        )
+      }
+
       return (
-        <Table.SortingHeadCell
+        <Table.HeadCell
           width={column.getSize()}
           minWidth={column.columnDef.minSize}
           maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}
-          sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
-          sortDirection={column.getIsSorted()}
-          onSortClicked={column.getToggleSortingHandler()}
           colSpan={colSpan}
           key={id}
+          styles={styles}
+          tooltipText={tooltipText}
           filter={
             column.getCanFilter() && (
               <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
             )
           }
-          styles={styles}
-          tooltipText={tooltipText}
+          {...resizeFuntions}
         >
-          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
-        </Table.SortingHeadCell>
+          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
+        </Table.HeadCell>
       )
     }
-
-    return (
-      <Table.HeadCell
-        width={column.getSize()}
-        minWidth={column.columnDef.minSize}
-        maxWidth={column.columnDef.maxSize}
-        data-testid={`netdata-table-head-cell${testPrefix}`}
-        colSpan={colSpan}
-        key={id}
-        styles={styles}
-        tooltipText={tooltipText}
-        filter={
-          column.getCanFilter() && (
-            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
-          )
-        }
-      >
-        {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
-      </Table.HeadCell>
-    )
-  })
+  )
 
   return HeadCell
 }

@@ -281,6 +281,7 @@ StoryTable.add("Pagination", () => {
   return (
     <Box width="800px">
       <NetdataTable
+        enableResize
         paginationOptions={paginationOptions}
         enablePagination={true}
         dataColumns={mockDataColumns}
@@ -450,6 +451,7 @@ StoryTable.add("Full Table functionallity", () => {
       testPrefixCallback={row => row.nodes}
       disableClickRow={({ data }) => data.alerts > 15}
       enableColumnVisibility
+      enableResize
     />
   )
 })
