@@ -181,7 +181,6 @@ Table.SortingHeadCell = forwardRef(
 
     return (
       <Table.HeadCell
-        as="th"
         styles={styles}
         align={align}
         ref={ref}
