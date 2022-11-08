@@ -38,6 +38,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
   const HeadCell = headers.map(({ id, colSpan, getContext, isPlaceholder, column }) => {
     const { getCanSort, columnDef } = column
     const { meta } = columnDef
+    const styles = meta?.styles || {}
 
     const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
     const filterOptions = meta && meta?.filter ? meta?.filter : {}
@@ -61,11 +62,12 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
               <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
             )
           }
+          styles={styles}
         >
           <Box position="absolute" right={0}>
             {tooltipText && (
               <Tooltip align="bottom" content={tooltipText}>
-                <Icon color="nodeBadgeColor" size="small" name="information"></Icon>
+                <Icon color="nodeBadgeColor" size="small" name="information" />
               </Tooltip>
             )}
           </Box>
@@ -82,6 +84,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
         data-testid={`netdata-table-head-cell${testPrefix}`}
         colSpan={colSpan}
         key={id}
+        styles={styles}
       >
         {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
         {column.getCanFilter() ? (

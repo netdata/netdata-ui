@@ -67,7 +67,7 @@ const Table = forwardRef(
     ref
   ) => {
     return (
-      <Flex width="100%" height="100%" column>
+      <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
         <StyledTableControls>
           {handleSearch && (
             <Box width={{ max: 50 }}>
@@ -114,11 +114,11 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadCell = forwardRef(
-  ({ children, align = "left", width, maxWidth, minWidth, ...props }, ref) => (
+  ({ children, align = "left", width, maxWidth, minWidth, styles = {}, ...props }, ref) => (
     <StyledHeaderCell
       width={{ max: maxWidth, base: width, min: minWidth }}
       ref={ref}
-      sx={{ textAlign: align, fontSize: "14px" }}
+      sx={{ textAlign: align, fontSize: "14px", ...styles }}
       {...props}
       as="th"
     >
@@ -141,6 +141,7 @@ Table.SortingHeadCell = forwardRef(
       align = "left",
       "data-testid": dataTestid,
       "sortby-testid": sortbyTestid,
+      styles = {},
       ...props
     },
     ref
@@ -169,7 +170,7 @@ Table.SortingHeadCell = forwardRef(
         as="th"
         ref={ref}
         {...props}
-        sx={{ textAlign: align, fontSize: "14px" }}
+        sx={{ textAlign: align, fontSize: "14px", ...styles }}
         data-testid={dataTestid}
       >
         <Box
