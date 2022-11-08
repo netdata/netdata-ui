@@ -118,8 +118,7 @@ const makeBulkActions = ({
     return acc
   }, [])
 
-  if ((!availableBulkActions || !availableBulkActions.length) && !actionsWithDropdown.length)
-    return []
+  if (!availableBulkActions || !availableBulkActions.length) return actionsWithDropdown
   const actions = availableBulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (
