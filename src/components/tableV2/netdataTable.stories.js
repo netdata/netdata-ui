@@ -343,9 +343,11 @@ StoryTable.add("Full Table functionallity", () => {
 
       header: "Nodes",
       id: "nodes",
-      enableFilter: true,
       cell: ({ getValue }) => getValue(),
       enableHiding: false,
+      meta: {
+        tooltip: "Information",
+      },
     },
     {
       accessorKey: "alerts",
@@ -359,12 +361,14 @@ StoryTable.add("Full Table functionallity", () => {
     },
     {
       accessorKey: "user",
-
       header: "user",
       id: "user",
       enableFilter: true,
       enableSorting: false,
       cell: ({ getValue }) => getValue(),
+      meta: {
+        tooltip: "Information",
+      },
     },
     {
       accessorKey: "status",
