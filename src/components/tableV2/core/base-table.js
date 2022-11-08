@@ -67,7 +67,7 @@ const Table = forwardRef(
     ref
   ) => {
     return (
-      <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
+      <Flex width={{ base: "100%", min: "fit-content" }} column>
         <StyledTableControls>
           {handleSearch && (
             <Box width={{ max: 50 }}>
