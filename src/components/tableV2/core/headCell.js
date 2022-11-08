@@ -5,7 +5,6 @@ import SelectFilter from "../components/selectFilter"
 
 import SearchInput from "src/components/search"
 import Box from "src/components/templates/box"
-import Tooltip from "src/components/drops/tooltip"
 import { Icon } from "src/components/icon"
 
 import Table from "./base-table"
@@ -63,14 +62,8 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
             )
           }
           styles={styles}
+          tooltipText={tooltipText}
         >
-          <Box position="absolute" right={0}>
-            {tooltipText && (
-              <Tooltip align="bottom" content={tooltipText}>
-                <Icon color="nodeBadgeColor" size="small" name="information" />
-              </Tooltip>
-            )}
-          </Box>
           {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
         </Table.SortingHeadCell>
       )
@@ -85,13 +78,14 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
         colSpan={colSpan}
         key={id}
         styles={styles}
+        tooltipText={tooltipText}
+        filter={
+          column.getCanFilter() && (
+            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+          )
+        }
       >
         {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
-        {column.getCanFilter() ? (
-          <div>
-            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
-          </div>
-        ) : null}
       </Table.HeadCell>
     )
   })
