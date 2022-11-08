@@ -30,7 +30,7 @@ const StyledHeaderCell = styled(Box)`
   }
 `
 const StyledSortIcon = styled(Icon)`
-  position: absolute;
+  position: relative;
   top: 0;
   bottom: 0;
   height: 16px;
@@ -114,15 +114,29 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadCell = forwardRef(
-  ({ children, align = "left", width, maxWidth, minWidth, styles = {}, ...props }, ref) => (
-    <StyledHeaderCell
-      width={{ max: maxWidth, base: width, min: minWidth }}
-      ref={ref}
-      sx={{ textAlign: align, fontSize: "14px", ...styles }}
-      {...props}
-      as="th"
-    >
-      {children}
+  (
+    { children, align = "left", width, maxWidth, styles = {}, tooltipText, filter, ...props },
+    ref
+  ) => (
+    <StyledHeaderCell ref={ref} as="th">
+      <Box
+        sx={{ textAlign: align, fontSize: "14px", ...styles }}
+        width={{ max: maxWidth, base: width, min: "fit-content" }}
+        {...props}
+      >
+        <Flex>
+          {children}
+          <Box sx={{ marginLeft: "auto" }} position="relative" top={0}>
+            {tooltipText && (
+              <Tooltip align="bottom" content={tooltipText}>
+                <Icon color="nodeBadgeColor" size="small" name="information" />
+              </Tooltip>
+            )}
+          </Box>
+        </Flex>
+
+        {filter}
+      </Box>
     </StyledHeaderCell>
   )
 )
@@ -142,6 +156,7 @@ Table.SortingHeadCell = forwardRef(
       "data-testid": dataTestid,
       "sortby-testid": sortbyTestid,
       styles = {},
+      tooltipText,
       ...props
     },
     ref
@@ -165,13 +180,18 @@ Table.SortingHeadCell = forwardRef(
     )
 
     return (
-      <StyledHeaderCell
-        width={{ max: maxWidth, base: width, min: minWidth }}
+      <Table.HeadCell
         as="th"
+        styles={styles}
+        align={align}
         ref={ref}
-        {...props}
-        sx={{ textAlign: align, fontSize: "14px", ...styles }}
         data-testid={dataTestid}
+        maxWidth={maxWidth}
+        width={width}
+        minWidth={minWidth}
+        tooltipText={tooltipText}
+        {...props}
+        filter={filter}
       >
         <Box
           onMouseEnter={onMouseEnter}
@@ -181,12 +201,17 @@ Table.SortingHeadCell = forwardRef(
           cursor="pointer"
           data-testid={sortbyTestid}
         >
-          {children}
-          <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
-          {showHoveringIcon && <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />}
+          <Flex data-testid="sorting-cell-children-sorting-arrows-wrapper">
+            {children}
+            <Box width={4}>
+              <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
+              {showHoveringIcon && (
+                <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />
+              )}
+            </Box>
+          </Flex>
         </Box>
-        {filter}
-      </StyledHeaderCell>
+      </Table.HeadCell>
     )
   }
 )
