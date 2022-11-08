@@ -21,10 +21,10 @@ export const supportedBulkActions = {
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
   addEntry: { icon: "plus", alwaysEnabled: true, flavour: "default", iconColor: "white" },
   remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
-  columnVisibillity: { icon: "gear", alwaysEnabled: true },
+  columnVisibility: { icon: "gear", alwaysEnabled: true },
 }
 
-//TODO THIS NEEDS TO BE REFACTORED NOW IS WORKING ONLY FOR COLUMN VISIBILLITY
+//TODO THIS NEEDS TO BE REFACTORED NOW IS WORKING ONLY FOR COLUMN VISIBILITY
 const renderActionWithDropdown = ({
   actions,
   table,
@@ -33,7 +33,7 @@ const renderActionWithDropdown = ({
   isOpen,
   onClose,
 }) => {
-  if (!actions || !actions.length) return <Box aria-hidden as="span" />
+  if (!actions || !actions.length) return []
   return actions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (
@@ -57,17 +57,13 @@ const renderActionWithDropdown = ({
   )
 }
 
-const makeColumnVisibillityAction = ({ handleAction, visible }) => {
-  const prepareColumnVisibilityAction = {
-    id: "columnVisibillity",
-    handleAction,
-    visible,
-    icon: "gear",
-    alwaysEnabled: true,
-  }
-
-  return prepareColumnVisibilityAction
-}
+const makeColumnVisibilityAction = ({ handleAction, visible }) => ({
+  id: "columnVisibility",
+  handleAction,
+  isVisible: visible,
+  icon: "gear",
+  alwaysEnabled: true,
+})
 
 const makeBulkActions = ({
   bulkActions,
@@ -76,9 +72,9 @@ const makeBulkActions = ({
   selectedRows,
   columnVisibilityOptions,
 }) => {
-  const columnVisibillity = makeColumnVisibillityAction({ ...columnVisibilityOptions })
+  const columnVisibility = makeColumnVisibilityAction({ ...columnVisibilityOptions })
   const actionsWithDropdown = renderActionWithDropdown({
-    actions: [columnVisibillity],
+    actions: [columnVisibility],
     ...columnVisibilityOptions,
     testPrefix,
     table,
@@ -122,7 +118,8 @@ const makeBulkActions = ({
     return acc
   }, [])
 
-  if (!availableBulkActions || !availableBulkActions.length) return []
+  if ((!availableBulkActions || !availableBulkActions.length) && !actionsWithDropdown.length)
+    return []
   const actions = availableBulkActions.map(
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (

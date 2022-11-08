@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 
 import BulkAction from "./bulkAction"
-import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is used only for the dropdown for column visibillity
+import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is used only for the dropdown for column visibility
 
 const ActionWithDropdown = ({
   id,
@@ -23,7 +23,7 @@ const ActionWithDropdown = ({
   const visible = typeof isVisible === "function" ? isVisible() : isVisible
 
   return (
-    <React.Fragment key={id}>
+    <>
       <BulkAction
         ref={actionRef}
         testPrefix={`-bulk${testPrefix}`}
@@ -43,7 +43,7 @@ const ActionWithDropdown = ({
         columns={table.getAllLeafColumns()}
         onClose={onClose}
       />
-    </React.Fragment>
+    </>
   )
 }
 
