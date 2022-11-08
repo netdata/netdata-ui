@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-table"
 
 import { comparison, select, includesString } from "./helpers/filterFns"
+import { SIZE_SUB_UNIT } from "src/theme/default/constants.js"
 
 import makeHeadCell from "./core/headCell"
 
@@ -211,7 +212,7 @@ const NetdataTable = ({
             {row.getVisibleCells().map(cell => {
               return (
                 <Table.Cell
-                  width={cell.column.getSize()}
+                  width={cell.column.getSize() / SIZE_SUB_UNIT}
                   minWidth={cell.column.columnDef.minSize}
                   maxWidth={cell.column.columnDef.maxSize}
                   data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
