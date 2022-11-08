@@ -377,9 +377,8 @@ StoryTable.add("Full Table functionallity", () => {
       id: "status",
       enableFilter: true,
       filterFn: "select",
-      size: 80,
-      maxSize: 80,
-      minSize: 80,
+
+      size: 230,
       cell: ({ getValue }) => getValue(),
       meta: {
         tooltip: "Information",
