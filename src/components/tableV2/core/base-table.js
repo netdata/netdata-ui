@@ -118,9 +118,9 @@ Table.HeadCell = forwardRef(
     { children, align = "left", width, maxWidth, styles = {}, tooltipText, filter, ...props },
     ref
   ) => (
-    <StyledHeaderCell ref={ref} as="th">
+    <StyledHeaderCell ref={ref} as="th" sx={styles}>
       <Box
-        sx={{ textAlign: align, fontSize: "14px", ...styles }}
+        sx={{ textAlign: align, fontSize: "14px" }}
         width={{ max: maxWidth, base: width, min: "fit-content" }}
         {...props}
       >
