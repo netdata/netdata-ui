@@ -210,7 +210,12 @@ StoryTable.add("Actions", () => {
 
   return (
     <Box width="800px">
-      <NetdataTable rowActions={rowActions} dataColumns={mockDataColumns} data={mockData()} />
+      <NetdataTable
+        enableSelection
+        rowActions={rowActions}
+        dataColumns={mockDataColumns}
+        data={mockData()}
+      />
     </Box>
   )
 })
@@ -252,6 +257,7 @@ StoryTable.add("Bulk Actions", () => {
   return (
     <Box width="800px">
       <NetdataTable
+        enableResize
         bulkActions={bulkActions}
         enableSelection
         dataColumns={mockDataColumns}
@@ -433,24 +439,26 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <NetdataTable
-      onClickRow={({ data, table, fullRow }) => {
-        console.log(data, table, fullRow)
-      }}
-      sortBy={[{ id: "nodes", desc: false }]}
-      onGlobalSearchChange={onGlobalSearchChange}
-      enableSorting
-      paginationOptions={paginationOptions}
-      enablePagination
-      rowActions={rowActions}
-      bulkActions={bulkActions}
-      enableSelection
-      dataColumns={mockDataColumns}
-      data={mockData()}
-      testPrefixCallback={row => row.nodes}
-      disableClickRow={({ data }) => data.alerts > 15}
-      enableColumnVisibility
-      enableResize
-    />
+    <Box width="100%">
+      <NetdataTable
+        onClickRow={({ data, table, fullRow }) => {
+          console.log(data, table, fullRow)
+        }}
+        sortBy={[{ id: "nodes", desc: false }]}
+        onGlobalSearchChange={onGlobalSearchChange}
+        enableSorting
+        paginationOptions={paginationOptions}
+        enablePagination
+        rowActions={rowActions}
+        bulkActions={bulkActions}
+        enableSelection
+        dataColumns={mockDataColumns}
+        data={mockData()}
+        testPrefixCallback={row => row.nodes}
+        disableClickRow={({ data }) => data.alerts > 15}
+        enableColumnVisibility
+        enableResize
+      />
+    </Box>
   )
 })

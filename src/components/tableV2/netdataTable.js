@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react"
 
 import Table from "./core/base-table"
+import Box from "src/components/templates/box"
 
 import {
   flexRender,
@@ -180,53 +181,56 @@ const NetdataTable = ({
   const headers = table.getFlatHeaders()
 
   return (
-    <Table
-      selectedRows={originalSelectedRows}
-      bulkActions={() => renderBulkActions()}
-      Pagination={enablePagination && makePagination({ table })}
-      handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-      ref={tableRef}
-      data-testid={`netdata-table${testPrefix}`}
-      testPrefix={testPrefix}
-      dataGa={dataGa}
-    >
-      <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
-        <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({ headers, enableSorting, testPrefix, enableResize })}
-        </Table.HeadRow>
-      </Table.Head>
-      <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-        {table.getRowModel().rows.map(row => (
-          <Table.Row
-            data-testid={`netdata-table-row${testPrefix}${
-              testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
-            }`}
-            onClick={
-              onClickRow && (() => onClickRow({ data: row.original, table: table, fullRow: row }))
-            }
-            key={row.id}
-            disableClickRow={() =>
-              disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
-            }
-          >
-            {row.getVisibleCells().map(cell => {
-              return (
-                <Table.Cell
-                  width={cell.column.getSize() / SIZE_SUB_UNIT}
-                  minWidth={cell.column.columnDef.minSize}
-                  maxWidth={cell.column.columnDef.maxSize}
-                  data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
-                  key={cell.id}
-                  {...cell.column.columnDef.meta}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </Table.Cell>
-              )
-            })}
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+    <Box width="100%">
+      <Table
+        selectedRows={originalSelectedRows}
+        bulkActions={() => renderBulkActions()}
+        Pagination={enablePagination && makePagination({ table })}
+        handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+        ref={tableRef}
+        data-testid={`netdata-table${testPrefix}`}
+        testPrefix={testPrefix}
+        dataGa={dataGa}
+      >
+        <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
+          <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
+            {makeHeadCell({ headers, enableSorting, testPrefix, enableResize })}
+          </Table.HeadRow>
+        </Table.Head>
+        <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
+          {table.getRowModel().rows.map(row => (
+            <Table.Row
+              data-testid={`netdata-table-row${testPrefix}${
+                testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
+              }`}
+              onClick={
+                onClickRow && (() => onClickRow({ data: row.original, table: table, fullRow: row }))
+              }
+              key={row.id}
+              disableClickRow={() =>
+                disableClickRow &&
+                disableClickRow({ data: row.original, table: table, fullRow: row })
+              }
+            >
+              {row.getVisibleCells().map(cell => {
+                return (
+                  <Table.Cell
+                    width={cell.column.getSize() / SIZE_SUB_UNIT}
+                    minWidth={cell.column.columnDef.minSize}
+                    maxWidth={cell.column.columnDef.maxSize}
+                    data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
+                    key={cell.id}
+                    {...cell.column.columnDef.meta}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Table.Cell>
+                )
+              })}
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Box>
   )
 }
 

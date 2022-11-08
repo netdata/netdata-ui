@@ -69,7 +69,7 @@ const Table = forwardRef(
     ref
   ) => {
     return (
-      <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
+      <Flex overflow="hidden" height="100%" column>
         <StyledTableControls>
           {handleSearch && (
             <Box width={{ base: 30, max: 30 }}>
@@ -89,9 +89,12 @@ const Table = forwardRef(
             {bulkActions && bulkActions()}
           </Flex>
         </StyledTableControls>
-        <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
-          {children}
+        <Box width="100%" overflow={{ horizontal: "auto" }}>
+          <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width="100%" {...props}>
+            {children}
+          </Box>
         </Box>
+
         {Pagination}
       </Flex>
     )
@@ -147,7 +150,7 @@ Table.HeadCell = forwardRef(
     },
     ref
   ) => (
-    <StyledHeaderCell ref={ref} as="th">
+    <StyledHeaderCell ref={ref} as="th" sx={{ ...styles }}>
       <Box
         sx={{ textAlign: align, fontSize: "14px", ...styles }}
         width={{ max: maxWidth, base: width, min: "fit-content" }}
