@@ -11,6 +11,11 @@ import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
 import { debounce } from "throttle-debounce"
 
+//TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
+// the problem is when we are applying column pin the second table has different sizes
+// than the first one. This is happening when we have a head with a filter and the all
+// the cells are being addapted to that size.
+
 const StyledRow = styled.tr`
   font-size: 14px;
   color: ${getColor("text")};
@@ -63,13 +68,14 @@ const Table = forwardRef(
       Pagination,
       bulkActions,
       dataGa,
+      disableTableControls = false,
       ...props
     },
     ref
   ) => {
     return (
-      <Flex width={{ base: "100%", min: "fit-content" }} column>
-        {(hasBulkActions || handleSearch) && (
+      <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
+        {!disableTableControls && (
           <StyledTableControls>
             {handleSearch && (
               <Box width={{ max: 50 }}>
@@ -128,7 +134,7 @@ Table.HeadCell = forwardRef(
     <StyledHeaderCell
       width={{ max: maxWidth, base: width, min: minWidth }}
       ref={ref}
-      sx={{ textAlign: align, fontSize: "14px", ...styles }}
+      sx={{ textAlign: align, fontSize: "14px", height: "90px", ...styles }}
       {...props}
       as="th"
     >
@@ -218,7 +224,7 @@ Table.Cell = forwardRef(
       <Box
         width={{ max: maxWidth, base: width, min: minWidth }}
         padding={[3]}
-        sx={{ textAlign: align }}
+        sx={{ textAlign: align, height: "56px" }}
         as="td"
         ref={ref}
         {...props}

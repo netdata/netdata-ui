@@ -446,6 +446,8 @@ StoryTable.add("Full Table functionallity", () => {
       testPrefixCallback={row => row.nodes}
       disableClickRow={({ data }) => data.alerts > 15}
       enableColumnVisibility
+      enableColumnPinning
+      columnPinningOptions={{ left: ["checkbox", "nodes"] }}
     />
   )
 })
