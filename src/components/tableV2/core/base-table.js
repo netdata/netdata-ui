@@ -51,7 +51,12 @@ const StyledPagination = styled(Flex)`
 const Table = forwardRef(({ children, ...props }, ref) => {
   return (
     <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
-      <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
+      <Box
+        sx={{ borderCollapse: "separate", position: "relative" }}
+        ref={ref}
+        as="table"
+        {...props}
+      >
         {children}
       </Box>
     </Flex>
@@ -59,7 +64,12 @@ const Table = forwardRef(({ children, ...props }, ref) => {
 })
 
 Table.Head = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} sx={{ whiteSpace: "nowrap", zIndex: "10" }} as="thead" {...props}>
+  <Box
+    ref={ref}
+    sx={{ whiteSpace: "nowrap", zIndex: "10", position: "sticky", top: 0 }}
+    as="thead"
+    {...props}
+  >
     {children}
   </Box>
 ))
@@ -75,7 +85,14 @@ Table.HeadCell = forwardRef(
     <StyledHeaderCell
       width={{ max: maxWidth, base: width, min: minWidth }}
       ref={ref}
-      sx={{ textAlign: align, fontSize: "14px", height: "90px", ...styles }}
+      sx={{
+        textAlign: align,
+        fontSize: "14px",
+        height: "90px",
+        position: "sticky",
+        top: 0,
+        ...styles,
+      }}
       {...props}
       as="th"
     >
@@ -127,7 +144,7 @@ Table.SortingHeadCell = forwardRef(
         as="th"
         ref={ref}
         {...props}
-        sx={{ textAlign: align, fontSize: "14px", ...styles }}
+        sx={{ textAlign: align, fontSize: "14px", position: "sticky", top: 0, ...styles }}
         data-testid={dataTestid}
       >
         <Box
