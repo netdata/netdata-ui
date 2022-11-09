@@ -15,6 +15,7 @@ import {
 import { comparison, select, includesString } from "./helpers/filterFns"
 
 import makeHeadCell from "./core/headCell"
+import makeRows from "./core/rows"
 
 import makeRowSelection from "./features/rowSelection"
 import makePagination from "./features/pagination"
@@ -45,9 +46,11 @@ const NetdataTable = ({
   testPrefixCallback,
   dataGa,
   enableColumnVisibility = false,
+  enableColumnPinning = false,
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
+  const [columnPinning, setColumnPinning] = React.useState({})
 
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
@@ -146,6 +149,7 @@ const NetdataTable = ({
       globalFilter,
       sorting,
       pagination,
+      columnPinning,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
@@ -157,6 +161,7 @@ const NetdataTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnPinningChange: setColumnPinning,
   })
 
   useEffect(() => {
@@ -172,15 +177,13 @@ const NetdataTable = ({
     }
   }, [rowSelection, table])
 
-  const headers = table.getFlatHeaders()
+  const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
   const hasBulkActions = enableColumnVisibility || !!Object.keys(bulkActions).length
 
   return (
     <Table
-      selectedRows={originalSelectedRows}
-      hasBulkActions={hasBulkActions}
-      bulkActions={renderBulkActions}
+      bulkActions={() => renderBulkActions()}
       Pagination={enablePagination && makePagination({ table })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
@@ -194,35 +197,15 @@ const NetdataTable = ({
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-        {table.getRowModel().rows.map(row => (
-          <Table.Row
-            data-testid={`netdata-table-row${testPrefix}${
-              testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
-            }`}
-            onClick={
-              onClickRow && (() => onClickRow({ data: row.original, table: table, fullRow: row }))
-            }
-            key={row.id}
-            disableClickRow={() =>
-              disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
-            }
-          >
-            {row.getVisibleCells().map(cell => {
-              return (
-                <Table.Cell
-                  width={cell.column.getSize()}
-                  minWidth={cell.column.columnDef.minSize}
-                  maxWidth={cell.column.columnDef.maxSize}
-                  data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
-                  key={cell.id}
-                  {...cell.column.columnDef.meta}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </Table.Cell>
-              )
-            })}
-          </Table.Row>
-        ))}
+        {makeRows({
+          testPrefixCallback,
+          testPrefix,
+          onClickRow,
+          table,
+          disableClickRow,
+          flexRender,
+          getRowHandler: enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells",
+        })}
       </Table.Body>
     </Table>
   )
