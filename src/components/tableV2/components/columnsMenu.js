@@ -5,7 +5,6 @@ import { Checkbox } from "src/components/checkbox"
 import Flex from "src/components/templates/flex"
 
 const ColumnsMenu = ({ parentRef, isOpen, columns, onClose }) => {
-  console.log({ isOpen, parentRefCurrent: parentRef.current })
   if (parentRef.current && isOpen)
     return (
       <Drop
