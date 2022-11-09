@@ -16,7 +16,6 @@ const ColumnPinning = ({
   table,
   disableClickRow,
   flexRender,
-  disableTableControls = true,
 }) => {
   return (
     <Box
@@ -25,15 +24,9 @@ const ColumnPinning = ({
         position: "sticky",
         left: 0,
         zIndex: 100,
-        marginTop: disableTableControls ? "51px" : 0,
       }}
     >
-      <Table
-        disableTableControls
-        data-testid={`netdata-table-pin${testPrefix}`}
-        testPrefix={testPrefix}
-        dataGa={dataGa}
-      >
+      <Table data-testid={`netdata-table-pin${testPrefix}`} testPrefix={testPrefix} dataGa={dataGa}>
         <Table.Head data-testid={`netdata-table-head-pin${testPrefix}`}>
           <Table.HeadRow data-testid={`netdata-table-headRow-pin${testPrefix}`}>
             {makeHeadCell({ headers, enableSorting, testPrefix })}

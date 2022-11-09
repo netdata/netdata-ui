@@ -24,6 +24,7 @@ import makePagination from "./features/pagination"
 import makeRowActions from "./features/rowActions"
 import makeBulkActions from "./features/bulkActions"
 import ColumnPinning from "./features/columnPinning"
+import GlobalControls from "./features/globalControls"
 
 const NetdataTable = ({
   dataColumns,
@@ -184,46 +185,53 @@ const NetdataTable = ({
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
   return (
-    <Flex>
-      {enableColumnPinning && (
-        <ColumnPinning
-          disableClickRow={disableClickRow}
-          onClickRow={onClickRow}
-          testPrefixCallback={testPrefixCallback}
-          enableSorting={enableSorting}
-          table={table}
-          headers={table.getLeftFlatHeaders()}
+    <Flex column>
+      <GlobalControls
+        handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+        dataGa={dataGa}
+        bulkActions={renderBulkActions}
+      />
+      <Flex overflow={{ horizontal: "scroll" }}>
+        {enableColumnPinning && (
+          <ColumnPinning
+            disableClickRow={disableClickRow}
+            onClickRow={onClickRow}
+            testPrefixCallback={testPrefixCallback}
+            enableSorting={enableSorting}
+            table={table}
+            headers={table.getLeftFlatHeaders()}
+            testPrefix={testPrefix}
+            dataGa={dataGa}
+            flexRender={flexRender}
+          />
+        )}
+        <Table
+          bulkActions={() => renderBulkActions()}
+          Pagination={enablePagination && makePagination({ table })}
+          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+          ref={tableRef}
+          data-testid={`netdata-table${testPrefix}`}
           testPrefix={testPrefix}
           dataGa={dataGa}
-          flexRender={flexRender}
-        />
-      )}
-      <Table
-        bulkActions={() => renderBulkActions()}
-        Pagination={enablePagination && makePagination({ table })}
-        handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-        ref={tableRef}
-        data-testid={`netdata-table${testPrefix}`}
-        testPrefix={testPrefix}
-        dataGa={dataGa}
-      >
-        <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
-          <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-            {makeHeadCell({ headers, enableSorting, testPrefix })}
-          </Table.HeadRow>
-        </Table.Head>
-        <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-          {makeRows({
-            testPrefixCallback,
-            testPrefix,
-            onClickRow,
-            table,
-            disableClickRow,
-            flexRender,
-            getRowHandler: enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells",
-          })}
-        </Table.Body>
-      </Table>
+        >
+          <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
+            <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
+              {makeHeadCell({ headers, enableSorting, testPrefix })}
+            </Table.HeadRow>
+          </Table.Head>
+          <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
+            {makeRows({
+              testPrefixCallback,
+              testPrefix,
+              onClickRow,
+              table,
+              disableClickRow,
+              flexRender,
+              getRowHandler: enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells",
+            })}
+          </Table.Body>
+        </Table>
+      </Flex>
     </Flex>
   )
 }

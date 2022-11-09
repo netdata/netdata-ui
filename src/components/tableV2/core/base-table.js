@@ -1,7 +1,6 @@
 import React, { forwardRef, useCallback } from "react"
 import styled from "styled-components"
 import { getColor } from "src/theme/utils"
-import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
@@ -9,7 +8,6 @@ import { Text } from "src/components/typography"
 import { IconButton } from "src/components/button"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
-import { debounce } from "throttle-debounce"
 
 //TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
 // the problem is when we are applying column pin the second table has different sizes
@@ -49,79 +47,23 @@ const StyledPagination = styled(Flex)`
   background: ${getColor("mainBackground")};
   border-top: 1px solid ${getColor("borderSecondary")};
 `
-const StyledTableControls = styled(Flex)`
-  position: sticky;
-  width: 100%;
-  top: -16px;
-  z-index: 10;
-  background: ${getColor("mainBackground")};
-  padding: 16px 0;
-  margin: -16px 0 0;
-`
-const Table = forwardRef(
-  (
-    {
-      hasBulkActions,
-      handleSearch,
-      children,
-      searchPlaceholder = "Search",
-      Pagination,
-      bulkActions,
-      dataGa,
-      disableTableControls = false,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
-        {!disableTableControls && (
-          <StyledTableControls>
-            {handleSearch && (
-              <Box width={{ max: 50 }}>
-                <SearchInput
-                  data-testid="table-global-search-filter"
-                  data-ga={`${dataGa}::search::table-filter`}
-                  onChange={debounce(300, e => {
-                    e.persist()
-                    handleSearch(e.target.value)
-                  })}
-                  placeholder={searchPlaceholder}
-                  iconRight={<Icon name="magnify" color="textLite" />}
-                />
-              </Box>
-            )}
-            <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
-              {bulkActions && bulkActions()}
-            </Flex>
-          </StyledTableControls>
-        )}
-        <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
-          {children}
-        </Box>
-        {Pagination}
-      </Flex>
-    )
-  }
-)
 
-Table.Head = forwardRef(({ hasBulkActions, children, ...props }, ref) => {
+const Table = forwardRef(({ children, Pagination, ...props }, ref) => {
   return (
-    <Box
-      ref={ref}
-      sx={{
-        whiteSpace: "nowrap",
-        position: "sticky",
-        top: hasBulkActions ? "50px" : "0",
-        zIndex: "10",
-      }}
-      as="thead"
-      {...props}
-    >
-      {children}
-    </Box>
+    <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
+      <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
+        {children}
+      </Box>
+      {Pagination}
+    </Flex>
   )
 })
+
+Table.Head = forwardRef(({ children, ...props }, ref) => (
+  <Box ref={ref} sx={{ whiteSpace: "nowrap", zIndex: "10" }} as="thead" {...props}>
+    {children}
+  </Box>
+))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   <StyledHeaderRow ref={ref} {...props}>
