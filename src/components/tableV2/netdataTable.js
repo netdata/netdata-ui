@@ -207,7 +207,6 @@ const NetdataTable = ({
         )}
         <Table
           bulkActions={() => renderBulkActions()}
-          Pagination={enablePagination && makePagination({ table })}
           handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
           ref={tableRef}
           data-testid={`netdata-table${testPrefix}`}
@@ -232,6 +231,7 @@ const NetdataTable = ({
           </Table.Body>
         </Table>
       </Flex>
+      {enablePagination && makePagination({ table })}
     </Flex>
   )
 }

@@ -48,13 +48,12 @@ const StyledPagination = styled(Flex)`
   border-top: 1px solid ${getColor("borderSecondary")};
 `
 
-const Table = forwardRef(({ children, Pagination, ...props }, ref) => {
+const Table = forwardRef(({ children, ...props }, ref) => {
   return (
     <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
       <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
         {children}
       </Box>
-      {Pagination}
     </Flex>
   )
 })
