@@ -39,7 +39,7 @@ const NetdataTable = ({
     pageIndex: 0,
     pageSize: 100,
   },
-  columnVisibility: intialColumnVisibility,
+  columnVisibility: initialColumnVisibility,
   testPrefix = "",
   sortBy = [],
   testPrefixCallback,
@@ -47,7 +47,7 @@ const NetdataTable = ({
   enableColumnVisibility = false,
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
-  const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
+  const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
 
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
@@ -174,10 +174,13 @@ const NetdataTable = ({
 
   const headers = table.getFlatHeaders()
 
+  const hasBulkActions = enableColumnVisibility || !!Object.keys(bulkActions).length
+
   return (
     <Table
       selectedRows={originalSelectedRows}
-      bulkActions={() => renderBulkActions()}
+      hasBulkActions={hasBulkActions}
+      bulkActions={renderBulkActions}
       Pagination={enablePagination && makePagination({ table })}
       handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
       ref={tableRef}
@@ -185,7 +188,7 @@ const NetdataTable = ({
       testPrefix={testPrefix}
       dataGa={dataGa}
     >
-      <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
+      <Table.Head hasBulkActions={hasBulkActions} data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
           {makeHeadCell({ headers, enableSorting, testPrefix })}
         </Table.HeadRow>
