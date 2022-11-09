@@ -104,7 +104,7 @@ const Table = forwardRef(
 Table.Head = forwardRef(({ children, ...props }, ref) => (
   <Box
     ref={ref}
-    sx={{ whiteSpace: "nowrap", position: "sticky", top: "50px", zIndex: "10" }}
+    sx={{ whiteSpace: "nowrap", position: "sticky", top: "0", zIndex: "10" }}
     as="thead"
     {...props}
   >
