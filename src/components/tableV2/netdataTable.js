@@ -39,7 +39,7 @@ const NetdataTable = ({
     pageIndex: 0,
     pageSize: 100,
   },
-  columnVisibility: intialColumnVisibility,
+  columnVisibility: initialColumnVisibility,
   testPrefix = "",
   sortBy = [],
   testPrefixCallback,
@@ -47,7 +47,7 @@ const NetdataTable = ({
   enableColumnVisibility = false,
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
-  const [columnVisibility, setColumnVisibility] = useState(intialColumnVisibility)
+  const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
 
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
