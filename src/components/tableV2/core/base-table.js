@@ -56,6 +56,7 @@ const StyledTableControls = styled(Flex)`
 const Table = forwardRef(
   (
     {
+      hasBulkActions,
       handleSearch,
       children,
       searchPlaceholder = "Search",
@@ -68,25 +69,27 @@ const Table = forwardRef(
   ) => {
     return (
       <Flex width={{ base: "100%", min: "fit-content" }} column>
-        <StyledTableControls>
-          {handleSearch && (
-            <Box width={{ max: 50 }}>
-              <SearchInput
-                data-testid="table-global-search-filter"
-                data-ga={`${dataGa}::search::table-filter`}
-                onChange={debounce(300, e => {
-                  e.persist()
-                  handleSearch(e.target.value)
-                })}
-                placeholder={searchPlaceholder}
-                iconRight={<Icon name="magnify" color="textLite" />}
-              />
-            </Box>
-          )}
-          <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
-            {bulkActions && bulkActions()}
-          </Flex>
-        </StyledTableControls>
+        {(hasBulkActions || handleSearch) && (
+          <StyledTableControls>
+            {handleSearch && (
+              <Box width={{ max: 50 }}>
+                <SearchInput
+                  data-testid="table-global-search-filter"
+                  data-ga={`${dataGa}::search::table-filter`}
+                  onChange={debounce(300, e => {
+                    e.persist()
+                    handleSearch(e.target.value)
+                  })}
+                  placeholder={searchPlaceholder}
+                  iconRight={<Icon name="magnify" color="textLite" />}
+                />
+              </Box>
+            )}
+            <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
+              {bulkActions && bulkActions()}
+            </Flex>
+          </StyledTableControls>
+        )}
         <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
           {children}
         </Box>
@@ -96,16 +99,23 @@ const Table = forwardRef(
   }
 )
 
-Table.Head = forwardRef(({ children, ...props }, ref) => (
-  <Box
-    ref={ref}
-    sx={{ whiteSpace: "nowrap", position: "sticky", top: "50px", zIndex: "10" }}
-    as="thead"
-    {...props}
-  >
-    {children}
-  </Box>
-))
+Table.Head = forwardRef(({ hasBulkActions, children, ...props }, ref) => {
+  return (
+    <Box
+      ref={ref}
+      sx={{
+        whiteSpace: "nowrap",
+        position: "sticky",
+        top: hasBulkActions ? "50px" : "0",
+        zIndex: "10",
+      }}
+      as="thead"
+      {...props}
+    >
+      {children}
+    </Box>
+  )
+})
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   <StyledHeaderRow ref={ref} {...props}>
