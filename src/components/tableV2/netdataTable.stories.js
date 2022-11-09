@@ -453,25 +453,27 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <NetdataTable
-      onClickRow={({ data, table, fullRow }) => {
-        console.log(data, table, fullRow)
-      }}
-      sortBy={[{ id: "nodes", desc: false }]}
-      onGlobalSearchChange={onGlobalSearchChange}
-      enableSorting
-      paginationOptions={paginationOptions}
-      enablePagination
-      rowActions={rowActions}
-      bulkActions={bulkActions}
-      enableSelection
-      dataColumns={mockDataColumns}
-      data={mockData()}
-      testPrefixCallback={row => row.nodes}
-      disableClickRow={({ data }) => data.alerts > 15}
-      enableColumnVisibility
-      enableColumnPinning
-      columnPinningOptions={{ left: ["checkbox", "nodes"] }}
-    />
+    <Box height="800px">
+      <NetdataTable
+        onClickRow={({ data, table, fullRow }) => {
+          console.log(data, table, fullRow)
+        }}
+        sortBy={[{ id: "nodes", desc: false }]}
+        onGlobalSearchChange={onGlobalSearchChange}
+        enableSorting
+        paginationOptions={paginationOptions}
+        enablePagination
+        rowActions={rowActions}
+        bulkActions={bulkActions}
+        enableSelection
+        dataColumns={mockDataColumns}
+        data={mockData()}
+        testPrefixCallback={row => row.nodes}
+        disableClickRow={({ data }) => data.alerts > 15}
+        enableColumnVisibility
+        enableColumnPinning
+        columnPinningOptions={{ left: ["checkbox", "nodes"] }}
+      />
+    </Box>
   )
 })
