@@ -19,7 +19,7 @@ const ColumnPinning = ({
 }) => {
   return (
     <Box
-      background="white"
+      background="mainBackground"
       sx={{
         position: "sticky",
         left: 0,

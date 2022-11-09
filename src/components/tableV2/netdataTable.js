@@ -185,13 +185,13 @@ const NetdataTable = ({
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
   return (
-    <Flex width="100%" column>
+    <Flex height="100%" overflow="hidden" width="100%" column>
       <GlobalControls
         handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
         dataGa={dataGa}
         bulkActions={renderBulkActions}
       />
-      <Flex>
+      <Flex overflow="scroll" height="100%">
         {enableColumnPinning && (
           <ColumnPinning
             disableClickRow={disableClickRow}

@@ -12,7 +12,6 @@ import { getColor } from "src/theme/utils"
 import { debounce } from "throttle-debounce"
 
 const StyledTableControls = styled(Flex)`
-  position: sticky;
   width: 100%;
   top: -16px;
   z-index: 10;

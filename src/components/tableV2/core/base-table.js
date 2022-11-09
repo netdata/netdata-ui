@@ -144,7 +144,14 @@ Table.SortingHeadCell = forwardRef(
         as="th"
         ref={ref}
         {...props}
-        sx={{ textAlign: align, fontSize: "14px", position: "sticky", top: 0, ...styles }}
+        sx={{
+          textAlign: align,
+          fontSize: "14px",
+          height: "90px",
+          position: "sticky",
+          top: 0,
+          ...styles,
+        }}
         data-testid={dataTestid}
       >
         <Box
@@ -182,7 +189,7 @@ Table.Cell = forwardRef(
       <Box
         width={{ max: maxWidth, base: width, min: minWidth }}
         padding={[3]}
-        sx={{ textAlign: align, height: "56px" }}
+        sx={{ textAlign: align, height: "80px" }}
         as="td"
         ref={ref}
         {...props}
