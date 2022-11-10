@@ -41,8 +41,6 @@ const StyledSortIcon = styled(Icon)`
   margin: auto;
 `
 const StyledPagination = styled(Flex)`
-  position: sticky;
-  bottom: -16px;
   height: 45px;
   background: ${getColor("mainBackground")};
   border-top: 1px solid ${getColor("borderSecondary")};
