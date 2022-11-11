@@ -2,6 +2,7 @@ import {
   ColumnDef,
   FilterFnOption,
   PaginationState,
+  ColumnPinningState,
   VisibilityTableState,
   Table,
 } from "@tanstack/table-core"
@@ -15,6 +16,7 @@ export type NetdataTableProps<T = any, D = any> = {
   dataColumns: Array<NetdataCoreColumns<T>>
   enableSorting?: boolean
   paginationOptions?: PaginationState
+  columnPinningOptions?: ColumnPinningState
   enableSelection?: boolean
   enablePagination?: boolean
   bulkActions?: {
@@ -49,9 +51,11 @@ export type NetdataTableProps<T = any, D = any> = {
   globalFilterFn?: FilterFnOption<T>
   columnVisibility?: VisibilityTableState
   enableColumnVisibility?: boolean
+  enableColumnPinning?: boolean
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
+  onHoverRow?: (value: any) => void
   disableClickRow?: (value: any) => void
 
   /**This is an escape hatch test id generator, we use this when we want to have

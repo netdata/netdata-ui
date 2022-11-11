@@ -1,5 +1,5 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState, useCallback } from "react"
 
 import Table from "./core/base-table"
 
@@ -38,6 +38,7 @@ const NetdataTable = ({
   rowActions = {},
   bulkActions = {},
   onClickRow,
+  onHoverRow,
   disableClickRow,
   enablePagination,
   paginationOptions = {
@@ -66,12 +67,14 @@ const NetdataTable = ({
     pageSize: paginationOptions.pageSize,
   })
 
-  const handleGlobalSearch = value => {
+  const [shareableTableState, setShareableTableState] = useState({ currentHoveredRow: null })
+
+  const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
     setGlobalFilter(String(value))
-  }
+  }, [])
 
-  const makeActionsColumn = makeRowActions({ rowActions, testPrefix })
+  const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
 
   const renderBulkActions = () => {
     const bulkActionsArray = [
@@ -184,6 +187,11 @@ const NetdataTable = ({
 
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
+  const handleOnHoverRow = useCallback((table, id) => {
+    onHoverRow?.(table)
+    setShareableTableState(state => ({ ...state, currentHoveredRow: id }))
+  }, [])
+
   return (
     <Flex height="100%" overflow="hidden" width="100%" column>
       <GlobalControls
@@ -196,6 +204,7 @@ const NetdataTable = ({
           <ColumnPinning
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}
+            onHoverRow={handleOnHoverRow}
             testPrefixCallback={testPrefixCallback}
             enableSorting={enableSorting}
             table={table}
@@ -203,10 +212,10 @@ const NetdataTable = ({
             testPrefix={testPrefix}
             dataGa={dataGa}
             flexRender={flexRender}
+            shareableTableState={shareableTableState}
           />
         )}
         <Table
-          bulkActions={() => renderBulkActions()}
           handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
           ref={tableRef}
           data-testid={`netdata-table${testPrefix}`}
@@ -220,6 +229,7 @@ const NetdataTable = ({
           </Table.Head>
           <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
             {makeRows({
+              onHoverRow: handleOnHoverRow,
               testPrefixCallback,
               testPrefix,
               onClickRow,
@@ -227,6 +237,7 @@ const NetdataTable = ({
               disableClickRow,
               flexRender,
               getRowHandler: enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells",
+              currentHoveredRow: shareableTableState?.currentHoveredRow,
             })}
           </Table.Body>
         </Table>

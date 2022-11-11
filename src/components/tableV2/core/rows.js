@@ -11,9 +11,12 @@ const makeRows = ({
   disableClickRow,
   flexRender,
   getRowHandler = "getCenterVisibleCells",
+  onHoverRow,
+  currentHoveredRow,
 }) => {
   return table.getRowModel().rows.map(row => (
     <Row
+      id={row.id}
       key={row.id}
       testPrefix={testPrefix}
       testPrefixCallback={testPrefixCallback}
@@ -21,6 +24,8 @@ const makeRows = ({
       table={table}
       onClickRow={onClickRow}
       disableClickRow={disableClickRow}
+      onHoverRow={onHoverRow}
+      isHovering={row.id === currentHoveredRow}
     >
       {row[getRowHandler]().map(cell => {
         return (

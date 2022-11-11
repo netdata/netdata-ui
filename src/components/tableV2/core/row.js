@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 
 import Table from "./base-table"
 
@@ -10,6 +10,9 @@ const Row = ({
   table,
   onClickRow,
   disableClickRow,
+  id,
+  onHoverRow,
+  isHovering,
 }) => {
   return (
     <Table.Row
@@ -20,6 +23,13 @@ const Row = ({
       disableClickRow={() =>
         disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
       }
+      onMouseEnter={() => {
+        onHoverRow && onHoverRow?.(table, id)
+      }}
+      onMouseLeave={() => {
+        onHoverRow?.(table, null)
+      }}
+      isHovering={isHovering}
     >
       {children}
     </Table.Row>

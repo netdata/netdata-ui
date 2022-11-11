@@ -200,32 +200,48 @@ Table.Cell = forwardRef(
   }
 )
 
-Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) => {
-  const isRowDisabledForClick = disableClickRow && disableClickRow()
-  const handleClick = e => {
-    if (isRowDisabledForClick) return
-    e.persist()
-    e.stopPropagation()
-    onClick?.()
+Table.Row = forwardRef(
+  (
+    { children, onClick, disableClickRow, onMouseEnter, onMouseLeave, isHovering, ...props },
+    ref
+  ) => {
+    const isRowDisabledForClick = disableClickRow && disableClickRow()
+    const handleClick = e => {
+      if (isRowDisabledForClick) return
+      e.persist()
+      e.stopPropagation()
+      onClick?.()
+    }
+
+    const handleMouseEnter = event => {
+      onMouseEnter?.(event)
+    }
+
+    const handleMousLeave = event => {
+      onMouseLeave?.(event)
+    }
+
+    const isRowClickable = !isRowDisabledForClick && onClick !== undefined
+    const cursor = isRowClickable ? "pointer" : "intial"
+
+    return (
+      <Box
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMousLeave}
+        as={StyledRow}
+        _hover={isRowClickable && { background: "borderSecondary" }}
+        cursor={cursor}
+        isClickable={!!onClick}
+        onClick={handleClick}
+        ref={ref}
+        {...props}
+        data-hover={isHovering ? "" : undefined}
+      >
+        {children}
+      </Box>
+    )
   }
-
-  const isRowClickable = !isRowDisabledForClick && onClick !== undefined
-  const cursor = isRowClickable ? "pointer" : "intial"
-
-  return (
-    <Box
-      as={StyledRow}
-      _hover={isRowClickable && { background: "borderSecondary" }}
-      cursor={cursor}
-      isClickable={!!onClick}
-      onClick={handleClick}
-      ref={ref}
-      {...props}
-    >
-      {children}
-    </Box>
-  )
-})
+)
 
 export const Pagination = ({
   pageIndex,
