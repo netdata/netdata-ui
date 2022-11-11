@@ -1,24 +1,20 @@
 import React from "react"
 
-import Table from "../core/base-table"
-import makeHeadCell from "../core/headCell"
-import makeRows from "../core/rows"
-
 import Box from "src/components/templates/box"
+
+import FullTable from "../core/fullTable"
 
 const ColumnPinning = ({
   testPrefix,
   dataGa,
-  headers,
   enableSorting,
   testPrefixCallback,
   onClickRow,
   table,
   disableClickRow,
   flexRender,
-  currentHoveredRow,
-  onHoverRow,
 }) => {
+  const headers = table.getLeftFlatHeaders()
   return (
     <Box
       background="mainBackground"
@@ -28,26 +24,18 @@ const ColumnPinning = ({
         zIndex: 2,
       }}
     >
-      <Table data-testid={`netdata-table-pin${testPrefix}`} testPrefix={testPrefix} dataGa={dataGa}>
-        <Table.Head data-testid={`netdata-table-head-pin${testPrefix}`}>
-          <Table.HeadRow data-testid={`netdata-table-headRow-pin${testPrefix}`}>
-            {makeHeadCell({ headers, enableSorting, testPrefix })}
-          </Table.HeadRow>
-        </Table.Head>
-        <Table.Body data-testid={`netdata-table-body-pin${testPrefix}`}>
-          {makeRows({
-            onHoverRow,
-            currentHoveredRow: currentHoveredRow,
-            testPrefixCallback,
-            testPrefix,
-            onClickRow,
-            table,
-            disableClickRow,
-            flexRender,
-            getRowHandler: "getLeftVisibleCells",
-          })}
-        </Table.Body>
-      </Table>
+      <FullTable
+        table={table}
+        headers={headers}
+        enableSorting={enableSorting}
+        getRowHandler="getLeftVisibleCells"
+        testPrefix={`pin${testPrefix}`}
+        dataGa={`pin-${dataGa}`}
+        testPrefixCallback={testPrefixCallback}
+        onClickRow={onClickRow}
+        disableClickRow={disableClickRow}
+        flexRender={flexRender}
+      />
     </Box>
   )
 }
