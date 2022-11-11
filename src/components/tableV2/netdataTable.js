@@ -67,8 +67,6 @@ const NetdataTable = ({
     pageSize: paginationOptions.pageSize,
   })
 
-  const [shareableTableState, setShareableTableState] = useState({ currentHoveredRow: null })
-
   const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
     setGlobalFilter(String(value))
@@ -187,11 +185,6 @@ const NetdataTable = ({
 
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
-  const handleOnHoverRow = useCallback((table, id) => {
-    onHoverRow?.(table)
-    setShareableTableState(state => ({ ...state, currentHoveredRow: id }))
-  }, [])
-
   return (
     <Flex height="100%" overflow="hidden" width="100%" column>
       <GlobalControls
@@ -204,7 +197,6 @@ const NetdataTable = ({
           <ColumnPinning
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}
-            onHoverRow={handleOnHoverRow}
             testPrefixCallback={testPrefixCallback}
             enableSorting={enableSorting}
             table={table}
@@ -212,7 +204,6 @@ const NetdataTable = ({
             testPrefix={testPrefix}
             dataGa={dataGa}
             flexRender={flexRender}
-            shareableTableState={shareableTableState}
           />
         )}
         <Table
@@ -229,7 +220,6 @@ const NetdataTable = ({
           </Table.Head>
           <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
             {makeRows({
-              onHoverRow: handleOnHoverRow,
               testPrefixCallback,
               testPrefix,
               onClickRow,
@@ -237,7 +227,6 @@ const NetdataTable = ({
               disableClickRow,
               flexRender,
               getRowHandler: enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells",
-              currentHoveredRow: shareableTableState?.currentHoveredRow,
             })}
           </Table.Body>
         </Table>

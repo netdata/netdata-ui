@@ -27,7 +27,7 @@ const Row = ({
         onHoverRow && onHoverRow?.(table, id)
       }}
       onMouseLeave={() => {
-        onHoverRow?.(table, null)
+        onHoverRow && onHoverRow?.(table, null)
       }}
       isHovering={isHovering}
     >

@@ -16,7 +16,7 @@ const ColumnPinning = ({
   table,
   disableClickRow,
   flexRender,
-  shareableTableState,
+  currentHoveredRow,
   onHoverRow,
 }) => {
   return (
@@ -37,7 +37,7 @@ const ColumnPinning = ({
         <Table.Body data-testid={`netdata-table-body-pin${testPrefix}`}>
           {makeRows({
             onHoverRow,
-            currentHoveredRow: shareableTableState?.currentHoveredRow,
+            currentHoveredRow: currentHoveredRow,
             testPrefixCallback,
             testPrefix,
             onClickRow,
