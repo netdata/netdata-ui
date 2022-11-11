@@ -1,8 +1,6 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
 import React, { useEffect, useMemo, useState, useCallback } from "react"
 
-import Table from "./core/base-table"
-
 import {
   flexRender,
   getCoreRowModel,
@@ -16,15 +14,14 @@ import Flex from "src/components/templates/flex"
 
 import { comparison, select, includesString } from "./helpers/filterFns"
 
-import makeHeadCell from "./core/headCell"
-import makeRows from "./core/rows"
-
 import makeRowSelection from "./features/rowSelection"
 import makePagination from "./features/pagination"
 import makeRowActions from "./features/rowActions"
 import makeBulkActions from "./features/bulkActions"
 import ColumnPinning from "./features/columnPinning"
 import GlobalControls from "./features/globalControls"
+
+import MainTable from "./features/mainTable"
 
 const NetdataTable = ({
   dataColumns,
@@ -183,8 +180,6 @@ const NetdataTable = ({
     }
   }, [rowSelection, table])
 
-  const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
-
   return (
     <Flex height="100%" overflow="hidden" width="100%" column>
       <GlobalControls
@@ -206,30 +201,18 @@ const NetdataTable = ({
             flexRender={flexRender}
           />
         )}
-        <Table
-          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-          ref={tableRef}
-          data-testid={`netdata-table${testPrefix}`}
-          testPrefix={testPrefix}
+        <MainTable
+          disableClickRow={disableClickRow}
+          onClickRow={onClickRow}
+          testPrefixCallback={testPrefixCallback}
+          enableSorting={enableSorting}
+          enableColumnPinning={enableColumnPinning}
+          table={table}
           dataGa={dataGa}
-        >
-          <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
-            <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-              {makeHeadCell({ headers, enableSorting, testPrefix })}
-            </Table.HeadRow>
-          </Table.Head>
-          <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-            {makeRows({
-              testPrefixCallback,
-              testPrefix,
-              onClickRow,
-              table,
-              disableClickRow,
-              flexRender,
-              getRowHandler: enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells",
-            })}
-          </Table.Body>
-        </Table>
+          tableRef={tableRef}
+          testPrefix={testPrefix}
+          flexRender={flexRender}
+        />
       </Flex>
       {enablePagination && makePagination({ table })}
     </Flex>
