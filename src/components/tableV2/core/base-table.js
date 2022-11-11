@@ -17,6 +17,7 @@ import useToggle from "src/hooks/use-toggle"
 const StyledRow = styled.tr`
   font-size: 14px;
   color: ${getColor("text")};
+  background: ${getColor("mainBackground")};
   &:nth-child(2n) {
     background: ${getColor("tableRowBg")};
   }
@@ -64,7 +65,7 @@ const Table = forwardRef(({ children, ...props }, ref) => {
 Table.Head = forwardRef(({ children, ...props }, ref) => (
   <Box
     ref={ref}
-    sx={{ whiteSpace: "nowrap", zIndex: "10", position: "sticky", top: 0 }}
+    sx={{ whiteSpace: "nowrap", zIndex: 1, position: "sticky", top: 0 }}
     as="thead"
     {...props}
   >
