@@ -190,7 +190,7 @@ const NetdataTable = ({
           dataGa={dataGa}
           bulkActions={renderBulkActions}
         />
-        <Flex overflow="scroll" height="100%">
+        <Flex overflow={{ vertical: "auto" }} height="100%">
           {enableColumnPinning && (
             <ColumnPinning
               disableClickRow={disableClickRow}
