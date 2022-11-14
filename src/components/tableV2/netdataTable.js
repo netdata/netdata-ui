@@ -55,6 +55,7 @@ const NetdataTable = ({
   enableColumnVisibility = false,
   enableColumnPinning = false,
   columnPinningOptions = {},
+  enableResize = false,
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
@@ -117,6 +118,7 @@ const NetdataTable = ({
           sortingFn,
           accessorKey,
           enableHiding = true,
+          enableResize = true,
         },
         index
       ) => {
@@ -125,6 +127,7 @@ const NetdataTable = ({
         return {
           id,
           cell,
+          enableResize,
           accessorKey: accessorKey ? accessorKey : id,
           header,
           ...(filterFn ? { filterFn } : {}),
@@ -147,6 +150,7 @@ const NetdataTable = ({
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
+    columnResizeMode: enableResize ? "onChange" : "",
     filterFns: {
       comparison,
       select,
@@ -196,9 +200,10 @@ const NetdataTable = ({
           dataGa={dataGa}
           bulkActions={renderBulkActions}
         />
-        <Flex overflow={{ vertical: "auto" }} height="100%">
+        <Flex overflow={{ vertical: "auto", horizontal: "auto" }} width="100%" height="100%">
           {enableColumnPinning && (
             <ColumnPinning
+              enableResize={enableResize}
               disableClickRow={disableClickRow}
               onClickRow={onClickRow}
               testPrefixCallback={testPrefixCallback}
@@ -212,6 +217,7 @@ const NetdataTable = ({
             />
           )}
           <MainTable
+            enableResize={enableResize}
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}
             testPrefixCallback={testPrefixCallback}

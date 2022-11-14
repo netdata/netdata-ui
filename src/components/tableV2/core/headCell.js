@@ -5,7 +5,6 @@ import SelectFilter from "../components/selectFilter"
 
 import SearchInput from "src/components/search"
 import Box from "src/components/templates/box"
-import Tooltip from "src/components/drops/tooltip"
 import { Icon } from "src/components/icon"
 
 import Table from "./base-table"
@@ -38,69 +37,77 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
-  const HeadCell = headers.map(({ id, colSpan, getContext, isPlaceholder, column }) => {
-    const { getCanSort, columnDef } = column
-    const { meta } = columnDef
-    const headStyles = meta?.headStyles || {}
-    const styles = meta?.styles || {}
+const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize, table }) => {
+  const HeadCell = headers.map(
+    ({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
+      const { getCanSort, columnDef, getCanResize, getIsResizing } = column
+      const { meta } = columnDef
+      const styles = meta?.styles || {}
 
-    const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
-    const filterOptions = meta && meta?.filter ? meta?.filter : {}
-    const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
-    const Filter = availableFilters[selectedFilter]
+      const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
+      const filterOptions = meta && meta?.filter ? meta?.filter : {}
+      const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
+      const Filter = availableFilters[selectedFilter]
 
-    if (getCanSort() && enableSorting) {
+      const resizeFuntions =
+        enableResize && getCanResize()
+          ? {
+              onMouseDown: getResizeHandler(),
+              onTouchStart: getResizeHandler(),
+              getIsResizing,
+              deltaOffset: table.getState().columnSizingInfo.deltaOffset,
+            }
+          : {}
+
+      const headWidth = getSize()
+
+      if (getCanSort() && enableSorting) {
+        return (
+          <Table.SortingHeadCell
+            width={headWidth}
+            minWidth={column.columnDef.minSize}
+            maxWidth={column.columnDef.maxSize}
+            data-testid={`netdata-table-head-cell${testPrefix}`}
+            sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
+            sortDirection={column.getIsSorted()}
+            onSortClicked={column.getToggleSortingHandler()}
+            key={id}
+            colSpan={colSpan}
+            filter={
+              column.getCanFilter() && (
+                <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+              )
+            }
+            styles={styles}
+            tooltipText={tooltipText}
+            {...resizeFuntions}
+          >
+            {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
+          </Table.SortingHeadCell>
+        )
+      }
+
       return (
-        <Table.SortingHeadCell
-          colSpan={colSpan}
+        <Table.HeadCell
+          width={headWidth}
+          minWidth={column.columnDef.minSize}
+          maxWidth={column.columnDef.maxSize}
           data-testid={`netdata-table-head-cell${testPrefix}`}
+          key={id}
+          styles={styles}
+          tooltipText={tooltipText}
           filter={
             column.getCanFilter() && (
               <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
             )
           }
-          headStyles={headStyles}
-          key={id}
-          maxWidth={column.columnDef.maxSize}
-          minWidth={column.columnDef.minSize}
-          onSortClicked={column.getToggleSortingHandler()}
-          sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
-          sortDirection={column.getIsSorted()}
-          styles={styles}
-          width={column.getSize()}
+          {...resizeFuntions}
         >
-          <Box position="absolute" right={0}>
-            {tooltipText && (
-              <Tooltip align="bottom" content={tooltipText}>
-                <Icon color="nodeBadgeColor" size="small" name="information" />
-              </Tooltip>
-            )}
-          </Box>
-          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
-        </Table.SortingHeadCell>
+          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
+        </Table.HeadCell>
       )
     }
-
-    return (
-      <Table.HeadCell
-        width={column.getSize()}
-        minWidth={column.columnDef.minSize}
-        maxWidth={column.columnDef.maxSize}
-        data-testid={`netdata-table-head-cell${testPrefix}`}
-        colSpan={colSpan}
-        key={id}
-        styles={styles}
-      >
-        {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
-        {column.getCanFilter() ? (
-          <div>
-            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
-          </div>
-        ) : null}
-      </Table.HeadCell>
-    )
-  })
+  )
 
   return HeadCell
 }

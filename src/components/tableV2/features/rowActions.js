@@ -84,6 +84,7 @@ const makeRowActions = ({ rowActions, testPrefix }) => {
     {
       id: "actions",
       enableHiding: false,
+      enableResizing: false,
 
       header: () => {
         return "Actions"
@@ -146,7 +147,7 @@ const makeRowActions = ({ rowActions, testPrefix }) => {
       },
       enableColumnFilter: false,
       enableSorting: false,
-      meta: { stopPropagation: true },
+      meta: { stopPropagation: true, styles: { width: "100%" } },
     },
   ]
 }

@@ -14,11 +14,13 @@ const MainTable = ({
   disableClickRow,
   flexRender,
   onHoverRow,
+  enableResize,
 }) => {
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
   return (
     <FullTable
+      enableResize={enableResize}
       onHoverRow={onHoverRow}
       table={table}
       headers={headers}
