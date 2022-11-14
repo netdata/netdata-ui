@@ -23,12 +23,8 @@ const Row = ({
       disableClickRow={() =>
         disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
       }
-      onMouseEnter={() => {
-        onMouseEnter()
-      }}
-      onMouseLeave={() => {
-        onMouseLeave()
-      }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       isHovering={isHovering}
     >
       {children}
