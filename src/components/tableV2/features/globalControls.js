@@ -13,11 +13,9 @@ import { debounce } from "throttle-debounce"
 
 const StyledTableControls = styled(Flex)`
   width: 100%;
-  top: -16px;
   z-index: 10;
   background: ${getColor("mainBackground")};
-  padding: 16px 0;
-  margin: -16px 0 0;
+  padding: 0 0 16px;
 `
 
 const GlobalControls = memo(
