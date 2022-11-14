@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import ComparisonFilter from "../components/comparisonFilter"
 import SelectFilter from "../components/selectFilter"
@@ -11,19 +11,23 @@ import { Icon } from "src/components/icon"
 import Table from "./base-table"
 
 import { flexRender } from "@tanstack/react-table"
+import { debounce } from "throttle-debounce"
 
 const SearchFilter = ({ column, testPrefix }) => {
-  const columnFilterValue = column.getFilterValue()
   const { id = "" } = column
+
+  const handleSearch = debounce(300, e => {
+    column.setFilterValue(e.target.value)
+  })
   return (
     <Box
       data-testid={`netdata-table-filter-${id}${testPrefix}`}
       as={SearchInput}
+      defaultValue={column.getFilterValue()}
       width={{ max: 50 }}
-      value={columnFilterValue ?? ""}
       placeholder={"...Search"}
       iconRight={<Icon name="magnify" />}
-      onChange={e => column.setFilterValue(e.target.value)}
+      onChange={handleSearch}
     />
   )
 }
