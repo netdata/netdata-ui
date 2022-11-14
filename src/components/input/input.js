@@ -118,7 +118,6 @@ export const TextInput = ({
         >
           {iconLeft && <LeftIcon icon={iconLeft} />}
           <StyledInput
-            {...props}
             disabled={disabled}
             placeholder={placeholder}
             onBlur={handleBlur}
@@ -130,6 +129,7 @@ export const TextInput = ({
             type="text"
             value={value}
             ref={inputRef}
+            {...props}
           />
           {iconRight && <RightIcon icon={iconRight} />}
           {metaDisplayed && error && <RightIcon icon={<ErrorIcon name="cross_s" />} />}
