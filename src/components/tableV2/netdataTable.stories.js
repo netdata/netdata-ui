@@ -343,9 +343,12 @@ StoryTable.add("Full Table functionallity", () => {
 
       header: "Nodes",
       id: "nodes",
-      enableFilter: true,
+      enableFilter: false,
       cell: ({ getValue }) => getValue(),
       enableHiding: false,
+      meta: {
+        tooltip: "Information",
+      },
     },
     {
       accessorKey: "alerts",
@@ -372,9 +375,7 @@ StoryTable.add("Full Table functionallity", () => {
       id: "status",
       enableFilter: true,
       filterFn: "select",
-      size: 80,
-      maxSize: 80,
-      minSize: 80,
+
       cell: ({ getValue }) => getValue(),
       meta: {
         tooltip: "Information",
@@ -472,7 +473,6 @@ StoryTable.add("Full Table functionallity", () => {
         testPrefixCallback={row => row.nodes}
         disableClickRow={({ data }) => data.alerts > 15}
         enableColumnVisibility
-        enableColumnPinning
         columnPinningOptions={{ left: ["checkbox", "nodes"] }}
       />
     </Box>

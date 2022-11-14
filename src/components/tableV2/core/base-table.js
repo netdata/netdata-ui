@@ -21,6 +21,7 @@ const StyledRow = styled.tr`
   &:nth-child(2n) {
     background: ${getColor("tableRowBg")};
   }
+  width: fit-content;
 `
 const StyledHeaderRow = styled.tr`
   background: ${getColor("tableRowBg")};
@@ -39,8 +40,8 @@ const StyledSortIcon = styled(Icon)`
   top: 0;
   bottom: 0;
   height: 16px;
-  margin: auto 4px;
   width: 16px;
+  margin: auto;
 `
 const StyledPagination = styled(Flex)`
   height: 45px;
@@ -48,20 +49,11 @@ const StyledPagination = styled(Flex)`
   border-top: 1px solid ${getColor("borderSecondary")};
 `
 
-const Table = forwardRef(({ children, ...props }, ref) => {
+const Table = forwardRef(({ children, width, ...props }, ref) => {
   return (
-    <Flex width={{ base: "100%" }} height="100%" column>
-      <Box
-        sx={{ borderCollapse: "separate", position: "relative" }}
-        ref={ref}
-        as="table"
-        {...props}
-      >
-        <Box width="100%">
-          <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width="100%" {...props}>
-            {children}
-          </Box>
-        </Box>
+    <Flex height="100%" width="100%" column>
+      <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width={width} {...props}>
+        {children}
       </Box>
     </Flex>
   )
@@ -84,11 +76,20 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   </StyledHeaderRow>
 ))
 
-Table.Resizer = ({ onMouseDown, onTouchStart }) => {
+Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
   if (!onMouseDown) return
+  const resizingProps = getIsResizing() ? { transform: `translateX(${deltaOffset}px)` } : {}
+
+  console.log(resizingProps)
   return (
     <Box
-      sx={{ width: "2px", userSelect: "none", touchAction: "none", cursor: "col-resize" }}
+      sx={{
+        width: "2px",
+        userSelect: "none",
+        touchAction: "none",
+        cursor: "col-resize",
+        ...resizingProps,
+      }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
       background="nodeBadgeColor"
@@ -236,34 +237,21 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.Cell = forwardRef(
-  (
-    {
-      align = "left",
-      cellStyles = {},
-      children,
-      maxWidth,
-      minWidth,
-      onClick,
-      styles = {},
-      width,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ children, onClick, width, maxWidth, minWidth, align = "left", ...props }, ref) => {
     const handleClick = e => {
       e.persist()
-      if (rest.stopPropagation) e.stopPropagation()
+      if (props.stopPropagation) e.stopPropagation()
       onClick?.()
     }
     return (
       <Box
-        width={{ max: maxWidth, base: width, min: minWidth }}
+        width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
         padding={[3]}
-        sx={{ textAlign: align, height: "80px", ...styles, ...cellStyles }}
+        sx={{ textAlign: align, height: "65px", maxHeight: "65px", whiteSpace: "nowrap" }}
         as="td"
         ref={ref}
+        {...props}
         onClick={handleClick}
-        {...rest}
       >
         {children}
       </Box>
@@ -288,7 +276,7 @@ Table.Row = forwardRef(
       onMouseEnter?.(event)
     }
 
-    const handleMouseLeave = event => {
+    const handleMousLeave = event => {
       onMouseLeave?.(event)
     }
 
@@ -298,7 +286,7 @@ Table.Row = forwardRef(
     return (
       <Box
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMousLeave}
         as={StyledRow}
         _hover={isRowClickable && { background: "borderSecondary" }}
         cursor={cursor}
