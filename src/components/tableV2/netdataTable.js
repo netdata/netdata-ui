@@ -1,7 +1,5 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
-import React, { useEffect, useMemo, useState } from "react"
-
-import Table from "./core/base-table"
+import React, { useEffect, useMemo, useState, useCallback } from "react"
 
 import {
   flexRender,
@@ -12,14 +10,20 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
-import { comparison, select, includesString } from "./helpers/filterFns"
+import Flex from "src/components/templates/flex"
 
-import makeHeadCell from "./core/headCell"
+import { comparison, select, includesString } from "./helpers/filterFns"
 
 import makeRowSelection from "./features/rowSelection"
 import makePagination from "./features/pagination"
 import makeRowActions from "./features/rowActions"
 import makeBulkActions from "./features/bulkActions"
+import ColumnPinning from "./features/columnPinning"
+import GlobalControls from "./features/globalControls"
+
+import MainTable from "./features/mainTable"
+
+import { SharedTableProvider } from "./context/sharedTable"
 
 const NetdataTable = ({
   dataColumns,
@@ -33,6 +37,7 @@ const NetdataTable = ({
   rowActions = {},
   bulkActions = {},
   onClickRow,
+  onHoverRow,
   disableClickRow,
   enablePagination,
   paginationOptions = {
@@ -45,9 +50,12 @@ const NetdataTable = ({
   testPrefixCallback,
   dataGa,
   enableColumnVisibility = false,
+  enableColumnPinning = false,
+  columnPinningOptions = {},
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
+  const [columnPinning, setColumnPinning] = React.useState(columnPinningOptions)
 
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
@@ -58,12 +66,12 @@ const NetdataTable = ({
     pageSize: paginationOptions.pageSize,
   })
 
-  const handleGlobalSearch = value => {
+  const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
     setGlobalFilter(String(value))
-  }
+  }, [])
 
-  const makeActionsColumn = makeRowActions({ rowActions, testPrefix })
+  const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
 
   const renderBulkActions = () => {
     const bulkActionsArray = [
@@ -146,6 +154,7 @@ const NetdataTable = ({
       globalFilter,
       sorting,
       pagination,
+      columnPinning,
     },
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
@@ -157,6 +166,7 @@ const NetdataTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnPinningChange: setColumnPinning,
   })
 
   useEffect(() => {
@@ -172,59 +182,46 @@ const NetdataTable = ({
     }
   }, [rowSelection, table])
 
-  const headers = table.getFlatHeaders()
-
-  const hasBulkActions = enableColumnVisibility || !!Object.keys(bulkActions).length
-
   return (
-    <Table
-      selectedRows={originalSelectedRows}
-      hasBulkActions={hasBulkActions}
-      bulkActions={renderBulkActions}
-      Pagination={enablePagination && makePagination({ table })}
-      handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-      ref={tableRef}
-      data-testid={`netdata-table${testPrefix}`}
-      testPrefix={testPrefix}
-      dataGa={dataGa}
-    >
-      <Table.Head hasBulkActions={hasBulkActions} data-testid={`netdata-table-head${testPrefix}`}>
-        <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({ headers, enableSorting, testPrefix })}
-        </Table.HeadRow>
-      </Table.Head>
-      <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-        {table.getRowModel().rows.map(row => (
-          <Table.Row
-            data-testid={`netdata-table-row${testPrefix}${
-              testPrefixCallback ? "-" + testPrefixCallback?.(row.original) : ""
-            }`}
-            onClick={
-              onClickRow && (() => onClickRow({ data: row.original, table: table, fullRow: row }))
-            }
-            key={row.id}
-            disableClickRow={() =>
-              disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
-            }
-          >
-            {row.getVisibleCells().map(cell => {
-              return (
-                <Table.Cell
-                  width={cell.column.getSize()}
-                  minWidth={cell.column.columnDef.minSize}
-                  maxWidth={cell.column.columnDef.maxSize}
-                  data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
-                  key={cell.id}
-                  {...cell.column.columnDef.meta}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </Table.Cell>
-              )
-            })}
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+    <SharedTableProvider>
+      <Flex height="100%" overflow="hidden" width="100%" column>
+        <GlobalControls
+          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+          dataGa={dataGa}
+          bulkActions={renderBulkActions}
+        />
+        <Flex overflow="scroll" height="100%">
+          {enableColumnPinning && (
+            <ColumnPinning
+              disableClickRow={disableClickRow}
+              onClickRow={onClickRow}
+              testPrefixCallback={testPrefixCallback}
+              enableSorting={enableSorting}
+              table={table}
+              headers={table.getLeftFlatHeaders()}
+              testPrefix={testPrefix}
+              dataGa={dataGa}
+              flexRender={flexRender}
+              onHoverRow={onHoverRow}
+            />
+          )}
+          <MainTable
+            disableClickRow={disableClickRow}
+            onClickRow={onClickRow}
+            testPrefixCallback={testPrefixCallback}
+            enableSorting={enableSorting}
+            enableColumnPinning={enableColumnPinning}
+            table={table}
+            dataGa={dataGa}
+            tableRef={tableRef}
+            testPrefix={testPrefix}
+            flexRender={flexRender}
+            onHoverRow={onHoverRow}
+          />
+        </Flex>
+        {enablePagination && makePagination({ table })}
+      </Flex>
+    </SharedTableProvider>
   )
 }
 

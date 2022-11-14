@@ -5,6 +5,7 @@ import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"
 
 import { TextInput } from "src/components/input"
+import { debounce } from "throttle-debounce"
 
 const Comparisons = [
   { value: "all", label: "All" },
@@ -33,11 +34,11 @@ const ComparisonFilter = ({ column }) => {
       <Box
         as={TextInput}
         width={{ max: 50 }}
-        value={filterValue ? filterValue[1] : null}
-        onChange={e => {
+        defaultValue={filterValue ? filterValue[1] : null}
+        onChange={debounce(300, e => {
           e.persist()
           setFilterValue(old => [old?.[0], e.target.value])
-        }}
+        })}
         pattern="[0-9]*(.[0-9]+)?"
         inputMode="decimal"
       />

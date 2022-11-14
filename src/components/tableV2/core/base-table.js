@@ -1,7 +1,6 @@
 import React, { forwardRef, useCallback } from "react"
 import styled from "styled-components"
 import { getColor } from "src/theme/utils"
-import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
@@ -9,11 +8,16 @@ import { Text } from "src/components/typography"
 import { IconButton } from "src/components/button"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
-import { debounce } from "throttle-debounce"
+
+//TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
+// the problem is when we are applying column pin the second table has different sizes
+// than the first one. This is happening when we have a head with a filter and the all
+// the cells are being addapted to that size.
 
 const StyledRow = styled.tr`
   font-size: 14px;
   color: ${getColor("text")};
+  background: ${getColor("mainBackground")};
   &:nth-child(2n) {
     background: ${getColor("tableRowBg")};
   }
@@ -38,84 +42,36 @@ const StyledSortIcon = styled(Icon)`
   margin: auto;
 `
 const StyledPagination = styled(Flex)`
-  position: sticky;
-  bottom: -16px;
   height: 45px;
   background: ${getColor("mainBackground")};
   border-top: 1px solid ${getColor("borderSecondary")};
 `
-const StyledTableControls = styled(Flex)`
-  position: sticky;
-  width: 100%;
-  top: -16px;
-  z-index: 10;
-  background: ${getColor("mainBackground")};
-  padding: 16px 0;
-  margin: -16px 0 0;
-`
-const Table = forwardRef(
-  (
-    {
-      hasBulkActions,
-      handleSearch,
-      children,
-      searchPlaceholder = "Search",
-      Pagination,
-      bulkActions,
-      dataGa,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <Flex width={{ base: "100%", min: "fit-content" }} column>
-        {(hasBulkActions || handleSearch) && (
-          <StyledTableControls>
-            {handleSearch && (
-              <Box width={{ max: 50 }}>
-                <SearchInput
-                  data-testid="table-global-search-filter"
-                  data-ga={`${dataGa}::search::table-filter`}
-                  onChange={debounce(300, e => {
-                    e.persist()
-                    handleSearch(e.target.value)
-                  })}
-                  placeholder={searchPlaceholder}
-                  iconRight={<Icon name="magnify" color="textLite" />}
-                />
-              </Box>
-            )}
-            <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
-              {bulkActions && bulkActions()}
-            </Flex>
-          </StyledTableControls>
-        )}
-        <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" {...props}>
-          {children}
-        </Box>
-        {Pagination}
-      </Flex>
-    )
-  }
-)
 
-Table.Head = forwardRef(({ hasBulkActions, children, ...props }, ref) => {
+const Table = forwardRef(({ children, ...props }, ref) => {
   return (
-    <Box
-      ref={ref}
-      sx={{
-        whiteSpace: "nowrap",
-        position: "sticky",
-        top: hasBulkActions ? "50px" : "0",
-        zIndex: "10",
-      }}
-      as="thead"
-      {...props}
-    >
-      {children}
-    </Box>
+    <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
+      <Box
+        sx={{ borderCollapse: "separate", position: "relative" }}
+        ref={ref}
+        as="table"
+        {...props}
+      >
+        {children}
+      </Box>
+    </Flex>
   )
 })
+
+Table.Head = forwardRef(({ children, ...props }, ref) => (
+  <Box
+    ref={ref}
+    sx={{ whiteSpace: "nowrap", zIndex: 1, position: "sticky", top: 0 }}
+    as="thead"
+    {...props}
+  >
+    {children}
+  </Box>
+))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   <StyledHeaderRow ref={ref} {...props}>
@@ -128,7 +84,14 @@ Table.HeadCell = forwardRef(
     <StyledHeaderCell
       width={{ max: maxWidth, base: width, min: minWidth }}
       ref={ref}
-      sx={{ textAlign: align, fontSize: "14px", ...styles }}
+      sx={{
+        textAlign: align,
+        fontSize: "14px",
+        height: "90px",
+        position: "sticky",
+        top: 0,
+        ...styles,
+      }}
       {...props}
       as="th"
     >
@@ -180,7 +143,14 @@ Table.SortingHeadCell = forwardRef(
         as="th"
         ref={ref}
         {...props}
-        sx={{ textAlign: align, fontSize: "14px", ...styles }}
+        sx={{
+          textAlign: align,
+          fontSize: "14px",
+          height: "90px",
+          position: "sticky",
+          top: 0,
+          ...styles,
+        }}
         data-testid={dataTestid}
       >
         <Box
@@ -218,7 +188,7 @@ Table.Cell = forwardRef(
       <Box
         width={{ max: maxWidth, base: width, min: minWidth }}
         padding={[3]}
-        sx={{ textAlign: align }}
+        sx={{ textAlign: align, height: "80px" }}
         as="td"
         ref={ref}
         {...props}
@@ -230,32 +200,48 @@ Table.Cell = forwardRef(
   }
 )
 
-Table.Row = forwardRef(({ children, onClick, disableClickRow, ...props }, ref) => {
-  const isRowDisabledForClick = disableClickRow && disableClickRow()
-  const handleClick = e => {
-    if (isRowDisabledForClick) return
-    e.persist()
-    e.stopPropagation()
-    onClick?.()
+Table.Row = forwardRef(
+  (
+    { children, onClick, disableClickRow, onMouseEnter, onMouseLeave, isHovering, ...props },
+    ref
+  ) => {
+    const isRowDisabledForClick = disableClickRow && disableClickRow()
+    const handleClick = e => {
+      if (isRowDisabledForClick) return
+      e.persist()
+      e.stopPropagation()
+      onClick?.()
+    }
+
+    const handleMouseEnter = event => {
+      onMouseEnter?.(event)
+    }
+
+    const handleMousLeave = event => {
+      onMouseLeave?.(event)
+    }
+
+    const isRowClickable = !isRowDisabledForClick && onClick !== undefined
+    const cursor = isRowClickable ? "pointer" : "intial"
+
+    return (
+      <Box
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMousLeave}
+        as={StyledRow}
+        _hover={isRowClickable && { background: "borderSecondary" }}
+        cursor={cursor}
+        isClickable={!!onClick}
+        onClick={handleClick}
+        ref={ref}
+        {...props}
+        data-hover={isHovering ? "" : undefined}
+      >
+        {children}
+      </Box>
+    )
   }
-
-  const isRowClickable = !isRowDisabledForClick && onClick !== undefined
-  const cursor = isRowClickable ? "pointer" : "intial"
-
-  return (
-    <Box
-      as={StyledRow}
-      _hover={isRowClickable && { background: "borderSecondary" }}
-      cursor={cursor}
-      isClickable={!!onClick}
-      onClick={handleClick}
-      ref={ref}
-      {...props}
-    >
-      {children}
-    </Box>
-  )
-})
+)
 
 export const Pagination = ({
   pageIndex,

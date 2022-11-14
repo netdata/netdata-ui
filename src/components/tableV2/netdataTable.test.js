@@ -120,11 +120,15 @@ describe("Netdata table", () => {
 
   describe("Column filter", () => {
     it("should filter the columns when changing the column search filter", async () => {
+      jest.useFakeTimers({ advanceTimers: true })
       renderNetdataTable({})
       const filterParams = "node8"
       const nodesFilter = screen.getByTestId(nodesColumnFilter)
 
-      await userEvent.type(nodesFilter, filterParams)
+      await act(async () => {
+        await userEvent.type(nodesFilter, filterParams)
+        jest.runOnlyPendingTimers()
+      })
 
       expect(nodesFilter).toBeInTheDocument()
       expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)

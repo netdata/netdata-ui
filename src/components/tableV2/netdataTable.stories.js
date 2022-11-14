@@ -294,7 +294,7 @@ StoryTable.add("Full Table functionallity", () => {
   const onGlobalSearchChange = value => {
     console.log(value)
   }
-  const paginationOptions = { pageIndex: 0, pageSize: 5 }
+  const paginationOptions = { pageIndex: 0, pageSize: 50 }
 
   const handleDelete = data => {
     console.log("Delete has been clicked", data)
@@ -426,26 +426,54 @@ StoryTable.add("Full Table functionallity", () => {
     { nodes: "node5", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
     { nodes: "node6", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
     { nodes: "node7", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node10", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node34", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node5", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node6", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node7", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node10", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node34", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node5", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node6", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node7", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+    { nodes: "node9", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node10", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node34", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node5", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node6", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node7", alerts: 22, user: "decker", status: "online", untouchable: "false" },
   ]
 
   return (
-    <NetdataTable
-      onClickRow={({ data, table, fullRow }) => {
-        console.log(data, table, fullRow)
-      }}
-      sortBy={[{ id: "nodes", desc: false }]}
-      onGlobalSearchChange={onGlobalSearchChange}
-      enableSorting
-      paginationOptions={paginationOptions}
-      enablePagination
-      rowActions={rowActions}
-      bulkActions={bulkActions}
-      enableSelection
-      dataColumns={mockDataColumns}
-      data={mockData()}
-      testPrefixCallback={row => row.nodes}
-      disableClickRow={({ data }) => data.alerts > 15}
-      enableColumnVisibility
-    />
+    <Box height="800px">
+      <NetdataTable
+        onClickRow={({ data, table, fullRow }) => {
+          console.log(data, table, fullRow)
+        }}
+        sortBy={[{ id: "nodes", desc: false }]}
+        onGlobalSearchChange={onGlobalSearchChange}
+        enableSorting
+        paginationOptions={paginationOptions}
+        enablePagination
+        rowActions={rowActions}
+        bulkActions={bulkActions}
+        enableSelection
+        dataColumns={mockDataColumns}
+        data={mockData()}
+        testPrefixCallback={row => row.nodes}
+        disableClickRow={({ data }) => data.alerts > 15}
+        enableColumnVisibility
+        enableColumnPinning
+        columnPinningOptions={{ left: ["checkbox", "nodes"] }}
+      />
+    </Box>
   )
 })
