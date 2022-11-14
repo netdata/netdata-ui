@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useCallback, memo } from "react"
 
 import Row from "./row"
 import DataCell from "./dataCell"
 
-const makeRows = ({
+import useSharedTable from "../hooks/useSharedTable"
+
+const Rows = ({
   testPrefixCallback,
   testPrefix,
   onClickRow,
@@ -12,8 +14,21 @@ const makeRows = ({
   flexRender,
   getRowHandler = "getCenterVisibleCells",
   onHoverRow,
-  currentHoveredRow,
 }) => {
+  const { state, updateState } = useSharedTable({})
+
+  const handleOnMouseEnter = useCallback(
+    id => {
+      onHoverRow?.()
+      updateState({ currentHoveredRow: id })
+    },
+    [onHoverRow, updateState]
+  )
+
+  const handleOnMouseLeave = useCallback(() => {
+    updateState({ currentHoveredRow: null })
+  }, [onHoverRow, updateState])
+
   return table.getRowModel().rows.map(row => (
     <Row
       id={row.id}
@@ -24,8 +39,9 @@ const makeRows = ({
       table={table}
       onClickRow={onClickRow}
       disableClickRow={disableClickRow}
-      onHoverRow={onHoverRow}
-      isHovering={row.id === currentHoveredRow}
+      onMouseEnter={() => handleOnMouseEnter(row.id)}
+      onMouseLeave={handleOnMouseLeave}
+      isHovering={row.id === state?.currentHoveredRow}
     >
       {row[getRowHandler]().map(cell => {
         return (
@@ -41,4 +57,4 @@ const makeRows = ({
   ))
 }
 
-export default makeRows
+export default Rows

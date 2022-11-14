@@ -2,7 +2,7 @@ import React from "react"
 
 import Table from "./base-table"
 import makeHeadCell from "./headCell"
-import makeRows from "./rows"
+import Rows from "./rows"
 
 const FullTable = ({
   tableRef,
@@ -16,6 +16,7 @@ const FullTable = ({
   table,
   disableClickRow,
   flexRender,
+  onHoverRow,
 }) => {
   return (
     <Table
@@ -30,15 +31,16 @@ const FullTable = ({
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
-        {makeRows({
-          testPrefixCallback,
-          testPrefix,
-          onClickRow,
-          table,
-          disableClickRow,
-          flexRender,
-          getRowHandler,
-        })}
+        <Rows
+          testPrefix={testPrefix}
+          testPrefixCallback={testPrefixCallback}
+          onClickRow={onClickRow}
+          table={table}
+          disableClickRow={disableClickRow}
+          flexRender={flexRender}
+          getRowHandler={getRowHandler}
+          onHoverRow={onHoverRow}
+        />
       </Table.Body>
     </Table>
   )

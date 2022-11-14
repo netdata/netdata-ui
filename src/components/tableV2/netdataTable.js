@@ -23,6 +23,8 @@ import GlobalControls from "./features/globalControls"
 
 import MainTable from "./features/mainTable"
 
+import { SharedTableProvider } from "./context/sharedTable"
+
 const NetdataTable = ({
   dataColumns,
   data,
@@ -181,41 +183,45 @@ const NetdataTable = ({
   }, [rowSelection, table])
 
   return (
-    <Flex height="100%" overflow="hidden" width="100%" column>
-      <GlobalControls
-        handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-        dataGa={dataGa}
-        bulkActions={renderBulkActions}
-      />
-      <Flex overflow="scroll" height="100%">
-        {enableColumnPinning && (
-          <ColumnPinning
+    <SharedTableProvider>
+      <Flex height="100%" overflow="hidden" width="100%" column>
+        <GlobalControls
+          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+          dataGa={dataGa}
+          bulkActions={renderBulkActions}
+        />
+        <Flex overflow="scroll" height="100%">
+          {enableColumnPinning && (
+            <ColumnPinning
+              disableClickRow={disableClickRow}
+              onClickRow={onClickRow}
+              testPrefixCallback={testPrefixCallback}
+              enableSorting={enableSorting}
+              table={table}
+              headers={table.getLeftFlatHeaders()}
+              testPrefix={testPrefix}
+              dataGa={dataGa}
+              flexRender={flexRender}
+              onHoverRow={onHoverRow}
+            />
+          )}
+          <MainTable
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}
             testPrefixCallback={testPrefixCallback}
             enableSorting={enableSorting}
+            enableColumnPinning={enableColumnPinning}
             table={table}
-            headers={table.getLeftFlatHeaders()}
-            testPrefix={testPrefix}
             dataGa={dataGa}
+            tableRef={tableRef}
+            testPrefix={testPrefix}
             flexRender={flexRender}
+            onHoverRow={onHoverRow}
           />
-        )}
-        <MainTable
-          disableClickRow={disableClickRow}
-          onClickRow={onClickRow}
-          testPrefixCallback={testPrefixCallback}
-          enableSorting={enableSorting}
-          enableColumnPinning={enableColumnPinning}
-          table={table}
-          dataGa={dataGa}
-          tableRef={tableRef}
-          testPrefix={testPrefix}
-          flexRender={flexRender}
-        />
+        </Flex>
+        {enablePagination && makePagination({ table })}
       </Flex>
-      {enablePagination && makePagination({ table })}
-    </Flex>
+    </SharedTableProvider>
   )
 }
 

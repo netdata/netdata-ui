@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react"
+import React from "react"
 
 import FullTable from "../core/fullTable"
 
@@ -13,11 +13,13 @@ const MainTable = ({
   onClickRow,
   disableClickRow,
   flexRender,
+  onHoverRow,
 }) => {
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
   return (
     <FullTable
+      onHoverRow={onHoverRow}
       table={table}
       headers={headers}
       enableSorting={enableSorting}

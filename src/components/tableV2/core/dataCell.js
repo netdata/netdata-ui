@@ -17,4 +17,4 @@ const DataCell = ({ cell, testPrefix, flexRender }) => {
   )
 }
 
-export default DataCell
+export default memo(DataCell)

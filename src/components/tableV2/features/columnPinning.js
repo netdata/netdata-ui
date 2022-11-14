@@ -13,6 +13,7 @@ const ColumnPinning = ({
   table,
   disableClickRow,
   flexRender,
+  onHoverRow,
 }) => {
   const headers = table.getLeftFlatHeaders()
   return (
@@ -25,6 +26,7 @@ const ColumnPinning = ({
       }}
     >
       <FullTable
+        onHoverRow={onHoverRow}
         table={table}
         headers={headers}
         enableSorting={enableSorting}

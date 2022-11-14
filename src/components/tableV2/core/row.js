@@ -10,8 +10,8 @@ const Row = ({
   table,
   onClickRow,
   disableClickRow,
-  id,
-  onHoverRow,
+  onMouseEnter,
+  onMouseLeave,
   isHovering,
 }) => {
   return (
@@ -24,10 +24,10 @@ const Row = ({
         disableClickRow && disableClickRow({ data: row.original, table: table, fullRow: row })
       }
       onMouseEnter={() => {
-        onHoverRow && onHoverRow?.(table, id)
+        onMouseEnter()
       }}
       onMouseLeave={() => {
-        onHoverRow && onHoverRow?.(table, null)
+        onMouseLeave()
       }}
       isHovering={isHovering}
     >
@@ -36,4 +36,4 @@ const Row = ({
   )
 }
 
-export default Row
+export default memo(Row)
