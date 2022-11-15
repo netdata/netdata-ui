@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import styled from "styled-components"
 import Flex from "src/components/templates/flex"
+import Search from "src/components/search"
+import { Box } from "src/index"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) =>
@@ -9,20 +11,58 @@ const Container = styled(Flex)`
   list-style-type: none;
 `
 
-const Dropdown = ({ hideShadow, itemProps, items, onItemClick, renderItem, value, ...rest }) => (
-  <Container
-    as="ul"
-    role="listbox"
-    background="dropdown"
-    hideShadow={hideShadow}
-    padding={[0]}
-    margin={[1, 0]}
-    column
-    tabindex="-1"
-    {...rest}
-  >
-    {items.map(item => renderItem({ item, itemProps, value, onItemClick }))}
-  </Container>
-)
+const Dropdown = ({
+  hideShadow,
+  itemProps,
+  items,
+  onItemClick,
+  renderItem,
+  value,
+  hasSearch,
+  ...rest
+}) => {
+  const [searchParams, setSearchParams] = useState("")
+  const filteredItems = useMemo(() => {
+    if (!searchParams) return items
+    const searchLowerCase = searchParams.toLowerCase()
+    return items.filter(({ label, value }) => {
+      if (label?.toLowerCase().includes(searchLowerCase)) return true
+      if (value?.toLowerCase().includes(searchLowerCase)) return true
+      return false
+    })
+  }, [items, searchParams])
+  const handleSearch = useCallback(
+    event => {
+      setSearchParams(event.target.value)
+    },
+    [setSearchParams]
+  )
+  return (
+    <Container
+      as="ul"
+      role="listbox"
+      background="dropdown"
+      hideShadow={hideShadow}
+      padding={[0]}
+      margin={[1, 0]}
+      column
+      tabindex="-1"
+      {...rest}
+    >
+      {hasSearch && (
+        <Box margin={[4]}>
+          <Search
+            data-testid={"dropdown-search"}
+            defaultValue={searchParams}
+            placeholder="Search"
+            onChange={handleSearch}
+            size="tiny"
+          />
+        </Box>
+      )}
+      {filteredItems.map(item => renderItem({ item, itemProps, value, onItemClick }))}
+    </Container>
+  )
+}
 
 export default Dropdown

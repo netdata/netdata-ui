@@ -35,6 +35,7 @@ const Menu = forwardRef(
       renderItem = defaultRenderItem,
       renderDropdown = defaultRenderDropdown,
       animation,
+      hasSearch = false,
       ...rest
     },
     parentRef
@@ -99,7 +100,15 @@ const Menu = forwardRef(
             target={ref.current}
             {...dropProps}
           >
-            {renderDropdown({ value, onItemClick, items, itemProps, renderItem, ...dropdownProps })}
+            {renderDropdown({
+              value,
+              onItemClick,
+              items,
+              itemProps,
+              renderItem,
+              hasSearch,
+              ...dropdownProps,
+            })}
           </Drop>
         )}
       </Fragment>
