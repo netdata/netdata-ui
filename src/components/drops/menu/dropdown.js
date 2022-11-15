@@ -25,8 +25,7 @@ const Dropdown = ({
   const filteredItems = useMemo(() => {
     if (!searchParams) return items
     const searchLowerCase = searchParams.toLowerCase()
-    return items.filter(({ dupa, label, value }) => {
-      if (dupa?.toLowerCase().includes(searchLowerCase)) return true
+    return items.filter(({ label, value }) => {
       if (label?.toLowerCase().includes(searchLowerCase)) return true
       if (value?.toLowerCase().includes(searchLowerCase)) return true
       return false
