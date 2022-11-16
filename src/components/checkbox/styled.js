@@ -1,9 +1,8 @@
 import styled from "styled-components"
 import { Icon } from "src/components/icon"
-import { getValidatedControlColor, getColor, getSizeUnit } from "src/theme/utils"
+import { getSizeUnit, getValidatedControlColor } from "src/theme/utils"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
-import { controlFocused } from "src/mixins"
 
 import Flex from "src/components/templates/flex"
 
@@ -59,12 +58,4 @@ export const StyledLabel = styled.label`
 export const LabelText = styled.span`
   ${({ right, ...props }) =>
     right ? `margin-left: ${getSizeUnit(props)}px;` : `margin-right: ${getSizeUnit(props)}px;`}
-`
-
-export const AccessibleArea = styled.div`
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  height: 30px;
-  width: calc(100% + 10px);
 `

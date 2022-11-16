@@ -3,20 +3,12 @@ import { Text } from "src/components/typography"
 import useCheckBoxStyles from "./use-styles-checkbox"
 import useCheckbox from "./use-checkbox"
 
-import {
-  CheckboxContainer,
-  HiddenCheckboxInput,
-  StyledCheckbox,
-  StyledLabel,
-  LabelText,
-  StyledIcon,
-  AccessibleArea,
-} from "./styled"
+import { CheckboxContainer, HiddenCheckboxInput, LabelText, StyledCheckbox, StyledIcon, StyledLabel } from "./styled"
 
 export const Checkbox = forwardRef((
   {
     checked,
-    'data-testid': testId,
+    "data-testid": testId,
     disabled,
     className,
     labelPosition,
@@ -39,8 +31,13 @@ export const Checkbox = forwardRef((
   })
 
   return (
-    <StyledLabel data-testid={testId} disabled={disabled} className={className} margin={margin} alignSelf={alignSelf}>
-      <AccessibleArea />
+    <StyledLabel
+      data-testid={testId}
+      disabled={disabled}
+      className={className}
+      margin={margin}
+      alignSelf={alignSelf}
+    >
       {label && labelPosition === "left" && (
         <LabelText as={Label} left>
           {label}
