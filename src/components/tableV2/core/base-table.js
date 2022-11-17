@@ -34,12 +34,9 @@ const StyledHeaderCell = styled(Box)`
   }
 `
 const StyledSortIcon = styled(Icon)`
-  position: absolute;
-  top: 0;
-  bottom: 0;
   height: 16px;
+  margin: auto 4px;
   width: 16px;
-  margin: auto;
 `
 const StyledPagination = styled(Flex)`
   height: 45px;
@@ -159,18 +156,22 @@ Table.SortingHeadCell = forwardRef(
         }}
         data-testid={dataTestid}
       >
-        <Box
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          onClick={onClick}
-          position="relative"
+        <Flex
           cursor="pointer"
           data-testid={sortbyTestid}
+          onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          position="relative"
         >
           {children}
           <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
-          {showHoveringIcon && <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />}
-        </Box>
+          {showHoveringIcon ? (
+            <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />
+          ) : (
+            <Box width={6} height={4} />
+          )}
+        </Flex>
         {filter}
       </StyledHeaderCell>
     )
