@@ -80,7 +80,10 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadCell = forwardRef(
-  ({ children, align = "left", width, maxWidth, minWidth, styles = {}, ...props }, ref) => (
+  (
+    { align = "left", children, headStyles = {}, maxWidth, minWidth, width, styles = {}, ...rest },
+    ref
+  ) => (
     <StyledHeaderCell
       width={{ max: maxWidth, base: width, min: minWidth }}
       ref={ref}
@@ -91,9 +94,10 @@ Table.HeadCell = forwardRef(
         position: "sticky",
         top: 0,
         ...styles,
+        ...headStyles,
       }}
-      {...props}
       as="th"
+      {...rest}
     >
       {children}
     </StyledHeaderCell>
@@ -103,19 +107,20 @@ Table.HeadCell = forwardRef(
 Table.SortingHeadCell = forwardRef(
   (
     {
+      align = "left",
       children,
+      "data-testid": dataTestid,
+      filter,
+      headStyles = {},
+      maxWidth,
+      minWidth,
       onSortClicked,
       setSortDirection,
-      maxWidth,
-      width,
-      minWidth,
-      sortDirection,
-      filter,
-      align = "left",
-      "data-testid": dataTestid,
       "sortby-testid": sortbyTestid,
+      sortDirection,
       styles = {},
-      ...props
+      width,
+      ...rest
     },
     ref
   ) => {
@@ -142,7 +147,7 @@ Table.SortingHeadCell = forwardRef(
         width={{ max: maxWidth, base: width, min: minWidth }}
         as="th"
         ref={ref}
-        {...props}
+        {...rest}
         sx={{
           textAlign: align,
           fontSize: "14px",
@@ -150,6 +155,7 @@ Table.SortingHeadCell = forwardRef(
           position: "sticky",
           top: 0,
           ...styles,
+          ...headStyles,
         }}
         data-testid={dataTestid}
       >
@@ -178,21 +184,34 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.Cell = forwardRef(
-  ({ children, onClick, width, maxWidth, minWidth, align = "left", ...props }, ref) => {
+  (
+    {
+      align = "left",
+      cellStyles = {},
+      children,
+      maxWidth,
+      minWidth,
+      onClick,
+      styles = {},
+      width,
+      ...rest
+    },
+    ref
+  ) => {
     const handleClick = e => {
       e.persist()
-      if (props.stopPropagation) e.stopPropagation()
+      if (rest.stopPropagation) e.stopPropagation()
       onClick?.()
     }
     return (
       <Box
         width={{ max: maxWidth, base: width, min: minWidth }}
         padding={[3]}
-        sx={{ textAlign: align, height: "80px" }}
+        sx={{ textAlign: align, height: "80px", ...styles, ...cellStyles }}
         as="td"
         ref={ref}
-        {...props}
         onClick={handleClick}
+        {...rest}
       >
         {children}
       </Box>
@@ -217,7 +236,7 @@ Table.Row = forwardRef(
       onMouseEnter?.(event)
     }
 
-    const handleMousLeave = event => {
+    const handleMouseLeave = event => {
       onMouseLeave?.(event)
     }
 
@@ -227,7 +246,7 @@ Table.Row = forwardRef(
     return (
       <Box
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMousLeave}
+        onMouseLeave={handleMouseLeave}
         as={StyledRow}
         _hover={isRowClickable && { background: "borderSecondary" }}
         cursor={cursor}
