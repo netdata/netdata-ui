@@ -52,14 +52,17 @@ const Menu = forwardRef(
       [onChange]
     )
 
-    const onClickOutside = useCallback(event => {
-      if (
-        ref.current !== event.target &&
-        !getAncestors(event.target).some(node => node === ref.current)
-      ) {
-        close()
-      }
-    }, [])
+    const onClickOutside = useCallback(
+      event => {
+        if (
+          ref.current !== event.target &&
+          !getAncestors(event.target).some(node => node === ref.current)
+        ) {
+          close()
+        }
+      },
+      [close]
+    )
 
     const clonedChildren = useClonedChildren(children, setRef, {
       onClick: toggleIsOpen,

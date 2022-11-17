@@ -20,17 +20,17 @@ export default (initialValue = false, { on, off, toggle: onToggle } = {}) => {
 
       return nextValue
     })
-  }, [])
+  }, [on, off, onToggle])
 
   const toggleOn = useCallback(() => {
     setToggle(true)
     if (on) on()
-  }, [])
+  }, [on])
 
   const toggleOff = useCallback(() => {
     setToggle(false)
     if (off) off()
-  }, [])
+  }, [off])
 
   return [value, toggle, toggleOn, toggleOff]
 }
