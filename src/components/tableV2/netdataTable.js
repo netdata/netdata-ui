@@ -25,6 +25,8 @@ import MainTable from "./features/mainTable"
 
 import { SharedTableProvider } from "./context/sharedTable"
 
+const noop = () => {}
+
 const NetdataTable = ({
   dataColumns,
   data,
@@ -38,6 +40,7 @@ const NetdataTable = ({
   bulkActions = {},
   onClickRow,
   onHoverRow,
+  onSortingChange = noop,
   disableClickRow,
   enablePagination,
   paginationOptions = {
@@ -161,7 +164,10 @@ const NetdataTable = ({
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: handleGlobalSearch,
-    onSortingChange: setSorting,
+    onSortingChange: getSorting => {
+      onSortingChange(getSorting)
+      setSorting(getSorting)
+    },
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
