@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 import ComparisonFilter from "../components/comparisonFilter"
 import SelectFilter from "../components/selectFilter"
@@ -42,6 +42,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
   const HeadCell = headers.map(({ id, colSpan, getContext, isPlaceholder, column }) => {
     const { getCanSort, columnDef } = column
     const { meta } = columnDef
+    const headStyles = meta?.headStyles || {}
     const styles = meta?.styles || {}
 
     const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
@@ -52,21 +53,22 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix }) => {
     if (getCanSort() && enableSorting) {
       return (
         <Table.SortingHeadCell
-          width={column.getSize()}
-          minWidth={column.columnDef.minSize}
-          maxWidth={column.columnDef.maxSize}
-          data-testid={`netdata-table-head-cell${testPrefix}`}
-          sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
-          sortDirection={column.getIsSorted()}
-          onSortClicked={column.getToggleSortingHandler()}
           colSpan={colSpan}
-          key={id}
+          data-testid={`netdata-table-head-cell${testPrefix}`}
           filter={
             column.getCanFilter() && (
               <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
             )
           }
+          headStyles={headStyles}
+          key={id}
+          maxWidth={column.columnDef.maxSize}
+          minWidth={column.columnDef.minSize}
+          onSortClicked={column.getToggleSortingHandler()}
+          sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
+          sortDirection={column.getIsSorted()}
           styles={styles}
+          width={column.getSize()}
         >
           <Box position="absolute" right={0}>
             {tooltipText && (
