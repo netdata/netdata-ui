@@ -359,6 +359,7 @@ StoryTable.add("Full Table functionallity", () => {
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
       cell: ({ getValue }) => getValue(),
+      size: 340,
     },
     {
       accessorKey: "user",
@@ -368,6 +369,7 @@ StoryTable.add("Full Table functionallity", () => {
       enableFilter: true,
       enableSorting: false,
       cell: ({ getValue }) => getValue(),
+      size: 200,
     },
     {
       accessorKey: "status",
@@ -375,6 +377,7 @@ StoryTable.add("Full Table functionallity", () => {
       id: "status",
       enableFilter: true,
       filterFn: "select",
+      size: 200,
 
       cell: ({ getValue }) => getValue(),
       meta: {
@@ -397,6 +400,8 @@ StoryTable.add("Full Table functionallity", () => {
       enableFilter: true,
       enableSorting: false,
       filterFn: "select",
+      size: 200,
+
       cell: ({ getValue }) => getValue(),
       meta: {
         filter: {

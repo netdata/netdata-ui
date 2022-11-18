@@ -114,7 +114,7 @@ const NetdataTable = ({
           meta,
           size = 150,
           maxSize = 5000,
-          minSize = 10,
+          minSize = 150,
           sortingFn,
           accessorKey,
           enableHiding = true,
