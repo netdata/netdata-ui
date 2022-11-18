@@ -21,6 +21,7 @@ const FullTable = ({
 }) => {
   return (
     <Table
+      width={table.getTotalSize()}
       ref={tableRef}
       data-testid={`netdata-table${testPrefix}`}
       testPrefix={testPrefix}

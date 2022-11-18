@@ -147,7 +147,7 @@ const makeRowActions = ({ rowActions, testPrefix }) => {
       },
       enableColumnFilter: false,
       enableSorting: false,
-      meta: { stopPropagation: true, styles: { width: "100%" } },
+      meta: { stopPropagation: true },
     },
   ]
 }
