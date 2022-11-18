@@ -464,6 +464,7 @@ StoryTable.add("Full Table functionallity", () => {
         onClickRow={({ data, table, fullRow }) => {
           console.log(data, table, fullRow)
         }}
+        enableColumnPinning
         enableResize
         sortBy={[{ id: "nodes", desc: false }]}
         onGlobalSearchChange={onGlobalSearchChange}

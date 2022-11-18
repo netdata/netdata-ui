@@ -20,6 +20,7 @@ const MainTable = ({
 
   return (
     <FullTable
+      width={table.getTotalSize()}
       enableResize={enableResize}
       onHoverRow={onHoverRow}
       table={table}

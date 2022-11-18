@@ -26,6 +26,7 @@ const ColumnPinning = ({
       }}
     >
       <FullTable
+        width={table.getLeftTotalSize()}
         onHoverRow={onHoverRow}
         table={table}
         headers={headers}

@@ -18,10 +18,11 @@ const FullTable = ({
   flexRender,
   onHoverRow,
   enableResize,
+  width,
 }) => {
   return (
     <Table
-      width={table.getTotalSize()}
+      width={width}
       ref={tableRef}
       data-testid={`netdata-table${testPrefix}`}
       testPrefix={testPrefix}
