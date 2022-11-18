@@ -16,7 +16,7 @@ export const CheckboxContainer = styled.div`
 export const StyledIcon = styled(Icon)`
   flex-grow: 0;
   flex-shrink: 0;
-  fill: ${getValidatedControlColor("primary")};
+  fill: ${getValidatedControlColor("primary", "accent")};
 `
 
 export const HiddenCheckboxInput = styled.input.attrs({

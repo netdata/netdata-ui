@@ -47,10 +47,10 @@ export const getGutterHeight = ({ theme }) => {
 
 export const getValidatedControlColor = (
   defaultColorPath = "border",
-  defaultDisabledPAth = "disabled"
+  defaultDisabledPath = "disabled"
 ) => ({ theme, success, error, disabled }) => {
   if (success) return getColor(["success"])({ theme })
   if (error) return getColor(["error"])({ theme })
-  if (disabled) return getColor([defaultDisabledPAth])({ theme })
+  if (disabled) return getColor([defaultDisabledPath])({ theme })
   return getColor([defaultColorPath])({ theme })
 }
