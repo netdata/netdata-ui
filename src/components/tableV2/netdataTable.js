@@ -150,7 +150,7 @@ const NetdataTable = ({
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
-    columnResizeMode: enableResize ? "onChange" : "",
+    columnResizeMode: enableResize ? "onEnd" : "",
     filterFns: {
       comparison,
       select,

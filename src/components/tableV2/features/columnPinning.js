@@ -14,6 +14,7 @@ const ColumnPinning = ({
   disableClickRow,
   flexRender,
   onHoverRow,
+  enableResize,
 }) => {
   const headers = table.getLeftFlatHeaders()
   return (
@@ -26,7 +27,7 @@ const ColumnPinning = ({
       }}
     >
       <FullTable
-        width={table.getLeftTotalSize()}
+        width={enableResize ? `${table.getLeftTotalSize()}px` : "100%"}
         onHoverRow={onHoverRow}
         table={table}
         headers={headers}
