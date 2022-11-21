@@ -84,6 +84,9 @@ const appColors = {
 
   //IconButton
   iconColor: rawColors.neutral.limedSpruce,
+
+  //table-resizer
+  resizerLine: rawColors.green.vista,
 }
 
 export default {
