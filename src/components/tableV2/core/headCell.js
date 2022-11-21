@@ -42,6 +42,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize, table 
     ({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
       const { getCanSort, columnDef, getCanResize, getIsResizing } = column
       const { meta } = columnDef
+      const headStyles = meta?.headStyles || {}
       const styles = meta?.styles || {}
 
       const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
@@ -78,6 +79,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize, table 
                 <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
               )
             }
+            headStyles={headStyles}
             styles={styles}
             tooltipText={tooltipText}
             {...resizeFuntions}
@@ -101,6 +103,7 @@ const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize, table 
               <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
             )
           }
+          headStyles={headStyles}
           {...resizeFuntions}
         >
           {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}

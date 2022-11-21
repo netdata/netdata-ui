@@ -116,6 +116,7 @@ Table.HeadCell = forwardRef(
       getIsResizing,
       deltaOffset,
       styles = {},
+      headStyles = {},
       ...props
     },
     ref
@@ -129,6 +130,7 @@ Table.HeadCell = forwardRef(
         position: "sticky",
         top: 0,
         ...styles,
+        ...headStyles,
       }}
       width={`${width}px`}
       as="th"
@@ -171,6 +173,7 @@ Table.SortingHeadCell = forwardRef(
       "data-testid": dataTestid,
       "sortby-testid": sortbyTestid,
       styles = {},
+      headStyles = {},
       tooltipText,
       ...props
     },
@@ -204,6 +207,7 @@ Table.SortingHeadCell = forwardRef(
         width={width}
         minWidth={minWidth}
         tooltipText={tooltipText}
+        headStyles={headStyles}
         {...props}
         filter={filter}
       >
@@ -237,7 +241,20 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.Cell = forwardRef(
-  ({ children, onClick, width, maxWidth, minWidth, align = "left", ...props }, ref) => {
+  (
+    {
+      children,
+      onClick,
+      width,
+      maxWidth,
+      minWidth,
+      align = "left",
+      cellStyles = {},
+      styles = {},
+      ...props
+    },
+    ref
+  ) => {
     const handleClick = e => {
       e.persist()
       if (props.stopPropagation) e.stopPropagation()
@@ -247,7 +264,14 @@ Table.Cell = forwardRef(
       <Box
         width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
         padding={[3]}
-        sx={{ textAlign: align, height: "65px", maxHeight: "65px", whiteSpace: "nowrap" }}
+        sx={{
+          textAlign: align,
+          height: "65px",
+          maxHeight: "65px",
+          whiteSpace: "nowrap",
+          ...cellStyles,
+          ...styles,
+        }}
         as="td"
         ref={ref}
         {...props}
@@ -276,7 +300,7 @@ Table.Row = forwardRef(
       onMouseEnter?.(event)
     }
 
-    const handleMousLeave = event => {
+    const handleMouseLeave = event => {
       onMouseLeave?.(event)
     }
 
@@ -286,7 +310,7 @@ Table.Row = forwardRef(
     return (
       <Box
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMousLeave}
+        onMouseLeave={handleMouseLeave}
         as={StyledRow}
         _hover={isRowClickable && { background: "borderSecondary" }}
         cursor={cursor}
