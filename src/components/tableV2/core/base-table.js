@@ -87,11 +87,26 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
         userSelect: "none",
         touchAction: "none",
         cursor: "col-resize",
+        color: "border",
+        "&::before": {
+          content: '":"',
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          display: "flex",
+          alignItems: "center",
+          left: "-8px",
+          width: "8px",
+        },
+        "&:hover, &:active": {
+          background: "#96D4A2",
+          color: "#96D4A2",
+        },
         ...resizingProps,
       }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
-      background="nodeBadgeColor"
+      background="borderSecondary"
       position="absolute"
       top={0}
       right={0}
