@@ -17,9 +17,12 @@ const FullTable = ({
   disableClickRow,
   flexRender,
   onHoverRow,
+  enableResize,
+  width,
 }) => {
   return (
     <Table
+      width={width}
       ref={tableRef}
       data-testid={`netdata-table${testPrefix}`}
       testPrefix={testPrefix}
@@ -27,7 +30,7 @@ const FullTable = ({
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({ headers, enableSorting, testPrefix })}
+          {makeHeadCell({ headers, enableSorting, testPrefix, enableResize, table })}
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>

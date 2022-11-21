@@ -1,7 +1,7 @@
 import background from "src/components/templates/mixins/background"
 import borderMixIn from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
-
+import { fontColor } from "src/components/typography/typography"
 const clearEmptyLines = str => str.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, "")
 
 export const callAllFunctionsAndMergeResults = (...fns) => {
@@ -53,7 +53,8 @@ export default ({ theme, ...props }) => {
       const styles = callAllFunctionsAndMergeResults(
         shadow,
         borderMixIn,
-        background
+        background,
+        fontColor
       )({ theme, ...pseudoStyles })
 
       pseudo =

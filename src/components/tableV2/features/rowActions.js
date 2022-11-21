@@ -84,6 +84,7 @@ const makeRowActions = ({ rowActions, testPrefix }) => {
     {
       id: "actions",
       enableHiding: false,
+      enableResizing: false,
 
       header: () => {
         return "Actions"

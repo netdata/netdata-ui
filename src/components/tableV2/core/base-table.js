@@ -21,12 +21,14 @@ const StyledRow = styled.tr`
   &:nth-child(2n) {
     background: ${getColor("tableRowBg")};
   }
+  width: fit-content;
 `
 const StyledHeaderRow = styled.tr`
   background: ${getColor("tableRowBg")};
   color: ${getColor("text")};
 `
 const StyledHeaderCell = styled(Box)`
+  position: relative;
   padding: 12px;
   border-bottom: 1px solid ${getColor("borderSecondary")};
   &:not(:last-child) {
@@ -34,9 +36,12 @@ const StyledHeaderCell = styled(Box)`
   }
 `
 const StyledSortIcon = styled(Icon)`
+  position: relative;
+  top: 0;
+  bottom: 0;
   height: 16px;
-  margin: auto 4px;
   width: 16px;
+  margin: auto;
 `
 const StyledPagination = styled(Flex)`
   height: 45px;
@@ -44,15 +49,10 @@ const StyledPagination = styled(Flex)`
   border-top: 1px solid ${getColor("borderSecondary")};
 `
 
-const Table = forwardRef(({ children, ...props }, ref) => {
+const Table = forwardRef(({ children, width, ...props }, ref) => {
   return (
-    <Flex width={{ base: "100%", min: "fit-content" }} height="100%" column>
-      <Box
-        sx={{ borderCollapse: "separate", position: "relative" }}
-        ref={ref}
-        as="table"
-        {...props}
-      >
+    <Flex height="100%" width="100%" column>
+      <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width={width} {...props}>
         {children}
       </Box>
     </Flex>
@@ -76,13 +76,64 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   </StyledHeaderRow>
 ))
 
+Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
+  if (!onMouseDown) return
+  const resizingProps = getIsResizing() ? { transform: `translateX(${deltaOffset}px)` } : {}
+
+  return (
+    <Box
+      _hover={{ background: "resizerLine", color: "resizerLine" }}
+      _active={{ background: "resizerLine", color: "resizerLine" }}
+      sx={{
+        width: "2px",
+        userSelect: "none",
+        touchAction: "none",
+        cursor: "col-resize",
+        color: "border",
+        "&::before": {
+          content: '":"',
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          display: "flex",
+          alignItems: "center",
+          left: "-8px",
+          width: "8px",
+        },
+        ...resizingProps,
+      }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+      background="borderSecondary"
+      position="absolute"
+      top={0}
+      right={0}
+      bottom={0}
+    />
+  )
+}
+
 Table.HeadCell = forwardRef(
   (
-    { align = "left", children, headStyles = {}, maxWidth, minWidth, width, styles = {}, ...rest },
+    {
+      children,
+      align = "left",
+      width,
+      maxWidth,
+      minWidth,
+      tooltipText,
+      filter,
+      onMouseDown,
+      onTouchStart,
+      getIsResizing,
+      deltaOffset,
+      styles = {},
+      headStyles = {},
+      ...props
+    },
     ref
   ) => (
     <StyledHeaderCell
-      width={{ max: maxWidth, base: width, min: minWidth }}
       ref={ref}
       sx={{
         textAlign: align,
@@ -93,10 +144,28 @@ Table.HeadCell = forwardRef(
         ...styles,
         ...headStyles,
       }}
+      width={`${width}px`}
       as="th"
-      {...rest}
+      {...props}
     >
-      {children}
+      <Flex>
+        {children}
+        <Box sx={{ marginLeft: "auto" }} position="relative" top={0}>
+          {tooltipText && (
+            <Tooltip align="bottom" content={tooltipText}>
+              <Icon color="nodeBadgeColor" size="small" name="information" />
+            </Tooltip>
+          )}
+        </Box>
+      </Flex>
+
+      {filter}
+      <Table.Resizer
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+        getIsResizing={getIsResizing}
+        deltaOffset={deltaOffset}
+      />
     </StyledHeaderCell>
   )
 )
@@ -104,20 +173,21 @@ Table.HeadCell = forwardRef(
 Table.SortingHeadCell = forwardRef(
   (
     {
-      align = "left",
       children,
-      "data-testid": dataTestid,
-      filter,
-      headStyles = {},
-      maxWidth,
-      minWidth,
       onSortClicked,
       setSortDirection,
-      "sortby-testid": sortbyTestid,
-      sortDirection,
-      styles = {},
+      maxWidth,
       width,
-      ...rest
+      minWidth,
+      sortDirection,
+      filter,
+      align = "left",
+      "data-testid": dataTestid,
+      "sortby-testid": sortbyTestid,
+      styles = {},
+      headStyles = {},
+      tooltipText,
+      ...props
     },
     ref
   ) => {
@@ -140,40 +210,38 @@ Table.SortingHeadCell = forwardRef(
     )
 
     return (
-      <StyledHeaderCell
-        width={{ max: maxWidth, base: width, min: minWidth }}
-        as="th"
+      <Table.HeadCell
+        styles={styles}
+        align={align}
         ref={ref}
-        {...rest}
-        sx={{
-          textAlign: align,
-          fontSize: "14px",
-          height: "90px",
-          position: "sticky",
-          top: 0,
-          ...styles,
-          ...headStyles,
-        }}
         data-testid={dataTestid}
+        maxWidth={maxWidth}
+        width={width}
+        minWidth={minWidth}
+        tooltipText={tooltipText}
+        headStyles={headStyles}
+        {...props}
+        filter={filter}
       >
-        <Flex
-          cursor="pointer"
-          data-testid={sortbyTestid}
-          onClick={onClick}
+        <Box
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
+          onClick={onClick}
           position="relative"
+          cursor="pointer"
+          data-testid={sortbyTestid}
         >
-          {children}
-          <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
-          {showHoveringIcon ? (
-            <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />
-          ) : (
-            <Box width={6} height={4} />
-          )}
-        </Flex>
-        {filter}
-      </StyledHeaderCell>
+          <Flex data-testid="sorting-cell-children-sorting-arrows-wrapper">
+            {children}
+            <Box width={4}>
+              <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
+              {showHoveringIcon && (
+                <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />
+              )}
+            </Box>
+          </Flex>
+        </Box>
+      </Table.HeadCell>
     )
   }
 )
@@ -187,32 +255,39 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 Table.Cell = forwardRef(
   (
     {
-      align = "left",
-      cellStyles = {},
       children,
+      onClick,
+      width,
       maxWidth,
       minWidth,
-      onClick,
+      align = "left",
+      cellStyles = {},
       styles = {},
-      width,
-      ...rest
+      ...props
     },
     ref
   ) => {
     const handleClick = e => {
       e.persist()
-      if (rest.stopPropagation) e.stopPropagation()
+      if (props.stopPropagation) e.stopPropagation()
       onClick?.()
     }
     return (
       <Box
-        width={{ max: maxWidth, base: width, min: minWidth }}
+        width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
         padding={[3]}
-        sx={{ textAlign: align, height: "80px", ...styles, ...cellStyles }}
+        sx={{
+          textAlign: align,
+          height: "65px",
+          maxHeight: "65px",
+          whiteSpace: "nowrap",
+          ...cellStyles,
+          ...styles,
+        }}
         as="td"
         ref={ref}
+        {...props}
         onClick={handleClick}
-        {...rest}
       >
         {children}
       </Box>

@@ -343,9 +343,12 @@ StoryTable.add("Full Table functionallity", () => {
 
       header: "Nodes",
       id: "nodes",
-      enableFilter: true,
+      enableFilter: false,
       cell: ({ getValue }) => getValue(),
       enableHiding: false,
+      meta: {
+        tooltip: "Information",
+      },
     },
     {
       accessorKey: "alerts",
@@ -356,6 +359,7 @@ StoryTable.add("Full Table functionallity", () => {
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
       cell: ({ getValue }) => getValue(),
+      size: 340,
     },
     {
       accessorKey: "user",
@@ -365,6 +369,7 @@ StoryTable.add("Full Table functionallity", () => {
       enableFilter: true,
       enableSorting: false,
       cell: ({ getValue }) => getValue(),
+      size: 200,
     },
     {
       accessorKey: "status",
@@ -372,9 +377,8 @@ StoryTable.add("Full Table functionallity", () => {
       id: "status",
       enableFilter: true,
       filterFn: "select",
-      size: 80,
-      maxSize: 80,
-      minSize: 80,
+      size: 200,
+
       cell: ({ getValue }) => getValue(),
       meta: {
         tooltip: "Information",
@@ -396,6 +400,8 @@ StoryTable.add("Full Table functionallity", () => {
       enableFilter: true,
       enableSorting: false,
       filterFn: "select",
+      size: 200,
+
       cell: ({ getValue }) => getValue(),
       meta: {
         filter: {
@@ -453,11 +459,13 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <Box height="800px">
+    <Box height="800px" width="800px">
       <NetdataTable
         onClickRow={({ data, table, fullRow }) => {
           console.log(data, table, fullRow)
         }}
+        enableColumnPinning
+        enableResize
         sortBy={[{ id: "nodes", desc: false }]}
         onGlobalSearchChange={onGlobalSearchChange}
         enableSorting
@@ -471,7 +479,6 @@ StoryTable.add("Full Table functionallity", () => {
         testPrefixCallback={row => row.nodes}
         disableClickRow={({ data }) => data.alerts > 15}
         enableColumnVisibility
-        enableColumnPinning
         columnPinningOptions={{ left: ["checkbox", "nodes"] }}
       />
     </Box>

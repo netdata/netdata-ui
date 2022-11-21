@@ -1,9 +1,9 @@
 import React from "react"
 import { Checkbox } from "src/components/checkbox"
 
-const ROW_SELECTION_MAX_SIZE = 10
-const ROW_SELECTION_MIN_SIZE = 10
-const ROW_SELECTION_SIZE = 10
+const ROW_SELECTION_MAX_SIZE = 45
+const ROW_SELECTION_MIN_SIZE = 45
+const ROW_SELECTION_SIZE = 45
 
 const ColumnCheckbox = ({ checked, indeterminate, onChange, disabled, ...rest }) => {
   return (
@@ -21,6 +21,7 @@ const makeRowSelection = ({ testPrefix }) => {
   return {
     id: "checkbox",
     enableHiding: false,
+    enableResizing: false,
     header: ({ table }) => {
       return (
         <ColumnCheckbox
