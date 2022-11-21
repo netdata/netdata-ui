@@ -80,7 +80,6 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
   if (!onMouseDown) return
   const resizingProps = getIsResizing() ? { transform: `translateX(${deltaOffset}px)` } : {}
 
-  console.log(resizingProps)
   return (
     <Box
       sx={{
