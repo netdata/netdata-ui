@@ -27,6 +27,7 @@ const ColumnPinning = ({
       }}
     >
       <FullTable
+        enableResize={enableResize}
         width={enableResize ? `${table.getLeftTotalSize()}px` : "100%"}
         onHoverRow={onHoverRow}
         table={table}
