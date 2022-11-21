@@ -82,6 +82,8 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
 
   return (
     <Box
+      _hover={{ background: "resizerLine", color: "resizerLine" }}
+      _active={{ background: "resizerLine", color: "resizerLine" }}
       sx={{
         width: "2px",
         userSelect: "none",
@@ -97,10 +99,6 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
           alignItems: "center",
           left: "-8px",
           width: "8px",
-        },
-        "&:hover, &:active": {
-          background: "#96D4A2",
-          color: "#96D4A2",
         },
         ...resizingProps,
       }}
