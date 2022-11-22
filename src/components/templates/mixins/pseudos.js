@@ -2,23 +2,42 @@ import background from "src/components/templates/mixins/background"
 import borderMixIn from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
 import { getColor } from "src/theme"
-
-const clearEmptyLines = str => str.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, "")
+import alignItems from "src/components/templates/mixins/alignItems"
 
 const fontColor = ({ theme, color }) => {
   if (!color) return ""
+
   return `color: ${getColor(color)({ theme })};`
 }
 
-export const callAllFunctionsAndMergeResults = (...fns) => {
+const clearEmptyLines = str => str.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, "")
+
+const transforms = {
+  boxShadow: shadow,
+  border: borderMixIn,
+  background: background,
+  color: fontColor,
+  alignItems: alignItems,
+}
+
+export const calculateStyles = ({ theme, ...styles }) => {
   let result = ""
-  return function mergedFn(arg) {
-    fns.forEach(fn => {
-      const functionResult = fn && typeof fn === "function" ? fn(arg) : ""
-      result = result + functionResult
-    })
-    return result
+
+  for (const key in styles) {
+    if (transforms[key] !== undefined) {
+      const transformFuction = transforms[key]
+      const transformFuctionResult =
+        transformFuction && typeof transformFuction === "function"
+          ? transformFuction({ theme, ...styles })
+          : ""
+      result = result + transformFuctionResult
+      continue
+    }
+    const value = styles[key]
+    result = result + `${key}:${value};`
   }
+
+  return result
 }
 
 export const pseudoSelectors = {
@@ -56,12 +75,7 @@ export default ({ theme, ...props }) => {
     if (prop in pseudoSelectors) {
       const pseudoProp = prop
       const pseudoStyles = props[pseudoProp]
-      const styles = callAllFunctionsAndMergeResults(
-        shadow,
-        borderMixIn,
-        background,
-        fontColor
-      )({ theme, ...pseudoStyles })
+      const styles = calculateStyles({ theme, ...pseudoStyles })
 
       pseudo =
         pseudo +

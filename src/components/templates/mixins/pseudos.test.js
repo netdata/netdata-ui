@@ -31,8 +31,8 @@ it("render border and box shadow (hover)", () => {
   const size = "0 0 0 1px"
 
   const _hover = {
-    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
     boxShadow: { size, color: "disabled" },
+    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
   }
   const pseudo = `
 ${pseudoSelectors["_hover"]}{
@@ -47,12 +47,12 @@ it("render border and box shadow with multiple selectors (hover,active)", () => 
   const size = "0 0 0 1px"
 
   const _hover = {
-    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
     boxShadow: { size, color: "disabled" },
+    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
   }
   const _active = {
-    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
     boxShadow: { size, color: "disabled" },
+    border: { color: "disabled", side: "top", size: "1rem", type: "dashed" },
   }
   const pseudo = `
 ${pseudoSelectors["_hover"]}{

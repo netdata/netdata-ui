@@ -84,22 +84,22 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
     <Box
       _hover={{ background: "resizerLine", color: "resizerLine" }}
       _active={{ background: "resizerLine", color: "resizerLine" }}
+      _before={{
+        content: '":"',
+        position: "absolute",
+        top: "0",
+        bottom: "0",
+        display: "flex",
+        alignItems: "center",
+        left: "-8px",
+        width: "8px",
+      }}
       sx={{
         width: "2px",
         userSelect: "none",
         touchAction: "none",
         cursor: "col-resize",
         color: "border",
-        "&::before": {
-          content: '":"',
-          position: "absolute",
-          top: "0",
-          bottom: "0",
-          display: "flex",
-          alignItems: "center",
-          left: "-8px",
-          width: "8px",
-        },
         ...resizingProps,
       }}
       onMouseDown={onMouseDown}
