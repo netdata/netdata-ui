@@ -1,8 +1,14 @@
 import background from "src/components/templates/mixins/background"
 import borderMixIn from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
-import { fontColor } from "src/components/typography/typography"
+import { getColor } from "src/theme"
+
 const clearEmptyLines = str => str.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, "")
+
+const fontColor = ({ theme, color }) => {
+  if (!color) return ""
+  return `color: ${getColor(color)({ theme })};`
+}
 
 export const callAllFunctionsAndMergeResults = (...fns) => {
   let result = ""
