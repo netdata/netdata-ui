@@ -259,7 +259,7 @@ Table.Cell = forwardRef(
       maxWidth,
       minWidth,
       onClick,
-      pinnedStyles,
+      pinnedStyles = {},
       styles = {},
       width,
       ...rest
@@ -283,7 +283,7 @@ Table.Cell = forwardRef(
           maxHeight: "65px",
           whiteSpace: "nowrap",
           ...cellStyles,
-          ...(pinnedStyles || {}),
+          ...pinnedStyles,
           ...styles,
         }}
         width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}

@@ -37,13 +37,20 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const makeHeadCell = ({ enableResize, enableSorting, headers, pinnedStyles, table, testPrefix }) =>
+const makeHeadCell = ({
+  enableResize,
+  enableSorting,
+  headers,
+  pinnedStyles = {},
+  table,
+  testPrefix,
+}) =>
   headers.map(({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
     const { getCanSort, columnDef, getCanResize, getIsResizing } = column
     const { meta } = columnDef
     const headStyles = {
       ...(meta?.headStyles || {}),
-      ...(pinnedStyles || {}),
+      ...pinnedStyles,
     }
     const styles = meta?.styles || {}
 
