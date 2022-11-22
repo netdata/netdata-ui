@@ -119,8 +119,6 @@ Table.HeadCell = forwardRef(
       children,
       align = "left",
       width,
-      maxWidth,
-      minWidth,
       tooltipText,
       filter,
       onMouseDown,
@@ -134,6 +132,7 @@ Table.HeadCell = forwardRef(
     ref
   ) => (
     <StyledHeaderCell
+      as="th"
       ref={ref}
       sx={{
         textAlign: align,
@@ -145,7 +144,6 @@ Table.HeadCell = forwardRef(
         ...headStyles,
       }}
       width={`${width}px`}
-      as="th"
       {...props}
     >
       <Flex>
@@ -255,39 +253,41 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 Table.Cell = forwardRef(
   (
     {
-      children,
-      onClick,
-      width,
-      maxWidth,
-      minWidth,
       align = "left",
       cellStyles = {},
+      children,
+      maxWidth,
+      minWidth,
+      onClick,
+      pinnedStyles,
       styles = {},
-      ...props
+      width,
+      ...rest
     },
     ref
   ) => {
     const handleClick = e => {
       e.persist()
-      if (props.stopPropagation) e.stopPropagation()
+      if (rest.stopPropagation) e.stopPropagation()
       onClick?.()
     }
     return (
       <Box
-        width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
+        as="td"
+        onClick={handleClick}
         padding={[3]}
+        ref={ref}
         sx={{
           textAlign: align,
           height: "65px",
           maxHeight: "65px",
           whiteSpace: "nowrap",
           ...cellStyles,
+          ...(pinnedStyles || {}),
           ...styles,
         }}
-        as="td"
-        ref={ref}
-        {...props}
-        onClick={handleClick}
+        width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
+        {...rest}
       >
         {children}
       </Box>

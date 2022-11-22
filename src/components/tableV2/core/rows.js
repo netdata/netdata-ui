@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from "react"
+import React, { useCallback } from "react"
 
 import Row from "./row"
 import DataCell from "./dataCell"
@@ -6,14 +6,15 @@ import DataCell from "./dataCell"
 import useSharedTable from "../hooks/useSharedTable"
 
 const Rows = ({
-  testPrefixCallback,
-  testPrefix,
-  onClickRow,
-  table,
   disableClickRow,
   flexRender,
   getRowHandler = "getCenterVisibleCells",
   onHoverRow,
+  onClickRow,
+  pinnedStyles,
+  table,
+  testPrefix,
+  testPrefixCallback,
 }) => {
   const { state, updateState } = useSharedTable({})
 
@@ -29,32 +30,39 @@ const Rows = ({
     updateState({ currentHoveredRow: null })
   }, [onHoverRow, updateState])
 
-  return table.getRowModel().rows.map(row => (
-    <Row
-      id={row.id}
-      key={row.id}
-      testPrefix={testPrefix}
-      testPrefixCallback={testPrefixCallback}
-      row={row}
-      table={table}
-      onClickRow={onClickRow}
-      disableClickRow={disableClickRow}
-      onMouseEnter={() => handleOnMouseEnter(row.id)}
-      onMouseLeave={handleOnMouseLeave}
-      isHovering={row.id === state?.currentHoveredRow}
-    >
-      {row[getRowHandler]().map(cell => {
-        return (
-          <DataCell
-            key={cell.column.columnDef.id}
-            cell={cell}
-            flexRender={flexRender}
-            testPrefix={testPrefix}
-          />
-        )
-      })}
-    </Row>
-  ))
+  return table.getRowModel().rows.map(row => {
+    const cells = row[getRowHandler]()
+
+    return (
+      <Row
+        id={row.id}
+        key={row.id}
+        testPrefix={testPrefix}
+        testPrefixCallback={testPrefixCallback}
+        row={row}
+        table={table}
+        onClickRow={onClickRow}
+        disableClickRow={disableClickRow}
+        onMouseEnter={() => handleOnMouseEnter(row.id)}
+        onMouseLeave={handleOnMouseLeave}
+        isHovering={row.id === state?.currentHoveredRow}
+      >
+        {cells.map((cell, index) => {
+          const isLast = cells.length === index + 1
+
+          return (
+            <DataCell
+              cell={cell}
+              flexRender={flexRender}
+              key={cell.column.columnDef.id}
+              pinnedStyles={isLast ? pinnedStyles : {}}
+              testPrefix={testPrefix}
+            />
+          )
+        })}
+      </Row>
+    )
+  })
 }
 
 export default Rows
