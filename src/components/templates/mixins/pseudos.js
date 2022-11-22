@@ -83,8 +83,6 @@ export default ({ theme, ...props }) => {
       ${pseudoSelectors[pseudoProp]}{ 
         ${styles} 
       }`
-
-      if (props) console.log(pseudo)
     }
   }
 
