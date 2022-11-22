@@ -10,7 +10,7 @@ const SIZES = {
 }
 
 const styledColor = ({ theme, color }) => color && `fill: ${getColor(color)({ theme })};`
-const styledhoverColor = ({ theme, hoverColor }) =>
+const styledHoverColor = ({ theme, hoverColor }) =>
   hoverColor && `&:hover { fill: ${getColor(hoverColor)({ theme })}; }`
 const styledRotate = ({ rotate }) => !isNaN(rotate) && `transform: rotate(${rotate * 90}deg);`
 
@@ -21,7 +21,7 @@ export const StyledIcon = styled.svg`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "unset")};
   ${styledRotate}
   ${styledColor}
-  ${styledhoverColor}
+  ${styledHoverColor}
   ${margin}
   ${alignSelf}
 `

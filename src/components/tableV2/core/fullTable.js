@@ -5,44 +5,46 @@ import makeHeadCell from "./headCell"
 import Rows from "./rows"
 
 const FullTable = ({
-  tableRef,
-  getRowHandler,
-  testPrefix,
   dataGa,
-  headers,
-  enableSorting,
-  testPrefixCallback,
-  onClickRow,
-  table,
   disableClickRow,
-  flexRender,
-  onHoverRow,
   enableResize,
+  enableSorting,
+  flexRender,
+  getRowHandler,
+  headers,
+  onClickRow,
+  onHoverRow,
+  pinnedStyles = {},
+  table,
+  tableRef,
+  testPrefix,
+  testPrefixCallback,
   width,
 }) => {
   return (
     <Table
-      width={width}
-      ref={tableRef}
-      data-testid={`netdata-table${testPrefix}`}
-      testPrefix={testPrefix}
       dataGa={dataGa}
+      data-testid={`netdata-table${testPrefix}`}
+      ref={tableRef}
+      testPrefix={testPrefix}
+      width={width}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({ headers, enableSorting, testPrefix, enableResize, table })}
+          {makeHeadCell({ enableResize, enableSorting, headers, pinnedStyles, table, testPrefix })}
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         <Rows
-          testPrefix={testPrefix}
-          testPrefixCallback={testPrefixCallback}
-          onClickRow={onClickRow}
-          table={table}
           disableClickRow={disableClickRow}
           flexRender={flexRender}
           getRowHandler={getRowHandler}
+          onClickRow={onClickRow}
           onHoverRow={onHoverRow}
+          pinnedStyles={pinnedStyles}
+          table={table}
+          testPrefix={testPrefix}
+          testPrefixCallback={testPrefixCallback}
         />
       </Table.Body>
     </Table>

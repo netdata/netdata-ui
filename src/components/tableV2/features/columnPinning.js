@@ -1,22 +1,23 @@
 import React from "react"
-
+import useColor from "src/hooks/use-color"
 import Box from "src/components/templates/box"
-
 import FullTable from "../core/fullTable"
 
 const ColumnPinning = ({
-  testPrefix,
   dataGa,
-  enableSorting,
-  testPrefixCallback,
-  onClickRow,
-  table,
   disableClickRow,
-  flexRender,
-  onHoverRow,
   enableResize,
+  enableSorting,
+  flexRender,
+  onClickRow,
+  onHoverRow,
+  table,
+  testPrefix,
+  testPrefixCallback,
 }) => {
+  const getThemeColor = useColor()
   const headers = table.getLeftFlatHeaders()
+
   return (
     <Box
       background="mainBackground"
@@ -27,19 +28,20 @@ const ColumnPinning = ({
       }}
     >
       <FullTable
-        enableResize={enableResize}
-        width={enableResize ? `${table.getLeftTotalSize()}px` : "100%"}
-        onHoverRow={onHoverRow}
-        table={table}
-        headers={headers}
-        enableSorting={enableSorting}
-        getRowHandler="getLeftVisibleCells"
-        testPrefix={`pin${testPrefix}`}
         dataGa={`pin-${dataGa}`}
-        testPrefixCallback={testPrefixCallback}
-        onClickRow={onClickRow}
         disableClickRow={disableClickRow}
+        enableResize={enableResize}
+        enableSorting={enableSorting}
         flexRender={flexRender}
+        getRowHandler="getLeftVisibleCells"
+        headers={headers}
+        onClickRow={onClickRow}
+        onHoverRow={onHoverRow}
+        pinnedStyles={{ borderRight: `1px solid ${getThemeColor("borderSecondary")}` }}
+        table={table}
+        testPrefix={`pin${testPrefix}`}
+        testPrefixCallback={testPrefixCallback}
+        width={enableResize ? `${table.getLeftTotalSize()}px` : "100%"}
       />
     </Box>
   )

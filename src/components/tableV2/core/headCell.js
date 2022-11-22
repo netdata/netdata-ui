@@ -37,82 +37,87 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const makeHeadCell = ({ headers, enableSorting, testPrefix, enableResize, table }) => {
-  const HeadCell = headers.map(
-    ({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
-      const { getCanSort, columnDef, getCanResize, getIsResizing } = column
-      const { meta } = columnDef
-      const headStyles = meta?.headStyles || {}
-      const styles = meta?.styles || {}
+const makeHeadCell = ({
+  enableResize,
+  enableSorting,
+  headers,
+  pinnedStyles = {},
+  table,
+  testPrefix,
+}) =>
+  headers.map(({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
+    const { getCanSort, columnDef, getCanResize, getIsResizing } = column
+    const { meta } = columnDef
+    const headStyles = {
+      ...(meta?.headStyles || {}),
+      ...pinnedStyles,
+    }
+    const styles = meta?.styles || {}
 
-      const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
-      const filterOptions = meta && meta?.filter ? meta?.filter : {}
-      const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
-      const Filter = availableFilters[selectedFilter]
+    const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
+    const filterOptions = meta && meta?.filter ? meta?.filter : {}
+    const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""
+    const Filter = availableFilters[selectedFilter]
 
-      const resizeFuntions =
-        enableResize && getCanResize()
-          ? {
-              onMouseDown: getResizeHandler(),
-              onTouchStart: getResizeHandler(),
-              getIsResizing,
-              deltaOffset: table.getState().columnSizingInfo.deltaOffset,
-            }
-          : {}
+    const resizeFuntions =
+      enableResize && getCanResize()
+        ? {
+            onMouseDown: getResizeHandler(),
+            onTouchStart: getResizeHandler(),
+            getIsResizing,
+            deltaOffset: table.getState().columnSizingInfo.deltaOffset,
+          }
+        : {}
 
-      const headWidth = getSize()
+    const headWidth = getSize()
 
-      if (getCanSort() && enableSorting) {
-        return (
-          <Table.SortingHeadCell
-            width={headWidth}
-            minWidth={column.columnDef.minSize}
-            maxWidth={column.columnDef.maxSize}
-            data-testid={`netdata-table-head-cell${testPrefix}`}
-            sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
-            sortDirection={column.getIsSorted()}
-            onSortClicked={column.getToggleSortingHandler()}
-            key={id}
-            colSpan={colSpan}
-            filter={
-              column.getCanFilter() && (
-                <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
-              )
-            }
-            headStyles={headStyles}
-            styles={styles}
-            tooltipText={tooltipText}
-            {...resizeFuntions}
-          >
-            {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
-          </Table.SortingHeadCell>
-        )
-      }
-
+    if (getCanSort() && enableSorting) {
       return (
-        <Table.HeadCell
-          width={headWidth}
-          minWidth={column.columnDef.minSize}
-          maxWidth={column.columnDef.maxSize}
+        <Table.SortingHeadCell
+          colSpan={colSpan}
           data-testid={`netdata-table-head-cell${testPrefix}`}
-          key={id}
-          styles={styles}
-          tooltipText={tooltipText}
           filter={
             column.getCanFilter() && (
               <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
             )
           }
           headStyles={headStyles}
+          key={id}
+          maxWidth={column.columnDef.maxSize}
+          minWidth={column.columnDef.minSize}
+          onSortClicked={column.getToggleSortingHandler()}
+          sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
+          sortDirection={column.getIsSorted()}
+          styles={styles}
+          tooltipText={tooltipText}
+          width={headWidth}
           {...resizeFuntions}
         >
-          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
-        </Table.HeadCell>
+          {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
+        </Table.SortingHeadCell>
       )
     }
-  )
 
-  return HeadCell
-}
+    return (
+      <Table.HeadCell
+        data-testid={`netdata-table-head-cell${testPrefix}`}
+        filter={
+          column.getCanFilter() && (
+            <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+          )
+        }
+        headStyles={headStyles}
+        maxWidth={column.columnDef.maxSize}
+        minWidth={column.columnDef.minSize}
+        key={id}
+        styles={styles}
+        tooltipText={tooltipText}
+        width={headWidth}
+        {...resizeFuntions}
+      >
+        {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
+      </Table.HeadCell>
+    )
+  })
 
 export default makeHeadCell
