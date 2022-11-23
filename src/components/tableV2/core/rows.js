@@ -6,8 +6,6 @@ import DataCell from "./dataCell"
 import useSharedTable from "../hooks/useSharedTable"
 import { useVirtualizer } from "@tanstack/react-virtual"
 
-import { TABLE_HEAD_HEIGHT } from "../constants"
-
 const Rows = ({
   disableClickRow,
   flexRender,
@@ -31,7 +29,7 @@ const Rows = ({
   })
 
   const virtualRows = virtualizer.getVirtualItems()
-  const totalSize = virtualizer.getTotalSize() + TABLE_HEAD_HEIGHT
+  const totalSize = virtualizer.getTotalSize()
 
   const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
   const paddingBottom =
