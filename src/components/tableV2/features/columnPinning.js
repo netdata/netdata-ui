@@ -14,6 +14,7 @@ const ColumnPinning = ({
   table,
   testPrefix,
   testPrefixCallback,
+  scrollParentRef,
 }) => {
   const getThemeColor = useColor()
   const headers = table.getLeftFlatHeaders()
@@ -28,6 +29,7 @@ const ColumnPinning = ({
       }}
     >
       <FullTable
+        scrollParentRef={scrollParentRef}
         dataGa={`pin-${dataGa}`}
         disableClickRow={disableClickRow}
         enableResize={enableResize}
