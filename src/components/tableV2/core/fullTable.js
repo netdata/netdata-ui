@@ -20,6 +20,7 @@ const FullTable = ({
   testPrefix,
   testPrefixCallback,
   width,
+  scrollParentRef,
 }) => {
   return (
     <Table
@@ -31,11 +32,19 @@ const FullTable = ({
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({ enableResize, enableSorting, headers, pinnedStyles, table, testPrefix })}
+          {makeHeadCell({
+            enableResize,
+            enableSorting,
+            headers,
+            pinnedStyles,
+            table,
+            testPrefix,
+          })}
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         <Rows
+          scrollParentRef={scrollParentRef}
           disableClickRow={disableClickRow}
           flexRender={flexRender}
           getRowHandler={getRowHandler}

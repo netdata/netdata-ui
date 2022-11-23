@@ -1,5 +1,5 @@
 //TODO refactor bulk action and row action to single funtion to decrease repeatabillity
-import React, { useEffect, useMemo, useState, useCallback } from "react"
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react"
 
 import {
   flexRender,
@@ -69,6 +69,8 @@ const NetdataTable = ({
     pageIndex: paginationOptions.pageIndex,
     pageSize: paginationOptions.pageSize,
   })
+
+  const scrollParentRef = useRef()
 
   const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
@@ -150,6 +152,7 @@ const NetdataTable = ({
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
+    manualPagination: !enablePagination,
     columnResizeMode: enableResize ? "onEnd" : "",
     filterFns: {
       comparison,
@@ -200,7 +203,12 @@ const NetdataTable = ({
           dataGa={dataGa}
           bulkActions={renderBulkActions}
         />
-        <Flex overflow={{ vertical: "auto", horizontal: "auto" }} width="100%" height="100%">
+        <Flex
+          ref={scrollParentRef}
+          overflow={{ vertical: "auto", horizontal: "auto" }}
+          width="100%"
+          height="100%"
+        >
           {enableColumnPinning && (
             <ColumnPinning
               enableResize={enableResize}
@@ -214,9 +222,11 @@ const NetdataTable = ({
               dataGa={dataGa}
               flexRender={flexRender}
               onHoverRow={onHoverRow}
+              scrollParentRef={scrollParentRef}
             />
           )}
           <MainTable
+            scrollParentRef={scrollParentRef}
             enableResize={enableResize}
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}

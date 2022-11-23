@@ -15,11 +15,13 @@ const MainTable = ({
   flexRender,
   onHoverRow,
   enableResize,
+  scrollParentRef,
 }) => {
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
   return (
     <FullTable
+      scrollParentRef={scrollParentRef}
       width={enableResize ? `${table.getTotalSize()}px` : "100%"}
       enableResize={enableResize}
       onHoverRow={onHoverRow}
