@@ -469,8 +469,6 @@ StoryTable.add("Full Table functionallity", () => {
         sortBy={[{ id: "nodes", desc: false }]}
         onGlobalSearchChange={onGlobalSearchChange}
         enableSorting
-        paginationOptions={paginationOptions}
-        enablePagination
         rowActions={rowActions}
         bulkActions={bulkActions}
         enableSelection

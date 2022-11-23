@@ -152,6 +152,7 @@ const NetdataTable = ({
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
     data: data,
+    manualPagination: !enablePagination,
     columnResizeMode: enableResize ? "onEnd" : "",
     filterFns: {
       comparison,
