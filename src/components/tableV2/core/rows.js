@@ -6,6 +6,8 @@ import DataCell from "./dataCell"
 import useSharedTable from "../hooks/useSharedTable"
 import { useVirtualizer } from "@tanstack/react-virtual"
 
+import { CELL_HEIGHT } from "../constants"
+
 const Rows = ({
   disableClickRow,
   flexRender,
@@ -24,7 +26,7 @@ const Rows = ({
   const virtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => scrollParentRef.current,
-    estimateSize: () => 65,
+    estimateSize: () => CELL_HEIGHT,
     overscan: 20,
   })
 
