@@ -13,6 +13,7 @@ const Row = ({
   onMouseEnter,
   onMouseLeave,
   isHovering,
+  background,
 }) => {
   return (
     <Table.Row
@@ -26,6 +27,7 @@ const Row = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       isHovering={isHovering}
+      background={background}
     >
       {children}
     </Table.Row>

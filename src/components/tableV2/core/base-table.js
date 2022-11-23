@@ -17,10 +17,6 @@ import useToggle from "src/hooks/use-toggle"
 const StyledRow = styled.tr`
   font-size: 14px;
   color: ${getColor("text")};
-  background: ${getColor("mainBackground")};
-  &:nth-child(2n) {
-    background: ${getColor("tableRowBg")};
-  }
   width: fit-content;
 `
 const StyledHeaderRow = styled.tr`

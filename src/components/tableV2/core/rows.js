@@ -25,7 +25,7 @@ const Rows = ({
     count: rows.length,
     getScrollElement: () => scrollParentRef.current,
     estimateSize: () => 65,
-    overscan: 15,
+    overscan: 5,
   })
 
   const virtualRows = virtualizer.getVirtualItems()
@@ -54,7 +54,6 @@ const Rows = ({
         </tr>
       )}
       {virtualizer.getVirtualItems().map(({ index }) => {
-        console.log({ index })
         const row = rows[index]
         const cells = row[getRowHandler]()
 
@@ -71,6 +70,7 @@ const Rows = ({
             onMouseEnter={() => handleOnMouseEnter(row.id)}
             onMouseLeave={handleOnMouseLeave}
             isHovering={row.id === state?.currentHoveredRow}
+            background={index % 2 == 0 ? "tableRowBg" : "mainBackground"}
           >
             {cells.map((cell, index) => {
               const isLast = cells.length === index + 1
