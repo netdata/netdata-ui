@@ -51,11 +51,9 @@ const StyledPagination = styled(Flex)`
 
 const Table = forwardRef(({ children, width, ...props }, ref) => {
   return (
-    <Flex height="100%" width="100%" column>
-      <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width={width} {...props}>
-        {children}
-      </Box>
-    </Flex>
+    <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width={width} {...props}>
+      {children}
+    </Box>
   )
 })
 
