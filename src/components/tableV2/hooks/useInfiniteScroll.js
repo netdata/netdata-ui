@@ -5,7 +5,7 @@ const useIniniteScroll = ({
   target,
   onError,
   onSuccess,
-  onDataend,
+  onDataEnd,
   updateTableData,
   threshold = 100,
 }) => {
@@ -13,8 +13,8 @@ const useIniniteScroll = ({
   const [loading, setLoading] = useState(false)
 
   const hasDataEnded = useMemo(() => {
-    if (!onDataend) return false
-    return onDataend(lastReceivedData)
+    if (!onDataEnd) return false
+    return onDataEnd(lastReceivedData)
   }, [lastReceivedData])
 
   const runService = async () => {
