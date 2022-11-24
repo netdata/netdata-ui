@@ -1,4 +1,85 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useRef } from "react"
+
+//COMMENTS HERE ARE ONLY FOR TESTING REASONS THE ARE GOING TO BE REMOVED AFTER WE SEE THAT THE INFINITY WORKS AS EXPECTED
+
+// const fakeData = () => [
+//   {
+//     nodes: "node51",
+//     alerts: 15,
+//     user: "mitsos",
+//     disabled: true,
+//     status: "stale",
+//     untouchable: "true",
+//   },
+//   {
+//     nodes: "node52",
+//     alerts: 15,
+//     user: "mitsos",
+//     disabled: true,
+//     status: "stale",
+//     untouchable: "true",
+//   },
+//   {
+//     nodes: "node53",
+//     alerts: 15,
+//     user: "mitsos",
+//     disabled: true,
+//     status: "stale",
+//     untouchable: "true",
+//   },
+//   {
+//     nodes: "node54",
+//     alerts: 15,
+//     user: "mitsos",
+//     disabled: true,
+//     status: "stale",
+//     untouchable: "true",
+//   },
+//   {
+//     nodes: "node55",
+//     alerts: 15,
+//     user: "mitsos",
+//     disabled: true,
+//     status: "stale",
+//     untouchable: "true",
+//   },
+//   {
+//     nodes: "node56",
+//     alerts: 15,
+//     user: "mitsos",
+//     disabled: true,
+//     status: "stale",
+//     untouchable: "true",
+//   },
+// ]
+
+// function loadMoreItems(lastData) {
+//   console.log(lastData)
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       resolve({
+//         data: fakeData(),
+//       })
+//     }, 1000)
+//   })
+// }
+
+const useScrollListener = (target, handler) => {
+  const listenerRef = useRef(handler)
+  listenerRef.current = handler
+
+  const listener = () => listenerRef.current()
+
+  useEffect(() => {
+    if (!target?.current) return
+    target.current.addEventListener("scroll", listener)
+
+    return () => {
+      if (!target.current) return
+      target.current.removeEventListener("scroll", listener)
+    }
+  }, [target])
+}
 
 const useIniniteScroll = ({
   service,
@@ -48,20 +129,11 @@ const useIniniteScroll = ({
       loadMore()
     }
   }
-  useEffect(() => {
-    if (!target?.current || loading || !service) return
-    const listener = () => {
-      if (loading) return
-      scrollMethod()
-    }
 
-    target.current.addEventListener("scroll", listener)
-
-    return () => {
-      if (!target.current) return
-      target.current.removeEventListener("scroll", listener)
-    }
-  }, [target, loading])
+  useScrollListener(target, () => {
+    if (loading || service) return
+    scrollMethod()
+  })
 }
 
 export default useIniniteScroll
