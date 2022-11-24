@@ -27,7 +27,7 @@ const Rows = ({
     count: rows.length,
     getScrollElement: () => scrollParentRef.current,
     estimateSize: () => CELL_HEIGHT,
-    overscan: 20,
+    overscan: 30,
   })
 
   const virtualRows = virtualizer.getVirtualItems()
