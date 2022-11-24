@@ -50,16 +50,16 @@ const useIniniteScroll = ({
   }
   useEffect(() => {
     if (!target?.current || loading || !service) return
-    const lisener = () => {
+    const listener = () => {
       if (loading) return
       scrollMethod()
     }
 
-    target.current.addEventListener("scroll", lisener)
+    target.current.addEventListener("scroll", listener)
 
     return () => {
       if (!target.current) return
-      target.current.removeEventListener("scroll", lisener)
+      target.current.removeEventListener("scroll", listener)
     }
   }, [target, loading])
 }
