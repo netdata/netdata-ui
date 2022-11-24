@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from "react"
 
-const useIniniteScroll = (
+const useIniniteScroll = ({
   service,
-  { target, onError, onSuccess, onDataend, updateTableData, threshold = 100 }
-) => {
+  target,
+  onError,
+  onSuccess,
+  onDataend,
+  updateTableData,
+  threshold = 100,
+}) => {
   const [lastReceivedData, setLastReceivedData] = useState()
   const [loading, setLoading] = useState(false)
 

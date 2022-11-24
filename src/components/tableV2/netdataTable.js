@@ -25,7 +25,7 @@ import MainTable from "./features/mainTable"
 
 import { SharedTableProvider } from "./context/sharedTable"
 
-import useIniniteScroll from "./hooks/useInfiniteScroll"
+import useInfiniteScroll from "./hooks/useInfiniteScroll"
 
 const noop = () => {}
 
@@ -58,6 +58,7 @@ const NetdataTable = ({
   enableColumnPinning = false,
   columnPinningOptions = {},
   enableResize = false,
+  loadMoreOptions = {},
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
@@ -79,7 +80,7 @@ const NetdataTable = ({
     setTableData(oldData => [...oldData, ...newData])
   }, [])
 
-  useIniniteScroll("", { target: scrollParentRef, updateTableData })
+  useInfiniteScroll({ target: scrollParentRef, updateTableData, ...loadMoreOptions })
 
   const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
