@@ -1,56 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
 
-const fakeData = () => [
-  {
-    nodes: "node51",
-    alerts: 15,
-    user: "mitsos",
-    disabled: true,
-    status: "stale",
-    untouchable: "true",
-  },
-  {
-    nodes: "node52",
-    alerts: 15,
-    user: "mitsos",
-    disabled: true,
-    status: "stale",
-    untouchable: "true",
-  },
-  {
-    nodes: "node53",
-    alerts: 15,
-    user: "mitsos",
-    disabled: true,
-    status: "stale",
-    untouchable: "true",
-  },
-  {
-    nodes: "node54",
-    alerts: 15,
-    user: "mitsos",
-    disabled: true,
-    status: "stale",
-    untouchable: "true",
-  },
-  {
-    nodes: "node55",
-    alerts: 15,
-    user: "mitsos",
-    disabled: true,
-    status: "stale",
-    untouchable: "true",
-  },
-  {
-    nodes: "node56",
-    alerts: 15,
-    user: "mitsos",
-    disabled: true,
-    status: "stale",
-    untouchable: "true",
-  },
-]
-
 const useIniniteScroll = (
   service,
   { target, onError, onSuccess, onDataend, updateTableData, threshold = 100 }
