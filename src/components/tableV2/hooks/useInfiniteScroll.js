@@ -60,7 +60,7 @@ import { useEffect, useMemo, useState, useRef } from "react"
 //       resolve({
 //         data: fakeData(),
 //       })
-//     }, 1000)
+//     }, 4000)
 //   })
 // }
 
@@ -68,9 +68,9 @@ const useScrollListener = (target, handler) => {
   const listenerRef = useRef(handler)
   listenerRef.current = handler
 
-  const listener = () => listenerRef.current()
-
   useEffect(() => {
+    const listener = () => listenerRef.current()
+
     if (!target?.current) return
     target.current.addEventListener("scroll", listener)
 
