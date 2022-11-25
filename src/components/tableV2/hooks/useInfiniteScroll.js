@@ -131,7 +131,7 @@ const useIniniteScroll = ({
   }
 
   useScrollListener(target, () => {
-    if (loading || service) return
+    if (loading || !service) return
     scrollMethod()
   })
 }
