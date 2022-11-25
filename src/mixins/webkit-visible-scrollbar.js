@@ -16,4 +16,10 @@ export const webkitVisibleScrollbar = css`
   &::-webkit-scrollbar-thumb:hover {
     background-color: ${getRgbColor("border", 0.5)};
   }
+  &::-webkit-scrollbar-track-piece {
+    background-color: ${getRgbColor("border", 0.3)};
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: ${getRgbColor("border", 0.3)};
+  }
 `
