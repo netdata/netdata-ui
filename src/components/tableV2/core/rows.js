@@ -19,6 +19,7 @@ const Rows = ({
   testPrefix,
   testPrefixCallback,
   scrollParentRef,
+  overscan,
 }) => {
   const { state, updateState } = useSharedTable({})
   const { rows } = table.getRowModel()
@@ -27,7 +28,7 @@ const Rows = ({
     count: rows.length,
     getScrollElement: () => scrollParentRef.current,
     estimateSize: () => CELL_HEIGHT,
-    overscan: 30,
+    overscan: overscan || 30,
   })
 
   const virtualRows = virtualizer.getVirtualItems()

@@ -59,6 +59,7 @@ const NetdataTable = ({
   columnPinningOptions = {},
   enableResize = false,
   loadMoreOptions = {},
+  virtualizeOptions = {},
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
@@ -233,6 +234,7 @@ const NetdataTable = ({
               flexRender={flexRender}
               onHoverRow={onHoverRow}
               scrollParentRef={scrollParentRef}
+              virtualizeOptions={virtualizeOptions}
             />
           )}
           <MainTable
@@ -249,6 +251,7 @@ const NetdataTable = ({
             testPrefix={testPrefix}
             flexRender={flexRender}
             onHoverRow={onHoverRow}
+            virtualizeOptions={virtualizeOptions}
           />
         </Flex>
         {enablePagination && makePagination({ table })}

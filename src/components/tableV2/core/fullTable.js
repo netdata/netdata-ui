@@ -21,6 +21,7 @@ const FullTable = ({
   testPrefixCallback,
   width,
   scrollParentRef,
+  virtualizeOptions = {},
 }) => {
   return (
     <Table
@@ -54,6 +55,7 @@ const FullTable = ({
           table={table}
           testPrefix={testPrefix}
           testPrefixCallback={testPrefixCallback}
+          {...virtualizeOptions}
         />
       </Table.Body>
     </Table>
