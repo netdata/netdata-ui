@@ -25,6 +25,8 @@ import MainTable from "./features/mainTable"
 
 import { SharedTableProvider } from "./context/sharedTable"
 
+import useInfiniteScroll from "./hooks/useInfiniteScroll"
+
 const noop = () => {}
 
 const NetdataTable = ({
@@ -56,6 +58,8 @@ const NetdataTable = ({
   enableColumnPinning = false,
   columnPinningOptions = {},
   enableResize = false,
+  loadMoreOptions = {},
+  virtualizeOptions = {},
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
@@ -69,8 +73,15 @@ const NetdataTable = ({
     pageIndex: paginationOptions.pageIndex,
     pageSize: paginationOptions.pageSize,
   })
+  const [tableData, setTableData] = useState(data)
 
   const scrollParentRef = useRef()
+
+  const updateTableData = useCallback(newData => {
+    setTableData(oldData => [...oldData, ...newData])
+  }, [])
+
+  useInfiniteScroll({ target: scrollParentRef, updateTableData, ...loadMoreOptions })
 
   const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
@@ -151,7 +162,7 @@ const NetdataTable = ({
 
   const table = useReactTable({
     columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
-    data: data,
+    data: tableData,
     manualPagination: !enablePagination,
     columnResizeMode: enableResize ? "onEnd" : "",
     filterFns: {
@@ -223,6 +234,7 @@ const NetdataTable = ({
               flexRender={flexRender}
               onHoverRow={onHoverRow}
               scrollParentRef={scrollParentRef}
+              virtualizeOptions={virtualizeOptions}
             />
           )}
           <MainTable
@@ -239,6 +251,7 @@ const NetdataTable = ({
             testPrefix={testPrefix}
             flexRender={flexRender}
             onHoverRow={onHoverRow}
+            virtualizeOptions={virtualizeOptions}
           />
         </Flex>
         {enablePagination && makePagination({ table })}
