@@ -206,6 +206,10 @@ const NetdataTable = ({
     }
   }, [rowSelection, table])
 
+  useEffect(() => {
+    setTableData(data)
+  }, [data])
+
   return (
     <SharedTableProvider>
       <Flex height="100%" overflow="hidden" width="100%" column>
