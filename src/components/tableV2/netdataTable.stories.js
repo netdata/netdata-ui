@@ -459,7 +459,7 @@ StoryTable.add("Full Table functionallity", () => {
   ]
 
   return (
-    <Box height="800px" width="800px">
+    <Box height="800px" width="1200px">
       <NetdataTable
         onClickRow={({ data, table, fullRow }) => {
           console.log(data, table, fullRow)
