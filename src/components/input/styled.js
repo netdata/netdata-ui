@@ -52,7 +52,6 @@ export const StyledLabel = styled.label`
 `
 export const LabelRow = styled.div`
   width: 100%;
-  height: 40px;
   flex-shrink: 0;
   flex-grow: 0;
   font-style: normal;
@@ -62,6 +61,7 @@ export const LabelRow = styled.div`
   color: ${getColor("text")};
   display: flex;
   align-items: center;
+  margin-bottom: 4px;
 `
 
 export const InputContainer = styled(Flex)`
