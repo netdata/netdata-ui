@@ -27,6 +27,8 @@ export const supportedBulkActions = {
 //TODO THIS NEEDS TO BE REFACTORED NOW IS WORKING ONLY FOR COLUMN VISIBILITY
 const renderActionWithDropdown = ({
   actions,
+  columnPinning,
+  enableColumnPinning,
   table,
   testPrefix,
   selectedRows,
@@ -38,6 +40,8 @@ const renderActionWithDropdown = ({
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (
         <ActionWithDropdown
+          columnPinning={columnPinning}
+          enableColumnPinning={enableColumnPinning}
           key={id}
           isVisible={isVisible}
           alwaysEnabled={alwaysEnabled}
@@ -67,6 +71,8 @@ const makeColumnVisibilityAction = ({ handleAction, visible }) => ({
 
 const makeBulkActions = ({
   bulkActions,
+  columnPinning,
+  enableColumnPinning,
   table,
   testPrefix,
   selectedRows,
@@ -75,6 +81,8 @@ const makeBulkActions = ({
   const columnVisibility = makeColumnVisibilityAction({ ...columnVisibilityOptions })
   const actionsWithDropdown = renderActionWithDropdown({
     actions: [columnVisibility],
+    columnPinning,
+    enableColumnPinning,
     ...columnVisibilityOptions,
     testPrefix,
     table,

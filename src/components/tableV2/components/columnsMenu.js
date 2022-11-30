@@ -1,10 +1,10 @@
 import React from "react"
 import Drop from "src/components/drops/drop/index.js"
-import { Text, ListItem } from "src/components/typography"
-import { Checkbox } from "src/components/checkbox"
+import { Text } from "src/components/typography"
 import Flex from "src/components/templates/flex"
+import ColumnsMenuItem from "src/components/tableV2/components/columnsMenuItem"
 
-const ColumnsMenu = ({ parentRef, isOpen, columns, onClose }) => {
+const ColumnsMenu = ({ parentRef, isOpen, columns, onClose, pinnedColumns }) => {
   if (parentRef.current && isOpen)
     return (
       <Drop
@@ -16,47 +16,38 @@ const ColumnsMenu = ({ parentRef, isOpen, columns, onClose }) => {
         target={parentRef.current}
         width={50}
       >
-        <>
-          <Flex
-            padding={[2]}
-            border={{
-              size: "1px",
-              type: "solid",
-              side: "bottom",
-              color: "borderSecondary",
-            }}
-          >
-            <Text strong>Columns</Text>
-          </Flex>
+        <Flex
+          padding={[3, 3, 1]}
+          border={{
+            size: "1px",
+            type: "solid",
+            side: "bottom",
+            color: "borderSecondary",
+          }}
+        >
+          <Text color="textLite">Edit columns</Text>
+        </Flex>
 
-          {columns.map(column => {
-            {
-              return (
-                column.getCanHide() && (
-                  <Flex
-                    padding={[2]}
-                    as={ListItem}
-                    alignItems="center"
-                    justifyContent="between"
-                    key={column.id}
-                    border={{
-                      size: "1px",
-                      type: "solid",
-                      side: "bottom",
-                      color: "borderSecondary",
-                    }}
-                  >
-                    <Checkbox
-                      checked={column.getIsVisible()}
-                      onChange={column.getToggleVisibilityHandler()}
-                      label={column.id}
-                    />
-                  </Flex>
-                )
-              )
-            }
-          })}
-        </>
+        <Flex column padding={[1, 3]}>
+          {pinnedColumns.length ? (
+            <Flex
+              border={{
+                size: "1px",
+                type: "solid",
+                side: "bottom",
+                color: "borderSecondary",
+              }}
+              column
+            >
+              {pinnedColumns.map(pinnedColumn => (
+                <ColumnsMenuItem column={pinnedColumn} disabled key={pinnedColumn.id} />
+              ))}
+            </Flex>
+          ) : null}
+          {columns.map(column => (
+            <ColumnsMenuItem column={column} key={column.id} />
+          ))}
+        </Flex>
       </Drop>
     )
 

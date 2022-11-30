@@ -93,12 +93,14 @@ const NetdataTable = ({
   const renderBulkActions = () => {
     const bulkActionsArray = [
       makeBulkActions({
+        columnPinning,
         columnVisibilityOptions: {
           isOpen: isColumnDropdownVisible,
           onClose: () => setIsColumnDropdownVisible(false),
           handleAction: () => setIsColumnDropdownVisible(true),
           visible: enableColumnVisibility,
         },
+        enableColumnPinning,
         bulkActions,
         testPrefix,
         table,

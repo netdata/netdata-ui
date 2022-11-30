@@ -6,6 +6,8 @@ import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is use
 const ActionWithDropdown = ({
   id,
   icon,
+  columnPinning = {},
+  enableColumnPinning,
   handleAction,
   tooltipText,
   alwaysEnabled,
@@ -21,6 +23,26 @@ const ActionWithDropdown = ({
   const actionRef = useRef()
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
   const visible = typeof isVisible === "function" ? isVisible() : isVisible
+  const allColumns = table.getAllLeafColumns()
+  const allPinnedColumns = enableColumnPinning
+    ? [...(columnPinning?.left || []), ...(columnPinning?.right || [])]
+    : []
+  const { columns, pinnedColumns } = enableColumnPinning
+    ? allColumns.reduce(
+        (accumulator, column) => {
+          let key = "columns"
+          if (allPinnedColumns.includes(column.id)) {
+            key = "pinnedColumns"
+          }
+
+          return {
+            ...accumulator,
+            [key]: [...accumulator[key], column],
+          }
+        },
+        { columns: [], pinnedColumns: [] }
+      )
+    : { columns: allColumns, pinnedColumns: [] }
 
   return (
     <>
@@ -40,7 +62,8 @@ const ActionWithDropdown = ({
       <ColumnsMenu
         parentRef={actionRef}
         isOpen={isOpen}
-        columns={table.getAllLeafColumns()}
+        columns={columns}
+        pinnedColumns={pinnedColumns}
         onClose={onClose}
       />
     </>
