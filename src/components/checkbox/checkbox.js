@@ -15,36 +15,36 @@ import {
 export const Checkbox = forwardRef(
   (
     {
+      alignSelf,
       checked,
+      className,
       "data-testid": testId,
       disabled,
-      className,
-      labelPosition,
-      label,
-      indeterminate,
-      margin,
-      alignSelf,
       iconProps,
+      indeterminate,
       Label,
+      label,
+      labelPosition,
+      margin,
       ...props
     },
     ref
   ) => {
     const { styles } = useCheckBoxStyles({ disabled })
     const { getInputProps, getCheckBoxProps } = useCheckbox({
-      disabled,
       checked,
+      disabled,
       indeterminate,
       ...props,
     })
 
     return (
       <StyledLabel
+        alignSelf={alignSelf}
+        className={className}
         data-testid={testId}
         disabled={disabled}
-        className={className}
         margin={margin}
-        alignSelf={alignSelf}
       >
         {label && labelPosition === "left" && (
           <LabelText as={Label} disabled={disabled} left>
@@ -59,8 +59,8 @@ export const Checkbox = forwardRef(
             {...getCheckBoxProps()}
           >
             <StyledIcon
-              name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
               disabled={disabled}
+              name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
               {...iconProps}
             />
           </StyledCheckbox>
@@ -76,6 +76,6 @@ export const Checkbox = forwardRef(
 )
 
 Checkbox.defaultProps = {
-  labelPosition: "right",
   Label: Text,
+  labelPosition: "right",
 }

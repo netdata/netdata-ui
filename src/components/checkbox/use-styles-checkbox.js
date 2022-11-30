@@ -2,25 +2,22 @@ import { useMemo } from "react"
 
 const makeColor = ({
   defaultColor = "inputBorder",
-  success = "success",
-  error = "error",
   disabled = "inputBorder",
+  error = "error",
+  success = "success",
 }) => ({
-  success: success,
-  error: error,
-  disabled: disabled,
   default: defaultColor,
+  disabled: disabled,
+  error: error,
+  success: success,
 })
 const useCheckboxStyles = ({ disabled, success, error, focused }) => {
   const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
 
   const styledCheckbox = useMemo(
     () => ({
-      width: "inherit",
-      height: "inherit",
-      background: disabled ? "mainBackgroundDisabled" : "mainBackground",
-      justifyContent: "center",
       alignItems: "center",
+      background: disabled ? "mainBackgroundDisabled" : "mainBackground",
       border: {
         size: "1px",
         type: "solid",
@@ -29,13 +26,16 @@ const useCheckboxStyles = ({ disabled, success, error, focused }) => {
           : makeColor({})[status],
         side: "all",
       },
+      height: "inherit",
+      justifyContent: "center",
       round: true,
+      width: "inherit",
       _focus: {
         border: {
-          size: "1px",
-          type: "solid",
           color: makeColor({ defaultColor: "controlFocused" })[status],
           side: "all",
+          size: "1px",
+          type: "solid",
         },
         boxShadow: {
           color: makeColor({ defaultColor: "controlFocused" })[status],
