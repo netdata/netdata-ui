@@ -14,10 +14,10 @@ const makeColor = ({
 const useCheckboxStyles = ({ disabled, success, error, focused }) => {
   const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
 
-  const styledCheckbox = useMemo(() => {
-    return {
-      width: "20px",
-      height: "20px",
+  const styledCheckbox = useMemo(
+    () => ({
+      width: "inherit",
+      height: "inherit",
       background: disabled ? "mainBackgroundDisabled" : "mainBackground",
       justifyContent: "center",
       alignItems: "center",
@@ -42,8 +42,9 @@ const useCheckboxStyles = ({ disabled, success, error, focused }) => {
           size: "0 0 0 1px",
         },
       },
-    }
-  }, [status, focused])
+    }),
+    [status, focused]
+  )
 
   return { styles: { styledCheckbox } }
 }

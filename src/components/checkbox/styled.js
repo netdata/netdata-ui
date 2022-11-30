@@ -1,19 +1,23 @@
 import styled from "styled-components"
 import { Icon } from "src/components/icon"
+import Box from "src/components/templates/box"
 import { getSizeUnit, getValidatedControlColor } from "src/theme/utils"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
 
 import Flex from "src/components/templates/flex"
 
-export const CheckboxContainer = styled.div`
-  display: block;
+export const CheckboxContainer = styled(Box).attrs({
+  height: "16px",
+  width: "16px",
+})`
   box-sizing: border-box;
-  width: 20px;
-  height: 20px;
 `
 
-export const StyledIcon = styled(Icon)`
+export const StyledIcon = styled(Icon).attrs({
+  height: "inherit",
+  width: "inherit",
+})`
   flex-grow: 0;
   flex-shrink: 0;
   fill: ${getValidatedControlColor("primary", "accent")};
@@ -57,5 +61,6 @@ export const StyledLabel = styled.label`
 
 export const LabelText = styled.span`
   ${({ right, ...props }) =>
-    right ? `margin-left: ${getSizeUnit(props)}px;` : `margin-right: ${getSizeUnit(props)}px;`}
+    right ? `margin-left: ${getSizeUnit(props)}px;` : `margin-right: ${getSizeUnit(props)}px;`};
+  ${({ disabled }) => disabled && "opacity: 0.4;"};
 `
