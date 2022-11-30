@@ -31,6 +31,8 @@ const ActionWithDropdown = ({
   const { columns, pinnedColumns } = enableColumnPinning
     ? allColumns.reduce(
         (accumulator, column) => {
+          if (!column.getCanHide()) return accumulator
+
           let key = "columns"
           if (allPinnedColumns.includes(column.id)) {
             key = "pinnedColumns"
