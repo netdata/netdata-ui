@@ -1,7 +1,7 @@
 import React from "react"
 import Drop from "src/components/drops/drop/index.js"
-import { Text } from "src/components/typography"
 import Flex from "src/components/templates/flex"
+import { Text } from "src/components/typography"
 import ColumnsMenuItem from "src/components/tableV2/components/columnsMenuItem"
 
 const ColumnsMenu = ({ parentRef, isOpen, columns, onClose, pinnedColumns }) => {
@@ -17,13 +17,13 @@ const ColumnsMenu = ({ parentRef, isOpen, columns, onClose, pinnedColumns }) => 
         width={50}
       >
         <Flex
-          padding={[3, 3, 1]}
           border={{
             size: "1px",
             type: "solid",
             side: "bottom",
             color: "borderSecondary",
           }}
+          padding={[3, 3, 1]}
         >
           <Text color="textLite">Edit columns</Text>
         </Flex>

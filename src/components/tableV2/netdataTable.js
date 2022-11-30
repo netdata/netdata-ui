@@ -90,26 +90,22 @@ const NetdataTable = ({
 
   const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
 
-  const renderBulkActions = () => {
-    const bulkActionsArray = [
-      makeBulkActions({
-        columnPinning,
-        columnVisibilityOptions: {
-          isOpen: isColumnDropdownVisible,
-          onClose: () => setIsColumnDropdownVisible(false),
-          handleAction: () => setIsColumnDropdownVisible(true),
-          visible: enableColumnVisibility,
-        },
-        enableColumnPinning,
-        bulkActions,
-        testPrefix,
-        table,
-        selectedRows: originalSelectedRows,
-      }),
-    ]
-
-    return bulkActionsArray
-  }
+  const renderBulkActions = () => [
+    makeBulkActions({
+      bulkActions,
+      columnPinning,
+      columnVisibilityOptions: {
+        handleAction: () => setIsColumnDropdownVisible(true),
+        isOpen: isColumnDropdownVisible,
+        onClose: () => setIsColumnDropdownVisible(false),
+        visible: enableColumnVisibility,
+      },
+      enableColumnPinning,
+      selectedRows: originalSelectedRows,
+      table,
+      testPrefix,
+    }),
+  ]
 
   const makeSelectionColumn = enableSelection ? [makeRowSelection({ testPrefix })] : []
 
