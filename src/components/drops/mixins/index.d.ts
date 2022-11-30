@@ -1,5 +1,5 @@
 export interface AlignProps {
-  align:
+  align?:
     | { top: "top" }
     | { top: "top"; right: "left" }
     | { top: "top"; right: "right" }

@@ -6,7 +6,7 @@ export interface DropProps extends FlexProps, AlignProps, StretchProps {
   backdropProps?: any
   canHideTarget?: boolean
   children: any
-  hideShadow: boolean
+  hideShadow?: boolean
   onClickOutside?: Function
   onEsc?: Function
   target: object
