@@ -4,23 +4,48 @@ import BulkAction from "./bulkAction"
 import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is used only for the dropdown for column visibility
 
 const ActionWithDropdown = ({
+  alwaysEnabled,
+  columnPinning = {},
+  enableColumnPinning,
+  handleAction,
   id,
   icon,
-  handleAction,
-  tooltipText,
-  alwaysEnabled,
   isDisabled,
+  isOpen,
   isVisible,
-  testPrefix,
+  onClose,
   selectedRows,
   table,
-  isOpen,
-  onClose,
+  testPrefix,
+  tooltipText,
   ...rest
 }) => {
   const actionRef = useRef()
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
   const visible = typeof isVisible === "function" ? isVisible() : isVisible
+
+  const allColumns = table.getAllLeafColumns()
+  const allPinnedColumns = enableColumnPinning
+    ? [...(columnPinning?.left || []), ...(columnPinning?.right || [])]
+    : []
+  const { columns, pinnedColumns } = enableColumnPinning
+    ? allColumns.reduce(
+        (accumulator, column) => {
+          if (!column.getCanHide()) return accumulator
+
+          let key = "columns"
+          if (allPinnedColumns.includes(column.id)) {
+            key = "pinnedColumns"
+          }
+
+          return {
+            ...accumulator,
+            [key]: [...accumulator[key], column],
+          }
+        },
+        { columns: [], pinnedColumns: [] }
+      )
+    : { columns: allColumns, pinnedColumns: [] }
 
   return (
     <>
@@ -38,10 +63,11 @@ const ActionWithDropdown = ({
         {...rest}
       />
       <ColumnsMenu
-        parentRef={actionRef}
+        columns={columns}
         isOpen={isOpen}
-        columns={table.getAllLeafColumns()}
         onClose={onClose}
+        parentRef={actionRef}
+        pinnedColumns={pinnedColumns}
       />
     </>
   )

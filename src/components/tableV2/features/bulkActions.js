@@ -27,9 +27,11 @@ export const supportedBulkActions = {
 //TODO THIS NEEDS TO BE REFACTORED NOW IS WORKING ONLY FOR COLUMN VISIBILITY
 const renderActionWithDropdown = ({
   actions,
+  columnPinning,
+  enableColumnPinning,
+  selectedRows,
   table,
   testPrefix,
-  selectedRows,
   isOpen,
   onClose,
 }) => {
@@ -38,18 +40,20 @@ const renderActionWithDropdown = ({
     ({ id, icon, handleAction, tooltipText, alwaysEnabled, isDisabled, isVisible, ...rest }) => {
       return (
         <ActionWithDropdown
-          key={id}
-          isVisible={isVisible}
           alwaysEnabled={alwaysEnabled}
-          isDisabled={isDisabled}
-          tooltipText={tooltipText}
-          icon={icon}
+          columnPinning={columnPinning}
+          enableColumnPinning={enableColumnPinning}
           handleAction={handleAction}
-          table={table}
-          testPrefix={testPrefix}
-          selectedRows={selectedRows}
+          icon={icon}
+          isDisabled={isDisabled}
           isOpen={isOpen}
+          isVisible={isVisible}
+          key={id}
           onClose={onClose}
+          selectedRows={selectedRows}
+          table={table}
+          tooltipText={tooltipText}
+          testPrefix={testPrefix}
           {...rest}
         />
       )
@@ -67,18 +71,22 @@ const makeColumnVisibilityAction = ({ handleAction, visible }) => ({
 
 const makeBulkActions = ({
   bulkActions,
+  columnPinning,
+  columnVisibilityOptions,
+  enableColumnPinning,
+  selectedRows,
   table,
   testPrefix,
-  selectedRows,
-  columnVisibilityOptions,
 }) => {
   const columnVisibility = makeColumnVisibilityAction({ ...columnVisibilityOptions })
   const actionsWithDropdown = renderActionWithDropdown({
     actions: [columnVisibility],
-    ...columnVisibilityOptions,
-    testPrefix,
-    table,
+    columnPinning,
+    enableColumnPinning,
     selectedRows,
+    table,
+    testPrefix,
+    ...columnVisibilityOptions,
   })
 
   const availableBulkActions = Object.keys({ ...bulkActions }).reduce((acc, currentActionKey) => {
