@@ -9,7 +9,7 @@ const appColors = {
   tabsBorder: rawColors.neutral.ratsbane,
   disabled: rawColors.neutral.tuna,
   disabledBackground: rawColors.neutral.outerSpace,
-  dropdown: rawColors.neutral.ratsbane,
+  dropdown: rawColors.neutral.arsenic,
   elementBackground: rawColors.neutral.outerSpace,
   elementBackgroundHover: rawColors.neutral.tuna,
   mainBackground: rawColors.neutral.gunmetal,
