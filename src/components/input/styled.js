@@ -50,18 +50,17 @@ export const StyledLabel = styled.label`
   display: block;
   ${disabledCursorSupport};
 `
-export const LabelRow = styled.div`
-  width: 100%;
-  height: 40px;
-  flex-shrink: 0;
-  flex-grow: 0;
+export const LabelRow = styled(Flex).attrs({
+  alignItems: "center",
+  color: "text",
+  flex: false,
+  width: "100%",
+})`
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
   line-height: 18px;
-  color: ${getColor("text")};
-  display: flex;
-  align-items: center;
+  margin-bottom: 4px;
 `
 
 export const InputContainer = styled(Flex)`
