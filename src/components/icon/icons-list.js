@@ -88,6 +88,7 @@ import feed from "./assets/feed.svg"
 import filterList from "./assets/filterList.svg"
 import forcePlay from "./assets/force_play.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
+import functions from "./assets/functions.svg"
 import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import goToNode from "./assets/go_to_node.svg"
@@ -384,6 +385,7 @@ export const iconsList = {
   firewallSolid,
   forcePlay,
   forcePlayOutline,
+  functions,
   gear,
   github,
   google,
