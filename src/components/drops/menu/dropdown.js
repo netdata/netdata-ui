@@ -19,6 +19,7 @@ const Dropdown = ({
   renderItem,
   value,
   hasSearch,
+  searchMargin = [4],
   ...rest
 }) => {
   const [searchParams, setSearchParams] = useState("")
@@ -50,7 +51,7 @@ const Dropdown = ({
       {...rest}
     >
       {hasSearch && (
-        <Box margin={[4]}>
+        <Box margin={searchMargin}>
           <Search
             data-testid={"dropdown-search"}
             defaultValue={searchParams}

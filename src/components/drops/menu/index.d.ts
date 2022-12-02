@@ -44,6 +44,8 @@ export interface MenuProps {
 
 declare const Menu: FC<MenuProps & JSX.IntrinsicElements["div"]>
 
-export { Menu }
+declare const MenuDropdown: FC<MenuProps & JSX.IntrinsicElements["div"]>
+
+export { Menu, MenuDropdown }
 
 export default Menu
