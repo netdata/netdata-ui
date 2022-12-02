@@ -15,8 +15,8 @@ export const CheckboxContainer = styled(Box).attrs({
 `
 
 export const StyledIcon = styled(Icon).attrs({
-  height: "inherit",
-  width: "inherit",
+  height: "16px",
+  width: "16px",
 })`
   flex-grow: 0;
   flex-shrink: 0;
