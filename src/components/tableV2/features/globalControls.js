@@ -19,7 +19,7 @@ const StyledTableControls = styled(Flex)`
 `
 
 const GlobalControls = memo(
-  ({ handleSearch, dataGa, searchPlaceholder = "Search", bulkActions }) => {
+  ({ bulkActions, dataGa, handleSearch, searchPlaceholder = "Search", searchValue }) => {
     return (
       <StyledTableControls>
         {handleSearch && (
@@ -27,12 +27,13 @@ const GlobalControls = memo(
             <SearchInput
               data-testid="table-global-search-filter"
               data-ga={`${dataGa}::search::table-filter`}
+              defaultValue={searchValue}
+              iconRight={<Icon name="magnify" color="textLite" />}
               onChange={debounce(300, e => {
                 e.persist()
                 handleSearch(e.target.value)
               })}
               placeholder={searchPlaceholder}
-              iconRight={<Icon name="magnify" color="textLite" />}
             />
           </Box>
         )}

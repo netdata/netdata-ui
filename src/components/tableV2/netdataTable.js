@@ -1,4 +1,4 @@
-//TODO refactor bulk action and row action to single funtion to decrease repeatabillity
+//TODO refactor bulk action and row action to single function to decrease repeatability
 import React, { useEffect, useMemo, useState, useCallback, useRef } from "react"
 
 import {
@@ -30,35 +30,37 @@ import useInfiniteScroll from "./hooks/useInfiniteScroll"
 const noop = () => {}
 
 const NetdataTable = ({
-  dataColumns,
-  data,
-  onRowSelected,
-  onGlobalSearchChange,
-  enableSelection,
-  globalFilterFn = includesString,
-  tableRef,
-  enableSorting,
-  rowActions = {},
   bulkActions = {},
-  onClickRow,
-  onHoverRow,
-  onSortingChange = noop,
+  columnPinningOptions = {},
+  columnVisibility: initialColumnVisibility,
+  data,
+  dataColumns,
+  dataGa,
   disableClickRow,
+  enableColumnPinning = false,
+  enableColumnVisibility = false,
   enablePagination,
+  enableResize = false,
+  enableSelection,
+  enableSorting,
+  globalFilter: initialGlobalFilter = "",
+  globalFilterFn = includesString,
+  loadMoreOptions = {},
+  onClickRow,
+  onColumnVisibilityChange = noop,
+  onGlobalSearchChange,
+  onHoverRow,
+  onRowSelected,
+  onSortingChange = noop,
   paginationOptions = {
     pageIndex: 0,
     pageSize: 100,
   },
-  columnVisibility: initialColumnVisibility,
-  testPrefix = "",
+  rowActions = {},
   sortBy = [],
+  tableRef,
+  testPrefix = "",
   testPrefixCallback,
-  dataGa,
-  enableColumnVisibility = false,
-  enableColumnPinning = false,
-  columnPinningOptions = {},
-  enableResize = false,
-  loadMoreOptions = {},
   virtualizeOptions = {},
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
@@ -68,7 +70,7 @@ const NetdataTable = ({
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
   const [rowSelection, setRowSelection] = useState({})
-  const [globalFilter, setGlobalFilter] = useState("")
+  const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
   const [pagination, setPagination] = useState({
     pageIndex: paginationOptions.pageIndex,
     pageSize: paginationOptions.pageSize,
@@ -83,9 +85,19 @@ const NetdataTable = ({
 
   useInfiniteScroll({ target: scrollParentRef, updateTableData, ...loadMoreOptions })
 
+  const handleColumnVisibilityChange = useCallback(getVisibility => {
+    onColumnVisibilityChange(getVisibility)
+    setColumnVisibility(getVisibility)
+  }, [])
+
   const handleGlobalSearch = useCallback(value => {
     onGlobalSearchChange?.(value)
     setGlobalFilter(String(value))
+  }, [])
+
+  const handleSortingChange = useCallback(getSorting => {
+    onSortingChange(getSorting)
+    setSorting(getSorting)
   }, [])
 
   const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
@@ -133,7 +145,7 @@ const NetdataTable = ({
         },
         index
       ) => {
-        if (!id) throw new Error(`Please provide id  at ${index}`)
+        if (!id) throw new Error(`Please provide id at ${index}`)
 
         return {
           id,
@@ -180,14 +192,11 @@ const NetdataTable = ({
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: handleGlobalSearch,
-    onSortingChange: getSorting => {
-      onSortingChange(getSorting)
-      setSorting(getSorting)
-    },
+    onSortingChange: handleSortingChange,
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
-    onColumnVisibilityChange: setColumnVisibility,
+    onColumnVisibilityChange: handleColumnVisibilityChange,
     onColumnPinningChange: setColumnPinning,
   })
 
@@ -212,9 +221,10 @@ const NetdataTable = ({
     <SharedTableProvider>
       <Flex height="100%" overflow="hidden" width="100%" column>
         <GlobalControls
-          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-          dataGa={dataGa}
           bulkActions={renderBulkActions}
+          dataGa={dataGa}
+          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+          searchValue={globalFilter}
         />
         <Flex
           ref={scrollParentRef}
