@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useCallback, useMemo, useState, useRef } from "react"
 import styled from "styled-components"
+import { useVirtualizer } from "@tanstack/react-virtual"
 import Flex from "src/components/templates/flex"
 import Search from "src/components/search"
 import { Box } from "src/index"
@@ -20,9 +21,11 @@ const Dropdown = ({
   value,
   hasSearch,
   searchMargin = [4],
+  gap = 0,
   ...rest
 }) => {
   const [searchParams, setSearchParams] = useState("")
+
   const filteredItems = useMemo(() => {
     if (!searchParams) return items
     const searchLowerCase = searchParams.toLowerCase()
@@ -32,12 +35,26 @@ const Dropdown = ({
       return false
     })
   }, [items, searchParams])
+
   const handleSearch = useCallback(
     event => {
       setSearchParams(event.target.value)
     },
     [setSearchParams]
   )
+
+  const ref = useRef()
+  const measuresRef = useRef({})
+
+  const rowVirtualizer = useVirtualizer({
+    count: filteredItems.length,
+    getScrollElement: () => ref.current,
+    scrollOffsetFn: event => (event ? event.target.scrollTop - ref.current.offsetTop : 0),
+    overscan: 3,
+    enableSmoothScroll: false,
+    estimateSize: () => 30,
+  })
+
   return (
     <Container
       as="ul"
@@ -61,7 +78,47 @@ const Dropdown = ({
           />
         </Box>
       )}
-      {filteredItems.map(item => renderItem({ item, itemProps, value, onItemClick }))}
+      <div
+        ref={ref}
+        style={{
+          minHeight: "100%",
+          width: "100%",
+          overflow: "auto",
+        }}
+      >
+        <div
+          style={{
+            minHeight: `${rowVirtualizer.getTotalSize()}px`,
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {rowVirtualizer.getVirtualItems().map(virtualRow => (
+            <div
+              key={virtualRow.key}
+              data-index={virtualRow.index}
+              ref={rowVirtualizer.measureElement}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualRow.start}px)`,
+                padding: gap * 2,
+                overflow: "hidden",
+              }}
+            >
+              {renderItem({
+                item: filteredItems[virtualRow.index],
+                index: virtualRow.index,
+                itemProps,
+                value,
+                onItemClick,
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
     </Container>
   )
 }

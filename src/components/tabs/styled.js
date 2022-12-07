@@ -15,7 +15,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   justifyContent: "start",
   alignItems: "center",
   padding: [0, 0.5],
-  flex: true,
+  flex: false,
   ...props,
 }))`
   border-bottom: 1px solid

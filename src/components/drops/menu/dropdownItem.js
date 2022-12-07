@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useLayoutEffect, useRef } from "react"
 import styled from "styled-components"
 import { getColor } from "src/theme"
 import Flex from "src/components/templates/flex"
@@ -23,6 +23,9 @@ const DropdownItem = ({
   item: { value, label, icon, reverse, disabled, onClick, ...restItem },
   value: selectedValue,
   onItemClick,
+  index,
+  measureElement,
+  style,
   ...rest
 }) => {
   const selected = selectedValue === value
@@ -34,11 +37,14 @@ const DropdownItem = ({
 
   return (
     <ItemContainer
+      ref={measureElement}
+      data-index={index}
       aria-selected={selected}
       disabled={disabled || selected}
       onClick={onSelect}
       {...restItem}
       {...rest}
+      style={style}
     >
       {reverse && <Text>{label}</Text>}
       {icon}

@@ -10,10 +10,7 @@ import DropdownItem from "./dropdownItem"
 
 const defaultRenderDropdown = props => <Dropdown {...props} />
 
-const defaultRenderItem = props => {
-  const key = props.item.value || props.item.label
-  return <DropdownItem key={key} {...props} />
-}
+const defaultRenderItem = props => <DropdownItem {...props} />
 
 const Menu = forwardRef(
   (
