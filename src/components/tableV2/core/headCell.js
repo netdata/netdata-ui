@@ -49,6 +49,7 @@ const makeHeadCell = ({
     const { getCanSort, columnDef, getCanResize, getIsResizing } = column
     const { meta } = columnDef
     const headStyles = {
+      verticalAlign: "baseline",
       ...(meta?.headStyles || {}),
       ...pinnedStyles,
     }
