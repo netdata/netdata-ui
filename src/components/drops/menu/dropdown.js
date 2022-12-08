@@ -24,7 +24,6 @@ const Dropdown = ({
   hasSearch,
   searchMargin = [4],
   gap = 0,
-  width = "300px",
   estimateSize = defaultEstimateSize,
   close,
   ...rest
@@ -69,6 +68,7 @@ const Dropdown = ({
       margin={[1, 0]}
       column
       tabindex="-1"
+      width="auto"
       {...rest}
     >
       {hasSearch && (
@@ -87,7 +87,6 @@ const Dropdown = ({
         style={{
           height: "100%",
           overflow: "auto",
-          width,
         }}
       >
         <div
