@@ -17,11 +17,12 @@ const Dropdown = ({
   itemProps,
   items,
   onItemClick,
-  renderItem,
+  Item,
   value,
   hasSearch,
   searchMargin = [4],
   gap = 0,
+  close,
   ...rest
 }) => {
   const [searchParams, setSearchParams] = useState("")
@@ -44,7 +45,6 @@ const Dropdown = ({
   )
 
   const ref = useRef()
-  const measuresRef = useRef({})
 
   const rowVirtualizer = useVirtualizer({
     count: filteredItems.length,
@@ -84,6 +84,7 @@ const Dropdown = ({
           minHeight: "100%",
           width: "100%",
           overflow: "auto",
+          minWidth: "300px",
         }}
       >
         <div
@@ -93,30 +94,32 @@ const Dropdown = ({
             position: "relative",
           }}
         >
-          {rowVirtualizer.getVirtualItems().map(virtualRow => (
-            <div
-              key={virtualRow.key}
-              data-index={virtualRow.index}
-              ref={rowVirtualizer.measureElement}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                transform: `translateY(${virtualRow.start}px)`,
-                padding: gap * 2,
-                overflow: "hidden",
-              }}
-            >
-              {renderItem({
-                item: filteredItems[virtualRow.index],
-                index: virtualRow.index,
-                itemProps,
-                value,
-                onItemClick,
-              })}
-            </div>
-          ))}
+          {ref.current?.isConnected &&
+            rowVirtualizer.getVirtualItems().map(virtualRow => (
+              <div
+                key={virtualRow.key}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  transform: `translateY(${virtualRow.start}px)`,
+                  padding: gap * 2,
+                  overflow: "hidden",
+                }}
+                data-index={virtualRow.index}
+                ref={rowVirtualizer.measureElement}
+              >
+                <Item
+                  item={filteredItems[virtualRow.index]}
+                  index={virtualRow.index}
+                  itemProps={itemProps}
+                  value={value}
+                  onItemClick={onItemClick}
+                  close={close}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </Container>

@@ -53,17 +53,12 @@ story.add(
   subData
 )
 
+const ItemButton = ({ item, onItemClick }) => (
+  <Button key={item.value} label={item.label} onClick={onItemClick} />
+)
 story.add(
   "Render item",
-  () => (
-    <Simple
-      onOpen={action("open")}
-      onClose={action("close")}
-      renderItem={({ item, onItemClick }) => (
-        <Button key={item.value} label={item.label} onClick={onItemClick} />
-      )}
-    />
-  ),
+  () => <Simple onOpen={action("open")} onClose={action("close")} Item={ItemButton} />,
   subData
 )
 
@@ -71,7 +66,7 @@ story.add(
   "Render dropdown",
   () => (
     <Simple
-      renderDropdown={({ value, onItemClick, items, renderItem }) => (
+      Dropdown={({ value, onItemClick, items, Item }) => (
         <Flex background="mainBackgroundDisabled" padding={[2]}>
           Characters are: {items.map(({ value }) => value).join(", ")}
         </Flex>

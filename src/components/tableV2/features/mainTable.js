@@ -16,6 +16,7 @@ const MainTable = ({
   onHoverRow,
   enableResize,
   scrollParentRef,
+  ...rest
 }) => {
   const headers = enableColumnPinning ? table.getCenterFlatHeaders() : table.getFlatHeaders()
 
@@ -36,6 +37,7 @@ const MainTable = ({
       disableClickRow={disableClickRow}
       flexRender={flexRender}
       tableRef={tableRef}
+      {...rest}
     />
   )
 }

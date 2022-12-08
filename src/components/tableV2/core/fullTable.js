@@ -22,6 +22,7 @@ const FullTable = ({
   width,
   scrollParentRef,
   virtualizeOptions = {},
+  ...rest
 }) => {
   return (
     <Table
@@ -30,6 +31,7 @@ const FullTable = ({
       ref={tableRef}
       testPrefix={testPrefix}
       width={width}
+      {...rest}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>

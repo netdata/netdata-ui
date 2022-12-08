@@ -18,12 +18,12 @@ interface MenuProps {
   children?: any
   dropProps?: DropProps
   items?: Item[]
-  renderItem?: RenderItemType
-  renderDropdown?: (props: {
+  Item?: RenderItemType
+  Dropdown?: (props: {
     items: Item[]
     value: string | number
     onItemClick: Function
-    renderItem: RenderItemType
+    Item: RenderItemType
   }) => JSX.Element
 
   [key: string]: any

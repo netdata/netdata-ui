@@ -30,7 +30,7 @@ import useInfiniteScroll from "./hooks/useInfiniteScroll"
 const noop = () => {}
 
 const NetdataTable = ({
-  bulkActions = {},
+  bulkActions,
   columnPinningOptions = {},
   columnVisibility: initialColumnVisibility,
   data,
@@ -62,6 +62,7 @@ const NetdataTable = ({
   testPrefix = "",
   testPrefixCallback,
   virtualizeOptions = {},
+  ...rest
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
@@ -102,22 +103,25 @@ const NetdataTable = ({
 
   const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
 
-  const renderBulkActions = () => [
-    makeBulkActions({
-      bulkActions,
-      columnPinning,
-      columnVisibilityOptions: {
-        handleAction: () => setIsColumnDropdownVisible(true),
-        isOpen: isColumnDropdownVisible,
-        onClose: () => setIsColumnDropdownVisible(false),
-        visible: enableColumnVisibility,
-      },
-      enableColumnPinning,
-      selectedRows: originalSelectedRows,
-      table,
-      testPrefix,
-    }),
-  ]
+  const renderBulkActions = () =>
+    bulkActions
+      ? [
+          makeBulkActions({
+            bulkActions,
+            columnPinning,
+            columnVisibilityOptions: {
+              handleAction: () => setIsColumnDropdownVisible(true),
+              isOpen: isColumnDropdownVisible,
+              onClose: () => setIsColumnDropdownVisible(false),
+              visible: enableColumnVisibility,
+            },
+            enableColumnPinning,
+            selectedRows: originalSelectedRows,
+            table,
+            testPrefix,
+          }),
+        ]
+      : null
 
   const makeSelectionColumn = enableSelection ? [makeRowSelection({ testPrefix })] : []
 
@@ -220,12 +224,14 @@ const NetdataTable = ({
   return (
     <SharedTableProvider>
       <Flex height="100%" overflow="hidden" width="100%" column>
-        <GlobalControls
-          bulkActions={renderBulkActions}
-          dataGa={dataGa}
-          handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-          searchValue={globalFilter}
-        />
+        {onGlobalSearchChange || bulkActions ? (
+          <GlobalControls
+            bulkActions={renderBulkActions}
+            dataGa={dataGa}
+            handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
+            searchValue={globalFilter}
+          />
+        ) : null}
         <Flex
           ref={scrollParentRef}
           overflow={{ vertical: "auto", horizontal: "auto" }}
@@ -264,6 +270,7 @@ const NetdataTable = ({
             flexRender={flexRender}
             onHoverRow={onHoverRow}
             virtualizeOptions={virtualizeOptions}
+            {...rest}
           />
         </Flex>
         {enablePagination && makePagination({ table })}

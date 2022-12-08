@@ -5,12 +5,8 @@ import getAncestors from "src/components/drops/mixins/getAncestors"
 import useForwardRef from "src/hooks/use-forward-ref"
 import useToggle from "src/hooks/use-toggle"
 import MenuButton from "./menuButton"
-import Dropdown from "./dropdown"
+import DefaultDropdown from "./dropdown"
 import DropdownItem from "./dropdownItem"
-
-const defaultRenderDropdown = props => <Dropdown {...props} />
-
-const defaultRenderItem = props => <DropdownItem {...props} />
 
 const Menu = forwardRef(
   (
@@ -29,8 +25,8 @@ const Menu = forwardRef(
       dropdownProps,
       itemProps,
       items,
-      renderItem = defaultRenderItem,
-      renderDropdown = defaultRenderDropdown,
+      Item = DropdownItem,
+      Dropdown = DefaultDropdown,
       animation,
       hasSearch = false,
       ...rest
@@ -100,15 +96,16 @@ const Menu = forwardRef(
             target={ref.current}
             {...dropProps}
           >
-            {renderDropdown({
-              value,
-              onItemClick,
-              items,
-              itemProps,
-              renderItem,
-              hasSearch,
-              ...dropdownProps,
-            })}
+            <Dropdown
+              value={value}
+              onItemClick={onItemClick}
+              items={items}
+              itemProps={itemProps}
+              Item={Item}
+              hasSearch={hasSearch}
+              close={close}
+              {...dropdownProps}
+            />
           </Drop>
         )}
       </Fragment>
