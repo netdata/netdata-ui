@@ -75,8 +75,7 @@ const Menu = forwardRef(
 
     return (
       <Fragment>
-        {clonedChildren}
-        {!clonedChildren && (
+        {clonedChildren || (
           <MenuButton
             ref={setRef}
             icon={icon}

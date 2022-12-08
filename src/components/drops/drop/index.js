@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from "react"
+import React, { forwardRef, useLayoutEffect } from "react"
 import ReactDOM from "react-dom"
 import useDropElement from "src/hooks/use-drop-element"
 import useKeyboardEsc from "src/hooks/use-keyboard-esc"
@@ -48,9 +48,8 @@ const Drop = forwardRef(
       keepHorizontal
     )
 
-    useEffect(() => {
-      const id = requestAnimationFrame(updatePosition)
-      return () => cancelAnimationFrame(id)
+    useLayoutEffect(() => {
+      updatePosition()
     }, [updatePosition])
 
     useDimensionChange(target, updatePosition)

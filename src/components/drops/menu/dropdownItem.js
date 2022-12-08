@@ -1,13 +1,13 @@
-import React, { useLayoutEffect, useRef } from "react"
+import React from "react"
 import styled from "styled-components"
 import { getColor } from "src/theme"
 import Flex from "src/components/templates/flex"
-import { Text } from "src/components/typography"
+import { TextSmall } from "src/components/typography"
 
 export const ItemContainer = styled(Flex).attrs({
   as: "li",
   role: "option",
-  padding: [2, 4],
+  padding: [1, 4],
 })`
   cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
@@ -24,7 +24,6 @@ const DropdownItem = ({
   value: selectedValue,
   onItemClick,
   index,
-  measureElement,
   style,
   ...rest
 }) => {
@@ -37,7 +36,6 @@ const DropdownItem = ({
 
   return (
     <ItemContainer
-      ref={measureElement}
       data-index={index}
       aria-selected={selected}
       disabled={disabled || selected}
@@ -46,9 +44,9 @@ const DropdownItem = ({
       {...rest}
       style={style}
     >
-      {reverse && <Text>{label}</Text>}
+      {reverse && <TextSmall>{label}</TextSmall>}
       {icon}
-      {!reverse && <Text>{label}</Text>}
+      {!reverse && <TextSmall>{label}</TextSmall>}
     </ItemContainer>
   )
 }

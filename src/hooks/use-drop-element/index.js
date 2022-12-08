@@ -1,10 +1,13 @@
-import { useEffect, useMemo } from "react"
+import { useLayoutEffect, useMemo } from "react"
 
 export default () => {
-  const el = useMemo(() => document.createElement("div"), [])
+  const el = useMemo(() => {
+    const div = document.createElement("div")
+    document.body.append(div)
+    return div
+  }, [])
 
-  useEffect(() => {
-    document.body.append(el)
+  useLayoutEffect(() => {
     return () => document.body.removeChild(el)
   }, [])
 
