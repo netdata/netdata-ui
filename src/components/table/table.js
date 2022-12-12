@@ -85,6 +85,7 @@ export function Table({
   autoResetFilters = false,
   autoResetExpanded = false,
   withPagination = false,
+  showTotalPages = false,
   controlledState = {},
   renderGroupHead,
   initialState = {},
@@ -103,10 +104,10 @@ export function Table({
   ...customProps
 }) {
   // preserve column order to override default grouping behaviour
-  const columnOrder = useMemo(() => controlledState.columnOrder || columns.map(({ id }) => id), [
-    columns,
-    controlledState.columnOrder,
-  ])
+  const columnOrder = useMemo(
+    () => controlledState.columnOrder || columns.map(({ id }) => id),
+    [columns, controlledState.columnOrder]
+  )
 
   const reactTableHooks = layoutType === "block" ? blockTableHooks : tableHooks
 
@@ -182,11 +183,10 @@ export function Table({
     return rows
   }, [groupBy, groupsOrderSettings, rows])
 
-  const tableRows = useMemo(() => (withPagination ? page : orderedRows), [
-    withPagination,
-    page,
-    orderedRows,
-  ])
+  const tableRows = useMemo(
+    () => (withPagination ? page : orderedRows),
+    [withPagination, page, orderedRows]
+  )
 
   const showPagination = withPagination && pageCount > 1
   const goToPreviousPage = useCallback(() => {
@@ -263,7 +263,10 @@ export function Table({
           disabled={!canPreviousPage}
           onClick={goToPreviousPage}
         />
-        <Text color="textDescription">{pageIndex + 1}</Text>
+        <Text color="textDescription">
+          {pageIndex + 1}
+          {showTotalPages && ` / ${pageCount}`}
+        </Text>
         <Icon
           name="chevron_left"
           color="text"
