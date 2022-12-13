@@ -66,7 +66,7 @@ const NetdataTable = ({
 }) => {
   const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
-  const [columnPinning, setColumnPinning] = React.useState(columnPinningOptions)
+  const [columnPinning, setColumnPinning] = useState(columnPinningOptions)
 
   const [originalSelectedRows, setOriginalSelectedRow] = useState([])
   const [sorting, setSorting] = useState(sortBy)
@@ -103,8 +103,10 @@ const NetdataTable = ({
 
   const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
 
+  const hasBulkActions = enableColumnPinning || enableColumnVisibility || bulkActions
+
   const renderBulkActions = () =>
-    bulkActions
+    hasBulkActions
       ? [
           makeBulkActions({
             bulkActions,
@@ -224,7 +226,7 @@ const NetdataTable = ({
   return (
     <SharedTableProvider>
       <Flex height="100%" overflow="hidden" width="100%" column>
-        {onGlobalSearchChange || bulkActions ? (
+        {onGlobalSearchChange || hasBulkActions ? (
           <GlobalControls
             bulkActions={renderBulkActions}
             dataGa={dataGa}
