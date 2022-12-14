@@ -25,7 +25,7 @@ const StyledHeaderRow = styled.tr`
 `
 const StyledHeaderCell = styled(Box)`
   position: relative;
-  padding: 12px;
+  padding: 4px 8px;
   border-bottom: 1px solid ${getColor("borderSecondary")};
   &:not(:last-child) {
     border-right: 1px solid ${getColor("borderSecondary")};
@@ -133,7 +133,7 @@ Table.HeadCell = forwardRef(
       sx={{
         textAlign: align,
         fontSize: "14px",
-        height: "90px",
+        height: "60px",
         position: "sticky",
         top: 0,
         ...styles,
@@ -271,7 +271,7 @@ Table.Cell = forwardRef(
       <Box
         as="td"
         onClick={handleClick}
-        padding={[3]}
+        padding={[1, 2]}
         ref={ref}
         sx={{
           textAlign: align,
