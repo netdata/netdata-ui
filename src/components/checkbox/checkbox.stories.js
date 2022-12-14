@@ -7,7 +7,7 @@ import { getGutterHeight } from "src/theme/utils"
 import { readmeCleanup } from "utils/readme"
 import readme from "./README.md"
 
-const checkBoxStory = storiesOf("COMPONENTS|Controls/Checkbox", module)
+const checkBoxStory = storiesOf("Input/Checkbox", module)
 
 const position = ["left", "right"]
 
@@ -22,7 +22,7 @@ checkBoxStory.add(
   "Controlled Checkbox",
   () => {
     const [checked, setChecked] = useState(false)
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = e => {
       setChecked(e.currentTarget.checked)
     }
     return (
@@ -36,7 +36,7 @@ checkBoxStory.add(
   "Labeled Checkbox",
   () => {
     const [checked, setChecked] = useState(false)
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = e => {
       setChecked(e.currentTarget.checked)
     }
     return (
@@ -55,7 +55,7 @@ checkBoxStory.add(
   "Disabled Checkobox",
   () => {
     const [checked, setChecked] = useState(false)
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = e => {
       setChecked(e.currentTarget.checked)
     }
     return (

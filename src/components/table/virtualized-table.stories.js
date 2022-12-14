@@ -18,7 +18,7 @@ const subData = {
   },
   jest: ["table.test.tsx"],
 }
-const virtualizedTableStory = storiesOf("COMPONENTS|Controls/VirtualizedTable", module)
+const virtualizedTableStory = storiesOf("Table/OldVirtualizedTable", module)
 
 const sampleNode = {
   node: { name: "Happiness" },

@@ -10,7 +10,7 @@ import { getColor } from "../../theme"
 import { iconsList } from "./icons-list"
 import { Icon } from "."
 
-const iconListStory = storiesOf("COMPONENTS|Icons", module)
+const iconListStory = storiesOf("Icons/List", module)
 
 const iconsExposed = Object.keys(iconsList)
 

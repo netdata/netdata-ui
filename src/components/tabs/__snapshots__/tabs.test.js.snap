@@ -20,9 +20,9 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -70,6 +70,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 }
 
 .c4 {
+  white-space: nowrap;
   border-bottom: 4px solid #42B861;
   box-sizing: border-box;
   min-width: 80px;
@@ -91,6 +92,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 }
 
 .c5 {
+  white-space: nowrap;
   border-bottom: 4px solid rgba(255,255,255,0.0);
   box-sizing: border-box;
   min-width: 80px;

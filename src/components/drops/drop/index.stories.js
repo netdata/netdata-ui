@@ -6,7 +6,7 @@ import Flex from "src/components/templates/flex"
 import readme from "./README.md"
 import Drop from "./index"
 
-const story = storiesOf("COMPONENTS|Drops/Drop", module)
+const story = storiesOf("Drops/Drop", module)
 
 const subData = {
   readme: {

@@ -5,8 +5,7 @@ import Flex from "src/components/templates/flex"
 import Pill from "./index"
 import MasterCard from "./mastercard"
 
-
-const story = storiesOf("COMPONENTS|Pills")
+const story = storiesOf("Atoms/Pills")
 
 const Custom = () => (
   <Flex gap={4}>
@@ -31,16 +30,32 @@ const Pills = () => (
       <Pill flavour="neutral">Neutral</Pill>
     </Flex>
     <Flex gap={4}>
-      <Pill flavour="warning" size="small">Warning</Pill>
-      <Pill flavour="error" size="small">Error</Pill>
-      <Pill flavour="success" size="small">Success</Pill>
-      <Pill flavour="neutral" size="small">Neutral</Pill>
+      <Pill flavour="warning" size="small">
+        Warning
+      </Pill>
+      <Pill flavour="error" size="small">
+        Error
+      </Pill>
+      <Pill flavour="success" size="small">
+        Success
+      </Pill>
+      <Pill flavour="neutral" size="small">
+        Neutral
+      </Pill>
     </Flex>
     <Flex gap={4}>
-      <Pill flavour="warning" size="large">Warning</Pill>
-      <Pill flavour="error" size="large">Error</Pill>
-      <Pill flavour="success" size="large">Success</Pill>
-      <Pill flavour="neutral" size="large">Neutral</Pill>
+      <Pill flavour="warning" size="large">
+        Warning
+      </Pill>
+      <Pill flavour="error" size="large">
+        Error
+      </Pill>
+      <Pill flavour="success" size="large">
+        Success
+      </Pill>
+      <Pill flavour="neutral" size="large">
+        Neutral
+      </Pill>
     </Flex>
   </Flex>
 )
@@ -190,11 +205,18 @@ const PillsTiny = () => (
 const MasterCards = () => (
   <Flex column gap={4}>
     <Flex gap={2}>
-      <MasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} />
+      <MasterCard
+        pillLeft={{ flavour: "error", text: "3" }}
+        pillRight={{ flavour: "warning", text: "2" }}
+      />
       <MasterCard />
     </Flex>
     <Flex gap={2}>
-      <MasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} size="large" />
+      <MasterCard
+        pillLeft={{ flavour: "error", text: "3" }}
+        pillRight={{ flavour: "warning", text: "2" }}
+        size="large"
+      />
       <MasterCard size="large" />
     </Flex>
   </Flex>
@@ -203,11 +225,19 @@ const MasterCards = () => (
 const AlertMasterCards = () => (
   <Flex column gap={4}>
     <Flex gap={2}>
-      <AlertMasterCard onClick={() => console.log("test")} pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} />
+      <AlertMasterCard
+        onClick={() => console.log("test")}
+        pillLeft={{ flavour: "error", text: "3" }}
+        pillRight={{ flavour: "warning", text: "2" }}
+      />
       <AlertMasterCard />
     </Flex>
     <Flex gap={2}>
-      <AlertMasterCard pillLeft={{ flavour: "error", text: "3" }} pillRight={{ flavour: "warning", text: "2" }} size="large" />
+      <AlertMasterCard
+        pillLeft={{ flavour: "error", text: "3" }}
+        pillRight={{ flavour: "warning", text: "2" }}
+        size="large"
+      />
       <AlertMasterCard size="large" />
     </Flex>
   </Flex>

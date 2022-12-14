@@ -18,7 +18,7 @@ const subData = {
   },
   jest: ["table.test.tsx"],
 }
-const tableStory = storiesOf("COMPONENTS|Controls/Table", module)
+const tableStory = storiesOf("Table/OldTable", module)
 
 const initialState = [
   {

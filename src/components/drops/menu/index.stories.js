@@ -10,7 +10,7 @@ import { Icon } from "src/components/icon"
 import readme from "./README.md"
 import Menu from "./index"
 
-const story = storiesOf("COMPONENTS|Drops/Menu", module)
+const story = storiesOf("Drops/Menu", module)
 
 const subData = {
   readme: {

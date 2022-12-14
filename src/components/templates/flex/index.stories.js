@@ -6,7 +6,7 @@ import readme from "./README.md"
 
 import Flex from "./index"
 
-const flexStory = storiesOf("COMPONENTS|Templates/Flex", module)
+const flexStory = storiesOf("Templates/Flex", module)
 
 const subData = {
   readme: {

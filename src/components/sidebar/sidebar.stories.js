@@ -10,7 +10,7 @@ import { readmeCleanup } from "utils/readme"
 import { Button } from "src/components/button"
 import readme from "./README.md"
 
-const sidebarStory = storiesOf("COMPONENTS|Layout/Sidebar", module)
+const sidebarStory = storiesOf("Templates/Sidebar", module)
 
 const subData = {
   readme: {

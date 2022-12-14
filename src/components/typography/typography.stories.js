@@ -77,7 +77,7 @@ const controls = (
   </>
 )
 
-storiesOf("COMPONENTS|Utils", module)
+storiesOf("Typography", module)
   .add(
     "Typography",
     () => (

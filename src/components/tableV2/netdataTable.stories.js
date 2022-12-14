@@ -20,7 +20,7 @@ const colorFilter = {
   value: "",
 }
 
-const StoryTable = storiesOf("COMPONENTS|NetdaTable")
+const StoryTable = storiesOf("Table/Table")
 
 StoryTable.add("Base Table", () => {
   const [value, setValue] = useState()

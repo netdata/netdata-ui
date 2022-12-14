@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import Flex from "src/components/templates/flex"
 import Search from "src/components/search"
-import { Box } from "src/index"
+import { Box } from "src/components/templates/box"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) =>

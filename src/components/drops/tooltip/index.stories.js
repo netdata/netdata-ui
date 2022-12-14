@@ -7,7 +7,7 @@ import { Button } from "src/components/button"
 import readme from "./README.md"
 import Tooltip from "./index"
 
-const story = storiesOf("COMPONENTS|Drops/Tooltip", module)
+const story = storiesOf("Drops/Tooltip", module)
 
 const subData = {
   readme: {

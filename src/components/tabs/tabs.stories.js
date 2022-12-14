@@ -6,7 +6,7 @@ import { readmeCleanup } from "utils/readme"
 import { Tabs, Tab } from "."
 import readme from "./README.md"
 
-const tabsStory = storiesOf("COMPONENTS|Tabs", module)
+const tabsStory = storiesOf("Templates/Tabs", module)
 
 const subData = {
   readme: {

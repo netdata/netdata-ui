@@ -7,7 +7,7 @@ import { iconsList } from "./icons-list"
 import { Icon } from "."
 import readme from "./README.md"
 
-const iconStory = storiesOf("COMPONENTS|Utils/Icon", module)
+const iconStory = storiesOf("Icons/Icon", module)
 
 const subData = {
   readme: {

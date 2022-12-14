@@ -16,7 +16,7 @@ const subData = {
   jest: ["index.test.js"],
 }
 
-const story = storiesOf("COMPONENTS|Templates/Layer", module)
+const story = storiesOf("Templates/Layer", module)
 
 story.add(
   "Simple",

@@ -27,6 +27,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
 `
 
 export const StyledTab = styled(Flex)`
+  white-space: nowrap;
   border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid
     ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
@@ -50,6 +51,7 @@ export const StyledTab = styled(Flex)`
   }
 `
 export const StyledTabMenu = styled(Flex)`
+  white-space: nowrap;
   color: ${getColor("text")};
   padding: 4px 8px;
   background: ${({ active }) =>

@@ -5,7 +5,7 @@ import Modal, { ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseBut
 import Flex from "../templates/flex"
 import { Button } from "../button"
 
-const modalStory = storiesOf("COMPONENTS|Modal")
+const modalStory = storiesOf("Utils/Modal")
 
 modalStory.add("Modal", () => {
   return (

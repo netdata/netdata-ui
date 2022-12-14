@@ -5,7 +5,7 @@ import Flex from "src/components/templates/flex"
 import readme from "./README.md"
 import Intersection from "./index"
 
-const story = storiesOf("COMPONENTS|Intersection", module)
+const story = storiesOf("Utils/Intersection", module)
 
 const subData = {
   readme: {

@@ -12,7 +12,7 @@ const subData = {
   },
 }
 
-const flexStory = storiesOf("COMPONENTS|Templates/Box", module)
+const flexStory = storiesOf("Templates/Box", module)
 
 flexStory.add(
   "With Different positions",

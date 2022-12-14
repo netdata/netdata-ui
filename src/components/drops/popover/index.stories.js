@@ -8,7 +8,7 @@ import { Button } from "src/components/button"
 import readme from "./README.md"
 import Popover from "./index"
 
-const story = storiesOf("COMPONENTS|Drops/Popover", module)
+const story = storiesOf("Drops/Popover", module)
 
 const subData = {
   readme: {

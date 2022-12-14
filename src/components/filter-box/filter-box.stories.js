@@ -6,7 +6,7 @@ import { FilterBox, FilterBoxProcessing } from "."
 import { Text } from "src/components/typography"
 import readme from "./README.md"
 
-const filterBoxStory = storiesOf("COMPONENTS|Controls/Filter Box", module)
+const filterBoxStory = storiesOf("Input/Filter Box", module)
 
 const subData = {
   readme: {

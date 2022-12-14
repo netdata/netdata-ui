@@ -6,7 +6,7 @@ import readme from "./README.md"
 
 import RadioButton from "./index"
 
-const radioButtonStory = storiesOf("COMPONENTS|Controls/RadioButton", module)
+const radioButtonStory = storiesOf("Input/RadioButton", module)
 
 const subData = {
   readme: {
