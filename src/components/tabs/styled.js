@@ -16,15 +16,14 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   alignItems: "center",
   padding: [0, 0.5],
   flex: false,
+  border: props.noDefaultBorder && {
+    side: "bottom",
+    size: "1px",
+    type: "solid",
+    color: "borderSecondary",
+  },
   ...props,
-}))`
-  border-bottom: 1px solid
-    ${({ noDefaultBorder }) =>
-      noDefaultBorder ? getColor(["transparent", "full"]) : getColor("borderSecondary")};
-  box-sizing: border-box;
-
-  padding: 0 2px;
-`
+}))``
 
 export const StyledTab = styled(Flex)`
   white-space: nowrap;
