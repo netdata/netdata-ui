@@ -104,7 +104,17 @@ import incident_manager from "./assets/incident_manager.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
+import integrationDiscord from "./assets/integrations/discord.svg"
+import integrationDiscordColor from "./assets/integrations/discord_olor.svg"
+import integrationEmail from "./assets/integrations/email.svg"
+import integrationEmailColor from "./assets/integrations/email_color.svg"
+import integrationPagerduty from "./assets/integrations/pagerduty.svg"
+import integrationPagerdutyColor from "./assets/integrations/pagerduty_color.svg"
 import integrations from "./assets/integrations.svg"
+import integrationSlack from "./assets/integrations/slack.svg"
+import integrationSlackColor from "./assets/integrations/slack_color.svg"
+import integrationWebhook from "./assets/integrations/webhook.svg"
+import integrationWebhookColor from "./assets/integrations/webhook_color.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
@@ -114,6 +124,8 @@ import loading from "./assets/loading.svg"
 import magnify from "./assets/magnify.svg"
 import metrics from "./assets/metrics.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
+import mobilePushNotifications from "./assets/mobile_push_notifications.svg"
+import mobilePushNotificationsHollow from "./assets/mobile_push_notifications_hollow.svg"
 import monitoring from "./assets/monitoring.svg"
 import more from "./assets/more.svg"
 import navLeft from "./assets/nav_left.svg"
@@ -261,6 +273,7 @@ import space_new from "./assets/space_new.svg"
 import spaces_v2 from "./assets/spaces_v2.svg"
 import switch_off from "./assets/switch_off.svg"
 import system_overview from "./assets/system_overview.svg"
+import systemOverviewPress from "./assets/system_overview_press.svg"
 import text_add from "./assets/text_add.svg"
 import thumb_down from "./assets/thumb_down.svg"
 import thumb_up from "./assets/thumb_up.svg"
@@ -277,6 +290,7 @@ import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import upload from "./assets/upload.svg"
 import user from "./assets/user.svg"
+import userPress from "./assets/user_press.svg"
 import users from "./assets/users.svg"
 import view_list from "./assets/view_list.svg"
 import viewSingleNode from "./assets/views/single_node_view.svg"
@@ -402,7 +416,17 @@ export const iconsList = {
   information,
   informationPress,
   insights,
+  integrationDiscord,
+  integrationDiscordColor,
+  integrationEmail,
+  integrationEmailColor,
+  integrationPagerduty,
+  integrationPagerdutyColor,
   integrations,
+  integrationSlack,
+  integrationSlackColor,
+  integrationWebhook,
+  integrationWebhookColor,
   ipNetworking,
   ipNetworkingPress,
   last_week,
@@ -412,6 +436,8 @@ export const iconsList = {
   magnify,
   metrics,
   metrics_explorer,
+  mobilePushNotifications,
+  mobilePushNotificationsHollow,
   monitoring,
   more,
   navLeft,
@@ -562,6 +588,7 @@ export const iconsList = {
   spaces_v2,
   switch_off,
   system_overview,
+  systemOverviewPress,
   text_add,
   thumb_down,
   thumb_up,
@@ -578,6 +605,7 @@ export const iconsList = {
   update_pending,
   upload,
   user,
+  userPress,
   users,
   view_list,
   viewSingleNode,
