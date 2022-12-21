@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState, forwardRef } from "react"
+import React, { forwardRef, memo, useMemo, useRef, useState } from "react"
 import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import styled from "styled-components"
 import useForwardRef from "src/hooks/use-forward-ref"
@@ -18,7 +18,18 @@ const Animated = styled(Flex).attrs({
 `
 
 const Collapsible = forwardRef(
-  ({ open = false, duration = 150, children, direction, persist = false, ...rest }, parentRef) => {
+  (
+    {
+      open = false,
+      duration = 150,
+      children,
+      direction,
+      waitForAnimationToRender = false,
+      persist = false,
+      ...rest
+    },
+    parentRef
+  ) => {
     duration = process.env.NODE_ENV === "test" ? 0 : duration
 
     const [dimension, setDimension] = useState(open ? "initial" : 0)
@@ -50,10 +61,17 @@ const Collapsible = forwardRef(
       }
     }, [open])
 
-    const child = useMemo(
-      () => (animatedOpen || persist) && (typeof children === "function" ? children() : children),
-      [animatedOpen, persist, children]
-    )
+    const openHeightRef = useRef()
+    if (!openHeightRef.current && ref.current?.scrollHeight) {
+      openHeightRef.current = ref.current.scrollHeight
+    }
+    const child = useMemo(() => {
+      if (!animatedOpen && !persist) return
+      if (waitForAnimationToRender && dimension !== "initial" && openHeightRef.current) {
+        return <Flex height={openHeightRef.current / 4} flex="grow" />
+      }
+      return typeof children === "function" ? children() : children
+    }, [animatedOpen, persist, children, dimension, waitForAnimationToRender])
 
     return (
       <Animated
