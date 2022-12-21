@@ -105,16 +105,16 @@ import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
 import integrationDiscord from "./assets/integrations/discord.svg"
-import integrationDiscordColor from "./assets/integrations/discord_olor.svg"
+import integrationDiscordColored from "./assets/integrations/discord_colored.svg"
 import integrationEmail from "./assets/integrations/email.svg"
-import integrationEmailColor from "./assets/integrations/email_color.svg"
+import integrationEmailColored from "./assets/integrations/email_colored.svg"
 import integrationPagerduty from "./assets/integrations/pagerduty.svg"
-import integrationPagerdutyColor from "./assets/integrations/pagerduty_color.svg"
+import integrationPagerdutyColored from "./assets/integrations/pagerduty_colored.svg"
 import integrations from "./assets/integrations.svg"
 import integrationSlack from "./assets/integrations/slack.svg"
-import integrationSlackColor from "./assets/integrations/slack_color.svg"
+import integrationSlackColored from "./assets/integrations/slack_colored.svg"
 import integrationWebhook from "./assets/integrations/webhook.svg"
-import integrationWebhookColor from "./assets/integrations/webhook_color.svg"
+import integrationWebhookColored from "./assets/integrations/webhook_colored.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
@@ -153,25 +153,25 @@ import osAmazonLinux from "./assets/os/amazon_linux.svg"
 import osArchLinux from "./assets/os/arch_linux.svg"
 import osCelarOS from "./assets/os/celarOS.svg"
 import osCentos from "./assets/os/centos.svg"
-import osCentosColor from "./assets/os/centos_color.svg"
+import osCentosColored from "./assets/os/centos_colored.svg"
 import osCoreOS from "./assets/os/coreOS.svg"
 import osDebian from "./assets/os/debian.svg"
-import osDebianColor from "./assets/os/debian_color.svg"
+import osDebianColored from "./assets/os/debian_colored.svg"
 import osFedora from "./assets/os/fedora.svg"
 import osFreeBSD from "./assets/os/freeBSD.svg"
 import osGentoo from "./assets/os/gentoo.svg"
 import osLinux from "./assets/os/linux.svg"
-import osLinuxColor from "./assets/os/linux_color.svg"
+import osLinuxColored from "./assets/os/linux_colored.svg"
 import osLinuxManjaro from "./assets/os/linux_manjaro.svg"
 import osMacOSX from "./assets/os/macOSX.svg"
 import osOracle from "./assets/os/oracle.svg"
-import osOracleColor from "./assets/os/oracle_color.svg"
+import osOracleColored from "./assets/os/oracle_colored.svg"
 import osPress from "./assets/os/os_press.svg"
 import osRaspbian from "./assets/os/raspbian.svg"
 import osRedHat from "./assets/os/red_hat.svg"
 import osSuseLinux from "./assets/os/suse_linux.svg"
 import osUbuntu from "./assets/os/ubuntu.svg"
-import osUbuntuColor from "./assets/os/ubuntu_color.svg"
+import osUbuntuColored from "./assets/os/ubuntu_colored.svg"
 import notification from "./assets/notification.svg"
 import padlock from "./assets/padlock.svg"
 import pauseOutline from "./assets/pause_outline.svg"
@@ -417,16 +417,16 @@ export const iconsList = {
   informationPress,
   insights,
   integrationDiscord,
-  integrationDiscordColor,
+  integrationDiscordColored,
   integrationEmail,
-  integrationEmailColor,
+  integrationEmailColored,
   integrationPagerduty,
-  integrationPagerdutyColor,
+  integrationPagerdutyColored,
   integrations,
   integrationSlack,
-  integrationSlackColor,
+  integrationSlackColored,
   integrationWebhook,
-  integrationWebhookColor,
+  integrationWebhookColored,
   ipNetworking,
   ipNetworkingPress,
   last_week,
@@ -468,25 +468,25 @@ export const iconsList = {
   osArchLinux,
   osCelarOS,
   osCentos,
-  osCentosColor,
+  osCentosColored,
   osCoreOS,
   osDebian,
-  osDebianColor,
+  osDebianColored,
   osFedora,
   osFreeBSD,
   osGentoo,
   osLinux,
-  osLinuxColor,
+  osLinuxColored,
   osLinuxManjaro,
   osMacOSX,
   osOracle,
-  osOracleColor,
+  osOracleColored,
   osPress,
   osRaspbian,
   osRedHat,
   osSuseLinux,
   osUbuntu,
-  osUbuntuColor,
+  osUbuntuColored,
   padlock,
   pauseOutline,
   pauseSolid,

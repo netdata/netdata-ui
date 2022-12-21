@@ -67,7 +67,7 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
         background: disabled ? "mainBackgroundDisabled" : "mainBackground",
         alignItems: "center",
         round: true,
-        margin: [0, iconRight ? 0 : 2.5, 0, iconLeft ? 0 : 2.5],
+        margin: [0, iconRight ? 0 : 2, 0, iconLeft ? 0 : 2],
       }
     },
     [disabled]
