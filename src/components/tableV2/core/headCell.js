@@ -37,14 +37,7 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const makeHeadCell = ({
-  enableResize,
-  enableSorting,
-  headers,
-  pinnedStyles = {},
-  table,
-  testPrefix,
-}) =>
+const HeadCell = ({ enableResize, enableSorting, headers, pinnedStyles = {}, table, testPrefix }) =>
   headers.map(({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
     const { getCanSort, columnDef, getCanResize, getIsResizing } = column
     const { meta } = columnDef
@@ -121,4 +114,4 @@ const makeHeadCell = ({
     )
   })
 
-export default makeHeadCell
+export default HeadCell

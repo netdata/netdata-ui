@@ -12,7 +12,6 @@ const MainTable = ({
   testPrefixCallback,
   onClickRow,
   disableClickRow,
-  flexRender,
   onHoverRow,
   enableResize,
   scrollParentRef,
@@ -35,7 +34,6 @@ const MainTable = ({
       testPrefixCallback={testPrefixCallback}
       onClickRow={onClickRow}
       disableClickRow={disableClickRow}
-      flexRender={flexRender}
       tableRef={tableRef}
       {...rest}
     />

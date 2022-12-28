@@ -9,7 +9,7 @@ import { Button, IconButton } from "."
 import readme from "./README.md"
 import { iconsList } from "src/components/icon"
 
-const buttonStory = storiesOf("Input/Button", module)
+const buttonStory = storiesOf("Inputs/Button", module)
 const icons = Object.keys(iconsList)
 
 const subData = {

@@ -2,7 +2,19 @@ import React from "react"
 import Drop from "src/components/drops/drop/index.js"
 import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
-import ColumnsMenuItem from "src/components/tableV2/components/columnsMenuItem"
+import { Checkbox } from "src/components/checkbox"
+import { ListItem } from "src/components/typography"
+
+const ColumnsMenuItem = ({ column, disabled }) => (
+  <Flex alignItems="center" as={ListItem} justifyContent="between" padding={[1]}>
+    <Checkbox
+      checked={column.getIsVisible()}
+      disabled={disabled}
+      label={column.id}
+      onChange={column.getToggleVisibilityHandler()}
+    />
+  </Flex>
+)
 
 const ColumnsMenu = ({ parentRef, isOpen, columns, onClose, pinnedColumns }) => {
   if (parentRef.current && isOpen)

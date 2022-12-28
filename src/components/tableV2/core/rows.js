@@ -1,16 +1,11 @@
-import React, { useCallback } from "react"
-
-import Row from "./row"
-import DataCell from "./dataCell"
-
-import useSharedTable from "../hooks/useSharedTable"
+import React, { useState, useEffect } from "react"
 import { useVirtualizer } from "@tanstack/react-virtual"
-
+import { flexRender } from "@tanstack/react-table"
+import Table from "./base-table"
 import { CELL_HEIGHT } from "../constants"
 
 const Rows = ({
   disableClickRow,
-  flexRender,
   getRowHandler = "getCenterVisibleCells",
   onHoverRow,
   onClickRow,
@@ -20,8 +15,11 @@ const Rows = ({
   testPrefixCallback,
   scrollParentRef,
   overscan,
+  hasNextPage,
+  loading,
+  loadMore,
 }) => {
-  const { state, updateState } = useSharedTable({})
+  const [hoveredRow, setHoveredRow] = useState(null)
   const { rows } = table.getRowModel()
 
   const virtualizer = useVirtualizer({
@@ -34,21 +32,30 @@ const Rows = ({
   const virtualRows = virtualizer.getVirtualItems()
   const totalSize = virtualizer.getTotalSize()
 
+  useEffect(() => {
+    if (!loadMore) return
+
+    const lastItem = virtualRows[virtualRows.length - 1]
+
+    if (!lastItem) return
+
+    if (lastItem.index >= totalSize - 1 && hasNextPage && !loading) loadMore()
+  }, [hasNextPage, virtualRows, loadMore])
+
   const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
   const paddingBottom =
     virtualRows.length > 0 ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
 
-  const handleOnMouseEnter = useCallback(
-    id => {
-      onHoverRow?.()
-      updateState({ currentHoveredRow: id })
-    },
-    [onHoverRow, updateState]
-  )
+  const handleOnMouseEnter = id => {
+    onHoverRow?.(id)
+    setHoveredRow(id)
+  }
 
-  const handleOnMouseLeave = useCallback(() => {
-    updateState({ currentHoveredRow: null })
-  }, [onHoverRow, updateState])
+  const handleOnMouseLeave = () => {
+    onHoverRow?.(null)
+    setHoveredRow(null)
+  }
+
   return (
     <>
       {paddingTop > 0 && (
@@ -56,39 +63,39 @@ const Rows = ({
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
-      {virtualizer.getVirtualItems().map(({ index }) => {
-        const row = rows[index]
+      {virtualizer.getVirtualItems().map(virtualRow => {
+        const row = rows[virtualRow.index]
         const cells = row[getRowHandler]()
 
         return (
-          <Row
-            id={row.id}
-            key={row.id}
-            testPrefix={testPrefix}
-            testPrefixCallback={testPrefixCallback}
-            row={row}
-            table={table}
-            onClickRow={onClickRow}
-            disableClickRow={disableClickRow}
+          <Table.Row
+            key={virtualRow.key}
+            data-testid={`netdata-table-row${testPrefix}${
+              testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
+            }`}
+            onClick={() => onClickRow?.({ data: row.original, table: table, fullRow: row })}
+            disableClickRow={() =>
+              disableClickRow?.({ data: row.original, table: table, fullRow: row })
+            }
             onMouseEnter={() => handleOnMouseEnter(row.id)}
             onMouseLeave={handleOnMouseLeave}
-            isHovering={row.id === state?.currentHoveredRow}
-            background={index % 2 == 0 ? "mainBackground" : "tableRowBg"}
+            isHovering={row.id === hoveredRow}
+            background={virtualRow.index % 2 == 0 ? "mainBackground" : "tableRowBg"}
           >
-            {cells.map((cell, index) => {
-              const isLast = cells.length === index + 1
-
-              return (
-                <DataCell
-                  cell={cell}
-                  flexRender={flexRender}
-                  key={cell.column.columnDef.id}
-                  pinnedStyles={isLast ? pinnedStyles : {}}
-                  testPrefix={testPrefix}
-                />
-              )
-            })}
-          </Row>
+            {cells.map((cell, index) => (
+              <Table.Cell
+                key={cell.column.columnDef.id}
+                data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
+                maxWidth={cell.column.columnDef.maxSize}
+                minWidth={cell.column.columnDef.minSize}
+                pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
+                width={cell.column.getSize()}
+                {...cell.column.columnDef.meta}
+              >
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </Table.Cell>
+            ))}
+          </Table.Row>
         )
       })}
 

@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, FC } from "react"
 import { DropProps } from "../drop"
 
 export interface PopoverProps {
@@ -12,7 +12,7 @@ export interface PopoverProps {
   [key: string]: any
 }
 
-declare const Popover: React.FC<PopoverProps & JSX.IntrinsicElements["div"]>
+declare const Popover: FC<PopoverProps & JSX.IntrinsicElements["div"]>
 
 export { Popover }
 

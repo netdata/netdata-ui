@@ -4,7 +4,7 @@ import { Tabs, Tab, TabSeparator, DraggableTabs } from "."
 import { Text } from "src/components/typography"
 import { Icon, Flex } from "src/index"
 
-const story = storiesOf("ORGANISMS|Tabbed Navigation/Tabbed Navigation", module)
+const story = storiesOf("Organisms/Tabbed Navigation", module)
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)

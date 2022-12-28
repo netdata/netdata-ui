@@ -13,7 +13,7 @@ const subData = {
   jest: ["index.test.js"],
 }
 
-const story = storiesOf("ORGANISMS|Documentation/Documentation", module)
+const story = storiesOf("Organisms/Documentation", module)
 
 story.add(
   "Cloud Documentation",

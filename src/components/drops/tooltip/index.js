@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment, useLayoutEffect, useState, useRef } from "react"
+import React, { forwardRef, Fragment, useLayoutEffect } from "react"
 import Drop from "src/components/drops/drop"
 import useForwardRef from "src/hooks/use-forward-ref"
 import useToggle from "src/hooks/use-toggle"
@@ -21,7 +21,6 @@ const Tooltip = forwardRef(
       disabled,
       zIndex = 80,
       children,
-      onClickOutside,
       allowHoverOnTooltip,
       ...rest
     },
@@ -29,20 +28,12 @@ const Tooltip = forwardRef(
   ) => {
     const id = useDescribedId(rest["aria-describedby"])
     const [isOpen, , open, close] = useToggle(false)
-    const [hasPopUpHovered, setHasPopUpHovered] = useState(false)
-    const closeWithDelayTimeout = useRef()
 
     const [ref, setRef] = useForwardRef(parentRef)
 
-    const handleCloseWithDelay = () => {
-      closeWithDelayTimeout.current = setTimeout(() => {
-        close()
-      }, 200)
-    }
-
     const targetElement = useClonedChildren(children, setRef, {
       onMouseEnter: open,
-      onMouseLeave: allowHoverOnTooltip ? handleCloseWithDelay : close,
+      onMouseLeave: !allowHoverOnTooltip ? close : undefined,
       onFocus: open,
       onBlur: close,
       ...(isOpen && { "aria-describedby": id }),
@@ -52,12 +43,6 @@ const Tooltip = forwardRef(
     useLayoutEffect(() => {
       if (ref.current && initialOpen) open()
     }, [])
-
-    useLayoutEffect(() => {
-      if (hasPopUpHovered && closeWithDelayTimeout.current) {
-        clearTimeout(closeWithDelayTimeout.current)
-      }
-    }, [hasPopUpHovered])
 
     if (!content) {
       return children
@@ -72,11 +57,7 @@ const Tooltip = forwardRef(
             hideShadow
             id={id}
             onClickOutside={close}
-            onMouseLeave={() => {
-              setHasPopUpHovered(false)
-              close()
-            }}
-            onMouseEnter={() => setHasPopUpHovered(true)}
+            onMouseLeave={close}
             target={ref.current}
             {...dropProps}
             animation={animation}

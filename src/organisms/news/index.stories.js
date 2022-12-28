@@ -13,7 +13,7 @@ const subData = {
   jest: ["index.test.js"],
 }
 
-const story = storiesOf("ORGANISMS|News/News", module)
+const newsStories = storiesOf("Organisms/News", module)
 
 const Wrapper = ({ children }) => {
   const [, setLastSeen] = useLocalStorage("news_last_seen")
@@ -49,5 +49,5 @@ const AgentNews = () => (
   </Wrapper>
 )
 
-story.add("Cloud News", CloudNews, subData)
-story.add("Agent News", AgentNews, subData)
+newsStories.add("Cloud News", CloudNews, subData)
+newsStories.add("Agent News", AgentNews, subData)

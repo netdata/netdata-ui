@@ -5,7 +5,7 @@ import { Toggle } from "."
 import { readmeCleanup } from "utils/readme"
 import readme from "./README.md"
 
-const toggleStory = storiesOf("Input/Toggle", module)
+const toggleStory = storiesOf("Inputs/Toggle", module)
 
 const subData = {
   readme: {

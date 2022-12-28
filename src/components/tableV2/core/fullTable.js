@@ -1,7 +1,6 @@
 import React from "react"
-
 import Table from "./base-table"
-import makeHeadCell from "./headCell"
+import HeadCell from "./headCell"
 import Rows from "./rows"
 
 const FullTable = ({
@@ -9,7 +8,6 @@ const FullTable = ({
   disableClickRow,
   enableResize,
   enableSorting,
-  flexRender,
   getRowHandler,
   headers,
   onClickRow,
@@ -35,21 +33,20 @@ const FullTable = ({
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          {makeHeadCell({
-            enableResize,
-            enableSorting,
-            headers,
-            pinnedStyles,
-            table,
-            testPrefix,
-          })}
+          <HeadCell
+            enableResize={enableResize}
+            enableSorting={enableSorting}
+            headers={headers}
+            pinnedStyles={pinnedStyles}
+            table={table}
+            testPrefix={testPrefix}
+          />
         </Table.HeadRow>
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         <Rows
           scrollParentRef={scrollParentRef}
           disableClickRow={disableClickRow}
-          flexRender={flexRender}
           getRowHandler={getRowHandler}
           onClickRow={onClickRow}
           onHoverRow={onHoverRow}

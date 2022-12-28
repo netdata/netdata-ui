@@ -9,7 +9,7 @@ import { Button } from "src/components/button"
 import readme from "./README.md"
 import Collapsible from "./index"
 
-const story = storiesOf("COMPONENTS|Collapsible", module)
+const story = storiesOf("Utils/Collapsible", module)
 
 const subData = {
   readme: {

@@ -39,11 +39,6 @@ const StyledSortIcon = styled(Icon)`
   width: 16px;
   margin: auto;
 `
-const StyledPagination = styled(Flex)`
-  height: 45px;
-  background: ${getColor("mainBackground")};
-  border-top: 1px solid ${getColor("borderSecondary")};
-`
 
 const Table = forwardRef(({ children, width, ...props }, ref) => {
   return (
@@ -164,6 +159,12 @@ Table.HeadCell = forwardRef(
   )
 )
 
+const sortingIcons = {
+  asc: "sort_ascending",
+  desc: "sort_descending",
+  indicator: "sort_indicator",
+}
+
 Table.SortingHeadCell = forwardRef(
   (
     {
@@ -187,11 +188,6 @@ Table.SortingHeadCell = forwardRef(
   ) => {
     const [isHovering, , onMouseEnter, onMouseLeave] = useToggle(false)
 
-    const sortingIcons = {
-      asc: "sort_ascending",
-      desc: "sort_descending",
-      indicator: "sort_indicator",
-    }
     const showHoveringIcon = isHovering && !sortDirection
 
     const onClick = useCallback(
@@ -225,14 +221,14 @@ Table.SortingHeadCell = forwardRef(
           cursor="pointer"
           data-testid={sortbyTestid}
         >
-          <Flex data-testid="sorting-cell-children-sorting-arrows-wrapper">
+          <Flex data-testid="sorting-cell-children-sorting-arrows-wrapper" gap={1}>
             {children}
-            <Box width={4}>
-              <StyledSortIcon color="text" name={sortingIcons[sortDirection] ?? null} />
-              {showHoveringIcon && (
-                <StyledSortIcon color="textLite" name={sortingIcons["indicator"]} />
-              )}
-            </Box>
+            <Icon
+              height="16px"
+              width="16px"
+              color={showHoveringIcon ? "textLite" : "text"}
+              name={sortingIcons[showHoveringIcon ? "indicator" : sortDirection] ?? null}
+            />
           </Flex>
         </Box>
       </Table.HeadCell>
@@ -283,6 +279,7 @@ Table.Cell = forwardRef(
           ...styles,
         }}
         width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
+        overflow="hidden"
         {...rest}
       >
         {children}
@@ -343,7 +340,6 @@ export const Pagination = ({
   onPreviousPage,
   setPageIndex,
   resetPageIndex,
-  pageSize,
 }) => {
   const handleOnPrevious = useCallback(() => {
     if (hasPrevious) onPreviousPage()
@@ -362,61 +358,55 @@ export const Pagination = ({
   }, [resetPageIndex])
 
   return (
-    <StyledPagination alignItems="center" justifyContent="end">
-      <Tooltip content="First">
-        <Flex>
-          <IconButton
-            data-testid={"pagination-go-to-first"}
-            cursor="pointer"
-            onClick={handleGoToFirstPage}
-            icon="chevron_left_start"
-            iconSize="small"
-            tooltip="test"
-            disabled={!hasPrevious}
-          />
-        </Flex>
-      </Tooltip>
-      <Tooltip content="Previous">
-        <Flex>
-          <IconButton
-            data-testid={"pagination-go-to-previous"}
-            cursor="pointer"
-            onClick={handleOnPrevious}
-            icon="chevron_left"
-            iconSize="small"
-            tooltip="Previous"
-            disabled={!hasPrevious}
-          />
-        </Flex>
-      </Tooltip>
+    <Flex
+      alignItems="center"
+      justifyContent="end"
+      height="45px"
+      background="mainBackground"
+      border={{ side: "top", color: "borderSecondary" }}
+    >
+      <IconButton
+        title="First"
+        data-testid={"pagination-go-to-first"}
+        cursor="pointer"
+        onClick={handleGoToFirstPage}
+        icon="chevron_left_start"
+        iconSize="small"
+        tooltip="test"
+        disabled={!hasPrevious}
+      />
+      <IconButton
+        title="Previous"
+        data-testid={"pagination-go-to-previous"}
+        cursor="pointer"
+        onClick={handleOnPrevious}
+        icon="chevron_left"
+        iconSize="small"
+        tooltip="Previous"
+        disabled={!hasPrevious}
+      />
       <Text data-testid={"pagination-counter"}>
         Page {pageCount === 0 ? 0 : pageIndex} of {pageCount}
       </Text>
-      <Tooltip content="Next">
-        <Flex>
-          <IconButton
-            data-testid={"pagination-go-to-next"}
-            cursor="pointer"
-            onClick={handleOnNextPage}
-            icon="chevron_right"
-            iconSize="small"
-            disabled={!hasNext}
-          />
-        </Flex>
-      </Tooltip>
-      <Tooltip content="Last">
-        <Flex>
-          <IconButton
-            data-testid={"pagination-go-to-last"}
-            cursor="pointer"
-            onClick={handleGoToLastPage}
-            icon="chevron_right_end"
-            iconSize="small"
-            disabled={!hasNext}
-          />
-        </Flex>
-      </Tooltip>
-    </StyledPagination>
+      <IconButton
+        title="Next"
+        data-testid={"pagination-go-to-next"}
+        cursor="pointer"
+        onClick={handleOnNextPage}
+        icon="chevron_right"
+        iconSize="small"
+        disabled={!hasNext}
+      />
+      <IconButton
+        title="Last"
+        data-testid={"pagination-go-to-last"}
+        cursor="pointer"
+        onClick={handleGoToLastPage}
+        icon="chevron_right_end"
+        iconSize="small"
+        disabled={!hasNext}
+      />
+    </Flex>
   )
 }
 

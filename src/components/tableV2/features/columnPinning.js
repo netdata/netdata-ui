@@ -8,7 +8,6 @@ const ColumnPinning = ({
   disableClickRow,
   enableResize,
   enableSorting,
-  flexRender,
   onClickRow,
   onHoverRow,
   table,
@@ -34,7 +33,6 @@ const ColumnPinning = ({
         disableClickRow={disableClickRow}
         enableResize={enableResize}
         enableSorting={enableSorting}
-        flexRender={flexRender}
         getRowHandler="getLeftVisibleCells"
         headers={headers}
         onClickRow={onClickRow}

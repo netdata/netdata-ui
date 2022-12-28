@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { storiesOf } from "@storybook/react"
 import RangeInput from "./index"
 
-const rangeStory = storiesOf("Components|Controls/InputRange", module)
+const rangeStory = storiesOf("Inputs/InputRange", module)
 
 rangeStory.add("Input Range", () => {
   const [value, setValue] = useState(0.1)

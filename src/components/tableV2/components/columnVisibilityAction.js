@@ -3,7 +3,7 @@ import React, { useRef } from "react"
 import BulkAction from "./bulkAction"
 import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is used only for the dropdown for column visibility
 
-const ActionWithDropdown = ({
+const ColumnVisibilityAction = ({
   alwaysEnabled,
   columnPinning = {},
   enableColumnPinning,
@@ -73,4 +73,4 @@ const ActionWithDropdown = ({
   )
 }
 
-export default ActionWithDropdown
+export default ColumnVisibilityAction

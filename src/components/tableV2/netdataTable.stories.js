@@ -20,9 +20,9 @@ const colorFilter = {
   value: "",
 }
 
-const StoryTable = storiesOf("Table/Table")
+const tableStories = storiesOf("Table/Table", module)
 
-StoryTable.add("Base Table", () => {
+tableStories.add("Base Table", () => {
   const [value, setValue] = useState()
   const filteringOptions = [{ ...colorFilter, onChange: value => setValue(value), value }]
 
@@ -52,7 +52,7 @@ StoryTable.add("Base Table", () => {
   )
 })
 
-StoryTable.add("Simple Netdata Table", () => {
+tableStories.add("Simple Netdata Table", () => {
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
     { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
@@ -70,13 +70,13 @@ StoryTable.add("Simple Netdata Table", () => {
   )
 })
 
-StoryTable.add("Filters at header cell", () => {
+tableStories.add("Filters at header cell", () => {
   const mockDataColumns = [
-    { header: "Nodes", id: "nodes", enableFilter: true, cell: ({ getValue }) => getValue() },
+    { header: "Nodes", id: "nodes", enableColumnFilter: true, cell: ({ getValue }) => getValue() },
     {
       id: "alerts",
       header: () => <Text>Alerts</Text>,
-      enableFilter: true,
+      enableColumnFilter: true,
       cell: ({ getValue }) => getValue(),
       filterFn: (row, columnId, value) => {
         const { original } = row
@@ -99,7 +99,7 @@ StoryTable.add("Filters at header cell", () => {
   )
 })
 
-StoryTable.add("Row selections", () => {
+tableStories.add("Row selections", () => {
   const [selectedRows, onRowSelected] = useState([])
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
@@ -137,7 +137,7 @@ StoryTable.add("Row selections", () => {
   )
 })
 
-StoryTable.add("Global Filters", () => {
+tableStories.add("Global Filters", () => {
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
     { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
@@ -165,7 +165,7 @@ StoryTable.add("Global Filters", () => {
   )
 })
 
-StoryTable.add("Sorting", () => {
+tableStories.add("Sorting", () => {
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
     { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
@@ -185,7 +185,7 @@ StoryTable.add("Sorting", () => {
   )
 })
 
-StoryTable.add("Actions", () => {
+tableStories.add("Actions", () => {
   const handleAction = data => {
     console.log(data)
   }
@@ -215,7 +215,7 @@ StoryTable.add("Actions", () => {
   )
 })
 
-StoryTable.add("Bulk Actions", () => {
+tableStories.add("Bulk Actions", () => {
   const handleDelete = data => {
     console.log("Delete has been clicked", data)
   }
@@ -261,7 +261,7 @@ StoryTable.add("Bulk Actions", () => {
   )
 })
 
-StoryTable.add("Pagination", () => {
+tableStories.add("Pagination", () => {
   const paginationOptions = { pageIndex: 0, pageSize: 2 }
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
@@ -290,7 +290,7 @@ StoryTable.add("Pagination", () => {
   )
 })
 
-StoryTable.add("Full Table functionallity", () => {
+tableStories.add("Full Table functionallity", () => {
   const onGlobalSearchChange = value => {
     console.log(value)
   }
@@ -343,7 +343,7 @@ StoryTable.add("Full Table functionallity", () => {
 
       header: "Nodes",
       id: "nodes",
-      enableFilter: false,
+      enableColumnFilter: false,
       cell: ({ getValue }) => getValue(),
       enableHiding: false,
       meta: {
@@ -355,7 +355,7 @@ StoryTable.add("Full Table functionallity", () => {
 
       id: "alerts",
       header: () => <Text>Alerts</Text>,
-      enableFilter: true,
+      enableColumnFilter: true,
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
       cell: ({ getValue }) => getValue(),
@@ -366,7 +366,7 @@ StoryTable.add("Full Table functionallity", () => {
 
       header: "user",
       id: "user",
-      enableFilter: true,
+      enableColumnFilter: true,
       enableSorting: false,
       cell: ({ getValue }) => getValue(),
       size: 200,
@@ -375,7 +375,7 @@ StoryTable.add("Full Table functionallity", () => {
       accessorKey: "status",
       header: "status",
       id: "status",
-      enableFilter: true,
+      enableColumnFilter: true,
       filterFn: "select",
       size: 200,
 
@@ -397,7 +397,7 @@ StoryTable.add("Full Table functionallity", () => {
       accessorKey: "untouchable",
       header: "Untouchable",
       id: "untouchable",
-      enableFilter: true,
+      enableColumnFilter: true,
       enableSorting: false,
       filterFn: "select",
       size: 200,

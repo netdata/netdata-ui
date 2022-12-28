@@ -5,7 +5,7 @@ import Flex from "src/components/templates/flex"
 import Pill from "./index"
 import MasterCard from "./mastercard"
 
-const story = storiesOf("Atoms/Pills")
+const story = storiesOf("Atoms/Pills", module)
 
 const Custom = () => (
   <Flex gap={4}>

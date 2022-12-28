@@ -7,7 +7,7 @@ import { getGutterHeight } from "src/theme/utils"
 import { readmeCleanup } from "utils/readme"
 import readme from "./README.md"
 
-const checkBoxStory = storiesOf("Input/Checkbox", module)
+const checkBoxStory = storiesOf("Inputs/Checkbox", module)
 
 const position = ["left", "right"]
 

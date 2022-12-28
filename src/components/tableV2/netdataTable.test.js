@@ -23,11 +23,11 @@ const mockRowActions = {
 }
 
 const mockDataColumns = [
-  { header: "Nodes", id: "nodes", enableFilter: true, cell: ({ getValue }) => getValue() },
+  { header: "Nodes", id: "nodes", enableColumnFilter: true, cell: ({ getValue }) => getValue() },
   {
     id: "alerts",
     header: "Text",
-    enableFilter: true,
+    enableColumnFilter: true,
     filterFn: (row, columnId, value) => {
       const { original } = row
       const rowValue = original[columnId]
@@ -39,7 +39,7 @@ const mockDataColumns = [
   {
     header: "user",
     id: "user",
-    enableFilter: true,
+    enableColumnFilter: true,
     cell: () => "Text",
   },
 ]

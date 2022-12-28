@@ -4,7 +4,7 @@ import { boolean } from "@storybook/addon-knobs"
 
 import ConfirmationDialog from "./confirmation-dialog"
 
-const Story = storiesOf("COMPONENTS|ConfirmationDialog")
+const Story = storiesOf("Utils/ConfirmationDialog", module)
 
 Story.add("Confirmation dialog", () => {
   return (

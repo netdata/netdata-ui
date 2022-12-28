@@ -10,7 +10,7 @@ import { Button } from "src/components/button"
 import { Icon } from "src/components/icon"
 import readme from "./README.md"
 
-const inputStory = storiesOf("Components|Controls/TextInput", module)
+const inputStory = storiesOf("Inputs/TextInput", module)
 
 const subData = {
   readme: {

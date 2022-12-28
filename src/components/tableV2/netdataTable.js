@@ -1,38 +1,33 @@
 //TODO refactor bulk action and row action to single function to decrease repeatability
 import React, { useEffect, useMemo, useState, useCallback, useRef } from "react"
-
 import {
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-
 import Flex from "src/components/templates/flex"
-
 import { comparison, select, includesString } from "./helpers/filterFns"
-
-import makeRowSelection from "./features/rowSelection"
+import useColumns from "./features/useColumns"
 import makePagination from "./features/pagination"
-import makeRowActions from "./features/rowActions"
-import makeBulkActions from "./features/bulkActions"
+import useBulkActions from "./features/useBulkActions"
 import ColumnPinning from "./features/columnPinning"
 import GlobalControls from "./features/globalControls"
 
 import MainTable from "./features/mainTable"
 
-import { SharedTableProvider } from "./context/sharedTable"
-
-import useInfiniteScroll from "./hooks/useInfiniteScroll"
-
 const noop = () => {}
+
+const filterFns = {
+  comparison,
+  select,
+}
 
 const NetdataTable = ({
   bulkActions,
-  columnPinningOptions = {},
-  columnVisibility: initialColumnVisibility,
+  columnPinning: defaultColumnPinning,
+  columnVisibility: defaultColumnVisibility,
   data,
   dataColumns,
   dataGa,
@@ -45,7 +40,6 @@ const NetdataTable = ({
   enableSorting,
   globalFilter: initialGlobalFilter = "",
   globalFilterFn = includesString,
-  loadMoreOptions = {},
   onClickRow,
   onColumnVisibilityChange = noop,
   onGlobalSearchChange,
@@ -57,134 +51,75 @@ const NetdataTable = ({
     pageSize: 100,
   },
   rowActions = {},
-  sortBy = [],
+  sortBy,
   tableRef,
   testPrefix = "",
   testPrefixCallback,
   virtualizeOptions = {},
   ...rest
 }) => {
-  const [isColumnDropdownVisible, setIsColumnDropdownVisible] = useState(false)
-  const [columnVisibility, setColumnVisibility] = useState(initialColumnVisibility)
-  const [columnPinning, setColumnPinning] = useState(columnPinningOptions)
+  const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
 
-  const [originalSelectedRows, setOriginalSelectedRow] = useState([])
-  const [sorting, setSorting] = useState(sortBy)
+  useEffect(() => {
+    if (columnVisibility === defaultColumnVisibility) return
+
+    setColumnVisibility(defaultColumnVisibility)
+  }, [defaultColumnVisibility])
+
+  const [columnPinning, setColumnPinning] = useState(() => defaultColumnPinning || {})
+
+  useEffect(() => {
+    if (!defaultColumnPinning || columnVisibility === defaultColumnPinning) return
+
+    setColumnPinning(defaultColumnPinning)
+  }, [defaultColumnPinning])
+
   const [rowSelection, setRowSelection] = useState({})
-  const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
-  const [pagination, setPagination] = useState({
-    pageIndex: paginationOptions.pageIndex,
-    pageSize: paginationOptions.pageSize,
-  })
-  const [tableData, setTableData] = useState(data)
 
-  const scrollParentRef = useRef()
+  const [sorting, setSorting] = useState(() => sortBy || [])
 
-  const updateTableData = useCallback(newData => {
-    setTableData(oldData => [...oldData, ...newData])
+  useEffect(() => {
+    if (!sortBy || sorting === sortBy) return
+
+    setSorting(sortBy)
+  }, [sortBy])
+
+  const onShorting = useCallback(getSorting => {
+    onSortingChange(getSorting)
+    setSorting(getSorting)
   }, [])
 
-  useInfiniteScroll({ target: scrollParentRef, updateTableData, ...loadMoreOptions })
+  const [pagination, setPagination] = useState(() => ({
+    pageIndex: paginationOptions.pageIndex,
+    pageSize: paginationOptions.pageSize,
+  }))
 
   const handleColumnVisibilityChange = useCallback(getVisibility => {
     onColumnVisibilityChange(getVisibility)
     setColumnVisibility(getVisibility)
   }, [])
 
-  const handleGlobalSearch = useCallback(value => {
+  const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
+
+  useEffect(() => {
+    if (!initialGlobalFilter || globalFilter === initialGlobalFilter) return
+
+    setGlobalFilter(initialGlobalFilter)
+  }, [sortBy])
+
+  const onGlobalFilterChange = useCallback(value => {
     onGlobalSearchChange?.(value)
     setGlobalFilter(String(value))
   }, [])
 
-  const handleSortingChange = useCallback(getSorting => {
-    onSortingChange(getSorting)
-    setSorting(getSorting)
-  }, [])
-
-  const makeActionsColumn = useMemo(() => makeRowActions({ rowActions, testPrefix }), [rowActions])
-
-  const hasBulkActions = enableColumnPinning || enableColumnVisibility || bulkActions
-
-  const renderBulkActions = () =>
-    hasBulkActions
-      ? [
-          makeBulkActions({
-            bulkActions,
-            columnPinning,
-            columnVisibilityOptions: {
-              handleAction: () => setIsColumnDropdownVisible(true),
-              isOpen: isColumnDropdownVisible,
-              onClose: () => setIsColumnDropdownVisible(false),
-              visible: enableColumnVisibility,
-            },
-            enableColumnPinning,
-            selectedRows: originalSelectedRows,
-            table,
-            testPrefix,
-          }),
-        ]
-      : null
-
-  const makeSelectionColumn = enableSelection ? [makeRowSelection({ testPrefix })] : []
-
-  const makeDataColumns = useMemo(() => {
-    if (!dataColumns || dataColumns.length < 1) return []
-    return dataColumns.map(
-      (
-        {
-          header,
-          id,
-          cell,
-          enableFilter = false,
-          isPlaceholder,
-          filterFn,
-          enableGlobalFilter = true,
-          enableSorting = true,
-          meta,
-          size = 150,
-          maxSize = 5000,
-          minSize = 150,
-          sortingFn,
-          accessorKey,
-          enableHiding = true,
-          enableResize = true,
-        },
-        index
-      ) => {
-        if (!id) throw new Error(`Please provide id at ${index}`)
-
-        return {
-          id,
-          cell,
-          enableResize,
-          accessorKey: accessorKey ? accessorKey : id,
-          header,
-          ...(filterFn ? { filterFn } : {}),
-          footer: props => props.column.id,
-          enableColumnFilter: enableFilter,
-          enableSorting,
-          enableGlobalFilter,
-          isPlaceholder,
-          meta,
-          enableHiding,
-          size,
-          ...(maxSize ? { maxSize } : {}),
-          minSize,
-          ...(sortingFn ? { sortingFn } : {}),
-        }
-      }
-    )
-  }, [dataColumns])
+  const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions })
 
   const table = useReactTable({
-    columns: [...makeSelectionColumn, ...makeDataColumns, ...makeActionsColumn],
-    data: tableData,
+    columns,
+    data,
     manualPagination: !enablePagination,
     columnResizeMode: enableResize ? "onEnd" : "",
-    filterFns: {
-      comparison,
-      select,
-    },
+    filterFns,
     state: {
       columnVisibility,
       rowSelection,
@@ -197,8 +132,8 @@ const NetdataTable = ({
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
-    onGlobalFilterChange: handleGlobalSearch,
-    onSortingChange: handleSortingChange,
+    onGlobalFilterChange,
+    onSortingChange: onShorting,
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
@@ -206,78 +141,81 @@ const NetdataTable = ({
     onColumnPinningChange: setColumnPinning,
   })
 
+  const [selectedRows, setActualSelectedRows] = useState([])
+
   useEffect(() => {
     const { rows } = table.getSelectedRowModel()
     if (rows) {
       const selectedRows = rows.reduce((acc, { original }) => {
-        if (original?.disabled === true) return acc
+        if (original?.disabled) return acc
+
         acc.push(original)
         return acc
       }, [])
-      setOriginalSelectedRow(selectedRows)
+      setActualSelectedRows(selectedRows)
       onRowSelected?.(selectedRows)
     }
   }, [rowSelection, table])
 
-  useEffect(() => {
-    setTableData(data)
-  }, [data])
+  const hasBulkActions = enableColumnPinning || enableColumnVisibility || !!bulkActions
+  const scrollParentRef = useRef()
+
+  const actions = useBulkActions({
+    bulkActions,
+    columnPinning,
+    enableColumnVisibility,
+    enableColumnPinning,
+    selectedRows,
+    table,
+    testPrefix,
+  })
 
   return (
-    <SharedTableProvider>
-      <Flex height="100%" overflow="hidden" width="100%" column>
-        {onGlobalSearchChange || hasBulkActions ? (
-          <GlobalControls
-            bulkActions={renderBulkActions}
-            dataGa={dataGa}
-            handleSearch={onGlobalSearchChange ? handleGlobalSearch : null}
-            searchValue={globalFilter}
-          />
-        ) : null}
-        <Flex
-          ref={scrollParentRef}
-          overflow={{ vertical: "auto", horizontal: "auto" }}
-          width="100%"
-          height="100%"
-        >
-          {enableColumnPinning && (
-            <ColumnPinning
-              enableResize={enableResize}
-              disableClickRow={disableClickRow}
-              onClickRow={onClickRow}
-              testPrefixCallback={testPrefixCallback}
-              enableSorting={enableSorting}
-              table={table}
-              headers={table.getLeftFlatHeaders()}
-              testPrefix={testPrefix}
-              dataGa={dataGa}
-              flexRender={flexRender}
-              onHoverRow={onHoverRow}
-              scrollParentRef={scrollParentRef}
-              virtualizeOptions={virtualizeOptions}
-            />
-          )}
-          <MainTable
-            scrollParentRef={scrollParentRef}
+    <Flex height="100%" overflow="hidden" width="100%" column>
+      {onGlobalSearchChange || hasBulkActions ? (
+        <GlobalControls
+          bulkActions={actions}
+          dataGa={dataGa}
+          handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
+          searchValue={globalFilter}
+        />
+      ) : null}
+      <Flex ref={scrollParentRef} overflow="auto" width="100%" height="100%">
+        {enableColumnPinning && (
+          <ColumnPinning
             enableResize={enableResize}
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}
             testPrefixCallback={testPrefixCallback}
             enableSorting={enableSorting}
-            enableColumnPinning={enableColumnPinning}
             table={table}
-            dataGa={dataGa}
-            tableRef={tableRef}
+            headers={table.getLeftFlatHeaders()}
             testPrefix={testPrefix}
-            flexRender={flexRender}
+            dataGa={dataGa}
             onHoverRow={onHoverRow}
+            scrollParentRef={scrollParentRef}
             virtualizeOptions={virtualizeOptions}
-            {...rest}
           />
-        </Flex>
-        {enablePagination && makePagination({ table })}
+        )}
+        <MainTable
+          scrollParentRef={scrollParentRef}
+          enableResize={enableResize}
+          disableClickRow={disableClickRow}
+          onClickRow={onClickRow}
+          testPrefixCallback={testPrefixCallback}
+          enableSorting={enableSorting}
+          enableColumnPinning={enableColumnPinning}
+          table={table}
+          dataGa={dataGa}
+          tableRef={tableRef}
+          testPrefix={testPrefix}
+          onHoverRow={onHoverRow}
+          virtualizeOptions={virtualizeOptions}
+          {...rest}
+        />
       </Flex>
-    </SharedTableProvider>
+      {enablePagination && makePagination({ table })}
+    </Flex>
   )
 }
 
