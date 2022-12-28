@@ -1,4 +1,4 @@
-import ReactFilterBox from "@netdata/react-filter-box"
+import ReactFilterBox from "react-filter-box"
 
 // Library doesn't handle dynamic data, even given an updated handler instance in props
 // So we extend base component and update its parser manually

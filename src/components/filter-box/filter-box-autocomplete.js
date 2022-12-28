@@ -1,4 +1,4 @@
-import { GridDataAutoCompleteHandler } from "@netdata/react-filter-box"
+import { GridDataAutoCompleteHandler } from "react-filter-box"
 import { map, uniq, pipe, identity, path, flatten } from "ramda"
 
 export class FilterBoxAutocompleteHandler extends GridDataAutoCompleteHandler {
