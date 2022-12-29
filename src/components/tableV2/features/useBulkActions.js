@@ -47,7 +47,7 @@ export default ({ bulkActions, enableColumnVisibility, ...props }) => {
 
   return useMemo(() => {
     if (!bulkActions) return columnVisibilityAction
-    console.log(1)
+
     return Object.keys(bulkActions)
       .map(actionKey => {
         const supportedBulkAction = supportedBulkActions[actionKey] || supportedBulkActions.delete

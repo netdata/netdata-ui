@@ -30,7 +30,6 @@ const Rows = ({
   })
 
   const virtualRows = virtualizer.getVirtualItems()
-  const totalSize = virtualizer.getTotalSize()
 
   useEffect(() => {
     if (!loadMore) return
@@ -39,12 +38,14 @@ const Rows = ({
 
     if (!lastItem) return
 
-    if (lastItem.index >= totalSize - 1 && hasNextPage && !loading) loadMore()
-  }, [hasNextPage, virtualRows, loadMore])
+    if (lastItem.index >= rows.length - 1 && hasNextPage && !loading) loadMore()
+  }, [virtualRows])
 
   const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
+
+  const totalHeight = virtualizer.getTotalSize()
   const paddingBottom =
-    virtualRows.length > 0 ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
+    virtualRows.length > 0 ? totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
 
   const handleOnMouseEnter = id => {
     onHoverRow?.(id)
