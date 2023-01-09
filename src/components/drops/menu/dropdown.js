@@ -34,7 +34,7 @@ const Dropdown = ({
     if (!searchParams) return items
     const searchLowerCase = searchParams.toLowerCase()
     return items.filter(({ label, value }) => {
-      if (typeof value === "string" && label.toLowerCase().includes(searchLowerCase)) return true
+      if (typeof value === "string" && label?.toLowerCase().includes(searchLowerCase)) return true
       if (typeof value === "string" && value.toLowerCase().includes(searchLowerCase)) return true
       return false
     })
