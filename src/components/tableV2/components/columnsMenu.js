@@ -21,12 +21,13 @@ const ColumnsMenu = ({ parentRef, isOpen, columns, onClose, pinnedColumns }) => 
     return (
       <Drop
         background="dropdown"
-        height={{ max: "100vh" }}
+        height={{ max: "400px" }}
         onClickOutside={onClose}
         overflow={{ vertical: "auto" }}
         round={1}
         target={parentRef.current}
         width={50}
+        align={{ top: "bottom", right: "right" }}
       >
         <Flex
           border={{
