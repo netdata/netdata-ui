@@ -105,7 +105,7 @@ export const TextInput = ({
     <StyledContainer className={className}>
       <StyledLabel disabled={disabled}>
         {label && (
-          <LabelRow>
+          <LabelRow size={size}>
             <span>{label}</span>
           </LabelRow>
         )}
@@ -128,6 +128,7 @@ export const TextInput = ({
             iconRight={iconRight}
             type="text"
             value={value}
+            size={size}
             ref={inputRef}
             {...props}
           />
