@@ -116,6 +116,7 @@ import integrationSlack from "./assets/integrations/slack.svg"
 import integrationSlackColored from "./assets/integrations/slack_colored.svg"
 import integrationWebhook from "./assets/integrations/webhook.svg"
 import integrationWebhookColored from "./assets/integrations/webhook_colored.svg"
+import inviteUserPress from "./assets/invite_user_press.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
@@ -429,6 +430,7 @@ export const iconsList = {
   integrationSlackColored,
   integrationWebhook,
   integrationWebhookColored,
+  inviteUserPress,
   ipNetworking,
   ipNetworkingPress,
   last_week,
