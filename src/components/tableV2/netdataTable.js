@@ -1,5 +1,5 @@
 //TODO refactor bulk action and row action to single function to decrease repeatability
-import React, { useEffect, useMemo, useState, useCallback, useRef } from "react"
+import React, { useEffect, useState, useCallback, useRef } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
