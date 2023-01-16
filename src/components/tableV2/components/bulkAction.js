@@ -21,7 +21,7 @@ const BulkAction = forwardRef(
     ref
   ) => {
     const actionRef = useRef()
-    const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
+    const disabled = typeof isDisabled === "function" ? isDisabled(selectedRows) : isDisabled
     const visible = typeof isVisible === "function" ? isVisible() : isVisible
 
     return (
