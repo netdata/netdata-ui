@@ -8,6 +8,7 @@ const Rows = ({
   disableClickRow,
   getRowHandler = "getCenterVisibleCells",
   onHoverRow,
+  hoveredRow,
   onClickRow,
   pinnedStyles,
   table,
@@ -19,7 +20,6 @@ const Rows = ({
   loading,
   loadMore,
 }) => {
-  const [hoveredRow, setHoveredRow] = useState(null)
   const { rows } = table.getRowModel()
 
   const virtualizer = useVirtualizer({
@@ -47,16 +47,6 @@ const Rows = ({
   const paddingBottom =
     virtualRows.length > 0 ? totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
 
-  const handleOnMouseEnter = id => {
-    onHoverRow?.(id)
-    setHoveredRow(id)
-  }
-
-  const handleOnMouseLeave = () => {
-    onHoverRow?.(null)
-    setHoveredRow(null)
-  }
-
   return (
     <>
       {paddingTop > 0 && (
@@ -78,8 +68,8 @@ const Rows = ({
             disableClickRow={() =>
               disableClickRow?.({ data: row.original, table: table, fullRow: row })
             }
-            onMouseEnter={() => handleOnMouseEnter(row.id)}
-            onMouseLeave={handleOnMouseLeave}
+            onMouseEnter={() => onHoverRow(row.id)}
+            onMouseLeave={() => onHoverRow(null)}
             isHovering={row.id === hoveredRow}
             background={virtualRow.index % 2 == 0 ? "mainBackground" : "tableRowBg"}
           >

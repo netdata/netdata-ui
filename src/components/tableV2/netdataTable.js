@@ -1,5 +1,5 @@
 //TODO refactor bulk action and row action to single function to decrease repeatability
-import React, { useEffect, useMemo, useState, useCallback, useRef } from "react"
+import React, { useEffect, useState, useCallback, useRef } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -14,6 +14,7 @@ import makePagination from "./features/pagination"
 import useBulkActions from "./features/useBulkActions"
 import ColumnPinning from "./features/columnPinning"
 import GlobalControls from "./features/globalControls"
+import useRowHover from "./features/useRowHover"
 
 import MainTable from "./features/mainTable"
 
@@ -58,6 +59,8 @@ const NetdataTable = ({
   virtualizeOptions = {},
   ...rest
 }) => {
+  const [hoveredRow, setHoveredRow] = useRowHover(onHoverRow)
+
   const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
 
   useEffect(() => {
@@ -192,7 +195,8 @@ const NetdataTable = ({
             headers={table.getLeftFlatHeaders()}
             testPrefix={testPrefix}
             dataGa={dataGa}
-            onHoverRow={onHoverRow}
+            onHoverRow={setHoveredRow}
+            hoveredRow={hoveredRow}
             scrollParentRef={scrollParentRef}
             virtualizeOptions={virtualizeOptions}
           />
@@ -209,7 +213,8 @@ const NetdataTable = ({
           dataGa={dataGa}
           tableRef={tableRef}
           testPrefix={testPrefix}
-          onHoverRow={onHoverRow}
+          onHoverRow={setHoveredRow}
+          hoveredRow={hoveredRow}
           virtualizeOptions={virtualizeOptions}
           {...rest}
         />
