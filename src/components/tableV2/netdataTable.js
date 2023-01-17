@@ -14,7 +14,7 @@ import makePagination from "./features/pagination"
 import useBulkActions from "./features/useBulkActions"
 import ColumnPinning from "./features/columnPinning"
 import GlobalControls from "./features/globalControls"
-import useRowHover from "./features/useRowHover"
+import TableProvider from "./features/provider"
 
 import MainTable from "./features/mainTable"
 
@@ -59,8 +59,6 @@ const NetdataTable = ({
   virtualizeOptions = {},
   ...rest
 }) => {
-  const [hoveredRow, setHoveredRow] = useRowHover(onHoverRow)
-
   const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
 
   useEffect(() => {
@@ -174,53 +172,51 @@ const NetdataTable = ({
   })
 
   return (
-    <Flex height="100%" overflow="hidden" width="100%" column>
-      {onGlobalSearchChange || hasBulkActions ? (
-        <GlobalControls
-          bulkActions={actions}
-          dataGa={dataGa}
-          handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
-          searchValue={globalFilter}
-        />
-      ) : null}
-      <Flex ref={scrollParentRef} overflow="auto" width="100%" height="100%">
-        {enableColumnPinning && (
-          <ColumnPinning
+    <TableProvider onHoverRow={onHoverRow}>
+      <Flex height="100%" overflow="hidden" width="100%" column>
+        {onGlobalSearchChange || hasBulkActions ? (
+          <GlobalControls
+            bulkActions={actions}
+            dataGa={dataGa}
+            handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
+            searchValue={globalFilter}
+          />
+        ) : null}
+        <Flex ref={scrollParentRef} overflow="auto" width="100%" height="100%">
+          {enableColumnPinning && (
+            <ColumnPinning
+              enableResize={enableResize}
+              disableClickRow={disableClickRow}
+              onClickRow={onClickRow}
+              testPrefixCallback={testPrefixCallback}
+              enableSorting={enableSorting}
+              table={table}
+              headers={table.getLeftFlatHeaders()}
+              testPrefix={testPrefix}
+              dataGa={dataGa}
+              scrollParentRef={scrollParentRef}
+              virtualizeOptions={virtualizeOptions}
+            />
+          )}
+          <MainTable
+            scrollParentRef={scrollParentRef}
             enableResize={enableResize}
             disableClickRow={disableClickRow}
             onClickRow={onClickRow}
             testPrefixCallback={testPrefixCallback}
             enableSorting={enableSorting}
+            enableColumnPinning={enableColumnPinning}
             table={table}
-            headers={table.getLeftFlatHeaders()}
-            testPrefix={testPrefix}
             dataGa={dataGa}
-            onHoverRow={setHoveredRow}
-            hoveredRow={hoveredRow}
-            scrollParentRef={scrollParentRef}
+            tableRef={tableRef}
+            testPrefix={testPrefix}
             virtualizeOptions={virtualizeOptions}
+            {...rest}
           />
-        )}
-        <MainTable
-          scrollParentRef={scrollParentRef}
-          enableResize={enableResize}
-          disableClickRow={disableClickRow}
-          onClickRow={onClickRow}
-          testPrefixCallback={testPrefixCallback}
-          enableSorting={enableSorting}
-          enableColumnPinning={enableColumnPinning}
-          table={table}
-          dataGa={dataGa}
-          tableRef={tableRef}
-          testPrefix={testPrefix}
-          onHoverRow={setHoveredRow}
-          hoveredRow={hoveredRow}
-          virtualizeOptions={virtualizeOptions}
-          {...rest}
-        />
+        </Flex>
+        {enablePagination && makePagination({ table })}
       </Flex>
-      {enablePagination && makePagination({ table })}
-    </Flex>
+    </TableProvider>
   )
 }
 

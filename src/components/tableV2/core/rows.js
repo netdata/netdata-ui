@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import { flexRender } from "@tanstack/react-table"
+import { useTableContext } from "../features/provider"
 import Table from "./base-table"
 import { CELL_HEIGHT } from "../constants"
 
 const Rows = ({
   disableClickRow,
   getRowHandler = "getCenterVisibleCells",
-  onHoverRow,
-  hoveredRow,
   onClickRow,
   pinnedStyles,
   table,
@@ -20,6 +19,8 @@ const Rows = ({
   loading,
   loadMore,
 }) => {
+  const { onHover, hoveredRow } = useTableContext()
+
   const { rows } = table.getRowModel()
 
   const virtualizer = useVirtualizer({
@@ -68,8 +69,8 @@ const Rows = ({
             disableClickRow={() =>
               disableClickRow?.({ data: row.original, table: table, fullRow: row })
             }
-            onMouseEnter={() => onHoverRow(row.id)}
-            onMouseLeave={() => onHoverRow(null)}
+            onMouseEnter={() => onHover(row.id)}
+            onMouseLeave={() => onHover(null)}
             isHovering={row.id === hoveredRow}
             background={virtualRow.index % 2 == 0 ? "mainBackground" : "tableRowBg"}
           >
