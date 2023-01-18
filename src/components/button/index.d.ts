@@ -36,6 +36,7 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
   loadingLabel?: string | JSX.Element
   loadingIcon?: any
   iconColor?: string
+  strong?: boolean
 }
 
 type IconButtonProps = Pick<

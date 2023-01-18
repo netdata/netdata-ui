@@ -4,7 +4,7 @@ import Tooltip from "src/components/drops/tooltip"
 import Flex from "src/components/templates/flex"
 
 import { ConfirmationDialog } from "src/components/confirmation-dialog"
-import { IconButton } from "src/components/button"
+import { Button, IconButton } from "src/components/button"
 
 const Action = forwardRef(
   (
@@ -31,6 +31,8 @@ const Action = forwardRef(
       iconColor,
       flavour = "borderless",
       CustomUIAction,
+      label,
+      ...rest
     },
     ref
   ) => {
@@ -54,6 +56,8 @@ const Action = forwardRef(
       setConfirmationOpen(false)
       handleAction?.()
     }
+
+    const Component = label ? Button : IconButton
 
     return (
       <>
@@ -88,13 +92,13 @@ const Action = forwardRef(
             ref={ref}
             alignItems="center"
             justifyContent="center"
-            _hover={{ background: disabled ? null : "borderSecondary" }}
+            _hover={{ background: (disabled || label) ? null : "borderSecondary" }}
             cursor={disabled ? "auto" : "pointer"}
             key={id}
             round
-            background={background}
+            background={label ? null : background}
           >
-            <IconButton
+            <Component
               iconSize="small"
               data-testid={`netdata-table-action-${id}${testPrefix}`}
               data-ga={dataGa}
@@ -103,6 +107,8 @@ const Action = forwardRef(
               icon={icon}
               flavour={flavour}
               iconColor={iconColor}
+              label={label}
+              {...rest}
             />
           </Flex>
         </Tooltip>
