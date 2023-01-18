@@ -1,4 +1,4 @@
-import React, { forwardRef, Fragment, useLayoutEffect } from "react"
+import React, { useRef, forwardRef, Fragment, useLayoutEffect } from "react"
 import Drop from "src/components/drops/drop"
 import useForwardRef from "src/hooks/use-forward-ref"
 import useToggle from "src/hooks/use-toggle"
@@ -33,12 +33,20 @@ const Tooltip = forwardRef(
 
     const targetElement = useClonedChildren(children, setRef, {
       onMouseEnter: open,
-      onMouseLeave: !allowHoverOnTooltip ? close : undefined,
+      onMouseLeave: !allowHoverOnTooltip
+        ? close
+        : () =>
+            setTimeout(() => {
+              if (onTooltipRef.current) return
+              close()
+            }, 300),
       onFocus: open,
       onBlur: close,
       ...(isOpen && { "aria-describedby": id }),
       ...rest,
     })
+
+    const onTooltipRef = useRef(false)
 
     useLayoutEffect(() => {
       if (ref.current && initialOpen) open()
@@ -57,7 +65,11 @@ const Tooltip = forwardRef(
             hideShadow
             id={id}
             onClickOutside={close}
-            onMouseLeave={close}
+            onMouseEnter={() => (onTooltipRef.current = true)}
+            onMouseLeave={() => {
+              onTooltipRef.current = false
+              close()
+            }}
             target={ref.current}
             {...dropProps}
             animation={animation}
