@@ -29,14 +29,14 @@ export const StyledInput = styled.input.attrs({ round: true })`
   flex-grow: 0;
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};
   ${({ iconRight }) => iconRight && "padding-right: 0"};
-  font-size: 14px;
+  font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
   line-height: 18px;
   color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textDescription"))};
   background: ${({ disabled }) =>
     disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
 
   &::placeholder {
-    font-size: 14px;
+    font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
     line-height: 18px;
     color: ${getColor("placeholder")};
     opacity: 1;
@@ -58,7 +58,7 @@ export const LabelRow = styled(Flex).attrs({
 })`
   font-style: normal;
   font-weight: bold;
-  font-size: 14px;
+  font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
   line-height: 18px;
   margin-bottom: 4px;
 `
