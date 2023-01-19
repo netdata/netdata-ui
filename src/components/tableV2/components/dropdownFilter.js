@@ -2,7 +2,7 @@ import React from "react"
 
 import { Select } from "src/components/select"
 
-const DropdownFilter = ({ onChange, value, options, isMulti }) => {
+const DropdownFilter = ({ onChange, value, options, isMulti, styles }) => {
   const selectedValue = value
 
   return (
@@ -13,6 +13,7 @@ const DropdownFilter = ({ onChange, value, options, isMulti }) => {
       onChange={option => {
         onChange(option)
       }}
+      styles={styles}
     />
   )
 }

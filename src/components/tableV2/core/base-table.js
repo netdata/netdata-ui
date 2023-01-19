@@ -147,8 +147,9 @@ Table.HeadCell = forwardRef(
           )}
         </Box>
       </Flex>
-
-      {filter}
+      <Box sx={{ fontWeight: "normal" }}>
+        {filter}
+      </Box>
       <Table.Resizer
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}

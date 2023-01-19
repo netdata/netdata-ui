@@ -3,7 +3,7 @@ import DropdownFilter from "./dropdownFilter"
 
 const all = { value: "all", label: "All" }
 
-const SelectFilter = ({ isMulti = false, column, options = [] }) => {
+const SelectFilter = ({ column, isMulti = false, options = [], tiny = false }) => {
   const { setFilterValue, getFilterValue } = column
   const filterValue = getFilterValue()
 
@@ -16,6 +16,7 @@ const SelectFilter = ({ isMulti = false, column, options = [] }) => {
       isMulti={isMulti}
       options={optionsWithExtraChoice}
       onChange={value => setFilterValue(value)}
+      styles={tiny && { size: "tiny" }}
     />
   )
 }
