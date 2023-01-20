@@ -41,7 +41,7 @@ const appColors = {
   selected: rawColors.neutral.iron,
   tooltip: rawColors.neutral.shark,
   bright: rawColors.neutral.white,
-  text: rawColors.neutral.limedSpruce,
+  text: rawColors.neutral.bluebayoux,
   textLite: rawColors.neutral.regentgrey,
   textFocus: rawColors.neutral.regentgrey,
   textDescription: rawColors.neutral.bluebayoux,
