@@ -15,6 +15,7 @@ export const supportedRowActions = {
     actionButtonDirection: "reverse",
     disabledTooltipText: "Delete is disabled",
   },
+  edit: { icon: "pencilOutline", confirmation: false, tooltipText: "Edit" },
   replace: {
     icon: "refresh",
     confirmation: true,
