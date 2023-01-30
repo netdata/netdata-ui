@@ -1,9 +1,13 @@
 import React from "react"
 import { Text } from "src/components/typography"
-import { Input, Container, IconContainer, StyledIcon } from "./styled"
+import { Container, IconContainer, Input, StyledIcon } from "./styled"
 
 const radioButtonStyles = {
-  disabled: { containerColor: "disabled", dotColor: "disabled", borderColor: "disabled" },
+  disabled: {
+    containerColor: "disabledBackground",
+    dotColor: "disabledBackground",
+    borderColor: "disabledBackground",
+  },
   checked: { containerColor: "inputBg", dotColor: "primary", borderColor: "inputBorder" },
   checkedDisabled: { containerColor: "inputBg", dotColor: "disabled", borderColor: "inputBorder" },
   default: { containerColor: "inputBg", dotColor: "bright", borderColor: "inputBorder" },
