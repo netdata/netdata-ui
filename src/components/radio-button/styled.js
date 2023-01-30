@@ -31,6 +31,7 @@ export const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  flex: 0 0 auto;
 
   height: 20px;
   width: 20px;
