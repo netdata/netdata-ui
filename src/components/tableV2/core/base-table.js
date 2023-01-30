@@ -31,14 +31,6 @@ const StyledHeaderCell = styled(Box)`
     border-right: 1px solid ${getColor("borderSecondary")};
   }
 `
-const StyledSortIcon = styled(Icon)`
-  position: relative;
-  top: 0;
-  bottom: 0;
-  height: 16px;
-  width: 16px;
-  margin: auto;
-`
 
 const Table = forwardRef(({ children, width, ...props }, ref) => {
   return (
@@ -147,9 +139,7 @@ Table.HeadCell = forwardRef(
           )}
         </Box>
       </Flex>
-      <Box sx={{ fontWeight: "normal" }}>
-        {filter}
-      </Box>
+      <Box sx={{ fontWeight: "normal" }}>{filter}</Box>
       <Table.Resizer
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
@@ -318,7 +308,7 @@ Table.Row = forwardRef(
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         as={StyledRow}
-        _hover={isRowClickable && { background: "borderSecondary" }}
+        _hover={isHovering && isRowClickable && { background: "borderSecondary" }}
         cursor={cursor}
         isClickable={!!onClick}
         onClick={handleClick}
