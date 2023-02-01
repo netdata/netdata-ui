@@ -77,6 +77,7 @@ const HeadCell = ({ enableResize, enableSorting, headers, pinnedStyles = {}, tab
           }
           headStyles={headStyles}
           key={id}
+          id={id}
           maxWidth={column.columnDef.maxSize}
           minWidth={column.columnDef.minSize}
           onSortClicked={column.getToggleSortingHandler()}
@@ -104,6 +105,7 @@ const HeadCell = ({ enableResize, enableSorting, headers, pinnedStyles = {}, tab
         maxWidth={column.columnDef.maxSize}
         minWidth={column.columnDef.minSize}
         key={id}
+        id={id}
         styles={styles}
         tooltipText={tooltipText}
         width={headWidth}

@@ -44,7 +44,7 @@ const NetdataTable = ({
   onClickRow,
   onColumnVisibilityChange = noop,
   onGlobalSearchChange,
-  onHoverRow,
+  onHoverCell,
   onRowSelected,
   onSortingChange = noop,
   paginationOptions = {
@@ -172,7 +172,7 @@ const NetdataTable = ({
   })
 
   return (
-    <TableProvider onHoverRow={onHoverRow}>
+    <TableProvider onHoverCell={onHoverCell}>
       <Flex height="100%" overflow="hidden" width="100%" column>
         {onGlobalSearchChange || hasBulkActions ? (
           <GlobalControls

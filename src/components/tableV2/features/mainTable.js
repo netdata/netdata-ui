@@ -12,7 +12,7 @@ const MainTable = ({
   testPrefixCallback,
   onClickRow,
   disableClickRow,
-  onHoverRow,
+  onHoverCell,
   enableResize,
   scrollParentRef,
   ...rest
@@ -24,7 +24,7 @@ const MainTable = ({
       scrollParentRef={scrollParentRef}
       width={enableResize ? `${table.getTotalSize()}px` : "100%"}
       enableResize={enableResize}
-      onHoverRow={onHoverRow}
+      onHoverCell={onHoverCell}
       table={table}
       headers={headers}
       enableSorting={enableSorting}

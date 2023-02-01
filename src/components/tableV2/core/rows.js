@@ -19,7 +19,7 @@ const Rows = ({
   loading,
   loadMore,
 }) => {
-  const { onHover, hoveredRow } = useTableContext()
+  const { onHover, hoveredRow, hoveredColumn } = useTableContext()
 
   const { rows } = table.getRowModel()
 
@@ -69,10 +69,6 @@ const Rows = ({
             disableClickRow={() =>
               disableClickRow?.({ data: row.original, table: table, fullRow: row })
             }
-            onMouseEnter={() => onHover(row.id)}
-            onMouseLeave={() => onHover(null)}
-            isHovering={row.id === hoveredRow}
-            background={virtualRow.index % 2 == 0 ? "mainBackground" : "tableRowBg"}
           >
             {cells.map((cell, index) => (
               <Table.Cell
@@ -82,7 +78,16 @@ const Rows = ({
                 minWidth={cell.column.columnDef.minSize}
                 pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
                 width={cell.column.getSize()}
+                onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
+                onMouseLeave={() => onHover()}
                 {...cell.column.columnDef.meta}
+                {...(!!cell.column.getIsSorted() && {
+                  background: "successBackground",
+                  backgroundOpacity: 0.3,
+                })}
+                index={virtualRow.index}
+                isRowHovering={row.id === hoveredRow}
+                isColumnHovering={cell.column.id === hoveredColumn}
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Table.Cell>

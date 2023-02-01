@@ -11,7 +11,7 @@ const FullTable = ({
   getRowHandler,
   headers,
   onClickRow,
-  onHoverRow,
+  onHoverCell,
   pinnedStyles = {},
   table,
   tableRef,
@@ -49,7 +49,7 @@ const FullTable = ({
           disableClickRow={disableClickRow}
           getRowHandler={getRowHandler}
           onClickRow={onClickRow}
-          onHoverRow={onHoverRow}
+          onHoverCell={onHoverCell}
           pinnedStyles={pinnedStyles}
           table={table}
           testPrefix={testPrefix}

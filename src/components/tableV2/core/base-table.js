@@ -8,6 +8,7 @@ import { Text } from "src/components/typography"
 import { IconButton } from "src/components/button"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
+import { useTableContext } from "../features/provider"
 
 //TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
 // the problem is when we are applying column pin the second table has different sizes
@@ -28,7 +29,8 @@ const StyledHeaderCell = styled(Box)`
   padding: 4px 8px;
   border-bottom: 1px solid ${getColor("borderSecondary")};
   &:not(:last-child) {
-    border-right: 1px solid ${getColor("borderSecondary")};
+    border-right: 1px solid
+      ${({ background, theme }) => getColor(background || "borderSecondary")({ theme })};
   }
 `
 
@@ -59,7 +61,7 @@ Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
   </StyledHeaderRow>
 ))
 
-Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
+Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing, background }) => {
   if (!onMouseDown) return
   const resizingProps = getIsResizing() ? { transform: `translateX(${deltaOffset}px)` } : {}
 
@@ -87,7 +89,7 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
       }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
-      background="borderSecondary"
+      background={background || "borderSecondary"}
       position="absolute"
       top={0}
       right={0}
@@ -99,9 +101,11 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing }) => {
 Table.HeadCell = forwardRef(
   (
     {
+      id,
       children,
       align = "left",
       width,
+      minWidth,
       tooltipText,
       filter,
       onMouseDown,
@@ -113,41 +117,48 @@ Table.HeadCell = forwardRef(
       ...props
     },
     ref
-  ) => (
-    <StyledHeaderCell
-      as="th"
-      ref={ref}
-      sx={{
-        textAlign: align,
-        fontSize: "14px",
-        height: "60px",
-        position: "sticky",
-        top: 0,
-        ...styles,
-        ...headStyles,
-      }}
-      width={`${width}px`}
-      {...props}
-    >
-      <Flex>
-        {children}
-        <Box sx={{ marginLeft: "auto" }} position="relative" top={0}>
-          {tooltipText && (
-            <Tooltip align="bottom" content={tooltipText}>
-              <Icon color="nodeBadgeColor" size="small" name="information" />
-            </Tooltip>
-          )}
-        </Box>
-      </Flex>
-      <Box sx={{ fontWeight: "normal" }}>{filter}</Box>
-      <Table.Resizer
-        onMouseDown={onMouseDown}
-        onTouchStart={onTouchStart}
-        getIsResizing={getIsResizing}
-        deltaOffset={deltaOffset}
-      />
-    </StyledHeaderCell>
-  )
+  ) => {
+    const { hoveredColumn, onHover } = useTableContext()
+    const isHovering = id === hoveredColumn
+
+    return (
+      <StyledHeaderCell
+        as="th"
+        ref={ref}
+        sx={{
+          textAlign: align,
+          fontSize: "14px",
+          height: "60px",
+          ...styles,
+          ...headStyles,
+        }}
+        width={{ min: `${minWidth}px`, max: `${width}px` }}
+        onMouseEnter={() => onHover({ row: null, column: id })}
+        onMouseLeave={() => onHover()}
+        {...props}
+        background={!props.background && isHovering ? "borderSecondary" : props.background}
+      >
+        <Flex>
+          {children}
+          <Box position="absolute" top={0.5} right={0.5} width={4} height={4}>
+            {tooltipText && (
+              <Tooltip align="bottom" content={tooltipText}>
+                <Icon color="nodeBadgeColor" size="small" name="information" />
+              </Tooltip>
+            )}
+          </Box>
+        </Flex>
+        <Box sx={{ fontWeight: "normal" }}>{filter}</Box>
+        <Table.Resizer
+          onMouseDown={onMouseDown}
+          onTouchStart={onTouchStart}
+          getIsResizing={getIsResizing}
+          deltaOffset={deltaOffset}
+          background={props.background}
+        />
+      </StyledHeaderCell>
+    )
+  }
 )
 
 const sortingIcons = {
@@ -196,13 +207,13 @@ Table.SortingHeadCell = forwardRef(
         align={align}
         ref={ref}
         data-testid={dataTestid}
-        maxWidth={maxWidth}
-        width={width}
+        width={width || maxWidth}
         minWidth={minWidth}
         tooltipText={tooltipText}
         headStyles={headStyles}
         {...props}
         filter={filter}
+        {...(!!sortDirection && { background: "successBackground" })}
       >
         <Box
           onMouseEnter={onMouseEnter}
@@ -212,14 +223,20 @@ Table.SortingHeadCell = forwardRef(
           cursor="pointer"
           data-testid={sortbyTestid}
         >
-          <Flex data-testid="sorting-cell-children-sorting-arrows-wrapper" gap={1}>
+          <Flex
+            position="relative"
+            data-testid="sorting-cell-children-sorting-arrows-wrapper"
+            gap={1}
+          >
             {children}
-            <Icon
-              height="16px"
-              width="16px"
-              color={showHoveringIcon ? "textLite" : "text"}
-              name={sortingIcons[showHoveringIcon ? "indicator" : sortDirection] ?? null}
-            />
+            <Box position="absolute" top={1} right={-12}>
+              <Icon
+                height="16px"
+                width="16px"
+                color={showHoveringIcon ? "textLite" : "text"}
+                name={sortingIcons[showHoveringIcon ? "indicator" : sortDirection] ?? null}
+              />
+            </Box>
           </Flex>
         </Box>
       </Table.HeadCell>
@@ -245,6 +262,9 @@ Table.Cell = forwardRef(
       pinnedStyles = {},
       styles = {},
       width,
+      isColumnHovering,
+      isRowHovering,
+      index,
       ...rest
     },
     ref
@@ -254,6 +274,7 @@ Table.Cell = forwardRef(
       if (rest.stopPropagation) e.stopPropagation()
       onClick?.()
     }
+
     return (
       <Box
         as="td"
@@ -269,9 +290,21 @@ Table.Cell = forwardRef(
           ...pinnedStyles,
           ...styles,
         }}
-        width={{ max: `${maxWidth}px`, base: `${width}px`, min: `${minWidth}px` }}
+        width={{ max: `${width || maxWidth}px`, min: `${minWidth}px` }}
         overflow="hidden"
         {...rest}
+        background={
+          !rest.background && (isColumnHovering || isRowHovering)
+            ? "borderSecondary"
+            : rest.background || (index % 2 == 0 ? "mainBackground" : "tableRowBg")
+        }
+        backgroundOpacity={
+          isColumnHovering && isRowHovering
+            ? rest.backgroundOpacity
+              ? rest.backgroundOpacity + 0.2
+              : 1
+            : rest.backgroundOpacity || 0.7
+        }
       >
         {children}
       </Box>
@@ -280,10 +313,7 @@ Table.Cell = forwardRef(
 )
 
 Table.Row = forwardRef(
-  (
-    { children, onClick, disableClickRow, onMouseEnter, onMouseLeave, isHovering, ...props },
-    ref
-  ) => {
+  ({ children, onClick, disableClickRow, onMouseEnter, onMouseLeave, ...props }, ref) => {
     const isRowDisabledForClick = disableClickRow && disableClickRow()
     const handleClick = e => {
       if (isRowDisabledForClick) return
@@ -308,13 +338,11 @@ Table.Row = forwardRef(
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         as={StyledRow}
-        _hover={isHovering && isRowClickable && { background: "borderSecondary" }}
         cursor={cursor}
         isClickable={!!onClick}
         onClick={handleClick}
         ref={ref}
         {...props}
-        data-hover={isHovering ? "" : undefined}
       >
         {children}
       </Box>

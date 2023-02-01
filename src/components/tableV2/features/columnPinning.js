@@ -9,7 +9,7 @@ const ColumnPinning = ({
   enableResize,
   enableSorting,
   onClickRow,
-  onHoverRow,
+  onHoverCell,
   table,
   testPrefix,
   testPrefixCallback,
@@ -36,7 +36,7 @@ const ColumnPinning = ({
         getRowHandler="getLeftVisibleCells"
         headers={headers}
         onClickRow={onClickRow}
-        onHoverRow={onHoverRow}
+        onHoverCell={onHoverCell}
         pinnedStyles={{ borderRight: `1px solid ${getThemeColor("borderSecondary")}` }}
         table={table}
         testPrefix={`pin${testPrefix}`}

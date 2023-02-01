@@ -4,8 +4,10 @@ const TableContext = createContext({})
 
 export const useTableContext = () => useContext(TableContext)
 
-const TableProvider = ({ onHoverRow, children }) => {
-  const [state, setState] = useState({ hoveredRow: null })
+const initialState = { hoveredRow: null, hoveredColumn: null }
+
+const TableProvider = ({ onHoverCell, children }) => {
+  const [state, setState] = useState(initialState)
 
   const dispatch = useCallback(values => {
     setState(prev => ({
@@ -15,11 +17,11 @@ const TableProvider = ({ onHoverRow, children }) => {
   }, [])
 
   const onHover = useCallback(
-    id => {
-      dispatch({ hoveredRow: id })
-      onHoverRow?.(id)
+    ({ row, column } = {}) => {
+      dispatch({ hoveredRow: row, hoveredColumn: column })
+      onHoverCell?.({ row, column })
     },
-    [onHoverRow]
+    [onHoverCell]
   )
 
   const contextValue = useMemo(() => ({ ...state, dispatch, onHover }), [state, onHover])
