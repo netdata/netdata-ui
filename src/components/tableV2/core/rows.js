@@ -82,7 +82,8 @@ const Rows = ({
                 onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
                 onMouseLeave={() => onHover()}
                 {...cell.column.columnDef.meta}
-                {...(coloredSortedColumn &&
+                {...(cell.column.getCanSort() &&
+                  coloredSortedColumn &&
                   !!cell.column.getIsSorted() && {
                     background: "successBackground",
                     backgroundOpacity: 0.3,

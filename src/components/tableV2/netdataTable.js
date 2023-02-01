@@ -197,7 +197,7 @@ const NetdataTable = ({
               dataGa={dataGa}
               scrollParentRef={scrollParentRef}
               virtualizeOptions={virtualizeOptions}
-              coloredSortedColumn={coloredSortedColumn}
+              coloredSortedColumn={enableSorting && coloredSortedColumn}
             />
           )}
           <MainTable
@@ -213,7 +213,7 @@ const NetdataTable = ({
             tableRef={tableRef}
             testPrefix={testPrefix}
             virtualizeOptions={virtualizeOptions}
-            coloredSortedColumn={coloredSortedColumn}
+            coloredSortedColumn={enableSorting && coloredSortedColumn}
             {...rest}
           />
         </Flex>

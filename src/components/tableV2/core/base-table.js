@@ -132,7 +132,7 @@ Table.HeadCell = forwardRef(
           ...styles,
           ...headStyles,
         }}
-        width={{ min: `${minWidth}px`, max: `${width}px` }}
+        width={{ min: `${minWidth}px`, max: `${width}px`, base: `${width}px` }}
         onMouseEnter={() => onHover({ row: null, column: id })}
         onMouseLeave={() => onHover()}
         {...props}
@@ -291,7 +291,11 @@ Table.Cell = forwardRef(
           ...pinnedStyles,
           ...styles,
         }}
-        width={{ max: `${width || maxWidth}px`, min: `${minWidth}px` }}
+        width={{
+          base: `${width || maxWidth}px`,
+          max: `${width || maxWidth}px`,
+          min: `${minWidth}px`,
+        }}
         overflow="hidden"
         {...rest}
         background={
