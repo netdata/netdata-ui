@@ -20,6 +20,7 @@ const FullTable = ({
   width,
   scrollParentRef,
   virtualizeOptions = {},
+  coloredSortedColumn,
   ...rest
 }) => {
   return (
@@ -40,6 +41,7 @@ const FullTable = ({
             pinnedStyles={pinnedStyles}
             table={table}
             testPrefix={testPrefix}
+            coloredSortedColumn={coloredSortedColumn}
           />
         </Table.HeadRow>
       </Table.Head>
@@ -54,6 +56,7 @@ const FullTable = ({
           table={table}
           testPrefix={testPrefix}
           testPrefixCallback={testPrefixCallback}
+          coloredSortedColumn={coloredSortedColumn}
           {...virtualizeOptions}
         />
       </Table.Body>

@@ -37,7 +37,15 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const HeadCell = ({ enableResize, enableSorting, headers, pinnedStyles = {}, table, testPrefix }) =>
+const HeadCell = ({
+  enableResize,
+  enableSorting,
+  headers,
+  pinnedStyles = {},
+  table,
+  testPrefix,
+  ...rest
+}) =>
   headers.map(({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
     const { getCanSort, columnDef, getCanResize, getIsResizing } = column
     const { meta } = columnDef
@@ -87,6 +95,7 @@ const HeadCell = ({ enableResize, enableSorting, headers, pinnedStyles = {}, tab
           tooltipText={tooltipText}
           width={headWidth}
           {...resizeFuntions}
+          {...rest}
         >
           {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}{" "}
         </Table.SortingHeadCell>
@@ -110,6 +119,7 @@ const HeadCell = ({ enableResize, enableSorting, headers, pinnedStyles = {}, tab
         tooltipText={tooltipText}
         width={headWidth}
         {...resizeFuntions}
+        {...rest}
       >
         {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
       </Table.HeadCell>

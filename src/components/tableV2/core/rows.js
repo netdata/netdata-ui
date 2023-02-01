@@ -18,6 +18,7 @@ const Rows = ({
   hasNextPage,
   loading,
   loadMore,
+  coloredSortedColumn,
 }) => {
   const { onHover, hoveredRow, hoveredColumn } = useTableContext()
 
@@ -81,10 +82,11 @@ const Rows = ({
                 onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
                 onMouseLeave={() => onHover()}
                 {...cell.column.columnDef.meta}
-                {...(!!cell.column.getIsSorted() && {
-                  background: "successBackground",
-                  backgroundOpacity: 0.3,
-                })}
+                {...(coloredSortedColumn &&
+                  !!cell.column.getIsSorted() && {
+                    background: "successBackground",
+                    backgroundOpacity: 0.3,
+                  })}
                 index={virtualRow.index}
                 isRowHovering={row.id === hoveredRow}
                 isColumnHovering={cell.column.id === hoveredColumn}

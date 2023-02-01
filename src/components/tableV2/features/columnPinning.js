@@ -14,6 +14,7 @@ const ColumnPinning = ({
   testPrefix,
   testPrefixCallback,
   scrollParentRef,
+  ...rest
 }) => {
   const getThemeColor = useColor()
   const headers = table.getLeftFlatHeaders()
@@ -42,6 +43,7 @@ const ColumnPinning = ({
         testPrefix={`pin${testPrefix}`}
         testPrefixCallback={testPrefixCallback}
         width={enableResize ? `${table.getLeftTotalSize()}px` : "100%"}
+        {...rest}
       />
     </Box>
   )

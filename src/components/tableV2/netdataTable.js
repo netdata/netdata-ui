@@ -57,6 +57,7 @@ const NetdataTable = ({
   testPrefix = "",
   testPrefixCallback,
   virtualizeOptions = {},
+  coloredSortedColumn = true,
   ...rest
 }) => {
   const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
@@ -196,6 +197,7 @@ const NetdataTable = ({
               dataGa={dataGa}
               scrollParentRef={scrollParentRef}
               virtualizeOptions={virtualizeOptions}
+              coloredSortedColumn={coloredSortedColumn}
             />
           )}
           <MainTable
@@ -211,6 +213,7 @@ const NetdataTable = ({
             tableRef={tableRef}
             testPrefix={testPrefix}
             virtualizeOptions={virtualizeOptions}
+            coloredSortedColumn={coloredSortedColumn}
             {...rest}
           />
         </Flex>

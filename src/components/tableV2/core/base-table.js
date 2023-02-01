@@ -184,6 +184,7 @@ Table.SortingHeadCell = forwardRef(
       styles = {},
       headStyles = {},
       tooltipText,
+      coloredSortedColumn,
       ...props
     },
     ref
@@ -213,7 +214,7 @@ Table.SortingHeadCell = forwardRef(
         headStyles={headStyles}
         {...props}
         filter={filter}
-        {...(!!sortDirection && { background: "successBackground" })}
+        {...(coloredSortedColumn && !!sortDirection && { background: "successBackground" })}
       >
         <Box
           onMouseEnter={onMouseEnter}
@@ -229,7 +230,7 @@ Table.SortingHeadCell = forwardRef(
             gap={1}
           >
             {children}
-            <Box position="absolute" top={1} right={-12}>
+            <Box position="absolute" top={1} right="-16px">
               <Icon
                 height="16px"
                 width="16px"
