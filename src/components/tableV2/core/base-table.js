@@ -140,7 +140,7 @@ Table.HeadCell = forwardRef(
       >
         <Flex>
           {children}
-          <Box position="absolute" top={0.5} right={0.5} width={4} height={4}>
+          <Box position="absolute" top={1} right="12px" width={4} height={4}>
             {tooltipText && (
               <Tooltip align="bottom" content={tooltipText}>
                 <Icon color="nodeBadgeColor" size="small" name="information" />
@@ -214,7 +214,7 @@ Table.SortingHeadCell = forwardRef(
         headStyles={headStyles}
         {...props}
         filter={filter}
-        {...(coloredSortedColumn && !!sortDirection && { background: "successBackground" })}
+        {...(coloredSortedColumn && !!sortDirection && { background: "columnHighlight" })}
       >
         <Box
           onMouseEnter={onMouseEnter}
@@ -230,7 +230,7 @@ Table.SortingHeadCell = forwardRef(
             gap={1}
           >
             {children}
-            <Box position="absolute" top={1} right="-16px">
+            <Box position="absolute" top={0.5} right="-16px">
               <Icon
                 height="16px"
                 width="16px"
@@ -306,7 +306,7 @@ Table.Cell = forwardRef(
         backgroundOpacity={
           isColumnHovering && isRowHovering
             ? rest.backgroundOpacity
-              ? rest.backgroundOpacity + 0.2
+              ? 0.8
               : 1
             : rest.backgroundOpacity || 0.7
         }

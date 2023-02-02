@@ -5,6 +5,7 @@ const rawColors = {
     popover: "rgba(18, 36, 50, 0.9)",
   },
   green: {
+    poker: "#2f5446",
     chateau: "#42B861",
     netdata: "#00AB44",
     deyork: "#68C47D",
