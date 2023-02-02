@@ -81,6 +81,7 @@ const appColors = {
 
   //Table
   tableRowBg: rawColors.neutral.arsenic,
+  columnHighlight: rawColors.green.poker,
 
   //IconButton
   iconColor: rawColors.neutral.iron,

@@ -85,8 +85,8 @@ const Rows = ({
                 {...(cell.column.getCanSort() &&
                   coloredSortedColumn &&
                   !!cell.column.getIsSorted() && {
-                    background: "successBackground",
-                    backgroundOpacity: 0.3,
+                    background: "columnHighlight",
+                    backgroundOpacity: virtualRow.index % 2 == 0 ? "0.2" : "0.4",
                   })}
                 index={virtualRow.index}
                 isRowHovering={row.id === hoveredRow}
