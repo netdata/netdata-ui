@@ -4,17 +4,18 @@ import ReactSelect, { components } from "react-select"
 import { capitalizeFirstLetter } from "@/lib/glue/utils"
 
 const addDataAttrs =
-  (Component, { ga, testId }) =>
-    props =>
-      (
-        <Component
-          {...props}
-          innerProps={Object.assign({}, props.innerProps, {
-            ...(ga ? { "data-ga": ga } : {}),
-            ...(testId ? { "data-testid": testId } : {}),
-          })}
-        />
-      )
+  (Component, { ga, testId }, hasInnerProps = true) =>
+  ({ innerProps, ...rest }) => {
+    const dataProps = {
+      ...(ga ? { "data-ga": ga } : {}),
+      ...(testId ? { "data-testid": testId } : {}),
+    }
+    const props = {
+      ...rest,
+      ...(hasInnerProps ? { innerProps: { ...innerProps, ...dataProps } } : { ...dataProps }),
+    }
+    return <Component {...props} />
+  }
 
 const makeDataAttrs = (ga, testId) => type => {
   const dataAttrs = {}
@@ -51,7 +52,7 @@ const makeCustomComponents = makeComponentDataAttrs => ({
     components.IndicatorSeparator,
     makeComponentDataAttrs("indicatorSeparator")
   ),
-  Input: addDataAttrs(components.Input, makeComponentDataAttrs("input")),
+  Input: addDataAttrs(components.Input, makeComponentDataAttrs("input"), false),
   LoadingIndicator: addDataAttrs(
     components.LoadingIndicator,
     makeComponentDataAttrs("loadingIndicator")
@@ -132,10 +133,10 @@ const makeCustomStyles = (theme, { size, ...providedStyles } = {}) => ({
     color: state.isDisabled ? theme.colors.placeholder : theme.colors.textDescription,
     ...(size === "tiny"
       ? {
-        lineHeight: "18px",
-        paddingBottom: 0,
-        paddingTop: 0,
-      }
+          lineHeight: "18px",
+          paddingBottom: 0,
+          paddingTop: 0,
+        }
       : {}),
   }),
   menu: styles => ({ ...styles, zIndex: 100 }),
@@ -159,13 +160,13 @@ const makeCustomStyles = (theme, { size, ...providedStyles } = {}) => ({
     ...(state.data.isDisabled
       ? { ...styles, display: "none" }
       : {
-        ...styles,
-        borderRadius: "2px 0 0 2px",
-        background: theme.colors.disabled,
-        ":hover": {
-          background: theme.colors.tabsBorder,
-        },
-      }),
+          ...styles,
+          borderRadius: "2px 0 0 2px",
+          background: theme.colors.disabled,
+          ":hover": {
+            background: theme.colors.tabsBorder,
+          },
+        }),
   }),
   option: (styles, state) => ({
     ...styles,
@@ -184,26 +185,24 @@ const makeCustomStyles = (theme, { size, ...providedStyles } = {}) => ({
   }),
   ...(size === "tiny"
     ? {
-      dropdownIndicator: styles => ({ ...styles, padding: "3px" }),
-      clearIndicator: styles => ({ ...styles, padding: "3px" }),
-      indicatorsContainer: styles => ({ ...styles, minHeight: 28 }),
-      valueContainer: styles => ({
-        ...styles,
-        minHeight: 28,
-        padding: "1px 6px",
-      }),
-    }
+        dropdownIndicator: styles => ({ ...styles, padding: "3px" }),
+        clearIndicator: styles => ({ ...styles, padding: "3px" }),
+        indicatorsContainer: styles => ({ ...styles, minHeight: 28 }),
+        valueContainer: styles => ({
+          ...styles,
+          minHeight: 28,
+          padding: "1px 6px",
+        }),
+      }
     : {}),
   ...providedStyles,
 })
 
-const Select = styled(ReactSelect).attrs(
-  ({ "data-ga": ga, "data-testid": testId, ...props }) => ({
-    ...props,
-    components: makeCustomComponents(makeDataAttrs(ga, testId)),
-    theme: makeCustomTheme(props.theme),
-    styles: makeCustomStyles(props.theme, props.styles),
-  })
-)``
+const Select = styled(ReactSelect).attrs(({ "data-ga": ga, "data-testid": testId, ...props }) => ({
+  ...props,
+  components: makeCustomComponents(makeDataAttrs(ga, testId)),
+  theme: makeCustomTheme(props.theme),
+  styles: makeCustomStyles(props.theme, props.styles),
+}))``
 
 export default Select
