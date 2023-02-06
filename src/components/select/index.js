@@ -3,7 +3,7 @@ import styled from "styled-components"
 import ReactSelect, { components } from "react-select"
 import { capitalizeFirstLetter } from "src/utils"
 
-const addDataAttrs =
+const withDataAttrs =
   (Component, { ga, testId }, hasInnerProps = true) =>
   ({ innerProps, ...rest }) => {
     const dataProps = {
@@ -34,58 +34,67 @@ const makeDataAttrs = (ga, testId) => type => {
 }
 
 const makeCustomComponents = makeComponentDataAttrs => ({
-  ClearIndicator: addDataAttrs(components.ClearIndicator, makeComponentDataAttrs("clearIndicator")),
-  Control: addDataAttrs(components.Control, makeComponentDataAttrs("clearIndicator")),
-  DropdownIndicator: addDataAttrs(
+  ClearIndicator: withDataAttrs(
+    components.ClearIndicator,
+    makeComponentDataAttrs("clearIndicator")
+  ),
+  Control: withDataAttrs(components.Control, makeComponentDataAttrs("clearIndicator")),
+  DropdownIndicator: withDataAttrs(
     components.DropdownIndicator,
     makeComponentDataAttrs("dropdownIndicator")
   ),
-  DownChevron: addDataAttrs(components.DownChevron, makeComponentDataAttrs("downChevron")),
-  CrossIcon: addDataAttrs(components.CrossIcon, makeComponentDataAttrs("crossIcon")),
-  Group: addDataAttrs(components.Group, makeComponentDataAttrs("group")),
-  GroupHeading: addDataAttrs(components.GroupHeading, makeComponentDataAttrs("groupHeading")),
-  IndicatorsContainer: addDataAttrs(
+  DownChevron: withDataAttrs(components.DownChevron, makeComponentDataAttrs("downChevron")),
+  CrossIcon: withDataAttrs(components.CrossIcon, makeComponentDataAttrs("crossIcon")),
+  Group: withDataAttrs(components.Group, makeComponentDataAttrs("group")),
+  GroupHeading: withDataAttrs(components.GroupHeading, makeComponentDataAttrs("groupHeading")),
+  IndicatorsContainer: withDataAttrs(
     components.IndicatorsContainer,
     makeComponentDataAttrs("indicatorsContainer")
   ),
-  IndicatorSeparator: addDataAttrs(
+  IndicatorSeparator: withDataAttrs(
     components.IndicatorSeparator,
     makeComponentDataAttrs("indicatorSeparator")
   ),
-  Input: addDataAttrs(components.Input, makeComponentDataAttrs("input"), false),
-  LoadingIndicator: addDataAttrs(
+  Input: withDataAttrs(components.Input, makeComponentDataAttrs("input"), false),
+  LoadingIndicator: withDataAttrs(
     components.LoadingIndicator,
     makeComponentDataAttrs("loadingIndicator")
   ),
-  Menu: addDataAttrs(components.Menu, makeComponentDataAttrs("menu")),
-  MenuList: addDataAttrs(components.MenuList, makeComponentDataAttrs("menuList")),
-  MenuPortal: addDataAttrs(components.MenuPortal, makeComponentDataAttrs("menuPortal")),
-  LoadingMessage: addDataAttrs(components.LoadingMessage, makeComponentDataAttrs("loadingMessage")),
-  NoOptionsMessage: addDataAttrs(
+  Menu: withDataAttrs(components.Menu, makeComponentDataAttrs("menu")),
+  MenuList: withDataAttrs(components.MenuList, makeComponentDataAttrs("menuList")),
+  MenuPortal: withDataAttrs(components.MenuPortal, makeComponentDataAttrs("menuPortal")),
+  LoadingMessage: withDataAttrs(
+    components.LoadingMessage,
+    makeComponentDataAttrs("loadingMessage")
+  ),
+  NoOptionsMessage: withDataAttrs(
     components.NoOptionsMessage,
     makeComponentDataAttrs("noOptionsMessage")
   ),
-  MultiValue: addDataAttrs(components.MultiValue, makeComponentDataAttrs("multiValue")),
-  MultiValueContainer: addDataAttrs(
+  MultiValue: withDataAttrs(components.MultiValue, makeComponentDataAttrs("multiValue")),
+  MultiValueContainer: withDataAttrs(
     components.MultiValueContainer,
     makeComponentDataAttrs("multiValueContainer")
   ),
-  MultiValueLabel: addDataAttrs(
+  MultiValueLabel: withDataAttrs(
     components.MultiValueLabel,
     makeComponentDataAttrs("multiValueLabel")
   ),
-  MultiValueRemove: addDataAttrs(
+  MultiValueRemove: withDataAttrs(
     components.MultiValueRemove,
     makeComponentDataAttrs("multiValueRemove")
   ),
-  Option: addDataAttrs(components.Option, makeComponentDataAttrs("option")),
-  Placeholder: addDataAttrs(components.Placeholder, makeComponentDataAttrs("placeholder")),
-  SelectContainer: addDataAttrs(
+  Option: withDataAttrs(components.Option, makeComponentDataAttrs("option")),
+  Placeholder: withDataAttrs(components.Placeholder, makeComponentDataAttrs("placeholder")),
+  SelectContainer: withDataAttrs(
     components.SelectContainer,
     makeComponentDataAttrs("selectContainer")
   ),
-  SingleValue: addDataAttrs(components.SingleValue, makeComponentDataAttrs("singleValue")),
-  ValueContainer: addDataAttrs(components.ValueContainer, makeComponentDataAttrs("valueContainer")),
+  SingleValue: withDataAttrs(components.SingleValue, makeComponentDataAttrs("singleValue")),
+  ValueContainer: withDataAttrs(
+    components.ValueContainer,
+    makeComponentDataAttrs("valueContainer")
+  ),
 })
 
 const makeCustomTheme = theme => selectTheme => {
