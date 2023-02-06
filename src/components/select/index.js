@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import ReactSelect, { components } from "react-select"
-import { capitalizeFirstLetter } from "@/lib/glue/utils"
+import { capitalizeFirstLetter } from "src/utils"
 
 const addDataAttrs =
   (Component, { ga, testId }, hasInnerProps = true) =>
