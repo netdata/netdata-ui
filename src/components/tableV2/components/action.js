@@ -32,6 +32,7 @@ const Action = forwardRef(
       flavour = "borderless",
       CustomUIAction,
       label,
+      TooltipComponent = Tooltip,
       ...rest
     },
     ref
@@ -87,12 +88,12 @@ const Action = forwardRef(
             handleConfirm={onActionConfirmed}
           />
         )}
-        <Tooltip content={disabled ? disabledTooltipText : tooltipText}>
+        <TooltipComponent content={disabled ? disabledTooltipText : tooltipText}>
           <Flex
             ref={ref}
             alignItems="center"
             justifyContent="center"
-            _hover={{ background: (disabled || label) ? null : "borderSecondary" }}
+            _hover={{ background: disabled || label ? null : "borderSecondary" }}
             cursor={disabled ? "auto" : "pointer"}
             key={id}
             round
@@ -111,7 +112,7 @@ const Action = forwardRef(
               {...rest}
             />
           </Flex>
-        </Tooltip>
+        </TooltipComponent>
       </>
     )
   }
