@@ -31,8 +31,8 @@ const Action = forwardRef(
       iconColor,
       flavour = "borderless",
       CustomUIAction,
-      CustomTooltip,
       label,
+      TooltipComponent = Tooltip,
       ...rest
     },
     ref
@@ -59,7 +59,6 @@ const Action = forwardRef(
     }
 
     const Component = label ? Button : IconButton
-    const TooltipComponent = CustomTooltip || Tooltip
 
     return (
       <>
