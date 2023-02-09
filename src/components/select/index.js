@@ -2,31 +2,35 @@ import React, { useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 
-const withDataAttrs =
-  (Component, name, hasInnerProps = true) =>
-  props => {
-    const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
+const useDataAttrs = (props, name) => {
+  const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
 
-    const ga = useMemo(() => {
-      if (!dataGA) return dataGA
+  const ga = useMemo(() => {
+    if (!dataGA) return dataGA
 
-      const gaParts = dataGA.split("::")
-      if (!gaParts[1]) return dataGA
+    const gaParts = dataGA.split("::")
+    if (!gaParts[1]) return dataGA
 
-      gaParts[1] = `${gaParts[1]}-${name}`
-      return gaParts.join("::")
-    }, [dataGA])
+    gaParts[1] = `${gaParts[1]}-${name}`
+    return gaParts.join("::")
+  }, [dataGA])
 
-    const testId = `${dataTestId || ""}${name}`
+  const testId = `${dataTestId || ""}${name}`
 
-    const dataProps = { "data-ga": ga, "data-testid": testId }
-    const componentProps = {
-      ...props,
-      ...(hasInnerProps ? { innerProps: { ...props.innerProps, ...dataProps } } : { ...dataProps }),
-    }
+  return { "data-ga": ga, "data-testid": testId }
+}
 
-    return <Component {...componentProps} />
-  }
+const withDataAttrs = (Component, name) => props => {
+  const dataProps = useDataAttrs(props, name)
+
+  return <Component {...props} innerProps={{ ...(props.innerProps || {}), ...dataProps }} />
+}
+
+const withDOMDataAttrs = (Component, name) => props => {
+  const dataProps = useDataAttrs(props, name)
+
+  return <Component {...props} {...dataProps} />
+}
 
 const customComponents = {
   ...defaultComponents,
@@ -39,7 +43,7 @@ const customComponents = {
   GroupHeading: withDataAttrs(defaultComponents.GroupHeading, "GroupHeading"),
   IndicatorsContainer: withDataAttrs(defaultComponents.IndicatorsContainer, "IndicatorsContainer"),
   IndicatorSeparator: withDataAttrs(defaultComponents.IndicatorSeparator, "IndicatorSeparator"),
-  Input: withDataAttrs(defaultComponents.Input, "Input", false),
+  Input: withDOMDataAttrs(defaultComponents.Input, "Input"),
   LoadingIndicator: withDataAttrs(defaultComponents.LoadingIndicator, "LoadingIndicator"),
   Menu: withDataAttrs(defaultComponents.Menu, "Menu"),
   MenuList: withDataAttrs(defaultComponents.MenuList, "MenuList"),
