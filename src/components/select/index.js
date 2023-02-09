@@ -2,51 +2,59 @@ import React, { useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 
-const withDataAttrs = Component => props => {
-  const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
+const withDataAttrs =
+  (Component, name, hasInnerProps = true) =>
+  props => {
+    const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
 
-  const ga = useMemo(() => {
-    if (!dataGA) return dataGA
+    const ga = useMemo(() => {
+      if (!dataGA) return dataGA
 
-    const gaParts = dataGA.split("::")
-    if (!gaParts[1]) return dataGA
+      const gaParts = dataGA.split("::")
+      if (!gaParts[1]) return dataGA
 
-    gaParts[1] = `${gaParts[1]}-${Component.displayName}`
-    return gaParts.join("::")
-  }, [dataGA])
+      gaParts[1] = `${gaParts[1]}-${name}`
+      return gaParts.join("::")
+    }, [dataGA])
 
-  const testId = `${dataTestId || ""}${Component.displayName}`
+    const testId = `${dataTestId || ""}${name}`
 
-  return <Component data-ga={ga} data-testid={testId} {...props} />
-}
+    const dataProps = { "data-ga": ga, "data-testid": testId }
+    const componentProps = {
+      ...props,
+      ...(hasInnerProps ? { innerProps: { ...props.innerProps, ...dataProps } } : { ...dataProps }),
+    }
+
+    return <Component {...componentProps} />
+  }
 
 const customComponents = {
   ...defaultComponents,
-  ClearIndicator: withDataAttrs(defaultComponents.ClearIndicator),
-  Control: withDataAttrs(defaultComponents.Control),
-  DropdownIndicator: withDataAttrs(defaultComponents.DropdownIndicator),
-  DownChevron: withDataAttrs(defaultComponents.DownChevron),
-  CrossIcon: withDataAttrs(defaultComponents.CrossIcon),
-  Group: withDataAttrs(defaultComponents.Group),
-  GroupHeading: withDataAttrs(defaultComponents.GroupHeading),
-  IndicatorsContainer: withDataAttrs(defaultComponents.IndicatorsContainer),
-  IndicatorSeparator: withDataAttrs(defaultComponents.IndicatorSeparator),
-  Input: withDataAttrs(defaultComponents.Input),
-  LoadingIndicator: withDataAttrs(defaultComponents.LoadingIndicator),
-  Menu: withDataAttrs(defaultComponents.Menu),
-  MenuList: withDataAttrs(defaultComponents.MenuList),
-  MenuPortal: withDataAttrs(defaultComponents.MenuPortal),
-  LoadingMessage: withDataAttrs(defaultComponents.LoadingMessage),
-  NoOptionsMessage: withDataAttrs(defaultComponents.NoOptionsMessage),
-  MultiValue: withDataAttrs(defaultComponents.MultiValue),
-  MultiValueContainer: withDataAttrs(defaultComponents.MultiValueContainer),
-  MultiValueLabel: withDataAttrs(defaultComponents.MultiValueLabel),
-  MultiValueRemove: withDataAttrs(defaultComponents.MultiValueRemove),
-  Option: withDataAttrs(defaultComponents.Option),
-  Placeholder: withDataAttrs(defaultComponents.Placeholder),
-  SelectContainer: withDataAttrs(defaultComponents.SelectContainer),
-  SingleValue: withDataAttrs(defaultComponents.SingleValue),
-  ValueContainer: withDataAttrs(defaultComponents.ValueContainer),
+  ClearIndicator: withDataAttrs(defaultComponents.ClearIndicator, "ClearIndicator"),
+  Control: withDataAttrs(defaultComponents.Control, "Control"),
+  DropdownIndicator: withDataAttrs(defaultComponents.DropdownIndicator, "DropdownIndicator"),
+  DownChevron: withDataAttrs(defaultComponents.DownChevron, "DownChevron"),
+  CrossIcon: withDataAttrs(defaultComponents.CrossIcon, "CrossIcon"),
+  Group: withDataAttrs(defaultComponents.Group, "Group"),
+  GroupHeading: withDataAttrs(defaultComponents.GroupHeading, "GroupHeading"),
+  IndicatorsContainer: withDataAttrs(defaultComponents.IndicatorsContainer, "IndicatorsContainer"),
+  IndicatorSeparator: withDataAttrs(defaultComponents.IndicatorSeparator, "IndicatorSeparator"),
+  Input: withDataAttrs(defaultComponents.Input, "Input", false),
+  LoadingIndicator: withDataAttrs(defaultComponents.LoadingIndicator, "LoadingIndicator"),
+  Menu: withDataAttrs(defaultComponents.Menu, "Menu"),
+  MenuList: withDataAttrs(defaultComponents.MenuList, "MenuList"),
+  MenuPortal: withDataAttrs(defaultComponents.MenuPortal, "MenuPortal"),
+  LoadingMessage: withDataAttrs(defaultComponents.LoadingMessage, "LoadingMessage"),
+  MultiValue: withDataAttrs(defaultComponents.MultiValue, "MultiValue"),
+  MultiValueContainer: withDataAttrs(defaultComponents.MultiValueContainer, "MultiValueContainer"),
+  MultiValueLabel: withDataAttrs(defaultComponents.MultiValueLabel, "MultiValueLabel"),
+  MultiValueRemove: withDataAttrs(defaultComponents.MultiValueRemove, "MultiValueRemove"),
+  NoOptionsMessage: withDataAttrs(defaultComponents.NoOptionsMessage, "NoOptionsMessage"),
+  Option: withDataAttrs(defaultComponents.Option, "Option"),
+  Placeholder: withDataAttrs(defaultComponents.Placeholder, "Placeholder"),
+  SelectContainer: withDataAttrs(defaultComponents.SelectContainer, "SelectContainer"),
+  SingleValue: withDataAttrs(defaultComponents.SingleValue, "SingleValue"),
+  ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
 }
 
 const makeCustomTheme = theme => selectTheme => {
