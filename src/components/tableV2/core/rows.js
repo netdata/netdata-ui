@@ -40,8 +40,8 @@ const Rows = ({
 
     if (!lastItem) return
 
-    if (lastItem.index >= rows.length - 1 && hasNextPage && !loading) loadMore()
-  }, [virtualRows])
+    if (lastItem.index === rows.length - 1 && hasNextPage && !loading) loadMore()
+  }, [virtualRows, loading])
 
   const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
 

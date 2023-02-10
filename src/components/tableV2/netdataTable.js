@@ -8,6 +8,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import Flex from "src/components/templates/flex"
+import { Text } from "src/components/typography"
+import { IconComponents, Icon } from "src/components/icon"
 import { comparison, select, includesString } from "./helpers/filterFns"
 import useColumns from "./features/useColumns"
 import makePagination from "./features/pagination"
@@ -172,6 +174,8 @@ const NetdataTable = ({
     testPrefix,
   })
 
+  const { hasNextPage, loading, warning } = virtualizeOptions
+
   return (
     <TableProvider onHoverCell={onHoverCell}>
       <Flex height="100%" overflow="hidden" width="100%" column>
@@ -183,39 +187,53 @@ const NetdataTable = ({
             searchValue={globalFilter}
           />
         ) : null}
-        <Flex ref={scrollParentRef} overflow="auto" width="100%" height="100%">
-          {enableColumnPinning && (
-            <ColumnPinning
+        <Flex column ref={scrollParentRef} overflow="auto" width="100%" height="100%">
+          <Flex>
+            {enableColumnPinning && (
+              <ColumnPinning
+                enableResize={enableResize}
+                disableClickRow={disableClickRow}
+                onClickRow={onClickRow}
+                testPrefixCallback={testPrefixCallback}
+                enableSorting={enableSorting}
+                table={table}
+                headers={table.getLeftFlatHeaders()}
+                testPrefix={testPrefix}
+                dataGa={dataGa}
+                scrollParentRef={scrollParentRef}
+                virtualizeOptions={virtualizeOptions}
+                coloredSortedColumn={enableSorting && coloredSortedColumn}
+              />
+            )}
+            <MainTable
+              scrollParentRef={scrollParentRef}
               enableResize={enableResize}
               disableClickRow={disableClickRow}
               onClickRow={onClickRow}
               testPrefixCallback={testPrefixCallback}
               enableSorting={enableSorting}
+              enableColumnPinning={enableColumnPinning}
               table={table}
-              headers={table.getLeftFlatHeaders()}
-              testPrefix={testPrefix}
               dataGa={dataGa}
-              scrollParentRef={scrollParentRef}
+              tableRef={tableRef}
+              testPrefix={testPrefix}
               virtualizeOptions={virtualizeOptions}
               coloredSortedColumn={enableSorting && coloredSortedColumn}
+              {...rest}
             />
+          </Flex>
+          {!hasNextPage && !loading && !!warning && (
+            <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
+              <Icon name="warning_triangle_hollow" color="warning" />{" "}
+              <Text color="warningText">{warning}</Text>
+            </Flex>
           )}
-          <MainTable
-            scrollParentRef={scrollParentRef}
-            enableResize={enableResize}
-            disableClickRow={disableClickRow}
-            onClickRow={onClickRow}
-            testPrefixCallback={testPrefixCallback}
-            enableSorting={enableSorting}
-            enableColumnPinning={enableColumnPinning}
-            table={table}
-            dataGa={dataGa}
-            tableRef={tableRef}
-            testPrefix={testPrefix}
-            virtualizeOptions={virtualizeOptions}
-            coloredSortedColumn={enableSorting && coloredSortedColumn}
-            {...rest}
-          />
+
+          {hasNextPage && loading && (
+            <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
+              <IconComponents.LoaderIcon /> <Text>Loading more...</Text>
+            </Flex>
+          )}
         </Flex>
         {enablePagination && makePagination({ table })}
       </Flex>
