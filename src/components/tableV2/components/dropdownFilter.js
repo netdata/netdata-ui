@@ -1,8 +1,18 @@
 import React from "react"
 import Select from "src/components/select"
 
-const DropdownFilter = ({ onChange, value, options, isMulti, styles }) => (
+const DropdownFilter = ({
+  "data-ga": dataGA,
+  "data-testid": dataTestId,
+  onChange,
+  value,
+  options,
+  isMulti,
+  styles,
+}) => (
   <Select
+    data-testid={dataTestId}
+    data-ga={dataGA}
     isMulti={isMulti}
     options={options}
     value={value}

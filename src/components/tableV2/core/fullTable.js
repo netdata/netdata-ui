@@ -35,6 +35,7 @@ const FullTable = ({
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
         <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
           <HeadCell
+            dataGa={dataGa}
             enableResize={enableResize}
             enableSorting={enableSorting}
             headers={headers}

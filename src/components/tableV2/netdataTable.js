@@ -1,5 +1,5 @@
 //TODO refactor bulk action and row action to single function to decrease repeatability
-import React, { useEffect, useState, useCallback, useRef } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -9,8 +9,8 @@ import {
 } from "@tanstack/react-table"
 import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
-import { IconComponents, Icon } from "src/components/icon"
-import { comparison, select, includesString } from "./helpers/filterFns"
+import { Icon, IconComponents } from "src/components/icon"
+import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./features/useColumns"
 import makePagination from "./features/pagination"
 import useBulkActions from "./features/useBulkActions"
@@ -167,6 +167,7 @@ const NetdataTable = ({
   const actions = useBulkActions({
     bulkActions,
     columnPinning,
+    dataGa,
     enableColumnVisibility,
     enableColumnPinning,
     selectedRows,
