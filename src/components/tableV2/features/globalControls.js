@@ -11,13 +11,14 @@ const GlobalControls = ({
   searchPlaceholder = "Search",
   searchValue,
 }) => {
+  const wordsCount = searchValue?.split(" ").filter(x => !!x).length
   return (
     <Flex width="100%" zIndex={10} background="mainBackground" padding={[0, 0, 4]}>
       {handleSearch && (
         <Flex width={{ max: 100, base: "40%" }}>
           <SearchInput
             data-testid="table-global-search-filter"
-            data-ga={`${dataGa}::search::table-filter`}
+            data-ga={`${dataGa}::search-${wordsCount}-words::table-filter`}
             defaultValue={searchValue}
             iconRight={<Icon name="magnify" color="textLite" />}
             onChange={debounce(300, e => {

@@ -179,6 +179,7 @@ Table.SortingHeadCell = forwardRef(
       sortDirection,
       filter,
       align = "left",
+      dataGa,
       "data-testid": dataTestid,
       "sortby-testid": sortbyTestid,
       styles = {},
@@ -223,6 +224,9 @@ Table.SortingHeadCell = forwardRef(
           position="relative"
           cursor="pointer"
           data-testid={sortbyTestid}
+          data-ga={`${dataGa}::click-${sortDirection ? "ascending" : "descending"}-column-${
+            props.id
+          }`}
         >
           <Flex
             position="relative"

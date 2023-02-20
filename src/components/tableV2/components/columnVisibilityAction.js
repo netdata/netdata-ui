@@ -6,6 +6,7 @@ import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is use
 const ColumnVisibilityAction = ({
   alwaysEnabled,
   columnPinning = {},
+  dataGa,
   enableColumnPinning,
   handleAction,
   id,
@@ -60,10 +61,12 @@ const ColumnVisibilityAction = ({
         disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
         background="elementBackground"
         selectedRows={selectedRows}
+        dataGa={dataGa}
         {...rest}
       />
       <ColumnsMenu
         columns={columns}
+        dataGa={dataGa}
         isOpen={isOpen}
         onClose={onClose}
         parentRef={actionRef}
