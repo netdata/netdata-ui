@@ -18,9 +18,18 @@ const makeFontWeight =
   ({ strong = defaultStrong }) =>
     `font-weight: ${strong ? "bold" : "normal"};`
 export const fontColor = ({ theme, color = "text" }) => `color: ${getColor(color)({ theme })};`
+export const fontCode = ({ background = "text", code, color = "elementBackground", theme }) =>
+  code &&
+  `
+  background-color: ${getColor(background)({ theme })};
+  border-radius: 4px;
+  color: ${getColor(color)({ theme })};
+  padding: 0 6px;
+  `
 
 const typography = css`
   ${fontColor}
+  ${fontCode}
   ${alignSelf}
   ${textAlign}
   ${textDecoration}
