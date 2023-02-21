@@ -14,13 +14,14 @@ const radioButtonStyles = {
 }
 
 const RadioButton = ({
-  label,
-  checked,
-  disabled,
-  children,
-  margin,
+  alignItems = "center",
   alignSelf,
+  checked,
+  children,
+  disabled,
   iconProps,
+  label,
+  margin,
   ...rest
 }) => {
   const radioStatus =
@@ -39,7 +40,7 @@ const RadioButton = ({
   const showIcon = radioStatus === "checkedDisabled" || radioStatus === "checked"
 
   return (
-    <Container disabled={disabled} margin={margin} alignSelf={alignSelf}>
+    <Container alignItems={alignItems} alignSelf={alignSelf} disabled={disabled} margin={margin}>
       <Input type="radio" disabled={disabled} checked={checked} {...rest} />
       <IconContainer
         background={radioStyles.containerColor}
