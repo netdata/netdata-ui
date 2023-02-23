@@ -12,13 +12,13 @@ const getContent = content => (typeof content === "function" ? content() : conte
 const Popover = forwardRef(
   (
     {
-      plain,
-      open: initialOpen = false,
       align = "top",
-      dropProps,
-      content,
       animation,
       children,
+      content,
+      dropProps,
+      open: initialOpen = false,
+      plain,
       zIndex = 70,
       ...rest
     },
@@ -60,16 +60,16 @@ const Popover = forwardRef(
         {targetElement}
         {isOpen && ref.current && (
           <Drop
-            id={id}
-            hideShadow
-            {...dropProps}
             align={dropProps?.align || dropAlignMap[align]}
             animation={animation}
+            id={id}
+            hideShadow
             onEsc={close}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             target={ref.current}
             zIndex={zIndex}
+            {...dropProps}
           >
             {plain ? (
               getContent(content)
