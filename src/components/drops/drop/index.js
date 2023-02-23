@@ -60,18 +60,12 @@ const Drop = forwardRef(
     const el = useDropElement()
 
     return ReactDOM.createPortal(
-      backdrop ? (
-        <>
-          <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
-            {children}
-          </Container>
-          <Backdrop />
-        </>
-      ) : (
+      <>
         <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
           {children}
         </Container>
-      ),
+        {backdrop && <Backdrop />}
+      </>,
       el
     )
   }
