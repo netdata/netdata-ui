@@ -2,7 +2,7 @@ import React from "react"
 import { renderWithProviders, screen } from "testUtilities"
 import ProgressBar from "."
 
-describe("Tooltip Content component", () => {
+describe("ProgressBar component", () => {
   test("should render component with width", () => {
     renderWithProviders(<ProgressBar width="20%" />)
 
