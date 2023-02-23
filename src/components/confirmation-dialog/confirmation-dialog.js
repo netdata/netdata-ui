@@ -41,7 +41,7 @@ const ConfirmationDialog = ({
         <Actions data-testid={`${dataTestId}-actions`}>
           {handleDecline && (
             <Button
-              data-ga={`${dataGA}-::click-cancel::global-view`}
+              data-ga={`${dataGA}::click-cancel::global-view`}
               data-testid={`${dataTestId}-cancelAction`}
               flavour="hollow"
               label={declineLabel}
@@ -50,7 +50,7 @@ const ConfirmationDialog = ({
             />
           )}
           <Button
-            data-ga={`${dataGA}-::click-confirm::global-view`}
+            data-ga={`${dataGA}::click-confirm::global-view`}
             data-testid={`${dataTestId}-confirmAction`}
             danger={!isConfirmPositive && true}
             disabled={isConfirmDisabled}
