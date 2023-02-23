@@ -1,14 +1,24 @@
-import { ReactNode, FC } from "react"
+import { FC } from "react"
+import { PaddingProps, ZIndexProps } from "src/mixins/types"
 import { DropProps } from "../drop"
 
-export interface PopoverProps {
-  plain?: boolean
-  open?: boolean
+export interface PopoverProps extends PaddingProps, ZIndexProps {
   align?: "top" | "right" | "bottom" | "left"
-  dropProps?: DropProps
-  content: ReactNode | (() => ReactNode)
-  children: any
   allowHoverOnTooltip?: boolean
+  animation?: boolean
+  background?: string
+  children: string | JSX.Element
+  content?: string | JSX.Element
+  disabled?: boolean
+  dropProps?: DropProps
+  icon?: string
+  iconColor?: string
+  isBasic?: boolean
+  open?: boolean
+  plain?: boolean
+  small?: boolean
+  title?: string | JSX.Element
+  width?: string
   [key: string]: any
 }
 

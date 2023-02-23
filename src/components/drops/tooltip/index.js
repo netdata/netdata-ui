@@ -6,22 +6,32 @@ import useClonedChildren from "src/components/drops/mixins/useClonedChildren"
 import useDescribedId from "src/components/drops/mixins/useDescribedId"
 import dropAlignMap from "src/components/drops/mixins/dropAlignMap"
 import Container from "src/components/drops/container"
+import Content from "./content"
 
-const getContent = content => (typeof content === "function" ? content() : content)
+const getContent = (content, props) =>
+  typeof content === "function" ? content() : <Content content={content} {...props} />
 
 const Tooltip = forwardRef(
   (
     {
-      plain,
-      open: initialOpen = false,
       align = "top",
-      dropProps,
-      content,
-      animation,
-      disabled,
-      zIndex = 80,
-      children,
       allowHoverOnTooltip,
+      animation,
+      background = "tooltip",
+      children,
+      content,
+      disabled,
+      dropProps,
+      icon,
+      iconColor,
+      isBasic,
+      open: initialOpen = false,
+      padding = [2],
+      plain,
+      small,
+      title,
+      width,
+      zIndex = 80,
       ...rest
     },
     parentRef
@@ -32,6 +42,8 @@ const Tooltip = forwardRef(
     const [ref, setRef] = useForwardRef(parentRef)
 
     const targetElement = useClonedChildren(children, setRef, {
+      onBlur: close,
+      onFocus: open,
       onMouseEnter: open,
       onMouseLeave: !allowHoverOnTooltip
         ? close
@@ -40,8 +52,6 @@ const Tooltip = forwardRef(
               if (onTooltipRef.current) return
               close()
             }, 300),
-      onFocus: open,
-      onBlur: close,
       ...(isOpen && { "aria-describedby": id }),
       ...rest,
     })
@@ -52,9 +62,19 @@ const Tooltip = forwardRef(
       if (ref.current && initialOpen) open()
     }, [])
 
-    if (!content) {
+    if (!content && !title) {
       return children
     }
+
+    const tooltipContent = getContent(content, {
+      background,
+      icon,
+      iconColor,
+      padding,
+      title,
+      ...(!isBasic ? { width: { max: width || small ? "200px" : "300px" } } : {}),
+      ...(plain ? { margin: [2] } : {}),
+    })
 
     return (
       <Fragment>
@@ -62,24 +82,26 @@ const Tooltip = forwardRef(
         {isOpen && ref.current && !disabled && (
           <Drop
             align={dropProps?.align || dropAlignMap[align]}
+            animation={animation}
             hideShadow
             id={id}
             onClickOutside={close}
+            onEsc={close}
             onMouseEnter={() => (onTooltipRef.current = true)}
             onMouseLeave={() => {
               onTooltipRef.current = false
               close()
             }}
             target={ref.current}
-            {...dropProps}
-            animation={animation}
-            onEsc={close}
             zIndex={zIndex}
+            {...dropProps}
           >
             {plain ? (
-              getContent(content)
+              tooltipContent
             ) : (
-              <Container align={align}>{getContent(content)}</Container>
+              <Container align={align} padding={[0]}>
+                {tooltipContent}
+              </Container>
             )}
           </Drop>
         )}

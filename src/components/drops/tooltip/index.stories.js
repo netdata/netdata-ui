@@ -45,6 +45,54 @@ story.add(
   subData
 )
 
+story.add(
+  "Default Variations",
+  () => (
+    <Flex gap={4} flexWrap>
+      <Tooltip align="top" content="Plain tooltip content" plain>
+        <Flex padding={[1, 2]} background="elementBackground" border>
+          Plain
+        </Flex>
+      </Tooltip>
+      <Tooltip
+        align="top"
+        icon="integrationSlackColored"
+        iconColor="default"
+        content="Choose how to aggregate metrics,
+over a specific timeframe, from your
+clusters pods or containers."
+        title="This is a scalable tooltip"
+      >
+        <Flex padding={[1, 2]} background="elementBackground" border>
+          With title and icon
+        </Flex>
+      </Tooltip>
+      <Tooltip
+        align="top"
+        content="Choose how to aggregate metrics,
+over a specific timeframe, from your
+clusters pods or containers."
+        title="This is a scalable tooltip"
+      >
+        <Flex padding={[1, 2]} background="elementBackground" border>
+          With title
+        </Flex>
+      </Tooltip>
+      <Tooltip align="top" icon="integrationSlack" title="This is a scalable tooltip">
+        <Flex padding={[1, 2]} background="elementBackground" border>
+          Only title and icon
+        </Flex>
+      </Tooltip>
+      <Tooltip align="top" title="This is a scalable tooltip">
+        <Flex padding={[1, 2]} background="elementBackground" border>
+          Only title
+        </Flex>
+      </Tooltip>
+    </Flex>
+  ),
+  subData
+)
+
 const CustomContent = () => (
   <Flex gap={1} column>
     <H5 color={["neutral", "white"]} margin={[0]}>

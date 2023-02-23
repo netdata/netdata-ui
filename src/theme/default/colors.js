@@ -39,7 +39,7 @@ const appColors = {
   separator: rawColors.neutral.porcelain,
   controlFocused: rawColors.neutral.limedSpruce,
   selected: rawColors.neutral.iron,
-  tooltip: rawColors.neutral.shark,
+  tooltip: rawColors.neutral.limedSpruce,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.bluebayoux,
   textLite: rawColors.neutral.regentgrey,
