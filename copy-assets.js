@@ -42,6 +42,9 @@ copyFileSync(
 copyFileSync("src/components/pill/index.d.ts", "lib/components/pill/index.d.ts")
 copyFileSync("src/components/pill/alertMastercard.d.ts", "lib/components/pill/alertMastercard.d.ts")
 copyFileSync("src/components/pill/mastercard.d.ts", "lib/components/pill/mastercard.d.ts")
+
+copyFileSync("src/components/progressBar/index.d.ts", "lib/components/progressBar/index.d.ts")
+
 copyFileSync(
   "src/components/sidebar/portaled-sidebar.d.ts",
   "lib/components/sidebar/portaled-sidebar.d.ts"
