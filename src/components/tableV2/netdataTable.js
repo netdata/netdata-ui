@@ -1,4 +1,3 @@
-//TODO refactor bulk action and row action to single function to decrease repeatability
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import {
   getCoreRowModel,

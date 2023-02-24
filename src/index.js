@@ -76,6 +76,10 @@ export { default as Tooltip } from "./components/drops/tooltip"
 export { default as Popover } from "./components/drops/popover"
 export { default as Menu } from "./components/drops/menu"
 export { default as MenuDropdown } from "./components/drops/menu/dropdown"
+export {
+  default as MenuDropdownItem,
+  ItemContainer as MenuItemContainer,
+} from "./components/drops/menu/dropdownItem"
 export { default as MenuButton } from "./components/drops/menu/menuButton"
 
 export { default as Flex } from "./components/templates/flex"

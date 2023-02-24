@@ -1,11 +1,8 @@
 import styled from "styled-components"
 import { Icon } from "src/components/icon"
 import Box from "src/components/templates/box"
-import { getSizeUnit, getValidatedControlColor } from "src/theme/utils"
-import margin from "src/mixins/margin"
-import alignSelf from "src/mixins/alignSelf"
-
 import Flex from "src/components/templates/flex"
+import { getSizeUnit, getValidatedControlColor } from "src/theme/utils"
 
 export const CheckboxContainer = styled(Box).attrs({
   height: "16px",
@@ -49,14 +46,13 @@ export const StyledCheckbox = styled(Flex)`
     }};
 `
 
-export const StyledLabel = styled.label`
-  ${margin}
-  ${alignSelf}
-  position: relative;
+export const StyledLabel = styled(Flex).attrs(props => ({
+  as: "label",
+  position: "relative",
+  alignItems: "center",
+  ...props,
+}))`
   cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
 `
 
 export const LabelText = styled.span`

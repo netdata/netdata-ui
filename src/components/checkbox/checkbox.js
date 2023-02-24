@@ -24,6 +24,7 @@ export const Checkbox = forwardRef(
       indeterminate,
       Label,
       label,
+      labelProps,
       labelPosition,
       margin,
       ...props
@@ -45,6 +46,7 @@ export const Checkbox = forwardRef(
         data-testid={testId}
         disabled={disabled}
         margin={margin}
+        {...labelProps}
       >
         {label && labelPosition === "left" && (
           <LabelText as={Label} disabled={disabled} left>
