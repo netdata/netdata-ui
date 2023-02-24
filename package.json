@@ -20,6 +20,8 @@
     "to-cloud": "yarn ts-bundle && yarn cp-cloud",
     "cp-dashboard": "cp -R ./lib ../dashboard/node_modules/@netdata/netdata-ui/",
     "to-dashboard": "yarn ts-bundle && yarn cp-dashboard",
+    "cp-charts": "cp -R ./lib ../charts/node_modules/@netdata/netdata-ui/",
+    "to-charts": "yarn ts-bundle && yarn cp-charts",
     "prepare": "install-peers && yarn ts-bundle",
     "resolveAlias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib"
   },
