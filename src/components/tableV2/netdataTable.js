@@ -182,7 +182,7 @@ const NetdataTable = ({
       <Flex height="100%" overflow="hidden" width="100%" column>
         {onGlobalSearchChange || hasBulkActions ? (
           <GlobalControls
-            bulkActions={actions}
+            bulkActions={hasBulkActions ? actions : null}
             dataGa={dataGa}
             handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
             searchValue={globalFilter}
