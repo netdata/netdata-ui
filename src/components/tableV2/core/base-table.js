@@ -290,12 +290,12 @@ Table.Cell = forwardRef(
           height: "65px",
           maxHeight: "65px",
           whiteSpace: "nowrap",
-          ...tableMeta.cellStyles,
-          ...tableMeta.pinnedStyles,
-          ...tableMeta.styles,
-          ...meta.cellStyles,
-          ...meta.pinnedStyles,
-          ...meta.styles,
+          ...tableMeta?.cellStyles,
+          ...tableMeta?.pinnedStyles,
+          ...tableMeta?.styles,
+          ...meta?.cellStyles,
+          ...meta?.pinnedStyles,
+          ...meta?.styles,
         }}
         width={{
           base: `${width || maxWidth}px`,
