@@ -186,6 +186,7 @@ const NetdataTable = ({
             dataGa={dataGa}
             handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
             searchValue={globalFilter}
+            tableMeta={tableMeta}
           />
         ) : null}
         <Flex column ref={scrollParentRef} overflow="auto" width="100%" height="100%">

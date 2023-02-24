@@ -10,12 +10,19 @@ const GlobalControls = ({
   handleSearch,
   searchPlaceholder = "Search",
   searchValue,
+  tableMeta,
 }) => {
   const wordsCount = searchValue?.split(" ").filter(x => !!x).length
   return (
-    <Flex width="100%" zIndex={10} background="mainBackground" padding={[0, 0, 4]}>
+    <Flex
+      width="100%"
+      zIndex={10}
+      background="mainBackground"
+      padding={[0, 0, 4]}
+      {...tableMeta?.bulkActionsStyles}
+    >
       {handleSearch && (
-        <Flex width={{ max: 100, base: "40%" }}>
+        <Flex width={{ max: 100, base: "40%" }} {...tableMeta?.searchContainerStyles}>
           <SearchInput
             data-testid="table-global-search-filter"
             data-ga={`${dataGa}::search-${wordsCount}-words::table-filter`}
@@ -26,6 +33,7 @@ const GlobalControls = ({
               handleSearch(e.target.value)
             })}
             placeholder={searchPlaceholder}
+            {...tableMeta?.searchStyles}
           />
         </Flex>
       )}
