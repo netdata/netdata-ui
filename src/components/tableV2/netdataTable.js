@@ -59,6 +59,7 @@ const NetdataTable = ({
   testPrefixCallback,
   virtualizeOptions = {},
   coloredSortedColumn = true,
+  meta: tableMeta = {},
   ...rest
 }) => {
   const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
@@ -115,7 +116,7 @@ const NetdataTable = ({
     setGlobalFilter(String(value))
   }, [])
 
-  const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions })
+  const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions, tableMeta })
 
   const table = useReactTable({
     columns,

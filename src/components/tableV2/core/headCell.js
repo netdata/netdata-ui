@@ -48,9 +48,10 @@ const HeadCell = ({
 }) =>
   headers.map(({ id, colSpan, getContext, isPlaceholder, column, getResizeHandler, getSize }) => {
     const { getCanSort, columnDef, getCanResize, getIsResizing } = column
-    const { meta } = columnDef
+    const { meta, tableMeta } = columnDef
     const headStyles = {
       verticalAlign: "baseline",
+      ...(tableMeta?.headStyles || {}),
       ...(meta?.headStyles || {}),
       ...pinnedStyles,
     }

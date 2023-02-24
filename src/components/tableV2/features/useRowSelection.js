@@ -3,7 +3,7 @@ import { Checkbox } from "src/components/checkbox"
 
 const width = 45
 
-export default (enabled, { testPrefix }) =>
+export default (enabled, { testPrefix, tableMeta }) =>
   useMemo(
     () =>
       enabled
@@ -34,6 +34,7 @@ export default (enabled, { testPrefix }) =>
             maxSize: width,
             minSize: width,
             meta: { stopPropagation: true },
+            tableMeta,
           }
         : null,
     [enabled]

@@ -2,9 +2,9 @@ import { useMemo } from "react"
 import useRowSelection from "./useRowSelection"
 import useRowActions from "./useRowActions"
 
-export default (dataColumns, { rowActions, enableSelection, testPrefix }) => {
-  const rowActionsColumn = useRowActions(rowActions, { testPrefix })
-  const selectionColumn = useRowSelection(enableSelection, { testPrefix })
+export default (dataColumns, { rowActions, enableSelection, testPrefix, tableMeta }) => {
+  const rowActionsColumn = useRowActions(rowActions, { testPrefix, tableMeta })
+  const selectionColumn = useRowSelection(enableSelection, { testPrefix, tableMeta })
 
   return useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
@@ -22,6 +22,7 @@ export default (dataColumns, { rowActions, enableSelection, testPrefix }) => {
         enableHiding: true,
         enableResize: true,
         footer: props => props.column.id,
+        tableMeta,
         ...col,
         accessorKey: col.accessorKey || col.id,
       }

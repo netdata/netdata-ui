@@ -259,17 +259,16 @@ Table.Cell = forwardRef(
   (
     {
       align = "left",
-      cellStyles = {},
       children,
       maxWidth,
       minWidth,
       onClick,
-      pinnedStyles = {},
-      styles = {},
       width,
       isColumnHovering,
       isRowHovering,
       index,
+      meta,
+      tableMeta,
       ...rest
     },
     ref
@@ -291,9 +290,12 @@ Table.Cell = forwardRef(
           height: "65px",
           maxHeight: "65px",
           whiteSpace: "nowrap",
-          ...cellStyles,
-          ...pinnedStyles,
-          ...styles,
+          ...tableMeta.cellStyles,
+          ...tableMeta.pinnedStyles,
+          ...tableMeta.styles,
+          ...meta.cellStyles,
+          ...meta.pinnedStyles,
+          ...meta.styles,
         }}
         width={{
           base: `${width || maxWidth}px`,

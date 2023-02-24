@@ -43,7 +43,7 @@ export const supportedRowActions = {
   },
 }
 
-export default (rowActions, { testPrefix } = {}) => {
+export default (rowActions, { testPrefix, tableMeta } = {}) => {
   const availableRowActions = useMemo(
     () =>
       Object.keys(rowActions).reduce((acc, key) => {
@@ -90,5 +90,6 @@ export default (rowActions, { testPrefix } = {}) => {
     enableColumnFilter: false,
     enableSorting: false,
     meta: { stopPropagation: true },
+    tableMeta,
   }
 }
