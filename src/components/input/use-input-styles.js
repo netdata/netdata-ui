@@ -37,7 +37,6 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
 
   const inputContainer = useMemo(() => {
     return {
-      width: "100%",
       ...sizeStyles,
       background: disabled ? "mainBackgroundDisabled" : "mainBackground",
       border: {

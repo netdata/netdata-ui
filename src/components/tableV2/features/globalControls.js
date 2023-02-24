@@ -37,7 +37,7 @@ const GlobalControls = ({
           />
         </Flex>
       )}
-      {!!bulkActions && (
+      {!bulkActions && (
         <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
           {bulkActions}
         </Flex>
