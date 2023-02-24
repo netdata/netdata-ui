@@ -83,12 +83,12 @@ const Rows = ({
                 onMouseLeave={() => onHover()}
                 tableMeta={
                   typeof cell.column.columnDef.tableMeta === "function"
-                    ? cell.column.columnDef.tableMeta(row.original)
+                    ? cell.column.columnDef.tableMeta(row)
                     : cell.column.columnDef.tableMeta
                 }
                 meta={
                   typeof cell.column.columnDef.meta === "function"
-                    ? cell.column.columnDef.meta(row.original)
+                    ? cell.column.columnDef.meta(row)
                     : cell.column.columnDef.meta
                 }
                 {...(cell.column.getCanSort() &&
