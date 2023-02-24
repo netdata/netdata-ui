@@ -81,8 +81,16 @@ const Rows = ({
                 width={cell.column.getSize()}
                 onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
                 onMouseLeave={() => onHover()}
-                tableMeta={cell.column.columnDef.tableMeta}
-                meta={cell.column.columnDef.meta}
+                tableMeta={
+                  typeof cell.column.columnDef.tableMeta === "function"
+                    ? cell.column.columnDef.tableMeta(row.original)
+                    : cell.column.columnDef.tableMeta
+                }
+                meta={
+                  typeof cell.column.columnDef.meta === "function"
+                    ? cell.column.columnDef.meta(row.original)
+                    : cell.column.columnDef.meta
+                }
                 {...(cell.column.getCanSort() &&
                   coloredSortedColumn &&
                   !!cell.column.getIsSorted() && {
