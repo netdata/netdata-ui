@@ -21,6 +21,7 @@ const FullTable = ({
   scrollParentRef,
   virtualizeOptions = {},
   coloredSortedColumn,
+  meta,
   ...rest
 }) => {
   return (
@@ -58,6 +59,7 @@ const FullTable = ({
           testPrefix={testPrefix}
           testPrefixCallback={testPrefixCallback}
           coloredSortedColumn={coloredSortedColumn}
+          meta={meta}
           {...virtualizeOptions}
         />
       </Table.Body>

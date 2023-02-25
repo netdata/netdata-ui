@@ -15,18 +15,9 @@ import { useTableContext } from "../features/provider"
 // than the first one. This is happening when we have a head with a filter and the all
 // the cells are being addapted to that size.
 
-const StyledRow = styled.tr`
-  font-size: 14px;
-  color: ${getColor("text")};
-  width: fit-content;
-`
-const StyledHeaderRow = styled.tr`
-  background: ${getColor("tableRowBg")};
-  color: ${getColor("text")};
-`
-const StyledHeaderCell = styled(Box)`
-  position: relative;
-  padding: 4px 8px;
+const StyledRow = styled(Text).attrs(props => ({ as: "tr", width: "fit-content", ...props }))``
+
+const HeaderCell = styled(Box)`
   border-bottom: 1px solid ${getColor("borderSecondary")};
   &:not(:last-child) {
     border-right: 1px solid
@@ -56,9 +47,9 @@ Table.Head = forwardRef(({ children, ...props }, ref) => (
 ))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
-  <StyledHeaderRow ref={ref} {...props}>
+  <Box as="tr" ref={ref} background="tableRowBg" color="text" {...props}>
     {children}
-  </StyledHeaderRow>
+  </Box>
 ))
 
 Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing, background }) => {
@@ -118,25 +109,26 @@ Table.HeadCell = forwardRef(
     },
     ref
   ) => {
-    const { hoveredColumn, onHover } = useTableContext()
-    const isHovering = id === hoveredColumn
+    const { onHover } = useTableContext()
 
     return (
-      <StyledHeaderCell
+      <HeaderCell
         as="th"
         ref={ref}
         sx={{
           textAlign: align,
           fontSize: "14px",
-          height: "60px",
-          ...styles,
-          ...headStyles,
         }}
+        position="relative"
+        padding={[1, 2]}
         width={{ min: `${minWidth}px`, max: `${width}px`, base: `${width}px` }}
         onMouseEnter={() => onHover({ row: null, column: id })}
         onMouseLeave={() => onHover()}
+        height="60px"
         {...props}
-        background={!props.background && isHovering ? "borderSecondary" : props.background}
+        {...styles}
+        {...headStyles}
+        background={props.background}
       >
         <Flex>
           {children}
@@ -156,7 +148,7 @@ Table.HeadCell = forwardRef(
           deltaOffset={deltaOffset}
           background={props.background}
         />
-      </StyledHeaderCell>
+      </HeaderCell>
     )
   }
 )
@@ -264,7 +256,6 @@ Table.Cell = forwardRef(
       minWidth,
       onClick,
       width,
-      isColumnHovering,
       isRowHovering,
       index,
       meta,
@@ -287,15 +278,7 @@ Table.Cell = forwardRef(
         ref={ref}
         sx={{
           textAlign: align,
-          height: "65px",
-          maxHeight: "65px",
           whiteSpace: "nowrap",
-          ...tableMeta?.cellStyles,
-          ...tableMeta?.pinnedStyles,
-          ...tableMeta?.styles,
-          ...meta?.cellStyles,
-          ...meta?.pinnedStyles,
-          ...meta?.styles,
         }}
         width={{
           base: `${width || maxWidth}px`,
@@ -305,17 +288,20 @@ Table.Cell = forwardRef(
         overflow="hidden"
         {...rest}
         background={
-          !rest.background && (isColumnHovering || isRowHovering)
+          !rest.background && isRowHovering
             ? "borderSecondary"
             : rest.background || (index % 2 == 0 ? "mainBackground" : "tableRowBg")
         }
         backgroundOpacity={
-          isColumnHovering && isRowHovering
-            ? rest.backgroundOpacity
-              ? 0.8
-              : 1
-            : rest.backgroundOpacity || 0.7
+          isRowHovering ? (rest.backgroundOpacity ? 0.8 : 1) : rest.backgroundOpacity || 0.7
         }
+        height="65px"
+        {...tableMeta?.cellStyles}
+        {...tableMeta?.pinnedStyles}
+        {...tableMeta?.styles}
+        {...meta?.cellStyles}
+        {...meta?.pinnedStyles}
+        {...meta?.styles}
       >
         {children}
       </Box>

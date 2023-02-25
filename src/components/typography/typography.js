@@ -10,6 +10,7 @@ import truncate from "./mixins/truncate"
 import whiteSpace from "./mixins/whiteSpace"
 import wordBreak from "./mixins/wordBreak"
 import opacity from "src/mixins/opacity"
+import cursor from "src/mixins/cursor"
 
 const makeFontSize = size => () => `font-size: ${size};`
 const makeLineHeight = size => () => `line-height: ${size};`
@@ -40,6 +41,8 @@ const typography = css`
   ${margin}
   ${padding}
   ${opacity}
+  ${cursor}
+  ${({ fontSize }) => fontSize && `font-size: ${fontSize};`}
 `
 
 export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`

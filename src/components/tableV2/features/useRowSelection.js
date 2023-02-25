@@ -19,17 +19,18 @@ export default (enabled, { testPrefix, tableMeta }) =>
                 onChange={table.getToggleAllPageRowsSelectedHandler()}
               />
             ),
-            cell: ({ row }) => (
-              <Checkbox
-                data-testid={`netdata-table-cell-checkbox${testPrefix}`}
-                checked={!row.original?.disabled && row.getIsSelected()}
-                indeterminate={row.getIsSomeSelected()}
-                onChange={row.getToggleSelectedHandler()}
-                disabled={row.original?.disabled || false}
-              />
-            ),
+            cell: ({ row }) =>
+              row.original?.disabled !== "hidden" && (
+                <Checkbox
+                  data-testid={`netdata-table-cell-checkbox${testPrefix}`}
+                  checked={!row.original?.disabled && row.getIsSelected()}
+                  indeterminate={row.getIsSomeSelected()}
+                  onChange={row.getToggleSelectedHandler()}
+                  disabled={row.original?.disabled || false}
+                />
+              ),
             enableColumnFilter: false,
-            enableSorting: false,
+            enableSorting: tableMeta?.enableSelectionSorting || false,
             size: width,
             maxSize: width,
             minSize: width,

@@ -3,7 +3,6 @@ import { useVirtualizer } from "@tanstack/react-virtual"
 import { flexRender } from "@tanstack/react-table"
 import { useTableContext } from "../features/provider"
 import Table from "./base-table"
-import { CELL_HEIGHT } from "../constants"
 
 const Rows = ({
   disableClickRow,
@@ -19,16 +18,20 @@ const Rows = ({
   loading,
   loadMore,
   coloredSortedColumn,
+  meta,
 }) => {
-  const { onHover, hoveredRow, hoveredColumn } = useTableContext()
+  const { onHover, hoveredRow } = useTableContext()
 
   const { rows } = table.getRowModel()
 
   const virtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => scrollParentRef.current,
-    estimateSize: () => CELL_HEIGHT,
-    overscan: overscan || 5,
+    estimateSize: () =>
+      (!!meta.styles?.height && parseInt(meta.styles.height)) ||
+      (!!meta.cellStyles?.height && parseInt(meta.cellStyles.height)) ||
+      35,
+    overscan: overscan || 10,
   })
 
   const virtualRows = virtualizer.getVirtualItems()
@@ -66,7 +69,11 @@ const Rows = ({
             data-testid={`netdata-table-row${testPrefix}${
               testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
             }`}
-            onClick={() => onClickRow?.({ data: row.original, table: table, fullRow: row })}
+            onClick={
+              onClickRow
+                ? () => onClickRow({ data: row.original, table: table, fullRow: row })
+                : undefined
+            }
             disableClickRow={() =>
               disableClickRow?.({ data: row.original, table: table, fullRow: row })
             }
@@ -83,7 +90,7 @@ const Rows = ({
                 onMouseLeave={() => onHover()}
                 tableMeta={
                   typeof cell.column.columnDef.tableMeta === "function"
-                    ? cell.column.columnDef.tableMeta(row)
+                    ? cell.column.columnDef.tableMeta(row, cell, index)
                     : cell.column.columnDef.tableMeta
                 }
                 meta={
@@ -99,7 +106,6 @@ const Rows = ({
                   })}
                 index={virtualRow.index}
                 isRowHovering={row.id === hoveredRow}
-                isColumnHovering={cell.column.id === hoveredColumn}
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Table.Cell>

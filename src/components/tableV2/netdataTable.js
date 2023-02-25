@@ -4,6 +4,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  getExpandedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 import Flex from "src/components/templates/flex"
@@ -20,6 +21,7 @@ import TableProvider from "./features/provider"
 import MainTable from "./features/mainTable"
 
 const noop = () => {}
+const emptyObj = {}
 
 const filterFns = {
   comparison,
@@ -30,6 +32,8 @@ const NetdataTable = ({
   bulkActions,
   columnPinning: defaultColumnPinning,
   columnVisibility: defaultColumnVisibility,
+  expanded: defaultExpanded = emptyObj,
+  rowSelection: defaultRowSelection = emptyObj,
   data,
   dataColumns,
   dataGa,
@@ -39,6 +43,7 @@ const NetdataTable = ({
   enablePagination,
   enableResize = false,
   enableSelection,
+  enableSubRowSelection,
   enableSorting,
   globalFilter: initialGlobalFilter = "",
   globalFilterFn = includesString,
@@ -78,7 +83,7 @@ const NetdataTable = ({
     setColumnPinning(defaultColumnPinning)
   }, [defaultColumnPinning])
 
-  const [rowSelection, setRowSelection] = useState({})
+  const [rowSelection, setRowSelection] = useState(defaultRowSelection)
 
   const [sorting, setSorting] = useState(() => sortBy || [])
 
@@ -118,6 +123,8 @@ const NetdataTable = ({
 
   const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions, tableMeta })
 
+  const [expanded, setExpanded] = useState(defaultExpanded)
+
   const table = useReactTable({
     columns,
     data,
@@ -131,7 +138,9 @@ const NetdataTable = ({
       sorting,
       pagination,
       columnPinning,
+      expanded,
     },
+    onExpandedChange: setExpanded,
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -140,9 +149,12 @@ const NetdataTable = ({
     onSortingChange: onShorting,
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getSubRows: row => row.children,
     onPaginationChange: setPagination,
     onColumnVisibilityChange: handleColumnVisibilityChange,
     onColumnPinningChange: setColumnPinning,
+    enableSubRowSelection,
   })
 
   const [selectedRows, setActualSelectedRows] = useState([])
@@ -205,6 +217,7 @@ const NetdataTable = ({
                 scrollParentRef={scrollParentRef}
                 virtualizeOptions={virtualizeOptions}
                 coloredSortedColumn={enableSorting && coloredSortedColumn}
+                meta={tableMeta}
               />
             )}
             <MainTable
@@ -221,6 +234,7 @@ const NetdataTable = ({
               testPrefix={testPrefix}
               virtualizeOptions={virtualizeOptions}
               coloredSortedColumn={enableSorting && coloredSortedColumn}
+              meta={tableMeta}
               {...rest}
             />
           </Flex>
