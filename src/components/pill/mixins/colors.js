@@ -2,6 +2,7 @@ const colorMap = {
   background: {
     neutral: "nodeBadgeBackground",
     success: ["green", "netdata"],
+    clear: ["green", "netdata"],
     warning: ["yellow", "seaBuckthorn"],
     error: ["red", "pomegranate"],
   },
@@ -14,12 +15,14 @@ const colorMap = {
   border: {
     neutral: "neutralPillBorder",
     success: ["green", "deyork"],
+    clear: ["green", "deyork"],
     warning: ["yellow", "seaBuckthorn"],
     error: ["red", "apricot"],
   },
   color: {
     neutral: "neutralPillColor",
     success: ["green", "netdata"],
+    clear: ["green", "netdata"],
     warning: ["yellow", "seaBuckthorn"],
     error: ["red", "apricot"],
   },
@@ -27,8 +30,10 @@ const colorMap = {
 
 export const masterCardColorMap = {
   alert: "alertIcon",
+  disabledClear: "idleClear",
   disabledError: "idleError",
   disabledWarning: "idleWarning",
+  clear: "successLite",
   error: "errorLite",
   warning: "warningLite",
 }

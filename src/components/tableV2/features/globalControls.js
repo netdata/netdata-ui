@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import Flex from "src/components/templates/flex"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
@@ -13,6 +13,9 @@ const GlobalControls = ({
   tableMeta,
 }) => {
   const wordsCount = searchValue?.split(" ").filter(x => !!x).length
+
+  tableMeta = typeof tableMeta === "function" ? tableMeta({}, {}, null) : tableMeta
+
   return (
     <Flex
       width="100%"
@@ -46,4 +49,4 @@ const GlobalControls = ({
   )
 }
 
-export default GlobalControls
+export default memo(GlobalControls)

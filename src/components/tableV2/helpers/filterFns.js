@@ -13,7 +13,12 @@ export const comparison = (row, columnId, value) => {
 
   if (isNaN(numberToCompareWith) || numberToCompareWith === "") return true
 
-  return operators[operator](Number(rowValue), Number(numberToCompareWith))
+  const found = operators[operator](Number(rowValue), Number(numberToCompareWith))
+
+  if (!found && row.subRows.length)
+    return row.subRows.some(subRow => comparison(subRow, columnId, value))
+
+  return found
 }
 
 const multiSelect = (row, columnId, value) => {
@@ -36,16 +41,27 @@ const singleSelect = (row, columnId, value) => {
 
 export const select = (row, columnId, value) => {
   const isMulti = Array.isArray(value)
-  if (isMulti) return multiSelect(row, columnId, value)
-  return singleSelect(row, columnId, value)
+  const found = isMulti ? multiSelect(row, columnId, value) : singleSelect(row, columnId, value)
+
+  if (!found && row.subRows.length)
+    return row.subRows.some(subRow =>
+      isMulti ? multiSelect(subRow, columnId, value) : singleSelect(subRow, columnId, value)
+    )
+
+  return found
 }
 
-export const includesString = (row, columnId, filterValue) => {
-  const value = row.getValue(columnId)?.toString?.()
+export const includesString = (row, columnId, value) => {
+  const rowValue = row.getValue(columnId)?.toString?.()
 
-  if (typeof value !== "string") return false
+  if (typeof rowValue !== "string") return false
 
-  const search = filterValue ? filterValue.toLowerCase() : ""
+  const search = value ? value.toLowerCase() : ""
 
-  return value.toLowerCase().includes(search)
+  const found = rowValue.toLowerCase().includes(search)
+
+  if (!found && row.subRows.length)
+    return row.subRows.some(subRow => includesString(subRow, columnId, value))
+
+  return found
 }

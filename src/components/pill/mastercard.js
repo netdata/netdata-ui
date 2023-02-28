@@ -18,6 +18,7 @@ const MasterCard = forwardRef(
       onClick,
       pillLeft = {},
       pillRight = {},
+      pillEnd,
       round,
       size,
       ...rest
@@ -26,10 +27,14 @@ const MasterCard = forwardRef(
   ) => {
     const commonProps = { height, round, size }
     const pillProps = { normal, ...commonProps, ...rest }
+
     const pillRightBackground = getMasterCardBackground(
       pillRight.background,
       pillRight.flavour || "disabledWarning"
     )
+    const pillEndBackground =
+      pillEnd && getMasterCardBackground(pillEnd.background, pillEnd.flavour || "disabledClear")
+
     const pillLeftProps = {
       background: getMasterCardBackground(pillLeft.background, pillLeft.flavour || "disabledError"),
       padding: [1, 3],
@@ -45,10 +50,17 @@ const MasterCard = forwardRef(
       ...pillProps,
       ...pillRight,
     }
+    const pillEndProps = pillEnd && {
+      background: pillEndBackground,
+      margin: [0, 0, 0, -1],
+      padding: [1, 2],
+      ...pillProps,
+      ...pillEnd,
+    }
 
     return (
       <MasterCardContainer
-        background={pillRightBackground}
+        background={pillEndBackground || pillRightBackground}
         data-testid={testId}
         onClick={onClick}
         ref={ref}
@@ -58,6 +70,9 @@ const MasterCard = forwardRef(
           <>
             <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />
             <MasterCardPill data-testid={`${testId}-right-pill`} {...pillRightProps} />
+            {pillEndProps && (
+              <MasterCardPill data-testid={`${testId}-end-pill`} {...pillEndProps} />
+            )}
           </>
         )}
       </MasterCardContainer>

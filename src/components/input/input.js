@@ -58,6 +58,7 @@ export const TextInput = ({
   inputRef,
   size = "large",
   handleMetaDisplay = defaultHandleMetaDisplay,
+  inputContainerStyles,
   ...props
 }) => {
   const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
@@ -115,6 +116,7 @@ export const TextInput = ({
           success={isSuccess}
           error={isError}
           disabled={disabled}
+          {...inputContainerStyles}
         >
           {iconLeft && <LeftIcon icon={iconLeft} />}
           <StyledInput

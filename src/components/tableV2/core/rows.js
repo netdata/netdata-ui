@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import { flexRender } from "@tanstack/react-table"
 import { useTableContext } from "../features/provider"
@@ -49,8 +49,11 @@ const Rows = ({
   const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
 
   const totalHeight = virtualizer.getTotalSize()
-  const paddingBottom =
-    virtualRows.length > 0 ? totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0
+  const paddingBottom = useMemo(
+    () =>
+      virtualRows.length > 0 ? totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0,
+    [virtualRows.length]
+  )
 
   return (
     <>
@@ -59,7 +62,7 @@ const Rows = ({
           <td style={{ height: `${paddingTop}px` }} />
         </tr>
       )}
-      {virtualizer.getVirtualItems().map(virtualRow => {
+      {virtualRows.map(virtualRow => {
         const row = rows[virtualRow.index]
         const cells = row[getRowHandler]()
 

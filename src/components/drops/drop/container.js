@@ -18,10 +18,12 @@ const styledAnimation = css`
   animation-delay: 0.01s;
 `
 
-const Container = styled(Flex).attrs(({ zIndex = 60 }) => ({ zIndex }))`
-  position: fixed;
+const Container = styled(Flex).attrs(({ zIndex = 60, ...rest }) => ({
+  zIndex,
+  position: "fixed",
+  ...rest,
+}))`
   left: -99999px;
-  z-index: 36;
 
   ${({ animation }) => animation && styledAnimation}
   ${({ hideShadow }) => !hideShadow && "box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);"}

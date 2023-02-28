@@ -25,15 +25,17 @@ const HeaderCell = styled(Box)`
   }
 `
 
-const Table = forwardRef(({ children, width, ...props }, ref) => {
-  return (
-    <Flex height="100%" width="100%" column>
-      <Box sx={{ borderCollapse: "separate" }} ref={ref} as="table" width={width} {...props}>
-        {children}
-      </Box>
-    </Flex>
-  )
-})
+const Table = forwardRef(({ children, width, ...props }, ref) => (
+  <Box
+    sx={{ borderCollapse: "separate", "table-layout": "fixed" }}
+    ref={ref}
+    as="table"
+    width={width}
+    {...props}
+  >
+    {children}
+  </Box>
+))
 
 Table.Head = forwardRef(({ children, ...props }, ref) => (
   <Box
@@ -96,7 +98,6 @@ Table.HeadCell = forwardRef(
       children,
       align = "left",
       width,
-      minWidth,
       tooltipText,
       filter,
       onMouseDown,
@@ -120,8 +121,9 @@ Table.HeadCell = forwardRef(
           fontSize: "14px",
         }}
         position="relative"
+        overflow="hidden"
         padding={[1, 2]}
-        width={{ min: `${minWidth}px`, max: `${width}px`, base: `${width}px` }}
+        width={`${width}px`}
         onMouseEnter={() => onHover({ row: null, column: id })}
         onMouseLeave={() => onHover()}
         height="60px"
@@ -280,16 +282,12 @@ Table.Cell = forwardRef(
           textAlign: align,
           whiteSpace: "nowrap",
         }}
-        width={{
-          base: `${width || maxWidth}px`,
-          max: `${width || maxWidth}px`,
-          min: `${minWidth}px`,
-        }}
+        width={`${width}px`}
         overflow="hidden"
         {...rest}
         background={
           !rest.background && isRowHovering
-            ? "borderSecondary"
+            ? "elementBackground"
             : rest.background || (index % 2 == 0 ? "mainBackground" : "tableRowBg")
         }
         backgroundOpacity={

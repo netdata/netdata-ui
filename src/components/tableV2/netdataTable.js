@@ -53,6 +53,7 @@ const NetdataTable = ({
   onHoverCell,
   onRowSelected,
   onSortingChange = noop,
+  onExpandedChange = noop,
   paginationOptions = {
     pageIndex: 0,
     pageSize: 100,
@@ -125,6 +126,11 @@ const NetdataTable = ({
 
   const [expanded, setExpanded] = useState(defaultExpanded)
 
+  const onExpand = useCallback(getExpanding => {
+    onExpandedChange(getExpanding)
+    setExpanded(getExpanding)
+  }, [])
+
   const table = useReactTable({
     columns,
     data,
@@ -140,7 +146,7 @@ const NetdataTable = ({
       columnPinning,
       expanded,
     },
-    onExpandedChange: setExpanded,
+    onExpandedChange: onExpand,
     ...(globalFilterFn ? { globalFilterFn } : {}),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -160,9 +166,9 @@ const NetdataTable = ({
   const [selectedRows, setActualSelectedRows] = useState([])
 
   useEffect(() => {
-    const { rows } = table.getSelectedRowModel()
-    if (rows) {
-      const selectedRows = rows.reduce((acc, { original }) => {
+    const { flatRows } = table.getSelectedRowModel()
+    if (flatRows) {
+      const selectedRows = flatRows.reduce((acc, { original }) => {
         if (original?.disabled) return acc
 
         acc.push(original)

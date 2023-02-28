@@ -30,7 +30,7 @@ export default (enabled, { testPrefix, tableMeta }) =>
                 />
               ),
             enableColumnFilter: false,
-            enableSorting: tableMeta?.enableSelectionSorting || false,
+            enableSorting: false,
             size: width,
             maxSize: width,
             minSize: width,
