@@ -35,8 +35,8 @@ export const IconContainer = styled.div`
   overflow: hidden;
   flex: 0 0 auto;
 
-  height: 20px;
-  width: 20px;
+  height: 16px;
+  width: 16px;
 
   box-sizing: border-box;
   border: 1px solid ${props => getColor(props.borderColor)(props)};
@@ -47,6 +47,6 @@ export const IconContainer = styled.div`
 `
 export const StyledIcon = styled(Icon)`
   fill: ${props => getColor(props.color)(props)};
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
 `

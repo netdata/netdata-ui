@@ -45,7 +45,7 @@ const RadioButton = ({
       <IconContainer
         background={radioStyles.containerColor}
         borderColor={radioStyles.borderColor}
-        margin={children || label ? [0, 2, 0, 0] : null}
+        margin={children || label ? [0.5, 2, 0, 0] : null}
       >
         {showIcon && <StyledIcon name="dot" color={radioStyles.dotColor} {...iconProps} />}
       </IconContainer>
