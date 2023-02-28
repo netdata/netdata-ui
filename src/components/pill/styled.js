@@ -34,6 +34,7 @@ export const PillContainer = styled(Flex).attrs(
     width,
     height,
     position,
+    zIndex,
   }) => ({
     padding: getPillPadding(padding, size, tiny),
     round,
@@ -48,6 +49,7 @@ export const PillContainer = styled(Flex).attrs(
     justifyContent: "center",
     alignItems: "center",
     position,
+    zIndex,
   })
 )`
   ${getPillBackground};
