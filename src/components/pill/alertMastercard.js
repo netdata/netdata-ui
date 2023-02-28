@@ -63,12 +63,14 @@ const AlertMasterCard = forwardRef(
       zIndex: 2,
       ...pillProps,
       ...pillRight,
+      round: "0 12px 12px 0",
     }
     const pillEndProps = pillEnd && {
       background: pillEndBackground,
       margin: [0, 0, 0, -3],
       padding: [1, 2, 1, 4],
       zIndex: 1,
+      round: "0 12px 12px 0",
       ...pillProps,
       ...pillEnd,
     }

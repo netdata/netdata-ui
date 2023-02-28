@@ -208,6 +208,7 @@ const MasterCards = () => (
       <MasterCard
         pillLeft={{ flavour: "error", text: "3" }}
         pillRight={{ flavour: "warning", text: "2" }}
+        pillEnd={{ flavour: "clear", text: "223" }}
       />
       <MasterCard />
     </Flex>
@@ -215,6 +216,7 @@ const MasterCards = () => (
       <MasterCard
         pillLeft={{ flavour: "error", text: "3" }}
         pillRight={{ flavour: "warning", text: "2" }}
+        pillEnd={{ flavour: "clear", text: "223" }}
         size="large"
       />
       <MasterCard size="large" />
@@ -229,6 +231,7 @@ const AlertMasterCards = () => (
         onClick={() => console.log("test")}
         pillLeft={{ flavour: "error", text: "3" }}
         pillRight={{ flavour: "warning", text: "2" }}
+        pillEnd={{ flavour: "clear", text: "223" }}
       />
       <AlertMasterCard />
     </Flex>
@@ -236,6 +239,7 @@ const AlertMasterCards = () => (
       <AlertMasterCard
         pillLeft={{ flavour: "error", text: "3" }}
         pillRight={{ flavour: "warning", text: "2" }}
+        pillEnd={{ flavour: "clear", text: "223" }}
         size="large"
       />
       <AlertMasterCard size="large" />
