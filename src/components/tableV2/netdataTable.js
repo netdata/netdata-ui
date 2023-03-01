@@ -17,7 +17,6 @@ import useBulkActions from "./features/useBulkActions"
 import ColumnPinning from "./features/columnPinning"
 import GlobalControls from "./features/globalControls"
 import TableProvider from "./features/provider"
-
 import MainTable from "./features/mainTable"
 
 const noop = () => {}
@@ -66,6 +65,7 @@ const NetdataTable = ({
   virtualizeOptions = {},
   coloredSortedColumn = true,
   meta: tableMeta = {},
+  title,
   ...rest
 }) => {
   const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
@@ -200,6 +200,7 @@ const NetdataTable = ({
       <Flex height="100%" overflow="hidden" width="100%" column>
         {onGlobalSearchChange || hasBulkActions ? (
           <GlobalControls
+            title={title}
             bulkActions={hasBulkActions ? actions : null}
             dataGa={dataGa}
             handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}

@@ -2,6 +2,7 @@ import React, { memo } from "react"
 import Flex from "src/components/templates/flex"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
+import { H4 } from "@netdata/netdata-ui/lib/components/typography"
 import { debounce } from "throttle-debounce"
 
 const GlobalControls = ({
@@ -11,6 +12,7 @@ const GlobalControls = ({
   searchPlaceholder = "Search",
   searchValue,
   tableMeta,
+  title,
 }) => {
   const wordsCount = searchValue?.split(" ").filter(x => !!x).length
 
@@ -22,8 +24,10 @@ const GlobalControls = ({
       zIndex={10}
       background="mainBackground"
       padding={[0, 0, 4]}
+      gap={3}
       {...tableMeta.bulkActionsStyles}
     >
+      {!!title && <H4>{title}</H4>}
       {handleSearch && (
         <Flex width={{ max: 100, base: "40%" }} {...tableMeta.searchContainerStyles}>
           <SearchInput
