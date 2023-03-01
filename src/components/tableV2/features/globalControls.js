@@ -30,7 +30,7 @@ const GlobalControls = ({
             data-testid="table-global-search-filter"
             data-ga={`${dataGa}::search-${wordsCount}-words::table-filter`}
             defaultValue={searchValue}
-            iconRight={<Icon name="magnify" color="textLite" />}
+            iconLeft={<Icon name="magnify" color="textLite" />}
             onChange={debounce(300, e => {
               e.persist()
               handleSearch(e.target.value)
