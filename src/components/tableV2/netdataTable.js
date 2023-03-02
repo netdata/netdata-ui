@@ -86,6 +86,12 @@ const NetdataTable = ({
 
   const [rowSelection, setRowSelection] = useState(defaultRowSelection)
 
+  useEffect(() => {
+    if (rowSelection === defaultRowSelection) return
+
+    setRowSelection(defaultRowSelection)
+  }, [defaultRowSelection])
+
   const [sorting, setSorting] = useState(() => sortBy || [])
 
   useEffect(() => {

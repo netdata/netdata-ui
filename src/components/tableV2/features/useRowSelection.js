@@ -14,9 +14,9 @@ export default (enabled, { testPrefix, tableMeta }) =>
             header: ({ table }) => (
               <Checkbox
                 data-testid={`netdata-table-header-checkbox${testPrefix}`}
-                checked={table.getIsAllPageRowsSelected()}
-                indeterminate={table.getIsSomePageRowsSelected()}
-                onChange={table.getToggleAllPageRowsSelectedHandler()}
+                checked={table.getIsAllRowsSelected()}
+                indeterminate={table.getIsSomeRowsSelected()}
+                onChange={table.getToggleAllRowsSelectedHandler()}
               />
             ),
             cell: ({ row }) =>
