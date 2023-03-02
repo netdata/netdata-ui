@@ -2,7 +2,7 @@ import React, { memo } from "react"
 import Flex from "src/components/templates/flex"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
-import { H4 } from "@netdata/netdata-ui/lib/components/typography"
+import { H4 } from "src/components/typography"
 import { debounce } from "throttle-debounce"
 
 const GlobalControls = ({
