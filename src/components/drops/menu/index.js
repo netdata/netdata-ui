@@ -28,6 +28,8 @@ const Menu = forwardRef(
       Item = DropdownItem,
       Dropdown = DefaultDropdown,
       animation,
+      dropTitle,
+      dropTitlePadding,
       hasSearch = false,
       ...rest
     },
@@ -96,6 +98,8 @@ const Menu = forwardRef(
             {...dropProps}
           >
             <Dropdown
+              dropTitle={dropTitle}
+              dropTitlePadding={dropTitlePadding}
               value={value}
               onItemClick={onItemClick}
               items={items}

@@ -21,6 +21,8 @@ const subData = {
 
 const Simple = props => (
   <Menu
+    dropTitle="Fight Club characters"
+    dropTitlePadding={[2]}
     label="Character"
     items={[
       { value: "narrator", label: "The Narrator", onClick: action("narrator") },
