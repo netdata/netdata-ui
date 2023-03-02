@@ -7,6 +7,8 @@ import Flex from "src/components/templates/flex"
 import Tooltip from "src/components/drops/tooltip"
 import { Button } from "src/components/button"
 import { Icon } from "src/components/icon"
+import { Text } from "src/components/typography"
+
 import readme from "./README.md"
 import Menu from "./index"
 
@@ -18,9 +20,10 @@ const subData = {
   },
   jest: ["index.test.js"],
 }
-
 const Simple = props => (
   <Menu
+    dropTitle={<Text>Fight Club characters</Text>}
+    dropTitlePadding={[2]}
     label="Character"
     items={[
       { value: "narrator", label: "The Narrator", onClick: action("narrator") },
