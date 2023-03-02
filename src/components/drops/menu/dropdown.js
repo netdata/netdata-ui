@@ -74,7 +74,7 @@ const Dropdown = ({
       width="auto"
       {...rest}
     >
-      {dropTitle && <TextSmall padding={dropTitlePadding}>{dropTitle}</TextSmall>}
+      {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}
       {hasSearch && (
         <Box margin={searchMargin}>
           <Search
