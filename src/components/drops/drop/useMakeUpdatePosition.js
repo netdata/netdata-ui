@@ -78,14 +78,20 @@ export default (target, dropRef, align, stretch, canHideTarget, keepHorizontal) 
     const width = getWidth(stretch, targetRect, dropRect)
     dropRect.width = width
 
-    const x = getXPosition(align, targetRect, dropRect, canHideTarget)
-    const y = getYPosition(align, targetRect, dropRect, canHideTarget)
+    const animate = () => {
+      const x = getXPosition(align, targetRect, dropRect, canHideTarget)
+      const y = getYPosition(align, targetRect, dropRect, canHideTarget)
 
-    if (!keepHorizontal || !dropRef.current.style.left) {
-      dropRef.current.style.left = `${x}px`
+      if (!dropRef.current) return
+
+      if (!keepHorizontal || !dropRef.current.style.left) {
+        dropRef.current.style.left = `${x}px`
+      }
+
+      dropRef.current.style.top = `${y}px`
+      if (stretch) {
+        dropRef.current.style.width = `${width}px`
+      }
     }
-    dropRef.current.style.top = `${y}px`
-    if (stretch) {
-      dropRef.current.style.width = `${width}px`
-    }
+    requestAnimationFrame(animate)
   }, [target, align, stretch])
