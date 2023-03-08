@@ -10,6 +10,7 @@ const appColors = {
   disabled: rawColors.neutral.tuna,
   disabledBackground: rawColors.neutral.outerSpace,
   dropdown: rawColors.neutral.arsenic,
+  dropdownShadow: rawColors.shadows.dropdownDark,
   elementBackground: rawColors.neutral.outerSpace,
   elementBackgroundHover: rawColors.neutral.tuna,
   mainBackground: rawColors.neutral.gunmetal,
@@ -81,8 +82,13 @@ const appColors = {
   idleClear: rawColors.neutral.arsenic,
 
   //Table
+  dropdownTable: rawColors.neutral.eerieBlack,
+  tableRowBgHover: rawColors.neutral.ratsbane,
   tableRowBg: rawColors.neutral.arsenic,
   columnHighlight: rawColors.green.poker,
+
+  //Progress Bare
+  progressBg: rawColors.neutral.bluebayoux,
 
   //IconButton
   iconColor: rawColors.neutral.iron,

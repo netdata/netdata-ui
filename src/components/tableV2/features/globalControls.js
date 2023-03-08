@@ -2,7 +2,7 @@ import React, { memo } from "react"
 import Flex from "src/components/templates/flex"
 import SearchInput from "src/components/search"
 import { Icon } from "src/components/icon"
-import { H4 } from "src/components/typography"
+import { TextBig } from "src/components/typography"
 import { debounce } from "throttle-debounce"
 
 const GlobalControls = ({
@@ -25,9 +25,14 @@ const GlobalControls = ({
       background="mainBackground"
       padding={[0, 0, 4]}
       gap={3}
+      alignItems="center"
       {...tableMeta.bulkActionsStyles}
     >
-      {!!title && <H4>{title}</H4>}
+      {!!title && (
+        <TextBig margin={[0, 0, 0, 3]} strong>
+          {title}
+        </TextBig>
+      )}
       {handleSearch && (
         <Flex width={{ max: 100, base: "40%" }} {...tableMeta.searchContainerStyles}>
           <SearchInput

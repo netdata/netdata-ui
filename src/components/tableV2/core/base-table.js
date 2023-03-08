@@ -27,7 +27,7 @@ const HeaderCell = styled(Box)`
 
 const Table = forwardRef(({ children, width, ...props }, ref) => (
   <Box
-    sx={{ borderCollapse: "separate", "table-layout": "fixed" }}
+    sx={{ borderCollapse: "separate", "table-layout": "fixed", borderSpacing: "0px" }}
     ref={ref}
     as="table"
     width={width}
@@ -40,7 +40,7 @@ const Table = forwardRef(({ children, width, ...props }, ref) => (
 Table.Head = forwardRef(({ children, ...props }, ref) => (
   <Box
     ref={ref}
-    sx={{ whiteSpace: "nowrap", zIndex: 1, position: "sticky", top: 0 }}
+    sx={{ whiteSpace: "nowrap", zIndex: 10, position: "sticky", top: 0 }}
     as="thead"
     {...props}
   >
@@ -287,7 +287,7 @@ Table.Cell = forwardRef(
         {...rest}
         background={
           !rest.background && isRowHovering
-            ? "elementBackground"
+            ? "tableRowBgHover"
             : rest.background || (index % 2 == 0 ? "mainBackground" : "tableRowBg")
         }
         backgroundOpacity={
