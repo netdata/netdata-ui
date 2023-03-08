@@ -157,6 +157,7 @@ tableStories.add("Global Filters", () => {
   return (
     <Box width="800px">
       <NetdataTable
+        title="Table Title"
         onGlobalSearchChange={onGlobalSearchChange}
         dataColumns={mockDataColumns}
         data={mockData()}

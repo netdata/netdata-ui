@@ -61,6 +61,10 @@ const rawColors = {
     indigo: "#5790FF",
     cyan: "#00BAE2",
   },
+  shadows: {
+    dropdownLight: "rgba(9, 30, 66, 0.15)",
+    dropdownDark: "rgba(0, 0, 0, 0.4)",
+  },
 }
 
 export default rawColors

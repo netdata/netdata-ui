@@ -10,6 +10,7 @@ const appColors = {
   disabled: rawColors.neutral.porcelain,
   disabledBackground: rawColors.neutral.porcelain,
   dropdown: rawColors.neutral.white,
+  dropdownShadow: rawColors.shadows.dropdownLight,
   elementBackground: rawColors.neutral.blackhaze,
   elementBackgroundHover: rawColors.neutral.white,
   mainBackground: rawColors.neutral.white,
@@ -81,10 +82,15 @@ const appColors = {
   idleClear: rawColors.neutral.chineseWhite,
 
   //Table
+  dropdownTable: rawColors.neutral.white,
   tableRowBg: rawColors.neutral.blackhaze,
+  tableRowBgHover: rawColors.neutral.porcelain,
   columnHighlight: rawColors.green.frostee,
   //IconButton
   iconColor: rawColors.neutral.limedSpruce,
+
+  //Progress Bare
+  progressBg: rawColors.neutral.chineseWhite,
 
   //table-resizer
   resizerLine: rawColors.green.vista,
