@@ -25,7 +25,7 @@ const ColumnPinning = ({
       sx={{
         position: "sticky",
         left: 0,
-        zIndex: 2,
+        zIndex: 11,
         height: "fit-content",
       }}
     >
