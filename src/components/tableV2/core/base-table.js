@@ -27,7 +27,7 @@ const HeaderCell = styled(Box)`
 
 const Table = forwardRef(({ children, width, ...props }, ref) => (
   <Box
-    sx={{ borderCollapse: "separate", "table-layout": "fixed", borderSpacing: "0px" }}
+    sx={{ borderCollapse: "separate", "table-layout": "fixed", borderSpacing: "0" }}
     ref={ref}
     as="table"
     width={width}
