@@ -53,8 +53,12 @@ const rawColors = {
   },
   purple: {
     mauve: "#DB94F4",
+    mauveDark: "#CB66EF",
+    mauveFocus: "#EBC2F9",
     daisy: "#563D7C",
     lilac: "#B596F8",
+    lilacLite: "#C6AEFA",
+    lilacFocus: "#824EF3",
   },
   blue: {
     aquamarine: "#19C89E",

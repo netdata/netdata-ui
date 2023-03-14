@@ -94,6 +94,10 @@ const appColors = {
 
   //table-resizer
   resizerLine: rawColors.green.vista,
+
+  anomalyText: rawColors.purple.lilac,
+  anomalyTextLite: rawColors.purple.lilacLite,
+  anomalyTextFocus: rawColors.purple.lilacFocus,
 }
 
 export default {
