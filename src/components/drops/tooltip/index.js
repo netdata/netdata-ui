@@ -61,6 +61,7 @@ const Tooltip = forwardRef(
         {targetElement}
         {isOpen && ref.current && !disabled && (
           <Drop
+            noEvents={!allowHoverOnTooltip}
             align={dropProps?.align || dropAlignMap[align]}
             hideShadow
             id={id}

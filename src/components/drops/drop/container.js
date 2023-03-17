@@ -27,6 +27,7 @@ const Container = styled(Flex).attrs(({ zIndex = 60, ...rest }) => ({
 
   ${({ animation }) => animation && styledAnimation}
   ${({ hideShadow }) => !hideShadow && "box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);"}
+  ${({ noEvents }) => !!noEvents && "pointer-events: none;"}
 
   backface-visibility: hidden;
   perspective: 1000;

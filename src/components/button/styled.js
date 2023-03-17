@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import { lighten, darken } from "polished"
 import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "src/theme"
 import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
@@ -28,25 +29,29 @@ const withTheme = props => {
 }
 
 const getPrimaryColor = props =>
-  props.neutral ? getColor("text")(props) : getColor("primary")(props)
+  props.neutral
+    ? getColor(props.flavour === HOLLOW ? "textFocus" : "text")(props)
+    : getColor("primary")(props)
 
 const getBorderColor = props =>
-  props.neutral ? getColor("border")(props) : getColor("primary")(props)
-const getTextColor = getColor("bright")
+  props.neutral ? getColor("textFocus")(props) : getColor("primary")(props)
+const getTextColor = props => getColor("mainBackground")(props)
 const getHoverColor = props =>
   props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
 const getAccentColor = props =>
-  props.neutral ? getColor("textFocus")(props) : getColor("successLite")(props)
-const getMain = props =>
-  props.neutral
-    ? getColor(props.disabled ? "disabled" : "mainBackground")(props)
-    : getColor("mainBackground")(props)
+  props.neutral ? lighten(0.2, getColor("textFocus")(props)) : getColor("successLite")(props)
 const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
   const getErrorColor = danger ? getColor("error") : undefined
   const getWarningColor = warning ? getColor("warning") : undefined
   const getSpecialColor = getErrorColor || getWarningColor
+  const getSpecialColorHover = getSpecialColor
+    ? props => lighten(0.2, getSpecialColor(props))
+    : undefined
+  const getSpecialColorActive = getSpecialColor
+    ? props => darken(0.2, getSpecialColor(props))
+    : undefined
   const specialIconColor = iconColor ? getColor(iconColor) : undefined
 
   const flavours = {
@@ -55,36 +60,36 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
       colorHover: getTextColor,
       colorActive: getTextColor,
       bg: getSpecialColor || getPrimaryColor,
-      bgHover: getSpecialColor || getHoverColor,
-      bgActive: getSpecialColor || getAccentColor,
+      bgHover: getSpecialColorHover || getHoverColor,
+      bgActive: getSpecialColorActive || getAccentColor,
       border: getSpecialColor || getPrimaryColor,
-      borderHover: getSpecialColor || getHoverColor,
-      borderActive: getSpecialColor || getAccentColor,
+      borderHover: getSpecialColorHover || getHoverColor,
+      borderActive: getSpecialColorActive || getAccentColor,
       iconColor: specialIconColor || getTextColor,
     },
     [HOLLOW]: {
       color: getSpecialColor || getPrimaryColor,
-      colorHover: getSpecialColor || getAccentColor,
-      colorActive: getSpecialColor || getAccentColor,
+      colorHover: getSpecialColorHover || getAccentColor,
+      colorActive: getSpecialColorActive || getAccentColor,
       bg: getTransparent,
       bgHover: getTransparent,
-      bgActive: getSpecialColor || getMain,
+      bgActive: getTransparent,
       border: getSpecialColor || getBorderColor,
-      borderHover: getSpecialColor || getHoverColor,
-      borderActive: getSpecialColor || getAccentColor,
-      iconColor: specialIconColor || getTextColor,
+      borderHover: getSpecialColorHover || getAccentColor,
+      borderActive: getSpecialColorActive || getAccentColor,
+      iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
     },
     [BORDER_LESS]: {
       color: getSpecialColor || getPrimaryColor,
-      colorHover: getSpecialColor || getAccentColor,
-      colorActive: getSpecialColor || getAccentColor,
+      colorHover: getSpecialColorHover || getAccentColor,
+      colorActive: getSpecialColorActive || getAccentColor,
       bg: getTransparent,
       bgHover: getTransparent,
       bgActive: getTransparent,
       border: getTransparent,
       borderHover: getTransparent,
       borderActive: getTransparent,
-      iconColor: specialIconColor || getTextColor,
+      iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
     },
   }
 
@@ -92,7 +97,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
 }
 
 export const StyledButton = styled.button.attrs(props => ({
-  padding: props.padding || [2],
+  padding: props.padding || props.tiny ? [0.5] : props.small ? [1] : [2],
   colors: colorsByFlavour(props),
   ...withTheme(props),
 }))`
@@ -102,15 +107,6 @@ export const StyledButton = styled.button.attrs(props => ({
     align-items: center;
     position: relative;
     ${alignSelf};
-
-    width: ${props =>
-      props.width
-        ? props.width
-        : getSizeBy(props.tiny ? 2 : props.small ? 3 : props.hasLabel ? 16 : 4)};
-    height: ${props =>
-      props.height
-        ? props.height
-        : getSizeBy(props.tiny ? 2 : props.small ? 3 : props.hasLabel ? 5 : 4)};
 
     font-weight: ${({ strong }) => (strong ? 700 : 500)};
     font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};

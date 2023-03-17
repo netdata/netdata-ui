@@ -18,6 +18,7 @@ export const Button = forwardRef(
       iconSize,
       iconWidth,
       iconHeight,
+      children = label,
       ...rest
     },
     ref
@@ -25,7 +26,6 @@ export const Button = forwardRef(
     <StyledButton
       flavour={flavour}
       textTransform={textTransform}
-      hasLabel={!!label}
       hasIcon={!!icon || isLoading}
       onClick={isLoading ? undefined : onClick}
       ref={ref}
@@ -46,7 +46,7 @@ export const Button = forwardRef(
         </Flex>
       )}
 
-      {label && <span>{(isLoading && loadingLabel) || label}</span>}
+      {!!children && <span>{(isLoading && loadingLabel) || children}</span>}
     </StyledButton>
   )
 )
