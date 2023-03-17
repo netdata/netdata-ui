@@ -12,7 +12,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  color: #35414A;
+  color: #536775;
 }
 
 .c1 {
@@ -38,10 +38,10 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -ms-flex-pack: start;
   justify-content: flex-start;
   padding: 0 2px;
-  color: #35414A;
+  color: #536775;
 }
 
-.c3 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -60,24 +60,40 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  color: #35414A;
+  color: #536775;
 }
 
-.c2 {
-  border-bottom: 1px solid #ECEEEF;
-  box-sizing: border-box;
-  padding: 0 2px;
-}
-
-.c4 {
+.c3 {
   white-space: nowrap;
   border-bottom: 4px solid #42B861;
   box-sizing: border-box;
   min-width: 80px;
   max-width: 208px;
   height: 48px;
-  color: #35414A;
+  color: #536775;
   font-weight: bold;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.c3:hover {
+  border-bottom: 4px solid #00AB44;
+}
+
+.c3 > span {
+  font-weight: bold;
+}
+
+.c4 {
+  white-space: nowrap;
+  border-bottom: 4px solid rgba(255,255,255,0.0);
+  box-sizing: border-box;
+  min-width: 80px;
+  max-width: 208px;
+  height: 48px;
+  color: #536775;
+  font-weight: normal;
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
@@ -88,28 +104,6 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 }
 
 .c4 > span {
-  font-weight: bold;
-}
-
-.c5 {
-  white-space: nowrap;
-  border-bottom: 4px solid rgba(255,255,255,0.0);
-  box-sizing: border-box;
-  min-width: 80px;
-  max-width: 208px;
-  height: 48px;
-  color: #35414A;
-  font-weight: normal;
-  cursor: pointer;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.c5:hover {
-  border-bottom: 4px solid #00AB44;
-}
-
-.c5 > span {
   font-weight: normal;
 }
 
@@ -117,28 +111,28 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   class="c0"
 >
   <nav
-    class="c1 c2 tabs tabs"
+    class="c1 tabs tabs"
   >
     <div
-      class="c3 c4"
+      class="c2 c3"
       label="hi"
     >
       hi
     </div>
     <div
-      class="c3 c5"
+      class="c2 c4"
       label="Hi again"
     >
       Hi again
     </div>
     <div
-      class="c3 c5"
+      class="c2 c4"
       label="Bye"
     >
       Bye
     </div>
     <div
-      class="c3 c5"
+      class="c2 c4"
       label="Bye Bye"
     >
       Bye Bye

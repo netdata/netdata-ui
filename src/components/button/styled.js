@@ -106,17 +106,13 @@ export const StyledButton = styled.button.attrs(props => ({
     width: ${props =>
       props.width
         ? props.width
-        : props.hasLabel
-        ? getSizeBy(16)
-        : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
+        : getSizeBy(props.tiny ? 2 : props.small ? 3 : props.hasLabel ? 16 : 4)};
     height: ${props =>
       props.height
         ? props.height
-        : props.hasLabel
-        ? getSizeBy(props.small ? 4 : 5)
-        : getSizeBy(props.tiny ? 2 : props.small ? 3 : 4)};
+        : getSizeBy(props.tiny ? 2 : props.small ? 3 : props.hasLabel ? 5 : 4)};
 
-    font-weight: ${({ strong }) => strong ? 700 : 500};
+    font-weight: ${({ strong }) => (strong ? 700 : 500)};
     font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};
     line-height: ${getSizeBy(2)};
     white-space: nowrap;

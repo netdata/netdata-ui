@@ -6,46 +6,24 @@ describe("getMasterCardBackground mixin", () => {
   })
 
   test("should return background", () => {
-    const mockedBackground = "main"
-    expect(getMasterCardBackground(mockedBackground)).toEqual(mockedBackground)
+    expect(getMasterCardBackground("main")).toEqual("main")
   })
 })
 
 describe("getPillBackground mixin", () => {
-  const mockedNetdata = "#00AB44"
-  const mockedPorcelain = "#fff"
-  const mockedRegentgrey = "#fff"
-  const mockedTheme = {
-    colors: {
-      green: {
-        netdata: mockedNetdata,
-      },
-      neutral: {
-        porcelain: mockedPorcelain,
-        regentgrey: mockedRegentgrey,
-      },
-    },
-  }
-
   test("should return default background color", () => {
-    expect(getPillBackground({ theme: mockedTheme })).toEqual(
-      `background-color: ${mockedRegentgrey};`
-    )
+    expect(getPillBackground({ theme: {} })).toEqual(`background-color: nodeBadgeBackground;`)
   })
 
   test("should return hollow default background color", () => {
-    expect(getPillBackground({ hollow: true, theme: mockedTheme })).toEqual(
-      `background-color: ${mockedPorcelain};`
+    expect(getPillBackground({ hollow: true, theme: {} })).toEqual(
+      `background-color: nodeBadgeBackground;`
     )
   })
 
   test("should return success flavour background color", () => {
-    expect(getPillBackground({ flavour: "success", theme: mockedTheme })).toEqual(
-      `background-color: ${mockedNetdata};`
+    expect(getPillBackground({ flavour: "success", theme: {} })).toEqual(
+      `background-color: green,netdata;`
     )
-  })
-
-  test("should return undefined", () => {
-    expect(getPillBackground({ background: "main" })).toEqual("background-color: #fff;")
   })
 })

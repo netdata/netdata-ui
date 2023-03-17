@@ -90,6 +90,8 @@ export { default as makeBox } from "./components/templates/box/box"
 
 export { default as Layer } from "./components/templates/layer"
 
+export { default as Animation } from "./components/animation"
+
 export { default as Collapsible } from "./components/collapsible"
 
 export { default as Documentation } from "./organisms/documentation"

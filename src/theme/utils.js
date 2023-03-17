@@ -39,10 +39,8 @@ export const getRgbColor = (colorPath, opacity = 1) => {
 
 export const getSizeBy =
   (multiplier = 1) =>
-  props => {
-    const size = (getSizeUnit(props) || 0) * multiplier
-    return `${size}px`
-  }
+  props =>
+    isNaN(multiplier) ? multiplier : `${(getSizeUnit(props) || 0) * multiplier}px`
 
 export const getGutterHeight = ({ theme }) => {
   const gutterValue = path(["constants", "GUTTER_HEIGHT"], theme) || 0

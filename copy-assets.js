@@ -53,6 +53,7 @@ copyFileSync("src/components/tabs/tab.d.ts", "lib/components/tabs/tab.d.ts")
 copyFileSync("src/components/tabs/tabs.d.ts", "lib/components/tabs/tabs.d.ts")
 copyFileSync("src/components/toggle/toggle.d.ts", "lib/components/toggle/toggle.d.ts")
 
+copyFileSync("src/components/animation/index.d.ts", "lib/components/animation/index.d.ts")
 copyFileSync("src/components/collapsible/index.d.ts", "lib/components/collapsible/index.d.ts")
 copyFileSync("src/components/modal/index.d.ts", "lib/components/modal/index.d.ts")
 copyFileSync(

@@ -7,7 +7,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   font-size: 14px;
   line-height: 20px;
   font-weight: normal;
-  color: #35414A;
+  color: #536775;
   text-transform: none;
 }
 

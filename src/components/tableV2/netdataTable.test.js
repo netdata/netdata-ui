@@ -45,9 +45,9 @@ const mockDataColumns = [
 ]
 
 const mockData = () => [
-  { nodes: "node8", alerts: 15, user: "mitsos" },
-  { nodes: "node9", alerts: 11, user: "koukouroukou" },
-  { nodes: "node10", alerts: 22, user: "reena" },
+  { nodes: "nodeB", alerts: 11, user: "koukouroukou" },
+  { nodes: "nodeC", alerts: 22, user: "reena" },
+  { nodes: "nodeA", alerts: 15, user: "mitsos" },
 ]
 
 const testPrefix = "-mock"
@@ -122,7 +122,7 @@ describe("Netdata table", () => {
     it("should filter the columns when changing the column search filter", async () => {
       jest.useFakeTimers({ advanceTimers: true })
       renderNetdataTable({})
-      const filterParams = "node8"
+      const filterParams = "nodeB"
       const nodesFilter = screen.getByTestId(nodesColumnFilter)
 
       await act(async () => {
@@ -225,7 +225,7 @@ describe("Netdata table", () => {
     it("should change global search and filter nodes", async () => {
       jest.useFakeTimers({ advanceTimers: true })
       renderNetdataTable({})
-      const filterParams = "node8"
+      const filterParams = "nodeB"
       const globalSearchFilter = screen.getByTestId("table-global-search-filter")
 
       await act(async () => {
@@ -272,16 +272,21 @@ describe("Netdata table", () => {
 
       await userEvent.click(headCell)
 
-      const afterClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+      let afterClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(beforeClickNodeCell).toHaveTextContent("node8")
-      expect(afterClickNodeCell).toHaveTextContent("node10")
+      expect(beforeClickNodeCell).toHaveTextContent("nodeA")
+      expect(afterClickNodeCell).toHaveTextContent("nodeA")
+
+      await userEvent.click(headCell)
+
+      afterClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+      expect(afterClickNodeCell).toHaveTextContent("nodeC")
     })
   })
 
   describe("Pagination", () => {
     it("should go to next page", async () => {
-      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
       const paginationOptions = { pageIndex: 0, pageSize: 3 }
 
       renderNetdataTable({ disableRow: true, data, paginationOptions })
@@ -289,16 +294,16 @@ describe("Netdata table", () => {
       const goToNext = screen.getByTestId("pagination-go-to-next")
       const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(beforePaginationNode).toHaveTextContent("node8")
+      expect(beforePaginationNode).toHaveTextContent("nodeB")
 
       await userEvent.click(goToNext)
 
       const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(afterPaginationNode).toHaveTextContent("node15")
+      expect(afterPaginationNode).toHaveTextContent("nodeD")
     })
     it("should go to previous page", async () => {
-      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
       const paginationOptions = { pageIndex: 1, pageSize: 3 }
 
       renderNetdataTable({ disableRow: true, data, paginationOptions })
@@ -306,17 +311,17 @@ describe("Netdata table", () => {
       const goToPrevious = screen.getByTestId("pagination-go-to-previous")
       const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(beforePaginationNode).toHaveTextContent("node15")
+      expect(beforePaginationNode).toHaveTextContent("nodeD")
 
       await userEvent.click(goToPrevious)
 
       const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(afterPaginationNode).toHaveTextContent("node8")
+      expect(afterPaginationNode).toHaveTextContent("nodeB")
     })
 
     it("should go to last page", async () => {
-      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
       const paginationOptions = { pageIndex: 0, pageSize: 1 }
 
       renderNetdataTable({ disableRow: true, data, paginationOptions })
@@ -324,17 +329,17 @@ describe("Netdata table", () => {
       const goToLast = screen.getByTestId("pagination-go-to-last")
       const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(beforePaginationNode).toHaveTextContent("node8")
+      expect(beforePaginationNode).toHaveTextContent("nodeB")
 
       await userEvent.click(goToLast)
 
       const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(afterPaginationNode).toHaveTextContent("node15")
+      expect(afterPaginationNode).toHaveTextContent("nodeD")
     })
 
     it("should go to first page", async () => {
-      const data = [...mockData(), { nodes: "node15", alerts: 122, user: "secondPage" }]
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
       const paginationOptions = { pageIndex: 3, pageSize: 1 }
 
       renderNetdataTable({ disableRow: true, data, paginationOptions })
@@ -342,13 +347,13 @@ describe("Netdata table", () => {
       const goToFirst = screen.getByTestId("pagination-go-to-first")
       const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(beforePaginationNode).toHaveTextContent("node15")
+      expect(beforePaginationNode).toHaveTextContent("nodeD")
 
       await userEvent.click(goToFirst)
 
       const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
 
-      expect(afterPaginationNode).toHaveTextContent("node8")
+      expect(afterPaginationNode).toHaveTextContent("nodeB")
     })
   })
 })

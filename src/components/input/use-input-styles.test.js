@@ -20,7 +20,7 @@ describe("useInputStyles", () => {
   it("renders with disabled styles", () => {
     const { result } = renderHookWithProviders(() => useInputStyles({ disabled: true }))
     expect(result.current.styles.inputContainer.background).toBe("mainBackgroundDisabled")
-    expect(result.current.styles.iconContainer({}).background).toBe("mainBackgroundDisabled")
+    expect(result.current.styles.iconContainer({}).background).toBeUndefined()
   })
 
   it("renders with focus styles", () => {

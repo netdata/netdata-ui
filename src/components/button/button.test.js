@@ -6,7 +6,7 @@ import { renderWithProviders, fireEvent } from "testUtilities"
 import { Button } from "./button"
 
 describe("Button states", () => {
-  it(" * should render disabled", () => {
+  it("renders disabled", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" disabled />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("opacity", "0.4", {
@@ -17,7 +17,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a button with text being in default format", () => {
+  it("renders a button with text being in default format", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
@@ -28,7 +28,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a button with text that has no text-transform", () => {
+  it("renders a button with text that has no text-transform", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" textTransform="none" />
     )
@@ -38,7 +38,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a button with text being capitalized", () => {
+  it("renders a button with text being capitalized", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" textTransform="capitalize" />
     )
@@ -48,7 +48,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a button with text being in uppercase", () => {
+  it("renders a button with text being in uppercase", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" textTransform="uppercase" />
     )
@@ -58,7 +58,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a button with text being in lowercase", () => {
+  it("renders a button with text being in lowercase", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" textTransform="lowercase" />
     )
@@ -68,7 +68,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a button with text being in full-width", () => {
+  it("renders a button with text being in full-width", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" textTransform="fullWidth" />
     )
@@ -78,7 +78,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render a text with only one capital letter, the first one", () => {
+  it("renders a text with only one capital letter, the first one", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" textTransform="firstLetter" />
     )
@@ -91,14 +91,14 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render loading text", () => {
+  it("renders loading text", () => {
     const { getByText } = renderWithProviders(
       <Button label="Test prop text" loadingLabel="loading..." isLoading />
     )
     expect(getByText(/loading/)).toBeInTheDocument()
   })
 
-  it(" * should render with icon", () => {
+  it("renders with icon", () => {
     const { container, getByText, getByTitle } = renderWithProviders(
       <Button label="Test prop text" icon="plus" />
     )
@@ -111,7 +111,7 @@ describe("Button states", () => {
     expect(getByTitle("plus")).toBeInTheDocument()
   })
 
-  it(" * should render only icon", () => {
+  it("renders only icon", () => {
     const { container } = renderWithProviders(<Button flavour="hollow" icon="plus" />)
     const button = container.firstChild
     expect(button).toMatchSnapshot()
@@ -123,7 +123,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render smaller only icon", () => {
+  it("renders smaller only icon", () => {
     const { container } = renderWithProviders(<Button flavour="hollow" icon="plus" small />)
     const button = container.firstChild
     expect(button).toMatchSnapshot()
@@ -135,7 +135,7 @@ describe("Button states", () => {
     })
   })
 
-  it(" * should render loading icon", () => {
+  it("renders loading icon", () => {
     const { container, getByText, queryByTitle } = renderWithProviders(
       <Button label="Test prop text" icon="plus" isLoading />
     )
@@ -145,7 +145,7 @@ describe("Button states", () => {
     expect(queryByTitle("plus")).not.toBeInTheDocument()
   })
 
-  it(" * should be clickable", () => {
+  it("is clickable", () => {
     const onClickFn = jest.fn()
     const { getByText } = renderWithProviders(<Button label="Test prop text" onClick={onClickFn} />)
 
@@ -155,7 +155,7 @@ describe("Button states", () => {
 })
 
 describe("Default Button", () => {
-  it(" * should render", () => {
+  it("renders", () => {
     const { container, getByText } = renderWithProviders(<Button label="Test prop text" />)
 
     expect(getByText(/prop text/)).toBeInTheDocument()
@@ -185,7 +185,7 @@ describe("Default Button", () => {
     })
   })
 
-  it(" * should render for danger", () => {
+  it("renders for danger", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" danger />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#FF4136", {
@@ -199,7 +199,7 @@ describe("Default Button", () => {
     })
   })
 
-  it(" * should render for warning", () => {
+  it("renders for warning", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" warning />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("background-color", "#F9A825", {
@@ -213,13 +213,13 @@ describe("Default Button", () => {
     })
   })
 
-  it(" * should render neutral", () => {
+  it("renders neutral", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" neutral />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#35414A", {
+    expect(button).toHaveStyleRule("background-color", "#536775", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#35414A", {
+    expect(button).toHaveStyleRule("border-color", "#536775", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#FFFFFF", {
@@ -229,7 +229,7 @@ describe("Default Button", () => {
 })
 
 describe("Hollow Button", () => {
-  it(" * should render", () => {
+  it("renders", () => {
     const { container, getByText } = renderWithProviders(
       <Button label="Test prop text" flavour="hollow" />
     )
@@ -261,7 +261,7 @@ describe("Hollow Button", () => {
     })
   })
 
-  it(" * should render for danger", () => {
+  it("renders for danger", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" flavour="hollow" danger />
     )
@@ -277,7 +277,7 @@ describe("Hollow Button", () => {
     })
   })
 
-  it(" * should render for warning", () => {
+  it("renders for warning", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" flavour="hollow" warning />
     )
@@ -293,7 +293,7 @@ describe("Hollow Button", () => {
     })
   })
 
-  it(" * should render for neutral", () => {
+  it("renders for neutral", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" flavour="hollow" neutral />
     )
@@ -304,14 +304,14 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("border-color", "#8F9EAA", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#35414A", {
+    expect(button).toHaveStyleRule("color", "#536775", {
       modifier: "&&",
     })
   })
 })
 
 describe("Borderless Button", () => {
-  it(" * should render", () => {
+  it("renders", () => {
     const { container, getByText } = renderWithProviders(
       <Button label="Test prop text" flavour="borderless" />
     )
@@ -343,7 +343,7 @@ describe("Borderless Button", () => {
     })
   })
 
-  it(" * should render for danger", () => {
+  it("renders for danger", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" flavour="borderless" danger />
     )
@@ -359,7 +359,7 @@ describe("Borderless Button", () => {
     })
   })
 
-  it(" * should render for warning", () => {
+  it("renders for warning", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" flavour="borderless" warning />
     )
@@ -375,7 +375,7 @@ describe("Borderless Button", () => {
     })
   })
 
-  it(" * should render for neutral", () => {
+  it("renders for neutral", () => {
     const { container } = renderWithProviders(
       <Button label="Test prop text" flavour="borderless" neutral />
     )
@@ -386,7 +386,7 @@ describe("Borderless Button", () => {
     expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#35414A", {
+    expect(button).toHaveStyleRule("color", "#536775", {
       modifier: "&&",
     })
   })

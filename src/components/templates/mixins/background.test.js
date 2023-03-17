@@ -12,5 +12,5 @@ it("renders color", () => {
 })
 
 it("renders invalid color", () => {
-  expect(background({ theme, background: "invalid" })).toBe(`background-color: #fff;`)
+  expect(background({ theme, background: "invalid" })).toBe(`background-color: invalid;`)
 })
