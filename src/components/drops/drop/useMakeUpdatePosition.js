@@ -32,7 +32,13 @@ const getAbsoluteYPosition = (align, targetRect, dropRect) => {
   if (align.top === "top") return targetRect.top
   if (align.top === "bottom") return targetRect.bottom
   if (align.bottom === "bottom") return targetRect.bottom - dropRect.height
-  if (align.bottom === "top") return targetRect.top - dropRect.height
+  if (align.bottom === "top") {
+    const y = targetRect.top - dropRect.height
+    if (y < 0 && targetRect.bottom + dropRect.height < window.innerHeight) {
+      return targetRect.bottom
+    }
+    return y
+  }
 
   return targetRect.top + targetRect.height / 2 - dropRect.height / 2
 }
