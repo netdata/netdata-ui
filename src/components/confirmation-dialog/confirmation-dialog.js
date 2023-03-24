@@ -2,6 +2,7 @@ import React from "react"
 import Flex from "src/components/templates/flex"
 import { Button } from "src/components/button"
 import { Text } from "src/components/typography"
+import useToggle from "react-use/lib/useToggle"
 import { Actions, Body, CloseButton, Content, Dialog, Header, Title, TitleIcon } from "./styled"
 
 const BodyMessage = ({ children, ...rest }) =>
@@ -9,6 +10,7 @@ const BodyMessage = ({ children, ...rest }) =>
 
 const ConfirmationDialog = ({
   confirmLabel = "Yes, remove",
+  confirmLoadingLabel = "Loading...",
   confirmWidth = "128px",
   "data-ga": dataGA = "confirmation-dialog",
   "data-testid": dataTestId = "confirmationDialog",
@@ -22,7 +24,16 @@ const ConfirmationDialog = ({
   isConfirmPositive,
   message,
   title,
+  showConfirmLoading,
+  disableConfirmOnLoading,
 }) => {
+  const [loading, toggleLoading] = useToggle(false)
+
+  const onConfirm = e => {
+    if (showConfirmLoading) toggleLoading()
+    handleConfirm(e, toggleLoading)
+  }
+
   return (
     <Dialog onEsc={handleDecline}>
       <Content data-testid={dataTestId}>
@@ -53,10 +64,11 @@ const ConfirmationDialog = ({
             data-ga={`${dataGA}-::click-confirm::global-view`}
             data-testid={`${dataTestId}-confirmAction`}
             danger={!isConfirmPositive && true}
-            disabled={isConfirmDisabled}
-            label={confirmLabel}
-            onClick={handleConfirm}
+            disabled={isConfirmDisabled || (disableConfirmOnLoading && loading)}
+            label={loading ? confirmLoadingLabel : confirmLabel}
+            onClick={onConfirm}
             width={confirmWidth}
+            isLoading={loading}
           />
         </Actions>
       </Content>
