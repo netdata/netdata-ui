@@ -20,6 +20,21 @@ export const MyComponent: FC<PropsT> = (props: PropsT) => <>...</>
 
 You can find latest **master** storybook playground [here](https://netdata.github.io/netdata-ui/)
 
+## Local development
+
+First, install the dependencies
+```
+yarn
+```
+
+then, build the project and start
+```
+yarn build && yarn start
+```
+
+Open your browser to [localhost:6006](http://localhost:6006) and view the storybook locally.
+
+
 ## Components
 
 - [Theme and theme utils](https://github.com/netdata/netdata-ui/blob/master/src/theme)
