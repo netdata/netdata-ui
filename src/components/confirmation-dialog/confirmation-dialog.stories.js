@@ -33,7 +33,7 @@ Story.add("Confirmation dialog with loading", () => {
       isConfirmPositive={boolean("isConfirmPositive", false)}
       message="We are about to fulfill your request, there is no return from here. Are you sure?"
       title="Are you sure you want to proceed?"
-      showConfirmLoading={boolean("showConfirmLoading", false)}
+      showConfirmLoading={boolean("showConfirmLoading", true)}
       disableConfirmOnLoading={boolean("disableConfirmOnLoading", true)}
     />
   )
