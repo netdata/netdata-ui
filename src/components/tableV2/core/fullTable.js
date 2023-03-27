@@ -34,18 +34,39 @@ const FullTable = ({
       {...rest}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
-        <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-          <HeadCell
-            dataGa={dataGa}
-            enableResize={enableResize}
-            enableSorting={enableSorting}
-            headers={headers}
-            pinnedStyles={pinnedStyles}
-            table={table}
-            testPrefix={testPrefix}
-            coloredSortedColumn={coloredSortedColumn}
-          />
-        </Table.HeadRow>
+        {Array.isArray(table.getHeaderGroups()) ? (
+          table.getHeaderGroups().map((headerGroup, index) => (
+            <Table.HeadRow
+              key={index}
+              id={headerGroup.id}
+              data-testid={`netdata-table-headRow${testPrefix}`}
+            >
+              <HeadCell
+                dataGa={dataGa}
+                enableResize={enableResize}
+                enableSorting={enableSorting}
+                headers={headerGroup.headers}
+                pinnedStyles={pinnedStyles}
+                table={table}
+                testPrefix={testPrefix}
+                coloredSortedColumn={coloredSortedColumn}
+              />
+            </Table.HeadRow>
+          ))
+        ) : (
+          <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
+            <HeadCell
+              dataGa={dataGa}
+              enableResize={enableResize}
+              enableSorting={enableSorting}
+              headers={headers}
+              pinnedStyles={pinnedStyles}
+              table={table}
+              testPrefix={testPrefix}
+              coloredSortedColumn={coloredSortedColumn}
+            />
+          </Table.HeadRow>
+        )}
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         <Rows

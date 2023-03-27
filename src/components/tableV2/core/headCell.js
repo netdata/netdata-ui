@@ -114,6 +114,7 @@ const HeadCell = ({
 
       return (
         <Table.HeadCell
+          colSpan={colSpan}
           data-testid={`netdata-table-head-cell${testPrefix}`}
           filter={
             column.getCanFilter() && (
