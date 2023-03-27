@@ -19,6 +19,8 @@ const ConfirmationDialog = ({
   hideIcon,
   iconName = "warning_triangle_hollow",
   isConfirmDisabled,
+  isConfirmLoading,
+  isDeclineDisabled,
   isConfirmPositive,
   message,
   title,
@@ -44,6 +46,7 @@ const ConfirmationDialog = ({
               data-ga={`${dataGA}-::click-cancel::global-view`}
               data-testid={`${dataTestId}-cancelAction`}
               flavour="hollow"
+              disabled={isDeclineDisabled}
               label={declineLabel}
               onClick={handleDecline}
               width={declineWidth}
@@ -57,6 +60,7 @@ const ConfirmationDialog = ({
             label={confirmLabel}
             onClick={handleConfirm}
             width={confirmWidth}
+            isLoading={isConfirmLoading}
           />
         </Actions>
       </Content>
