@@ -34,7 +34,7 @@ const FullTable = ({
       {...rest}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
-        {Array.isArray(table.getHeaderGroups()) ? (
+        {table.getHeaderGroups().length > 1 ? (
           table.getHeaderGroups().map((headerGroup, index) => (
             <Table.HeadRow
               key={index}
