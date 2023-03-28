@@ -134,7 +134,7 @@ export const StyledButton = styled.button.attrs(props => ({
     text-decoration: none;
     & > span {
       ${textTransform};
-      margin-left: ${({ hasIcon }) => (hasIcon ? getSizeBy(1.5) : "0px")};
+      margin-left: ${({ hasIcon }) => (hasIcon ? "2px" : "0px")};
     }
 
     &:hover {

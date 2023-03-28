@@ -1,7 +1,7 @@
 import React, { useMemo } from "react"
 import { Checkbox } from "src/components/checkbox"
 
-const width = 45
+const width = 30
 
 export default (enabled, { testPrefix, tableMeta }) =>
   useMemo(
