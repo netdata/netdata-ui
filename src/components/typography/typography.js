@@ -46,7 +46,7 @@ const typography = css`
 `
 
 export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
   font-style: normal;
   ${makeFontSize(fontSize)}
   ${makeLineHeight(lineHeight)}

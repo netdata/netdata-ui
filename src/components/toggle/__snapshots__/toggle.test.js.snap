@@ -2,7 +2,7 @@
 
 exports[`Toggle test  * should render with labels 1`] = `
 .c1 {
-  font-family: "IBM Plex Sans",sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Ubuntu,"Helvetica Neue",sans-serif;
   font-style: normal;
   font-size: 14px;
   line-height: 20px;

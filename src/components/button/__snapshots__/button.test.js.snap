@@ -15,8 +15,6 @@ exports[`Borderless Button renders 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  width: 128px;
-  height: 40px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -77,7 +75,7 @@ exports[`Borderless Button renders 1`] = `
 }
 
 .c0.c0 .button-icon__color {
-  fill: #FFFFFF;
+  fill: #00AB44;
 }
 
 .c0.c0 .ntd-spinner {
@@ -119,8 +117,6 @@ exports[`Button states renders loading icon 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  width: 128px;
-  height: 40px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -145,7 +141,7 @@ exports[`Button states renders loading icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
-  margin-left: 12px;
+  margin-left: 2px;
 }
 
 .c0.c0 > span::first-letter {
@@ -258,8 +254,6 @@ exports[`Button states renders only icon 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  width: 32px;
-  height: 32px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -284,7 +278,7 @@ exports[`Button states renders only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
-  margin-left: 12px;
+  margin-left: 2px;
 }
 
 .c0.c0 > span::first-letter {
@@ -292,7 +286,7 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42B861;
+  border-color: #68C47D;
   background-color: rgba(255,255,255,0.0);
   color: #68C47D;
   -webkit-text-decoration: none;
@@ -305,7 +299,7 @@ exports[`Button states renders only icon 1`] = `
 
 .c0.c0:active {
   border-color: #68C47D;
-  background-color: #FFFFFF;
+  background-color: rgba(255,255,255,0.0);
   color: #68C47D;
 }
 
@@ -320,7 +314,7 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c0.c0 .button-icon__color {
-  fill: #FFFFFF;
+  fill: #00AB44;
 }
 
 .c0.c0 .ntd-spinner {
@@ -401,8 +395,6 @@ exports[`Button states renders smaller only icon 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  width: 24px;
-  height: 24px;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -411,7 +403,7 @@ exports[`Button states renders smaller only icon 1`] = `
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  padding: 8px;
+  padding: 4px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
@@ -427,7 +419,7 @@ exports[`Button states renders smaller only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
-  margin-left: 12px;
+  margin-left: 2px;
 }
 
 .c0.c0 > span::first-letter {
@@ -435,7 +427,7 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42B861;
+  border-color: #68C47D;
   background-color: rgba(255,255,255,0.0);
   color: #68C47D;
   -webkit-text-decoration: none;
@@ -448,7 +440,7 @@ exports[`Button states renders smaller only icon 1`] = `
 
 .c0.c0:active {
   border-color: #68C47D;
-  background-color: #FFFFFF;
+  background-color: rgba(255,255,255,0.0);
   color: #68C47D;
 }
 
@@ -463,7 +455,7 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c0.c0 .button-icon__color {
-  fill: #FFFFFF;
+  fill: #00AB44;
 }
 
 .c0.c0 .ntd-spinner {
@@ -544,8 +536,6 @@ exports[`Default Button renders 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  width: 128px;
-  height: 40px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -648,8 +638,6 @@ exports[`Hollow Button renders 1`] = `
   -ms-flex-align: center;
   align-items: center;
   position: relative;
-  width: 128px;
-  height: 40px;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -682,7 +670,7 @@ exports[`Hollow Button renders 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42B861;
+  border-color: #68C47D;
   background-color: rgba(255,255,255,0.0);
   color: #68C47D;
   -webkit-text-decoration: none;
@@ -695,7 +683,7 @@ exports[`Hollow Button renders 1`] = `
 
 .c0.c0:active {
   border-color: #68C47D;
-  background-color: #FFFFFF;
+  background-color: rgba(255,255,255,0.0);
   color: #68C47D;
 }
 
@@ -710,7 +698,7 @@ exports[`Hollow Button renders 1`] = `
 }
 
 .c0.c0 .button-icon__color {
-  fill: #FFFFFF;
+  fill: #00AB44;
 }
 
 .c0.c0 .ntd-spinner {

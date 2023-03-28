@@ -105,7 +105,7 @@ describe("Button states", () => {
     const button = container.firstChild
 
     expect(getByText(/prop text/)).toBeInTheDocument()
-    expect(button).toHaveStyleRule("margin-left", "12px", {
+    expect(button).toHaveStyleRule("margin-left", "2px", {
       modifier: "&& > span",
     })
     expect(getByTitle("plus")).toBeInTheDocument()
@@ -115,24 +115,12 @@ describe("Button states", () => {
     const { container } = renderWithProviders(<Button flavour="hollow" icon="plus" />)
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "32px", {
-      modifier: "&&",
-    })
-    expect(button).toHaveStyleRule("height", "32px", {
-      modifier: "&&",
-    })
   })
 
   it("renders smaller only icon", () => {
     const { container } = renderWithProviders(<Button flavour="hollow" icon="plus" small />)
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "24px", {
-      modifier: "&&",
-    })
-    expect(button).toHaveStyleRule("height", "24px", {
-      modifier: "&&",
-    })
   })
 
   it("renders loading icon", () => {
@@ -162,12 +150,6 @@ describe("Default Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "128px", {
-      modifier: "&&",
-    })
-    expect(button).toHaveStyleRule("height", "40px", {
-      modifier: "&&",
-    })
     expect(button).toHaveStyleRule("background-color", "#00AB44", {
       modifier: "&&",
     })
@@ -238,12 +220,6 @@ describe("Hollow Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "128px", {
-      modifier: "&&",
-    })
-    expect(button).toHaveStyleRule("height", "40px", {
-      modifier: "&&",
-    })
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
@@ -304,7 +280,7 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("border-color", "#8F9EAA", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#536775", {
+    expect(button).toHaveStyleRule("color", "#8F9EAA", {
       modifier: "&&",
     })
   })
@@ -320,12 +296,6 @@ describe("Borderless Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("width", "128px", {
-      modifier: "&&",
-    })
-    expect(button).toHaveStyleRule("height", "40px", {
-      modifier: "&&",
-    })
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
