@@ -211,10 +211,15 @@ import searchPress from "./assets/search_press.svg"
 import serviceApache from "./assets/services/apache.svg"
 import serviceApacheTomcat from "./assets/services/apache_tomcat.svg"
 import serviceBeanstalk from "./assets/services/beanstalk.svg"
+import serviceBind from "./assets/services/bind.svg"
+import serviceContainer from "./assets/services/containerTech.svg"
+import serviceCoreDns from "./assets/services/coreDNS.svg"
 import serviceCouchDB from "./assets/services/couchDB.svg"
 import serviceDatabase from "./assets/services/database.svg"
-import serviceDockerHub from "./assets/services/docker_hub.svg"
+import serviceDNS from "./assets/services/dns.svg"
 import serviceDockerHubPress from "./assets/services/docker_hub_press.svg"
+import serviceDockerHub from "./assets/services/docker_hub.svg"
+import serviceDotNet from "./assets/services/dotnet.svg"
 import serviceEBPF from "./assets/services/eBPF.svg"
 import serviceElasticSearch from "./assets/services/elasticSearch.svg"
 import serviceFreeNAS from "./assets/services/freeNAS.svg"
@@ -224,7 +229,7 @@ import serviceIceCast from "./assets/services/iceCast.svg"
 import serviceInfluxDB from "./assets/services/influxDB.svg"
 import serviceIPFS from "./assets/services/ipfs.svg"
 import serviceIPVS from "./assets/services/ipvs.svg"
-import serviceKubernetes from "./assets/services/kubermetes.svg"
+import serviceKubernetes from "./assets/services/kubernetes.svg"
 import serviceLighthttpd from "./assets/services/lighthttpd.svg"
 import serviceLighthttpd2 from "./assets/services/lighthttpd2.svg"
 import serviceLiteSpeed from "./assets/services/liteSpeed.svg"
@@ -252,11 +257,14 @@ import serviceRabbitMQ from "./assets/services/rabbitMQ.svg"
 import serviceRedis from "./assets/services/redis.svg"
 import serviceRethinkDB from "./assets/services/rethinkDB.svg"
 import serviceRetroShare from "./assets/services/retroShare.svg"
-import services from "./assets/services/services.svg"
 import serviceSelectedArea from "./assets/services/selected_area.svg"
+import serviceSendgrid from "./assets/services/sendgrid.svg"
+import services from "./assets/services/services.svg"
+import servicesSmartdlog from "./assets/services/smartdlog.svg"
 import serviceSolr from "./assets/services/solr.svg"
 import serviceSquid from "./assets/services/squid.svg"
 import serviceSummaryStatistic from "./assets/services/summary_statistic.svg"
+import serviceSystemd from "./assets/services/systemd.svg"
 import serviceTraefik from "./assets/services/traefik.svg"
 import serviceVarnish from "./assets/services/varnish.svg"
 import serviceWebLog from "./assets/services/webLog.svg"
@@ -532,10 +540,15 @@ export const iconsList = {
   serviceApache,
   serviceApacheTomcat,
   serviceBeanstalk,
+  serviceBind,
+  serviceContainer,
+  serviceCoreDns,
   serviceCouchDB,
   serviceDatabase,
-  serviceDockerHub,
+  serviceDNS,
   serviceDockerHubPress,
+  serviceDockerHub,
+  serviceDotNet,
   serviceEBPF,
   serviceElasticSearch,
   serviceFreeNAS,
@@ -573,11 +586,14 @@ export const iconsList = {
   serviceRedis,
   serviceRethinkDB,
   serviceRetroShare,
-  services,
   serviceSelectedArea,
+  serviceSendgrid,
+  services,
+  servicesSmartdlog,
   serviceSolr,
   serviceSquid,
   serviceSummaryStatistic,
+  serviceSystemd,
   serviceTraefik,
   serviceVarnish,
   serviceWebLog,
