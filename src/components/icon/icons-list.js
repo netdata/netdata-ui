@@ -84,6 +84,7 @@ import documentation from "./assets/documentation.svg"
 import dot from "./assets/dot.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
 import download from "./assets/download.svg"
+import dragHorizontal from "./assets/drag_horizontal.svg"
 import edit from "./assets/edit.svg"
 import error from "./assets/error.svg"
 import exclamation from "./assets/exclamation.svg"
@@ -178,6 +179,7 @@ import osUbuntu from "./assets/os/ubuntu.svg"
 import osUbuntuColored from "./assets/os/ubuntu_colored.svg"
 import notification from "./assets/notification.svg"
 import padlock from "./assets/padlock.svg"
+import panTool from "./assets/pan_tool.svg"
 import pauseOutline from "./assets/pause_outline.svg"
 import pauseSolid from "./assets/pause_solid.svg"
 import pencilOutline from "./assets/pencil_outline.svg"
@@ -320,6 +322,9 @@ import applicationsSolid from "./assets/applications_solid.svg"
 import networkingStack from "./assets/networking_stack.svg"
 import charts_view from "./assets/charts_view.svg"
 import nodes_update from "./assets/nodes_update.svg"
+import zoomIn from "./assets/zoom_in.svg"
+import zoomOut from "./assets/zoom_out.svg"
+import zoomReset from "./assets/zoom_reset.svg"
 
 export const iconsList = {
   add_node,
@@ -409,6 +414,7 @@ export const iconsList = {
   dot,
   dots_2x3,
   download,
+  dragHorizontal,
   edit,
   error,
   exclamation,
@@ -506,6 +512,7 @@ export const iconsList = {
   osUbuntu,
   osUbuntuColored,
   padlock,
+  panTool,
   pauseOutline,
   pauseSolid,
   pencilSolid,
@@ -643,4 +650,7 @@ export const iconsList = {
   weights_compare,
   weights_drill_down,
   x,
+  zoomIn,
+  zoomOut,
+  zoomReset,
 }
