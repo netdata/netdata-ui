@@ -121,6 +121,7 @@ Table.HeadCell = forwardRef(
           fontSize: "14px",
         }}
         position="relative"
+        overflow="hidden"
         padding={[1, 2]}
         width={`${width}px`}
         onMouseEnter={() => onHover({ row: null, column: id })}
