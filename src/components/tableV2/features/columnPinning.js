@@ -17,7 +17,6 @@ const ColumnPinning = ({
   ...rest
 }) => {
   const getThemeColor = useColor()
-  const headers = table.getLeftHeaderGroups()
 
   return (
     <Box
@@ -36,7 +35,6 @@ const ColumnPinning = ({
         enableResize={enableResize}
         enableSorting={enableSorting}
         getRowHandler="getLeftVisibleCells"
-        headers={headers}
         onClickRow={onClickRow}
         onHoverCell={onHoverCell}
         pinnedStyles={{ borderRight: `1px solid ${getThemeColor("borderSecondary")}` }}

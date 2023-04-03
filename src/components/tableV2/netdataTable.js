@@ -208,14 +208,14 @@ const NetdataTable = ({
           />
         ) : null}
         <Flex column flex ref={scrollParentRef} overflow="auto">
-          <Flex gap={enableColumnPinning ? 2 : undefined}>
+          <Flex>
             {enableColumnPinning && (
               <ColumnPinning
                 enableResize={enableResize}
                 onClickRow={onClickRow}
                 enableSorting={enableSorting}
                 table={table}
-                headers={table.getLeftFlatHeaders()}
+                headers={table.getLeftHeaderGroups()}
                 testPrefix={testPrefix}
                 dataGa={dataGa}
                 scrollParentRef={scrollParentRef}
