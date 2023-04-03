@@ -1,6 +1,6 @@
 import React from "react"
 import Table from "./base-table"
-import HeadCell from "./headCell"
+import HeadCells from "./headCells"
 import Rows from "./rows"
 
 const FullTable = ({
@@ -34,39 +34,24 @@ const FullTable = ({
       {...rest}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
-        {table.getHeaderGroups().length > 1 ? (
-          table.getHeaderGroups().map((headerGroup, index) => (
-            <Table.HeadRow
-              key={index}
-              id={headerGroup.id}
-              data-testid={`netdata-table-headRow${testPrefix}`}
-            >
-              <HeadCell
-                dataGa={dataGa}
-                enableResize={enableResize}
-                enableSorting={enableSorting}
-                headers={headerGroup.headers}
-                pinnedStyles={pinnedStyles}
-                table={table}
-                testPrefix={testPrefix}
-                coloredSortedColumn={coloredSortedColumn}
-              />
-            </Table.HeadRow>
-          ))
-        ) : (
-          <Table.HeadRow data-testid={`netdata-table-headRow${testPrefix}`}>
-            <HeadCell
+        {headers.map((headerGroup, index) => (
+          <Table.HeadRow
+            key={index}
+            id={headerGroup.id}
+            data-testid={`netdata-table-headRow${testPrefix}`}
+          >
+            <HeadCells
               dataGa={dataGa}
               enableResize={enableResize}
               enableSorting={enableSorting}
-              headers={headers}
+              headers={headerGroup.headers}
               pinnedStyles={pinnedStyles}
               table={table}
               testPrefix={testPrefix}
-              coloredSortedColumn={coloredSortedColumn}
+              coloredSortedColumn={enableSorting && coloredSortedColumn}
             />
           </Table.HeadRow>
-        )}
+        ))}
       </Table.Head>
       <Table.Body data-testid={`netdata-table-body${testPrefix}`}>
         <Rows
@@ -79,7 +64,7 @@ const FullTable = ({
           table={table}
           testPrefix={testPrefix}
           testPrefixCallback={testPrefixCallback}
-          coloredSortedColumn={coloredSortedColumn}
+          coloredSortedColumn={enableSorting && coloredSortedColumn}
           meta={meta}
           {...virtualizeOptions}
         />

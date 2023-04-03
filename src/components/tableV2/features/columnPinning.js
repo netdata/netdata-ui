@@ -17,7 +17,7 @@ const ColumnPinning = ({
   ...rest
 }) => {
   const getThemeColor = useColor()
-  const headers = table.getLeftFlatHeaders()
+  const headers = table.getLeftHeaderGroups()
 
   return (
     <Box

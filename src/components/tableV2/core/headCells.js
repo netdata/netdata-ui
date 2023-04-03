@@ -37,7 +37,7 @@ const availableFilters = {
   default: SearchFilter,
 }
 
-const HeadCell = ({
+const HeadCells = ({
   enableResize,
   enableSorting,
   headers,
@@ -138,4 +138,4 @@ const HeadCell = ({
     }
   )
 
-export default HeadCell
+export default HeadCells

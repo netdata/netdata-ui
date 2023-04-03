@@ -96,7 +96,7 @@ const makeCustomStyles = (theme, { size, ...providedStyles } = {}) => ({
     borderColor: state.isFocused ? theme.colors.inputBorderFocus : theme.colors.inputBorder,
     boxShadow: "none",
     minWidth: 160,
-    ...(size === "tiny" ? { minHeight: 28 } : {}),
+    ...(size === "tiny" ? { minHeight: 18 } : { minHeight: 18 }),
     ":hover": {
       borderColor: theme.colors.inputBorderHover,
     },
@@ -160,14 +160,23 @@ const makeCustomStyles = (theme, { size, ...providedStyles } = {}) => ({
     ? {
         dropdownIndicator: styles => ({ ...styles, padding: "3px" }),
         clearIndicator: styles => ({ ...styles, padding: "3px" }),
+        indicatorsContainer: styles => ({ ...styles, minHeight: 18 }),
+        valueContainer: styles => ({
+          ...styles,
+          minHeight: 18,
+          padding: "1px 6px",
+        }),
+      }
+    : {
+        dropdownIndicator: styles => ({ ...styles, padding: "3px" }),
+        clearIndicator: styles => ({ ...styles, padding: "3px" }),
         indicatorsContainer: styles => ({ ...styles, minHeight: 28 }),
         valueContainer: styles => ({
           ...styles,
           minHeight: 28,
           padding: "1px 6px",
         }),
-      }
-    : {}),
+      }),
   ...providedStyles,
 })
 

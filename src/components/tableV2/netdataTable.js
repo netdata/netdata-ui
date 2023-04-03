@@ -12,12 +12,12 @@ import { Text } from "src/components/typography"
 import { Icon, IconComponents } from "src/components/icon"
 import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./features/useColumns"
-import makePagination from "./features/pagination"
 import useBulkActions from "./features/useBulkActions"
 import ColumnPinning from "./features/columnPinning"
 import GlobalControls from "./features/globalControls"
 import TableProvider from "./features/provider"
-import MainTable from "./features/mainTable"
+import Pagination from "./components/pagination"
+import FullTable from "./core/fullTable"
 
 const noop = () => {}
 const emptyObj = {}
@@ -31,41 +31,34 @@ const NetdataTable = ({
   bulkActions,
   columnPinning: defaultColumnPinning,
   columnVisibility: defaultColumnVisibility,
-  expanded: defaultExpanded = emptyObj,
-  rowSelection: defaultRowSelection = emptyObj,
+  expanded: defaultExpanded,
+  rowSelection: defaultRowSelection,
   data,
   dataColumns,
   dataGa,
-  disableClickRow,
-  enableColumnPinning = false,
-  enableColumnVisibility = false,
+  enableColumnPinning,
+  enableColumnVisibility,
   enablePagination,
-  enableResize = false,
+  enableResize,
   enableSelection,
   enableSubRowSelection,
   enableSorting,
-  globalFilter: initialGlobalFilter = "",
+  globalFilter: initialGlobalFilter,
   globalFilterFn = includesString,
   onClickRow,
-  onColumnVisibilityChange = noop,
+  onColumnVisibilityChange,
   onGlobalSearchChange,
   onHoverCell,
   onRowSelected,
-  onSortingChange = noop,
-  onExpandedChange = noop,
-  paginationOptions = {
-    pageIndex: 0,
-    pageSize: 100,
-  },
-  rowActions = {},
+  onSortingChange,
+  onExpandedChange,
+  paginationOptions,
+  rowActions,
   sortBy,
-  tableRef,
-  testPrefix = "",
-  testPrefixCallback,
-  virtualizeOptions = {},
-  coloredSortedColumn = true,
-  meta: tableMeta = {},
+  testPrefix,
+  meta: tableMeta,
   title,
+  virtualizeOptions,
   ...rest
 }) => {
   const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
@@ -199,11 +192,11 @@ const NetdataTable = ({
     testPrefix,
   })
 
-  const { hasNextPage, loading, warning } = virtualizeOptions
+  const { hasNextPage, loading, warning } = virtualizeOptions || {}
 
   return (
     <TableProvider onHoverCell={onHoverCell}>
-      <Flex height="100%" overflow="hidden" width="100%" column>
+      <Flex flex column>
         {onGlobalSearchChange || hasBulkActions ? (
           <GlobalControls
             title={title}
@@ -214,14 +207,12 @@ const NetdataTable = ({
             tableMeta={tableMeta}
           />
         ) : null}
-        <Flex column ref={scrollParentRef} overflow="auto" width="100%" height="100%">
-          <Flex>
+        <Flex column flex ref={scrollParentRef} overflow="auto">
+          <Flex gap={enableColumnPinning ? 2 : undefined}>
             {enableColumnPinning && (
               <ColumnPinning
                 enableResize={enableResize}
-                disableClickRow={disableClickRow}
                 onClickRow={onClickRow}
-                testPrefixCallback={testPrefixCallback}
                 enableSorting={enableSorting}
                 table={table}
                 headers={table.getLeftFlatHeaders()}
@@ -229,24 +220,22 @@ const NetdataTable = ({
                 dataGa={dataGa}
                 scrollParentRef={scrollParentRef}
                 virtualizeOptions={virtualizeOptions}
-                coloredSortedColumn={enableSorting && coloredSortedColumn}
                 meta={tableMeta}
               />
             )}
-            <MainTable
+            <FullTable
+              headers={columnPinning ? table.getCenterHeaderGroups() : table.getHeaderGroups()}
+              width={enableResize ? `${table.getTotalSize()}px` : "100%"}
+              getRowHandler={enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells"}
               scrollParentRef={scrollParentRef}
               enableResize={enableResize}
-              disableClickRow={disableClickRow}
               onClickRow={onClickRow}
-              testPrefixCallback={testPrefixCallback}
               enableSorting={enableSorting}
               enableColumnPinning={enableColumnPinning}
               table={table}
               dataGa={dataGa}
-              tableRef={tableRef}
               testPrefix={testPrefix}
               virtualizeOptions={virtualizeOptions}
-              coloredSortedColumn={enableSorting && coloredSortedColumn}
               meta={tableMeta}
               {...rest}
             />
@@ -264,10 +253,30 @@ const NetdataTable = ({
             </Flex>
           )}
         </Flex>
-        {enablePagination && makePagination({ table })}
+        {enablePagination && <Pagination table={table} />}
       </Flex>
     </TableProvider>
   )
+}
+
+NetdataTable.defaultProps = {
+  coloredSortedColumn: true,
+  enableColumnPinning: false,
+  enableColumnVisibility: false,
+  enableResize: false,
+  onColumnVisibilityChange: noop,
+  onSortingChange: noop,
+  onExpandedChange: noop,
+  paginationOptions: {
+    pageIndex: 0,
+    pageSize: 100,
+  },
+  expanded: emptyObj,
+  rowSelection: emptyObj,
+  rowActions: emptyObj,
+  meta: emptyObj,
+  globalFilter: "",
+  testPrefix: "",
 }
 
 export default NetdataTable
