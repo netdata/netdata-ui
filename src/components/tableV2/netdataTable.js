@@ -196,7 +196,7 @@ const NetdataTable = ({
 
   return (
     <TableProvider onHoverCell={onHoverCell}>
-      <Flex flex column>
+      <Flex height="100%" overflow="hidden" column>
         {onGlobalSearchChange || hasBulkActions ? (
           <GlobalControls
             title={title}
