@@ -5,7 +5,6 @@ import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
-import { IconButton } from "src/components/button"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
 import { useTableContext } from "../features/provider"
@@ -121,7 +120,6 @@ Table.HeadCell = forwardRef(
           fontSize: "14px",
         }}
         position="relative"
-        overflow="hidden"
         padding={[1, 2]}
         width={`${width}px`}
         onMouseEnter={() => onHover({ row: null, column: id })}
@@ -283,7 +281,6 @@ Table.Cell = forwardRef(
           whiteSpace: "nowrap",
         }}
         width={`${width}px`}
-        overflow="hidden"
         {...rest}
         background={
           !rest.background && isRowHovering
