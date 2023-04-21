@@ -16,6 +16,7 @@ import alarms_new from "./assets/alarms_new.svg"
 import alarm_off from "./assets/alarm_off.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
+import anomalyBadge from "./assets/anomaly_badge.svg"
 import applications_hollow from "./assets/applications_hollow.svg"
 import around_clock from "./assets/around_clock.svg"
 import arrow_down from "./assets/arrow_down.svg"
@@ -328,6 +329,11 @@ import zoomIn from "./assets/zoom_in.svg"
 import zoomOut from "./assets/zoom_out.svg"
 import zoomReset from "./assets/zoom_reset.svg"
 
+import N from "./assets/N.svg"
+import I from "./assets/I.svg"
+import D from "./assets/D.svg"
+import L from "./assets/L.svg"
+
 export const iconsList = {
   add_node,
   add_user,
@@ -346,6 +352,7 @@ export const iconsList = {
   alarm_off,
   anomaliesBrain,
   anomaliesLens,
+  anomalyBadge,
   applications_hollow,
   applicationsSolid,
   around_clock,
@@ -657,4 +664,9 @@ export const iconsList = {
   zoomIn,
   zoomOut,
   zoomReset,
+
+  N,
+  I,
+  D,
+  L,
 }

@@ -132,13 +132,13 @@ Table.HeadCell = forwardRef(
       >
         <Flex>
           {children}
-          <Box position="absolute" top={1} right="12px" width={4} height={4}>
-            {tooltipText && (
+          {tooltipText && (
+            <Box position="absolute" top={1} right="12px" width={4} height={4}>
               <Tooltip align="bottom" content={tooltipText}>
                 <Icon color="nodeBadgeColor" size="small" name="information" />
               </Tooltip>
-            )}
-          </Box>
+            </Box>
+          )}
         </Flex>
         <Box sx={{ fontWeight: "normal" }}>{filter}</Box>
         <Table.Resizer
