@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -27,188 +27,191 @@ const filterFns = {
   select,
 }
 
-const NetdataTable = ({
-  bulkActions,
-  columnPinning: defaultColumnPinning,
-  columnVisibility: defaultColumnVisibility,
-  expanded: defaultExpanded,
-  rowSelection: defaultRowSelection,
-  data,
-  dataColumns,
-  dataGa,
-  enableColumnPinning,
-  enableColumnVisibility,
-  enablePagination,
-  enableResize,
-  enableSelection,
-  enableSubRowSelection,
-  enableSorting,
-  globalFilter: initialGlobalFilter,
-  globalFilterFn = includesString,
-  onClickRow,
-  onColumnVisibilityChange,
-  onGlobalSearchChange,
-  onHoverCell,
-  onRowSelected,
-  onSortingChange,
-  onExpandedChange,
-  paginationOptions,
-  rowActions,
-  sortBy,
-  testPrefix,
-  meta: tableMeta,
-  title,
-  virtualizeOptions,
-  ...rest
-}) => {
-  const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
-
-  useEffect(() => {
-    if (columnVisibility === defaultColumnVisibility) return
-
-    setColumnVisibility(defaultColumnVisibility)
-  }, [defaultColumnVisibility])
-
-  const [columnPinning, setColumnPinning] = useState(() => defaultColumnPinning || {})
-
-  useEffect(() => {
-    if (!defaultColumnPinning || columnVisibility === defaultColumnPinning) return
-
-    setColumnPinning(defaultColumnPinning)
-  }, [defaultColumnPinning])
-
-  const [rowSelection, setRowSelection] = useState(defaultRowSelection)
-
-  useEffect(() => {
-    if (rowSelection === defaultRowSelection) return
-
-    setRowSelection(defaultRowSelection)
-  }, [defaultRowSelection])
-
-  const [sorting, setSorting] = useState(() => sortBy || [])
-
-  useEffect(() => {
-    if (!sortBy || sorting === sortBy) return
-
-    setSorting(sortBy)
-  }, [sortBy])
-
-  const onShorting = useCallback(getSorting => {
-    onSortingChange(getSorting)
-    setSorting(getSorting)
-  }, [])
-
-  const [pagination, setPagination] = useState(() => ({
-    pageIndex: paginationOptions.pageIndex,
-    pageSize: paginationOptions.pageSize,
-  }))
-
-  const handleColumnVisibilityChange = useCallback(getVisibility => {
-    onColumnVisibilityChange(getVisibility)
-    setColumnVisibility(getVisibility)
-  }, [])
-
-  const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
-
-  useEffect(() => {
-    if (!initialGlobalFilter || globalFilter === initialGlobalFilter) return
-
-    setGlobalFilter(initialGlobalFilter)
-  }, [sortBy])
-
-  const onGlobalFilterChange = useCallback(value => {
-    onGlobalSearchChange?.(value)
-    setGlobalFilter(String(value))
-  }, [])
-
-  const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions, tableMeta })
-
-  const [expanded, setExpanded] = useState(defaultExpanded)
-
-  const onExpand = useCallback(getExpanding => {
-    onExpandedChange(getExpanding)
-    setExpanded(getExpanding)
-  }, [])
-
-  const table = useReactTable({
-    columns,
-    data,
-    manualPagination: !enablePagination,
-    columnResizeMode: enableResize ? "onEnd" : "",
-    filterFns,
-    state: {
-      columnVisibility,
-      rowSelection,
-      globalFilter,
-      sorting,
-      pagination,
-      columnPinning,
-      expanded,
+const NetdataTable = forwardRef(
+  (
+    {
+      bulkActions,
+      columnPinning: defaultColumnPinning,
+      columnVisibility: defaultColumnVisibility,
+      expanded: defaultExpanded,
+      rowSelection: defaultRowSelection,
+      data,
+      dataColumns,
+      dataGa,
+      enableColumnPinning,
+      enableColumnVisibility,
+      enablePagination,
+      enableResize,
+      enableSelection,
+      enableSubRowSelection,
+      enableSorting,
+      globalFilter: initialGlobalFilter,
+      globalFilterFn = includesString,
+      onClickRow,
+      onColumnVisibilityChange,
+      onGlobalSearchChange,
+      onHoverCell,
+      onRowSelected,
+      onSortingChange,
+      onExpandedChange,
+      paginationOptions,
+      rowActions,
+      sortBy,
+      testPrefix,
+      meta: tableMeta,
+      title,
+      virtualizeOptions,
+      ...rest
     },
-    onExpandedChange: onExpand,
-    ...(globalFilterFn ? { globalFilterFn } : {}),
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onRowSelectionChange: setRowSelection,
-    onGlobalFilterChange,
-    onSortingChange: onShorting,
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getExpandedRowModel: getExpandedRowModel(),
-    getSubRows: row => row.children,
-    onPaginationChange: setPagination,
-    onColumnVisibilityChange: handleColumnVisibilityChange,
-    onColumnPinningChange: setColumnPinning,
-    enableSubRowSelection,
-  })
+    ref
+  ) => {
+    const [columnVisibility, setColumnVisibility] = useState(defaultColumnVisibility)
 
-  const [selectedRows, setActualSelectedRows] = useState([])
+    useEffect(() => {
+      if (columnVisibility === defaultColumnVisibility) return
 
-  useEffect(() => {
-    const { flatRows } = table.getSelectedRowModel()
-    if (flatRows) {
-      const selectedRows = flatRows.reduce((acc, { original }) => {
-        if (original?.disabled) return acc
+      setColumnVisibility(defaultColumnVisibility)
+    }, [defaultColumnVisibility])
 
-        acc.push(original)
-        return acc
-      }, [])
-      setActualSelectedRows(selectedRows)
-      onRowSelected?.(selectedRows)
-    }
-  }, [rowSelection, table])
+    const [columnPinning, setColumnPinning] = useState(() => defaultColumnPinning || {})
 
-  const hasBulkActions = enableColumnPinning || enableColumnVisibility || !!bulkActions
-  const scrollParentRef = useRef()
+    useEffect(() => {
+      if (!defaultColumnPinning || columnVisibility === defaultColumnPinning) return
 
-  const actions = useBulkActions({
-    bulkActions,
-    columnPinning,
-    dataGa,
-    enableColumnVisibility,
-    enableColumnPinning,
-    selectedRows,
-    table,
-    testPrefix,
-  })
+      setColumnPinning(defaultColumnPinning)
+    }, [defaultColumnPinning])
 
-  const { hasNextPage, loading, warning } = virtualizeOptions || {}
+    const [rowSelection, setRowSelection] = useState(defaultRowSelection)
 
-  return (
-    <TableProvider onHoverCell={onHoverCell}>
-      <Flex height="100%" overflow="hidden" column>
-        {onGlobalSearchChange || hasBulkActions ? (
-          <GlobalControls
-            title={title}
-            bulkActions={hasBulkActions ? actions : null}
-            dataGa={dataGa}
-            handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
-            searchValue={globalFilter}
-            tableMeta={tableMeta}
-          />
-        ) : null}
-        <Flex column flex ref={scrollParentRef} overflow="auto">
-          <Flex>
+    useEffect(() => {
+      if (rowSelection === defaultRowSelection) return
+
+      setRowSelection(defaultRowSelection)
+    }, [defaultRowSelection])
+
+    const [sorting, setSorting] = useState(() => sortBy || [])
+
+    useEffect(() => {
+      if (!sortBy || sorting === sortBy) return
+
+      setSorting(sortBy)
+    }, [sortBy])
+
+    const onShorting = useCallback(getSorting => {
+      onSortingChange(getSorting)
+      setSorting(getSorting)
+    }, [])
+
+    const [pagination, setPagination] = useState(() => ({
+      pageIndex: paginationOptions.pageIndex,
+      pageSize: paginationOptions.pageSize,
+    }))
+
+    const handleColumnVisibilityChange = useCallback(getVisibility => {
+      onColumnVisibilityChange(getVisibility)
+      setColumnVisibility(getVisibility)
+    }, [])
+
+    const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
+
+    useEffect(() => {
+      if (!initialGlobalFilter || globalFilter === initialGlobalFilter) return
+
+      setGlobalFilter(initialGlobalFilter)
+    }, [sortBy])
+
+    const onGlobalFilterChange = useCallback(value => {
+      onGlobalSearchChange?.(value)
+      setGlobalFilter(String(value))
+    }, [])
+
+    const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions, tableMeta })
+
+    const [expanded, setExpanded] = useState(defaultExpanded)
+
+    const onExpand = useCallback(getExpanding => {
+      onExpandedChange(getExpanding)
+      setExpanded(getExpanding)
+    }, [])
+
+    const table = useReactTable({
+      columns,
+      data,
+      manualPagination: !enablePagination,
+      columnResizeMode: enableResize ? "onEnd" : "",
+      filterFns,
+      state: {
+        columnVisibility,
+        rowSelection,
+        globalFilter,
+        sorting,
+        pagination,
+        columnPinning,
+        expanded,
+      },
+      onExpandedChange: onExpand,
+      ...(globalFilterFn ? { globalFilterFn } : {}),
+      getCoreRowModel: getCoreRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      onRowSelectionChange: setRowSelection,
+      onGlobalFilterChange,
+      onSortingChange: onShorting,
+      getSortedRowModel: getSortedRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+      getExpandedRowModel: getExpandedRowModel(),
+      getSubRows: row => row.children,
+      onPaginationChange: setPagination,
+      onColumnVisibilityChange: handleColumnVisibilityChange,
+      onColumnPinningChange: setColumnPinning,
+      enableSubRowSelection,
+    })
+
+    const [selectedRows, setActualSelectedRows] = useState([])
+
+    useEffect(() => {
+      const { flatRows } = table.getSelectedRowModel()
+      if (flatRows) {
+        const selectedRows = flatRows.reduce((acc, { original }) => {
+          if (original?.disabled) return acc
+
+          acc.push(original)
+          return acc
+        }, [])
+        setActualSelectedRows(selectedRows)
+        onRowSelected?.(selectedRows)
+      }
+    }, [rowSelection, table])
+
+    const hasBulkActions = enableColumnPinning || enableColumnVisibility || !!bulkActions
+    const scrollParentRef = useRef()
+
+    const actions = useBulkActions({
+      bulkActions,
+      columnPinning,
+      dataGa,
+      enableColumnVisibility,
+      enableColumnPinning,
+      selectedRows,
+      table,
+      testPrefix,
+    })
+
+    const { hasNextPage, loading, warning } = virtualizeOptions || {}
+
+    return (
+      <TableProvider onHoverCell={onHoverCell}>
+        <Flex height="100%" overflow="hidden" column ref={ref}>
+          {onGlobalSearchChange || hasBulkActions ? (
+            <GlobalControls
+              title={title}
+              bulkActions={hasBulkActions ? actions : null}
+              dataGa={dataGa}
+              handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
+              searchValue={globalFilter}
+              tableMeta={tableMeta}
+            />
+          ) : null}
+          <Flex row flex ref={scrollParentRef} overflow="auto">
             {enableColumnPinning && (
               <ColumnPinning
                 enableResize={enableResize}
@@ -225,7 +228,7 @@ const NetdataTable = ({
             )}
             <FullTable
               headers={columnPinning ? table.getCenterHeaderGroups() : table.getHeaderGroups()}
-              width={enableResize ? `${table.getTotalSize()}px` : "100%"}
+              width="100%"
               getRowHandler={enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells"}
               scrollParentRef={scrollParentRef}
               enableResize={enableResize}
@@ -252,12 +255,12 @@ const NetdataTable = ({
               <IconComponents.LoaderIcon /> <Text>Loading more...</Text>
             </Flex>
           )}
+          {enablePagination && <Pagination table={table} />}
         </Flex>
-        {enablePagination && <Pagination table={table} />}
-      </Flex>
-    </TableProvider>
-  )
-}
+      </TableProvider>
+    )
+  }
+)
 
 NetdataTable.defaultProps = {
   coloredSortedColumn: true,

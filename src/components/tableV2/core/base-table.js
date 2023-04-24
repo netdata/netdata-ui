@@ -37,12 +37,7 @@ const Table = forwardRef(({ children, width, ...props }, ref) => (
 ))
 
 Table.Head = forwardRef(({ children, ...props }, ref) => (
-  <Box
-    ref={ref}
-    sx={{ whiteSpace: "nowrap", zIndex: 10, position: "sticky", top: 0 }}
-    as="thead"
-    {...props}
-  >
+  <Box ref={ref} sx={{ zIndex: 10, position: "sticky", top: 0 }} as="thead" {...props}>
     {children}
   </Box>
 ))
@@ -165,9 +160,7 @@ Table.SortingHeadCell = forwardRef(
       children,
       onSortClicked,
       setSortDirection,
-      maxWidth,
       width,
-      minWidth,
       sortDirection,
       filter,
       align = "left",
@@ -201,8 +194,7 @@ Table.SortingHeadCell = forwardRef(
         align={align}
         ref={ref}
         data-testid={dataTestid}
-        width={width || maxWidth}
-        minWidth={minWidth}
+        width={width}
         tooltipText={tooltipText}
         headStyles={headStyles}
         {...props}
@@ -249,19 +241,7 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 
 Table.Cell = forwardRef(
   (
-    {
-      align = "left",
-      children,
-      maxWidth,
-      minWidth,
-      onClick,
-      width,
-      isRowHovering,
-      index,
-      meta,
-      tableMeta,
-      ...rest
-    },
+    { align = "left", children, onClick, width, isRowHovering, index, meta, tableMeta, ...rest },
     ref
   ) => {
     const handleClick = e => {
@@ -278,7 +258,6 @@ Table.Cell = forwardRef(
         ref={ref}
         sx={{
           textAlign: align,
-          whiteSpace: "nowrap",
         }}
         width={`${width}px`}
         {...rest}

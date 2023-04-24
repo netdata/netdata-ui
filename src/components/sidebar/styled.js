@@ -32,7 +32,7 @@ export const DisabledOverlay = styled.aside`
   max-width: 100vw;
   background-color: black;
   opacity: 0.3;
-  z-index: ${({ overlayZIndex }) => overlayZIndex};
+  z-index: 15;
 `
 
 export const PortalSidebox = styled.aside`

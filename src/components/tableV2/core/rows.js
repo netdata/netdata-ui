@@ -85,8 +85,6 @@ const Rows = ({
               <Table.Cell
                 key={cell.column.columnDef.id}
                 data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
-                maxWidth={cell.column.columnDef.maxSize}
-                minWidth={cell.column.columnDef.minSize}
                 pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
                 width={cell.column.getSize()}
                 onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}

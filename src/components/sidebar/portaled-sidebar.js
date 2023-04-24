@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState, useRef } from "react"
+import React, { Fragment, useEffect } from "react"
 import { Portal } from "react-portal"
-import useMount from "react-use/lib/useMount"
 import { PortalSidebox, DisabledOverlay } from "./styled"
 
 const ESCAPE_KEY = 27
@@ -15,9 +14,6 @@ export const PortalSidebar = ({
   Wrapper = Fragment,
   ...rest
 }) => {
-  const sidebarRef = useRef(null)
-  const [overlayZIndex, setOverlayZIndex] = useState("auto")
-
   useEffect(() => {
     const evHandler = event => {
       if (event.keyCode === ESCAPE_KEY && closeOnEsc) {
@@ -36,21 +32,11 @@ export const PortalSidebar = ({
     }
   }
 
-  useMount(() => {
-    if (sidebarRef?.current) {
-      const element = sidebarRef.current
-      const style = window.getComputedStyle(element)
-      const zIndex = style.getPropertyValue("z-index") || "auto"
-      setOverlayZIndex(zIndex)
-    }
-  })
-
   return (
     <Portal>
-      <DisabledOverlay overlayZIndex={overlayZIndex} onClick={handleOverlayClick} />
+      <DisabledOverlay onClick={handleOverlayClick} />
       <Wrapper>
         <PortalSidebox
-          ref={sidebarRef}
           className={className}
           shadowSide={right}
           side={right ? "right" : "left"}

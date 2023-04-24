@@ -96,8 +96,6 @@ const HeadCells = ({
             headStyles={headStyles}
             key={id}
             id={id}
-            maxWidth={column.columnDef.maxSize}
-            minWidth={column.columnDef.minSize}
             onSortClicked={column.getToggleSortingHandler()}
             sortby-testid={`netdata-table-head-cell-sortyBy-${id}${testPrefix}`}
             sortDirection={column.getIsSorted()}
@@ -122,8 +120,6 @@ const HeadCells = ({
             )
           }
           headStyles={headStyles}
-          maxWidth={column.columnDef.maxSize}
-          minWidth={column.columnDef.minSize}
           key={id}
           id={id}
           styles={styles}
