@@ -211,7 +211,7 @@ const NetdataTable = forwardRef(
               tableMeta={tableMeta}
             />
           ) : null}
-          <Flex row flex ref={scrollParentRef} overflow="auto">
+          <Flex row ref={scrollParentRef} overflow="auto">
             {enableColumnPinning && (
               <ColumnPinning
                 enableResize={enableResize}
