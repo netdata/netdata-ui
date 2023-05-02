@@ -200,6 +200,7 @@ import privacy from "./assets/privacy.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
 import ram from "./assets/ram.svg"
+import rearrange from "./assets/rearrange.svg"
 import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import removeNode from "./assets/remove_node.svg"
@@ -542,6 +543,7 @@ export const iconsList = {
   qualityOfServiceSolid,
   question,
   questionFilled,
+  rearrange,
   refresh,
   reload,
   removeNode,
