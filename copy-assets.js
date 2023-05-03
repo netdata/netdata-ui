@@ -32,6 +32,10 @@ copyFileSync("src/components/drops/popover/index.d.ts", "lib/components/drops/po
 copyFileSync("src/components/icon/index.d.ts", "lib/components/icon/index.d.ts")
 copyFileSync("src/components/input/input.d.ts", "lib/components/input/input.d.ts")
 copyFileSync(
+  "src/components/input/multiRange/index.d.ts",
+  "lib/components/input/multiRange/index.d.ts"
+)
+copyFileSync(
   "src/components/input/use-input-value.d.ts",
   "lib/components/input/use-input-value.d.ts"
 )

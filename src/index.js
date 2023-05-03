@@ -69,6 +69,7 @@ export {
 } from "./components/filter-box"
 
 export { default as InputRange } from "./components/input/range"
+export { default as MultiRangeInput } from "./components/input/multiRange"
 
 export { default as Drop } from "./components/drops/drop"
 export { default as DropContainer } from "./components/drops/container"
