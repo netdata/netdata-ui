@@ -97,10 +97,13 @@ const NetdataTable = forwardRef(
       setSorting(sortBy)
     }, [sortBy])
 
-    const onShorting = getSorting => {
-      onSortingChange(getSorting)
-      setSorting(getSorting)
-    }
+    const onShorting = useCallback(
+      getSorting => {
+        onSortingChange(getSorting)
+        setSorting(getSorting)
+      },
+      [sortBy]
+    )
 
     const [pagination, setPagination] = useState(() => ({
       pageIndex: paginationOptions.pageIndex,
