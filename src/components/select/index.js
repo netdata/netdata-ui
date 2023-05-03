@@ -90,13 +90,13 @@ const getOptionColor = (theme, state) => {
   return theme.colors.textDescription
 }
 
-const makeCustomStyles = (theme, { size, ...providedStyles } = {}) => ({
+const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => ({
   control: (styles, state) => ({
     ...styles,
     borderColor: state.isFocused ? theme.colors.inputBorderFocus : theme.colors.inputBorder,
     boxShadow: "none",
-    minWidth: 160,
-    ...(size === "tiny" ? { minHeight: 18 } : { minHeight: 18 }),
+    minHeight: 18,
+    minWidth: minWidth || 160,
     ":hover": {
       borderColor: theme.colors.inputBorderHover,
     },
