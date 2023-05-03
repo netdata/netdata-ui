@@ -4,7 +4,6 @@ import { useVirtualizer } from "@tanstack/react-virtual"
 import Flex from "src/components/templates/flex"
 import Search from "src/components/search"
 import Box from "src/components/templates/box"
-import { TextSmall } from "src/components/typography"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) =>

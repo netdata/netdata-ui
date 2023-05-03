@@ -1,4 +1,5 @@
 export * from "./input"
+export { default as MultiRangeInput } from "./multiRange"
 export { useTouchedState } from "./use-touched-state"
 export { useFocusedState } from "./use-focused-state"
 export { useInputValue } from "./use-input-value"
