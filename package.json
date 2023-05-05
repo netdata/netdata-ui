@@ -22,7 +22,8 @@
     "to-dashboard": "yarn ts-bundle && yarn cp-dashboard",
     "cp-charts": "cp -R ./lib ../charts/node_modules/@netdata/netdata-ui/",
     "to-charts": "yarn ts-bundle && yarn cp-charts",
-    "resolveAlias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib"
+    "resolveAlias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib",
+    "prepublishOnly": "yarn clean && yarn ts-bundle"
   },
   "keywords": [
     "uikit",
