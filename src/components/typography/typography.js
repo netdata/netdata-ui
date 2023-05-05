@@ -42,7 +42,12 @@ const typography = css`
   ${padding}
   ${opacity}
   ${cursor}
-  ${({ fontSize }) => fontSize && `font-size: ${fontSize};`}
+  ${({ fontSize }) =>
+    fontSize &&
+    `
+    font-size: ${fontSize};
+    line-height: ${fontSize};
+  `}
 `
 
 export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
