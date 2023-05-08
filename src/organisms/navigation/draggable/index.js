@@ -35,7 +35,7 @@ const DraggableTabs = forwardRef(
         container.removeEventListener("scroll", onScroll)
         window.removeEventListener("resize", handlers)
       }
-    }, [children, collapsed])
+    }, [children])
 
     const scrollLeft = e => {
       e.preventDefault()
