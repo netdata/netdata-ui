@@ -22,6 +22,8 @@ import border from "src/components/templates/mixins/border"
 import shadow from "src/components/templates/mixins/shadow"
 import pseudos from "src/components/templates/mixins/pseudos"
 import { fontColor } from "src/components/typography/typography"
+
+import { position as styledSystemPosition } from "styled-system"
 import css from "@styled-system/css"
 
 export const sx = props => css(props.sx)(props)
@@ -54,6 +56,7 @@ const Flex = Component => styled(Component)`
   ${cursor}
   ${shadow}
   ${pseudos}
+  ${styledSystemPosition}
   ${sx}
 `
 
