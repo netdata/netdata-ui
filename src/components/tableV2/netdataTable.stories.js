@@ -483,3 +483,112 @@ tableStories.add("Full Table functionallity", () => {
     </Box>
   )
 })
+
+tableStories.add("With Pinning", () => {
+  const mockDataColumns = [
+    {
+      accessorKey: "nodes",
+      header: "Nodes",
+      id: "nodes",
+      cell: ({ getValue }) => getValue(),
+      enableHiding: false,
+    },
+    {
+      accessorKey: "alerts",
+      id: "alerts",
+      header: () => <Text>Alerts</Text>,
+      cell: ({ getValue }) => getValue(),
+      size: 340,
+    },
+    {
+      accessorKey: "user",
+      header: "user",
+      id: "user",
+      cell: ({ getValue }) => getValue(),
+      size: 200,
+    },
+    {
+      accessorKey: "status",
+      header: "status",
+      id: "status",
+      size: 200,
+      cell: ({ getValue }) => getValue(),
+    },
+    {
+      accessorKey: "untouchable",
+      header: "Untouchable",
+      id: "untouchable",
+      size: 200,
+      cell: ({ getValue }) => getValue(),
+    },
+  ]
+
+  const mockData = () => [
+    {
+      nodes: "node31",
+      alerts: 15,
+      user: "mitsos",
+      disabled: true,
+      status: "stale",
+      untouchable: "true",
+    },
+    { nodes: "node0", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node1", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node3", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node4", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node5", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node6", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+    { nodes: "node7", alerts: 11, user: "koukouroukou, koukouroukou, koukouroukou, koukouroukou, koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node8", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node9", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node10", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node11", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node12", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node13", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node14", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+    { nodes: "node15", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node16", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node17", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node18", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node19", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node20", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node21", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node22", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+    { nodes: "node23", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node24", alerts: 22, user: "reena", status: "online", untouchable: "true" },
+    { nodes: "node25", alerts: 15, user: "nic", status: "online", untouchable: "true" },
+    { nodes: "node26", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
+    { nodes: "node27", alerts: 22, user: "manolis", status: "offline", untouchable: "true" },
+    { nodes: "node28", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
+    { nodes: "node29", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
+    { nodes: "node30", alerts: 22, user: "decker", status: "online", untouchable: "false" },
+  ]
+
+  const handleDelete = data => {
+    console.log("Delete has been clicked", data)
+  }
+
+  const rowActions = {
+    delete: {
+      handleAction: handleDelete,
+      isDisabled: row => row.disabled,
+    },
+  }
+
+  const columnPinning = { left: ["nodes"], right: ["actions"] }
+
+  return (
+    <Box height="800px" width="1000px">
+      <NetdataTable
+        dataColumns={mockDataColumns}
+        data={mockData()}
+        rowActions={rowActions}
+        columnPinning={columnPinning}
+        enableColumnPinning={true}
+        enablePinning={true}
+      />
+    </Box>
+  )
+})

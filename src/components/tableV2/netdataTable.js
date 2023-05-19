@@ -215,8 +215,9 @@ const NetdataTable = forwardRef(
             />
           ) : null}
           <Flex row ref={scrollParentRef} overflow="auto">
-            {enableColumnPinning && (
+            {enableColumnPinning && columnPinning.left && (
               <ColumnPinning
+                side="left"
                 enableResize={enableResize}
                 onClickRow={onClickRow}
                 enableSorting={enableSorting}
@@ -245,6 +246,21 @@ const NetdataTable = forwardRef(
               meta={tableMeta}
               {...rest}
             />
+            {enableColumnPinning && columnPinning.right && (
+              <ColumnPinning
+                side="right"
+                enableResize={enableResize}
+                onClickRow={onClickRow}
+                enableSorting={enableSorting}
+                table={table}
+                headers={table.getRightHeaderGroups()}
+                testPrefix={testPrefix}
+                dataGa={dataGa}
+                scrollParentRef={scrollParentRef}
+                virtualizeOptions={virtualizeOptions}
+                meta={tableMeta}
+              />
+            )}
           </Flex>
           {!hasNextPage && !loading && !!warning && (
             <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">

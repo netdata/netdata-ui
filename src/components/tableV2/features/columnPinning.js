@@ -14,16 +14,21 @@ const ColumnPinning = ({
   testPrefix,
   testPrefixCallback,
   scrollParentRef,
+  side,
   ...rest
 }) => {
   const getThemeColor = useColor()
+  const isLeft = side == "left"
+  const getRowHandler = isLeft ? "getLeftVisibleCells" : "getRightVisibleCells"
+  const borderSide = isLeft ? "borderRight" : "borderLeft"
+  const getTotalSizeFunc = isLeft ? "getLeftTotalSize" : "getRightTotalSize"
 
   return (
     <Box
       background="mainBackground"
       sx={{
         position: "sticky",
-        left: 0,
+        [side]: 0,
         zIndex: 11,
         height: "fit-content",
       }}
@@ -34,14 +39,14 @@ const ColumnPinning = ({
         disableClickRow={disableClickRow}
         enableResize={enableResize}
         enableSorting={enableSorting}
-        getRowHandler="getLeftVisibleCells"
+        getRowHandler={getRowHandler}
         onClickRow={onClickRow}
         onHoverCell={onHoverCell}
-        pinnedStyles={{ borderRight: `1px solid ${getThemeColor("borderSecondary")}` }}
+        pinnedStyles={{ [borderSide]: `1px solid ${getThemeColor("borderSecondary")}` }}
         table={table}
         testPrefix={`pin${testPrefix}`}
         testPrefixCallback={testPrefixCallback}
-        width={enableResize ? `${table.getLeftTotalSize()}px` : "100%"}
+        width={enableResize ? `${table[getTotalSizeFunc]()}px` : "100%"}
         {...rest}
       />
     </Box>
