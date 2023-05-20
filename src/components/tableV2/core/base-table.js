@@ -241,7 +241,18 @@ Table.Body = forwardRef(({ children, ...props }, ref) => (
 
 Table.Cell = forwardRef(
   (
-    { align = "left", children, onClick, width, isRowHovering, index, meta, tableMeta, ...rest },
+    {
+      align = "left",
+      children,
+      onClick,
+      width,
+      isRowHovering,
+      index,
+      meta,
+      tableMeta,
+      cellHeight = "65px",
+      ...rest
+    },
     ref
   ) => {
     const handleClick = e => {
@@ -269,7 +280,7 @@ Table.Cell = forwardRef(
         backgroundOpacity={
           isRowHovering ? (rest.backgroundOpacity ? 0.8 : 1) : rest.backgroundOpacity || 0.7
         }
-        height="65px"
+        height={cellHeight}
         {...tableMeta?.cellStyles}
         {...tableMeta?.pinnedStyles}
         {...tableMeta?.styles}

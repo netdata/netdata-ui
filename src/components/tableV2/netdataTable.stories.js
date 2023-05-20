@@ -532,7 +532,14 @@ tableStories.add("With Pinning", () => {
       status: "stale",
       untouchable: "true",
     },
-    { nodes: "node0", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
+    {
+      nodes:
+        "node0, node0, node0, node0, node0, node0, node0, node0, node0, node0, node0, node0, node0, node0, node0, node0",
+      alerts: 11,
+      user: "koukouroukou, koukouroukou, koukouroukou, koukouroukou",
+      status: "offline",
+      untouchable: "true",
+    },
     { nodes: "node1", alerts: 22, user: "reena", status: "online", untouchable: "true" },
     { nodes: "node1", alerts: 15, user: "nic", status: "online", untouchable: "true" },
     { nodes: "node2", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
@@ -540,7 +547,7 @@ tableStories.add("With Pinning", () => {
     { nodes: "node4", alerts: 15, user: "achile", status: "stale", untouchable: "true" },
     { nodes: "node5", alerts: 11, user: "barba", status: "stale", untouchable: "false" },
     { nodes: "node6", alerts: 22, user: "decker", status: "online", untouchable: "false" },
-    { nodes: "node7", alerts: 11, user: "koukouroukou, koukouroukou, koukouroukou, koukouroukou, koukouroukou", status: "offline", untouchable: "true" },
+    { nodes: "node7", alerts: 11, user: "koukouroukou", status: "offline", untouchable: "true" },
     { nodes: "node8", alerts: 22, user: "reena", status: "online", untouchable: "true" },
     { nodes: "node9", alerts: 15, user: "nic", status: "online", untouchable: "true" },
     { nodes: "node10", alerts: 11, user: "alex", status: "offline", untouchable: "true" },
@@ -580,7 +587,7 @@ tableStories.add("With Pinning", () => {
   const columnPinning = { left: ["nodes"], right: ["actions"] }
 
   return (
-    <Box height="800px" width="1000px">
+    <Box height="500px" width="1000px">
       <NetdataTable
         dataColumns={mockDataColumns}
         data={mockData()}

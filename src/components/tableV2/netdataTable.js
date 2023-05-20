@@ -244,6 +244,7 @@ const NetdataTable = forwardRef(
               testPrefix={testPrefix}
               virtualizeOptions={virtualizeOptions}
               meta={tableMeta}
+              side="center"
               {...rest}
             />
             {enableColumnPinning && columnPinning.right && (

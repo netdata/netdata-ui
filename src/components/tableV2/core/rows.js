@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo } from "react"
 import { useVirtualizer } from "@tanstack/react-virtual"
-import { flexRender } from "@tanstack/react-table"
 import { useTableContext } from "../features/provider"
-import Table from "./base-table"
+import Row from "./row"
 
 const Rows = ({
   disableClickRow,
@@ -19,6 +18,8 @@ const Rows = ({
   loadMore,
   coloredSortedColumn,
   meta,
+  enableColumnPinning,
+  side,
 }) => {
   const { onHover, hoveredRow } = useTableContext()
 
@@ -64,54 +65,25 @@ const Rows = ({
       )}
       {virtualRows.map(virtualRow => {
         const row = rows[virtualRow.index]
-        const cells = row[getRowHandler]()
 
         return (
-          <Table.Row
+          <Row
             key={virtualRow.key}
-            data-testid={`netdata-table-row${testPrefix}${
-              testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
-            }`}
-            onClick={
-              onClickRow
-                ? () => onClickRow({ data: row.original, table: table, fullRow: row })
-                : undefined
-            }
-            disableClickRow={() =>
-              disableClickRow?.({ data: row.original, table: table, fullRow: row })
-            }
-          >
-            {cells.map((cell, index) => (
-              <Table.Cell
-                key={cell.column.columnDef.id}
-                data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
-                pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
-                width={cell.column.getSize()}
-                onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
-                onMouseLeave={() => onHover()}
-                tableMeta={
-                  typeof cell.column.columnDef.tableMeta === "function"
-                    ? cell.column.columnDef.tableMeta(row, cell, index)
-                    : cell.column.columnDef.tableMeta
-                }
-                meta={
-                  typeof cell.column.columnDef.meta === "function"
-                    ? cell.column.columnDef.meta(row)
-                    : cell.column.columnDef.meta
-                }
-                {...(cell.column.getCanSort() &&
-                  coloredSortedColumn &&
-                  !!cell.column.getIsSorted() && {
-                    background: "columnHighlight",
-                    backgroundOpacity: virtualRow.index % 2 == 0 ? "0.2" : "0.4",
-                  })}
-                index={virtualRow.index}
-                isRowHovering={row.id === hoveredRow}
-              >
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </Table.Cell>
-            ))}
-          </Table.Row>
+            table={table}
+            pinnedStyles={pinnedStyles}
+            row={row}
+            virtualRow={virtualRow}
+            onClickRow={onClickRow}
+            disableClickRow={disableClickRow}
+            testPrefix={testPrefix}
+            testPrefixCallback={testPrefixCallback}
+            getRowHandler={getRowHandler}
+            onHover={onHover}
+            coloredSortedColumn={coloredSortedColumn}
+            hoveredRow={hoveredRow}
+            enableColumnPinning={enableColumnPinning}
+            side={side}
+          />
         )
       })}
 

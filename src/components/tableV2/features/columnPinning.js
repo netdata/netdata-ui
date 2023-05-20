@@ -47,6 +47,7 @@ const ColumnPinning = ({
         testPrefix={`pin${testPrefix}`}
         testPrefixCallback={testPrefixCallback}
         width={enableResize ? `${table[getTotalSizeFunc]()}px` : "100%"}
+        side={side}
         {...rest}
       />
     </Box>
