@@ -22,6 +22,7 @@ const FullTable = ({
   virtualizeOptions = {},
   coloredSortedColumn,
   meta,
+  side,
   ...rest
 }) => {
   return (
@@ -66,6 +67,8 @@ const FullTable = ({
           testPrefixCallback={testPrefixCallback}
           coloredSortedColumn={enableSorting && coloredSortedColumn}
           meta={meta}
+          enableColumnPinning={rest.enableColumnPinning}
+          side={side}
           {...virtualizeOptions}
         />
       </Table.Body>

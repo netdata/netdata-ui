@@ -199,6 +199,33 @@ const NetdataTable = forwardRef(
       testPrefix,
     })
 
+    const columnPinningProps = useCallback(
+      side => ({
+        side,
+        enableResize,
+        onClickRow,
+        enableSorting,
+        table,
+        headers: side == "left" ? table.getLeftHeaderGroups() : table.getRightHeaderGroups(),
+        testPrefix,
+        dataGa,
+        scrollParentRef,
+        virtualizeOptions,
+        meta: tableMeta,
+      }),
+      [
+        enableResize,
+        onClickRow,
+        enableSorting,
+        table,
+        testPrefix,
+        dataGa,
+        scrollParentRef,
+        virtualizeOptions,
+        tableMeta,
+      ]
+    )
+
     const { hasNextPage, loading, warning } = virtualizeOptions || {}
 
     return (
@@ -215,19 +242,8 @@ const NetdataTable = forwardRef(
             />
           ) : null}
           <Flex row ref={scrollParentRef} overflow="auto">
-            {enableColumnPinning && (
-              <ColumnPinning
-                enableResize={enableResize}
-                onClickRow={onClickRow}
-                enableSorting={enableSorting}
-                table={table}
-                headers={table.getLeftHeaderGroups()}
-                testPrefix={testPrefix}
-                dataGa={dataGa}
-                scrollParentRef={scrollParentRef}
-                virtualizeOptions={virtualizeOptions}
-                meta={tableMeta}
-              />
+            {enableColumnPinning && columnPinning.left && (
+              <ColumnPinning {...columnPinningProps("left")} />
             )}
             <FullTable
               headers={columnPinning ? table.getCenterHeaderGroups() : table.getHeaderGroups()}
@@ -243,8 +259,12 @@ const NetdataTable = forwardRef(
               testPrefix={testPrefix}
               virtualizeOptions={virtualizeOptions}
               meta={tableMeta}
+              side="center"
               {...rest}
             />
+            {enableColumnPinning && columnPinning.right && (
+              <ColumnPinning {...columnPinningProps("right")} />
+            )}
           </Flex>
           {!hasNextPage && !loading && !!warning && (
             <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
