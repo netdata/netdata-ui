@@ -34,12 +34,12 @@ const GlobalControls = ({
         </TextBig>
       )}
       {handleSearch && (
-        <Flex width={{ max: 100, base: "40%" }} {...tableMeta.searchContainerStyles}>
+        <Flex width={{ max: 57.5, base: "40%" }} {...tableMeta.searchContainerStyles}>
           <SearchInput
             data-testid="table-global-search-filter"
             data-ga={`${dataGa}::search-${wordsCount}-words::table-filter`}
             defaultValue={searchValue}
-            iconLeft={<Icon name="magnify" color="textLite" />}
+            iconLeft={<Icon color="textLite" name="magnify" height="18px" width="18px" />}
             onChange={debounce(300, e => {
               e.persist()
               handleSearch(e.target.value)

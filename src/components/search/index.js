@@ -7,7 +7,7 @@ const Search = forwardRef(({ value, onChange, placeholder, ...rest }, ref) => (
     value={value}
     onChange={onChange}
     placeholder={placeholder}
-    size="small"
+    size="tiny"
     {...rest}
   />
 ))
