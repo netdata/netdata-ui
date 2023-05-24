@@ -355,6 +355,7 @@ tableStories.add("Full Table functionallity", () => {
       accessorKey: "alerts",
 
       id: "alerts",
+      name: "Alerts",
       header: () => <Text>Alerts</Text>,
       enableColumnFilter: true,
       filterFn: "comparison",
@@ -367,6 +368,7 @@ tableStories.add("Full Table functionallity", () => {
 
       header: "user",
       id: "user",
+      name: "User",
       enableColumnFilter: true,
       enableSorting: false,
       cell: ({ getValue }) => getValue(),
