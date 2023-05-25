@@ -11,7 +11,7 @@ const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
       <Checkbox
         checked={checked}
         disabled={disabled}
-        label={column.id}
+        label={column.columnDef.name || column.id}
         onChange={column.getToggleVisibilityHandler()}
         data-ga={`columns-menu::click-${checked ? "disable" : "enable"}-${column.id}-::${dataGa}`}
       />
