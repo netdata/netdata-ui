@@ -24,8 +24,8 @@ const SearchFilter = ({ column, testPrefix }) => {
       as={SearchInput}
       defaultValue={column.getFilterValue()}
       width={{ max: 50 }}
-      placeholder={"...Search"}
-      iconRight={<Icon name="magnify" />}
+      placeholder={"Search..."}
+      iconRight={<Icon color="textLite" name="magnify" height="18px" width="18px" />}
       onChange={handleSearch}
     />
   )

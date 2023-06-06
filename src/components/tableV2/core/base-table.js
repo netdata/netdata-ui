@@ -4,10 +4,11 @@ import { getColor } from "src/theme/utils"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
-import { Text } from "src/components/typography"
+import { Text, TextSmall } from "src/components/typography"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
 import { useTableContext } from "../features/provider"
+import { fontWeight } from "styled-system"
 
 //TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
 // the problem is when we are applying column pin the second table has different sizes
@@ -243,14 +244,14 @@ Table.Cell = forwardRef(
   (
     {
       align = "left",
-      children,
-      onClick,
-      width,
-      isRowHovering,
-      index,
-      meta,
-      tableMeta,
       cellHeight = "65px",
+      children,
+      index,
+      isRowHovering,
+      meta,
+      onClick,
+      tableMeta,
+      width,
       ...rest
     },
     ref
@@ -275,7 +276,7 @@ Table.Cell = forwardRef(
         background={
           !rest.background && isRowHovering
             ? "tableRowBgHover"
-            : rest.background || (index % 2 == 0 ? "mainBackground" : "tableRowBg")
+            : rest.background || (index % 2 === 0 ? "mainBackground" : "tableRowBg")
         }
         backgroundOpacity={
           isRowHovering ? (rest.backgroundOpacity ? 0.8 : 1) : rest.backgroundOpacity || 0.7

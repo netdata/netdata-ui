@@ -339,11 +339,10 @@ tableStories.add("Pagination", () => {
   )
 })
 
-tableStories.add("Full Table functionallity", () => {
+tableStories.add("Full Table functionality", () => {
   const onGlobalSearchChange = value => {
     console.log(value)
   }
-  const paginationOptions = { pageIndex: 0, pageSize: 50 }
 
   const handleDelete = data => {
     console.log("Delete has been clicked", data)
@@ -401,10 +400,9 @@ tableStories.add("Full Table functionallity", () => {
     },
     {
       accessorKey: "alerts",
-
       id: "alerts",
       name: "Alerts",
-      header: () => <Text>Alerts</Text>,
+      header: () => <Text strong>Alerts</Text>,
       enableColumnFilter: true,
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
@@ -414,7 +412,7 @@ tableStories.add("Full Table functionallity", () => {
     {
       accessorKey: "user",
 
-      header: "user",
+      header: "User",
       id: "user",
       name: "User",
       enableColumnFilter: true,
@@ -424,8 +422,9 @@ tableStories.add("Full Table functionallity", () => {
     },
     {
       accessorKey: "status",
-      header: "status",
+      header: "Status",
       id: "status",
+      name: "Status",
       enableColumnFilter: true,
       filterFn: "select",
       size: 200,
@@ -515,6 +514,7 @@ tableStories.add("Full Table functionallity", () => {
         onClickRow={({ data, table, fullRow }) => {
           console.log(data, table, fullRow)
         }}
+        groupByColumnIds={["alerts"]}
         enableColumnPinning
         enableResize
         sortBy={[{ id: "nodes", desc: false }]}

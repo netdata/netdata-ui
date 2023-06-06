@@ -19,7 +19,7 @@ const DropdownFilter = ({
     onChange={option => {
       onChange(option)
     }}
-    styles={styles}
+    styles={{ size: "tiny", ...(styles || {}) }}
   />
 )
 

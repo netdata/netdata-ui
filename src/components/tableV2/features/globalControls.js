@@ -1,14 +1,18 @@
 import React, { memo } from "react"
 import Flex from "src/components/templates/flex"
 import SearchInput from "src/components/search"
+import Select from "src/components/select"
 import { Icon } from "src/components/icon"
-import { TextBig } from "src/components/typography"
+import { TextSmall, TextBig } from "src/components/typography"
 import { debounce } from "throttle-debounce"
 
 const GlobalControls = ({
   bulkActions,
   dataGa,
-  handleSearch,
+  groupByOptions,
+  groupValue,
+  onGroupBy,
+  onSearch,
   searchPlaceholder = "Search",
   searchValue,
   tableMeta,
@@ -33,7 +37,7 @@ const GlobalControls = ({
           {title}
         </TextBig>
       )}
-      {handleSearch && (
+      {onSearch && (
         <Flex width={{ max: 57.5, base: "40%" }} {...tableMeta.searchContainerStyles}>
           <SearchInput
             data-testid="table-global-search-filter"
@@ -42,10 +46,31 @@ const GlobalControls = ({
             iconLeft={<Icon color="textLite" name="magnify" height="18px" width="18px" />}
             onChange={debounce(300, e => {
               e.persist()
-              handleSearch(e.target.value)
+              onSearch(e.target.value)
             })}
             placeholder={searchPlaceholder}
             {...tableMeta.searchStyles}
+          />
+        </Flex>
+      )}
+      {groupByOptions && (
+        <Flex
+          alignItems="center"
+          data-testid="tableGroupBy"
+          gap={2}
+          {...tableMeta.groupByContainerStyles}
+        >
+          <TextSmall data-testid="tableGroupByLabel" color="textLite" whiteSpace="nowrap">
+            Group by
+          </TextSmall>
+          <Select
+            data-ga={`${dataGa}::group-by-filter::table-filter`}
+            data-testid="tableGroupByFilter"
+            menuPortalTarget={document.body}
+            onChange={({ value }) => onGroupBy(value)}
+            options={Object.values(groupByOptions)}
+            styles={{ size: "tiny", minWidth: 120 }}
+            value={groupByOptions[groupValue] || groupByOptions.default}
           />
         </Flex>
       )}

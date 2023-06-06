@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useRef, useState } from "react"
+import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -47,9 +47,12 @@ const NetdataTable = forwardRef(
       enableSorting,
       globalFilter: initialGlobalFilter,
       globalFilterFn = includesString,
+      groupByFilter: initialGroupByFilter = "",
+      groupByColumnIds = [],
       onClickRow,
       onColumnVisibilityChange,
       onGlobalSearchChange,
+      onGroupByChange,
       onHoverCell,
       onRowSelected,
       onSortingChange,
@@ -116,6 +119,21 @@ const NetdataTable = forwardRef(
     }, [])
 
     const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
+    const [groupByFilter, setGroupByFilter] = useState(initialGroupByFilter)
+
+    const groupByOptions = groupByColumnIds.length
+      ? {
+          default: { label: "None", value: "" },
+          ...groupByColumnIds.reduce((acc, colId) => {
+            const column = dataColumns.find(({ id }) => id === colId)
+
+            return {
+              ...acc,
+              [colId]: { label: column?.name || column.id, value: colId },
+            }
+          }, {}),
+        }
+      : null
 
     useEffect(() => {
       if (!initialGlobalFilter || globalFilter === initialGlobalFilter) return
@@ -128,6 +146,14 @@ const NetdataTable = forwardRef(
       setGlobalFilter(String(value))
     }, [])
 
+    const onGlobalGroupByChange = useCallback(
+      value => {
+        onGroupByChange?.(value)
+        setGroupByFilter(value)
+      },
+      [onGroupByChange]
+    )
+
     const columns = useColumns(dataColumns, { testPrefix, enableSelection, rowActions, tableMeta })
 
     const [expanded, setExpanded] = useState(defaultExpanded)
@@ -137,9 +163,77 @@ const NetdataTable = forwardRef(
       setExpanded(getExpanding)
     }, [])
 
+    const groupedData = useMemo(() => {
+      if (!groupByFilter) return []
+
+      const groupObj = data.reduce((acc, row) => {
+        if (!acc[row[groupByFilter]])
+          return {
+            ...acc,
+            [row[groupByFilter]]: row,
+          }
+        if (!acc[row[groupByFilter]].children) {
+          return {
+            ...acc,
+            [row[groupByFilter]]: Object.keys(acc[row[groupByFilter]]).reduce(
+              (rowAcc, key) => ({
+                ...rowAcc,
+                children: [
+                  {
+                    ...acc[row[groupByFilter]],
+                    [groupByFilter]: "",
+                  },
+                  {
+                    ...row,
+                    [groupByFilter]: "",
+                  },
+                ],
+                [key]:
+                  typeof acc[row[groupByFilter]][key] === "number"
+                    ? acc[row[groupByFilter]][key] + row[key]
+                    : key === groupByFilter
+                    ? acc[row[groupByFilter]][key]
+                    : new Set([acc[row[groupByFilter]][key], row[key]]),
+              }),
+              {}
+            ),
+          }
+        }
+        return {
+          ...acc,
+          [row[groupByFilter]]: Object.keys(acc[row[groupByFilter]]).reduce((rowAcc, key) => {
+            if (key === "children")
+              return {
+                ...rowAcc,
+                children: [...acc[row[groupByFilter]].children, { ...row, [groupByFilter]: "" }],
+              }
+            return {
+              ...rowAcc,
+              [key]:
+                typeof acc[row[groupByFilter]][key] === "number"
+                  ? acc[row[groupByFilter]][key] + row[key]
+                  : key === groupByFilter
+                  ? acc[row[groupByFilter]][key]
+                  : acc[row[groupByFilter]][key].add(row[key]),
+            }
+          }, {}),
+        }
+      }, {})
+
+      return Object.values(groupObj)
+    }, [data, groupByFilter])
+
+    const groupedColumnPinning = useMemo(() => {
+      if (!groupByFilter) return columnPinning
+      if (!columnPinning || !Object.keys(columnPinning).length) return columnPinning
+
+      const side = columnPinning.left ? "left" : "right"
+      return { [side]: Array.from(new Set([groupByFilter, ...columnPinning[side]])) }
+    }, [columnPinning, groupByFilter])
+
     const table = useReactTable({
       columns,
-      data,
+      data: groupByFilter ? groupedData : data,
       manualPagination: !enablePagination,
       columnResizeMode: enableResize ? "onEnd" : "",
       filterFns,
@@ -149,7 +243,7 @@ const NetdataTable = forwardRef(
         globalFilter,
         sorting,
         pagination,
-        columnPinning,
+        columnPinning: groupByFilter ? groupedColumnPinning : columnPinning,
         expanded,
       },
       onExpandedChange: onExpand,
@@ -190,7 +284,7 @@ const NetdataTable = forwardRef(
 
     const actions = useBulkActions({
       bulkActions,
-      columnPinning,
+      columnPinning: groupByFilter ? groupedColumnPinning : columnPinning,
       dataGa,
       enableColumnVisibility,
       enableColumnPinning,
@@ -206,7 +300,7 @@ const NetdataTable = forwardRef(
         onClickRow,
         enableSorting,
         table,
-        headers: side == "left" ? table.getLeftHeaderGroups() : table.getRightHeaderGroups(),
+        headers: side === "left" ? table.getLeftHeaderGroups() : table.getRightHeaderGroups(),
         testPrefix,
         dataGa,
         scrollParentRef,
@@ -233,12 +327,15 @@ const NetdataTable = forwardRef(
         <Flex height="100%" overflow="hidden" column ref={ref}>
           {onGlobalSearchChange || hasBulkActions ? (
             <GlobalControls
-              title={title}
               bulkActions={hasBulkActions ? actions : null}
               dataGa={dataGa}
-              handleSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
+              groupByOptions={groupByOptions}
+              groupValue={groupByFilter}
+              onGroupBy={onGlobalGroupByChange}
+              onSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
               searchValue={globalFilter}
               tableMeta={tableMeta}
+              title={title}
             />
           ) : null}
           <Flex row ref={scrollParentRef} overflow="auto">
