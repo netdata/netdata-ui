@@ -38,8 +38,8 @@ export default ({
         testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
       }`}
       onClick={
-        row.getCanExpand()
-          ? () => row.toggleExpanded()
+        row.getCanExpand() && !row.depth
+          ? undefined
           : onClickRow
           ? () => onClickRow({ data: row.original, table: table, fullRow: row })
           : undefined

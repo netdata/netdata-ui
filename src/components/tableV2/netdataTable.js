@@ -30,6 +30,7 @@ const filterFns = {
 const NetdataTable = forwardRef(
   (
     {
+      additionalGroupBy,
       bulkActions,
       columnPinning: defaultColumnPinning,
       columnVisibility: defaultColumnVisibility,
@@ -166,6 +167,48 @@ const NetdataTable = forwardRef(
     const groupedData = useMemo(() => {
       if (!groupByFilter) return []
 
+      const additionalGroupData = rows => {
+        const groupedData = rows.reduce((result, obj) => {
+          const objChild = obj[additionalGroupBy.child]
+          const objParent = obj[additionalGroupBy.parent]
+          const newObj = { ...obj }
+
+          if (objParent === 0) {
+            newObj.children = []
+            result[objChild] = newObj
+          } else {
+            let parentFound = false
+
+            const findParentInChildren = children => {
+              for (const child of children) {
+                if (child[additionalGroupBy.child] === objParent) {
+                  if (!child.children) {
+                    child.children = []
+                  }
+                  child.children.push(newObj)
+                  parentFound = true
+                  break
+                } else if (child.children) {
+                  findParentInChildren(child.children)
+                }
+              }
+            }
+
+            findParentInChildren(Object.values(result))
+
+            if (!parentFound) {
+              result[objChild] = newObj
+            }
+          }
+
+          return result
+        }, {})
+        return Object.values(groupedData)
+      }
+
+      if (additionalGroupBy && groupByFilter === additionalGroupBy.parent)
+        return additionalGroupData(data)
+
       const groupObj = data.reduce((acc, row) => {
         if (!acc[row[groupByFilter]])
           return {
@@ -220,8 +263,17 @@ const NetdataTable = forwardRef(
         }
       }, {})
 
-      return Object.values(groupObj)
-    }, [data, groupByFilter])
+      return !additionalGroupBy
+        ? Object.values(groupObj)
+        : Object.values(groupObj).map(group =>
+            group.children
+              ? {
+                  ...group,
+                  children: additionalGroupData(group.children),
+                }
+              : group
+          )
+    }, [additionalGroupBy, data, groupByFilter])
 
     const groupedColumnPinning = useMemo(() => {
       if (!groupByFilter) return columnPinning
