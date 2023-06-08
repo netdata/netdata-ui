@@ -35,6 +35,8 @@ export const PillContainer = styled(Flex).attrs(
     height,
     position,
     zIndex,
+    justifyContent = "center",
+    alignItems = "center",
   }) => ({
     padding: getPillPadding(padding, size, tiny),
     round,
@@ -46,8 +48,8 @@ export const PillContainer = styled(Flex).attrs(
     ...(onClick && { cursor: "pointer" }),
     height: getPillHeight(height, size, tiny),
     width: getPillWidth(width, tiny),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent,
+    alignItems,
     position,
     zIndex,
   })
