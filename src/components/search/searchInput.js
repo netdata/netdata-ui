@@ -9,5 +9,9 @@ const SearchInput = styled(TextInput)`
   & > label {
     margin-bottom: 0;
   }
+
+  & > div {
+    margin-top: 0;
+  }
 `
 export default SearchInput

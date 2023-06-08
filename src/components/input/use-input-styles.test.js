@@ -5,7 +5,7 @@ import useInputStyles from "./use-input-styles"
 describe("useInputStyles", () => {
   it("renders with size tiny properties", () => {
     const { result } = renderHookWithProviders(() => useInputStyles({ size: "tiny" }))
-    expect(result.current.styles.inputContainer.height).toBe("30px")
+    expect(result.current.styles.inputContainer.height).toBe("28px")
   })
 
   it("renders with size small properties", () => {

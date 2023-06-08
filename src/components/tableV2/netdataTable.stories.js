@@ -166,6 +166,54 @@ tableStories.add("Global Filters", () => {
   )
 })
 
+tableStories.add("Expanding", () => {
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text strong>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: () => <Text strong>Users</Text>, cell: ({ getValue }) => getValue() },
+  ]
+
+  const mockData = () => [
+    {
+      nodes: "node1",
+      alerts: 15,
+      user: "nic",
+      children: [
+        { nodes: "node4", alerts: 5, user: "nic" },
+        { nodes: "node5", alerts: 6, user: "nic" },
+        { nodes: "node6", alerts: 4, user: "nic" },
+      ],
+    },
+    {
+      nodes: "node2",
+      alerts: 11,
+      user: "alex",
+      children: [
+        { nodes: "node7", alerts: 1, user: "alex" },
+        { nodes: "node8", alerts: 2, user: "alex" },
+        { nodes: "node9", alerts: 6, user: "alex" },
+        { nodes: "node10", alerts: 2, user: "alex" },
+      ],
+    },
+    { nodes: "node3", alerts: 22, user: "manolis" },
+  ]
+
+  return (
+    <Box width="800px">
+      <NetdataTable
+        enableExpanding
+        dataColumns={mockDataColumns}
+        data={mockData()}
+        onClickRow={({ data, table, fullRow }) => {
+          // console.log(data, table, fullRow)
+          console.log(fullRow.getCanExpand())
+          fullRow.toggleExpanded()
+        }}
+      />
+    </Box>
+  )
+})
+
 tableStories.add("Sorting", () => {
   const mockDataColumns = [
     { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
@@ -291,11 +339,10 @@ tableStories.add("Pagination", () => {
   )
 })
 
-tableStories.add("Full Table functionallity", () => {
+tableStories.add("Full Table functionality", () => {
   const onGlobalSearchChange = value => {
     console.log(value)
   }
-  const paginationOptions = { pageIndex: 0, pageSize: 50 }
 
   const handleDelete = data => {
     console.log("Delete has been clicked", data)
@@ -353,10 +400,9 @@ tableStories.add("Full Table functionallity", () => {
     },
     {
       accessorKey: "alerts",
-
       id: "alerts",
       name: "Alerts",
-      header: () => <Text>Alerts</Text>,
+      header: () => <Text strong>Alerts</Text>,
       enableColumnFilter: true,
       filterFn: "comparison",
       meta: { filter: { component: "comparison" } },
@@ -366,7 +412,7 @@ tableStories.add("Full Table functionallity", () => {
     {
       accessorKey: "user",
 
-      header: "user",
+      header: "User",
       id: "user",
       name: "User",
       enableColumnFilter: true,
@@ -376,8 +422,9 @@ tableStories.add("Full Table functionallity", () => {
     },
     {
       accessorKey: "status",
-      header: "status",
+      header: "Status",
       id: "status",
+      name: "Status",
       enableColumnFilter: true,
       filterFn: "select",
       size: 200,
@@ -467,6 +514,7 @@ tableStories.add("Full Table functionallity", () => {
         onClickRow={({ data, table, fullRow }) => {
           console.log(data, table, fullRow)
         }}
+        groupByColumnIds={["alerts"]}
         enableColumnPinning
         enableResize
         sortBy={[{ id: "nodes", desc: false }]}

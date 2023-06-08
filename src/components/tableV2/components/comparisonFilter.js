@@ -41,6 +41,7 @@ const ComparisonFilter = ({ column }) => {
         })}
         pattern="[0-9]*(.[0-9]+)?"
         inputMode="decimal"
+        size="tiny"
       />
     </Flex>
   )

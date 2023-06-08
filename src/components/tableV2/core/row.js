@@ -4,20 +4,20 @@ import { useTableContext } from "../features/provider"
 import Table from "./base-table"
 
 export default ({
-  table,
+  coloredSortedColumn,
+  disableClickRow,
+  enableColumnPinning,
+  getRowHandler,
+  hoveredRow,
+  onClickRow,
+  onHover,
   pinnedStyles,
   row,
-  virtualRow,
-  onClickRow,
-  disableClickRow,
+  side,
+  table,
   testPrefix,
   testPrefixCallback,
-  getRowHandler,
-  onHover,
-  coloredSortedColumn,
-  hoveredRow,
-  enableColumnPinning,
-  side,
+  virtualRow,
 }) => {
   const ref = useRef()
   const cells = row[getRowHandler]()
@@ -38,7 +38,9 @@ export default ({
         testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
       }`}
       onClick={
-        onClickRow
+        row.getCanExpand() && !row.depth
+          ? undefined
+          : onClickRow
           ? () => onClickRow({ data: row.original, table: table, fullRow: row })
           : undefined
       }
@@ -48,30 +50,31 @@ export default ({
     >
       {cells.map((cell, index) => (
         <Table.Cell
-          key={cell.column.columnDef.id}
           data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
-          pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
-          width={cell.column.getSize()}
-          onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
-          onMouseLeave={() => onHover()}
-          tableMeta={
-            typeof cell.column.columnDef.tableMeta === "function"
-              ? cell.column.columnDef.tableMeta(row, cell, index)
-              : cell.column.columnDef.tableMeta
-          }
+          key={cell.column.columnDef.id}
+          index={virtualRow.index}
+          isRowExpandable={row.getCanExpand()}
+          isRowHovering={row.id === hoveredRow}
           meta={
             typeof cell.column.columnDef.meta === "function"
               ? cell.column.columnDef.meta(row)
               : cell.column.columnDef.meta
           }
+          onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
+          onMouseLeave={() => onHover()}
+          pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
+          tableMeta={
+            typeof cell.column.columnDef.tableMeta === "function"
+              ? cell.column.columnDef.tableMeta(row, cell, index)
+              : cell.column.columnDef.tableMeta
+          }
+          width={cell.column.getSize()}
           {...(cell.column.getCanSort() &&
             coloredSortedColumn &&
             !!cell.column.getIsSorted() && {
               background: "columnHighlight",
-              backgroundOpacity: virtualRow.index % 2 == 0 ? "0.2" : "0.4",
+              backgroundOpacity: virtualRow.index % 2 === 0 ? "0.2" : "0.4",
             })}
-          index={virtualRow.index}
-          isRowHovering={row.id === hoveredRow}
           {...(enableColumnPinning ? { cellHeight: `${rowHeight}px` } : {})}
         >
           {flexRender(cell.column.columnDef.cell, cell.getContext())}

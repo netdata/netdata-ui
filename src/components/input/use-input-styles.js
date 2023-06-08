@@ -18,7 +18,7 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
     switch (size) {
       case "tiny":
         return {
-          height: "30px",
+          height: "28px",
           padding: [1, 2],
         }
       case "small":
