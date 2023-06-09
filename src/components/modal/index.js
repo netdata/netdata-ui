@@ -40,30 +40,25 @@ export const ModalFooter = ({ children, hasBorder = true, parentPadding, testId,
   </Flex>
 )
 
-export const ModalCloseButton = ({ onClose, testId, ...rest }) => (
+export const ModalButton = ({ iconName, onClick, testId, ...rest }) => (
   <Box
     data-testid={testId}
     sx={{ marginLeft: "auto" }}
     as={Icon}
-    name="x"
-    color="border"
-    onClick={onClose}
-    cursor="pointer"
-    {...rest}
-  />
-)
-
-export const ModalMinimizeButton = ({ onClick, testId, ...rest }) => (
-  <Box
-    data-testid={testId}
-    sx={{ marginLeft: "auto" }}
-    as={Icon}
-    name="minimize_s"
+    name={iconName}
     color="border"
     onClick={onClick}
     cursor="pointer"
     {...rest}
   />
+)
+
+export const ModalCloseButton = ({ onClose, testId, ...rest }) => (
+  <ModalButton iconName="x" onClick={onClose} testId={testId} {...rest} />
+)
+
+export const ModalMinimizeButton = ({ onClick, testId, ...rest }) => (
+  <ModalButton iconName="minimize_s" onClick={onClick} testId={testId} {...rest} />
 )
 
 const Modal = ({ children, ...rest }) => <Layer {...rest}>{children}</Layer>
