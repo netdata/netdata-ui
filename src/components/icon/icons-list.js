@@ -96,6 +96,7 @@ import filterList from "./assets/filterList.svg"
 import forcePlay from "./assets/force_play.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
 import functions from "./assets/functions.svg"
+import full_screen from "./assets/full_screen.svg"
 import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import goToNode from "./assets/go_to_node.svg"
@@ -439,6 +440,7 @@ export const iconsList = {
   forcePlay,
   forcePlayOutline,
   functions,
+  full_screen,
   gear,
   github,
   google,
