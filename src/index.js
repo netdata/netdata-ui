@@ -121,7 +121,6 @@ export {
   ModalFooter,
   ModalButton,
   ModalCloseButton,
-  ModalMinimizeButton,
 } from "./components/modal"
 export { default as Modal } from "./components/modal"
 
