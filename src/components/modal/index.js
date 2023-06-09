@@ -53,6 +53,19 @@ export const ModalCloseButton = ({ onClose, testId, ...rest }) => (
   />
 )
 
+export const ModalMinimizeButton = ({ onClick, testId, ...rest }) => (
+  <Box
+    data-testid={testId}
+    sx={{ marginLeft: "auto" }}
+    as={Icon}
+    name="minimize_s"
+    color="border"
+    onClick={onClick}
+    cursor="pointer"
+    {...rest}
+  />
+)
+
 const Modal = ({ children, ...rest }) => <Layer {...rest}>{children}</Layer>
 
 export default Modal

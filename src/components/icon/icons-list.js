@@ -134,6 +134,7 @@ import loading from "./assets/loading.svg"
 import magnify from "./assets/magnify.svg"
 import metrics from "./assets/metrics.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
+import minimize_s from "./assets/minimize_s.svg"
 import mobilePushNotifications from "./assets/mobile_push_notifications.svg"
 import mobilePushNotificationsHollow from "./assets/mobile_push_notifications_hollow.svg"
 import monitoring from "./assets/monitoring.svg"
@@ -476,6 +477,7 @@ export const iconsList = {
   magnify,
   metrics,
   metrics_explorer,
+  minimize_s,
   mobilePushNotifications,
   mobilePushNotificationsHollow,
   monitoring,

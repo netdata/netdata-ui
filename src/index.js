@@ -120,6 +120,7 @@ export {
   ModalBody,
   ModalFooter,
   ModalCloseButton,
+  ModalMinimizeButton,
 } from "./components/modal"
 export { default as Modal } from "./components/modal"
 
