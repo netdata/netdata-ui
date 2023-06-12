@@ -6,7 +6,6 @@ import Rows from "./rows"
 const FullTable = ({
   dataGa,
   disableClickRow,
-  enableExpanding,
   enableResize,
   enableSorting,
   getRowHandler,

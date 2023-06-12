@@ -63,6 +63,8 @@ export default ({
           onMouseEnter={() => onHover({ row: row.id, column: cell.column.id })}
           onMouseLeave={() => onHover()}
           pinnedStyles={index === cells.length - 1 ? pinnedStyles : {}}
+          row={row}
+          cell={cell}
           tableMeta={
             typeof cell.column.columnDef.tableMeta === "function"
               ? cell.column.columnDef.tableMeta(row, cell, index)

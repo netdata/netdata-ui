@@ -4,11 +4,10 @@ import { getColor } from "src/theme/utils"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
 import Box from "src/components/templates/box"
-import { Text, TextSmall } from "src/components/typography"
+import { Text } from "src/components/typography"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
 import { useTableContext } from "../features/provider"
-import { fontWeight } from "styled-system"
 
 //TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
 // the problem is when we are applying column pin the second table has different sizes
@@ -252,6 +251,8 @@ Table.Cell = forwardRef(
       onClick,
       tableMeta,
       width,
+      row,
+      cell,
       ...rest
     },
     ref
@@ -290,6 +291,29 @@ Table.Cell = forwardRef(
         {...meta?.styles}
       >
         {children}
+        {cell.getIsGrouped() && row.getCanExpand() && (
+          <Flex
+            cursor="pointer"
+            role="button"
+            padding={[1]}
+            gap={1}
+            onClick={e => {
+              row.getToggleExpandedHandler()(e)
+              setTimeout(() => e.target.scrollIntoView({ behavior: "smooth", block: "nearest" }))
+            }}
+          >
+            <Text fontSize="10px" color="textLite">
+              Expand
+            </Text>
+            <Icon
+              name="chevron_down"
+              width="12px"
+              height="12px"
+              color="selected"
+              rotate={row.getIsExpanded() ? 2 : null}
+            />
+          </Flex>
+        )}
       </Box>
     )
   }

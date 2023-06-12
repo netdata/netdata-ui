@@ -5,6 +5,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   getExpandedRowModel,
+  getGroupedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 import Flex from "src/components/templates/flex"
@@ -30,7 +31,6 @@ const filterFns = {
 const NetdataTable = forwardRef(
   (
     {
-      additionalGroupBy,
       bulkActions,
       columnPinning: defaultColumnPinning,
       columnVisibility: defaultColumnVisibility,
@@ -48,8 +48,8 @@ const NetdataTable = forwardRef(
       enableSorting,
       globalFilter: initialGlobalFilter,
       globalFilterFn = includesString,
-      groupByFilter: initialGroupByFilter = "",
-      groupByColumnIds = [],
+      grouping: initialGrouping = "",
+      groupByColumns,
       onClickRow,
       onColumnVisibilityChange,
       onGlobalSearchChange,
@@ -120,21 +120,25 @@ const NetdataTable = forwardRef(
     }, [])
 
     const [globalFilter, setGlobalFilter] = useState(initialGlobalFilter)
-    const [groupByFilter, setGroupByFilter] = useState(initialGroupByFilter)
+    const [grouping, setGrouping] = useState(initialGrouping)
 
-    const groupByOptions = groupByColumnIds.length
-      ? {
-          default: { label: "None", value: "" },
-          ...groupByColumnIds.reduce((acc, colId) => {
-            const column = dataColumns.find(({ id }) => id === colId)
+    const groupByOptions = useMemo(
+      () =>
+        groupByColumns
+          ? {
+              default: { label: "None", value: "" },
+              ...Object.keys(groupByColumns).reduce((acc, colId) => {
+                const column = dataColumns.find(({ id }) => id === colId)
 
-            return {
-              ...acc,
-              [colId]: { label: column?.name || column.id, value: colId },
+                return {
+                  ...acc,
+                  [colId]: { label: column?.name || column.id, value: colId },
+                }
+              }, {}),
             }
-          }, {}),
-        }
-      : null
+          : null,
+      [groupByColumns]
+    )
 
     useEffect(() => {
       if (!initialGlobalFilter || globalFilter === initialGlobalFilter) return
@@ -150,7 +154,7 @@ const NetdataTable = forwardRef(
     const onGlobalGroupByChange = useCallback(
       value => {
         onGroupByChange?.(value)
-        setGroupByFilter(value)
+        setGrouping(value)
       },
       [onGroupByChange]
     )
@@ -164,128 +168,9 @@ const NetdataTable = forwardRef(
       setExpanded(getExpanding)
     }, [])
 
-    const groupedData = useMemo(() => {
-      if (!groupByFilter) return []
-
-      const additionalGroupData = rows => {
-        const groupedData = rows.reduce((result, obj) => {
-          const objChild = obj[additionalGroupBy.child]
-          const objParent = obj[additionalGroupBy.parent]
-          const newObj = { ...obj }
-
-          if (objParent === 0) {
-            newObj.children = []
-            result[objChild] = newObj
-          } else {
-            let parentFound = false
-
-            const findParentInChildren = children => {
-              for (const child of children) {
-                if (child[additionalGroupBy.child] === objParent) {
-                  if (!child.children) {
-                    child.children = []
-                  }
-                  child.children.push(newObj)
-                  parentFound = true
-                  break
-                } else if (child.children) {
-                  findParentInChildren(child.children)
-                }
-              }
-            }
-
-            findParentInChildren(Object.values(result))
-
-            if (!parentFound) {
-              result[objChild] = newObj
-            }
-          }
-
-          return result
-        }, {})
-        return Object.values(groupedData)
-      }
-
-      if (additionalGroupBy && groupByFilter === additionalGroupBy.parent)
-        return additionalGroupData(data)
-
-      const groupObj = data.reduce((acc, row) => {
-        if (!acc[row[groupByFilter]])
-          return {
-            ...acc,
-            [row[groupByFilter]]: row,
-          }
-        if (!acc[row[groupByFilter]].children) {
-          return {
-            ...acc,
-            [row[groupByFilter]]: Object.keys(acc[row[groupByFilter]]).reduce(
-              (rowAcc, key) => ({
-                ...rowAcc,
-                children: [
-                  {
-                    ...acc[row[groupByFilter]],
-                    [groupByFilter]: "",
-                  },
-                  {
-                    ...row,
-                    [groupByFilter]: "",
-                  },
-                ],
-                [key]:
-                  typeof acc[row[groupByFilter]][key] === "number"
-                    ? acc[row[groupByFilter]][key] + row[key]
-                    : key === groupByFilter
-                    ? acc[row[groupByFilter]][key]
-                    : new Set([acc[row[groupByFilter]][key], row[key]]),
-              }),
-              {}
-            ),
-          }
-        }
-        return {
-          ...acc,
-          [row[groupByFilter]]: Object.keys(acc[row[groupByFilter]]).reduce((rowAcc, key) => {
-            if (key === "children")
-              return {
-                ...rowAcc,
-                children: [...acc[row[groupByFilter]].children, { ...row, [groupByFilter]: "" }],
-              }
-            return {
-              ...rowAcc,
-              [key]:
-                typeof acc[row[groupByFilter]][key] === "number"
-                  ? acc[row[groupByFilter]][key] + row[key]
-                  : key === groupByFilter
-                  ? acc[row[groupByFilter]][key]
-                  : acc[row[groupByFilter]][key].add(row[key]),
-            }
-          }, {}),
-        }
-      }, {})
-
-      return !additionalGroupBy
-        ? Object.values(groupObj)
-        : Object.values(groupObj).map(group =>
-            group.children
-              ? {
-                  ...group,
-                  children: additionalGroupData(group.children),
-                }
-              : group
-          )
-    }, [additionalGroupBy, data, groupByFilter])
-
-    const groupedColumnPinning = useMemo(() => {
-      if (!groupByFilter) return columnPinning
-      if (!columnPinning || !Object.keys(columnPinning).length) return columnPinning
-
-      const side = columnPinning.left ? "left" : "right"
-      return { [side]: Array.from(new Set([groupByFilter, ...columnPinning[side]])) }
-    }, [columnPinning, groupByFilter])
-
     const table = useReactTable({
       columns,
-      data: groupByFilter ? groupedData : data,
+      data,
       manualPagination: !enablePagination,
       columnResizeMode: enableResize ? "onEnd" : "",
       filterFns,
@@ -295,8 +180,16 @@ const NetdataTable = forwardRef(
         globalFilter,
         sorting,
         pagination,
-        columnPinning: groupByFilter ? groupedColumnPinning : columnPinning,
+        columnPinning,
         expanded,
+        grouping: useMemo(
+          () =>
+            Array.isArray(grouping)
+              ? [grouping].filter(Boolean)
+              : groupByColumns[grouping]?.columns || [],
+          [grouping]
+        ),
+        columnOrder: [],
       },
       onExpandedChange: onExpand,
       ...(globalFilterFn ? { globalFilterFn } : {}),
@@ -308,11 +201,13 @@ const NetdataTable = forwardRef(
       getSortedRowModel: getSortedRowModel(),
       getPaginationRowModel: getPaginationRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
+      getGroupedRowModel: getGroupedRowModel(),
       getSubRows: row => row.children,
       onPaginationChange: setPagination,
       onColumnVisibilityChange: handleColumnVisibilityChange,
       onColumnPinningChange: setColumnPinning,
       enableSubRowSelection,
+      columnGroupingMode: "reorder",
     })
 
     const [selectedRows, setActualSelectedRows] = useState([])
@@ -336,7 +231,7 @@ const NetdataTable = forwardRef(
 
     const actions = useBulkActions({
       bulkActions,
-      columnPinning: groupByFilter ? groupedColumnPinning : columnPinning,
+      columnPinning,
       dataGa,
       enableColumnVisibility,
       enableColumnPinning,
@@ -382,7 +277,7 @@ const NetdataTable = forwardRef(
               bulkActions={hasBulkActions ? actions : null}
               dataGa={dataGa}
               groupByOptions={groupByOptions}
-              groupValue={groupByFilter}
+              groupValue={grouping}
               onGroupBy={onGlobalGroupByChange}
               onSearch={onGlobalSearchChange ? onGlobalFilterChange : null}
               searchValue={globalFilter}
