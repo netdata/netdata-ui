@@ -186,7 +186,7 @@ const NetdataTable = forwardRef(
           () =>
             Array.isArray(grouping)
               ? [grouping].filter(Boolean)
-              : groupByColumns[grouping]?.columns || [],
+              : groupByColumns?.[grouping]?.columns || [],
           [grouping]
         ),
         columnOrder: [],
