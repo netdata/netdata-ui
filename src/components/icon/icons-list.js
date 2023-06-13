@@ -96,6 +96,7 @@ import filterList from "./assets/filterList.svg"
 import forcePlay from "./assets/force_play.svg"
 import forcePlayOutline from "./assets/force_play_outline.svg"
 import functions from "./assets/functions.svg"
+import fullScreen from "./assets/full_screen.svg"
 import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import goToNode from "./assets/go_to_node.svg"
@@ -134,6 +135,7 @@ import loading from "./assets/loading.svg"
 import magnify from "./assets/magnify.svg"
 import metrics from "./assets/metrics.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
+import minimize_s from "./assets/minimize_s.svg"
 import mobilePushNotifications from "./assets/mobile_push_notifications.svg"
 import mobilePushNotificationsHollow from "./assets/mobile_push_notifications_hollow.svg"
 import monitoring from "./assets/monitoring.svg"
@@ -438,6 +440,7 @@ export const iconsList = {
   forcePlay,
   forcePlayOutline,
   functions,
+  fullScreen,
   gear,
   github,
   google,
@@ -476,6 +479,7 @@ export const iconsList = {
   magnify,
   metrics,
   metrics_explorer,
+  minimize_s,
   mobilePushNotifications,
   mobilePushNotificationsHollow,
   monitoring,

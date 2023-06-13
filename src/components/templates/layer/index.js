@@ -18,6 +18,7 @@ const Layer = ({
   borderShadow,
   children,
   backdropProps,
+  ...rest
 }) => {
   const ref = useRef()
 
@@ -35,6 +36,7 @@ const Layer = ({
       margin={margin}
       borderShadow={borderShadow}
       data-testid="layer-container"
+      {...(backdrop ? {} : { ...rest })}
     >
       {children}
     </Container>
@@ -42,7 +44,9 @@ const Layer = ({
 
   return ReactDOM.createPortal(
     backdrop ? (
-      <BackdropContainer backdropProps={backdropProps}>{content}</BackdropContainer>
+      <BackdropContainer backdropProps={backdropProps} {...rest}>
+        {content}
+      </BackdropContainer>
     ) : (
       content
     ),

@@ -78,12 +78,13 @@ const transform = ({ full, position }) => {
 const boxShadow = ({ borderShadow }) =>
   borderShadow && "box-shadow: 0px 2px 68px rgba(0, 0, 0, 0.288);"
 
+const zIndex = ({ zIndex = 35 }) => `z-index: ${zIndex};`
+
 const Container = styled.div.attrs(({ theme, margin }) => ({
   marginDimensions: getMarginDimensions(theme, margin),
 }))`
   position: ${({ isAbsolute }) => (isAbsolute ? "absolute" : "fixed")};
   display: flex;
-  z-index: 35;
   outline: none;
   pointer-events: all;
 
@@ -96,6 +97,7 @@ const Container = styled.div.attrs(({ theme, margin }) => ({
   ${transform}
 
   ${boxShadow}
+  ${zIndex}
 `
 
 export default Container
