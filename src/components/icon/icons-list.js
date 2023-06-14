@@ -117,10 +117,12 @@ import integrationEmail from "./assets/integrations/email.svg"
 import integrationEmailColored from "./assets/integrations/email_colored.svg"
 import integrationMattermost from "./assets/integrations/mattermost.svg"
 import integrationMattermostColored from "./assets/integrations/mattermost_colored.svg"
-import integrationPagerduty from "./assets/integrations/pagerduty.svg"
-import integrationPagerdutyColored from "./assets/integrations/pagerduty_colored.svg"
 import integrationOpsgenie from "./assets/integrations/opsgenie.svg"
 import integrationOpsgenieColored from "./assets/integrations/opsgenie_colored.svg"
+import integrationPagerduty from "./assets/integrations/pagerduty.svg"
+import integrationPagerdutyColored from "./assets/integrations/pagerduty_colored.svg"
+import integrationRocketChat from "./assets/integrations/rocketChat.svg"
+import integrationRocketChatColored from "./assets/integrations/rocketChat_colored.svg"
 import integrations from "./assets/integrations.svg"
 import integrationSlack from "./assets/integrations/slack.svg"
 import integrationSlackColored from "./assets/integrations/slack_colored.svg"
@@ -465,6 +467,8 @@ export const iconsList = {
   integrationOpsgenieColored,
   integrationPagerduty,
   integrationPagerdutyColored,
+  integrationRocketChat,
+  integrationRocketChatColored,
   integrations,
   integrationSlack,
   integrationSlackColored,
