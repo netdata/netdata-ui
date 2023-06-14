@@ -147,6 +147,7 @@ import navRight from "./assets/nav_right.svg"
 import nav_arrow_goto from "./assets/nav_arrow_goto.svg"
 import nav_dots from "./assets/nav_dots.svg"
 import netdata from "./assets/netdata.svg"
+import netdataAssistant from "./assets/netdataAssistant.svg"
 import netdataPress from "./assets/netdata-press.svg"
 import node from "./assets/node.svg"
 import node_child from "./assets/node_child.svg"
@@ -494,6 +495,7 @@ export const iconsList = {
   nav_dots,
   networkingStack,
   netdata,
+  netdataAssistant,
   netdataPress,
   node,
   node_child,
