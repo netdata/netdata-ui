@@ -4,6 +4,9 @@ import Box from "../templates/box"
 import Flex from "../templates/flex"
 import { Icon } from "../icon"
 
+const TOP_BOTTOM_PADDING = 2
+const LEFT_RIGHT_PADDING = 4
+
 export const ModalContent = ({ background = "mainBackground", children, testId, ...rest }) => (
   <Flex background={background} column data-testid={testId} round {...rest}>
     {children}
@@ -11,23 +14,28 @@ export const ModalContent = ({ background = "mainBackground", children, testId, 
 )
 
 export const ModalHeader = ({ children, testId, ...rest }) => (
-  <Flex data-testid={testId} padding={[6]} {...rest}>
+  <Flex
+    background="modalHeaderBackground"
+    data-testid={testId}
+    padding={[TOP_BOTTOM_PADDING, LEFT_RIGHT_PADDING]}
+    {...rest}
+  >
     {children}
   </Flex>
 )
 
 export const ModalBody = ({ children, testId, ...rest }) => (
-  <Flex data-testid={testId} padding={[0, 6]} column {...rest}>
+  <Flex data-testid={testId} padding={[TOP_BOTTOM_PADDING, LEFT_RIGHT_PADDING]} column {...rest}>
     {children}
   </Flex>
 )
 
 export const ModalFooter = ({ children, hasBorder = true, parentPadding, testId, ...rest }) => (
-  <Flex column padding={parentPadding || [0, 6]} flex={1}>
+  <Flex column padding={parentPadding || [0, LEFT_RIGHT_PADDING]} flex={1}>
     <Flex
       data-testid={testId}
       flex={1}
-      padding={[6, 0]}
+      padding={[TOP_BOTTOM_PADDING, 0]}
       alignItems="center"
       justifyContent="end"
       border={

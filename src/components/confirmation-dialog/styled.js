@@ -57,6 +57,7 @@ export const Dialog = styled(Modal).attrs({
 export const Header = styled(ModalHeader).attrs({
   alignItems: "center",
   padding: [0],
+  background: "",
 })``
 
 export const Title = styled(H3).attrs({
