@@ -208,6 +208,7 @@ import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
 import ram from "./assets/ram.svg"
 import rearrange from "./assets/rearrange.svg"
+import reduceSize from "./assets/reduce_size.svg"
 import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import removeNode from "./assets/remove_node.svg"
@@ -558,6 +559,7 @@ export const iconsList = {
   question,
   questionFilled,
   rearrange,
+  reduceSize,
   refresh,
   reload,
   removeNode,
