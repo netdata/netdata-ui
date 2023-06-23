@@ -62,11 +62,6 @@ export { Table, VirtualizedTable } from "./components/table"
 export { Toggle } from "./components/toggle"
 export { default as RadioButton } from "./components/radio-button"
 export { Tabs, Tab } from "./components/tabs"
-export {
-  FilterBox,
-  FilterBoxProcessing,
-  FilterBoxAutocompleteHandler,
-} from "./components/filter-box"
 
 export { default as InputRange } from "./components/input/range"
 export { default as MultiRangeInput } from "./components/input/multiRange"

@@ -7,8 +7,7 @@ import { VirtualizedTable } from "./virtualized-table"
 import { NodesTableSchema } from "./mocks/nodes-table-schema"
 import { readmeCleanup } from "utils/readme"
 import readme from "./README.md"
-import { customGroupBy, filterByExpressions, filterOptions } from "./mocks/utils"
-import { FilterBox } from "../filter-box"
+import { customGroupBy } from "./mocks/utils"
 import { getColor } from "../.."
 import { Text } from "src/components/typography"
 
@@ -95,7 +94,7 @@ const groupsOrderSettings = {
   },
 }
 
-const prepareData = (arr: any) =>
+const prepareData = arr =>
   arr.reduce((a, c) => {
     const {
       alarm: { critical, warning, unreachable },
@@ -114,10 +113,6 @@ const prepareData = (arr: any) =>
 const NoScrollContainer = styled.div`
   position: relative;
   height: 350px;
-  width: 400px;
-`
-
-const StyledFilterBox = styled(FilterBox)`
   width: 400px;
 `
 
@@ -196,7 +191,7 @@ virtualizedTableStory.add(
     const [ref, { width, height }] = useMeasure()
 
     const nodeHeights = useMemo(() => nodes.map(() => 25 + Math.round(Math.random() * 50)), [nodes])
-    const getItemHeight = useCallback((index: number) => nodeHeights[index] + 8, [nodeHeights])
+    const getItemHeight = useCallback(index => nodeHeights[index] + 8, [nodeHeights])
 
     const virtualizedSettings = useMemo(
       () => ({
@@ -240,8 +235,8 @@ virtualizedTableStory.add(
             Group by:
             <select
               id="groupBySelect"
-              onChange={(e: any) => {
-                const { value }: { value: string } = e.target
+              onChange={e => {
+                const { value } = e.target
                 tableRef.current.resetAfterIndex(0, false) // sizes cache invalidation
                 setGroupBy([value])
               }}
@@ -271,15 +266,6 @@ virtualizedTableStory.add(
             change status
           </button>
         </div>
-        <div>
-          <StyledFilterBox
-            data={virtualizedData}
-            options={filterOptions}
-            onParseOk={handleFilterExpressions}
-            accessorPaths={{ node: ["node", "name"] }}
-            resultsQty={<StyledResults>{resultsQty} Nodes</StyledResults>}
-          />
-        </div>
         <NoScrollContainer ref={ref}>
           {width > 0 && height > 0 && (
             <MemoizedVirtualTable
@@ -297,7 +283,6 @@ virtualizedTableStory.add(
               data={virtualizedData}
               groupByFn={customGroupBy}
               virtualizedSettings={virtualizedSettings}
-              globalFilter={filterByExpressions}
               dataResultsCallback={logResults}
               itemIsDisabled={item => item.status === "unreachable"}
               selectedItemsClb={action("selected-all")}
