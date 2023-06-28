@@ -3,6 +3,7 @@ import { lighten, darken } from "polished"
 import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "src/theme"
 import margin from "src/mixins/margin"
 import padding from "src/mixins/padding"
+import round from "src/mixins/round"
 import alignSelf from "src/mixins/alignSelf"
 import textTransform from "src/mixins/textTransform"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
@@ -96,11 +97,14 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
   return flavours[flavour] || flavours[DEFAULT]
 }
 
-export const StyledButton = styled.button.attrs(props => ({
-  padding: props.padding || props.tiny ? [0.5] : props.small ? [1] : [2],
-  colors: colorsByFlavour(props),
-  ...withTheme(props),
-}))`
+export const StyledButton = styled.button.attrs(
+  ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
+    padding: props.padding || props.tiny ? [0.5] : props.small ? [1] : [2],
+    colors: colorsByFlavour(props),
+    round: groupFirst ? { side: "left" } : groupLast ? { side: "right" } : !groupMiddle,
+    ...withTheme(props),
+  })
+)`
   && {
     display: flex;
     justify-content: center;
@@ -128,7 +132,7 @@ export const StyledButton = styled.button.attrs(props => ({
     border-width: 1px;
     border-style: solid;
     border-color: ${props => props.colors.border(props)};
-    border-radius: 4px;
+    ${round}
     box-sizing: border-box;
 
     text-decoration: none;

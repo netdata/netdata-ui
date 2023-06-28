@@ -44,9 +44,27 @@ type IconButtonProps = Pick<
   "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize"
 > & { width?: string; height?: string; tooltip?: string }
 
+export interface ButtonGroupProps {
+  items?: Array<RadioButtonGroupItem>
+  checked?: string | number
+  onChange?: (value: string | number) => void
+}
+
+export interface RadioButtonGroupItem {
+  label: string
+  value: string | number
+}
+
+export interface ButtonGroupWrapperProps
+  extends ButtonGroupProps,
+    MarginProps,
+    PaddingProps,
+    AlignSelfProps {}
+
 declare const Button: FC<ButtonWrapperProps>
 declare const IconButton: FC<IconButtonProps>
+declare const ButtonGroup: FC<ButtonGroupWrapperProps>
 
-export { Button, IconButton }
+export { Button, IconButton, ButtonGroup }
 
 export default Button
