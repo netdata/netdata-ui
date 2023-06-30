@@ -14,19 +14,17 @@ const getWidthRules = ({ theme, rule, value }) => {
 export default ({ theme, width, minWidth, maxWidth }) => {
   if (!width && !minWidth && !maxWidth) return "min-width: 144px;width: 100%;"
 
-  const widthRules = []
+  return [
+    { rule: "width", value: width },
+    { rule: "min-width", value: minWidth },
+    { rule: "max-width", value: maxWidth },
+  ]
+    .reduce((acc, { rule, value }) => {
+      if (value || value == 0) {
+        acc.push(getWidthRules({ theme, rule, value }))
+      }
 
-  if (width) {
-    widthRules.push(getWidthRules({ theme, rule: "width", value: width }))
-  }
-
-  if (minWidth) {
-    widthRules.push(getWidthRules({ theme, rule: "min-width", value: minWidth }))
-  }
-
-  if (maxWidth) {
-    widthRules.push(getWidthRules({ theme, rule: "max-width", value: maxWidth }))
-  }
-
-  return widthRules.join("")
+      return acc
+    }, [])
+    .join("")
 }
