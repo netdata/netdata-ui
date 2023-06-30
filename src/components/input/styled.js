@@ -5,7 +5,7 @@ import { controlReset } from "src/mixins"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
 import round from "src/mixins/round"
-import width from "src/mixins/width"
+import width from "src/components/templates/mixins/width"
 import Flex from "src/components/templates/flex"
 
 const disabledCursorSupport = css`
