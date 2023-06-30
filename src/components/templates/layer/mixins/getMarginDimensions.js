@@ -1,4 +1,4 @@
-import { getDimension } from "src/mixins/margin"
+import { getDimension } from "src/mixins/utils"
 
 const blank = { top: "0", right: "0", bottom: "0", left: "0" }
 

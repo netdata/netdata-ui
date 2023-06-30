@@ -1,4 +1,4 @@
-import { getDimension } from "src/mixins/margin"
+import { getDimension } from "src/mixins/utils"
 
 const getWidthRules = ({ theme, rule, value }) => {
   const ruleValue =
