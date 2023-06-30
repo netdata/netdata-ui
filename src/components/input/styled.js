@@ -5,6 +5,7 @@ import { controlReset } from "src/mixins"
 import margin from "src/mixins/margin"
 import alignSelf from "src/mixins/alignSelf"
 import round from "src/mixins/round"
+import width from "src/mixins/width"
 import Flex from "src/components/templates/flex"
 
 const disabledCursorSupport = css`
@@ -16,8 +17,7 @@ export const StyledContainer = styled.div`
   ${margin}
   ${alignSelf}
   position: relative;
-  min-width: 144px;
-  width: 100%;
+  ${width}
 `
 
 export const StyledInput = styled.input.attrs({ round: true })`
