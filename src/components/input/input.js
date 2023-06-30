@@ -58,6 +58,7 @@ export const TextInput = ({
   inputRef,
   size = "large",
   handleMetaDisplay = defaultHandleMetaDisplay,
+  containerStyles,
   inputContainerStyles,
   ...props
 }) => {
@@ -103,7 +104,7 @@ export const TextInput = ({
   )
 
   return (
-    <StyledContainer className={className}>
+    <StyledContainer className={className} {...containerStyles}>
       <StyledLabel disabled={disabled}>
         {label && (
           <LabelRow size={size}>

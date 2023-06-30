@@ -1,4 +1,4 @@
-import { getDimensions } from "./margin"
+import { getDimensions } from "src/mixins/utils"
 
 export default ({ theme, padding }) => {
   if (!padding) return ""
