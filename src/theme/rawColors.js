@@ -13,6 +13,7 @@ const rawColors = {
     fringyFlower: "#BFE5C6",
     frostee: "#E5F5E8",
     limeGreen: "#48E499",
+    terminalGreen: "#00220E",
   },
   red: {
     pomegranate: "#FF4136",
