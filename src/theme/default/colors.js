@@ -98,6 +98,7 @@ const appColors = {
   anomalyText: rawColors.purple.lilac,
   anomalyTextLite: rawColors.purple.lilacLite,
   anomalyTextFocus: rawColors.purple.lilacFocus,
+  terminalGreen: rawColors.green.terminalGreen,
 }
 
 export default {
