@@ -87,7 +87,7 @@ const Tab = ({
         {closable && (
           <Icon name="x" size="small" color={active ? "text" : "border"} onClick={onCloseTab} />
         )}
-        <Tooltip content={tooltip} align={tooltip ? "bottom" : "top"} isBasic>
+        <Tooltip content={tooltip} align={tooltip ? "bottom" : "top"}>
           {!closable && icon && renderIcon(icon)}
         </Tooltip>
       </Flex>
