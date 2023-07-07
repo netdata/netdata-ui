@@ -18,7 +18,7 @@ const Tabs = ({ children }) => {
     <Flex column width="100%" position="relative" ref={ref}>
       <Flex
         height="1px"
-        background="borderSecondary"
+        background="border"
         width="100%"
         position="absolute"
         style={{ top: 0 }}
@@ -37,7 +37,7 @@ const Tabs = ({ children }) => {
       </Flex>
       <Flex
         height="1px"
-        background="borderSecondary"
+        background="border"
         width="100%"
         position="absolute"
         style={{ bottom: 0 }}

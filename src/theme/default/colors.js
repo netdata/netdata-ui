@@ -1,7 +1,7 @@
 import rawColors from "../rawColors"
 
 const appColors = {
-  primary: rawColors.green.netdata,
+  primary: rawColors.green.green100,
   accent: rawColors.green.chateau,
   main: rawColors.neutral.limedSpruce,
   border: rawColors.neutral.regentgrey,
