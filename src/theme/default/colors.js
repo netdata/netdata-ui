@@ -55,6 +55,8 @@ const appColors = {
   panelBg: rawColors.neutral.blackhaze,
   sideBar: rawColors.neutral.brightGrey,
   sideBarMini: rawColors.neutral.chineseWhite,
+  spaceSelected: rawColors.neutral.grey85,
+  spaceIdle: rawColors.neutral.grey50,
   menuItem: rawColors.neutral.bluebayoux,
   nodesViewMiniCharts: rawColors.neutral.iron,
   topBarBg: rawColors.neutral.blackhaze,
