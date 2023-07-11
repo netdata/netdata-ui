@@ -10,6 +10,7 @@ import aggregation_sum_abs from "./assets/aggregation_sum_abs.svg"
 import alarm from "./assets/alarm.svg"
 import alarmCritical from "./assets/alarm_c.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
+import alarmFilled from "./assets/alarmFilled.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alarm_bell from "./assets/alarm_bell.svg"
 import alarms_new from "./assets/alarms_new.svg"
@@ -62,6 +63,7 @@ import cluster from "./assets/cluster.svg"
 import cluster_spaces from "./assets/cluster_spaces.svg"
 import code from "./assets/code.svg"
 import collapse from "./assets/collapse.svg"
+import collect from "./assets/collect.svg"
 import community from "./assets/community.svg"
 import connection_to_cloud from "./assets/connection_to_cloud.svg"
 import connectivityStatusLive from "./assets/connectivity_status_live.svg"
@@ -107,6 +109,7 @@ import help from "./assets/help.svg"
 import hide from "./assets/hide.svg"
 import highlightArea from "./assets/highlight_area.svg"
 import holder from "./assets/holder.svg"
+import importExport from "./assets/importExport.svg"
 import incident_manager from "./assets/incident_manager.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
@@ -213,6 +216,7 @@ import refresh from "./assets/refresh.svg"
 import reload from "./assets/reload.svg"
 import removeNode from "./assets/remove_node.svg"
 import resize_handler from "./assets/resize_handler.svg"
+import rocket from "./assets/rocket.svg"
 import room from "./assets/room.svg"
 import room_home from "./assets/room_home.svg"
 import room_new from "./assets/room_new.svg"
@@ -355,6 +359,7 @@ export const iconsList = {
   alarm,
   alarmCritical,
   alarmCriticalWarning,
+  alarmFilled,
   alarmWarning,
   alarm_bell,
   alarms_new,
@@ -409,6 +414,7 @@ export const iconsList = {
   cluster_spaces,
   code,
   collapse,
+  collect,
   community,
   connection_to_cloud,
   connectivityStatusLive,
@@ -455,6 +461,7 @@ export const iconsList = {
   hide,
   highlightArea,
   holder,
+  importExport,
   incident_manager,
   information,
   informationPress,
@@ -564,6 +571,7 @@ export const iconsList = {
   reload,
   removeNode,
   resize_handler,
+  rocket,
   room,
   room_home,
   room_new,
