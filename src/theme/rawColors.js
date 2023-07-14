@@ -14,6 +14,8 @@ const rawColors = {
     frostee: "#E5F5E8",
     limeGreen: "#48E499",
     terminalGreen: "#00220E",
+    terminalGreenBorder: "#006729",
+    terminalGreenBorderLight: "#BBFFD6",
   },
   red: {
     pomegranate: "#FF4136",
@@ -51,6 +53,10 @@ const rawColors = {
     gunmetal: "#282C34",
     darkGunmetal: "#21252B",
     eerieBlack: "#181c20",
+    "grey-05": "#040505",
+    "grey-180": "#DBE1E1",
+    "grey-195": "#F6F7F7",
+    "grey-197": "#F5FFF9",
   },
   purple: {
     mauve: "#DB94F4",
