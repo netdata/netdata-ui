@@ -98,7 +98,10 @@ const appColors = {
   anomalyText: rawColors.purple.lilac,
   anomalyTextLite: rawColors.purple.lilacLite,
   anomalyTextFocus: rawColors.purple.lilacFocus,
-  terminalGreen: rawColors.green.terminalGreen,
+  terminalGreen: rawColors.green["grey-197"],
+  terminalGreenBorder: rawColors.green.terminalGreenBorderLight,
+  darkBackground: rawColors.neutral["grey-195"],
+  integrationMenuItemHover: rawColors.neutral["grey-180"],
 }
 
 export default {

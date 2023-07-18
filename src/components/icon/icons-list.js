@@ -207,6 +207,8 @@ import pod from "./assets/pod.svg"
 import pricing from "./assets/pricing.svg"
 import print from "./assets/print.svg"
 import privacy from "./assets/privacy.svg"
+import pushNotifications from "./assets/integrations/push_notifications.svg"
+import qrCode from "./assets/qr_code.svg"
 import question from "./assets/question.svg"
 import questionFilled from "./assets/questionFilled.svg"
 import ram from "./assets/ram.svg"
@@ -561,6 +563,8 @@ export const iconsList = {
   pricing,
   print,
   privacy,
+  pushNotifications,
+  qrCode,
   ram,
   qualityOfServiceSolid,
   question,
