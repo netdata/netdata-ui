@@ -92,6 +92,7 @@ import edit from "./assets/edit.svg"
 import error from "./assets/error.svg"
 import exclamation from "./assets/exclamation.svg"
 import expand from "./assets/expand.svg"
+import favorites from "./assets/favorites.svg"
 import feed from "./assets/feed.svg"
 import filter from "./assets/filter.svg"
 import filterList from "./assets/filterList.svg"
@@ -445,6 +446,7 @@ export const iconsList = {
   error,
   exclamation,
   expand,
+  favorites,
   feed,
   filter,
   filterList,
