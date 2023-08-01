@@ -33,9 +33,9 @@ export const masterCardColorMap = {
   disabledClear: "idleClear",
   disabledError: "idleError",
   disabledWarning: "idleWarning",
-  clear: "successLite",
-  error: "errorLite",
-  warning: "warningLite",
+  clear: "success",
+  error: "error",
+  warning: "warning",
 }
 
 const getMasterCardColor = flavour => masterCardColorMap[flavour]
