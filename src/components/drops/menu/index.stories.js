@@ -90,6 +90,14 @@ story.add(
 )
 
 story.add(
+  "Render dropdown footer",
+  () => (
+    <Simple onOpen={action("open")} onClose={action("close")} Footer={() => <Flex>Footer</Flex>} />
+  ),
+  subData
+)
+
+story.add(
   "Aligns",
   () => (
     <Flex gap={4} alignItems="start" column>
