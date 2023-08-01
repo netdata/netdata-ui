@@ -22,6 +22,7 @@ const Dropdown = ({
   dropTitle,
   dropTitlePadding = [3, 3, 0],
   Item,
+  Footer,
   value,
   hasSearch,
   searchMargin = [4],
@@ -126,6 +127,7 @@ const Dropdown = ({
           ))}
         </div>
       </div>
+      {Footer && <Footer close={close} />}
     </Container>
   )
 }

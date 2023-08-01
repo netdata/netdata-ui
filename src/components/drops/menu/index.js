@@ -26,6 +26,7 @@ const Menu = forwardRef(
       itemProps,
       items,
       Item = DropdownItem,
+      Footer,
       Dropdown = DefaultDropdown,
       animation,
       dropTitle,
@@ -105,6 +106,7 @@ const Menu = forwardRef(
               items={items}
               itemProps={itemProps}
               Item={Item}
+              Footer={Footer}
               hasSearch={hasSearch}
               close={close}
               {...dropdownProps}
