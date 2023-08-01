@@ -1,25 +1,13 @@
 import React, { useState } from "react"
-import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { boolean } from "@storybook/addon-knobs"
-import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import Tooltip from "src/components/drops/tooltip"
 import { Button } from "src/components/button"
 import { Icon } from "src/components/icon"
 import { Text } from "src/components/typography"
+import Menu from "."
 
-import readme from "./README.md"
-import Menu from "./index"
-
-const story = storiesOf("Drops/Menu", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
 const Simple = props => (
   <Menu
     dropTitle={<Text>Fight Club characters</Text>}
@@ -34,9 +22,8 @@ const Simple = props => (
   />
 )
 
-story.add(
-  "Simple",
-  () => (
+export const MenuSimple = {
+  component: () => (
     <Simple
       onOpen={action("open")}
       onClose={action("close")}
@@ -44,30 +31,24 @@ story.add(
       icon={boolean("icon", false) && <Icon name="add_user" />}
     />
   ),
-  subData
-)
+}
 
-story.add(
-  "Controlled",
-  () => {
+export const Controlled = {
+  component: () => {
     const [value, setValue] = useState("durgen")
     return <Simple onChange={setValue} value={value} label={value} />
   },
-  subData
-)
+}
 
 const ItemButton = ({ item, onItemClick }) => (
   <Button key={item.value} label={item.label} onClick={onItemClick} />
 )
-story.add(
-  "Render item",
-  () => <Simple onOpen={action("open")} onClose={action("close")} Item={ItemButton} />,
-  subData
-)
+export const RenderItem = {
+  component: () => <Simple onOpen={action("open")} onClose={action("close")} Item={ItemButton} />,
+}
 
-story.add(
-  "Render dropdown",
-  () => (
+export const RenderDropdown = {
+  component: () => (
     <Simple
       Dropdown={({ value, onItemClick, items, Item }) => (
         <Flex background="mainBackgroundDisabled" padding={[2]}>
@@ -76,30 +57,24 @@ story.add(
       )}
     />
   ),
-  subData
-)
+}
 
-story.add(
-  "Render menu button",
-  () => (
+export const RenderMenuButton = {
+  component: () => (
     <Simple>
       <Button label="characters" />
     </Simple>
   ),
-  subData
-)
+}
 
-story.add(
-  "Render dropdown footer",
-  () => (
+export const RenderDropdownFooter = {
+  component: () => (
     <Simple onOpen={action("open")} onClose={action("close")} Footer={() => <Flex>Footer</Flex>} />
   ),
-  subData
-)
+}
 
-story.add(
-  "Aligns",
-  () => (
+export const Aligns = {
+  component: () => (
     <Flex gap={4} alignItems="start" column>
       <Menu
         border
@@ -149,12 +124,10 @@ story.add(
       />
     </Flex>
   ),
-  subData
-)
+}
 
-story.add(
-  "With tooltip",
-  () => (
+export const WithTooltip = {
+  component: () => (
     <Flex gap={4} column>
       <Tooltip align="top" content="Menu tooltip">
         <Menu
@@ -180,5 +153,8 @@ story.add(
       </Menu>
     </Flex>
   ),
-  subData
-)
+}
+
+export default {
+  component: Menu,
+}

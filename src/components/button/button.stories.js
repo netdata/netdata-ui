@@ -1,27 +1,14 @@
 import React, { useState } from "react"
-import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
-
 import { action } from "@storybook/addon-actions"
 import { text, boolean, select } from "@storybook/addon-knobs"
-import { readmeCleanup } from "utils/readme"
 import { Button, IconButton, ButtonGroup } from "."
-import readme from "./README.md"
 import { iconsList } from "src/components/icon"
 
-const buttonStory = storiesOf("Inputs/Button", module)
 const icons = Object.keys(iconsList)
 
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["button.test.tsx"],
-}
-
-buttonStory.add(
-  "Button",
-  () => (
+export const BaseButton = {
+  component: () => (
     <Button
       label={text("Label", "LABEL")}
       icon={select("Name", ["No icon", ...icons], "plus")}
@@ -35,8 +22,7 @@ buttonStory.add(
       loadingLabel={text("Loading label prop", "LOADING...")}
     />
   ),
-  subData
-)
+}
 
 const DarkBackground = styled.div`
   background-color: black;
@@ -47,9 +33,8 @@ const DarkBackground = styled.div`
   justify-content: center;
 `
 
-buttonStory.add(
-  "Button on dark background",
-  () => (
+export const ButtonOnDarkBackground = {
+  component: () => (
     <DarkBackground>
       <Button
         label={text("Label", "LABEL")}
@@ -65,17 +50,15 @@ buttonStory.add(
       />
     </DarkBackground>
   ),
-  subData
-)
+}
 
 const OverridedButton = styled(Button)`
   background-color: black;
   color: purple;
 `
 
-buttonStory.add(
-  "Button with CSS override",
-  () => (
+export const ButtonWithCSSOverride = {
+  component: () => (
     <OverridedButton
       label={text("Label", "LABEL")}
       icon={select("Name", ["No icon", ...icons], "plus")}
@@ -89,22 +72,23 @@ buttonStory.add(
       loadingLabel={text("Loading label prop", "LOADING...")}
     />
   ),
-  subData
-)
+}
 
-buttonStory.add(
-  "Icon Button",
-  () => <IconButton cursor="pointer" icon="chevron_left" iconSize="small" tooltip="Previous" />,
-  subData
-)
+export const BaseIconButton = {
+  component: () => (
+    <IconButton cursor="pointer" icon="chevron_left" iconSize="small" tooltip="Previous" />
+  ),
+}
 
-buttonStory.add("Button Group", () => (
-  <ButtonGroup>
-    <Button label="One" />
-    <Button label="Two" />
-    <Button label="Three" />
-  </ButtonGroup>
-))
+export const BaseButtonGroup = {
+  component: () => (
+    <ButtonGroup>
+      <Button label="One" />
+      <Button label="Two" />
+      <Button label="Three" />
+    </ButtonGroup>
+  ),
+}
 
 const radioButtonItems = [
   { label: "One", value: 1 },
@@ -112,9 +96,15 @@ const radioButtonItems = [
   { label: "Three", value: 3 },
 ]
 
-buttonStory.add("Radio Button Group", () => {
-  const [checked, setChecked] = useState(1)
-  const onChange = value => setChecked(value)
+export const RadioButtonGroup = {
+  component: () => () => {
+    const [checked, setChecked] = useState(1)
+    const onChange = value => setChecked(value)
 
-  return <ButtonGroup items={radioButtonItems} checked={checked} onChange={onChange} />
-})
+    return <ButtonGroup items={radioButtonItems} checked={checked} onChange={onChange} />
+  },
+}
+
+export default {
+  component: Button,
+}

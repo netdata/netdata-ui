@@ -1,6 +1,5 @@
 import React from "react"
 import useLocalStorage from "react-use/lib/useLocalStorage"
-import { addDecorator } from "@storybook/react"
 import { addReadme } from "storybook-readme"
 import centered from "@storybook/addon-centered/react"
 import { withKnobs } from "@storybook/addon-knobs"
@@ -18,23 +17,23 @@ import { Text } from "src/components/typography"
 
 const results = require("../.jest-test-results.json")
 
-addDecorator(addReadme)
-addDecorator(centered)
-addDecorator(withKnobs)
-addDecorator(withTests({ results }))
-
-addDecorator(story => {
-  const [isDarkTheme, setIsDarkTheme] = useLocalStorage("is_dark_theme")
-  const handleChange = e => {
-    setIsDarkTheme(e.currentTarget.checked)
-  }
-  return (
-    <ThemeProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-      <GlobalStyles />
-      <div id="story-wrapper" style={{ minHeight: "100vh" }}>
-        {story()}
-        <Flex>
-          <Toggle
+export const decorators = [
+  addReadme,
+  centered,
+  withKnobs,
+  withTests({ results }),
+  story => {
+    const [isDarkTheme, setIsDarkTheme] = useLocalStorage("is_dark_theme")
+    const handleChange = e => {
+      setIsDarkTheme(e.currentTarget.checked)
+    }
+    return (
+      <ThemeProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+        <GlobalStyles />
+        <div id="story-wrapper" style={{ minHeight: "100vh" }}>
+          {story()}
+          <Flex>
+            <Toggle
               labelRight={"Dark theme"}
               labelLeft={"Light theme"}
               onChange={handleChange}
@@ -42,12 +41,13 @@ addDecorator(story => {
               colored={false}
               disabled={false}
               Label={Text}
-          />
-        </Flex>
-      </div>
-    </ThemeProvider>
-  )
-})
+            />
+          </Flex>
+        </div>
+      </ThemeProvider>
+    )
+  },
+]
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

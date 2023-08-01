@@ -1,10 +1,7 @@
-import { storiesOf } from "@storybook/react"
 import React, { useState } from "react"
 import { Tabs, Tab, TabSeparator, DraggableTabs } from "."
 import { Text } from "src/components/typography"
 import { Icon, Flex } from "src/index"
-
-const story = storiesOf("Organisms/Tabbed Navigation", module)
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -29,79 +26,87 @@ const initialDynamicTabs = [
   { icon: "node_hollow", title: "9fb7ab5e-2aaf-11eb-b77f-ede966ae97e1" },
 ]
 
-story.add("Tabbed navigation", () => {
-  const [dynamicTabs, setDynamicTabs] = useState(() => initialDynamicTabs)
+export const TabbedNavigation = {
+  component: () => {
+    const [dynamicTabs, setDynamicTabs] = useState(() => initialDynamicTabs)
 
-  const onClose = tabIndex => {
-    const result = Array.from(dynamicTabs)
-    result.splice(tabIndex, 1)
-    setDynamicTabs(result)
-  }
+    const onClose = tabIndex => {
+      const result = Array.from(dynamicTabs)
+      result.splice(tabIndex, 1)
+      setDynamicTabs(result)
+    }
 
-  const onDragEnd = ({ destination, source }) => {
-    const result = reorder(dynamicTabs, source.index, destination.index)
-    setDynamicTabs(result)
-  }
+    const onDragEnd = ({ destination, source }) => {
+      const result = reorder(dynamicTabs, source.index, destination.index)
+      setDynamicTabs(result)
+    }
 
-  const onAddClick = () => {
-    const item = { icon: "node_hollow", title: `centos-super-node-${Math.random() * 10}` }
-    setDynamicTabs([...dynamicTabs, item])
-  }
+    const onAddClick = () => {
+      const item = { icon: "node_hollow", title: `centos-super-node-${Math.random() * 10}` }
+      setDynamicTabs([...dynamicTabs, item])
+    }
 
-  const [activeTab, setActiveTab] = React.useState(0)
+    const [activeTab, setActiveTab] = React.useState(0)
 
-  return (
-    <>
-      <button style={{ position: "absolute", top: 0, left: 0 }} onClick={onAddClick}>
-        Add +
-      </button>
-      <Flex width="100vw">
-        <Tabs>
-          {staticTabs.map(({ icon, title }) => (
-            <Tab fixed icon={<Icon name={icon} size="small" />} key={title}>
-              <Text>{title}</Text>
-            </Tab>
-          ))}
-          <TabSeparator />
-          <DraggableTabs onDragEnd={onDragEnd} onTabClose={onClose}>
-            {dynamicTabs.map(({ icon, title }, i) => (
-              <Tab
-                showBorderLeft={i === 0}
-                onActivate={() => setActiveTab(i)}
-                icon={<Icon name={icon} size="small" />}
-                key={title}
-                tabIndex={i}
-                active={i === activeTab}
-              >
-                <Text truncate>{title}</Text>
+    return (
+      <>
+        <button style={{ position: "absolute", top: 0, left: 0 }} onClick={onAddClick}>
+          Add +
+        </button>
+        <Flex width="100vw">
+          <Tabs>
+            {staticTabs.map(({ icon, title }) => (
+              <Tab fixed icon={<Icon name={icon} size="small" />} key={title}>
+                <Text>{title}</Text>
               </Tab>
             ))}
-          </DraggableTabs>
-        </Tabs>
-      </Flex>
-    </>
-  )
-})
+            <TabSeparator />
+            <DraggableTabs onDragEnd={onDragEnd} onTabClose={onClose}>
+              {dynamicTabs.map(({ icon, title }, i) => (
+                <Tab
+                  showBorderLeft={i === 0}
+                  onActivate={() => setActiveTab(i)}
+                  icon={<Icon name={icon} size="small" />}
+                  key={title}
+                  tabIndex={i}
+                  active={i === activeTab}
+                >
+                  <Text truncate>{title}</Text>
+                </Tab>
+              ))}
+            </DraggableTabs>
+          </Tabs>
+        </Flex>
+      </>
+    )
+  },
+}
 
-story.add("Static tabs with activate functionallity", () => {
-  const [activeTab, setActiveTab] = React.useState(0)
-  return (
-    <>
-      <Flex width="100vw">
-        <Tabs>
-          {staticTabs.map(({ icon, title }, index) => (
-            <Tab
-              active={index === activeTab}
-              onActivate={() => setActiveTab(index)}
-              fixed
-              icon={<Icon name={icon} size="small" />}
-              key={title}
-            >
-              <Text>{title}</Text>
-            </Tab>
-          ))}
-        </Tabs>
-      </Flex>
-    </>
-  )
-})
+export const StaticTabsWithActivate = {
+  component: () => {
+    const [activeTab, setActiveTab] = React.useState(0)
+    return (
+      <>
+        <Flex width="100vw">
+          <Tabs>
+            {staticTabs.map(({ icon, title }, index) => (
+              <Tab
+                active={index === activeTab}
+                onActivate={() => setActiveTab(index)}
+                fixed
+                icon={<Icon name={icon} size="small" />}
+                key={title}
+              >
+                <Text>{title}</Text>
+              </Tab>
+            ))}
+          </Tabs>
+        </Flex>
+      </>
+    )
+  },
+}
+
+export default {
+  component: Tabs,
+}

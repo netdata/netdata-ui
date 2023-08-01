@@ -1,5 +1,4 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
 import { Button } from "src/components/button"
 import {
   H0,
@@ -19,16 +18,7 @@ import {
   TextFemto,
   List,
   ListItem,
-} from "./index"
-
-import readme from "./README.md"
-import { readmeCleanup } from "utils/readme"
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-}
+} from "."
 
 const headers = (
   <div>
@@ -77,41 +67,41 @@ const controls = (
   </>
 )
 
-storiesOf("Typography", module)
-  .add(
-    "Typography",
-    () => (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          width: "100vw",
-          flexFlow: "column",
-          alignItems: "left",
-          padding: "20px",
-          margin: "20px",
-        }}
-      >
-        {headers}
-        <br />
-        <br />
-        {texts}
-        <br />
-        <br />
-        {controls}
-      </div>
-    ),
-    subData
-  )
-  .add(
-    "List",
-    () => (
-      <List style={{ width: "284px" }}>
-        <ListItem>My list item 1</ListItem>
-        <ListItem>My list item 2 and my list item 2-2</ListItem>
-        <ListItem>My list item 3</ListItem>
-        <ListItem>My list item 4</ListItem>
-      </List>
-    ),
-    subData
-  )
+export const Typography = {
+  component: () => (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+        width: "100vw",
+        flexFlow: "column",
+        alignItems: "left",
+        padding: "20px",
+        margin: "20px",
+      }}
+    >
+      {headers}
+      <br />
+      <br />
+      {texts}
+      <br />
+      <br />
+      {controls}
+    </div>
+  ),
+}
+
+export const BaseList = {
+  component: () => (
+    <List style={{ width: "284px" }}>
+      <ListItem>My list item 1</ListItem>
+      <ListItem>My list item 2 and my list item 2-2</ListItem>
+      <ListItem>My list item 3</ListItem>
+      <ListItem>My list item 4</ListItem>
+    </List>
+  ),
+}
+
+export default {
+  component: Text,
+}

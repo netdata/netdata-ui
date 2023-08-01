@@ -1,22 +1,9 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
 import { Text } from "src/components/typography"
-import { readmeCleanup } from "utils/readme"
-import readme from "./README.md"
+import Box from "."
 
-import Box from "./index"
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-}
-
-const flexStory = storiesOf("Templates/Box", module)
-
-flexStory.add(
-  "With Different positions",
-  () => (
+export const Positions = {
+  component: () => (
     <Box position="relative" width="500px" height="500px" border={{ size: "1px", side: "all" }}>
       <Box position="absolute" top="5px" right="5px">
         {" "}
@@ -27,23 +14,20 @@ flexStory.add(
       </Box>
     </Box>
   ),
-  subData
-)
+}
 
-flexStory.add(
-  "using as prop",
-  () => (
+export const As = {
+  component: () => (
     <Box position="relative" width="500px" height="500px" border={{ size: "1px", side: "all" }}>
       <Box as={Text} position="absolute" left="25px" top="25px">
         Look at me i am text inside a box also i inheretit everything from box
       </Box>
     </Box>
   ),
-  subData
-)
-flexStory.add(
-  "Styled with sx prop",
-  () => (
+}
+
+export const SX = {
+  component: () => (
     <Box
       sx={{
         width: "500px",
@@ -58,5 +42,8 @@ flexStory.add(
       </Box>
     </Box>
   ),
-  subData
-)
+}
+
+export default {
+  component: Box,
+}

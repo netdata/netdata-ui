@@ -1,27 +1,15 @@
 import React, { useState } from "react"
-import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { text, boolean } from "@storybook/addon-knobs"
 import { action } from "@storybook/addon-actions"
 import { Sidebar } from "./sidebar"
 import { PortalSidebar } from "./portaled-sidebar"
 import { getColor } from "src/theme/utils"
-import { readmeCleanup } from "utils/readme"
 import { Button } from "src/components/button"
-import readme from "./README.md"
 
-const sidebarStory = storiesOf("Templates/Sidebar", module)
+export const Empty = { component: () => <Sidebar right={boolean("right", false)} /> }
 
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["sidebar.test.tsx", "portal-sidebar.test.tsx"],
-}
-
-sidebarStory.add("empty", () => <Sidebar right={boolean("right", false)} />, subData)
-
-sidebarStory.add("on right", () => <Sidebar right={boolean("right", true)} />, subData)
+export const Right = { component: () => <Sidebar right={boolean("right", true)} /> }
 
 const StaticBox = styled.div`
   display: flex;
@@ -32,16 +20,14 @@ const StaticBox = styled.div`
   color: #fff;
 `
 
-sidebarStory.add(
-  "with static content",
-  () => (
+export const withStaticContent = {
+  component: () => (
     <Sidebar
       right={boolean("right", false)}
       info={<StaticBox>{text("infobox children text", "this is infobox children text")}</StaticBox>}
     />
   ),
-  subData
-)
+}
 
 const SidebarContent = styled.div`
   display: flex;
@@ -55,29 +41,26 @@ const SidebarContent = styled.div`
   color: #3a3a3a;
 `
 
-sidebarStory.add(
-  "with sidebar content",
-  () => (
+export const withSidebarContent = {
+  component: () => (
     <Sidebar right={boolean("right", false)}>
       <SidebarContent>
         {text("sidebar children text", "this is sidebar children text")}
       </SidebarContent>
     </Sidebar>
   ),
-  subData
-)
+}
 
-sidebarStory.add(
-  "portaled sidebar",
-  () => (
+export const PortaledSidebar = {
+  component: () => (
     <PortalSidebar right={boolean("right", false)}>
       <SidebarContent>
         {text("sidebar children text", "this is sidebar children text")}
       </SidebarContent>
     </PortalSidebar>
   ),
-  subData
-)
+}
+
 const Header = styled.div`
   width: 100%;
   background-color: ${getColor("separator")};
@@ -88,10 +71,9 @@ const StyledPortalSidebar = styled(PortalSidebar)`
   max-width: 300px;
 `
 
-sidebarStory.add(
-  "styled portaled with large list",
-  () => {
-    const list: number[] = []
+export const StyledPortaledLargeList = {
+  component: () => {
+    const list = []
     for (let i = 0; i <= 100; i += 1) {
       list.push(i)
     }
@@ -106,8 +88,7 @@ sidebarStory.add(
       </StyledPortalSidebar>
     )
   },
-  subData
-)
+}
 
 const Underlay = styled.div`
   display: flex;
@@ -118,9 +99,8 @@ const Underlay = styled.div`
   width: 100vw;
 `
 
-sidebarStory.add(
-  "portal sidebar as overlay",
-  () => {
+export const PortalSidebarOverlay = {
+  component: () => {
     const [someText, setSomeText] = useState("opened")
     const textHolder = " - text should disappear after you press `Esc`"
     return (
@@ -159,5 +139,8 @@ sidebarStory.add(
       </>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Sidebar,
+}

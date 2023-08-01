@@ -1,26 +1,13 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { storiesOf } from "@storybook/react"
 import { text, select, boolean } from "@storybook/addon-knobs"
 import { Checkbox, useCheckboxesList } from "."
 import { getGutterHeight } from "src/theme/utils"
-import { readmeCleanup } from "utils/readme"
-import readme from "./README.md"
-
-const checkBoxStory = storiesOf("Inputs/Checkbox", module)
 
 const position = ["left", "right"]
 
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["checkbox.test.tsx"],
-}
-
-checkBoxStory.add(
-  "Controlled Checkbox",
-  () => {
+export const ControlledCheckbox = {
+  component: () => {
     const [checked, setChecked] = useState(false)
     const handleChange = e => {
       setChecked(e.currentTarget.checked)
@@ -29,12 +16,10 @@ checkBoxStory.add(
       <Checkbox disabled={boolean("Disabled", false)} onChange={handleChange} checked={checked} />
     )
   },
-  subData
-)
+}
 
-checkBoxStory.add(
-  "Labeled Checkbox",
-  () => {
+export const LabeledCheckbox = {
+  component: () => {
     const [checked, setChecked] = useState(false)
     const handleChange = e => {
       setChecked(e.currentTarget.checked)
@@ -48,12 +33,10 @@ checkBoxStory.add(
       />
     )
   },
-  subData
-)
+}
 
-checkBoxStory.add(
-  "Disabled Checkobox",
-  () => {
+export const DisabledCheckobox = {
+  component: () => {
     const [checked, setChecked] = useState(false)
     const handleChange = e => {
       setChecked(e.currentTarget.checked)
@@ -62,12 +45,10 @@ checkBoxStory.add(
       <Checkbox disabled={boolean("Disabled", true)} onChange={handleChange} checked={checked} />
     )
   },
-  subData
-)
+}
 
-checkBoxStory.add(
-  "Left Labeled Checkbox",
-  () => {
+export const LeftLabeledCheckbox = {
+  component: () => {
     const [checked, setChecked] = useState(false)
     const handleChange = e => {
       setChecked(e.currentTarget.checked)
@@ -82,8 +63,7 @@ checkBoxStory.add(
       />
     )
   },
-  subData
-)
+}
 
 const MasterCheckbox = styled(Checkbox)`
   margin-bottom: ${getGutterHeight};
@@ -96,9 +76,8 @@ const StyledCheckbox = styled(Checkbox)`
 
 const CheckboxGroup = styled.div``
 
-checkBoxStory.add(
-  "Labeled Checkbox Group",
-  () => {
+export const LabeledCheckboxGroup = {
+  component: () => {
     const [checkedOne, setCheckedOne] = useState(false)
     const [checkedTwo, setCheckedTwo] = useState(false)
     const [checkedThree, setCheckedThree] = useState(false)
@@ -138,5 +117,8 @@ checkBoxStory.add(
       </CheckboxGroup>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Checkbox,
+}

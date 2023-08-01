@@ -1,9 +1,6 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
 import Flex from "src/components/templates/flex"
 import ProgressBar from "."
-
-const story = storiesOf("Atoms/ProgressBar", module)
 
 const Default = () => (
   <Flex width="300px">
@@ -23,5 +20,9 @@ const WithValue = () => (
   </Flex>
 )
 
-story.add("Default", Default)
-story.add("WithValue", WithValue)
+export const Base = { component: Default }
+export const BaseWithValue = { component: WithValue }
+
+export default {
+  component: ProgressBar,
+}
