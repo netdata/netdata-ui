@@ -21,20 +21,33 @@ const appColors = {
   menuItemSelected: rawColors.green.green20,
   menuItemHover: rawColors.green.green10,
 
+  //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
-  successBackground: rawColors.green.deyork,
+  successSemi: rawColors.green.green20,
+  successBackground: rawColors.green.green50,
   successText: rawColors.green.green100,
 
   warning: rawColors.yellow.yellow80,
   warningLite: rawColors.yellow.yellow190,
-  warningBackground: rawColors.yellow.salomie,
+  warningSemi: rawColors.yellow.yellow20,
+  warningBackground: rawColors.yellow.yellow60,
   warningText: rawColors.yellow.seaBuckthorn,
 
   error: rawColors.red.red100,
   errorLite: rawColors.red.red190,
-  errorBackground: rawColors.red.wewak,
+  errorSemi: rawColors.red.red20,
+  errorBackground: rawColors.red.red50,
   errorText: rawColors.red.pomegranate,
+
+  generic: rawColors.neutral.grey60,
+
+  live: rawColors.green.green100,
+  stale: rawColors.green.green900,
+  unseen: rawColors.yellow.yellow900,
+  offline: rawColors.neutral.grey90,
+
+  //=========================================\\
 
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
