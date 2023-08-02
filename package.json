@@ -7,14 +7,13 @@
     "/lib"
   ],
   "scripts": {
-    "_drop_native": "rimraf node_modules/@types/react-native/",
-    "start": "yarn _drop_native && yarn storybook dev",
+    "start": "yarn storybook dev",
     "storybook-start": "bash start.sh",
     "testOut": "yarn test --env=jsdom --json --outputFile=.jest-test-results.json",
     "build-storybook": "storybook build -c .storybook -o public",
-    "build": "yarn _drop_native && yarn testOut && storybook build",
+    "build": "yarn testOut && storybook build",
     "clean": "rimraf ./lib",
-    "ts-bundle": "yarn _drop_native && yarn clean && tsc && tsc -m es6 && node copy-assets && yarn resolveAlias",
+    "ts-bundle": "yarn clean && tsc && tsc -m es6 && node copy-assets && yarn resolveAlias",
     "test": "jest --config ./jest/config.js",
     "cp-cloud": "cp -R ./lib ../cloud-frontend/node_modules/@netdata/netdata-ui/",
     "to-cloud": "yarn ts-bundle && yarn cp-cloud",
