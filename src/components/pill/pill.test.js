@@ -9,7 +9,7 @@ describe("Pill component", () => {
     expect(screen.queryByTestId("pill")).toBeInTheDocument()
     expect(screen.queryByTestId("pill-text")).toBeInTheDocument()
     expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "bright")
-    expect(screen.queryByTestId("pill-text")).toHaveStyle("font-size: 11px;")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "11px")
     expect(screen.queryByTestId("pill-tiny")).not.toBeInTheDocument()
     expect(screen.queryByTestId("pill-icon-left")).not.toBeInTheDocument()
     expect(screen.queryByTestId("pill-icon-right")).not.toBeInTheDocument()
@@ -50,13 +50,13 @@ describe("Pill component", () => {
   test("should render component with small text", () => {
     renderWithProviders(<Pill textSize="small">Test</Pill>)
 
-    expect(screen.queryByTestId("pill-text")).toHaveStyle("font-size: 12px;")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
   })
 
   test("should render component with small text", () => {
     renderWithProviders(<Pill size="normal">Test</Pill>)
 
-    expect(screen.queryByTestId("pill-text")).toHaveStyle("font-size: 14px;")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "14px")
   })
 
   test("should render component with custom colored text", () => {
@@ -67,7 +67,11 @@ describe("Pill component", () => {
   })
 
   test("should render component with hollowed warning colored text", () => {
-    renderWithProviders(<Pill hollow flavour="warning">Test</Pill>)
+    renderWithProviders(
+      <Pill hollow flavour="warning">
+        Test
+      </Pill>
+    )
 
     expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "yellow,seaBuckthorn")
   })

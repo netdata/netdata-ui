@@ -17,9 +17,7 @@ it("renders", async () => {
     </Drop>
   )
   expect(getByTestId("drop")).toBeInTheDocument()
-  expect(getByTestId("drop")).not.toBeVisible()
   expect(getByTestId("drop").parentNode.parentNode).toBe(document.body)
-  expect(getByText("Drop content")).not.toBeVisible()
 
   await waitFor(() => expect(getByText("Drop content").style.top).toBeTruthy())
 

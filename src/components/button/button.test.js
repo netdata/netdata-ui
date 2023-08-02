@@ -21,10 +21,10 @@ describe("Button states", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&& > span::first-letter",
+      modifier: "&&>span::first-letter",
     })
   })
 
@@ -34,7 +34,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "none", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -44,7 +44,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "capitalize", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -54,7 +54,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -64,7 +64,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -74,7 +74,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "full-width", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -84,10 +84,10 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&& > span::first-letter",
+      modifier: "&&>span::first-letter",
     })
   })
 
@@ -106,7 +106,7 @@ describe("Button states", () => {
 
     expect(getByText(/prop text/)).toBeInTheDocument()
     expect(button).toHaveStyleRule("margin-left", "2px", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
     expect(getByTitle("plus")).toBeInTheDocument()
   })
@@ -144,7 +144,9 @@ describe("Button states", () => {
 
 describe("Default Button", () => {
   it("renders", () => {
-    const { container, getByText } = renderWithProviders(<Button label="Test prop text" />)
+    const { container, getByText } = renderWithProviders(
+      <Button label="Test prop text" textTransform="fullWidth" />
+    )
 
     expect(getByText(/prop text/)).toBeInTheDocument()
 
@@ -220,7 +222,7 @@ describe("Hollow Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#00AB44", {
@@ -242,7 +244,7 @@ describe("Hollow Button", () => {
       <Button label="Test prop text" flavour="hollow" danger />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#FF4136", {
@@ -258,7 +260,7 @@ describe("Hollow Button", () => {
       <Button label="Test prop text" flavour="hollow" warning />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#F9A825", {
@@ -274,7 +276,7 @@ describe("Hollow Button", () => {
       <Button label="Test prop text" flavour="hollow" neutral />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("border-color", "#8F9EAA", {
@@ -296,10 +298,10 @@ describe("Borderless Button", () => {
 
     const button = container.firstChild
     expect(button).toMatchSnapshot()
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("border-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#00AB44", {
@@ -318,10 +320,10 @@ describe("Borderless Button", () => {
       <Button label="Test prop text" flavour="borderless" danger />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("border-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#FF4136", {
@@ -334,10 +336,10 @@ describe("Borderless Button", () => {
       <Button label="Test prop text" flavour="borderless" warning />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("border-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#F9A825", {
@@ -350,10 +352,10 @@ describe("Borderless Button", () => {
       <Button label="Test prop text" flavour="borderless" neutral />
     )
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("background-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
+    expect(button).toHaveStyleRule("border-color", "rgba(255, 255, 255, 0.0)", {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#536775", {
