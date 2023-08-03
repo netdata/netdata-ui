@@ -37,12 +37,14 @@ const appColors = {
   warningLite: rawColors.yellow.yellow190,
   warningSemi: rawColors.yellow.yellow20,
   warningBackground: rawColors.yellow.yellow60,
+  warningBannerBg: rawColors.yellow.yellow60,
   warningText: rawColors.yellow.seaBuckthorn,
 
   error: rawColors.red.red100,
   errorLite: rawColors.red.red190,
   errorSemi: rawColors.red.red20,
   errorBackground: rawColors.red.red50,
+  errorBannerBg: rawColors.red.red50,
   errorText: rawColors.red.pomegranate,
 
   generic: rawColors.neutral.grey60,
