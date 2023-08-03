@@ -1,7 +1,7 @@
-import prismic from "@prismicio/client"
+import * as prismic from "@prismicio/client"
 
 const apiEndpoint = "https://netdata-news.cdn.prismic.io/api/v2"
-const client = prismic.client(apiEndpoint)
+const client = prismic.createClient(apiEndpoint)
 
 export const fetchNews = (app, onSuccess, onError) => {
   return client
