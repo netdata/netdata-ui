@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "2.19.2",
+  "version": "2.19.3",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
@@ -101,6 +101,7 @@
     "jest-styled-components": "^7.1.1",
     "jsdom": "22.1.0",
     "markdown-loader": "8.0.0",
+    "node-fetch": "^3.3.2",
     "prettier": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
