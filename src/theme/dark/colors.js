@@ -21,6 +21,11 @@ const appColors = {
   menuItemSelected: rawColors.green.green20,
   menuItemHover: rawColors.green.green10,
 
+  //Buttons
+  primaryHighlight: rawColors.green.green100,
+  secondaryColor: rawColors.green.green110,
+  secondaryHighlight: rawColors.green.green40,
+  neutralHighlight: rawColors.green.grey50,
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
@@ -54,11 +59,12 @@ const appColors = {
   separator: rawColors.neutral.borderSecondary,
   controlFocused: rawColors.neutral.white,
   selected: rawColors.neutral.grey55,
+  highlight: rawColors.neutral.grey55,
   tooltip: rawColors.neutral.outerSpace,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.grey155,
   textLite: rawColors.neutral.grey120,
-  textFocus: rawColors.neutral.porcelain,
+  textFocus: rawColors.neutral.grey160,
   textDescription: rawColors.neutral.grey120,
   sectionHeaderBackground: rawColors.neutral.white,
   sectionTitle: rawColors.neutral.grey155,
@@ -120,10 +126,10 @@ const appColors = {
   anomalyText: rawColors.purple.mauve,
   anomalyTextLite: rawColors.purple.mauveDark,
   anomalyTextFocus: rawColors.purple.mauveFocus,
-  terminalGreen: rawColors.green.terminalGreen,
-  terminalGreenBorder: rawColors.green.terminalGreenBorder,
-  darkBackground: rawColors.neutral["grey-05"],
-  integrationMenuItemHover: rawColors.green.terminalGreen,
+  terminalGreen: rawColors.green.green20,
+  terminalGreenBorder: rawColors.green.green60,
+  darkBackground: rawColors.neutral.grey05,
+  integrationMenuItemHover: rawColors.green.green20,
 }
 
 export default {

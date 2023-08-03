@@ -19,6 +19,11 @@ const appColors = {
   modalBackground: rawColors.neutral.white,
   modalInfoBackground: rawColors.neutral.blackhaze,
 
+  //Buttons
+  secondaryColor: rawColors.green.green100,
+  primaryHighlight: rawColors.green.green110,
+  secondaryHighlight: rawColors.green.green190,
+  neutralHighlight: rawColors.green.grey50,
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
@@ -51,16 +56,16 @@ const appColors = {
   attentionSecondary: rawColors.purple.daisy,
   separator: rawColors.neutral.grey185,
   controlFocused: rawColors.neutral.limedSpruce,
-  selected: rawColors.neutral.iron,
+  selected: rawColors.neutral.grey180,
   tooltip: rawColors.neutral.shark,
   bright: rawColors.neutral.white,
-  text: rawColors.neutral.bluebayoux,
-  textLite: rawColors.neutral.regentgrey,
-  textFocus: rawColors.neutral.regentgrey,
-  textDescription: rawColors.neutral.bluebayoux,
+  text: rawColors.neutral.grey100,
+  textLite: rawColors.neutral.grey120,
+  textFocus: rawColors.neutral.grey90,
+  textDescription: rawColors.neutral.grey120,
   sectionHeaderBackground: rawColors.neutral.limedSpruce,
-  sectionTitle: rawColors.neutral.bluebayoux,
-  sectionDescription: rawColors.neutral.regentgrey,
+  sectionTitle: rawColors.neutral.grey100,
+  sectionDescription: rawColors.neutral.grey120,
   placeholder: rawColors.neutral.regentgrey,
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
@@ -95,9 +100,9 @@ const appColors = {
 
   //Alert MasterCard
   alertIcon: rawColors.neutral.grey180,
-  idleError: rawColors.red.red900,
-  idleWarning: rawColors.yellow.yellow900,
-  idleClear: rawColors.green.green900,
+  idleError: rawColors.red.red170,
+  idleWarning: rawColors.yellow.yellow170,
+  idleClear: rawColors.green.green190,
 
   //Table
   dropdownTable: rawColors.neutral.white,
@@ -116,10 +121,10 @@ const appColors = {
   anomalyText: rawColors.purple.lilac,
   anomalyTextLite: rawColors.purple.lilacLite,
   anomalyTextFocus: rawColors.purple.lilacFocus,
-  terminalGreen: rawColors.green["grey-197"],
-  terminalGreenBorder: rawColors.green.terminalGreenBorderLight,
-  darkBackground: rawColors.neutral["grey-195"],
-  integrationMenuItemHover: rawColors.neutral["grey-180"],
+  terminalGreen: rawColors.green.green197,
+  terminalGreenBorder: rawColors.green.green,
+  darkBackground: rawColors.neutral.grey195,
+  integrationMenuItemHover: rawColors.neutral.grey180,
 }
 
 export default {

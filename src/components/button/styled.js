@@ -17,6 +17,7 @@ const activeStyles = css`
   border-color: ${props => props.colors.borderActive(props)};
   background-color: ${props => props.colors.bgActive(props)};
   color: ${props => props.colors.colorActive(props)};
+  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const withTheme = props => {
@@ -35,12 +36,17 @@ const getPrimaryColor = props =>
     : getColor("primary")(props)
 
 const getBorderColor = props =>
-  props.neutral ? getColor("textFocus")(props) : getColor("primary")(props)
-const getTextColor = props => getColor("mainBackground")(props)
+  props.neutral ? getColor("generic")(props) : getColor("primary")(props)
+const getTextColor = props =>
+  props.neutral
+    ? getColor(props.flavour === HOLLOW ? "textFocus" : "text")(props)
+    : getColor(props.flavour === HOLLOW ? "secondaryColor" : "mainBackground")(props)
 const getHoverColor = props =>
-  props.neutral ? getColor("textFocus")(props) : getColor("accent")(props)
+  props.neutral ? getColor("generic")(props) : getColor("accent")(props)
 const getAccentColor = props =>
-  props.neutral ? lighten(0.2, getColor("textFocus")(props)) : getColor("successLite")(props)
+  props.neutral
+    ? getColor("neutralHighlight")(props)
+    : getColor(props.flavour === HOLLOW ? "secondaryHighlight" : "primaryHighlight")(props)
 const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
@@ -69,15 +75,15 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
       iconColor: specialIconColor || getTextColor,
     },
     [HOLLOW]: {
-      color: getSpecialColor || getPrimaryColor,
-      colorHover: getSpecialColorHover || getAccentColor,
-      colorActive: getSpecialColorActive || getAccentColor,
+      color: getSpecialColor || getTextColor,
+      colorHover: getSpecialColorHover || getTextColor,
+      colorActive: getSpecialColorActive || getTextColor,
       bg: getTransparent,
-      bgHover: getTransparent,
-      bgActive: getTransparent,
+      bgHover: getAccentColor,
+      bgActive: getAccentColor,
       border: getSpecialColor || getBorderColor,
-      borderHover: getSpecialColorHover || getAccentColor,
-      borderActive: getSpecialColorActive || getAccentColor,
+      borderHover: getSpecialColorHover || getPrimaryColor,
+      borderActive: getSpecialColorActive || getPrimaryColor,
       iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
     },
     [BORDER_LESS]: {
@@ -99,7 +105,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
 
 export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
-    padding: props.padding || props.tiny ? [0.5] : props.small ? [1] : [2],
+    padding: props.padding || props.tiny ? [0.5] : props.small ? [1, 3] : [2],
     colors: colorsByFlavour(props),
     round: groupFirst ? { side: "left" } : groupLast ? { side: "right" } : !groupMiddle,
     ...withTheme(props),
@@ -114,7 +120,7 @@ export const StyledButton = styled.button.attrs(
 
     font-weight: ${({ strong }) => (strong ? 700 : 500)};
     font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};
-    line-height: ${getSizeBy(2)};
+    line-height: ${getSizeBy(2.5)};
     white-space: nowrap;
     word-break: keep-all;
 
@@ -138,7 +144,7 @@ export const StyledButton = styled.button.attrs(
     text-decoration: none;
     & > span {
       ${textTransform};
-      margin-left: ${({ hasIcon }) => (hasIcon ? "2px" : "0px")};
+      margin-left: ${({ hasIcon }) => (hasIcon ? "4px" : "0px")};
     }
 
     &:hover {
