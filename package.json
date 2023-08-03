@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "2.19.0",
+  "version": "2.19.1",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
@@ -57,7 +57,7 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.9"
   },
   "repository": {
     "type": "git",
@@ -106,7 +106,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.2.0",
     "storybook-readme": "^5.0.9",
-    "styled-components": "^6.0.5",
+    "styled-components": "^5.3.9",
     "svg-sprite-loader": "^6.0.11",
     "svgo-loader": "^4.0.0",
     "ts-jest": "^29.0.5",
