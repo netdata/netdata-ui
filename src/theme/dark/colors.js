@@ -8,7 +8,7 @@ const appColors = {
   borderSecondary: rawColors.neutral.grey35,
   disabled: rawColors.neutral.tuna,
   disabledBackground: rawColors.neutral.outerSpace,
-  dropdown: rawColors.neutral.arsenic,
+  dropdown: rawColors.neutral.grey40,
   dropdownShadow: rawColors.shadows.dropdownDark,
   elementBackground: rawColors.neutral.outerSpace,
   elementBackgroundHover: rawColors.neutral.tuna,
@@ -88,9 +88,9 @@ const appColors = {
   nodeBadgeColor: rawColors.neutral.white,
 
   //Default pills
-  neutralPillBg: rawColors.neutral.limedSpruce,
-  neutralPillBorder: rawColors.neutral.limedSpruce,
-  neutralPillColor: rawColors.neutral.regentgrey,
+  neutralPillBg: rawColors.neutral.grey90,
+  neutralPillBorder: rawColors.neutral.grey90,
+  neutralPillColor: rawColors.neutral.grey120,
 
   //Alert MasterCard
   alertIcon: rawColors.neutral.grey50,
