@@ -5,7 +5,7 @@ const appColors = {
   accent: rawColors.green.chateau,
   main: rawColors.neutral.limedSpruce,
   border: rawColors.neutral.grey185,
-  borderSecondary: rawColors.neutral.grey185,
+  borderSecondary: rawColors.neutral.grey180,
   disabled: rawColors.neutral.porcelain,
   disabledBackground: rawColors.neutral.porcelain,
   dropdown: rawColors.neutral.white,
@@ -38,7 +38,7 @@ const appColors = {
   errorBackground: rawColors.red.red50,
   errorText: rawColors.red.pomegranate,
 
-  generic: rawColors.neutral.grey60,
+  generic: rawColors.neutral.grey165,
 
   live: rawColors.green.green100,
   stale: rawColors.green.green900,
@@ -65,6 +65,10 @@ const appColors = {
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey190,
+  mainChartBg: rawColors.transparent.full,
+  mainChartHeaderBg: rawColors.neutral.grey190,
+  mainChartBorder: rawColors.neutral.grey185,
+  mainChartTboxHover: rawColors.neutral.grey180,
   sideBar: rawColors.neutral.grey190,
   sideBarMini: rawColors.neutral.grey185,
   spaceSelected: rawColors.neutral.grey175,
@@ -97,9 +101,9 @@ const appColors = {
 
   //Table
   dropdownTable: rawColors.neutral.white,
-  tableRowBg: rawColors.neutral.blackhaze,
-  tableRowBgHover: rawColors.neutral.porcelain,
-  columnHighlight: rawColors.green.frostee,
+  tableRowBg: rawColors.neutral.grey190,
+  tableRowBgHover: rawColors.neutral.grey185,
+  columnHighlight: rawColors.green.green190,
   //IconButton
   iconColor: rawColors.neutral.limedSpruce,
 

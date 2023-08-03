@@ -10,7 +10,7 @@ const appColors = {
   disabledBackground: rawColors.neutral.outerSpace,
   dropdown: rawColors.neutral.grey40,
   dropdownShadow: rawColors.shadows.dropdownDark,
-  elementBackground: rawColors.neutral.outerSpace,
+  elementBackground: rawColors.neutral.grey35,
   elementBackgroundHover: rawColors.neutral.tuna,
   mainBackground: rawColors.neutral.grey15,
   mainBackgroundDisabled: rawColors.neutral.outerSpace,
@@ -68,6 +68,10 @@ const appColors = {
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey25,
+  mainChartBg: rawColors.neutral.grey25,
+  mainChartHeaderBg: rawColors.neutral.grey35,
+  mainChartBorder: rawColors.neutral.grey25,
+  mainChartTboxHover: rawColors.neutral.grey50,
   sideBar: rawColors.neutral.grey25,
   sideBarMini: rawColors.neutral.grey05,
   spaceSelected: rawColors.neutral.grey85,
@@ -83,7 +87,7 @@ const appColors = {
   inputBorderHover: rawColors.neutral.grey85,
   inputBorderFocus: rawColors.neutral.grey85,
   // Badges
-  nodeBadgeBackground: rawColors.neutral.limedSpruce,
+  nodeBadgeBackground: rawColors.neutral.grey35,
   nodeBadgeBorder: rawColors.neutral.bluebayoux,
   nodeBadgeColor: rawColors.neutral.white,
 
