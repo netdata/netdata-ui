@@ -5,9 +5,10 @@ const client = prismic.createClient(apiEndpoint)
 
 export const fetchNews = (app, onSuccess, onError) => {
   return client
-    .query(prismic.filter.at("document.tags", [app]), {
+    .get({
+      filters: [prismic.filter.any("document.tags", Array.isArray(app) ? app : [app])],
       pageSize: 100,
-      orderings: "[document.last_publication_date desc]",
+      orderings: [{ field: "document.last_publication_date", direction: "desc" }],
     })
     .then(onSuccess)
     .catch(onError)
