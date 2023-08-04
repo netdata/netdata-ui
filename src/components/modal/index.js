@@ -54,7 +54,7 @@ export const ModalButton = ({ iconName, onClick, testId, ...rest }) => (
     sx={{ marginLeft: "auto" }}
     as={Icon}
     name={iconName}
-    color="border"
+    color="text"
     onClick={onClick}
     cursor="pointer"
     {...rest}

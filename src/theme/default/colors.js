@@ -68,7 +68,7 @@ const appColors = {
   sectionHeaderBackground: rawColors.neutral.limedSpruce,
   sectionTitle: rawColors.neutral.grey100,
   sectionDescription: rawColors.neutral.grey120,
-  placeholder: rawColors.neutral.regentgrey,
+  placeholder: rawColors.neutral.grey120,
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey190,
@@ -86,10 +86,10 @@ const appColors = {
   topBarBg: rawColors.neutral.grey190,
   elevationLevelOne: rawColors.neutral.grey185,
   //Input colors
-  inputBg: rawColors.neutral.blackhaze,
-  inputBorder: rawColors.neutral.iron,
-  inputBorderHover: rawColors.neutral.regentgrey,
-  inputBorderFocus: rawColors.neutral.bluebayoux,
+  inputBg: rawColors.neutral.grey190,
+  inputBorder: rawColors.neutral.grey185,
+  inputBorderHover: rawColors.neutral.grey165,
+  inputBorderFocus: rawColors.neutral.grey165,
   //Badges
   nodeBadgeBackground: rawColors.neutral.porcelain,
   nodeBadgeBorder: rawColors.neutral.iron,
@@ -98,7 +98,7 @@ const appColors = {
   //Default pills
   neutralPillBg: rawColors.neutral.grey155,
   neutralPillBorder: rawColors.neutral.grey155,
-  neutralPillColor: rawColors.neutral.grey195,
+  neutralPillColor: rawColors.neutral.grey100,
 
   //Alert MasterCard
   alertIcon: rawColors.neutral.grey180,

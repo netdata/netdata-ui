@@ -17,7 +17,7 @@ const appColors = {
   modalHeaderBackground: rawColors.neutral.grey10,
   modalTabsBackground: rawColors.neutral.grey20,
   modalBackground: rawColors.neutral.grey30,
-  modalInfoBackground: rawColors.neutral.grey20,
+  modalInfoBackground: rawColors.neutral.grey50,
   menuItemSelected: rawColors.green.green20,
   menuItemHover: rawColors.green.green10,
 
@@ -72,7 +72,7 @@ const appColors = {
   sectionTitle: rawColors.neutral.grey155,
   sectionDescription: rawColors.neutral.grey150,
   menuItem: rawColors.neutral.grey140,
-  placeholder: rawColors.neutral.bluebayoux,
+  placeholder: rawColors.neutral.grey140,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey25,
