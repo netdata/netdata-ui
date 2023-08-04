@@ -14,9 +14,9 @@ const appColors = {
   elementBackgroundHover: rawColors.neutral.white,
   mainBackground: rawColors.neutral.grey195,
   mainBackgroundDisabled: rawColors.neutral.blackhaze,
-  modalHeaderBackground: rawColors.neutral.porcelain,
-  modalTabsBackground: rawColors.neutral.blackhaze,
-  modalBackground: rawColors.neutral.white,
+  modalHeaderBackground: rawColors.neutral.grey185,
+  modalTabsBackground: rawColors.neutral.grey190,
+  modalBackground: rawColors.neutral.grey195,
   modalInfoBackground: rawColors.neutral.blackhaze,
 
   //Buttons
@@ -98,7 +98,7 @@ const appColors = {
   //Default pills
   neutralPillBg: rawColors.neutral.grey155,
   neutralPillBorder: rawColors.neutral.grey155,
-  neutralPillColor: rawColors.neutral.grey165,
+  neutralPillColor: rawColors.neutral.grey195,
 
   //Alert MasterCard
   alertIcon: rawColors.neutral.grey180,
@@ -109,7 +109,7 @@ const appColors = {
   //Table
   dropdownTable: rawColors.neutral.white,
   tableRowBg: rawColors.neutral.grey190,
-  tableRowBgHover: rawColors.neutral.grey185,
+  tableRowBgHover: rawColors.green.green195,
   columnHighlight: rawColors.green.green190,
   //IconButton
   iconColor: rawColors.neutral.limedSpruce,
