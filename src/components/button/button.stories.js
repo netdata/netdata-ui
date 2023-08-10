@@ -1,94 +1,22 @@
 import React, { useState } from "react"
-import styled from "styled-components"
-import { action } from "@storybook/addon-actions"
-import { text, boolean, select } from "@storybook/addon-knobs"
 import { Button, IconButton, ButtonGroup } from "."
 import { iconsList } from "src/components/icon"
 
 const icons = Object.keys(iconsList)
 
-export const BaseButton = {
-  component: () => (
-    <Button
-      label={text("Label", "LABEL")}
-      icon={select("Name", ["No icon", ...icons], "plus")}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-      flavour={select("Flavour", ["default", "hollow", "borderless"], "default")}
-      danger={boolean("Danger", false)}
-      warning={boolean("Warning", false)}
-      small={boolean("Small (works when icon only)", false)}
-      isLoading={boolean("Is loading", false)}
-      loadingLabel={text("Loading label prop", "LOADING...")}
-    />
-  ),
-}
+export const Basic = args => <Button {...args} />
 
-const DarkBackground = styled.div`
-  background-color: black;
-  height: 50vh;
-  width: 50vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+export const BaseIconButton = () => (
+  <IconButton cursor="pointer" icon="chevron_left" iconSize="small" tooltip="Previous" />
+)
 
-export const ButtonOnDarkBackground = {
-  component: () => (
-    <DarkBackground>
-      <Button
-        label={text("Label", "LABEL")}
-        icon={select("Name", ["No icon", ...icons], "plus")}
-        disabled={boolean("Disabled", false)}
-        onClick={action("clicked")}
-        flavour={select("Flavour", ["default", "hollow", "borderless"], "default")}
-        danger={boolean("Danger", false)}
-        warning={boolean("Warning", false)}
-        small={boolean("Small (works when icon only)", false)}
-        isLoading={boolean("Is loading", false)}
-        loadingLabel={text("Loading label prop", "LOADING...")}
-      />
-    </DarkBackground>
-  ),
-}
-
-const OverridedButton = styled(Button)`
-  background-color: black;
-  color: purple;
-`
-
-export const ButtonWithCSSOverride = {
-  component: () => (
-    <OverridedButton
-      label={text("Label", "LABEL")}
-      icon={select("Name", ["No icon", ...icons], "plus")}
-      disabled={boolean("Disabled", false)}
-      onClick={action("clicked")}
-      flavour={select("Flavour", ["default", "hollow", "borderless"], "default")}
-      danger={boolean("Danger", false)}
-      warning={boolean("Warning", false)}
-      small={boolean("Small (works when icon only)", false)}
-      isLoading={boolean("Is loading", false)}
-      loadingLabel={text("Loading label prop", "LOADING...")}
-    />
-  ),
-}
-
-export const BaseIconButton = {
-  component: () => (
-    <IconButton cursor="pointer" icon="chevron_left" iconSize="small" tooltip="Previous" />
-  ),
-}
-
-export const BaseButtonGroup = {
-  component: () => (
-    <ButtonGroup>
-      <Button label="One" />
-      <Button label="Two" />
-      <Button label="Three" />
-    </ButtonGroup>
-  ),
-}
+export const BaseButtonGroup = () => (
+  <ButtonGroup>
+    <Button label="One" />
+    <Button label="Two" />
+    <Button label="Three" />
+  </ButtonGroup>
+)
 
 const radioButtonItems = [
   { label: "One", value: 1 },
@@ -107,4 +35,34 @@ export const RadioButtonGroup = {
 
 export default {
   component: Button,
+  args: {
+    onClick: () => alert("clicked"),
+    flavour: "default",
+    id: "some-id",
+    className: "some-classname",
+    label: "My button",
+    loadingLabel: "Loading button",
+    icon: icons[0],
+    isLoading: false,
+    disabled: false,
+    danger: false,
+    warning: false,
+    small: false,
+  },
+  argTypes: {
+    flavour: {
+      options: ["default", "hollow", "borderless"],
+      control: { type: "radio" },
+    },
+    id: { control: "text" },
+    className: { control: "text" },
+    label: { control: "text" },
+    loadingLabel: { control: "text" },
+    icon: { options: icons, type: "select" },
+    isLoading: { control: "boolean" },
+    disabled: { control: "boolean" },
+    danger: { control: "boolean" },
+    warning: { control: "boolean" },
+    small: { control: "boolean" },
+  },
 }

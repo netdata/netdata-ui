@@ -1,6 +1,5 @@
 import React from "react"
 import useLocalStorage from "react-use/lib/useLocalStorage"
-import { addReadme } from "storybook-readme"
 import centered from "@storybook/addon-centered/react"
 import { withKnobs } from "@storybook/addon-knobs"
 import { withTests } from "@storybook/addon-jest"
@@ -18,7 +17,6 @@ import { Text } from "src/components/typography"
 const results = require("../.jest-test-results.json")
 
 export const decorators = [
-  addReadme,
   centered,
   withKnobs,
   withTests({ results }),
