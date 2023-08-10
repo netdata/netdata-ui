@@ -22,24 +22,29 @@ exports[`Toggle test  * should render with labels 1`] = `
   display: none;
 }
 
-.c6 {
+.c7 {
   box-sizing: border-box;
   width: 40px;
   height: 20px;
   background: #FFFFFF;
   border: 1px solid #8F9EAA;
   border-radius: 100px;
+  -webkit-transition: all 150ms;
   transition: all 150ms;
   display: block;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
   align-self: flex-start;
   cursor: pointer;
   pointer-events: auto;
 }
 
-.c6:after {
+.c7:after {
   display: block;
   position: absolute;
   content: "";
@@ -48,12 +53,15 @@ exports[`Toggle test  * should render with labels 1`] = `
   border-radius: 50%;
   left: 5%;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  -webkit-transition: left 0.2s ease;
   transition: left 0.2s ease;
   background-color: #35414A;
 }
 
-.c4:focus+.c6 {
+.c4:focus + .c6 {
   border-color: #35414A;
   box-shadow: 0 0 0 1px #35414A;
 }
@@ -61,8 +69,16 @@ exports[`Toggle test  * should render with labels 1`] = `
 .c0 {
   position: relative;
   cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -70,7 +86,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   margin-right: 8px;
 }
 
-.c7 {
+.c8 {
   margin-left: 8px;
 }
 
@@ -91,12 +107,12 @@ exports[`Toggle test  * should render with labels 1`] = `
         type="checkbox"
       />
       <div
-        class="c6"
+        class="c6 c7"
         role="switch"
       />
     </div>
     <span
-      class="c1 c7"
+      class="c1 c8"
     >
       Light theme
     </span>
@@ -116,24 +132,29 @@ exports[`Toggle test  * should render with required props 1`] = `
   display: none;
 }
 
-.c4 {
+.c5 {
   box-sizing: border-box;
   width: 40px;
   height: 20px;
   background: #FFFFFF;
   border: 1px solid #8F9EAA;
   border-radius: 100px;
+  -webkit-transition: all 150ms;
   transition: all 150ms;
   display: block;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
   align-self: flex-start;
   cursor: pointer;
   pointer-events: auto;
 }
 
-.c4:after {
+.c5:after {
   display: block;
   position: absolute;
   content: "";
@@ -142,12 +163,15 @@ exports[`Toggle test  * should render with required props 1`] = `
   border-radius: 50%;
   left: 5%;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  -webkit-transition: left 0.2s ease;
   transition: left 0.2s ease;
   background-color: #35414A;
 }
 
-.c2:focus+.c4 {
+.c2:focus + .c4 {
   border-color: #35414A;
   box-shadow: 0 0 0 1px #35414A;
 }
@@ -155,8 +179,16 @@ exports[`Toggle test  * should render with required props 1`] = `
 .c0 {
   position: relative;
   cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -172,7 +204,7 @@ exports[`Toggle test  * should render with required props 1`] = `
         type="checkbox"
       />
       <div
-        class="c4"
+        class="c4 c5"
         role="switch"
       />
     </div>

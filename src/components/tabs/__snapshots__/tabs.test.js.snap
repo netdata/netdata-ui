@@ -2,28 +2,63 @@
 
 exports[`Tabs states  * should render uncontrolled 1`] = `
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   color: #536775;
 }
 
 .c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
   padding: 0 2px;
   color: #536775;
 }
 
 .c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
   flex-basis: 100%;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
   justify-content: center;
   color: #536775;
 }
@@ -46,13 +81,13 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid #00AB44;
 }
 
-.c3>span {
+.c3 > span {
   font-weight: bold;
 }
 
 .c4 {
   white-space: nowrap;
-  border-bottom: 4px solid rgba(255, 255, 255, 0.0);
+  border-bottom: 4px solid rgba(255,255,255,0.0);
   box-sizing: border-box;
   min-width: 80px;
   max-width: 208px;
@@ -68,7 +103,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid #00AB44;
 }
 
-.c4>span {
+.c4 > span {
   font-weight: normal;
 }
 
@@ -76,43 +111,28 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   class="c0"
 >
   <nav
-    alignitems="center"
-    class="c1 tabs"
-    justifycontent="start"
-    padding="0,0.5"
+    class="c1 tabs tabs"
   >
     <div
-      alignitems="center"
-      basis="100%"
       class="c2 c3"
-      justifycontent="center"
       label="hi"
     >
       hi
     </div>
     <div
-      alignitems="center"
-      basis="100%"
       class="c2 c4"
-      justifycontent="center"
       label="Hi again"
     >
       Hi again
     </div>
     <div
-      alignitems="center"
-      basis="100%"
       class="c2 c4"
-      justifycontent="center"
       label="Bye"
     >
       Bye
     </div>
     <div
-      alignitems="center"
-      basis="100%"
       class="c2 c4"
-      justifycontent="center"
       label="Bye Bye"
     >
       Bye Bye
