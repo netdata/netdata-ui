@@ -1,22 +1,9 @@
 import React, { useState } from "react"
-import { storiesOf } from "@storybook/react"
 import { text, boolean } from "@storybook/addon-knobs"
 import { Toggle } from "."
-import { readmeCleanup } from "utils/readme"
-import readme from "./README.md"
 
-const toggleStory = storiesOf("Inputs/Toggle", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["toggle.test.tsx"],
-}
-
-toggleStory.add(
-  "Toggle",
-  () => {
+export const Base = {
+  component: () => {
     const [checked, setChecked] = useState(false)
     const handleChange = e => {
       setChecked(e.currentTarget.checked)
@@ -31,12 +18,10 @@ toggleStory.add(
       />
     )
   },
-  subData
-)
+}
 
-toggleStory.add(
-  "Two options Toggle",
-  () => {
+export const TwoOptions = {
+  component: () => {
     const [checked, setChecked] = useState(false)
     const handleChange = e => {
       setChecked(e.currentTarget.checked)
@@ -52,5 +37,8 @@ toggleStory.add(
       />
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Toggle,
+}

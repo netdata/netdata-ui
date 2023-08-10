@@ -1,21 +1,8 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
-import { readmeCleanup } from "utils/readme"
 import { H4, Text, TextSmall } from "src/components/typography"
-import readme from "./README.md"
+import Flex from "."
 
-import Flex from "./index"
-
-const flexStory = storiesOf("Templates/Flex", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
-
-const Card = () => (
+const FlexCard = () => (
   <Flex
     height="260px"
     width={{ max: "220px" }}
@@ -33,21 +20,18 @@ const Card = () => (
   </Flex>
 )
 
-flexStory.add(
-  "Card",
-  () => (
+export const Card = {
+  component: () => (
     <Flex gap={4} flexWrap>
       {[...Array(6)].map((value, index) => (
-        <Card key={index.toString()} />
+        <FlexCard key={index.toString()} />
       ))}
     </Flex>
   ),
-  subData
-)
+}
 
-flexStory.add(
-  "List",
-  () => (
+export const List = {
+  component: () => (
     <Flex column gap={1} width={{ min: "400px" }}>
       <Flex background="textFocus" padding={[1, 2]}>
         First box
@@ -60,12 +44,10 @@ flexStory.add(
       </Flex>
     </Flex>
   ),
-  subData
-)
+}
 
-flexStory.add(
-  "Header",
-  () => (
+export const Header = {
+  component: () => (
     <Flex
       as="header"
       justifyContent="between"
@@ -78,5 +60,8 @@ flexStory.add(
       <Text>Options</Text>
     </Flex>
   ),
-  subData
-)
+}
+
+export default {
+  component: Flex,
+}

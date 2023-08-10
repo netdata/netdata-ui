@@ -144,7 +144,9 @@ describe("Button states", () => {
 
 describe("Default Button", () => {
   it("renders", () => {
-    const { container, getByText } = renderWithProviders(<Button label="Test prop text" />)
+    const { container, getByText } = renderWithProviders(
+      <Button label="Test prop text" textTransform="fullWidth" />
+    )
 
     expect(getByText(/prop text/)).toBeInTheDocument()
 

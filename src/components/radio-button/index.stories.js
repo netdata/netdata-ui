@@ -1,23 +1,9 @@
 import React, { useState } from "react"
-import { storiesOf } from "@storybook/react"
 import { boolean, text } from "@storybook/addon-knobs"
-import { readmeCleanup } from "utils/readme"
-import readme from "./README.md"
+import RadioButton from "."
 
-import RadioButton from "./index"
-
-const radioButtonStory = storiesOf("Inputs/RadioButton", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
-
-radioButtonStory.add(
-  "RadioButton",
-  () => {
+export const BaseRadioButton = {
+  component: () => {
     return (
       <RadioButton
         disabled={boolean("Disabled", false)}
@@ -27,12 +13,10 @@ radioButtonStory.add(
       />
     )
   },
-  subData
-)
+}
 
-radioButtonStory.add(
-  "RadioButton Disabled And Checked",
-  () => {
+export const RadioButtonDisabledAndChecked = {
+  component: () => {
     return (
       <RadioButton
         disabled={boolean("Disabled", true)}
@@ -42,12 +26,10 @@ radioButtonStory.add(
       />
     )
   },
-  subData
-)
+}
 
-radioButtonStory.add(
-  "RadioButton Checked",
-  () => {
+export const RadioButtonChecked = {
+  component: () => {
     return (
       <RadioButton
         disabled={boolean("Disabled", false)}
@@ -57,12 +39,10 @@ radioButtonStory.add(
       />
     )
   },
-  subData
-)
+}
 
-radioButtonStory.add(
-  "Controlled RadioButtons",
-  () => {
+export const ControlledRadioButtons = {
+  component: () => {
     const [checked, setChecked] = useState("radio1")
     const handleChange = event => setChecked(event.target.value)
 
@@ -94,5 +74,8 @@ radioButtonStory.add(
       </div>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: RadioButton,
+}

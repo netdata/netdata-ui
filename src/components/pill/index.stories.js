@@ -1,11 +1,8 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
 import AlertMasterCard from "./alertMastercard"
 import Flex from "src/components/templates/flex"
-import Pill from "./index"
+import Pill from "."
 import MasterCard from "./mastercard"
-
-const story = storiesOf("Atoms/Pills", module)
 
 const Custom = () => (
   <Flex gap={4}>
@@ -247,11 +244,15 @@ const AlertMasterCards = () => (
   </Flex>
 )
 
-story.add("Custom", Custom)
-story.add("Pills", Pills)
-story.add("Pills Hollow", PillsHollow)
-story.add("Pills Icon with Label", PillsLabelIcon)
-story.add("Pills Icon", PillsIcon)
-story.add("Pills Tiny", PillsTiny)
-story.add("MasterCards", MasterCards)
-story.add("Alert MasterCards", AlertMasterCards)
+export const BaseCustom = { component: Custom }
+export const BasePills = { component: Pills }
+export const BasePillsHollow = { component: PillsHollow }
+export const BasePillsIconWithLabel = { component: PillsLabelIcon }
+export const BasePillsIcon = { component: PillsIcon }
+export const BasePillsTiny = { component: PillsTiny }
+export const BaseMasterCards = { component: MasterCards }
+export const BaseAlertMasterCards = { component: AlertMasterCards }
+
+export default {
+  component: Pill,
+}

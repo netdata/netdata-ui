@@ -1,13 +1,14 @@
-import Prismic from "@prismicio/client"
+import * as prismic from "@prismicio/client"
 
 const apiEndpoint = "https://netdata-news.cdn.prismic.io/api/v2"
-const client = Prismic.client(apiEndpoint)
+const client = prismic.createClient(apiEndpoint)
 
 export const fetchNews = (app, onSuccess, onError) => {
   return client
-    .query(Prismic.Predicates.at("document.tags", [app]), {
+    .get({
+      filters: [prismic.filter.any("document.tags", Array.isArray(app) ? app : [app])],
       pageSize: 100,
-      orderings: "[document.last_publication_date desc]",
+      orderings: [{ field: "document.last_publication_date", direction: "desc" }],
     })
     .then(onSuccess)
     .catch(onError)

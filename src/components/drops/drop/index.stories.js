@@ -1,50 +1,38 @@
 import React, { useState, useEffect, useRef } from "react"
-import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
-import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
-import readme from "./README.md"
-import Drop from "./index"
+import Drop from "."
 
-const story = storiesOf("Drops/Drop", module)
+export const Simple = {
+  component: props => {
+    const ref = useRef()
 
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
+    const [, setShowDrop] = useState(false)
+    useEffect(() => {
+      setTimeout(() => setShowDrop(true), 200)
+    }, [])
 
-const Simple = props => {
-  const ref = useRef()
-
-  const [, setShowDrop] = useState(false)
-  useEffect(() => {
-    setTimeout(() => setShowDrop(true), 200)
-  }, [])
-
-  return (
-    <Flex {...props}>
-      <Flex ref={ref} background="disabled" padding={[4]}>
-        Target
+    return (
+      <Flex {...props}>
+        <Flex ref={ref} background="disabled" padding={[4]}>
+          Target
+        </Flex>
+        {ref.current && (
+          <Drop
+            target={ref.current}
+            align={{ top: "bottom", left: "left" }}
+            onEsc={action("onEsc")}
+            onClickOutside={action("onClickOutside")}
+          >
+            <Flex background="border" padding={[6]}>
+              Drop Contents
+            </Flex>
+          </Drop>
+        )}
       </Flex>
-      {ref.current && (
-        <Drop
-          target={ref.current}
-          align={{ top: "bottom", left: "left" }}
-          onEsc={action("onEsc")}
-          onClickOutside={action("onClickOutside")}
-        >
-          <Flex background="border" padding={[6]}>
-            Drop Contents
-          </Flex>
-        </Drop>
-      )}
-    </Flex>
-  )
+    )
+  },
 }
-
-story.add("Simple", Simple, subData)
 
 const positions = [
   { top: "top" },
@@ -96,9 +84,8 @@ const DropBox = ({ position }) => {
   )
 }
 
-story.add(
-  "Positions",
-  () => {
+export const Positions = {
+  component: () => {
     return (
       <Flex flexWrap>
         {positions.map((position, index) => (
@@ -107,22 +94,22 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add("Scroll Container", () => {
-  return (
-    <Flex height="400px" border overflow="auto">
-      <Flex height="1000px" width="400px">
-        <Simple height="100px" />
+export const ScrollContainer = {
+  component: () => {
+    return (
+      <Flex height="400px" border overflow="auto">
+        <Flex height="1000px" width="400px">
+          <Simple height="100px" />
+        </Flex>
       </Flex>
-    </Flex>
-  )
-})
+    )
+  },
+}
 
-story.add(
-  "Stretch",
-  () => {
+export const Stretch = {
+  component: () => {
     const Component = ({ label, stretch }) => {
       const ref = useRef()
 
@@ -160,12 +147,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Boundaries",
-  () => {
+export const Boundaries = {
+  component: () => {
     const ref = useRef()
 
     const [, setShowDrop] = useState(false)
@@ -197,5 +182,8 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Drop,
+}

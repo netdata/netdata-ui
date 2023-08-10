@@ -1,19 +1,7 @@
 import React, { useState } from "react"
-import { storiesOf } from "@storybook/react"
 import { action } from "@storybook/addon-actions"
 import { text, boolean, select, number } from "@storybook/addon-knobs"
-import { readmeCleanup } from "utils/readme"
 import { Tabs, Tab } from "."
-import readme from "./README.md"
-
-const tabsStory = storiesOf("Templates/Tabs", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["tabs.test.tsx"],
-}
 
 const makeOnChange = {
   no: undefined,
@@ -27,9 +15,8 @@ const makeTabContentSelect = {
   b: "b",
 }
 
-tabsStory.add(
-  "Tabs",
-  () => {
+export const BaseTabs = {
+  component: () => {
     const hasOnChange = select("Controlled (onChange)", ["no", "yes"], "no")
     const selectTabContent = select("Tab content wrapper", ["TabContentExample", "b"], "b")
     const small = boolean("small", false)
@@ -60,12 +47,10 @@ tabsStory.add(
       </Tabs>
     )
   },
-  subData
-)
+}
 
-tabsStory.add(
-  "Tabs with mocked router",
-  () => {
+export const TabsRouter = {
+  component: () => {
     const [path, setPath] = useState("/a")
     const paths = ["/a", "/b", "/c", "/d"]
     const selected = paths.findIndex(p => p === path)
@@ -86,5 +71,8 @@ tabsStory.add(
       </Tabs>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Tabs,
+}

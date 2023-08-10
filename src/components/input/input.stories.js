@@ -1,31 +1,18 @@
 import React, { useState, useEffect } from "react"
-import { storiesOf } from "@storybook/react"
 import styled from "styled-components"
 import { text, number, boolean, select } from "@storybook/addon-knobs"
 import { useCallback } from "@storybook/addons"
 import { getColor } from "src/theme/utils"
-import { readmeCleanup } from "utils/readme"
-import { TextInput, useInputValue, useTouchedState, MetaOptions } from "."
+import { TextInput, useInputValue, useTouchedState } from "."
 import { Button } from "src/components/button"
 import { Icon } from "src/components/icon"
-import readme from "./README.md"
-
-const inputStory = storiesOf("Inputs/TextInput", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["input.test.tsx"],
-}
 
 const Container = styled.div`
   width: 400px;
 `
 
-inputStory.add(
-  "Input with validation",
-  () => {
+export const InputWithValidation = {
+  component: () => {
     const disabled = boolean("Disabled", false)
     const [isValid, setIsValid] = useState(false)
     const [validationMessage, setValidationMessage] = useState("")
@@ -74,10 +61,9 @@ inputStory.add(
       </Container>
     )
   },
-  subData
-)
+}
 
-const customMetaDisplay = ({ isDirty, value, prevValue, error, success, focused }: MetaOptions) =>
+const customMetaDisplay = ({ isDirty, value, prevValue, error, success, focused }) =>
   Boolean(success) ||
   Boolean(focused && isDirty && error && prevValue && value.length < prevValue.length)
 
@@ -89,9 +75,8 @@ const metaOptions = {
 const metaDefaultValue = undefined
 const metaGroupId = "metaDisplayGroup"
 
-inputStory.add(
-  "Input with feedback, custom meta and reset",
-  () => {
+export const InputAdvanced = {
+  component: () => {
     const disabled = boolean("Disabled", false)
     const [isValid, setIsValid] = useState(false)
     const [validationMessage, setValidationMessage] = useState("")
@@ -149,8 +134,7 @@ inputStory.add(
       </Container>
     )
   },
-  subData
-)
+}
 
 const StyledIcon = styled(Icon)`
   fill: ${getColor("text")};
@@ -158,9 +142,8 @@ const StyledIcon = styled(Icon)`
 
 const SearchIcon = <StyledIcon name="search_s" />
 
-inputStory.add(
-  "Input with right icon and label",
-  () => {
+export const InputWithIcon = {
+  component: () => {
     const disabled = boolean("Disabled", false)
     const charLimit = number("Max characters", 20)
     const label = text("Label", "Label")
@@ -188,12 +171,10 @@ inputStory.add(
       </Container>
     )
   },
-  subData
-)
+}
 
-inputStory.add(
-  "Input with left icon and label",
-  () => {
+export const InputLeftIcon = {
+  component: () => {
     const disabled = boolean("Disabled", false)
     const charLimit = number("Max characters", 20)
     const label = text("Label", "Label")
@@ -221,12 +202,10 @@ inputStory.add(
       </Container>
     )
   },
-  subData
-)
+}
 
-inputStory.add(
-  "Input with left and right icon and label",
-  () => {
+export const InputTwoIcons = {
+  component: () => {
     const disabled = boolean("Disabled", false)
     const charLimit = number("Max characters", 20)
     const label = text("Label", "Label")
@@ -255,12 +234,10 @@ inputStory.add(
       </Container>
     )
   },
-  subData
-)
+}
 
-inputStory.add(
-  "Input disabled",
-  () => {
+export const InputDisabled = {
+  component: () => {
     const disabled = boolean("Disabled", true)
     const charLimit = number("Max characters", 20)
     const label = text("Label", "Label")
@@ -288,12 +265,10 @@ inputStory.add(
       </Container>
     )
   },
-  subData
-)
+}
 
-inputStory.add(
-  "Input with all sizes",
-  () => {
+export const InputSizes = {
+  component: () => {
     const disabled = boolean("Disabled", false)
     const charLimit = number("Max characters", 20)
     const label = text("Label", "Label")
@@ -349,5 +324,8 @@ inputStory.add(
       </>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: TextInput,
+}

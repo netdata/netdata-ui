@@ -1,24 +1,11 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
-import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { H5, Text } from "src/components/typography"
 import { Button } from "src/components/button"
-import readme from "./README.md"
-import Tooltip from "./index"
+import Tooltip from "."
 
-const story = storiesOf("Drops/Tooltip", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
-
-story.add(
-  "Simple",
-  () => (
+export const Simple = {
+  component: () => (
     <Flex gap={4} flexWrap>
       <Tooltip align="top" content="Tooltip content">
         <Flex padding={[1, 2]} background="elementBackground" border>
@@ -42,8 +29,7 @@ story.add(
       </Tooltip>
     </Flex>
   ),
-  subData
-)
+}
 
 const CustomContent = () => (
   <Flex gap={1} column>
@@ -61,9 +47,8 @@ const PlainContent = () => (
   </Flex>
 )
 
-story.add(
-  "Custom",
-  () => (
+export const Custom = {
+  component: () => (
     <Flex gap={4}>
       <Tooltip allowHoverOnTooltip align="top" content={<CustomContent />}>
         <Button label="allow hover tooltip" />
@@ -76,5 +61,8 @@ story.add(
       </Tooltip>
     </Flex>
   ),
-  subData
-)
+}
+
+export default {
+  component: Tooltip,
+}

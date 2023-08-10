@@ -1,6 +1,6 @@
 const rawColors = {
   transparent: {
-    full: "rgba(255, 255, 255, 0.0)",
+    full: "rgba(255,255,255,0.0)",
     semi: "rgba(255, 255, 255, 0.5)",
     popover: "rgba(18, 36, 50, 0.9)",
   },

@@ -1,23 +1,10 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
-import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { Button } from "src/components/button"
-import readme from "./README.md"
-import Documentation from "./index"
+import Documentation from "."
 
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
-
-const story = storiesOf("Organisms/Documentation", module)
-
-story.add(
-  "Cloud Documentation",
-  () => {
+export const CloudDocumentation = {
+  component: () => {
     return (
       <Flex background="mainBackgroundDisabled" gap={4} width="100vw" height="100vh">
         <Documentation app="cloud">
@@ -41,5 +28,8 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Documentation,
+}

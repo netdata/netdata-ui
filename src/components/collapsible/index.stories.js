@@ -1,22 +1,10 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
 import { boolean, number } from "@storybook/addon-knobs"
 import useToggle from "react-use/lib/useToggle"
-import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { H2, Text } from "src/components/typography"
 import { Button } from "src/components/button"
-import readme from "./README.md"
-import Collapsible from "./index"
-
-const story = storiesOf("Utils/Collapsible", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
+import Collapsible from "."
 
 const Content = () => (
   <Flex gap={2} background="disabled" padding={[4]} column>
@@ -25,17 +13,18 @@ const Content = () => (
   </Flex>
 )
 
-story.add("Simple", () => {
-  return (
-    <Collapsible open={boolean("open", true)} duration={number("duration", 150)}>
-      <Content />
-    </Collapsible>
-  )
-})
+export const Simple = {
+  component: () => {
+    return (
+      <Collapsible open={boolean("open", true)} duration={number("duration", 150)}>
+        <Content />
+      </Collapsible>
+    )
+  },
+}
 
-story.add(
-  "Controlled",
-  () => {
+export const Controlled = {
+  component: () => {
     const [open, toggle] = useToggle(false)
     return (
       <Flex gap={2} column>
@@ -47,5 +36,8 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Collapsible,
+}

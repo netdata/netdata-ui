@@ -1,21 +1,9 @@
 import React from "react"
-import { storiesOf } from "@storybook/react"
 import useToggle from "react-use/lib/useToggle"
-import { readmeCleanup } from "utils/readme"
 import Flex from "src/components/templates/flex"
 import { H5, Text } from "src/components/typography"
 import { Button } from "src/components/button"
-import readme from "./README.md"
-import Popover from "./index"
-
-const story = storiesOf("Drops/Popover", module)
-
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
+import Popover from "."
 
 const PopoverContent = () => {
   const [clicked, toggle] = useToggle()
@@ -40,9 +28,8 @@ const Content = ({ align }) => {
   )
 }
 
-story.add(
-  "Simple",
-  () => (
+export const Simple = {
+  component: () => (
     <Flex gap={4} flexWrap>
       <Content align="top" />
       <Content align="right" />
@@ -50,8 +37,7 @@ story.add(
       <Content align="left" />
     </Flex>
   ),
-  subData
-)
+}
 
 const CustomContent = () => (
   <Flex width="200px" gap={1} column>
@@ -71,9 +57,8 @@ const PlainContent = () => (
   </Flex>
 )
 
-story.add(
-  "Custom",
-  () => (
+export const Custom = {
+  component: () => (
     <Flex gap={4}>
       <Popover align="top" content={<CustomContent />}>
         <Button label="hover me" />
@@ -83,5 +68,8 @@ story.add(
       </Popover>
     </Flex>
   ),
-  subData
-)
+}
+
+export default {
+  component: Popover,
+}

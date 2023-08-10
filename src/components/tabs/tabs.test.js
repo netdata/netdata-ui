@@ -20,9 +20,7 @@ describe("Tabs states", () => {
     const tabs = container.firstChild
     expect(tabs).toMatchSnapshot()
 
-    expect(getByText("hi")).toHaveStyle({
-      "font-weight": "bold",
-    })
+    expect(getByText("hi")).toHaveStyleRule("font-weight", "bold")
     expect(queryByText("Hello")).toBeInTheDocument()
     expect(queryByText("Hello again")).not.toBeInTheDocument()
     expect(queryByText("Goodbye")).not.toBeInTheDocument()
@@ -30,9 +28,7 @@ describe("Tabs states", () => {
 
     const tab = getByText("Bye Bye")
     fireEvent.click(tab)
-    expect(tab).toHaveStyle({
-      "font-weight": "bold",
-    })
+    expect(tab).toHaveStyleRule("font-weight", "bold")
     expect(queryByText("Hello")).not.toBeInTheDocument()
     expect(queryByText("Fairwell")).toBeInTheDocument()
   })
@@ -59,17 +55,13 @@ describe("Tabs states", () => {
 
     expect(queryByText("Hello")).not.toBeInTheDocument()
     expect(queryByText("Hello again")).not.toBeInTheDocument()
-    expect(getByText("Bye")).toHaveStyle({
-      "font-weight": "bold",
-    })
+    expect(getByText("Bye")).toHaveStyleRule("font-weight", "bold")
     expect(queryByText("Goodbye")).toBeInTheDocument()
     expect(queryByText("Fairwell")).not.toBeInTheDocument()
 
     const tab = getByText("Hi again")
     fireEvent.click(tab)
-    expect(tab).toHaveStyle({
-      "font-weight": "bold",
-    })
+    expect(tab).toHaveStyleRule("font-weight", "bold")
     expect(onChange).toBeCalledWith(1)
     expect(queryByText("Goodbye")).not.toBeInTheDocument()
     expect(queryByText("Hello again")).toBeInTheDocument()
@@ -89,16 +81,12 @@ describe("Tabs states", () => {
     const { queryByText, getByText } = renderWithProviders(<Component />)
 
     expect(queryByText("Hello")).not.toBeInTheDocument()
-    expect(getByText("Hi again")).toHaveStyle({
-      "font-weight": "bold",
-    })
+    expect(getByText("Hi again")).toHaveStyleRule("font-weight", "bold")
     expect(queryByText("Hello again")).toBeInTheDocument()
 
     const tab = getByText("hi")
     fireEvent.click(tab)
-    expect(tab).toHaveStyle({
-      "font-weight": "normal",
-    })
+    expect(tab).toHaveStyleRule("font-weight", "normal")
     expect(queryByText("Hello")).not.toBeInTheDocument()
     expect(queryByText("Hello again")).toBeInTheDocument()
   })

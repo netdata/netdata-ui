@@ -1,26 +1,13 @@
 import React from "react"
 import useToggle from "react-use/lib/useMeasure"
-import { storiesOf } from "@storybook/react"
-import { readmeCleanup } from "utils/readme"
 import { H2, H3, Text } from "src/components/typography"
 import { Icon } from "src/components/icon"
 import { Button } from "src/components/button"
 import Flex from "src/components/templates/flex"
-import readme from "./README.md"
-import Layer from "./index"
+import Layer from "."
 
-const subData = {
-  readme: {
-    sidebar: readmeCleanup(readme),
-  },
-  jest: ["index.test.js"],
-}
-
-const story = storiesOf("Templates/Layer", module)
-
-story.add(
-  "Simple",
-  () => {
+export const Simple = {
+  component: () => {
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
         <Layer>
@@ -31,8 +18,7 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
 const positions = [
   "top-left",
@@ -46,9 +32,8 @@ const positions = [
   "bottom-right",
 ]
 
-story.add(
-  "Positions",
-  () => {
+export const Positions = {
+  component: () => {
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
         {positions.map(position => (
@@ -61,12 +46,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Full horizontal",
-  () => {
+export const FullHorizontal = {
+  component: () => {
     const fullPositions = ["top", "center", "bottom"]
 
     return (
@@ -81,12 +64,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Full vertical",
-  () => {
+export const FullVertical = {
+  component: () => {
     const fullPositions = ["left", "center", "right"]
 
     return (
@@ -101,12 +82,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Full",
-  () => {
+export const Full = {
+  component: () => {
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
         <Layer full>
@@ -117,12 +96,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Full margin",
-  () => {
+export const FullMargin = {
+  component: () => {
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
         <Layer full margin={[4, 8]}>
@@ -133,12 +110,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Right sidebar",
-  () => {
+export const RightSidebar = {
+  component: () => {
     const [open, toggle] = useToggle(true)
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
@@ -158,12 +133,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Notification",
-  () => {
+export const Notification = {
+  component: () => {
     const [open, toggle] = useToggle(true)
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
@@ -189,12 +162,10 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
 
-story.add(
-  "Modal",
-  () => {
+export const Modal = {
+  component: () => {
     const [open, toggle] = useToggle(true)
     return (
       <Flex background="mainBackgroundDisabled" width="100vw" height="100vh">
@@ -225,5 +196,8 @@ story.add(
       </Flex>
     )
   },
-  subData
-)
+}
+
+export default {
+  component: Layer,
+}

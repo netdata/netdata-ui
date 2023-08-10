@@ -559,12 +559,8 @@ exports[`Default Button renders 1`] = `
 }
 
 .c0.c0 > span {
-  text-transform: lowercase;
+  text-transform: full-width;
   margin-left: 0px;
-}
-
-.c0.c0 > span::first-letter {
-  text-transform: uppercase;
 }
 
 .c0.c0:hover {

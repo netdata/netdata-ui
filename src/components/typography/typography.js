@@ -48,6 +48,11 @@ const typography = css`
     font-size: ${fontSize};
     line-height: ${fontSize};
   `}
+  ${({ lineHeight }) =>
+    lineHeight &&
+    `
+    line-height: ${lineHeight};
+  `}
 `
 
 export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
