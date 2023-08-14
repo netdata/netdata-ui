@@ -7,7 +7,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   font-size: 14px;
   line-height: 20px;
   font-weight: normal;
-  color: #536775;
+  color: #526161;
   text-transform: none;
 }
 
@@ -26,8 +26,8 @@ exports[`Toggle test  * should render with labels 1`] = `
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-  background: #FFFFFF;
-  border: 1px solid #8F9EAA;
+  background: #F6F7F7;
+  border: 1px solid #E4E8E8;
   border-radius: 100px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
@@ -58,6 +58,7 @@ exports[`Toggle test  * should render with labels 1`] = `
   transform: translateY(-50%);
   -webkit-transition: left 0.2s ease;
   transition: left 0.2s ease;
+  opacity: 1;
   background-color: #35414A;
 }
 
@@ -136,8 +137,8 @@ exports[`Toggle test  * should render with required props 1`] = `
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-  background: #FFFFFF;
-  border: 1px solid #8F9EAA;
+  background: #F6F7F7;
+  border: 1px solid #E4E8E8;
   border-radius: 100px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
@@ -168,6 +169,7 @@ exports[`Toggle test  * should render with required props 1`] = `
   transform: translateY(-50%);
   -webkit-transition: left 0.2s ease;
   transition: left 0.2s ease;
+  opacity: 1;
   background-color: #35414A;
 }
 

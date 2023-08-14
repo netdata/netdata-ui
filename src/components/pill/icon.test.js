@@ -38,6 +38,6 @@ describe("PillIcon component", () => {
 
   test("should render component with hollowed warning color", () => {
     renderWithProviders(<PillIcon icon="alarm_bell" hollow flavour="warning" />)
-    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("color", "yellow,seaBuckthorn")
+    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("color", "yellow,warning80")
   })
 })

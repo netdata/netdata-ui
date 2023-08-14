@@ -2,7 +2,7 @@ import getPillBackground, { getMasterCardBackground } from "./background"
 
 describe("getMasterCardBackground mixin", () => {
   test("should return warning color", () => {
-    expect(getMasterCardBackground(undefined, "warning")).toEqual("warningLite")
+    expect(getMasterCardBackground(undefined, "warning")).toEqual("warning")
   })
 
   test("should return background", () => {
@@ -16,14 +16,12 @@ describe("getPillBackground mixin", () => {
   })
 
   test("should return hollow default background color", () => {
-    expect(getPillBackground({ hollow: true, theme: {} })).toEqual(
-      `background-color: nodeBadgeBackground;`
-    )
+    expect(getPillBackground({ hollow: true, theme: {} })).toEqual(`background-color: generic;`)
   })
 
   test("should return success flavour background color", () => {
     expect(getPillBackground({ flavour: "success", theme: {} })).toEqual(
-      `background-color: green,netdata;`
+      `background-color: green,green100;`
     )
   })
 })

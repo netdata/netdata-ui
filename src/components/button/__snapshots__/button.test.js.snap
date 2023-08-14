@@ -17,7 +17,7 @@ exports[`Borderless Button renders 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -49,19 +49,20 @@ exports[`Borderless Button renders 1`] = `
 .c0.c0:hover {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  color: #00CD51;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #68C47D;
+  fill: #00CD51;
 }
 
 .c0.c0:active {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  color: #00CD51;
+  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
 }
 
 .c0.c0:focus {
@@ -119,7 +120,7 @@ exports[`Button states renders loading icon 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -129,7 +130,7 @@ exports[`Button states renders loading icon 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
-  color: #FFFFFF;
+  color: #F6F7F7;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
@@ -141,7 +142,7 @@ exports[`Button states renders loading icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
-  margin-left: 2px;
+  margin-left: 4px;
 }
 
 .c0.c0 > span::first-letter {
@@ -151,19 +152,20 @@ exports[`Button states renders loading icon 1`] = `
 .c0.c0:hover {
   border-color: #42B861;
   background-color: #42B861;
-  color: #FFFFFF;
+  color: #F6F7F7;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #FFFFFF;
+  fill: #F6F7F7;
 }
 
 .c0.c0:active {
-  border-color: #68C47D;
-  background-color: #68C47D;
-  color: #FFFFFF;
+  border-color: #00CD51;
+  background-color: #00CD51;
+  color: #F6F7F7;
+  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
 }
 
 .c0.c0:focus {
@@ -173,11 +175,11 @@ exports[`Button states renders loading icon 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
-  fill: #FFFFFF;
+  fill: #F6F7F7;
 }
 
 .c0.c0 .button-icon__color {
-  fill: #FFFFFF;
+  fill: #F6F7F7;
 }
 
 .c0.c0 .ntd-spinner {
@@ -187,12 +189,12 @@ exports[`Button states renders loading icon 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFFFFF;
+  stroke: #F6F7F7;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFFFFF;
+  stroke: #F6F7F7;
 }
 
 .c1 {
@@ -256,7 +258,7 @@ exports[`Button states renders only icon 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -278,7 +280,7 @@ exports[`Button states renders only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
-  margin-left: 2px;
+  margin-left: 4px;
 }
 
 .c0.c0 > span::first-letter {
@@ -286,21 +288,22 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #68C47D;
-  background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  border-color: #00AB44;
+  background-color: #DDFFEB;
+  color: #00AB44;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #68C47D;
+  fill: #00AB44;
 }
 
 .c0.c0:active {
-  border-color: #68C47D;
-  background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  border-color: #00AB44;
+  background-color: #DDFFEB;
+  color: #00AB44;
+  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
 }
 
 .c0.c0:focus {
@@ -357,7 +360,7 @@ exports[`Button states renders only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
-  color: #536775;
+  color: #526161;
 }
 
 <button
@@ -397,13 +400,13 @@ exports[`Button states renders smaller only icon 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  padding: 4px;
+  padding: 4px 12px;
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
@@ -419,7 +422,7 @@ exports[`Button states renders smaller only icon 1`] = `
 
 .c0.c0 > span {
   text-transform: lowercase;
-  margin-left: 2px;
+  margin-left: 4px;
 }
 
 .c0.c0 > span::first-letter {
@@ -427,21 +430,22 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #68C47D;
-  background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  border-color: #00AB44;
+  background-color: #DDFFEB;
+  color: #00AB44;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #68C47D;
+  fill: #00AB44;
 }
 
 .c0.c0:active {
-  border-color: #68C47D;
-  background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  border-color: #00AB44;
+  background-color: #DDFFEB;
+  color: #00AB44;
+  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
 }
 
 .c0.c0:focus {
@@ -498,7 +502,7 @@ exports[`Button states renders smaller only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
-  color: #536775;
+  color: #526161;
 }
 
 <button
@@ -538,7 +542,7 @@ exports[`Default Button renders 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -548,7 +552,7 @@ exports[`Default Button renders 1`] = `
   -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
-  color: #FFFFFF;
+  color: #F6F7F7;
   border-width: 1px;
   border-style: solid;
   border-color: #00AB44;
@@ -566,19 +570,20 @@ exports[`Default Button renders 1`] = `
 .c0.c0:hover {
   border-color: #42B861;
   background-color: #42B861;
-  color: #FFFFFF;
+  color: #F6F7F7;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #FFFFFF;
+  fill: #F6F7F7;
 }
 
 .c0.c0:active {
-  border-color: #68C47D;
-  background-color: #68C47D;
-  color: #FFFFFF;
+  border-color: #00CD51;
+  background-color: #00CD51;
+  color: #F6F7F7;
+  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
 }
 
 .c0.c0:focus {
@@ -588,11 +593,11 @@ exports[`Default Button renders 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
-  fill: #FFFFFF;
+  fill: #F6F7F7;
 }
 
 .c0.c0 .button-icon__color {
-  fill: #FFFFFF;
+  fill: #F6F7F7;
 }
 
 .c0.c0 .ntd-spinner {
@@ -602,12 +607,12 @@ exports[`Default Button renders 1`] = `
   stroke-dashoffset: 100;
   -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
-  stroke: #FFFFFF;
+  stroke: #F6F7F7;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #FFFFFF;
+  stroke: #F6F7F7;
 }
 
 <button
@@ -636,7 +641,7 @@ exports[`Hollow Button renders 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -666,21 +671,22 @@ exports[`Hollow Button renders 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #68C47D;
-  background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  border-color: #00AB44;
+  background-color: #DDFFEB;
+  color: #00AB44;
   -webkit-text-decoration: none;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #68C47D;
+  fill: #00AB44;
 }
 
 .c0.c0:active {
-  border-color: #68C47D;
-  background-color: rgba(255,255,255,0.0);
-  color: #68C47D;
+  border-color: #00AB44;
+  background-color: #DDFFEB;
+  color: #00AB44;
+  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
 }
 
 .c0.c0:focus {

@@ -12,7 +12,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  color: #536775;
+  color: #526161;
 }
 
 .c1 {
@@ -38,7 +38,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -ms-flex-pack: start;
   justify-content: flex-start;
   padding: 0 2px;
-  color: #536775;
+  color: #526161;
 }
 
 .c2 {
@@ -60,7 +60,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  color: #536775;
+  color: #526161;
 }
 
 .c3 {
@@ -70,7 +70,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   min-width: 80px;
   max-width: 208px;
   height: 48px;
-  color: #536775;
+  color: #526161;
   font-weight: bold;
   cursor: pointer;
   opacity: 1;
@@ -92,7 +92,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   min-width: 80px;
   max-width: 208px;
   height: 48px;
-  color: #536775;
+  color: #526161;
   font-weight: normal;
   cursor: pointer;
   opacity: 1;

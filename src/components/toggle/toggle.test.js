@@ -21,7 +21,7 @@ describe("Toggle test", () => {
     expect(checkbox).toBeInTheDocument()
 
     const toggle = getByRole("switch")
-    expect(toggle).toHaveStyleRule("background", "#FFFFFF")
+    expect(toggle).toHaveStyleRule("background", "#F6F7F7")
     expect(toggle).toHaveStyleRule("background-color", "#35414A", { modifier: ":after" })
     expect(container).toMatchSnapshot()
   })
@@ -41,13 +41,13 @@ describe("Toggle test", () => {
     expect(checkbox).toBeDisabled()
 
     const toggle = getByRole("switch")
-    expect(toggle).toHaveStyleRule("background-color", "#8F9EAA", { modifier: ":after" })
+    expect(toggle).toHaveStyleRule("background-color", "#35414A", { modifier: ":after" })
   })
 
   it(" * should be colored", () => {
     const { container, getByRole } = renderWithProviders(<MockedToggle colored />)
     const toggle = getByRole("switch")
-    expect(toggle).toHaveStyleRule("background-color", "#FF4136", { modifier: ":after" })
+    expect(toggle).toHaveStyleRule("background-color", "#DB162F", { modifier: ":after" })
 
     const checkbox = container.querySelectorAll("input")[0]
     fireEvent.click(checkbox)

@@ -2,12 +2,12 @@ import { getMasterCardColor, getPillColor } from "./colors"
 
 describe("getMasterCardColor mixin", () => {
   test("should return warning color", () => {
-    expect(getMasterCardColor("warning")).toEqual("warningLite")
+    expect(getMasterCardColor("warning")).toEqual("warning")
   })
 })
 
 describe("getPillColor mixin", () => {
   test("should return success background color", () => {
-    expect(getPillColor("background", "success")).toEqual(["green", "netdata"])
+    expect(getPillColor("background", "success")).toEqual(["green", "green100"])
   })
 })

@@ -7,7 +7,7 @@ describe("useStyleTabs", () => {
     const { result } = renderHookWithProviders(() => useStyleTabs({ active: false }))
     expect(result.current.rootStyles.background).toBe("topBarBg")
     expect(result.current.rootStyles.zIndex).toBe(1)
-    expect(result.current.rootStyles.sx.borderTop).toBe("3px solid transparent")
+    expect(result.current.rootStyles.sx.borderTop).toBe("2px solid transparent")
   })
 
   it("should return the correct styles when tab active", () => {
@@ -15,11 +15,11 @@ describe("useStyleTabs", () => {
     const { result } = renderHookWithProviders(() => useStyleTabs({ active: true }))
     expect(result.current.rootStyles.background).toBe("mainBackground")
     expect(result.current.rootStyles.zIndex).toBe(2)
-    expect(result.current.rootStyles.sx.borderTop).toBe(`3px solid ${expectedBorderTopColor}`)
+    expect(result.current.rootStyles.sx.borderTop).toBe(`2px solid ${expectedBorderTopColor}`)
   })
 
   it("should return borderLeft when {showBorderLeft} is true", () => {
-    const expectedBorderTopColor = DefaultTheme.colors.borderSecondary
+    const expectedBorderTopColor = DefaultTheme.colors.border
     const { result } = renderHookWithProviders(() => useStyleTabs({ showBorderLeft: true }))
 
     expect(result.current.rootStyles.sx.borderLeft).toBe(`1px solid ${expectedBorderTopColor}`)
