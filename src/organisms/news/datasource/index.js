@@ -1,7 +1,7 @@
 import * as prismic from "@prismicio/client"
+import fetch from "node-fetch"
 
-const apiEndpoint = "https://netdata-news.cdn.prismic.io/api/v2"
-const client = prismic.createClient(apiEndpoint)
+const client = prismic.createClient("https://netdata-news.cdn.prismic.io/api/v2", { fetch })
 
 export const fetchNews = (app, onSuccess, onError) => {
   return client
