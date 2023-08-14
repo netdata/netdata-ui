@@ -17,10 +17,10 @@ import { useTableContext } from "../features/provider"
 const StyledRow = styled(Text).attrs(props => ({ as: "tr", width: "fit-content", ...props }))``
 
 const HeaderCell = styled(Box)`
-  border-bottom: 1px solid ${getColor("borderSecondary")};
+  border-bottom: 1px solid ${getColor("border")};
   &:not(:last-child) {
     border-right: 1px solid
-      ${({ background, theme }) => getColor(background || "borderSecondary")({ theme })};
+      ${({ background, theme }) => getColor(background || "border")({ theme })};
   }
 `
 

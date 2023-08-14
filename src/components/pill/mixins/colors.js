@@ -1,30 +1,30 @@
 const colorMap = {
   background: {
     neutral: "nodeBadgeBackground",
-    success: ["green", "netdata"],
-    clear: ["green", "netdata"],
-    warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "pomegranate"],
+    success: ["green", "green100"],
+    clear: ["green", "green100"],
+    warning: ["yellow", "yellow80"],
+    error: ["red", "red100"],
   },
   hollow: {
-    neutral: "nodeBadgeBackground",
-    success: "nodeBadgeBackground",
-    warning: "nodeBadgeBackground",
-    error: "nodeBadgeBackground",
+    neutral: "generic",
+    success: "successSemi",
+    warning: "warningSemi",
+    error: "errorSemi",
   },
   border: {
     neutral: "neutralPillBorder",
-    success: ["green", "deyork"],
-    clear: ["green", "deyork"],
-    warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "apricot"],
+    success: ["green", "green100"],
+    clear: ["green", "green100"],
+    warning: ["yellow", "yellow80"],
+    error: ["red", "error100"],
   },
   color: {
     neutral: "neutralPillColor",
-    success: ["green", "netdata"],
-    clear: ["green", "netdata"],
-    warning: ["yellow", "seaBuckthorn"],
-    error: ["red", "apricot"],
+    success: ["green", "green100"],
+    clear: ["green", "green100"],
+    warning: ["yellow", "warning80"],
+    error: ["red", "red100"],
   },
 }
 
@@ -33,9 +33,9 @@ export const masterCardColorMap = {
   disabledClear: "idleClear",
   disabledError: "idleError",
   disabledWarning: "idleWarning",
-  clear: "successLite",
-  error: "errorLite",
-  warning: "warningLite",
+  clear: "success",
+  error: "error",
+  warning: "warning",
 }
 
 const getMasterCardColor = flavour => masterCardColorMap[flavour]

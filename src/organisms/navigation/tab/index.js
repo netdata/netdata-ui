@@ -68,7 +68,7 @@ const Tab = ({
   )
 
   const renderIcon = useCallback(
-    iconProp => React.cloneElement(iconProp, { color: active ? "text" : "border" }),
+    iconProp => React.cloneElement(iconProp, { color: active ? "text" : "textLite" }),
     [active]
   )
 
@@ -85,7 +85,7 @@ const Tab = ({
     >
       <Flex>
         {closable && (
-          <Icon name="x" size="small" color={active ? "text" : "border"} onClick={onCloseTab} />
+          <Icon name="x" size="small" color={active ? "text" : "textLite"} onClick={onCloseTab} />
         )}
         <Tooltip content={tooltip} align={tooltip ? "bottom" : "top"}>
           {!closable && icon && renderIcon(icon)}

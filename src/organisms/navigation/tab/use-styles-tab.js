@@ -3,13 +3,13 @@ import useColor from "src/hooks/use-color"
 
 const border = ({ borderSideColor, borderTopColor, showBorderLeft }) => ({
   borderRight: `1px solid ${borderSideColor}`,
-  borderTop: `3px solid ${borderTopColor}`,
+  borderTop: `2px solid ${borderTopColor}`,
   ...(showBorderLeft ? { borderLeft: `1px solid ${borderSideColor}` } : {}),
 })
 
 const useStyleTabs = ({ active = false, showBorderLeft = false }) => {
   const pickColor = useColor()
-  const borderSideColor = pickColor("borderSecondary")
+  const borderSideColor = pickColor("border")
   const borderTopColor = active ? pickColor("primary") : "transparent"
 
   const rootStyles = useMemo(() => {

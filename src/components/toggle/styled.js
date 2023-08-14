@@ -35,7 +35,6 @@ export const StyledToggle = styled.div`
   align-self: flex-start;
   cursor: pointer;
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-
   &:after {
     display: block;
     position: absolute;
@@ -47,8 +46,8 @@ export const StyledToggle = styled.div`
     top: 50%;
     transform: translateY(-50%);
     transition: left 0.2s ease;
+    opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
     background-color: ${({ disabled, colored, checked }) => {
-      if (disabled) return getColor("border")
       if (!colored) return getColor("controlFocused")
       return checked ? getColor("primary") : getColor("error")
     }};

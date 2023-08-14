@@ -47,7 +47,7 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
           : makeColor({})[status],
         side: "all",
       },
-      round: true,
+      round: "2px",
       _hover: {
         border: {
           size: "1px",

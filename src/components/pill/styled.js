@@ -13,7 +13,7 @@ export const MasterCardContainer = styled(Flex).attrs(
     position: "relative",
     round,
     size,
-    border: { side: "all", color: "alertBorder" },
+    border: { side: "all", color: "border" },
   })
 )`
   * {

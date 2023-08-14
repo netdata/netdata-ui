@@ -54,12 +54,13 @@ export const StyledTabMenu = styled(Flex)`
   color: ${getColor("text")};
   padding: 4px 8px;
   background: ${({ active }) =>
-    active ? getColor("nodeBadgeBackground") : getColor(["transparent", "full"])};
+    active ? getColor("menuItemSelected") : getColor(["transparent", "full"])};
   width: 100%;
   border-radius: 4px;
   cursor: ${({ active }) => (active ? "default" : "pointer")};
   justify-content: flex-start;
   &:hover {
-    background: ${getColor("nodeBadgeBackground")};
+    background: ${({ active }) =>
+      active ? getColor("menuItemSelected") : getColor("menuItemHover")};
   }
 `

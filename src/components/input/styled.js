@@ -32,9 +32,8 @@ export const StyledInput = styled.input.attrs({ round: true })`
   font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
   line-height: 18px;
   color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textDescription"))};
-  background: ${({ disabled }) =>
-    disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
-
+  background: ${getColor("mainBackground")};
+  opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
   &::placeholder {
     font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
     line-height: 18px;
