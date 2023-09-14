@@ -20,6 +20,7 @@ const Rows = ({
   meta,
   enableColumnPinning,
   side,
+  onVirtualChange,
 }) => {
   const { onHover, hoveredRow } = useTableContext()
 
@@ -33,6 +34,7 @@ const Rows = ({
       (!!meta.cellStyles?.height && parseInt(meta.cellStyles.height)) ||
       35,
     overscan: overscan || 10,
+    onChange: onVirtualChange,
   })
 
   const virtualRows = virtualizer.getVirtualItems()
