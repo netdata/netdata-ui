@@ -271,7 +271,7 @@ const NetdataTable = forwardRef(
 
     return (
       <TableProvider onHoverCell={onHoverCell}>
-        <Flex height="100%" overflow="hidden" column ref={ref}>
+        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref}>
           {onGlobalSearchChange || hasBulkActions ? (
             <GlobalControls
               bulkActions={hasBulkActions ? actions : null}
