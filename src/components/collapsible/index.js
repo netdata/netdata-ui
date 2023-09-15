@@ -28,8 +28,13 @@ const Collapsible = forwardRef(
     useUpdateEffect(() => {
       let nestedRequestId
       const requestId = requestAnimationFrame(() => {
+        if (!ref.current) return
+
         setDimension(!open ? `${ref.current.scrollHeight}px` : 0)
+
         nestedRequestId = requestAnimationFrame(() => {
+          if (!ref.current) return
+
           setDimension(open ? `${ref.current.scrollHeight}px` : 0)
         })
       })
