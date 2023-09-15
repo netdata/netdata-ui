@@ -21,6 +21,7 @@ const Rows = ({
   enableColumnPinning,
   side,
   onVirtualChange,
+  virtualRef,
 }) => {
   const { onHover, hoveredRow } = useTableContext()
 
@@ -36,6 +37,8 @@ const Rows = ({
     overscan: overscan || 10,
     onChange: onVirtualChange,
   })
+
+  if (virtualRef) virtualRef.current = virtualizer
 
   const virtualRows = virtualizer.getVirtualItems()
 

@@ -65,6 +65,7 @@ const NetdataTable = forwardRef(
       meta: tableMeta,
       title,
       virtualizeOptions,
+      tableRef,
       ...rest
     },
     ref
@@ -209,6 +210,8 @@ const NetdataTable = forwardRef(
       enableSubRowSelection,
       columnGroupingMode: "reorder",
     })
+
+    if (tableRef) tableRef.current = table
 
     const [selectedRows, setActualSelectedRows] = useState([])
 
