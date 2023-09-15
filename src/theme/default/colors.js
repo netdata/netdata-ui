@@ -70,7 +70,7 @@ const appColors = {
   sectionDescription: rawColors.neutral.grey120,
   placeholder: rawColors.neutral.grey120,
   key: rawColors.neutral.regentgrey,
-  panel: rawColors.neutral.limedSpruce,
+  panel: rawColors.neutral.grey25,
   panelBg: rawColors.neutral.grey190,
   mainChartBg: rawColors.transparent.full,
   mainChartHeaderBg: rawColors.neutral.grey190,

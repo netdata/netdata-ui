@@ -74,7 +74,7 @@ const appColors = {
   menuItem: rawColors.neutral.grey140,
   placeholder: rawColors.neutral.grey140,
   key: rawColors.neutral.iron,
-  panel: rawColors.neutral.limedSpruce,
+  panel: rawColors.neutral.grey25,
   panelBg: rawColors.neutral.grey25,
   mainChartBg: rawColors.neutral.grey25,
   mainChartHeaderBg: rawColors.neutral.grey35,
