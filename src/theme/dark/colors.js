@@ -20,7 +20,9 @@ const appColors = {
   modalInfoBackground: rawColors.neutral.grey50,
   menuItemSelected: rawColors.green.green20,
   menuItemHover: rawColors.green.green10,
-
+  //links
+  link: rawColors.green.green110,
+  linkHover: rawColors.green.green120,
   //Buttons
   primaryHighlight: rawColors.green.green100,
   secondaryColor: rawColors.green.green110,

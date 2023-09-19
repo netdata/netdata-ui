@@ -18,7 +18,9 @@ const appColors = {
   modalTabsBackground: rawColors.neutral.grey190,
   modalBackground: rawColors.neutral.grey195,
   modalInfoBackground: rawColors.neutral.blackhaze,
-
+  //links
+  link: rawColors.green.green100,
+  linkHover: rawColors.green.green110,
   //Buttons
   secondaryColor: rawColors.green.green100,
   primaryHighlight: rawColors.green.green110,
