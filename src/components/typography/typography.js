@@ -116,48 +116,48 @@ export const makeH6 = Component =>
 
 export const makeFemto = Component =>
   makeTypography(Component, {
+    fontSize: "7px",
+    lineHeight: "8px",
+  })
+
+export const makeNano = Component =>
+  makeTypography(Component, {
     fontSize: "8px",
     lineHeight: "10px",
   })
 
-export const makeNano = Component =>
+export const makeMicro = Component =>
   makeTypography(Component, {
     fontSize: "10px",
     lineHeight: "13px",
   })
 
-export const makeMicro = Component =>
+export const makeSmall = Component =>
   makeTypography(Component, {
     fontSize: "11px",
     lineHeight: "14px",
   })
 
-export const makeSmall = Component =>
+export const makeText = Component =>
   makeTypography(Component, {
     fontSize: "12px",
     lineHeight: "16px",
   })
 
-export const makeText = Component =>
+export const makeBig = Component =>
   makeTypography(Component, {
     fontSize: "14px",
     lineHeight: "20px",
   })
 
-export const makeBig = Component =>
+export const makeBigger = Component =>
   makeTypography(Component, {
     fontSize: "16px",
     lineHeight: "18px",
   })
 
-export const makeBigger = Component =>
+export const makeHuge = Component =>
   makeTypography(Component, {
     fontSize: "24px",
     lineHeight: "32px",
-  })
-
-export const makeHuge = Component =>
-  makeTypography(Component, {
-    fontSize: "36px",
-    lineHeight: "44px",
   })
