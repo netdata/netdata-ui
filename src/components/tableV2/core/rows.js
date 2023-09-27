@@ -14,6 +14,8 @@ const Rows = ({
   scrollParentRef,
   overscan,
   hasNextPage,
+  hasPrevPage,
+  getItemKey,
   loading,
   loadMore,
   coloredSortedColumn,
@@ -22,6 +24,7 @@ const Rows = ({
   side,
   onVirtualChange,
   virtualRef,
+  initialOffset = 0,
 }) => {
   const { onHover, hoveredRow } = useTableContext()
 
@@ -36,6 +39,8 @@ const Rows = ({
       35,
     overscan: overscan || 10,
     onChange: onVirtualChange,
+    initialOffset,
+    getItemKey,
   })
 
   if (virtualRef) virtualRef.current = virtualizer
@@ -49,15 +54,27 @@ const Rows = ({
 
     if (!lastItem) return
 
-    if (lastItem.index === rows.length - 1 && hasNextPage && !loading) loadMore()
+    if (lastItem.index === rows.length - 1 && hasNextPage && !loading) loadMore("backward")
   }, [virtualRows, loading])
 
-  const paddingTop = virtualRows.length > 0 ? virtualRows?.[0]?.start || 0 : 0
+  useEffect(() => {
+    if (!loadMore) return
+
+    const first = virtualRows[0]
+
+    if (!first) return
+
+    if (first.index === 0 && hasPrevPage && !loading) {
+      loadMore("forward")
+    }
+  }, [virtualRows, hasPrevPage, loading, rows])
 
   const totalHeight = virtualizer.getTotalSize()
-  const paddingBottom = useMemo(
+  const [paddingTop, paddingBottom] = useMemo(
     () =>
-      virtualRows.length > 0 ? totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0,
+      virtualRows.length > 0
+        ? [virtualRows?.[0]?.start, totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0)]
+        : [0, 0],
     [virtualRows.length]
   )
 
@@ -73,7 +90,7 @@ const Rows = ({
 
         return (
           <Row
-            key={virtualRow.key}
+            key={`${virtualRow.key}-${virtualRow.index}`}
             table={table}
             pinnedStyles={pinnedStyles}
             row={row}

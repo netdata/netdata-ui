@@ -1,14 +1,15 @@
 import React, { forwardRef } from "react"
-import { Text, TextMicro, TextSmall } from "src/components/typography"
+import { Text, TextMicro, TextNano, TextSmall } from "src/components/typography"
 import PillIcon from "./icon"
 import { getPillColor } from "./mixins/colors"
 import { PillContainer } from "./styled"
 
-const TextComponents = {
+const textComponents = {
   default: TextMicro,
   large: Text,
   normal: Text,
   small: TextSmall,
+  tiny: TextNano,
 }
 
 const Pill = forwardRef(
@@ -33,22 +34,11 @@ const Pill = forwardRef(
   ) => {
     const iconProps = { color, flavour, hollow, icon, size: iconSize }
 
-    if (tiny)
-      return (
-        <PillContainer
-          background={background}
-          data-testid={`${testId}-tiny`}
-          flavour={flavour}
-          hollow={hollow}
-          ref={ref}
-          tiny
-          {...rest}
-        />
-      )
-
-    const Text = textSize
-      ? TextComponents[textSize]
-      : TextComponents[size] || TextComponents.default
+    const TextComponent = tiny
+      ? textComponents.tiny
+      : textSize
+      ? textComponents[textSize]
+      : textComponents[size] || textComponents.default
 
     return (
       <PillContainer
@@ -59,18 +49,19 @@ const Pill = forwardRef(
         hollow={hollow}
         ref={ref}
         size={size}
+        tiny={tiny}
         {...rest}
       >
         {!reverse && <PillIcon data-testid={`${testId}-icon-left`} {...iconProps} />}
         {children && (
-          <Text
+          <TextComponent
             color={color || (hollow ? getPillColor("color", flavour) : "bright")}
             data-testid={`${testId}-text`}
             strong={!normal}
             whiteSpace="nowrap"
           >
             {children}
-          </Text>
+          </TextComponent>
         )}
         {reverse && <PillIcon data-testid={`${testId}-icon-right`} {...iconProps} />}
       </PillContainer>
