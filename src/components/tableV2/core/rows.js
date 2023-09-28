@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo } from "react"
+import React, { useEffect } from "react"
 import { useVirtualizer } from "@tanstack/react-virtual"
-import { useTableContext } from "../features/provider"
 import Row from "./row"
 
 const Rows = ({
@@ -20,14 +19,10 @@ const Rows = ({
   loadMore,
   coloredSortedColumn,
   meta,
-  enableColumnPinning,
-  side,
   onVirtualChange,
   virtualRef,
   initialOffset = 0,
 }) => {
-  const { onHover, hoveredRow } = useTableContext()
-
   const { rows } = table.getRowModel()
 
   const virtualizer = useVirtualizer({
@@ -55,7 +50,7 @@ const Rows = ({
     if (!lastItem) return
 
     if (lastItem.index === rows.length - 1 && hasNextPage && !loading) loadMore("backward")
-  }, [virtualRows, loading])
+  }, [virtualRows[0]?.key, loading])
 
   useEffect(() => {
     if (!loadMore) return
@@ -67,16 +62,13 @@ const Rows = ({
     if (first.index === 0 && hasPrevPage && !loading) {
       loadMore("forward")
     }
-  }, [virtualRows, hasPrevPage, loading, rows])
+  }, [virtualRows[0]?.key, hasPrevPage, loading])
 
   const totalHeight = virtualizer.getTotalSize()
-  const [paddingTop, paddingBottom] = useMemo(
-    () =>
-      virtualRows.length > 0
-        ? [virtualRows?.[0]?.start, totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0)]
-        : [0, 0],
-    [virtualRows.length]
-  )
+  const [paddingTop, paddingBottom] =
+    virtualRows.length > 0
+      ? [virtualRows?.[0]?.start, totalHeight - (virtualRows?.[virtualRows.length - 1]?.end || 0)]
+      : [0, 0]
 
   return (
     <>
@@ -100,11 +92,11 @@ const Rows = ({
             testPrefix={testPrefix}
             testPrefixCallback={testPrefixCallback}
             getRowHandler={getRowHandler}
-            onHover={onHover}
             coloredSortedColumn={coloredSortedColumn}
-            hoveredRow={hoveredRow}
-            enableColumnPinning={enableColumnPinning}
-            side={side}
+            ref={(...args) => {
+              debugger
+              return virtualizer.measureElement(...args)
+            }}
           />
         )
       })}

@@ -1,6 +1,6 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "2.20.2",
+  "version": "2.21.0",
   "description": "netdata UI kit",
   "main": "./lib/index.js",
   "files": [
@@ -42,7 +42,7 @@
     "@elastic/search-ui-site-search-connector": "^1.20.2",
     "@prismicio/client": "7.1.0",
     "@styled-system/css": "^5.1.5",
-    "@tanstack/react-table": "^8.9.3",
+    "@tanstack/react-table": "^8.10.3",
     "@tanstack/react-virtual": "3.0.0-beta.29",
     "axios": "^1.4.0",
     "polished": "^4.2.2",

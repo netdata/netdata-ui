@@ -9,8 +9,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import Flex from "src/components/templates/flex"
+import Layer from "src/components/templates/layer"
 import { Text } from "src/components/typography"
-import { Icon, IconComponents } from "src/components/icon"
+import { Icon } from "src/components/icon"
 import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./features/useColumns"
 import useBulkActions from "./features/useBulkActions"
@@ -274,7 +275,7 @@ const NetdataTable = forwardRef(
 
     return (
       <TableProvider onHoverCell={onHoverCell}>
-        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref}>
+        <Flex height="100%" overflow="hidden" column ref={ref}>
           {onGlobalSearchChange || hasBulkActions ? (
             <GlobalControls
               bulkActions={hasBulkActions ? actions : null}
@@ -321,9 +322,11 @@ const NetdataTable = forwardRef(
           )}
 
           {hasNextPage && loading && (
-            <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
-              <IconComponents.LoaderIcon /> <Text>Loading more...</Text>
-            </Flex>
+            <Layer backdrop={false} position="bottom" margin={[0, 0, 10]} padding={[0, 0, 10]}>
+              <Flex background={["neutral", "black"]} padding={[1, 2]} gap={2}>
+                <Text>Loading more...</Text>
+              </Flex>
+            </Layer>
           )}
           {enablePagination && <Pagination table={table} />}
         </Flex>
