@@ -93,10 +93,7 @@ const Rows = ({
             testPrefixCallback={testPrefixCallback}
             getRowHandler={getRowHandler}
             coloredSortedColumn={coloredSortedColumn}
-            ref={(...args) => {
-              debugger
-              return virtualizer.measureElement(...args)
-            }}
+            ref={virtualizer.measureElement}
           />
         )
       })}
