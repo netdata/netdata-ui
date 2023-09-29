@@ -70,7 +70,6 @@ export default forwardRef(
                 background: "columnHighlight",
                 backgroundOpacity: virtualRow.index % 2 === 0 ? "0.2" : "0.4",
               })}
-            // {...(enableColumnPinning ? { cellHeight: `${rowHeight}px` } : {})}
           >
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </Table.Cell>

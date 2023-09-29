@@ -275,7 +275,7 @@ const NetdataTable = forwardRef(
 
     return (
       <TableProvider onHoverCell={onHoverCell}>
-        <Flex height="100%" overflow="hidden" column ref={ref}>
+        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref}>
           {onGlobalSearchChange || hasBulkActions ? (
             <GlobalControls
               bulkActions={hasBulkActions ? actions : null}
@@ -291,7 +291,7 @@ const NetdataTable = forwardRef(
           ) : null}
           <Flex row ref={scrollParentRef} overflow="auto">
             {enableColumnPinning && columnPinning.left && (
-              <ColumnPinning {...columnPinningProps("left")} />
+              <ColumnPinning {...columnPinningProps("left")} meta={tableMeta} {...rest} />
             )}
             <FullTable
               headers={columnPinning ? table.getCenterHeaderGroups() : table.getHeaderGroups()}
@@ -311,7 +311,7 @@ const NetdataTable = forwardRef(
               {...rest}
             />
             {enableColumnPinning && columnPinning.right && (
-              <ColumnPinning {...columnPinningProps("right")} />
+              <ColumnPinning {...columnPinningProps("right")} meta={tableMeta} {...rest} />
             )}
           </Flex>
           {!hasNextPage && !loading && !!warning && (

@@ -112,7 +112,7 @@ Table.HeadCell = forwardRef(
         ref={ref}
         sx={{
           textAlign: align,
-          fontSize: "14px",
+          fontSize: "10px",
         }}
         position="relative"
         padding={[1, 2]}
@@ -274,13 +274,9 @@ Table.Cell = forwardRef(
         }}
         width={`${width}px`}
         {...rest}
-        background={
-          !rest.background && isRowHovering
-            ? "tableRowBgHover"
-            : rest.background || (index % 2 === 0 ? "mainBackground" : "tableRowBg")
-        }
+        background={rest.background || (index % 2 === 0 ? "mainBackground" : "tableRowBg")}
         backgroundOpacity={
-          isRowHovering ? (rest.backgroundOpacity ? 0.8 : 1) : rest.backgroundOpacity || 0.7
+          isRowHovering ? (rest.backgroundOpacity ? 0.8 : 0.9) : rest.backgroundOpacity || 0.7
         }
         height={cellHeight}
         {...tableMeta?.cellStyles}
