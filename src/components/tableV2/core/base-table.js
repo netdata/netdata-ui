@@ -274,7 +274,13 @@ Table.Cell = forwardRef(
         }}
         width={`${width}px`}
         {...rest}
-        background={rest.background || (index % 2 === 0 ? "mainBackground" : "tableRowBg")}
+        background={
+          !rest.background && isRowHovering
+            ? index % 2 === 0
+              ? "panelBg"
+              : "tableRowBgHover"
+            : rest.background || (index % 2 === 0 ? "mainBackground" : "tableRowBg")
+        }
         backgroundOpacity={
           isRowHovering ? (rest.backgroundOpacity ? 0.8 : 0.9) : rest.backgroundOpacity || 0.7
         }
