@@ -3,20 +3,12 @@ import styled from "styled-components"
 import { getColor } from "src/theme/utils"
 import { Icon } from "src/components/icon"
 import Flex from "src/components/templates/flex"
-import Box from "src/components/templates/box"
 import { Text } from "src/components/typography"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
 import { useTableContext } from "../features/provider"
 
-//TODO heights in Table.Cell and Table.HeadCell needs to change and not be direct.
-// the problem is when we are applying column pin the second table has different sizes
-// than the first one. This is happening when we have a head with a filter and the all
-// the cells are being addapted to that size.
-
-const StyledRow = styled(Text).attrs(props => ({ as: "tr", width: "fit-content", ...props }))``
-
-const HeaderCell = styled(Box)`
+const HeaderCell = styled(Flex)`
   border-bottom: 1px solid ${getColor("border")};
   &:not(:last-child) {
     border-right: 1px solid
@@ -25,27 +17,21 @@ const HeaderCell = styled(Box)`
 `
 
 const Table = forwardRef(({ children, width, ...props }, ref) => (
-  <Box
-    sx={{ borderCollapse: "separate", "table-layout": "fixed", borderSpacing: "0" }}
-    ref={ref}
-    as="table"
-    width={width}
-    {...props}
-  >
+  <Flex column ref={ref} width={width} {...props}>
     {children}
-  </Box>
+  </Flex>
 ))
 
 Table.Head = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} sx={{ zIndex: 10, position: "sticky", top: 0 }} as="thead" {...props}>
+  <Flex ref={ref} sx={{ zIndex: 10, position: "sticky", top: 0 }} {...props}>
     {children}
-  </Box>
+  </Flex>
 ))
 
 Table.HeadRow = forwardRef(({ children, ...props }, ref) => (
-  <Box as="tr" ref={ref} background="tableRowBg" color="text" {...props}>
+  <Flex ref={ref} background="tableRowBg" color="text" flex {...props}>
     {children}
-  </Box>
+  </Flex>
 ))
 
 Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing, background }) => {
@@ -53,7 +39,7 @@ Table.Resizer = ({ onMouseDown, onTouchStart, deltaOffset, getIsResizing, backgr
   const resizingProps = getIsResizing() ? { transform: `translateX(${deltaOffset}px)` } : {}
 
   return (
-    <Box
+    <Flex
       _hover={{ background: "resizerLine", color: "resizerLine" }}
       _active={{ background: "resizerLine", color: "resizerLine" }}
       _before={{
@@ -108,7 +94,6 @@ Table.HeadCell = forwardRef(
 
     return (
       <HeaderCell
-        as="th"
         ref={ref}
         sx={{
           textAlign: align,
@@ -119,7 +104,8 @@ Table.HeadCell = forwardRef(
         width={`${width}px`}
         onMouseEnter={() => onHover({ row: null, column: id })}
         onMouseLeave={() => onHover()}
-        height="60px"
+        column
+        justifyContent="center"
         {...props}
         {...styles}
         {...headStyles}
@@ -128,14 +114,14 @@ Table.HeadCell = forwardRef(
         <Flex>
           {children}
           {tooltipText && (
-            <Box position="absolute" top={1} right="12px" width={4} height={4}>
+            <Flex position="absolute" top={1} right="12px" width={4} height={4}>
               <Tooltip align="bottom" content={tooltipText}>
                 <Icon color="nodeBadgeColor" size="small" name="information" />
               </Tooltip>
-            </Box>
+            </Flex>
           )}
         </Flex>
-        <Box sx={{ fontWeight: "normal" }}>{filter}</Box>
+        <Flex sx={{ fontWeight: "normal" }}>{filter}</Flex>
         <Table.Resizer
           onMouseDown={onMouseDown}
           onTouchStart={onTouchStart}
@@ -201,7 +187,7 @@ Table.SortingHeadCell = forwardRef(
         filter={filter}
         {...(coloredSortedColumn && !!sortDirection && { background: "columnHighlight" })}
       >
-        <Box
+        <Flex
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
@@ -218,32 +204,32 @@ Table.SortingHeadCell = forwardRef(
             gap={1}
           >
             {children}
-            <Box position="absolute" top={0.5} right="-16px">
+            <Flex position="absolute" top={0.5} right="-16px">
               <Icon
                 height="16px"
                 width="16px"
                 color={showHoveringIcon ? "textLite" : "text"}
                 name={sortingIcons[showHoveringIcon ? "indicator" : sortDirection] ?? null}
               />
-            </Box>
+            </Flex>
           </Flex>
-        </Box>
+        </Flex>
       </Table.HeadCell>
     )
   }
 )
 
 Table.Body = forwardRef(({ children, ...props }, ref) => (
-  <Box ref={ref} as="tbody" {...props}>
+  <Flex column ref={ref} {...props}>
     {children}
-  </Box>
+  </Flex>
 ))
 
 Table.Cell = forwardRef(
   (
     {
       align = "left",
-      cellHeight = "65px",
+      cellHeight,
       children,
       index,
       isRowHovering,
@@ -264,14 +250,14 @@ Table.Cell = forwardRef(
     }
 
     return (
-      <Box
-        as="td"
+      <Flex
         onClick={handleClick}
         padding={[1, 2]}
         ref={ref}
         sx={{
           textAlign: align,
         }}
+        alignItems="center"
         width={`${width}px`}
         {...rest}
         background={
@@ -316,7 +302,7 @@ Table.Cell = forwardRef(
             />
           </Flex>
         )}
-      </Box>
+      </Flex>
     )
   }
 )
@@ -343,10 +329,10 @@ Table.Row = forwardRef(
     const cursor = isRowClickable ? "pointer" : "intial"
 
     return (
-      <Box
+      <Text
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        as={StyledRow}
+        as={Flex}
         cursor={cursor}
         isClickable={!!onClick}
         onClick={handleClick}
@@ -354,7 +340,7 @@ Table.Row = forwardRef(
         {...props}
       >
         {children}
-      </Box>
+      </Text>
     )
   }
 )

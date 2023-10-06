@@ -58,7 +58,6 @@ export { devices, breakpoints } from "./media"
 export { Checkbox, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
 export { webkitVisibleScrollbar } from "./mixins"
-export { Table, VirtualizedTable } from "./components/table"
 export { Toggle } from "./components/toggle"
 export { default as RadioButton } from "./components/radio-button"
 export { Tabs, Tab } from "./components/tabs"
@@ -121,6 +120,6 @@ export { default as Modal } from "./components/modal"
 
 export { ConfirmationDialog } from "./components/confirmation-dialog"
 
-export { NetdataTable } from "./components/tableV2"
+export { Table } from "./components/table"
 
 export { default as Select } from "./components/select"

@@ -30,7 +30,6 @@ const ColumnPinning = ({
         position: "sticky",
         [side]: 0,
         zIndex: 11,
-        height: "fit-content",
       }}
     >
       <FullTable

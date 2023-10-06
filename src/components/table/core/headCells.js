@@ -102,6 +102,7 @@ const HeadCells = ({
             styles={styles}
             tooltipText={tooltipText}
             width={headWidth}
+            flex={columnDef.fullWidth ? 1 : undefined}
             {...resizeFuntions}
             {...rest}
           >
@@ -125,6 +126,7 @@ const HeadCells = ({
           styles={styles}
           tooltipText={tooltipText}
           width={headWidth}
+          flex={columnDef.fullWidth ? 1 : undefined}
           {...resizeFuntions}
           {...rest}
         >

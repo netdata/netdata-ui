@@ -11,7 +11,7 @@ import { supportedRowActions } from "./features/useRowActions"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
 
-export type NetdataTableProps<T = any, D = any> = {
+export type TableProps<T = any, D = any> = {
   data: Array<D>
   dataColumns: Array<NetdataCoreColumns<T>>
   enableSorting?: boolean
@@ -64,7 +64,7 @@ export type NetdataTableProps<T = any, D = any> = {
   testPrefixCallback?: (rowData: D) => string
 }
 
-declare const NetdataTable: (props: NetdataTableProps) => JSX.Element
+declare const Table: (props: TableProps) => JSX.Element
 
-export { NetdataTable }
-export default NetdataTable
+export { Table }
+export default Table

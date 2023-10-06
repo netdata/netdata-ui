@@ -27,7 +27,7 @@ const ColumnVisibilityAction = ({
 
   const allColumns = useMemo(
     () =>
-      table.getAllLeafColumns().sort((a, b) =>
+      [...table.getAllLeafColumns()].sort((a, b) =>
         a.id.localeCompare(b.id, undefined, {
           sensitivity: "accent",
           ignorePunctuation: true,

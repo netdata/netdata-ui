@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Table from "./core/base-table"
-import NetdataTable from "./netdataTable"
+import Table from "./table"
 import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
@@ -63,7 +63,7 @@ export const SimpleTable = {
     ]
     return (
       <Box width="800px">
-        <NetdataTable dataColumns={mockDataColumns} data={mockData()} onClickRow={() => {}} />
+        <Table dataColumns={mockDataColumns} data={mockData()} onClickRow={() => {}} />
       </Box>
     )
   },
@@ -99,7 +99,7 @@ export const Filters = {
     ]
     return (
       <Box width="800px">
-        <NetdataTable dataColumns={mockDataColumns} data={mockData()} />
+        <Table dataColumns={mockDataColumns} data={mockData()} />
       </Box>
     )
   },
@@ -120,7 +120,7 @@ export const RowSelections = {
     ]
     return (
       <Box width="800px">
-        <NetdataTable
+        <Table
           enableSelection
           dataColumns={mockDataColumns}
           data={mockData()}
@@ -169,7 +169,7 @@ export const GlobalFilters = {
 
     return (
       <Box width="800px">
-        <NetdataTable
+        <Table
           title="Table Title"
           onGlobalSearchChange={onGlobalSearchChange}
           dataColumns={mockDataColumns}
@@ -219,7 +219,7 @@ export const Expanding = {
 
     return (
       <Box width="800px">
-        <NetdataTable
+        <Table
           enableExpanding
           dataColumns={mockDataColumns}
           data={mockData()}
@@ -254,7 +254,7 @@ export const Sorting = {
 
     return (
       <Box width="800px">
-        <NetdataTable enableSorting dataColumns={mockDataColumns} data={mockData()} />
+        <Table enableSorting dataColumns={mockDataColumns} data={mockData()} />
       </Box>
     )
   },
@@ -290,7 +290,7 @@ export const Actions = {
 
     return (
       <Box width="800px">
-        <NetdataTable rowActions={rowActions} dataColumns={mockDataColumns} data={mockData()} />
+        <Table rowActions={rowActions} dataColumns={mockDataColumns} data={mockData()} />
       </Box>
     )
   },
@@ -337,7 +337,7 @@ export const BulkActions = {
 
     return (
       <Box width="800px">
-        <NetdataTable
+        <Table
           bulkActions={bulkActions}
           enableSelection
           dataColumns={mockDataColumns}
@@ -372,7 +372,7 @@ export const Pagination = {
 
     return (
       <Box width="800px">
-        <NetdataTable
+        <Table
           paginationOptions={paginationOptions}
           enablePagination={true}
           dataColumns={mockDataColumns}
@@ -555,7 +555,7 @@ export const FullTable = {
 
     return (
       <Box height="800px" width="1200px">
-        <NetdataTable
+        <Table
           onClickRow={({ data, table, fullRow }) => {
             console.log(data, table, fullRow)
           }}
@@ -685,7 +685,7 @@ export const Pinning = {
 
     return (
       <Box height="500px" width="1000px">
-        <NetdataTable
+        <Table
           dataColumns={mockDataColumns}
           data={mockData()}
           rowActions={rowActions}
@@ -699,5 +699,5 @@ export const Pinning = {
 }
 
 export default {
-  component: NetdataTable,
+  component: Table,
 }

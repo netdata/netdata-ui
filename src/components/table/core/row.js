@@ -70,6 +70,7 @@ export default forwardRef(
                 background: "columnHighlight",
                 backgroundOpacity: virtualRow.index % 2 === 0 ? "0.2" : "0.4",
               })}
+            flex={cell.column.columnDef.fullWidth ? 1 : undefined}
           >
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </Table.Cell>

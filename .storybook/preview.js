@@ -1,8 +1,6 @@
 import React from "react"
 import useLocalStorage from "react-use/lib/useLocalStorage"
 import centered from "@storybook/addon-centered/react"
-import { withKnobs } from "@storybook/addon-knobs"
-import { withTests } from "@storybook/addon-jest"
 
 import { DefaultTheme } from "src/theme/default"
 import { DarkTheme } from "src/theme/dark"
@@ -18,8 +16,6 @@ const results = require("../.jest-test-results.json")
 
 export const decorators = [
   centered,
-  withKnobs,
-  withTests({ results }),
   story => {
     const [isDarkTheme, setIsDarkTheme] = useLocalStorage("is_dark_theme")
     const handleChange = e => {

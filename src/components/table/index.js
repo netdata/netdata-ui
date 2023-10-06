@@ -1,2 +1,1 @@
-export { Table } from "./table"
-export { VirtualizedTable } from "./virtualized-table"
+export { default as Table } from "./table"

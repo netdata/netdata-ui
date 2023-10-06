@@ -61,7 +61,7 @@ copyFileSync(
   "src/components/confirmation-dialog/confirmation-dialog.d.ts",
   "lib/components/confirmation-dialog/confirmation-dialog.d.ts"
 )
-copyFileSync("src/components/tableV2/index.d.ts", "lib/components/tableV2/index.d.ts")
+copyFileSync("src/components/table/index.d.ts", "lib/components/table/index.d.ts")
 
 copyFileSync("src/organisms/documentation/index.d.ts", "lib/organisms/documentation/index.d.ts")
 copyFileSync("src/theme/index.d.ts", "lib/theme/index.d.ts")

@@ -1,158 +1,372 @@
-/**
- * @jest-environment jsdom
- */
+import React from "react"
+import Table from "./table"
+import { renderWithProviders, screen, act } from "testUtilities"
+import userEvent from "@testing-library/user-event"
 
-import "@testing-library/jest-dom/extend-expect"
-import React, { useState } from "react"
-import { renderWithProviders, fireEvent } from "testUtilities"
-import { UserTableSchema } from "./mocks/mocked-table-schema"
-import { EnhancedTable } from "./mocks/styled"
+const onGlobalSearchChange = jest.fn()
+const handleDelete = jest.fn()
+const handleDownload = jest.fn()
+const handleToggleAlarms = jest.fn()
+const handleInfo = jest.fn()
+const onClickRow = jest.fn()
+const mockDisableRow = jest.fn()
 
-const initialState = [
-  {
-    user: { photo: "https://i.pravatar.cc/30", name: "Fry" },
-    dots: "123",
-    email: "noway@noway.com",
-  },
+const mockBulkActions = {
+  delete: { handleAction: handleDelete },
+  download: { handleAction: handleDownload },
+  toggleAlarm: { handleAction: handleToggleAlarms },
+}
 
+const mockRowActions = {
+  delete: { handleAction: handleDelete },
+  info: { handleAction: handleInfo },
+}
+
+const mockDataColumns = [
+  { header: "Nodes", id: "nodes", enableColumnFilter: true, cell: ({ getValue }) => getValue() },
   {
-    user: { photo: "https://i.pravatar.cc/31", name: "Amy" },
-    email: "amy@vong.com",
-    dots: "123",
-    disabled: true,
-  },
-  {
-    user: {
-      photo: "https://i.pravatar.cc/32",
-      name: "dr. Zoidberg",
+    id: "alerts",
+    header: "Text",
+    enableColumnFilter: true,
+    filterFn: (row, columnId, value) => {
+      const { original } = row
+      const rowValue = original[columnId]
+
+      return rowValue.toString().includes(value.toString())
     },
-    email: "amy@vong.com",
-    dots: "123",
+    cell: ({ getValue }) => getValue(),
+  },
+  {
+    header: "user",
+    id: "user",
+    enableColumnFilter: true,
+    cell: () => "Text",
   },
 ]
 
-const makeComponent = () => {
-  const toggleSelectedItemClb = jest.fn()
-  const selectedItemsClb = jest.fn()
+const mockData = () => [
+  { nodes: "nodeB", alerts: 11, user: "koukouroukou" },
+  { nodes: "nodeC", alerts: 22, user: "reena" },
+  { nodes: "nodeA", alerts: 15, user: "mitsos" },
+]
 
-  const Component = props => {
-    const [groupBy, setGroupBy] = useState([])
+const testPrefix = "-mock"
+const testName = "netdata-table-"
 
-    return (
-      <>
-        <button type="button" onClick={() => setGroupBy(["email"])}>
-          Group by email
-        </button>
-        <EnhancedTable
-          sortableBy={["user"]}
-          controlledState={{ groupBy }}
-          columns={UserTableSchema}
-          data={initialState}
-          itemIsDisabled={item => !!item.disabled}
-          selectedItemsClb={selectedItemsClb}
-          toggleSelectedItemClb={toggleSelectedItemClb}
-          {...props}
-        />
-      </>
-    )
-  }
+const makeTestId = elementName => `${testName}${elementName}${testPrefix}`
 
-  return { toggleSelectedItemClb, selectedItemsClb, Component }
+const rowTestid = makeTestId("row")
+const headTestid = makeTestId("head")
+const nodeCellTestid = makeTestId("cell-nodes")
+const checkboxCellTestid = makeTestId("cell-checkbox")
+const alertsCellTestid = makeTestId("cell-alerts")
+const userCellTestid = makeTestId("cell-user")
+const headeCellNodesSortTestId = makeTestId("head-cell-sortyBy-nodes")
+
+const headRowTestid = makeTestId("headRow")
+const headCellTestid = makeTestId("head-cell")
+const nodesColumnFilter = makeTestId("filter-nodes")
+const deleteActionTestid = makeTestId("action-delete")
+const infoActionTestid = makeTestId("action-info")
+const headerCheckBoxTestid = makeTestId("header-checkbox")
+const bulkDeleteActionTestid = makeTestId("action-delete-bulk")
+
+const renderTable = ({
+  disableRow,
+  rowActions,
+  bulkActions,
+  paginationOptions,
+  data = mockData(),
+} = {}) => {
+  renderWithProviders(
+    <Table
+      enablePagination
+      paginationOptions={paginationOptions}
+      onGlobalSearchChange={onGlobalSearchChange}
+      enableSorting
+      rowActions={rowActions || mockRowActions}
+      bulkActions={bulkActions || mockBulkActions}
+      enableSelection
+      dataColumns={mockDataColumns}
+      data={data}
+      testPrefix={testPrefix}
+      onClickRow={({ data }) => {
+        onClickRow(data)
+      }}
+      disableClickRow={({ data }) => {
+        mockDisableRow(data)
+        return disableRow
+      }}
+    />
+  )
 }
-describe("Table component test", () => {
-  it(" * should render a table", () => {
-    const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByText, getAllByText, queryByTestId } = renderWithProviders(<Component />)
-    expect(selectedItemsClb).toBeCalledWith([])
-    expect(toggleSelectedItemClb).not.toBeCalled()
 
-    expect(getByText("noway@noway.com")).toBeInTheDocument()
-    expect(getAllByText("amy@vong.com")).toHaveLength(2)
-    expect(queryByTestId("table-pagination")).not.toBeInTheDocument()
+describe("Netdata table", () => {
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+  it("Should render netdata table", () => {
+    renderTable()
+    expect(screen.queryAllByTestId(rowTestid)).toHaveLength(3)
+    expect(screen.getByTestId(headTestid)).toBeInTheDocument()
+    expect(screen.getByTestId(headRowTestid)).toBeInTheDocument()
+    expect(screen.queryAllByTestId(headCellTestid)).toHaveLength(5)
+
+    expect(screen.queryAllByTestId(nodeCellTestid)).toHaveLength(3)
+    expect(screen.queryAllByTestId(checkboxCellTestid)).toHaveLength(6)
+    expect(screen.queryAllByTestId(alertsCellTestid)).toHaveLength(3)
+    expect(screen.queryAllByTestId(userCellTestid)).toHaveLength(3)
   })
 
-  it(" * should select all rows", () => {
-    const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByTitle } = renderWithProviders(<Component />)
+  describe("Column filter", () => {
+    it("should filter the columns when changing the column search filter", async () => {
+      const user = userEvent.setup()
+      jest.useFakeTimers({ advanceTimers: true })
+      renderTable()
+      const filterParams = "nodeB"
+      const nodesFilter = screen.getByTestId(nodesColumnFilter)
 
-    fireEvent.click(getByTitle("Toggle All Rows Selected"))
-    expect(selectedItemsClb).toBeCalledWith([
-      {
-        dots: "123",
-        email: "noway@noway.com",
-        user: { name: "Fry", photo: "https://i.pravatar.cc/30" },
-      },
-      {
-        dots: "123",
-        email: "amy@vong.com",
-        user: { name: "dr. Zoidberg", photo: "https://i.pravatar.cc/32" },
-      },
-    ])
-    expect(toggleSelectedItemClb).not.toBeCalled()
+      await act(async () => {
+        await user.type(nodesFilter, filterParams)
+        jest.runOnlyPendingTimers()
+      })
+
+      expect(nodesFilter).toBeInTheDocument()
+      expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+    })
   })
 
-  it(" * should select rows", () => {
-    const { Component, toggleSelectedItemClb } = makeComponent()
-    const { getAllByTitle } = renderWithProviders(<Component />)
+  describe("Row Action", () => {
+    it.skip("should trigger confirmation dialog when clicking delete and handle confirm", async () => {
+      const user = userEvent.setup()
+      renderTable()
+      const deleteAction = screen.queryAllByTestId(deleteActionTestid)
+      const expectedDeletedItem = mockData()[0]
+      await user.click(deleteAction[0])
 
-    fireEvent.click(getAllByTitle("Toggle Row Selected")[1])
-    expect(toggleSelectedItemClb).not.toBeCalled()
+      expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    fireEvent.click(getAllByTitle("Toggle Row Selected")[0])
-    expect(toggleSelectedItemClb).toBeCalledWith(
-      {
-        dots: "123",
-        email: "noway@noway.com",
-        user: {
-          name: "Fry",
-          photo: "https://i.pravatar.cc/30",
-        },
-      },
-      true
-    )
+      await user.click(screen.getByTestId("confirmationDialog-confirmAction"))
+
+      expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
+    })
+
+    it.skip("should trigger confirmation dialog when clicking delete and handle decline", async () => {
+      const user = userEvent.setup()
+      renderTable()
+      const deleteAction = screen.queryAllByTestId(deleteActionTestid)
+
+      await user.click(deleteAction[0])
+
+      expect(screen.getByTestId("layer-container")).toBeInTheDocument()
+
+      await user.click(screen.getByTestId("confirmationDialog-cancelAction"))
+
+      expect(handleDelete).not.toHaveBeenCalled()
+    })
+
+    it.skip("should trigger info action when clicking it", async () => {
+      const user = userEvent.setup()
+      renderTable()
+      const infoAction = screen.getAllByTestId(infoActionTestid)
+      console.log(infoAction)
+      await user.click(infoAction[0])
+
+      expect(handleInfo).toHaveBeenCalled()
+    })
+
+    it("should disable row action when it meets the requirements", async () => {
+      const rowActions = {
+        delete: { handleAction: handleDelete, isDisabled: true },
+      }
+      renderTable({ rowActions })
+
+      const deleteAction = screen.queryAllByTestId(deleteActionTestid)[0]
+
+      expect(deleteAction).toBeDisabled()
+    })
   })
 
-  it(" * should group", () => {
-    const { Component, selectedItemsClb, toggleSelectedItemClb } = makeComponent()
-    const { getByText, getAllByTitle, getByTitle } = renderWithProviders(<Component />)
+  describe("Bulk Actions", () => {
+    it("should select multiple rows and handle delete bulk action", async () => {
+      const user = userEvent.setup()
+      renderTable()
+      const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
+      const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+      const expectedDeletedItem = mockData()
 
-    fireEvent.click(getByText("Group by email"))
-    expect(getAllByTitle("group-head")).toHaveLength(2)
+      await user.click(headerCheckbox)
+      await user.click(deleteBulkAction)
 
-    fireEvent.click(getByTitle("Toggle All Rows Selected"))
-    expect(selectedItemsClb).toBeCalledWith([
-      {
-        dots: "123",
-        email: "noway@noway.com",
-        user: { name: "Fry", photo: "https://i.pravatar.cc/30" },
-      },
-      {
-        dots: "123",
-        email: "amy@vong.com",
-        user: { name: "dr. Zoidberg", photo: "https://i.pravatar.cc/32" },
-      },
-    ])
+      expect(screen.getByTestId("layer-container")).toBeInTheDocument()
 
-    fireEvent.click(getAllByTitle("Toggle Row Selected")[0])
-    expect(toggleSelectedItemClb).toBeCalledWith(
-      {
-        dots: "123",
-        email: "noway@noway.com",
-        user: {
-          name: "Fry",
-          photo: "https://i.pravatar.cc/30",
-        },
-      },
-      false
-    )
+      await user.click(screen.getByTestId("confirmationDialog-confirmAction"))
+
+      expect(handleDelete).toHaveBeenCalledWith(expectedDeletedItem, expect.anything())
+    })
+    it("should disable bulk action when no rows are selected", async () => {
+      renderTable()
+      const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+
+      expect(deleteBulkAction).toBeDisabled()
+    })
+
+    it("should disable bulk action when it meets the requirements", async () => {
+      const user = userEvent.setup()
+      const bulkActions = {
+        delete: { handleAction: handleDelete, isDisabled: true },
+      }
+      renderTable({ bulkActions })
+
+      const deleteBulkAction = screen.getByTestId(bulkDeleteActionTestid)
+      const headerCheckbox = screen.getByTestId(headerCheckBoxTestid)
+
+      await user.click(headerCheckbox)
+
+      expect(deleteBulkAction).toBeDisabled()
+    })
   })
 
-  it(" * should render a table with pagination", () => {
-    const { Component } = makeComponent()
-    const { getByTestId } = renderWithProviders(
-      <Component initialState={{ pageSize: 2 }} withPagination />
-    )
+  describe("Global Search Filter", () => {
+    it("should change global search and filter nodes", async () => {
+      jest.useFakeTimers({ advanceTimers: true })
+      renderTable()
+      const filterParams = "nodeB"
+      const globalSearchFilter = screen.getByTestId("table-global-search-filter")
 
-    expect(getByTestId("table-pagination")).toBeInTheDocument()
+      await act(async () => {
+        await userEvent.type(globalSearchFilter, filterParams)
+        jest.runOnlyPendingTimers()
+      })
+
+      expect(onGlobalSearchChange).toHaveBeenCalledWith(filterParams)
+      expect(globalSearchFilter).toBeInTheDocument()
+      expect(screen.queryAllByTestId(rowTestid)).toHaveLength(1)
+    })
+  })
+
+  describe("OnClickRow", () => {
+    it("should allow as to click a row", async () => {
+      const user = userEvent.setup()
+      renderTable()
+      const expectedValue = mockData()[0]
+      const row = screen.queryAllByTestId(rowTestid)[0]
+
+      await user.click(row)
+
+      expect(onClickRow).toHaveBeenCalledWith(expectedValue)
+    })
+
+    it("should not  allow to click a row when is disabled", async () => {
+      const user = userEvent.setup()
+      renderTable({ disableRow: true })
+      const expectedValue = mockData()[0]
+
+      const row = screen.queryAllByTestId(rowTestid)[0]
+
+      await user.click(row)
+
+      expect(onClickRow).not.toHaveBeenCalled()
+      expect(mockDisableRow).toHaveBeenCalledWith(expectedValue)
+    })
+  })
+
+  describe("Sorting", () => {
+    it("should allow as to sort the table", async () => {
+      const user = userEvent.setup()
+      renderTable({ disableRow: true })
+
+      const headCell = screen.getByTestId(headeCellNodesSortTestId)
+      const beforeClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      await user.click(headCell)
+
+      let afterClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforeClickNodeCell).toHaveTextContent("nodeA")
+      expect(afterClickNodeCell).toHaveTextContent("nodeA")
+
+      await user.click(headCell)
+
+      afterClickNodeCell = screen.queryAllByTestId(nodeCellTestid)[0]
+      expect(afterClickNodeCell).toHaveTextContent("nodeC")
+    })
+  })
+
+  describe("Pagination", () => {
+    it("should go to next page", async () => {
+      const user = userEvent.setup()
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 0, pageSize: 3 }
+
+      renderTable({ disableRow: true, data, paginationOptions })
+
+      const goToNext = screen.getByTestId("pagination-go-to-next")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("nodeB")
+
+      await user.click(goToNext)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("nodeD")
+    })
+    it("should go to previous page", async () => {
+      const user = userEvent.setup()
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 1, pageSize: 3 }
+
+      renderTable({ disableRow: true, data, paginationOptions })
+
+      const goToPrevious = screen.getByTestId("pagination-go-to-previous")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("nodeD")
+
+      await user.click(goToPrevious)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("nodeB")
+    })
+
+    it("should go to last page", async () => {
+      const user = userEvent.setup()
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 0, pageSize: 1 }
+
+      renderTable({ disableRow: true, data, paginationOptions })
+
+      const goToLast = screen.getByTestId("pagination-go-to-last")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("nodeB")
+
+      await user.click(goToLast)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("nodeD")
+    })
+
+    it("should go to first page", async () => {
+      const user = userEvent.setup()
+      const data = [...mockData(), { nodes: "nodeD", alerts: 122, user: "secondPage" }]
+      const paginationOptions = { pageIndex: 3, pageSize: 1 }
+
+      renderTable({ disableRow: true, data, paginationOptions })
+
+      const goToFirst = screen.getByTestId("pagination-go-to-first")
+      const beforePaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(beforePaginationNode).toHaveTextContent("nodeD")
+
+      await user.click(goToFirst)
+
+      const afterPaginationNode = screen.queryAllByTestId(nodeCellTestid)[0]
+
+      expect(afterPaginationNode).toHaveTextContent("nodeB")
+    })
   })
 })
