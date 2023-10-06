@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useMemo } from "react"
 
 import BulkAction from "./bulkAction"
 import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is used only for the dropdown for column visibility
@@ -25,7 +25,16 @@ const ColumnVisibilityAction = ({
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
   const visible = typeof isVisible === "function" ? isVisible() : isVisible
 
-  const allColumns = table.getAllLeafColumns()
+  const allColumns = useMemo(
+    () =>
+      table.getAllLeafColumns().sort((a, b) =>
+        a.id.localeCompare(b.id, undefined, {
+          sensitivity: "accent",
+          ignorePunctuation: true,
+        })
+      ),
+    [table.getAllLeafColumns()]
+  )
   const allPinnedColumns = enableColumnPinning
     ? [...(columnPinning?.left || []), ...(columnPinning?.right || [])]
     : []
