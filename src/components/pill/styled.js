@@ -2,9 +2,7 @@ import styled from "styled-components"
 import Flex from "src/components/templates/flex"
 import getPillBackground from "./mixins/background"
 import { getPillColor } from "./mixins/colors"
-import getPillHeight from "./mixins/height"
 import getPillPadding from "./mixins/padding"
-import getPillWidth from "./mixins/width"
 
 export const MasterCardContainer = styled(Flex).attrs(
   ({ background, height, onClick, round = 999, size }) => ({
@@ -31,12 +29,12 @@ export const PillContainer = styled(Flex).attrs(
     padding,
     size,
     tiny,
-    width,
-    height,
     position,
     zIndex,
     justifyContent = "center",
     alignItems = "center",
+    background,
+    ...rest
   }) => ({
     padding: getPillPadding(padding, size, tiny),
     round,
@@ -46,13 +44,11 @@ export const PillContainer = styled(Flex).attrs(
       size: "1px",
     },
     ...(onClick && { cursor: "pointer" }),
-    height: getPillHeight(height, size, tiny),
-    width: getPillWidth(width, tiny),
     justifyContent,
     alignItems,
     position,
     zIndex,
+    background: getPillBackground({ background, flavour, hollow }),
+    ...rest,
   })
-)`
-  ${getPillBackground};
-`
+)``

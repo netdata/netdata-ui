@@ -9,9 +9,10 @@ const measurementByDimension = {
   horizontal: "width",
 }
 
-const Animated = styled(Flex).attrs({
+const Animated = styled(Flex).attrs(props => ({
   column: true,
-})`
+  ...props,
+}))`
   transition: ${({ duration, measurement }) =>
     `max-${measurement} ${duration}ms ease-out, opacity ${duration}ms ease`};
   ${({ measurement, maxDimension }) => `max-${measurement}: ${maxDimension}`};

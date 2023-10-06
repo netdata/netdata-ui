@@ -1,6 +1,6 @@
 const getPillWidth = (width, tiny) => {
   if (width) return width
-  return tiny && "8px"
+  return tiny && "auto"
 }
 
 export default getPillWidth
