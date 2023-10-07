@@ -72,11 +72,7 @@ const Rows = ({
 
   return (
     <>
-      {paddingTop > 0 && (
-        <tr>
-          <td style={{ height: `${paddingTop}px` }} />
-        </tr>
-      )}
+      {paddingTop > 0 && <div style={{ height: `${paddingTop}px` }} />}
       {virtualRows.map(virtualRow => {
         const row = rows[virtualRow.index]
 
@@ -98,11 +94,7 @@ const Rows = ({
         )
       })}
 
-      {paddingBottom > 0 && (
-        <tr>
-          <td style={{ height: `${paddingBottom}px` }} />
-        </tr>
-      )}
+      {paddingBottom > 0 && <div style={{ height: `${paddingBottom}px` }} />}
     </>
   )
 }

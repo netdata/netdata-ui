@@ -295,7 +295,6 @@ const Table = forwardRef(
             )}
             <FullTable
               headers={columnPinning ? table.getCenterHeaderGroups() : table.getHeaderGroups()}
-              width="100%"
               getRowHandler={enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells"}
               scrollParentRef={scrollParentRef}
               enableResize={enableResize}

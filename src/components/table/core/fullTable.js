@@ -17,7 +17,6 @@ const FullTable = ({
   tableRef,
   testPrefix,
   testPrefixCallback,
-  width,
   scrollParentRef,
   virtualizeOptions = {},
   coloredSortedColumn,
@@ -31,7 +30,6 @@ const FullTable = ({
       data-testid={`netdata-table${testPrefix}`}
       ref={tableRef}
       testPrefix={testPrefix}
-      width={width}
       {...rest}
     >
       <Table.Head data-testid={`netdata-table-head${testPrefix}`}>
