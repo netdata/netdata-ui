@@ -2,7 +2,10 @@ import { useMemo } from "react"
 import useRowSelection from "./useRowSelection"
 import useRowActions from "./useRowActions"
 
-export default (dataColumns, { rowActions, enableSelection, testPrefix, tableMeta }) => {
+export default (
+  dataColumns,
+  { rowActions, enableSelection, enableResizing, enableSorting, testPrefix, tableMeta }
+) => {
   const rowActionsColumn = useRowActions(rowActions, { testPrefix, tableMeta })
   const selectionColumn = useRowSelection(enableSelection, { testPrefix, tableMeta })
 
@@ -24,12 +27,10 @@ export default (dataColumns, { rowActions, enableSelection, testPrefix, tableMet
             return {
               enableColumnFilter: false,
               enableGlobalFilter: true,
-              enableSorting: true,
-              size: 150,
-              maxSize: 5000,
-              minSize: 150,
+              enableSorting,
+              ...(enableResizing ? { size: 150, maxSize: 5000, minSize: 150 } : {}),
               enableHiding: true,
-              enableResize: true,
+              enableResizing,
               footer: props => props.column.id,
               tableMeta,
               ...subCol,
@@ -44,12 +45,10 @@ export default (dataColumns, { rowActions, enableSelection, testPrefix, tableMet
       return {
         enableColumnFilter: false,
         enableGlobalFilter: true,
-        enableSorting: true,
-        size: 150,
-        maxSize: 5000,
-        minSize: 150,
+        enableSorting,
+        ...(enableResizing ? { size: 150, maxSize: 5000, minSize: 150 } : {}),
         enableHiding: true,
-        enableResize: true,
+        enableResizing,
         footer: props => props.column.id,
         tableMeta,
         ...col,

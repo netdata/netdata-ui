@@ -6,7 +6,7 @@ import FullTable from "../core/fullTable"
 const ColumnPinning = ({
   dataGa,
   disableClickRow,
-  enableResize,
+  enableResizing,
   enableSorting,
   onClickRow,
   onHoverCell,
@@ -36,7 +36,7 @@ const ColumnPinning = ({
         scrollParentRef={scrollParentRef}
         dataGa={`pin-${dataGa}`}
         disableClickRow={disableClickRow}
-        enableResize={enableResize}
+        enableResizing={enableResizing}
         enableSorting={enableSorting}
         getRowHandler={getRowHandler}
         onClickRow={onClickRow}
@@ -45,7 +45,7 @@ const ColumnPinning = ({
         table={table}
         testPrefix={`pin${testPrefix}`}
         testPrefixCallback={testPrefixCallback}
-        width={enableResize ? `${table[getTotalSizeFunc]()}px` : "100%"}
+        width={enableResizing ? `${table[getTotalSizeFunc]()}px` : "100%"}
         side={side}
         {...rest}
       />

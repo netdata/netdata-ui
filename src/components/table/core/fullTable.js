@@ -6,7 +6,7 @@ import Rows from "./rows"
 const FullTable = ({
   dataGa,
   disableClickRow,
-  enableResize,
+  enableResizing,
   enableSorting,
   getRowHandler,
   headers,
@@ -41,7 +41,7 @@ const FullTable = ({
           >
             <HeadCells
               dataGa={dataGa}
-              enableResize={enableResize}
+              enableResizing={enableResizing}
               enableSorting={enableSorting}
               headers={headerGroup.headers}
               pinnedStyles={pinnedStyles}

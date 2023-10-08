@@ -1,9 +1,9 @@
 import React, { useRef, forwardRef } from "react"
-import Action from "./action"
+import BaseAction from "src/components/table/components/action"
 
 import { mergeRefs } from "src/utils"
 
-const BulkAction = forwardRef(
+const HeaderAction = forwardRef(
   (
     {
       isDisabled,
@@ -25,7 +25,7 @@ const BulkAction = forwardRef(
     const visible = typeof isVisible === "function" ? isVisible() : isVisible
 
     return (
-      <Action
+      <BaseAction
         ref={mergeRefs(actionRef, ref)}
         testPrefix={`-bulk${testPrefix}`}
         key={id}
@@ -43,4 +43,4 @@ const BulkAction = forwardRef(
   }
 )
 
-export default BulkAction
+export default HeaderAction

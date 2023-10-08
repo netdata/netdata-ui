@@ -1,5 +1,5 @@
 import React from "react"
-import DropdownFilter from "./dropdownFilter"
+import DropdownFilter from "./dropdown"
 
 const all = { value: "all", label: "All" }
 

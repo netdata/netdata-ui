@@ -63,33 +63,36 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
 
   if (availableRowActions.length < 1) return null
 
-  return {
-    id: "actions",
-    enableHiding: false,
-    enableResizing: false,
-    header: "Actions",
-    cell: ({ row, table }) => (
-      <Flex data-testid="action-cell" height="100%" gap={2}>
-        {availableRowActions.map(
-          ({ id, handleAction, isDisabled, isVisible = true, dataGa, ...rest }) => (
-            <Action
-              {...rest}
-              disabled={typeof isDisabled === "function" ? isDisabled(row.original) : isDisabled}
-              visible={typeof isVisible === "function" ? isVisible(row.original) : isVisible}
-              dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
-              key={id}
-              id={id}
-              handleAction={() => handleAction(row.original, table)}
-              testPrefix={testPrefix}
-              currentRow={row}
-            />
-          )
-        )}
-      </Flex>
-    ),
-    enableColumnFilter: false,
-    enableSorting: false,
-    meta: { stopPropagation: true },
-    tableMeta,
-  }
+  return useMemo(
+    () => ({
+      id: "actions",
+      enableHiding: false,
+      enableResizing: false,
+      header: "Actions",
+      cell: ({ row, table }) => (
+        <Flex data-testid="action-cell" height="100%" gap={2}>
+          {availableRowActions.map(
+            ({ id, handleAction, isDisabled, isVisible = true, dataGa, ...rest }) => (
+              <Action
+                {...rest}
+                disabled={typeof isDisabled === "function" ? isDisabled(row.original) : isDisabled}
+                visible={typeof isVisible === "function" ? isVisible(row.original) : isVisible}
+                dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
+                key={id}
+                id={id}
+                handleAction={() => handleAction(row.original, table)}
+                testPrefix={testPrefix}
+                currentRow={row}
+              />
+            )
+          )}
+        </Flex>
+      ),
+      enableColumnFilter: false,
+      enableSorting: false,
+      meta: { stopPropagation: true },
+      tableMeta,
+    }),
+    [availableRowActions]
+  )
 }

@@ -1,7 +1,8 @@
 import React, { useRef, useMemo } from "react"
-
-import BulkAction from "./bulkAction"
-import ColumnsMenu from "./columnsMenu" //todo refactor this as right now is used only for the dropdown for column visibility
+import useToggle from "src/hooks/use-toggle"
+import BulkAction from "../action"
+import ColumnsMenu from "./columnsMenu"
+import { supportedBulkActions } from "../useActions"
 
 const ColumnVisibilityAction = ({
   alwaysEnabled,
@@ -85,4 +86,21 @@ const ColumnVisibilityAction = ({
   )
 }
 
-export default ColumnVisibilityAction
+const ColumnVisibility = ({ isVisible, ...rest }) => {
+  const [isOpen, toggle, , close] = useToggle(false)
+
+  return (
+    <ColumnVisibilityAction
+      key="columnVisibility"
+      {...supportedBulkActions.columnVisibility}
+      handleAction={toggle}
+      isOpen={isOpen}
+      isVisible={isVisible}
+      id="columnVisibility"
+      onClose={close}
+      {...rest}
+    />
+  )
+}
+
+export default ColumnVisibility

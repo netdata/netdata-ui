@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react"
 import { flexRender } from "@tanstack/react-table"
-import { useTableContext } from "../features/provider"
+import { useTableContext } from "../provider"
 import Table from "./base-table"
 
 export default forwardRef(

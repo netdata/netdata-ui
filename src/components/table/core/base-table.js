@@ -6,7 +6,7 @@ import Flex from "src/components/templates/flex"
 import { Text } from "src/components/typography"
 import Tooltip from "src/components/drops/tooltip"
 import useToggle from "src/hooks/use-toggle"
-import { useTableContext } from "../features/provider"
+import { useTableContext } from "../provider"
 
 const HeaderCell = styled(Flex)`
   border-bottom: 1px solid ${getColor("border")};

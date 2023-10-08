@@ -34,6 +34,7 @@ export default (enabled, { testPrefix, tableMeta }) =>
             size: width,
             maxSize: width,
             minSize: width,
+            notFlex: true,
             meta: { stopPropagation: true },
             tableMeta,
           }

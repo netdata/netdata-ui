@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import DropdownFilter from "./dropdownFilter"
+import DropdownFilter from "./dropdown"
 
 import Box from "src/components/templates/box"
 import Flex from "src/components/templates/flex"

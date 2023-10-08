@@ -561,7 +561,7 @@ export const FullTable = {
           }}
           groupByColumnIds={["alerts"]}
           enableColumnPinning
-          enableResize
+          enableResizing
           sortBy={[{ id: "nodes", desc: false }]}
           onGlobalSearchChange={onGlobalSearchChange}
           enableSorting
