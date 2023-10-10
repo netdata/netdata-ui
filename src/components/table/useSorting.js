@@ -12,10 +12,13 @@ export default (defaultSorting = emptyArr, onChange = noop) => {
     setSorting(defaultSorting)
   }, [defaultSorting])
 
-  const onSortingChange = useCallback(getValue => {
-    onChange(getValue())
-    setSorting(getValue())
-  }, [])
+  const onSortingChange = useCallback(
+    getValue => {
+      onChange(getValue(sorting))
+      setSorting(getValue(sorting))
+    },
+    [sorting]
+  )
 
   return [sorting, onSortingChange]
 }

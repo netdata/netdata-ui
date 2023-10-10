@@ -59,20 +59,20 @@ const Body = ({
 
     if (!lastItem) return
 
-    if (lastItem.index === rows.length - 1 && hasNextPage && !loading) loadMore("backward")
-  }, [virtualRows[0]?.key, loading])
+    if (lastItem.index === rows.length && hasNextPage && !loading) loadMore("backward")
+  }, [virtualRows, loading])
 
   useEffect(() => {
     if (!loadMore) return
 
-    const first = virtualRows[0]
+    const first = virtualRows[1]
 
     if (!first) return
 
-    if (first.index === 0 && hasPrevPage && !loading) {
+    if (first.index === 1 && hasPrevPage && !loading) {
       loadMore("forward")
     }
-  }, [virtualRows[0]?.key, hasPrevPage, loading])
+  }, [virtualRows, hasPrevPage, loading])
 
   return (
     <div
@@ -95,7 +95,7 @@ const Body = ({
         {virtualRows.map((virtualRow, index) => {
           return (
             <Flex
-              key={virtualRow.key}
+              key={`${virtualRow.key}-${virtualRow.index}`}
               sx={{
                 transform: `translateY(${virtualRow.start}px)`,
               }}

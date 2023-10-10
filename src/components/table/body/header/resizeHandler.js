@@ -10,25 +10,14 @@ const ResizeHandler = ({ header, table }) => {
 
   return (
     <Flex
-      background="borderSecondary"
-      _hover={{ background: "resizerLine", color: "resizerLine" }}
-      _active={{ background: "resizerLine", color: "resizerLine" }}
-      _before={{
-        content: "",
-        position: "absolute",
-        top: "0",
-        bottom: "0",
-        display: "flex",
-        alignItems: "center",
-        left: "-8px",
-        width: "8px",
-      }}
-      width="1px"
+      border={{ side: "right", size: "1px", color: "borderSecondary" }}
+      _hover={{ border: { side: "right", size: "3px", color: "resizerLine" } }}
+      _active={{ border: { side: "right", size: "3px", color: "resizerLine" } }}
+      width="8px"
       sx={{
         userSelect: "none",
         touchAction: "none",
         cursor: "col-resize",
-        color: "border",
         ...resizingProps,
       }}
       onMouseDown={header.getResizeHandler()}

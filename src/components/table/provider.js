@@ -36,7 +36,7 @@ const TableProvider = ({ onHoverCell, children }) => {
   useEffect(() => {
     if (!onHoverCell) return
 
-    onHoverCell({ row: state.hoveredRow, column: state.hoveredColumn })
+    onHoverCell({ row: state.hoveredRow + 1, column: state.hoveredColumn })
   }, [state.hoveredRow, state.hoveredColumn])
 
   const setRowHeight = useCallback(({ index, height }) => {

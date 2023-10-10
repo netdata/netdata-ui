@@ -165,7 +165,6 @@ const Table = forwardRef(
       onColumnPinningChange,
       enableSubRowSelection,
       columnGroupingMode: "reorder",
-      enableSortingRemoval: true,
     })
 
     if (tableRef) tableRef.current = table
@@ -212,8 +211,8 @@ const Table = forwardRef(
             dataGa={dataGa}
             testPrefix={testPrefix}
             meta={tableMeta}
-            {...virtualizeOptions}
             {...rest}
+            {...virtualizeOptions}
           />
           {!hasNextPage && !loading && !!warning && (
             <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
