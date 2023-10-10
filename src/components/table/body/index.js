@@ -40,7 +40,7 @@ const Body = memo(
       initialOffset,
       getItemKey,
       rangeExtractor: useCallback(range => {
-        if (range.startIndex >= 0) {
+        if (range.count && range.startIndex >= 0) {
           const next = new Set([0, ...defaultRangeExtractor(range)])
           return [...next].sort((a, b) => a - b)
         }
@@ -93,7 +93,7 @@ const Body = memo(
             flex: "1 0 auto",
           }}
         >
-          {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
+          {virtualRows.map((virtualRow, index) => {
             return (
               <Flex
                 key={virtualRow.key}
@@ -102,7 +102,7 @@ const Body = memo(
                 }}
                 top={0}
                 left={0}
-                zIndex={rowVirtualizer.getVirtualItems().length - index}
+                zIndex={virtualRows.length - index}
                 position={virtualRow.index === 0 ? "sticky" : "absolute"}
                 flex
                 data-index={virtualRow.index}

@@ -10,8 +10,6 @@ const Header = ({
   q,
   hasSearch,
   onSearch,
-  enableColumnPinning,
-  enableColumnVisibility,
   groupByColumns,
   grouping,
   onGroupBy,
@@ -27,7 +25,7 @@ const Header = ({
     []
   )
 
-  if (!hasSearch && !enableColumnPinning && !enableColumnVisibility && !children) return null
+  if (!title && !groupByColumns && !hasSearch && !children) return null
 
   return (
     <Flex

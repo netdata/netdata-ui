@@ -1,7 +1,8 @@
 import React, { memo, useState, useEffect } from "react"
 import Flex from "src/components/templates/flex"
-import useActions, { ColumnVisibility } from "./useActions"
+import useActions from "./useActions"
 import Action from "./action"
+import ColumnVisibility from "./columnVisibility"
 
 const noop = () => {}
 

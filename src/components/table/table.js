@@ -178,8 +178,6 @@ const Table = forwardRef(
             q={globalFilter}
             hasSearch={!!onSearch}
             onSearch={onGlobalFilterChange}
-            enableColumnPinning={enableColumnPinning}
-            enableColumnVisibility={enableColumnVisibility}
             groupByColumns={groupByColumns}
             onGroupBy={onGroupingChange}
             grouping={grouping}
@@ -187,7 +185,7 @@ const Table = forwardRef(
             title={title}
             dataColumns={dataColumns}
           >
-            {!!bulkActions && (
+            {(enableColumnVisibility || !!bulkActions) && (
               <HeaderActions
                 rowSelection={rowSelection}
                 bulkActions={bulkActions}
