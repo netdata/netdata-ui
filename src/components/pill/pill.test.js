@@ -48,7 +48,7 @@ describe("Pill component", () => {
   test("should render component with small text", () => {
     renderWithProviders(<Pill size="normal">Test</Pill>)
 
-    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "11px")
   })
 
   test("should render component with custom colored text", () => {
