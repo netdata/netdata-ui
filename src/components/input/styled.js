@@ -25,6 +25,7 @@ export const StyledInput = styled.input.attrs({ round: true })`
   ${round}
   height: 100%;
   width: 100%;
+  min-width: 100%;
   font-weight: normal;
   flex-grow: 0;
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};

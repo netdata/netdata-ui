@@ -32,13 +32,13 @@ const Header = ({
       width="100%"
       zIndex={10}
       background="mainBackground"
-      gap={2}
+      gap={1}
       alignItems="center"
       {...tableMeta.bulkActionsStyles}
     >
       {typeof title === "string" ? <TextBig strong>{title}</TextBig> : title}
       {hasSearch && (
-        <Flex width={{ max: 57.5, base: "40%" }} {...tableMeta.searchContainerStyles}>
+        <Flex flex="grow" {...tableMeta.searchContainerStyles}>
           <SearchInput
             data-testid="table-global-search-filter"
             data-ga={`${dataGa}::search-words::table-filter`}
@@ -61,11 +61,7 @@ const Header = ({
         onGroupBy={onGroupBy}
         dataGa={dataGa}
       />
-      {!!children && (
-        <Flex gap={1} data-testid="bulk-actions" width="100%" justifyContent="end">
-          {children}
-        </Flex>
-      )}
+      {children}
     </Flex>
   )
 }

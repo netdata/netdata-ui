@@ -109,6 +109,7 @@ const Action = forwardRef(
               flavour={flavour}
               iconColor={iconColor}
               label={label}
+              padding={[0.5]}
               {...rest}
             />
           </Flex>

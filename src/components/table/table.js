@@ -165,6 +165,7 @@ const Table = forwardRef(
       onColumnPinningChange,
       enableSubRowSelection,
       columnGroupingMode: "reorder",
+      enableSortingRemoval: true,
     })
 
     if (tableRef) tableRef.current = table
@@ -173,7 +174,14 @@ const Table = forwardRef(
 
     return (
       <TableProvider onHoverCell={onHoverCell}>
-        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref} className={className}>
+        <Flex
+          height={{ max: "100%" }}
+          overflow="hidden"
+          column
+          ref={ref}
+          className={className}
+          gap={1}
+        >
           <Header
             q={globalFilter}
             hasSearch={!!onSearch}

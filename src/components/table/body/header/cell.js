@@ -11,16 +11,20 @@ import Filter from "./filter"
 
 const Label = styled(Text)`
   transition: transform 200ms ease;
-  ${({ sorting }) => sorting && "transform: translateX(10px);"}
+  ${({ sorting }) => sorting && "transform: translateX(12px);"}
 `
 
 const LabelContainer = styled(Flex)`
   &:hover ${SortIconContainer} {
     opacity: 1;
   }
-  &:hover ${Label} {
-    transform: translateX(10px);
+  ${({ sortable }) =>
+    sortable &&
+    `
+    &:hover ${Label} {
+    transform: translateX(12px);
   }
+  `}
 `
 
 const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index, rootRef }) => {
@@ -72,6 +76,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index,
             cursor={column.getCanSort() ? "pointer" : "default"}
             onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
             padding={[0, 2, 0, 0]}
+            sortable={column.getCanSort()}
           >
             <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
             {column.isPlaceholder ? null : (

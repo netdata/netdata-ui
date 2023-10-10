@@ -12,7 +12,6 @@ const sortingIcons = {
 // Needed to be targeted by parent on hover
 export const SortIconContainer = styled(Flex).attrs(props => ({
   flex: 0,
-  alignSelf: "start",
   ...props,
 }))`
   transition: opacity 200ms ease;

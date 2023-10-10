@@ -1,7 +1,7 @@
-import React, { memo } from "react"
+import React from "react"
 import { flexRender } from "@tanstack/react-table"
 import Flex from "src/components/templates/flex"
-import { TextMicro } from "src/components/typography"
+import { TextNano } from "src/components/typography"
 import { Icon } from "src/components/icon"
 import useIntersection from "src/hooks/use-intersection"
 import { useTableContext } from "../provider"
@@ -56,7 +56,7 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
         })}
       {...cellStyles}
     >
-      <Flex flex width="100%" justifyContent="between">
+      <Flex flex width="100%" justifyContent="between" alignItems="start">
         {visible && (
           <>
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -74,14 +74,14 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
                 }}
                 alignSelf="end"
               >
-                <TextMicro fontSize="10px" color="textLite">
+                <TextNano fontSize="10px" color="textLite">
                   Expand
-                </TextMicro>
+                </TextNano>
                 <Icon
                   name="chevron_down"
                   width="12px"
                   height="12px"
-                  color="selected"
+                  color="textLite"
                   rotate={row.getIsExpanded() ? 2 : null}
                 />
               </Flex>
@@ -95,61 +95,42 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
 
 const selectOnHover = s => s.onHover
 
-export default memo(
-  ({ disableClickRow, onClickRow, row, table, testPrefix, testPrefixCallback, index, ...rest }) => {
-    const onHover = useTableContext(selectOnHover)
-    const isHovered = useTableContext(makeSelectIsRowHovered(row.id))
+export default ({
+  disableClickRow,
+  onClickRow,
+  row,
+  table,
+  testPrefix,
+  testPrefixCallback,
+  index,
+  ...rest
+}) => {
+  const onHover = useTableContext(selectOnHover)
+  const isHovered = useTableContext(makeSelectIsRowHovered(row.id))
 
-    return (
-      <Flex
-        data-testid={`netdata-table-row${testPrefix}${
-          testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
-        }`}
-        onClick={
-          row.getCanExpand() && !row.depth
-            ? undefined
-            : onClickRow
-            ? () => onClickRow({ data: row.original, table: table, fullRow: row })
-            : undefined
-        }
-        onMouseEnter={() => onHover({ hoveredRow: row.id })}
-        onMouseLeave={() => onHover({ hoveredRow: null, hoveredColumn: null })}
-        disableClickRow={() =>
-          disableClickRow?.({ data: row.original, table: table, fullRow: row })
-        }
-        flex
-      >
-        {!!row.getLeftVisibleCells().length && (
-          <Flex
-            position="sticky"
-            left={0}
-            zIndex={11}
-            basis={`${table.getLeftTotalSize()}px`}
-            flex="grow"
-            background={
-              isHovered
-                ? index % 2 === 0
-                  ? "tableRowBg2Hover"
-                  : "tableRowBgHover"
-                : index % 2 === 0
-                ? "tableRowBg2"
-                : "tableRowBg"
-            }
-          >
-            {row.getLeftVisibleCells().map((cell, index) => (
-              <CellGroup
-                cell={cell}
-                row={row}
-                key={cell.id}
-                testPrefix={testPrefix}
-                header={table.getLeftLeafHeaders()[index]}
-                {...rest}
-              />
-            ))}
-          </Flex>
-        )}
+  return (
+    <Flex
+      data-testid={`netdata-table-row${testPrefix}${
+        testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
+      }`}
+      onClick={
+        row.getCanExpand() && !row.depth
+          ? undefined
+          : onClickRow
+          ? () => onClickRow({ data: row.original, table: table, fullRow: row })
+          : undefined
+      }
+      onMouseEnter={() => onHover({ hoveredRow: row.id })}
+      onMouseLeave={() => onHover({ hoveredRow: null, hoveredColumn: null })}
+      disableClickRow={() => disableClickRow?.({ data: row.original, table: table, fullRow: row })}
+      flex
+    >
+      {!!row.getLeftVisibleCells().length && (
         <Flex
-          width={`${table.getCenterTotalSize()}px`}
+          position="sticky"
+          left={0}
+          zIndex={11}
+          basis={`${table.getLeftTotalSize()}px`}
           flex="grow"
           background={
             isHovered
@@ -161,49 +142,73 @@ export default memo(
               : "tableRowBg"
           }
         >
-          <Flex flex>
-            {row.getCenterVisibleCells().map((cell, index) => (
-              <CellGroup
-                cell={cell}
-                row={row}
-                key={cell.id}
-                testPrefix={testPrefix}
-                header={table.getCenterLeafHeaders()[index]}
-                {...rest}
-              />
-            ))}
-          </Flex>
+          {row.getLeftVisibleCells().map((cell, index) => (
+            <CellGroup
+              cell={cell}
+              row={row}
+              key={cell.id}
+              testPrefix={testPrefix}
+              header={table.getLeftLeafHeaders()[index]}
+              {...rest}
+            />
+          ))}
         </Flex>
-        {!!row.getRightVisibleCells().length && (
-          <Flex
-            position="sticky"
-            right={0}
-            zIndex={11}
-            basis={`${table.getLeftTotalSize()}px`}
-            flex="grow"
-            background={
-              isHovered
-                ? index % 2 === 0
-                  ? "tableRowBg2Hover"
-                  : "tableRowBgHover"
-                : index % 2 === 0
-                ? "tableRowBg2"
-                : "tableRowBg"
-            }
-          >
-            {row.getRightVisibleCells().map((cell, index) => (
-              <CellGroup
-                cell={cell}
-                row={row}
-                key={cell.id}
-                testPrefix={testPrefix}
-                header={table.getRightLeafHeaders()[index]}
-                {...rest}
-              />
-            ))}
-          </Flex>
-        )}
+      )}
+      <Flex
+        width={`${table.getCenterTotalSize()}px`}
+        flex="grow"
+        background={
+          isHovered
+            ? index % 2 === 0
+              ? "tableRowBg2Hover"
+              : "tableRowBgHover"
+            : index % 2 === 0
+            ? "tableRowBg2"
+            : "tableRowBg"
+        }
+      >
+        <Flex flex>
+          {row.getCenterVisibleCells().map((cell, index) => (
+            <CellGroup
+              cell={cell}
+              row={row}
+              key={cell.id}
+              testPrefix={testPrefix}
+              header={table.getCenterLeafHeaders()[index]}
+              {...rest}
+            />
+          ))}
+        </Flex>
       </Flex>
-    )
-  }
-)
+      {!!row.getRightVisibleCells().length && (
+        <Flex
+          position="sticky"
+          right={0}
+          zIndex={11}
+          basis={`${table.getLeftTotalSize()}px`}
+          flex="grow"
+          background={
+            isHovered
+              ? index % 2 === 0
+                ? "tableRowBg2Hover"
+                : "tableRowBgHover"
+              : index % 2 === 0
+              ? "tableRowBg2"
+              : "tableRowBg"
+          }
+        >
+          {row.getRightVisibleCells().map((cell, index) => (
+            <CellGroup
+              cell={cell}
+              row={row}
+              key={cell.id}
+              testPrefix={testPrefix}
+              header={table.getRightLeafHeaders()[index]}
+              {...rest}
+            />
+          ))}
+        </Flex>
+      )}
+    </Flex>
+  )
+}

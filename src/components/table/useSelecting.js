@@ -12,9 +12,9 @@ export default (defaultRowSelection = emptyObj, onChange = noop) => {
     setRowSelection(defaultRowSelection)
   }, [defaultRowSelection])
 
-  const onRowSelectionChange = useCallback(value => {
-    onChange(value)
-    setRowSelection(value)
+  const onRowSelectionChange = useCallback(getValue => {
+    onChange(getValue())
+    setRowSelection(getValue())
   }, [])
 
   return [rowSelection, onRowSelectionChange]

@@ -29,6 +29,7 @@ const HeaderGroupBy = ({ grouping, groupByColumns, onGroupBy, tableMeta, dataGa,
       alignItems="center"
       data-testid="tableGroupBy"
       gap={2}
+      flex="grow"
       {...tableMeta.groupByContainerStyles}
     >
       <TextSmall data-testid="tableGroupByLabel" color="textLite" whiteSpace="nowrap">
