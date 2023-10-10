@@ -113,6 +113,8 @@ const appColors = {
   dropdownTable: rawColors.neutral.white,
   tableRowBg: rawColors.neutral.grey190,
   tableRowBgHover: rawColors.neutral.grey180,
+  tableRowBg2: rawColors.neutral.mystic,
+  tableRowBg2Hover: rawColors.neutral.iron,
   columnHighlight: rawColors.green.green190,
   //IconButton
   iconColor: rawColors.neutral.limedSpruce,

@@ -34,9 +34,9 @@ const ResizeHandler = ({ header, table }) => {
       onMouseDown={header.getResizeHandler()}
       onTouchStart={header.getResizeHandler()}
       position="absolute"
-      top={0}
+      top="2px"
       right={0}
-      bottom={0}
+      bottom="2px"
     />
   )
 }

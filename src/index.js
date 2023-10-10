@@ -44,15 +44,12 @@ export {
   DefaultTheme,
   DarkTheme,
   // Theme helpers
-  extendTheme,
   getSizeUnit,
   getSizeBy,
   getRgbColor,
-  calcSize,
   getOrElse,
   propOrElse,
   getColor,
-  getGutterHeight,
 } from "./theme"
 export { devices, breakpoints } from "./media"
 export { Checkbox, useCheckboxesList } from "./components/checkbox"

@@ -7,7 +7,7 @@ import { PillContainer } from "./styled"
 const textComponents = {
   default: TextMicro,
   large: Text,
-  normal: Text,
+  normal: TextSmall,
   small: TextSmall,
   tiny: TextNano,
 }

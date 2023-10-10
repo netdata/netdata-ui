@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useRef } from "react"
+import React, { forwardRef, useCallback, useMemo } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -14,10 +14,8 @@ import { Text } from "src/components/typography"
 import { Icon } from "src/components/icon"
 import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./useColumns"
-import ColumnPinning from "./features/columnPinning"
 import TableProvider from "./provider"
 import Pagination from "./components/pagination"
-import FullTable from "./core/fullTable"
 
 import Header from "./header"
 import HeaderActions from "./header/actions"
@@ -91,6 +89,7 @@ const Table = forwardRef(
       title,
       virtualizeOptions,
       tableRef,
+      className,
       ...rest
     },
     ref
@@ -170,40 +169,11 @@ const Table = forwardRef(
 
     if (tableRef) tableRef.current = table
 
-    const scrollParentRef = useRef()
-
-    // const columnPinningProps = useCallback(
-    //   side => ({
-    //     side,
-    //     enableResizing,
-    //     onClickRow,
-    //     enableSorting,
-    //     table,
-    //     headers: side === "left" ? table.getLeftHeaderGroups() : table.getRightHeaderGroups(),
-    //     testPrefix,
-    //     dataGa,
-    //     scrollParentRef,
-    //     virtualizeOptions,
-    //     meta: tableMeta,
-    //   }),
-    //   [
-    //     enableResizing,
-    //     onClickRow,
-    //     enableSorting,
-    //     table,
-    //     testPrefix,
-    //     dataGa,
-    //     scrollParentRef,
-    //     virtualizeOptions,
-    //     tableMeta,
-    //   ]
-    // )
-
-    const { hasNextPage, loading, warning } = virtualizeOptions || {}
+    const { hasNextPage, loading, warning } = virtualizeOptions
 
     return (
       <TableProvider onHoverCell={onHoverCell}>
-        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref}>
+        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref} className={className}>
           <Header
             q={globalFilter}
             hasSearch={!!onSearch}
@@ -232,35 +202,13 @@ const Table = forwardRef(
             )}
           </Header>
           <Body
-            ref={scrollParentRef}
             table={table}
             dataGa={dataGa}
             testPrefix={testPrefix}
+            meta={tableMeta}
+            {...virtualizeOptions}
             {...rest}
           />
-
-          {/*{enableColumnPinning && columnPinning.left && (
-              <ColumnPinning {...columnPinningProps("left")} meta={tableMeta} {...rest} />
-            )}*/}
-          {/*<FullTable
-              headers={columnPinning ? table.getCenterHeaderGroups() : table.getHeaderGroups()}
-              getRowHandler={enableColumnPinning ? "getCenterVisibleCells" : "getVisibleCells"}
-              scrollParentRef={scrollParentRef}
-              enableResizing={enableResizing}
-              onClickRow={onClickRow}
-              enableSorting={enableSorting}
-              enableColumnPinning={enableColumnPinning}
-              table={table}
-              dataGa={dataGa}
-              testPrefix={testPrefix}
-              virtualizeOptions={virtualizeOptions}
-              meta={tableMeta}
-              side="center"
-              {...rest}
-            />*/}
-          {/*{enableColumnPinning && columnPinning.right && (
-              <ColumnPinning {...columnPinningProps("right")} meta={tableMeta} {...rest} />
-            )}*/}
           {!hasNextPage && !loading && !!warning && (
             <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
               <Icon name="warning_triangle_hollow" color="warning" />{" "}
@@ -299,6 +247,7 @@ Table.defaultProps = {
   meta: emptyObj,
   globalFilter: "",
   testPrefix: "",
+  virtualizeOptions: {},
 }
 
 export default Table

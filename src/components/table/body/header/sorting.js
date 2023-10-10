@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import Flex from "src/components/templates/flex"
 import { Icon } from "src/components/icon"
 
 const sortingIcons = {
@@ -9,8 +10,14 @@ const sortingIcons = {
 }
 
 // Needed to be targeted by parent on hover
-export const SortIconContainer = styled.div`
-  visibility: ${({ sorting }) => (sorting ? "visible" : "hidden")};
+export const SortIconContainer = styled(Flex).attrs(props => ({
+  flex: 0,
+  alignSelf: "start",
+  ...props,
+}))`
+  transition: opacity 200ms ease;
+  opacity: ${({ sorting }) => (sorting ? 1 : 0)};
+  position: absolute;
 `
 
 const Sorting = ({ sortable, sorting, ...rest }) => {
