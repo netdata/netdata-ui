@@ -106,7 +106,7 @@ export default ({
   ...rest
 }) => {
   const onHover = useTableContext(selectOnHover)
-  const isHovered = useTableContext(makeSelectIsRowHovered(row.id))
+  const isHovered = useTableContext(makeSelectIsRowHovered(row.index))
 
   return (
     <Flex
@@ -120,7 +120,7 @@ export default ({
           ? () => onClickRow({ data: row.original, table: table, fullRow: row })
           : undefined
       }
-      onMouseEnter={() => onHover({ hoveredRow: row.id })}
+      onMouseEnter={() => onHover({ hoveredRow: row.index })}
       onMouseLeave={() => onHover({ hoveredRow: null, hoveredColumn: null })}
       disableClickRow={() => disableClickRow?.({ data: row.original, table: table, fullRow: row })}
       flex

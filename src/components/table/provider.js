@@ -6,7 +6,7 @@ const TableContext = createContext({})
 
 export const useTableContext = select => useContext(TableContext, select)
 
-const initialState = { hoveredRow: null, hoveredColumn: null, rowsHeight: {} }
+const initialState = { hoveredRow: null, hoveredColumn: null }
 
 const TableProvider = ({ onHoverCell, children }) => {
   const [state, setState] = useState(initialState)
@@ -37,19 +37,9 @@ const TableProvider = ({ onHoverCell, children }) => {
     if (!onHoverCell) return
 
     onHoverCell({ row: state.hoveredRow + 1, column: state.hoveredColumn })
-  }, [state.hoveredRow, state.hoveredColumn])
+  }, [state.hoveredRow, state.hoveredColumn, onHoverCell])
 
-  const setRowHeight = useCallback(({ index, height }) => {
-    setState(prev => ({
-      ...prev,
-      rowsHeight: { ...prev.rowsHeight, [index]: Math.max(prev.rowsHeight[index] || 0, height) },
-    }))
-  }, [])
-
-  const contextValue = useMemo(
-    () => ({ ...state, dispatch, onHover, setRowHeight }),
-    [state, onHover]
-  )
+  const contextValue = useMemo(() => ({ ...state, dispatch, onHover }), [state, onHover])
 
   return <TableContext.Provider value={contextValue}>{children}</TableContext.Provider>
 }
