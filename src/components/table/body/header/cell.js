@@ -23,10 +23,12 @@ const LabelContainer = styled(Flex)`
   }
 `
 
-const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index }) => {
+const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index, rootRef }) => {
   const [setRef, , visible] = useIntersection({
     rootMargin: "100% 0% 100% 0%",
     threshold: 0,
+    root: rootRef.current,
+    defaultVisible: true,
   })
 
   const { column } = header

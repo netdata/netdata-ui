@@ -8,8 +8,13 @@ import { useTableContext } from "../provider"
 
 const makeSelectIsRowHovered = id => s => s.hoveredRow === id
 
-const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
-  const [setRef, , visible] = useIntersection({ rootMargin: "100% 0% 100% 0%", threshold: 0.1 })
+const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef }) => {
+  const [setRef, , visible] = useIntersection({
+    rootMargin: "100% 0% 100% 0%",
+    threshold: 0,
+    root: rootRef.current,
+    defaultVisible: true,
+  })
 
   const { column } = cell
 

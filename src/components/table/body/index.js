@@ -117,6 +117,7 @@ const Body = memo(
                     testPrefix={testPrefix}
                     coloredSortedColumn={coloredSortedColumn}
                     index={virtualRow.index}
+                    rootRef={ref}
                   />
                 ) : (
                   <Row
@@ -128,6 +129,7 @@ const Body = memo(
                     meta={meta}
                     row={rows[virtualRow.index - 1]}
                     index={virtualRow.index}
+                    rootRef={ref}
                     {...rest}
                   />
                 )}
