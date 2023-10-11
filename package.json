@@ -1,11 +1,14 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "netdata UI kit",
   "main": "index.js",
   "module": "es6/index.js",
   "jsnext:main": "es6/index.js",
-  "repository": "git@github.com:netdata/charts.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:netdata/netdata-ui.git"
+  },
   "author": "Netdata",
   "license": "GPL-3.0",
   "private": false,
@@ -57,10 +60,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.9"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:netdata/netdata-ui.git"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.0",
