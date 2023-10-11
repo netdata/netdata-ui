@@ -1,10 +1,10 @@
 {
   "name": "@netdata/netdata-ui",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "netdata UI kit",
-  "main": "index.js",
-  "module": "es6/index.js",
-  "jsnext:main": "es6/index.js",
+  "main": "dist/index.js",
+  "module": "dist/es6/index.js",
+  "jsnext:main": "dist/es6/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:netdata/netdata-ui.git"
@@ -30,7 +30,6 @@
     "to-cloud": "yarn build && yarn cp-cloud",
     "cp-charts": "cp -R ./dist ../charts/node_modules/@netdata/netdata-ui/",
     "to-charts": "yarn build && yarn cp-charts",
-    "resolve-alias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib",
     "prepublishOnly": "yarn clean && yarn build"
   },
   "keywords": [
