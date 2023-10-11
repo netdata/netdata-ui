@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import backdropBlur from "src/components/templates/layer/mixins/backdropBlur"
+import backdropBlur from "@/components/templates/layer/mixins/backdropBlur"
 
 const Container = styled.div`
   position: fixed;

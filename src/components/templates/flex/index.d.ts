@@ -11,7 +11,7 @@ import {
   ZIndexProps,
   PositionProps,
   CursorProps,
-} from "src/mixins/types"
+} from "@/mixins/types"
 
 import {
   DirectionProps,

@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState, useRef } from "react"
 import styled from "styled-components"
 import { useVirtualizer } from "@tanstack/react-virtual"
-import Flex from "src/components/templates/flex"
-import Search from "src/components/search"
-import Box from "src/components/templates/box"
+import Flex from "@/components/templates/flex"
+import Search from "@/components/search"
+import Box from "@/components/templates/box"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) =>

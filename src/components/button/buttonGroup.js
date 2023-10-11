@@ -1,5 +1,5 @@
 import React, { Children, isValidElement, cloneElement } from "react"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import { Button } from "./button"
 
 const getButtonGroupProps = (itemIndex, itemsLength) => {

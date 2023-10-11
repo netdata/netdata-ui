@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { action } from "@storybook/addon-actions"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import Drop from "."
 
 export const Simple = {

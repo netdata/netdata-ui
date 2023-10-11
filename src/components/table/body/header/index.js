@@ -1,5 +1,6 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
+import { useMeasure } from "react-use"
+import Flex from "@/components/templates/flex"
 import Cell from "./cell"
 
 const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
@@ -15,6 +16,32 @@ const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
   </Flex>
 )
 
+const HeaderGroups = ({ groups, size, side, ...rest }) => {
+  const [widthRef, { width }] = useMeasure()
+
+  if (!groups[0].headers.length) return null
+
+  if (!side)
+    return groups.map(headerGroup => (
+      <HeaderGroup headerGroup={headerGroup} key={headerGroup.id} {...rest} />
+    ))
+
+  return (
+    <Flex
+      // ref={widthRef}
+      position="sticky"
+      {...(side === "right" ? { right: 0, sx: { transform: "translateX(100%)" } } : { left: 0 })}
+      zIndex={11}
+      width={`${size}px`}
+      flex="grow"
+    >
+      {groups.map(headerGroup => (
+        <HeaderGroup headerGroup={headerGroup} key={headerGroup.id} {...rest} />
+      ))}
+    </Flex>
+  )
+}
+
 const BodyHeader = ({ table, testPrefix, ...rest }) => (
   <Flex
     data-testid={`netdata-table-head${testPrefix}`}
@@ -26,55 +53,29 @@ const BodyHeader = ({ table, testPrefix, ...rest }) => (
       color: "border",
     }}
   >
-    {!!table.getLeftHeaderGroups()[0].headers.length && (
-      <Flex
-        position="sticky"
-        left={0}
-        zIndex={11}
-        width={`${table.getLeftTotalSize()}px`}
-        flex="grow"
-      >
-        {table.getLeftHeaderGroups().map(headerGroup => (
-          <HeaderGroup
-            headerGroup={headerGroup}
-            key={headerGroup.id}
-            testPrefix={testPrefix}
-            {...rest}
-            table={table}
-          />
-        ))}
-      </Flex>
-    )}
-    <Flex width={`${table.getCenterTotalSize()}px`} flex="grow">
-      {table.getCenterHeaderGroups().map(headerGroup => (
-        <HeaderGroup
-          headerGroup={headerGroup}
-          key={headerGroup.id}
-          testPrefix={testPrefix}
-          {...rest}
-          table={table}
-        />
-      ))}
-    </Flex>
-    {!!table.getRightHeaderGroups()[0].headers.length && (
-      <Flex
-        position="sticky"
-        right={0}
-        zIndex={11}
-        width={`${table.getLeftTotalSize()}px`}
-        flex="grow"
-      >
-        {table.getRightHeaderGroups().map(headerGroup => (
-          <HeaderGroup
-            headerGroup={headerGroup}
-            key={headerGroup.id}
-            testPrefix={testPrefix}
-            {...rest}
-            table={table}
-          />
-        ))}
-      </Flex>
-    )}
+    <HeaderGroups
+      groups={table.getLeftHeaderGroups()}
+      side="left"
+      size={table.getLeftTotalSize()}
+      testPrefix={testPrefix}
+      {...rest}
+      table={table}
+    />
+    <HeaderGroups
+      groups={table.getCenterHeaderGroups()}
+      size={table.getCenterTotalSize()}
+      testPrefix={testPrefix}
+      {...rest}
+      table={table}
+    />
+    <HeaderGroups
+      groups={table.getRightHeaderGroups()}
+      side="right"
+      size={table.getRightTotalSize()}
+      testPrefix={testPrefix}
+      {...rest}
+      table={table}
+    />
   </Flex>
 )
 

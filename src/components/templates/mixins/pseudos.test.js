@@ -1,5 +1,5 @@
 import pseudos, { pseudoSelectors } from "./pseudos"
-import { DefaultTheme as theme } from "src/theme/default"
+import { DefaultTheme as theme } from "@/theme/default"
 
 const disabledColor = theme.colors.disabled
 it("renders", () => {

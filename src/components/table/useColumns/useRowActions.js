@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 
 import Action from "../components/action"
 
@@ -70,7 +70,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       enableResizing: false,
       header: "Actions",
       cell: ({ row, table }) => (
-        <Flex data-testid="action-cell" height="100%" gap={2}>
+        <Flex data-testid="action-cell" height="100%" gap={2} justifyContent="end">
           {availableRowActions.map(
             ({ id, handleAction, isDisabled, isVisible = true, dataGa, ...rest }) => (
               <Action
@@ -90,8 +90,14 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       ),
       enableColumnFilter: false,
       enableSorting: false,
-      meta: { stopPropagation: true },
       tableMeta,
+      size: availableRowActions.length * 30,
+      meta: {
+        cellStyles: {
+          justifyContent: "end",
+        },
+      },
+      notFlex: true,
     }),
     [availableRowActions]
   )

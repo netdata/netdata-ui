@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { getColor, getSizeBy } from "src/theme/utils"
-import Flex from "src/components/templates/flex"
+import { getColor, getSizeBy } from "@/theme/utils"
+import Flex from "@/components/templates/flex"
 
 export const StyledTabsWrapper = styled(Flex).attrs(props => ({
   column: true,

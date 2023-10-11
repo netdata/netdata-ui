@@ -1,11 +1,11 @@
 // import React, { useState } from "react"
 // import { action } from "@storybook/addon-actions"
 // import { boolean } from "@storybook/addon-knobs"
-// import Flex from "src/components/templates/flex"
-// import Tooltip from "src/components/drops/tooltip"
-// import { Button } from "src/components/button"
-// import { Icon } from "src/components/icon"
-// import { Text } from "src/components/typography"
+// import Flex from "@/components/templates/flex"
+// import Tooltip from "@/components/drops/tooltip"
+// import { Button } from "@/components/button"
+// import { Icon } from "@/components/icon"
+// import { Text } from "@/components/typography"
 // import Menu from "."
 
 // const Simple = props => (

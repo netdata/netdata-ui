@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, FocusEvent, KeyboardEvent, MutableRefObject, ReactNode } from "react"
-import { AlignSelfProps, MarginProps } from "src/mixins/types"
+import { AlignSelfProps, MarginProps } from "@/mixins/types"
 
 export type CallBackRef = (input: any) => void
 export type InstantFeedback = "all" | "positiveFirst"

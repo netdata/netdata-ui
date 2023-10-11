@@ -1,9 +1,9 @@
 // import React from "react"
 // import { boolean, number } from "@storybook/addon-knobs"
 // import useToggle from "react-use/lib/useToggle"
-// import Flex from "src/components/templates/flex"
-// import { H2, Text } from "src/components/typography"
-// import { Button } from "src/components/button"
+// import Flex from "@/components/templates/flex"
+// import { H2, Text } from "@/components/typography"
+// import { Button } from "@/components/button"
 // import Collapsible from "."
 
 // const Content = () => (

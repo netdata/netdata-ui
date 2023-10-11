@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 
 const Anchor = styled(Flex).attrs({ as: "a" })`
   text-decoration: none;

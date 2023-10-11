@@ -1,9 +1,9 @@
 import React from "react"
 import { flexRender } from "@tanstack/react-table"
-import Flex from "src/components/templates/flex"
-import { TextNano } from "src/components/typography"
-import { Icon } from "src/components/icon"
-import useIntersection from "src/hooks/use-intersection"
+import Flex from "@/components/templates/flex"
+import { TextNano } from "@/components/typography"
+import { Icon } from "@/components/icon"
+import useIntersection from "@/hooks/use-intersection"
 import { useTableContext } from "../provider"
 
 const makeSelectIsRowHovered = id => s => s.hoveredRow === id
@@ -44,19 +44,23 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
           : header.colSpan
       }
       width={`${column.getSize()}px`}
-      padding={[1]}
       position="relative"
       data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
       overflow="hidden"
-      {...(cell.column.getCanSort() &&
-        coloredSortedColumn &&
-        !!cell.column.getIsSorted() && {
-          background: "columnHighlight",
-          backgroundOpacity: row.index % 2 === 0 ? "0.2" : "0.4",
-        })}
-      {...cellStyles}
     >
-      <Flex flex width="100%" justifyContent="between" alignItems="start">
+      <Flex
+        flex
+        width="100%"
+        alignItems="start"
+        padding={[1]}
+        {...(cell.column.getCanSort() &&
+          coloredSortedColumn &&
+          !!cell.column.getIsSorted() && {
+            background: "columnHighlight",
+            backgroundOpacity: row.index % 2 === 0 ? "0.2" : "0.4",
+          })}
+        {...cellStyles}
+      >
         {visible && (
           <>
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -72,7 +76,9 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
                     e.target.scrollIntoView({ behavior: "smooth", block: "nearest" })
                   )
                 }}
-                alignSelf="end"
+                position="absolute"
+                right={0}
+                bottom="-2px"
               >
                 <TextNano fontSize="10px" color="textLite">
                   Expand

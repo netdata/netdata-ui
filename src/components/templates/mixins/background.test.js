@@ -1,4 +1,4 @@
-import { DefaultTheme as theme } from "src/theme/default"
+import { DefaultTheme as theme } from "@/theme/default"
 import background from "./background"
 
 it("renders", () => {

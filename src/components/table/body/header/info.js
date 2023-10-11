@@ -1,7 +1,7 @@
 import React from "react"
-import { Icon } from "src/components/icon"
-import Flex from "src/components/templates/flex"
-import Tooltip from "src/components/drops/tooltip"
+import { Icon } from "@/components/icon"
+import Flex from "@/components/templates/flex"
+import Tooltip from "@/components/drops/tooltip"
 
 const Info = ({ meta }) => {
   const tooltipText = meta && meta?.tooltip ? meta?.tooltip : ""

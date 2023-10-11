@@ -1,7 +1,7 @@
 import React from "react"
 import { renderWithProviders } from "testUtilities"
 import styled from "styled-components"
-import { DefaultTheme as theme } from "src/theme/default"
+import { DefaultTheme as theme } from "@/theme/default"
 import styledBorder from "./border"
 
 const borderColor = theme.colors.border

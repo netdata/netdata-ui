@@ -4,8 +4,8 @@
 // import { action } from "@storybook/addon-actions"
 // import { Sidebar } from "./sidebar"
 // import { PortalSidebar } from "./portaled-sidebar"
-// import { getColor } from "src/theme/utils"
-// import { Button } from "src/components/button"
+// import { getColor } from "@/theme/utils"
+// import { Button } from "@/components/button"
 
 // export const Empty = { component: () => <Sidebar right={boolean("right", false)} /> }
 

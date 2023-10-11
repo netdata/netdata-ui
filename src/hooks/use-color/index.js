@@ -1,6 +1,6 @@
 import { ThemeContext } from "styled-components"
 import { useContext } from "react"
-import { getColor } from "src/theme"
+import { getColor } from "@/theme"
 
 const useColor = () => {
   const theme = useContext(ThemeContext)

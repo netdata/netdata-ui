@@ -1,7 +1,7 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
-import { H5, Text } from "src/components/typography"
-import { Button } from "src/components/button"
+import Flex from "@/components/templates/flex"
+import { H5, Text } from "@/components/typography"
+import { Button } from "@/components/button"
 import Tooltip from "."
 
 export const Simple = {

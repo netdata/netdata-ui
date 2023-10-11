@@ -1,8 +1,8 @@
 import React, { memo, useMemo } from "react"
-import Flex from "src/components/templates/flex"
-import SearchInput from "src/components/search"
-import { Icon } from "src/components/icon"
-import { TextBig } from "src/components/typography"
+import Flex from "@/components/templates/flex"
+import SearchInput from "@/components/search"
+import { Icon } from "@/components/icon"
+import { TextBig } from "@/components/typography"
 import { debounce } from "throttle-debounce"
 import GroupBy from "./groupBy"
 

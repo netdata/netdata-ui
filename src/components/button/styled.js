@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components"
 import { lighten, darken } from "polished"
-import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "src/theme"
-import margin from "src/mixins/margin"
-import padding from "src/mixins/padding"
-import round from "src/mixins/round"
-import alignSelf from "src/mixins/alignSelf"
-import textTransform from "src/mixins/textTransform"
+import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
+import margin from "@/mixins/margin"
+import padding from "@/mixins/padding"
+import round from "@/mixins/round"
+import alignSelf from "@/mixins/alignSelf"
+import textTransform from "@/mixins/textTransform"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 
 const themes = {

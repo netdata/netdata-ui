@@ -1,5 +1,5 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 
 const ResizeHandler = ({ header, table }) => {
   if (!header.column.getCanResize()) return null

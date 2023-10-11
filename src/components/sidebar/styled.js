@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { propOrElse, getColor } from "src/theme/utils"
+import { propOrElse, getColor } from "@/theme/utils"
 
 const LEFT = 2
 const RIGHT = -2

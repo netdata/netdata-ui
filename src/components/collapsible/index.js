@@ -1,8 +1,8 @@
 import React, { memo, useMemo, useState, forwardRef } from "react"
 import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import styled from "styled-components"
-import useForwardRef from "src/hooks/use-forward-ref"
-import Flex from "src/components/templates/flex"
+import useForwardRef from "@/hooks/use-forward-ref"
+import Flex from "@/components/templates/flex"
 
 const measurementByDimension = {
   vertical: "height",

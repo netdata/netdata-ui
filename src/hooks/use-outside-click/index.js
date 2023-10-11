@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import isAncestor from "src/components/drops/mixins/isAncestor"
+import isAncestor from "@/components/drops/mixins/isAncestor"
 
 export default (dropRef, onClickOutside, target) => {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from "react"
-import { H4, Text, TextSmall } from "src/components/typography"
+import { H4, Text, TextSmall } from "@/components/typography"
 import Flex from "."
 
 const FlexCard = () => (

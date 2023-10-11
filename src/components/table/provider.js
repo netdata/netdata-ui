@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react"
 import { createContext } from "use-context-selector"
-import useContext from "src/utils/useContextSelector"
+import useContext from "@/utils/useContextSelector"
 
 const TableContext = createContext({})
 

@@ -1,5 +1,5 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import ProgressBar from "."
 
 const Default = () => (

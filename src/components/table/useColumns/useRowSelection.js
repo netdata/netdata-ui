@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import { Checkbox } from "src/components/checkbox"
+import { Checkbox } from "@/components/checkbox"
 
 const width = 30
 
@@ -35,7 +35,6 @@ export default (enabled, { testPrefix, tableMeta }) =>
             maxSize: width,
             minSize: width,
             notFlex: true,
-            meta: { stopPropagation: true },
             tableMeta,
           }
         : null,

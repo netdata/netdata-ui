@@ -1,6 +1,6 @@
 import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
-import { DefaultTheme } from "src/theme/default"
+import { DefaultTheme } from "@/theme/default"
 import RadioButton from "./index"
 
 const getSelectors = container => {

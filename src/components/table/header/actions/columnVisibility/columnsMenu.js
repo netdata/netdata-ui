@@ -1,8 +1,8 @@
 import React from "react"
-import Drop from "src/components/drops/drop/index.js"
-import Flex from "src/components/templates/flex"
-import { ListItem, Text } from "src/components/typography"
-import { Checkbox } from "src/components/checkbox"
+import Drop from "@/components/drops/drop/index.js"
+import Flex from "@/components/templates/flex"
+import { ListItem, Text } from "@/components/typography"
+import { Checkbox } from "@/components/checkbox"
 
 const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
   const checked = column.getIsVisible()

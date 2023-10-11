@@ -1,7 +1,7 @@
 import React from "react"
-import Box from "src/components/templates/box"
-import { Icon } from "src/components/icon"
-import SearchInput from "src/components/search"
+import Box from "@/components/templates/box"
+import { Icon } from "@/components/icon"
+import SearchInput from "@/components/search"
 import { debounce } from "throttle-debounce"
 
 const SearchFilter = ({ column, testPrefix }) => {

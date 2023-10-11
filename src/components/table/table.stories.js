@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import Table from "./core/base-table"
 import Table from "./table"
-import Box from "src/components/templates/box"
-import Flex from "src/components/templates/flex"
-import { Text } from "src/components/typography"
+import Box from "@/components/templates/box"
+import Flex from "@/components/templates/flex"
+import { Text } from "@/components/typography"
 
 const colorFilter = {
   id: "colorFilter",

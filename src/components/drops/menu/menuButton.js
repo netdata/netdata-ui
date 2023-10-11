@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react"
 import styled from "styled-components"
-import Flex from "src/components/templates/flex"
-import { Icon } from "src/components/icon"
-import { Text } from "src/components/typography"
+import Flex from "@/components/templates/flex"
+import { Icon } from "@/components/icon"
+import { Text } from "@/components/typography"
 
 const MenuContainer = styled(Flex)`
   cursor: pointer;

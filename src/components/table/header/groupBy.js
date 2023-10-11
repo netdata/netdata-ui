@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from "react"
-import Flex from "src/components/templates/flex"
-import Select from "src/components/select"
-import { TextSmall } from "src/components/typography"
+import Flex from "@/components/templates/flex"
+import Select from "@/components/select"
+import { TextSmall } from "@/components/typography"
 
 const HeaderGroupBy = ({ grouping, groupByColumns, onGroupBy, tableMeta, dataGa, dataColumns }) => {
   const groupByOptions = useMemo(

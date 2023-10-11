@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { Icon } from "src/components/icon"
-import Box from "src/components/templates/box"
-import Flex from "src/components/templates/flex"
-import { getSizeUnit, getValidatedControlColor } from "src/theme/utils"
+import { Icon } from "@/components/icon"
+import Box from "@/components/templates/box"
+import Flex from "@/components/templates/flex"
+import { getSizeUnit, getValidatedControlColor } from "@/theme/utils"
 
 export const CheckboxContainer = styled(Box).attrs({
   height: "16px",

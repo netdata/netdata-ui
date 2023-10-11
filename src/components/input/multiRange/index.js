@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
-import Flex from "src/components/templates/flex"
-import { TextSmall } from "src/components/typography"
+import Flex from "@/components/templates/flex"
+import { TextSmall } from "@/components/typography"
 import { Range, Slider, SliderTrack } from "./styled"
 
 const MultiRangeInput = ({

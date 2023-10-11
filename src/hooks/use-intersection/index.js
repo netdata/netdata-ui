@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
-import uuid from "src/mixins/uuid"
+import uuid from "@/mixins/uuid"
 
 const roots = new Map()
 const observers = {}

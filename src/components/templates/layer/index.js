@@ -1,8 +1,8 @@
 import React, { useRef } from "react"
 import ReactDOM from "react-dom"
-import useDropElement from "src/hooks/use-drop-element"
-import useOutsideClick from "src/hooks/use-outside-click"
-import useKeyboardEsc from "src/hooks/use-keyboard-esc"
+import useDropElement from "@/hooks/use-drop-element"
+import useOutsideClick from "@/hooks/use-outside-click"
+import useKeyboardEsc from "@/hooks/use-keyboard-esc"
 import Container from "./container"
 import BackdropContainer from "./backdropContainer"
 

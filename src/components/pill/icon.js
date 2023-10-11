@@ -1,5 +1,5 @@
 import React from "react"
-import { Icon } from "src/components/icon"
+import { Icon } from "@/components/icon"
 import { getPillColor } from "./mixins/colors"
 
 const PillIcon = ({ icon, color, hollow, flavour, size, ...rest }) => {

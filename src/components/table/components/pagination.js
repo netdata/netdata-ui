@@ -1,7 +1,7 @@
 import React, { memo } from "react"
-import Flex from "src/components/templates/flex"
-import { Text } from "src/components/typography"
-import { IconButton } from "src/components/button"
+import Flex from "@/components/templates/flex"
+import { Text } from "@/components/typography"
+import { IconButton } from "@/components/button"
 
 const Pagination = ({ table }) => {
   const {

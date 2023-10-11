@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { getColor } from "src/theme"
-import margin from "src/mixins/margin"
-import alignSelf from "src/mixins/alignSelf"
+import { getColor } from "@/theme"
+import margin from "@/mixins/margin"
+import alignSelf from "@/mixins/alignSelf"
 
 const SIZES = {
   small: "16px",

@@ -1,5 +1,5 @@
 import React from "react"
-import Select from "src/components/select"
+import Select from "@/components/select"
 
 const DropdownFilter = ({
   "data-ga": dataGA,

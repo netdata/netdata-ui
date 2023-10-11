@@ -1,10 +1,10 @@
 import React, { useState, forwardRef } from "react"
 
-import Tooltip from "src/components/drops/tooltip"
-import Flex from "src/components/templates/flex"
+import Tooltip from "@/components/drops/tooltip"
+import Flex from "@/components/templates/flex"
 
-import { ConfirmationDialog } from "src/components/confirmation-dialog"
-import { Button, IconButton } from "src/components/button"
+import { ConfirmationDialog } from "@/components/confirmation-dialog"
+import { Button, IconButton } from "@/components/button"
 
 const Action = forwardRef(
   (

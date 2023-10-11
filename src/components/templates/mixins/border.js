@@ -1,4 +1,4 @@
-import { getColor } from "src/theme"
+import { getColor } from "@/theme"
 
 const borderMap = {
   all: ({ size, type, color }) => `

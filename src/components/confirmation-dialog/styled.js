@@ -1,14 +1,14 @@
 import styled from "styled-components"
-import { Icon } from "src/components/icon"
+import { Icon } from "@/components/icon"
 import Modal, {
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from "src/components/modal"
-import { H3, Text } from "src/components/typography"
-import { getColor } from "src/theme"
+} from "@/components/modal"
+import { H3, Text } from "@/components/typography"
+import { getColor } from "@/theme"
 
 export const Actions = styled(ModalFooter).attrs({
   gap: 6,
@@ -50,7 +50,9 @@ export const Body = styled(ModalBody).attrs({
 export const Dialog = styled(Modal).attrs({
   backdropProps: { backdropBlur: 8 },
 })`
-  box-shadow: 0 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%),
+  box-shadow:
+    0 11px 15px -7px rgb(0 0 0 / 20%),
+    0px 24px 38px 3px rgb(0 0 0 / 14%),
     0px 9px 46px 8px rgb(0 0 0 / 12%);
 `
 

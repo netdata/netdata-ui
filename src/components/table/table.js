@@ -8,10 +8,10 @@ import {
   getGroupedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import Flex from "src/components/templates/flex"
-import Layer from "src/components/templates/layer"
-import { Text } from "src/components/typography"
-import { Icon } from "src/components/icon"
+import Flex from "@/components/templates/flex"
+import Layer from "@/components/templates/layer"
+import { Text } from "@/components/typography"
+import { Icon } from "@/components/icon"
 import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./useColumns"
 import TableProvider from "./provider"

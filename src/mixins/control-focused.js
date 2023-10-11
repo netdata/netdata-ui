@@ -1,5 +1,5 @@
 import { css } from "styled-components"
-import { getValidatedControlColor } from "src/theme"
+import { getValidatedControlColor } from "@/theme"
 
 export const controlFocused = css`
   border-color: ${getValidatedControlColor("controlFocused")};

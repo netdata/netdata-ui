@@ -1,6 +1,6 @@
 import { FC, SyntheticEvent } from "react"
-import { MarginProps, PaddingProps, PositionProps, RoundProps, RefType } from "src/mixins/types"
-import { HeightProps, WidthProps } from "src/components/templates/mixins"
+import { MarginProps, PaddingProps, PositionProps, RoundProps, RefType } from "@/mixins/types"
+import { HeightProps, WidthProps } from "@/components/templates/mixins"
 
 export type PillFlavour = "error" | "neutral" | "success" | "warning"
 export type PillSize = "default" | "large" | "normal" | "small"

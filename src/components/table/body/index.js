@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useEffect } from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import Row from "./row"
 import Header from "./header"
 

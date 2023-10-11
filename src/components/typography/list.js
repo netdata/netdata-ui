@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
-import alignSelf from "src/mixins/alignSelf"
-import margin from "src/mixins/margin"
-import padding from "src/mixins/padding"
+import alignSelf from "@/mixins/alignSelf"
+import margin from "@/mixins/margin"
+import padding from "@/mixins/padding"
 
 const list = css`
   ${alignSelf}

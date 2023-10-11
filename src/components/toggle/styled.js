@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { getColor, getSizeUnit } from "src/theme/utils"
-import { controlFocused } from "src/mixins"
-import margin from "src/mixins/margin"
-import alignSelf from "src/mixins/alignSelf"
+import { getColor, getSizeUnit } from "@/theme/utils"
+import { controlFocused } from "@/mixins"
+import margin from "@/mixins/margin"
+import alignSelf from "@/mixins/alignSelf"
 
 export const ToggleContainer = styled.div`
   display: block;

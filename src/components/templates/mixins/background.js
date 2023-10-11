@@ -1,4 +1,4 @@
-import { getColor, getRgbColor } from "src/theme"
+import { getColor, getRgbColor } from "@/theme"
 
 export default ({ theme, background, backgroundOpacity }) => {
   if (!background) return ""

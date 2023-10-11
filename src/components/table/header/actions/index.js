@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import useActions from "./useActions"
 import Action from "./action"
 import ColumnVisibility from "./columnVisibility"

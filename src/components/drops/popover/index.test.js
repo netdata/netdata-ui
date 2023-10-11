@@ -1,6 +1,6 @@
 import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
-import { Text } from "src/components/typography"
+import { Text } from "@/components/typography"
 import Popover from "./index"
 
 it("renders", () => {

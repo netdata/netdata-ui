@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Box from "src/components/templates/box"
-import InputRange from "src/components/input/range"
+import Box from "@/components/templates/box"
+import InputRange from "@/components/input/range"
 
 export const Slider = styled(Box)``
 

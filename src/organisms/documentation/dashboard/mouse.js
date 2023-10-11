@@ -1,5 +1,5 @@
 import React from "react"
-import { Text } from "src/components/typography"
+import { Text } from "@/components/typography"
 import Section, { Container } from "./section"
 
 const Mouse = () => (

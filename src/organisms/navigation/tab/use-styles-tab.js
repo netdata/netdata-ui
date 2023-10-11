@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import useColor from "src/hooks/use-color"
+import useColor from "@/hooks/use-color"
 
 const border = ({ borderSideColor, borderTopColor, showBorderLeft }) => ({
   borderRight: `1px solid ${borderSideColor}`,

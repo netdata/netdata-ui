@@ -2,10 +2,10 @@
 // import styled from "styled-components"
 // import { text, number, boolean, select } from "@storybook/addon-knobs"
 // import { useCallback } from "@storybook/addons"
-// import { getColor } from "src/theme/utils"
+// import { getColor } from "@/theme/utils"
 // import { TextInput, useInputValue, useTouchedState } from "."
-// import { Button } from "src/components/button"
-// import { Icon } from "src/components/icon"
+// import { Button } from "@/components/button"
+// import { Icon } from "@/components/icon"
 
 // const Container = styled.div`
 //   width: 400px;

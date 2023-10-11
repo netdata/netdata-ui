@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import DropdownFilter from "./dropdown"
 
-import Box from "src/components/templates/box"
-import Flex from "src/components/templates/flex"
+import Box from "@/components/templates/box"
+import Flex from "@/components/templates/flex"
 
-import { TextInput } from "src/components/input"
+import { TextInput } from "@/components/input"
 import { debounce } from "throttle-debounce"
 
 const Comparisons = [

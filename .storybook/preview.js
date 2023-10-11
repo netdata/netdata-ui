@@ -2,15 +2,15 @@ import React from "react"
 import useLocalStorage from "react-use/lib/useLocalStorage"
 import centered from "@storybook/addon-centered/react"
 
-import { DefaultTheme } from "src/theme/default"
-import { DarkTheme } from "src/theme/dark"
-import { GlobalStyles } from "src/global-styles"
+import { DefaultTheme } from "@/theme/default"
+import { DarkTheme } from "@/theme/dark"
+import { GlobalStyles } from "@/global-styles"
 
 import { ThemeProvider } from "styled-components"
 import Flex from "../src/components/templates/flex"
 
 import { Toggle } from "../src/components/toggle"
-import { Text } from "src/components/typography"
+import { Text } from "@/components/typography"
 
 const results = require("../.jest-test-results.json")
 

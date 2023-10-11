@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react"
-import Box from "src/components/templates/box"
-import Flex from "src/components/templates/flex"
-import Tooltip from "src/components/drops/tooltip"
-import { TextSmall } from "src/components/typography"
+import Box from "@/components/templates/box"
+import Flex from "@/components/templates/flex"
+import Tooltip from "@/components/drops/tooltip"
+import { TextSmall } from "@/components/typography"
 import { Button } from "./button"
 
 //this  addition here has been done to be aligned with our current implementation at cloud-frontend src/components/tooltips/customTooltip.js

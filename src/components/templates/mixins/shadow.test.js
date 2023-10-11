@@ -1,5 +1,5 @@
 import shadow from "./shadow"
-import { DefaultTheme as theme } from "src/theme/default"
+import { DefaultTheme as theme } from "@/theme/default"
 
 it("renders", () => {
   expect(shadow({ theme })).toBe("")

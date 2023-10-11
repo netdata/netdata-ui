@@ -1,7 +1,7 @@
 import React from "react"
 import { render } from "@testing-library/react"
 import { ThemeProvider } from "styled-components"
-import { DefaultTheme } from "src/theme/default"
+import { DefaultTheme } from "@/theme/default"
 
 export default (Component, { theme = DefaultTheme, ...rest } = {}) =>
   render(Component, {

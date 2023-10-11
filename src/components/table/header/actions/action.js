@@ -1,7 +1,7 @@
 import React, { useRef, forwardRef } from "react"
-import Action from "src/components/table/components/action"
+import Action from "@/components/table/components/action"
 
-import { mergeRefs } from "src/utils"
+import { mergeRefs } from "@/utils"
 
 const HeaderAction = forwardRef(
   (

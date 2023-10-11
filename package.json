@@ -2,41 +2,39 @@
   "name": "@netdata/netdata-ui",
   "version": "3.0.4",
   "description": "netdata UI kit",
-  "main": "./lib/index.js",
+  "main": "index.js",
+  "module": "es6/index.js",
+  "jsnext:main": "es6/index.js",
+  "repository": "git@github.com:netdata/charts.git",
+  "author": "Netdata",
+  "license": "GPL-3.0",
+  "private": false,
   "files": [
-    "/lib"
+    "/dist"
   ],
   "scripts": {
     "start": "yarn storybook dev",
     "storybook-start": "bash start.sh",
     "testOut": "yarn test --env=jsdom --json --outputFile=.jest-test-results.json",
     "build-storybook": "storybook build -c .storybook -o public",
-    "build": "yarn testOut && storybook build",
-    "clean": "rimraf ./lib",
-    "copy-files": "copyfiles -u 1 src/**/*.d.ts src/**/*.svg lib/",
-    "ts-bundle": "yarn clean && tsc && tsc -m es6 && yarn copy-files && yarn resolve-alias",
+    "build:cjs": "babel src --out-dir dist --copy-files --ignore **/*.stories.js",
+    "build:es6": "BABEL_ENV=es6 babel src --out-dir dist/es6 --copy-files --ignore **/*.stories.js",
+    "build:umd": "NODE_ENV=production webpack",
+    "build": "yarn build:umd && yarn build:cjs && yarn build:es6",
+    "clean": "rimraf lib dist es coverage",
     "test": "jest --config ./jest/config.js",
-    "cp-cloud": "cp -R ./lib ../cloud-frontend/node_modules/@netdata/netdata-ui/",
-    "to-cloud": "yarn ts-bundle && yarn cp-cloud",
-    "cp-dashboard": "cp -R ./lib ../dashboard/node_modules/@netdata/netdata-ui/",
-    "to-dashboard": "yarn ts-bundle && yarn cp-dashboard",
-    "cp-charts": "cp -R ./lib ../charts/node_modules/@netdata/netdata-ui/",
-    "to-charts": "yarn ts-bundle && yarn cp-charts",
+    "cp-cloud": "cp -R ./dist ../cloud-frontend/node_modules/@netdata/netdata-ui/",
+    "to-cloud": "yarn build && yarn cp-cloud",
+    "cp-charts": "cp -R ./dist ../charts/node_modules/@netdata/netdata-ui/",
+    "to-charts": "yarn build && yarn cp-charts",
     "resolve-alias": "tsconfig-replace-paths -p tsconfig.json -s ./src -o ./lib",
-    "prepublishOnly": "yarn clean && yarn ts-bundle"
+    "prepublishOnly": "yarn clean && yarn build"
   },
   "keywords": [
-    "uikit",
-    "ui-kit",
-    "netdata-ui"
+    "netdata",
+    "frontend",
+    "ui-kit"
   ],
-  "author": "netdata",
-  "license": "ISC",
-  "resolutions": {
-    "@storybook/**/@emotion/sheet": "^1",
-    "@storybook/**/@emotion/styled": "^11",
-    "yargs": "^17.3"
-  },
   "dependencies": {
     "@elastic/react-search-ui": "^1.20.2",
     "@elastic/search-ui-site-search-connector": "^1.20.2",
@@ -49,9 +47,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-portal": "^4.2.2",
     "react-select": "^5.7.7",
-    "react-table": "^7.8.0",
     "react-use": "^17.4.0",
-    "react-window": "^1.8.9",
     "styled-system": "^5.1.5",
     "throttle-debounce": "5.0.0",
     "use-context-selector": "^1.3.7"
@@ -67,8 +63,11 @@
     "url": "git@github.com:netdata/netdata-ui.git"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.0",
     "@babel/eslint-parser": "^7.22.15",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-transform-modules-umd": "^7.22.5",
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-react": "^7.22.15",
@@ -85,9 +84,10 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.5.1",
-    "@types/node": "^20.8.4",
     "babel-loader": "^9.1.3",
+    "babel-plugin-module-resolver": "^5.0.0",
     "babel-plugin-styled-components": "^2.1.4",
+    "clean-webpack-plugin": "^4.0.0",
     "copyfiles": "^2.4.1",
     "eslint": "^8.51.0",
     "eslint-plugin-react": "^7.33.2",
@@ -102,19 +102,19 @@
     "jsdom": "22.1.0",
     "lodash": "^4.17.21",
     "markdown-loader": "8.0.0",
-    "node-fetch": "^3.3.2",
     "prettier": "^3.0.3",
+    "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
+    "sass-loader": "^13.3.2",
     "storybook": "^7.4.6",
     "storybook-readme": "^5.0.9",
     "styled-components": "^5.3.9",
     "svg-sprite-loader": "^6.0.11",
     "svgo-loader": "^4.0.0",
-    "ts-jest": "^29.1.1",
-    "tsconfig-replace-paths": "^0.0.14",
-    "typescript": "^4.9.5",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }
