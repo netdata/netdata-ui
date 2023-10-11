@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { flexRender } from "@tanstack/react-table"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
-import useIntersection from "@/hooks/use-intersection"
 import ResizeHandler from "./resizeHandler"
 import Sorting, { SortIconContainer } from "./sorting"
 import Info from "./info"
@@ -27,14 +26,7 @@ const LabelContainer = styled(Flex)`
   `}
 `
 
-const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index, rootRef }) => {
-  const [setRef, , visible] = useIntersection({
-    rootMargin: "100% 0% 100% 0%",
-    threshold: 0,
-    root: rootRef.current,
-    defaultVisible: true,
-  })
-
+const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index }) => {
   const { column } = header
   const tableMeta =
     typeof column.columnDef.tableMeta === "function"
@@ -55,41 +47,43 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index,
 
   return (
     <Flex
-      ref={setRef}
       flex={
         !column.columnDef.fullWidth && (column.columnDef.notFlex || column.getCanResize())
           ? false
           : header.colSpan
       }
       width={`${column.getSize()}px`}
-      padding={[1]}
-      {...(coloredSortedColumn && !!column.getIsSorted() && { background: "columnHighlight" })}
       position="relative"
+      overflow="hidden"
+      {...(column.getCanSort() &&
+        coloredSortedColumn &&
+        !!column.getIsSorted() && {
+          background: "columnHighlight",
+          backgroundOpacity: "0.2",
+        })}
+      padding={[1]}
       {...headStyles}
       column
-      overflow="hidden"
     >
-      {visible && (
-        <>
-          <LabelContainer
-            alignItems="center"
-            cursor={column.getCanSort() ? "pointer" : "default"}
-            onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
-            padding={[0, 2, 0, 0]}
-            sortable={column.getCanSort()}
-          >
-            <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
-            {column.isPlaceholder ? null : (
-              <Label truncate sorting={column.getIsSorted()}>
-                {flexRender(column.columnDef.header, header.getContext())}
-              </Label>
-            )}
-          </LabelContainer>
-          <Filter column={column} testPrefix={testPrefix} index={index} />
-          <Info meta={meta} />
-          {!column.columnDef.fullWidth && <ResizeHandler header={header} table={table} />}
-        </>
-      )}
+      <Flex flex width="100%" alignItems={column.columnDef.align || "start"}>
+        <LabelContainer
+          alignItems="center"
+          cursor={column.getCanSort() ? "pointer" : "default"}
+          onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
+          padding={[0, 2, 0, 0]}
+          sortable={column.getCanSort()}
+        >
+          <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
+          {column.isPlaceholder ? null : (
+            <Label truncate sorting={column.getIsSorted()}>
+              {flexRender(column.columnDef.header, header.getContext())}
+            </Label>
+          )}
+        </LabelContainer>
+        <Filter column={column} testPrefix={testPrefix} index={index} />
+        <Info meta={meta} />
+        {!column.columnDef.fullWidth && <ResizeHandler header={header} table={table} />}
+      </Flex>
     </Flex>
   )
 }

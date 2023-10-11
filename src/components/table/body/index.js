@@ -116,7 +116,7 @@ const Body = ({
                   testPrefix={testPrefix}
                   coloredSortedColumn={coloredSortedColumn}
                   index={virtualRow.index}
-                  rootRef={ref}
+                  {...rest}
                 />
               ) : (
                 <Row
@@ -128,7 +128,6 @@ const Body = ({
                   meta={meta}
                   row={rows[virtualRow.index - 1]}
                   index={virtualRow.index}
-                  rootRef={ref}
                   {...rest}
                 />
               )}

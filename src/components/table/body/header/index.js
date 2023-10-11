@@ -1,5 +1,4 @@
 import React from "react"
-import { useMeasure } from "react-use"
 import Flex from "@/components/templates/flex"
 import Cell from "./cell"
 
@@ -17,21 +16,18 @@ const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
 )
 
 const HeaderGroups = ({ groups, size, side, ...rest }) => {
-  const [widthRef, { width }] = useMeasure()
-
   if (!groups[0].headers.length) return null
-
-  if (!side)
-    return groups.map(headerGroup => (
-      <HeaderGroup headerGroup={headerGroup} key={headerGroup.id} {...rest} />
-    ))
 
   return (
     <Flex
-      // ref={widthRef}
-      position="sticky"
-      {...(side === "right" ? { right: 0, sx: { transform: "translateX(100%)" } } : { left: 0 })}
-      zIndex={11}
+      position={side ? "sticky" : "relative"}
+      {...(side === "right"
+        ? {
+            right: 0,
+            border: { side: "left" },
+          }
+        : { left: 0, border: { side: "right" } })}
+      zIndex={side ? 11 : undefined}
       width={`${size}px`}
       flex="grow"
     >

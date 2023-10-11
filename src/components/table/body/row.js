@@ -3,19 +3,11 @@ import { flexRender } from "@tanstack/react-table"
 import Flex from "@/components/templates/flex"
 import { TextNano } from "@/components/typography"
 import { Icon } from "@/components/icon"
-import useIntersection from "@/hooks/use-intersection"
 import { useTableContext } from "../provider"
 
 const makeSelectIsRowHovered = id => s => s.hoveredRow === id
 
-const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef }) => {
-  const [setRef, , visible] = useIntersection({
-    rootMargin: "100% 0% 100% 0%",
-    threshold: 0,
-    root: rootRef.current,
-    defaultVisible: true,
-  })
-
+const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
   const { column } = cell
 
   const tableMeta =
@@ -37,7 +29,6 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
 
   return (
     <Flex
-      ref={setRef}
       flex={
         !column.columnDef.fullWidth && (column.columnDef.notFlex || column.getCanResize())
           ? false
@@ -47,52 +38,42 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn, rootRef
       position="relative"
       data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
       overflow="hidden"
+      {...(cell.column.getCanSort() &&
+        coloredSortedColumn &&
+        !!cell.column.getIsSorted() && {
+          background: "columnHighlight",
+          backgroundOpacity: row.index % 2 === 0 ? "0.2" : "0.4",
+        })}
+      padding={[1]}
+      {...cellStyles}
     >
-      <Flex
-        flex
-        width="100%"
-        alignItems="start"
-        padding={[1]}
-        {...(cell.column.getCanSort() &&
-          coloredSortedColumn &&
-          !!cell.column.getIsSorted() && {
-            background: "columnHighlight",
-            backgroundOpacity: row.index % 2 === 0 ? "0.2" : "0.4",
-          })}
-        {...cellStyles}
-      >
-        {visible && (
-          <>
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-            {cell.getIsGrouped() && row.getCanExpand() && (
-              <Flex
-                cursor="pointer"
-                role="button"
-                padding={[0.5]}
-                gap={0.5}
-                onClick={e => {
-                  row.getToggleExpandedHandler()(e)
-                  setTimeout(() =>
-                    e.target.scrollIntoView({ behavior: "smooth", block: "nearest" })
-                  )
-                }}
-                position="absolute"
-                right={0}
-                bottom="-2px"
-              >
-                <TextNano fontSize="10px" color="textLite">
-                  Expand
-                </TextNano>
-                <Icon
-                  name="chevron_down"
-                  width="12px"
-                  height="12px"
-                  color="textLite"
-                  rotate={row.getIsExpanded() ? 2 : null}
-                />
-              </Flex>
-            )}
-          </>
+      <Flex flex width="100%" alignItems={cell.column.columnDef.align || "start"}>
+        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        {cell.getIsGrouped() && row.getCanExpand() && (
+          <Flex
+            cursor="pointer"
+            role="button"
+            padding={[0.5]}
+            gap={0.5}
+            onClick={e => {
+              row.getToggleExpandedHandler()(e)
+              setTimeout(() => e.target.scrollIntoView({ behavior: "smooth", block: "nearest" }))
+            }}
+            position="absolute"
+            right={0}
+            bottom="-2px"
+          >
+            <TextNano fontSize="10px" color="textLite">
+              Expand
+            </TextNano>
+            <Icon
+              name="chevron_down"
+              width="12px"
+              height="12px"
+              color="textLite"
+              rotate={row.getIsExpanded() ? 2 : null}
+            />
+          </Flex>
         )}
       </Flex>
     </Flex>
@@ -135,6 +116,7 @@ export default ({
         <Flex
           position="sticky"
           left={0}
+          border={{ side: "right" }}
           zIndex={11}
           basis={`${table.getLeftTotalSize()}px`}
           flex="grow"
@@ -190,8 +172,9 @@ export default ({
         <Flex
           position="sticky"
           right={0}
+          border={{ side: "left" }}
           zIndex={11}
-          basis={`${table.getLeftTotalSize()}px`}
+          basis={`${table.getRightTotalSize()}px`}
           flex="grow"
           background={
             isHovered
