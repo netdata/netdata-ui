@@ -54,7 +54,6 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
       }
       width={`${column.getSize()}px`}
       position="relative"
-      overflow="hidden"
       {...(column.getCanSort() &&
         coloredSortedColumn &&
         !!column.getIsSorted() && {
@@ -65,7 +64,13 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
       {...headStyles}
       column
     >
-      <Flex flex width="100%" alignItems={column.columnDef.align || "start"}>
+      <Flex
+        flex
+        column
+        width="100%"
+        alignItems={column.columnDef.align || "start"}
+        overflow="hidden"
+      >
         <LabelContainer
           alignItems="center"
           cursor={column.getCanSort() ? "pointer" : "default"}
@@ -81,9 +86,9 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
           )}
         </LabelContainer>
         <Filter column={column} testPrefix={testPrefix} index={index} />
-        <Info meta={meta} />
-        {!column.columnDef.fullWidth && <ResizeHandler header={header} table={table} />}
       </Flex>
+      <Info meta={meta} />
+      {!column.columnDef.fullWidth && <ResizeHandler header={header} table={table} />}
     </Flex>
   )
 }

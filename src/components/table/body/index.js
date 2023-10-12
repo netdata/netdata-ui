@@ -4,6 +4,8 @@ import Flex from "@/components/templates/flex"
 import Row from "./row"
 import Header from "./header"
 
+const noop = () => {}
+
 const Body = ({
   dataGa,
   table,
@@ -12,11 +14,11 @@ const Body = ({
   coloredSortedColumn,
   meta,
   overscan,
-  getHasNextPage,
-  getHasPrevPage,
+  getHasNextPage = noop,
+  getHasPrevPage = noop,
   getItemKey,
-  getIsLoading,
-  loadMore,
+  getIsLoading = noop,
+  loadMore = noop,
   onVirtualChange,
   virtualRef,
   initialOffset = 0,
@@ -130,6 +132,7 @@ const Body = ({
                   meta={meta}
                   row={rows[virtualRow.index - 1]}
                   index={virtualRow.index}
+                  zIndex={virtualRows.length - index}
                   {...rest}
                 />
               )}

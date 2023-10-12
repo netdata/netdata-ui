@@ -90,6 +90,7 @@ export default ({
   testPrefix,
   testPrefixCallback,
   index,
+  zIndex,
   ...rest
 }) => {
   const onHover = useTableContext(selectOnHover)
@@ -117,7 +118,7 @@ export default ({
           position="sticky"
           left={0}
           border={{ side: "right" }}
-          zIndex={11}
+          zIndex={zIndex}
           basis={`${table.getLeftTotalSize()}px`}
           flex="grow"
           background={
@@ -173,7 +174,7 @@ export default ({
           position="sticky"
           right={0}
           border={{ side: "left" }}
-          zIndex={11}
+          zIndex={zIndex}
           basis={`${table.getRightTotalSize()}px`}
           flex="grow"
           background={
