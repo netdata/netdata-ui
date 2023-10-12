@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo } from "react"
+import React, { memo, forwardRef, useCallback, useMemo, useRef } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -8,6 +8,8 @@ import {
   getGroupedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import isEqual from "lodash/isEqual"
+import identity from "lodash/identity"
 import Flex from "@/components/templates/flex"
 import Layer from "@/components/templates/layer"
 import { Text } from "@/components/typography"
@@ -39,141 +41,154 @@ const filterFns = {
   select,
 }
 
-const Table = forwardRef(
-  (
-    {
-      bulkActions,
+const Table = memo(
+  forwardRef(
+    (
+      {
+        bulkActions,
 
-      data,
-      dataColumns,
-      dataGa,
-      enableColumnPinning,
-      columnPinning: defaultColumnPinning,
-      onColumnPinningChange: pinningChangeCb,
+        data,
+        dataColumns,
+        dataGa,
+        enableColumnPinning,
+        columnPinning: defaultColumnPinning,
+        onColumnPinningChange: pinningChangeCb,
 
-      enableColumnVisibility,
-      columnVisibility: defaultColumnVisibility,
-      onColumnVisibilityChange: visibilityChangeCb,
+        enableColumnVisibility,
+        columnVisibility: defaultColumnVisibility,
+        onColumnVisibilityChange: visibilityChangeCb,
 
-      enablePagination,
-      enableResizing,
-      enableSelection,
-      enableSubRowSelection,
-      rowSelection: defaultRowSelection,
-      onRowSelectionChange: rowSelectionChangeCb,
+        enablePagination,
+        enableResizing,
+        enableSelection,
+        enableSubRowSelection,
+        rowSelection: defaultRowSelection,
+        onRowSelectionChange: rowSelectionChangeCb,
 
-      expanded: defaultExpanded,
-      onExpandedChange: expandedChangeCb,
+        expanded: defaultExpanded,
+        onExpandedChange: expandedChangeCb,
 
-      enableSorting,
-      sortBy,
-      onSortingChange: sortingChangeCb,
+        enableSorting,
+        sortBy,
+        onSortingChange: sortingChangeCb,
 
-      globalFilter: defaultGlobalFilter,
-      onSearch,
-      globalFilterFn = includesString,
-      enableCustomSearch,
+        globalFilter: defaultGlobalFilter,
+        onSearch,
+        globalFilterFn = includesString,
+        enableCustomSearch,
 
-      grouping: defaultGrouping,
-      onGroupByChange: groupingChangeCb,
-      groupByColumns,
+        grouping: defaultGrouping,
+        onGroupByChange: groupingChangeCb,
+        groupByColumns,
 
-      onHoverCell,
-      onRowSelected,
+        onRowSelected,
 
-      paginationOptions,
-      onPaginationChange: paginationChangeCb,
+        paginationOptions,
+        onPaginationChange: paginationChangeCb,
 
-      rowActions,
-      testPrefix,
-      meta: tableMeta,
-      title,
-      virtualizeOptions,
-      tableRef,
-      className,
-      ...rest
-    },
-    ref
-  ) => {
-    const [columnVisibility, onColumnVisibilityChange] = useVisibility(
-      defaultColumnVisibility,
-      visibilityChangeCb
-    )
-
-    const [columnPinning, onColumnPinningChange] = usePinning(defaultColumnPinning, pinningChangeCb)
-
-    const [expanded, onExpandedChange] = useExpanding(defaultExpanded, expandedChangeCb)
-
-    const [rowSelection, onRowSelectionChange] = useSelecting(
-      defaultRowSelection,
-      rowSelectionChangeCb
-    )
-
-    const [sorting, onSortingChange] = useSorting(sortBy, sortingChangeCb)
-
-    const [pagination, onPaginationChange] = usePaginating(paginationOptions, paginationChangeCb)
-
-    const [grouping, onGroupingChange] = useGrouping(defaultGrouping, groupingChangeCb)
-
-    const [globalFilter, onGlobalFilterChange] = useSearching(defaultGlobalFilter, onSearch)
-
-    const columns = useColumns(dataColumns, {
-      testPrefix,
-      enableSelection,
-      enableResizing,
-      enableSorting,
-      rowActions,
-      tableMeta,
-    })
-
-    const table = useReactTable({
-      columns,
-      data,
-      manualPagination: !enablePagination,
-      columnResizeMode: "onEnd",
-      filterFns,
-      state: {
-        columnVisibility,
-        rowSelection,
-        globalFilter: enableCustomSearch ? "" : globalFilter,
-        sorting,
-        pagination,
-        columnPinning,
-        expanded,
-        grouping: useMemo(
-          () =>
-            Array.isArray(grouping)
-              ? [grouping].filter(Boolean)
-              : groupByColumns?.[grouping]?.columns || [],
-          [grouping]
-        ),
-        columnOrder: [],
+        rowActions,
+        testPrefix,
+        meta: tableMeta,
+        title,
+        virtualizeOptions,
+        tableRef,
+        className,
+        ...rest
       },
-      onExpandedChange,
-      ...(!enableCustomSearch && globalFilterFn ? { globalFilterFn } : {}),
-      getCoreRowModel: getCoreRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      onRowSelectionChange,
-      onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
-      onSortingChange,
-      getSortedRowModel: getSortedRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      getExpandedRowModel: getExpandedRowModel(),
-      getGroupedRowModel: getGroupedRowModel(),
-      getSubRows: useCallback(row => row.children, []),
-      onPaginationChange,
-      onColumnVisibilityChange,
-      onColumnPinningChange,
-      enableSubRowSelection,
-      columnGroupingMode: "reorder",
-    })
+      ref
+    ) => {
+      const [columnVisibility, onColumnVisibilityChange] = useVisibility(
+        defaultColumnVisibility,
+        visibilityChangeCb
+      )
 
-    if (tableRef) tableRef.current = table
+      const [columnPinning, onColumnPinningChange] = usePinning(
+        defaultColumnPinning,
+        pinningChangeCb
+      )
 
-    const { hasNextPage, loading, warning } = virtualizeOptions
+      const [expanded, onExpandedChange] = useExpanding(defaultExpanded, expandedChangeCb)
 
-    return (
-      <TableProvider onHoverCell={onHoverCell}>
+      const [rowSelection, onRowSelectionChange] = useSelecting(
+        defaultRowSelection,
+        rowSelectionChangeCb
+      )
+
+      const [sorting, onSortingChange] = useSorting(sortBy, sortingChangeCb)
+
+      const [pagination, onPaginationChange] = usePaginating(paginationOptions, paginationChangeCb)
+
+      const [grouping, onGroupingChange] = useGrouping(defaultGrouping, groupingChangeCb)
+
+      const [globalFilter, onGlobalFilterChange] = useSearching(defaultGlobalFilter, onSearch)
+
+      const columns = useColumns(dataColumns, {
+        testPrefix,
+        enableSelection,
+        enableResizing,
+        enableSorting,
+        rowActions,
+        tableMeta,
+      })
+
+      const table = useReactTable({
+        columns,
+        data,
+        manualPagination: !enablePagination,
+        columnResizeMode: "onEnd",
+        filterFns,
+        state: {
+          columnVisibility,
+          rowSelection,
+          globalFilter: enableCustomSearch ? "" : globalFilter,
+          sorting,
+          pagination,
+          columnPinning,
+          expanded,
+          grouping: useMemo(
+            () =>
+              Array.isArray(grouping)
+                ? [grouping].filter(Boolean)
+                : groupByColumns?.[grouping]?.columns || [],
+            [grouping]
+          ),
+          columnOrder: [],
+        },
+        onExpandedChange,
+        ...(!enableCustomSearch && globalFilterFn ? { globalFilterFn } : {}),
+        getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        onRowSelectionChange,
+        onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
+        onSortingChange,
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        getExpandedRowModel: getExpandedRowModel(),
+        getGroupedRowModel: getGroupedRowModel(),
+        getSubRows: useCallback(row => row.children, []),
+        onPaginationChange,
+        onColumnVisibilityChange,
+        onColumnPinningChange,
+        enableSubRowSelection,
+        columnGroupingMode: "reorder",
+      })
+      const prevStateRef = useRef(table.getState())
+      table.isEqual = (selector = identity) => {
+        if (!prevStateRef.current) {
+          prevStateRef.current = table.getState()
+          return false
+        }
+
+        const areStatesEqual = isEqual(selector(prevStateRef.current), selector(table.getState()))
+        prevStateRef.current = table.getState()
+        return areStatesEqual
+      }
+
+      if (tableRef) tableRef.current = table
+
+      const { getHasNextPage, getIsLoading, warning } = virtualizeOptions
+
+      return (
         <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref} className={className}>
           <Header
             q={globalFilter}
@@ -208,13 +223,13 @@ const Table = forwardRef(
             {...rest}
             {...virtualizeOptions}
           />
-          {!hasNextPage && !loading && !!warning && (
+          {!getHasNextPage() && !getIsLoading() && !!warning && (
             <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
               <Icon name="warning_triangle_hollow" color="warning" />{" "}
               <Text color="warningText">{warning}</Text>
             </Flex>
           )}
-          {hasNextPage && loading && (
+          {getHasNextPage() && getIsLoading() && (
             <Layer backdrop={false} position="bottom" margin={[0, 0, 10]} padding={[0, 0, 10]}>
               <Flex background={["neutral", "black"]} padding={[1, 2]} gap={2}>
                 <Text>Loading more...</Text>
@@ -223,9 +238,9 @@ const Table = forwardRef(
           )}
           {enablePagination && <Pagination table={table} />}
         </Flex>
-      </TableProvider>
-    )
-  }
+      )
+    }
+  )
 )
 
 Table.defaultProps = {
@@ -249,4 +264,13 @@ Table.defaultProps = {
   virtualizeOptions: {},
 }
 
-export default Table
+const withProvider = Component =>
+  forwardRef(({ onHoverCell, ...rest }, ref) => {
+    return (
+      <TableProvider onHoverCell={onHoverCell}>
+        <Component {...rest} ref={ref} />
+      </TableProvider>
+    )
+  })
+
+export default withProvider(Table)

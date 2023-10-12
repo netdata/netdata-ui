@@ -12,10 +12,10 @@ const Body = ({
   coloredSortedColumn,
   meta,
   overscan,
-  hasNextPage,
-  hasPrevPage,
+  getHasNextPage,
+  getHasPrevPage,
   getItemKey,
-  loading,
+  getIsLoading,
   loadMore,
   onVirtualChange,
   virtualRef,
@@ -59,8 +59,10 @@ const Body = ({
 
     if (!lastItem) return
 
-    if (lastItem.index === rows.length && hasNextPage && !loading) loadMore("backward")
-  }, [virtualRows, loading])
+    if (lastItem.index === rows.length && getHasNextPage() && !getIsLoading()) {
+      loadMore("backward")
+    }
+  }, [virtualRows, getIsLoading()])
 
   useEffect(() => {
     if (!loadMore) return
@@ -69,10 +71,10 @@ const Body = ({
 
     if (!first) return
 
-    if (first.index === 1 && hasPrevPage && !loading) {
+    if (first.index === 1 && getHasPrevPage() && !getIsLoading()) {
       loadMore("forward")
     }
-  }, [virtualRows, hasPrevPage, loading])
+  }, [virtualRows, getHasPrevPage(), getIsLoading()])
 
   return (
     <div

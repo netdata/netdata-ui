@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react"
 import { createContext } from "use-context-selector"
+import { debounce } from "throttle-debounce"
 import useContext from "@/utils/useContextSelector"
 
 const TableContext = createContext({})
@@ -31,7 +32,10 @@ const TableProvider = ({ onHoverCell, children }) => {
     }
   }, [])
 
-  const onHover = useCallback(values => dispatch(values), [onHoverCell])
+  const onHover = useCallback(
+    debounce(300, values => dispatch(values)),
+    [onHoverCell]
+  )
 
   useEffect(() => {
     if (!onHoverCell) return

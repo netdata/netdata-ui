@@ -34,6 +34,7 @@ const Header = ({
       background="mainBackground"
       gap={1}
       alignItems="center"
+      padding={[1, 0]}
       {...tableMeta.bulkActionsStyles}
     >
       {typeof title === "string" ? <TextBig strong>{title}</TextBig> : title}
