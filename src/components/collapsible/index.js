@@ -19,10 +19,21 @@ const Animated = styled(Flex).attrs(props => ({
 `
 
 const Collapsible = forwardRef(
-  ({ open = false, duration = 150, children, direction, persist = false, ...rest }, parentRef) => {
+  (
+    {
+      open = false,
+      duration = 150,
+      children,
+      direction,
+      persist = false,
+      closedValue = 0,
+      ...rest
+    },
+    parentRef
+  ) => {
     duration = process.env.NODE_ENV === "test" ? 0 : duration
 
-    const [dimension, setDimension] = useState(open ? "initial" : 0)
+    const [dimension, setDimension] = useState(open ? "initial" : `${closedValue}px`)
     const [animatedOpen, setAnimatedOpen] = useState(open)
     const [ref, setRef] = useForwardRef(parentRef)
 
@@ -31,12 +42,12 @@ const Collapsible = forwardRef(
       const requestId = requestAnimationFrame(() => {
         if (!ref.current) return
 
-        setDimension(!open ? `${ref.current.scrollHeight}px` : 0)
+        setDimension(!open ? `${ref.current.scrollHeight}px` : `${closedValue}px`)
 
         nestedRequestId = requestAnimationFrame(() => {
           if (!ref.current) return
 
-          setDimension(open ? `${ref.current.scrollHeight}px` : 0)
+          setDimension(open ? `${ref.current.scrollHeight}px` : `${closedValue}px`)
         })
       })
 
@@ -57,7 +68,9 @@ const Collapsible = forwardRef(
     }, [open])
 
     const child = useMemo(
-      () => (animatedOpen || persist) && (typeof children === "function" ? children() : children),
+      () =>
+        (animatedOpen || persist) &&
+        (typeof children === "function" ? children(animatedOpen) : children),
       [animatedOpen, persist, children]
     )
 

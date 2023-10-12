@@ -30,8 +30,8 @@ export const Tabs = forwardRef(
     }, [activeIndex, firstActiveIndex, activeIsDisabled, setActiveIndex])
 
     return (
-      <StyledTabsWrapper className={className} {...rest}>
-        <TabsHeader ref={ref}>
+      <StyledTabsWrapper className={className} {...rest} ref={ref}>
+        <TabsHeader>
           <StyledTabs className="tabs" noDefaultBorder={noDefaultBorder} {...tabsProps}>
             {nav}
           </StyledTabs>

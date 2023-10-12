@@ -174,14 +174,7 @@ const Table = forwardRef(
 
     return (
       <TableProvider onHoverCell={onHoverCell}>
-        <Flex
-          height={{ max: "100%" }}
-          overflow="hidden"
-          column
-          ref={ref}
-          className={className}
-          gap={1}
-        >
+        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref} className={className}>
           <Header
             q={globalFilter}
             hasSearch={!!onSearch}

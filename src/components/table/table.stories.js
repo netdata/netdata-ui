@@ -691,7 +691,6 @@ export const Pinning = {
           rowActions={rowActions}
           columnPinning={columnPinning}
           enableColumnPinning={true}
-          enablePinning={true}
         />
       </Box>
     )

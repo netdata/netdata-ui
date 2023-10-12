@@ -75,7 +75,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
         >
           <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
           {column.isPlaceholder ? null : (
-            <Label truncate sorting={column.getIsSorted()}>
+            <Label sorting={column.getIsSorted()}>
               {flexRender(column.columnDef.header, header.getContext())}
             </Label>
           )}
