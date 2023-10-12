@@ -1,6 +1,6 @@
 import React from "react"
 import { renderWithProviders } from "testUtilities"
-import { DefaultTheme as theme } from "src/theme/default"
+import { DefaultTheme as theme } from "@/theme/default"
 import {
   H0,
   H1,

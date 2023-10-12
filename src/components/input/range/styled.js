@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getColor } from "src/theme"
+import { getColor } from "@/theme"
 
 export const InputRange = styled.input.attrs({ type: "range" })`
   -webkit-appearance: none;

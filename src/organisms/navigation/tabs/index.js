@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useRef } from "react"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 
 const Tabs = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)

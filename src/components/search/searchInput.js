@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { TextInput } from "src/components/input"
+import { TextInput } from "@/components/input"
 
 const SearchInput = styled(TextInput)`
   & input {

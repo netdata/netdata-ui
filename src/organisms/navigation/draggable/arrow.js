@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import Flex from "src/components/templates/flex"
-import { Icon } from "src/components/icon/icon"
+import Flex from "@/components/templates/flex"
+import { Icon } from "@/components/icon/icon"
 
 const IconWrapper = styled(Flex).attrs({
   padding: [2],

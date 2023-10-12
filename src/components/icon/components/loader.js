@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { getColor } from "src/theme"
+import { getColor } from "@/theme"
 
 const StyledSvg = styled.svg`
   fill: none;

@@ -1,6 +1,6 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
-import { Button } from "src/components/button"
+import Flex from "@/components/templates/flex"
+import { Button } from "@/components/button"
 import Documentation from "."
 
 export const CloudDocumentation = {

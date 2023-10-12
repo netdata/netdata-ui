@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react"
-import Box from "src/components/templates/box"
-import Flex from "src/components/templates/flex"
+import Box from "@/components/templates/box"
+import Flex from "@/components/templates/flex"
 
 const ProgressBar = forwardRef(
   (

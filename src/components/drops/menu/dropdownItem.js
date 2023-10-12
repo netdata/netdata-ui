@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { getColor } from "src/theme"
-import Flex from "src/components/templates/flex"
-import { TextSmall } from "src/components/typography"
+import { getColor } from "@/theme"
+import Flex from "@/components/templates/flex"
+import { TextSmall } from "@/components/typography"
 
 export const ItemContainer = styled(Flex).attrs({
   as: "li",

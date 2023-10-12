@@ -1,4 +1,4 @@
-import { renderHookWithProviders } from "@/jest/testUtilities"
+import { renderHookWithProviders } from "testUtilities"
 import useColor from "./index"
 
 describe("useColor", () => {

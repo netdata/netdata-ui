@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { Tabs, Tab } from "src/components/tabs"
-import Flex from "src/components/templates/flex"
+import { Tabs, Tab } from "@/components/tabs"
+import Flex from "@/components/templates/flex"
 import Mouse from "./mouse"
 import Touch from "./touch"
 

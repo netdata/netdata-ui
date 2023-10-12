@@ -1,10 +1,10 @@
 import React, { Fragment } from "react"
 import styled from "styled-components"
-import { getColor } from "src/theme"
-import { H5, Text } from "src/components/typography"
-import { Icon } from "src/components/icon"
-import { Button } from "src/components/button"
-import Flex from "src/components/templates/flex"
+import { getColor } from "@/theme"
+import { H5, Text } from "@/components/typography"
+import { Icon } from "@/components/icon"
+import { Button } from "@/components/button"
+import Flex from "@/components/templates/flex"
 
 const Anchor = styled(Text).attrs({ as: "a", target: "_blank" })`
   &&& {

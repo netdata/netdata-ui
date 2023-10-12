@@ -1,5 +1,5 @@
 import React, { useMemo, Children, cloneElement, isValidElement } from "react"
-import setRef from "src/mixins/set-ref"
+import setRef from "@/mixins/set-ref"
 
 const getChild = children => {
   if (Children.count(children) !== 1) return Children.only(children)

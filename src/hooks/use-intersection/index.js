@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react"
-import uuid from "src/mixins/uuid"
+import uuid from "@/mixins/uuid"
 
 const roots = new Map()
 const observers = {}
@@ -51,10 +51,10 @@ const observe = (callback, element, options) => {
   }
 }
 
-export default ({ root, rootMargin, threshold, onVisibility }) => {
+export default ({ root, rootMargin, threshold, onVisibility, defaultVisible = false }) => {
   const ref = useRef()
   const unObserveRef = useRef()
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(defaultVisible)
 
   const setRef = useCallback(
     element => {

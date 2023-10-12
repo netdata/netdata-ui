@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react"
-import { Text } from "src/components/typography"
+import { Text } from "@/components/typography"
 import useCheckBoxStyles from "./use-styles-checkbox"
 import useCheckbox from "./use-checkbox"
 

@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { Tabs, Tab } from "src/components/tabs"
-import Flex from "src/components/templates/flex"
-import { Text } from "src/components/typography"
-import { getColor } from "src/theme"
+import { Tabs, Tab } from "@/components/tabs"
+import Flex from "@/components/templates/flex"
+import { Text } from "@/components/typography"
+import { getColor } from "@/theme"
 
 const Link = styled.a`
   text-decoration: none;

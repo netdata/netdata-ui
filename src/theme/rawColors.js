@@ -140,6 +140,8 @@ const rawColors = {
     blackhaze: "#F7F8F8",
     brightGrey: "#E9ECEC",
     chineseWhite: "#DEE3E3",
+    mystic: "#e1e6eb",
+    alabaster: "#f2f4f5",
     iron: "#CFD5DA",
     porcelain: "#ECEEEF",
     bluebayoux: "#536775",

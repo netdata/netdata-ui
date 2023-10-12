@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react"
 import { StyledButton } from "./styled"
-import { Icon } from "src/components/icon"
-import { LoaderIcon } from "src/components/icon/components"
-import Flex from "src/components/templates/flex"
+import { Icon } from "@/components/icon"
+import { LoaderIcon } from "@/components/icon/components"
+import Flex from "@/components/templates/flex"
 
 export const Button = forwardRef(
   (

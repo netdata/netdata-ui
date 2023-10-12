@@ -1,5 +1,5 @@
 import React from "react"
-import { Button } from "src/components/button"
+import { Button } from "@/components/button"
 import {
   H0,
   H1,

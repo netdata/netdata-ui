@@ -1,5 +1,5 @@
 import { FC, SyntheticEvent } from "react"
-import { MarginProps, PaddingProps, AlignSelfProps } from "src/mixins/types"
+import { MarginProps, PaddingProps, AlignSelfProps } from "@/mixins/types"
 
 export type ButtonFlavour = "default" | "hollow" | "borderless"
 export type ThemeType = "light" | "dark"

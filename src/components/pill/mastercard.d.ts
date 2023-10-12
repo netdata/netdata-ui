@@ -1,7 +1,7 @@
 import { FC, SyntheticEvent } from "react"
-import { RoundProps } from "src/mixins/types"
-import { HeightProps } from "src/components/templates/mixins"
-import { PillProps } from "src/components/pill/index"
+import { RoundProps } from "@/mixins/types"
+import { HeightProps } from "@/components/templates/mixins"
+import { PillProps } from "@/components/pill/index"
 
 export type MasterCardFlavour = "disabledError" | "disabledWarning" | "error" | "warning"
 export type MasterCardRef = { [key: string]: Element }

@@ -1,6 +1,6 @@
 import React from "react"
 import AlertMasterCard from "./alertMastercard"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import Pill from "."
 import MasterCard from "./mastercard"
 

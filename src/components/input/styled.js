@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components"
-import { Icon } from "src/components/icon"
-import { getColor, getValidatedControlColor } from "src/theme/utils"
-import { controlReset } from "src/mixins"
-import margin from "src/mixins/margin"
-import alignSelf from "src/mixins/alignSelf"
-import round from "src/mixins/round"
-import width from "src/components/templates/mixins/width"
-import Flex from "src/components/templates/flex"
+import { Icon } from "@/components/icon"
+import { getColor, getValidatedControlColor } from "@/theme/utils"
+import { controlReset } from "@/mixins"
+import margin from "@/mixins/margin"
+import alignSelf from "@/mixins/alignSelf"
+import round from "@/mixins/round"
+import width from "@/components/templates/mixins/width"
+import Flex from "@/components/templates/flex"
 
 const disabledCursorSupport = css`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "")};
@@ -25,6 +25,7 @@ export const StyledInput = styled.input.attrs({ round: true })`
   ${round}
   height: 100%;
   width: 100%;
+  min-width: 100%;
   font-weight: normal;
   flex-grow: 0;
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};

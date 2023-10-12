@@ -1,7 +1,7 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
-import { Text } from "src/components/typography"
-import { Icon } from "src/components/icon"
+import Flex from "@/components/templates/flex"
+import { Text } from "@/components/typography"
+import { Icon } from "@/components/icon"
 
 const borderProps = {
   border: { side: "top", color: "disabled" },

@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "src/components/templates/flex"
-import { webkitVisibleScrollbar } from "src/mixins"
+import Flex from "@/components/templates/flex"
+import { webkitVisibleScrollbar } from "@/mixins"
 
 const Container = styled(Flex).attrs({
   overflow: { vertical: "auto" },

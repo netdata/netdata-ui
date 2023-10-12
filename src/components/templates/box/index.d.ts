@@ -14,7 +14,7 @@ import {
   WrapProps,
 } from "../mixins"
 
-import { PaddingProps, MarginProps } from "src/mixins/types"
+import { PaddingProps, MarginProps } from "@/mixins/types"
 
 export type NativeAttributes<El extends React.ElementType> = React.ComponentPropsWithRef<El>
 export type CustomProps = AlignContentProps &

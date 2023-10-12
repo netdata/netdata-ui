@@ -1,11 +1,11 @@
 import React, { useCallback, Fragment, forwardRef, useRef } from "react"
-import Drop from "src/components/drops/drop"
-import useForwardRef from "src/hooks/use-forward-ref"
-import useToggle from "src/hooks/use-toggle"
-import useClonedChildren from "src/components/drops/mixins/useClonedChildren"
-import useDescribedId from "src/components/drops/mixins/useDescribedId"
-import dropAlignMap from "src/components/drops/mixins/dropAlignMap"
-import Container from "src/components/drops/container"
+import Drop from "@/components/drops/drop"
+import useForwardRef from "@/hooks/use-forward-ref"
+import useToggle from "@/hooks/use-toggle"
+import useClonedChildren from "@/components/drops/mixins/useClonedChildren"
+import useDescribedId from "@/components/drops/mixins/useDescribedId"
+import dropAlignMap from "@/components/drops/mixins/dropAlignMap"
+import Container from "@/components/drops/container"
 
 const getContent = content => (typeof content === "function" ? content() : content)
 

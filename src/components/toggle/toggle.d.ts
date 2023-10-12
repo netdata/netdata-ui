@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react"
-import { AlignSelfProps, MarginProps } from "src/mixins/types"
+import { AlignSelfProps, MarginProps } from "@/mixins/types"
 
 export interface ToggleProps extends AlignSelfProps, MarginProps {
   checked: boolean

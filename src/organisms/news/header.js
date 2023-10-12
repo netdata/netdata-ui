@@ -1,8 +1,8 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
-import { Icon } from "src/components/icon"
-import { TextBig } from "src/components/typography"
-import { Button } from "src/components/button"
+import Flex from "@/components/templates/flex"
+import { Icon } from "@/components/icon"
+import { TextBig } from "@/components/typography"
+import { Button } from "@/components/button"
 
 const Header = ({ onClose }) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
-import { Button } from "src/components/button"
-import { Text } from "src/components/typography"
+import Flex from "@/components/templates/flex"
+import { Button } from "@/components/button"
+import { Text } from "@/components/typography"
 import { Actions, Body, CloseButton, Content, Dialog, Header, Title, TitleIcon } from "./styled"
 
 const BodyMessage = ({ children, ...rest }) =>

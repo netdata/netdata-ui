@@ -1,7 +1,7 @@
 import React from "react"
-import Flex from "src/components/templates/flex"
-import { Icon } from "src/components/icon"
-import { Text, TextSmall } from "src/components/typography"
+import Flex from "@/components/templates/flex"
+import { Icon } from "@/components/icon"
+import { Text, TextSmall } from "@/components/typography"
 import Image from "./image"
 import Anchor from "./anchor"
 

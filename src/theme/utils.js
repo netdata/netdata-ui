@@ -1,24 +1,13 @@
-import math from "polished/lib/math/math"
-import { mergeDeepRight, path, pathOr } from "ramda"
+import get from "lodash/get"
 
-export const extendTheme = (theme, extension) => mergeDeepRight(theme, extension)
-
-export const propOrElse = (pathName, defaultValue) => props => pathOr(defaultValue, pathName, props)
+export const propOrElse = (pathName, defaultValue) => props => get(props, pathName, defaultValue)
 
 export const getOrElse =
   (pathName, defaultValue) =>
   ({ theme }) =>
-    pathOr(defaultValue, pathName, theme)
+    get(theme, pathName, defaultValue)
 
-export const getSizeUnit = ({ theme }) => path(["constants", "SIZE_UNIT"], theme)
-
-export const calcSize = expr => props => {
-  if (expr) {
-    const exprWithGap = expr.replace("_", `${getSizeUnit(props)}`)
-    return math(exprWithGap)
-  }
-  return getSizeUnit(props)
-}
+export const getSizeUnit = getOrElse(["constants", "SIZE_UNIT"], 8)
 
 export const getColor = colorPath => {
   const colorPaths = Array.isArray(colorPath) ? colorPath : [colorPath]
@@ -41,11 +30,6 @@ export const getSizeBy =
   (multiplier = 1) =>
   props =>
     isNaN(multiplier) ? multiplier : `${(getSizeUnit(props) || 0) * multiplier}px`
-
-export const getGutterHeight = ({ theme }) => {
-  const gutterValue = path(["constants", "GUTTER_HEIGHT"], theme) || 0
-  return `${gutterValue}px`
-}
 
 export const getValidatedControlColor =
   (defaultColorPath = "border", defaultDisabledPath = "disabled") =>

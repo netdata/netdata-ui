@@ -81,26 +81,17 @@ declare const DarkTheme: IDarkTheme
 
 export { DefaultTheme, DarkTheme }
 
-declare function extendTheme(
-  theme: ContstructedTheme,
-  extension: ContstructedTheme
-): ContstructedTheme
-
 declare function propOrElse<T = any, R = any>(pathName: string[], defaultValue: R): any
 
 declare function getOrElse(pathName: string[], defaultValue: NumberOrStringT): any
 
 declare function getSizeUnit({ theme }: WrappedTheme): number | undefined
 
-declare function calcSize(expr?: string): (props: WrappedTheme) => any
-
 declare function getColor(colorPath: string[] | string): any
 
 declare function getRgbColor(colorPath: string[] | string, opacity: number): any
 
 declare function getSizeBy(multiplier?: number): (props: WrappedTheme) => any
-
-declare function getGutterHeight({ theme }: WrappedTheme): string
 
 declare function getValidatedControlColor(
   defaultColorPath: string
@@ -117,14 +108,11 @@ declare function getValidatedControlColor(
 }) => any
 
 export {
-  extendTheme,
   propOrElse,
   getOrElse,
   getSizeUnit,
-  calcSize,
   getColor,
   getRgbColor,
   getSizeBy,
-  getGutterHeight,
   getValidatedControlColor,
 }

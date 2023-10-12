@@ -1,9 +1,9 @@
 import styled from "styled-components"
-import { getColor } from "src/theme/utils"
-import margin from "src/mixins/margin"
-import alignItems from "src/components/templates/mixins/alignItems"
-import alignSelf from "src/mixins/alignSelf"
-import { Icon } from "src/components/icon"
+import { getColor } from "@/theme/utils"
+import margin from "@/mixins/margin"
+import alignItems from "@/components/templates/mixins/alignItems"
+import alignSelf from "@/mixins/alignSelf"
+import { Icon } from "@/components/icon"
 import disabled from "./mixins/disabled"
 
 export const Input = styled.input`

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Flex from "src/components/templates/flex"
+import Flex from "@/components/templates/flex"
 import getPillBackground from "./mixins/background"
 import { getPillColor } from "./mixins/colors"
 import getPillPadding from "./mixins/padding"

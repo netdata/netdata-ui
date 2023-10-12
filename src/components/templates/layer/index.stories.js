@@ -1,9 +1,9 @@
 import React from "react"
 import useToggle from "react-use/lib/useMeasure"
-import { H2, H3, Text } from "src/components/typography"
-import { Icon } from "src/components/icon"
-import { Button } from "src/components/button"
-import Flex from "src/components/templates/flex"
+import { H2, H3, Text } from "@/components/typography"
+import { Icon } from "@/components/icon"
+import { Button } from "@/components/button"
+import Flex from "@/components/templates/flex"
 import Layer from "."
 
 export const Simple = {

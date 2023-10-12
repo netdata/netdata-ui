@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { AlignSelfProps, ColorType, MarginProps, RefType } from "src/mixins/types"
+import { AlignSelfProps, ColorType, MarginProps, RefType } from "@/mixins/types"
 
 export interface IconProps extends MarginProps, AlignSelfProps {
   className?: string

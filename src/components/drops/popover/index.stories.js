@@ -1,8 +1,8 @@
 import React from "react"
 import useToggle from "react-use/lib/useToggle"
-import Flex from "src/components/templates/flex"
-import { H5, Text } from "src/components/typography"
-import { Button } from "src/components/button"
+import Flex from "@/components/templates/flex"
+import { H5, Text } from "@/components/typography"
+import { Button } from "@/components/button"
 import Popover from "."
 
 const PopoverContent = () => {

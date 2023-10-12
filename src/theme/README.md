@@ -85,8 +85,6 @@ Normally you will access this values with `utils`
 
 Most of functions in utils provided the way that you have not to create extra arrow function in styled-components
 
-- `extendTheme` - this utility provides interface for partially override of theme.
-
 - `getOrElse` - provides extraction of value from theme with a fallback to default value
 
 ```typescript
@@ -110,16 +108,6 @@ const Div = styled.div<{ display?: "flex" }>`
 
 - `getSizeUnit` - returns size unit constant of the theme
 
-- `calcSize("_ + n")` - provides math based on SIZE_UNIT. `*`will be replaced to value of SIZE_UNIT and`n` could be a number
-
-```typescript
-calcSize("_ + n") /* or */ calcSize("n + _")
-calcSize("_ - n") /* or */ calcSize("n - _")
-calcSize("_ * n") /* or */ calcSize("n * _")
-calcSize("_ / n") /* or */ calcSize("n / _")
-
-```
-
 - `getColor` - provides access to access colors from theme. Also there is fallback to `#FFF` value in case requested color is undefined.
 
 ```typescript
@@ -140,14 +128,6 @@ const AnotherDiv = styled.div`
  */
 const Div = styled.div`
   padding: ${getSizeBy(5)};
-`
-```
-
-- `getGutterHeight` - provides simple interface to `GUTTER_HEIGHT`. Fallback value is `0`
-
-```typescript
-const Div = styled.div`
-  padding: ${getGutterHeight};
 `
 ```
 

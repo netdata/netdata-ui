@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components"
-import { getColor } from "src/theme"
-import alignSelf from "src/mixins/alignSelf"
-import margin from "src/mixins/margin"
-import padding from "src/mixins/padding"
-import textTransform from "src/mixins/textTransform"
+import { getColor } from "@/theme"
+import alignSelf from "@/mixins/alignSelf"
+import margin from "@/mixins/margin"
+import padding from "@/mixins/padding"
+import textTransform from "@/mixins/textTransform"
 import textAlign from "./mixins/textAlign"
 import textDecoration from "./mixins/textDecoration"
 import truncate from "./mixins/truncate"
 import whiteSpace from "./mixins/whiteSpace"
 import wordBreak from "./mixins/wordBreak"
-import opacity from "src/mixins/opacity"
-import cursor from "src/mixins/cursor"
+import opacity from "@/mixins/opacity"
+import cursor from "@/mixins/cursor"
 
 const makeFontSize = size => () => `font-size: ${size};`
 const makeLineHeight = size => () => `line-height: ${size};`

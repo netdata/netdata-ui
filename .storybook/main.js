@@ -4,8 +4,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-controls",
     "@storybook/addon-interactions",
-    "@storybook/addon-jest",
-    "@storybook/addon-knobs",
     "@storybook/addon-links",
     "@storybook/addon-storysource",
   ],

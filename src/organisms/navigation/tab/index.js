@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react"
-import { Icon } from "src/components/icon/icon"
-import Flex from "src/components/templates/flex"
+import { Icon } from "@/components/icon/icon"
+import Flex from "@/components/templates/flex"
 
 import useStylesTab from "./use-styles-tab"
-import Tooltip from "src/components/drops/tooltip"
+import Tooltip from "@/components/drops/tooltip"
 
 const Tab = ({
   active,

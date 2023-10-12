@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Button, IconButton, ButtonGroup } from "."
-import { iconsList } from "src/components/icon"
+import { iconsList } from "@/components/icon"
 
 const icons = Object.keys(iconsList)
 

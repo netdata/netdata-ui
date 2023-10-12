@@ -1,4 +1,4 @@
-import { getColor } from "src/theme"
+import { getColor } from "@/theme"
 
 export default ({ boxShadow, theme }) => {
   if (!boxShadow) return ""

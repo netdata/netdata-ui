@@ -1,6 +1,6 @@
 import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
-import { DefaultTheme as theme } from "src/theme/default"
+import { DefaultTheme as theme } from "@/theme/default"
 import Layer from "./index"
 
 const base = theme.constants.SIZE_SUB_UNIT

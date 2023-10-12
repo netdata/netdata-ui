@@ -1,15 +1,14 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { getGutterHeight } from "src/theme/utils"
 import { Checkbox, useCheckboxesList } from "."
 
 const MasterCheckbox = styled(Checkbox)`
-  margin-bottom: ${getGutterHeight};
+  margin-bottom: 8px;
 `
 
 const StyledCheckbox = styled(Checkbox)`
   margin-left: 10px;
-  margin-bottom: ${getGutterHeight};
+  margin-bottom: 8px;
 `
 
 const CheckboxGroup = styled.div``

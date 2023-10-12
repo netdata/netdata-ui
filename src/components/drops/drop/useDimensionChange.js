@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import getAncestors from "src/components/drops/mixins/getAncestors"
+import getAncestors from "@/components/drops/mixins/getAncestors"
 
 export default (target, callback) =>
   useEffect(() => {

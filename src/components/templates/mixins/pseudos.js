@@ -1,8 +1,8 @@
-import background from "src/components/templates/mixins/background"
-import borderMixIn from "src/components/templates/mixins/border"
-import shadow from "src/components/templates/mixins/shadow"
-import { getColor } from "src/theme"
-import alignItems from "src/components/templates/mixins/alignItems"
+import background from "@/components/templates/mixins/background"
+import borderMixIn from "@/components/templates/mixins/border"
+import shadow from "@/components/templates/mixins/shadow"
+import { getColor } from "@/theme"
+import alignItems from "@/components/templates/mixins/alignItems"
 
 const fontColor = ({ theme, color }) => {
   if (!color) return ""

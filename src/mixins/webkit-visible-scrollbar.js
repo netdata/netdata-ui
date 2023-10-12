@@ -1,5 +1,5 @@
 import { css } from "styled-components"
-import { getSizeBy, getRgbColor } from "src/theme/utils"
+import { getSizeBy, getRgbColor } from "@/theme/utils"
 
 export const webkitVisibleScrollbar = css`
   &::-webkit-scrollbar {

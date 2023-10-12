@@ -8,3 +8,5 @@ node_modules
 public
 lib
 coverage/
+dist
+coverage

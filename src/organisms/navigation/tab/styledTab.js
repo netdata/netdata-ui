@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Flex from "src/components/templates/flex"
-import { getColor } from "src/theme"
+import Flex from "@/components/templates/flex"
+import { getColor } from "@/theme"
 
 const StyledTab = styled(Flex).attrs(({ active }) => ({
   gap: 1,

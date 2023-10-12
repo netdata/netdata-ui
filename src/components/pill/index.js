@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react"
-import { Text, TextMicro, TextNano, TextSmall } from "src/components/typography"
+import { Text, TextMicro, TextNano, TextSmall } from "@/components/typography"
 import PillIcon from "./icon"
 import { getPillColor } from "./mixins/colors"
 import { PillContainer } from "./styled"
@@ -7,7 +7,7 @@ import { PillContainer } from "./styled"
 const textComponents = {
   default: TextMicro,
   large: Text,
-  normal: Text,
+  normal: TextSmall,
   small: TextSmall,
   tiny: TextNano,
 }

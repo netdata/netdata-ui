@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import useLocalStorage from "react-use/lib/useLocalStorage"
-import Pill from "src/components/pill"
+import Pill from "@/components/pill"
 import News from "."
 
 const Wrapper = ({ children }) => {

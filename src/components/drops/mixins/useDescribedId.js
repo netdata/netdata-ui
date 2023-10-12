@@ -1,4 +1,4 @@
 import { useMemo } from "react"
-import uuid from "src/mixins/uuid"
+import uuid from "@/mixins/uuid"
 
 export default describedby => useMemo(() => describedby || uuid(), [])
