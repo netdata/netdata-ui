@@ -3,14 +3,14 @@ import { createContext } from "use-context-selector"
 import { debounce } from "throttle-debounce"
 import useContext from "@/utils/useContextSelector"
 
-const TableContext = createContext({})
+const TableUtilsContext = createContext({})
 
-export const useTableContext = select => useContext(TableContext, select)
+export const useTableUtilsContext = select => useContext(TableUtilsContext, select)
 
-const initialState = { hoveredRow: null, hoveredColumn: null }
+const utilsInitialState = { hoveredRow: null, hoveredColumn: null }
 
-const TableProvider = ({ onHoverCell, children }) => {
-  const [state, setState] = useState(initialState)
+const TableUtilsProvider = ({ onHoverCell, children }) => {
+  const [state, setState] = useState(utilsInitialState)
 
   const dispatch = useCallback((values, cb) => {
     if (typeof values === "function") {
@@ -32,10 +32,7 @@ const TableProvider = ({ onHoverCell, children }) => {
     }
   }, [])
 
-  const onHover = useCallback(
-    debounce(300, values => dispatch(values)),
-    [onHoverCell]
-  )
+  const onHover = useCallback(values => debounce(10, () => dispatch(values)), [onHoverCell])
 
   useEffect(() => {
     if (!onHoverCell) return
@@ -45,7 +42,33 @@ const TableProvider = ({ onHoverCell, children }) => {
 
   const contextValue = useMemo(() => ({ ...state, dispatch, onHover }), [state, onHover])
 
-  return <TableContext.Provider value={contextValue}>{children}</TableContext.Provider>
+  return <TableUtilsContext.Provider value={contextValue}>{children}</TableUtilsContext.Provider>
+}
+
+const TableContext = createContext([])
+
+export const useTableState = select => useContext(TableContext, s => select(s.state))
+
+export const useTableDispatch = () => useContext(TableContext, s => s.setState)
+
+const initialState = {}
+
+const TableProvider = ({ children, ...rest }) => {
+  const [state, setState] = useState(initialState)
+
+  const contextValue = useMemo(
+    () => ({
+      state,
+      setState,
+    }),
+    [state]
+  )
+
+  return (
+    <TableContext.Provider value={contextValue}>
+      <TableUtilsProvider {...rest}>{useMemo(() => children, [children])}</TableUtilsProvider>
+    </TableContext.Provider>
+  )
 }
 
 export default TableProvider

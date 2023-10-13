@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { flexRender } from "@tanstack/react-table"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
+import { useTableState } from "../../provider"
 import ResizeHandler from "./resizeHandler"
 import Sorting, { SortIconContainer } from "./sorting"
 import Info from "./info"
@@ -11,22 +12,26 @@ import Filter from "./filter"
 const Label = styled(Text)`
   transition: transform 200ms ease;
   ${({ sorting }) => sorting && "transform: translateX(12px);"}
+  ${({ sortable }) =>
+    sortable &&
+    `
+    &:hover {
+      transform: translateX(12px);
+    }
+  `}
 `
 
 const LabelContainer = styled(Flex)`
   &:hover ${SortIconContainer} {
     opacity: 1;
   }
-  ${({ sortable }) =>
-    sortable &&
-    `
-    &:hover ${Label} {
-    transform: translateX(12px);
-  }
-  `}
 `
 
+const rerenderSelector = state => ({ sorting: state.sorting, sizing: state.columnSizing })
+
 const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index }) => {
+  useTableState(rerenderSelector)
+
   const { column } = header
   const tableMeta =
     typeof column.columnDef.tableMeta === "function"
@@ -60,7 +65,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
           background: "columnHighlight",
           backgroundOpacity: "0.2",
         })}
-      padding={[1]}
+      padding={[1, 2]}
       {...headStyles}
       column
     >
@@ -76,11 +81,10 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
           cursor={column.getCanSort() ? "pointer" : "default"}
           onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
           padding={[0, 2, 0, 0]}
-          sortable={column.getCanSort()}
         >
           <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
           {column.isPlaceholder ? null : (
-            <Label sorting={column.getIsSorted()}>
+            <Label sorting={column.getIsSorted()} sortable={column.getCanSort()}>
               {flexRender(column.columnDef.header, header.getContext())}
             </Label>
           )}

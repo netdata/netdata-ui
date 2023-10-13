@@ -3,6 +3,9 @@ import useToggle from "@/hooks/use-toggle"
 import BulkAction from "../action"
 import ColumnsMenu from "./columnsMenu"
 import { supportedBulkActions } from "../useActions"
+import { useTableState } from "../../../provider"
+
+const rerenderSelector = state => state.columnVisibility
 
 const ColumnVisibilityAction = ({
   alwaysEnabled,
@@ -22,6 +25,7 @@ const ColumnVisibilityAction = ({
   tooltipText,
   ...rest
 }) => {
+  useTableState(rerenderSelector)
   const actionRef = useRef()
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
   const visible = typeof isVisible === "function" ? isVisible() : isVisible

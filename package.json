@@ -27,7 +27,7 @@
     "clean": "rimraf lib dist es coverage",
     "test": "jest --config ./jest/config.js",
     "cp-cloud": "cp -R ./dist ../cloud-frontend/node_modules/@netdata/netdata-ui/",
-    "to-cloud": "yarn build && yarn cp-cloud",
+    "to-cloud": "yarn build:cjs && yarn build:es6 && yarn cp-cloud",
     "cp-charts": "cp -R ./dist ../charts/node_modules/@netdata/netdata-ui/",
     "to-charts": "yarn build && yarn cp-charts",
     "prepublishOnly": "yarn clean && yarn build"

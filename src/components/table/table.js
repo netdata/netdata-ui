@@ -1,4 +1,4 @@
-import React, { memo, forwardRef, useCallback, useMemo, useRef } from "react"
+import React, { memo, forwardRef, useCallback, useLayoutEffect, useMemo, useRef } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -16,7 +16,7 @@ import { Text } from "@/components/typography"
 import { Icon } from "@/components/icon"
 import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./useColumns"
-import TableProvider from "./provider"
+import TableProvider, { useTableDispatch } from "./provider"
 import Pagination from "./components/pagination"
 
 import Header from "./header"
@@ -183,6 +183,11 @@ const Table = memo(
         prevStateRef.current = table.getState()
         return areStatesEqual
       }
+
+      const dispatch = useTableDispatch()
+      useLayoutEffect(() => {
+        dispatch({ ...table.getState(), rowsById: table.getRowModel().rowsById, table })
+      }, [table.getState()])
 
       if (tableRef) tableRef.current = table
 

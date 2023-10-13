@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import Flex from "@/components/templates/flex"
 import Cell from "./cell"
 
@@ -38,7 +38,7 @@ const HeaderGroups = ({ groups, size, side, ...rest }) => {
   )
 }
 
-const BodyHeader = ({ table, testPrefix, ...rest }) => (
+const BodyHeader = memo(({ table, testPrefix, ...rest }) => (
   <Flex
     data-testid={`netdata-table-head${testPrefix}`}
     flex
@@ -73,6 +73,6 @@ const BodyHeader = ({ table, testPrefix, ...rest }) => (
       table={table}
     />
   </Flex>
-)
+))
 
 export default BodyHeader
