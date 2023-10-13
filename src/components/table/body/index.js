@@ -109,7 +109,7 @@ const Body = memo(
           {virtualRows.map(virtualRow => {
             return (
               <div
-                key={`${virtualRow.key}-${virtualRow.index}`}
+                key={virtualRow.key}
                 style={{
                   transform: `translateY(${virtualRow.start}px)`,
                   top: 0,
