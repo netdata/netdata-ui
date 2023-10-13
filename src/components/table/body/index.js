@@ -82,7 +82,7 @@ const Body = memo(
 
       if (!first) return
 
-      if (first.index === 1 && getHasPrevPage() && !loading) {
+      if (first.index <= 1 && getHasPrevPage() && !loading) {
         loadMore("forward")
       }
     }, [virtualRows, getHasPrevPage(), loading])
@@ -108,7 +108,7 @@ const Body = memo(
           {virtualRows.map(virtualRow => {
             return (
               <div
-                key={virtualRow.key}
+                key={`${virtualRow.key}-${virtualRow.index}`}
                 style={{
                   transform: `translateY(${virtualRow.start}px)`,
                   top: 0,

@@ -2,7 +2,7 @@ import React, { memo, useMemo, useCallback } from "react"
 import Flex from "@/components/templates/flex"
 import { TextNano } from "@/components/typography"
 import { Icon } from "@/components/icon"
-import { useTableUtilsContext, useTableState } from "../provider"
+import { useTableState } from "../provider"
 
 const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
   const { column } = cell
@@ -77,7 +77,6 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
   )
 }
 
-const selectOnHover = s => s.onHover
 const rerenderSelector = state => ({
   sizing: state.columnSizing,
 })
@@ -92,9 +91,9 @@ export default memo(
     testPrefixCallback,
     index,
     zIndex,
+    onHoverCell,
     ...rest
   }) => {
-    const onHover = useTableUtilsContext(selectOnHover)
     useTableState(rerenderSelector)
 
     const isClickable = useMemo(() => {
@@ -116,8 +115,8 @@ export default memo(
           [isClickable, row, onClickRow]
         )}
         cursor={isClickable ? "pointer" : "default"}
-        onMouseEnter={() => onHover({ hoveredRow: row.index })}
-        onMouseLeave={() => onHover({ hoveredRow: null })}
+        onMouseEnter={() => onHoverCell?.({ row: row.index })}
+        onMouseLeave={() => onHoverCell?.({ row: null })}
         flex
       >
         {!!row.getLeftVisibleCells().length && (

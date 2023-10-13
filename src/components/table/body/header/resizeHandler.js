@@ -1,7 +1,11 @@
 import React from "react"
 import Flex from "@/components/templates/flex"
+import { useTableState } from "../../provider"
+
+const rerenderSelector = state => state.columnSizingInfo?.deltaPercentage
 
 const ResizeHandler = ({ header, table }) => {
+  useTableState(rerenderSelector)
   if (!header.column.getCanResize()) return null
 
   const resizingProps = header.column.getIsResizing()

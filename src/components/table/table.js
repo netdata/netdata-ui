@@ -276,10 +276,10 @@ Table.defaultProps = {
 }
 
 const withProvider = Component =>
-  forwardRef(({ onHoverCell, ...rest }, ref) => {
+  forwardRef((props, ref) => {
     return (
-      <TableProvider onHoverCell={onHoverCell}>
-        <Component {...rest} ref={ref} />
+      <TableProvider>
+        <Component {...props} ref={ref} />
       </TableProvider>
     )
   })
