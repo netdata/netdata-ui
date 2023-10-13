@@ -11,6 +11,7 @@ const rerenderSelector = state => ({
   sorting: state.sorting,
   sizing: state.columnSizing,
   rowsById: state.rowsById,
+  expanded: state.expanded,
 })
 
 const Body = memo(

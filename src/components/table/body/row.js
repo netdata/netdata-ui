@@ -53,6 +53,7 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
             padding={[0.5]}
             gap={0.5}
             onClick={e => {
+              e.stopPropagation()
               row.getToggleExpandedHandler()(e)
               setTimeout(() => e.target.scrollIntoView({ behavior: "smooth", block: "nearest" }))
             }}
@@ -79,6 +80,7 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
 
 const rerenderSelector = state => ({
   sizing: state.columnSizing,
+  expanded: state.expanded,
 })
 
 export default memo(

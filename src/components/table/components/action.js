@@ -40,7 +40,8 @@ const Action = forwardRef(
     const [isConfirmationOpen, setConfirmationOpen] = useState(false)
     if (visible === false) return null
 
-    const onActionClicked = () => {
+    const onActionClicked = e => {
+      e.stopPropagation()
       if (confirmation || CustomUIAction) {
         setConfirmationOpen(true)
         return
