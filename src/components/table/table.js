@@ -191,7 +191,7 @@ const Table = memo(
 
       if (tableRef) tableRef.current = table
 
-      const { getHasNextPage, getIsLoading, warning } = virtualizeOptions
+      const { getHasNextPage, loading, warning } = virtualizeOptions
 
       return (
         <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref} className={className}>
@@ -228,16 +228,22 @@ const Table = memo(
             {...rest}
             {...virtualizeOptions}
           />
-          {!getHasNextPage?.() && !getIsLoading?.() && !!warning && (
+          {!getHasNextPage?.() && !loading && !!warning && (
             <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
               <Icon name="warning_triangle_hollow" color="warning" />{" "}
               <Text color="warningText">{warning}</Text>
             </Flex>
           )}
-          {getIsLoading?.() && (
-            <Layer backdrop={false} position="bottom" margin={[0, 0, 10]} padding={[0, 0, 10]}>
+          {loading && (
+            <Layer
+              backdrop={false}
+              position="bottom"
+              margin={[0, 0, 10]}
+              padding={[0, 0, 10]}
+              zIndex={20}
+            >
               <Flex background={["neutral", "black"]} padding={[1, 2]} gap={2}>
-                <Text>Loading more...</Text>
+                <Text strong>Loading more...</Text>
               </Flex>
             </Layer>
           )}

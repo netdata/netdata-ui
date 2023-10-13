@@ -32,12 +32,12 @@ const TableUtilsProvider = ({ onHoverCell, children }) => {
     }
   }, [])
 
-  const onHover = useCallback(values => debounce(10, () => dispatch(values)), [onHoverCell])
+  const onHover = debounce(10, values => dispatch(values))
 
   useEffect(() => {
     if (!onHoverCell) return
 
-    onHoverCell({ row: state.hoveredRow + 1, column: state.hoveredColumn })
+    onHoverCell({ row: state.hoveredRow, column: state.hoveredColumn })
   }, [state.hoveredRow, state.hoveredColumn, onHoverCell])
 
   const contextValue = useMemo(() => ({ ...state, dispatch, onHover }), [state, onHover])

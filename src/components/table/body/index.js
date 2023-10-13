@@ -25,7 +25,7 @@ const Body = memo(
     getHasNextPage = noop,
     getHasPrevPage = noop,
     getItemKey = identity,
-    getIsLoading = noop,
+    loading,
     loadMore = noop,
     onVirtualChange,
     virtualRef,
@@ -70,10 +70,10 @@ const Body = memo(
 
       if (!lastItem) return
 
-      if (lastItem.index >= rows.length && getHasNextPage() && !getIsLoading()) {
+      if (lastItem.index >= rows.length && getHasNextPage() && !loading) {
         loadMore("backward")
       }
-    }, [virtualRows, getIsLoading()])
+    }, [virtualRows, loading])
 
     useEffect(() => {
       if (!loadMore) return
@@ -82,10 +82,10 @@ const Body = memo(
 
       if (!first) return
 
-      if (first.index === 1 && getHasPrevPage() && !getIsLoading()) {
+      if (first.index === 1 && getHasPrevPage() && !loading) {
         loadMore("forward")
       }
-    }, [virtualRows, getHasPrevPage(), getIsLoading()])
+    }, [virtualRows, getHasPrevPage(), loading])
 
     return (
       <div
