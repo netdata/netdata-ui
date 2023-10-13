@@ -27,7 +27,11 @@ const LabelContainer = styled(Flex)`
   }
 `
 
-const rerenderSelector = state => ({ sorting: state.sorting, sizing: state.columnSizing })
+const rerenderSelector = state => ({
+  sorting: state.sorting,
+  sizing: state.columnSizing,
+  selecting: state.rowSelection,
+})
 
 const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index }) => {
   useTableState(rerenderSelector)

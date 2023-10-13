@@ -93,13 +93,12 @@ export default memo(
   }) => {
     const onHover = useTableUtilsContext(selectOnHover)
 
-    const isClickable = useMemo(
-      () =>
-        onClickRow && disableClickRow
-          ? !disableClickRow({ data: row.original, table: table, fullRow: row })
-          : true,
-      [row]
-    )
+    const isClickable = useMemo(() => {
+      if (typeof onClickRow !== "function") return false
+      return disableClickRow
+        ? !disableClickRow({ data: row.original, table: table, fullRow: row })
+        : true
+    }, [row, onClickRow])
 
     return (
       <Flex
