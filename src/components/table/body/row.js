@@ -82,6 +82,7 @@ const rerenderSelector = state => ({
   sizing: state.columnSizing,
   expanded: state.expanded,
   columnVisibility: state.columnVisibility,
+  selectedRows: state.selectedRows,
 })
 
 export default memo(
