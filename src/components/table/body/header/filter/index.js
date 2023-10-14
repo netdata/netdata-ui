@@ -19,9 +19,9 @@ const Filter = ({ column, testPrefix, index }) => {
 
   const selectedFilter = meta && meta?.filter?.component ? meta?.filter?.component : "default"
   const filterOptions = meta && meta?.filter ? meta?.filter : {}
-  const Filter = availableFilters[selectedFilter]
+  const FilterComponent = availableFilters[selectedFilter]
 
-  return <Filter column={column} testPrefix={testPrefix} {...filterOptions} />
+  return <FilterComponent column={column} testPrefix={testPrefix} {...filterOptions} />
 }
 
 export default Filter

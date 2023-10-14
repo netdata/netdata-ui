@@ -16,7 +16,10 @@ export default (enabled, { testPrefix, tableMeta }) =>
                 data-testid={`netdata-table-header-checkbox${testPrefix}`}
                 checked={table.getIsAllRowsSelected()}
                 indeterminate={table.getIsSomeRowsSelected()}
-                onChange={table.getToggleAllRowsSelectedHandler()}
+                onChange={e => {
+                  e.stopPropagation()
+                  table.getToggleAllRowsSelectedHandler()(e)
+                }}
               />
             ),
             cell: ({ row }) =>
@@ -25,7 +28,10 @@ export default (enabled, { testPrefix, tableMeta }) =>
                   data-testid={`netdata-table-cell-checkbox${testPrefix}`}
                   checked={!row.original?.disabled && row.getIsSelected()}
                   indeterminate={row.getIsSomeSelected()}
-                  onChange={row.getToggleSelectedHandler()}
+                  onChange={e => {
+                    e.stopPropagation()
+                    row.getToggleSelectedHandler()(e)
+                  }}
                   disabled={row.original?.disabled || false}
                 />
               ),

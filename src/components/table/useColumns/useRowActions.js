@@ -91,7 +91,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       enableColumnFilter: false,
       enableSorting: false,
       tableMeta,
-      size: availableRowActions.length * 35,
+      size: availableRowActions.length * 35 < 60 ? 60 : availableRowActions.length * 35,
       meta: {
         cellStyles: {
           justifyContent: "end",

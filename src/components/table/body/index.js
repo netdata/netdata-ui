@@ -39,7 +39,7 @@ const Body = memo(
     const { rows } = table.getRowModel()
 
     const rowVirtualizer = useVirtualizer({
-      count: rows.length ? rows.length + 1 : 0,
+      count: rows.length ? rows.length + 1 : 1,
       getScrollElement: () => ref.current,
       enableSmoothScroll: false,
       estimateSize: () =>

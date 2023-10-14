@@ -73,18 +73,13 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
       {...headStyles}
       column
     >
-      <Flex
-        flex
-        column
-        width="100%"
-        alignItems={column.columnDef.align || "start"}
-        overflow="hidden"
-      >
+      <Flex flex column width="100%" alignItems={column.columnDef.align || "start"}>
         <LabelContainer
           alignItems="center"
           cursor={column.getCanSort() ? "pointer" : "default"}
           onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
           padding={[0, 2, 0, 0]}
+          overflow="hidden"
         >
           <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
           {column.isPlaceholder ? null : (
