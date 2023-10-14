@@ -10,7 +10,13 @@ import Info from "./info"
 import Filter from "./filter"
 
 const Label = styled(Text)`
+  width: 100%;
   transition: transform 200ms ease;
+  * {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   ${({ sorting }) => sorting && "transform: translateX(12px);"}
   ${({ sortable }) =>
     sortable &&
@@ -80,6 +86,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
           onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
           padding={[0, 2, 0, 0]}
           overflow="hidden"
+          width="100%"
         >
           <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
           {column.isPlaceholder ? null : (
