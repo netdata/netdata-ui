@@ -1,6 +1,9 @@
 import React, { memo } from "react"
 import Flex from "@/components/templates/flex"
+import { useTableState } from "../../provider"
 import Cell from "./cell"
+
+const rerenderSelector = state => state.columnVisibility
 
 const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
   <Flex
@@ -38,41 +41,45 @@ const HeaderGroups = ({ groups, size, side, ...rest }) => {
   )
 }
 
-const BodyHeader = memo(({ table, testPrefix, ...rest }) => (
-  <Flex
-    data-testid={`netdata-table-head${testPrefix}`}
-    flex
-    border={{
-      size: "1px",
-      type: "solid",
-      side: "bottom",
-      color: "border",
-    }}
-  >
-    <HeaderGroups
-      groups={table.getLeftHeaderGroups()}
-      side="left"
-      size={table.getLeftTotalSize()}
-      testPrefix={testPrefix}
-      {...rest}
-      table={table}
-    />
-    <HeaderGroups
-      groups={table.getCenterHeaderGroups()}
-      size={table.getCenterTotalSize()}
-      testPrefix={testPrefix}
-      {...rest}
-      table={table}
-    />
-    <HeaderGroups
-      groups={table.getRightHeaderGroups()}
-      side="right"
-      size={table.getRightTotalSize()}
-      testPrefix={testPrefix}
-      {...rest}
-      table={table}
-    />
-  </Flex>
-))
+const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
+  useTableState(rerenderSelector)
+
+  return (
+    <Flex
+      data-testid={`netdata-table-head${testPrefix}`}
+      flex
+      border={{
+        size: "1px",
+        type: "solid",
+        side: "bottom",
+        color: "border",
+      }}
+    >
+      <HeaderGroups
+        groups={table.getLeftHeaderGroups()}
+        side="left"
+        size={table.getLeftTotalSize()}
+        testPrefix={testPrefix}
+        {...rest}
+        table={table}
+      />
+      <HeaderGroups
+        groups={table.getCenterHeaderGroups()}
+        size={table.getCenterTotalSize()}
+        testPrefix={testPrefix}
+        {...rest}
+        table={table}
+      />
+      <HeaderGroups
+        groups={table.getRightHeaderGroups()}
+        side="right"
+        size={table.getRightTotalSize()}
+        testPrefix={testPrefix}
+        {...rest}
+        table={table}
+      />
+    </Flex>
+  )
+})
 
 export default BodyHeader

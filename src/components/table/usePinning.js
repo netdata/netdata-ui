@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState, useRef } from "react"
 
 const noop = () => {}
 const emptyObj = {}
 
 export default (defaultPinning = emptyObj, onChange = noop) => {
   const [pinning, setPinning] = useState(() => defaultPinning)
+  const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (!defaultPinning || pinning === defaultPinning) return
+    if (initialSetRef.current || !defaultPinning || pinning === defaultPinning) return
 
+    initialSetRef.current = true
     setPinning(defaultPinning)
   }, [defaultPinning])
 

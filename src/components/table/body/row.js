@@ -81,6 +81,7 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
 const rerenderSelector = state => ({
   sizing: state.columnSizing,
   expanded: state.expanded,
+  columnVisibility: state.columnVisibility,
 })
 
 export default memo(

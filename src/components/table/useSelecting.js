@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState, useRef } from "react"
 
 const noop = () => {}
 const emptyObj = {}
 
 export default (defaultRowSelection = emptyObj, onChange = noop) => {
   const [rowSelection, setRowSelection] = useState(() => defaultRowSelection)
+  const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (rowSelection === defaultRowSelection) return
+    if (initialSetRef.current || rowSelection === defaultRowSelection) return
 
+    // initialSetRef.current = true
     setRowSelection(defaultRowSelection)
   }, [defaultRowSelection])
 

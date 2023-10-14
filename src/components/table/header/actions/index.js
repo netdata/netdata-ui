@@ -1,12 +1,16 @@
 import React, { memo, useState, useEffect } from "react"
 import Flex from "@/components/templates/flex"
+import { useTableState } from "../../provider"
 import useActions from "./useActions"
 import Action from "./action"
 import ColumnVisibility from "./columnVisibility"
 
 const noop = () => {}
 
+const rerenderSelector = state => state.selectedRows
+
 const useSelectedRowsObserver = (table, { onRowSelected = noop, rowSelection }) => {
+  useTableState(rerenderSelector)
   const [selectedRows, setActualSelectedRows] = useState([])
 
   useEffect(() => {

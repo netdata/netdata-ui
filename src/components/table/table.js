@@ -186,7 +186,12 @@ const Table = memo(
 
       const dispatch = useTableDispatch()
       useLayoutEffect(() => {
-        dispatch({ ...table.getState(), rowsById: table.getRowModel().rowsById, table })
+        dispatch({
+          ...table.getState(),
+          rowsById: table.getRowModel().rowsById,
+          table,
+          selectedRows: table.getSelectedRowModel().rows,
+        })
       }, [table.getState()])
 
       if (tableRef) tableRef.current = table
@@ -206,19 +211,17 @@ const Table = memo(
             title={title}
             dataColumns={dataColumns}
           >
-            {(enableColumnVisibility || !!bulkActions) && (
-              <HeaderActions
-                rowSelection={rowSelection}
-                bulkActions={bulkActions}
-                columnPinning={columnPinning}
-                dataGa={dataGa}
-                enableColumnVisibility={enableColumnVisibility}
-                enableColumnPinning={enableColumnPinning}
-                table={table}
-                testPrefix={testPrefix}
-                onRowSelected={onRowSelected}
-              />
-            )}
+            <HeaderActions
+              rowSelection={rowSelection}
+              bulkActions={bulkActions}
+              columnPinning={columnPinning}
+              dataGa={dataGa}
+              enableColumnVisibility={enableColumnVisibility}
+              enableColumnPinning={enableColumnPinning}
+              table={table}
+              testPrefix={testPrefix}
+              onRowSelected={onRowSelected}
+            />
           </Header>
           <Body
             table={table}

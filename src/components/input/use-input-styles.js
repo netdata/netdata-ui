@@ -65,7 +65,7 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
         height: "100%",
         alignItems: "center",
         round: true,
-        margin: [0, iconRight ? 0 : -1, 0, iconLeft ? 0 : -1],
+        margin: [0, 0, 0, iconLeft ? 0 : -1],
       }
     },
     [disabled]
