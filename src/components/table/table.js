@@ -18,12 +18,10 @@ import { comparison, includesString, select } from "./helpers/filterFns"
 import useColumns from "./useColumns"
 import TableProvider, { useTableDispatch } from "./provider"
 import Pagination from "./components/pagination"
-
+import { throttle } from "throttle-debounce"
 import Header from "./header"
 import HeaderActions from "./header/actions"
-
 import Body from "./body"
-
 import usePinning from "./usePinning"
 import useVisibility from "./useVisibility"
 import useExpanding from "./useExpanding"
@@ -185,8 +183,11 @@ const Table = memo(
       }
 
       const dispatch = useTableDispatch()
+
+      const dispatchThrottled = useCallback(throttle(10, dispatch), [])
+
       useLayoutEffect(() => {
-        dispatch({
+        dispatchThrottled({
           ...table.getState(),
           rowsById: table.getRowModel().rowsById,
           table,
