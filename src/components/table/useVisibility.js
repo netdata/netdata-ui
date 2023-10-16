@@ -8,7 +8,7 @@ export default (defaultColumnVisibility = emptyObj, onChange = noop) => {
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || columnVisibility === defaultColumnVisibility) return
+    if (columnVisibility === defaultColumnVisibility) return
 
     initialSetRef.current = true
     setColumnVisibility(defaultColumnVisibility)

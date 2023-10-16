@@ -8,7 +8,7 @@ export default (defaultSorting = emptyArr, onChange = noop) => {
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || sorting === defaultSorting) return
+    if (sorting === defaultSorting) return
 
     initialSetRef.current = true
     setSorting(defaultSorting)

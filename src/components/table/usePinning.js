@@ -8,7 +8,7 @@ export default (defaultPinning = emptyObj, onChange = noop) => {
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || !defaultPinning || pinning === defaultPinning) return
+    if (!defaultPinning || pinning === defaultPinning) return
 
     initialSetRef.current = true
     setPinning(defaultPinning)

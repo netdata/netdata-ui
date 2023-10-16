@@ -7,7 +7,7 @@ export default (defaultGrouping = "", onChange = noop) => {
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || grouping === defaultGrouping) return
+    if (grouping === defaultGrouping) return
 
     initialSetRef.current = true
     setGrouping(defaultGrouping)

@@ -8,7 +8,7 @@ export default (defaultExpanded = emptyObj, onChange = noop) => {
   const [expanded, setExpanded] = useState(() => defaultExpanded)
 
   useEffect(() => {
-    if (initialSetRef.current || !defaultExpanded || expanded === defaultExpanded) return
+    if (!defaultExpanded || expanded === defaultExpanded) return
 
     initialSetRef.current = true
     setExpanded(defaultExpanded)

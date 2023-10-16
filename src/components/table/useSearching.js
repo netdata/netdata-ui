@@ -7,7 +7,7 @@ export default (defaultGlobalFilter = "", onChange = noop) => {
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || globalFilter === defaultGlobalFilter) return
+    if (globalFilter === defaultGlobalFilter) return
 
     initialSetRef.current = true
     setGlobalFilter(defaultGlobalFilter)

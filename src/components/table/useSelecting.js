@@ -8,7 +8,7 @@ export default (defaultRowSelection = emptyObj, onChange = noop) => {
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || rowSelection === defaultRowSelection) return
+    if (rowSelection === defaultRowSelection) return
 
     // initialSetRef.current = true
     setRowSelection(defaultRowSelection)

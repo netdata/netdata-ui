@@ -8,7 +8,7 @@ export default (paginationOptions = defaultPaginationOptions, onChange = noop) =
   const initialSetRef = useRef(false)
 
   useEffect(() => {
-    if (initialSetRef.current || pagination === paginationOptions) return
+    if (pagination === paginationOptions) return
 
     initialSetRef.current = true
     setPagination(paginationOptions)
