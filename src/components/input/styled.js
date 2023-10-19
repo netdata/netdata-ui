@@ -28,8 +28,6 @@ export const StyledInput = styled.input.attrs({ round: true })`
   min-width: 100%;
   font-weight: normal;
   flex-grow: 0;
-  padding-left: 8px;
-  padding-right: 8px;
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
