@@ -25,15 +25,14 @@ export const StyledInput = styled.input.attrs({ round: true })`
   ${round}
   height: 100%;
   width: 100%;
-  min-width: 100%;
   font-weight: normal;
   flex-grow: 0;
   ${({ iconLeft }) => iconLeft && "padding-left: 0"};
   ${({ iconRight }) => iconRight && "padding-right: 0"};
   font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
   line-height: 18px;
-  color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textDescription"))};
-  background: ${getColor("mainBackground")};
+  color: ${({ disabled }) => getColor(disabled ? "placeholder" : "textDescription")};
+  background: ${({ disabled }) => getColor(disabled ? "inputBg" : "mainBackground")};
   opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
   &::placeholder {
     font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
