@@ -19,14 +19,17 @@ const useInputStyles = ({ size = "large", disabled, success, error, focused }) =
       case "tiny":
         return {
           height: "28px",
+          padding: [0.5, 1],
         }
       case "small":
         return {
           height: "34px",
+          padding: [1, 2],
         }
       default: {
         return {
           height: "42px",
+          padding: [2, 3],
         }
       }
     }
