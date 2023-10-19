@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef } from "react"
-import usePrevious from "react-use/lib/usePrevious"
+import usePrevious from "@/hooks/usePrevious"
 import Flex from "@/components/templates/flex"
-import useIntersection from "@/hooks/use-intersection"
+import useIntersection from "@/hooks/useIntersection"
 import setParentRef from "@/mixins/set-ref"
 
 const getContent = value => (typeof value === "function" ? value() : value)

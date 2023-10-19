@@ -7,26 +7,25 @@ import { useState, useCallback } from "react"
  * @param {Boolean} initialValue
  */
 
-export default (initialValue = false, { on, off, toggle: onToggle } = {}) => {
+export default (initialValue, { on, off, toggle: onToggle } = {}) => {
   const [value, setToggle] = useState(!!initialValue)
+  const toggle = useCallback(
+    val =>
+      setToggle(oldValue => {
+        const nextValue = typeof val === "boolean" ? val : !oldValue
 
-  const toggle = useCallback(() => {
-    setToggle(oldValue => {
-      const nextValue = !oldValue
+        if (onToggle) onToggle(nextValue)
+        if (on && nextValue) on()
+        if (off && !nextValue) off()
 
-      if (onToggle) onToggle(nextValue)
-      if (on && nextValue) on()
-      if (off && !nextValue) off()
-
-      return nextValue
-    })
-  }, [on, off, onToggle])
-
+        return nextValue
+      }),
+    [onToggle, on, off]
+  )
   const toggleOn = useCallback(() => {
     setToggle(true)
     if (on) on()
   }, [on])
-
   const toggleOff = useCallback(() => {
     setToggle(false)
     if (off) off()

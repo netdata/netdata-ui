@@ -19,13 +19,16 @@ const Header = ({
   searchPlaceholder = "Search",
   dataColumns,
   children,
+  bulkActions,
+  enableColumnVisibility,
 }) => {
   tableMeta = useMemo(
     () => (typeof tableMeta === "function" ? tableMeta({}, {}, null) : tableMeta),
     []
   )
 
-  if (!title && !groupByColumns && !hasSearch && !children) return null
+  if (!title && !groupByColumns && !hasSearch && !bulkActions && !enableColumnVisibility)
+    return null
 
   return (
     <Flex

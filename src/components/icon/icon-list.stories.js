@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import useCopyToClipboard from "react-use/lib/useCopyToClipboard"
 import Flex from "@/components/templates/flex"
 import { Text, TextBigger } from "@/components/typography"
 import { getColor } from "../../theme"
@@ -17,14 +16,13 @@ const Item = styled(Flex)`
 
 export const Svgs = {
   component: () => {
-    const [, copyToClipboard] = useCopyToClipboard()
     return (
       <Flex column padding={[10, 4, 2]} gap={4}>
         <TextBigger>Click item to copy icon name</TextBigger>
         <Flex flexWrap>
           {iconsExposed.map(name => (
             <Item
-              onClick={() => copyToClipboard(name)}
+              onClick={() => alert(name)}
               cursor="pointer"
               key={name}
               padding={[3, 3]}

@@ -82,7 +82,6 @@ const Dropdown = ({
             defaultValue={searchParams}
             placeholder="Search"
             onChange={handleSearch}
-            size="tiny"
           />
         </Box>
       )}

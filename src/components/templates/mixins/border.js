@@ -46,6 +46,13 @@ export default ({ theme, border }) => {
     return borderMap[border](getDefaults(theme))
   }
 
+  if (typeof border === "string") {
+    return borderMap.all({
+      ...getDefaults(theme),
+      color: getColor(border || "border")({ theme }),
+    })
+  }
+
   if (typeof border !== "object") {
     return ""
   }

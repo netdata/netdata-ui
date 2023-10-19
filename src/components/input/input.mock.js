@@ -12,7 +12,7 @@ const Container = styled.div`
 export const TextInputMock = () => {
   const [isValid, setIsValid] = useState(false)
   const [validationMessage, setValidationMessage] = useState("")
-  const fieldMessage = "Pls fill this field for the sake of humanity"
+  const hint = "Pls fill this field for the sake of humanity"
   const charLimit = 20
 
   const [value, handleChange, charsIndicator] = useInputValue({ maxChars: charLimit })
@@ -34,7 +34,7 @@ export const TextInputMock = () => {
       <TextInput
         name="testInput"
         placeholder="Enter something"
-        fieldMessage={fieldMessage}
+        hint={hint}
         fieldIndicator={charsIndicator}
         value={value}
         touched={touched}

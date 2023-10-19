@@ -1,13 +1,14 @@
 import React, { forwardRef } from "react"
-import SearchInput from "./searchInput"
+import { Icon } from "@/components/icon"
+import { TextInput } from "@/components/input"
 
 const Search = forwardRef(({ value, onChange, placeholder, ...rest }, ref) => (
-  <SearchInput
+  <TextInput
+    iconLeft={<Icon name="search" color="textLite" width="14px" height="14px" />}
     inputRef={ref}
     value={value}
     onChange={onChange}
     placeholder={placeholder}
-    size="tiny"
     {...rest}
   />
 ))

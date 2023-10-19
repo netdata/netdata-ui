@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useState, forwardRef } from "react"
-import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import styled from "styled-components"
-import useForwardRef from "@/hooks/use-forward-ref"
+import useUpdateEffect from "@/hooks/useUpdateEffect"
+import useForwardRef from "@/hooks/useForwardRef"
 import Flex from "@/components/templates/flex"
 
 const measurementByDimension = {
@@ -27,6 +27,7 @@ const Collapsible = forwardRef(
       direction,
       persist = false,
       closedValue = 0,
+      overflow = "visible",
       ...rest
     },
     parentRef
@@ -82,7 +83,7 @@ const Collapsible = forwardRef(
         duration={duration}
         ref={setRef}
         data-testid="collapsible"
-        overflow={dimension === "initial" ? "visible" : "hidden"}
+        overflow={dimension === "initial" ? overflow : "hidden"}
         {...rest}
       >
         {child}

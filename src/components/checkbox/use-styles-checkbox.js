@@ -12,18 +12,17 @@ const makeColor = ({
   success: success,
 })
 const useCheckboxStyles = ({ disabled, success, error, focused }) => {
-  const status = success ? "success" : error ? "error" : disabled ? "disabled" : "default"
+  const status = success ? "success" : error ? "error" : "default"
 
   const styledCheckbox = useMemo(
     () => ({
       alignItems: "center",
-      background: disabled ? "mainBackgroundDisabled" : "mainBackground",
+      background: "inputBg",
+      backgroundOpacity: disabled ? 0.4 : 1,
       border: {
         size: "1px",
         type: "solid",
-        color: focused
-          ? makeColor({ defaultColor: "inputBorderFocus" })[status]
-          : makeColor({})[status],
+        color: makeColor({ defaultColor: "inputBorder" })[status],
         side: "all",
       },
       height: "inherit",
@@ -32,13 +31,25 @@ const useCheckboxStyles = ({ disabled, success, error, focused }) => {
       width: "inherit",
       _focus: {
         border: {
-          color: makeColor({ defaultColor: "controlFocused" })[status],
+          color: makeColor({ defaultColor: "inputBorderFocus" })[status],
           side: "all",
           size: "1px",
           type: "solid",
         },
         boxShadow: {
-          color: makeColor({ defaultColor: "controlFocused" })[status],
+          color: makeColor({ defaultColor: "inputBorderFocus" })[status],
+          size: "0 0 0 1px",
+        },
+      },
+      _hover: {
+        border: {
+          color: makeColor({ defaultColor: "inputBorderHover" })[status],
+          side: "all",
+          size: "1px",
+          type: "solid",
+        },
+        boxShadow: {
+          color: makeColor({ defaultColor: "inputBorderHover" })[status],
           size: "0 0 0 1px",
         },
       },

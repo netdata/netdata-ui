@@ -1,5 +1,5 @@
 import React from "react"
-import useToggle from "react-use/lib/useMeasure"
+import useToggle from "@/hooks/useMeasure"
 import { H2, H3, Text } from "@/components/typography"
 import { Icon } from "@/components/icon"
 import { Button } from "@/components/button"

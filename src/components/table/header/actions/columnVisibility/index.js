@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from "react"
-import useToggle from "@/hooks/use-toggle"
+import useToggle from "@/hooks/useToggle"
 import BulkAction from "../action"
 import ColumnsMenu from "./columnsMenu"
 import { supportedBulkActions } from "../useActions"

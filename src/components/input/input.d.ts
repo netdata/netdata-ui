@@ -5,7 +5,7 @@ export type CallBackRef = (input: any) => void
 export type InstantFeedback = "all" | "positiveFirst"
 
 export interface ComponentProps extends MarginProps, AlignSelfProps {
-  fieldMessage?: string
+  hint?: string
   error?: boolean | string
   success?: boolean | string
   touched?: boolean

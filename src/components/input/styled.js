@@ -1,42 +1,39 @@
 import styled, { css } from "styled-components"
 import { Icon } from "@/components/icon"
-import { getColor, getValidatedControlColor } from "@/theme/utils"
-import { controlReset } from "@/mixins"
-import margin from "@/mixins/margin"
-import alignSelf from "@/mixins/alignSelf"
-import round from "@/mixins/round"
-import width from "@/components/templates/mixins/width"
 import Flex from "@/components/templates/flex"
+import { TextSmall, TextMicro } from "@/components/typography"
+import { getColor, getValidatedControlColor } from "@/theme/utils"
 
 const disabledCursorSupport = css`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "")};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `
 
-export const StyledContainer = styled.div`
-  ${margin}
-  ${alignSelf}
-  position: relative;
-  ${width}
-`
-
-export const StyledInput = styled.input.attrs({ round: true })`
-  ${controlReset}
-  ${round}
-  height: 100%;
-  width: 100%;
-  font-weight: normal;
-  flex-grow: 0;
-  ${({ iconLeft }) => iconLeft && "padding-left: 0"};
-  ${({ iconRight }) => iconRight && "padding-right: 0"};
+export const Input = styled(Flex).attrs(props => ({
+  round: 0.5,
+  as: "input",
+  background: "inputBg",
+  backgroundOpacity: props.disabled ? 0.4 : 1,
+  width: "100%",
+  border: props.error ? "error" : "inputBorder",
+  _hover: {
+    border: props.error ? "errorText" : "inputBorderHover",
+  },
+  _focus: {
+    border: props.error ? "errorText" : "inputBorderFocus",
+  },
+  padding: props.size === "tiny" ? [0.5, 1] : props.size === "small" ? [1, 2] : [2, 3],
+  height: props.size === "tiny" ? 5 : props.size === "small" ? 6 : 7,
+  ...props,
+}))`
   font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
-  line-height: 18px;
-  color: ${({ disabled }) => getColor(disabled ? "placeholder" : "textDescription")};
-  background: ${({ disabled }) => getColor(disabled ? "inputBg" : "mainBackground")};
-  opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
+  color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textLite"))};
+  ${({ hasIconLeft }) => hasIconLeft && "padding-left: 24px;"}
+  ${({ hasIconRight, hasIndicator }) =>
+    hasIconRight || (hasIndicator && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`)}
+
   &::placeholder {
     font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
-    line-height: 18px;
     color: ${getColor("placeholder")};
     opacity: 1;
     font-weight: normal;
@@ -49,22 +46,14 @@ export const StyledLabel = styled.label`
   display: block;
   ${disabledCursorSupport};
 `
-export const LabelRow = styled(Flex).attrs({
+export const LabelText = styled(Flex).attrs(props => ({
+  as: props.size === "tiny" ? TextMicro : TextSmall,
+  strong: true,
   alignItems: "center",
-  color: "text",
   flex: false,
   width: "100%",
-})`
-  font-style: normal;
-  font-weight: bold;
-  font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
-  line-height: 18px;
-  margin-bottom: 4px;
-`
-
-export const InputContainer = styled(Flex)`
-  ${disabledCursorSupport};
-`
+  ...props,
+}))``
 
 export const StyledIcon = styled(Icon)`
   flex-grow: 0;

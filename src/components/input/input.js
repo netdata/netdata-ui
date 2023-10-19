@@ -1,159 +1,78 @@
 import React from "react"
-import usePreviousDistinct from "react-use/lib/usePreviousDistinct"
-import {
-  StyledInput,
-  StyledLabel,
-  InputContainer,
-  SuccessIcon,
-  IconContainer,
-  StyledContainer,
-  MetaContainer,
-  MetaInfo,
-  FieldInfo,
-  LabelRow,
-  ErrorIcon,
-} from "./styled"
-import { useFocusedState } from "./use-focused-state"
-import useInputStyles from "./use-input-styles"
-
-const defaultHandleMetaDisplay = ({
-  isDirty,
-  instantFeedback,
-  value,
-  prevValue,
-  error,
-  success,
-  touched,
-}) =>
-  touched ||
-  Boolean(instantFeedback === "all" && isDirty) ||
-  Boolean(instantFeedback === "positiveFirst" && isDirty && success) ||
-  Boolean(
-    instantFeedback === "positiveFirst" &&
-      isDirty &&
-      error &&
-      prevValue &&
-      value.length < prevValue.length
-  ) // if user starts to erase entered data, we provide negative feedback
+import Flex from "@/components/templates/flex"
+import { TextMicro } from "@/components/typography"
+import { Input, LabelText } from "./styled"
 
 export const TextInput = ({
   error,
-  success,
-  touched,
   disabled,
-  instantFeedback,
   iconLeft,
   iconRight,
   name,
   onFocus,
   onBlur,
   className,
-  fieldMessage,
+  hint,
   fieldIndicator,
-  metaShrinked,
   placeholder = "",
   label,
-  isDirty,
   value,
   inputRef,
   size = "large",
-  handleMetaDisplay = defaultHandleMetaDisplay,
   containerStyles,
   inputContainerStyles,
   ...props
 }) => {
-  const [focused, handleFocus, handleBlur] = useFocusedState({ onBlur, onFocus })
-
-  const prevValue = usePreviousDistinct(value)
-
-  const metaDisplayed = handleMetaDisplay({
-    isDirty,
-    instantFeedback,
-    value,
-    prevValue,
-    error,
-    success,
-    touched,
-    focused,
-  })
-
-  const isSuccess = metaDisplayed && success
-  const isError = metaDisplayed && error
-  const errorMessage = isError && error !== true && error
-  const successMessage = isSuccess && success !== true && success
-
-  const { styles } = useInputStyles({
-    size,
-    error: isError,
-    success: isSuccess,
-    disabled,
-    focused,
-  })
-
-  const LeftIcon = React.useCallback(
-    ({ icon }) => (
-      <IconContainer {...styles.iconContainer({ iconLeft: true })}>{icon}</IconContainer>
-    ),
-    []
-  )
-  const RightIcon = React.useCallback(
-    ({ icon }) => (
-      <IconContainer {...styles.iconContainer({ iconRight: true })}>{icon}</IconContainer>
-    ),
-    []
-  )
+  const errorMessage = error === true ? "invalid" : error
 
   return (
-    <StyledContainer className={className} {...containerStyles}>
-      <StyledLabel disabled={disabled}>
-        {label && (
-          <LabelRow size={size}>
-            <span>{label}</span>
-          </LabelRow>
+    <Flex gap={1} column className={className} {...containerStyles} as="label" flex>
+      {typeof label === "string" ? <LabelText size={size}>{label}</LabelText> : label}
+      <Flex position="relative" gap={1} {...inputContainerStyles}>
+        {iconLeft && (
+          <Flex position="absolute" left={0} top={0} bottom={0} alignItems="center" padding={[1]}>
+            {iconLeft}
+          </Flex>
         )}
-        <InputContainer
-          {...styles.inputContainer}
-          focused={focused}
-          success={isSuccess}
-          error={isError}
+        <Input
           disabled={disabled}
-          {...inputContainerStyles}
-        >
-          {iconLeft && <LeftIcon icon={iconLeft} />}
-          <StyledInput
-            disabled={disabled}
-            placeholder={placeholder}
-            onBlur={handleBlur}
-            onFocus={handleFocus}
-            name={name}
-            aria-label={name}
-            iconLeft={iconLeft}
-            iconRight={iconRight}
-            type="text"
-            value={value}
-            size={size}
-            ref={inputRef}
-            {...props}
-          />
-          {iconRight && <RightIcon icon={iconRight} />}
-          {metaDisplayed && error && <RightIcon icon={<ErrorIcon name="cross_s" />} />}
-          {metaDisplayed && success && <RightIcon icon={<SuccessIcon name="checkmark_s" />} />}
-        </InputContainer>
-      </StyledLabel>
+          placeholder={placeholder}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          name={name}
+          aria-label={name}
+          hasIconLeft={!!iconLeft}
+          hasIconRight={!!iconRight}
+          hasIndicator={!!fieldIndicator}
+          type="text"
+          value={value}
+          size={size}
+          ref={inputRef}
+          error={error}
+          {...props}
+        />
 
-      {!metaShrinked && (
-        <MetaContainer
-          margin={[1, 0, 0, 0]}
-          width="100%"
-          justifyContent="between"
-          alignItems="center"
-        >
-          <FieldInfo success={isSuccess} error={isError}>
-            {(isError && errorMessage) || (isSuccess && successMessage) || fieldMessage}
-          </FieldInfo>
-          <MetaInfo>{fieldIndicator}</MetaInfo>
-        </MetaContainer>
+        {iconRight && (
+          <Flex
+            position="absolute"
+            right={0}
+            top={0}
+            bottom={0}
+            alignItems="center"
+            padding={[1]}
+            gap={1}
+          >
+            <span>{fieldIndicator}</span>
+            <span>{iconRight}</span>
+          </Flex>
+        )}
+      </Flex>
+      {typeof hint === "string" ? <TextMicro color="textLite">{hint}</TextMicro> : !!hint && hint}
+      {typeof errorMessage === "string" ? (
+        <TextMicro color="errorText">{errorMessage}</TextMicro>
+      ) : (
+        !!errorMessage && errorMessage
       )}
-    </StyledContainer>
+    </Flex>
   )
 }

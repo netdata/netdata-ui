@@ -16,7 +16,7 @@
 //     const disabled = boolean("Disabled", false)
 //     const [isValid, setIsValid] = useState(false)
 //     const [validationMessage, setValidationMessage] = useState("")
-//     const fieldMessage = text(
+//     const hint = text(
 //       "Defailt field message",
 //       "Pls fill this field for the sake of humanity"
 //     )
@@ -49,7 +49,7 @@
 //         <TextInput
 //           disabled={disabled}
 //           placeholder={text("Placeholder", "Enter something")}
-//           fieldMessage={fieldMessage}
+//           hint={hint}
 //           fieldIndicator={charsIndicator}
 //           value={value}
 //           touched={touched}
@@ -80,7 +80,7 @@
 //     const disabled = boolean("Disabled", false)
 //     const [isValid, setIsValid] = useState(false)
 //     const [validationMessage, setValidationMessage] = useState("")
-//     const fieldMessage = text("Default field message", "Pls enter at least 5 characters")
+//     const hint = text("Default field message", "Pls enter at least 5 characters")
 //     const charLimit = number("Max characters", 20)
 
 //     const onChange = useCallback(() => {
@@ -119,7 +119,7 @@
 //         <TextInput
 //           disabled={disabled}
 //           placeholder={text("Placeholder", "Enter something")}
-//           fieldMessage={fieldMessage}
+//           hint={hint}
 //           fieldIndicator={charsIndicator}
 //           value={value}
 //           touched={touched}
@@ -162,7 +162,7 @@
 //           disabled={disabled}
 //           label={label}
 //           placeholder={text("Placeholder", "Enter something")}
-//           fieldMessage={text("Default field message", "Fun input with icon")}
+//           hint={text("Default field message", "Fun input with icon")}
 //           value={value}
 //           onChange={handleChange}
 //           iconRight={SearchIcon}
@@ -193,7 +193,7 @@
 //           disabled={disabled}
 //           label={label}
 //           placeholder={text("Placeholder", "Enter something")}
-//           fieldMessage={text("Default field message", "Fun input with icon")}
+//           hint={text("Default field message", "Fun input with icon")}
 //           value={value}
 //           onChange={handleChange}
 //           iconLeft={SearchIcon}
@@ -224,7 +224,7 @@
 //           disabled={disabled}
 //           label={label}
 //           placeholder={text("Placeholder", "Enter something")}
-//           fieldMessage={text("Default field message", "Fun input with icon")}
+//           hint={text("Default field message", "Fun input with icon")}
 //           value={value}
 //           onChange={handleChange}
 //           iconLeft={SearchIcon}
@@ -256,7 +256,7 @@
 //           disabled={disabled}
 //           label={label}
 //           placeholder={text("Placeholder", "Enter something")}
-//           fieldMessage={text("Default field message", "Fun input with icon")}
+//           hint={text("Default field message", "Fun input with icon")}
 //           value={value}
 //           onChange={handleChange}
 //           iconLeft={SearchIcon}
@@ -288,7 +288,7 @@
 //             disabled={disabled}
 //             label={"Large"}
 //             placeholder={text("Placeholder", "Enter something")}
-//             fieldMessage={text("Default field message", "Fun input with icon")}
+//             hint={text("Default field message", "Fun input with icon")}
 //             value={value}
 //             onChange={handleChange}
 //             iconRight={SearchIcon}
@@ -301,7 +301,7 @@
 //             disabled={disabled}
 //             label={"Small"}
 //             placeholder={text("Placeholder", "Enter something")}
-//             fieldMessage={text("Default field message", "Fun input with icon")}
+//             hint={text("Default field message", "Fun input with icon")}
 //             value={value}
 //             onChange={handleChange}
 //             iconRight={SearchIcon}
@@ -314,7 +314,7 @@
 //             disabled={disabled}
 //             label={"Tiny"}
 //             placeholder={text("Placeholder", "Enter something")}
-//             fieldMessage={text("Default field message", "Fun input with icon")}
+//             hint={text("Default field message", "Fun input with icon")}
 //             value={value}
 //             onChange={handleChange}
 //             iconRight={SearchIcon}
