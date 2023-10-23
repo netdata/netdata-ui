@@ -12,8 +12,8 @@ const disabledCursorSupport = css`
 export const Input = styled(Flex).attrs(props => ({
   round: 0.5,
   as: "input",
-  background: "inputBg",
-  backgroundOpacity: props.disabled ? 0.4 : 1,
+  background: props.value ? "successBackground" : "inputBg",
+  backgroundOpacity: props.disabled || props.value ? 0.4 : 1,
   width: "100%",
   border: props.error ? "error" : "inputBorder",
   _hover: {
@@ -23,17 +23,17 @@ export const Input = styled(Flex).attrs(props => ({
     border: props.error ? "errorText" : "inputBorderFocus",
   },
   padding: props.size === "tiny" ? [0.5, 1] : props.size === "small" ? [1, 2] : [2, 3],
-  height: props.size === "tiny" ? 5 : props.size === "small" ? 6 : 7,
+  height: props.size === "tiny" ? 6 : props.size === "small" ? 7 : 9,
   ...props,
 }))`
-  font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
+  font-size: ${({ size }) => (size === "tiny" ? "11px" : size === "small" ? "12px" : "14px")};
   color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textLite"))};
   ${({ hasIconLeft }) => hasIconLeft && "padding-left: 24px;"}
   ${({ hasIconRight, hasIndicator }) =>
     hasIconRight || (hasIndicator && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`)}
 
   &::placeholder {
-    font-size: ${({ size }) => (size === "tiny" ? "12px" : "14px")};
+    font-size: ${({ size }) => (size === "tiny" ? "11px" : size === "small" ? "12px" : "14px")};
     color: ${getColor("placeholder")};
     opacity: 1;
     font-weight: normal;

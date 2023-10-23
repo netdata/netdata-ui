@@ -56,12 +56,7 @@ const ColumnsMenu = ({ dataGa, parentRef, isOpen, columns, onClose, pinnedColumn
               column
             >
               {pinnedColumns.map(pinnedColumn => (
-                <ColumnsMenuItem
-                  column={pinnedColumn}
-                  dataGa={dataGa}
-                  disabled
-                  key={pinnedColumn.id}
-                />
+                <ColumnsMenuItem column={pinnedColumn} dataGa={dataGa} key={pinnedColumn.id} />
               ))}
             </Flex>
           ) : null}

@@ -13,8 +13,7 @@ const Animated = styled(Flex).attrs(props => ({
   column: true,
   ...props,
 }))`
-  transition: ${({ duration, measurement }) =>
-    `max-${measurement} ${duration}ms ease-out, opacity ${duration}ms ease`};
+  transition: ${({ duration, measurement }) => `max-${measurement} ${duration}ms ease-in-out`};
   ${({ measurement, maxDimension }) => `max-${measurement}: ${maxDimension}`};
 `
 
@@ -32,6 +31,7 @@ const Collapsible = forwardRef(
     },
     parentRef
   ) => {
+    const measurement = measurementByDimension[direction] || measurementByDimension.vertical
     duration = process.env.NODE_ENV === "test" ? 0 : duration
 
     const [dimension, setDimension] = useState(open ? "initial" : `${closedValue}px`)
@@ -39,31 +39,40 @@ const Collapsible = forwardRef(
     const [ref, setRef] = useForwardRef(parentRef)
 
     useUpdateEffect(() => {
-      let nestedRequestId
+      if (!ref.current) return
+      setDimension(
+        !open
+          ? `${
+              measurement === measurementByDimension.vertical
+                ? ref.current.scrollHeight
+                : ref.current.scrollHeight
+            }px`
+          : `${closedValue}px`
+      )
+
       const requestId = requestAnimationFrame(() => {
         if (!ref.current) return
 
-        setDimension(!open ? `${ref.current.scrollHeight}px` : `${closedValue}px`)
-
-        nestedRequestId = requestAnimationFrame(() => {
-          if (!ref.current) return
-
-          setDimension(open ? `${ref.current.scrollHeight}px` : `${closedValue}px`)
-        })
+        setDimension(
+          open
+            ? `${
+                measurement === measurementByDimension.vertical
+                  ? ref.current.scrollHeight
+                  : ref.current.scrollHeight
+              }px`
+            : `${closedValue}px`
+        )
       })
 
-      if (open) {
-        setAnimatedOpen(true)
-      }
+      setAnimatedOpen(open)
 
       const timeoutId = setTimeout(
-        () => (open ? setDimension("initial") : setAnimatedOpen(false)),
+        () => (open ? setDimension("initial") : `${closedValue}px`),
         duration
       )
 
       return () => {
         cancelAnimationFrame(requestId)
-        cancelAnimationFrame(nestedRequestId)
         clearTimeout(timeoutId)
       }
     }, [open])
@@ -79,7 +88,7 @@ const Collapsible = forwardRef(
       <Animated
         open={open}
         maxDimension={dimension}
-        measurement={measurementByDimension[direction] || measurementByDimension.vertical}
+        measurement={measurement}
         duration={duration}
         ref={setRef}
         data-testid="collapsible"

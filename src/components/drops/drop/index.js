@@ -15,7 +15,7 @@ const Backdrop = styled.div`
   inset: 0;
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 50000;
+  z-index: 60;
   ${backdropBlur};
 }
 `
