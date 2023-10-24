@@ -61,6 +61,8 @@ const appColors = {
   separator: rawColors.neutral.grey185,
   controlFocused: rawColors.neutral.limedSpruce,
   selected: rawColors.neutral.grey180,
+  highlight: rawColors.neutral.grey180,
+
   tooltip: rawColors.neutral.shark,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.grey100,
@@ -111,10 +113,10 @@ const appColors = {
 
   //Table
   dropdownTable: rawColors.neutral.white,
-  tableRowBg: rawColors.neutral.grey190,
+  tableRowBg: rawColors.neutral.grey195,
   tableRowBgHover: rawColors.neutral.grey180,
-  tableRowBg2: rawColors.neutral.mystic,
-  tableRowBg2Hover: rawColors.neutral.iron,
+  tableRowBg2: rawColors.neutral.grey190,
+  tableRowBg2Hover: rawColors.neutral.grey180,
   columnHighlight: rawColors.green.green190,
   //IconButton
   iconColor: rawColors.neutral.limedSpruce,
