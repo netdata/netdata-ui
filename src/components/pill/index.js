@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react"
 import { Text, TextMicro, TextNano, TextSmall } from "@/components/typography"
+import Flex from "@/components/templates/flex"
 import PillIcon from "./icon"
 import { getPillColor } from "./mixins/colors"
 import { PillContainer } from "./styled"
@@ -28,6 +29,7 @@ const Pill = forwardRef(
       size,
       textSize,
       tiny,
+      textProps,
       ...rest
     },
     ref
@@ -54,14 +56,16 @@ const Pill = forwardRef(
       >
         {!reverse && <PillIcon data-testid={`${testId}-icon-left`} {...iconProps} />}
         {children && (
-          <TextComponent
+          <Flex
+            as={TextComponent}
             color={color || (hollow ? getPillColor("color", flavour) : "bright")}
             data-testid={`${testId}-text`}
             strong={!normal}
             whiteSpace="nowrap"
+            {...textProps}
           >
             {children}
-          </TextComponent>
+          </Flex>
         )}
         {reverse && <PillIcon data-testid={`${testId}-icon-right`} {...iconProps} />}
       </PillContainer>
