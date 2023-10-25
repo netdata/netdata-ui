@@ -43,7 +43,7 @@ export interface MetaOptions {
 }
 
 export interface ComponentProps {
-  fieldMessage?: string
+  hint?: string
   error?: boolean | string
   success?: boolean | string
   touched?: boolean
@@ -61,8 +61,8 @@ export type TextInputProps = InputProps & ComponentProps
 
 Notable props:
 
-- `fieldMessage` - default message under the input field
-- `success` and `error` - status indicators, could be boolean or strings (in this case they render instead of `fieldMessage`)
+- `hint` - default message under the input field
+- `success` and `error` - status indicators, could be boolean or strings (in this case they render instead of `hint`)
 - `instantFeedback` - set this to true, if you want to provide validation status as user types, not onBlur/other.
   With `all` updates validation status on any value change, with `positiveFirst` - only when string is successfully
   validated (`success` prop), or user started to erase entered data and current string has errors according to `error` prop.

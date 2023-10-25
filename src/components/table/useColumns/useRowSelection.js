@@ -1,5 +1,6 @@
 import React, { useMemo } from "react"
 import { Checkbox } from "@/components/checkbox"
+import Flex from "@/components/templates/flex"
 
 const width = 32
 
@@ -12,15 +13,17 @@ export default (enabled, { testPrefix, tableMeta }) =>
             enableHiding: false,
             enableResizing: false,
             header: ({ table }) => (
-              <Checkbox
-                data-testid={`netdata-table-header-checkbox${testPrefix}`}
-                checked={table.getIsAllRowsSelected()}
-                indeterminate={table.getIsSomeRowsSelected()}
-                onChange={e => {
-                  e.stopPropagation()
-                  table.getToggleAllRowsSelectedHandler()(e)
-                }}
-              />
+              <Flex width={4}>
+                <Checkbox
+                  data-testid={`netdata-table-header-checkbox${testPrefix}`}
+                  checked={table.getIsAllRowsSelected()}
+                  indeterminate={table.getIsSomeRowsSelected()}
+                  onChange={e => {
+                    e.stopPropagation()
+                    table.getToggleAllRowsSelectedHandler()(e)
+                  }}
+                />
+              </Flex>
             ),
             cell: ({ row }) =>
               row.original?.disabled !== "hidden" && (

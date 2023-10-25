@@ -18,7 +18,7 @@ const styledAnimation = css`
   animation-delay: 0.01s;
 `
 
-const Container = styled(Flex).attrs(({ zIndex = 60000, ...rest }) => ({
+const Container = styled(Flex).attrs(({ zIndex = 70, ...rest }) => ({
   zIndex,
   position: "fixed",
   ...rest,

@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect, useMemo, useCallback } from "react"
-import useToggle from "react-use/lib/useToggle"
-import useLocalStorage from "react-use/lib/useLocalStorage"
+import useToggle from "@/hooks/useToggle"
 import { TextSmall } from "@/components/typography"
 import Flex from "@/components/templates/flex"
 import Layer from "@/components/templates/layer"
@@ -12,7 +11,7 @@ import { fetchNews } from "./datasource"
 const emptyArray = []
 
 const News = ({ app = "cloud", onCloseClick, children }) => {
-  const [lastSeen, setLastSeen] = useLocalStorage("news_last_seen")
+  const lastSeen = localStorage.getItem("news_last_seen")
   const [news, setNews] = useState(emptyArray)
   const [error, setError] = useState()
   const [isOpen, toggle] = useToggle()
@@ -36,7 +35,7 @@ const News = ({ app = "cloud", onCloseClick, children }) => {
 
   const onClose = useCallback(() => {
     toggle()
-    setLastSeen(new Date())
+    localStorage.setItem("news_last_seen", new Date())
     if (onCloseClick) onCloseClick()
   }, [onCloseClick])
 

@@ -1,5 +1,5 @@
 import React from "react"
-import useToggle from "react-use/lib/useToggle"
+import useToggle from "@/hooks/useToggle"
 import Flex from "@/components/templates/flex"
 import { H5, Text } from "@/components/typography"
 import { Button } from "@/components/button"

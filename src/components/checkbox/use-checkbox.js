@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect } from "react"
-import useToggle from "@/hooks/use-toggle"
+import useToggle from "@/hooks/useToggle"
 import { mergeRefs } from "@/utils"
 
 const useCheckbox = ({ onChange, indeterminate, disabled, checked }) => {

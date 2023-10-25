@@ -31,24 +31,19 @@ const Dropdown = ({
   close,
   ...rest
 }) => {
-  const [searchParams, setSearchParams] = useState("")
+  const [searchValue, setSearchValue] = useState("")
 
   const filteredItems = useMemo(() => {
-    if (!searchParams) return items
-    const searchLowerCase = searchParams.toLowerCase()
-    return items.filter(({ label, value }) => {
+    if (!searchValue) return items
+
+    const searchLowerCase = searchValue.toLowerCase()
+
+    return items.filter(({ label, value: val }) => {
       if (typeof label === "string" && label.toLowerCase().includes(searchLowerCase)) return true
-      if (typeof value === "string" && value.toLowerCase().includes(searchLowerCase)) return true
+      if (typeof val === "string" && val.toLowerCase().includes(searchLowerCase)) return true
       return false
     })
-  }, [items, searchParams])
-
-  const handleSearch = useCallback(
-    event => {
-      setSearchParams(event.target.value)
-    },
-    [setSearchParams]
-  )
+  }, [items, searchValue])
 
   const ref = useRef()
 
@@ -77,13 +72,7 @@ const Dropdown = ({
       {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}
       {hasSearch && (
         <Box margin={searchMargin}>
-          <Search
-            data-testid={"dropdown-search"}
-            defaultValue={searchParams}
-            placeholder="Search"
-            onChange={handleSearch}
-            size="tiny"
-          />
+          <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
         </Box>
       )}
       <div

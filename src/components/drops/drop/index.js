@@ -1,9 +1,9 @@
 import React, { forwardRef, useLayoutEffect } from "react"
 import ReactDOM from "react-dom"
-import useDropElement from "@/hooks/use-drop-element"
-import useKeyboardEsc from "@/hooks/use-keyboard-esc"
-import useOutsideClick from "@/hooks/use-outside-click"
-import useForwardRef from "@/hooks/use-forward-ref"
+import useDropElement from "@/hooks/useDropElement"
+import useKeyboardEsc from "@/hooks/useKeyboardEsc"
+import useOutsideClick from "@/hooks/useOutsideClick"
+import useForwardRef from "@/hooks/useForwardRef"
 import useDimensionChange from "./useDimensionChange"
 import useMakeUpdatePosition from "./useMakeUpdatePosition"
 import Container from "./container"
@@ -15,7 +15,7 @@ const Backdrop = styled.div`
   inset: 0;
   pointer-events: all;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 50000;
+  z-index: 60;
   ${backdropBlur};
 }
 `

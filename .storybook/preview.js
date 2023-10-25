@@ -1,5 +1,4 @@
 import React from "react"
-import useLocalStorage from "react-use/lib/useLocalStorage"
 import centered from "@storybook/addon-centered/react"
 
 import { DefaultTheme } from "@/theme/default"
@@ -17,12 +16,13 @@ const results = require("../.jest-test-results.json")
 export const decorators = [
   centered,
   story => {
-    const [isDarkTheme, setIsDarkTheme] = useLocalStorage("is_dark_theme")
     const handleChange = e => {
-      setIsDarkTheme(e.currentTarget.checked)
+      localStorage.setItem("storybook-preview-theme", e.currentTarget.checked)
     }
     return (
-      <ThemeProvider theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+      <ThemeProvider
+        theme={localStorage.getItem("storybook-preview-theme") ? DarkTheme : DefaultTheme}
+      >
         <GlobalStyles />
         <div id="story-wrapper" style={{ minHeight: "100vh" }}>
           {story()}
@@ -31,7 +31,7 @@ export const decorators = [
               labelRight={"Dark theme"}
               labelLeft={"Light theme"}
               onChange={handleChange}
-              checked={!!isDarkTheme}
+              checked={!!localStorage.getItem("storybook-preview-theme")}
               colored={false}
               disabled={false}
               Label={Text}

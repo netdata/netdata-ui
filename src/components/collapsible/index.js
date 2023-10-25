@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useState, forwardRef } from "react"
-import useUpdateEffect from "react-use/lib/useUpdateEffect"
 import styled from "styled-components"
-import useForwardRef from "@/hooks/use-forward-ref"
+import useUpdateEffect from "@/hooks/useUpdateEffect"
+import useForwardRef from "@/hooks/useForwardRef"
 import Flex from "@/components/templates/flex"
 
 const measurementByDimension = {
@@ -13,8 +13,7 @@ const Animated = styled(Flex).attrs(props => ({
   column: true,
   ...props,
 }))`
-  transition: ${({ duration, measurement }) =>
-    `max-${measurement} ${duration}ms ease-out, opacity ${duration}ms ease`};
+  transition: ${({ duration, measurement }) => `max-${measurement} ${duration}ms ease-in-out`};
   ${({ measurement, maxDimension }) => `max-${measurement}: ${maxDimension}`};
 `
 
@@ -27,10 +26,12 @@ const Collapsible = forwardRef(
       direction,
       persist = false,
       closedValue = 0,
+      overflow = "visible",
       ...rest
     },
     parentRef
   ) => {
+    const measurement = measurementByDimension[direction] || measurementByDimension.vertical
     duration = process.env.NODE_ENV === "test" ? 0 : duration
 
     const [dimension, setDimension] = useState(open ? "initial" : `${closedValue}px`)
@@ -38,31 +39,40 @@ const Collapsible = forwardRef(
     const [ref, setRef] = useForwardRef(parentRef)
 
     useUpdateEffect(() => {
-      let nestedRequestId
+      if (!ref.current) return
+      setDimension(
+        !open
+          ? `${
+              measurement === measurementByDimension.vertical
+                ? ref.current.scrollHeight
+                : ref.current.scrollHeight
+            }px`
+          : `${closedValue}px`
+      )
+
       const requestId = requestAnimationFrame(() => {
         if (!ref.current) return
 
-        setDimension(!open ? `${ref.current.scrollHeight}px` : `${closedValue}px`)
-
-        nestedRequestId = requestAnimationFrame(() => {
-          if (!ref.current) return
-
-          setDimension(open ? `${ref.current.scrollHeight}px` : `${closedValue}px`)
-        })
+        setDimension(
+          open
+            ? `${
+                measurement === measurementByDimension.vertical
+                  ? ref.current.scrollHeight
+                  : ref.current.scrollHeight
+              }px`
+            : `${closedValue}px`
+        )
       })
 
-      if (open) {
-        setAnimatedOpen(true)
-      }
+      setAnimatedOpen(open)
 
       const timeoutId = setTimeout(
-        () => (open ? setDimension("initial") : setAnimatedOpen(false)),
+        () => (open ? setDimension("initial") : `${closedValue}px`),
         duration
       )
 
       return () => {
         cancelAnimationFrame(requestId)
-        cancelAnimationFrame(nestedRequestId)
         clearTimeout(timeoutId)
       }
     }, [open])
@@ -78,11 +88,11 @@ const Collapsible = forwardRef(
       <Animated
         open={open}
         maxDimension={dimension}
-        measurement={measurementByDimension[direction] || measurementByDimension.vertical}
+        measurement={measurement}
         duration={duration}
         ref={setRef}
         data-testid="collapsible"
-        overflow={dimension === "initial" ? "visible" : "hidden"}
+        overflow={dimension === "initial" ? overflow : "hidden"}
         {...rest}
       >
         {child}

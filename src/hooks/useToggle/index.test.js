@@ -1,5 +1,5 @@
-import { renderHook, act } from "testUtilities"
-import useToggle from "./index"
+import { renderHook, act } from "@testing-library/react-hooks"
+import useToggle from "."
 
 it("returns the false by default", () => {
   const { result } = renderHook(value => useToggle(value), { initialProps: undefined })
@@ -12,28 +12,16 @@ it("returns the initial value", () => {
 })
 
 it("toggles the value", () => {
-  const onToggle = jest.fn()
-  const on = jest.fn()
-  const off = jest.fn()
-  const { result } = renderHook(value => useToggle(value, { on, off, toggle: onToggle }), {
-    initialProps: true,
-  })
+  const { result } = renderHook(value => useToggle(value), { initialProps: true })
   const [, toggle] = result.current
   act(() => {
     toggle()
   })
   expect(result.current[0]).toBe(false)
-  expect(onToggle).toBeCalledTimes(1)
-  expect(off).toBeCalledTimes(1)
-  expect(on).toBeCalledTimes(0)
-
   act(() => {
     toggle()
   })
   expect(result.current[0]).toBe(true)
-  expect(onToggle).toBeCalledTimes(2)
-  expect(off).toBeCalledTimes(1)
-  expect(on).toBeCalledTimes(1)
 })
 
 it("toggles on", () => {

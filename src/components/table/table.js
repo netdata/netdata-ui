@@ -211,6 +211,8 @@ const Table = memo(
             tableMeta={tableMeta}
             title={title}
             dataColumns={dataColumns}
+            enableColumnVisibility={enableColumnVisibility}
+            bulkActions={bulkActions}
           >
             <HeaderActions
               rowSelection={rowSelection}

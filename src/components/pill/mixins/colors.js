@@ -23,7 +23,7 @@ const colorMap = {
     neutral: "neutralPillColor",
     success: ["green", "green100"],
     clear: ["green", "green100"],
-    warning: ["yellow", "warning80"],
+    warning: ["yellow", "yellow80"],
     error: ["red", "red100"],
   },
 }

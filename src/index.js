@@ -96,7 +96,7 @@ export { default as DraggableTabs } from "./organisms/navigation/draggable"
 export { default as useNavigationArrows } from "./organisms/navigation/hooks/useNavigationArrows"
 
 export { default as Intersection } from "./components/intersection"
-export { default as useIntersection } from "./hooks/use-intersection"
+export { default as useIntersection } from "./hooks/useIntersection"
 
 export { default as Pill } from "./components/pill"
 
@@ -120,3 +120,4 @@ export { ConfirmationDialog } from "./components/confirmation-dialog"
 export { Table } from "./components/table"
 
 export { default as Select } from "./components/select"
+export { default as SearchInput } from "./components/search"
