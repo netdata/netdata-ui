@@ -116,7 +116,7 @@ const Documentation = ({
 
                     {view !== views.dashboard && (
                       <SearchInput
-                        defaultValue={searchTerm}
+                        value={searchTerm}
                         setSearchTerm={setSearchTerm}
                         setSearchView={setSearchView}
                       />

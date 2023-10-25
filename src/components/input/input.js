@@ -49,6 +49,7 @@ export const TextInput = ({
           size={size}
           ref={inputRef}
           error={error}
+          hasValue={!!value}
           {...props}
         />
 

@@ -46,12 +46,9 @@ const Header = ({
           <SearchInput
             data-testid="table-global-search-filter"
             data-ga={`${dataGa}::search-words::table-filter`}
-            defaultValue={q}
+            value={q}
             iconLeft={<Icon color="textLite" name="magnify" height="18px" width="18px" />}
-            onChange={debounce(300, e => {
-              e.persist()
-              onSearch(e.target.value)
-            })}
+            onChange={onSearch}
             placeholder={searchPlaceholder}
             {...tableMeta.searchStyles}
           />

@@ -13,7 +13,7 @@ export default (enabled, { testPrefix, tableMeta }) =>
             enableHiding: false,
             enableResizing: false,
             header: ({ table }) => (
-              <Flex>
+              <Flex width={4}>
                 <Checkbox
                   data-testid={`netdata-table-header-checkbox${testPrefix}`}
                   checked={table.getIsAllRowsSelected()}

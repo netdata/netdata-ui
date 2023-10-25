@@ -12,10 +12,10 @@ const disabledCursorSupport = css`
 export const Input = styled(Flex).attrs(props => ({
   round: 0.5,
   as: "input",
-  background: props.value ? "successBackground" : "inputBg",
-  backgroundOpacity: props.disabled || props.value ? 0.4 : 1,
+  background: "inputBg",
+  backgroundOpacity: props.disabled ? 0.4 : 1,
   width: "100%",
-  border: props.error ? "error" : "inputBorder",
+  border: props.hasValue ? "text" : props.error ? "error" : "inputBorder",
   _hover: {
     border: props.error ? "errorText" : "inputBorderHover",
   },
@@ -27,7 +27,8 @@ export const Input = styled(Flex).attrs(props => ({
   ...props,
 }))`
   font-size: ${({ size }) => (size === "tiny" ? "11px" : size === "small" ? "12px" : "14px")};
-  color: ${({ disabled }) => (disabled ? getColor("placeholder") : getColor("textLite"))};
+  color: ${({ disabled, hasValue }) =>
+    hasValue ? getColor("text") : disabled ? getColor("placeholder") : getColor("textLite")};
   ${({ hasIconLeft }) => hasIconLeft && "padding-left: 24px;"}
   ${({ hasIconRight, hasIndicator }) =>
     hasIconRight || (hasIndicator && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`)}

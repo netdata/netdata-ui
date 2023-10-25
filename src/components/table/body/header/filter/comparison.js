@@ -34,7 +34,7 @@ const ComparisonFilter = ({ column }) => {
       <Box
         as={TextInput}
         width={{ max: 50 }}
-        defaultValue={filterValue ? filterValue[1] : null}
+        value={filterValue ? filterValue[1] : null}
         onChange={debounce(300, e => {
           e.persist()
           setFilterValue(old => [old?.[0], e.target.value])

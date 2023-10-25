@@ -3,7 +3,7 @@ import useDebounce from "@/hooks/useDebounce"
 import { TextInput } from "@/components/input"
 import { Icon } from "@/components/icon"
 
-const SearchInput = ({ defaultValue, setSearchTerm, setSearchView }) => {
+const SearchInput = ({ value: defaultValue, setSearchTerm, setSearchView }) => {
   const [value, setValue] = useState(defaultValue)
 
   useDebounce(
