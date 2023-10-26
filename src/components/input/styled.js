@@ -31,12 +31,12 @@ export const Input = styled(Flex).attrs(props => ({
     hasValue ? getColor("text") : disabled ? getColor("placeholder") : getColor("textLite")};
   ${({ hasIconLeft }) => hasIconLeft && "padding-left: 24px;"}
   ${({ hasIconRight, hasIndicator }) =>
-    hasIconRight || (hasIndicator && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`)}
+    (hasIconRight || hasIndicator) && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`}
 
   &::placeholder {
     font-size: ${({ size }) => (size === "tiny" ? "11px" : size === "small" ? "12px" : "14px")};
     color: ${getColor("placeholder")};
-    opacity: 1;
+    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
     font-weight: normal;
   }
   ${disabledCursorSupport};

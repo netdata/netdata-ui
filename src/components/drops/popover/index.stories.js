@@ -28,16 +28,14 @@ const Content = ({ align }) => {
   )
 }
 
-export const Simple = {
-  component: () => (
-    <Flex gap={4} flexWrap>
-      <Content align="top" />
-      <Content align="right" />
-      <Content align="bottom" />
-      <Content align="left" />
-    </Flex>
-  ),
-}
+export const Simple = () => (
+  <Flex gap={4} flexWrap>
+    <Content align="top" />
+    <Content align="right" />
+    <Content align="bottom" />
+    <Content align="left" />
+  </Flex>
+)
 
 const CustomContent = () => (
   <Flex width="200px" gap={1} column>
@@ -57,18 +55,16 @@ const PlainContent = () => (
   </Flex>
 )
 
-export const Custom = {
-  component: () => (
-    <Flex gap={4}>
-      <Popover align="top" content={<CustomContent />}>
-        <Button label="hover me" />
-      </Popover>
-      <Popover align="top" content={<PlainContent />} plain>
-        <Button label="hover me (plain)" />
-      </Popover>
-    </Flex>
-  ),
-}
+export const Custom = () => (
+  <Flex gap={4}>
+    <Popover align="top" content={<CustomContent />}>
+      <Button label="hover me" />
+    </Popover>
+    <Popover align="top" content={<PlainContent />} plain>
+      <Button label="hover me (plain)" />
+    </Popover>
+  </Flex>
+)
 
 export default {
   component: Popover,

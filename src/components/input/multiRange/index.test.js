@@ -1,5 +1,5 @@
 import React from "react"
-import MultiRangeInput from "./index"
+import MultiRangeInput from "."
 import { renderWithProviders, screen } from "testUtilities"
 
 const setup = props => renderWithProviders(<MultiRangeInput {...props} />)

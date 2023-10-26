@@ -24,12 +24,13 @@ const Pill = forwardRef(
       hollow,
       icon,
       iconSize,
-      normal,
+      normal = true,
       reverse,
       size,
       textSize,
       tiny,
       textProps,
+      semi,
       ...rest
     },
     ref
@@ -52,6 +53,7 @@ const Pill = forwardRef(
         ref={ref}
         size={size}
         tiny={tiny}
+        semi={semi}
         {...rest}
       >
         {!reverse && <PillIcon data-testid={`${testId}-icon-left`} {...iconProps} />}

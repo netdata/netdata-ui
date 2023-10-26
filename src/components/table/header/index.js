@@ -3,7 +3,6 @@ import Flex from "@/components/templates/flex"
 import SearchInput from "@/components/search"
 import { Icon } from "@/components/icon"
 import { TextBig } from "@/components/typography"
-import { debounce } from "throttle-debounce"
 import GroupBy from "./groupBy"
 
 const Header = ({
@@ -37,7 +36,7 @@ const Header = ({
       background="mainBackground"
       gap={1}
       alignItems="center"
-      padding={[1, 0]}
+      padding={[1]}
       {...tableMeta.bulkActionsStyles}
     >
       {typeof title === "string" ? <TextBig strong>{title}</TextBig> : title}

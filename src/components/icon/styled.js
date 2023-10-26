@@ -17,7 +17,7 @@ const styledRotate = ({ rotate }) => !isNaN(rotate) && `transform: rotate(${rota
 export const StyledIcon = styled.svg`
   height: ${({ size, height }) => height || SIZES[size]};
   width: ${({ size, width }) => width || SIZES[size]};
-  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "unset")};
   ${styledRotate}
   ${styledColor}

@@ -40,6 +40,7 @@ const Collapsible = forwardRef(
 
     useUpdateEffect(() => {
       if (!ref.current) return
+
       setDimension(
         !open
           ? `${
@@ -64,12 +65,18 @@ const Collapsible = forwardRef(
         )
       })
 
-      setAnimatedOpen(open)
+      if (open) setAnimatedOpen(open)
 
-      const timeoutId = setTimeout(
-        () => (open ? setDimension("initial") : `${closedValue}px`),
-        duration
-      )
+      const timeoutId = setTimeout(() => {
+        cancelAnimationFrame(requestId)
+        if (open) {
+          setDimension("initial")
+          return
+        }
+
+        setDimension(`${closedValue}px`)
+        setAnimatedOpen(false)
+      }, duration)
 
       return () => {
         cancelAnimationFrame(requestId)

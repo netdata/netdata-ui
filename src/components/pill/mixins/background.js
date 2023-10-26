@@ -3,10 +3,11 @@ import { getMasterCardColor, getPillColor } from "./colors"
 export const getMasterCardBackground = (background, flavour) =>
   background || getMasterCardColor(flavour)
 
-const getPillBackground = ({ background, flavour = "neutral", hollow }) => {
+const getPillBackground = ({ background, flavour = "neutral", hollow, semi }) => {
   if (background) return background
-  const type = hollow ? "hollow" : "background"
-  return getPillColor(type, flavour)
+  if (hollow) return semi ? getPillColor("hollow", flavour) : "transparent"
+
+  return getPillColor("background", flavour)
 }
 
 export default getPillBackground

@@ -5,6 +5,6 @@ const opacityMap = {
 }
 
 export default ({ opacity }) => {
-  const value = opacity && opacityMap[opacity]
+  const value = (opacity && opacityMap[opacity]) || opacity
   return value ? `opacity: ${value};` : ""
 }

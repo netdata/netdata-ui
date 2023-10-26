@@ -1,5 +1,5 @@
 import * as IconComponents from "./components"
 
 export { IconComponents }
-export { iconsList } from "./icons-list"
+export { iconsList } from "./iconsList"
 export * from "./icon"

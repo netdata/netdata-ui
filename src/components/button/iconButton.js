@@ -16,42 +16,19 @@ const CustomTooltipContent = ({ content }) => (
 )
 
 const IconButton = forwardRef(
-  (
-    {
-      iconColor = "nodeBadgeColor",
-      flavour = "borderless",
-      icon,
-      disabled,
-      onClick,
-      width = "20px",
-      height = "20px",
-      iconSize,
-      tooltip = "",
-      ...props
-    },
-    ref
-  ) => {
-    const isDefaultFlavour = flavour === "default"
-    return (
-      <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
-        <Box
-          cursor="pointer"
-          iconWidth={width}
-          iconHeight={height}
-          onClick={onClick}
-          as={Button}
-          flavour={flavour}
-          disabled={disabled}
-          icon={icon}
-          iconColor={isDefaultFlavour ? "white" : iconColor}
-          iconSize={iconSize}
-          neutral={!isDefaultFlavour}
-          ref={ref}
-          {...props}
-        />
-      </Tooltip>
-    )
-  }
+  ({ width = "20px", height = "20px", tooltip = "", ...props }, ref) => (
+    <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
+      <Box
+        as={Button}
+        iconWidth={width}
+        iconHeight={height}
+        ref={ref}
+        flavour="borderless"
+        neutral
+        {...props}
+      />
+    </Tooltip>
+  )
 )
 
 export default IconButton

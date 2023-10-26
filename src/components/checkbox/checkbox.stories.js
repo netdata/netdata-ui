@@ -1,14 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Checkbox } from "."
 
-export const ControlledCheckbox = {
-  component: (...args) => {
-    const [checked, setChecked] = useState(false)
-    const handleChange = e => {
-      setChecked(e.currentTarget.checked)
-    }
-    return <Checkbox {...args} onChange={handleChange} checked={checked} />
-  },
+export const Basic = args => {
+  const [checked, setChecked] = useState(false)
+
+  useEffect(() => {
+    setChecked(args.checked)
+  }, [args.checked])
+
+  return <Checkbox {...args} onChange={setChecked} checked={checked} />
 }
 
 export default {

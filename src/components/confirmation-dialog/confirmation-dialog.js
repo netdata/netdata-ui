@@ -1,8 +1,9 @@
 import React from "react"
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"
+import { ModalCloseButton } from "@/components/modal"
 import { Text } from "@/components/typography"
-import { Actions, Body, CloseButton, Content, Dialog, Header, Title, TitleIcon } from "./styled"
+import { Actions, Body, Content, Dialog, Header, Title, TitleIcon } from "./styled"
 
 const BodyMessage = ({ children, ...rest }) =>
   typeof children === "object" ? children : <Text {...rest}>{children}</Text>
@@ -29,12 +30,12 @@ const ConfirmationDialog = ({
     <Dialog onEsc={handleDecline}>
       <Content data-testid={dataTestId}>
         <Header data-testid={`${dataTestId}-headerContainer`}>
-          <Flex data-testid={`${dataTestId}-header`} gap={4}>
+          <Flex data-testid={`${dataTestId}-header`} gap={2}>
             {!hideIcon && <TitleIcon data-testid={`${dataTestId}-headerIcon`} name={iconName} />}
             <Title data-testid={`${dataTestId}-headerText`}>{title}</Title>
           </Flex>
           {handleDecline && (
-            <CloseButton data-testid={`${dataTestId}-headerClose`} onClose={handleDecline} />
+            <ModalCloseButton data-testid={`${dataTestId}-headerClose`} onClose={handleDecline} />
           )}
         </Header>
         <Body data-testid={`${dataTestId}-body`}>

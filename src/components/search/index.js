@@ -24,6 +24,7 @@ const Search = forwardRef(
               height="14px"
               onClick={() => (onReset ? onReset() : setValue(""))}
               padding={[0]}
+              neutral
             />
           )
         }

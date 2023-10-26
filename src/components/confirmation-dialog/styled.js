@@ -1,38 +1,21 @@
 import styled from "styled-components"
 import { Icon } from "@/components/icon"
-import Modal, {
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from "@/components/modal"
+import Modal, { ModalBody, ModalContent, ModalFooter, ModalHeader } from "@/components/modal"
 import { H3, Text } from "@/components/typography"
-import { getColor } from "@/theme"
 
 export const Actions = styled(ModalFooter).attrs({
-  gap: 6,
+  gap: 3,
   hasBorder: false,
   parentPadding: [0],
   padding: [0],
 })``
 
-export const CloseButton = styled(ModalCloseButton).attrs({
-  color: "text",
-  height: "14px",
-  width: "14px",
-})`
-  &:hover {
-    fill: ${getColor("selected")};
-  }
-`
-
 export const Content = styled(Text).attrs({
   as: ModalContent,
   background: "dropdown",
-  gap: 6,
-  height: { max: "calc(100vh - 32px)", min: 45 },
-  padding: [6],
+  gap: 4,
+  height: { max: "calc(100vh - 32px)" },
+  padding: [4],
   width: { base: 128, max: 140, min: 70 },
 })``
 
