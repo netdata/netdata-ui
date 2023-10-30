@@ -17,7 +17,6 @@ exports[`Borderless Button renders 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -75,10 +74,6 @@ exports[`Borderless Button renders 1`] = `
   fill: #00AB44;
 }
 
-.c0.c0 .button-icon__color {
-  fill: #00AB44;
-}
-
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -120,7 +115,6 @@ exports[`Button states renders loading icon 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -175,10 +169,6 @@ exports[`Button states renders loading icon 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
-  fill: #F6F7F7;
-}
-
-.c0.c0 .button-icon__color {
   fill: #F6F7F7;
 }
 
@@ -258,7 +248,6 @@ exports[`Button states renders only icon 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -316,10 +305,6 @@ exports[`Button states renders only icon 1`] = `
   fill: #00AB44;
 }
 
-.c0.c0 .button-icon__color {
-  fill: #00AB44;
-}
-
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -336,8 +321,8 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c2 {
-  height: 24px;
-  width: 24px;
+  height: 16px;
+  width: 16px;
   opacity: 1;
   pointer-events: unset;
 }
@@ -400,7 +385,6 @@ exports[`Button states renders smaller only icon 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 12px;
-  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -458,10 +442,6 @@ exports[`Button states renders smaller only icon 1`] = `
   fill: #00AB44;
 }
 
-.c0.c0 .button-icon__color {
-  fill: #00AB44;
-}
-
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -478,8 +458,8 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c2 {
-  height: 24px;
-  width: 24px;
+  height: 16px;
+  width: 16px;
   opacity: 1;
   pointer-events: unset;
 }
@@ -542,7 +522,6 @@ exports[`Default Button renders 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -596,10 +575,6 @@ exports[`Default Button renders 1`] = `
   fill: #F6F7F7;
 }
 
-.c0.c0 .button-icon__color {
-  fill: #F6F7F7;
-}
-
 .c0.c0 .ntd-spinner {
   fill: none;
   stroke-width: 17px;
@@ -641,7 +616,6 @@ exports[`Hollow Button renders 1`] = `
   position: relative;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -696,10 +670,6 @@ exports[`Hollow Button renders 1`] = `
 .c0.c0 .button-icon {
   height: 16px;
   width: 16px;
-  fill: #00AB44;
-}
-
-.c0.c0 .button-icon__color {
   fill: #00AB44;
 }
 

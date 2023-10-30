@@ -65,7 +65,7 @@ describe("Pill component", () => {
       </Pill>
     )
 
-    expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "yellow,warning80")
+    expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "warning")
   })
 
   test("should render clickable component", () => {

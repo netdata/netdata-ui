@@ -1,4 +1,4 @@
-import { renderHook, act } from "@testing-library/react-hooks"
+import { renderHook, act } from "testUtilities"
 import useToggle from "."
 
 it("returns the false by default", () => {

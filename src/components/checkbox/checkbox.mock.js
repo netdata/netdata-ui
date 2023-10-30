@@ -15,8 +15,8 @@ const CheckboxGroup = styled.div``
 
 export const MockedCheckbox = ({ disabled = false }) => {
   const [checked, setChecked] = useState(false)
-  const handleChange = e => {
-    setChecked(e.currentTarget.checked)
+  const handleChange = value => {
+    setChecked(value)
   }
   return <Checkbox onChange={handleChange} checked={checked} disabled={disabled} />
 }
@@ -31,8 +31,8 @@ export const MockedCheckboxList = () => {
 
   const [allChecked, indeterminate, switchAll] = useCheckboxesList(valuesList, handlersList)
 
-  const handleChange = setter => e => {
-    setter(e.currentTarget.checked)
+  const handleChange = setter => value => {
+    setter(value)
   }
 
   return (

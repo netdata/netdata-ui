@@ -9,7 +9,6 @@ export const Checkbox = forwardRef(
   (
     {
       checked,
-      "data-testid": testId,
       disabled,
       iconProps,
       indeterminate,
@@ -38,17 +37,24 @@ export const Checkbox = forwardRef(
         gap={1}
         cursor={disabled ? "auto" : "pointer"}
         rowReverse={labelPosition === "right"}
-        {...rest}
-        data-testid={testId}
+        data-testid="checkbox"
         disabled={disabled}
+        {...rest}
+        onClick={onClick}
       >
         {label && (
           <Text as={Label} opacity={disabled ? 0.4 : 1} {...labelProps}>
             {label}
           </Text>
         )}
-        <Box width="16px" height="16px" onClick={onClick}>
-          <HiddenCheckboxInput data-testid="checkbox-input" ref={ref} />
+        <Box width="16px" height="16px">
+          <HiddenCheckboxInput
+            data-testid="checkbox-input"
+            ref={ref}
+            disabled={disabled}
+            {...(indeterminate && { "data-indeterminate": true })}
+            data-checked={checked}
+          />
           <StyledCheckbox data-testid="styled-checkbox" disabled={disabled}>
             {(!!checked || !!indeterminate) && (
               <Icon

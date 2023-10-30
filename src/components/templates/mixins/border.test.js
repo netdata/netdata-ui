@@ -68,5 +68,7 @@ it("renders custom border vertically", () => {
 })
 
 it("renders invalid", () => {
-  expect(styledBorder({ theme, border: "invalid" })).toBe("")
+  expect(styledBorder({ theme, border: "invalid" })).toBe(`
+    border: 1px solid invalid;
+  `)
 })

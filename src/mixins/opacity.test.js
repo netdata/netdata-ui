@@ -9,5 +9,5 @@ it("renders weak opacity", () => {
 })
 
 it("renders invalid opacity", () => {
-  expect(styledOpacity({ opacity: "invalid" })).toBe("")
+  expect(styledOpacity({ opacity: "invalid" })).toBe("opacity: invalid;")
 })
