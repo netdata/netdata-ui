@@ -1,5 +1,6 @@
 import React, { forwardRef, useMemo, useCallback, useRef, useEffect } from "react"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import { DndContext } from "@dnd-kit/core"
 import { debounce } from "throttle-debounce"
 import Flex from "@/components/templates/flex"
 import useNavigationArrows from "@/organisms/navigation/hooks/useNavigationArrows"
@@ -102,7 +103,7 @@ const DraggableTabs = forwardRef(
     )
 
     return (
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DndContext>
         <Flex
           flex="grow"
           basis="0%"
@@ -133,7 +134,7 @@ const DraggableTabs = forwardRef(
           </Droppable>
           {arrowRight && <Arrow onClick={scrollRight} name="navRight" />}
         </Flex>
-      </DragDropContext>
+      </DndContext>
     )
   }
 )

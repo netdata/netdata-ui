@@ -15,7 +15,7 @@ export default (parentRef, ref, target, callback, deps) => {
   const prevValuesRef = useRef(initialRect)
 
   return useCallback(() => {
-    if (!ref.current || !target.current.length) return
+    if (!ref.current || !target.current || !parentRef || !parentRef.current) return
 
     const width = document.body.clientWidth
 
@@ -28,8 +28,7 @@ export default (parentRef, ref, target, callback, deps) => {
       prevValuesRef.current.expandedStaticWidth = draggableLeft - containerLeft
     }
 
-    const lastTab = target.current[target.current.length - 1]
-    const { right: tabRight, width: tabWidth } = lastTab.getBoundingClientRect()
+    const { right: tabRight, width: tabWidth } = target.current.getBoundingClientRect()
 
     if (!hasChanged(prevValuesRef.current, { width, tabRight })) return
 

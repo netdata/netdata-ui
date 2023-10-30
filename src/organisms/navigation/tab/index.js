@@ -1,100 +1,116 @@
-import React, { useState, useCallback } from "react"
+import React, { forwardRef, useState, useCallback } from "react"
 import { Icon } from "@/components/icon/icon"
 import Flex from "@/components/templates/flex"
-
 import useStylesTab from "./use-styles-tab"
-import Tooltip from "@/components/drops/tooltip"
 
-const Tab = ({
-  active,
-  onActivate,
-  tabIndex,
-  onMouseOver: mouseOver,
-  onMouseOut: mouseOut,
-  onClose,
-  fixed,
-  collapsed,
-  icon,
-  children,
-  draggableRef,
-  dragHandleProps,
-  tabRef,
-  showBorderLeft,
-  tooltip,
-  ...rest
-}) => {
-  const [hover, setHover] = useState()
-  const { rootStyles } = useStylesTab({ active, showBorderLeft })
-
-  const onClickTab = useCallback(
-    event => {
-      if (event) event.preventDefault()
-      if (onActivate) onActivate()
+const Tab = forwardRef(
+  (
+    {
+      active,
+      onActivate,
+      tabIndex,
+      onMouseOver: mouseOver,
+      onMouseOut: mouseOut,
+      onRemove,
+      fixed,
+      icon,
+      children,
+      showBorderLeft,
+      isDragOverlay,
+      draggable,
+      handleProps,
+      listeners,
+      attributes,
+      id,
+      index,
+      style,
+      dragging,
+      sorting,
+      collapsed,
+      ...rest
     },
-    [onActivate]
-  )
+    ref
+  ) => {
+    const [hover, setHover] = useState()
+    const { rootStyles } = useStylesTab({ active, showBorderLeft, isDragOverlay })
 
-  const onMouseOver = useCallback(
-    event => {
-      setHover(true)
-      if (mouseOver) mouseOver(event)
-    },
-    [mouseOver]
-  )
+    const onClickTab = useCallback(
+      event => {
+        if (event) event.preventDefault()
+        if (onActivate) onActivate()
+      },
+      [onActivate]
+    )
 
-  const onMouseOut = useCallback(
-    event => {
-      setHover(false)
-      if (mouseOut) mouseOut(event)
-    },
-    [mouseOut]
-  )
+    const onMouseOver = useCallback(
+      event => {
+        setHover(true)
+        if (mouseOver) mouseOver(event)
+      },
+      [mouseOver]
+    )
 
-  const onCloseTab = useCallback(
-    event => {
-      event.preventDefault()
-      event.stopPropagation()
-      if (onClose) onClose(tabIndex, active)
-    },
-    [onClose, tabIndex, active]
-  )
+    const onMouseOut = useCallback(
+      event => {
+        setHover(false)
+        if (mouseOut) mouseOut(event)
+      },
+      [mouseOut]
+    )
 
-  const onRef = useCallback(
-    node => {
-      if (draggableRef) draggableRef(node)
-      if (tabRef) tabRef(node)
-    },
-    [draggableRef, tabRef]
-  )
+    const onCloseTab = useCallback(
+      event => {
+        event.preventDefault()
+        event.stopPropagation()
+        if (onRemove) onRemove(tabIndex, active)
+      },
+      [onRemove, tabIndex, active]
+    )
 
-  const renderIcon = useCallback(
-    iconProp => React.cloneElement(iconProp, { color: active ? "text" : "textLite" }),
-    [active]
-  )
+    const renderIcon = useCallback(
+      iconProp => React.cloneElement(iconProp, { color: active ? "text" : "textLite" }),
+      [active]
+    )
 
-  const closable = hover && !fixed
+    const closable = hover && !fixed
 
-  return (
-    <Flex
-      {...rootStyles}
-      ref={onRef}
-      onClick={onClickTab}
-      onMouseOver={onMouseOver}
-      onMouseLeave={onMouseOut}
-      {...rest}
-    >
-      <Flex>
-        {closable && (
-          <Icon name="x" size="small" color={active ? "text" : "textLite"} onClick={onCloseTab} />
-        )}
-        <Tooltip content={tooltip} align={tooltip ? "bottom" : "top"}>
+    return (
+      <Flex
+        {...rootStyles}
+        ref={ref}
+        {...(!isDragOverlay && {
+          onClick: onClickTab,
+          onMouseOver: onMouseOver,
+          onMouseLeave: onMouseOut,
+        })}
+        tabIndex="0"
+        data-index={index}
+        data-id={id}
+        style={style}
+        {...attributes}
+      >
+        <Flex>
+          {closable && !isDragOverlay && (
+            <Icon name="x" size="small" color={active ? "text" : "textLite"} onClick={onCloseTab} />
+          )}
           {!closable && icon && renderIcon(icon)}
-        </Tooltip>
+        </Flex>
+        {!collapsed && <Flex {...rest}>{children}</Flex>}
+        {(draggable || isDragOverlay) && (
+          <Icon
+            name="rearrange"
+            width="10px"
+            height="10px"
+            color={hover ? (active ? "text" : "textLite") : "textNoFocus"}
+            {...handleProps}
+            {...listeners}
+            cursor={sorting || dragging ? "grabbing" : "grab"}
+          />
+        )}
       </Flex>
-      {!collapsed && <Flex {...dragHandleProps}>{children}</Flex>}
-    </Flex>
-  )
-}
+    )
+  }
+)
 
 Tab.displayName = "Tab"
 

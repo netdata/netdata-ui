@@ -2,6 +2,7 @@ const cursorMap = {
   pointer: "pointer",
   default: "default",
   grab: "grab",
+  grabbing: "grabbing",
   move: "move",
   none: "none",
   text: "text",

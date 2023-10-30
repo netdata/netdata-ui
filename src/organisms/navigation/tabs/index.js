@@ -1,21 +1,12 @@
-import React, { useMemo, useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import Flex from "@/components/templates/flex"
 
 const Tabs = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false)
   const ref = useRef()
-  const tabs = useMemo(() => {
-    return React.Children.map(children, child => {
-      const draggable = child.type.displayName === "DraggableTabs"
-      return React.cloneElement(child, {
-        collapsed,
-        ...(draggable && { onResize: setCollapsed, ref }),
-      })
-    })
-  }, [collapsed, children])
 
   return (
-    <Flex column width="100%" position="relative" ref={ref}>
+    <Flex column width="100%" position="relative">
       <Flex
         height="1px"
         background="border"
@@ -32,8 +23,15 @@ const Tabs = ({ children }) => {
         height="100%"
         overflow="hidden"
         background="topBarBg"
+        ref={ref}
       >
-        {tabs}
+        {React.Children.map(children, child => {
+          return React.cloneElement(child, {
+            collapsed,
+            onResize: setCollapsed,
+            parentRef: ref,
+          })
+        })}
       </Flex>
       <Flex
         height="1px"

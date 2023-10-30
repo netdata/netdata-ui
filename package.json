@@ -40,6 +40,8 @@
     "jackspeak": "2.1.1"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
     "@elastic/react-search-ui": "^1.20.2",
     "@elastic/search-ui-site-search-connector": "^1.20.2",
     "@prismicio/client": "7.3.0",
@@ -48,7 +50,6 @@
     "@tanstack/react-virtual": "3.0.0-beta.29",
     "axios": "^1.5.1",
     "polished": "^4.2.2",
-    "react-beautiful-dnd": "^13.1.1",
     "react-portal": "^4.2.2",
     "react-select": "^5.7.7",
     "styled-system": "^5.1.5",

@@ -26,7 +26,7 @@ export const TextInput = ({
   const errorMessage = error === true ? "invalid" : error
 
   return (
-    <Flex gap={0.5} column className={className} flex as="label" {...containerStyles}>
+    <Flex gap={0.5} column className={className} {...containerStyles} as="label">
       {typeof label === "string" ? <LabelText size={size}>{label}</LabelText> : label}
       <Flex position="relative" {...inputContainerStyles}>
         {iconLeft && (

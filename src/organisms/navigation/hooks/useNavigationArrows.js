@@ -1,29 +1,21 @@
 import { useCallback, useState } from "react"
 
-export default (ref, childrenRef, children, collapsed) => {
+export default (ref, target, itemsLength, collapsed) => {
   const [arrowLeft, setArrowLeft] = useState(false)
   const [arrowRight, setArrowRight] = useState(false)
 
   const onScroll = useCallback(() => {
-    if (!ref.current || !childrenRef.current) return
+    if (!ref.current || !target.current) return
     if (!collapsed) return
 
-    const container = ref.current
-    const tabs = childrenRef.current
+    const scroll = ref.current.scrollLeft
+    const { right: containerRight } = ref.current.getBoundingClientRect()
+    const { right: lastTabRight } = target.current.getBoundingClientRect()
 
-    if (!Array.isArray(tabs) || !tabs.length) return
-    const lastTab = tabs[tabs.length - 1]
+    setArrowRight(lastTabRight > containerRight + 20)
 
-    const scroll = container.scrollLeft
-    const { right: containerRight } = container.getBoundingClientRect()
-    const { right: lastTabRight } = lastTab.getBoundingClientRect()
-
-    if (lastTabRight > containerRight) setArrowRight(true)
-    if (lastTabRight <= containerRight) setArrowRight(false)
-
-    if (scroll > 0) setArrowLeft(true)
-    if (scroll === 0) setArrowLeft(false)
-  }, [collapsed, children])
+    setArrowLeft(scroll > 20)
+  }, [collapsed, itemsLength])
 
   return [arrowLeft, arrowRight, onScroll]
 }

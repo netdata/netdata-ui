@@ -2,11 +2,12 @@ import styled from "styled-components"
 import { getColor } from "@/theme"
 import margin from "@/mixins/margin"
 import alignSelf from "@/mixins/alignSelf"
+import cursor from "@/mixins/cursor"
 
 const SIZES = {
-  small: "16px",
-  medium: "24px",
-  large: "40px",
+  small: "14px",
+  medium: "16px",
+  large: "24px",
 }
 
 const styledColor = ({ theme, color }) => color && `fill: ${getColor(color)({ theme })};`
@@ -24,4 +25,5 @@ export const StyledIcon = styled.svg`
   ${styledHoverColor}
   ${margin}
   ${alignSelf}
+  ${cursor}
 `
