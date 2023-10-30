@@ -10,7 +10,7 @@ const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
     id={headerGroup.id}
     data-testid={`netdata-table-headRow${testPrefix}`}
     flex
-    background="panelBg"
+    background="tableRowBg2"
   >
     {headerGroup.headers.map((header, index) => (
       <Cell key={header.id} index={index} {...rest} header={header} testPrefix={testPrefix} />
