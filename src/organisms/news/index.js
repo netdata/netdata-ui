@@ -6,7 +6,7 @@ import Layer from "@/components/templates/layer"
 import Container from "./container"
 import Header from "./header"
 import Item from "./item"
-import { fetchNews } from "./datasource"
+import useFetchNews from "./useFetchNews"
 
 const emptyArray = []
 
@@ -15,6 +15,7 @@ const News = ({ app = "cloud", onCloseClick, children }) => {
   const [news, setNews] = useState(emptyArray)
   const [error, setError] = useState()
   const [isOpen, toggle] = useToggle()
+  const fetchNews = useFetchNews()
 
   useEffect(() => {
     fetchNews(
