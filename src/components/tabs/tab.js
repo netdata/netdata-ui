@@ -9,7 +9,6 @@ export const Tab = ({ index, isMenuItem, onChange, ...rest }) => {
     <TabComponent
       justifyContent="center"
       alignItems="center"
-      basis="100%"
       onClick={rest.disabled ? undefined : onClick}
       {...rest}
     >

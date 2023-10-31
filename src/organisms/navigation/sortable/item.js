@@ -4,7 +4,6 @@ import { CSS } from "@dnd-kit/utilities"
 
 const SortableItem = ({
   animateLayoutChanges,
-  getNewIndex,
   draggable,
   id,
   index,
@@ -26,7 +25,6 @@ const SortableItem = ({
     id,
     animateLayoutChanges,
     disabled: !draggable,
-    getNewIndex,
   })
 
   const style = {

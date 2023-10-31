@@ -47,7 +47,7 @@ const getHoverColor = props =>
   props.neutral ? getColor("generic")(props) : getColor("accent")(props)
 const getAccentColor = props =>
   props.neutral
-    ? getColor("neutralHighlight")(props)
+    ? getColor(props.flavour === BORDER_LESS ? "textFocus" : "neutralHighlight")(props)
     : getColor(props.flavour === HOLLOW ? "secondaryHighlight" : "primaryHighlight")(props)
 const getTransparent = getColor(["transparent", "full"])
 

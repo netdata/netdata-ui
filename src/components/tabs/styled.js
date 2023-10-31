@@ -25,7 +25,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   ...props,
 }))``
 
-export const StyledTab = styled(Flex)`
+export const StyledTab = styled(Flex).attrs(props => ({ flex: "grow", ...props }))`
   white-space: nowrap;
   border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid
     ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};

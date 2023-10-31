@@ -154,13 +154,13 @@ const Sortable = ({
             {items.map((item, index) => (
               <SortableItem
                 key={`${item.id}-${index}`}
+                itemProps={item}
                 id={item.id}
                 draggable={!item.fixed}
                 index={index}
                 onRemove={onTabClose}
                 animateLayoutChanges={animateLayoutChanges}
                 Item={Item}
-                itemProps={item}
                 {...(index === items.length - 1 && { lastTabRef })}
                 collapsed={collapsed}
               />
