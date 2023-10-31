@@ -8,7 +8,7 @@ const Tab = forwardRef(
     {
       active,
       onActivate,
-      tabIndex,
+      index,
       onMouseOver: mouseOver,
       onMouseOut: mouseOut,
       onRemove,
@@ -22,7 +22,6 @@ const Tab = forwardRef(
       listeners,
       attributes,
       id,
-      index,
       style,
       dragging,
       sorting,
@@ -62,9 +61,9 @@ const Tab = forwardRef(
       event => {
         event.preventDefault()
         event.stopPropagation()
-        if (onRemove) onRemove(tabIndex, active)
+        if (onRemove) onRemove(index, active)
       },
-      [onRemove, tabIndex, active]
+      [onRemove, index, active]
     )
 
     const renderIcon = useCallback(

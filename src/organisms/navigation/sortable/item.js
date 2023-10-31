@@ -55,7 +55,7 @@ const SortableItem = ({
       }
       index={index}
       style={style}
-      onRemove={() => onRemove?.(id)}
+      onRemove={onRemove}
       id={id}
       attributes={attributes}
       listeners={listeners}

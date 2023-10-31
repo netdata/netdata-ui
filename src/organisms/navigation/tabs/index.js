@@ -7,14 +7,7 @@ const Tabs = ({ children }) => {
 
   return (
     <Flex column width="100%" position="relative">
-      <Flex
-        height="1px"
-        background="border"
-        width="100%"
-        position="absolute"
-        style={{ top: 0 }}
-        zIndex={3}
-      />
+      <Flex height="1px" background="border" width="100%" position="absolute" top={0} />
       <Flex
         justifyContent="start"
         alignSelf="start"
@@ -33,14 +26,6 @@ const Tabs = ({ children }) => {
           })
         })}
       </Flex>
-      <Flex
-        height="1px"
-        background="border"
-        width="100%"
-        position="absolute"
-        style={{ bottom: 0 }}
-        zIndex={1}
-      />
     </Flex>
   )
 }

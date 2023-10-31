@@ -68,8 +68,6 @@ const Sortable = ({
   const getIndex = id => items.findIndex(item => item.id === id)
   const activeIndex = activeId !== null ? getIndex(activeId) : -1
 
-  const onRemove = id => onTabClose(getIndex(id), activeId === id)
-
   const containerRef = useRef()
   useNavigationScroll(containerRef)
 
@@ -159,7 +157,7 @@ const Sortable = ({
                 id={item.id}
                 draggable={!item.fixed}
                 index={index}
-                onRemove={onRemove}
+                onRemove={onTabClose}
                 animateLayoutChanges={animateLayoutChanges}
                 Item={Item}
                 itemProps={item}
