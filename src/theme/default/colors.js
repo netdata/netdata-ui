@@ -25,7 +25,7 @@ const appColors = {
   secondaryColor: rawColors.green.green100,
   primaryHighlight: rawColors.green.green110,
   secondaryHighlight: rawColors.green.green190,
-  neutralHighlight: rawColors.neutral.grey50,
+  neutralHighlight: rawColors.neutral.grey180,
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
