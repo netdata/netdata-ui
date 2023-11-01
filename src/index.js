@@ -121,3 +121,5 @@ export { Table } from "./components/table"
 
 export { default as Select } from "./components/select"
 export { default as SearchInput } from "./components/search"
+
+export { GlobalStyles } from "./global-styles"
