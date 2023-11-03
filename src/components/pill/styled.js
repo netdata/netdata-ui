@@ -11,7 +11,6 @@ export const MasterCardContainer = styled(Flex).attrs(
     position: "relative",
     round,
     size,
-    border: { side: "all", color: "border" },
   })
 )`
   * {
@@ -41,7 +40,7 @@ export const PillContainer = styled(Flex).attrs(
     round: round === false ? 1 : round === true ? 7.5 : round,
     border: {
       side: "all",
-      color: borderColor || getPillColor(hollow ? "border" : "hollow", flavour),
+      color: borderColor || getPillColor(semi ? "hollow" : "border", flavour),
       size: "1px",
     },
     ...(onClick && { cursor: "pointer" }),

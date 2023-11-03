@@ -54,7 +54,7 @@ export {
 export { devices, breakpoints } from "./media"
 export { Checkbox, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
-export { webkitVisibleScrollbar } from "./mixins"
+export * from "./mixins"
 export { Toggle } from "./components/toggle"
 export { default as RadioButton } from "./components/radio-button"
 export { Tabs, Tab } from "./components/tabs"

@@ -9,7 +9,7 @@ const colorMap = {
     stale: "stale",
   },
   border: {
-    neutral: "neutralPillBorder",
+    neutral: "nodeBadgeBackground",
     success: "success",
     clear: "success",
     warning: "warning",
@@ -18,7 +18,7 @@ const colorMap = {
     stale: "stale",
   },
   hollow: {
-    neutral: "neutralPillColor",
+    neutral: "neutralPillBorder",
     success: "successSemi",
     clear: "successSemi",
     warning: "warningSemi",

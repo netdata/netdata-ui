@@ -8,6 +8,7 @@ const rerenderSelector = state => ({
   expanded: state.expanded,
   columnVisibility: state.columnVisibility,
   selectedRows: state.selectedRows,
+  grouping: state.grouping,
 })
 
 const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (

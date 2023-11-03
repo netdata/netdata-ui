@@ -230,6 +230,16 @@ export const AlertMasterCards = () => (
         pillLeft={{ flavour: "error", text: "3" }}
         pillRight={{ flavour: "warning", text: "2" }}
         pillEnd={{ flavour: "clear", text: "223" }}
+        size="small"
+      />
+      <AlertMasterCard size="small" />
+    </Flex>
+    <Flex gap={2}>
+      <AlertMasterCard
+        onClick={() => console.log("test")}
+        pillLeft={{ flavour: "error", text: "3" }}
+        pillRight={{ flavour: "warning", text: "2" }}
+        pillEnd={{ flavour: "clear", text: "223" }}
       />
       <AlertMasterCard />
     </Flex>

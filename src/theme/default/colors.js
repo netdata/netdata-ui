@@ -97,7 +97,7 @@ const appColors = {
   inputBorderHover: rawColors.neutral.grey165,
   inputBorderFocus: rawColors.neutral.grey165,
   //Badges
-  nodeBadgeBackground: rawColors.neutral.grey145,
+  nodeBadgeBackground: rawColors.neutral.grey155,
   nodeBadgeBorder: rawColors.neutral.iron,
   nodeBadgeColor: rawColors.neutral.bluebayoux,
 

@@ -12,6 +12,7 @@ const rerenderSelector = state => ({
   sizing: state.columnSizing,
   rowsById: state.rowsById,
   expanded: state.expanded,
+  grouping: state.grouping,
 })
 
 const Body = memo(

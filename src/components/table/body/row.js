@@ -1,6 +1,6 @@
 import React, { memo, useMemo, useCallback } from "react"
 import Flex from "@/components/templates/flex"
-import { TextNano } from "@/components/typography"
+import { TextMicro } from "@/components/typography"
 import { Icon } from "@/components/icon"
 import { useTableState } from "../provider"
 
@@ -41,7 +41,7 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
           background: "columnHighlight",
           backgroundOpacity: row.index % 2 === 0 ? "0.2" : "0.4",
         })}
-      padding={[1, 2]}
+      padding={[1.5, 2]}
       {...cellStyles}
     >
       <Flex flex width="100%" alignItems={cell.column.columnDef.align || "start"}>
@@ -61,13 +61,13 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
             right={0}
             bottom="-2px"
           >
-            <TextNano fontSize="10px" color="textLite">
+            <TextMicro color="textLite" fontSize="9px">
               Expand
-            </TextNano>
+            </TextMicro>
             <Icon
               name="chevron_down"
-              width="12px"
-              height="12px"
+              width="10px"
+              height="10px"
               color="textLite"
               rotate={row.getIsExpanded() ? 2 : null}
             />
