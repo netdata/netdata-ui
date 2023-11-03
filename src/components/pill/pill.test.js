@@ -9,7 +9,7 @@ describe("Pill component", () => {
     expect(screen.queryByTestId("pill")).toBeInTheDocument()
     expect(screen.queryByTestId("pill-text")).toBeInTheDocument()
     expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "bright")
-    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "10px")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
     expect(screen.queryByTestId("pill-icon-left")).not.toBeInTheDocument()
     expect(screen.queryByTestId("pill-icon-right")).not.toBeInTheDocument()
   })
@@ -45,10 +45,10 @@ describe("Pill component", () => {
     expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "11px")
   })
 
-  test("should render component with small text", () => {
+  test("should render component with normal text", () => {
     renderWithProviders(<Pill size="normal">Test</Pill>)
 
-    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "11px")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
   })
 
   test("should render component with custom colored text", () => {
