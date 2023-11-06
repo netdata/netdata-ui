@@ -7,6 +7,10 @@ const colorMap = {
     error: "error",
     critical: "error",
     stale: "stale",
+
+    idleClear: "idleClear",
+    idleError: "idleError",
+    idleWarning: "idleWarning",
   },
   border: {
     neutral: "nodeBadgeBackground",
@@ -16,6 +20,10 @@ const colorMap = {
     error: "error",
     critical: "error",
     stale: "stale",
+
+    idleClear: "idleClear",
+    idleError: "idleError",
+    idleWarning: "idleWarning",
   },
   hollow: {
     neutral: "neutralPillBorder",
@@ -34,13 +42,18 @@ const colorMap = {
     error: "error",
     critical: "error",
     stale: "stale",
+
+    idleClear: "idleClear",
+    idleError: "idleError",
+    idleWarning: "idleWarning",
   },
 }
 
+// TODO deprecated them by taking care all the mastcards in app
 export const masterCardColorMap = {
   alert: "alertIcon",
   disabledClear: "idleClear",
-  disabledError: "idleError",
+  disabledError: "errorSemi",
   disabledWarning: "idleWarning",
   clear: "success",
   error: "error",
