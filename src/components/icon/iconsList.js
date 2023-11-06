@@ -230,7 +230,9 @@ import save from "./assets/save.svg"
 import search from "./assets/search.svg"
 import search_s from "./assets/search_s.svg"
 import searchPress from "./assets/search_press.svg"
+import serviceAlarm from "./assets/alarm.svg"
 import serviceApache from "./assets/services/apache.svg"
+import serviceAsterisk from "./assets/services/asterisk.svg"
 import serviceApacheTomcat from "./assets/services/apache_tomcat.svg"
 import serviceBeanstalk from "./assets/services/beanstalk.svg"
 import serviceBind from "./assets/services/bind.svg"
@@ -239,11 +241,13 @@ import serviceCoreDns from "./assets/services/coreDNS.svg"
 import serviceCouchDB from "./assets/services/couchDB.svg"
 import serviceDatabase from "./assets/services/database.svg"
 import serviceDNS from "./assets/services/dns.svg"
+import serviceDNSmasq from "./assets/services/dnsmasq.svg"
 import serviceDockerHubPress from "./assets/services/docker_hub_press.svg"
 import serviceDockerHub from "./assets/services/docker_hub.svg"
 import serviceDotNet from "./assets/services/dotnet.svg"
 import serviceEBPF from "./assets/services/eBPF.svg"
 import serviceElasticSearch from "./assets/services/elasticSearch.svg"
+import serviceExample from "./assets/services/example.svg"
 import serviceFreeNAS from "./assets/services/freeNAS.svg"
 import serviceHAProxy from "./assets/services/haProxy.svg"
 import serviceHTTPCheck from "./assets/services/httpCheck.svg"
@@ -265,10 +269,12 @@ import serviceNginx from "./assets/services/nginx.svg"
 import serviceNginxLocal from "./assets/services/nginx_local.svg"
 import serviceNginxPlus from "./assets/services/nginx_plus.svg"
 import serviceNtpd from "./assets/services/ntpd.svg"
+import serviceNvidia from "./assets/services/nvidia.svg"
 import serviceNtpdPress from "./assets/services/ntpd_press.svg"
 import serviceOpenStack from "./assets/services/openStack.svg"
 import serviceOpenWrt from "./assets/services/openWrt.svg"
 import servicePan from "./assets/services/pan.svg"
+import servicePandas from "./assets/services/pandas.svg"
 import servicePercona from "./assets/services/percona.svg"
 import servicePfSense from "./assets/services/pfSense.svg"
 import servicePhpFpm from "./assets/services/php_fpm.svg"
@@ -276,6 +282,7 @@ import servicePostgreSQL from "./assets/services/postgreSQL.svg"
 import servicePrometheus from "./assets/services/prometheus.svg"
 import serviceProxySQL from "./assets/services/proxySQL.svg"
 import serviceRabbitMQ from "./assets/services/rabbitMQ.svg"
+import serviceRandom from "./assets/services/random.svg"
 import serviceRedis from "./assets/services/redis.svg"
 import serviceRethinkDB from "./assets/services/rethinkDB.svg"
 import serviceRetroShare from "./assets/services/retroShare.svg"
@@ -589,7 +596,9 @@ export const iconsList = {
   search,
   search_s,
   searchPress,
+  serviceAlarm,
   serviceApache,
+  serviceAsterisk,
   serviceApacheTomcat,
   serviceBeanstalk,
   serviceBind,
@@ -598,6 +607,7 @@ export const iconsList = {
   serviceCouchDB,
   serviceDatabase,
   serviceDNS,
+  serviceDNSmasq,
   serviceDockerHubPress,
   serviceDockerHub,
   serviceDotNet,
@@ -624,10 +634,12 @@ export const iconsList = {
   serviceNginxLocal,
   serviceNginxPlus,
   serviceNtpd,
+  serviceNvidia,
   serviceNtpdPress,
   serviceOpenStack,
   serviceOpenWrt,
   servicePan,
+  servicePandas,
   servicePercona,
   servicePfSense,
   servicePhpFpm,
@@ -635,6 +647,7 @@ export const iconsList = {
   servicePrometheus,
   serviceProxySQL,
   serviceRabbitMQ,
+  serviceRandom,
   serviceRedis,
   serviceRethinkDB,
   serviceRetroShare,
