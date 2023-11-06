@@ -26,7 +26,7 @@ export const Checkbox = forwardRef(
 
       if (disabled) return
 
-      onChange?.(!checked)
+      onChange?.(!checked, e)
     }
 
     return (

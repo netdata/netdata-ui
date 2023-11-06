@@ -12,7 +12,7 @@ const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
         checked={checked}
         disabled={disabled}
         label={column.columnDef.name || column.id}
-        onChange={column.getToggleVisibilityHandler()}
+        onChange={val => column.getToggleVisibilityHandler()({ target: { checked: val } })}
         data-ga={`columns-menu::click-${checked ? "disable" : "enable"}-${column.id}-::${dataGa}`}
       />
     </Flex>
