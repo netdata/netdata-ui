@@ -1,78 +1,75 @@
 import React, { forwardRef } from "react"
 import { Text } from "@/components/typography"
-import useCheckBoxStyles from "./use-styles-checkbox"
-import useCheckbox from "./use-checkbox"
-
-import {
-  CheckboxContainer,
-  HiddenCheckboxInput,
-  LabelText,
-  StyledCheckbox,
-  StyledIcon,
-  StyledLabel,
-} from "./styled"
+import { Icon } from "@/components/icon"
+import Box from "@/components/templates/box"
+import Flex from "@/components/templates/flex"
+import { HiddenCheckboxInput, Checkbox as StyledCheckbox } from "./styled"
 
 export const Checkbox = forwardRef(
   (
     {
-      alignSelf,
       checked,
-      className,
-      "data-testid": testId,
       disabled,
       iconProps,
       indeterminate,
       Label,
       label,
       labelProps,
-      labelPosition,
-      margin,
-      ...props
+      labelPosition = "left",
+      onChange,
+      ...rest
     },
     ref
   ) => {
-    const { styles } = useCheckBoxStyles({ disabled })
-    const { getInputProps, getCheckBoxProps } = useCheckbox({
-      checked,
-      disabled,
-      indeterminate,
-      ...props,
-    })
+    const onClick = e => {
+      e.preventDefault()
+
+      if (disabled) return
+
+      onChange?.(!checked)
+    }
 
     return (
-      <StyledLabel
-        alignSelf={alignSelf}
-        className={className}
-        data-testid={testId}
+      <Flex
+        as="label"
+        position="relative"
+        alignItems="center"
+        gap={1}
+        cursor={disabled ? "auto" : "pointer"}
+        rowReverse={labelPosition === "right"}
+        data-testid="checkbox"
         disabled={disabled}
-        margin={margin}
-        {...labelProps}
+        {...rest}
+        onClick={onClick}
       >
-        {label && labelPosition === "left" && (
-          <LabelText as={Label} disabled={disabled} left>
+        {label && (
+          <Text as={Label} opacity={disabled ? 0.4 : 1} {...labelProps}>
             {label}
-          </LabelText>
+          </Text>
         )}
-        <CheckboxContainer>
-          <HiddenCheckboxInput data-testid="checkbox-input" {...getInputProps(ref, props)} />
-          <StyledCheckbox
-            data-testid="styled-checkbox"
-            {...styles.styledCheckbox}
-            {...getCheckBoxProps()}
-          >
-            <StyledIcon
-              disabled={disabled}
-              name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
-              {...iconProps}
-            />
+        <Box width="16px" height="16px">
+          <HiddenCheckboxInput
+            data-testid="checkbox-input"
+            ref={ref}
+            disabled={disabled}
+            {...(indeterminate && { "data-indeterminate": true })}
+            data-checked={checked}
+          />
+          <StyledCheckbox data-testid="styled-checkbox" disabled={disabled}>
+            {(!!checked || !!indeterminate) && (
+              <Icon
+                disabled={disabled}
+                name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
+                width="16px"
+                height="16px"
+                color="accent"
+                hoverColor="primary"
+                {...iconProps}
+              />
+            )}
           </StyledCheckbox>
-        </CheckboxContainer>
-        {label && labelPosition === "right" && (
-          <LabelText as={Label} disabled={disabled} right>
-            {label}
-          </LabelText>
-        )}
-      </StyledLabel>
+        </Box>
+      </Flex>
     )
   }
 )

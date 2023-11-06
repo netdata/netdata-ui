@@ -1,10 +1,11 @@
 import React from "react"
 import AlertMasterCard from "./alertMastercard"
+import { iconsList } from "@/components/icon/iconsList"
 import Flex from "@/components/templates/flex"
 import Pill from "."
 import MasterCard from "./mastercard"
 
-const Custom = () => (
+export const Custom = () => (
   <Flex gap={4}>
     <Pill hollow background="panel" borderColor="warning" color="warning">
       Custom pill
@@ -18,7 +19,7 @@ const Custom = () => (
   </Flex>
 )
 
-const Pills = () => (
+export const Pills = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning">Warning</Pill>
@@ -57,7 +58,7 @@ const Pills = () => (
   </Flex>
 )
 
-const PillsHollow = () => (
+export const PillsHollow = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning" hollow>
@@ -104,7 +105,7 @@ const PillsHollow = () => (
   </Flex>
 )
 
-const PillsLabelIcon = () => (
+export const PillsLabelIcon = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning" hollow icon="alarm">
@@ -165,7 +166,7 @@ const PillsLabelIcon = () => (
   </Flex>
 )
 
-const PillsIcon = () => (
+export const PillsIcon = () => (
   <Flex column gap={4}>
     <Flex gap={4}>
       <Pill flavour="warning" hollow icon="alarm" iconSize="18px" />
@@ -182,7 +183,7 @@ const PillsIcon = () => (
   </Flex>
 )
 
-const PillsTiny = () => (
+export const PillsTiny = () => (
   <Flex gap={2}>
     <Pill flavour="warning" tiny>
       Warning
@@ -199,7 +200,7 @@ const PillsTiny = () => (
   </Flex>
 )
 
-const MasterCards = () => (
+export const MasterCards = () => (
   <Flex column gap={4}>
     <Flex gap={2}>
       <MasterCard
@@ -221,8 +222,18 @@ const MasterCards = () => (
   </Flex>
 )
 
-const AlertMasterCards = () => (
+export const AlertMasterCards = () => (
   <Flex column gap={4}>
+    <Flex gap={2}>
+      <AlertMasterCard
+        onClick={() => console.log("test")}
+        pillLeft={{ flavour: "error", text: "3" }}
+        pillRight={{ flavour: "warning", text: "2" }}
+        pillEnd={{ flavour: "clear", text: "223" }}
+        size="small"
+      />
+      <AlertMasterCard size="small" />
+    </Flex>
     <Flex gap={2}>
       <AlertMasterCard
         onClick={() => console.log("test")}
@@ -244,15 +255,41 @@ const AlertMasterCards = () => (
   </Flex>
 )
 
-export const BaseCustom = { component: Custom }
-export const BasePills = { component: Pills }
-export const BasePillsHollow = { component: PillsHollow }
-export const BasePillsIconWithLabel = { component: PillsLabelIcon }
-export const BasePillsIcon = { component: PillsIcon }
-export const BasePillsTiny = { component: PillsTiny }
-export const BaseMasterCards = { component: MasterCards }
-export const BaseAlertMasterCards = { component: AlertMasterCards }
+export const Basic = args => <Pill {...args} />
 
 export default {
   component: Pill,
+  args: {
+    children: "My pill",
+    flavour: "neutral",
+    hollow: false,
+    reverse: false,
+    size: "large",
+    tiny: false,
+    semi: false,
+  },
+  argTypes: {
+    children: { control: "text" },
+    flavour: {
+      options: ["neutral", "success", "clear", "warning", "error", "stale"],
+      control: { type: "select" },
+    },
+    hollow: { control: "boolean" },
+    semi: { control: "boolean" },
+    normal: { control: "boolean" },
+    reverse: { control: "boolean" },
+    size: {
+      options: ["default", "large", "normal", "small", "tiny"],
+      control: { type: "select" },
+    },
+    textSize: {
+      options: ["default", "large", "normal", "small", "tiny"],
+      control: { type: "select" },
+    },
+    tiny: { control: "boolean" },
+    icon: {
+      options: Object.keys(iconsList),
+      control: { type: "select" },
+    },
+  },
 }

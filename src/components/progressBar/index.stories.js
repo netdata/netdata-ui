@@ -2,13 +2,13 @@ import React from "react"
 import Flex from "@/components/templates/flex"
 import ProgressBar from "."
 
-const Default = () => (
+export const Basic = () => (
   <Flex width="300px">
     <ProgressBar width="80%" color={["blue", "aquamarine"]} background={["purple", "lilac"]} />
   </Flex>
 )
 
-const WithValue = () => (
+export const WithValue = () => (
   <Flex width="300px">
     <ProgressBar
       value={[
@@ -19,9 +19,6 @@ const WithValue = () => (
     />
   </Flex>
 )
-
-export const Base = { component: Default }
-export const BaseWithValue = { component: WithValue }
 
 export default {
   component: ProgressBar,

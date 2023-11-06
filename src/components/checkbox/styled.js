@@ -1,24 +1,5 @@
 import styled from "styled-components"
-import { Icon } from "@/components/icon"
-import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"
-import { getSizeUnit, getValidatedControlColor } from "@/theme/utils"
-
-export const CheckboxContainer = styled(Box).attrs({
-  height: "16px",
-  width: "16px",
-})`
-  box-sizing: border-box;
-`
-
-export const StyledIcon = styled(Icon).attrs({
-  height: "16px",
-  width: "16px",
-})`
-  flex-grow: 0;
-  flex-shrink: 0;
-  fill: ${getValidatedControlColor("primary", "accent")};
-`
 
 export const HiddenCheckboxInput = styled.input.attrs({
   type: "checkbox",
@@ -35,28 +16,19 @@ export const HiddenCheckboxInput = styled.input.attrs({
   width: 1px;
 `
 
-export const StyledCheckbox = styled(Flex)`
-  box-sizing: border-box;
-  transition: all 150ms;
-
-  ${StyledIcon} {
-    visibility: ${props => {
-      if (props.indeterminate) return "visible"
-      return props.checked ? "visible" : "hidden"
-    }};
-`
-
-export const StyledLabel = styled(Flex).attrs(props => ({
-  as: "label",
-  position: "relative",
+export const Checkbox = styled(Flex).attrs(props => ({
+  width: "16px",
+  height: "16px",
+  round: 0.5,
+  background: "inputBg",
+  backgroundOpacity: props.disabled ? 0.4 : 1,
   alignItems: "center",
+  border: props.error ? "error" : "inputBorder",
+  _hover: {
+    border: props.disabled ? "inputBorder" : props.error ? "errorText" : "inputBorderHover",
+  },
+  _focus: {
+    border: props.disabled ? "inputBorder" : props.error ? "errorText" : "inputBorderFocus",
+  },
   ...props,
-}))`
-  cursor: ${({ disabled }) => (disabled ? "auto" : "pointer")};
-`
-
-export const LabelText = styled.span`
-  ${({ right, ...props }) =>
-    right ? `margin-left: ${getSizeUnit(props)}px;` : `margin-right: ${getSizeUnit(props)}px;`};
-  ${({ disabled }) => disabled && "opacity: 0.4;"};
-`
+}))``

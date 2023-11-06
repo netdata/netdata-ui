@@ -1,4 +1,4 @@
-export const controlReset = `
+export default `
   font-family: inherit;
   border: none;
   outline: none;

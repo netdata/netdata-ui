@@ -54,7 +54,7 @@ export {
 export { devices, breakpoints } from "./media"
 export { Checkbox, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
-export { webkitVisibleScrollbar } from "./mixins"
+export * from "./mixins"
 export { Toggle } from "./components/toggle"
 export { default as RadioButton } from "./components/radio-button"
 export { Tabs, Tab } from "./components/tabs"
@@ -92,7 +92,7 @@ export { default as News } from "./organisms/news"
 export { default as NavigationTabs } from "./organisms/navigation/tabs"
 export { default as NavigationTab } from "./organisms/navigation/tab"
 export { default as TabSeparator } from "./organisms/navigation/tab/tabSeparator"
-export { default as DraggableTabs } from "./organisms/navigation/draggable"
+export { default as DraggableTabs } from "./organisms/navigation/sortable"
 export { default as useNavigationArrows } from "./organisms/navigation/hooks/useNavigationArrows"
 
 export { default as Intersection } from "./components/intersection"
@@ -121,3 +121,5 @@ export { Table } from "./components/table"
 
 export { default as Select } from "./components/select"
 export { default as SearchInput } from "./components/search"
+
+export { GlobalStyles } from "./global-styles"

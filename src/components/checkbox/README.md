@@ -7,7 +7,7 @@ The implementation requires controlled behaviour, so the component has to be pro
 ```typescript
 interface CheckboxProps {
   checked: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (boolean) => void
   id?: string
   label?: string
   labelPosition?: "left" | "right"
@@ -23,8 +23,8 @@ interface CheckboxProps {
 ```JSX
 export const ContolledCheckbox = () => {
   const [checked, setChecked] = useState(false)
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.currentTarget.checked)
+  const handleChange = (value => {
+    setChecked(value)
   }
   return <Checkbox onChange={handleChange} checked={checked} />
 }

@@ -14,7 +14,10 @@ const HeaderGroupBy = ({ grouping, groupByColumns, onGroupBy, tableMeta, dataGa,
 
               return {
                 ...acc,
-                [colId]: { label: column?.name || column.id, value: colId },
+                [colId]: {
+                  label: groupByColumns[colId].name || column?.name || column.id,
+                  value: colId,
+                },
               }
             }, {}),
           }

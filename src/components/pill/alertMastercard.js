@@ -49,28 +49,26 @@ const AlertMasterCard = forwardRef(
     const pillLeftProps = {
       background: pillLeftBackground,
       position: "relative",
-      margin: [0, 0, 0, -3],
-      padding: [1, 2, 1, 4],
+      margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
+      padding: [0, 2, 0, size === "large" ? 5 : 4],
       zIndex: 3,
       ...pillProps,
       ...pillLeft,
-      round: labelProps.hidden ? round : "0 12px 12px 0",
+      round: labelProps.hidden,
     }
     const pillRightProps = {
       background: pillRightBackground,
-      margin: [0, 0, 0, -3],
-      padding: [1, 2, 1, 4],
+      margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
+      padding: [0, 2, 0, size === "large" ? 5 : 4],
       zIndex: 2,
       ...pillProps,
       ...pillRight,
-      round: "0 12px 12px 0",
     }
     const pillEndProps = pillEnd && {
       background: pillEndBackground,
-      margin: [0, 0, 0, -3],
-      padding: [1, 2, 1, 4],
+      margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
+      padding: [0, 2, 0, size === "large" ? 5 : 4],
       zIndex: 1,
-      round: "0 12px 12px 0",
       ...pillProps,
       ...pillEnd,
     }

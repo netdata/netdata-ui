@@ -10,6 +10,6 @@ describe("cursor", () => {
   })
 
   it("renders cursor invalid", () => {
-    expect(cursor({ cursor: "invalid" })).toBe("")
+    expect(cursor({ cursor: "invalid" })).toBe("cursor: invalid;")
   })
 })

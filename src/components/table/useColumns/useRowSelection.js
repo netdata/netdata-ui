@@ -18,9 +18,8 @@ export default (enabled, { testPrefix, tableMeta }) =>
                   data-testid={`netdata-table-header-checkbox${testPrefix}`}
                   checked={table.getIsAllRowsSelected()}
                   indeterminate={table.getIsSomeRowsSelected()}
-                  onChange={e => {
-                    e.stopPropagation()
-                    table.getToggleAllRowsSelectedHandler()(e)
+                  onChange={checked => {
+                    table.getToggleAllRowsSelectedHandler()({ target: { checked } })
                   }}
                 />
               </Flex>
@@ -31,9 +30,8 @@ export default (enabled, { testPrefix, tableMeta }) =>
                   data-testid={`netdata-table-cell-checkbox${testPrefix}`}
                   checked={!row.original?.disabled && row.getIsSelected()}
                   indeterminate={row.getIsSomeSelected()}
-                  onChange={e => {
-                    e.stopPropagation()
-                    row.getToggleSelectedHandler()(e)
+                  onChange={checked => {
+                    row.getToggleSelectedHandler()({ target: { checked } })
                   }}
                   disabled={row.original?.disabled || false}
                 />

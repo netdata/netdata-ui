@@ -1,8 +1,7 @@
 import React from "react"
-import Layer from "../templates/layer"
-import Box from "../templates/box"
-import Flex from "../templates/flex"
-import { Icon } from "../icon"
+import Layer from "@/components/templates/layer"
+import Flex from "@/components/templates/flex"
+import { IconButton } from "@/components/button"
 
 const TOP_BOTTOM_PADDING = 2
 const LEFT_RIGHT_PADDING = 4
@@ -49,20 +48,29 @@ export const ModalFooter = ({ children, hasBorder = true, parentPadding, testId,
 )
 
 export const ModalButton = ({ iconName, onClick, testId, ...rest }) => (
-  <Box
+  <IconButton
     data-testid={testId}
-    sx={{ marginLeft: "auto" }}
-    as={Icon}
-    name={iconName}
-    color="text"
+    icon={iconName}
+    neutral
     onClick={onClick}
     cursor="pointer"
+    flavour="borderless"
     {...rest}
   />
 )
 
 export const ModalCloseButton = ({ onClose, testId, ...rest }) => (
-  <ModalButton iconName="x" onClick={onClose} testId={testId} {...rest} />
+  <ModalButton
+    iconName="x"
+    onClick={onClose}
+    testId={testId}
+    position="absolute"
+    height="14px"
+    width="14px"
+    top={2}
+    right={2}
+    {...rest}
+  />
 )
 
 const Modal = ({ children, ...rest }) => <Layer {...rest}>{children}</Layer>

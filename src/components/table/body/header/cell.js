@@ -98,7 +98,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
         <Filter column={column} testPrefix={testPrefix} index={index} />
       </Flex>
       <Info meta={meta} />
-      {!column.columnDef.fullWidth && <ResizeHandler header={header} table={table} />}
+      <ResizeHandler header={header} table={table} />
     </Flex>
   )
 }

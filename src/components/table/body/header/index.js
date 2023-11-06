@@ -3,7 +3,13 @@ import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
 import Cell from "./cell"
 
-const rerenderSelector = state => state.columnVisibility
+const rerenderSelector = state => ({
+  sizing: state.columnSizing,
+  expanded: state.expanded,
+  columnVisibility: state.columnVisibility,
+  selectedRows: state.selectedRows,
+  grouping: state.grouping,
+})
 
 const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
   <Flex

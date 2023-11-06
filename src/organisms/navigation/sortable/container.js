@@ -9,6 +9,7 @@ const Container = styled(Flex).attrs({
   basis: "0%",
   position: "relative",
   overflow: { vertical: "hidden", horizontal: "auto" },
+  alignItems: "center",
 })`
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;

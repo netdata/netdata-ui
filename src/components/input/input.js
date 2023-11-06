@@ -26,11 +26,11 @@ export const TextInput = ({
   const errorMessage = error === true ? "invalid" : error
 
   return (
-    <Flex gap={1} column className={className} flex as="label" {...containerStyles}>
+    <Flex gap={0.5} column className={className} {...containerStyles} as="label">
       {typeof label === "string" ? <LabelText size={size}>{label}</LabelText> : label}
-      <Flex position="relative" gap={1} {...inputContainerStyles}>
+      <Flex position="relative" {...inputContainerStyles}>
         {iconLeft && (
-          <Flex position="absolute" left={0} top={0} bottom={0} alignItems="center" padding={[1]}>
+          <Flex position="absolute" left={1} top={0} bottom={0} alignItems="center">
             {iconLeft}
           </Flex>
         )}
@@ -53,18 +53,10 @@ export const TextInput = ({
           {...props}
         />
 
-        {iconRight && (
-          <Flex
-            position="absolute"
-            right={0}
-            top={0}
-            bottom={0}
-            alignItems="center"
-            padding={[1]}
-            gap={1}
-          >
-            <span>{fieldIndicator}</span>
-            <span>{iconRight}</span>
+        {(!!iconRight || !!fieldIndicator) && (
+          <Flex position="absolute" right={1} top={0} bottom={0} alignItems="center" gap={1}>
+            {!!fieldIndicator && <TextMicro color="textLite">{fieldIndicator}</TextMicro>}
+            {!!iconRight && iconRight}
           </Flex>
         )}
       </Flex>

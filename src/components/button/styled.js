@@ -6,6 +6,8 @@ import padding from "@/mixins/padding"
 import round from "@/mixins/round"
 import alignSelf from "@/mixins/alignSelf"
 import textTransform from "@/mixins/textTransform"
+import position from "@/mixins/position"
+import { position as styledSystemPosition } from "styled-system"
 import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
 
 const themes = {
@@ -45,7 +47,7 @@ const getHoverColor = props =>
   props.neutral ? getColor("generic")(props) : getColor("accent")(props)
 const getAccentColor = props =>
   props.neutral
-    ? getColor("neutralHighlight")(props)
+    ? getColor(props.flavour === BORDER_LESS ? "textFocus" : "neutralHighlight")(props)
     : getColor(props.flavour === HOLLOW ? "secondaryHighlight" : "primaryHighlight")(props)
 const getTransparent = getColor(["transparent", "full"])
 
@@ -140,6 +142,9 @@ export const StyledButton = styled.button.attrs(
     ${round}
     box-sizing: border-box;
 
+    ${position}
+    ${styledSystemPosition}
+
     text-decoration: none;
     & > span {
       ${textTransform};
@@ -176,9 +181,6 @@ export const StyledButton = styled.button.attrs(
       fill: ${props => props.colors.color(props)};
     }
 
-    .button-icon__color {
-      fill: ${props => props.colors.iconColor(props)};
-    }
     .ntd-spinner {
       fill: none;
       stroke-width: 17px;

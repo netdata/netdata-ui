@@ -4,10 +4,6 @@ it("renders", () => {
   expect(flex({})).toBe("")
 })
 
-it("renders nothing", () => {
-  expect(flex({ flex: "something-wrong" })).toBe("")
-})
-
 it("renders flex", () => {
   expect(flex({ flex: true })).toBe("flex: 1 1 auto;")
 })

@@ -6,16 +6,15 @@ const icons = Object.keys(iconsList)
 
 export const Basic = args => <Button {...args} />
 
-export const BaseIconButton = () => (
-  <IconButton cursor="pointer" icon="chevron_left" iconSize="small" tooltip="Previous" />
-)
-
-export const BaseButtonGroup = () => (
-  <ButtonGroup>
-    <Button label="One" />
-    <Button label="Two" />
-    <Button label="Three" />
-  </ButtonGroup>
+export const BaseIconButton = args => (
+  <IconButton
+    {...args}
+    label=""
+    cursor="pointer"
+    icon="chevron_left"
+    iconSize="small"
+    tooltip="Previous"
+  />
 )
 
 const radioButtonItems = [
@@ -24,17 +23,22 @@ const radioButtonItems = [
   { label: "Three", value: 3 },
 ]
 
-export const RadioButtonGroup = {
-  component: () => () => {
-    const [checked, setChecked] = useState(1)
-    const onChange = value => setChecked(value)
+export const RadioButtonGroup = args => {
+  const [checked, setChecked] = useState(1)
+  const onChange = value => setChecked(value)
 
-    return <ButtonGroup items={radioButtonItems} checked={checked} onChange={onChange} />
-  },
+  return (
+    <ButtonGroup
+      items={radioButtonItems.map(item => ({ ...args, ...item }))}
+      checked={checked}
+      onChange={onChange}
+    />
+  )
 }
 
 export default {
   component: Button,
+  tags: ["autodocs"],
   args: {
     onClick: () => alert("clicked"),
     flavour: "default",
@@ -48,6 +52,7 @@ export default {
     danger: false,
     warning: false,
     small: false,
+    neutral: false,
   },
   argTypes: {
     flavour: {
@@ -64,5 +69,6 @@ export default {
     danger: { control: "boolean" },
     warning: { control: "boolean" },
     small: { control: "boolean" },
+    neutral: { control: "boolean" },
   },
 }

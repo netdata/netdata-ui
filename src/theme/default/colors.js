@@ -25,7 +25,7 @@ const appColors = {
   secondaryColor: rawColors.green.green100,
   primaryHighlight: rawColors.green.green110,
   secondaryHighlight: rawColors.green.green190,
-  neutralHighlight: rawColors.green.grey50,
+  neutralHighlight: rawColors.neutral.grey180,
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
@@ -50,7 +50,8 @@ const appColors = {
   generic: rawColors.neutral.grey165,
 
   live: rawColors.green.green100,
-  stale: rawColors.green.green900,
+  stale: rawColors.green.green1000,
+  staleSemi: rawColors.green.green900,
   unseen: rawColors.yellow.yellow900,
   offline: rawColors.neutral.grey145,
 
@@ -96,7 +97,7 @@ const appColors = {
   inputBorderHover: rawColors.neutral.grey165,
   inputBorderFocus: rawColors.neutral.grey165,
   //Badges
-  nodeBadgeBackground: rawColors.neutral.porcelain,
+  nodeBadgeBackground: rawColors.neutral.grey155,
   nodeBadgeBorder: rawColors.neutral.iron,
   nodeBadgeColor: rawColors.neutral.bluebayoux,
 

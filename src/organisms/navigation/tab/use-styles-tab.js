@@ -7,7 +7,7 @@ const border = ({ borderSideColor, borderTopColor, showBorderLeft }) => ({
   ...(showBorderLeft ? { borderLeft: `1px solid ${borderSideColor}` } : {}),
 })
 
-const useStyleTabs = ({ active = false, showBorderLeft = false }) => {
+const useStyleTabs = ({ active = false, showBorderLeft = false, isDragOverlay }) => {
   const pickColor = useColor()
   const borderSideColor = pickColor("border")
   const borderTopColor = active ? pickColor("primary") : "transparent"
@@ -19,11 +19,15 @@ const useStyleTabs = ({ active = false, showBorderLeft = false }) => {
       alignItems: "center",
       justifyContent: "start",
       position: "relative",
-      padding: [2, 3],
+      padding: [1, 2],
       background: active ? "mainBackground" : "topBarBg",
-      zIndex: active ? 2 : 1,
       height: 8,
-      sx: { ...border({ borderSideColor, borderTopColor, showBorderLeft }) },
+      sx: {
+        ...border({ borderSideColor, borderTopColor, showBorderLeft }),
+        ...(isDragOverlay && {
+          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+        }),
+      },
     }
   }, [borderTopColor, borderSideColor, active])
 

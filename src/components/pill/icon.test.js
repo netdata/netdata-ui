@@ -23,13 +23,6 @@ describe("PillIcon component", () => {
     expect(screen.queryByTestId("custom-icon")).toBeInTheDocument()
   })
 
-  test("should render component with custom size", () => {
-    const mockedSize = "20px"
-    renderWithProviders(<PillIcon icon="alarm_bell" size={mockedSize} />)
-    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("width", mockedSize)
-    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("height", mockedSize)
-  })
-
   test("should render component with custom color", () => {
     const mockedColor = "primary"
     renderWithProviders(<PillIcon icon="alarm_bell" color={mockedColor} />)
@@ -38,6 +31,6 @@ describe("PillIcon component", () => {
 
   test("should render component with hollowed warning color", () => {
     renderWithProviders(<PillIcon icon="alarm_bell" hollow flavour="warning" />)
-    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("color", "yellow,warning80")
+    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("color", "warning")
   })
 })

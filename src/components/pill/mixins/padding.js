@@ -1,6 +1,6 @@
 const paddings = {
-  default: [0.5, 1],
-  large: [1, 2],
+  default: [0.5, 2],
+  large: [1, 2.5],
 }
 
 const getPillPadding = (padding, size, tiny) => {

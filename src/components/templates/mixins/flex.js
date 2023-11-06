@@ -20,7 +20,7 @@ const getFlex = (flex, basis = "auto") => {
   }
 
   if (typeof flex !== "object") {
-    return ""
+    return flex
   }
 
   const { grow, shrink } = flex

@@ -1,29 +1,39 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import RangeInput from "."
 
-export const InputRange = {
-  component: () => {
-    const [value, setValue] = useState(0.1)
+export const InputRange = args => {
+  const [value, setValue] = useState(args.value)
 
-    return (
-      <RangeInput
-        data-testid="metricCorrelation-resultsSlider"
-        min={0}
-        max={1}
-        onChange={event => {
-          console.log(`You changed ${event.target.value.toString()}`)
-        }}
-        onClick={() => {
-          console.log("You clicked input range")
-        }}
-        onInput={event => setValue(event.target.value)}
-        value={value}
-        step={0.00000000000001}
-      />
-    )
-  },
+  useEffect(() => {
+    setValue(args.value)
+  }, [args.value])
+
+  return (
+    <RangeInput
+      {...args}
+      value={value}
+      onChange={e => {
+        setValue(e.target.value)
+      }}
+    />
+  )
 }
 
 export default {
   component: RangeInput,
+  args: {
+    value: 0,
+    max: 100,
+    min: 0,
+    step: 1,
+  },
+  argTypes: {
+    initMax: { control: "number" },
+    initMin: { control: "number" },
+    max: { control: "number" },
+    min: { control: "number" },
+    step: { control: "number" },
+    onChange: { action: "onChange" },
+    onInput: { action: "onInput" },
+  },
 }

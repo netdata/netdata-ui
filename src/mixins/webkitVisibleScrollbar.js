@@ -1,7 +1,7 @@
 import { css } from "styled-components"
 import { getSizeBy, getRgbColor } from "@/theme/utils"
 
-export const webkitVisibleScrollbar = css`
+export default css`
   &::-webkit-scrollbar {
     width: ${getSizeBy(1)};
   }

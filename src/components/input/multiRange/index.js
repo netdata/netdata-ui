@@ -57,7 +57,7 @@ const MultiRangeInput = ({
   }
 
   return (
-    <Flex column gap={1}>
+    <Flex column gap={1} flex>
       <Flex
         alignItems="center"
         data-testid="multiRangeInput"
