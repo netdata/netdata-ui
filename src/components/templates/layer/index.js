@@ -22,7 +22,7 @@ const Layer = ({
 }) => {
   const ref = useRef()
 
-  useOutsideClick(ref, onClickOutside)
+  useOutsideClick(ref, onClickOutside, null, backdrop)
   useKeyboardEsc(onEsc)
 
   const el = useDropElement()
@@ -44,7 +44,7 @@ const Layer = ({
 
   return ReactDOM.createPortal(
     backdrop ? (
-      <BackdropContainer backdropProps={backdropProps} {...rest}>
+      <BackdropContainer backdropProps={backdropProps} {...rest} onClick={onClickOutside}>
         {content}
       </BackdropContainer>
     ) : (

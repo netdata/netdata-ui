@@ -19,9 +19,9 @@ const Backdrop = styled.div`
 }
 `
 
-const BackdropContainer = ({ children, backdropProps }) => (
+const BackdropContainer = ({ children, backdropProps, onClick }) => (
   <Container data-testid="layer-backdropContainer">
-    <Backdrop data-testid="layer-backdrop" {...backdropProps} />
+    <Backdrop data-testid="layer-backdrop" {...backdropProps} onClick={onClick} />
     {children}
   </Container>
 )

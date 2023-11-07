@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import isAncestor from "@/components/drops/mixins/isAncestor"
 
-export default (dropRef, onClickOutside, target) => {
+export default (dropRef, onClickOutside, target, hasBackdrop) => {
   useEffect(() => {
-    if (!onClickOutside) return
+    if (!onClickOutside || hasBackdrop) return
 
     const onMousedown = event => {
       if (
