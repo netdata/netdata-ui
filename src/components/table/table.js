@@ -44,6 +44,7 @@ const Table = memo(
     (
       {
         bulkActions,
+        headerChildren,
 
         data,
         dataColumns,
@@ -214,6 +215,7 @@ const Table = memo(
             enableColumnVisibility={enableColumnVisibility}
             bulkActions={bulkActions}
           >
+            {headerChildren || null}
             <HeaderActions
               rowSelection={rowSelection}
               bulkActions={bulkActions}
