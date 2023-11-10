@@ -74,7 +74,12 @@ const Popover = forwardRef(
             {plain ? (
               getContent(content)
             ) : (
-              <Container align={align} background={["transparent", "popover"]} padding={[2, 4]}>
+              <Container
+                align={align}
+                background="tooltip"
+                backgroundOpacity={0.9}
+                padding={[2, 4]}
+              >
                 {getContent(content)}
               </Container>
             )}

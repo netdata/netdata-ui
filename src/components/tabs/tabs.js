@@ -13,6 +13,7 @@ export const Tabs = forwardRef(
       TabContent = Fragment,
       noDefaultBorder,
       tabsProps,
+      tabContentProps,
       ...rest
     },
     ref
@@ -36,7 +37,7 @@ export const Tabs = forwardRef(
             {nav}
           </StyledTabs>
         </TabsHeader>
-        <TabContent>{content}</TabContent>
+        <TabContent {...tabContentProps}>{content}</TabContent>
       </StyledTabsWrapper>
     )
   }

@@ -250,7 +250,7 @@ const Table = memo(
               padding={[0, 0, 10]}
               zIndex={20}
             >
-              <Flex background={["neutral", "black"]} padding={[1, 2]} gap={2}>
+              <Flex background="tooltip" padding={[1, 2]} gap={2}>
                 <Text strong>Loading more...</Text>
               </Flex>
             </Layer>

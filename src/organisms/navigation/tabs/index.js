@@ -17,6 +17,7 @@ const Tabs = ({ children }) => {
         overflow="hidden"
         background="topBarBg"
         ref={ref}
+        zIndex={1}
       >
         {React.Children.map(children, child => {
           return React.cloneElement(child, {
@@ -26,6 +27,14 @@ const Tabs = ({ children }) => {
           })
         })}
       </Flex>
+      <Flex
+        height="1px"
+        background="border"
+        width="100%"
+        position="absolute"
+        bottom={0}
+        zIndex={0}
+      />
     </Flex>
   )
 }

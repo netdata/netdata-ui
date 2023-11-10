@@ -5,12 +5,8 @@ import Tooltip from "@/components/drops/tooltip"
 import { TextSmall } from "@/components/typography"
 import { Button } from "./button"
 
-//this  addition here has been done to be aligned with our current implementation at cloud-frontend src/components/tooltips/customTooltip.js
-
-const tooltipBackground = ["neutral", "black"]
-
 const CustomTooltipContent = ({ content }) => (
-  <Flex padding={[1.5, 2]} margin={[2]} background={tooltipBackground} round={1} alignSelf="start">
+  <Flex padding={[1.5, 2]} margin={[2]} background="tooltip" round={1} alignSelf="start">
     <TextSmall color="bright">{content}</TextSmall>
   </Flex>
 )
