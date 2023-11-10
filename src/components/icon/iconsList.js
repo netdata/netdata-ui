@@ -115,6 +115,8 @@ import incident_manager from "./assets/incident_manager.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
+import integrationAWSSNS from "./assets/integrations/aws_sns.svg"
+import integrationAWSSNSColored from "./assets/integrations/aws_sns_colored.svg"
 import integrationDiscord from "./assets/integrations/discord.svg"
 import integrationDiscordColored from "./assets/integrations/discord_colored.svg"
 import integrationEmail from "./assets/integrations/email.svg"
@@ -478,6 +480,8 @@ export const iconsList = {
   information,
   informationPress,
   insights,
+  integrationAWSSNS,
+  integrationAWSSNSColored,
   integrationDiscord,
   integrationDiscordColored,
   integrationEmail,
