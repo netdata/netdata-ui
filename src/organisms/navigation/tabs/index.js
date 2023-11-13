@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react"
 import Flex from "@/components/templates/flex"
 
-const Tabs = ({ children }) => {
+const Tabs = ({ children, ...rest }) => {
   const [collapsed, setCollapsed] = useState(false)
   const ref = useRef()
 
@@ -14,10 +14,11 @@ const Tabs = ({ children }) => {
         alignItems="end"
         width="100%"
         height="100%"
-        overflow="hidden"
+        overflow="auto"
         background="topBarBg"
         ref={ref}
         zIndex={1}
+        {...rest}
       >
         {React.Children.map(children, child => {
           return React.cloneElement(child, {

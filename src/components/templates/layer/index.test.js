@@ -85,7 +85,9 @@ it("clicks outside", () => {
   const { getByText } = renderWithProviders(
     <div>
       <div>outside content</div>
-      <Layer onClickOutside={onClickOutside}>layer content</Layer>
+      <Layer backdrop={false} onClickOutside={onClickOutside}>
+        layer content
+      </Layer>
     </div>
   )
 
