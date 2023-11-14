@@ -12,6 +12,7 @@ export const Toggle = ({
   colored,
   margin,
   alignSelf,
+  toggleProps = {},
   ...props
 }) => (
   <StyledLabel className={className} margin={margin} alignSelf={alignSelf}>
@@ -22,7 +23,7 @@ export const Toggle = ({
     )}
     <ToggleContainer>
       <HiddenToggleInput disabled={disabled} checked={checked} {...props} />
-      <StyledToggle checked={checked} disabled={disabled} colored={colored} role="switch" />
+      <StyledToggle checked={checked} disabled={disabled} colored={colored} role="switch" {...toggleProps} />
     </ToggleContainer>
     {labelRight && (
       <LabelText as={Label} right>

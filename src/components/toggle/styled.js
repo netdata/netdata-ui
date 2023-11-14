@@ -25,7 +25,7 @@ export const StyledToggle = styled.div`
     props.disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
   border: 1px solid ${getColor("border")};
   border-radius: 100px;
-  transition: all 150ms;
+  transition: ${({ noTransition }) => (noTransition ? "unset" : "all 150ms")};
 
   display: block;
   position: relative;
@@ -45,7 +45,7 @@ export const StyledToggle = styled.div`
     left: 5%;
     top: 50%;
     transform: translateY(-50%);
-    transition: left 0.2s ease;
+    transition: ${({ noTransition }) => (noTransition ? "unset" : "left 0.2s ease")};
     opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
     background-color: ${({ disabled, colored, checked }) => {
       if (!colored) return getColor("controlFocused")
