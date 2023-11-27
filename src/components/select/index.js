@@ -103,7 +103,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   }),
   input: (styles, state) => ({
     ...styles,
-    color: state.isDisabled ? theme.colors.placeholder : theme.colors.textDescription,
+    color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
     ...(size === "tiny"
       ? {
           lineHeight: "18px",
@@ -122,20 +122,20 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   }),
   multiValueLabel: (styles, state) => ({
     ...styles,
-    backgroundColor: theme.colors.disabled,
+    backgroundColor: theme.colors.grey40,
     borderRadius: "0 2px 2px 0",
-    color: state.isDisabled ? theme.colors.placeholder : theme.colors.textDescription,
+    color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
     ...(size === "tiny" ? { padding: "1px" } : {}),
     paddingRight: state.data.isDisabled ? "8px" : "",
   }),
   multiValueRemove: (styles, state) => ({
-    color: state.isDisabled ? theme.colors.placeholder : theme.colors.textDescription,
+    color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
     ...(state.data.isDisabled
       ? { ...styles, display: "none" }
       : {
           ...styles,
           borderRadius: "2px 0 0 2px",
-          background: theme.colors.disabled,
+          background: theme.colors.grey40,
           ":hover": {
             background: theme.colors.tabsBorder,
           },
@@ -153,7 +153,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   }),
   singleValue: (styles, state) => ({
     ...styles,
-    color: state.isDisabled ? theme.colors.placeholder : theme.colors.textDescription,
+    color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
     fontSize: size === "tiny" ? "12px" : "14px",
   }),
   ...(size === "tiny"
