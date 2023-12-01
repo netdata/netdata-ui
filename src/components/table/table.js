@@ -201,7 +201,14 @@ const Table = memo(
       const { getHasNextPage, loading, warning } = virtualizeOptions
 
       return (
-        <Flex height={{ max: "100%" }} overflow="hidden" column ref={ref} className={className}>
+        <Flex
+          height={{ max: "100%" }}
+          overflow="hidden"
+          column
+          flex="1"
+          ref={ref}
+          className={className}
+        >
           <Header
             q={globalFilter}
             hasSearch={!!onSearch}

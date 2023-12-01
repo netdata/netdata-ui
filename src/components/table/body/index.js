@@ -96,6 +96,7 @@ const Body = memo(
           display: "flex",
           height: "100%",
           overflow: "auto",
+          flex: "1",
         }}
         data-testid={`netdata-table${testPrefix}`}
       >
