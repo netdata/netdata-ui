@@ -29,8 +29,8 @@ exports[`Toggle test  * should render with labels 1`] = `
   background: #F6F7F7;
   border: 1px solid #E4E8E8;
   border-radius: 100px;
-  -webkit-transition: all 150ms;
-  transition: all 150ms;
+  -webkit-transition: unset;
+  transition: unset;
   display: block;
   position: relative;
   -webkit-tap-highlight-color: transparent;
@@ -56,8 +56,8 @@ exports[`Toggle test  * should render with labels 1`] = `
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  -webkit-transition: left 0.2s ease;
-  transition: left 0.2s ease;
+  -webkit-transition: unset;
+  transition: unset;
   opacity: 1;
   background-color: #35414A;
 }
@@ -140,8 +140,8 @@ exports[`Toggle test  * should render with required props 1`] = `
   background: #F6F7F7;
   border: 1px solid #E4E8E8;
   border-radius: 100px;
-  -webkit-transition: all 150ms;
-  transition: all 150ms;
+  -webkit-transition: unset;
+  transition: unset;
   display: block;
   position: relative;
   -webkit-tap-highlight-color: transparent;
@@ -167,8 +167,8 @@ exports[`Toggle test  * should render with required props 1`] = `
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  -webkit-transition: left 0.2s ease;
-  transition: left 0.2s ease;
+  -webkit-transition: unset;
+  transition: unset;
   opacity: 1;
   background-color: #35414A;
 }

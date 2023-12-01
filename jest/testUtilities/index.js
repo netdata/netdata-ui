@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom/extend-expect"
+import "@testing-library/jest-dom/jest-globals"
 
 export { default as renderWithProviders } from "./renderWithProviders"
 export { default as renderHookWithProviders } from "./renderHookWithProviders"

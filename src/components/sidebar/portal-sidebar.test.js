@@ -1,9 +1,4 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from "react"
-import "@testing-library/jest-dom/extend-expect"
 import { renderWithProviders, act } from "testUtilities"
 import { PortalSidebar } from "./portaled-sidebar"
 
