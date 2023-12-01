@@ -20,11 +20,16 @@ const useDataAttrs = (props, name) => {
   return { "data-ga": ga, "data-testid": testId }
 }
 
-const withDataAttrs = (Component, name) => props => {
-  const dataProps = useDataAttrs(props, name)
+const withDataAttrs =
+  (Component, name) =>
+  ({ innerProps, ...props }) => {
+    const dataProps = useDataAttrs(props, name)
+    const componentProps = innerProps
+      ? { ...props, innerProps: { ...innerProps, ...dataProps } }
+      : { ...props, ...dataProps }
 
-  return <Component {...props} innerProps={{ ...(props.innerProps || {}), ...dataProps }} />
-}
+    return <Component {...componentProps} />
+  }
 
 const withDOMDataAttrs = (Component, name) => props => {
   const dataProps = useDataAttrs(props, name)
