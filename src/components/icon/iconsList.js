@@ -141,6 +141,7 @@ import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
 import line_chart from "./assets/line_chart.svg"
+import logs from "./assets/logs.svg"
 import logo_s from "./assets/logo_s.svg"
 import loading from "./assets/loading.svg"
 import magnify from "./assets/magnify.svg"
@@ -327,6 +328,7 @@ import training from "./assets/training.svg"
 import trashcan from "./assets/trashcan.svg"
 import triangle from "./assets/triangle.svg"
 import triangle_down from "./assets/triangle_down.svg"
+import top from "./assets/top.svg"
 import unknownError from "./assets/unknownError.svg"
 import universe from "./assets/universe.svg"
 import unreachable from "./assets/unreachable.svg"
@@ -509,6 +511,7 @@ export const iconsList = {
   last_week,
   line_chart,
   logo_s,
+  logs,
   loading,
   magnify,
   metrics,
@@ -696,6 +699,7 @@ export const iconsList = {
   trashcan,
   triangle,
   triangle_down,
+  top,
   unknownError,
   universe,
   unreachable,
