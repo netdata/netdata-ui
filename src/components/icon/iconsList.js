@@ -133,6 +133,7 @@ import integrationRocketChatColored from "./assets/integrations/rocketChat_color
 import integrations from "./assets/integrations.svg"
 import integrationSlack from "./assets/integrations/slack.svg"
 import integrationSlackColored from "./assets/integrations/slack_colored.svg"
+import integrationSplunk from "./assets/integrations/splunk-black.svg"
 import integrationTelegram from "./assets/integrations/telegram.svg"
 import integrationTelegramColored from "./assets/integrations/telegram_colored.svg"
 import integrationWebhook from "./assets/integrations/webhook.svg"
@@ -502,6 +503,7 @@ export const iconsList = {
   integrations,
   integrationSlack,
   integrationSlackColored,
+  integrationSplunk,
   integrationTelegram,
   integrationTelegramColored,
   integrationWebhook,
