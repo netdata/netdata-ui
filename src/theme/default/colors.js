@@ -87,7 +87,7 @@ const appColors = {
   spaceSelected: rawColors.neutral.grey175,
   spaceIdle: rawColors.neutral.grey195,
   spaceHovered: rawColors.neutral.grey180,
-  menuItem: rawColors.neutral.bluebayoux,
+  menuItem: rawColors.neutral.grey120,
   nodesViewMiniCharts: rawColors.neutral.iron,
   topBarBg: rawColors.neutral.grey190,
   elevationLevelOne: rawColors.neutral.grey185,
