@@ -161,9 +161,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("color", "#F6F7F7", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("opacity", "1", {
-      modifier: "&&",
-    })
+
     expect(button).toHaveStyleRule("pointer-events", "auto", {
       modifier: "&&",
     })
@@ -231,9 +229,7 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("color", "#00AB44", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("opacity", "1", {
-      modifier: "&&",
-    })
+
     expect(button).toHaveStyleRule("pointer-events", "auto", {
       modifier: "&&",
     })
@@ -307,9 +303,7 @@ describe("Borderless Button", () => {
     expect(button).toHaveStyleRule("color", "#00AB44", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("opacity", "1", {
-      modifier: "&&",
-    })
+
     expect(button).toHaveStyleRule("pointer-events", "auto", {
       modifier: "&&",
     })

@@ -126,7 +126,7 @@ export const StyledButton = styled.button.attrs(
     word-break: keep-all;
 
     cursor: pointer;
-    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+    ${({ disabled }) => disabled && `opacity: 0.4;`}
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
     ${margin}
@@ -176,9 +176,19 @@ export const StyledButton = styled.button.attrs(
     }
 
     .button-icon {
-      height: ${getSizeBy(2)};
-      width: ${getSizeBy(2)};
-      fill: ${props => props.colors.color(props)};
+      height: ${props =>
+        props.iconWidth
+          ? typeof props.iconWidth === "string"
+            ? props.iconWidth
+            : `${props.iconWidth}px`
+          : getSizeBy(2)(props)};
+      width: ${props =>
+        props.iconHeight
+          ? typeof props.iconHeight === "string"
+            ? props.iconHeight
+            : `${props.iconHeight}px`
+          : getSizeBy(2)(props)};
+      fill: ${props => props.colors.iconColor(props)};
     }
 
     .ntd-spinner {

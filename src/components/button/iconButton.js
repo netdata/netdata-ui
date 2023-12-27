@@ -12,7 +12,7 @@ const CustomTooltipContent = ({ content }) => (
 )
 
 const IconButton = forwardRef(
-  ({ width = "20px", height = "20px", tooltip = "", ...props }, ref) => (
+  ({ width = "14px", height = "14px", tooltip = "", ...props }, ref) => (
     <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
       <Box
         as={Button}

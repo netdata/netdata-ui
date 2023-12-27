@@ -78,7 +78,7 @@ const appColors = {
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey190,
-  mainChartBg: rawColors.transparent.full,
+  mainChartBg: rawColors.neutral.blackhaze,
   mainChartHeaderBg: rawColors.neutral.grey190,
   mainChartBorder: rawColors.neutral.grey185,
   mainChartTboxHover: rawColors.neutral.grey180,

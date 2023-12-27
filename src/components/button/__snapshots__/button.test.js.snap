@@ -20,7 +20,6 @@ exports[`Borderless Button renders 1`] = `
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
-  opacity: 1;
   pointer-events: auto;
   padding: 8px;
   -webkit-transition: all 150ms;
@@ -118,7 +117,6 @@ exports[`Button states renders loading icon 1`] = `
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
-  opacity: 1;
   pointer-events: auto;
   padding: 8px;
   -webkit-transition: all 150ms;
@@ -251,7 +249,6 @@ exports[`Button states renders only icon 1`] = `
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
-  opacity: 1;
   pointer-events: auto;
   padding: 8px;
   -webkit-transition: all 150ms;
@@ -388,7 +385,6 @@ exports[`Button states renders smaller only icon 1`] = `
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
-  opacity: 1;
   pointer-events: auto;
   padding: 4px 12px;
   -webkit-transition: all 150ms;
@@ -525,7 +521,6 @@ exports[`Default Button renders 1`] = `
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
-  opacity: 1;
   pointer-events: auto;
   padding: 8px;
   -webkit-transition: all 150ms;
@@ -619,7 +614,6 @@ exports[`Hollow Button renders 1`] = `
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
-  opacity: 1;
   pointer-events: auto;
   padding: 8px;
   -webkit-transition: all 150ms;

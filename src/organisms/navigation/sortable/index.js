@@ -4,7 +4,6 @@ import {
   closestCenter,
   DragOverlay,
   DndContext,
-  KeyboardSensor,
   MouseSensor,
   TouchSensor,
   useSensor,
@@ -12,7 +11,7 @@ import {
   defaultDropAnimationSideEffects,
   MeasuringStrategy,
 } from "@dnd-kit/core"
-import { SortableContext, sortableKeyboardCoordinates } from "@dnd-kit/sortable"
+import { SortableContext } from "@dnd-kit/sortable"
 import { defaultAnimateLayoutChanges, horizontalListSortingStrategy } from "@dnd-kit/sortable"
 import { debounce } from "throttle-debounce"
 import Flex from "@/components/templates/flex"
@@ -39,7 +38,6 @@ const Sortable = ({
   adjustScale = false,
   Container = DefaultContainer,
   collisionDetection = closestCenter,
-  coordinateGetter = sortableKeyboardCoordinates,
   dropAnimation = dropAnimationConfig,
   measuring = { droppable: { strategy: MeasuringStrategy.Always } },
   modifiers, //= [restrictToHorizontalAxis], // @dnd-kit/modifiers -> https://docs.dndkit.com/api-documentation/modifiers
@@ -59,9 +57,6 @@ const Sortable = ({
     }),
     useSensor(TouchSensor, {
       activationConstraint,
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter,
     })
   )
 

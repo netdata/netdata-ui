@@ -30,6 +30,8 @@ export const Button = forwardRef(
       onClick={isLoading ? undefined : onClick}
       ref={ref}
       iconColor={iconColor}
+      iconWidth={iconWidth}
+      iconHeight={iconHeight}
       {...rest}
     >
       {isLoading && <LoaderIcon className="button-icon" />}
