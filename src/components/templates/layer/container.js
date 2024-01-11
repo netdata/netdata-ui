@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import alignItems from "@/components/templates/mixins/alignItems"
+import alignContent from "@/components/templates/mixins/alignContent"
+import justifyContent from "@/components/templates/mixins/justifyContent"
 import getMarginDimensions from "./mixins/getMarginDimensions"
 
 const getCalc = (from, to) => {
@@ -87,6 +90,10 @@ const Container = styled.div.attrs(({ theme, margin }) => ({
   display: flex;
   outline: none;
   pointer-events: all;
+
+  ${alignItems}
+  ${alignContent}
+  ${justifyContent}
 
   ${maxHeight}
   ${maxWidth}

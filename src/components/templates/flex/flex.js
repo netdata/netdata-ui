@@ -19,7 +19,6 @@ import justifyContent from "@/components/templates/mixins/justifyContent"
 import gap from "@/components/templates/mixins/gap"
 import direction from "@/components/templates/mixins/direction"
 import border from "@/components/templates/mixins/border"
-import shadow from "@/components/templates/mixins/shadow"
 import pseudos from "@/components/templates/mixins/pseudos"
 import { fontColor } from "@/components/typography/typography"
 
@@ -54,7 +53,6 @@ const Flex = Component => styled(Component)`
   ${overflow}
   ${zIndex}
   ${cursor}
-  ${shadow}
   ${pseudos}
   ${styledSystemPosition}
   ${sx}

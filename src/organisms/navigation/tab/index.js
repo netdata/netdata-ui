@@ -26,6 +26,7 @@ const Tab = forwardRef(
       dragging,
       sorting,
       collapsed,
+      rootProps,
       ...rest
     },
     ref
@@ -87,6 +88,7 @@ const Tab = forwardRef(
         data-id={id}
         style={style}
         {...attributes}
+        {...rootProps}
       >
         <Flex>
           {closable && !isDragOverlay && (

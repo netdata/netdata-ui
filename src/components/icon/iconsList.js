@@ -34,6 +34,10 @@ import bullet_two from "./assets/bullet_two.svg"
 import calendarFull from "./assets/calendar_full.svg"
 import calendarFullPress from "./assets/calendar_full_press.svg"
 import chart_added from "./assets/chart_added.svg"
+import chart_bars from "./assets/chart_bars.svg"
+import chart_circle from "./assets/chart_circle.svg"
+import chart_gauge from "./assets/chart_gauge.svg"
+import chart_pie from "./assets/chart_pie.svg"
 import charts from "./assets/charts.svg"
 import check from "./assets/check.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
@@ -105,6 +109,8 @@ import github from "./assets/github.svg"
 import goToNode from "./assets/go_to_node.svg"
 import google from "./assets/google.svg"
 import group_by from "./assets/group_by.svg"
+import h1 from "./assets/h1.svg"
+import h2 from "./assets/h2.svg"
 import hamburger from "./assets/hamburger.svg"
 import help from "./assets/help.svg"
 import hide from "./assets/hide.svg"
@@ -145,6 +151,7 @@ import line_chart from "./assets/line_chart.svg"
 import logs from "./assets/logs.svg"
 import logo_s from "./assets/logo_s.svg"
 import loading from "./assets/loading.svg"
+import long_arrow_up from "./assets/long_arrow_up.svg"
 import magnify from "./assets/magnify.svg"
 import metrics from "./assets/metrics.svg"
 import metrics_explorer from "./assets/metrics_explorer.svg"
@@ -340,6 +347,7 @@ import upload from "./assets/upload.svg"
 import user from "./assets/user.svg"
 import userPress from "./assets/user_press.svg"
 import users from "./assets/users.svg"
+import value from "./assets/value.svg"
 import view_list from "./assets/view_list.svg"
 import viewSingleNode from "./assets/views/single_node_view.svg"
 import viewSingleNodePress from "./assets/views/single_node_view_press.svg"
@@ -402,6 +410,10 @@ export const iconsList = {
   calendarFull,
   calendarFullPress,
   chart_added,
+  chart_bars,
+  chart_circle,
+  chart_gauge,
+  chart_pie,
   charts,
   charts_view,
   check,
@@ -475,6 +487,8 @@ export const iconsList = {
   google,
   goToNode,
   group_by,
+  h1,
+  h2,
   hamburger,
   help,
   hide,
@@ -515,6 +529,7 @@ export const iconsList = {
   logo_s,
   logs,
   loading,
+  long_arrow_up,
   magnify,
   metrics,
   metrics_explorer,
@@ -712,6 +727,7 @@ export const iconsList = {
   user,
   userPress,
   users,
+  value,
   view_list,
   viewSingleNode,
   viewSingleNodePress,

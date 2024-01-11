@@ -92,7 +92,10 @@ export { default as News } from "./organisms/news"
 export { default as NavigationTabs } from "./organisms/navigation/tabs"
 export { default as NavigationTab } from "./organisms/navigation/tab"
 export { default as TabSeparator } from "./organisms/navigation/tab/tabSeparator"
-export { default as DraggableTabs } from "./organisms/navigation/sortable"
+export {
+  default as DraggableTabs,
+  BaseSortable as BaseDraggableTabs,
+} from "./organisms/navigation/sortable"
 export { default as useNavigationArrows } from "./organisms/navigation/hooks/useNavigationArrows"
 
 export { default as Intersection } from "./components/intersection"

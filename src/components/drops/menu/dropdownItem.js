@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { getColor } from "@/theme"
+import { getColor, getRgbColor } from "@/theme"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
 
@@ -12,11 +12,29 @@ export const ItemContainer = styled(Flex).attrs({
   cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   alignitems: ${({ alignItems }) => alignItems ?? "center"};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  pointer-events: ${({ disabled, selected }) => (disabled || selected ? "none" : "auto")};
 
   &:hover {
     background-color: ${props => getColor("borderSecondary")(props)};
   }
+  ${({ justDesc, theme }) =>
+    justDesc &&
+    `
+    pointer-events: none;
+    border-top: 1px solid ${getColor("borderSecondary")({ theme })};
+    & > * {
+      color: ${getColor("textLite")({ theme })}
+    }
+  `}
+  ${({ selected, theme }) =>
+    selected &&
+    `
+    background-color: ${
+      theme.name === "Dark"
+        ? getRgbColor(["green", "netdata"], 0.3)({ theme })
+        : getRgbColor(["green", "frostee"])({ theme })
+    }
+  `}
 `
 
 const DropdownItem = ({
@@ -38,7 +56,8 @@ const DropdownItem = ({
     <ItemContainer
       data-index={index}
       aria-selected={selected}
-      disabled={disabled || selected}
+      disabled={disabled}
+      selected={selected}
       onClick={onSelect}
       {...restItem}
       {...rest}

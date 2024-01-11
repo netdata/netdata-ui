@@ -25,6 +25,10 @@ const SortableItem = ({
     id,
     animateLayoutChanges,
     disabled: !draggable,
+    data: {
+      sortable: true,
+      navigationTab: true,
+    },
   })
 
   const style = {

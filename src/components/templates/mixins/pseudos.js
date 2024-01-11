@@ -1,6 +1,5 @@
 import background from "@/components/templates/mixins/background"
 import borderMixIn from "@/components/templates/mixins/border"
-import shadow from "@/components/templates/mixins/shadow"
 import { getColor } from "@/theme"
 import alignItems from "@/components/templates/mixins/alignItems"
 
@@ -13,7 +12,6 @@ const fontColor = ({ theme, color }) => {
 const clearEmptyLines = str => str.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, "")
 
 const transforms = {
-  boxShadow: shadow,
   border: borderMixIn,
   background: background,
   color: fontColor,

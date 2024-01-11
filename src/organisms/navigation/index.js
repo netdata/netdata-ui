@@ -1,5 +1,5 @@
 export { default as Tab } from "./tab"
 export { default as Tabs } from "./tabs"
-export { default as DraggableTabs } from "./sortable"
+export { default as DraggableTabs, BaseSortable as BaseDraggableTabs } from "./sortable"
 export { default as TabSeparator } from "./tab/tabSeparator"
 export { default as Sortable } from "./sortable"

@@ -15,7 +15,6 @@ import background from "@/components/templates/mixins/background"
 import alignContent from "@/components/templates/mixins/alignContent"
 import gap from "@/components/templates/mixins/gap"
 import border from "@/components/templates/mixins/border"
-import shadow from "@/components/templates/mixins/shadow"
 import pseudos from "@/components/templates/mixins/pseudos"
 //styled system custom
 import { position as styledSystemPosition } from "styled-system"
@@ -43,7 +42,6 @@ const Box = Component => styled(Component)`
   ${overflow}
   ${zIndex}
   ${cursor}
-  ${shadow}
   ${pseudos}
   ${styledSystemPosition}
   ${sx}

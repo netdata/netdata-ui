@@ -36,7 +36,7 @@ const Layer = ({
       margin={margin}
       borderShadow={borderShadow}
       data-testid="layer-container"
-      {...(backdrop ? {} : { ...rest })}
+      {...rest}
     >
       {children}
     </Container>
