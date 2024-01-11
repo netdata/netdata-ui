@@ -34,33 +34,25 @@ const dropAnimationConfig = {
   }),
 }
 
-const Sortable = ({
-  activationConstraint,
-  animateLayoutChanges = args => defaultAnimateLayoutChanges({ ...args, wasDragging: true }),
-  adjustScale = false,
-  Container = DefaultContainer,
-  collisionDetection = closestCenter,
-  dropAnimation = dropAnimationConfig,
-  measuring = { droppable: { strategy: MeasuringStrategy.Always } },
-  modifiers, //= [restrictToHorizontalAxis], // @dnd-kit/modifiers -> https://docs.dndkit.com/api-documentation/modifiers
-  strategy = horizontalListSortingStrategy,
-  onDragEnd,
-  onTabClose,
-  onResize,
-  items,
-  Item,
-  parentRef,
-  collapsed,
-}) => {
-  const [activeId, setActiveId] = useState(null)
-  const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint,
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint,
-    })
-  )
+export const BaseSortable = forwardRef(
+  (
+    {
+      animateLayoutChanges = args => defaultAnimateLayoutChanges({ ...args, wasDragging: true }),
+      adjustScale = false,
+      Container = DefaultContainer,
+      dropAnimation = dropAnimationConfig,
+      strategy = horizontalListSortingStrategy,
+      onDragEnd,
+      onTabClose,
+      onResize,
+      items,
+      Item,
+      parentRef,
+      collapsed,
+    },
+    ref
+  ) => {
+    const [activeId, setActiveId] = useState(null)
 
     const getIndex = id => items.findIndex(item => item.id === id)
     const activeIndex = activeId !== null ? getIndex(activeId) : -1
