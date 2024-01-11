@@ -10,7 +10,7 @@ export const ItemContainer = styled(Flex).attrs({
   padding: [1, 4],
 })`
   cursor: ${({ cursor }) => cursor ?? "pointer"};
-  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+  opacity: ${({ disabled, selected }) => (selected ? 0.9 : disabled ? 0.4 : 1)};
   alignitems: ${({ alignItems }) => alignItems ?? "center"};
   pointer-events: ${({ disabled, selected }) => (disabled || selected ? "none" : "auto")};
 
@@ -56,7 +56,7 @@ const DropdownItem = ({
     <ItemContainer
       data-index={index}
       aria-selected={selected}
-      disabled={disabled}
+      disabled={disabled || selected}
       selected={selected}
       onClick={onSelect}
       {...restItem}
