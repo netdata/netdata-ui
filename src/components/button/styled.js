@@ -41,7 +41,7 @@ const getBorderColor = props =>
   props.neutral ? getColor("generic")(props) : getColor("primary")(props)
 const getTextColor = props =>
   props.neutral
-    ? getColor(props.flavour === HOLLOW ? "textFocus" : "mainBackground")(props)
+    ? getColor(props.flavour === HOLLOW ? "text" : "mainBackground")(props)
     : getColor(props.flavour === HOLLOW ? "secondaryColor" : "mainBackground")(props)
 const getHoverColor = props =>
   props.neutral ? getColor("generic")(props) : getColor("accent")(props)
