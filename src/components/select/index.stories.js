@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import Select from "."
 
 const options = [
@@ -9,7 +9,13 @@ const options = [
   { label: "Five", value: "five" },
 ]
 
-export const Basic = args => <Select {...args} />
+export const Basic = args => {
+  const onChange = useCallback(e => console.log(`On change: ${JSON.stringify(e)}`), [])
+
+  const onCreateOption = useCallback(e => console.log(`On create: ${JSON.stringify(e)}`), [])
+
+  return <Select onChange={onChange} onCreateOption={onCreateOption} {...args} />
+}
 
 export default {
   component: Select,
