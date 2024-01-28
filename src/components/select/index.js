@@ -1,6 +1,7 @@
 import React, { useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
+import Creatable from "react-select/creatable"
 
 const useDataAttrs = (props, name) => {
   const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
@@ -185,11 +186,19 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   ...providedStyles,
 })
 
-const Select = styled(ReactSelect).attrs(props => ({
+const getAttrs = props => ({
   ...props,
   components: { ...customComponents, ...props.components },
   theme: makeCustomTheme(props.theme),
   styles: makeCustomStyles(props.theme, props.styles),
-}))``
+})
+
+const SelectComponent = styled(ReactSelect).attrs(getAttrs)``
+const CreatableComponent = styled(Creatable).attrs(getAttrs)``
+
+const Select = ({ isCreatable, ...props }) => {
+  const Component = isCreatable ? CreatableComponent : SelectComponent
+  return <Component {...props} />
+}
 
 export default Select
