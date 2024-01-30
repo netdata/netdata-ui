@@ -116,10 +116,10 @@ const appColors = {
 
   //Table
   dropdownTable: rawColors.neutral.eerieBlack,
-  tableRowBgHover: rawColors.neutral.grey50,
+  tableRowBgHover: rawColors.neutral.grey35,
   tableRowBg: rawColors.neutral.grey10,
-  tableRowBg2: rawColors.neutral.grey40,
-  tableRowBg2Hover: rawColors.neutral.grey50,
+  tableRowBg2: rawColors.neutral.grey20,
+  tableRowBg2Hover: rawColors.neutral.grey35,
   columnHighlight: rawColors.green.green30,
 
   //Progress Bare
