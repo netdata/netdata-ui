@@ -87,6 +87,7 @@ import dashboard from "./assets/dashboard.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
 import dashboards from "./assets/dashboards.svg"
 import disk from "./assets/disk.svg"
+import discoveredConfig from "./assets/discovered_config.svg"
 import documentation from "./assets/documentation.svg"
 import dot from "./assets/dot.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
@@ -470,6 +471,7 @@ export const iconsList = {
   dashboard_add,
   dashboards,
   disk,
+  discoveredConfig,
   documentation,
   dot,
   dots_2x3,
