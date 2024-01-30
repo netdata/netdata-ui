@@ -92,6 +92,7 @@ import dot from "./assets/dot.svg"
 import dots_2x3 from "./assets/dots_2x3.svg"
 import download from "./assets/download.svg"
 import dragHorizontal from "./assets/drag_horizontal.svg"
+import dynamicConfig from "./assets/dynamic_config.svg"
 import edit from "./assets/edit.svg"
 import error from "./assets/error.svg"
 import exclamation from "./assets/exclamation.svg"
@@ -137,6 +138,7 @@ import integrationPagerdutyColored from "./assets/integrations/pagerduty_colored
 import integrationRocketChat from "./assets/integrations/rocketChat.svg"
 import integrationRocketChatColored from "./assets/integrations/rocketChat_colored.svg"
 import integrations from "./assets/integrations.svg"
+import internalConfig from "./assets/internal_config.svg"
 import integrationSlack from "./assets/integrations/slack.svg"
 import integrationSlackColored from "./assets/integrations/slack_colored.svg"
 import integrationSplunk from "./assets/integrations/splunk-black.svg"
@@ -327,6 +329,7 @@ import sort_indicator from "./assets/sort_indicator.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import spaces_v2 from "./assets/spaces_v2.svg"
+import stockConfig from "./assets/stock_config.svg"
 import switch_off from "./assets/switch_off.svg"
 import system_overview from "./assets/system_overview.svg"
 import systemOverviewPress from "./assets/system_overview_press.svg"
@@ -346,6 +349,7 @@ import unreachableNode from "./assets/unreachableNode.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import upload from "./assets/upload.svg"
+import userConfig from "./assets/user_config.svg"
 import user from "./assets/user.svg"
 import userPress from "./assets/user_press.svg"
 import users from "./assets/users.svg"
@@ -471,6 +475,7 @@ export const iconsList = {
   dots_2x3,
   download,
   dragHorizontal,
+  dynamicConfig,
   edit,
   error,
   exclamation,
@@ -517,6 +522,7 @@ export const iconsList = {
   integrationRocketChat,
   integrationRocketChatColored,
   integrations,
+  internalConfig,
   integrationSlack,
   integrationSlackColored,
   integrationSplunk,
@@ -709,6 +715,7 @@ export const iconsList = {
   space,
   space_new,
   spaces_v2,
+  stockConfig,
   switch_off,
   system_overview,
   systemOverviewPress,
@@ -728,6 +735,7 @@ export const iconsList = {
   update,
   update_pending,
   upload,
+  userConfig,
   user,
   userPress,
   users,
