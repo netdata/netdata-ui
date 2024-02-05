@@ -3,7 +3,7 @@ import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { Input, LabelText } from "./styled"
 
-const Error = ({ error } = {}) => {
+const Error = ({ error }) => {
   const errorMessage = error === true ? "invalid" : error
 
   return typeof errorMessage === "string" ? (
