@@ -3,6 +3,16 @@ import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { Input, LabelText } from "./styled"
 
+const Error = ({ error }) => {
+  const errorMessage = error === true ? "invalid" : error
+
+  return typeof errorMessage === "string" ? (
+    <TextMicro color="errorText">{errorMessage}</TextMicro>
+  ) : (
+    !!errorMessage && errorMessage
+  )
+}
+
 export const TextInput = ({
   error,
   disabled,
@@ -21,10 +31,9 @@ export const TextInput = ({
   size = "large",
   containerStyles,
   inputContainerStyles,
+  hideErrorMessage,
   ...props
 }) => {
-  const errorMessage = error === true ? "invalid" : error
-
   return (
     <Flex gap={0.5} column className={className} {...containerStyles} as="label">
       {typeof label === "string" ? <LabelText size={size}>{label}</LabelText> : label}
@@ -61,11 +70,7 @@ export const TextInput = ({
         )}
       </Flex>
       {typeof hint === "string" ? <TextMicro color="textLite">{hint}</TextMicro> : !!hint && hint}
-      {typeof errorMessage === "string" ? (
-        <TextMicro color="errorText">{errorMessage}</TextMicro>
-      ) : (
-        !!errorMessage && errorMessage
-      )}
+      {!hideErrorMessage ? <Error error={error} /> : null}
     </Flex>
   )
 }
