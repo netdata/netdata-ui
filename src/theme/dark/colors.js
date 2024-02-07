@@ -61,7 +61,7 @@ const appColors = {
 
   attention: rawColors.purple.mauve,
   attentionSecondary: rawColors.purple.daisy,
-  separator: rawColors.neutral.borderSecondary,
+  separator: rawColors.neutral.grey35,
   controlFocused: rawColors.neutral.white,
   selected: rawColors.neutral.grey55,
   highlight: rawColors.neutral.grey55,

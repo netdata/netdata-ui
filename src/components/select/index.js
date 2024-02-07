@@ -79,7 +79,7 @@ const makeCustomTheme = theme => selectTheme => {
       primary75: theme.colors.tooltip,
       danger: theme.colors.text,
       dangerLight: theme.colors.border,
-      neutral0: theme.colors.mainBackground,
+      neutral0: theme.colors.dropdown,
       neutral5: theme.colors.mainBackgroundDisabled,
       neutral30: theme.colors.controlFocused,
       neutral60: theme.colors.border,
