@@ -185,6 +185,7 @@ import nodes_hollow from "./assets/nodes_hollow.svg"
 import none_selected from "./assets/none_selected.svg"
 import notification_shortcut_enabled from "./assets/notification_shortcut_enabled.svg"
 import notification_shortcut_disabled from "./assets/notification_shortcut_disabled.svg"
+import notificationTrigger from "./assets/notification_trigger.svg"
 import os from "./assets/os/os.svg"
 import osAlpineLinux from "./assets/os/alpine_linux.svg"
 import osAmazonLinux from "./assets/os/amazon_linux.svg"
@@ -573,6 +574,7 @@ export const iconsList = {
   notification,
   notification_shortcut_enabled,
   notification_shortcut_disabled,
+  notificationTrigger,
   os,
   osAlpineLinux,
   osAmazonLinux,
