@@ -24,6 +24,7 @@ import HeaderActions from "./header/actions"
 import Body from "./body"
 import usePinning from "./usePinning"
 import useVisibility from "./useVisibility"
+import useSizing from "./useSizing"
 import useExpanding from "./useExpanding"
 import usePaginating from "./usePaginating"
 import useSearching from "./useSearching"
@@ -56,6 +57,10 @@ const Table = memo(
         enableColumnVisibility,
         columnVisibility: defaultColumnVisibility,
         onColumnVisibilityChange: visibilityChangeCb,
+
+        enableColumnSizing,
+        columnSizing: defaultColumnSizing,
+        onColumnSizingChange: sizingChangeCb,
 
         enablePagination,
         enableResizing,
@@ -101,6 +106,8 @@ const Table = memo(
         visibilityChangeCb
       )
 
+      const [columnSizing, onColumnSizingChange] = useSizing(defaultColumnSizing, sizingChangeCb)
+
       const [columnPinning, onColumnPinningChange] = usePinning(
         defaultColumnPinning,
         pinningChangeCb
@@ -138,6 +145,7 @@ const Table = memo(
         filterFns,
         state: {
           columnVisibility,
+          columnSizing,
           rowSelection,
           globalFilter: enableCustomSearch ? "" : globalFilter,
           sorting,
@@ -167,10 +175,12 @@ const Table = memo(
         getSubRows: useCallback(row => row.children, []),
         onPaginationChange,
         onColumnVisibilityChange,
+        onColumnSizingChange,
         onColumnPinningChange,
         enableSubRowSelection,
         columnGroupingMode: "reorder",
       })
+
       const prevStateRef = useRef(table.getState())
       table.isEqual = (selector = identity) => {
         if (!prevStateRef.current) {
@@ -179,6 +189,7 @@ const Table = memo(
         }
 
         const areStatesEqual = isEqual(selector(prevStateRef.current), selector(table.getState()))
+
         prevStateRef.current = table.getState()
         return areStatesEqual
       }
