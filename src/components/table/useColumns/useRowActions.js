@@ -72,12 +72,25 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       cell: ({ row, table }) => (
         <Flex data-testid="action-cell" height="100%" gap={2} justifyContent="end">
           {availableRowActions.map(
-            ({ id, handleAction, isDisabled, isVisible = true, dataGa, ...rest }) => (
+            ({
+              id,
+              handleAction,
+              isDisabled,
+              isVisible = true,
+              dataGa,
+              disabledTooltipText,
+              ...rest
+            }) => (
               <Action
                 {...rest}
                 disabled={typeof isDisabled === "function" ? isDisabled(row.original) : isDisabled}
                 visible={typeof isVisible === "function" ? isVisible(row.original) : isVisible}
                 dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
+                disabledTooltipText={
+                  typeof disabledTooltipText === "function"
+                    ? disabledTooltipText(row.original)
+                    : disabledTooltipText
+                }
                 key={id}
                 id={id}
                 handleAction={() => handleAction(row.original, table)}

@@ -16,6 +16,7 @@ const HeaderAction = forwardRef(
       table,
       tooltipText,
       alwaysEnabled,
+      disabledTooltipText,
       ...rest
     },
     ref
@@ -37,6 +38,11 @@ const HeaderAction = forwardRef(
         disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
         background="elementBackground"
         selectedRows={selectedRows}
+        disabledTooltipText={
+          typeof disabledTooltipText === "function"
+            ? disabledTooltipText(selectedRows)
+            : disabledTooltipText
+        }
         {...rest}
       />
     )
