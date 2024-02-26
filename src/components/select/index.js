@@ -150,6 +150,10 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   option: (styles, state) => ({
     ...styles,
     color: getOptionColor(theme, state),
+    ":hover": {
+      backgroundColor: theme.colors.dropdown,
+      color: theme.colors.bright,
+    },
     ...(size === "tiny" ? { fontSize: "12px", minHeight: 28, padding: "4px 8px" } : {}),
   }),
   placeholder: styles => ({
