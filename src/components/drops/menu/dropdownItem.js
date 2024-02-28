@@ -4,14 +4,14 @@ import { getColor, getRgbColor } from "@/theme"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
 
-export const ItemContainer = styled(Flex).attrs({
+export const ItemContainer = styled(Flex).attrs(props => ({
   as: "li",
   role: "option",
   padding: [1, 4],
-})`
+  ...props,
+}))`
   cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled, selected }) => (selected ? 0.9 : disabled ? 0.4 : 1)};
-  alignitems: ${({ alignItems }) => alignItems ?? "center"};
   pointer-events: ${({ disabled, selected }) => (disabled || selected ? "none" : "auto")};
 
   &:hover {

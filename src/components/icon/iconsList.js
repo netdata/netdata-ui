@@ -246,6 +246,7 @@ import room_new from "./assets/room_new.svg"
 import room_overview from "./assets/room_overview.svg"
 import sad from "./assets/sad.svg"
 import save from "./assets/save.svg"
+import save2 from "./assets/save2.svg"
 import scheduled from "./assets/scheduled.svg"
 import search from "./assets/search.svg"
 import search_s from "./assets/search_s.svg"
@@ -636,6 +637,7 @@ export const iconsList = {
   room_overview,
   sad,
   save,
+  save2,
   scheduled,
   search,
   search_s,
@@ -657,6 +659,7 @@ export const iconsList = {
   serviceDotNet,
   serviceEBPF,
   serviceElasticSearch,
+  serviceExample,
   serviceFreeNAS,
   serviceHAProxy,
   serviceHTTPCheck,
