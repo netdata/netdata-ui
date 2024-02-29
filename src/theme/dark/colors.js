@@ -64,6 +64,7 @@ const appColors = {
   separator: rawColors.neutral.grey35,
   controlFocused: rawColors.neutral.white,
   selected: rawColors.neutral.grey55,
+  selectedStrong: rawColors.neutral.white,
   highlight: rawColors.neutral.grey55,
   tooltip: rawColors.neutral.outerSpace,
   bright: rawColors.neutral.white,
