@@ -92,7 +92,7 @@ const makeCustomTheme = theme => selectTheme => {
 
 const getOptionColor = (theme, state) => {
   if (state.isDisabled) return theme.colors.placeholder
-  if (state.isSelected) return theme.colors.bright
+  if (state.isSelected) return theme.colors.selectedStrong
   return theme.colors.textDescription
 }
 
@@ -152,7 +152,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
     color: getOptionColor(theme, state),
     ":hover": {
       backgroundColor: theme.colors.dropdown,
-      color: theme.colors.bright,
+      color: theme.colors.selectedStrong,
     },
     ...(size === "tiny" ? { fontSize: "12px", minHeight: 28, padding: "4px 8px" } : {}),
   }),
