@@ -2,6 +2,8 @@ import React, { useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
+import { Icon } from "@/components/icon"
+import { TextSmall } from "@/components/typography"
 
 const useDataAttrs = (props, name) => {
   const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
@@ -38,6 +40,21 @@ const withDOMDataAttrs = (Component, name) => props => {
   return <Component {...props} {...dataProps} />
 }
 
+const OriginalOption = defaultComponents.Option
+
+const Option = props => {
+  if (props.data.icon) {
+    return (
+      <OriginalOption {...props}>
+        <Icon name={props.data.icon} color="textLite" margin={[0, 1, 0, 0]} />
+        <span>{props.data.label}</span>
+      </OriginalOption>
+    )
+  }
+
+  return <OriginalOption {...props} />
+}
+
 const customComponents = {
   ...defaultComponents,
   ClearIndicator: withDataAttrs(defaultComponents.ClearIndicator, "ClearIndicator"),
@@ -60,7 +77,7 @@ const customComponents = {
   MultiValueLabel: withDataAttrs(defaultComponents.MultiValueLabel, "MultiValueLabel"),
   MultiValueRemove: withDataAttrs(defaultComponents.MultiValueRemove, "MultiValueRemove"),
   NoOptionsMessage: withDataAttrs(defaultComponents.NoOptionsMessage, "NoOptionsMessage"),
-  Option: withDataAttrs(defaultComponents.Option, "Option"),
+  Option: withDataAttrs(Option, "Option"),
   Placeholder: withDataAttrs(defaultComponents.Placeholder, "Placeholder"),
   SelectContainer: withDataAttrs(defaultComponents.SelectContainer, "SelectContainer"),
   SingleValue: withDataAttrs(defaultComponents.SingleValue, "SingleValue"),
@@ -92,7 +109,7 @@ const makeCustomTheme = theme => selectTheme => {
 
 const getOptionColor = (theme, state) => {
   if (state.isDisabled) return theme.colors.placeholder
-  if (state.isSelected) return theme.colors.bright
+  if (state.isSelected) return theme.colors.text
   return theme.colors.textDescription
 }
 
@@ -149,10 +166,12 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   }),
   option: (styles, state) => ({
     ...styles,
+    display: "flex",
+    alignItems: "center",
     color: getOptionColor(theme, state),
     ":hover": {
-      backgroundColor: theme.colors.dropdown,
-      color: theme.colors.bright,
+      backgroundColor: theme.colors.secondaryHighlight,
+      color: theme.colors.text,
     },
     ...(size === "tiny" ? { fontSize: "12px", minHeight: 28, padding: "4px 8px" } : {}),
   }),
