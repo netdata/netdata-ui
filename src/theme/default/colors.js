@@ -66,7 +66,8 @@ const appColors = {
   selected: rawColors.neutral.grey180,
   highlight: rawColors.neutral.grey180,
 
-  tooltip: rawColors.neutral.shark,
+  tooltip: rawColors.neutral.grey180,
+  tooltipText: rawColors.neutral.grey100,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.grey100,
   textLite: rawColors.neutral.grey120,
