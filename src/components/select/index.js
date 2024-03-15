@@ -3,7 +3,6 @@ import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
 import { Icon } from "@/components/icon"
-import { TextSmall } from "@/components/typography"
 
 const useDataAttrs = (props, name) => {
   const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
@@ -109,8 +108,12 @@ const makeCustomTheme = theme => selectTheme => {
 
 const getOptionColor = (theme, state) => {
   if (state.isDisabled) return theme.colors.placeholder
-  if (state.isSelected) return theme.colors.text
-  return theme.colors.textDescription
+  return theme.colors.text
+}
+
+const getOptionBackground = (theme, state) => {
+  if (state.isSelected) return theme.colors.menuItemSelected
+  return null
 }
 
 const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => ({
@@ -169,6 +172,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
     display: "flex",
     alignItems: "center",
     color: getOptionColor(theme, state),
+    backgroundColor: getOptionBackground(theme, state),
     ":hover": {
       backgroundColor: theme.colors.secondaryHighlight,
       color: theme.colors.text,

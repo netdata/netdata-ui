@@ -18,7 +18,7 @@ const appColors = {
   modalTabsBackground: rawColors.neutral.grey20,
   modalBackground: rawColors.neutral.grey30,
   modalInfoBackground: rawColors.neutral.grey50,
-  menuItemSelected: rawColors.green.green20,
+  menuItemSelected: rawColors.green.green30,
   menuItemHover: rawColors.green.green10,
   //links
   link: rawColors.green.green110,
