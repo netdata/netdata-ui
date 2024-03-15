@@ -32,13 +32,14 @@ const Content = ({ children }) => {
 
 const RadioButtons = ({ items, checked, buttonProps = {}, onChange }) => (
   <>
-    {items.map(({ label, value }, index) => {
+    {items.map(({ label, value, title }, index) => {
       const buttonGroupProps = getButtonGroupProps(index, items.length)
       return (
         <Button
           key={value}
           label={label}
           onClick={() => onChange(value)}
+          {...(title ? { title } : {})}
           {...(checked != value ? { flavour: "hollow" } : {})}
           {...buttonGroupProps}
           {...buttonProps}
