@@ -30,7 +30,7 @@ const Content = ({ children }) => {
   )
 }
 
-const RadioButtons = ({ items, checked, onChange }) => (
+const RadioButtons = ({ items, checked, buttonProps = {}, onChange }) => (
   <>
     {items.map(({ label, value }, index) => {
       const buttonGroupProps = getButtonGroupProps(index, items.length)
@@ -41,16 +41,17 @@ const RadioButtons = ({ items, checked, onChange }) => (
           onClick={() => onChange(value)}
           {...(checked != value ? { flavour: "hollow" } : {})}
           {...buttonGroupProps}
+          {...buttonProps}
         />
       )
     })}
   </>
 )
 
-export const ButtonGroup = ({ items, checked, onChange, children, ...props }) => (
+export const ButtonGroup = ({ items, checked, onChange, children, buttonProps, ...props }) => (
   <Flex alignItems="center" {...props}>
     {items?.length ? (
-      <RadioButtons items={items} checked={checked} onChange={onChange} />
+      <RadioButtons items={items} checked={checked} onChange={onChange} buttonProps={buttonProps} />
     ) : (
       <Content>{children}</Content>
     )}
