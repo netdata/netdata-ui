@@ -77,7 +77,7 @@ const appColors = {
   sectionTitle: rawColors.neutral.grey155,
   sectionDescription: rawColors.neutral.grey150,
   menuItem: rawColors.neutral.grey140,
-  placeholder: rawColors.neutral.grey140,
+  placeholder: rawColors.neutral.grey110,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey25,
