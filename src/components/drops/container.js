@@ -15,7 +15,7 @@ const Container = forwardRef(
       margin={margin}
     >
       <Flex background={background} padding={[1, 2]} round column {...rest}>
-        {typeof children === "string" ? <Text color="bright">{children}</Text> : children}
+        {typeof children === "string" ? <Text color="tooltipText">{children}</Text> : children}
       </Flex>
       {align && (
         <Icon

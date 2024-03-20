@@ -7,7 +7,7 @@ import { Button } from "./button"
 
 const CustomTooltipContent = ({ content }) => (
   <Flex padding={[1.5, 2]} margin={[2]} background="tooltip" round={1} alignSelf="start">
-    <TextSmall color="bright">{content}</TextSmall>
+    <TextSmall color="tooltipText">{content}</TextSmall>
   </Flex>
 )
 
