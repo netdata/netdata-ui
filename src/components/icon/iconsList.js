@@ -186,7 +186,7 @@ import none_selected from "./assets/none_selected.svg"
 import notification_shortcut_enabled from "./assets/notification_shortcut_enabled.svg"
 import notification_shortcut_disabled from "./assets/notification_shortcut_disabled.svg"
 import notificationTrigger from "./assets/notification_trigger.svg"
-import okta from "./assets/okta.svg"
+import octa from "./assets/okta.svg"
 import os from "./assets/os/os.svg"
 import osAlpineLinux from "./assets/os/alpine_linux.svg"
 import osAmazonLinux from "./assets/os/amazon_linux.svg"
@@ -578,7 +578,7 @@ export const iconsList = {
   notification_shortcut_enabled,
   notification_shortcut_disabled,
   notificationTrigger,
-  okta,
+  octa,
   os,
   osAlpineLinux,
   osAmazonLinux,
