@@ -67,7 +67,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
           ? false
           : header.colSpan
       }
-      width={`${column.getSize()}px`}
+      width={`${header.subHeaders.length ? header.subHeaders.reduce((s, h) => s + h.column.getSize(), 0) : column.getSize()}px`}
       position="relative"
       {...(column.getCanSort() &&
         coloredSortedColumn &&

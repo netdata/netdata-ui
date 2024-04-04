@@ -3,13 +3,16 @@ import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
 import Cell from "./cell"
 
-const rerenderSelector = state => ({
-  sizing: state.columnSizing,
-  expanded: state.expanded,
-  columnVisibility: state.columnVisibility,
-  selectedRows: state.selectedRows,
-  grouping: state.grouping,
-})
+const rerenderSelector = state => {
+  return {
+    sizing: state.columnSizing,
+    expanded: state.expanded,
+    columnVisibility: state.columnVisibility,
+    selectedRows: state.selectedRows,
+    grouping: state.grouping,
+    columnsCount: state.table && state.table.getAllColumns().length,
+  }
+}
 
 const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
   <Flex
@@ -39,6 +42,7 @@ const HeaderGroups = ({ groups, size, side, ...rest }) => {
       zIndex={side ? 11 : undefined}
       width={`${size}px`}
       flex="grow"
+      column
     >
       {groups.map(headerGroup => (
         <HeaderGroup headerGroup={headerGroup} key={headerGroup.id} {...rest} />
