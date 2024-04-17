@@ -8,7 +8,13 @@ export default () => {
   }, [])
 
   useLayoutEffect(() => {
-    return () => document.body.removeChild(el)
+    return () => {
+      try {
+        document.body.removeChild(el)
+      } catch (e) {
+        // Do nothing
+      }
+    }
   }, [])
 
   return el
