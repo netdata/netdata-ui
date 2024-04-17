@@ -39,7 +39,15 @@ const rerenderSelector = state => ({
   selecting: state.selectedRows,
 })
 
-const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index }) => {
+const BodyHeaderCell = ({
+  header,
+  table,
+  testPrefix,
+  coloredSortedColumn,
+  index,
+  children,
+  isSubheader,
+}) => {
   useTableState(rerenderSelector)
 
   const { column } = header
@@ -75,7 +83,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
           background: "columnHighlight",
           backgroundOpacity: "0.2",
         })}
-      padding={[1, 2]}
+      padding={isSubheader ? [0] : [1, 2]}
       {...headStyles}
       column
     >
@@ -90,7 +98,12 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
         >
           <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
           {column.isPlaceholder ? null : (
-            <Label sorting={column.getIsSorted()} sortable={column.getCanSort()}>
+            <Label
+              as={column.columnDef.labelAs}
+              {...column.columnDef.labelProps}
+              sorting={column.getIsSorted()}
+              sortable={column.getCanSort()}
+            >
               {flexRender(column.columnDef.header, header.getContext())}
             </Label>
           )}
@@ -99,6 +112,7 @@ const BodyHeaderCell = ({ header, table, testPrefix, coloredSortedColumn, index 
       </Flex>
       <Info meta={meta} />
       <ResizeHandler header={header} table={table} />
+      {children}
     </Flex>
   )
 }

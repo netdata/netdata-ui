@@ -14,18 +14,25 @@ const rerenderSelector = state => {
   }
 }
 
-const HeaderGroup = ({ headerGroup, testPrefix, ...rest }) => (
-  <Flex
-    id={headerGroup.id}
-    data-testid={`netdata-table-headRow${testPrefix}`}
-    flex
-    background="tableRowBg2"
-  >
-    {headerGroup.headers.map((header, index) => (
-      <Cell key={header.id} index={index} {...rest} header={header} testPrefix={testPrefix} />
-    ))}
-  </Flex>
-)
+const HeaderGroup = ({ id, headers, testPrefix, ...rest }) => {
+  return (
+    <Flex id={id} data-testid={`netdata-table-headRow${testPrefix}`} flex background="tableRowBg2">
+      {headers.map((header, index) => (
+        <Cell key={header.id} index={index} {...rest} header={header} testPrefix={testPrefix}>
+          {!!header.subHeaders.length && (
+            <HeaderGroup
+              headers={header.subHeaders}
+              id={header.id}
+              key={header.id}
+              {...rest}
+              isSubheader
+            />
+          )}
+        </Cell>
+      ))}
+    </Flex>
+  )
+}
 
 const HeaderGroups = ({ groups, size, side, ...rest }) => {
   if (!groups[0].headers.length) return null
@@ -44,9 +51,7 @@ const HeaderGroups = ({ groups, size, side, ...rest }) => {
       flex="grow"
       column
     >
-      {groups.map(headerGroup => (
-        <HeaderGroup headerGroup={headerGroup} key={headerGroup.id} {...rest} />
-      ))}
+      <HeaderGroup headers={groups[0].headers} id={groups[0].id} key={groups[0].id} {...rest} />
     </Flex>
   )
 }

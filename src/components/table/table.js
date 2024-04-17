@@ -97,6 +97,7 @@ const Table = memo(
         virtualizeOptions,
         tableRef,
         className,
+        width,
         ...rest
       },
       ref
@@ -219,6 +220,7 @@ const Table = memo(
           flex="1"
           ref={ref}
           className={className}
+          width={width}
         >
           <Header
             q={globalFilter}
