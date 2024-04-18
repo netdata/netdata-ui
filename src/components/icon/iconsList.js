@@ -147,6 +147,8 @@ import integrationTeams from "./assets/integrations/teams.svg"
 import integrationTeamsColored from "./assets/integrations/teams_colored.svg"
 import integrationTelegram from "./assets/integrations/telegram.svg"
 import integrationTelegramColored from "./assets/integrations/telegram_colored.svg"
+import integrationVictorOps from "./assets/integrations/victorOps.svg"
+import integrationVictorOpsColored from "./assets/integrations/victorOps_colored.svg"
 import integrationWebhook from "./assets/integrations/webhook.svg"
 import integrationWebhookColored from "./assets/integrations/webhook_colored.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
@@ -536,6 +538,8 @@ export const iconsList = {
   integrationTeamsColored,
   integrationTelegram,
   integrationTelegramColored,
+  integrationVictorOps,
+  integrationVictorOpsColored,
   integrationWebhook,
   integrationWebhookColored,
   ipNetworking,
