@@ -147,6 +147,8 @@ import integrationTeams from "./assets/integrations/teams.svg"
 import integrationTeamsColored from "./assets/integrations/teams_colored.svg"
 import integrationTelegram from "./assets/integrations/telegram.svg"
 import integrationTelegramColored from "./assets/integrations/telegram_colored.svg"
+import integrationVictorOps from "./assets/integrations/victorOps.svg"
+import integrationVictorOpsColored from "./assets/integrations/victorOps_colored.svg"
 import integrationWebhook from "./assets/integrations/webhook.svg"
 import integrationWebhookColored from "./assets/integrations/webhook_colored.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
@@ -187,6 +189,7 @@ import notification_shortcut_enabled from "./assets/notification_shortcut_enable
 import notification_shortcut_disabled from "./assets/notification_shortcut_disabled.svg"
 import notificationTrigger from "./assets/notification_trigger.svg"
 import okta from "./assets/okta.svg"
+import openid from "./assets/openid.svg"
 import os from "./assets/os/os.svg"
 import osAlpineLinux from "./assets/os/alpine_linux.svg"
 import osAmazonLinux from "./assets/os/amazon_linux.svg"
@@ -536,6 +539,8 @@ export const iconsList = {
   integrationTeamsColored,
   integrationTelegram,
   integrationTelegramColored,
+  integrationVictorOps,
+  integrationVictorOpsColored,
   integrationWebhook,
   integrationWebhookColored,
   ipNetworking,
@@ -579,6 +584,7 @@ export const iconsList = {
   notification_shortcut_disabled,
   notificationTrigger,
   okta,
+  openid,
   os,
   osAlpineLinux,
   osAmazonLinux,
