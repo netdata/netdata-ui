@@ -8,11 +8,11 @@ export const Button = forwardRef(
   (
     {
       label,
-      icon,
+      icon = null,
       flavour,
       isLoading,
       loadingLabel,
-      onClick,
+      onClick = () => {},
       textTransform = "firstLetter",
       iconColor,
       iconSize,
@@ -52,8 +52,3 @@ export const Button = forwardRef(
     </StyledButton>
   )
 )
-
-Button.defaultProps = {
-  onClick: () => {},
-  icon: null,
-}
