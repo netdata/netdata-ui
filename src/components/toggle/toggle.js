@@ -8,8 +8,8 @@ export const Toggle = ({
   className,
   labelLeft,
   labelRight,
-  Label,
-  colored,
+  Label = Text,
+  colored = false,
   margin,
   alignSelf,
   toggleProps = {},
@@ -23,7 +23,13 @@ export const Toggle = ({
     )}
     <ToggleContainer>
       <HiddenToggleInput disabled={disabled} checked={checked} {...props} />
-      <StyledToggle checked={checked} disabled={disabled} colored={colored} role="switch" {...toggleProps} />
+      <StyledToggle
+        checked={checked}
+        disabled={disabled}
+        colored={colored}
+        role="switch"
+        {...toggleProps}
+      />
     </ToggleContainer>
     {labelRight && (
       <LabelText as={Label} right>
@@ -32,8 +38,3 @@ export const Toggle = ({
     )}
   </StyledLabel>
 )
-
-Toggle.defaultProps = {
-  colored: false,
-  Label: Text,
-}

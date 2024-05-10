@@ -12,7 +12,7 @@ export const Checkbox = forwardRef(
       disabled,
       iconProps,
       indeterminate,
-      Label,
+      Label = Text,
       label,
       labelProps,
       labelPosition = "left",
@@ -73,8 +73,3 @@ export const Checkbox = forwardRef(
     )
   }
 )
-
-Checkbox.defaultProps = {
-  Label: Text,
-  labelPosition: "right",
-}
