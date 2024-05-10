@@ -15,7 +15,7 @@ export const Checkbox = forwardRef(
       Label = Text,
       label,
       labelProps,
-      labelPosition = "left",
+      labelPosition = "right",
       onChange,
       ...rest
     },
