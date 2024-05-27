@@ -221,7 +221,7 @@ const Table = memo(
         ...table.getState(),
         rowsById: table.getRowModel().rowsById,
         table,
-        selectedRows: table.getSelectedRowModel().rows,
+        selectedRows: table.getSelectedRowModel().flatRows,
       })
     }, [table.getState()])
 
