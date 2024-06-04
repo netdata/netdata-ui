@@ -30,7 +30,7 @@ const ProgressBar = forwardRef(
         width={containerWidth}
         {...rest}
       >
-        {value.map(({ color, width }, index) =>
+        {value.map(({ color, width }, index, arr) =>
           width === "0%" ? null : (
             <Box
               background={color}
@@ -39,8 +39,9 @@ const ProgressBar = forwardRef(
               height="100%"
               key={`${width}-${index}`}
               position="relative"
-              round="2px"
+              round={!index ? "2px 0 0 2px" : arr.length - 1 === index ? "0 2px 2px 0" : "0"}
               width={width}
+              zIndex={index}
             />
           )
         )}
