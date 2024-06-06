@@ -83,11 +83,11 @@ const BodyHeaderCell = ({
           background: "columnHighlight",
           backgroundOpacity: "0.2",
         })}
-      padding={isSubheader ? [0] : [1, 2]}
+      padding={isSubheader ? [1, 2] : [0]}
       {...headStyles}
       column
     >
-      <Flex flex column width="100%" alignItems={column.columnDef.align || "start"}>
+      <Flex flex column width="100%" alignItems={column.columnDef.align || "start"} gap={1}>
         <LabelContainer
           alignItems="center"
           cursor={column.getCanSort() ? "pointer" : "default"}
