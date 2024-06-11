@@ -18,7 +18,14 @@ const HeaderGroup = ({ id, headers, testPrefix, ...rest }) => {
   return (
     <Flex id={id} data-testid={`netdata-table-headRow${testPrefix}`} flex background="tableRowBg2">
       {headers.map((header, index) => (
-        <Cell key={header.id} index={index} {...rest} header={header} testPrefix={testPrefix}>
+        <Cell
+          key={header.id}
+          index={index}
+          {...rest}
+          header={header}
+          testPrefix={testPrefix}
+          hasSubheaders={!!header.subHeaders.length}
+        >
           {!!header.subHeaders.length && (
             <HeaderGroup
               headers={header.subHeaders}

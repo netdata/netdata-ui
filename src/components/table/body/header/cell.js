@@ -47,6 +47,7 @@ const BodyHeaderCell = ({
   index,
   children,
   isSubheader,
+  hasSubheaders,
 }) => {
   useTableState(rerenderSelector)
 
@@ -83,7 +84,7 @@ const BodyHeaderCell = ({
           background: "columnHighlight",
           backgroundOpacity: "0.2",
         })}
-      padding={isSubheader ? [1, 2] : [0]}
+      padding={!hasSubheaders || isSubheader ? [1, 2] : [0]}
       {...headStyles}
       column
     >
@@ -92,7 +93,7 @@ const BodyHeaderCell = ({
           alignItems="center"
           cursor={column.getCanSort() ? "pointer" : "default"}
           onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
-          padding={[0, 2, 0, 0]}
+          padding={[0, 2, 0, !hasSubheaders || isSubheader ? 0 : 2]}
           overflow="hidden"
           width="100%"
         >
