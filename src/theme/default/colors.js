@@ -90,7 +90,7 @@ const appColors = {
   spaceSelected: rawColors.neutral.grey175,
   spaceIdle: rawColors.neutral.grey195,
   spaceHovered: rawColors.neutral.grey180,
-  hoverHighlight: rawColors.neutral.green70,
+  hoverHighlight: rawColors.green.green70,
   menuItem: rawColors.neutral.grey120,
   topBarBg: rawColors.neutral.grey190,
   elevationLevelOne: rawColors.neutral.grey185,

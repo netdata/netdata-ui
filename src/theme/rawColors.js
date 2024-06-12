@@ -20,7 +20,7 @@ const rawColors = {
     green40: "#00441B",
     green50: "#005622",
     green60: "#006729",
-    green70: "#00783",
+    green70: "#007830",
     green80: "#008936",
     green90: "#009A3D",
     // Base green 100
