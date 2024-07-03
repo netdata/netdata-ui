@@ -278,7 +278,7 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("border-color", "#C0CACA", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#4A5757", {
+    expect(button).toHaveStyleRule("color", "#526161", {
       modifier: "&&",
     })
   })

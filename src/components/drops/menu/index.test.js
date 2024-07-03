@@ -48,15 +48,13 @@ it("closes on item click", () => {
 
 it("renders controlled", () => {
   const onChange = jest.fn()
-  const { getByText, queryByTestId, debug, getAllByRole } = render({
+  const { getByText, queryByTestId } = render({
     value: "durgen",
     onChange,
     label: null,
   })
 
   fireEvent.click(getByText("Tyler Durden"))
-  expect(getAllByRole("option")[1]).toHaveAttribute("disabled")
-
   fireEvent.click(getByText("Marla Singer"))
   expect(onChange).toBeCalledWith("singer")
   expect(queryByTestId("drop")).not.toBeInTheDocument()

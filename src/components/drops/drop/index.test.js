@@ -7,9 +7,18 @@ const getStyle = el => {
   return { left, top, width }
 }
 
+beforeEach(() => {
+  Element.prototype.getBoundingClientRect = Element.prototype.getOriginalBoundingClientRect
+})
+
 it("renders", async () => {
   const div = document.createElement("div")
-  div.getBoundingClientRect = jest.fn(() => ({ bottom: 200, left: 300, width: 100, height: 100 }))
+  div.getBoundingClientRect = jest.fn(() => ({
+    bottom: 200,
+    left: 300,
+    width: 100,
+    height: 100,
+  }))
 
   const { getByTestId, getByText } = renderWithProviders(
     <Drop target={div} animation>
@@ -116,10 +125,10 @@ it("renders aligns", async () => {
     const { target, result } = positions[i]
     rerender(
       <Drop target={div} align={target}>
-        Drop content
+        Drop content {JSON.stringify(target)}
       </Drop>
     )
-    await waitFor(() => expect(getStyle(getByText("Drop content"))).toEqual(result))
+    await waitFor(() => expect(getStyle(getByText(/Drop content/))).toEqual(result))
   }
 })
 
