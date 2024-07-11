@@ -20,6 +20,7 @@ const Header = ({
   children,
   bulkActions,
   enableColumnVisibility,
+  enableCustomSearch,
 }) => {
   tableMeta = useMemo(
     () => (typeof tableMeta === "function" ? tableMeta({}, {}, null) : tableMeta),
@@ -49,6 +50,7 @@ const Header = ({
             iconLeft={<Icon color="textLite" name="magnify" height="18px" width="18px" />}
             onChange={onSearch}
             placeholder={searchPlaceholder}
+            controlled={enableCustomSearch}
             {...tableMeta.searchStyles}
           />
         </Flex>

@@ -251,6 +251,7 @@ const Table = memo(
           dataColumns={dataColumns}
           enableColumnVisibility={enableColumnVisibility}
           bulkActions={bulkActions}
+          enableCustomSearch={enableCustomSearch}
         >
           {headerChildren || null}
           <HeaderActions

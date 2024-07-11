@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import useDebounce from "@/hooks/useDebounce"
 import { TextInput } from "@/components/input"
 import { Icon } from "@/components/icon"
 
-const SearchInput = ({ value: defaultValue, setSearchTerm, setSearchView }) => {
+const SearchInput = ({ value: defaultValue, setSearchTerm, setSearchView, controlled }) => {
   const [value, setValue] = useState(defaultValue)
 
   useDebounce(
@@ -17,6 +17,12 @@ const SearchInput = ({ value: defaultValue, setSearchTerm, setSearchView }) => {
   )
 
   const onChange = useCallback(e => setValue(e.target.value), [])
+
+  useEffect(() => {
+    if (!controlled) return
+
+    setValue(defaultValue)
+  }, [defaultValue])
 
   return (
     <TextInput
