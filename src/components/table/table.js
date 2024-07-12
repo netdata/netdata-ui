@@ -186,6 +186,8 @@ const Table = memo(
       onRowSelectionChange,
       onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
       onSortingChange,
+      enableMultiSorting: true,
+      isMultiSortEvent: e => e.ctrlKey || e.shiftKey || e.metaKey,
       getSortedRowModel: getSortedRowModel(),
       getPaginationRowModel: getPaginationRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
