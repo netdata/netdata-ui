@@ -110,6 +110,7 @@ import gear from "./assets/gear.svg"
 import github from "./assets/github.svg"
 import goToNode from "./assets/go_to_node.svg"
 import google from "./assets/google.svg"
+import grid from "./assets/grid.svg"
 import group_by from "./assets/group_by.svg"
 import h1 from "./assets/h1.svg"
 import h2 from "./assets/h2.svg"
@@ -155,6 +156,7 @@ import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
 import line_chart from "./assets/line_chart.svg"
+import list from "./assets/list.svg"
 import logs from "./assets/logs.svg"
 import logo_s from "./assets/logo_s.svg"
 import loading from "./assets/loading.svg"
@@ -502,6 +504,7 @@ export const iconsList = {
   github,
   google,
   goToNode,
+  grid,
   group_by,
   h1,
   h2,
@@ -547,6 +550,7 @@ export const iconsList = {
   ipNetworkingPress,
   last_week,
   line_chart,
+  list,
   logo_s,
   logs,
   loading,
