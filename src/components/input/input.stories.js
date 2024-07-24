@@ -16,7 +16,11 @@ export const Basic = args => <TextInput {...args} />
 export const WithAutocomplete = () => {
   const [value, setValue] = useState("")
   const autocompleteProps = {
-    suggestions: [{ value: "one", label: "one" }],
+    suggestions: [
+      { value: "one", label: "one" },
+      { value: "two", label: "two" },
+      { value: "three", label: "three" },
+    ],
   }
 
   return (
