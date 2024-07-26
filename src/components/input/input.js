@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react"
+import React, { useMemo } from "react"
 import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { Input, LabelText } from "./styled"
@@ -36,8 +36,6 @@ export const TextInput = ({
   autocompleteProps,
   ...props
 }) => {
-  const inputContainerRef = useRef()
-
   const autocompleteInputProps = useMemo(
     () =>
       autocompleteProps
@@ -50,9 +48,16 @@ export const TextInput = ({
   )
 
   return (
-    <Flex gap={0.5} column className={className} {...containerStyles} as="label">
+    <Flex
+      gap={0.5}
+      column
+      className={className}
+      position="relative"
+      {...containerStyles}
+      as="label"
+    >
       {typeof label === "string" ? <LabelText size={size}>{label}</LabelText> : label}
-      <Flex ref={inputContainerRef} position="relative" {...inputContainerStyles}>
+      <Flex position="relative" {...inputContainerStyles}>
         {iconLeft && (
           <Flex position="absolute" left={1} top={0} bottom={0} alignItems="center">
             {iconLeft}
@@ -87,11 +92,7 @@ export const TextInput = ({
       </Flex>
       {typeof hint === "string" ? <TextMicro color="textLite">{hint}</TextMicro> : !!hint && hint}
       {!hideErrorMessage ? <Error error={error} /> : null}
-      <Autocomplete
-        value={value}
-        autocompleteProps={autocompleteProps}
-        tagretRef={inputContainerRef}
-      />
+      <Autocomplete value={value} autocompleteProps={autocompleteProps} />
     </Flex>
   )
 }

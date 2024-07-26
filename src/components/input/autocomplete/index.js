@@ -1,28 +1,20 @@
 import React from "react"
-import Drop from "@/components/drops/drop"
-import Options from "./options"
+import { StyledOptionsContainer } from "./styled"
+import Dropdown from "@/components/drops/menu/dropdown"
+import DropdownItem from "@/components/drops/menu/dropdownItem"
 import useAutocomplete from "./useAutocomplete"
 
-const Autocomplete = ({ value, autocompleteProps, tagretRef }) => {
-  const { autocompleteOpen, suggestions } = useAutocomplete({ value, autocompleteProps })
+const Autocomplete = ({ value, autocompleteProps, Item = DropdownItem }) => {
+  const { autocompleteOpen, suggestions, onItemClick } = useAutocomplete({
+    value,
+    autocompleteProps,
+  })
 
   return (
-    autocompleteOpen &&
-    tagretRef?.current && (
-      <Drop
-        width={60}
-        target={tagretRef.current}
-        align={{ top: "bottom", left: "left" }}
-        animation
-        background="inputBg"
-        margin={[1, 0, 0]}
-        round={1}
-        close={() => {}}
-        onClickOutside={() => {}}
-        onEsc={() => {}}
-      >
-        <Options suggestions={suggestions} />
-      </Drop>
+    autocompleteOpen && (
+      <StyledOptionsContainer>
+        <Dropdown items={suggestions} Item={Item} onItemClick={onItemClick} width="100%" />
+      </StyledOptionsContainer>
     )
   )
 }
