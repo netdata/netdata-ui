@@ -5,6 +5,7 @@ import Flex from "@/components/templates/flex"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
+import { useCallback } from "react"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) =>
@@ -14,6 +15,19 @@ const Container = styled(Flex)`
 `
 
 const defaultEstimateSize = () => 28
+
+const indexCalculatorByKey = {
+  ArrowDown: (index, length) => Math.min(index + 1, length - 1),
+  ArrowUp: index => Math.max(index - 1, 0),
+  Home: () => 0,
+  End: (_, length) => length - 1,
+  default: index => index,
+}
+
+const getNextIndex = (currentIndex, key, itemsLength) => {
+  const calculator = indexCalculatorByKey[key] || indexCalculatorByKey.default
+  return calculator(currentIndex, itemsLength)
+}
 
 const Dropdown = forwardRef(
   (
@@ -32,6 +46,9 @@ const Dropdown = forwardRef(
       gap = 0,
       estimateSize = defaultEstimateSize,
       close,
+      enableKeyNavigation,
+      activeIndex,
+      setActiveIndex,
       ...rest
     },
     forwardedRef
@@ -61,6 +78,31 @@ const Dropdown = forwardRef(
       estimateSize,
     })
 
+    const handleKeyDown = useCallback(
+      event => {
+        if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.code)) {
+          setActiveIndex(prevIndex => {
+            const nextIndex = getNextIndex(prevIndex, event.code, items.length)
+            rowVirtualizer.scrollToIndex(nextIndex)
+            return nextIndex
+          })
+        }
+      },
+      [rowVirtualizer, items, setActiveIndex]
+    )
+
+    const virtualContainerProps = useMemo(() => {
+      if (enableKeyNavigation)
+        return {
+          tabIndex: 0,
+          role: "listbox",
+          "aria-activedescendant": `item-${activeIndex}`,
+          onKeyDown: handleKeyDown,
+        }
+
+      return {}
+    }, [enableKeyNavigation, activeIndex, handleKeyDown])
+
     return (
       <Container
         as="ul"
@@ -86,6 +128,7 @@ const Dropdown = forwardRef(
             height: "100%",
             overflow: "auto",
           }}
+          {...virtualContainerProps}
         >
           <div
             style={{
@@ -116,6 +159,7 @@ const Dropdown = forwardRef(
                   value={value}
                   onItemClick={onItemClick}
                   close={close}
+                  {...(enableKeyNavigation ? { enableKeyNavigation: true, activeIndex } : {})}
                 />
               </div>
             ))}
