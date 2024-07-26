@@ -1,11 +1,9 @@
 import styled from "styled-components"
+import Flex from "@/components/templates/flex"
 
-export const StyledOption = styled.li`
-  &:hover {
-    background-color: red;
-  }
-
-  &:focus {
-    background-color: red;
-  }
+export const StyledOptionsContainer = styled(Flex)`
+  width: 300px;
+  position: absolute;
+  left: 0;
+  top: 36px;
 `
