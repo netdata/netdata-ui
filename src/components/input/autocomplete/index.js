@@ -6,7 +6,7 @@ import useAutocomplete from "./useAutocomplete"
 
 const Autocomplete = forwardRef(({ value, autocompleteProps, onInputChange, onEsc }, ref) => {
   const [activeIndex, setActiveIndex] = useState(0)
-  const { autocompleteOpen, close, suggestions, onItemClick } = useAutocomplete({
+  const { autocompleteOpen, close, filteredSuggestions, onItemClick } = useAutocomplete({
     value,
     onInputChange,
     autocompleteProps,
@@ -18,12 +18,12 @@ const Autocomplete = forwardRef(({ value, autocompleteProps, onInputChange, onEs
         onEsc()
         close()
       } else if (e.code == "Enter") {
-        onItemClick(suggestions[activeIndex]?.value)
+        onItemClick(filteredSuggestions[activeIndex]?.value)
         onEsc()
         close()
       }
     },
-    [activeIndex, suggestions, onItemClick, onEsc, close]
+    [activeIndex, filteredSuggestions, onItemClick, onEsc, close]
   )
 
   return (
@@ -31,7 +31,7 @@ const Autocomplete = forwardRef(({ value, autocompleteProps, onInputChange, onEs
       <StyledOptionsContainer>
         <Dropdown
           ref={ref}
-          items={suggestions}
+          items={filteredSuggestions}
           Item={DropdownItem}
           onItemClick={onItemClick}
           width="100%"

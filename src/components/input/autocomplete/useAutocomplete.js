@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 const useAutocomplete = ({ value, onInputChange, autocompleteProps = {} }) => {
   const [autocompleteOpen, setAutocompleteOpen] = useState()
   const { suggestions = [] } = autocompleteProps || {}
+  const [filteredSuggestions, setFilteredSuggestions] = useState(suggestions)
 
   const close = useCallback(() => setAutocompleteOpen(false), [setAutocompleteOpen])
 
@@ -18,12 +19,14 @@ const useAutocomplete = ({ value, onInputChange, autocompleteProps = {} }) => {
   )
 
   useEffect(() => {
-    if (suggestions.length) {
-      setAutocompleteOpen(!!value.length)
+    if (suggestions.length && !!value) {
+      const filtered = suggestions.filter(({ label }) => label.includes(value))
+      setFilteredSuggestions(filtered)
+      setAutocompleteOpen(!!filtered.length)
     }
-  }, [suggestions, value, setAutocompleteOpen])
+  }, [value, suggestions, setAutocompleteOpen, setFilteredSuggestions])
 
-  return { autocompleteOpen, close, suggestions, onItemClick }
+  return { autocompleteOpen, close, filteredSuggestions, onItemClick }
 }
 
 export default useAutocomplete
