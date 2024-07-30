@@ -1,11 +1,18 @@
 import { useState, useEffect, useMemo, useCallback } from "react"
 
+const defaultSuggestions = {
+  loading: false,
+  loaded: true,
+  value: [],
+  error: null,
+}
+
 const useAutocomplete = ({ value, onInputChange, autocompleteProps = {} }) => {
   const [autocompleteOpen, setAutocompleteOpen] = useState()
-  const { suggestions = [] } = autocompleteProps || {}
+  const { suggestions = defaultSuggestions } = autocompleteProps || {}
   const items = useMemo(
     () =>
-      suggestions.map(suggestion => ({
+      suggestions.value.map(suggestion => ({
         value: suggestion,
         label: suggestion,
       })),

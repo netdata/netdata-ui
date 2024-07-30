@@ -16,7 +16,11 @@ export const Basic = args => <TextInput {...args} />
 export const WithAutocomplete = () => {
   const [value, setValue] = useState("")
   const autocompleteProps = {
-    suggestions: Array.from(Array(10000).keys()).map(i => `Label ${i}`),
+    suggestions: {
+      loading: false,
+      value: Array.from(Array(10000).keys()).map(i => `Label ${i}`),
+      error: null,
+    },
   }
 
   const onChange = e => {
