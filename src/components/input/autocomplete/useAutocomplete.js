@@ -1,10 +1,17 @@
-import { useCallback } from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 
 const useAutocomplete = ({ value, onInputChange, autocompleteProps = {} }) => {
   const [autocompleteOpen, setAutocompleteOpen] = useState()
   const { suggestions = [] } = autocompleteProps || {}
-  const [filteredSuggestions, setFilteredSuggestions] = useState(suggestions)
+  const items = useMemo(
+    () =>
+      suggestions.map(suggestion => ({
+        value: suggestion,
+        label: suggestion,
+      })),
+    [suggestions]
+  )
+  const [filteredSuggestions, setFilteredSuggestions] = useState(items)
 
   const close = useCallback(() => setAutocompleteOpen(false), [setAutocompleteOpen])
 
@@ -12,19 +19,21 @@ const useAutocomplete = ({ value, onInputChange, autocompleteProps = {} }) => {
     val => {
       if (typeof onInputChange == "function") {
         onInputChange({ target: { value: val } })
-        close()
+        setTimeout(() => close(), 100)
       }
     },
     [close, onInputChange]
   )
 
   useEffect(() => {
-    if (suggestions.length && !!value) {
-      const filtered = suggestions.filter(({ label }) => label.includes(value))
+    if (items.length && !!value) {
+      const filtered = items.filter(({ label }) =>
+        label.toLowerCase().includes(value.toLowerCase())
+      )
       setFilteredSuggestions(filtered)
       setAutocompleteOpen(!!filtered.length)
     }
-  }, [value, suggestions, setAutocompleteOpen, setFilteredSuggestions])
+  }, [value, items, setAutocompleteOpen, setFilteredSuggestions])
 
   return { autocompleteOpen, close, filteredSuggestions, onItemClick }
 }
