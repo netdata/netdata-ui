@@ -2,6 +2,7 @@ import React, { forwardRef, useCallback, useState } from "react"
 import { StyledOptionsContainer } from "./styled"
 import Dropdown from "@/components/drops/menu/dropdown"
 import DropdownItem from "@/components/drops/menu/dropdownItem"
+import useOutsideClick from "@/hooks/useOutsideClick"
 import useAutocomplete from "./useAutocomplete"
 
 const Autocomplete = forwardRef(({ value, autocompleteProps, onInputChange, onEsc }, ref) => {
@@ -20,11 +21,12 @@ const Autocomplete = forwardRef(({ value, autocompleteProps, onInputChange, onEs
       } else if (e.code == "Enter") {
         onItemClick(filteredSuggestions[activeIndex]?.value)
         onEsc()
-        close()
       }
     },
     [activeIndex, filteredSuggestions, onItemClick, onEsc, close]
   )
+
+  useOutsideClick(ref, close, ref?.current)
 
   return (
     autocompleteOpen && (
