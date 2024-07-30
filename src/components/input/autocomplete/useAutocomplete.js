@@ -26,14 +26,16 @@ const useAutocomplete = ({ value, onInputChange, autocompleteProps = {} }) => {
   )
 
   useEffect(() => {
-    if (items.length && !!value) {
+    if (!value) {
+      close()
+    } else if (items.length) {
       const filtered = items.filter(({ label }) =>
         label.toLowerCase().includes(value.toLowerCase())
       )
       setFilteredSuggestions(filtered)
       setAutocompleteOpen(!!filtered.length)
     }
-  }, [value, items, setAutocompleteOpen, setFilteredSuggestions])
+  }, [value, items, setAutocompleteOpen, setFilteredSuggestions, close])
 
   return { autocompleteOpen, close, filteredSuggestions, onItemClick }
 }
