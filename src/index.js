@@ -81,6 +81,7 @@ export { default as Box } from "./components/templates/box"
 export { default as makeBox } from "./components/templates/box/box"
 
 export { default as Layer } from "./components/templates/layer"
+export { default as BackdropContainer } from "./components/templates/layer/backdropContainer"
 
 export { default as Animation } from "./components/animation"
 
