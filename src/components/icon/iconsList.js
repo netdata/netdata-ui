@@ -107,6 +107,7 @@ import forcePlayOutline from "./assets/force_play_outline.svg"
 import functions from "./assets/functions.svg"
 import fullScreen from "./assets/full_screen.svg"
 import gear from "./assets/gear.svg"
+import giftbox from "./assets/gift_box.svg"
 import github from "./assets/github.svg"
 import goToNode from "./assets/go_to_node.svg"
 import google from "./assets/google.svg"
@@ -501,6 +502,7 @@ export const iconsList = {
   functions,
   fullScreen,
   gear,
+  giftbox,
   github,
   google,
   goToNode,
