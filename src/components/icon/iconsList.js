@@ -131,6 +131,8 @@ import integrationDiscord from "./assets/integrations/discord.svg"
 import integrationDiscordColored from "./assets/integrations/discord_colored.svg"
 import integrationEmail from "./assets/integrations/email.svg"
 import integrationEmailColored from "./assets/integrations/email_colored.svg"
+import integrationIlert from "./assets/integrations/ilert.svg"
+import integrationIlertColored from "./assets/integrations/ilert_colored.svg"
 import integrationMattermost from "./assets/integrations/mattermost.svg"
 import integrationMattermostColored from "./assets/integrations/mattermost_colored.svg"
 import integrationMobileAppColored from "./assets/integrations/mobile_app_colored.svg"
@@ -526,6 +528,8 @@ export const iconsList = {
   integrationDiscordColored,
   integrationEmail,
   integrationEmailColored,
+  integrationIlert,
+  integrationIlertColored,
   integrationMattermost,
   integrationMattermostColored,
   integrationMobileAppColored,
