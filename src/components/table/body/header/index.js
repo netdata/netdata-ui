@@ -14,9 +14,15 @@ const rerenderSelector = state => {
   }
 }
 
-const HeaderGroup = ({ id, headers, testPrefix, ...rest }) => {
+const HeaderGroup = ({ id, headers, testPrefix, rowReverse, ...rest }) => {
   return (
-    <Flex id={id} data-testid={`netdata-table-headRow${testPrefix}`} flex background="tableRowBg2">
+    <Flex
+      id={id}
+      data-testid={`netdata-table-headRow${testPrefix}`}
+      flex
+      background="tableRowBg2"
+      rowReverse={rowReverse}
+    >
       {headers.map((header, index) => (
         <Cell
           key={header.id}
@@ -41,7 +47,7 @@ const HeaderGroup = ({ id, headers, testPrefix, ...rest }) => {
   )
 }
 
-const HeaderGroups = ({ groups, size, side, ...rest }) => {
+const HeaderGroups = ({ groups, size, side, flex = "grow", ...rest }) => {
   if (!groups[0].headers.length) return null
 
   return (
@@ -55,7 +61,7 @@ const HeaderGroups = ({ groups, size, side, ...rest }) => {
         : { left: 0, border: { side: "right" } })}
       zIndex={side ? 11 : undefined}
       width={`${size}px`}
-      flex="grow"
+      flex={flex}
       column
     >
       <HeaderGroup headers={groups[0].headers} id={groups[0].id} key={groups[0].id} {...rest} />
@@ -98,7 +104,9 @@ const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
         size={table.getRightTotalSize()}
         testPrefix={testPrefix}
         {...rest}
+        flex={false}
         table={table}
+        rowReverse
       />
     </Flex>
   )

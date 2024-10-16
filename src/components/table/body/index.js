@@ -97,6 +97,7 @@ const Body = memo(
           height: "100%",
           overflow: "auto",
           flex: "1",
+          maxWidth: `min(${table.getTotalSize()}, 100%)`,
         }}
         data-testid={`netdata-table${testPrefix}`}
       >

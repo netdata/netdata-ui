@@ -176,11 +176,12 @@ export default memo(
             border={{ side: "left" }}
             zIndex={zIndex || 1}
             basis={`${table.getRightTotalSize()}px`}
-            flex="grow"
+            flex={false}
             background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
             _hover={{
               background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
             }}
+            rowReverse
           >
             {row.getRightVisibleCells().map((cell, index) => (
               <CellGroup
