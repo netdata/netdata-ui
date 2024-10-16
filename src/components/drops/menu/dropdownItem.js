@@ -13,6 +13,8 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled, selected }) => (selected ? 0.9 : disabled ? 0.4 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  background-color: ${props =>
+    props.activeIndex == props.index ? getColor("borderSecondary")(props) : "none"};
 
   &:hover {
     background-color: ${props => getColor("borderSecondary")(props)};
@@ -43,6 +45,7 @@ const DropdownItem = ({
   onItemClick,
   index,
   style,
+  enableKeyNavigation,
   ...rest
 }) => {
   const selected = selectedValue === value
@@ -54,11 +57,14 @@ const DropdownItem = ({
 
   return (
     <ItemContainer
+      id={`item-${index}`}
       data-index={index}
       aria-selected={selected}
       disabled={disabled}
       selected={selected}
       onClick={onSelect}
+      index={index}
+      {...(enableKeyNavigation ? { role: "option" } : {})}
       {...restItem}
       {...rest}
       style={style}
