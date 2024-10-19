@@ -20,6 +20,8 @@ const appColors = {
   modalInfoBackground: rawColors.neutral.grey50,
   menuItemSelected: rawColors.green.green30,
   menuItemHover: rawColors.green.green10,
+  scrollbarThumb: rawColors.neutral.grey80,
+  scrollbarTrack: rawColors.neutral.grey35,
   //links
   link: rawColors.green.green110,
   linkHover: rawColors.green.green120,
