@@ -27,6 +27,7 @@ import arrow_left from "./assets/arrow_left.svg"
 import arrow_s_down from "./assets/arrow-s_down.svg"
 import arrow_s_left from "./assets/arrow-s_left.svg"
 import arrows_vertical from "./assets/arrows_vertical.svg"
+import auth from "./assets/auth.svg"
 import bookmark from "./assets/bookmark.svg"
 import bullet_one from "./assets/bullet_one.svg"
 import bullet_three from "./assets/bullet_three.svg"
@@ -422,6 +423,7 @@ export const iconsList = {
   arrow_s_down,
   arrow_s_left,
   arrows_vertical,
+  auth,
   bookmark,
   bullet_one,
   bullet_three,
