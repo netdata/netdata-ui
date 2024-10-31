@@ -61,6 +61,6 @@ export const masterCardColorMap = {
 }
 
 const getMasterCardColor = flavour => masterCardColorMap[flavour]
-const getPillColor = (type, flavour) => colorMap[type][flavour]
+const getPillColor = (type, flavour) => colorMap[type][flavour] || colorMap[type].neutral
 
 export { getMasterCardColor, getPillColor }
