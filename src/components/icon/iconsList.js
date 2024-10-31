@@ -384,6 +384,7 @@ import applicationsSolid from "./assets/applications_solid.svg"
 import networkingStack from "./assets/networking_stack.svg"
 import charts_view from "./assets/charts_view.svg"
 import nodes_update from "./assets/nodes_update.svg"
+import windows from "./assets/windows.svg"
 import zoomIn from "./assets/zoom_in.svg"
 import zoomOut from "./assets/zoom_out.svg"
 import zoomReset from "./assets/zoom_reset.svg"
@@ -779,6 +780,7 @@ export const iconsList = {
   weights_compare,
   weights_drill_down,
   x,
+  windows,
   zoomIn,
   zoomOut,
   zoomReset,
