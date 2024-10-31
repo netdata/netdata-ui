@@ -14,10 +14,10 @@ export default css`
   }
   &::-webkit-scrollbar-thumb {
     border-radius: ${getSizeBy(1)};
-    background-color: ${getRgbColor("border", 0.3)};
+    background-color: ${getRgbColor("border", 0.6)};
   }
   &::-webkit-scrollbar-thumb:hover {
-    background-color: ${getRgbColor("border", 0.5)};
+    background-color: ${getRgbColor("border", 0.9)};
   }
   &::-webkit-scrollbar-track-piece {
     background-color: ${getRgbColor("border", 0.3)};
