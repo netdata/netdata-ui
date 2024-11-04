@@ -89,6 +89,7 @@ const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
         size={table.getLeftTotalSize()}
         testPrefix={testPrefix}
         {...rest}
+        flex={false}
         table={table}
       />
       <HeaderGroups

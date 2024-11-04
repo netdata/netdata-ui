@@ -97,7 +97,7 @@ const Body = memo(
           height: "100%",
           overflow: "auto",
           flex: "1",
-          maxWidth: `min(${table.getTotalSize()}, 100%)`,
+          // maxWidth: `min(${table.getTotalSize()}, 100%)`, // WHY: Removing since it causes issues with fullWidth cells
         }}
         data-testid={`netdata-table${testPrefix}`}
       >

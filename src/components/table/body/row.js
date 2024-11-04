@@ -130,7 +130,7 @@ export default memo(
             border={{ side: "right" }}
             zIndex={zIndex || 1}
             basis={`${table.getLeftTotalSize()}px`}
-            flex="grow"
+            flex={false}
             background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
             _hover={{
               background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
