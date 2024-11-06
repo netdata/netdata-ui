@@ -5,7 +5,7 @@ import backdropBlur from "@/components/templates/layer/mixins/backdropBlur"
 const Container = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 35;
+  z-index: ${({ zIndex }) => zIndex || "35"};
   pointer-events: none;
   outline: none;
 `
@@ -19,8 +19,8 @@ const Backdrop = styled.div`
 }
 `
 
-const BackdropContainer = ({ children, backdropProps, onClick }) => (
-  <Container data-testid="layer-backdropContainer">
+const BackdropContainer = ({ children, backdropContainerProps, backdropProps, onClick }) => (
+  <Container data-testid="layer-backdropContainer" {...backdropContainerProps}>
     <Backdrop data-testid="layer-backdrop" {...backdropProps} onClick={onClick} />
     {children}
   </Container>
