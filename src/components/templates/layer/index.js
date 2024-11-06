@@ -17,6 +17,7 @@ const Layer = ({
   onEsc,
   borderShadow,
   children,
+  backdropContainerProps,
   backdropProps,
   ...rest
 }) => {
@@ -44,7 +45,12 @@ const Layer = ({
 
   return ReactDOM.createPortal(
     backdrop ? (
-      <BackdropContainer backdropProps={backdropProps} {...rest} onClick={onClickOutside}>
+      <BackdropContainer
+        backdropContainerProps={backdropContainerProps}
+        backdropProps={backdropProps}
+        {...rest}
+        onClick={onClickOutside}
+      >
         {content}
       </BackdropContainer>
     ) : (

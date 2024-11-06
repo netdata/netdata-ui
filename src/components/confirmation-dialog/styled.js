@@ -30,9 +30,10 @@ export const Body = styled(ModalBody).attrs({
   }
 `
 
-export const Dialog = styled(Modal).attrs({
+export const Dialog = styled(Modal).attrs(props => ({
   backdropProps: { backdropBlur: 8 },
-})`
+  ...props,
+}))`
   box-shadow:
     0 11px 15px -7px rgb(0 0 0 / 20%),
     0px 24px 38px 3px rgb(0 0 0 / 14%),
