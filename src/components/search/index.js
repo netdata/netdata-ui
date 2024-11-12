@@ -1,5 +1,6 @@
 import React, { forwardRef, useState } from "react"
 import useDebounce from "@/hooks/useDebounce"
+import usePrevious from "@/hooks/usePrevious"
 import { Icon } from "@/components/icon"
 import { TextInput } from "@/components/input"
 import { IconButton } from "@/components/button"
@@ -7,8 +8,16 @@ import { IconButton } from "@/components/button"
 const Search = forwardRef(
   ({ value: defaultValue = "", onChange, onReset, placeholder, ...rest }, ref) => {
     const [value, setValue] = useState(defaultValue)
+    const prevValue = usePrevious(value)
 
-    useDebounce(() => onChange(value), 300, [value])
+    useDebounce(
+      () => {
+        if (value === defaultValue && typeof prevValue === "undefined") return
+        onChange(value)
+      },
+      300,
+      [value]
+    )
 
     return (
       <TextInput
