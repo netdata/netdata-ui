@@ -119,6 +119,7 @@ import h2 from "./assets/h2.svg"
 import hamburger from "./assets/hamburger.svg"
 import heart from "./assets/heart.svg"
 import heart_broken from "./assets/heart_broken.svg"
+import heart_hollow from "./assets/heart_hollow.svg"
 import help from "./assets/help.svg"
 import hide from "./assets/hide.svg"
 import highlightArea from "./assets/highlight_area.svg"
@@ -520,6 +521,7 @@ export const iconsList = {
   hamburger,
   heart,
   heart_broken,
+  heart_hollow,
   help,
   hide,
   highlightArea,
