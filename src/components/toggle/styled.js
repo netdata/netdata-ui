@@ -47,9 +47,9 @@ export const StyledToggle = styled.div`
     transform: translateY(-50%);
     transition: ${({ withTransition }) => (withTransition ? "left 0.2s ease" : "unset")};
     opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
-    background-color: ${({ colored, checked }) => {
-      if (!colored) return getColor("controlFocused")
-      return checked ? getColor("primary") : getColor("error")
+    background-color: ${({ colored, checked, checkedColor, uncheckedColor, defaultColor }) => {
+      if (!colored) return getColor(defaultColor || "controlFocused")
+      return checked ? getColor(checkedColor || "primary") : getColor(uncheckedColor || "error")
     }};
   }
 
