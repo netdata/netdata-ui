@@ -1,4 +1,4 @@
-import React, { forwardRef, useLayoutEffect } from "react"
+import React, { forwardRef, useState, useLayoutEffect } from "react"
 import ReactDOM from "react-dom"
 import useDropElement from "@/hooks/useDropElement"
 import useKeyboardEsc from "@/hooks/useKeyboardEsc"
@@ -20,25 +20,39 @@ const Backdrop = styled.div`
 }
 `
 
-const defaultAlign = { top: "bottom", left: "left" }
+const leftTopAlign = { right: "left", bottom: "top" }
+const leftBottomAlign = { right: "right", top: "bottom" }
+const rightTopAlign = { left: "right", bottom: "top" }
+const rightBottomAlign = { left: "left", top: "bottom" }
+
+const getAlign = (left, top) => {
+  if (left && top) return leftTopAlign
+  if (left) return leftBottomAlign
+  if (top) return rightTopAlign
+  return rightBottomAlign
+}
+
+const defaultAlignValue = { top: "bottom", left: "left" }
 
 const Drop = forwardRef(
   (
     {
       backdrop = false,
       target,
-      align = defaultAlign,
+      align: defaultAlign = defaultAlignValue,
       stretch = "width",
       onClickOutside,
       onEsc,
       children,
       canHideTarget = true,
       keepHorizontal,
+      dataDrop,
       ...rest
     },
     parentRef
   ) => {
     const [ref, setRef] = useForwardRef(parentRef)
+    const [align, setAlign] = useState(defaultAlign)
 
     const updatePosition = useMakeUpdatePosition(
       target,
@@ -50,12 +64,27 @@ const Drop = forwardRef(
     )
 
     useLayoutEffect(() => {
+      if (!target?.getBoundingClientRect || !ref.current) return
+
+      const { right: targetRight, bottom: targetBottom } = target.getBoundingClientRect()
+
+      const winHeight = window.innerHeight
+      const winWidth = window.innerWidth
+
+      const { width, height } = ref.current.getBoundingClientRect()
+      const left = targetRight + width > winWidth
+      const top = targetBottom + height > winHeight
+
+      setAlign(getAlign(left, top))
+    }, [target])
+
+    useLayoutEffect(() => {
       updatePosition()
     }, [updatePosition])
 
     useDimensionChange(target, updatePosition)
 
-    useOutsideClick(ref, onClickOutside, target)
+    useOutsideClick(ref, onClickOutside, target, backdrop, dataDrop)
     useKeyboardEsc(onEsc)
 
     const el = useDropElement()
@@ -63,13 +92,27 @@ const Drop = forwardRef(
     return ReactDOM.createPortal(
       backdrop ? (
         <>
-          <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
+          <Container
+            ref={setRef}
+            width={{ max: "100%" }}
+            column
+            data-testid="drop"
+            data-drop={dataDrop}
+            {...rest}
+          >
             {children}
           </Container>
-          <Backdrop />
+          <Backdrop onClick={onClickOutside} />
         </>
       ) : (
-        <Container ref={setRef} width={{ max: "100%" }} column data-testid="drop" {...rest}>
+        <Container
+          ref={setRef}
+          width={{ max: "100%" }}
+          column
+          data-testid="drop"
+          data-drop={dataDrop}
+          {...rest}
+        >
           {children}
         </Container>
       ),

@@ -19,11 +19,12 @@ const Layer = ({
   children,
   backdropContainerProps,
   backdropProps,
+  dataDrop = "",
   ...rest
 }) => {
   const ref = useRef()
 
-  useOutsideClick(ref, onClickOutside, null, backdrop)
+  useOutsideClick(ref, onClickOutside, null, backdrop, dataDrop)
   useKeyboardEsc(onEsc)
 
   const el = useDropElement()
@@ -37,6 +38,7 @@ const Layer = ({
       margin={margin}
       borderShadow={borderShadow}
       data-testid="layer-container"
+      data-drop={dataDrop}
       {...rest}
     >
       {children}
