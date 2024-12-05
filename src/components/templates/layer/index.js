@@ -19,7 +19,7 @@ const Layer = ({
   children,
   backdropContainerProps,
   backdropProps,
-  dataDrop = "",
+  dataDrop = "layer-content",
   ...rest
 }) => {
   const ref = useRef()

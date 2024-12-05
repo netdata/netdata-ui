@@ -46,7 +46,7 @@ const Drop = forwardRef(
       children,
       canHideTarget = true,
       keepHorizontal,
-      dataDrop,
+      dataDrop = "drop-content",
       ...rest
     },
     parentRef
