@@ -38,6 +38,7 @@ export const Input = styled(Flex).attrs(props => ({
     color: ${getColor("placeholder")};
     opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
     font-weight: normal;
+    ${({ placeholderProps }) => placeholderProps || null}
   }
   ${disabledCursorSupport};
 `
