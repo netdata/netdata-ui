@@ -16,9 +16,7 @@ const DropdownFilter = ({
     isMulti={isMulti}
     options={options}
     value={value}
-    onChange={option => {
-      onChange(option)
-    }}
+    onChange={onChange}
     styles={{ size: "tiny", ...(styles || {}) }}
   />
 )

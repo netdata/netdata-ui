@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useCallback } from "react"
 import DropdownFilter from "./dropdown"
 
 const all = { value: "all", label: "All" }
@@ -9,13 +9,22 @@ const SelectFilter = ({ column, isMulti = false, options = [], tiny = true, ...r
 
   const optionsWithExtraChoice = isMulti ? options : [all, ...options]
   const selectedValue = isMulti ? filterValue : optionsWithExtraChoice[0]
+  const [val, setVal] = useState(filterValue ? filterValue : selectedValue)
+
+  const onChange = useCallback(
+    value => {
+      setFilterValue(value)
+      setVal(value)
+    },
+    [setVal]
+  )
 
   return (
     <DropdownFilter
-      value={filterValue ? filterValue : selectedValue}
+      value={val}
       isMulti={isMulti}
       options={optionsWithExtraChoice}
-      onChange={value => setFilterValue(value)}
+      onChange={onChange}
       styles={tiny && { size: "tiny" }}
       {...rest}
     />
