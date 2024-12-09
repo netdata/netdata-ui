@@ -1,7 +1,7 @@
 const justifyContentMap = {
-  start: "flex-start",
+  start: "start",
   center: "center",
-  end: "flex-end",
+  end: "end",
   between: "space-between",
   around: "space-around",
   evenly: "space-evenly",
