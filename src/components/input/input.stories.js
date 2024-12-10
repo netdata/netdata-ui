@@ -1,6 +1,7 @@
 import React from "react"
 import { Icon } from "@/components/icon"
 import { TextInput } from "."
+import { useState } from "react"
 
 export const WithIcons = args => (
   <TextInput
@@ -11,6 +12,23 @@ export const WithIcons = args => (
 )
 
 export const Basic = args => <TextInput {...args} />
+
+export const WithAutocomplete = () => {
+  const [value, setValue] = useState("")
+  const autocompleteProps = {
+    suggestions: {
+      loading: false,
+      value: Array.from(Array(10000).keys()).map(i => `Label ${i}`),
+      error: null,
+    },
+  }
+
+  const onChange = e => {
+    setValue(e.target.value)
+  }
+
+  return <TextInput value={value} onChange={onChange} autocompleteProps={autocompleteProps} />
+}
 
 export default {
   component: TextInput,
