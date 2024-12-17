@@ -138,6 +138,10 @@ const appColors = {
   terminalGreenBorder: rawColors.green.green,
   darkBackground: rawColors.neutral.grey195,
   integrationMenuItemHover: rawColors.neutral.grey180,
+
+  //Dynamic rooms
+  clauseBg: rawColors.neutral.grey180,
+  clauseText: rawColors.neutral.grey100,
 }
 
 export default {
