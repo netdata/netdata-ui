@@ -11,6 +11,7 @@ export const Checkbox = forwardRef(
       checked,
       disabled,
       iconProps,
+      checkboxProps = {},
       indeterminate,
       Label = Text,
       label,
@@ -55,7 +56,7 @@ export const Checkbox = forwardRef(
             {...(indeterminate && { "data-indeterminate": true })}
             data-checked={checked}
           />
-          <StyledCheckbox data-testid="styled-checkbox" disabled={disabled}>
+          <StyledCheckbox data-testid="styled-checkbox" disabled={disabled} {...checkboxProps}>
             {(!!checked || !!indeterminate) && (
               <Icon
                 disabled={disabled}
