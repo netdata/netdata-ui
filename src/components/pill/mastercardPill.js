@@ -1,7 +1,7 @@
-import React, { forwardRef } from "react"
+import React from "react"
 import Pill from "./index"
 
-const MasterCardPill = forwardRef(({ background, icon, text, ...rest }, ref) => (
+const MasterCardPill = ({ background, icon, text, ref, ...rest }) => (
   <Pill
     background={background}
     borderColor={background}
@@ -12,6 +12,6 @@ const MasterCardPill = forwardRef(({ background, icon, text, ...rest }, ref) => 
   >
     {!icon && (text || "-")}
   </Pill>
-))
+)
 
 export default MasterCardPill

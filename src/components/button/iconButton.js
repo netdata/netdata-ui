@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react"
+import React from "react"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"
 import Tooltip from "@/components/drops/tooltip"
@@ -11,20 +11,18 @@ const CustomTooltipContent = ({ content }) => (
   </Flex>
 )
 
-const IconButton = forwardRef(
-  ({ width = "14px", height = "14px", tooltip = "", ...props }, ref) => (
-    <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
-      <Box
-        as={Button}
-        iconWidth={width}
-        iconHeight={height}
-        ref={ref}
-        flavour="borderless"
-        neutral
-        {...props}
-      />
-    </Tooltip>
-  )
+const IconButton = ({ width = "14px", height = "14px", tooltip = "", ref, ...props }) => (
+  <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
+    <Box
+      as={Button}
+      iconWidth={width}
+      iconHeight={height}
+      ref={ref}
+      flavour="borderless"
+      neutral
+      {...props}
+    />
+  </Tooltip>
 )
 
 export default IconButton
