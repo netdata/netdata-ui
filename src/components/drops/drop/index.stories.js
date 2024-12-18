@@ -67,15 +67,17 @@ const DropBox = ({ position }) => {
   }, [])
 
   return (
-    <Flex margin={[4]}>
-      <Flex ref={ref} background="disabled" padding={[1]} width={{ min: 10 }}>
+    <Flex margin={[4]} relative>
+      <Flex ref={ref} background="disabled" padding={[1]} width={10} height={10}>
         {Object.keys(position)
           .map(d => `${d[0]}-${position[d][0]}`)
           .join(", ")}
       </Flex>
       {ref.current && (
         <Drop target={ref.current} align={position} stretch={false}>
-          <Flex background="border" padding={[1]}></Flex>
+          <Flex background="border" padding={[1]}>
+            hello
+          </Flex>
         </Drop>
       )}
     </Flex>
