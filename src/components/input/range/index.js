@@ -1,7 +1,7 @@
-import React, { forwardRef } from "react"
+import React from "react"
 import { InputRange as StyledInputRange } from "./styled"
 
-const InputRange = forwardRef(({ max = 100, min = 0, step = 1, value = 0, ...rest }, ref) => (
+const InputRange = ({ max = 100, min = 0, step = 1, value = 0, ref, ...rest }) => (
   <StyledInputRange
     data-testid="rangeInput"
     max={max}
@@ -12,6 +12,6 @@ const InputRange = forwardRef(({ max = 100, min = 0, step = 1, value = 0, ...res
     ref={ref}
     {...rest}
   />
-))
+)
 
 export default InputRange
