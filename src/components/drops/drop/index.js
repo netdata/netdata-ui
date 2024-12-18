@@ -44,7 +44,7 @@ const Drop = forwardRef(
       onClickOutside,
       onEsc,
       children,
-      canHideTarget = true,
+      canHideTarget = false,
       keepHorizontal,
       dataDrop = "drop-content",
       ...rest
@@ -52,31 +52,15 @@ const Drop = forwardRef(
     parentRef
   ) => {
     const [ref, setRef] = useForwardRef(parentRef)
-    const [align, setAlign] = useState(defaultAlign)
 
     const updatePosition = useMakeUpdatePosition(
       target,
       ref,
-      align,
+      defaultAlign,
       stretch,
       canHideTarget,
       keepHorizontal
     )
-
-    useLayoutEffect(() => {
-      if (!target?.getBoundingClientRect || !ref.current) return
-
-      const { right: targetRight, bottom: targetBottom } = target.getBoundingClientRect()
-
-      const winHeight = window.innerHeight
-      const winWidth = window.innerWidth
-
-      const { width, height } = ref.current.getBoundingClientRect()
-      const left = targetRight + width > winWidth
-      const top = targetBottom + height > winHeight
-
-      setAlign(getAlign(left, top))
-    }, [target])
 
     useLayoutEffect(() => {
       updatePosition()
