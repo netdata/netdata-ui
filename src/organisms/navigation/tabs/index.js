@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react"
 import Flex from "@/components/templates/flex"
 
-const Tabs = ({ children, ...rest }) => {
+const Tabs = ({ children, subTabs, ...rest }) => {
   const [collapsed, setCollapsed] = useState(false)
   const ref = useRef()
 
@@ -28,6 +28,10 @@ const Tabs = ({ children, ...rest }) => {
           })
         })}
       </Flex>
+      {subTabs &&
+        React.cloneElement(subTabs, {
+          collapsed,
+        })}
       <Flex
         height="1px"
         background="border"
