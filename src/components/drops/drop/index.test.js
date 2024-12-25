@@ -133,8 +133,8 @@ it("renders aligns", async () => {
 })
 
 it("boundaries", async () => {
-  window.innerWidth = 400
-  window.innerHeight = 400
+  window.innerWidth = 1000
+  window.innerHeight = 1000
 
   const div = document.createElement("div")
   div.getBoundingClientRect = jest.fn(() => ({
@@ -169,7 +169,7 @@ it("boundaries", async () => {
   await waitFor(() =>
     expect(getStyle(getByText("Drop content"))).toEqual({
       top: "100px",
-      left: "200px",
+      left: "300px",
       width: "200px",
     })
   )

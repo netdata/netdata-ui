@@ -21,10 +21,10 @@ describe("Button states", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" />)
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&& > span::first-letter",
+      modifier: "&&>span::first-letter",
     })
   })
 
@@ -34,7 +34,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "none", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -44,7 +44,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "capitalize", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -54,7 +54,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -64,7 +64,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -74,7 +74,7 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "full-width", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
   })
 
@@ -84,10 +84,10 @@ describe("Button states", () => {
     )
     const button = container.firstChild
     expect(button).toHaveStyleRule("text-transform", "lowercase", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
     expect(button).toHaveStyleRule("text-transform", "uppercase", {
-      modifier: "&& > span::first-letter",
+      modifier: "&&>span::first-letter",
     })
   })
 
@@ -106,7 +106,7 @@ describe("Button states", () => {
 
     expect(getByText(/prop text/)).toBeInTheDocument()
     expect(button).toHaveStyleRule("margin-left", "4px", {
-      modifier: "&& > span",
+      modifier: "&&>span",
     })
     expect(getByTitle("plus")).toBeInTheDocument()
   })

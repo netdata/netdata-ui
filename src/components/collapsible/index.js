@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState, forwardRef } from "react"
+import React, { memo, useMemo, useState } from "react"
 import styled from "styled-components"
 import useUpdateEffect from "@/hooks/useUpdateEffect"
 import useForwardRef from "@/hooks/useForwardRef"
@@ -17,32 +17,42 @@ const Animated = styled(Flex).attrs(props => ({
   ${({ measurement, maxDimension }) => `max-${measurement}: ${maxDimension}`};
 `
 
-const Collapsible = forwardRef(
-  (
-    {
-      open = false,
-      duration = 150,
-      children,
-      direction,
-      persist = false,
-      closedValue = 0,
-      overflow = "visible",
-      ...rest
-    },
-    parentRef
-  ) => {
-    const measurement = measurementByDimension[direction] || measurementByDimension.vertical
-    duration = process.env.NODE_ENV === "test" ? 0 : duration
+const Collapsible = ({
+  open = false,
+  duration = 150,
+  children,
+  direction,
+  persist = false,
+  closedValue = 0,
+  overflow = "visible",
+  ref: parentRef,
+  ...rest
+}) => {
+  const measurement = measurementByDimension[direction] || measurementByDimension.vertical
+  duration = process.env.NODE_ENV === "test" ? 0 : duration
 
-    const [dimension, setDimension] = useState(open ? "initial" : `${closedValue}px`)
-    const [animatedOpen, setAnimatedOpen] = useState(open)
-    const [ref, setRef] = useForwardRef(parentRef)
+  const [dimension, setDimension] = useState(open ? "initial" : `${closedValue}px`)
+  const [animatedOpen, setAnimatedOpen] = useState(open)
+  const [ref, setRef] = useForwardRef(parentRef)
 
-    useUpdateEffect(() => {
+  useUpdateEffect(() => {
+    if (!ref.current) return
+
+    setDimension(
+      !open
+        ? `${
+            measurement === measurementByDimension.vertical
+              ? ref.current.scrollHeight
+              : ref.current.scrollHeight
+          }px`
+        : `${closedValue}px`
+    )
+
+    const requestId = requestAnimationFrame(() => {
       if (!ref.current) return
 
       setDimension(
-        !open
+        open
           ? `${
               measurement === measurementByDimension.vertical
                 ? ref.current.scrollHeight
@@ -50,62 +60,48 @@ const Collapsible = forwardRef(
             }px`
           : `${closedValue}px`
       )
+    })
 
-      const requestId = requestAnimationFrame(() => {
-        if (!ref.current) return
+    if (open) setAnimatedOpen(open)
 
-        setDimension(
-          open
-            ? `${
-                measurement === measurementByDimension.vertical
-                  ? ref.current.scrollHeight
-                  : ref.current.scrollHeight
-              }px`
-            : `${closedValue}px`
-        )
-      })
-
-      if (open) setAnimatedOpen(open)
-
-      const timeoutId = setTimeout(() => {
-        cancelAnimationFrame(requestId)
-        if (open) {
-          setDimension("initial")
-          return
-        }
-
-        setDimension(`${closedValue}px`)
-        setAnimatedOpen(false)
-      }, duration)
-
-      return () => {
-        cancelAnimationFrame(requestId)
-        clearTimeout(timeoutId)
+    const timeoutId = setTimeout(() => {
+      cancelAnimationFrame(requestId)
+      if (open) {
+        setDimension("initial")
+        return
       }
-    }, [open])
 
-    const child = useMemo(
-      () =>
-        (animatedOpen || persist) &&
-        (typeof children === "function" ? children(animatedOpen) : children),
-      [animatedOpen, persist, children]
-    )
+      setDimension(`${closedValue}px`)
+      setAnimatedOpen(false)
+    }, duration)
 
-    return (
-      <Animated
-        open={open}
-        maxDimension={dimension}
-        measurement={measurement}
-        duration={duration}
-        ref={setRef}
-        data-testid="collapsible"
-        overflow={dimension === "initial" ? overflow : "hidden"}
-        {...rest}
-      >
-        {child}
-      </Animated>
-    )
-  }
-)
+    return () => {
+      cancelAnimationFrame(requestId)
+      clearTimeout(timeoutId)
+    }
+  }, [open])
+
+  const child = useMemo(
+    () =>
+      (animatedOpen || persist) &&
+      (typeof children === "function" ? children(animatedOpen) : children),
+    [animatedOpen, persist, children]
+  )
+
+  return (
+    <Animated
+      open={open}
+      maxDimension={dimension}
+      measurement={measurement}
+      duration={duration}
+      ref={setRef}
+      data-testid="collapsible"
+      overflow={dimension === "initial" ? overflow : "hidden"}
+      {...rest}
+    >
+      {child}
+    </Animated>
+  )
+}
 
 export default memo(Collapsible)
