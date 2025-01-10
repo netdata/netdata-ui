@@ -119,6 +119,7 @@ const Table = memo(
       tableRef,
       className,
       width,
+      getRowCanExpand,
       ...rest
     } = { ...tableDefaultProps, ...props }
 
@@ -191,6 +192,7 @@ const Table = memo(
       getSortedRowModel: getSortedRowModel(),
       getPaginationRowModel: getPaginationRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
+      getRowCanExpand,
       getGroupedRowModel: getGroupedRowModel(),
       getSubRows: useCallback(row => row.children, []),
       onPaginationChange,

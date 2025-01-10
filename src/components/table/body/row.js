@@ -96,6 +96,7 @@ export default memo(
     index,
     zIndex,
     onHoverCell,
+    renderSubComponent,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -108,94 +109,110 @@ export default memo(
     }, [row, onClickRow])
 
     return (
-      <Flex
-        data-testid={`netdata-table-row${testPrefix}${
-          testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
-        }`}
-        onClick={useCallback(
-          isClickable
-            ? () => onClickRow({ data: row.original, table: table, fullRow: row })
-            : undefined,
-          [isClickable, row, onClickRow]
-        )}
-        cursor={isClickable ? "pointer" : "default"}
-        onMouseEnter={() => onHoverCell?.({ row: row.index })}
-        onMouseLeave={() => onHoverCell?.({ row: null })}
-        flex
-      >
-        {!!row.getLeftVisibleCells().length && (
-          <Flex
-            position="sticky"
-            left={0}
-            border={{ side: "right" }}
-            zIndex={zIndex || 1}
-            basis={`${table.getLeftTotalSize()}px`}
-            flex={false}
-            background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
-            _hover={{
-              background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
-            }}
-          >
-            {row.getLeftVisibleCells().map((cell, index) => (
-              <CellGroup
-                cell={cell}
-                row={row}
-                key={cell.id}
-                testPrefix={testPrefix}
-                header={table.getLeftLeafHeaders()[index]}
-                {...rest}
-              />
-            ))}
-          </Flex>
-        )}
+      <>
         <Flex
-          width={`${table.getCenterTotalSize()}px`}
-          flex="grow"
-          background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
-          _hover={{
-            background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
-          }}
+          data-testid={`netdata-table-row${testPrefix}${
+            testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
+          }`}
+          onClick={useCallback(
+            isClickable
+              ? e => onClickRow({ data: row.original, table: table, fullRow: row }, e)
+              : undefined,
+            [isClickable, row, onClickRow]
+          )}
+          cursor={isClickable ? "pointer" : "default"}
+          onMouseEnter={() => onHoverCell?.({ row: row.index })}
+          onMouseLeave={() => onHoverCell?.({ row: null })}
+          flex
+          column
         >
           <Flex flex>
-            {row.getCenterVisibleCells().map((cell, index) => (
-              <CellGroup
-                cell={cell}
-                row={row}
-                key={cell.id}
-                testPrefix={testPrefix}
-                header={table.getCenterLeafHeaders()[index]}
-                {...rest}
-              />
-            ))}
+            {!!row.getLeftVisibleCells().length && (
+              <Flex
+                position="sticky"
+                left={0}
+                border={{ side: "right" }}
+                zIndex={zIndex || 1}
+                basis={`${table.getLeftTotalSize()}px`}
+                flex={false}
+                background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
+                _hover={{
+                  background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
+                }}
+              >
+                {row.getLeftVisibleCells().map((cell, index) => (
+                  <CellGroup
+                    cell={cell}
+                    row={row}
+                    key={cell.id}
+                    testPrefix={testPrefix}
+                    header={table.getLeftLeafHeaders()[index]}
+                    {...rest}
+                  />
+                ))}
+              </Flex>
+            )}
+            <Flex
+              width={`${table.getCenterTotalSize()}px`}
+              flex="grow"
+              background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
+              _hover={{
+                background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
+              }}
+            >
+              <Flex flex>
+                {row.getCenterVisibleCells().map((cell, index) => (
+                  <CellGroup
+                    cell={cell}
+                    row={row}
+                    key={cell.id}
+                    testPrefix={testPrefix}
+                    header={table.getCenterLeafHeaders()[index]}
+                    {...rest}
+                  />
+                ))}
+              </Flex>
+            </Flex>
+            {!!row.getRightVisibleCells().length && (
+              <Flex
+                position="sticky"
+                right={0}
+                border={{ side: "left" }}
+                zIndex={zIndex || 1}
+                basis={`${table.getRightTotalSize()}px`}
+                flex={false}
+                background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
+                _hover={{
+                  background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
+                }}
+                rowReverse
+              >
+                {row.getRightVisibleCells().map((cell, index) => (
+                  <CellGroup
+                    cell={cell}
+                    row={row}
+                    key={cell.id}
+                    testPrefix={testPrefix}
+                    header={table.getRightLeafHeaders()[index]}
+                    {...rest}
+                  />
+                ))}
+              </Flex>
+            )}
           </Flex>
+          {renderSubComponent && row.getIsExpanded() && (
+            <Flex
+              flex
+              data-testid={`netdata-table-sub-row${testPrefix}${
+                testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
+              }`}
+              onClick={e => e.stopPropagation()}
+            >
+              {renderSubComponent({ data: row.original, table, fullRow: row })}
+            </Flex>
+          )}
         </Flex>
-        {!!row.getRightVisibleCells().length && (
-          <Flex
-            position="sticky"
-            right={0}
-            border={{ side: "left" }}
-            zIndex={zIndex || 1}
-            basis={`${table.getRightTotalSize()}px`}
-            flex={false}
-            background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
-            _hover={{
-              background: index % 2 === 0 ? "tableRowBg2Hover" : "tableRowBgHover",
-            }}
-            rowReverse
-          >
-            {row.getRightVisibleCells().map((cell, index) => (
-              <CellGroup
-                cell={cell}
-                row={row}
-                key={cell.id}
-                testPrefix={testPrefix}
-                header={table.getRightLeafHeaders()[index]}
-                {...rest}
-              />
-            ))}
-          </Flex>
-        )}
-      </Flex>
+      </>
     )
   }
 )
