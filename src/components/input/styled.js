@@ -15,7 +15,7 @@ export const Input = styled(Flex).attrs(props => ({
   background: "inputBg",
   backgroundOpacity: props.disabled ? 0.4 : 1,
   width: "100%",
-  border: props.hasValue ? "text" : props.error ? "error" : "inputBorder",
+  border: props.error ? "error" : props.hasValue ? "text" : "inputBorder",
   _hover: {
     border: props.error ? "errorText" : "inputBorderHover",
   },

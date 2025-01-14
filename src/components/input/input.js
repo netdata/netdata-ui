@@ -3,7 +3,7 @@ import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { Input, LabelText } from "./styled"
 
-const Error = ({ error }) => {
+const ErrorMessage = ({ error }) => {
   const errorMessage = error === true ? "invalid" : error
 
   return typeof errorMessage === "string" ? (
@@ -70,7 +70,7 @@ export const TextInput = ({
         )}
       </Flex>
       {typeof hint === "string" ? <TextMicro color="textLite">{hint}</TextMicro> : !!hint && hint}
-      {!hideErrorMessage ? <Error error={error} /> : null}
+      {!hideErrorMessage ? <ErrorMessage error={error} /> : null}
     </Flex>
   )
 }
