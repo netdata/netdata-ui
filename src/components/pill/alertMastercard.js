@@ -15,13 +15,14 @@ const AlertMasterCard = forwardRef(
       pillLeft = {},
       pillRight = {},
       pillEnd,
+      containerProps = {},
       round,
       size,
       ...rest
     },
     ref
   ) => {
-    const commonProps = { height, round, size }
+    const commonProps = { height, round, size, ...containerProps }
     const iconProps = {
       background: masterCardColorMap.alert,
       color: "text",

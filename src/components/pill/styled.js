@@ -5,17 +5,18 @@ import { getPillColor } from "./mixins/colors"
 import getPillPadding from "./mixins/padding"
 
 export const MasterCardContainer = styled(Flex).attrs(
-  ({ background, height, onClick, round = 999, size }) => ({
+  ({ background, height, onClick, round = 999, size, ...props }) => ({
     background,
     ...(onClick && { cursor: "pointer" }),
     position: "relative",
     round,
     size,
+    ...props,
   })
 )`
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  -webkit-user-select: ${({ noUserSelection }) => (noUserSelection ? "none" : "auto")};
+  -ms-user-select: ${({ noUserSelection }) => (noUserSelection ? "none" : "auto")};
+  user-select: ${({ noUserSelection }) => (noUserSelection ? "none" : "auto")};
 
   * {
     cursor: ${({ onClick }) => (onClick ? "pointer" : "inherit")};
