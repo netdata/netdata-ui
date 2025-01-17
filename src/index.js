@@ -121,7 +121,7 @@ export { default as Modal } from "./components/modal"
 
 export { ConfirmationDialog } from "./components/confirmation-dialog"
 
-export { Table } from "./components/table"
+export { Table, downloadCsvAction } from "./components/table"
 
 export { default as Select } from "./components/select"
 export { default as SearchInput } from "./components/search"
