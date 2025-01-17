@@ -13,6 +13,10 @@ export const MasterCardContainer = styled(Flex).attrs(
     size,
   })
 )`
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   * {
     cursor: ${({ onClick }) => (onClick ? "pointer" : "inherit")};
   }
