@@ -70,7 +70,13 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       enableResizing: false,
       header: "Actions",
       cell: ({ row, table }) => (
-        <Flex data-testid="action-cell" height="100%" gap={2} justifyContent="end">
+        <Flex
+          data-testid="action-cell"
+          height="100%"
+          gap={2}
+          justifyContent="end"
+          onClick={e => e.stopPropagation()}
+        >
           {availableRowActions.map(
             ({
               id,

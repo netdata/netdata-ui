@@ -1,7 +1,5 @@
 import React, { memo, useMemo, useCallback } from "react"
 import Flex from "@/components/templates/flex"
-import { TextMicro } from "@/components/typography"
-import { Icon } from "@/components/icon"
 import { useTableState } from "../provider"
 
 const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
@@ -46,33 +44,6 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
     >
       <Flex flex width="100%" alignItems={cell.column.columnDef.align || "start"}>
         <cell.column.columnDef.cell {...cell.getContext()} />
-        {cell.getIsGrouped() && row.getCanExpand() && (
-          <Flex
-            cursor="pointer"
-            role="button"
-            padding={[0.5]}
-            gap={0.5}
-            onClick={e => {
-              e.stopPropagation()
-              row.getToggleExpandedHandler()(e)
-              setTimeout(() => e.target.scrollIntoView({ behavior: "smooth", block: "nearest" }))
-            }}
-            position="absolute"
-            right={0}
-            bottom="-2px"
-          >
-            <TextMicro color="textLite" fontSize="9px">
-              Expand
-            </TextMicro>
-            <Icon
-              name="chevron_down"
-              width="10px"
-              height="10px"
-              color="textLite"
-              rotate={row.getIsExpanded() ? 2 : null}
-            />
-          </Flex>
-        )}
       </Flex>
     </Flex>
   )
@@ -103,6 +74,7 @@ export default memo(
 
     const isClickable = useMemo(() => {
       if (typeof onClickRow !== "function") return false
+
       return disableClickRow
         ? !disableClickRow({ data: row.original, table: table, fullRow: row })
         : true
@@ -115,9 +87,17 @@ export default memo(
             testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
           }`}
           onClick={useCallback(
-            isClickable
-              ? e => onClickRow({ data: row.original, table: table, fullRow: row }, e)
-              : undefined,
+            e => {
+              e.preventDefault()
+              e.stopPropagation()
+
+              if (row.getCanExpand()) {
+                row.getToggleExpandedHandler()(e)
+              } else if (isClickable) {
+                onClickRow({ data: row.original, table: table, fullRow: row }, e)
+              }
+              setTimeout(() => e.target.scrollIntoView({ behavior: "auto", block: "nearest" }))
+            },
             [isClickable, row, onClickRow]
           )}
           cursor={isClickable ? "pointer" : "default"}
@@ -200,7 +180,7 @@ export default memo(
               </Flex>
             )}
           </Flex>
-          {renderSubComponent && row.getIsExpanded() && (
+          {renderSubComponent && row.getIsExpanded() && !row.getIsGrouped() && (
             <Flex
               flex
               data-testid={`netdata-table-sub-row${testPrefix}${
