@@ -96,7 +96,7 @@ export default memo(
               } else if (isClickable) {
                 onClickRow({ data: row.original, table: table, fullRow: row }, e)
               }
-              setTimeout(() => e.target.scrollIntoView({ behavior: "auto", block: "nearest" }))
+              setTimeout(() => e?.target?.scrollIntoView?.({ behavior: "auto", block: "nearest" }))
             },
             [isClickable, row, onClickRow]
           )}

@@ -30,7 +30,8 @@ export default (enabled, { testPrefix, tableMeta }) =>
                   data-testid={`netdata-table-cell-checkbox${testPrefix}`}
                   checked={!row.original?.disabled && row.getIsSelected()}
                   indeterminate={row.getIsSomeSelected()}
-                  onChange={checked => {
+                  onChange={(checked, e) => {
+                    e?.stopPropagation?.()
                     row.getToggleSelectedHandler()({ target: { checked } })
                   }}
                   disabled={row.original?.disabled || false}
