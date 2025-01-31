@@ -156,7 +156,7 @@ const Table = memo(
       tableMeta,
     })
 
-    const table = useReactTable({
+    const reactTable = useReactTable({
       columns,
       data,
       manualPagination: !enablePagination,
@@ -202,6 +202,9 @@ const Table = memo(
       enableSubRowSelection,
       columnGroupingMode: "reorder",
     })
+
+    // Add timestamp to distinguish different versions of the object and correctly render memoized components
+    const table = { ...reactTable, timestamp: Date.now() }
 
     const prevStateRef = useRef(table.getState())
     table.isEqual = (selector = identity) => {
