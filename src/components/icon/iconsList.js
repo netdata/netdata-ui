@@ -146,6 +146,8 @@ import integrationPagerduty from "./assets/integrations/pagerduty.svg"
 import integrationPagerdutyColored from "./assets/integrations/pagerduty_colored.svg"
 import integrationRocketChat from "./assets/integrations/rocketChat.svg"
 import integrationRocketChatColored from "./assets/integrations/rocketChat_colored.svg"
+import integrationSMSEagle from "./assets/integrations/smseagle.svg"
+import integrationSMSEagleColored from "./assets/integrations/smseagle_colored.svg"
 import integrations from "./assets/integrations.svg"
 import internalConfig from "./assets/internal_config.svg"
 import integrationSlack from "./assets/integrations/slack.svg"
@@ -552,6 +554,8 @@ export const iconsList = {
   internalConfig,
   integrationSlack,
   integrationSlackColored,
+  integrationSMSEagle,
+  integrationSMSEagleColored,
   integrationSplunk,
   integrationTeams,
   integrationTeamsColored,
