@@ -88,7 +88,6 @@ export default memo(
           }`}
           onClick={useCallback(
             e => {
-              e.preventDefault()
               e.stopPropagation()
 
               if (row.getCanExpand()) {
