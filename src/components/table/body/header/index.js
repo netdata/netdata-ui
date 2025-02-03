@@ -4,7 +4,7 @@ import { useTableState } from "../../provider"
 import Cell from "./cell"
 
 const rerenderSelector = state => {
-  const columns = state.table?.getAllColumns() || []
+  const columns = state.table?.getAllColumns?.() || []
 
   return {
     sizing: state.columnSizing,
@@ -13,9 +13,7 @@ const rerenderSelector = state => {
     selectedRows: state.selectedRows,
     grouping: state.grouping,
     columnsCount: columns.length,
-    columnsFilters: columns.map(({ columnDef }) => ({
-      filterOptions: columnDef?.meta?.filter?.options,
-    })),
+    columnsFilters: columns.map(({ columnDef }) => columnDef?.meta?.filter?.options),
   }
 }
 
