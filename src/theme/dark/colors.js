@@ -143,6 +143,13 @@ const appColors = {
   //Dynamic rooms
   clauseBg: rawColors.neutral.grey90,
   clauseText: rawColors.neutral.white,
+
+  //Onboarding
+  nodeButtonsText: rawColors.green.green100,
+  nodeButtonsTextHover: rawColors.green.green130,
+  pnlBorder: rawColors.green.green20,
+  pnlBackground: rawColors.neutral.black,
+  pnlText: rawColors.green.green110,
 }
 
 export default {
