@@ -120,6 +120,7 @@ const Table = memo(
       className,
       width,
       getRowCanExpand,
+      getRowId,
       ...rest
     } = { ...tableDefaultProps, ...props }
 
@@ -193,6 +194,7 @@ const Table = memo(
       getPaginationRowModel: getPaginationRowModel(),
       getExpandedRowModel: getExpandedRowModel(),
       getRowCanExpand,
+      autoResetExpanded: false,
       getGroupedRowModel: getGroupedRowModel(),
       getSubRows: useCallback(row => row.children, []),
       onPaginationChange,
@@ -201,6 +203,7 @@ const Table = memo(
       onColumnPinningChange,
       enableSubRowSelection,
       columnGroupingMode: "reorder",
+      getRowId,
     })
 
     const prevStateRef = useRef(table.getState())
