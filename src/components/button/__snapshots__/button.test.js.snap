@@ -2,17 +2,8 @@
 
 exports[`Borderless Button renders 1`] = `
 .c0.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   font-weight: 500;
@@ -22,7 +13,6 @@ exports[`Borderless Button renders 1`] = `
   cursor: pointer;
   pointer-events: auto;
   padding: 8px;
-  -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
   color: #00AB44;
@@ -31,16 +21,15 @@ exports[`Borderless Button renders 1`] = `
   border-color: rgba(255,255,255,0.0);
   border-radius: 4px;
   box-sizing: border-box;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c0.c0 > span {
+.c0.c0>span {
   text-transform: lowercase;
   margin-left: 0px;
 }
 
-.c0.c0 > span::first-letter {
+.c0.c0>span::first-letter {
   text-transform: uppercase;
 }
 
@@ -48,7 +37,6 @@ exports[`Borderless Button renders 1`] = `
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
   color: #00CD51;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -78,7 +66,6 @@ exports[`Borderless Button renders 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #00AB44;
   width: 24px;
@@ -90,6 +77,10 @@ exports[`Borderless Button renders 1`] = `
 
 <button
   class="c0"
+  colors="[object Object]"
+  flavour="borderless"
+  padding="2"
+  texttransform="firstLetter"
 >
   <span>
     Test prop text
@@ -99,17 +90,8 @@ exports[`Borderless Button renders 1`] = `
 
 exports[`Button states renders loading icon 1`] = `
 .c0.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   font-weight: 500;
@@ -119,7 +101,6 @@ exports[`Button states renders loading icon 1`] = `
   cursor: pointer;
   pointer-events: auto;
   padding: 8px;
-  -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
   color: #F6F7F7;
@@ -128,16 +109,15 @@ exports[`Button states renders loading icon 1`] = `
   border-color: #00AB44;
   border-radius: 4px;
   box-sizing: border-box;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c0.c0 > span {
+.c0.c0>span {
   text-transform: lowercase;
   margin-left: 4px;
 }
 
-.c0.c0 > span::first-letter {
+.c0.c0>span::first-letter {
   text-transform: uppercase;
 }
 
@@ -145,7 +125,6 @@ exports[`Button states renders loading icon 1`] = `
   border-color: #42B861;
   background-color: #42B861;
   color: #F6F7F7;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -175,7 +154,6 @@ exports[`Button states renders loading icon 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #F6F7F7;
   width: 24px;
@@ -190,7 +168,6 @@ exports[`Button states renders loading icon 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #FFFFFF;
   width: 24px;
@@ -202,6 +179,9 @@ exports[`Button states renders loading icon 1`] = `
 
 <button
   class="c0"
+  colors="[object Object]"
+  padding="2"
+  texttransform="firstLetter"
 >
   <svg
     class="c1 button-icon"
@@ -231,17 +211,8 @@ exports[`Button states renders loading icon 1`] = `
 
 exports[`Button states renders only icon 1`] = `
 .c0.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   font-weight: 500;
@@ -251,7 +222,6 @@ exports[`Button states renders only icon 1`] = `
   cursor: pointer;
   pointer-events: auto;
   padding: 8px;
-  -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
   color: #00AB44;
@@ -260,16 +230,15 @@ exports[`Button states renders only icon 1`] = `
   border-color: #00AB44;
   border-radius: 4px;
   box-sizing: border-box;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c0.c0 > span {
+.c0.c0>span {
   text-transform: lowercase;
   margin-left: 4px;
 }
 
-.c0.c0 > span::first-letter {
+.c0.c0>span::first-letter {
   text-transform: uppercase;
 }
 
@@ -277,7 +246,6 @@ exports[`Button states renders only icon 1`] = `
   border-color: #00AB44;
   background-color: #DDFFEB;
   color: #00AB44;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -307,7 +275,6 @@ exports[`Button states renders only icon 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #00AB44;
   width: 24px;
@@ -325,20 +292,9 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   width: auto;
   height: 100%;
@@ -347,10 +303,16 @@ exports[`Button states renders only icon 1`] = `
 
 <button
   class="c0"
+  colors="[object Object]"
+  flavour="hollow"
+  padding="2"
+  texttransform="firstLetter"
 >
   <div
+    alignitems="center"
     class="c1"
     height="100%"
+    justifycontent="center"
     width="auto"
   >
     <svg
@@ -367,17 +329,8 @@ exports[`Button states renders only icon 1`] = `
 
 exports[`Button states renders smaller only icon 1`] = `
 .c0.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   font-weight: 500;
@@ -387,7 +340,6 @@ exports[`Button states renders smaller only icon 1`] = `
   cursor: pointer;
   pointer-events: auto;
   padding: 4px 12px;
-  -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
   color: #00AB44;
@@ -396,16 +348,15 @@ exports[`Button states renders smaller only icon 1`] = `
   border-color: #00AB44;
   border-radius: 4px;
   box-sizing: border-box;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c0.c0 > span {
+.c0.c0>span {
   text-transform: lowercase;
   margin-left: 4px;
 }
 
-.c0.c0 > span::first-letter {
+.c0.c0>span::first-letter {
   text-transform: uppercase;
 }
 
@@ -413,7 +364,6 @@ exports[`Button states renders smaller only icon 1`] = `
   border-color: #00AB44;
   background-color: #DDFFEB;
   color: #00AB44;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -443,7 +393,6 @@ exports[`Button states renders smaller only icon 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #00AB44;
   width: 24px;
@@ -461,20 +410,9 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   width: auto;
   height: 100%;
@@ -483,10 +421,16 @@ exports[`Button states renders smaller only icon 1`] = `
 
 <button
   class="c0"
+  colors="[object Object]"
+  flavour="hollow"
+  padding="1,3"
+  texttransform="firstLetter"
 >
   <div
+    alignitems="center"
     class="c1"
     height="100%"
+    justifycontent="center"
     width="auto"
   >
     <svg
@@ -503,17 +447,8 @@ exports[`Button states renders smaller only icon 1`] = `
 
 exports[`Default Button renders 1`] = `
 .c0.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   font-weight: 500;
@@ -523,7 +458,6 @@ exports[`Default Button renders 1`] = `
   cursor: pointer;
   pointer-events: auto;
   padding: 8px;
-  -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: #00AB44;
   color: #F6F7F7;
@@ -532,11 +466,10 @@ exports[`Default Button renders 1`] = `
   border-color: #00AB44;
   border-radius: 4px;
   box-sizing: border-box;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c0.c0 > span {
+.c0.c0>span {
   text-transform: full-width;
   margin-left: 0px;
 }
@@ -545,7 +478,6 @@ exports[`Default Button renders 1`] = `
   border-color: #42B861;
   background-color: #42B861;
   color: #F6F7F7;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -575,7 +507,6 @@ exports[`Default Button renders 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #F6F7F7;
   width: 24px;
@@ -587,6 +518,9 @@ exports[`Default Button renders 1`] = `
 
 <button
   class="c0"
+  colors="[object Object]"
+  padding="2"
+  texttransform="fullWidth"
 >
   <span>
     Test prop text
@@ -596,17 +530,8 @@ exports[`Default Button renders 1`] = `
 
 exports[`Hollow Button renders 1`] = `
 .c0.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   position: relative;
   font-weight: 500;
@@ -616,7 +541,6 @@ exports[`Hollow Button renders 1`] = `
   cursor: pointer;
   pointer-events: auto;
   padding: 8px;
-  -webkit-transition: all 150ms;
   transition: all 150ms;
   background-color: rgba(255,255,255,0.0);
   color: #00AB44;
@@ -625,16 +549,15 @@ exports[`Hollow Button renders 1`] = `
   border-color: #00AB44;
   border-radius: 4px;
   box-sizing: border-box;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
-.c0.c0 > span {
+.c0.c0>span {
   text-transform: lowercase;
   margin-left: 0px;
 }
 
-.c0.c0 > span::first-letter {
+.c0.c0>span::first-letter {
   text-transform: uppercase;
 }
 
@@ -642,7 +565,6 @@ exports[`Hollow Button renders 1`] = `
   border-color: #00AB44;
   background-color: #DDFFEB;
   color: #00AB44;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -672,7 +594,6 @@ exports[`Hollow Button renders 1`] = `
   stroke-width: 17px;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
-  -webkit-animation: ntd-draw 1s linear infinite;
   animation: ntd-draw 1s linear infinite;
   stroke: #00AB44;
   width: 24px;
@@ -684,6 +605,10 @@ exports[`Hollow Button renders 1`] = `
 
 <button
   class="c0"
+  colors="[object Object]"
+  flavour="hollow"
+  padding="2"
+  texttransform="firstLetter"
 >
   <span>
     Test prop text

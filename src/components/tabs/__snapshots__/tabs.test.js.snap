@@ -2,63 +2,28 @@
 
 exports[`Tabs states  * should render uncontrolled 1`] = `
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   color: #526161;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: start;
-  -webkit-justify-content: start;
-  -ms-flex-pack: start;
   justify-content: start;
   padding: 0 2px;
   color: #526161;
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
   flex: 1 0 auto;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   color: #526161;
 }
@@ -81,7 +46,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid #00AB44;
 }
 
-.c3 > span {
+.c3>span {
   font-weight: bold;
 }
 
@@ -103,7 +68,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   border-bottom: 4px solid #00AB44;
 }
 
-.c4 > span {
+.c4>span {
   font-weight: normal;
 }
 
@@ -111,28 +76,43 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   class="c0"
 >
   <nav
-    class="c1 tabs tabs"
+    alignitems="center"
+    class="c1 tabs"
+    justifycontent="start"
+    padding="0,0.5"
   >
     <div
+      alignitems="center"
       class="c2 c3"
+      flex="grow"
+      justifycontent="center"
       label="hi"
     >
       hi
     </div>
     <div
+      alignitems="center"
       class="c2 c4"
+      flex="grow"
+      justifycontent="center"
       label="Hi again"
     >
       Hi again
     </div>
     <div
+      alignitems="center"
       class="c2 c4"
+      flex="grow"
+      justifycontent="center"
       label="Bye"
     >
       Bye
     </div>
     <div
+      alignitems="center"
       class="c2 c4"
+      flex="grow"
+      justifycontent="center"
       label="Bye Bye"
     >
       Bye Bye

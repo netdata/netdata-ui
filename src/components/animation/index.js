@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useRef } from "react"
 import styled from "styled-components"
 import { Transition } from "react-transition-group"
 import makeAnimations from "./makeAnimations"
@@ -25,20 +25,28 @@ const Animation = ({
     []
   )
 
+  const ref = useRef()
+
   return (
-    <Transition in={isVisible} timeout={speed} mountOnEnter={!mount} unmountOnExit={!mount}>
+    <Transition
+      nodeRef={ref}
+      in={isVisible}
+      timeout={speed}
+      mountOnEnter={!mount}
+      unmountOnExit={!mount}
+    >
       {transition => {
         const transitionStyling = animations[transition]
 
         if (StyledContainer) {
           return (
-            <StyledContainer transitionStyling={transitionStyling} {...rest}>
+            <StyledContainer transitionStyling={transitionStyling} {...rest} ref={ref}>
               {children({ transition, transitionStyling })}
             </StyledContainer>
           )
         }
 
-        return children({ transition, transitionStyling })
+        return children({ transition, transitionStyling, ref })
       }}
     </Transition>
   )

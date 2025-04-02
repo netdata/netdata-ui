@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react"
+import React from "react"
 import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Icon } from "@/components/icon"
@@ -8,7 +8,7 @@ const MenuContainer = styled(Flex)`
   cursor: pointer;
 `
 
-const MenuButton = forwardRef(({ open, icon, label, caret, ...rest }, ref) => (
+const MenuButton = ({ open, icon, label, caret, ref, ...rest }) => (
   <MenuContainer
     gap={2}
     padding={[2, 4]}
@@ -31,6 +31,6 @@ const MenuButton = forwardRef(({ open, icon, label, caret, ...rest }, ref) => (
       caret
     )}
   </MenuContainer>
-))
+)
 
 export default MenuButton

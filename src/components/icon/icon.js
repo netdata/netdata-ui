@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react"
+import React from "react"
 import { iconsList } from "./iconsList"
 import { StyledIcon } from "./styled"
 
@@ -12,7 +12,7 @@ const getSize = filename => {
   return "medium"
 }
 
-export const Icon = forwardRef(({ name, size, ...rest }, ref) => {
+export const Icon = ({ name, size, ref, ...rest }) => {
   const iconSymbol = iconsList[name]
 
   if (!iconSymbol) {
@@ -26,4 +26,4 @@ export const Icon = forwardRef(({ name, size, ...rest }, ref) => {
       <use xlinkHref={`#${iconSymbol.id}`} />
     </StyledIcon>
   )
-})
+}

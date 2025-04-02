@@ -1,4 +1,4 @@
-import React, { memo, forwardRef, useCallback, useLayoutEffect, useMemo, useRef } from "react"
+import React, { memo, useCallback, useLayoutEffect, useMemo, useRef } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -62,257 +62,255 @@ const tableDefaultProps = {
   virtualizeOptions: {},
 }
 
-const Table = memo(
-  forwardRef((props, ref) => {
-    const {
-      bulkActions,
-      headerChildren,
+const Table = memo(props => {
+  const {
+    bulkActions,
+    headerChildren,
 
-      data,
-      dataColumns,
-      dataGa,
-      enableColumnPinning = tableDefaultProps.enableColumnPinning,
-      columnPinning: defaultColumnPinning,
-      onColumnPinningChange: pinningChangeCb,
+    data,
+    dataColumns,
+    dataGa,
+    enableColumnPinning = tableDefaultProps.enableColumnPinning,
+    columnPinning: defaultColumnPinning,
+    onColumnPinningChange: pinningChangeCb,
 
-      enableColumnVisibility = tableDefaultProps.enableColumnVisibility,
-      columnVisibility: defaultColumnVisibility,
-      onColumnVisibilityChange: visibilityChangeCb = tableDefaultProps.onColumnVisibilityChange,
+    enableColumnVisibility = tableDefaultProps.enableColumnVisibility,
+    columnVisibility: defaultColumnVisibility,
+    onColumnVisibilityChange: visibilityChangeCb = tableDefaultProps.onColumnVisibilityChange,
 
-      enableColumnSizing,
-      columnSizing: defaultColumnSizing,
-      onColumnSizingChange: sizingChangeCb,
+    enableColumnSizing,
+    columnSizing: defaultColumnSizing,
+    onColumnSizingChange: sizingChangeCb,
 
-      enablePagination,
-      enableResizing = tableDefaultProps.enableResizing,
-      enableSelection,
-      enableSubRowSelection,
-      rowSelection: defaultRowSelection = tableDefaultProps.rowSelection,
-      onRowSelectionChange: rowSelectionChangeCb,
+    enablePagination,
+    enableResizing = tableDefaultProps.enableResizing,
+    enableSelection,
+    enableSubRowSelection,
+    rowSelection: defaultRowSelection = tableDefaultProps.rowSelection,
+    onRowSelectionChange: rowSelectionChangeCb,
 
-      expanded: defaultExpanded = tableDefaultProps.expanded,
-      onExpandedChange: expandedChangeCb = tableDefaultProps.onExpandedChange,
+    expanded: defaultExpanded = tableDefaultProps.expanded,
+    onExpandedChange: expandedChangeCb = tableDefaultProps.onExpandedChange,
 
-      enableSorting,
-      sortBy,
-      onSortingChange: sortingChangeCb = tableDefaultProps.onSortingChange,
+    enableSorting,
+    sortBy,
+    onSortingChange: sortingChangeCb = tableDefaultProps.onSortingChange,
 
-      globalFilter: defaultGlobalFilter = tableDefaultProps.globalFilter,
-      onSearch,
-      globalFilterFn = tableDefaultProps.globalFilterFn,
-      enableCustomSearch,
+    globalFilter: defaultGlobalFilter = tableDefaultProps.globalFilter,
+    onSearch,
+    globalFilterFn = tableDefaultProps.globalFilterFn,
+    enableCustomSearch,
 
-      grouping: defaultGrouping,
-      onGroupByChange: groupingChangeCb,
-      groupByColumns,
+    grouping: defaultGrouping,
+    onGroupByChange: groupingChangeCb,
+    groupByColumns,
 
-      onRowSelected,
+    onRowSelected,
 
-      paginationOptions = tableDefaultProps.paginationOptions,
-      onPaginationChange: paginationChangeCb,
+    paginationOptions = tableDefaultProps.paginationOptions,
+    onPaginationChange: paginationChangeCb,
 
-      rowActions = tableDefaultProps.rowActions,
-      testPrefix = tableDefaultProps.testPrefix,
-      meta: tableMeta = tableDefaultProps.meta,
-      title,
-      virtualizeOptions = tableDefaultProps.virtualizeOptions,
-      tableRef,
-      className,
-      width,
-      getRowCanExpand,
-      getRowId,
-      ...rest
-    } = { ...tableDefaultProps, ...props }
+    rowActions = tableDefaultProps.rowActions,
+    testPrefix = tableDefaultProps.testPrefix,
+    meta: tableMeta = tableDefaultProps.meta,
+    title,
+    virtualizeOptions = tableDefaultProps.virtualizeOptions,
+    tableRef,
+    className,
+    width,
+    getRowCanExpand,
+    getRowId,
+    ref,
+    ...rest
+  } = { ...tableDefaultProps, ...props }
 
-    const [columnVisibility, onColumnVisibilityChange] = useVisibility(
-      defaultColumnVisibility,
-      visibilityChangeCb
-    )
+  const [columnVisibility, onColumnVisibilityChange] = useVisibility(
+    defaultColumnVisibility,
+    visibilityChangeCb
+  )
 
-    const [columnSizing, onColumnSizingChange] = useSizing(defaultColumnSizing, sizingChangeCb)
+  const [columnSizing, onColumnSizingChange] = useSizing(defaultColumnSizing, sizingChangeCb)
 
-    const [columnPinning, onColumnPinningChange] = usePinning(defaultColumnPinning, pinningChangeCb)
+  const [columnPinning, onColumnPinningChange] = usePinning(defaultColumnPinning, pinningChangeCb)
 
-    const [expanded, onExpandedChange] = useExpanding(defaultExpanded, expandedChangeCb)
+  const [expanded, onExpandedChange] = useExpanding(defaultExpanded, expandedChangeCb)
 
-    const [rowSelection, onRowSelectionChange] = useSelecting(
-      defaultRowSelection,
-      rowSelectionChangeCb
-    )
+  const [rowSelection, onRowSelectionChange] = useSelecting(
+    defaultRowSelection,
+    rowSelectionChangeCb
+  )
 
-    const [sorting, onSortingChange] = useSorting(sortBy, sortingChangeCb)
+  const [sorting, onSortingChange] = useSorting(sortBy, sortingChangeCb)
 
-    const [pagination, onPaginationChange] = usePaginating(paginationOptions, paginationChangeCb)
+  const [pagination, onPaginationChange] = usePaginating(paginationOptions, paginationChangeCb)
 
-    const [grouping, onGroupingChange] = useGrouping(defaultGrouping, groupingChangeCb)
+  const [grouping, onGroupingChange] = useGrouping(defaultGrouping, groupingChangeCb)
 
-    const [globalFilter, onGlobalFilterChange] = useSearching(defaultGlobalFilter, onSearch)
+  const [globalFilter, onGlobalFilterChange] = useSearching(defaultGlobalFilter, onSearch)
 
-    const columns = useColumns(dataColumns, {
-      testPrefix,
-      enableSelection,
-      enableResizing,
-      enableSorting,
-      rowActions,
-      tableMeta,
-    })
+  const columns = useColumns(dataColumns, {
+    testPrefix,
+    enableSelection,
+    enableResizing,
+    enableSorting,
+    rowActions,
+    tableMeta,
+  })
 
-    const table = useReactTable({
-      columns,
-      data,
-      manualPagination: !enablePagination,
-      columnResizeMode: "onEnd",
-      filterFns,
-      state: {
-        columnVisibility,
-        columnSizing,
-        rowSelection,
-        globalFilter: enableCustomSearch ? "" : globalFilter,
-        sorting,
-        pagination,
-        columnPinning,
-        expanded,
-        grouping: useMemo(
-          () =>
-            Array.isArray(grouping)
-              ? [grouping].filter(Boolean)
-              : groupByColumns?.[grouping]?.columns || [],
-          [grouping]
-        ),
-        columnOrder: [],
-      },
-      onExpandedChange,
-      ...(!enableCustomSearch && globalFilterFn ? { globalFilterFn } : {}),
-      getCoreRowModel: getCoreRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      onRowSelectionChange,
-      onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
-      onSortingChange,
-      enableMultiSorting: true,
-      isMultiSortEvent: e => e.ctrlKey || e.shiftKey || e.metaKey,
-      getSortedRowModel: getSortedRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      getExpandedRowModel: getExpandedRowModel(),
-      getRowCanExpand,
-      autoResetExpanded: false,
-      getGroupedRowModel: getGroupedRowModel(),
-      getSubRows: useCallback(row => row.children, []),
-      onPaginationChange,
-      onColumnVisibilityChange,
-      onColumnSizingChange,
-      onColumnPinningChange,
-      enableSubRowSelection,
-      columnGroupingMode: "reorder",
-      getRowId,
-    })
+  const table = useReactTable({
+    columns,
+    data,
+    manualPagination: !enablePagination,
+    columnResizeMode: "onEnd",
+    filterFns,
+    state: {
+      columnVisibility,
+      columnSizing,
+      rowSelection,
+      globalFilter: enableCustomSearch ? "" : globalFilter,
+      sorting,
+      pagination,
+      columnPinning,
+      expanded,
+      grouping: useMemo(
+        () =>
+          Array.isArray(grouping)
+            ? [grouping].filter(Boolean)
+            : groupByColumns?.[grouping]?.columns || [],
+        [grouping]
+      ),
+      columnOrder: [],
+    },
+    onExpandedChange,
+    ...(!enableCustomSearch && globalFilterFn ? { globalFilterFn } : {}),
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onRowSelectionChange,
+    onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
+    onSortingChange,
+    enableMultiSorting: true,
+    isMultiSortEvent: e => e.ctrlKey || e.shiftKey || e.metaKey,
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getRowCanExpand,
+    autoResetExpanded: false,
+    getGroupedRowModel: getGroupedRowModel(),
+    getSubRows: useCallback(row => row.children, []),
+    onPaginationChange,
+    onColumnVisibilityChange,
+    onColumnSizingChange,
+    onColumnPinningChange,
+    enableSubRowSelection,
+    columnGroupingMode: "reorder",
+    getRowId,
+  })
 
-    const prevStateRef = useRef(table.getState())
-    table.isEqual = (selector = identity) => {
-      if (!prevStateRef.current) {
-        prevStateRef.current = table.getState()
-        return false
-      }
-
-      const areStatesEqual = isEqual(selector(prevStateRef.current), selector(table.getState()))
-
+  const prevStateRef = useRef(table.getState())
+  table.isEqual = (selector = identity) => {
+    if (!prevStateRef.current) {
       prevStateRef.current = table.getState()
-      return areStatesEqual
+      return false
     }
 
-    const dispatch = useTableDispatch()
+    const areStatesEqual = isEqual(selector(prevStateRef.current), selector(table.getState()))
 
-    const dispatchThrottled = useCallback(throttle(10, dispatch), [])
+    prevStateRef.current = table.getState()
+    return areStatesEqual
+  }
 
-    useLayoutEffect(() => {
-      dispatchThrottled({
-        ...table.getState(),
-        rowsById: table.getRowModel().rowsById,
-        table,
-        selectedRows: table.getSelectedRowModel().flatRows,
-      })
-    }, [table.getState()])
+  const dispatch = useTableDispatch()
 
-    if (tableRef) tableRef.current = table
+  const dispatchThrottled = useCallback(throttle(10, dispatch), [])
 
-    const { getHasNextPage, loading, warning } = virtualizeOptions
+  useLayoutEffect(() => {
+    dispatchThrottled({
+      ...table.getState(),
+      rowsById: table.getRowModel().rowsById,
+      table,
+      selectedRows: table.getSelectedRowModel().flatRows,
+    })
+  }, [table.getState()])
 
-    return (
-      <Flex
-        height={{ max: "100%" }}
-        overflow="hidden"
-        column
-        flex="1"
-        ref={ref}
-        className={className}
-        width={width}
+  if (tableRef) tableRef.current = table
+
+  const { getHasNextPage, loading, warning } = virtualizeOptions
+
+  return (
+    <Flex
+      height={{ max: "100%" }}
+      overflow="hidden"
+      column
+      flex="1"
+      ref={ref}
+      className={className}
+      width={width}
+    >
+      <Header
+        q={globalFilter}
+        hasSearch={!!onSearch}
+        onSearch={onGlobalFilterChange}
+        groupByColumns={groupByColumns}
+        onGroupBy={onGroupingChange}
+        grouping={grouping}
+        tableMeta={tableMeta}
+        title={title}
+        dataColumns={dataColumns}
+        enableColumnVisibility={enableColumnVisibility}
+        bulkActions={bulkActions}
+        enableCustomSearch={enableCustomSearch}
       >
-        <Header
-          q={globalFilter}
-          hasSearch={!!onSearch}
-          onSearch={onGlobalFilterChange}
-          groupByColumns={groupByColumns}
-          onGroupBy={onGroupingChange}
-          grouping={grouping}
-          tableMeta={tableMeta}
-          title={title}
-          dataColumns={dataColumns}
-          enableColumnVisibility={enableColumnVisibility}
+        {headerChildren || null}
+        <HeaderActions
+          rowSelection={rowSelection}
           bulkActions={bulkActions}
-          enableCustomSearch={enableCustomSearch}
-        >
-          {headerChildren || null}
-          <HeaderActions
-            rowSelection={rowSelection}
-            bulkActions={bulkActions}
-            columnPinning={columnPinning}
-            dataGa={dataGa}
-            enableColumnVisibility={enableColumnVisibility}
-            enableColumnPinning={enableColumnPinning}
-            table={table}
-            testPrefix={testPrefix}
-            onRowSelected={onRowSelected}
-          />
-        </Header>
-        <Body
-          table={table}
+          columnPinning={columnPinning}
           dataGa={dataGa}
+          enableColumnVisibility={enableColumnVisibility}
+          enableColumnPinning={enableColumnPinning}
+          table={table}
           testPrefix={testPrefix}
-          meta={tableMeta}
-          {...rest}
-          {...virtualizeOptions}
+          onRowSelected={onRowSelected}
         />
-        {!getHasNextPage?.() && !loading && !!warning && (
-          <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
-            <Icon name="warning_triangle_hollow" color="warning" />{" "}
-            <Text color="warningText">{warning}</Text>
+      </Header>
+      <Body
+        table={table}
+        dataGa={dataGa}
+        testPrefix={testPrefix}
+        meta={tableMeta}
+        {...rest}
+        {...virtualizeOptions}
+      />
+      {!getHasNextPage?.() && !loading && !!warning && (
+        <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
+          <Icon name="warning_triangle_hollow" color="warning" />{" "}
+          <Text color="warningText">{warning}</Text>
+        </Flex>
+      )}
+      {loading && (
+        <Layer
+          backdrop={false}
+          position="bottom"
+          margin={[0, 0, 10]}
+          padding={[0, 0, 10]}
+          zIndex={20}
+        >
+          <Flex background="tooltip" padding={[1, 2]} gap={2}>
+            <Text strong>Loading more...</Text>
           </Flex>
-        )}
-        {loading && (
-          <Layer
-            backdrop={false}
-            position="bottom"
-            margin={[0, 0, 10]}
-            padding={[0, 0, 10]}
-            zIndex={20}
-          >
-            <Flex background="tooltip" padding={[1, 2]} gap={2}>
-              <Text strong>Loading more...</Text>
-            </Flex>
-          </Layer>
-        )}
-        {enablePagination && <Pagination table={table} />}
-      </Flex>
-    )
-  })
-)
+        </Layer>
+      )}
+      {enablePagination && <Pagination table={table} />}
+    </Flex>
+  )
+})
 
-const withProvider = Component =>
-  forwardRef((props, ref) => {
-    return (
-      <TableProvider>
-        <Component {...props} ref={ref} />
-      </TableProvider>
-    )
-  })
+const withProvider = Component => props => {
+  return (
+    <TableProvider>
+      <Component {...props} />
+    </TableProvider>
+  )
+}
 
 export default withProvider(Table)

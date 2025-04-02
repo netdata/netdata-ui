@@ -22,7 +22,7 @@ export default (children, ref, childProps) =>
       ...childProps,
       ref: node => {
         setRef(ref, node)
-        setRef(child.ref, node)
+        setRef(child.props.ref, node)
       },
     })
   }, [children, childProps.open])

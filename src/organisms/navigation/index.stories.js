@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react"
+import React, { useState } from "react"
 import { Tabs, Tab, TabSeparator, Sortable } from "."
 import { Text } from "@/components/typography"
 import { Icon, Flex } from "@/index"
@@ -79,7 +79,7 @@ export const TabbedNavigation = () => {
             onTabClose={onClose}
             items={dynamicTabs}
             onResize={(...args) => console.log(...args)}
-            Item={forwardRef(({ icon, title, index, ...rest }, ref) => (
+            Item={({ icon, title, index, ref, ...rest }) => (
               <Tab
                 ref={ref}
                 {...rest}
@@ -92,7 +92,7 @@ export const TabbedNavigation = () => {
               >
                 <Text truncate>{title}</Text>
               </Tab>
-            ))}
+            )}
           />
         </Tabs>
       </Flex>
