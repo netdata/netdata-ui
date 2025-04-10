@@ -14,6 +14,7 @@ const reverseXPosition = align => {
   if (align.left === "right") return { right: "left" }
   if (align.right === "right") return { left: "left" }
   if (align.right === "left") return { left: "right" }
+  return align
 }
 
 const getXPosition = (align, targetRect, dropRect, canHideTarget = true) => {
@@ -48,6 +49,7 @@ const reverseYPosition = align => {
   if (align.top === "bottom") return { bottom: "top" }
   if (align.bottom === "bottom") return { top: "top" }
   if (align.bottom === "top") return { top: "bottom" }
+  return align
 }
 
 const getYPosition = (align, targetRect, dropRect, canHideTarget = true) => {
