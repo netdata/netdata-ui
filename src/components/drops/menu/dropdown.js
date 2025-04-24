@@ -30,6 +30,7 @@ const Dropdown = ({
   gap = 0,
   estimateSize = defaultEstimateSize,
   close,
+  containerRef,
   ref: forwardedRef,
   ...rest
 }) => {
@@ -69,6 +70,7 @@ const Dropdown = ({
       column
       tabindex="-1"
       width="auto"
+      ref={containerRef}
       {...rest}
     >
       {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}

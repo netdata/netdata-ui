@@ -78,7 +78,6 @@ const Table = memo(props => {
     columnVisibility: defaultColumnVisibility,
     onColumnVisibilityChange: visibilityChangeCb = tableDefaultProps.onColumnVisibilityChange,
 
-    enableColumnSizing,
     columnSizing: defaultColumnSizing,
     onColumnSizingChange: sizingChangeCb,
 
@@ -221,7 +220,7 @@ const Table = memo(props => {
 
   const dispatch = useTableDispatch()
 
-  const dispatchThrottled = useCallback(throttle(10, dispatch), [])
+  const dispatchThrottled = useCallback(throttle(300, dispatch), [])
 
   useLayoutEffect(() => {
     dispatchThrottled({

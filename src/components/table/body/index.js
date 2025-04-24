@@ -155,7 +155,8 @@ const Body = memo(
         </div>
       </div>
     )
-  }
+  },
+  () => true
 )
 
 export default Body
