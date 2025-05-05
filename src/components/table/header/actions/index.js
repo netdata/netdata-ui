@@ -16,8 +16,8 @@ const useSelectedRowsObserver = (table, { onRowSelected = noop, rowSelection }) 
   useEffect(() => {
     const { flatRows } = table.getSelectedRowModel()
     if (flatRows) {
-      const selected = flatRows.reduce((acc, { original, subRows }) => {
-        if (original?.disabled || !!subRows?.length) return acc
+      const selected = flatRows.reduce((acc, { original }) => {
+        if (original?.disabled) return acc
 
         acc.push(original)
         return acc
