@@ -17,7 +17,7 @@ const useSelectedRowsObserver = (table, { onRowSelected = noop, rowSelection }) 
     const { flatRows } = table.getSelectedRowModel()
     if (flatRows) {
       const selected = flatRows.reduce((acc, { original }) => {
-        if (original?.disabled) return acc
+        if (original?.disabled || original?.unselectable) return acc
 
         acc.push(original)
         return acc
