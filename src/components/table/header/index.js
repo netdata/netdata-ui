@@ -32,6 +32,7 @@ const Header = ({
 
   return (
     <Flex
+      data-noprint
       width="100%"
       zIndex={10}
       background="mainBackground"
