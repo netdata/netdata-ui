@@ -3,7 +3,13 @@ import useDebounce from "@/hooks/useDebounce"
 import { TextInput } from "@/components/input"
 import { Icon } from "@/components/icon"
 
-const SearchInput = ({ value: defaultValue, setSearchTerm, setSearchView, controlled }) => {
+const SearchInput = ({
+  value: defaultValue,
+  setSearchTerm,
+  setSearchView,
+  controlled,
+  ...props
+}) => {
   const [value, setValue] = useState(defaultValue)
 
   useDebounce(
@@ -31,6 +37,7 @@ const SearchInput = ({ value: defaultValue, setSearchTerm, setSearchView, contro
       placeholder="Search Netdata’s docs & community"
       autoFocus
       iconLeft={<Icon name="search_s" size="small" color={value ? "text" : "border"} />}
+      {...props}
     />
   )
 }
