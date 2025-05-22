@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import add_node from "./assets/add_node.svg"
 import add_user from "./assets/add_user.svg"
 import aggregation_avg from "./assets/aggregation_avg.svg"
@@ -338,6 +337,7 @@ import serviceX509Check from "./assets/services/x509_check.svg"
 import serviceXen from "./assets/services/xen.svg"
 import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
+import share from "./assets/share.svg"
 import sign_in from "./assets/sign_in.svg"
 import sorting_vertical from "./assets/sorting_vertical.svg"
 import sorting_asc from "./assets/sorting_asc.svg"
@@ -745,6 +745,7 @@ export const iconsList = {
   serviceXen,
   settings,
   settings_h,
+  share,
   sign_in,
   sorting_vertical,
   sort_ascending,
