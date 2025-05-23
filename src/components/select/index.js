@@ -1,8 +1,9 @@
-import React, { useMemo } from "react"
+import React, { useRef, useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
 import { Icon } from "@/components/icon"
+import { useVirtualizer } from "@tanstack/react-virtual"
 
 const useDataAttrs = (props, name) => {
   const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
@@ -81,6 +82,57 @@ const customComponents = {
   SelectContainer: withDataAttrs(defaultComponents.SelectContainer, "SelectContainer"),
   SingleValue: withDataAttrs(defaultComponents.SingleValue, "SingleValue"),
   ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
+}
+
+const VirtualizedMenuList = props => {
+  const parentRef = useRef()
+
+  const virtualizer = useVirtualizer({
+    count: props.options.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 20,
+    overscan: 5,
+  })
+
+  const virtualItems = virtualizer.getVirtualItems()
+
+  return (
+    <customComponents.MenuList
+      {...props}
+      innerRef={parentRef}
+      styles={{
+        height: "300px",
+        overflow: "auto",
+        position: "relative",
+      }}
+    >
+      <div
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          position: "relative",
+        }}
+      >
+        {virtualItems.map(virtualRow => {
+          return (
+            <div
+              key={virtualRow.key}
+              style={{
+                transform: `translateY(${virtualRow.start}px)`,
+                top: 0,
+                left: 0,
+                right: 0,
+                position: "absolute",
+              }}
+              data-index={virtualRow.index}
+              ref={virtualizer.measureElement}
+            >
+              {props.children[virtualRow.index]}
+            </div>
+          )
+        })}
+      </div>
+    </customComponents.MenuList>
+  )
 }
 
 const makeCustomTheme = theme => selectTheme => {
@@ -215,7 +267,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
 
 const getAttrs = props => ({
   ...props,
-  components: { ...customComponents, ...props.components },
+  components: { ...customComponents, MenuList: VirtualizedMenuList, ...props.components },
   theme: makeCustomTheme(props.theme),
   styles: makeCustomStyles(props.theme, props.styles),
 })
