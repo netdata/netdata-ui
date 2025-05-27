@@ -65,7 +65,10 @@ const Tab = ({
   )
 
   const renderIcon = useCallback(
-    iconProp => React.cloneElement(iconProp, { color: active ? "text" : "textLite" }),
+    iconProp =>
+      React.cloneElement(iconProp, {
+        color: iconProp?.props?.color ? iconProp.props.color : active ? "text" : "textLite",
+      }),
     [active]
   )
 
