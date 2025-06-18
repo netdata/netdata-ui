@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react"
+import React, { useRef, useMemo, useEffect, memo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
@@ -84,6 +84,23 @@ const customComponents = {
   ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
 }
 
+const VirtualItem = memo(({ virtualRow, child, measureElement }) => (
+  <div
+    key={virtualRow.key}
+    style={{
+      transform: `translateY(${virtualRow.start}px)`,
+      top: 0,
+      left: 0,
+      right: 0,
+      position: "absolute",
+    }}
+    data-index={virtualRow.index}
+    ref={measureElement}
+  >
+    {child}
+  </div>
+))
+
 const VirtualizedMenuList = props => {
   const parentRef = useRef()
 
@@ -112,24 +129,14 @@ const VirtualizedMenuList = props => {
           position: "relative",
         }}
       >
-        {virtualItems.map(virtualRow => {
-          return (
-            <div
-              key={virtualRow.key}
-              style={{
-                transform: `translateY(${virtualRow.start}px)`,
-                top: 0,
-                left: 0,
-                right: 0,
-                position: "absolute",
-              }}
-              data-index={virtualRow.index}
-              ref={virtualizer.measureElement}
-            >
-              {props.children[virtualRow.index]}
-            </div>
-          )
-        })}
+        {virtualItems.map(virtualRow => (
+          <VirtualItem
+            key={virtualRow.key}
+            virtualRow={virtualRow}
+            child={props.children[virtualRow.index]}
+            measureElement={virtualizer.measureElement}
+          />
+        ))}
       </div>
     </customComponents.MenuList>
   )
@@ -265,9 +272,11 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   ...providedStyles,
 })
 
+const components = { ...customComponents, MenuList: VirtualizedMenuList }
+
 const getAttrs = props => ({
   ...props,
-  components: { ...customComponents, MenuList: VirtualizedMenuList, ...props.components },
+  components: props.components ? { ...components, ...props.components } : components,
   theme: makeCustomTheme(props.theme),
   styles: makeCustomStyles(props.theme, props.styles),
 })
@@ -276,8 +285,8 @@ const SelectComponent = styled(ReactSelect).attrs(getAttrs)``
 const CreatableComponent = styled(Creatable).attrs(getAttrs)``
 
 const Select = ({ isCreatable, ...props }) => {
-  const Component = isCreatable ? CreatableComponent : SelectComponent
-  return <Component {...props} />
+  if (isCreatable) return <CreatableComponent {...props} />
+  return <SelectComponent {...props} />
 }
 
 export default Select
