@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, memo } from "react"
+import React, { useRef, useMemo, memo, useState, useEffect } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
@@ -101,7 +101,7 @@ const VirtualItem = memo(({ virtualRow, child, measureElement }) => (
   </div>
 ))
 
-const VirtualList = memo(({ optionsLength, children, parentRef }) => {
+const VirtualList = memo(({ optionsLength, children, parentRef, setIsMounted }) => {
   const virtualizer = useVirtualizer({
     count: optionsLength,
     getScrollElement: () => parentRef.current,
@@ -110,6 +110,11 @@ const VirtualList = memo(({ optionsLength, children, parentRef }) => {
   })
 
   const virtualItems = virtualizer.getVirtualItems()
+
+  useEffect(() => {
+    const timeoutId = setTimeout(setIsMounted(true), 0)
+    return () => clearTimeout(timeoutId)
+  }, [setIsMounted])
 
   return (
     <div
@@ -131,6 +136,7 @@ const VirtualList = memo(({ optionsLength, children, parentRef }) => {
 })
 
 const VirtualizedMenuList = props => {
+  const [isMounted, setIsMounted] = useState(false)
   const parentRef = useRef()
 
   return (
@@ -143,7 +149,12 @@ const VirtualizedMenuList = props => {
         position: "relative",
       }}
     >
-      <VirtualList parentRef={parentRef} optionsLength={props.options.length}>
+      <VirtualList
+        parentRef={parentRef}
+        optionsLength={props.options.length}
+        isMounted={isMounted}
+        setIsMounted={setIsMounted}
+      >
         {props.children}
       </VirtualList>
     </customComponents.MenuList>
