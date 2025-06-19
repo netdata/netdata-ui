@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect, memo } from "react"
+import React, { useRef, useMemo, memo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
