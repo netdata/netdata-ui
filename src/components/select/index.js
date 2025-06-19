@@ -101,17 +101,37 @@ const VirtualItem = memo(({ virtualRow, child, measureElement }) => (
   </div>
 ))
 
-const VirtualizedMenuList = props => {
-  const parentRef = useRef()
-
+const VirtualList = memo(({ optionsLength, children, parentRef }) => {
   const virtualizer = useVirtualizer({
-    count: props.options.length,
+    count: optionsLength,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 20,
     overscan: 5,
   })
 
   const virtualItems = virtualizer.getVirtualItems()
+
+  return (
+    <div
+      style={{
+        height: `${virtualizer.getTotalSize()}px`,
+        position: "relative",
+      }}
+    >
+      {virtualItems.map(virtualRow => (
+        <VirtualItem
+          key={virtualRow.key}
+          virtualRow={virtualRow}
+          child={children[virtualRow.index]}
+          measureElement={virtualizer.measureElement}
+        />
+      ))}
+    </div>
+  )
+})
+
+const VirtualizedMenuList = props => {
+  const parentRef = useRef()
 
   return (
     <customComponents.MenuList
@@ -123,21 +143,9 @@ const VirtualizedMenuList = props => {
         position: "relative",
       }}
     >
-      <div
-        style={{
-          height: `${virtualizer.getTotalSize()}px`,
-          position: "relative",
-        }}
-      >
-        {virtualItems.map(virtualRow => (
-          <VirtualItem
-            key={virtualRow.key}
-            virtualRow={virtualRow}
-            child={props.children[virtualRow.index]}
-            measureElement={virtualizer.measureElement}
-          />
-        ))}
-      </div>
+      <VirtualList parentRef={parentRef} optionsLength={props.options.length}>
+        {props.children}
+      </VirtualList>
     </customComponents.MenuList>
   )
 }
