@@ -12,7 +12,7 @@ const Search = ({ value: defaultValue = "", onChange, onReset, placeholder, ref,
   useDebounce(
     () => {
       if (value === defaultValue && typeof prevValue === "undefined") return
-      onChange(value)
+      onChange?.(value)
     },
     300,
     [value]
@@ -41,6 +41,7 @@ const Search = ({ value: defaultValue = "", onChange, onReset, placeholder, ref,
       onChange={e => setValue(e.target.value)}
       placeholder={placeholder}
       size="small"
+      title="search"
       {...rest}
     />
   )
