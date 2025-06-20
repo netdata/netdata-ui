@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, memo, useState, useEffect } from "react"
+import React, { useRef, useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
@@ -84,7 +84,7 @@ const customComponents = {
   ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
 }
 
-const VirtualItem = memo(({ virtualRow, child, measureElement }) => (
+const VirtualItem = ({ virtualRow, child }) => (
   <div
     key={virtualRow.key}
     style={{
@@ -95,26 +95,20 @@ const VirtualItem = memo(({ virtualRow, child, measureElement }) => (
       position: "absolute",
     }}
     data-index={virtualRow.index}
-    ref={measureElement}
   >
     {child}
   </div>
-))
+)
 
-const VirtualList = memo(({ optionsLength, children, parentRef, setIsMounted }) => {
+const VirtualList = ({ children, parentRef }) => {
   const virtualizer = useVirtualizer({
-    count: optionsLength,
+    count: children.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 20,
+    estimateSize: () => 35,
     overscan: 5,
   })
 
   const virtualItems = virtualizer.getVirtualItems()
-
-  useEffect(() => {
-    const timeoutId = setTimeout(setIsMounted(true), 0)
-    return () => clearTimeout(timeoutId)
-  }, [setIsMounted])
 
   return (
     <div
@@ -128,15 +122,13 @@ const VirtualList = memo(({ optionsLength, children, parentRef, setIsMounted }) 
           key={virtualRow.key}
           virtualRow={virtualRow}
           child={children[virtualRow.index]}
-          measureElement={virtualizer.measureElement}
         />
       ))}
     </div>
   )
-})
+}
 
 const VirtualizedMenuList = props => {
-  const [isMounted, setIsMounted] = useState(false)
   const parentRef = useRef()
 
   return (
@@ -149,14 +141,7 @@ const VirtualizedMenuList = props => {
         position: "relative",
       }}
     >
-      <VirtualList
-        parentRef={parentRef}
-        optionsLength={props.options.length}
-        isMounted={isMounted}
-        setIsMounted={setIsMounted}
-      >
-        {props.children}
-      </VirtualList>
+      <VirtualList parentRef={parentRef}>{props.children}</VirtualList>
     </customComponents.MenuList>
   )
 }
