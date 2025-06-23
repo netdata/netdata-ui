@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useCallback, useState } from "react"
 import DropdownFilter from "./dropdown"
 
 import Box from "@/components/templates/box"
@@ -18,27 +18,42 @@ const ComparisonFilter = ({ column }) => {
   const { setFilterValue, getFilterValue } = column
 
   const filterValue = getFilterValue()
+  const [query, setQuery] = useState(filterValue?.[1] || "")
 
   useEffect(() => {
     setFilterValue(old => [Comparisons[0], old?.[1]])
   }, [])
+
+  const handleComparisonChange = useCallback(value => {
+    setFilterValue(old => [value, old?.[1]])
+  }, [setFilterValue])
+
+  const debouncedSetFilter = useCallback(
+    debounce(300, value => {
+      setFilterValue(old => [old?.[0], value])
+    }),
+    [setFilterValue]
+  )
+
+  const handleValueChange = useCallback(e => {
+    const value = e.target.value
+    setQuery(value)
+    debouncedSetFilter(value)
+  }, [debouncedSetFilter])
 
   return (
     <Flex gap={2}>
       <DropdownFilter
         value={filterValue ? filterValue[0] : Comparisons[0]}
         options={Comparisons}
-        onChange={value => setFilterValue(old => [value, old?.[1]])}
+        onChange={handleComparisonChange}
       />
 
       <Box
         as={TextInput}
         width={{ max: 50 }}
-        value={filterValue ? filterValue[1] : null}
-        onChange={debounce(300, e => {
-          e.persist()
-          setFilterValue(old => [old?.[0], e.target.value])
-        })}
+        value={query}
+        onChange={handleValueChange}
         pattern="[0-9]*(.[0-9]+)?"
         inputMode="decimal"
         size="tiny"

@@ -14,8 +14,9 @@ export default (defaultColumnVisibility = emptyObj, onChange = noop) => {
 
   const onVisibilityChange = useCallback(
     getValue => {
-      onChange(getValue(columnVisibility))
-      setColumnVisibility(getValue(columnVisibility))
+      const newValue = getValue(columnVisibility)
+      onChange(newValue)
+      setColumnVisibility(newValue)
     },
     [columnVisibility]
   )

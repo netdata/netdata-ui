@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useMemo } from "react"
 import DropdownFilter from "./dropdown"
 
 const all = { value: "all", label: "All" }
@@ -7,7 +7,10 @@ const SelectFilter = ({ column, isMulti = false, options = [], tiny = true, ...r
   const { setFilterValue, getFilterValue } = column
   const filterValue = getFilterValue()
 
-  const optionsWithExtraChoice = isMulti ? options : [all, ...options]
+  const optionsWithExtraChoice = useMemo(() => 
+    isMulti ? options : [all, ...options],
+    [isMulti, options]
+  )
   const selectedValue = isMulti ? filterValue : optionsWithExtraChoice[0]
   const [val, setVal] = useState(filterValue ? filterValue : selectedValue)
 

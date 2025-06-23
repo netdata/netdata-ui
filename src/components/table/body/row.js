@@ -5,15 +5,19 @@ import { useTableState } from "../provider"
 const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
   const { column } = cell
 
-  const tableMeta =
+  const tableMeta = useMemo(() =>
     typeof column.columnDef.tableMeta === "function"
       ? column.columnDef.tableMeta({}, column, row.index)
-      : column.columnDef.tableMeta
+      : column.columnDef.tableMeta,
+    [column.columnDef.tableMeta, column, row.index]
+  )
 
-  const meta =
+  const meta = useMemo(() =>
     typeof column.columnDef.meta === "function"
       ? column.columnDef.meta({}, column, row.index)
-      : column.columnDef.meta
+      : column.columnDef.meta,
+    [column.columnDef.meta, column, row.index]
+  )
 
   const cellStyles = {
     ...(tableMeta?.styles || {}),
@@ -72,6 +76,10 @@ export default memo(
   }) => {
     useTableState(rerenderSelector)
 
+    const leftHeaders = useMemo(() => table.getLeftLeafHeaders(), [table])
+    const centerHeaders = useMemo(() => table.getCenterLeafHeaders(), [table])
+    const rightHeaders = useMemo(() => table.getRightLeafHeaders(), [table])
+
     const isClickable = useMemo(() => {
       if (typeof onClickRow !== "function") return false
 
@@ -125,7 +133,7 @@ export default memo(
                     row={row}
                     key={cell.id}
                     testPrefix={testPrefix}
-                    header={table.getLeftLeafHeaders()[index]}
+                    header={leftHeaders[index]}
                     {...rest}
                   />
                 ))}
@@ -146,7 +154,7 @@ export default memo(
                     row={row}
                     key={cell.id}
                     testPrefix={testPrefix}
-                    header={table.getCenterLeafHeaders()[index]}
+                    header={centerHeaders[index]}
                     {...rest}
                   />
                 ))}
@@ -172,7 +180,7 @@ export default memo(
                     row={row}
                     key={cell.id}
                     testPrefix={testPrefix}
-                    header={table.getRightLeafHeaders()[index]}
+                    header={rightHeaders[index]}
                     {...rest}
                   />
                 ))}

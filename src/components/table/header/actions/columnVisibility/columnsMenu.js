@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState, useMemo } from "react"
 import Drop from "@/components/drops/drop/index.js"
 import Flex from "@/components/templates/flex"
 import { ListItem, Text } from "@/components/typography"
 import { Checkbox } from "@/components/checkbox"
+import SearchInput from "@/components/search"
 
 const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
   const checked = column.getIsVisible()
@@ -20,6 +21,24 @@ const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
 }
 
 const ColumnsMenu = ({ dataGa, parentRef, isOpen, columns, onClose, pinnedColumns }) => {
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const filteredColumns = useMemo(() => {
+    if (!searchQuery) return columns
+    return columns.filter(column => {
+      const name = column.columnDef.name || column.id
+      return name.toLowerCase().includes(searchQuery.toLowerCase())
+    })
+  }, [columns, searchQuery])
+
+  const filteredPinnedColumns = useMemo(() => {
+    if (!searchQuery) return pinnedColumns
+    return pinnedColumns.filter(column => {
+      const name = column.columnDef.name || column.id
+      return name.toLowerCase().includes(searchQuery.toLowerCase())
+    })
+  }, [pinnedColumns, searchQuery])
+
   if (parentRef.current && isOpen)
     return (
       <Drop
@@ -44,8 +63,16 @@ const ColumnsMenu = ({ dataGa, parentRef, isOpen, columns, onClose, pinnedColumn
           <Text color="textLite">Edit columns</Text>
         </Flex>
 
+        <Flex padding={[2, 3]}>
+          <SearchInput
+            placeholder="Search columns..."
+            onChange={setSearchQuery}
+            value={searchQuery}
+          />
+        </Flex>
+
         <Flex column padding={[1, 3]}>
-          {pinnedColumns.length ? (
+          {filteredPinnedColumns.length ? (
             <Flex
               border={{
                 size: "1px",
@@ -55,12 +82,12 @@ const ColumnsMenu = ({ dataGa, parentRef, isOpen, columns, onClose, pinnedColumn
               }}
               column
             >
-              {pinnedColumns.map(pinnedColumn => (
+              {filteredPinnedColumns.map(pinnedColumn => (
                 <ColumnsMenuItem column={pinnedColumn} dataGa={dataGa} key={pinnedColumn.id} />
               ))}
             </Flex>
           ) : null}
-          {columns.map(column => (
+          {filteredColumns.map(column => (
             <ColumnsMenuItem column={column} dataGa={dataGa} key={column.id} />
           ))}
         </Flex>

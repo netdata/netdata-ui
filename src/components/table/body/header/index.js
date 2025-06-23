@@ -4,16 +4,12 @@ import { useTableState } from "../../provider"
 import Cell from "./cell"
 
 const rerenderSelector = state => {
-  const columns = state.table?.getAllColumns?.() || []
-
   return {
     sizing: state.columnSizing,
     expanded: state.expanded,
     columnVisibility: state.columnVisibility,
     selectedRows: state.selectedRows,
     grouping: state.grouping,
-    columnsCount: columns.length,
-    columnsFilters: columns.map(({ columnDef }) => columnDef?.meta?.filter?.options),
   }
 }
 

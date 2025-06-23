@@ -223,10 +223,15 @@ const Table = memo(props => {
   const dispatchThrottled = useCallback(throttle(300, dispatch), [])
 
   useLayoutEffect(() => {
+    const state = table.getState()
     dispatchThrottled({
-      ...table.getState(),
+      sorting: state.sorting,
+      columnSizing: state.columnSizing,
+      expanded: state.expanded,
+      grouping: state.grouping,
+      columnVisibility: state.columnVisibility,
+      columnSizingInfo: state.columnSizingInfo,
       rowsById: table.getRowModel().rowsById,
-      table,
       selectedRows: table.getSelectedRowModel().flatRows,
     })
   }, [table.getState()])

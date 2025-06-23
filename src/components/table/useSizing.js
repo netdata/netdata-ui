@@ -16,8 +16,9 @@ export default (defaultColumnSizing = emptyObj, onChange = noop) => {
 
   const onSizingChange = useCallback(
     getValue => {
-      onChange(getValue(columnSizing))
-      setColumnSizing(getValue(columnSizing))
+      const newValue = getValue(columnSizing)
+      onChange(newValue)
+      setColumnSizing(newValue)
     },
     [columnSizing]
   )
