@@ -4,7 +4,20 @@ import Flex from "@/components/templates/flex"
 
 const width = 32
 
-export default (enabled, { testPrefix, tableMeta }) =>
+const Header = ({ table, testPrefix }) => (
+  <Flex width={4}>
+    <Checkbox
+      data-testid={`netdata-table-header-checkbox${testPrefix}`}
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={checked => {
+        table.getToggleAllRowsSelectedHandler()({ target: { checked } })
+      }}
+    />
+  </Flex>
+)
+
+export default (enabled, { testPrefix, tableMeta, singleRowSelection }) =>
   useMemo(
     () =>
       enabled
@@ -12,18 +25,8 @@ export default (enabled, { testPrefix, tableMeta }) =>
             id: "checkbox",
             enableHiding: false,
             enableResizing: false,
-            header: ({ table }) => (
-              <Flex width={4}>
-                <Checkbox
-                  data-testid={`netdata-table-header-checkbox${testPrefix}`}
-                  checked={table.getIsAllRowsSelected()}
-                  indeterminate={table.getIsSomeRowsSelected()}
-                  onChange={checked => {
-                    table.getToggleAllRowsSelectedHandler()({ target: { checked } })
-                  }}
-                />
-              </Flex>
-            ),
+            header: ({ table }) =>
+              !singleRowSelection ? <Header table={table} testPrefix={testPrefix} /> : null,
             cell: ({ row }) =>
               row.original?.disabled !== "hidden" && (
                 <Checkbox
@@ -46,5 +49,5 @@ export default (enabled, { testPrefix, tableMeta }) =>
             tableMeta,
           }
         : null,
-    [enabled]
+    [enabled, testPrefix, tableMeta, singleRowSelection]
   )

@@ -87,6 +87,7 @@ const Table = memo(props => {
     enableSubRowSelection,
     rowSelection: defaultRowSelection = tableDefaultProps.rowSelection,
     onRowSelectionChange: rowSelectionChangeCb,
+    singleRowSelection,
 
     expanded: defaultExpanded = tableDefaultProps.expanded,
     onExpandedChange: expandedChangeCb = tableDefaultProps.onExpandedChange,
@@ -150,6 +151,7 @@ const Table = memo(props => {
   const columns = useColumns(dataColumns, {
     testPrefix,
     enableSelection,
+    singleRowSelection,
     enableResizing,
     enableSorting,
     rowActions,

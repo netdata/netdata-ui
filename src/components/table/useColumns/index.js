@@ -4,10 +4,22 @@ import useRowActions from "./useRowActions"
 
 export default (
   dataColumns,
-  { rowActions, enableSelection, enableResizing, enableSorting, testPrefix, tableMeta }
+  {
+    rowActions,
+    enableSelection,
+    singleRowSelection,
+    enableResizing,
+    enableSorting,
+    testPrefix,
+    tableMeta,
+  }
 ) => {
   const rowActionsColumn = useRowActions(rowActions, { testPrefix, tableMeta })
-  const selectionColumn = useRowSelection(enableSelection, { testPrefix, tableMeta })
+  const selectionColumn = useRowSelection(enableSelection, {
+    testPrefix,
+    tableMeta,
+    singleRowSelection,
+  })
 
   return useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
