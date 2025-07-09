@@ -1,5 +1,6 @@
 import React, { useMemo } from "react"
 import { Checkbox } from "@/components/checkbox"
+import RadioButton from "@/components/radio-button"
 import Flex from "@/components/templates/flex"
 
 const width = 32
@@ -17,6 +18,37 @@ const Header = ({ table, testPrefix }) => (
   </Flex>
 )
 
+const Cell = ({ row, singleRowSelection, testPrefix }) => {
+  if (row.original?.disabled === "hidden") return null
+
+  if (singleRowSelection)
+    return (
+      <RadioButton
+        data-testid={`netdata-table-cell-radio-button${testPrefix}`}
+        checked={!row.original?.disabled && row.getIsSelected()}
+        name="netdata-table-row-radio-button-selection"
+        onChange={e => {
+          e?.stopPropagation?.()
+          row.getToggleSelectedHandler()({ target: { checked: e.target.checked } })
+        }}
+        disabled={row.original?.disabled || false}
+      />
+    )
+
+  return (
+    <Checkbox
+      data-testid={`netdata-table-cell-checkbox${testPrefix}`}
+      checked={!row.original?.disabled && row.getIsSelected()}
+      indeterminate={row.getIsSomeSelected()}
+      onChange={(checked, e) => {
+        e?.stopPropagation?.()
+        row.getToggleSelectedHandler()({ target: { checked } })
+      }}
+      disabled={row.original?.disabled || false}
+    />
+  )
+}
+
 export default (enabled, { testPrefix, tableMeta, singleRowSelection }) =>
   useMemo(
     () =>
@@ -27,19 +59,9 @@ export default (enabled, { testPrefix, tableMeta, singleRowSelection }) =>
             enableResizing: false,
             header: ({ table }) =>
               !singleRowSelection ? <Header table={table} testPrefix={testPrefix} /> : null,
-            cell: ({ row }) =>
-              row.original?.disabled !== "hidden" && (
-                <Checkbox
-                  data-testid={`netdata-table-cell-checkbox${testPrefix}`}
-                  checked={!row.original?.disabled && row.getIsSelected()}
-                  indeterminate={row.getIsSomeSelected()}
-                  onChange={(checked, e) => {
-                    e?.stopPropagation?.()
-                    row.getToggleSelectedHandler()({ target: { checked } })
-                  }}
-                  disabled={row.original?.disabled || false}
-                />
-              ),
+            cell: ({ row }) => (
+              <Cell row={row} singleRowSelection={singleRowSelection} testPrefix={testPrefix} />
+            ),
             enableColumnFilter: false,
             enableSorting: false,
             size: width,
