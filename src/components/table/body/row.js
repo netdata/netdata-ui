@@ -5,17 +5,19 @@ import { useTableState } from "../provider"
 const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
   const { column } = cell
 
-  const tableMeta = useMemo(() =>
-    typeof column.columnDef.tableMeta === "function"
-      ? column.columnDef.tableMeta({}, column, row.index)
-      : column.columnDef.tableMeta,
+  const tableMeta = useMemo(
+    () =>
+      typeof column.columnDef.tableMeta === "function"
+        ? column.columnDef.tableMeta({}, column, row.index)
+        : column.columnDef.tableMeta,
     [column.columnDef.tableMeta, column, row.index]
   )
 
-  const meta = useMemo(() =>
-    typeof column.columnDef.meta === "function"
-      ? column.columnDef.meta({}, column, row.index)
-      : column.columnDef.meta,
+  const meta = useMemo(
+    () =>
+      typeof column.columnDef.meta === "function"
+        ? column.columnDef.meta({}, column, row.index)
+        : column.columnDef.meta,
     [column.columnDef.meta, column, row.index]
   )
 

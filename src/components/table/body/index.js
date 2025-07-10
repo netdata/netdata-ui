@@ -15,24 +15,25 @@ const rerenderSelector = state => ({
   grouping: state.grouping,
 })
 
-const Body = memo(({
-  dataGa,
-  table,
-  testPrefix,
-  testPrefixCallback,
-  coloredSortedColumn,
-  meta,
-  overscan,
-  getHasNextPage = noop,
-  getHasPrevPage = noop,
-  getItemKey = identity,
-  loading,
-  loadMore = noop,
-  onVirtualChange,
-  virtualRef,
-  initialOffset = 0,
-  ...rest
-}) => {
+const Body = memo(
+  ({
+    dataGa,
+    table,
+    testPrefix,
+    testPrefixCallback,
+    coloredSortedColumn,
+    meta,
+    overscan,
+    getHasNextPage = noop,
+    getHasPrevPage = noop,
+    getItemKey = identity,
+    loading,
+    loadMore = noop,
+    onVirtualChange,
+    virtualRef,
+    initialOffset = 0,
+    ...rest
+  }) => {
     useTableState(rerenderSelector)
     const ref = useRef()
 
@@ -154,6 +155,7 @@ const Body = memo(({
         </div>
       </div>
     )
-  })
+  }
+)
 
 export default Body

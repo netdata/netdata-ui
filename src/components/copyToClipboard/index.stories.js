@@ -10,35 +10,36 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "A component that wraps children with click-to-copy functionality and shows a fade-out tooltip with feedback."
-      }
-    }
+        component:
+          "A component that wraps children with click-to-copy functionality and shows a fade-out tooltip with feedback.",
+      },
+    },
   },
   argTypes: {
     text: {
       description: "The text to copy to clipboard",
-      control: "text"
+      control: "text",
     },
     disabled: {
       description: "Whether the copy functionality is disabled",
-      control: "boolean"
-    }
-  }
+      control: "boolean",
+    },
+  },
 }
 
-const Template = (args) => <CopyToClipboard {...args} />
+const Template = args => <CopyToClipboard {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
   text: "Hello, World!",
   children: <Text>Click me to copy</Text>,
-  disabled: false
+  disabled: false,
 }
 
 export const WithTextSmall = Template.bind({})
 WithTextSmall.args = {
   text: "system.cpu.usage",
-  children: <TextSmall color="textLite">system.cpu.usage</TextSmall>
+  children: <TextSmall color="textLite">system.cpu.usage</TextSmall>,
 }
 
 export const WithIcon = Template.bind({})
@@ -49,7 +50,7 @@ WithIcon.args = {
       <Icon name="copy" size="small" />
       <Text>Copy text</Text>
     </Box>
-  )
+  ),
 }
 
 export const ChartContextExample = Template.bind({})
@@ -58,28 +59,26 @@ ChartContextExample.args = {
   children: (
     <Box display="flex" alignItems="center" gap={1}>
       <H3>System Overview</H3>
-      <CopyToClipboard
-        text="system.cpu, system.memory, system.disk"
-      >
+      <CopyToClipboard text="system.cpu, system.memory, system.disk">
         <TextSmall color="textLite" style={{ cursor: "pointer" }}>
           • system.cpu, system.memory, system.disk
         </TextSmall>
       </CopyToClipboard>
     </Box>
-  )
+  ),
 }
 
 export const LongText = Template.bind({})
 LongText.args = {
   text: "This is a very long piece of text that demonstrates copying longer content to the clipboard. It includes multiple sentences and should work just as well as shorter text.",
-  children: <Text>Copy long text</Text>
+  children: <Text>Copy long text</Text>,
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
   text: "This won't be copied",
   children: <Text style={{ opacity: 0.5 }}>Disabled copy</Text>,
-  disabled: true
+  disabled: true,
 }
 
 export const MultipleExamples = () => (
@@ -102,7 +101,6 @@ export const WithCallbacks = Template.bind({})
 WithCallbacks.args = {
   text: "Callback example",
   children: <Text>Copy with callbacks</Text>,
-  onCopy: (text) => console.log("Copied:", text),
-  onError: (error) => console.error("Copy failed:", error)
+  onCopy: text => console.log("Copied:", text),
+  onError: error => console.error("Copy failed:", error),
 }
-

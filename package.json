@@ -29,7 +29,8 @@
     "to-charts": "yarn build && yarn cp-charts",
     "prepublishOnly": "yarn clean && yarn build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write \"**/*.{js,mjs}\""
   },
   "keywords": [
     "netdata",

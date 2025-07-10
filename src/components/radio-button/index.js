@@ -28,10 +28,10 @@ const RadioButton = ({
     disabled && !checked
       ? "disabled"
       : checked && disabled
-      ? "checkedDisabled"
-      : checked
-      ? "checked"
-      : "default"
+        ? "checkedDisabled"
+        : checked
+          ? "checked"
+          : "default"
 
   const radioStyles = React.useMemo(() => {
     return radioButtonStyles[radioStatus]

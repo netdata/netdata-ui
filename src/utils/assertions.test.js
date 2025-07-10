@@ -4,7 +4,7 @@ describe("assertions", () => {
   describe("isFunction", () => {
     it("returns true for functions", () => {
       expect(isFunction(() => {})).toBe(true)
-      expect(isFunction(function() {})).toBe(true)
+      expect(isFunction(function () {})).toBe(true)
       expect(isFunction(async () => {})).toBe(true)
       expect(isFunction(Math.max)).toBe(true)
     })
@@ -49,7 +49,7 @@ describe("assertions", () => {
 
     it("returns true for functions", () => {
       expect(isObject(() => {})).toBe(true)
-      expect(isObject(function() {})).toBe(true)
+      expect(isObject(function () {})).toBe(true)
     })
 
     it("returns false for arrays", () => {
@@ -88,14 +88,14 @@ describe("assertions", () => {
 
     it("returns true for functions with no enumerable properties", () => {
       expect(isEmptyObject(() => {})).toBe(true)
-      expect(isEmptyObject(function() {})).toBe(true)
+      expect(isEmptyObject(function () {})).toBe(true)
     })
 
     it("returns false for objects with inherited properties", () => {
       function Constructor() {}
       Constructor.prototype.inherited = "value"
       const instance = new Constructor()
-      
+
       expect(isEmptyObject(instance)).toBe(true) // only checks own properties
     })
 
@@ -103,9 +103,9 @@ describe("assertions", () => {
       const obj = {}
       Object.defineProperty(obj, "hidden", {
         value: "secret",
-        enumerable: false
+        enumerable: false,
       })
-      
+
       expect(isEmptyObject(obj)).toBe(true) // Object.keys only gets enumerable properties
     })
   })

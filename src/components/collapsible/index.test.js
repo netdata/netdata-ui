@@ -35,7 +35,11 @@ it("toggles off", async () => {
 
 it("toggles off and persists", async () => {
   const children = jest.fn().mockReturnValue("hello")
-  const { getByText, rerender } = renderWithProviders(<Collapsible open persist>{children}</Collapsible>)
+  const { getByText, rerender } = renderWithProviders(
+    <Collapsible open persist>
+      {children}
+    </Collapsible>
+  )
   rerender(<Collapsible>{children}</Collapsible>)
   await waitForElementToBeRemoved(() => getByText("hello"))
   expect(children).toBeCalledTimes(2)

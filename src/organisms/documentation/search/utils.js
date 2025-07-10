@@ -1,4 +1,5 @@
-const domainRegexp = /^https:\/\/((learn.netdata).cloud|www.(netdata.cloud)|github.com\/netdata\/(netdata-cloud)|github.com\/netdata\/(netdata))/
+const domainRegexp =
+  /^https:\/\/((learn.netdata).cloud|www.(netdata.cloud)|github.com\/netdata\/(netdata-cloud)|github.com\/netdata\/(netdata))/
 
 export const getResultsByKey = results => {
   return results.reduce((acc, result) => {

@@ -24,9 +24,12 @@ const ComparisonFilter = ({ column }) => {
     setFilterValue(old => [Comparisons[0], old?.[1]])
   }, [])
 
-  const handleComparisonChange = useCallback(value => {
-    setFilterValue(old => [value, old?.[1]])
-  }, [setFilterValue])
+  const handleComparisonChange = useCallback(
+    value => {
+      setFilterValue(old => [value, old?.[1]])
+    },
+    [setFilterValue]
+  )
 
   const debouncedSetFilter = useCallback(
     debounce(300, value => {
@@ -35,11 +38,14 @@ const ComparisonFilter = ({ column }) => {
     [setFilterValue]
   )
 
-  const handleValueChange = useCallback(e => {
-    const value = e.target.value
-    setQuery(value)
-    debouncedSetFilter(value)
-  }, [debouncedSetFilter])
+  const handleValueChange = useCallback(
+    e => {
+      const value = e.target.value
+      setQuery(value)
+      debouncedSetFilter(value)
+    },
+    [debouncedSetFilter]
+  )
 
   return (
     <Flex gap={2}>
