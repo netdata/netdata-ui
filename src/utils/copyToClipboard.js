@@ -35,7 +35,9 @@ export default async text => {
     } else {
       isSuccess = document.execCommand("copy")
     }
-  } catch {}
+  } catch {
+    /* empty */
+  }
 
   element.remove()
 
