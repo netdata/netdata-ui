@@ -3,11 +3,13 @@ import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { Input, LabelText } from "./styled"
 
-const ErrorMessage = ({ error }) => {
+const ErrorMessage = ({ error, ...props }) => {
   const errorMessage = error === true ? "invalid" : error
 
   return typeof errorMessage === "string" ? (
-    <TextMicro color="errorText">{errorMessage}</TextMicro>
+    <TextMicro color="errorText" {...props}>
+      {errorMessage}
+    </TextMicro>
   ) : (
     !!errorMessage && errorMessage
   )
@@ -32,6 +34,7 @@ export const TextInput = ({
   containerStyles,
   inputContainerStyles,
   hideErrorMessage,
+  errorMessageProps = {},
   ...props
 }) => {
   return (
@@ -70,7 +73,7 @@ export const TextInput = ({
         )}
       </Flex>
       {typeof hint === "string" ? <TextMicro color="textLite">{hint}</TextMicro> : !!hint && hint}
-      {!hideErrorMessage ? <ErrorMessage error={error} /> : null}
+      {!hideErrorMessage ? <ErrorMessage error={error} {...errorMessageProps} /> : null}
     </Flex>
   )
 }
