@@ -235,6 +235,7 @@ const Table = memo(props => {
       columnSizingInfo: state.columnSizingInfo,
       rowsById: table.getRowModel().rowsById,
       selectedRows: table.getSelectedRowModel().flatRows,
+      allColumns: table?.getAllColumns?.(),
     })
   }, [table.getState()])
 

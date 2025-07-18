@@ -85,6 +85,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
               isVisible = true,
               dataGa,
               disabledTooltipText,
+              tooltipText,
               ...rest
             }) => (
               <Action
@@ -96,6 +97,9 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
                   typeof disabledTooltipText === "function"
                     ? disabledTooltipText(row.original)
                     : disabledTooltipText
+                }
+                tooltipText={
+                  typeof tooltipText === "function" ? tooltipText(row.original) : tooltipText
                 }
                 key={id}
                 id={id}

@@ -76,11 +76,11 @@ export default memo(
     renderSubComponent,
     ...rest
   }) => {
-    useTableState(rerenderSelector)
+    const { columnVisibility } = useTableState(rerenderSelector)
 
-    const leftHeaders = useMemo(() => table.getLeftLeafHeaders(), [table])
-    const centerHeaders = useMemo(() => table.getCenterLeafHeaders(), [table])
-    const rightHeaders = useMemo(() => table.getRightLeafHeaders(), [table])
+    const leftHeaders = useMemo(() => table.getLeftLeafHeaders(), [table, columnVisibility])
+    const centerHeaders = useMemo(() => table.getCenterLeafHeaders(), [table, columnVisibility])
+    const rightHeaders = useMemo(() => table.getRightLeafHeaders(), [table, columnVisibility])
 
     const isClickable = useMemo(() => {
       if (typeof onClickRow !== "function") return false
