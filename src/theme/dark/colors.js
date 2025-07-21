@@ -30,6 +30,7 @@ const appColors = {
   neutralHighlight: rawColors.neutral.grey50,
   // Buttons - AI
   primaryAI: rawColors.blue.blue130,
+  accentAI: rawColors.blue.blue150,
   primaryHighlightAI: rawColors.blue.blue130,
   secondaryColorAI: rawColors.blue.blue140,
   secondaryHighlightAI: rawColors.blue.blue70,
