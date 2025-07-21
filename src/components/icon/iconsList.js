@@ -6,6 +6,7 @@ import aggregation_med from "./assets/aggregation_med.svg"
 import aggregation_min from "./assets/aggregation_min.svg"
 import aggregation_sum from "./assets/aggregation_sum.svg"
 import aggregation_sum_abs from "./assets/aggregation_sum_abs.svg"
+import ai from "./assets/ai.svg"
 import alarm from "./assets/alarm.svg"
 import alarmCritical from "./assets/alarm_c.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
@@ -408,6 +409,7 @@ export const iconsList = {
   aggregation_min,
   aggregation_sum,
   aggregation_sum_abs,
+  ai,
   alarm,
   alarmCritical,
   alarmCriticalWarning,

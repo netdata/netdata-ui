@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import { lighten, darken } from "polished"
-import { getColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
+import { getColor as themeGetColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
 import margin from "@/mixins/margin"
 import padding from "@/mixins/padding"
 import round from "@/mixins/round"
@@ -30,6 +30,11 @@ const withTheme = props => {
     }
   }
   return { ...props, theme: props.theme }
+}
+
+const getColor = name => props => {
+  const prop = props?.colorPalette?.[name] || name
+  return themeGetColor(prop)(props)
 }
 
 const getPrimaryColor = props =>
