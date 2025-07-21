@@ -108,7 +108,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
 export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
     padding: props.padding || props.tiny ? [0.5, 1] : props.small ? [1, 3] : [2],
-    colors: colorsByFlavour(props),
+    colors: { ...colorsByFlavour(props), ...(props.colors || {}) },
     round: groupFirst ? { side: "left" } : groupLast ? { side: "right" } : !groupMiddle,
     ...withTheme(props),
   })
