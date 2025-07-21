@@ -20,14 +20,19 @@ const appColors = {
   modalInfoBackground: rawColors.neutral.grey50,
   menuItemSelected: rawColors.green.green30,
   menuItemHover: rawColors.green.green10,
-  //links
+  // Links
   link: rawColors.green.green110,
   linkHover: rawColors.green.green120,
-  //Buttons
+  // Buttons
   primaryHighlight: rawColors.green.green100,
   secondaryColor: rawColors.green.green110,
   secondaryHighlight: rawColors.green.green40,
   neutralHighlight: rawColors.neutral.grey50,
+  // Buttons - AI
+  primaryAI: rawColors.blue.blue130,
+  primaryHighlightAI: rawColors.blue.blue130,
+  secondaryColorAI: rawColors.blue.blue140,
+  secondaryHighlightAI: rawColors.blue.blue70,
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
