@@ -121,7 +121,7 @@ export default memo(
                 position="sticky"
                 left={0}
                 border={{ side: "right" }}
-                zIndex={zIndex || 1}
+                zIndex={zIndex || 10}
                 basis={`${table.getLeftTotalSize()}px`}
                 flex={false}
                 background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
@@ -167,7 +167,7 @@ export default memo(
                 position="sticky"
                 right={0}
                 border={{ side: "left" }}
-                zIndex={zIndex || 1}
+                zIndex={zIndex || 10}
                 basis={`${table.getRightTotalSize()}px`}
                 flex={false}
                 background={index % 2 === 0 ? "tableRowBg2" : "tableRowBg"}
