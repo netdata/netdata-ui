@@ -29,6 +29,7 @@ const Action = ({
   iconColor,
   flavour = "borderless",
   CustomUIAction,
+  CustomComponent,
   label,
   TooltipComponent = Tooltip,
   ref,
@@ -56,7 +57,7 @@ const Action = ({
     handleAction?.()
   }
 
-  const Component = label ? Button : IconButton
+  const Component = CustomComponent || (label ? Button : IconButton)
 
   return (
     <>
@@ -108,6 +109,7 @@ const Action = ({
             iconColor={iconColor}
             label={label}
             padding={[0.5]}
+            data={currentRow?.original || selectedRows}
             {...rest}
           />
         </Flex>
