@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 
 import Tooltip from "@/components/drops/tooltip"
 import Flex from "@/components/templates/flex"
@@ -59,6 +59,38 @@ const Action = ({
 
   const Component = CustomComponent || (label ? Button : IconButton)
 
+  const componentProps = useMemo(
+    () => ({
+      iconSize: "small",
+      "data-testid": `netdata-table-action-${id}${testPrefix}`,
+      "data-ga": dataGa,
+      disabled: disabled,
+      onClick: onActionClicked,
+      icon,
+      flavour,
+      iconColor,
+      label,
+      padding: [0.5],
+      ...(CustomComponent ? { data: currentRow?.original || selectedRows } : {}),
+      ...rest,
+    }),
+    [
+      id,
+      testPrefix,
+      dataGa,
+      disabled,
+      onActionClicked,
+      icon,
+      flavour,
+      iconColor,
+      label,
+      currentRow?.original,
+      selectedRows,
+      CustomComponent,
+      rest,
+    ]
+  )
+
   return (
     <>
       {isConfirmationOpen && CustomUIAction && (
@@ -98,20 +130,7 @@ const Action = ({
           round
           background={label ? null : background}
         >
-          <Component
-            iconSize="small"
-            data-testid={`netdata-table-action-${id}${testPrefix}`}
-            data-ga={dataGa}
-            disabled={disabled}
-            onClick={onActionClicked}
-            icon={icon}
-            flavour={flavour}
-            iconColor={iconColor}
-            label={label}
-            padding={[0.5]}
-            data={currentRow?.original || selectedRows}
-            {...rest}
-          />
+          <Component {...componentProps} />
         </Flex>
       </TooltipComponent>
     </>
