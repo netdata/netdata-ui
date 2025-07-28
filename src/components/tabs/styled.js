@@ -16,7 +16,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   alignItems: "center",
   padding: [0, 0.5],
   flex: false,
-  border: props.noDefaultBorder && {
+  border: !props.noDefaultBorder && {
     side: "bottom",
     size: "1px",
     type: "solid",
@@ -27,22 +27,35 @@ export const StyledTabs = styled(Flex).attrs(props => ({
 
 export const StyledTab = styled(Flex).attrs(props => ({ flex: "grow", ...props }))`
   white-space: nowrap;
-  border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid
+  border-bottom: ${({ small, green }) => (green ? "1px" : small ? "2px" : "4px")} solid
     ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
   box-sizing: border-box;
 
   min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
-  height: ${({ small }) => (small ? getSizeBy(4) : getSizeBy(6))};
-  color: ${getColor("text")};
+  height: ${({ small, green }) =>
+    green ? (small ? getSizeBy(3) : getSizeBy(4)) : small ? getSizeBy(4) : getSizeBy(6)};
+  color: ${props =>
+    props.green
+      ? props.active
+        ? getColor("primary")(props)
+        : getColor("menuItem")(props)
+      : getColor("text")(props)};
   font-weight: ${({ active }) => (active ? "bold" : "normal")};
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+  background: ${props =>
+    props.green
+      ? props.active
+        ? getColor("menuItemSelected")(props)
+        : getColor("modalBackground")(props)
+      : "transparent"};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   &:hover {
-    border-bottom: ${({ small }) => (small ? "2px" : "4px")} solid ${getColor("primary")};
+    border-bottom: ${({ small, green }) => (green ? "1px" : small ? "2px" : "4px")} solid
+      ${getColor("primary")};
   }
 
   & > span {
