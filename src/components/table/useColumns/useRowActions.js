@@ -66,7 +66,6 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
   return useMemo(
     () => ({
       id: "actions",
-      enableHiding: false,
       enableResizing: false,
       header: "Actions",
       cell: ({ row, table }) => (
@@ -74,7 +73,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
           data-testid="action-cell"
           height="100%"
           gap={2}
-          justifyContent="end"
+          flex={false}
           onClick={e => e.stopPropagation()}
         >
           {availableRowActions.map(
@@ -114,13 +113,14 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       enableColumnFilter: false,
       enableSorting: false,
       tableMeta,
-      size: availableRowActions.length * 35 < 60 ? 60 : availableRowActions.length * 35,
+      size: availableRowActions.length * 35 < 40 ? 40 : availableRowActions.length * 35,
+      align: "end",
+      notFlex: true,
       meta: {
         cellStyles: {
           justifyContent: "end",
         },
       },
-      notFlex: true,
     }),
     [availableRowActions]
   )

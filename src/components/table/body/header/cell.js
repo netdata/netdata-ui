@@ -11,20 +11,12 @@ import Filter from "./filter"
 
 const Label = styled(Text)`
   width: 100%;
-  transition: transform 200ms ease;
+
   * {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
   }
-  ${({ sorting }) => sorting && "transform: translateX(12px);"}
-  ${({ sortable }) =>
-    sortable &&
-    `
-    &:hover {
-      transform: translateX(12px);
-    }
-  `}
 `
 
 const LabelContainer = styled(Flex)`
@@ -97,7 +89,6 @@ const BodyHeaderCell = ({
           overflow="hidden"
           width="100%"
         >
-          <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
           {column.isPlaceholder ? null : (
             <Label
               as={column.columnDef.labelAs}
@@ -108,6 +99,7 @@ const BodyHeaderCell = ({
               {flexRender(column.columnDef.header, header.getContext())}
             </Label>
           )}
+          <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
         </LabelContainer>
         <Filter column={column} testPrefix={testPrefix} index={index} />
       </Flex>

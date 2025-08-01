@@ -32,6 +32,7 @@ const Body = memo(
     onVirtualChange,
     virtualRef,
     initialOffset = 0,
+    onScroll,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -100,6 +101,7 @@ const Body = memo(
           // maxWidth: `min(${table.getTotalSize()}, 100%)`, // WHY: Removing since it causes issues with fullWidth cells
         }}
         data-testid={`netdata-table${testPrefix}`}
+        onScroll={onScroll}
       >
         <div
           style={{

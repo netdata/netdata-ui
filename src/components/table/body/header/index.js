@@ -1,7 +1,9 @@
 import React, { memo } from "react"
+import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
 import Cell from "./cell"
+import { Handler } from "./resizeHandler"
 
 const rerenderSelector = state => {
   const columns = state.allColumns || []
@@ -23,7 +25,7 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, ...rest }) => {
       id={id}
       data-testid={`netdata-table-headRow${testPrefix}`}
       flex
-      background="tableRowBg2"
+      background="tableRowBg"
       rowReverse={rowReverse}
     >
       {headers.map((header, index) => (
@@ -72,11 +74,21 @@ const HeaderGroups = ({ groups, size, side, flex = "grow", ...rest }) => {
   )
 }
 
+const HeaderRow = styled(Flex)`
+  ${Handler} {
+    display: none;
+  }
+
+  &:hover ${Handler} {
+    display: block;
+  }
+`
+
 const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
   useTableState(rerenderSelector)
 
   return (
-    <Flex
+    <HeaderRow
       data-testid={`netdata-table-head${testPrefix}`}
       flex
       border={{
@@ -112,7 +124,7 @@ const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
         table={table}
         rowReverse
       />
-    </Flex>
+    </HeaderRow>
   )
 })
 
