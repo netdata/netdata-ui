@@ -5,6 +5,14 @@ import { ListItem, Text } from "@/components/typography"
 import { Checkbox } from "@/components/checkbox"
 import SearchInput from "@/components/search"
 
+const filterColumns = (columns, searchQuery) => {
+  if (!searchQuery) return columns
+  return columns.filter(column => {
+    const name = column.columnDef.name || column.id
+    return name.toLowerCase().includes(searchQuery.toLowerCase())
+  })
+}
+
 const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
   const checked = column.getIsVisible()
   return (
@@ -12,7 +20,13 @@ const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
       <Checkbox
         checked={checked}
         disabled={disabled}
-        label={column.columnDef.name || column.id}
+        label={
+          column.columnDef.name ||
+          (typeof column.columnDef.headerString === "function"
+            ? column.columnDef.headerString()
+            : column.columnDef.headerString) ||
+          column.id
+        }
         onChange={val => column.getToggleVisibilityHandler()({ target: { checked: val } })}
         data-ga={`columns-menu::click-${checked ? "disable" : "enable"}-${column.id}-::${dataGa}`}
       />
@@ -20,24 +34,49 @@ const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
   )
 }
 
-const ColumnsMenu = ({ dataGa, parentRef, isOpen, columns, onClose, pinnedColumns }) => {
+const ColumnsSection = ({ columns, searchQuery, dataGa, title, showBorder }) => {
+  const filteredColumns = useMemo(() => filterColumns(columns, searchQuery), [columns, searchQuery])
+
+  if (filteredColumns.length === 0) return null
+
+  return (
+    <Flex
+      column
+      border={
+        showBorder
+          ? {
+              size: "1px",
+              type: "solid",
+              side: "bottom",
+              color: "borderSecondary",
+            }
+          : undefined
+      }
+    >
+      {title && (
+        <Flex padding={[2, 0, 1]}>
+          <Text color="textDescription" strong>
+            {title}
+          </Text>
+        </Flex>
+      )}
+      {filteredColumns.map(column => (
+        <ColumnsMenuItem column={column} dataGa={dataGa} key={column.id} />
+      ))}
+    </Flex>
+  )
+}
+
+const ColumnsMenu = ({
+  dataGa,
+  parentRef,
+  isOpen,
+  columns,
+  columnGroups,
+  onClose,
+  pinnedColumns,
+}) => {
   const [searchQuery, setSearchQuery] = useState("")
-
-  const filteredColumns = useMemo(() => {
-    if (!searchQuery) return columns
-    return columns.filter(column => {
-      const name = column.columnDef.name || column.id
-      return name.toLowerCase().includes(searchQuery.toLowerCase())
-    })
-  }, [columns, searchQuery])
-
-  const filteredPinnedColumns = useMemo(() => {
-    if (!searchQuery) return pinnedColumns
-    return pinnedColumns.filter(column => {
-      const name = column.columnDef.name || column.id
-      return name.toLowerCase().includes(searchQuery.toLowerCase())
-    })
-  }, [pinnedColumns, searchQuery])
 
   if (parentRef.current && isOpen)
     return (
@@ -72,24 +111,26 @@ const ColumnsMenu = ({ dataGa, parentRef, isOpen, columns, onClose, pinnedColumn
         </Flex>
 
         <Flex column padding={[1, 3]}>
-          {filteredPinnedColumns.length ? (
-            <Flex
-              border={{
-                size: "1px",
-                type: "solid",
-                side: "bottom",
-                color: "borderSecondary",
-              }}
-              column
-            >
-              {filteredPinnedColumns.map(pinnedColumn => (
-                <ColumnsMenuItem column={pinnedColumn} dataGa={dataGa} key={pinnedColumn.id} />
-              ))}
-            </Flex>
-          ) : null}
-          {filteredColumns.map(column => (
-            <ColumnsMenuItem column={column} dataGa={dataGa} key={column.id} />
-          ))}
+          <ColumnsSection
+            columns={pinnedColumns}
+            searchQuery={searchQuery}
+            dataGa={dataGa}
+            title="Pinned"
+            showBorder
+          />
+          {columnGroups?.length ? (
+            columnGroups.map(group => (
+              <ColumnsSection
+                key={group.id}
+                columns={group.columns}
+                searchQuery={searchQuery}
+                dataGa={dataGa}
+                title={group.name}
+              />
+            ))
+          ) : (
+            <ColumnsSection columns={columns} searchQuery={searchQuery} dataGa={dataGa} />
+          )}
         </Flex>
       </Drop>
     )

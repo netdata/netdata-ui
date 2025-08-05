@@ -68,6 +68,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       id: "actions",
       enableResizing: false,
       header: "Actions",
+      headerString: "Actions",
       cell: ({ row, table }) => (
         <Flex
           data-testid="action-cell"

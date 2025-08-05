@@ -72,11 +72,15 @@ export default (
 
     if (selectionColumn)
       dataColumns.unshift(
-        isGrouped ? { id: "selectionColumn", columns: selectionColumn } : selectionColumn
+        isGrouped
+          ? { id: "selectionColumn", isPlaceholder: true, columns: [selectionColumn] }
+          : selectionColumn
       )
     if (rowActionsColumn)
       dataColumns.push(
-        isGrouped ? { id: "rowActionsColumn", columns: rowActionsColumn } : rowActionsColumn
+        isGrouped
+          ? { id: "rowActionsColumn", isPlaceholder: true, columns: [rowActionsColumn] }
+          : rowActionsColumn
       )
 
     return dataColumns

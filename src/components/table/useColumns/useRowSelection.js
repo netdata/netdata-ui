@@ -55,6 +55,7 @@ export default (enabled, { testPrefix, tableMeta, singleRowSelection }) =>
       enabled
         ? {
             id: "checkbox",
+            headerString: "Selection",
             enableHiding: false,
             enableResizing: false,
             header: ({ table }) =>

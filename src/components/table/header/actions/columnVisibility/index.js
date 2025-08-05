@@ -30,19 +30,49 @@ const ColumnVisibilityAction = ({
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
   const visible = typeof isVisible === "function" ? isVisible() : isVisible
 
-  const allColumns = useMemo(
-    () =>
-      [...table.getAllLeafColumns()].sort((a, b) =>
-        a.id.localeCompare(b.id, undefined, {
-          sensitivity: "accent",
-          ignorePunctuation: true,
-        })
-      ),
-    [table.getAllLeafColumns()]
-  )
+  const columnGroups = useMemo(() => {
+    const groups = []
+    const columnMap = new Map()
+    
+    table.getHeaderGroups().forEach(headerGroup => {
+      headerGroup.headers.forEach(header => {
+        if (header.column.columns && header.column.columns.length > 0) {
+          const groupColumns = header.column.columns.filter(col => col.getCanHide())
+          if (groupColumns.length > 0) {
+            groups.push({
+              id: header.column.id,
+              name: header.column.columnDef.name ||
+                (typeof header.column.columnDef.headerString === "function"
+                  ? header.column.columnDef.headerString()
+                  : header.column.columnDef.headerString) ||
+                header.column.id,
+              columns: groupColumns
+            })
+          }
+          header.column.columns.forEach(subColumn => {
+            columnMap.set(subColumn.id, subColumn)
+          })
+        } else {
+          columnMap.set(header.column.id, header.column)
+        }
+      })
+    })
+    
+    return { groups, flatColumns: Array.from(columnMap.values()) }
+  }, [table])
+
+  const allColumns = useMemo(() => 
+    columnGroups.flatColumns.sort((a, b) =>
+      a.id.localeCompare(b.id, undefined, {
+        sensitivity: "accent",
+        ignorePunctuation: true,
+      })
+    ), [columnGroups.flatColumns])
+
   const allPinnedColumns = enableColumnPinning
     ? [...(columnPinning?.left || []), ...(columnPinning?.right || [])]
     : []
+  
   const { columns, pinnedColumns } = enableColumnPinning
     ? allColumns.reduce(
         (accumulator, column) => {
@@ -61,7 +91,6 @@ const ColumnVisibilityAction = ({
         { columns: [], pinnedColumns: [] }
       )
     : { columns: allColumns, pinnedColumns: [] }
-
   return (
     <>
       <BulkAction
@@ -80,6 +109,7 @@ const ColumnVisibilityAction = ({
       />
       <ColumnsMenu
         columns={columns}
+        columnGroups={columnGroups.groups}
         dataGa={dataGa}
         isOpen={isOpen}
         onClose={onClose}
