@@ -7,6 +7,11 @@ import { useTableState } from "../../../provider"
 
 const rerenderSelector = state => state.columnVisibility
 
+const excludedById = {
+  selectionColumn: true,
+  rowActionsColumn: true,
+}
+
 const ColumnVisibilityAction = ({
   alwaysEnabled,
   columnPinning = {},
@@ -35,6 +40,8 @@ const ColumnVisibilityAction = ({
 
     table.getHeaderGroups().forEach(headerGroup => {
       headerGroup.headers.forEach(header => {
+        if (excludedById[header.column.id]) return
+
         if (header.column.columns && header.column.columns.length > 0) {
           const groupColumns = header.column.columns.filter(col => col.getCanHide())
           if (groupColumns.length > 0) {
@@ -54,7 +61,7 @@ const ColumnVisibilityAction = ({
     })
 
     return groups
-  }, [table])
+  }, [table.getAllLeafColumns()])
 
   const allColumns = useMemo(
     () =>
@@ -89,6 +96,7 @@ const ColumnVisibilityAction = ({
         { columns: [], pinnedColumns: [] }
       )
     : { columns: allColumns, pinnedColumns: [] }
+
   return (
     <>
       <BulkAction

@@ -38,7 +38,9 @@ const Header = ({
       background="mainBackground"
       gap={1}
       alignItems="center"
-      padding={[1]}
+      padding={[2, 3]}
+      round
+      border={{ side: ["vertical", "top"] }}
       {...tableMeta.bulkActionsStyles}
     >
       {typeof title === "string" ? <TextBig strong>{title}</TextBig> : title}

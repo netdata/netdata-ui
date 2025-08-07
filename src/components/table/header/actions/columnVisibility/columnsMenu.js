@@ -115,7 +115,6 @@ const ColumnsMenu = ({
             columns={pinnedColumns}
             searchQuery={searchQuery}
             dataGa={dataGa}
-            title="Pinned"
             showBorder
           />
           {columnGroups?.length ? (

@@ -13,10 +13,13 @@ export default (defaultGrouping = "", onChange = noop) => {
     setGrouping(defaultGrouping)
   }, [defaultGrouping])
 
-  const onGroupingChange = useCallback(value => {
-    onChange(value)
-    setGrouping(value)
-  }, [])
+  const onGroupingChange = useCallback(
+    value => {
+      onChange(value)
+      setGrouping(value)
+    },
+    [onChange]
+  )
 
   return [grouping, onGroupingChange]
 }

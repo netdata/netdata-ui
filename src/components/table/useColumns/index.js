@@ -60,7 +60,7 @@ export default (
         enableGlobalFilter: true,
         enableSorting,
         enableMultiSort: enableSorting,
-        ...(enableResizing ? { size: 120, maxSize: 5000, minSize: 60 } : {}),
+        ...(enableResizing ? { size: 120, maxSize: 5000, minSize: 10 } : {}),
         enableHiding: true,
         enableResizing,
         footer: props => props.column.id,

@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useRef, useEffect } from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
 import identity from "lodash/identity"
+import Flex from "@/components/templates/flex"
 import { useTableState } from "../provider"
 import Row from "./row"
 import Header from "./header"
@@ -91,17 +92,14 @@ const Body = memo(
     }, [virtualRows, getHasPrevPage(), loading])
 
     return (
-      <div
+      <Flex
         ref={ref}
-        style={{
-          display: "flex",
-          height: "100%",
-          overflow: "auto",
-          flex: "1",
-          // maxWidth: `min(${table.getTotalSize()}, 100%)`, // WHY: Removing since it causes issues with fullWidth cells
-        }}
+        height="100%"
+        overflow="auto"
+        flex="1"
         data-testid={`netdata-table${testPrefix}`}
         onScroll={onScroll}
+        border
       >
         <div
           style={{
@@ -155,7 +153,7 @@ const Body = memo(
             )
           })}
         </div>
-      </div>
+      </Flex>
     )
   }
 )

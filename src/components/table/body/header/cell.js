@@ -100,10 +100,10 @@ const BodyHeaderCell = ({
             </Label>
           )}
           <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
+          <Info meta={meta} />
         </LabelContainer>
         <Filter column={column} testPrefix={testPrefix} index={index} />
       </Flex>
-      <Info meta={meta} />
       <ResizeHandler header={header} table={table} />
       {children}
     </Flex>

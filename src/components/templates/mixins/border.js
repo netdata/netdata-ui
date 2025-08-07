@@ -58,6 +58,23 @@ export default ({ theme, border }) => {
   }
 
   const { side, color } = border
+
+  if (Array.isArray(side)) {
+    return side.reduce((acc, s) => {
+      if (s in borderMap) {
+        return (
+          acc +
+          borderMap[s]({
+            ...getDefaults(theme),
+            ...border,
+            color: getColor(color || "border")({ theme }),
+          })
+        )
+      }
+      return acc
+    }, "")
+  }
+
   return (
     side in borderMap &&
     borderMap[side]({
