@@ -66,7 +66,7 @@ const Action = ({
       "data-ga": dataGa,
       disabled: disabled,
       onClick: onActionClicked,
-      icon,
+      icon: typeof icon === "function" ? icon(currentRow?.original) : icon,
       flavour,
       iconColor,
       label,
