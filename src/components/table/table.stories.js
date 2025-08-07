@@ -497,6 +497,7 @@ export const FullTable = () => {
         }}
         groupByColumnIds={["alerts"]}
         enableColumnPinning
+        columnPinning={{ right: ["actions"], left: ["checkbox", "nodes"] }}
         enableResizing
         sortBy={[{ id: "nodes", desc: false }]}
         onGlobalSearchChange={onGlobalSearchChange}
@@ -509,7 +510,6 @@ export const FullTable = () => {
         testPrefixCallback={row => row.nodes}
         disableClickRow={({ data }) => data.alerts > 15}
         enableColumnVisibility
-        columnPinningOptions={{ left: ["checkbox", "nodes"] }}
       />
     </Box>
   )
