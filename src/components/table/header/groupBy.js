@@ -31,8 +31,7 @@ const HeaderGroupBy = ({ grouping, groupByColumns, onGroupBy, tableMeta, dataGa,
     <Flex
       alignItems="center"
       data-testid="tableGroupBy"
-      gap={2}
-      flex="grow"
+      gap={1}
       {...tableMeta.groupByContainerStyles}
     >
       <TextSmall data-testid="tableGroupByLabel" color="textLite" whiteSpace="nowrap">

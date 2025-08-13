@@ -1,11 +1,19 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import useDebounce from "@/hooks/useDebounce"
 import usePrevious from "@/hooks/usePrevious"
 import { Icon } from "@/components/icon"
 import { TextInput } from "@/components/input"
 import { IconButton } from "@/components/button"
 
-const Search = ({ value: defaultValue = "", onChange, onReset, placeholder, ref, ...rest }) => {
+const Search = ({
+  value: defaultValue = "",
+  onChange,
+  reset,
+  onReset,
+  placeholder,
+  ref,
+  ...rest
+}) => {
   const [value, setValue] = useState(defaultValue)
   const prevValue = usePrevious(value)
 
@@ -17,6 +25,12 @@ const Search = ({ value: defaultValue = "", onChange, onReset, placeholder, ref,
     300,
     [value]
   )
+
+  useEffect(() => {
+    if (reset) {
+      setValue("")
+    }
+  }, [reset])
 
   return (
     <TextInput
@@ -30,7 +44,10 @@ const Search = ({ value: defaultValue = "", onChange, onReset, placeholder, ref,
             iconColor={value ? "textFocus" : "textLite"}
             width="14px"
             height="14px"
-            onClick={() => (onReset ? onReset() : setValue(""))}
+            onClick={() => {
+              onReset?.()
+              setValue("")
+            }}
             padding={[0]}
             neutral
           />

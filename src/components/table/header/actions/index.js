@@ -48,7 +48,7 @@ const HeaderActions = ({
   if (!actions.length && !enableColumnVisibility) return null
 
   return (
-    <Flex gap={0.5} data-testid="bulk-actions" width="100%" justifyContent="end">
+    <Flex gap={0.5} data-testid="bulk-actions" flex="1" justifyContent="end">
       {actions.map(action => (
         <Action
           key={action.id}
