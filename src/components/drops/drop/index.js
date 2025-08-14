@@ -14,6 +14,7 @@ import styled from "styled-components"
 const Backdrop = styled(Box).attrs(props => ({
   background: "rgba(0, 0, 0, 0.3)",
   zIndex: 60,
+  ["data-drop"]: "drop-backdrop",
   ...props,
 }))`
   position: absolute;
