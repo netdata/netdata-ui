@@ -1,5 +1,6 @@
 import React, { useLayoutEffect } from "react"
 import ReactDOM from "react-dom"
+import Box from "@/components/templates/box"
 import useDropElement from "@/hooks/useDropElement"
 import useKeyboardEsc from "@/hooks/useKeyboardEsc"
 import useOutsideClick from "@/hooks/useOutsideClick"
@@ -10,12 +11,14 @@ import Container from "./container"
 import backdropBlur from "@/components/templates/layer/mixins/backdropBlur"
 import styled from "styled-components"
 
-const Backdrop = styled.div`
+const Backdrop = styled(Box).attrs(props => ({
+  background: "rgba(0, 0, 0, 0.3)",
+  zIndex: 60,
+  ...props,
+}))`
   position: absolute;
   inset: 0;
   pointer-events: all;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 60;
   ${backdropBlur};
 }
 `
@@ -34,6 +37,7 @@ const Drop = ({
   keepHorizontal,
   dataDrop = "drop-content",
   ref: parentRef,
+  backdropProps = {},
   ...rest
 }) => {
   const [ref, setRef] = useForwardRef(parentRef)
@@ -71,7 +75,7 @@ const Drop = ({
         >
           {children}
         </Container>
-        <Backdrop onClick={onClickOutside} />
+        <Backdrop onClick={onClickOutside} {...backdropProps} />
       </>
     ) : (
       <Container
