@@ -266,6 +266,7 @@ import osPaloAlto from "./assets/os/panos.svg"
 import osPeplink from "./assets/os/peplink.svg"
 import osPfSense from "./assets/os/pfsense.svg"
 import osPress from "./assets/os/os_press.svg"
+import osProxmox from "./assets/os/proxmox.svg"
 import osRaritan from "./assets/os/raritan.svg"
 import osRaspbian from "./assets/os/raspbian.svg"
 import osRedHat from "./assets/os/red_hat.svg"
@@ -719,6 +720,7 @@ export const iconsList = {
   osPeplink,
   osPfSense,
   osPress,
+  osProxmox,
   osRaritan,
   osRaspbian,
   osRedHat,
