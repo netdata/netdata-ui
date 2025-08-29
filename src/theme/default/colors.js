@@ -29,11 +29,11 @@ const appColors = {
   secondaryHighlight: rawColors.green.green190,
   neutralHighlight: rawColors.neutral.grey180,
   // Buttons - AI
-  primaryAI: rawColors.blue.blue130,
-  accentAI: rawColors.blue.blue140,
-  primaryHighlightAI: rawColors.blue.blue130,
-  secondaryColorAI: rawColors.blue.blue120,
-  secondaryHighlightAI: rawColors.blue.blue190,
+  primaryAI: "#0052CC",
+  accentAI: "#003D99",
+  primaryHighlightAI: "#0066FF",
+  secondaryColorAI: "#0052CC",
+  secondaryHighlightAI: "#E6F0FF",
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
