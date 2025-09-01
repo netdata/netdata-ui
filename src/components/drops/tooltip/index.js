@@ -18,6 +18,7 @@ const Tooltip = ({
   animation,
   disabled,
   zIndex = 80,
+  delay = 0,
   children,
   allowHoverOnTooltip,
   ref: parentRef,
@@ -25,25 +26,39 @@ const Tooltip = ({
 }) => {
   const id = useDescribedId(rest["aria-describedby"])
   const [isOpen, , open, close] = useToggle(false)
-
   const [ref, setRef] = useForwardRef(parentRef)
+  const onAccessorRef = useRef(false)
+  const onTooltipRef = useRef(false)
 
   const targetElement = useClonedChildren(children, setRef, {
-    onMouseEnter: open,
+    onMouseEnter: () => {
+      onAccessorRef.current = true
+      if (delay) {
+        setTimeout(() => {
+          if (onAccessorRef.current) {
+            open()
+          }
+        }, delay)
+      } else {
+        open()
+      }
+    },
     onMouseLeave: !allowHoverOnTooltip
-      ? close
+      ? () => {
+          close()
+          onAccessorRef.current = false
+        }
       : () =>
           setTimeout(() => {
             if (onTooltipRef.current) return
             close()
+            onAccessorRef.current = false
           }, 300),
     onFocus: open,
     onBlur: close,
     ...(isOpen && { "aria-describedby": id }),
     ...rest,
   })
-
-  const onTooltipRef = useRef(false)
 
   useLayoutEffect(() => {
     if (ref.current && initialOpen) open()
