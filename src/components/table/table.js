@@ -135,7 +135,7 @@ const Table = memo(props => {
   const [columnPinning, onColumnPinningChange] = usePinning(defaultColumnPinning, pinningChangeCb)
 
   const [expanded, onExpandedChange] = useExpanding(defaultExpanded, expandedChangeCb)
-  console.log("table", expanded)
+
   const [rowSelection, onRowSelectionChange] = useSelecting(
     defaultRowSelection,
     rowSelectionChangeCb
