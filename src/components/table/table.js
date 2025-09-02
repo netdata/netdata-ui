@@ -91,6 +91,7 @@ const Table = memo(props => {
 
     expanded: defaultExpanded = tableDefaultProps.expanded,
     onExpandedChange: expandedChangeCb = tableDefaultProps.onExpandedChange,
+    autoResetExpanded = false,
 
     enableSorting,
     sortBy,
@@ -134,7 +135,7 @@ const Table = memo(props => {
   const [columnPinning, onColumnPinningChange] = usePinning(defaultColumnPinning, pinningChangeCb)
 
   const [expanded, onExpandedChange] = useExpanding(defaultExpanded, expandedChangeCb)
-
+  console.log("table", expanded)
   const [rowSelection, onRowSelectionChange] = useSelecting(
     defaultRowSelection,
     rowSelectionChangeCb
@@ -195,7 +196,7 @@ const Table = memo(props => {
     getPaginationRowModel: getPaginationRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand,
-    autoResetExpanded: false,
+    autoResetExpanded,
     getGroupedRowModel: getGroupedRowModel(),
     getSubRows: useCallback(row => row.children, []),
     onPaginationChange,

@@ -8,16 +8,19 @@ export default (defaultExpanded = emptyObj, onChange = noop) => {
   const [expanded, setExpanded] = useState(() => defaultExpanded)
 
   useEffect(() => {
-    if (!defaultExpanded || expanded === defaultExpanded) return
+    if (expanded === defaultExpanded) return
 
     initialSetRef.current = true
     setExpanded(defaultExpanded)
   }, [defaultExpanded])
 
-  const onExpand = useCallback(value => {
-    onChange(value)
-    setExpanded(value)
-  }, [])
+  const onExpand = useCallback(
+    value => {
+      onChange(value)
+      setExpanded(value)
+    },
+    [onChange]
+  )
 
   return [expanded, onExpand]
 }
