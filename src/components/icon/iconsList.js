@@ -17,6 +17,7 @@ import alarms_new from "./assets/alarms_new.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
+import anomalyAnalysis from "./assets/insights/anomaly_analysis_colored.svg"
 import anomalyBadge from "./assets/anomaly_badge.svg"
 import applications_hollow from "./assets/applications_hollow.svg"
 import applicationsSolid from "./assets/applications_solid.svg"
@@ -29,12 +30,14 @@ import arrow_w_line_left from "./assets/arrow_w_line_left.svg"
 import arrow_w_line_right from "./assets/arrow_w_line_right.svg"
 import arrows_vertical from "./assets/arrows_vertical.svg"
 import auth from "./assets/auth.svg"
+import automatedTroubleshooting from "./assets/insights/automated_troubleshooting_colored.svg"
 import bookmark from "./assets/bookmark.svg"
 import bullet_one from "./assets/bullet_one.svg"
 import bullet_three from "./assets/bullet_three.svg"
 import bullet_two from "./assets/bullet_two.svg"
 import calendarFull from "./assets/calendar_full.svg"
 import calendarFullPress from "./assets/calendar_full_press.svg"
+import capacityPlanning from "./assets/insights/capacity_planning_colored.svg"
 import chart_added from "./assets/chart_added.svg"
 import chart_bars from "./assets/chart_bars.svg"
 import chart_circle from "./assets/chart_circle.svg"
@@ -289,6 +292,7 @@ import pauseOutline from "./assets/pause_outline.svg"
 import pauseSolid from "./assets/pause_solid.svg"
 import pencilOutline from "./assets/pencil_outline.svg"
 import pencilSolid from "./assets/pencil_solid.svg"
+import performanceOptimization from "./assets/insights/performance_optimization_colored.svg"
 import pie_chart_skeleton from "./assets/pie_chart_skeleton.svg"
 import pin_element from "./assets/pin_element.svg"
 import playOutline from "./assets/play_outline.svg"
@@ -471,6 +475,7 @@ export const iconsList = {
   alarmWarning,
   anomaliesBrain,
   anomaliesLens,
+  anomalyAnalysis,
   anomalyBadge,
   applications_hollow,
   applicationsSolid,
@@ -483,12 +488,14 @@ export const iconsList = {
   arrow_w_line_right,
   arrows_vertical,
   auth,
+  automatedTroubleshooting,
   bookmark,
   bullet_one,
   bullet_three,
   bullet_two,
   calendarFull,
   calendarFullPress,
+  capacityPlanning,
   chart_added,
   chart_bars,
   chart_circle,
@@ -743,6 +750,7 @@ export const iconsList = {
   pauseSolid,
   pencilOutline,
   pencilSolid,
+  performanceOptimization,
   pie_chart_skeleton,
   pin_element,
   playOutline,
