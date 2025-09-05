@@ -100,41 +100,44 @@ const appColors = {
   menuItem: rawColors.neutral.grey120,
   topBarBg: rawColors.neutral.grey190,
   elevationLevelOne: rawColors.neutral.grey185,
-  //Input colors
+
+  // Input colors
   inputBg: rawColors.neutral.grey190,
   inputBorder: rawColors.neutral.grey185,
   inputBorderHover: rawColors.neutral.grey165,
   inputBorderFocus: rawColors.neutral.grey165,
-  //Badges
+
+  // Badges
   nodeBadgeBackground: rawColors.neutral.grey155,
   nodeBadgeBorder: rawColors.neutral.iron,
   nodeBadgeColor: rawColors.neutral.bluebayoux,
 
-  //Default pills
+  // Default pills
   neutralPillBg: rawColors.neutral.grey155,
   neutralPillBorder: rawColors.neutral.grey155,
   neutralPillColor: rawColors.neutral.grey100,
 
-  //Alert MasterCard
+  // Alert MasterCard
   alertIcon: rawColors.neutral.grey180,
   idleError: rawColors.red.red170,
   idleWarning: rawColors.yellow.yellow170,
   idleClear: rawColors.green.green190,
 
-  //Table
+  // Table
   dropdownTable: rawColors.neutral.white,
   tableRowBg: rawColors.neutral.grey195,
   tableRowBgHover: rawColors.neutral.grey180,
   tableRowBg2: rawColors.neutral.grey190,
   tableRowBg2Hover: rawColors.neutral.grey180,
   columnHighlight: rawColors.green.green190,
-  //IconButton
+
+  // IconButton
   iconColor: rawColors.neutral.limedSpruce,
 
-  //Progress Bare
+  // Progress Bare
   progressBg: rawColors.neutral.chineseWhite,
 
-  //table-resizer
+  // table-resizer
   resizerLine: rawColors.green.vista,
 
   anomalyText: rawColors.purple.lilac,
@@ -145,16 +148,22 @@ const appColors = {
   darkBackground: rawColors.neutral.grey195,
   integrationMenuItemHover: rawColors.neutral.grey180,
 
-  //Dynamic rooms
+  // Dynamic rooms
   clauseBg: rawColors.neutral.grey180,
   clauseText: rawColors.neutral.grey100,
 
-  //Onboarding
+  // Onboarding
   nodeButtonsText: rawColors.neutral.grey100,
   nodeButtonsTextHover: rawColors.neutral.black,
   pnlBorder: rawColors.neutral.grey185,
   pnlBackground: rawColors.neutral.white,
   pnlText: rawColors.neutral.black,
+
+  // Insights
+  insightsYellow: rawColors.yellow.yellow300,
+  insightsViolet: rawColors.violet.violet150,
+  insightsPurple: rawColors.purple.purple100,
+  insightsGreen: rawColors.green.netdata,
 }
 
 export default {

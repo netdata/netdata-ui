@@ -100,7 +100,7 @@ const appColors = {
 
   topBarBg: rawColors.neutral.grey35,
   elevationLevelOne: rawColors.neutral.grey60,
-  //Input colors
+  // Input colors
   inputBg: rawColors.neutral.grey55,
   inputBorder: rawColors.neutral.grey65,
   inputBorderHover: rawColors.neutral.grey85,
@@ -110,18 +110,18 @@ const appColors = {
   nodeBadgeBorder: rawColors.neutral.bluebayoux,
   nodeBadgeColor: rawColors.neutral.white,
 
-  //Default pills
+  // Default pills
   neutralPillBg: rawColors.neutral.grey90,
   neutralPillBorder: rawColors.neutral.grey90,
   neutralPillColor: rawColors.neutral.grey120,
 
-  //Alert MasterCard
+  // Alert MasterCard
   alertIcon: rawColors.neutral.grey50,
   idleError: rawColors.red.red20,
   idleWarning: rawColors.yellow.yellow20,
   idleClear: rawColors.green.green20,
 
-  //Table
+  // Table
   dropdownTable: rawColors.neutral.eerieBlack,
   tableRowBgHover: rawColors.neutral.grey35,
   tableRowBg: rawColors.neutral.grey10,
@@ -129,13 +129,13 @@ const appColors = {
   tableRowBg2Hover: rawColors.neutral.grey35,
   columnHighlight: rawColors.green.green30,
 
-  //Progress Bare
+  // Progress Bare
   progressBg: rawColors.neutral.bluebayoux,
 
-  //IconButton
+  // IconButton
   iconColor: rawColors.neutral.grey160,
 
-  //table-resizer
+  // table-resizer
   resizerLine: rawColors.green.vista,
 
   anomalyText: rawColors.purple.mauve,
@@ -146,16 +146,22 @@ const appColors = {
   darkBackground: rawColors.neutral.grey05,
   integrationMenuItemHover: rawColors.green.green20,
 
-  //Dynamic rooms
+  // Dynamic rooms
   clauseBg: rawColors.neutral.grey90,
   clauseText: rawColors.neutral.white,
 
-  //Onboarding
+  // Onboarding
   nodeButtonsText: rawColors.green.green100,
   nodeButtonsTextHover: rawColors.green.green130,
   pnlBorder: rawColors.green.green20,
   pnlBackground: rawColors.neutral.black,
   pnlText: rawColors.green.green110,
+
+  // Insights
+  insightsYellow: rawColors.yellow.yellow130,
+  insightsViolet: rawColors.violet.violet150,
+  insightsPurple: rawColors.purple.purple130,
+  insightsGreen: rawColors.green.netdata,
 }
 
 export default {
