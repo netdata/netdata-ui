@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from "react"
-
 import Tooltip from "@/components/drops/tooltip"
 import Flex from "@/components/templates/flex"
-
 import { ConfirmationDialog } from "@/components/confirmation-dialog"
 import { Button, IconButton } from "@/components/button"
 
@@ -30,6 +28,7 @@ const Action = ({
   flavour = "borderless",
   CustomUIAction,
   CustomComponent,
+  onCustomComponentClick,
   label,
   TooltipComponent = Tooltip,
   ref,
@@ -42,6 +41,9 @@ const Action = ({
     e.stopPropagation()
     if (confirmation || CustomUIAction) {
       setConfirmationOpen(true)
+      if (typeof onCustomComponentClick === "function") {
+        onCustomComponentClick(currentRow?.original || selectedRows)
+      }
       return
     }
     handleAction()
