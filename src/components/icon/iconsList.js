@@ -100,6 +100,7 @@ import dots_2x3 from "./assets/dots_2x3.svg"
 import download from "./assets/download.svg"
 import dragHorizontal from "./assets/drag_horizontal.svg"
 import dynamicConfig from "./assets/dynamic_config.svg"
+import earlyAccess from "./assets/early-access.svg"
 import edit from "./assets/edit.svg"
 import error from "./assets/error.svg"
 import exclamation from "./assets/exclamation.svg"
@@ -558,6 +559,7 @@ export const iconsList = {
   download,
   dragHorizontal,
   dynamicConfig,
+  earlyAccess,
   edit,
   error,
   exclamation,
