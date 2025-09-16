@@ -15,6 +15,7 @@ import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import alarmFilled from "./assets/alarmFilled.svg"
 import alarms_new from "./assets/alarms_new.svg"
 import alarmWarning from "./assets/alarm_w.svg"
+import alertInvestigation from "./assets/insights/alert_investigation_colored.svg"
 import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
 import anomalyAnalysis from "./assets/insights/anomaly_analysis_colored.svg"
@@ -168,6 +169,7 @@ import integrationVictorOpsColored from "./assets/integrations/victorOps_colored
 import integrationWebhook from "./assets/integrations/webhook.svg"
 import integrationWebhookColored from "./assets/integrations/webhook_colored.svg"
 import internalConfig from "./assets/internal_config.svg"
+import investigation from "./assets/insights/investigation_colored.svg"
 import ipNetworking from "./assets/ipNetworking.svg"
 import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
@@ -474,6 +476,7 @@ export const iconsList = {
   alarmFilled,
   alarms_new,
   alarmWarning,
+  alertInvestigation,
   anomaliesBrain,
   anomaliesLens,
   anomalyAnalysis,
@@ -627,6 +630,7 @@ export const iconsList = {
   integrationWebhook,
   integrationWebhookColored,
   internalConfig,
+  investigation,
   ipNetworking,
   ipNetworkingPress,
   last_week,
