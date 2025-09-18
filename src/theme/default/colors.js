@@ -161,11 +161,17 @@ const appColors = {
 
   // Insights
   insightsYellow: rawColors.yellow.yellow300,
+  insightsYellowSemi: rawColors.yellow.yellow190,
   insightsViolet: rawColors.violet.violet150,
+  insightsVioletSemi: rawColors.violet.violet190,
   insightsPurple: rawColors.purple.purple100,
+  insightsPurpleSemi: rawColors.purple.purple180,
   insightsGreen: rawColors.green.netdata,
+  insightsGreenSemi: rawColors.green.green195,
   insightsRed: rawColors.red.red140,
+  insightsRedSemi: rawColors.red.red190,
   insightsBlue: rawColors.blue.blue130,
+  insightsBlueSemi: rawColors.blue.blue190,
 }
 
 export default {
