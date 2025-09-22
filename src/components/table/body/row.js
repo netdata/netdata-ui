@@ -62,6 +62,7 @@ const rerenderSelector = state => ({
   expanded: state.expanded,
   columnVisibility: state.columnVisibility,
   selectedRows: state.selectedRows,
+  allColumns: state.allColumns?.length,
 })
 
 const StyledRow = styled(Flex)`

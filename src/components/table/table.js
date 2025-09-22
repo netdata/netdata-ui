@@ -227,6 +227,7 @@ const Table = memo(props => {
 
   useLayoutEffect(() => {
     const state = table.getState()
+
     dispatchThrottled({
       sorting: state.sorting,
       columnSizing: state.columnSizing,
@@ -236,7 +237,7 @@ const Table = memo(props => {
       columnSizingInfo: state.columnSizingInfo,
       rowsById: table.getRowModel().rowsById,
       selectedRows: table.getSelectedRowModel().flatRows,
-      allColumns: table?.getAllColumns?.(),
+      allColumns: table?.getAllLeafColumns?.(),
     })
   }, [table.getState()])
 
