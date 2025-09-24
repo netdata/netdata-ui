@@ -41,6 +41,7 @@ const Header = ({
       padding={[2, 3]}
       round
       border={{ side: ["vertical", "top"] }}
+      flexWrap
       {...tableMeta.bulkActionsStyles}
     >
       {typeof title === "string" ? <TextBig strong>{title}</TextBig> : title}
