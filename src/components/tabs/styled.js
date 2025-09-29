@@ -25,9 +25,13 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   ...props,
 }))``
 
-export const StyledTab = styled(Flex).attrs(props => ({ small: true, padding: [0, 6], ...props }))`
+export const StyledTab = styled(Flex).attrs(props => ({
+  small: true,
+  padding: [0, 6],
+  ...props,
+}))`
   white-space: nowrap;
-  border-bottom: ${({ small, green }) => (green ? "1px" : small ? "1px" : "2px")} solid
+  border-bottom: 1px solid
     ${({ active, green }) =>
       active ? getColor("accent") : green ? getColor(["transparent", "full"]) : getColor("border")};
   box-sizing: border-box;
@@ -44,9 +48,10 @@ export const StyledTab = styled(Flex).attrs(props => ({ small: true, padding: [0
     active ? getColor("menuItemSelected") : getColor("modalBackground")};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
+  margin-bottom: -1px;
+
   &:hover {
-    border-bottom: ${({ small, green }) => (green ? "1px" : small ? "1px" : "2px")} solid
-      ${getColor("primary")};
+    border-bottom: 1px solid ${getColor("primary")};
   }
 
   & > span {
