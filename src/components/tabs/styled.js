@@ -20,48 +20,45 @@ export const StyledTabs = styled(Flex).attrs(props => ({
     side: "bottom",
     size: "1px",
     type: "solid",
-    color: "borderSecondary",
+    color: "border",
   },
   ...props,
 }))``
 
-export const StyledTab = styled(Flex).attrs(props => ({ flex: "grow", ...props }))`
+export const StyledTab = styled(Flex).attrs(props => ({
+  small: true,
+  padding: [0, 6],
+  ...props,
+}))`
   white-space: nowrap;
-  border-bottom: ${({ small, green }) => (green ? "1px" : small ? "2px" : "4px")} solid
-    ${({ active }) => (active ? getColor("accent") : getColor(["transparent", "full"]))};
+  border-bottom: 1px solid
+    ${({ active, green }) =>
+      active ? getColor("accent") : green ? getColor(["transparent", "full"]) : getColor("border")};
   box-sizing: border-box;
 
-  min-width: ${({ minWidth }) => minWidth ?? getSizeBy(10)};
+  border-radius: 4px 4px 0 0;
+
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
   height: ${({ small, green }) =>
-    green ? (small ? getSizeBy(3) : getSizeBy(4)) : small ? getSizeBy(4) : getSizeBy(6)};
-  color: ${props =>
-    props.green
-      ? props.active
-        ? getColor("primary")(props)
-        : getColor("menuItem")(props)
-      : getColor("text")(props)};
-  font-weight: ${({ active }) => (active ? "bold" : "normal")};
+    green ? (small ? getSizeBy(3) : getSizeBy(4)) : small ? getSizeBy(4) : getSizeBy(5)};
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
-  background: ${props =>
-    props.green
-      ? props.active
-        ? getColor("menuItemSelected")(props)
-        : getColor("modalBackground")(props)
-      : "transparent"};
+  background: ${({ active }) =>
+    active ? getColor("menuItemSelected") : getColor("modalBackground")};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
+  margin-bottom: -1px;
+
   &:hover {
-    border-bottom: ${({ small, green }) => (green ? "1px" : small ? "2px" : "4px")} solid
-      ${getColor("primary")};
+    border-bottom: 1px solid ${getColor("primary")};
   }
 
   & > span {
-    font-weight: ${({ active }) => (active ? "bold" : "normal")};
+    color: ${({ active }) => (active ? getColor("primary") : getColor("menuItem"))};
   }
 `
+
 export const StyledTabMenu = styled(Flex)`
   white-space: nowrap;
   color: ${getColor("text")};
