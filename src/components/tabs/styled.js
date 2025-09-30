@@ -40,7 +40,7 @@ export const StyledTab = styled(Flex).attrs(props => ({
 
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
   height: ${({ small, green }) =>
-    green ? (small ? getSizeBy(3) : getSizeBy(4)) : small ? getSizeBy(4) : getSizeBy(6)};
+    green ? (small ? getSizeBy(3) : getSizeBy(4)) : small ? getSizeBy(4) : getSizeBy(5)};
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
