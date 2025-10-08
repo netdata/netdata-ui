@@ -16,7 +16,7 @@ export const SliderTrack = styled(Box)`
   background-size: ${({ max, maxValue, min, minValue }) =>
     `${((maxValue - minValue) * 100) / (max - min)}% 100%`};
   height: 2px;
-  width: ${({ width }) => `${width}px` || "100%"};
+  width: ${({ width }) => (width ? `${width}px` : "100%")};
 `
 
 export const Range = styled(InputRange)`
