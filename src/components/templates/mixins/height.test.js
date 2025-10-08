@@ -14,10 +14,12 @@ it("renders min max", () => {
   expect(height({ theme, height: { min: "20rem", max: "45rem" } })).toBe(`
       min-height: 20rem;
       max-height: 45rem;
+      
     `)
   expect(height({ theme, height: { min: 1, max: 2 } })).toBe(`
       min-height: 4px;
       max-height: 8px;
+      
     `)
 })
 
