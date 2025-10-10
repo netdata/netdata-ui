@@ -13,6 +13,7 @@ import alarm_off from "./assets/alarm_off.svg"
 import alarmCritical from "./assets/alarm_c.svg"
 import alarmCriticalWarning from "./assets/alarm_cw.svg"
 import alarmFilled from "./assets/alarmFilled.svg"
+import alarmNew from "./assets/alarm_new.svg"
 import alarms_new from "./assets/alarms_new.svg"
 import alarmWarning from "./assets/alarm_w.svg"
 import alertInvestigation from "./assets/insights/alert_investigation_colored.svg"
@@ -474,6 +475,7 @@ export const iconsList = {
   alarmCritical,
   alarmCriticalWarning,
   alarmFilled,
+  alarmNew,
   alarms_new,
   alarmWarning,
   alertInvestigation,
