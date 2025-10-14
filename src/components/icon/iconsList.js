@@ -155,6 +155,8 @@ import integrationPagerduty from "./assets/integrations/pagerduty.svg"
 import integrationPagerdutyColored from "./assets/integrations/pagerduty_colored.svg"
 import integrationRocketChat from "./assets/integrations/rocketChat.svg"
 import integrationRocketChatColored from "./assets/integrations/rocketChat_colored.svg"
+import integrationServiceNow from "./assets/integrations/serviceNow.svg"
+import integrationServiceNowColored from "./assets/integrations/serviceNow_colored.svg"
 import integrations from "./assets/integrations.svg"
 import integrationSlack from "./assets/integrations/slack.svg"
 import integrationSlackColored from "./assets/integrations/slack_colored.svg"
@@ -617,6 +619,8 @@ export const iconsList = {
   integrationPagerdutyColored,
   integrationRocketChat,
   integrationRocketChatColored,
+  integrationServiceNow,
+  integrationServiceNowColored
   integrations,
   integrationSlack,
   integrationSlackColored,
