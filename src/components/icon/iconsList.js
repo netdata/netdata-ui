@@ -620,7 +620,7 @@ export const iconsList = {
   integrationRocketChat,
   integrationRocketChatColored,
   integrationServiceNow,
-  integrationServiceNowColored
+  integrationServiceNowColored,
   integrations,
   integrationSlack,
   integrationSlackColored,
