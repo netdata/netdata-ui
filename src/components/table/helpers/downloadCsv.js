@@ -17,7 +17,11 @@ const convertToCSV = data =>
 
 export default (name = "netdata") =>
   (_, table) => {
-    const headers = table.getFlatHeaders().filter(header => !header.subHeaders?.length)
+    const headers = table
+      .getFlatHeaders()
+      .filter(
+        header => !header.subHeaders?.length && header.id !== "checkbox" && header.id !== "actions"
+      )
 
     let data = [
       headers.map(header => {
