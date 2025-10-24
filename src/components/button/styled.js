@@ -39,7 +39,7 @@ const getColor = name => props => {
 
 const getPrimaryColor = props =>
   props.neutral
-    ? getColor(props.flavour === HOLLOW ? "textFocus" : "text")(props)
+    ? getColor(props.flavour === HOLLOW ? "textFocus" : "neutralPillColor")(props)
     : getColor("primary")(props)
 
 const getBorderColor = props =>
