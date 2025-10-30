@@ -375,6 +375,7 @@ import serviceNtpd from "./assets/services/ntpd.svg"
 import serviceNtpdPress from "./assets/services/ntpd_press.svg"
 import serviceNvidia from "./assets/services/nvidia.svg"
 import serviceOpenStack from "./assets/services/openStack.svg"
+import serviceOpenTelemetry from "./assets/services/openTelemetry.svg"
 import serviceOpenWrt from "./assets/services/openWrt.svg"
 import servicePan from "./assets/services/pan.svg"
 import servicePandas from "./assets/services/pandas.svg"
@@ -839,6 +840,7 @@ export const iconsList = {
   serviceNtpdPress,
   serviceNvidia,
   serviceOpenStack,
+  serviceOpenTelemetry,
   serviceOpenWrt,
   servicePan,
   servicePandas,
