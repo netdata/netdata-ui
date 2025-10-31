@@ -36,17 +36,12 @@ export const Checkbox = (
       alignItems="center"
       gap={1}
       cursor={disabled ? "auto" : "pointer"}
-      rowReverse={labelPosition === "right"}
+      rowReverse={labelPosition === "left"}
       data-testid="checkbox"
       disabled={disabled}
       {...rest}
       onClick={onClick}
     >
-      {label && (
-        <Text as={Label} opacity={disabled ? 0.4 : 1} {...labelProps}>
-          {label}
-        </Text>
-      )}
       <Box width="16px" height="16px">
         <HiddenCheckboxInput
           data-testid="checkbox-input"
@@ -69,6 +64,11 @@ export const Checkbox = (
           )}
         </StyledCheckbox>
       </Box>
+      {label && (
+        <Text as={Label} opacity={disabled ? 0.4 : 1} {...labelProps}>
+          {label}
+        </Text>
+      )}
     </Flex>
   )
 }
