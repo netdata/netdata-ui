@@ -50,10 +50,21 @@ const getTextColor = props =>
     : getColor(props.flavour === HOLLOW ? "secondaryColor" : "mainBackground")(props)
 const getHoverColor = props =>
   props.neutral ? getColor("generic")(props) : getColor("accent")(props)
-const getAccentColor = props =>
-  props.neutral
-    ? getColor(props.flavour === BORDER_LESS ? "textFocus" : "neutralHighlight")(props)
-    : getColor(props.flavour === HOLLOW ? "secondaryHighlight" : "primaryHighlight")(props)
+
+const getAccentColor = props => {
+  if (props.neutral)
+    return getColor(props.flavour === BORDER_LESS ? "textFocus" : "neutralHighlight")(props)
+
+  const errorColor = props.danger ? "error" : undefined
+  const errorBgColor = props.danger ? "errorSemi" : undefined
+  const warningColor = props.warning ? "warning" : undefined
+  const warningBgColor = props.warning ? "warningSemi" : undefined
+  const primaryColor = errorColor || warningColor || "primaryHighlight"
+  const secondaryHollow = errorBgColor || warningBgColor || "secondaryHighlight"
+
+  return getColor(props.flavour === HOLLOW ? secondaryHollow : primaryColor)(props)
+}
+
 const getTransparent = getColor(["transparent", "full"])
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
