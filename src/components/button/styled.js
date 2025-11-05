@@ -125,7 +125,13 @@ export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
     padding: props.padding || props.tiny ? [0.5, 1] : props.small ? [1, 3] : [2],
     colors: colorsByFlavour(props),
-    round: groupFirst ? { side: "left" } : groupLast ? { side: "right" } : !groupMiddle,
+    round: groupFirst
+      ? { side: "left", size: 0.5 }
+      : groupLast
+        ? { side: "right", size: 0.5 }
+        : groupMiddle
+          ? false
+          : 0.5,
     ...withTheme(props),
   })
 )`
