@@ -69,6 +69,7 @@ const BodyHeaderCell = ({
           : header.colSpan
       }
       width={`${header.subHeaders.length ? header.subHeaders.reduce((s, h) => s + h.column.getSize(), 0) : column.getSize()}px`}
+      height={{ min: "45px" }}
       position="relative"
       {...(column.getCanSort() &&
         coloredSortedColumn &&
@@ -80,8 +81,16 @@ const BodyHeaderCell = ({
       {...headStyles}
       column
     >
-      <Flex flex column width="100%" alignItems={column.columnDef.align || "start"} gap={1}>
+      <Flex
+        flex
+        column
+        width="100%"
+        alignItems={column.columnDef.align || "start"}
+        justifyContent="center"
+        gap={1}
+      >
         <LabelContainer
+          data-testid="netdata-table-header-cell-label-container"
           alignItems="center"
           cursor={column.getCanSort() ? "pointer" : "default"}
           onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}

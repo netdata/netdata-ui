@@ -36,7 +36,7 @@ export const StyledTab = styled(Flex).attrs(props => ({
       active ? getColor("accent") : green ? getColor(["transparent", "full"]) : getColor("border")};
   box-sizing: border-box;
 
-  border-radius: 4px 4px 0 0;
+  border-radius: 2px 2px 0 0;
 
   max-width: ${({ maxWidth }) => maxWidth ?? getSizeBy(26)};
   height: ${({ small, green }) =>
