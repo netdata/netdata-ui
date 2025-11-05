@@ -203,13 +203,13 @@ export const StyledButton = styled.button.attrs(
           ? typeof props.iconWidth === "string"
             ? props.iconWidth
             : `${props.iconWidth}px`
-          : getSizeBy(2)(props)};
+          : getSizeBy(1.75)(props)};
       width: ${props =>
         props.iconHeight
           ? typeof props.iconHeight === "string"
             ? props.iconHeight
             : `${props.iconHeight}px`
-          : getSizeBy(2)(props)};
+          : getSizeBy(1.75)(props)};
       fill: ${props => props.colors.iconColor(props)};
     }
 
