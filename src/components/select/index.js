@@ -84,7 +84,7 @@ const customComponents = {
   ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
 }
 
-const VirtualItem = ({ virtualRow, child }) => (
+const VirtualItem = ({ virtualRow, child, virtualizer }) => (
   <div
     key={virtualRow.key}
     style={{
@@ -94,6 +94,7 @@ const VirtualItem = ({ virtualRow, child }) => (
       right: 0,
       position: "absolute",
     }}
+    ref={virtualizer.measureElement}
     data-index={virtualRow.index}
   >
     {child}
@@ -122,6 +123,7 @@ const VirtualList = ({ children, parentRef }) => {
           key={virtualRow.key}
           virtualRow={virtualRow}
           child={children[virtualRow.index]}
+          virtualizer={virtualizer}
         />
       ))}
     </div>
@@ -202,7 +204,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
         }
       : {}),
   }),
-  menu: styles => ({ ...styles, zIndex: 100 }),
+  menu: styles => ({ ...styles, borderRadius: "2px", zIndex: 100 }),
   menuPortal: styles => ({ ...styles, zIndex: 9999 }),
   multiValue: styles => ({
     ...styles,
