@@ -65,7 +65,7 @@ const customComponents = {
   Group: withDataAttrs(defaultComponents.Group, "Group"),
   GroupHeading: withDataAttrs(defaultComponents.GroupHeading, "GroupHeading"),
   IndicatorsContainer: withDataAttrs(defaultComponents.IndicatorsContainer, "IndicatorsContainer"),
-  IndicatorSeparator: withDataAttrs(defaultComponents.IndicatorSeparator, "IndicatorSeparator"),
+  IndicatorSeparator: null,
   Input: withDOMDataAttrs(defaultComponents.Input, "Input"),
   LoadingIndicator: withDataAttrs(defaultComponents.LoadingIndicator, "LoadingIndicator"),
   Menu: withDataAttrs(defaultComponents.Menu, "Menu"),
@@ -84,7 +84,7 @@ const customComponents = {
   ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
 }
 
-const VirtualItem = ({ virtualRow, child }) => (
+const VirtualItem = ({ virtualRow, child, virtualizer }) => (
   <div
     key={virtualRow.key}
     style={{
@@ -94,6 +94,7 @@ const VirtualItem = ({ virtualRow, child }) => (
       right: 0,
       position: "absolute",
     }}
+    ref={virtualizer.measureElement}
     data-index={virtualRow.index}
   >
     {child}
@@ -122,6 +123,7 @@ const VirtualList = ({ children, parentRef }) => {
           key={virtualRow.key}
           virtualRow={virtualRow}
           child={children[virtualRow.index]}
+          virtualizer={virtualizer}
         />
       ))}
     </div>
@@ -183,6 +185,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   control: (styles, state) => ({
     ...styles,
     borderColor: state.isFocused ? theme.colors.inputBorderFocus : theme.colors.inputBorder,
+    borderRadius: "2px",
     boxShadow: "none",
     minHeight: 18,
     minWidth: minWidth || 160,
@@ -201,7 +204,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
         }
       : {}),
   }),
-  menu: styles => ({ ...styles, zIndex: 100 }),
+  menu: styles => ({ ...styles, borderRadius: "2px", zIndex: 100 }),
   menuPortal: styles => ({ ...styles, zIndex: 9999 }),
   multiValue: styles => ({
     ...styles,
