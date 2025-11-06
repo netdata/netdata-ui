@@ -65,7 +65,7 @@ const customComponents = {
   Group: withDataAttrs(defaultComponents.Group, "Group"),
   GroupHeading: withDataAttrs(defaultComponents.GroupHeading, "GroupHeading"),
   IndicatorsContainer: withDataAttrs(defaultComponents.IndicatorsContainer, "IndicatorsContainer"),
-  IndicatorSeparator: withDataAttrs(defaultComponents.IndicatorSeparator, "IndicatorSeparator"),
+  IndicatorSeparator: null,
   Input: withDOMDataAttrs(defaultComponents.Input, "Input"),
   LoadingIndicator: withDataAttrs(defaultComponents.LoadingIndicator, "LoadingIndicator"),
   Menu: withDataAttrs(defaultComponents.Menu, "Menu"),
