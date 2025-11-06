@@ -183,6 +183,7 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   control: (styles, state) => ({
     ...styles,
     borderColor: state.isFocused ? theme.colors.inputBorderFocus : theme.colors.inputBorder,
+    borderRadius: "2px",
     boxShadow: "none",
     minHeight: 18,
     minWidth: minWidth || 160,
