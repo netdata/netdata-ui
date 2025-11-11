@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 import { Icon } from "@/components/icon"
 import Flex from "@/components/templates/flex"
-import { TextSmall, TextMicro } from "@/components/typography"
+import { TextSmall } from "@/components/typography"
 import { getColor, getValidatedControlColor } from "@/theme/utils"
 
 const disabledCursorSupport = css`
@@ -22,11 +22,11 @@ export const Input = styled(Flex).attrs(props => ({
   _focus: {
     border: props.error ? "errorText" : "inputBorderFocus",
   },
-  padding: props.size === "tiny" ? [0.5, 1] : props.size === "small" ? [1, 2] : [2, 3],
-  height: props.size === "tiny" ? 6 : props.size === "small" ? 7 : 9,
+  padding: [0.5, 1],
+  height: 6,
   ...props,
 }))`
-  font-size: ${({ size }) => (size === "tiny" ? "11px" : size === "small" ? "12px" : "14px")};
+  font-size: 12px;
   color: ${({ disabled, hasValue }) =>
     hasValue ? getColor("text") : disabled ? getColor("placeholder") : getColor("textLite")};
   ${({ hasIconLeft }) => hasIconLeft && "padding-left: 24px;"}
@@ -34,7 +34,7 @@ export const Input = styled(Flex).attrs(props => ({
     (hasIconRight || hasIndicator) && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`}
 
   &::placeholder {
-    font-size: ${({ size }) => (size === "tiny" ? "11px" : size === "small" ? "12px" : "14px")};
+    font-size: 12px;
     color: ${getColor("placeholder")};
     opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
     font-weight: normal;
@@ -49,7 +49,7 @@ export const StyledLabel = styled.label`
   ${disabledCursorSupport};
 `
 export const LabelText = styled(Flex).attrs(props => ({
-  as: props.size === "tiny" ? TextMicro : TextSmall,
+  as: TextSmall,
   strong: true,
   alignItems: "center",
   flex: false,

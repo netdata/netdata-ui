@@ -33,7 +33,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   white-space: nowrap;
   border-bottom: 1px solid #42B861;
   box-sizing: border-box;
-  border-radius: 4px 4px 0 0;
+  border-radius: 2px 2px 0 0;
   max-width: 208px;
   height: 32px;
   cursor: pointer;
@@ -55,7 +55,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   white-space: nowrap;
   border-bottom: 1px solid #E4E8E8;
   box-sizing: border-box;
-  border-radius: 4px 4px 0 0;
+  border-radius: 2px 2px 0 0;
   max-width: 208px;
   height: 32px;
   cursor: pointer;

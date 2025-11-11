@@ -181,7 +181,10 @@ const getOptionBackground = (theme, state) => {
   return null
 }
 
-const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => ({
+const fontSize = "12px"
+const lineHeight = "16px"
+
+const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => ({
   control: (styles, state) => ({
     ...styles,
     borderColor: state.isFocused ? theme.colors.inputBorderFocus : theme.colors.inputBorder,
@@ -196,28 +199,25 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
   input: (styles, state) => ({
     ...styles,
     color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
-    ...(size === "tiny"
-      ? {
-          lineHeight: "18px",
-          paddingBottom: 0,
-          paddingTop: 0,
-        }
-      : {}),
+    fontSize,
+    lineHeight,
+    paddingBottom: 0,
+    paddingTop: 0,
   }),
   menu: styles => ({ ...styles, borderRadius: "2px", zIndex: 100 }),
   menuPortal: styles => ({ ...styles, zIndex: 9999 }),
   multiValue: styles => ({
     ...styles,
-    fontSize: size === "tiny" ? "12px" : "14px",
+    fontSize,
     flexDirection: "row-reverse",
-    ...(size === "tiny" ? { minHeight: 18 } : {}),
+    minHeight: 18,
   }),
   multiValueLabel: (styles, state) => ({
     ...styles,
     backgroundColor: theme.colors.grey40,
     borderRadius: "0 2px 2px 0",
     color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
-    ...(size === "tiny" ? { padding: "1px" } : {}),
+    padding: "1px",
     paddingRight: state.data.isDisabled ? "8px" : "",
   }),
   multiValueRemove: (styles, state) => ({
@@ -243,39 +243,31 @@ const makeCustomStyles = (theme, { minWidth, size, ...providedStyles } = {}) => 
       backgroundColor: theme.colors.secondaryHighlight,
       color: theme.colors.text,
     },
-    ...(size === "tiny" ? { fontSize: "12px", minHeight: 28, padding: "4px 8px" } : {}),
+    fontSize,
+    lineHeight,
+    minHeight: 28,
+    padding: "4px 8px",
   }),
   placeholder: styles => ({
     ...styles,
     color: theme.colors.placeholder,
-    ...(size === "tiny" ? { fontSize: "12px", lineHeight: "18px" } : {}),
+    fontSize,
+    lineHeight,
   }),
   singleValue: (styles, state) => ({
     ...styles,
     color: state.isDisabled ? theme.colors.placeholder : theme.colors.grey140,
-    fontSize: size === "tiny" ? "12px" : "14px",
+    fontSize,
+    lineHeight,
   }),
-  ...(size === "tiny"
-    ? {
-        dropdownIndicator: styles => ({ ...styles, padding: "3px" }),
-        clearIndicator: styles => ({ ...styles, padding: "3px" }),
-        indicatorsContainer: styles => ({ ...styles, minHeight: 18 }),
-        valueContainer: styles => ({
-          ...styles,
-          minHeight: 18,
-          padding: "1px 6px",
-        }),
-      }
-    : {
-        dropdownIndicator: styles => ({ ...styles, padding: "3px" }),
-        clearIndicator: styles => ({ ...styles, padding: "3px" }),
-        indicatorsContainer: styles => ({ ...styles, minHeight: 28 }),
-        valueContainer: styles => ({
-          ...styles,
-          minHeight: 28,
-          padding: "1px 6px",
-        }),
-      }),
+  indicatorsContainer: styles => ({ ...styles, minHeight: 18 }),
+  dropdownIndicator: styles => ({ ...styles, padding: "1px" }),
+  clearIndicator: styles => ({ ...styles, padding: "1px" }),
+  valueContainer: styles => ({
+    ...styles,
+    minHeight: 18,
+    padding: "0px 6px",
+  }),
   ...providedStyles,
 })
 
