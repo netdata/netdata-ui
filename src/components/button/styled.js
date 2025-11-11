@@ -123,7 +123,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
 
 export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
-    padding: props.padding || props.tiny ? [0.5, 1] : props.small ? [1, 3] : [2],
+    padding: props.large ? [1.5, 4] : [1, 3],
     colors: colorsByFlavour(props),
     round: groupFirst
       ? { side: "left", size: 0.5 }
@@ -143,7 +143,7 @@ export const StyledButton = styled.button.attrs(
     ${alignSelf};
 
     font-weight: ${({ strong }) => (strong ? 700 : 500)};
-    font-size: ${({ small, tiny }) => (tiny ? "10px" : small ? "12px" : "14px")};
+    font-size: ${({ large }) => (large ? "16px" : "12px")};
     white-space: nowrap;
     word-break: keep-all;
 
