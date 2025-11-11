@@ -24,6 +24,7 @@ export const Button = ({
     flavour={flavour}
     textTransform={textTransform}
     hasIcon={!!icon || isLoading}
+    hasLabel={!!children}
     onClick={isLoading ? undefined : onClick}
     ref={ref}
     iconColor={iconColor}
