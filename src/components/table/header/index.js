@@ -32,6 +32,7 @@ const Header = ({
 
   return (
     <Flex
+      data-testid="netdata-table-header-container"
       data-noprint
       width="100%"
       zIndex={10}
@@ -39,7 +40,7 @@ const Header = ({
       gap={1}
       alignItems="center"
       padding={[2, 3]}
-      round
+      round={{ side: "top", size: 1 }}
       border={{ side: ["vertical", "top"] }}
       flexWrap
       {...tableMeta.bulkActionsStyles}

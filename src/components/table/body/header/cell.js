@@ -104,6 +104,7 @@ const BodyHeaderCell = ({
               {...column.columnDef.labelProps}
               sorting={column.getIsSorted()}
               sortable={column.getCanSort()}
+              strong
             >
               {flexRender(column.columnDef.header, header.getContext())}
             </Label>
