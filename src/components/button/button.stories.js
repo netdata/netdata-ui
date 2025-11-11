@@ -31,6 +31,7 @@ export const RadioButtonGroup = args => {
     <ButtonGroup
       items={radioButtonItems.map(item => ({ ...args, ...item }))}
       checked={checked}
+      buttonProps={args}
       onChange={onChange}
     />
   )
