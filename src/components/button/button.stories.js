@@ -51,7 +51,7 @@ export default {
     disabled: false,
     danger: false,
     warning: false,
-    small: false,
+    large: false,
     neutral: false,
   },
   argTypes: {
@@ -68,7 +68,7 @@ export default {
     disabled: { control: "boolean" },
     danger: { control: "boolean" },
     warning: { control: "boolean" },
-    small: { control: "boolean" },
+    large: { control: "boolean" },
     neutral: { control: "boolean" },
   },
 }
