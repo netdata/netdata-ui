@@ -123,7 +123,13 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
 
 export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
-    padding: props.large ? [1.5, 4] : [1, 3],
+    padding: props.large
+      ? !props.hasLabel
+        ? [1.5, 3]
+        : [1.5, 4]
+      : !props.hasLabel
+        ? [1, 1.5]
+        : [1, 3],
     colors: colorsByFlavour(props),
     round: groupFirst
       ? { side: "left", size: 0.5 }
