@@ -1,6 +1,5 @@
 import React, { useMemo } from "react"
 import Flex from "@/components/templates/flex"
-
 import Action from "../components/action"
 
 export const supportedRowActions = {
@@ -42,6 +41,8 @@ export const supportedRowActions = {
     tooltipText: "Go to",
   },
 }
+
+const MIN_ACTIONS_COLUMN_WIDTH = 70
 
 export default (rowActions, { testPrefix, tableMeta } = {}) => {
   const availableRowActions = useMemo(
@@ -114,7 +115,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       enableColumnFilter: false,
       enableSorting: false,
       tableMeta,
-      size: availableRowActions.length * 35 < 40 ? 40 : availableRowActions.length * 35,
+      size: Math.max(MIN_ACTIONS_COLUMN_WIDTH, availableRowActions.length * 35),
       align: "end",
       notFlex: true,
       meta: {
