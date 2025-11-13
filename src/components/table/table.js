@@ -250,10 +250,10 @@ const Table = memo(props => {
       height={{ max: "100%" }}
       overflow="hidden"
       column
-      alignSelf="stretch"
+      flex="1"
       ref={ref}
       className={className}
-      width={width || { base: "100%" }}
+      width={width}
     >
       <Header
         q={globalFilter}
