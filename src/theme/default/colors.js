@@ -74,6 +74,7 @@ const appColors = {
 
   tooltip: rawColors.neutral.grey180,
   tooltipText: rawColors.neutral.grey100,
+  tooltipBg: rawColors.neutral.grey190,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.grey100,
   textLite: rawColors.neutral.grey120,
