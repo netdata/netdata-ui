@@ -15,12 +15,12 @@ export const Input = styled(Flex).attrs(props => ({
   background: "inputBg",
   backgroundOpacity: props.disabled ? 0.4 : 1,
   width: "100%",
-  border: props.error ? "error" : props.hasValue ? "text" : "inputBorder",
+  border: props.error ? "error" : "inputBorder",
   _hover: {
     border: props.error ? "errorText" : "inputBorderHover",
   },
   _focus: {
-    border: props.error ? "errorText" : "inputBorderFocus",
+    border: props.error ? "error" : "inputBorder",
   },
   padding: [0.5, 1],
   height: 6,
