@@ -59,6 +59,7 @@ const Documentation = ({
   onGoToDemoClick,
   children,
   demoUrl,
+  modalProps = {},
 }) => {
   const [isOpen, toggle] = useToggle()
   const [view, setView] = useState(views.general)
@@ -93,6 +94,7 @@ const Documentation = ({
                       max: isGeneral ? "325px" : view === views.dashboard ? "600px" : "100%",
                     }}
                     data-testid="documentation-layer"
+                    {...modalProps}
                   >
                     <Header onClose={closeClicked}>
                       {isGeneral && (
