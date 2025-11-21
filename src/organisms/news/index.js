@@ -10,7 +10,7 @@ import useFetchNews from "./useFetchNews"
 
 const emptyArray = []
 
-const News = ({ app = "cloud", onCloseClick, children }) => {
+const News = ({ app = "cloud", onCloseClick, modalProps = {}, children }) => {
   const lastSeen = localStorage.getItem("news_last_seen")
   const [news, setNews] = useState(emptyArray)
   const [error, setError] = useState()
@@ -53,6 +53,7 @@ const News = ({ app = "cloud", onCloseClick, children }) => {
             height={{ max: "640px" }}
             gap={4}
             column
+            {...modalProps}
           >
             <Header onClose={onClose} />
             <Container column gap={6}>
