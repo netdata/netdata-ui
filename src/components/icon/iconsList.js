@@ -21,6 +21,7 @@ import anomaliesBrain from "./assets/anomalies_brain.svg"
 import anomaliesLens from "./assets/anomalies_lens.svg"
 import anomalyAnalysis from "./assets/insights/anomaly_analysis_colored.svg"
 import anomalyBadge from "./assets/anomaly_badge.svg"
+import antenna from "./assets/antenna.svg"
 import applications_hollow from "./assets/applications_hollow.svg"
 import applicationsSolid from "./assets/applications_solid.svg"
 import around_clock from "./assets/around_clock.svg"
@@ -486,6 +487,7 @@ export const iconsList = {
   anomaliesLens,
   anomalyAnalysis,
   anomalyBadge,
+  antenna,
   applications_hollow,
   applicationsSolid,
   around_clock,
