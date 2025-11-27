@@ -16,6 +16,7 @@ export const Button = ({
   iconSize,
   iconWidth,
   iconHeight,
+  iconRotate = 0,
   children = label,
   ref,
   ...rest
@@ -42,6 +43,7 @@ export const Button = ({
           name={icon}
           width={iconWidth}
           height={iconHeight}
+          rotate={iconRotate}
         />
       </Flex>
     )}
