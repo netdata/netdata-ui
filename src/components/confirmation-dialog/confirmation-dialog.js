@@ -26,9 +26,10 @@ const ConfirmationDialog = ({
   message,
   title,
   backdropContainerProps,
+  ...props
 }) => {
   return (
-    <Dialog onEsc={handleDecline} backdropContainerProps={backdropContainerProps}>
+    <Dialog onEsc={handleDecline} backdropContainerProps={backdropContainerProps} {...props}>
       <Content data-testid={dataTestId}>
         <Header data-testid={`${dataTestId}-headerContainer`}>
           <Flex data-testid={`${dataTestId}-header`} gap={2}>
