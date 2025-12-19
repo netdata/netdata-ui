@@ -85,11 +85,7 @@ export default memo(
     GroupRow,
     ...rest
   }) => {
-    const { columnVisibility } = useTableState(rerenderSelector)
-
-    const leftHeaders = useMemo(() => table.getLeftLeafHeaders(), [table, columnVisibility])
-    const centerHeaders = useMemo(() => table.getCenterLeafHeaders(), [table, columnVisibility])
-    const rightHeaders = useMemo(() => table.getRightLeafHeaders(), [table, columnVisibility])
+    useTableState(rerenderSelector)
 
     const isClickable = useMemo(() => {
       if (typeof onClickRow !== "function") return false
@@ -153,7 +149,7 @@ export default memo(
                     row={row}
                     key={cell.id}
                     testPrefix={testPrefix}
-                    header={leftHeaders[index]}
+                    header={table.getLeftLeafHeaders()[index]}
                     {...rest}
                   />
                 ))}
@@ -175,7 +171,7 @@ export default memo(
                     row={row}
                     key={cell.id}
                     testPrefix={testPrefix}
-                    header={centerHeaders[index]}
+                    header={table.getCenterLeafHeaders()[index]}
                     {...rest}
                   />
                 ))}
@@ -202,7 +198,7 @@ export default memo(
                     row={row}
                     key={cell.id}
                     testPrefix={testPrefix}
-                    header={rightHeaders[index]}
+                    header={table.getRightLeafHeaders()[index]}
                     {...rest}
                   />
                 ))}
