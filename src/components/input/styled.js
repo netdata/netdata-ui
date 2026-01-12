@@ -32,6 +32,7 @@ export const Input = styled(Flex).attrs(props => ({
   ${({ hasIconLeft }) => hasIconLeft && "padding-left: 24px;"}
   ${({ hasIconRight, hasIndicator }) =>
     (hasIconRight || hasIndicator) && `padding-right: ${hasIconRight && hasIndicator ? 48 : 24}px;`}
+  ${({ textAlign }) => (textAlign ? `text-align: ${textAlign};` : "")}
 
   &::placeholder {
     font-size: 12px;
