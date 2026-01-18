@@ -11,6 +11,7 @@ export const Tabs = ({
   TabContent = Fragment,
   noDefaultBorder,
   tabsProps,
+  tabHeaderProps,
   tabContentProps,
   ref,
   ...rest
@@ -29,7 +30,7 @@ export const Tabs = ({
 
   return (
     <StyledTabsWrapper className={className} {...rest} ref={ref}>
-      <TabsHeader>
+      <TabsHeader {...tabHeaderProps}>
         <StyledTabs className="tabs" noDefaultBorder={noDefaultBorder} {...tabsProps}>
           {nav}
         </StyledTabs>
