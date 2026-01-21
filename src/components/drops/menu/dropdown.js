@@ -2,6 +2,7 @@ import React, { useMemo, useState, useRef } from "react"
 import styled from "styled-components"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import Flex from "@/components/templates/flex"
+import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
@@ -14,6 +15,14 @@ const Container = styled(Flex)`
 `
 
 const defaultEstimateSize = () => 28
+
+const DefaultNoSearchResultsComponent = () => {
+  return (
+    <Flex padding={[2, 0]} justifyContent="center">
+      <Text>No results were found</Text>
+    </Flex>
+  )
+}
 
 const Dropdown = ({
   hideShadow,
@@ -33,6 +42,8 @@ const Dropdown = ({
   close,
   containerRef,
   ref: forwardedRef,
+  showNoSearchResults = true,
+  NoSearchResultsComponent = DefaultNoSearchResultsComponent,
   ...rest
 }) => {
   const [searchValue, setSearchValue] = useState("")
@@ -84,6 +95,9 @@ const Dropdown = ({
         </Box>
       )}
       {typeof renderSelectAll === "function" && renderSelectAll({ searchValue, filteredItems })}
+      {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
+        <NoSearchResultsComponent />
+      ) : null}
       <div
         ref={mergeRefs(ref, forwardedRef)}
         style={{
