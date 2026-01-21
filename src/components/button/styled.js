@@ -67,10 +67,10 @@ const getAccentColor = props => {
 
 const getTransparent = getColor(["transparent", "full"])
 
-const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor }) => {
+const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color }) => {
   const getErrorColor = danger ? getColor("error") : undefined
   const getWarningColor = warning ? getColor("warning") : undefined
-  const getSpecialColor = getErrorColor || getWarningColor
+  const getSpecialColor = getErrorColor || getWarningColor || (color ? getColor(color) : undefined)
   const getSpecialColorHover = getSpecialColor
     ? props => lighten(0.2, getSpecialColor(props))
     : undefined
