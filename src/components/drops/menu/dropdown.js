@@ -26,6 +26,7 @@ const Dropdown = ({
   Footer,
   value,
   hasSearch,
+  renderSelectAll,
   searchMargin = [4],
   gap = 0,
   estimateSize = defaultEstimateSize,
@@ -41,7 +42,9 @@ const Dropdown = ({
 
     const searchLowerCase = searchValue.toLowerCase()
 
-    return items.filter(({ label, value: val }) => {
+    return items.filter(({ label, value: val, customFiltering }) => {
+      if (typeof customFiltering === "function")
+        return customFiltering({ searchValue, label, value: val })
       if (typeof label === "string" && label.toLowerCase().includes(searchLowerCase)) return true
       if (!label && typeof val === "string" && val.toLowerCase().includes(searchLowerCase))
         return true
@@ -80,6 +83,7 @@ const Dropdown = ({
           <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
         </Box>
       )}
+      {typeof renderSelectAll === "function" && renderSelectAll({ searchValue, filteredItems })}
       <div
         ref={mergeRefs(ref, forwardedRef)}
         style={{
