@@ -2,6 +2,7 @@ import React, { useMemo, useState, useRef } from "react"
 import styled from "styled-components"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import Flex from "@/components/templates/flex"
+import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
@@ -15,6 +16,14 @@ const Container = styled(Flex)`
 
 const defaultEstimateSize = () => 28
 
+const DefaultNoSearchResultsComponent = () => {
+  return (
+    <Flex padding={[2, 0]} justifyContent="center">
+      <Text>No results were found</Text>
+    </Flex>
+  )
+}
+
 const Dropdown = ({
   hideShadow,
   itemProps,
@@ -26,12 +35,15 @@ const Dropdown = ({
   Footer,
   value,
   hasSearch,
+  renderComponent,
   searchMargin = [4],
   gap = 0,
   estimateSize = defaultEstimateSize,
   close,
   containerRef,
   ref: forwardedRef,
+  showNoSearchResults = true,
+  NoSearchResultsComponent = DefaultNoSearchResultsComponent,
   ...rest
 }) => {
   const [searchValue, setSearchValue] = useState("")
@@ -41,7 +53,9 @@ const Dropdown = ({
 
     const searchLowerCase = searchValue.toLowerCase()
 
-    return items.filter(({ label, value: val }) => {
+    return items.filter(({ label, value: val, customFiltering }) => {
+      if (typeof customFiltering === "function")
+        return customFiltering({ searchValue, label, value: val })
       if (typeof label === "string" && label.toLowerCase().includes(searchLowerCase)) return true
       if (!label && typeof val === "string" && val.toLowerCase().includes(searchLowerCase))
         return true
@@ -80,6 +94,10 @@ const Dropdown = ({
           <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
         </Box>
       )}
+      {typeof renderComponent === "function" && renderComponent({ searchValue, filteredItems })}
+      {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
+        <NoSearchResultsComponent />
+      ) : null}
       <div
         ref={mergeRefs(ref, forwardedRef)}
         style={{
