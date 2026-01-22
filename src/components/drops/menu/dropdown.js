@@ -35,7 +35,7 @@ const Dropdown = ({
   Footer,
   value,
   hasSearch,
-  renderSelectAll,
+  renderComponent,
   searchMargin = [4],
   gap = 0,
   estimateSize = defaultEstimateSize,
@@ -94,7 +94,7 @@ const Dropdown = ({
           <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
         </Box>
       )}
-      {typeof renderSelectAll === "function" && renderSelectAll({ searchValue, filteredItems })}
+      {typeof renderComponent === "function" && renderComponent({ searchValue, filteredItems })}
       {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
         <NoSearchResultsComponent />
       ) : null}
