@@ -291,6 +291,7 @@ exports[`Button states renders only icon 1`] = `
   width: 16px;
   opacity: 1;
   pointer-events: unset;
+  transform: rotate(0deg);
 }
 
 .c1 {
@@ -320,6 +321,7 @@ exports[`Button states renders only icon 1`] = `
   >
     <svg
       class="c2 button-icon"
+      rotate="0"
       title="plus"
     >
       <use
@@ -410,6 +412,7 @@ exports[`Button states renders smaller only icon 1`] = `
   width: 16px;
   opacity: 1;
   pointer-events: unset;
+  transform: rotate(0deg);
 }
 
 .c1 {
@@ -439,6 +442,7 @@ exports[`Button states renders smaller only icon 1`] = `
   >
     <svg
       class="c2 button-icon"
+      rotate="0"
       title="plus"
     >
       <use

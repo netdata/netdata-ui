@@ -124,6 +124,7 @@ import google from "./assets/google.svg"
 import goToNode from "./assets/go_to_node.svg"
 import grid from "./assets/grid.svg"
 import group_by from "./assets/group_by.svg"
+import groupCreate from "./assets/group_create.svg"
 import h1 from "./assets/h1.svg"
 import h2 from "./assets/h2.svg"
 import hamburger from "./assets/hamburger.svg"
@@ -590,6 +591,7 @@ export const iconsList = {
   goToNode,
   grid,
   group_by,
+  groupCreate,
   h1,
   h2,
   hamburger,

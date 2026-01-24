@@ -34,6 +34,11 @@ const appColors = {
   primaryHighlightAI: rawColors.blue.blue130,
   secondaryColorAI: rawColors.blue.blue140,
   secondaryHighlightAI: rawColors.blue.blue70,
+  // AI Graphics
+  strokeMain: rawColors.blue.blue150,
+  strokeHighlight: rawColors.blue.blue170,
+  aiParticleMain: rawColors.blue.blue150,
+
   //============Status=============\\
   success: rawColors.green.green100,
   successLite: rawColors.green.green190,
