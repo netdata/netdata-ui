@@ -29,8 +29,15 @@ export const ModalBody = ({ children, testId, ...rest }) => (
   </Flex>
 )
 
-export const ModalFooter = ({ children, hasBorder = true, parentPadding, testId, ...rest }) => (
-  <Flex column padding={parentPadding || [0, LEFT_RIGHT_PADDING]} flex={1}>
+export const ModalFooter = ({
+  children,
+  hasBorder = true,
+  parentPadding,
+  testId,
+  containerProps = {},
+  ...rest
+}) => (
+  <Flex column padding={parentPadding || [0, LEFT_RIGHT_PADDING]} flex={1} {...containerProps}>
     <Flex
       data-testid={testId}
       flex={1}
