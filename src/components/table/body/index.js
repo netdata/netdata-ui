@@ -34,6 +34,7 @@ const Body = memo(
     virtualRef,
     initialOffset = 0,
     onScroll,
+    enableColumnReordering,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -134,6 +135,7 @@ const Body = memo(
                     testPrefix={testPrefix}
                     coloredSortedColumn={coloredSortedColumn}
                     index={virtualRow.index}
+                    enableColumnReordering={enableColumnReordering}
                     {...rest}
                   />
                 ) : (

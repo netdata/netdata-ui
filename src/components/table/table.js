@@ -31,6 +31,7 @@ import useSearching from "./useSearching"
 import useSelecting from "./useSelecting"
 import useSorting from "./useSorting"
 import useGrouping from "./useGrouping"
+import useColumnOrder from "./useColumnOrder"
 
 const noop = () => {}
 const emptyObj = {}
@@ -40,13 +41,17 @@ const filterFns = {
   select,
 }
 
+const emptyArray = []
+
 const tableDefaultProps = {
   coloredSortedColumn: true,
   enableColumnPinning: false,
+  enableColumnReordering: false,
   enableColumnVisibility: false,
   enableResizing: false,
   globalFilterFn: includesString,
   onColumnVisibilityChange: noop,
+  onColumnOrderChange: noop,
   onSortingChange: noop,
   onExpandedChange: noop,
   paginationOptions: {
@@ -60,6 +65,7 @@ const tableDefaultProps = {
   globalFilter: "",
   testPrefix: "",
   virtualizeOptions: {},
+  columnOrder: emptyArray,
 }
 
 const Table = memo(props => {
@@ -73,6 +79,10 @@ const Table = memo(props => {
     enableColumnPinning = tableDefaultProps.enableColumnPinning,
     columnPinning: defaultColumnPinning,
     onColumnPinningChange: pinningChangeCb,
+
+    enableColumnReordering = tableDefaultProps.enableColumnReordering,
+    columnOrder: defaultColumnOrder = tableDefaultProps.columnOrder,
+    onColumnOrderChange: columnOrderChangeCb = tableDefaultProps.onColumnOrderChange,
 
     enableColumnVisibility = tableDefaultProps.enableColumnVisibility,
     columnVisibility: defaultColumnVisibility,
@@ -149,6 +159,8 @@ const Table = memo(props => {
 
   const [globalFilter, onGlobalFilterChange] = useSearching(defaultGlobalFilter, onSearch)
 
+  const [columnOrder, onColumnOrderChange] = useColumnOrder(defaultColumnOrder, columnOrderChangeCb)
+
   const columns = useColumns(dataColumns, {
     testPrefix,
     enableSelection,
@@ -181,7 +193,7 @@ const Table = memo(props => {
             : groupByColumns?.[grouping]?.columns || [],
         [grouping]
       ),
-      columnOrder: [],
+      columnOrder,
     },
     onExpandedChange,
     ...(!enableCustomSearch && globalFilterFn ? { globalFilterFn } : {}),
@@ -203,6 +215,7 @@ const Table = memo(props => {
     onColumnVisibilityChange,
     onColumnSizingChange,
     onColumnPinningChange,
+    onColumnOrderChange,
     enableSubRowSelection,
     columnGroupingMode: "reorder",
     getRowId,
@@ -287,6 +300,7 @@ const Table = memo(props => {
         dataGa={dataGa}
         testPrefix={testPrefix}
         meta={tableMeta}
+        enableColumnReordering={enableColumnReordering}
         {...rest}
         {...virtualizeOptions}
       />

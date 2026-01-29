@@ -65,6 +65,7 @@ export default (enabled, { testPrefix, tableMeta, singleRowSelection }) =>
             ),
             enableColumnFilter: false,
             enableSorting: false,
+            enableReordering: false,
             size: width,
             maxSize: width,
             minSize: width,

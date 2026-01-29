@@ -1,9 +1,20 @@
-import React, { memo } from "react"
+import React, { memo, useState, useMemo, useCallback } from "react"
 import styled from "styled-components"
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core"
+import { SortableContext, horizontalListSortingStrategy, arrayMove } from "@dnd-kit/sortable"
+import { restrictToHorizontalAxis } from "@dnd-kit/modifiers"
 import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
 import Cell from "./cell"
 import { Handler } from "./resizeHandler"
+import DragOverlay from "./dragOverlay"
 
 const rerenderSelector = state => {
   const columns = state.allColumns || []
@@ -19,8 +30,10 @@ const rerenderSelector = state => {
   }
 }
 
-const HeaderGroup = ({ id, headers, testPrefix, rowReverse, ...rest }) => {
-  return (
+const HeaderGroup = ({ id, headers, testPrefix, rowReverse, enableColumnReordering, ...rest }) => {
+  const columnIds = useMemo(() => headers.map(h => h.column.id), [headers])
+
+  const content = (
     <Flex
       id={id}
       data-testid={`netdata-table-headRow${testPrefix}`}
@@ -36,6 +49,9 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, ...rest }) => {
           header={header}
           testPrefix={testPrefix}
           hasSubheaders={!!header.subHeaders.length}
+          enableColumnReordering={
+            enableColumnReordering && header.column.columnDef.enableReordering !== false
+          }
         >
           {!!header.subHeaders.length && (
             <HeaderGroup
@@ -43,6 +59,7 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, ...rest }) => {
               id={header.id}
               key={header.id}
               {...rest}
+              enableColumnReordering={enableColumnReordering}
               isSubheader
             />
           )}
@@ -50,9 +67,19 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, ...rest }) => {
       ))}
     </Flex>
   )
+
+  if (!enableColumnReordering) {
+    return content
+  }
+
+  return (
+    <SortableContext items={columnIds} strategy={horizontalListSortingStrategy}>
+      {content}
+    </SortableContext>
+  )
 }
 
-const HeaderGroups = ({ groups, size, side, flex = "grow", ...rest }) => {
+const HeaderGroups = ({ groups, size, side, flex = "grow", enableColumnReordering, ...rest }) => {
   if (!groups[0].headers.length) return null
 
   return (
@@ -69,7 +96,13 @@ const HeaderGroups = ({ groups, size, side, flex = "grow", ...rest }) => {
       flex={flex}
       column
     >
-      <HeaderGroup headers={groups[0].headers} id={groups[0].id} key={groups[0].id} {...rest} />
+      <HeaderGroup
+        headers={groups[0].headers}
+        id={groups[0].id}
+        key={groups[0].id}
+        {...rest}
+        enableColumnReordering={enableColumnReordering}
+      />
     </Flex>
   )
 }
@@ -82,12 +115,67 @@ const HeaderRow = styled(Flex)`
   &:hover ${Handler} {
     display: block;
   }
+
+  &:hover .drag-handle {
+    opacity: 1;
+  }
 `
 
-const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
+const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest }) => {
   useTableState(rerenderSelector)
 
-  return (
+  const [activeId, setActiveId] = useState(null)
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor)
+  )
+
+  const activeColumn = useMemo(() => {
+    if (!activeId) return null
+    return table.getColumn(activeId)
+  }, [activeId, table])
+
+  const handleDragStart = useCallback(event => {
+    setActiveId(event.active.id)
+  }, [])
+
+  const handleDragEnd = useCallback(
+    event => {
+      const { active, over } = event
+      setActiveId(null)
+
+      if (!active || !over || active.id === over.id) return
+
+      const currentOrder = table.getState().columnOrder
+      const allColumns = table.getAllLeafColumns()
+
+      let columnOrder = currentOrder.length > 0 ? currentOrder : allColumns.map(c => c.id)
+
+      const oldIndex = columnOrder.indexOf(active.id)
+      const newIndex = columnOrder.indexOf(over.id)
+
+      if (oldIndex === -1 || newIndex === -1) return
+
+      const activeColumn = table.getColumn(active.id)
+      const overColumn = table.getColumn(over.id)
+      if (activeColumn?.getIsPinned() !== overColumn?.getIsPinned()) return
+
+      const newOrder = arrayMove(columnOrder, oldIndex, newIndex)
+      table.setColumnOrder(newOrder)
+    },
+    [table]
+  )
+
+  const handleDragCancel = useCallback(() => {
+    setActiveId(null)
+  }, [])
+
+  const headerContent = (
     <HeaderRow
       data-testid={`netdata-table-head${testPrefix}`}
       flex
@@ -106,6 +194,7 @@ const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
         {...rest}
         flex={false}
         table={table}
+        enableColumnReordering={enableColumnReordering}
       />
       <HeaderGroups
         groups={table.getCenterHeaderGroups()}
@@ -113,6 +202,7 @@ const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
         testPrefix={testPrefix}
         {...rest}
         table={table}
+        enableColumnReordering={enableColumnReordering}
       />
       <HeaderGroups
         groups={table.getRightHeaderGroups()}
@@ -122,9 +212,28 @@ const BodyHeader = memo(({ table, testPrefix, ...rest }) => {
         {...rest}
         flex={false}
         table={table}
+        enableColumnReordering={enableColumnReordering}
         rowReverse
       />
     </HeaderRow>
+  )
+
+  if (!enableColumnReordering) {
+    return headerContent
+  }
+
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      modifiers={[restrictToHorizontalAxis]}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+    >
+      {headerContent}
+      <DragOverlay activeColumn={activeColumn} />
+    </DndContext>
   )
 })
 

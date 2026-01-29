@@ -114,6 +114,7 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
       ),
       enableColumnFilter: false,
       enableSorting: false,
+      enableReordering: false,
       tableMeta,
       size: Math.max(MIN_ACTIONS_COLUMN_WIDTH, availableRowActions.length * 35),
       align: "end",

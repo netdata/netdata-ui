@@ -515,6 +515,83 @@ export const FullTable = () => {
   )
 }
 
+export const ColumnReordering = () => {
+  const [columnOrder, setColumnOrder] = useState([])
+
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: "User", cell: ({ getValue }) => getValue() },
+    { id: "status", header: "Status", cell: ({ getValue }) => getValue() },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15, user: "nic", status: "online" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline" },
+    { nodes: "node3", alerts: 22, user: "manolis", status: "stale" },
+  ]
+
+  return (
+    <Box width="800px">
+      <Text>Drag column headers to reorder columns. Current order: {columnOrder.join(", ") || "default"}</Text>
+      <Table
+        enableColumnReordering
+        columnOrder={columnOrder}
+        onColumnOrderChange={setColumnOrder}
+        dataColumns={mockDataColumns}
+        data={mockData()}
+      />
+    </Box>
+  )
+}
+
+export const ColumnReorderingWithPinning = () => {
+  const [columnOrder, setColumnOrder] = useState([])
+
+  const handleDelete = data => {
+    console.log("Delete has been clicked", data)
+  }
+
+  const rowActions = {
+    delete: {
+      handleAction: handleDelete,
+    },
+  }
+
+  const columnPinning = { left: ["checkbox", "nodes"], right: ["actions"] }
+
+  const mockDataColumns = [
+    { header: "Nodes", id: "nodes", cell: ({ getValue }) => getValue() },
+    { id: "alerts", header: () => <Text>Alerts</Text>, cell: ({ getValue }) => getValue() },
+    { id: "user", header: "User", cell: ({ getValue }) => getValue() },
+    { id: "status", header: "Status", cell: ({ getValue }) => getValue() },
+    { id: "region", header: "Region", cell: ({ getValue }) => getValue() },
+  ]
+
+  const mockData = () => [
+    { nodes: "node1", alerts: 15, user: "nic", status: "online", region: "EU" },
+    { nodes: "node2", alerts: 11, user: "alex", status: "offline", region: "US" },
+    { nodes: "node3", alerts: 22, user: "manolis", status: "stale", region: "APAC" },
+  ]
+
+  return (
+    <Box width="1000px">
+      <Text>Columns can only be reordered within their pinned group. Checkbox and Actions columns are not draggable.</Text>
+      <Table
+        enableColumnReordering
+        enableColumnPinning
+        enableSelection
+        columnPinning={columnPinning}
+        columnOrder={columnOrder}
+        onColumnOrderChange={setColumnOrder}
+        rowActions={rowActions}
+        dataColumns={mockDataColumns}
+        data={mockData()}
+      />
+    </Box>
+  )
+}
+
 export const Pinning = props => {
   const handleDelete = data => {
     console.log("Delete has been clicked", data)

@@ -8,6 +8,8 @@ import ResizeHandler from "./resizeHandler"
 import Sorting, { SortIconContainer } from "./sorting"
 import Info from "./info"
 import Filter from "./filter"
+import useSortableHeader from "./sortableHeader"
+import DragHandle from "./dragHandle"
 
 const Label = styled(Text)`
   width: 100%;
@@ -40,10 +42,16 @@ const BodyHeaderCell = ({
   children,
   isSubheader,
   hasSubheaders,
+  enableColumnReordering,
 }) => {
   useTableState(rerenderSelector)
 
   const { column } = header
+  const { sortableRef, sortableStyle, dragHandleProps, isDragging } = useSortableHeader(
+    column.id,
+    enableColumnReordering
+  )
+
   const tableMeta =
     typeof column.columnDef.tableMeta === "function"
       ? column.columnDef.tableMeta({}, column, index)
@@ -63,6 +71,8 @@ const BodyHeaderCell = ({
 
   return (
     <Flex
+      ref={sortableRef}
+      style={enableColumnReordering ? sortableStyle : undefined}
       flex={
         !column.columnDef.fullWidth && (column.columnDef.notFlex || column.getCanResize())
           ? false
@@ -98,6 +108,7 @@ const BodyHeaderCell = ({
           overflow="hidden"
           width="100%"
         >
+          <DragHandle dragHandleProps={dragHandleProps} visible={isDragging} />
           {column.isPlaceholder ? null : (
             <Label
               as={column.columnDef.labelAs}
