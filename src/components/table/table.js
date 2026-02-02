@@ -104,6 +104,7 @@ const Table = memo(props => {
     autoResetExpanded = false,
 
     enableSorting,
+    manualSorting = false,
     sortBy,
     onSortingChange: sortingChangeCb = tableDefaultProps.onSortingChange,
 
@@ -202,6 +203,7 @@ const Table = memo(props => {
     onRowSelectionChange,
     onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
     onSortingChange,
+    manualSorting,
     enableMultiSorting: true,
     isMultiSortEvent: e => e.ctrlKey || e.shiftKey || e.metaKey,
     getSortedRowModel: getSortedRowModel(),
