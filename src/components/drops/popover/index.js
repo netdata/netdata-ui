@@ -1,4 +1,4 @@
-import React, { useCallback, Fragment, useRef } from "react"
+import React, { useCallback, Fragment, useRef, useEffect } from "react"
 import Drop from "@/components/drops/drop"
 import useForwardRef from "@/hooks/useForwardRef"
 import useToggle from "@/hooks/useToggle"
@@ -7,6 +7,7 @@ import useDescribedId from "@/components/drops/mixins/useDescribedId"
 import dropAlignMap from "@/components/drops/mixins/dropAlignMap"
 import Container from "@/components/drops/container"
 
+const noop = () => {}
 const getContent = content => (typeof content === "function" ? content() : content)
 
 const Popover = ({
@@ -19,6 +20,7 @@ const Popover = ({
   children,
   zIndex = 70,
   ref: parentRef,
+  onHoverChange = noop,
   ...rest
 }) => {
   const id = useDescribedId(rest["aria-describedby"])
@@ -33,15 +35,33 @@ const Popover = ({
 
   const [ref, setRef] = useForwardRef(parentRef)
 
+  const onTargetElementMouseOver = useCallback(() => {
+    open()
+    onHoverChange(true)
+  }, [open, onHoverChange])
+
+  const onTargetElementMouseLeave = useCallback(() => {
+    closeDrop()
+    onHoverChange(false)
+  }, [closeDrop, onHoverChange])
+
   const targetElement = useClonedChildren(children, setRef, {
     isOpen,
-    onMouseOver: open,
-    onMouseLeave: closeDrop,
+    onMouseOver: onTargetElementMouseOver,
+    onMouseLeave: onTargetElementMouseLeave,
     onFocus: open,
     onBlur: closeDrop,
     ...(isOpen && { "aria-describedby": id }),
     ...rest,
   })
+
+  useEffect(() => {
+    if (initialOpen) {
+      open()
+    } else {
+      close()
+    }
+  }, [initialOpen, open, close])
 
   const onMouseEnter = useCallback(() => {
     dropHoverRef.current = true
