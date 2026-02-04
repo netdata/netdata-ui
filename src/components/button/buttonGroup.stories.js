@@ -1,39 +1,17 @@
-import React, { useCallback, useState } from "react"
+import React, { useState } from "react"
 import { ButtonGroup } from "."
 
 export const RadioButtonGroup = args => {
-  const [checked, setChecked] = useState(args.checked)
+  const [value, setValue] = useState(args.value)
 
-  return (
-    <ButtonGroup
-      items={args.items.map(item => ({ ...item }))}
-      checked={checked}
-      buttonProps={args}
-      onChange={setChecked}
-    />
-  )
+  return <ButtonGroup items={args.items} value={value} buttonProps={args} onChange={setValue} />
 }
 
 export const MultiButtonGroup = args => {
-  const [checked, setChecked] = useState([args.checked])
-
-  const onChange = useCallback(
-    value => {
-      setChecked(prev => {
-        if (prev.includes(value)) return prev.filter(v => v !== value)
-        return [...prev, value]
-      })
-    },
-    [setChecked]
-  )
+  const [value, setValue] = useState([args.value])
 
   return (
-    <ButtonGroup
-      items={args.items.map(item => ({ ...item }))}
-      checked={checked}
-      buttonProps={args}
-      onChange={onChange}
-    />
+    <ButtonGroup items={args.items} value={value} isMulti buttonProps={args} onChange={setValue} />
   )
 }
 
@@ -42,14 +20,14 @@ export default {
   tags: ["autodocs"],
   args: {
     items: [
-      { label: "One", value: 1 },
-      { label: "Two", value: 2 },
-      { label: "Three", value: 3 },
+      { label: "One", value: "1" },
+      { label: "Two", value: "2" },
+      { label: "Three", value: "3" },
     ],
-    checked: 1,
+    value: "1",
     buttonProps: {},
   },
   argTypes: {
-    checked: { control: "text" },
+    value: { control: "text" },
   },
 }
