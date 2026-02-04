@@ -1,4 +1,4 @@
-import React, { Children, isValidElement, cloneElement } from "react"
+import React, { Children, isValidElement, cloneElement, useCallback } from "react"
 import Flex from "@/components/templates/flex"
 import { Button } from "./button"
 
@@ -30,24 +30,28 @@ const Content = ({ children }) => {
   )
 }
 
-const RadioButtons = ({ items, checked, buttonProps = {}, onChange }) => (
-  <>
-    {items.map(({ label, value, title }, index) => {
-      const buttonGroupProps = getButtonGroupProps(index, items.length)
-      return (
-        <Button
-          key={value}
-          label={label}
-          onClick={() => onChange(value)}
-          {...(title ? { title } : {})}
-          {...(checked != value ? { flavour: "hollow" } : {})}
-          {...buttonGroupProps}
-          {...buttonProps}
-        />
-      )
-    })}
-  </>
-)
+const RadioButtons = ({ items, checked, buttonProps = {}, onChange }) => {
+  return (
+    <>
+      {items.map(({ label, value, title }, index) => {
+        const buttonGroupProps = getButtonGroupProps(index, items.length)
+        const isChecked = checked === value || (Array.isArray(checked) && checked.includes(value))
+
+        return (
+          <Button
+            key={value}
+            label={label}
+            onClick={() => onChange(value)}
+            {...(title ? { title } : {})}
+            {...(!isChecked ? { flavour: "hollow" } : {})}
+            {...buttonGroupProps}
+            {...buttonProps}
+          />
+        )
+      })}
+    </>
+  )
+}
 
 export const ButtonGroup = ({ items, checked, onChange, children, buttonProps, ...props }) => (
   <Flex alignItems="center" {...props}>

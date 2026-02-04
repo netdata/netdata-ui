@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Button, IconButton, ButtonGroup } from "."
+import React from "react"
+import { Button, IconButton } from "."
 import { iconsList } from "@/components/icon"
 
 const icons = Object.keys(iconsList)
@@ -16,26 +16,6 @@ export const BaseIconButton = args => (
     tooltip="Previous"
   />
 )
-
-const radioButtonItems = [
-  { label: "One", value: 1 },
-  { label: "Two", value: 2 },
-  { label: "Three", value: 3 },
-]
-
-export const RadioButtonGroup = args => {
-  const [checked, setChecked] = useState(1)
-  const onChange = value => setChecked(value)
-
-  return (
-    <ButtonGroup
-      items={radioButtonItems.map(item => ({ ...args, ...item }))}
-      checked={checked}
-      buttonProps={args}
-      onChange={onChange}
-    />
-  )
-}
 
 export default {
   component: Button,
