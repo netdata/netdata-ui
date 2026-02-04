@@ -30,7 +30,7 @@ describe("ButtonGroup", () => {
         { label: "Option 3", value: "opt3" },
       ]
 
-      renderWithProviders(<ButtonGroup items={items} checked="opt1" onChange={() => {}} />)
+      renderWithProviders(<ButtonGroup items={items} value="opt1" onChange={() => {}} />)
 
       expect(screen.getByText("Option 1")).toBeInTheDocument()
       expect(screen.getByText("Option 2")).toBeInTheDocument()
@@ -90,7 +90,7 @@ describe("ButtonGroup", () => {
         { label: "Option 2", value: "opt2" },
       ]
 
-      renderWithProviders(<ButtonGroup items={items} checked="opt1" onChange={handleChange} />)
+      renderWithProviders(<ButtonGroup items={items} value="opt1" onChange={handleChange} />)
 
       await user().click(screen.getByText("Option 2"))
       expect(handleChange).toHaveBeenCalledWith("opt2")
@@ -103,7 +103,7 @@ describe("ButtonGroup", () => {
       ]
 
       const { container } = renderWithProviders(
-        <ButtonGroup items={items} checked="checked" onChange={() => {}} />
+        <ButtonGroup items={items} value="checked" onChange={() => {}} />
       )
 
       const buttons = container.querySelectorAll("button")
@@ -119,7 +119,7 @@ describe("ButtonGroup", () => {
       renderWithProviders(
         <ButtonGroup
           items={items}
-          checked="btn1"
+          value="btn1"
           onChange={() => {}}
           buttonProps={{ disabled: true }}
         />
@@ -137,7 +137,7 @@ describe("ButtonGroup", () => {
         { label: "Cancel", value: "cancel" },
       ]
 
-      renderWithProviders(<ButtonGroup items={items} checked="save" onChange={() => {}} />)
+      renderWithProviders(<ButtonGroup items={items} value="save" onChange={() => {}} />)
 
       expect(screen.getByTitle("Save the document")).toBeInTheDocument()
     })
@@ -192,7 +192,7 @@ describe("ButtonGroup", () => {
 
     it("handles empty items array", () => {
       const { container } = renderWithProviders(
-        <ButtonGroup items={[]} checked={null} onChange={() => {}} />
+        <ButtonGroup items={[]} value={null} onChange={() => {}} />
       )
 
       expect(container.firstChild).toBeInTheDocument()
