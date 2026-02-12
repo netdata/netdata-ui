@@ -32,7 +32,14 @@ const Content = ({ children }) => {
   )
 }
 
-const RadioButtons = ({ items, value, isMulti, buttonProps = {}, onChange }) => {
+const RadioButtons = ({
+  items,
+  value,
+  isMulti,
+  ButtonComponent = Button,
+  buttonProps = {},
+  onChange,
+}) => {
   return (
     <>
       {items.map((item, index) => {
@@ -54,7 +61,7 @@ const RadioButtons = ({ items, value, isMulti, buttonProps = {}, onChange }) => 
         }
 
         return (
-          <Button
+          <ButtonComponent
             key={item.value}
             label={item.label}
             onClick={onClick}
@@ -62,6 +69,7 @@ const RadioButtons = ({ items, value, isMulti, buttonProps = {}, onChange }) => 
             {...(!isSelected ? { flavour: "hollow" } : {})}
             {...buttonGroupProps}
             {...buttonProps}
+            {...(item.buttonProps || {})}
           />
         )
       })}
@@ -75,6 +83,7 @@ export const ButtonGroup = ({
   isMulti,
   onChange = noop,
   children,
+  ButtonComponent,
   buttonProps,
   ...props
 }) => (
@@ -85,6 +94,7 @@ export const ButtonGroup = ({
         value={value}
         isMulti={isMulti}
         onChange={onChange}
+        ButtonComponent={ButtonComponent}
         buttonProps={buttonProps}
       />
     ) : (
