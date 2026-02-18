@@ -27,6 +27,9 @@ module.exports = {
     },
   },
   testPathIgnorePatterns: ["/node_modules/"],
+  transformIgnorePatterns: [
+    "/node_modules/(?!(strip-indent|redent|@testing-library/jest-dom)/)",
+  ],
   reporters: ["default"],
   cacheDirectory: "<rootDir>/.jest-tmp",
 }

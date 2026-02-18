@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import { action } from "@storybook/addon-actions"
+import { action } from "storybook/actions"
 import Flex from "@/components/templates/flex"
 import Drop from "."
 
