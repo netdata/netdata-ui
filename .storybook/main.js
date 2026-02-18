@@ -1,4 +1,8 @@
-const path = require("path")
+import path from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -57,7 +61,6 @@ const config = {
       utils: path.resolve(__dirname, "../utils/"),
     }
 
-    // Workaround to make storybook serve raw svg, not static path
     config.module.rules = config.module.rules.map(data => {
       if (/svg\|/.test(String(data.test)))
         data.test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/

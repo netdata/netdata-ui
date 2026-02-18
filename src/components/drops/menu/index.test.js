@@ -23,39 +23,39 @@ it("renders", () => {
   expect(queryByText("The Narrator")).not.toBeInTheDocument()
 })
 
-it("renders open", () => {
-  const { getByText, queryByTestId } = render()
+it("renders open", async () => {
+  const { getByText, findByText, queryByTestId } = render()
 
   fireEvent.click(getByText("character"))
 
   expect(getByText("character")).toBeVisible()
   expect(queryByTestId("drop")).toBeInTheDocument()
-  expect(getByText("The Narrator")).toBeInTheDocument()
+  expect(await findByText("The Narrator")).toBeInTheDocument()
 })
 
-it("closes on item click", () => {
+it("closes on item click", async () => {
   const onOpen = jest.fn()
   const onClose = jest.fn()
-  const { getByText, queryByTestId } = render({ onOpen, onClose })
+  const { getByText, findByText, queryByTestId } = render({ onOpen, onClose })
 
   fireEvent.click(getByText("character"))
-  expect(onOpen).toBeCalled()
+  expect(onOpen).toHaveBeenCalled()
 
-  fireEvent.click(getByText("Tyler Durden"))
-  expect(onClose).toBeCalled()
+  fireEvent.click(await findByText("Tyler Durden"))
+  expect(onClose).toHaveBeenCalled()
   expect(queryByTestId("drop")).not.toBeInTheDocument()
 })
 
-it("renders controlled", () => {
+it("renders controlled", async () => {
   const onChange = jest.fn()
-  const { getByText, queryByTestId } = render({
+  const { getByText, findByText, queryByTestId } = render({
     value: "durgen",
     onChange,
     label: null,
   })
 
   fireEvent.click(getByText("Tyler Durden"))
-  fireEvent.click(getByText("Marla Singer"))
-  expect(onChange).toBeCalledWith("singer")
+  fireEvent.click(await findByText("Marla Singer"))
+  expect(onChange).toHaveBeenCalledWith("singer")
   expect(queryByTestId("drop")).not.toBeInTheDocument()
 })

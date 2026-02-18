@@ -216,10 +216,10 @@ it("clicks outside", () => {
   )
 
   fireEvent.mouseDown(getByText("Drop content"))
-  expect(onClickOutside).toBeCalledTimes(0)
+  expect(onClickOutside).toHaveBeenCalledTimes(0)
 
   fireEvent.mouseDown(getByText("Outside content"))
-  expect(onClickOutside).toBeCalledTimes(1)
+  expect(onClickOutside).toHaveBeenCalledTimes(1)
 })
 
 it("clicks escape", async () => {
@@ -235,5 +235,5 @@ it("clicks escape", async () => {
   )
 
   fireEvent.keyDown(document, { keyCode: 27 })
-  expect(onEsc).toBeCalledTimes(1)
+  expect(onEsc).toHaveBeenCalledTimes(1)
 })

@@ -10,7 +10,7 @@ it("renders", () => {
 
   fireEvent.keyDown(document, { keyCode: 27 })
   expect(result.error).toBeUndefined()
-  expect(document.addEventListener).toBeCalledTimes(0)
+  expect(document.addEventListener).toHaveBeenCalledTimes(0)
 })
 
 it("triggers on enter keystroke", () => {
@@ -18,7 +18,7 @@ it("triggers on enter keystroke", () => {
   renderHookWithProviders(() => useKeyboardEsc(callback))
 
   fireEvent.keyDown(document, { keyCode: 27 })
-  expect(callback).toBeCalledTimes(1)
+  expect(callback).toHaveBeenCalledTimes(1)
 })
 
 it("does not trigger on non enter keystroke", () => {
@@ -26,5 +26,5 @@ it("does not trigger on non enter keystroke", () => {
   renderHookWithProviders(() => useKeyboardEsc(callback))
 
   fireEvent.keyDown(document, { keyCode: 26 })
-  expect(callback).toBeCalledTimes(0)
+  expect(callback).toHaveBeenCalledTimes(0)
 })

@@ -27,14 +27,14 @@ it("calls the observers", () => {
     <Intersection fallback="invisible">visible</Intersection>
   )
 
-  expect(observe).toBeCalledWith(container.firstChild)
-  expect(observe).toBeCalledTimes(1)
-  expect(unobserve).toBeCalledTimes(0)
-  expect(disconnect).toBeCalledTimes(0)
+  expect(observe).toHaveBeenCalledWith(container.firstChild)
+  expect(observe).toHaveBeenCalledTimes(1)
+  expect(unobserve).toHaveBeenCalledTimes(0)
+  expect(disconnect).toHaveBeenCalledTimes(0)
 
   unmount()
 
-  expect(observe).toBeCalledTimes(1)
-  expect(unobserve).toBeCalledTimes(1)
-  expect(disconnect).toBeCalledTimes(1)
+  expect(observe).toHaveBeenCalledTimes(1)
+  expect(unobserve).toHaveBeenCalledTimes(1)
+  expect(disconnect).toHaveBeenCalledTimes(1)
 })

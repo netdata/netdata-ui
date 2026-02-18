@@ -92,10 +92,10 @@ it("clicks outside", () => {
   )
 
   fireEvent.mouseDown(getByText("layer content"))
-  expect(onClickOutside).toBeCalledTimes(0)
+  expect(onClickOutside).toHaveBeenCalledTimes(0)
 
   fireEvent.mouseDown(getByText("outside content"))
-  expect(onClickOutside).toBeCalledTimes(1)
+  expect(onClickOutside).toHaveBeenCalledTimes(1)
 })
 
 it("clicks escape", async () => {
@@ -108,7 +108,7 @@ it("clicks escape", async () => {
   )
 
   fireEvent.keyDown(document, { keyCode: 27 })
-  expect(onEsc).toBeCalledTimes(1)
+  expect(onEsc).toHaveBeenCalledTimes(1)
 })
 
 it("renders border shadow", async () => {

@@ -35,5 +35,5 @@ it("sets parent as callback", () => {
     result.current[1]("test")
   })
 
-  expect(parentRef).toBeCalledWith("test")
+  expect(parentRef).toHaveBeenCalledWith("test")
 })

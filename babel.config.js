@@ -9,7 +9,6 @@ module.exports = {
   plugins: [
     ["styled-components", { ssr: !isTest, displayName: !isTest }],
     "@babel/plugin-transform-spread",
-    "@babel/plugin-proposal-object-rest-spread",
     [
       "module-resolver",
       {

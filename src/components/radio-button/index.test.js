@@ -48,7 +48,7 @@ it("triggers change", () => {
   const onChange = jest.fn()
   const { container } = renderWithProviders(<RadioButton onChange={onChange} />)
   fireEvent.click(container.firstChild)
-  expect(onChange).toBeCalledTimes(1)
+  expect(onChange).toHaveBeenCalledTimes(1)
 })
 
 it("renders label", () => {

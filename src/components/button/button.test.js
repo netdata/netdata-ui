@@ -138,7 +138,7 @@ describe("Button states", () => {
     const { getByText } = renderWithProviders(<Button label="Test prop text" onClick={onClickFn} />)
 
     fireEvent.click(getByText(/prop text/))
-    expect(onClickFn).toBeCalled()
+    expect(onClickFn).toHaveBeenCalled()
   })
 })
 

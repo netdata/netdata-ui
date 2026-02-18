@@ -59,7 +59,7 @@ describe("Tabs states", () => {
 
     const tab = getByText("Hi again")
     fireEvent.click(tab)
-    expect(onChange).toBeCalledWith(1)
+    expect(onChange).toHaveBeenCalledWith(1)
     expect(queryByText("Goodbye")).not.toBeInTheDocument()
     expect(queryByText("Hello again")).toBeInTheDocument()
   })

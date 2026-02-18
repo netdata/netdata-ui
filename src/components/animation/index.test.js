@@ -41,7 +41,7 @@ it("provides render props", () => {
   )
 
   expect(queryByText("myContent")).toBeInTheDocument()
-  expect(spy).toBeCalledTimes(1)
+  expect(spy).toHaveBeenCalledTimes(1)
   expect(props.transition).toBe("entered")
 })
 
@@ -61,6 +61,6 @@ it("renders in a wrapper", () => {
     </Animation>
   )
 
-  expect(spy).toBeCalledTimes(1)
-  expect(wrapperSpy).toBeCalledTimes(1)
+  expect(spy).toHaveBeenCalledTimes(1)
+  expect(wrapperSpy).toHaveBeenCalledTimes(1)
 })

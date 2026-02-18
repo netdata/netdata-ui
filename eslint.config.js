@@ -1,9 +1,9 @@
-const globals = require("globals")
-const pluginJs = require("@eslint/js")
-const pluginReact = require("eslint-plugin-react")
-const storybook = require("eslint-plugin-storybook")
+import globals from "globals"
+import pluginJs from "@eslint/js"
+import pluginReact from "eslint-plugin-react"
+import storybook from "eslint-plugin-storybook"
 
-module.exports = [
+export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
   {
     languageOptions: {
@@ -28,7 +28,6 @@ module.exports = [
   },
   {
     ignores: [
-      // Ignore dotfiles
       ".*.js",
       "node_modules/",
       "dist/",

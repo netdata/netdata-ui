@@ -26,7 +26,7 @@ it("trigger on outside click", () => {
 
   fireEvent.mouseDown(div3)
 
-  expect(onClickOutside).toBeCalledTimes(1)
+  expect(onClickOutside).toHaveBeenCalledTimes(1)
 })
 
 it("does not trigger on inner click", () => {
@@ -37,7 +37,7 @@ it("does not trigger on inner click", () => {
 
   fireEvent.mouseDown(div2)
 
-  expect(onClickOutside).toBeCalledTimes(0)
+  expect(onClickOutside).toHaveBeenCalledTimes(0)
 })
 
 it("does not trigger on the same element", () => {
@@ -48,5 +48,5 @@ it("does not trigger on the same element", () => {
 
   fireEvent.mouseDown(div1)
 
-  expect(onClickOutside).toBeCalledTimes(0)
+  expect(onClickOutside).toHaveBeenCalledTimes(0)
 })
