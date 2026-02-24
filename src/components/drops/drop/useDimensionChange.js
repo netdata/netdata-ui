@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import getAncestors from "@/components/drops/mixins/getAncestors"
 
-export default (target, callback) =>
+export default (target, callback, dropRef) =>
   useEffect(() => {
     let removeScrollListeners
 
@@ -27,8 +27,15 @@ export default (target, callback) =>
     }
     window.addEventListener("resize", onResize)
 
+    let resizeObserver
+    if (dropRef?.current) {
+      resizeObserver = new ResizeObserver(callback)
+      resizeObserver.observe(dropRef.current)
+    }
+
     return () => {
       removeScrollListeners()
       window.removeEventListener("resize", onResize)
+      if (resizeObserver) resizeObserver.disconnect()
     }
-  }, [target, callback])
+  }, [target, callback, dropRef])

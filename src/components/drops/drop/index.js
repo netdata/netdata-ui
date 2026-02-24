@@ -56,7 +56,7 @@ const Drop = ({
     updatePosition()
   }, [updatePosition])
 
-  useDimensionChange(target, updatePosition)
+  useDimensionChange(target, updatePosition, ref)
 
   useOutsideClick(ref, onClickOutside, target, backdrop, dataDrop)
   useKeyboardEsc(onEsc)
