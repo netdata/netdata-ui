@@ -85,6 +85,7 @@ import connectivityStatusStale from "./assets/connectivity_status_stale.svg"
 import container from "./assets/container.svg"
 import controller_kind from "./assets/controller_kind.svg"
 import controller_name from "./assets/controller_name.svg"
+import conversationSubject from "./assets/conversation_subject.svg"
 import copy from "./assets/copy.svg"
 import correlation from "./assets/correlation.svg"
 import correlation_inv from "./assets/correlation_inv.svg"
@@ -552,6 +553,7 @@ export const iconsList = {
   container,
   controller_kind,
   controller_name,
+  conversationSubject,
   copy,
   correlation_inv,
   correlation,
