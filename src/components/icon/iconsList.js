@@ -181,6 +181,7 @@ import ipNetworkingPress from "./assets/ipNetworkingPress.svg"
 import last_week from "./assets/last_week.svg"
 import line_chart from "./assets/line_chart.svg"
 import list from "./assets/list.svg"
+import live from "./assets/live.svg"
 import loading from "./assets/loading.svg"
 import logo_s from "./assets/logo_s.svg"
 import logs from "./assets/logs.svg"
@@ -649,6 +650,7 @@ export const iconsList = {
   last_week,
   line_chart,
   list,
+  live,
   loading,
   logo_s,
   logs,
