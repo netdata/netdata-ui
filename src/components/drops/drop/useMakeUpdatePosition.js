@@ -78,8 +78,6 @@ export default (target, dropRef, align, stretch, canHideTarget, keepHorizontal) 
   useCallback(() => {
     if (!dropRef.current) return
 
-    styles.forEach(position => (dropRef.current.style[position] = ""))
-
     const targetRect = target.getBoundingClientRect()
     const dropRect = dropRef.current.getBoundingClientRect()
 
@@ -87,10 +85,12 @@ export default (target, dropRef, align, stretch, canHideTarget, keepHorizontal) 
     dropRect.width = width
 
     const animate = () => {
+      if (!dropRef.current) return
+
+      styles.forEach(position => (dropRef.current.style[position] = ""))
+
       const x = getXPosition(align, targetRect, dropRect, canHideTarget)
       const y = getYPosition(align, targetRect, dropRect, canHideTarget)
-
-      if (!dropRef.current) return
 
       if (!keepHorizontal || !dropRef.current.style.left) {
         dropRef.current.style.left = `${x}px`
