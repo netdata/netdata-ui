@@ -36,12 +36,11 @@ const Header = ({
       data-noprint
       width="100%"
       zIndex={10}
-      background="mainBackground"
+      background="panelBg"
       gap={1}
       alignItems="center"
       padding={[2, 3]}
       round={{ side: "top", size: 1 }}
-      border={{ side: ["vertical", "top"] }}
       flexWrap
       {...tableMeta.bulkActionsStyles}
     >

@@ -5,12 +5,13 @@ import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
 
-const OverlayContainer = styled(Flex)`
-  background: ${({ theme }) => theme.colors.mainBackground};
-  border: 1px solid ${({ theme }) => theme.colors.border};
+const OverlayContainer = styled(Flex).attrs({
+  background: "mainBackground",
+  padding: [2, 4],
+  round: 1,
+  border: true,
+})`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  padding: 8px 16px;
-  border-radius: 4px;
   opacity: 0.9;
 `
 

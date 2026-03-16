@@ -100,7 +100,6 @@ const Body = memo(
         flex="1"
         data-testid={`netdata-table${testPrefix}`}
         onScroll={onScroll}
-        border
       >
         <div
           style={{
