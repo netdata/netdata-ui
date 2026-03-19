@@ -26,6 +26,8 @@ const Tab = ({
   collapsed,
   rootProps,
   ref,
+  tooltip,
+  tooltipProps,
   ...rest
 }) => {
   const [hover, setHover] = useState()
@@ -87,6 +89,8 @@ const Tab = ({
       data-index={index}
       data-id={id}
       style={style}
+      tooltip={tooltip}
+      tooltipProps={tooltipProps}
       {...attributes}
       {...rootProps}
     >
