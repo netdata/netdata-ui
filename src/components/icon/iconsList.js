@@ -326,6 +326,8 @@ import reload from "./assets/reload.svg"
 import removeNode from "./assets/remove_node.svg"
 import resize_handler from "./assets/resize_handler.svg"
 import rocket from "./assets/rocket.svg"
+import rotate_ccw from "./assets/rotate_ccw.svg"
+import rotate_cw from "./assets/rotate_cw.svg"
 import room from "./assets/room.svg"
 import room_home from "./assets/room_home.svg"
 import room_new from "./assets/room_new.svg"
@@ -428,6 +430,7 @@ import systemOverviewPress from "./assets/system_overview_press.svg"
 import text_add from "./assets/text_add.svg"
 import thumb_down from "./assets/thumb_down.svg"
 import thumb_up from "./assets/thumb_up.svg"
+import thunder from "./assets/thunder.svg"
 import tiny_buttons from "./assets/tiny_buttons.svg"
 import top from "./assets/top.svg"
 import training from "./assets/training.svg"
@@ -795,6 +798,8 @@ export const iconsList = {
   removeNode,
   resize_handler,
   rocket,
+  rotate_ccw,
+  rotate_cw,
   room_home,
   room_new,
   room_overview,
@@ -897,6 +902,7 @@ export const iconsList = {
   text_add,
   thumb_down,
   thumb_up,
+  thunder,
   tiny_buttons,
   top,
   training,
