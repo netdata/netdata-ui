@@ -3,6 +3,7 @@ import { getColor } from "@/theme"
 import margin from "@/mixins/margin"
 import alignSelf from "@/mixins/alignSelf"
 import cursor from "@/mixins/cursor"
+import css from "@styled-system/css"
 
 const SIZES = {
   small: "14px",
@@ -15,6 +16,8 @@ const styledHoverColor = ({ theme, hoverColor }) =>
   hoverColor && `&:hover { fill: ${getColor(hoverColor)({ theme })}; }`
 const styledRotate = ({ rotate }) => !isNaN(rotate) && `transform: rotate(${rotate * 90}deg);`
 
+const sx = props => css(props.sx)(props)
+
 export const StyledIcon = styled.svg`
   height: ${({ size, height }) => height || SIZES[size]};
   width: ${({ size, width }) => width || SIZES[size]};
@@ -26,4 +29,5 @@ export const StyledIcon = styled.svg`
   ${margin}
   ${alignSelf}
   ${cursor}
+  ${sx}
 `
