@@ -31,46 +31,50 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 
 .c3 {
   white-space: nowrap;
-  border-bottom: 1px solid #42B861;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
   box-sizing: border-box;
   border-radius: 2px 2px 0 0;
   max-width: 208px;
   height: 32px;
   cursor: pointer;
   opacity: 1;
-  background: #F1FFF7;
   pointer-events: auto;
   margin-bottom: -1px;
-}
-
-.c3:hover {
-  border-bottom: 1px solid #00AB44;
+  border-bottom-color: #42B861;
+  background: #F1FFF7;
 }
 
 .c3>span {
   color: #00AB44;
 }
 
+.c3:hover {
+  border-bottom-color: #00AB44;
+}
+
 .c4 {
   white-space: nowrap;
-  border-bottom: 1px solid #E4E8E8;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
   box-sizing: border-box;
   border-radius: 2px 2px 0 0;
   max-width: 208px;
   height: 32px;
   cursor: pointer;
   opacity: 1;
-  background: #F6F7F7;
   pointer-events: auto;
   margin-bottom: -1px;
-}
-
-.c4:hover {
-  border-bottom: 1px solid #00AB44;
+  border-bottom-color: #E4E8E8;
+  background: #F6F7F7;
 }
 
 .c4>span {
   color: #708585;
+}
+
+.c4:hover {
+  border-bottom-color: #00AB44;
 }
 
 <div
