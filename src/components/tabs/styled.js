@@ -25,15 +25,57 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   ...props,
 }))``
 
+const colorsByFlavour = {
+  success: { background: "menuItemSelected", borderColor: "accent", color: "menuItem" },
+  warning: { background: "warningSemi", borderColor: "warning", color: "menuItem" },
+  error: { background: "errorSemi", borderColor: "error", color: "menuItem" },
+  default: { background: "modalBackground", borderColor: "border", color: "menuItem" },
+}
+
+const activeColorsByFlavour = {
+  success: { ...colorsByFlavour.success, color: "primary" },
+  warning: { ...colorsByFlavour.warning, color: "warning" },
+  error: { ...colorsByFlavour.error, color: "error" },
+  default: { background: "menuItemSelected", borderColor: "accent", color: "primary" },
+}
+
+const hoverColorsByFlavour = {
+  ...colorsByFlavour,
+  default: { ...colorsByFlavour.default, borderColor: "primary" },
+}
+
+const colors = ({ theme, active, green, flavour }) => {
+  const dictionary = active ? activeColorsByFlavour : colorsByFlavour
+  const { background, borderColor, color } = dictionary[flavour] || dictionary.default
+
+  const styles = [
+    `border-bottom-color: ${getColor(borderColor)({ theme })};`,
+    `background: ${getColor(background)({ theme })};`,
+    `& > span { color: ${getColor(color)({ theme })}; }`,
+  ]
+
+  if (!active && green) {
+    styles.push(`border-bottom-color: ${getColor(["transparent", "full"])({ theme })};`)
+  }
+
+  const hoverStyles = [
+    `&:hover {
+    border-bottom-color: ${getColor((hoverColorsByFlavour[flavour] || hoverColorsByFlavour.default)?.borderColor)({ theme })};
+  }`,
+  ]
+
+  return [...styles, ...hoverStyles].join("")
+}
+
 export const StyledTab = styled(Flex).attrs(props => ({
   small: true,
   padding: [0, 6],
   ...props,
 }))`
   white-space: nowrap;
-  border-bottom: 1px solid
-    ${({ active, green }) =>
-      active ? getColor("accent") : green ? getColor(["transparent", "full"]) : getColor("border")};
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+
   box-sizing: border-box;
 
   border-radius: 2px 2px 0 0;
@@ -44,19 +86,12 @@ export const StyledTab = styled(Flex).attrs(props => ({
 
   cursor: pointer;
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
-  background: ${({ active }) =>
-    active ? getColor("menuItemSelected") : getColor("modalBackground")};
+
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   margin-bottom: -1px;
 
-  &:hover {
-    border-bottom: 1px solid ${getColor("primary")};
-  }
-
-  & > span {
-    color: ${({ active }) => (active ? getColor("primary") : getColor("menuItem"))};
-  }
+  ${colors}
 `
 
 export const StyledTabMenu = styled(Flex)`
