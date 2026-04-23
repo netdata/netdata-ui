@@ -26,21 +26,23 @@ export const StyledTabs = styled(Flex).attrs(props => ({
 }))``
 
 const colorsByFlavour = {
-  success: { background: "menuItemSelected", borderColor: "accent", color: "menuItem" },
-  warning: { background: "warningSemi", borderColor: "warning", color: "menuItem" },
-  error: { background: "errorSemi", borderColor: "error", color: "menuItem" },
+  success: { background: "menuItemSelected", borderColor: "border", color: "menuItem" },
+  warning: { background: "warningSemi", borderColor: "border", color: "menuItem" },
+  error: { background: "errorSemi", borderColor: "border", color: "menuItem" },
   default: { background: "modalBackground", borderColor: "border", color: "menuItem" },
 }
 
 const activeColorsByFlavour = {
-  success: { ...colorsByFlavour.success, color: "primary" },
-  warning: { ...colorsByFlavour.warning, color: "warning" },
-  error: { ...colorsByFlavour.error, color: "error" },
+  success: { ...colorsByFlavour.success, borderColor: "primary", color: "primary" },
+  warning: { ...colorsByFlavour.warning, borderColor: "warning", color: "warning" },
+  error: { ...colorsByFlavour.error, borderColor: "error", color: "error" },
   default: { background: "menuItemSelected", borderColor: "accent", color: "primary" },
 }
 
 const hoverColorsByFlavour = {
-  ...colorsByFlavour,
+  success: { ...colorsByFlavour.success, borderColor: "primary" },
+  warning: { ...colorsByFlavour.warning, borderColor: "warning" },
+  error: { ...colorsByFlavour.error, borderColor: "error" },
   default: { ...colorsByFlavour.default, borderColor: "primary" },
 }
 
