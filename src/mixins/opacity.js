@@ -7,5 +7,5 @@ const opacityMap = {
 
 export default ({ opacity }) => {
   const value = (opacity && opacityMap[opacity]) || opacity
-  return value ? `opacity: ${value};` : ""
+  return value !== undefined && value !== null ? `opacity: ${value};` : ""
 }
