@@ -414,6 +414,7 @@ import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import share from "./assets/share.svg"
 import sign_in from "./assets/sign_in.svg"
+import socialChat from "./assets/social_chat.svg"
 import sort_ascending from "./assets/sort_ascending.svg"
 import sort_descending from "./assets/sort_descending.svg"
 import sort_indicator from "./assets/sort_indicator.svg"
@@ -432,6 +433,7 @@ import thumb_down from "./assets/thumb_down.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import thunder from "./assets/thunder.svg"
 import tiny_buttons from "./assets/tiny_buttons.svg"
+import tools from "./assets/tools.svg"
 import top from "./assets/top.svg"
 import training from "./assets/training.svg"
 import trashcan from "./assets/trashcan.svg"
@@ -885,6 +887,7 @@ export const iconsList = {
   settings_h,
   settings,
   share,
+  socialChat,
   sign_in,
   sort_ascending,
   sort_descending,
@@ -904,6 +907,7 @@ export const iconsList = {
   thumb_up,
   thunder,
   tiny_buttons,
+  tools,
   top,
   training,
   trashcan,
