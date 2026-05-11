@@ -36,7 +36,7 @@ const Header = ({
       data-noprint
       width="100%"
       zIndex={10}
-      background="panelBg"
+      background="mainBackground"
       gap={1}
       alignItems="center"
       padding={[2, 3]}

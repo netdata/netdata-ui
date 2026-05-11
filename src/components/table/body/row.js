@@ -67,7 +67,7 @@ const rerenderSelector = state => ({
 
 const StyledRow = styled(Flex)`
   &:hover .row-content {
-    background: ${getColor("tableRowBgHover")};
+    background: ${getColor("mainBackgroundHover")};
   }
 `
 
@@ -119,9 +119,9 @@ export default memo(
         onMouseLeave={() => onHoverCell?.({ row: null })}
         flex
         column
-        background="tableRowBg"
+        background="mainBackground"
         _hover={{
-          background: "tableRowBgHover",
+          background: "mainBackgroundHover",
         }}
         border={{ side: "bottom" }}
       >
@@ -137,9 +137,9 @@ export default memo(
                 zIndex={zIndex || 10}
                 basis={`${table.getLeftTotalSize()}px`}
                 flex={false}
-                background="tableRowBg"
+                background="mainBackground"
                 _hover={{
-                  background: "tableRowBgHover",
+                  background: "mainBackgroundHover",
                 }}
                 className="row-content"
               >
@@ -158,9 +158,9 @@ export default memo(
             <Flex
               width={`${table.getCenterTotalSize()}px`}
               flex="grow"
-              background="tableRowBg"
+              background="mainBackground"
               _hover={{
-                background: "tableRowBgHover",
+                background: "mainBackgroundHover",
               }}
               className="row-content"
             >
@@ -185,9 +185,9 @@ export default memo(
                 zIndex={zIndex || 10}
                 basis={`${table.getRightTotalSize()}px`}
                 flex={false}
-                background="tableRowBg"
+                background="mainBackground"
                 _hover={{
-                  background: "tableRowBgHover",
+                  background: "mainBackgroundHover",
                 }}
                 rowReverse
                 className="row-content"

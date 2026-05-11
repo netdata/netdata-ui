@@ -21,7 +21,7 @@ const Pagination = ({ table }) => {
       alignItems="center"
       justifyContent="end"
       height="45px"
-      background="panelBg"
+      background="mainBackground"
       border={{ side: "top", color: "borderSecondary" }}
     >
       <IconButton
