@@ -141,6 +141,7 @@ import incident_manager from "./assets/incident_manager.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
+import integrationAWS from "./assets/integrations/aws.svg"
 import integrationAWSSNS from "./assets/integrations/aws_sns.svg"
 import integrationAWSSNSColored from "./assets/integrations/aws_sns_colored.svg"
 import integrationDiscord from "./assets/integrations/discord.svg"
@@ -149,6 +150,7 @@ import integrationEmail from "./assets/integrations/email.svg"
 import integrationEmailColored from "./assets/integrations/email_colored.svg"
 import integrationIlert from "./assets/integrations/ilert.svg"
 import integrationIlertColored from "./assets/integrations/ilert_colored.svg"
+import integrationJiraColored from "./assets/integrations/jira_colored.svg"
 import integrationMattermost from "./assets/integrations/mattermost.svg"
 import integrationMattermostColored from "./assets/integrations/mattermost_colored.svg"
 import integrationMobileAppColored from "./assets/integrations/mobile_app_colored.svg"
@@ -615,6 +617,7 @@ export const iconsList = {
   information,
   informationPress,
   insights,
+  integrationAWS,
   integrationAWSSNS,
   integrationAWSSNSColored,
   integrationDiscord,
@@ -623,6 +626,7 @@ export const iconsList = {
   integrationEmailColored,
   integrationIlert,
   integrationIlertColored,
+  integrationJiraColored,
   integrationMattermost,
   integrationMattermostColored,
   integrationMobileAppColored,
