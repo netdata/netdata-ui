@@ -99,18 +99,11 @@ const Body = memo(
 
     const getPlaceholderOffset = useCallback(
       index => {
-        // For rows that have been measured by the virtualizer, use their known offset
-        const virtualItem = rowVirtualizer.getVirtualItems().find(v => v.index === index)
-        if (virtualItem) return virtualItem.start
-
-        // For unmeasured rows (typically "after" rows), estimate using estimateSize
-        const estimateSize = rowVirtualizer.options.estimateSize
-        let offset = 0
-        for (let i = 0; i < index; i++) {
-          const knownSize = rowVirtualizer.getSize(i)
-          offset += knownSize > 0 ? knownSize : estimateSize(i)
-        }
-        return offset
+        // measurementsCache is populated for all count items on every render
+        // (getTotalSize calls getMeasurements which fills the full cache).
+        // Entries use real sizes for measured rows and estimateSize for the rest.
+        const cached = rowVirtualizer.measurementsCache[index]
+        return cached ? cached.start : 0
       },
       [rowVirtualizer]
     )
