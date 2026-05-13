@@ -141,6 +141,7 @@ import incident_manager from "./assets/incident_manager.svg"
 import information from "./assets/information.svg"
 import informationPress from "./assets/information_press.svg"
 import insights from "./assets/insights.svg"
+import integrationAWS from "./assets/integrations/aws.svg"
 import integrationAWSSNS from "./assets/integrations/aws_sns.svg"
 import integrationAWSSNSColored from "./assets/integrations/aws_sns_colored.svg"
 import integrationDiscord from "./assets/integrations/discord.svg"
@@ -149,6 +150,7 @@ import integrationEmail from "./assets/integrations/email.svg"
 import integrationEmailColored from "./assets/integrations/email_colored.svg"
 import integrationIlert from "./assets/integrations/ilert.svg"
 import integrationIlertColored from "./assets/integrations/ilert_colored.svg"
+import integrationJiraColored from "./assets/integrations/jira_colored.svg"
 import integrationMattermost from "./assets/integrations/mattermost.svg"
 import integrationMattermostColored from "./assets/integrations/mattermost_colored.svg"
 import integrationMobileAppColored from "./assets/integrations/mobile_app_colored.svg"
@@ -414,6 +416,7 @@ import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import share from "./assets/share.svg"
 import sign_in from "./assets/sign_in.svg"
+import socialChat from "./assets/social_chat.svg"
 import sort_ascending from "./assets/sort_ascending.svg"
 import sort_descending from "./assets/sort_descending.svg"
 import sort_indicator from "./assets/sort_indicator.svg"
@@ -432,6 +435,7 @@ import thumb_down from "./assets/thumb_down.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import thunder from "./assets/thunder.svg"
 import tiny_buttons from "./assets/tiny_buttons.svg"
+import tools from "./assets/tools.svg"
 import top from "./assets/top.svg"
 import training from "./assets/training.svg"
 import trashcan from "./assets/trashcan.svg"
@@ -613,6 +617,7 @@ export const iconsList = {
   information,
   informationPress,
   insights,
+  integrationAWS,
   integrationAWSSNS,
   integrationAWSSNSColored,
   integrationDiscord,
@@ -621,6 +626,7 @@ export const iconsList = {
   integrationEmailColored,
   integrationIlert,
   integrationIlertColored,
+  integrationJiraColored,
   integrationMattermost,
   integrationMattermostColored,
   integrationMobileAppColored,
@@ -885,6 +891,7 @@ export const iconsList = {
   settings_h,
   settings,
   share,
+  socialChat,
   sign_in,
   sort_ascending,
   sort_descending,
@@ -904,6 +911,7 @@ export const iconsList = {
   thumb_up,
   thunder,
   tiny_buttons,
+  tools,
   top,
   training,
   trashcan,
