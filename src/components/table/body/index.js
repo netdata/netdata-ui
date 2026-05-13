@@ -91,16 +91,11 @@ const Body = memo(
       }, []),
     })
 
-    // useCallback unconditionally to satisfy React Rules of Hooks.
-    // When isDeferEnabled is false, behavior is identical to rowVirtualizer.measureElement.
     const measureRef = useCallback(
       node => {
-        if (!isDeferEnabled) {
+        if (!isDeferEnabled || (measureEnabled && node)) {
           rowVirtualizer.measureElement(node)
           return
-        }
-        if (measureEnabled && node) {
-          rowVirtualizer.measureElement(node)
         }
       },
       [isDeferEnabled, measureEnabled, rowVirtualizer]
