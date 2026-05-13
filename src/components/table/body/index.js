@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useEffect } from "react"
+import React, { memo, useCallback, useRef, useEffect, useMemo } from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
 import identity from "lodash/identity"
 import Flex from "@/components/templates/flex"
@@ -35,6 +35,7 @@ const Body = memo(
     initialOffset = 0,
     onScroll,
     enableColumnReordering,
+    renderPlaceholder,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -67,6 +68,52 @@ const Body = memo(
     if (virtualRef) virtualRef.current = rowVirtualizer
 
     const virtualRows = rowVirtualizer.getVirtualItems()
+
+    const placeholders = useMemo(() => {
+      if (!renderPlaceholder) return { before: [], after: [] }
+
+      const range = rowVirtualizer.calculateRange()
+      if (!range) return { before: [], after: [] }
+
+      const { startIndex, endIndex } = range
+      if (startIndex === undefined || endIndex === undefined)
+        return { before: [], after: [] }
+
+      // Adjust for header: index 0 is the header row, data rows start at 1
+      const firstDataIndex = 1
+      const lastDataIndex = rows.length
+
+      // "before" = data rows with index < startIndex (excluding header at 0)
+      const beforeStart = firstDataIndex
+      const beforeEnd = Math.max(beforeStart, startIndex)
+
+      // "after" = data rows with index > endIndex
+      const afterStart = Math.min(lastDataIndex, endIndex + 1)
+      const afterEnd = lastDataIndex + 1
+
+      return {
+        before: Array.from({ length: beforeEnd - beforeStart }, (_, i) => beforeStart + i),
+        after: Array.from({ length: afterEnd - afterStart }, (_, i) => afterStart + i),
+      }
+    }, [renderPlaceholder, virtualRows, rows.length])
+
+    const getPlaceholderOffset = useCallback(
+      index => {
+        // For rows that have been measured by the virtualizer, use their known offset
+        const virtualItem = rowVirtualizer.getVirtualItems().find(v => v.index === index)
+        if (virtualItem) return virtualItem.start
+
+        // For unmeasured rows (typically "after" rows), estimate using estimateSize
+        const estimateSize = rowVirtualizer.options.estimateSize
+        let offset = 0
+        for (let i = 0; i < index; i++) {
+          const knownSize = rowVirtualizer.getSize(i)
+          offset += knownSize > 0 ? knownSize : estimateSize(i)
+        }
+        return offset
+      },
+      [rowVirtualizer]
+    )
 
     useEffect(() => {
       if (!loadMore) return
@@ -109,6 +156,25 @@ const Body = memo(
             flex: "1 0 auto",
           }}
         >
+          {renderPlaceholder &&
+            placeholders.before.map(index => (
+              <div
+                key={`placeholder-before-${index}`}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  transform: `translateY(${getPlaceholderOffset(index)}px)`,
+                  minWidth: "100%",
+                }}
+              >
+                {renderPlaceholder({
+                  index: index - 1,
+                  isBefore: true,
+                  table,
+                })}
+              </div>
+            ))}
           {virtualRows.map(virtualRow => {
             return (
               <div
@@ -153,6 +219,25 @@ const Body = memo(
               </div>
             )
           })}
+          {renderPlaceholder &&
+            placeholders.after.map(index => (
+              <div
+                key={`placeholder-after-${index}`}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  transform: `translateY(${getPlaceholderOffset(index)}px)`,
+                  minWidth: "100%",
+                }}
+              >
+                {renderPlaceholder({
+                  index: index - 1,
+                  isBefore: false,
+                  table,
+                })}
+              </div>
+            ))}
         </div>
       </Flex>
     )
