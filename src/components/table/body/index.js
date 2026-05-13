@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useEffect } from "react"
+import React, { memo, useCallback, useRef, useEffect, useState } from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
 import identity from "lodash/identity"
 import Flex from "@/components/templates/flex"
@@ -35,10 +35,37 @@ const Body = memo(
     initialOffset = 0,
     onScroll,
     enableColumnReordering,
+    deferMeasureMs,
     ...rest
   }) => {
     useTableState(rerenderSelector)
     const ref = useRef()
+
+    const isDeferEnabled = !!deferMeasureMs && deferMeasureMs > 0
+
+    const scrollTimeoutRef = useRef(null)
+    const [measureEnabled, setMeasureEnabled] = useState(true)
+
+    const handleScrollDetection = useCallback(() => {
+      setMeasureEnabled(false)
+
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current)
+      }
+
+      scrollTimeoutRef.current = setTimeout(() => {
+        setMeasureEnabled(true)
+      }, deferMeasureMs)
+    }, [deferMeasureMs])
+
+    // Cleanup timeout on unmount
+    useEffect(() => {
+      return () => {
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current)
+        }
+      }
+    }, [])
 
     const { rows } = table.getRowModel()
 
@@ -63,6 +90,27 @@ const Body = memo(
         return defaultRangeExtractor(range)
       }, []),
     })
+
+    // useCallback unconditionally to satisfy React Rules of Hooks.
+    // When isDeferEnabled is false, behavior is identical to rowVirtualizer.measureElement.
+    const measureRef = useCallback(
+      node => {
+        if (!isDeferEnabled) {
+          rowVirtualizer.measureElement(node)
+          return
+        }
+        if (measureEnabled && node) {
+          rowVirtualizer.measureElement(node)
+        }
+      },
+      [isDeferEnabled, measureEnabled, rowVirtualizer]
+    )
+
+    useEffect(() => {
+      if (isDeferEnabled && measureEnabled) {
+        rowVirtualizer.measure()
+      }
+    }, [isDeferEnabled, measureEnabled, rowVirtualizer])
 
     if (virtualRef) virtualRef.current = rowVirtualizer
 
@@ -99,7 +147,10 @@ const Body = memo(
         overflow="auto"
         flex="1"
         data-testid={`netdata-table${testPrefix}`}
-        onScroll={onScroll}
+        onScroll={e => {
+          if (isDeferEnabled) handleScrollDetection()
+          if (onScroll) onScroll(e)
+        }}
       >
         <div
           style={{
@@ -125,7 +176,7 @@ const Body = memo(
                   display: "flex",
                 }}
                 data-index={virtualRow.index}
-                ref={rowVirtualizer.measureElement}
+                ref={measureRef}
               >
                 {virtualRow.index === 0 ? (
                   <Header
