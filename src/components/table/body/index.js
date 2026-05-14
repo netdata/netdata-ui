@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useRef, useEffect } from "react"
+import React, { memo, useCallback, useRef, useEffect, useMemo } from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
 import identity from "lodash/identity"
 import Flex from "@/components/templates/flex"
@@ -35,6 +35,7 @@ const Body = memo(
     initialOffset = 0,
     onScroll,
     enableColumnReordering,
+    renderPlaceholder,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -67,6 +68,41 @@ const Body = memo(
     if (virtualRef) virtualRef.current = rowVirtualizer
 
     const virtualRows = rowVirtualizer.getVirtualItems()
+    // index 0 is reserved for the sticky header (see count = rows + 1 and rangeExtractor above)
+    const firstVirtualDataIndex = virtualRows[1]?.index ?? 1
+    const lastVirtualDataIndex = virtualRows[virtualRows.length - 1]?.index ?? 0
+
+    const placeholders = useMemo(() => {
+      if (!renderPlaceholder) return { before: [], after: [] }
+
+      const N = overscan || 15
+      const firstDataIndex = 1
+      const lastDataIndex = rows.length
+
+      // "before" = up to N data rows immediately before the virtual window (outside overscan)
+      const beforeEnd = firstVirtualDataIndex
+      const beforeStart = Math.max(firstDataIndex, beforeEnd - N)
+
+      // "after" = up to N data rows immediately after the virtual window (outside overscan)
+      const afterStart = lastVirtualDataIndex + 1
+      const afterEnd = Math.min(lastDataIndex + 1, afterStart + N)
+
+      return {
+        before: Array.from({ length: beforeEnd - beforeStart }, (_, i) => beforeStart + i),
+        after: Array.from({ length: afterEnd - afterStart }, (_, i) => afterStart + i),
+      }
+    }, [renderPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, overscan])
+
+    const getPlaceholderOffset = useCallback(
+      index => {
+        // measurementsCache is populated for all count items on every render
+        // (getTotalSize calls getMeasurements which fills the full cache).
+        // Entries use real sizes for measured rows and estimateSize for the rest.
+        const cached = rowVirtualizer.measurementsCache[index]
+        return cached ? cached.start : 0
+      },
+      [rowVirtualizer]
+    )
 
     useEffect(() => {
       if (!loadMore) return
@@ -109,6 +145,25 @@ const Body = memo(
             flex: "1 0 auto",
           }}
         >
+          {renderPlaceholder &&
+            placeholders.before.map(index => (
+              <div
+                key={`placeholder-before-${index}`}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  transform: `translateY(${getPlaceholderOffset(index)}px)`,
+                  minWidth: "100%",
+                }}
+              >
+                {renderPlaceholder({
+                  index: index - 1,
+                  isBefore: true,
+                  table,
+                })}
+              </div>
+            ))}
           {virtualRows.map(virtualRow => {
             return (
               <div
@@ -153,6 +208,25 @@ const Body = memo(
               </div>
             )
           })}
+          {renderPlaceholder &&
+            placeholders.after.map(index => (
+              <div
+                key={`placeholder-after-${index}`}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  transform: `translateY(${getPlaceholderOffset(index)}px)`,
+                  minWidth: "100%",
+                }}
+              >
+                {renderPlaceholder({
+                  index: index - 1,
+                  isBefore: false,
+                  table,
+                })}
+              </div>
+            ))}
         </div>
       </Flex>
     )
