@@ -68,7 +68,7 @@ const Body = memo(
     if (virtualRef) virtualRef.current = rowVirtualizer
 
     const virtualRows = rowVirtualizer.getVirtualItems()
-    // virtualRows[0] is always the sticky header (index 0); data rows start at virtualRows[1]
+    // index 0 is reserved for the sticky header (see count = rows + 1 and rangeExtractor above)
     const firstVirtualDataIndex = virtualRows[1]?.index ?? 1
     const lastVirtualDataIndex = virtualRows[virtualRows.length - 1]?.index ?? 0
 
