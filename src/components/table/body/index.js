@@ -5,6 +5,7 @@ import Flex from "@/components/templates/flex"
 import { useTableState } from "../provider"
 import Row from "./row"
 import Header from "./header"
+import RowPlaceholdersRenderer from "./rowPLaceholdersRenderer"
 
 const noop = () => {}
 
@@ -35,7 +36,8 @@ const Body = memo(
     initialOffset = 0,
     onScroll,
     enableColumnReordering,
-    renderPlaceholder,
+    RowPlaceholder,
+    placeholdersLength,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -73,25 +75,30 @@ const Body = memo(
     const lastVirtualDataIndex = virtualRows[virtualRows.length - 1]?.index ?? 0
 
     const placeholders = useMemo(() => {
-      if (!renderPlaceholder) return { before: [], after: [] }
+      if (!RowPlaceholder) return { before: [], after: [] }
 
-      const N = overscan || 15
       const firstDataIndex = 1
       const lastDataIndex = rows.length
 
-      // "before" = up to N data rows immediately before the virtual window (outside overscan)
+      // "before" = rows before the virtual window; capped to placeholdersLength when provided
       const beforeEnd = firstVirtualDataIndex
-      const beforeStart = Math.max(firstDataIndex, beforeEnd - N)
+      const beforeStart =
+        placeholdersLength != null
+          ? Math.max(firstDataIndex, beforeEnd - placeholdersLength)
+          : firstDataIndex
 
-      // "after" = up to N data rows immediately after the virtual window (outside overscan)
+      // "after" = rows after the virtual window; capped to placeholdersLength when provided
       const afterStart = lastVirtualDataIndex + 1
-      const afterEnd = Math.min(lastDataIndex + 1, afterStart + N)
+      const afterEnd =
+        placeholdersLength != null
+          ? Math.min(lastDataIndex + 1, afterStart + placeholdersLength)
+          : lastDataIndex + 1
 
       return {
         before: Array.from({ length: beforeEnd - beforeStart }, (_, i) => beforeStart + i),
         after: Array.from({ length: afterEnd - afterStart }, (_, i) => afterStart + i),
       }
-    }, [renderPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, overscan])
+    }, [RowPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, placeholdersLength])
 
     const getPlaceholderOffset = useCallback(
       index => {
@@ -145,25 +152,11 @@ const Body = memo(
             flex: "1 0 auto",
           }}
         >
-          {renderPlaceholder &&
-            placeholders.before.map(index => (
-              <div
-                key={`placeholder-before-${index}`}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  transform: `translateY(${getPlaceholderOffset(index)}px)`,
-                  minWidth: "100%",
-                }}
-              >
-                {renderPlaceholder({
-                  index: index - 1,
-                  isBefore: true,
-                  table,
-                })}
-              </div>
-            ))}
+          <RowPlaceholdersRenderer
+            RowPlaceholder={RowPlaceholder}
+            items={placeholders.before}
+            getPlaceholderOffset={getPlaceholderOffset}
+          />
           {virtualRows.map(virtualRow => {
             return (
               <div
@@ -208,25 +201,11 @@ const Body = memo(
               </div>
             )
           })}
-          {renderPlaceholder &&
-            placeholders.after.map(index => (
-              <div
-                key={`placeholder-after-${index}`}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  transform: `translateY(${getPlaceholderOffset(index)}px)`,
-                  minWidth: "100%",
-                }}
-              >
-                {renderPlaceholder({
-                  index: index - 1,
-                  isBefore: false,
-                  table,
-                })}
-              </div>
-            ))}
+          <RowPlaceholdersRenderer
+            RowPlaceholder={RowPlaceholder}
+            items={placeholders.after}
+            getPlaceholderOffset={getPlaceholderOffset}
+          />
         </div>
       </Flex>
     )
