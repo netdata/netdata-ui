@@ -37,6 +37,7 @@ const Body = memo(
     onScroll,
     enableColumnReordering,
     RowPlaceholder,
+    placeholdersLength,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -76,23 +77,28 @@ const Body = memo(
     const placeholders = useMemo(() => {
       if (!RowPlaceholder) return { before: [], after: [] }
 
-      const N = overscan || 15
       const firstDataIndex = 1
       const lastDataIndex = rows.length
 
-      // "before" = up to N data rows immediately before the virtual window (outside overscan)
+      // "before" = rows before the virtual window; capped to placeholdersLength when provided
       const beforeEnd = firstVirtualDataIndex
-      const beforeStart = Math.max(firstDataIndex, beforeEnd - N)
+      const beforeStart =
+        placeholdersLength != null
+          ? Math.max(firstDataIndex, beforeEnd - placeholdersLength)
+          : firstDataIndex
 
-      // "after" = up to N data rows immediately after the virtual window (outside overscan)
+      // "after" = rows after the virtual window; capped to placeholdersLength when provided
       const afterStart = lastVirtualDataIndex + 1
-      const afterEnd = Math.min(lastDataIndex + 1, afterStart + N)
+      const afterEnd =
+        placeholdersLength != null
+          ? Math.min(lastDataIndex + 1, afterStart + placeholdersLength)
+          : lastDataIndex + 1
 
       return {
         before: Array.from({ length: beforeEnd - beforeStart }, (_, i) => beforeStart + i),
         after: Array.from({ length: afterEnd - afterStart }, (_, i) => afterStart + i),
       }
-    }, [RowPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, overscan])
+    }, [RowPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, placeholdersLength])
 
     const getPlaceholderOffset = useCallback(
       index => {
