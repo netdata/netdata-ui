@@ -68,34 +68,30 @@ const Body = memo(
     if (virtualRef) virtualRef.current = rowVirtualizer
 
     const virtualRows = rowVirtualizer.getVirtualItems()
+    // virtualRows[0] is always the sticky header (index 0); data rows start at virtualRows[1]
+    const firstVirtualDataIndex = virtualRows[1]?.index ?? 1
+    const lastVirtualDataIndex = virtualRows[virtualRows.length - 1]?.index ?? 0
 
     const placeholders = useMemo(() => {
       if (!renderPlaceholder) return { before: [], after: [] }
 
-      const range = rowVirtualizer.calculateRange()
-      if (!range) return { before: [], after: [] }
-
-      const { startIndex, endIndex } = range
-      if (startIndex === undefined || endIndex === undefined)
-        return { before: [], after: [] }
-
-      // Adjust for header: index 0 is the header row, data rows start at 1
+      const N = overscan || 15
       const firstDataIndex = 1
       const lastDataIndex = rows.length
 
-      // "before" = data rows with index < startIndex (excluding header at 0)
-      const beforeStart = firstDataIndex
-      const beforeEnd = Math.max(beforeStart, startIndex)
+      // "before" = up to N data rows immediately before the virtual window (outside overscan)
+      const beforeEnd = firstVirtualDataIndex
+      const beforeStart = Math.max(firstDataIndex, beforeEnd - N)
 
-      // "after" = data rows with index > endIndex
-      const afterStart = Math.min(lastDataIndex, endIndex + 1)
-      const afterEnd = lastDataIndex + 1
+      // "after" = up to N data rows immediately after the virtual window (outside overscan)
+      const afterStart = lastVirtualDataIndex + 1
+      const afterEnd = Math.min(lastDataIndex + 1, afterStart + N)
 
       return {
         before: Array.from({ length: beforeEnd - beforeStart }, (_, i) => beforeStart + i),
         after: Array.from({ length: afterEnd - afterStart }, (_, i) => afterStart + i),
       }
-    }, [renderPlaceholder, virtualRows, rows.length])
+    }, [renderPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, overscan])
 
     const getPlaceholderOffset = useCallback(
       index => {
