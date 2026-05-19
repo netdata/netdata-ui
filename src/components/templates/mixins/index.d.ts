@@ -29,7 +29,8 @@ export interface FlexibleProps {
 }
 
 export interface GapProps {
-  gap?: MultiplierType
+  gap?: MultiplierType | string
+  gapY?: MultiplierType | string
   column?: boolean
   columnReverse?: boolean
 }
