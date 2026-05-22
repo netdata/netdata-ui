@@ -17,6 +17,9 @@ const ConfirmationDialog = ({
   declineWidth = "128px",
   handleConfirm,
   handleDecline,
+  handleMiddle,
+  middleLabel,
+  middleWidth = "128px",
   hideIcon,
   iconName = "warning_triangle_hollow",
   isConfirmDisabled,
@@ -53,6 +56,17 @@ const ConfirmationDialog = ({
               label={declineLabel}
               onClick={handleDecline}
               width={declineWidth}
+            />
+          )}
+          {handleMiddle && (
+            <Button
+              data-ga={`${dataGA}-::click-middle::global-view`}
+              data-testid={`${dataTestId}-middleAction`}
+              flavour="hollow"
+              danger={!isConfirmPositive && true}
+              label={middleLabel}
+              onClick={handleMiddle}
+              width={middleWidth}
             />
           )}
           <Button

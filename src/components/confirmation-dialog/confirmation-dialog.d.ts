@@ -11,6 +11,9 @@ export interface ConfirmationDialogProps {
   declineWidth?: string
   handleConfirm: OnClickType
   handleDecline?: OnClickType
+  handleMiddle?: OnClickType
+  middleLabel?: string
+  middleWidth?: string
   hideIcon?: boolean
   iconName?: string
   isConfirmDisabled?: boolean
