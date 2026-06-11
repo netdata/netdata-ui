@@ -22,8 +22,17 @@ export const StyledTabs = styled(Flex).attrs(props => ({
     type: "solid",
     color: "border",
   },
+  overflow: { horizontal: "auto", vertical: "hidden" },
+  flex: { grow: 0, shrink: 1 },
   ...props,
-}))``
+}))`
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
+`
 
 const colorsByFlavour = {
   success: { background: "menuItemSelected", borderColor: "border", color: "menuItem" },
