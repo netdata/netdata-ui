@@ -23,7 +23,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
     color: "border",
   },
   overflow: { horizontal: "auto", vertical: "hidden" },
-  flex: { grow: 0, shrink: 1 },
+  flex: 0,
   ...props,
 }))`
   -ms-overflow-style: none;
