@@ -3,8 +3,9 @@ import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { getColor } from "@/theme"
 import { useTableState } from "../provider"
+import getColumnFlex from "./columnFlex"
 
-const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
+const CellGroup = ({ cell, row, table, header, testPrefix, coloredSortedColumn }) => {
   const { column } = cell
 
   const tableMeta = useMemo(
@@ -32,11 +33,7 @@ const CellGroup = ({ cell, row, header, testPrefix, coloredSortedColumn }) => {
 
   return (
     <Flex
-      flex={
-        !column.columnDef.fullWidth && (column.columnDef.notFlex || column.getCanResize())
-          ? false
-          : header.colSpan
-      }
+      flex={getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)}
       width={`${column.getSize()}px`}
       position="relative"
       data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
@@ -63,6 +60,7 @@ const rerenderSelector = state => ({
   columnVisibility: state.columnVisibility,
   selectedRows: state.selectedRows,
   allColumns: state.allColumns?.length,
+  visibleColumns: state.visibleColumns,
 })
 
 const StyledRow = styled(Flex)`
@@ -147,6 +145,7 @@ export default memo(
                   <CellGroup
                     cell={cell}
                     row={row}
+                    table={table}
                     key={cell.id}
                     testPrefix={testPrefix}
                     header={table.getLeftLeafHeaders()[index]}
@@ -169,6 +168,7 @@ export default memo(
                   <CellGroup
                     cell={cell}
                     row={row}
+                    table={table}
                     key={cell.id}
                     testPrefix={testPrefix}
                     header={table.getCenterLeafHeaders()[index]}
@@ -196,6 +196,7 @@ export default memo(
                   <CellGroup
                     cell={cell}
                     row={row}
+                    table={table}
                     key={cell.id}
                     testPrefix={testPrefix}
                     header={table.getRightLeafHeaders()[index]}
