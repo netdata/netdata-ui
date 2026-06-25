@@ -298,6 +298,7 @@ import osVMware from "./assets/os/vmware.svg"
 import osWatchGuard from "./assets/os/watchguard.svg"
 import osZebra from "./assets/os/zebra.svg"
 import osZyxel from "./assets/os/zyxel.svg"
+import palette from "./assets/palette.svg"
 import padlock from "./assets/padlock.svg"
 import panTool from "./assets/pan_tool.svg"
 import pauseOutline from "./assets/pause_outline.svg"
@@ -435,6 +436,7 @@ import thumb_down from "./assets/thumb_down.svg"
 import thumb_up from "./assets/thumb_up.svg"
 import thunder from "./assets/thunder.svg"
 import tiny_buttons from "./assets/tiny_buttons.svg"
+import tokens from "./assets/tokens.svg"
 import tools from "./assets/tools.svg"
 import top from "./assets/top.svg"
 import training from "./assets/training.svg"
@@ -774,6 +776,7 @@ export const iconsList = {
   osWatchGuard,
   osZebra,
   osZyxel,
+  palette,
   padlock,
   panTool,
   pauseOutline,
@@ -911,6 +914,7 @@ export const iconsList = {
   thumb_up,
   thunder,
   tiny_buttons,
+  tokens,
   tools,
   top,
   training,
