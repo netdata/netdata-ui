@@ -10,6 +10,17 @@ const AUTO_FIT_PADDING = 8
 
 const AUTO_FIT_MAX_RATIO = 0.5
 
+const naturalWidthStyles = {
+  width: "max-content",
+  minWidth: "max-content",
+  maxWidth: "none",
+  whiteSpace: "nowrap",
+  overflow: "visible",
+  textOverflow: "clip",
+  flexWrap: "nowrap",
+  flexShrink: "0",
+}
+
 export const Handler = styled(Flex).attrs({
   position: "absolute",
   top: "2px",
@@ -19,29 +30,47 @@ export const Handler = styled(Flex).attrs({
 
 const measureNaturalWidth = (nodes, forceNowrap) => {
   const probe = document.createElement("div")
-  probe.style.cssText =
-    "position:absolute;visibility:hidden;left:-9999px;top:0;width:auto;white-space:nowrap;"
+  probe.style.cssText = [
+    "position:absolute",
+    "visibility:hidden",
+    "pointer-events:none",
+    "left:-9999px",
+    "top:0",
+    "width:max-content",
+    "min-width:max-content",
+    "max-width:none",
+    "white-space:nowrap",
+  ].join(";")
   document.body.appendChild(probe)
 
   let max = 0
-  nodes.forEach(node => {
-    const clone = node.cloneNode(true)
-    clone.style.width = "auto"
-    clone.style.maxWidth = "none"
-    if (forceNowrap) {
-      clone.style.whiteSpace = "nowrap"
-      clone.style.flexWrap = "nowrap"
-      clone.querySelectorAll("*").forEach(el => {
-        el.style.whiteSpace = "nowrap"
-        el.style.flexWrap = "nowrap"
-      })
-    }
-    probe.appendChild(clone)
-    max = Math.max(max, clone.scrollWidth)
-    probe.removeChild(clone)
-  })
+  try {
+    nodes.forEach(node => {
+      const clone = node.cloneNode(true)
+      clone.style.width = "max-content"
+      clone.style.minWidth = "max-content"
+      clone.style.maxWidth = "none"
 
-  document.body.removeChild(probe)
+      const cs = getComputedStyle(node)
+      clone.style.fontFamily = cs.fontFamily
+      clone.style.fontSize = cs.fontSize
+      clone.style.fontWeight = cs.fontWeight
+      clone.style.fontStyle = cs.fontStyle
+      clone.style.letterSpacing = cs.letterSpacing
+
+      if (forceNowrap) {
+        clone.querySelectorAll("*").forEach(el => Object.assign(el.style, naturalWidthStyles))
+        Object.assign(clone.style, naturalWidthStyles)
+      }
+
+      probe.appendChild(clone)
+      max = Math.max(max, clone.getBoundingClientRect().width, clone.scrollWidth)
+      probe.removeChild(clone)
+    })
+  } finally {
+    document.body.removeChild(probe)
+  }
+
   return max
 }
 
