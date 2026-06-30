@@ -20,6 +20,7 @@ const ColumnsMenuItem = ({ column, dataGa, disabled }) => {
       <Checkbox
         checked={checked}
         disabled={disabled}
+        labelProps={{ wordBreak: "break-word" }}
         label={
           column.columnDef.name ||
           (typeof column.columnDef.headerString === "function"
@@ -82,12 +83,12 @@ const ColumnsMenu = ({
     return (
       <Drop
         background="dropdown"
-        height={{ max: "400px" }}
+        height={{ max: "70vh" }}
         onClickOutside={onClose}
         overflow={{ vertical: "auto" }}
         round={1}
         target={parentRef.current}
-        width={50}
+        width={{ base: 100, max: "90vw" }}
         align={{ top: "bottom", right: "right" }}
       >
         <Flex

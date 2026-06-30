@@ -253,6 +253,7 @@ const Table = memo(props => {
       rowsById: table.getRowModel().rowsById,
       selectedRows: table.getSelectedRowModel().flatRows,
       allColumns: table?.getAllLeafColumns?.(),
+      visibleColumns: table?.getVisibleLeafColumns?.().map(column => column.id),
     })
   }, [table.getState()])
 

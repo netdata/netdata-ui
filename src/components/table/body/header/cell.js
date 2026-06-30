@@ -5,6 +5,7 @@ import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
 import { useTableState } from "../../provider"
 import ResizeHandler from "./resizeHandler"
+import getColumnFlex from "../columnFlex"
 import Sorting, { SortIconContainer } from "./sorting"
 import Info from "./info"
 import Filter from "./filter"
@@ -73,11 +74,7 @@ const BodyHeaderCell = ({
     <Flex
       ref={sortableRef}
       style={enableColumnReordering ? sortableStyle : undefined}
-      flex={
-        !column.columnDef.fullWidth && (column.columnDef.notFlex || column.getCanResize())
-          ? false
-          : header.colSpan
-      }
+      flex={getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)}
       width={`${header.subHeaders.length ? header.subHeaders.reduce((s, h) => s + h.column.getSize(), 0) : column.getSize()}px`}
       height={{ min: "45px" }}
       position="relative"
@@ -125,7 +122,7 @@ const BodyHeaderCell = ({
         </LabelContainer>
         <Filter column={column} testPrefix={testPrefix} index={index} />
       </Flex>
-      <ResizeHandler header={header} table={table} />
+      <ResizeHandler header={header} table={table} testPrefix={testPrefix} />
       {children}
     </Flex>
   )
