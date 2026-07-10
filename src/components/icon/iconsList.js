@@ -53,6 +53,7 @@ import checkmark from "./assets/checkmark.svg"
 import checkmark_partial_s from "./assets/checkmark_partial_s.svg"
 import checkmark_s from "./assets/checkmark_s.svg"
 import chevron_double from "./assets/chevron_double.svg"
+import chevron_double_left from "./assets/chevron_double_left.svg"
 import chevron_down from "./assets/chevron_down.svg"
 import chevron_down_thin from "./assets/chevron_down_thin.svg"
 import chevron_expand from "./assets/chevron_expand.svg"
@@ -531,6 +532,7 @@ export const iconsList = {
   checkmark_s,
   checkmark,
   chevron_double,
+  chevron_double_left,
   chevron_down_thin,
   chevron_down,
   chevron_expand,
