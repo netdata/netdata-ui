@@ -8,13 +8,14 @@ import {
   Table,
   Row,
 } from "@tanstack/table-core"
-import { ComponentType, ReactNode } from "react"
+import { ComponentType, Key, MutableRefObject, ReactNode, UIEventHandler } from "react"
+import { Virtualizer } from "@tanstack/react-virtual"
 import { supportedBulkActions } from "./header/actions/useActions"
 import { supportedRowActions } from "./useColumns/useRowActions"
 
 type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
 
-type LargeDataSource<D = any> = {
+export type LargeDataSource<D = any> = {
   forEachExportRow?: (callback: (row: D, id: string) => void) => void
   forEachRow?: (callback: (row: D, id: string) => void) => void
   getDisplayIndex?: (rowId: string, options?: { leaf?: boolean }) => number
@@ -23,6 +24,44 @@ type LargeDataSource<D = any> = {
   getRow: (index: number) => D
   getRowCount: () => number
   getRowId: (index: number) => string
+}
+
+export type TableVirtualizer = Virtualizer<HTMLDivElement, Element>
+
+export type TableRowWrapperProps<D = any> = {
+  children: ReactNode
+  row: Row<D>
+  virtualIndex: number
+  logicalIndex?: number
+}
+
+export type TableVirtualizeOptions = {
+  DeferredRowPlaceholder?: ComponentType<{ index: number }>
+  RowPlaceholder?: ComponentType<{ index: number }>
+  deferRowMount?: boolean
+  directCellContent?: boolean
+  getHasNextPage?: () => boolean
+  getHasPrevPage?: () => boolean
+  getItemKey?: (index: number) => Key
+  initialOffset?: number
+  loading?: boolean
+  loadMore?: (direction: "forward" | "backward") => void
+  onIsScrollingChange?: (isScrolling: boolean) => void
+  onScroll?: UIEventHandler<HTMLDivElement>
+  onVirtualChange?: (instance: TableVirtualizer, sync: boolean) => void
+  overscan?: number
+  placeholdersLength?: number
+  virtualRef?: MutableRefObject<TableVirtualizer | null>
+  warning?: ReactNode
+}
+
+export type LargeDataOptions<D = any> = {
+  enabled?: boolean
+  filterRow?: (row: D, globalFilter: any) => boolean
+  getEstimatedRowHeight?: (row: D, index: number) => number | undefined
+  initialRowCount?: number
+  sortingFns?: Record<string, Function>
+  source?: LargeDataSource<D>
 }
 
 export type TableProps<T = any, D = any> = {
@@ -71,25 +110,14 @@ export type TableProps<T = any, D = any> = {
   onClickRow?: (value: any) => void
   onHoverCell?: (value: any) => void
   disableClickRow?: (value: any) => void
-  RowWrapper?: ComponentType<{
-    children: ReactNode
-    row: Row<D>
-    virtualIndex: number
-    logicalIndex?: number
-  }>
+  RowWrapper?: ComponentType<TableRowWrapperProps<D>>
+  virtualizeOptions?: TableVirtualizeOptions
 
   /**This is an escape hatch test id generator, we use this when we want to have
    * dynamic generator tesids depending on the row values
    */
   testPrefixCallback?: (rowData: D) => string
-  largeDataOptions?: {
-    enabled?: boolean
-    filterRow?: (row: D, globalFilter: any) => boolean
-    getEstimatedRowHeight?: (row: D, index: number) => number | undefined
-    initialRowCount?: number
-    sortingFns?: Record<string, Function>
-    source?: LargeDataSource<D>
-  }
+  largeDataOptions?: LargeDataOptions<D>
 }
 
 declare const Table: (props: TableProps) => JSX.Element
