@@ -18,7 +18,7 @@ import { getVirtualWindowRange } from "../largeData"
 import { createRowMountController } from "./rowMountController"
 import { measureTableElement } from "./measureElement"
 
-const deferredRowScrollResetDelayMs = 75
+const deferredRowScrollResetDelayMs = 50
 
 const noop = () => {}
 

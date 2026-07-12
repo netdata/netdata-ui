@@ -1,5 +1,5 @@
 const rowMountIntervalMs = 24
-const rowMountBatchSize = 3
+const rowMountBatchSize = 4
 
 export const createRowMountController = () => {
   let scrolling = false

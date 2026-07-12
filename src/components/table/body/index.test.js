@@ -46,7 +46,7 @@ describe("Table Body large-data mode", () => {
     expect(secondOptions.estimateSize).toBe(firstOptions.estimateSize)
   })
 
-  it("halves the scroll reset delay only for deferred row mounting", () => {
+  it("shortens the scroll reset delay only for deferred row mounting", () => {
     const props = {
       largeDataSource: { getRowCount: () => 50_000, getRowId: index => `node-${index}` },
       meta: {},
@@ -64,7 +64,7 @@ describe("Table Body large-data mode", () => {
 
     rerender(renderBody(true))
 
-    expect(useVirtualizer.mock.calls.at(-1)[0].isScrollingResetDelay).toBe(75)
+    expect(useVirtualizer.mock.calls.at(-1)[0].isScrollingResetDelay).toBe(50)
   })
 
   it("publishes an unchanged virtual window only once", () => {
