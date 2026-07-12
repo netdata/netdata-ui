@@ -64,6 +64,13 @@ export type LargeDataOptions<D = any> = {
   source?: LargeDataSource<D>
 }
 
+export type TableOverflowTooltipOptions = {
+  align?: "top" | "right" | "bottom" | "left"
+  delay?: number
+  renderContent?: (content: string) => ReactNode
+  zIndex?: number
+}
+
 export type TableProps<T = any, D = any> = {
   data: Array<D>
   dataColumns: Array<NetdataCoreColumns<T>>
@@ -112,6 +119,7 @@ export type TableProps<T = any, D = any> = {
   disableClickRow?: (value: any) => void
   RowWrapper?: ComponentType<TableRowWrapperProps<D>>
   virtualizeOptions?: TableVirtualizeOptions
+  overflowTooltip?: TableOverflowTooltipOptions
 
   /**This is an escape hatch test id generator, we use this when we want to have
    * dynamic generator tesids depending on the row values

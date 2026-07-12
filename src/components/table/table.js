@@ -139,6 +139,7 @@ const Table = memo(props => {
     tableRef,
     className,
     width,
+    overflowTooltip,
     getRowCanExpand,
     getRowId,
     ref,
@@ -388,6 +389,7 @@ const Table = memo(props => {
         largeDataSource={largeDataSource}
         windowStartIndex={largeDataPublication?.startIndex || 0}
         onWindowChange={handleLargeDataRangeChange}
+        overflowTooltip={overflowTooltip}
         {...rest}
         {...virtualizeOptions}
       />

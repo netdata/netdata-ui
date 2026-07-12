@@ -17,6 +17,7 @@ import RowPlaceholdersRenderer from "./rowPLaceholdersRenderer"
 import { getVirtualWindowRange } from "../largeData"
 import { createRowMountController } from "./rowMountController"
 import { measureTableElement } from "./measureElement"
+import OverflowTooltip from "../components/overflowTooltip"
 
 const deferredRowScrollResetDelayMs = 50
 
@@ -87,6 +88,7 @@ const Body = memo(
     largeDataSource,
     windowStartIndex = 0,
     onWindowChange,
+    overflowTooltip,
     ...rest
   }) => {
     useTableState(rerenderSelector)
@@ -350,6 +352,7 @@ const Body = memo(
             getPlaceholderOffset={getPlaceholderOffset}
           />
         </div>
+        {overflowTooltip ? <OverflowTooltip containerRef={ref} options={overflowTooltip} /> : null}
       </Flex>
     )
   }
