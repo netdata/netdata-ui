@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 
@@ -36,10 +36,13 @@ const SortableItem = ({
     transition,
   }
 
-  const setRef = el => {
-    setNodeRef(el)
-    if (lastTabRef) lastTabRef.current = el
-  }
+  const setRef = useCallback(
+    el => {
+      setNodeRef(el)
+      if (lastTabRef) lastTabRef.current = el
+    },
+    [lastTabRef, setNodeRef]
+  )
 
   return (
     <Item

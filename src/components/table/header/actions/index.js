@@ -14,18 +14,18 @@ const useSelectedRowsObserver = (table, { onRowSelected = noop, rowSelection }) 
   const [selectedRows, setActualSelectedRows] = useState([])
 
   useEffect(() => {
-    const { flatRows } = table.getSelectedRowModel()
-    if (flatRows) {
-      const selected = flatRows.reduce((acc, { original }) => {
-        if (original?.disabled || original?.unselectable) return acc
+    const selected = table.getSelectedOriginalRows
+      ? table.getSelectedOriginalRows()
+      : table.getSelectedRowModel().flatRows.reduce((acc, { original }) => {
+          if (original?.disabled || original?.unselectable) return acc
 
-        acc.push(original)
-        return acc
-      }, [])
-      setActualSelectedRows(selected)
-      onRowSelected(selected)
-    }
-  }, [rowSelection, table])
+          acc.push(original)
+          return acc
+        }, [])
+
+    setActualSelectedRows(selected)
+    onRowSelected(selected)
+  }, [rowSelection, table, table.largeDataSource])
 
   return selectedRows
 }
