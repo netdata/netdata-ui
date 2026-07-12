@@ -8,7 +8,7 @@ import {
   Table,
   Row,
 } from "@tanstack/table-core"
-import { ComponentType, Key, MutableRefObject, ReactNode, UIEventHandler } from "react"
+import { ComponentType, Key, MutableRefObject, ReactNode, RefObject, UIEventHandler } from "react"
 import { Virtualizer } from "@tanstack/react-virtual"
 import { supportedBulkActions } from "./header/actions/useActions"
 import { supportedRowActions } from "./useColumns/useRowActions"
@@ -64,11 +64,22 @@ export type LargeDataOptions<D = any> = {
   source?: LargeDataSource<D>
 }
 
-export type TableOverflowTooltipOptions = {
+export type OverflowTooltipOptions = {
   align?: "top" | "right" | "bottom" | "left"
+  closeOnWindowScroll?: boolean
   delay?: number
+  getContent?: (target: HTMLElement) => string | null | undefined
+  isOverflowing?: (target: HTMLElement) => boolean
   renderContent?: (content: string) => ReactNode
+  selector?: string
   zIndex?: number
+}
+
+export type TableOverflowTooltipOptions = OverflowTooltipOptions
+
+export type OverflowTooltipProps = {
+  containerRef: RefObject<HTMLElement | null>
+  options?: OverflowTooltipOptions
 }
 
 export type TableProps<T = any, D = any> = {
@@ -129,6 +140,7 @@ export type TableProps<T = any, D = any> = {
 }
 
 declare const Table: (props: TableProps) => JSX.Element
+declare const OverflowTooltip: (props: OverflowTooltipProps) => JSX.Element
 declare const createLargeDataSource: <D = any>(options: {
   columns: Array<any>
   columnFilters?: ColumnFiltersState
@@ -142,5 +154,5 @@ declare const createLargeDataSource: <D = any>(options: {
   sortingFns?: Record<string, Function>
 }) => LargeDataSource<D>
 
-export { Table, createLargeDataSource }
+export { Table, createLargeDataSource, OverflowTooltip }
 export default Table

@@ -34,6 +34,16 @@ const rerenderSelector = state => ({
   selecting: state.selectedRows,
 })
 
+export const getHeaderTooltipContent = columnDef => {
+  const headerString =
+    typeof columnDef.headerString === "function" ? columnDef.headerString() : columnDef.headerString
+
+  if (headerString != null) return String(headerString)
+  if (typeof columnDef.header === "string") return columnDef.header
+  if (columnDef.header != null) return ""
+  return undefined
+}
+
 const BodyHeaderCell = ({
   header,
   table,
@@ -62,6 +72,8 @@ const BodyHeaderCell = ({
     typeof column.columnDef.meta === "function"
       ? column.columnDef.meta({}, column, index)
       : column.columnDef.meta
+
+  const headerTooltipContent = getHeaderTooltipContent(column.columnDef)
 
   const headStyles = {
     ...(tableMeta?.styles || {}),
@@ -110,6 +122,7 @@ const BodyHeaderCell = ({
             <Label
               as={column.columnDef.labelAs}
               {...column.columnDef.labelProps}
+              data-table-header-tooltip={headerTooltipContent}
               sorting={column.getIsSorted()}
               sortable={column.getCanSort()}
               strong

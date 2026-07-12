@@ -16,7 +16,7 @@ const setDimensions = (
 
 const renderContent = content => <span>{content}</span>
 
-const Fixture = ({ delay = 0 }) => {
+const Fixture = ({ delay = 0, options = {} }) => {
   const ref = useRef()
 
   return (
@@ -26,7 +26,7 @@ const Fixture = ({ delay = 0 }) => {
           Cropped value
         </span>
       </div>
-      <OverflowTooltip containerRef={ref} options={{ delay, renderContent }} />
+      <OverflowTooltip containerRef={ref} options={{ delay, renderContent, ...options }} />
     </>
   )
 }
@@ -89,6 +89,32 @@ it("cancels pending and visible tooltips when the table scrolls", () => {
   jest.useRealTimers()
 })
 
+it("closes a visible tooltip when the viewport resizes", () => {
+  const { getByTestId, queryByText } = renderWithProviders(<Fixture />)
+  const target = getByTestId("target")
+
+  setDimensions(target)
+  fireEvent.focus(target)
+  expect(queryByText("Complete value")).toBeInTheDocument()
+
+  fireEvent(window, new Event("resize"))
+  expect(queryByText("Complete value")).not.toBeInTheDocument()
+})
+
+it("closes a visible tooltip on window scroll when configured", () => {
+  const { getByTestId, queryByText } = renderWithProviders(
+    <Fixture options={{ closeOnWindowScroll: true }} />
+  )
+  const target = getByTestId("target")
+
+  setDimensions(target)
+  fireEvent.focus(target)
+  expect(queryByText("Complete value")).toBeInTheDocument()
+
+  fireEvent.scroll(window)
+  expect(queryByText("Complete value")).not.toBeInTheDocument()
+})
+
 it("does not resolve an unrelated descendant while hovering the table container", () => {
   const { getByTestId, queryByText } = renderWithProviders(<Fixture />)
 
@@ -118,4 +144,55 @@ it("finds an overflowing descendant when its link receives focus", () => {
   setDimensions(getByTestId("target"))
   fireEvent.focus(getByTestId("link"))
   expect(queryByText("Complete value")).toBeInTheDocument()
+})
+
+it("supports custom targets, content resolution, and overflow detection", () => {
+  const HeaderFixture = () => {
+    const ref = useRef()
+    return (
+      <>
+        <div ref={ref}>
+          <span data-table-header-tooltip="Canonical header" data-testid="header">
+            <span data-testid="headerText">Cropped header</span>
+          </span>
+        </div>
+        <OverflowTooltip
+          containerRef={ref}
+          options={{
+            getContent: target => target.dataset.tableHeaderTooltip,
+            isOverflowing: target =>
+              [target, ...target.querySelectorAll("*")].some(
+                element =>
+                  element.scrollWidth > element.clientWidth ||
+                  element.scrollHeight > element.clientHeight
+              ),
+            renderContent,
+            selector: "[data-table-header-tooltip]",
+          }}
+        />
+      </>
+    )
+  }
+  const { getByTestId, queryByText } = renderWithProviders(<HeaderFixture />)
+
+  setDimensions(getByTestId("header"), { scrollWidth: 100 })
+  setDimensions(getByTestId("headerText"))
+  fireEvent.mouseOver(getByTestId("headerText"))
+
+  expect(queryByText("Canonical header")).toBeInTheDocument()
+})
+
+it("removes a visible tooltip when its target disconnects without a controller render", () => {
+  jest.useFakeTimers()
+  const { getByTestId, queryByText } = renderWithProviders(<Fixture />)
+  const target = getByTestId("target")
+
+  setDimensions(target)
+  fireEvent.focus(target)
+  expect(queryByText("Complete value")).toBeInTheDocument()
+
+  target.remove()
+  act(() => jest.advanceTimersByTime(100))
+  expect(queryByText("Complete value")).not.toBeInTheDocument()
+  jest.useRealTimers()
 })
