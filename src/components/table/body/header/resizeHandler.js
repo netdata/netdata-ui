@@ -115,6 +115,7 @@ const ResizeHandler = ({ header, table, testPrefix = "" }) => {
   return (
     <Handler
       ref={ref}
+      data-testid={`netdata-table-header-resize-handler-${column.id}${testPrefix}`}
       border={{ side: "right", size: "1px", color: "borderSecondary" }}
       _hover={{ border: { side: "right", size: "3px", color: "resizerLine" } }}
       _active={{ border: { side: "right", size: "3px", color: "resizerLine" } }}

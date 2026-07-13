@@ -10,7 +10,7 @@ import Sorting, { SortIconContainer } from "./sorting"
 import Info from "./info"
 import Filter from "./filter"
 import useSortableHeader from "./sortableHeader"
-import DragHandle from "./dragHandle"
+import DragHandle, { tableHeaderDragHandleSelector } from "./dragHandle"
 
 const Label = styled(Text)`
   width: 100%;
@@ -44,6 +44,14 @@ export const getHeaderTooltipContent = columnDef => {
   return undefined
 }
 
+const getAccessibleHeaderLabel = (content, canSort, sorting) => {
+  if (!content) return undefined
+  if (!canSort) return content
+  if (sorting === "asc") return `${content}, sorted ascending`
+  if (sorting === "desc") return `${content}, sorted descending`
+  return `${content}, sortable, not sorted`
+}
+
 const BodyHeaderCell = ({
   header,
   table,
@@ -74,6 +82,33 @@ const BodyHeaderCell = ({
       : column.columnDef.meta
 
   const headerTooltipContent = getHeaderTooltipContent(column.columnDef)
+  const canSort = column.getCanSort()
+  const sorting = column.getIsSorted()
+  const toggleSorting = canSort ? column.getToggleSortingHandler() : undefined
+  const {
+    "aria-label": labelAriaLabel,
+    onKeyDown: labelOnKeyDown,
+    role: labelRole,
+    tabIndex: labelTabIndex,
+    ...labelProps
+  } = column.columnDef.labelProps || {}
+
+  const handleSortingClick = event => {
+    if (
+      event.defaultPrevented ||
+      (event.target instanceof Element && event.target.closest(tableHeaderDragHandleSelector))
+    )
+      return
+    toggleSorting?.(event)
+  }
+
+  const handleSortingKeyDown = event => {
+    labelOnKeyDown?.(event)
+    if (event.defaultPrevented) return
+    if (event.target !== event.currentTarget || (event.key !== "Enter" && event.key !== " ")) return
+    event.preventDefault()
+    toggleSorting?.(event)
+  }
 
   const headStyles = {
     ...(tableMeta?.styles || {}),
@@ -111,8 +146,8 @@ const BodyHeaderCell = ({
         <LabelContainer
           data-testid="netdata-table-header-cell-label-container"
           alignItems="center"
-          cursor={column.getCanSort() ? "pointer" : "default"}
-          onClick={column.getCanSort() ? column.getToggleSortingHandler() : undefined}
+          cursor={canSort ? "pointer" : "default"}
+          onClick={canSort ? handleSortingClick : undefined}
           padding={[0, 0, 0, !hasSubheaders || isSubheader ? 0 : 2]}
           overflow="hidden"
           width="100%"
@@ -121,16 +156,22 @@ const BodyHeaderCell = ({
           {column.isPlaceholder ? null : (
             <Label
               as={column.columnDef.labelAs}
-              {...column.columnDef.labelProps}
+              {...labelProps}
+              role={labelRole ?? (canSort ? "button" : undefined)}
+              tabIndex={labelTabIndex ?? (headerTooltipContent || canSort ? 0 : undefined)}
+              aria-label={
+                labelAriaLabel ?? getAccessibleHeaderLabel(headerTooltipContent, canSort, sorting)
+              }
+              onKeyDown={canSort ? handleSortingKeyDown : labelOnKeyDown}
               data-table-header-tooltip={headerTooltipContent}
-              sorting={column.getIsSorted()}
-              sortable={column.getCanSort()}
+              sorting={sorting}
+              sortable={canSort}
               strong
             >
               {flexRender(column.columnDef.header, header.getContext())}
             </Label>
           )}
-          <Sorting sortable={column.getCanSort()} sorting={column.getIsSorted()} />
+          <Sorting sortable={canSort} sorting={sorting} />
           <Info meta={meta} />
         </LabelContainer>
         <Filter column={column} testPrefix={testPrefix} index={index} />
