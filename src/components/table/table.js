@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useLayoutEffect, useMemo, useRef } from "react"
+import React, { memo, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -32,6 +32,14 @@ import useSelecting from "./useSelecting"
 import useSorting from "./useSorting"
 import useGrouping from "./useGrouping"
 import useColumnOrder from "./useColumnOrder"
+import { containsWindowRange, getBufferedWindowRange, getWindowPublication } from "./largeData"
+import createLargeDataSource from "./createLargeDataSource"
+import {
+  getIsAllRowsSelected,
+  getIsSomeRowsSelected,
+  getNextRowSelection,
+  getSelectedOriginalRows,
+} from "./largeDataSelection"
 
 const noop = () => {}
 const emptyObj = {}
@@ -127,14 +135,23 @@ const Table = memo(props => {
     meta: tableMeta = tableDefaultProps.meta,
     title,
     virtualizeOptions = tableDefaultProps.virtualizeOptions,
+    largeDataOptions,
     tableRef,
     className,
     width,
+    overflowTooltip,
     getRowCanExpand,
     getRowId,
     ref,
     ...rest
   } = { ...tableDefaultProps, ...props }
+
+  const [largeDataRange, setLargeDataRange] = useState(() => ({
+    startIndex: 0,
+    endIndex: largeDataOptions?.initialRowCount || 50,
+  }))
+  const largeDataRangeRef = useRef(largeDataRange)
+  largeDataRangeRef.current = largeDataRange
 
   const [columnVisibility, onColumnVisibilityChange] = useVisibility(
     defaultColumnVisibility,
@@ -161,6 +178,7 @@ const Table = memo(props => {
   const [globalFilter, onGlobalFilterChange] = useSearching(defaultGlobalFilter, onSearch)
 
   const [columnOrder, onColumnOrderChange] = useColumnOrder(defaultColumnOrder, columnOrderChangeCb)
+  const [largeDataColumnFilters, setLargeDataColumnFilters] = useState([])
 
   const columns = useColumns(dataColumns, {
     testPrefix,
@@ -172,9 +190,54 @@ const Table = memo(props => {
     tableMeta,
   })
 
+  const largeDataSource = useMemo(() => {
+    if (largeDataOptions?.source) return largeDataOptions.source
+    if (!largeDataOptions?.enabled) return null
+    if (!getRowId) throw new Error("Large-data Table requires getRowId")
+
+    const filterRow = largeDataOptions.filterRow
+
+    return createLargeDataSource({
+      columns: dataColumns,
+      columnFilters: largeDataColumnFilters,
+      data,
+      expanded,
+      filterRow: globalFilter && filterRow ? row => filterRow(row, globalFilter) : undefined,
+      filterFns,
+      getEstimatedRowHeight: largeDataOptions.getEstimatedRowHeight,
+      getRowId,
+      sorting,
+      sortingFns: largeDataOptions.sortingFns,
+    })
+  }, [
+    data,
+    dataColumns,
+    expanded,
+    getRowId,
+    globalFilter,
+    largeDataColumnFilters,
+    largeDataOptions,
+    sorting,
+  ])
+  const largeDataPublication = useMemo(
+    () => (largeDataSource ? getWindowPublication(largeDataSource, largeDataRange) : null),
+    [largeDataSource, largeDataRange]
+  )
+  const handleLargeDataRangeChange = useCallback(
+    nextRange => {
+      if (containsWindowRange(largeDataRangeRef.current, nextRange)) return
+
+      const bufferedRange = getBufferedWindowRange(nextRange, largeDataSource.getRowCount())
+      largeDataRangeRef.current = bufferedRange
+      setLargeDataRange(bufferedRange)
+    },
+    [largeDataSource]
+  )
+  const tableData = largeDataPublication?.rows || data
+
   const table = useReactTable({
     columns,
-    data,
+    data: tableData,
     manualPagination: !enablePagination,
     columnResizeMode: "onEnd",
     filterFns,
@@ -195,6 +258,7 @@ const Table = memo(props => {
         [grouping]
       ),
       columnOrder,
+      ...(largeDataSource ? { columnFilters: largeDataColumnFilters } : {}),
     },
     onExpandedChange,
     ...(!enableCustomSearch && globalFilterFn ? { globalFilterFn } : {}),
@@ -203,7 +267,10 @@ const Table = memo(props => {
     onRowSelectionChange,
     onGlobalFilterChange: enableCustomSearch ? undefined : onGlobalFilterChange,
     onSortingChange,
-    manualSorting,
+    manualSorting: Boolean(largeDataSource) || manualSorting,
+    manualFiltering: Boolean(largeDataSource),
+    manualGrouping: Boolean(largeDataSource),
+    manualExpanding: Boolean(largeDataSource),
     enableMultiSorting: true,
     isMultiSortEvent: e => e.ctrlKey || e.shiftKey || e.metaKey,
     getSortedRowModel: getSortedRowModel(),
@@ -212,16 +279,31 @@ const Table = memo(props => {
     getRowCanExpand,
     autoResetExpanded,
     getGroupedRowModel: getGroupedRowModel(),
-    getSubRows: useCallback(row => row.children, []),
+    getSubRows: useCallback(row => (largeDataSource ? undefined : row.children), [largeDataSource]),
     onPaginationChange,
     onColumnVisibilityChange,
     onColumnSizingChange,
     onColumnPinningChange,
     onColumnOrderChange,
+    ...(largeDataSource ? { onColumnFiltersChange: setLargeDataColumnFilters } : {}),
     enableSubRowSelection,
     columnGroupingMode: "reorder",
-    getRowId,
+    getRowId: largeDataSource ? (_, index) => String(largeDataPublication.rowIds[index]) : getRowId,
   })
+
+  table.largeDataSource = largeDataSource
+  table.forEachExportRow = largeDataSource?.forEachExportRow
+  if (
+    largeDataSource?.forEachRow &&
+    largeDataSource?.forEachExportRow &&
+    largeDataSource?.getFlatRowCount
+  ) {
+    table.getSelectedOriginalRows = () => getSelectedOriginalRows(largeDataSource, rowSelection)
+    table.getIsAllRowsSelected = () => getIsAllRowsSelected(largeDataSource, rowSelection)
+    table.getIsSomeRowsSelected = () => getIsSomeRowsSelected(largeDataSource, rowSelection)
+    table.toggleAllRowsSelected = value =>
+      onRowSelectionChange(current => getNextRowSelection(largeDataSource, current, value))
+  }
 
   const prevStateRef = useRef(table.getState())
   table.isEqual = (selector = identity) => {
@@ -304,6 +386,10 @@ const Table = memo(props => {
         testPrefix={testPrefix}
         meta={tableMeta}
         enableColumnReordering={enableColumnReordering}
+        largeDataSource={largeDataSource}
+        windowStartIndex={largeDataPublication?.startIndex || 0}
+        onWindowChange={handleLargeDataRangeChange}
+        overflowTooltip={overflowTooltip}
         {...rest}
         {...virtualizeOptions}
       />

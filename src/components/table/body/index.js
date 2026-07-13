@@ -1,4 +1,12 @@
-import React, { memo, useCallback, useRef, useEffect, useMemo } from "react"
+import React, {
+  memo,
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+  useLayoutEffect,
+  useState,
+} from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
 import identity from "lodash/identity"
 import Flex from "@/components/templates/flex"
@@ -6,8 +14,43 @@ import { useTableState } from "../provider"
 import Row from "./row"
 import Header from "./header"
 import RowPlaceholdersRenderer from "./rowPLaceholdersRenderer"
+import { getVirtualWindowRange } from "../largeData"
+import { createRowMountController } from "./rowMountController"
+import { measureTableElement } from "./measureElement"
+import OverflowTooltip from "../components/overflowTooltip"
+
+const deferredRowScrollResetDelayMs = 50
 
 const noop = () => {}
+
+const DeferredRow = memo(
+  ({ children, controller, RowPlaceholder, index, placeholderSize }) => {
+    const [ready, setReady] = useState(false)
+
+    useEffect(() => controller.schedule(() => setReady(true)), [controller])
+
+    if (ready) return children
+    return (
+      <div
+        aria-hidden
+        style={{ height: `${placeholderSize}px`, overflow: "hidden", width: "100%" }}
+      >
+        {RowPlaceholder ? <RowPlaceholder index={index} /> : null}
+      </div>
+    )
+  },
+  (previous, next) =>
+    previous.controller === next.controller &&
+    previous.rowKey === next.rowKey &&
+    previous.rowOriginal === next.rowOriginal &&
+    previous.RowPlaceholder === next.RowPlaceholder &&
+    previous.RowWrapper === next.RowWrapper &&
+    previous.GroupRow === next.GroupRow &&
+    previous.onClickRow === next.onClickRow &&
+    previous.directCellContent === next.directCellContent &&
+    previous.placeholderSize === next.placeholderSize &&
+    previous.index === next.index
+)
 
 const rerenderSelector = state => ({
   sorting: state.sorting,
@@ -35,28 +78,59 @@ const Body = memo(
     virtualRef,
     initialOffset = 0,
     onScroll,
+    onIsScrollingChange = noop,
+    deferRowMount = false,
+    DeferredRowPlaceholder,
     enableColumnReordering,
     RowPlaceholder,
+    RowWrapper,
     placeholdersLength,
+    largeDataSource,
+    windowStartIndex = 0,
+    onWindowChange,
+    overflowTooltip,
     ...rest
   }) => {
     useTableState(rerenderSelector)
     const ref = useRef()
+    const publishedWindowRef = useRef()
+    const pendingWindowRef = useRef()
+    const rowMountController = useMemo(() => createRowMountController(), [])
+
+    useEffect(() => () => rowMountController.dispose(), [rowMountController])
 
     const { rows } = table.getRowModel()
 
+    const dataRowCount = largeDataSource?.getRowCount() ?? rows.length
+    const rowHeight =
+      (!!meta.styles?.height && parseInt(meta.styles.height)) ||
+      (!!meta.cellStyles?.height && parseInt(meta.cellStyles.height)) ||
+      35
+    const estimateSize = useCallback(
+      index => (index > 0 && largeDataSource?.getEstimatedRowHeight?.(index - 1)) || rowHeight,
+      [largeDataSource, rowHeight]
+    )
+    const resolveItemKey = useCallback(
+      index =>
+        index === 0 ? "header" : (largeDataSource?.getRowId(index - 1) ?? getItemKey(index - 1)),
+      [getItemKey, largeDataSource]
+    )
+    const measureElement = useCallback(
+      (element, entry, instance) => measureTableElement(element, entry, instance),
+      []
+    )
+
     const rowVirtualizer = useVirtualizer({
-      count: rows.length ? rows.length + 1 : 1,
+      count: dataRowCount ? dataRowCount + 1 : 1,
       getScrollElement: () => ref.current,
       enableSmoothScroll: false,
-      estimateSize: () =>
-        (!!meta.styles?.height && parseInt(meta.styles.height)) ||
-        (!!meta.cellStyles?.height && parseInt(meta.cellStyles.height)) ||
-        35,
+      estimateSize,
       overscan: overscan || 15,
       onChange: onVirtualChange,
       initialOffset,
-      getItemKey: index => (index === 0 ? "header" : getItemKey(index - 1)),
+      getItemKey: resolveItemKey,
+      measureElement,
+      ...(deferRowMount ? { isScrollingResetDelay: deferredRowScrollResetDelayMs } : {}),
       rangeExtractor: useCallback(range => {
         if (range.count && range.startIndex >= 0) {
           const next = new Set([0, ...defaultRangeExtractor(range)])
@@ -69,7 +143,40 @@ const Body = memo(
 
     if (virtualRef) virtualRef.current = rowVirtualizer
 
+    useEffect(() => {
+      rowMountController.setScrolling(rowVirtualizer.isScrolling)
+      onIsScrollingChange(rowVirtualizer.isScrolling)
+    }, [onIsScrollingChange, rowMountController, rowVirtualizer.isScrolling])
+
     const virtualRows = rowVirtualizer.getVirtualItems()
+    const nextWindowRange = useMemo(
+      () => (largeDataSource ? getVirtualWindowRange(virtualRows, dataRowCount) : null),
+      [largeDataSource, virtualRows, dataRowCount]
+    )
+
+    useLayoutEffect(() => {
+      if (!nextWindowRange) return
+
+      if (deferRowMount && rowVirtualizer.isScrolling) {
+        pendingWindowRef.current = nextWindowRange
+        return
+      }
+
+      const windowRange = pendingWindowRef.current || nextWindowRange
+      pendingWindowRef.current = undefined
+
+      const publishedWindow = publishedWindowRef.current
+      if (
+        publishedWindow?.startIndex === windowRange.startIndex &&
+        publishedWindow?.endIndex === windowRange.endIndex
+      ) {
+        return
+      }
+
+      publishedWindowRef.current = windowRange
+      onWindowChange(windowRange)
+    }, [deferRowMount, nextWindowRange, onWindowChange, rowVirtualizer.isScrolling])
+
     // index 0 is reserved for the sticky header (see count = rows + 1 and rangeExtractor above)
     const firstVirtualDataIndex = virtualRows[1]?.index ?? 1
     const lastVirtualDataIndex = virtualRows[virtualRows.length - 1]?.index ?? 0
@@ -78,7 +185,7 @@ const Body = memo(
       if (!RowPlaceholder) return { before: [], after: [] }
 
       const firstDataIndex = 1
-      const lastDataIndex = rows.length
+      const lastDataIndex = dataRowCount
 
       // "before" = rows before the virtual window; capped to placeholdersLength when provided
       const beforeEnd = firstVirtualDataIndex
@@ -98,17 +205,20 @@ const Body = memo(
         before: Array.from({ length: beforeEnd - beforeStart }, (_, i) => beforeStart + i),
         after: Array.from({ length: afterEnd - afterStart }, (_, i) => afterStart + i),
       }
-    }, [RowPlaceholder, firstVirtualDataIndex, lastVirtualDataIndex, rows.length, placeholdersLength])
+    }, [
+      RowPlaceholder,
+      firstVirtualDataIndex,
+      lastVirtualDataIndex,
+      dataRowCount,
+      placeholdersLength,
+    ])
 
     const getPlaceholderOffset = useCallback(
       index => {
-        // measurementsCache is populated for all count items on every render
-        // (getTotalSize calls getMeasurements which fills the full cache).
-        // Entries use real sizes for measured rows and estimateSize for the rest.
-        const cached = rowVirtualizer.measurementsCache[index]
-        return cached ? cached.start : 0
+        if (!largeDataSource) return rowVirtualizer.measurementsCache[index]?.start || 0
+        return rowVirtualizer.getOffsetForIndex(index, "start")?.[0] || 0
       },
-      [rowVirtualizer]
+      [largeDataSource, rowVirtualizer]
     )
 
     useEffect(() => {
@@ -118,7 +228,7 @@ const Body = memo(
 
       if (!lastItem) return
 
-      if (lastItem.index >= rows.length && getHasNextPage() && !loading) {
+      if (lastItem.index >= dataRowCount && getHasNextPage() && !loading) {
         loadMore("backward")
       }
     }, [virtualRows, loading])
@@ -158,6 +268,36 @@ const Body = memo(
             getPlaceholderOffset={getPlaceholderOffset}
           />
           {virtualRows.map(virtualRow => {
+            const row =
+              virtualRow.index === 0
+                ? null
+                : rows[virtualRow.index - 1 - (largeDataSource ? windowStartIndex : 0)]
+            const logicalIndex = largeDataSource ? virtualRow.index - 1 : undefined
+            const rowContent = row ? (
+              <Row
+                dataGa={dataGa}
+                table={table}
+                testPrefix={testPrefix}
+                testPrefixCallback={testPrefixCallback}
+                coloredSortedColumn={coloredSortedColumn}
+                meta={meta}
+                row={row}
+                index={virtualRow.index}
+                logicalIndex={logicalIndex}
+                {...rest}
+              />
+            ) : null
+            const wrappedRow =
+              row && RowWrapper ? (
+                <RowWrapper row={row} virtualIndex={virtualRow.index} logicalIndex={logicalIndex}>
+                  {rowContent}
+                </RowWrapper>
+              ) : row ? (
+                rowContent
+              ) : RowPlaceholder ? (
+                <RowPlaceholder index={virtualRow.index - 1} />
+              ) : null
+
             return (
               <div
                 key={virtualRow.key}
@@ -185,18 +325,23 @@ const Body = memo(
                     enableColumnReordering={enableColumnReordering}
                     {...rest}
                   />
+                ) : deferRowMount && row ? (
+                  <DeferredRow
+                    controller={rowMountController}
+                    rowKey={virtualRow.key}
+                    rowOriginal={row.original}
+                    RowPlaceholder={DeferredRowPlaceholder || RowPlaceholder}
+                    RowWrapper={RowWrapper}
+                    GroupRow={rest.GroupRow}
+                    onClickRow={rest.onClickRow}
+                    directCellContent={rest.directCellContent}
+                    index={virtualRow.index - 1}
+                    placeholderSize={virtualRow.size ?? estimateSize(virtualRow.index)}
+                  >
+                    {wrappedRow}
+                  </DeferredRow>
                 ) : (
-                  <Row
-                    dataGa={dataGa}
-                    table={table}
-                    testPrefix={testPrefix}
-                    testPrefixCallback={testPrefixCallback}
-                    coloredSortedColumn={coloredSortedColumn}
-                    meta={meta}
-                    row={rows[virtualRow.index - 1]}
-                    index={virtualRow.index}
-                    {...rest}
-                  />
+                  wrappedRow
                 )}
               </div>
             )
@@ -207,6 +352,7 @@ const Body = memo(
             getPlaceholderOffset={getPlaceholderOffset}
           />
         </div>
+        {overflowTooltip ? <OverflowTooltip containerRef={ref} options={overflowTooltip} /> : null}
       </Flex>
     )
   }

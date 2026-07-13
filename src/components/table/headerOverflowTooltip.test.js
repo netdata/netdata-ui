@@ -1,0 +1,36 @@
+import React from "react"
+import { renderWithProviders, waitFor } from "testUtilities"
+import Table from "./table"
+
+it("publishes canonical overflow content without replacing column drag handles", async () => {
+  const { container } = renderWithProviders(
+    <Table
+      data={[]}
+      dataColumns={[
+        {
+          id: "dynamic",
+          accessorKey: "dynamic",
+          header: <span>XYZ…</span>,
+          headerString: () => "XYZ complete dynamic column name",
+        },
+        {
+          id: "literal",
+          accessorKey: "literal",
+          header: "Complete literal column name",
+        },
+      ]}
+      enableColumnReordering
+    />
+  )
+
+  await waitFor(() => {
+    expect(
+      container.querySelector('[data-table-header-tooltip="XYZ complete dynamic column name"]')
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector('[data-table-header-tooltip="Complete literal column name"]')
+    ).toBeInTheDocument()
+    expect(container.querySelectorAll(".drag-handle[role=button]")).toHaveLength(2)
+    expect(container.querySelectorAll("[data-table-header-tooltip] .drag-handle")).toHaveLength(0)
+  })
+})

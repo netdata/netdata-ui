@@ -15,6 +15,28 @@ const escapeForCSV = value => {
 const convertToCSV = data =>
   data.reduce((h, row) => h + row.map(v => escapeForCSV(formatValue(v))).join(",") + "\n", "")
 
+const getPathValue = (value, path) =>
+  path.split(".").reduce((current, key) => current?.[key], value)
+
+const createExportRow = (original, index, headers, columnsById) => {
+  const row = {
+    index,
+    original,
+    getValue: columnId => {
+      const column = columnsById.get(columnId)
+      const { accessorFn, accessorKey } = column?.columnDef || {}
+      if (accessorFn) return accessorFn(original, index)
+      if (accessorKey) return getPathValue(original, accessorKey)
+      return original?.[columnId]
+    },
+  }
+
+  row.getAllCells = () =>
+    headers.map(header => ({ column: header.column, row, getValue: () => row.getValue(header.id) }))
+
+  return row
+}
+
 export default (name = "netdata") =>
   (_, table) => {
     const headers = table
@@ -22,6 +44,7 @@ export default (name = "netdata") =>
       .filter(
         header => !header.subHeaders?.length && header.id !== "checkbox" && header.id !== "actions"
       )
+    const columnsById = new Map(headers.map(header => [header.id, header.column]))
 
     let data = [
       headers.map(header => {
@@ -39,7 +62,7 @@ export default (name = "netdata") =>
         return parentLabel ? `${parentLabel} ${label}` : label
       }),
     ]
-    table.getRowModel().rows.forEach(row =>
+    const appendRow = row =>
       data.push(
         headers.map(header => {
           const value = row.getValue(header.id)
@@ -53,7 +76,16 @@ export default (name = "netdata") =>
           return header.column.columnDef.renderString(cell.row)
         })
       )
-    )
+
+    if (table.forEachExportRow) {
+      let index = 0
+      table.forEachExportRow(original => {
+        appendRow(createExportRow(original, index, headers, columnsById))
+        index += 1
+      })
+    } else {
+      table.getRowModel().rows.forEach(appendRow)
+    }
 
     const url = window.URL.createObjectURL(
       new Blob([convertToCSV(data)], { type: "text/csv;charset=utf-8;" })

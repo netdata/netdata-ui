@@ -18,9 +18,11 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   padding: 0 2px;
   color: #526161;
   border-bottom: 1px solid #E4E8E8;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
-.c2 {
+.c3 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,7 +31,16 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   color: #526161;
 }
 
-.c3 {
+.c2 {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.c2::-webkit-scrollbar {
+  height: 0px;
+}
+
+.c4 {
   white-space: nowrap;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -45,15 +56,15 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   background: #F1FFF7;
 }
 
-.c3>span {
+.c4>span {
   color: #00AB44;
 }
 
-.c3:hover {
+.c4:hover {
   border-bottom-color: #00AB44;
 }
 
-.c4 {
+.c5 {
   white-space: nowrap;
   border-bottom-width: 1px;
   border-bottom-style: solid;
@@ -69,11 +80,11 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   background: #F6F7F7;
 }
 
-.c4>span {
+.c5>span {
   color: #708585;
 }
 
-.c4:hover {
+.c5:hover {
   border-bottom-color: #00AB44;
 }
 
@@ -83,13 +94,15 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   <nav
     alignitems="center"
     border="[object Object]"
-    class="c1 tabs"
+    class="c1 c2 tabs"
+    flex="0"
     justifycontent="start"
+    overflow="[object Object]"
     padding="0,0.5"
   >
     <div
       alignitems="center"
-      class="c2 c3"
+      class="c3 c4"
       justifycontent="center"
       label="hi"
       padding="0,6"
@@ -98,7 +111,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
     </div>
     <div
       alignitems="center"
-      class="c2 c4"
+      class="c3 c5"
       justifycontent="center"
       label="Hi again"
       padding="0,6"
@@ -107,7 +120,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
     </div>
     <div
       alignitems="center"
-      class="c2 c4"
+      class="c3 c5"
       justifycontent="center"
       label="Bye"
       padding="0,6"
@@ -116,7 +129,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
     </div>
     <div
       alignitems="center"
-      class="c2 c4"
+      class="c3 c5"
       justifycontent="center"
       label="Bye Bye"
       padding="0,6"
