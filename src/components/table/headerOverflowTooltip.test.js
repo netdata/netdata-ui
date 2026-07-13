@@ -1,5 +1,5 @@
 import React from "react"
-import { fireEvent, renderWithProviders, screen, waitFor } from "testUtilities"
+import { renderWithProviders, waitFor } from "testUtilities"
 import Table from "./table"
 
 const dataColumns = [
@@ -16,43 +16,20 @@ const dataColumns = [
   },
 ]
 
-it("publishes canonical overflow content without replacing column drag handles", async () => {
+it("publishes dedicated header overflow content without replacing column drag handles", async () => {
   const { container } = renderWithProviders(
     <Table data={[]} dataColumns={dataColumns} enableColumnReordering />
   )
 
   await waitFor(() => {
     expect(
-      container.querySelector('[data-overflow-tooltip="XYZ complete dynamic column name"]')
+      container.querySelector('[data-table-header-tooltip="XYZ complete dynamic column name"]')
     ).toBeInTheDocument()
     expect(
-      container.querySelector('[data-overflow-tooltip="Complete literal column name"]')
+      container.querySelector('[data-table-header-tooltip="Complete literal column name"]')
     ).toBeInTheDocument()
     expect(container.querySelectorAll(".drag-handle[role=button]")).toHaveLength(2)
-    expect(container.querySelectorAll("[data-overflow-tooltip] .drag-handle")).toHaveLength(0)
-  })
-})
-
-it("opens a header tooltip with the default selector when the label is truncated", async () => {
-  const { container } = renderWithProviders(
-    <Table
-      data={[]}
-      dataColumns={dataColumns}
-      overflowTooltip={{ isOverflowing: () => true }}
-    />
-  )
-
-  await waitFor(() => {
-    expect(
-      container.querySelector('[data-overflow-tooltip="XYZ complete dynamic column name"]')
-    ).toBeInTheDocument()
-  })
-
-  fireEvent.mouseOver(
-    container.querySelector('[data-overflow-tooltip="XYZ complete dynamic column name"]')
-  )
-
-  await waitFor(() => {
-    expect(screen.getByText("XYZ complete dynamic column name")).toBeInTheDocument()
+    expect(container.querySelectorAll("[data-table-header-tooltip] .drag-handle")).toHaveLength(0)
+    expect(container.querySelectorAll("[data-overflow-tooltip]")).toHaveLength(0)
   })
 })
