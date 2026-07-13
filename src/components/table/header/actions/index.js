@@ -1,6 +1,7 @@
-import React, { memo, useState, useEffect } from "react"
+import React, { memo, useState, useEffect, useRef } from "react"
 import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
+import { isRowSelectable } from "../../largeDataSelection"
 import useActions from "./useActions"
 import Action from "./action"
 import ColumnVisibility from "./columnVisibility"
@@ -12,19 +13,21 @@ const rerenderSelector = state => state.selectedRows
 const useSelectedRowsObserver = (table, { onRowSelected = noop, rowSelection }) => {
   useTableState(rerenderSelector)
   const [selectedRows, setActualSelectedRows] = useState([])
+  const onRowSelectedRef = useRef(onRowSelected)
+  onRowSelectedRef.current = onRowSelected
 
   useEffect(() => {
     const selected = table.getSelectedOriginalRows
       ? table.getSelectedOriginalRows()
       : table.getSelectedRowModel().flatRows.reduce((acc, { original }) => {
-          if (original?.disabled || original?.unselectable) return acc
+          if (!isRowSelectable(original)) return acc
 
           acc.push(original)
           return acc
         }, [])
 
     setActualSelectedRows(selected)
-    onRowSelected(selected)
+    onRowSelectedRef.current(selected)
   }, [rowSelection, table, table.largeDataSource])
 
   return selectedRows

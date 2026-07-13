@@ -14,7 +14,7 @@ import { useTableState } from "../provider"
 import Row from "./row"
 import Header from "./header"
 import RowPlaceholdersRenderer from "./rowPLaceholdersRenderer"
-import { getVirtualWindowRange } from "../largeData"
+import { normalizeWindowRange } from "../largeData"
 import { createRowMountController } from "./rowMountController"
 import { measureTableElement } from "./measureElement"
 import OverflowTooltip from "../components/overflowTooltip"
@@ -23,34 +23,32 @@ const deferredRowScrollResetDelayMs = 50
 
 const noop = () => {}
 
-const DeferredRow = memo(
-  ({ children, controller, RowPlaceholder, index, placeholderSize }) => {
-    const [ready, setReady] = useState(false)
+const getVirtualWindowRange = (virtualItems, count) => {
+  let startIndex
+  let endIndex
 
-    useEffect(() => controller.schedule(() => setReady(true)), [controller])
+  virtualItems.forEach(item => {
+    if (item.index === 0) return
+    const index = item.index - 1
+    startIndex = startIndex === undefined ? index : Math.min(startIndex, index)
+    endIndex = endIndex === undefined ? index + 1 : Math.max(endIndex, index + 1)
+  })
 
-    if (ready) return children
-    return (
-      <div
-        aria-hidden
-        style={{ height: `${placeholderSize}px`, overflow: "hidden", width: "100%" }}
-      >
-        {RowPlaceholder ? <RowPlaceholder index={index} /> : null}
-      </div>
-    )
-  },
-  (previous, next) =>
-    previous.controller === next.controller &&
-    previous.rowKey === next.rowKey &&
-    previous.rowOriginal === next.rowOriginal &&
-    previous.RowPlaceholder === next.RowPlaceholder &&
-    previous.RowWrapper === next.RowWrapper &&
-    previous.GroupRow === next.GroupRow &&
-    previous.onClickRow === next.onClickRow &&
-    previous.directCellContent === next.directCellContent &&
-    previous.placeholderSize === next.placeholderSize &&
-    previous.index === next.index
-)
+  return normalizeWindowRange({ startIndex, endIndex }, count)
+}
+
+const DeferredRow = ({ children, controller, RowPlaceholder, index, placeholderSize }) => {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => controller.schedule(() => setReady(true)), [controller])
+
+  if (ready) return children
+  return (
+    <div aria-hidden style={{ height: `${placeholderSize}px`, overflow: "hidden", width: "100%" }}>
+      {RowPlaceholder ? <RowPlaceholder index={index} /> : null}
+    </div>
+  )
+}
 
 const rerenderSelector = state => ({
   sorting: state.sorting,
@@ -175,9 +173,14 @@ const Body = memo(
 
       publishedWindowRef.current = windowRange
       onWindowChange(windowRange)
-    }, [deferRowMount, nextWindowRange, onWindowChange, rowVirtualizer.isScrolling])
+    }, [
+      deferRowMount,
+      nextWindowRange?.startIndex,
+      nextWindowRange?.endIndex,
+      onWindowChange,
+      rowVirtualizer.isScrolling,
+    ])
 
-    // index 0 is reserved for the sticky header (see count = rows + 1 and rangeExtractor above)
     const firstVirtualDataIndex = virtualRows[1]?.index ?? 1
     const lastVirtualDataIndex = virtualRows[virtualRows.length - 1]?.index ?? 0
 
@@ -187,14 +190,12 @@ const Body = memo(
       const firstDataIndex = 1
       const lastDataIndex = dataRowCount
 
-      // "before" = rows before the virtual window; capped to placeholdersLength when provided
       const beforeEnd = firstVirtualDataIndex
       const beforeStart =
         placeholdersLength != null
           ? Math.max(firstDataIndex, beforeEnd - placeholdersLength)
           : firstDataIndex
 
-      // "after" = rows after the virtual window; capped to placeholdersLength when provided
       const afterStart = lastVirtualDataIndex + 1
       const afterEnd =
         placeholdersLength != null
@@ -328,13 +329,7 @@ const Body = memo(
                 ) : deferRowMount && row ? (
                   <DeferredRow
                     controller={rowMountController}
-                    rowKey={virtualRow.key}
-                    rowOriginal={row.original}
                     RowPlaceholder={DeferredRowPlaceholder || RowPlaceholder}
-                    RowWrapper={RowWrapper}
-                    GroupRow={rest.GroupRow}
-                    onClickRow={rest.onClickRow}
-                    directCellContent={rest.directCellContent}
                     index={virtualRow.index - 1}
                     placeholderSize={virtualRow.size ?? estimateSize(virtualRow.index)}
                   >

@@ -2,9 +2,9 @@ import {
   filterFns as defaultFilterFns,
   sortingFns as defaultSortingFns,
 } from "@tanstack/react-table"
+import { getColumnValue } from "./helpers/columnValue"
 
-const getPathValue = (value, path) =>
-  path.split(".").reduce((current, key) => current?.[key], value)
+const reSplitAlphaNumeric = /([0-9]+)/gm
 
 const getColumnsById = columns => {
   const byId = new Map()
@@ -20,12 +20,6 @@ const getColumnsById = columns => {
   return byId
 }
 
-const getColumnValue = (row, index, column) => {
-  if (column.accessorFn) return column.accessorFn(row, index)
-  if (column.accessorKey) return getPathValue(row, column.accessorKey)
-  return row?.[column.id]
-}
-
 const getAutoSortingFn = (rows, column) => {
   let isString = false
 
@@ -36,7 +30,7 @@ const getAutoSortingFn = (rows, column) => {
     }
     if (typeof value !== "string") continue
     isString = true
-    if (/([0-9]+)/.test(value)) return defaultSortingFns.alphanumeric
+    if (value.split(reSplitAlphaNumeric).length > 1) return defaultSortingFns.alphanumeric
   }
 
   return isString ? defaultSortingFns.text : defaultSortingFns.basic
@@ -46,8 +40,18 @@ const createRowAdapter = columnsById => ({
   index: 0,
   original: null,
   subRows: [],
+  values: null,
+  setRow(original, index) {
+    this.original = original
+    this.index = index
+    this.values = null
+  },
   getValue(columnId) {
-    return getColumnValue(this.original, this.index, columnsById.get(columnId))
+    if (this.values?.has(columnId)) return this.values.get(columnId)
+    const value = getColumnValue(this.original, this.index, columnsById.get(columnId))
+    if (!this.values) this.values = new Map()
+    this.values.set(columnId, value)
+    return value
   },
 })
 
@@ -57,7 +61,6 @@ const getAutoFilterFn = (rows, column) => {
   if (typeof value === "string") return defaultFilterFns.includesString
   if (typeof value === "number") return defaultFilterFns.inNumberRange
   if (typeof value === "boolean") return defaultFilterFns.equals
-  if (Array.isArray(value)) return defaultFilterFns.arrIncludes
   if (value !== null && typeof value === "object") return defaultFilterFns.equals
   return defaultFilterFns.weakEquals
 }
@@ -91,8 +94,7 @@ const filterRows = ({ rows, columnFilters, columnsById, filterFns }) => {
 
   const rowAdapter = createRowAdapter(columnsById)
   return rows.filter((row, index) => {
-    rowAdapter.index = index
-    rowAdapter.original = row
+    rowAdapter.setRow(row, index)
     return filters.every(({ filterFn, id, value }) => filterFn(rowAdapter, id, value))
   })
 }
@@ -117,20 +119,17 @@ const sortRows = ({ rows, sorting, columnsById, sortingFns }) => {
           ? getAutoSortingFn(rows, column)
           : sortingFns[column.sortingFn] || defaultSortingFns[column.sortingFn],
   }))
-  const left = createRowAdapter(columnsById)
-  const right = createRowAdapter(columnsById)
-  const indexedRows = rows.map((row, index) => ({ index, row }))
+  const indexedRows = rows.map((row, index) => {
+    const adapter = createRowAdapter(columnsById)
+    adapter.setRow(row, index)
+    return adapter
+  })
 
   indexedRows.sort((a, b) => {
-    left.index = a.index
-    left.original = a.row
-    right.index = b.index
-    right.original = b.row
-
     for (let index = 0; index < columnInfo.length; index += 1) {
       const { entry, column, sortUndefined, sortingFn } = columnInfo[index]
-      const aValue = left.getValue(entry.id)
-      const bValue = right.getValue(entry.id)
+      const aValue = a.getValue(entry.id)
+      const bValue = b.getValue(entry.id)
       let result = 0
 
       if (sortUndefined && (aValue === undefined || bValue === undefined)) {
@@ -144,7 +143,7 @@ const sortRows = ({ rows, sorting, columnsById, sortingFns }) => {
               : -sortUndefined
       }
 
-      if (result === 0) result = sortingFn(left, right, entry.id)
+      if (result === 0) result = sortingFn(a, b, entry.id)
       if (result === 0) continue
       if (entry.desc) result *= -1
       if (column.invertSorting) result *= -1
@@ -154,7 +153,7 @@ const sortRows = ({ rows, sorting, columnsById, sortingFns }) => {
     return a.index - b.index
   })
 
-  return indexedRows.map(({ row }) => row)
+  return indexedRows.map(({ original }) => original)
 }
 
 export default ({
@@ -213,8 +212,11 @@ export default ({
   const displayIndexById = new Map(displayIds.map((id, index) => [id, index]))
 
   return {
-    forEachExportRow: callback =>
-      exportRows.forEach((row, index) => callback(row, exportIds[index])),
+    forEachExportRow: callback => {
+      for (let index = 0; index < exportRows.length; index += 1) {
+        if (callback(exportRows[index], exportIds[index]) === false) return
+      }
+    },
     forEachRow: callback => forEachRow(data, callback),
     getDisplayIndex: (id, { leaf = false } = {}) =>
       (leaf ? lastDisplayIndexById : displayIndexById).get(id) ??

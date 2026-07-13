@@ -3,6 +3,7 @@ import {
   createTable,
   getCoreRowModel,
   getExpandedRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
 } from "@tanstack/react-table"
 
@@ -193,9 +194,9 @@ describe("createLargeDataSource", () => {
     expect(source.getRowId(0)).toBe("alpha")
   })
 
-  it("uses array membership filtering for array-valued columns", () => {
+  it("supports explicit array membership filtering for array-valued columns", () => {
     const source = createLargeDataSource({
-      columns: [{ id: "roles", accessorKey: "roles" }],
+      columns: [{ id: "roles", accessorKey: "roles", filterFn: "arrIncludes" }],
       columnFilters: [{ id: "roles", value: "admin" }],
       data: [
         { id: "admin", roles: ["admin", "viewer"] },
@@ -206,5 +207,34 @@ describe("createLargeDataSource", () => {
 
     expect(source.getRowCount()).toBe(1)
     expect(source.getRowId(0)).toBe("admin")
+  })
+
+  it("matches TanStack automatic filtering for array-valued columns", () => {
+    const arrayColumns = [{ id: "roles", accessorKey: "roles" }]
+    const arrayData = [
+      { id: "admin", roles: ["admin", "viewer"] },
+      { id: "viewer", roles: ["viewer"] },
+    ]
+    const columnFilters = [{ id: "roles", value: "admin" }]
+    const source = createLargeDataSource({
+      columns: arrayColumns,
+      columnFilters,
+      data: arrayData,
+      getRowId: row => row.id,
+    })
+    const table = createTable({
+      columns: arrayColumns,
+      data: arrayData,
+      getCoreRowModel: getCoreRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      getRowId: row => row.id,
+      onStateChange: () => {},
+      renderFallbackValue: null,
+      state: { columnFilters },
+    })
+
+    expect(
+      Array.from({ length: source.getRowCount() }, (_, index) => source.getRowId(index))
+    ).toEqual(table.getRowModel().rows.map(row => row.id))
   })
 })

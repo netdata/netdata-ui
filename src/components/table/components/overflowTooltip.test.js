@@ -16,6 +16,8 @@ const setDimensions = (
 
 const renderContent = content => <span>{content}</span>
 
+afterEach(() => jest.useRealTimers())
+
 const Fixture = ({ delay = 0, options = {} }) => {
   const ref = useRef()
 
@@ -67,7 +69,6 @@ it("waits for the configured hover delay", () => {
 
   act(() => jest.advanceTimersByTime(600))
   expect(queryByText("Complete value")).toBeInTheDocument()
-  jest.useRealTimers()
 })
 
 it("cancels pending and visible tooltips when the table scrolls", () => {
@@ -86,7 +87,34 @@ it("cancels pending and visible tooltips when the table scrolls", () => {
   expect(queryByText("Complete value")).toBeInTheDocument()
   fireEvent.scroll(container)
   expect(queryByText("Complete value")).not.toBeInTheDocument()
-  jest.useRealTimers()
+})
+
+it("cancels a pending tooltip when the viewport resizes", () => {
+  jest.useFakeTimers()
+  const { getByTestId, queryByText } = renderWithProviders(<Fixture delay={600} />)
+  const target = getByTestId("target")
+
+  setDimensions(target)
+  fireEvent.mouseOver(target)
+  fireEvent(window, new Event("resize"))
+  act(() => jest.advanceTimersByTime(600))
+
+  expect(queryByText("Complete value")).not.toBeInTheDocument()
+})
+
+it("cancels a pending tooltip on window scroll when configured", () => {
+  jest.useFakeTimers()
+  const { getByTestId, queryByText } = renderWithProviders(
+    <Fixture delay={600} options={{ closeOnWindowScroll: true }} />
+  )
+  const target = getByTestId("target")
+
+  setDimensions(target)
+  fireEvent.mouseOver(target)
+  fireEvent.scroll(window)
+  act(() => jest.advanceTimersByTime(600))
+
+  expect(queryByText("Complete value")).not.toBeInTheDocument()
 })
 
 it("closes a visible tooltip when the viewport resizes", () => {
@@ -194,5 +222,4 @@ it("removes a visible tooltip when its target disconnects without a controller r
   target.remove()
   act(() => jest.advanceTimersByTime(100))
   expect(queryByText("Complete value")).not.toBeInTheDocument()
-  jest.useRealTimers()
 })

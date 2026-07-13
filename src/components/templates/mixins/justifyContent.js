@@ -1,4 +1,4 @@
-const justifyContentMap = {
+export const justifyContentMap = {
   start: "start",
   center: "center",
   end: "end",

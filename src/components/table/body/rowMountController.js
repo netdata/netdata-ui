@@ -10,14 +10,15 @@ export const createRowMountController = () => {
     timer = null
     if (scrolling) return
 
-    const batch = [...scheduled].slice(0, rowMountBatchSize)
-    if (!batch.length) return
-
-    batch.forEach(entry => {
+    let executed = 0
+    for (const entry of scheduled) {
+      if (executed === rowMountBatchSize) break
       scheduled.delete(entry)
       entry.callback()
-    })
-    start()
+      executed += 1
+    }
+
+    if (executed) start()
   }
 
   const start = () => {

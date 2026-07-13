@@ -32,16 +32,19 @@ describe("large-data row selection", () => {
     expect(getIsAllRowsSelected(source, { outside: true, enabled: true, disabled: true })).toBe(
       true
     )
+    expect(getIsAllRowsSelected(source, { outside: true, enabled: true })).toBe(true)
+    expect(getIsSomeRowsSelected(source, { enabled: true })).toBe(false)
+    expect(getIsSomeRowsSelected(source, { outside: true, enabled: true })).toBe(false)
     expect(getIsSomeRowsSelected(source, { outside: true, enabled: true, disabled: true })).toBe(
       false
     )
+    expect(getIsSomeRowsSelected(source, { disabled: true })).toBe(false)
   })
 
-  it("toggles only the filtered result and preserves selections outside it", () => {
+  it("toggles only the selectable filtered result and preserves selections outside it", () => {
     expect(getNextRowSelection(source, { outside: true }, true)).toEqual({
       outside: true,
       enabled: true,
-      disabled: true,
     })
     expect(
       getNextRowSelection(source, { outside: true, enabled: true, disabled: true }, false)
