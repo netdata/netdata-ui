@@ -1,9 +1,31 @@
 import React, { memo, useMemo, useCallback } from "react"
 import styled, { useTheme } from "styled-components"
 import Flex from "@/components/templates/flex"
+import { alignItemValuesMap } from "@/components/templates/mixins/alignItems"
+import { justifyContentMap } from "@/components/templates/mixins/justifyContent"
+import { getFlex } from "@/components/templates/mixins/flex"
+import { getDimension, getDimensions } from "@/mixins/utils"
 import { getColor, getRgbColor } from "@/theme"
 import { useTableState } from "../provider"
 import getColumnFlex from "./columnFlex"
+
+const resolveCellStyles = (column, rowIndex) => {
+  const tableMeta =
+    typeof column.columnDef.tableMeta === "function"
+      ? column.columnDef.tableMeta({}, column, rowIndex)
+      : column.columnDef.tableMeta
+  const meta =
+    typeof column.columnDef.meta === "function"
+      ? column.columnDef.meta({}, column, rowIndex)
+      : column.columnDef.meta
+
+  return {
+    ...(tableMeta?.styles || {}),
+    ...(meta?.styles || {}),
+    ...(tableMeta?.cellStyles || {}),
+    ...(meta?.cellStyles || {}),
+  }
+}
 
 const CellGroup = ({
   cell,
@@ -16,28 +38,11 @@ const CellGroup = ({
 }) => {
   const { column } = cell
 
-  const tableMeta = useMemo(
-    () =>
-      typeof column.columnDef.tableMeta === "function"
-        ? column.columnDef.tableMeta({}, column, row.index)
-        : column.columnDef.tableMeta,
-    [column.columnDef.tableMeta, column, row.index]
+  const cellStyles = useMemo(
+    () => resolveCellStyles(column, row.index),
+    [column.columnDef.tableMeta, column.columnDef.meta, column, row.index]
   )
 
-  const meta = useMemo(
-    () =>
-      typeof column.columnDef.meta === "function"
-        ? column.columnDef.meta({}, column, row.index)
-        : column.columnDef.meta,
-    [column.columnDef.meta, column, row.index]
-  )
-
-  const cellStyles = {
-    ...(tableMeta?.styles || {}),
-    ...(meta?.styles || {}),
-    ...(tableMeta?.cellStyles || {}),
-    ...(meta?.cellStyles || {}),
-  }
   const content = <cell.column.columnDef.cell {...cell.getContext()} row={row} />
 
   return (
@@ -68,42 +73,19 @@ const CellGroup = ({
   )
 }
 
-const alignment = {
-  start: "flex-start",
-  center: "center",
-  end: "flex-end",
-  baseline: "baseline",
-  stretch: "stretch",
-}
-
-const getFlexStyle = value => {
-  if (value === true) return "1 1 auto"
-  if (value === false) return "0 0 auto"
-  if (value === "grow") return "1 0 auto"
-  if (value === "shrink") return "0 1 auto"
-  if (typeof value === "number") return `${value} 0 auto`
-  return value
-}
-
 const getInlineCellStyles = (styles, theme) => {
   const result = { ...styles }
 
-  if (styles.alignItems) result.alignItems = alignment[styles.alignItems] || styles.alignItems
+  if (styles.alignItems) {
+    result.alignItems = alignItemValuesMap[styles.alignItems] || styles.alignItems
+  }
   if (styles.justifyContent) {
-    result.justifyContent = alignment[styles.justifyContent] || styles.justifyContent
+    result.justifyContent = justifyContentMap[styles.justifyContent] || styles.justifyContent
   }
-  if (styles.flex !== undefined) result.flex = getFlexStyle(styles.flex)
-  if (typeof styles.width === "number") {
-    result.width = `${styles.width * theme.constants.SIZE_SUB_UNIT}px`
-  }
-  if (typeof styles.height === "number") {
-    result.height = `${styles.height * theme.constants.SIZE_SUB_UNIT}px`
-  }
-  if (Array.isArray(styles.padding)) {
-    result.padding = styles.padding
-      .map(value => `${value * theme.constants.SIZE_SUB_UNIT}px`)
-      .join(" ")
-  }
+  if (styles.flex !== undefined) result.flex = getFlex(styles.flex)
+  if (typeof styles.width === "number") result.width = getDimension(theme, styles.width)
+  if (typeof styles.height === "number") result.height = getDimension(theme, styles.height)
+  if (Array.isArray(styles.padding)) result.padding = getDimensions(theme, styles.padding)
   if (styles.background) {
     result.backgroundColor = styles.backgroundOpacity
       ? getRgbColor(styles.background, styles.backgroundOpacity)({ theme })
@@ -117,23 +99,7 @@ const getInlineCellStyles = (styles, theme) => {
 
 const DirectCellGroup = ({ cell, row, table, header, testPrefix, coloredSortedColumn, theme }) => {
   const { column } = cell
-  const tableMeta =
-    typeof column.columnDef.tableMeta === "function"
-      ? column.columnDef.tableMeta({}, column, row.index)
-      : column.columnDef.tableMeta
-  const meta =
-    typeof column.columnDef.meta === "function"
-      ? column.columnDef.meta({}, column, row.index)
-      : column.columnDef.meta
-  const cellStyles = getInlineCellStyles(
-    {
-      ...(tableMeta?.styles || {}),
-      ...(meta?.styles || {}),
-      ...(tableMeta?.cellStyles || {}),
-      ...(meta?.cellStyles || {}),
-    },
-    theme
-  )
+  const cellStyles = getInlineCellStyles(resolveCellStyles(column, row.index), theme)
   const sorted = column.getCanSort() && coloredSortedColumn && column.getIsSorted()
 
   return (
@@ -142,14 +108,14 @@ const DirectCellGroup = ({ cell, row, table, header, testPrefix, coloredSortedCo
       style={{
         display: "flex",
         boxSizing: "border-box",
-        flex: getFlexStyle(
+        flex: getFlex(
           getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)
         ),
         width: `${column.getSize()}px`,
         position: "relative",
         overflow: "hidden",
-        padding: `${theme.constants.SIZE_SUB_UNIT * 1.5}px ${theme.constants.SIZE_SUB_UNIT * 2}px`,
-        alignItems: alignment[column.columnDef.align] || "flex-start",
+        padding: getDimensions(theme, [1.5, 2]),
+        alignItems: alignItemValuesMap[column.columnDef.align] || "flex-start",
         backgroundColor: sorted
           ? getRgbColor("columnHighlight", row.index % 2 === 0 ? 0.2 : 0.4)({ theme })
           : undefined,
@@ -176,13 +142,12 @@ const StyledRow = styled(Flex)`
   }
 `
 
-const DirectStyledRow = styled.div`
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  background-color: ${getColor("mainBackground")};
-  border-bottom: 1px solid ${getColor("border")};
-
+const DirectStyledRow = styled(Flex).attrs({
+  flex: true,
+  column: true,
+  background: "mainBackground",
+  border: { side: "bottom" },
+})`
   &:hover,
   &:hover .row-content {
     background: ${getColor("mainBackgroundHover")};
@@ -411,8 +376,7 @@ const TableRow = ({
       }`}
       data-id={row.original?.id || row.id}
       onClick={onClick}
-      cursor={directCellContent ? undefined : isClickable ? "pointer" : "default"}
-      style={directCellContent ? { cursor: isClickable ? "pointer" : "default" } : undefined}
+      cursor={isClickable ? "pointer" : "default"}
       onMouseEnter={() => onHoverCell?.({ row: row.index })}
       onMouseLeave={() => onHoverCell?.({ row: null })}
       {...(!directCellContent && {

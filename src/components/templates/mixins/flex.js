@@ -1,4 +1,4 @@
-const getFlex = (flex, basis = "auto") => {
+export const getFlex = (flex, basis = "auto") => {
   if (flex === true) {
     return `1 1 ${basis}`
   }

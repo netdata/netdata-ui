@@ -3,8 +3,10 @@ import Drop from "@/components/drops/drop"
 import Container from "@/components/drops/container"
 import dropAlignMap from "@/components/drops/mixins/dropAlignMap"
 
-const defaultSelector = "[data-overflow-tooltip]"
-const defaultGetContent = target => target.dataset.overflowTooltip
+export const overflowTooltipAttribute = "data-overflow-tooltip"
+
+const defaultSelector = `[${overflowTooltipAttribute}]`
+const defaultGetContent = target => target.getAttribute(overflowTooltipAttribute)
 const targetConnectivityCheckIntervalMs = 100
 
 const getTarget = (container, origin, selector, includeDescendant = false) => {
@@ -33,6 +35,7 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
     zIndex = 80,
   } = options
   const [active, setActive] = useState(null)
+  const [pending, setPending] = useState(false)
   const activeRef = useRef(null)
   const pendingTargetRef = useRef(null)
   const timeoutRef = useRef()
@@ -42,6 +45,7 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
     clearTimeout(timeoutRef.current)
     timeoutRef.current = undefined
     pendingTargetRef.current = null
+    setPending(false)
   }, [])
 
   const close = useCallback(() => {
@@ -70,6 +74,7 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
       const activate = () => {
         timeoutRef.current = undefined
         pendingTargetRef.current = null
+        setPending(false)
         const currentContent = getContent(target)
         if (!target.isConnected || !currentContent || !isOverflowing(target)) return
         if (activeRef.current?.target === target && activeRef.current.content === currentContent)
@@ -84,6 +89,7 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
         if (activeRef.current?.target !== target) close()
         pendingTargetRef.current = target
         timeoutRef.current = setTimeout(activate, delay)
+        setPending(true)
       } else {
         activate()
       }
@@ -91,17 +97,21 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
     [clearPending, close, delay, getContent, isOverflowing]
   )
 
+  const openRef = useRef()
+  openRef.current = open
+
   useEffect(() => {
     const container = containerRef.current
     if (!container) return undefined
 
-    const onMouseOver = event => open(getTarget(container, event.target, selector))
+    const onMouseOver = event => openRef.current(getTarget(container, event.target, selector))
     const onMouseOut = event => {
       const target = getTarget(container, event.target, selector)
       if (target?.contains(event.relatedTarget)) return
       close()
     }
-    const onFocusIn = event => open(getTarget(container, event.target, selector, true), true)
+    const onFocusIn = event =>
+      openRef.current(getTarget(container, event.target, selector, true), true)
     const onFocusOut = event => {
       const target = getTarget(container, event.target, selector, true)
       if (target?.contains(event.relatedTarget)) return
@@ -113,10 +123,6 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
     container.addEventListener("focusin", onFocusIn)
     container.addEventListener("focusout", onFocusOut)
     container.addEventListener("scroll", close, { capture: true, passive: true })
-    if (closeOnWindowScroll) {
-      window.addEventListener("scroll", close, { capture: true, passive: true })
-    }
-    window.addEventListener("resize", close, { passive: true })
 
     return () => {
       clearPending()
@@ -125,20 +131,29 @@ const OverflowTooltip = ({ containerRef, options = {} }) => {
       container.removeEventListener("focusin", onFocusIn)
       container.removeEventListener("focusout", onFocusOut)
       container.removeEventListener("scroll", close, true)
-      if (closeOnWindowScroll) window.removeEventListener("scroll", close, true)
-      window.removeEventListener("resize", close)
     }
-  }, [clearPending, close, closeOnWindowScroll, containerRef, open, selector])
+  }, [clearPending, close, containerRef, selector])
 
   useEffect(() => {
-    if (!active) return undefined
+    if (!active && !pending) return undefined
 
-    const interval = setInterval(() => {
-      if (!active.target.isConnected) close()
-    }, targetConnectivityCheckIntervalMs)
+    const interval = active
+      ? setInterval(() => {
+          if (!active.target.isConnected) close()
+        }, targetConnectivityCheckIntervalMs)
+      : undefined
 
-    return () => clearInterval(interval)
-  }, [active, close])
+    window.addEventListener("resize", close, { passive: true })
+    if (closeOnWindowScroll) {
+      window.addEventListener("scroll", close, { capture: true, passive: true })
+    }
+
+    return () => {
+      if (interval !== undefined) clearInterval(interval)
+      window.removeEventListener("resize", close)
+      if (closeOnWindowScroll) window.removeEventListener("scroll", close, true)
+    }
+  }, [active, close, closeOnWindowScroll, pending])
 
   if (!active?.target.isConnected) return null
 

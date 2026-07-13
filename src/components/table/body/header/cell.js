@@ -11,6 +11,7 @@ import Info from "./info"
 import Filter from "./filter"
 import useSortableHeader from "./sortableHeader"
 import DragHandle from "./dragHandle"
+import { overflowTooltipAttribute } from "../../components/overflowTooltip"
 
 const Label = styled(Text)`
   width: 100%;
@@ -122,7 +123,7 @@ const BodyHeaderCell = ({
             <Label
               as={column.columnDef.labelAs}
               {...column.columnDef.labelProps}
-              data-table-header-tooltip={headerTooltipContent}
+              {...{ [overflowTooltipAttribute]: headerTooltipContent }}
               sorting={column.getIsSorted()}
               sortable={column.getCanSort()}
               strong

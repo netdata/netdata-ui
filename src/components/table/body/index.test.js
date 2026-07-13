@@ -6,12 +6,7 @@ import { useVirtualizer } from "@tanstack/react-virtual"
 
 jest.mock("@tanstack/react-virtual", () => ({
   defaultRangeExtractor: jest.fn(() => []),
-  useVirtualizer: jest.fn(() => ({
-    getTotalSize: () => 0,
-    getVirtualItems: () => [],
-    measureElement: jest.fn(),
-    measurementsCache: [],
-  })),
+  useVirtualizer: jest.fn(),
 }))
 
 jest.mock("./row", () => ({ row }) => (
@@ -19,7 +14,18 @@ jest.mock("./row", () => ({ row }) => (
 ))
 jest.mock("./header", () => () => <div data-testid="header-content" />)
 
+const createDefaultVirtualizer = () => ({
+  getTotalSize: () => 0,
+  getVirtualItems: () => [],
+  measureElement: jest.fn(),
+  measurementsCache: [],
+})
+
 describe("Table Body large-data mode", () => {
+  beforeEach(() => {
+    useVirtualizer.mockImplementation(createDefaultVirtualizer)
+  })
+
   it("keeps virtual measurement callbacks stable across equivalent renders", () => {
     const largeDataSource = {
       getRowCount: () => 50_000,

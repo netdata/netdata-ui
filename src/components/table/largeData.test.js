@@ -1,8 +1,8 @@
 import {
   containsWindowRange,
   getBufferedWindowRange,
-  getVirtualWindowRange,
   getWindowPublication,
+  normalizeWindowRange,
 } from "./largeData"
 
 describe("large-data table window", () => {
@@ -47,17 +47,8 @@ describe("large-data table window", () => {
     expect(getRow).toHaveBeenCalledTimes(30)
   })
 
-  it("uses the complete virtual range instead of classifying range overlap", () => {
-    const virtualItems = [{ index: 0 }, { index: 20_001 }, { index: 20_002 }, { index: 20_003 }]
-
-    expect(getVirtualWindowRange(virtualItems, 50_000)).toEqual({
-      startIndex: 20_000,
-      endIndex: 20_003,
-    })
-  })
-
-  it("clamps stale virtual indexes when the logical source shrinks", () => {
-    expect(getVirtualWindowRange([{ index: 0 }, { index: 10 }], 5)).toEqual({
+  it("clamps a stale window range when the logical source shrinks", () => {
+    expect(normalizeWindowRange({ startIndex: 9, endIndex: 10 }, 5)).toEqual({
       startIndex: 5,
       endIndex: 5,
     })

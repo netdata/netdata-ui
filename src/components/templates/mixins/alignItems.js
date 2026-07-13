@@ -1,4 +1,4 @@
-const alignItemValuesMap = {
+export const alignItemValuesMap = {
   start: "flex-start",
   center: "center",
   end: "flex-end",

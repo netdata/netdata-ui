@@ -1,3 +1,5 @@
+import { getColumnValue } from "./columnValue"
+
 const formatValue = value => {
   if (value === null || value === undefined) return "-"
   if (typeof value === "object") return JSON.stringify(value)
@@ -15,19 +17,13 @@ const escapeForCSV = value => {
 const convertToCSV = data =>
   data.reduce((h, row) => h + row.map(v => escapeForCSV(formatValue(v))).join(",") + "\n", "")
 
-const getPathValue = (value, path) =>
-  path.split(".").reduce((current, key) => current?.[key], value)
-
 const createExportRow = (original, index, headers, columnsById) => {
   const row = {
     index,
     original,
     getValue: columnId => {
       const column = columnsById.get(columnId)
-      const { accessorFn, accessorKey } = column?.columnDef || {}
-      if (accessorFn) return accessorFn(original, index)
-      if (accessorKey) return getPathValue(original, accessorKey)
-      return original?.[columnId]
+      return getColumnValue(original, index, { ...(column?.columnDef || {}), id: columnId })
     },
   }
 
