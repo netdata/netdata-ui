@@ -19,6 +19,8 @@ const HandleContainer = styled(Flex)`
   }
 `
 
+export const tableHeaderDragHandleSelector = "[data-table-header-drag-handle]"
+
 export const DragHandle = ({ dragHandleProps, visible }) => {
   if (!dragHandleProps || Object.keys(dragHandleProps).length === 0) {
     return null
@@ -32,6 +34,7 @@ export const DragHandle = ({ dragHandleProps, visible }) => {
       padding={[0, 1, 0, 0]}
       style={{ opacity: visible ? 1 : undefined }}
       className="drag-handle"
+      data-table-header-drag-handle
     >
       <Icon name="hamburger" color="textLite" />
     </HandleContainer>
