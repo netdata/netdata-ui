@@ -110,6 +110,12 @@ const appColors = {
   topBarBg: rawColors.neutral.grey190,
   elevationLevelOne: rawColors.neutral.grey185,
 
+  // Date picker
+  datePickerPausedBg: rawColors.neutral.grey170,
+  datePickerPlayBg: rawColors.green.green180,
+  dateTimePickerChipBg: rawColors.violet.violet190,
+  dateTimePickerChipAccent: rawColors.violet.violet130,
+
   // Input colors
   inputBg: rawColors.neutral.grey190,
   inputBorder: rawColors.neutral.grey185,
