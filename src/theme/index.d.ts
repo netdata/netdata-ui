@@ -38,6 +38,10 @@ export type AppColorsT = {
   placeholder: string
   key: string
   panel: string
+  datePickerPausedBg: string
+  datePickerPlayBg: string
+  dateTimePickerChipBg: string
+  dateTimePickerChipAccent: string
 }
 
 export type NumberOrStringT = number | string
