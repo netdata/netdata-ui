@@ -10,6 +10,7 @@ import {
 } from "@tanstack/table-core"
 import { ComponentType, Key, MutableRefObject, ReactNode, RefObject, UIEventHandler } from "react"
 import { Virtualizer } from "@tanstack/react-virtual"
+import { StylesConfig } from "react-select"
 import { supportedBulkActions } from "./header/actions/useActions"
 import { supportedRowActions } from "./useColumns/useRowActions"
 
@@ -82,6 +83,21 @@ export type OverflowTooltipProps = {
   options?: OverflowTooltipOptions
 }
 
+export type TableGroupBySelectStyles = StylesConfig & {
+  minWidth?: number | string
+  size?: string
+}
+
+export type TableMeta = {
+  bulkActionsStyles?: Record<string, unknown>
+  cellStyles?: Record<string, unknown>
+  groupByContainerStyles?: Record<string, unknown>
+  groupBySelectStyles?: TableGroupBySelectStyles
+  headStyles?: Record<string, unknown>
+  searchContainerStyles?: Record<string, unknown>
+  searchStyles?: Record<string, unknown>
+}
+
 export type TableProps<T = any, D = any> = {
   data: Array<D>
   dataColumns: Array<NetdataCoreColumns<T>>
@@ -137,6 +153,7 @@ export type TableProps<T = any, D = any> = {
    */
   testPrefixCallback?: (rowData: D) => string
   largeDataOptions?: LargeDataOptions<D>
+  meta?: TableMeta | ((...args: Array<any>) => TableMeta)
 }
 
 declare const Table: (props: TableProps) => JSX.Element

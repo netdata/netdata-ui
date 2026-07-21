@@ -43,7 +43,7 @@ const HeaderGroupBy = ({ grouping, groupByColumns, onGroupBy, tableMeta, dataGa,
         menuPortalTarget={document.body}
         onChange={({ value }) => onGroupBy(value)}
         options={Object.values(groupByOptions)}
-        styles={{ size: "tiny", minWidth: 120 }}
+        styles={{ size: "tiny", minWidth: 120, ...tableMeta.groupBySelectStyles }}
         value={groupByOptions[grouping] || groupByOptions.default}
       />
     </Flex>
