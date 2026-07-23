@@ -139,6 +139,7 @@ export type TableProps<T = any, D = any> = {
   columnVisibility?: VisibilityTableState
   enableColumnVisibility?: boolean
   enableColumnPinning?: boolean
+  enableGroupByControl?: boolean
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
