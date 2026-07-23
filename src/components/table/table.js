@@ -49,6 +49,7 @@ const tableDefaultProps = {
   enableColumnPinning: false,
   enableColumnReordering: false,
   enableColumnVisibility: false,
+  enableGroupByControl: true,
   enableResizing: false,
   globalFilterFn: includesString,
   onColumnVisibilityChange: noop,
@@ -117,6 +118,7 @@ const Table = memo(props => {
     grouping: defaultGrouping,
     onGroupByChange: groupingChangeCb,
     groupByColumns,
+    enableGroupByControl = tableDefaultProps.enableGroupByControl,
 
     onRowSelected,
 
@@ -308,6 +310,7 @@ const Table = memo(props => {
         hasSearch={!!onSearch}
         onSearch={onGlobalFilterChange}
         groupByColumns={groupByColumns}
+        enableGroupByControl={enableGroupByControl}
         onGroupBy={onGroupingChange}
         grouping={grouping}
         tableMeta={tableMeta}

@@ -25,6 +25,8 @@ export type AppColorsT = {
   errorLite: string
   errorBackground: string
   errorText: string
+  metricGap: string
+  mapSearchHighlight: string
   attention: string
   attentionSecondary: string
   separator: string
