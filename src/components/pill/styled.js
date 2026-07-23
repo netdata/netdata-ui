@@ -48,7 +48,6 @@ export const PillContainer = styled(Flex).attrs(
       color: borderColor || getPillColor(semi ? "hollow" : "border", flavour),
       size: "1px",
     },
-    ...(onClick && { cursor: "pointer" }),
     justifyContent,
     alignItems,
     position,
@@ -56,4 +55,8 @@ export const PillContainer = styled(Flex).attrs(
     background: getPillBackground({ background, flavour, hollow, semi }),
     ...rest,
   })
-)``
+)`
+  && {
+    cursor: ${({ onClick }) => (onClick ? "pointer" : "inherit")};
+  }
+`
