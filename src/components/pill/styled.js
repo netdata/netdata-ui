@@ -23,6 +23,11 @@ export const MasterCardContainer = styled(Flex).attrs(
   }
 `
 
+const cursorStyle = props => {
+  if (props.onClick) return `&& { cursor: pointer; }`
+  return ""
+}
+
 export const PillContainer = styled(Flex).attrs(
   ({
     round = true,
@@ -41,6 +46,7 @@ export const PillContainer = styled(Flex).attrs(
     semi,
     ...rest
   }) => ({
+    ...(onClick && { cursor: "pointer" }),
     padding: getPillPadding(padding, size, tiny),
     round: round === false ? 1 : round === true ? 7.5 : round,
     border: {
@@ -48,7 +54,6 @@ export const PillContainer = styled(Flex).attrs(
       color: borderColor || getPillColor(semi ? "hollow" : "border", flavour),
       size: "1px",
     },
-    ...(onClick && { cursor: "pointer" }),
     justifyContent,
     alignItems,
     position,
@@ -56,4 +61,6 @@ export const PillContainer = styled(Flex).attrs(
     background: getPillBackground({ background, flavour, hollow, semi }),
     ...rest,
   })
-)``
+)`
+  ${cursorStyle}
+`
