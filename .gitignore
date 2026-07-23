@@ -3,6 +3,7 @@
 .jest-test-results.json
 .jest-tmp
 .idea
+.claude/
 node_modules
 public
 lib

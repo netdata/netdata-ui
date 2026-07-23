@@ -23,6 +23,11 @@ export const MasterCardContainer = styled(Flex).attrs(
   }
 `
 
+const cursorStyle = props => {
+  if (props.onClick) return `&& { cursor: pointer; }`
+  return ""
+}
+
 export const PillContainer = styled(Flex).attrs(
   ({
     round = true,
@@ -41,6 +46,7 @@ export const PillContainer = styled(Flex).attrs(
     semi,
     ...rest
   }) => ({
+    ...(onClick && { cursor: "pointer" }),
     padding: getPillPadding(padding, size, tiny),
     round: round === false ? 1 : round === true ? 7.5 : round,
     border: {
@@ -56,7 +62,5 @@ export const PillContainer = styled(Flex).attrs(
     ...rest,
   })
 )`
-  && {
-    cursor: ${({ onClick }) => (onClick ? "pointer" : "inherit")};
-  }
+  ${cursorStyle}
 `
