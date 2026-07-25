@@ -52,6 +52,7 @@ const tableDefaultProps = {
   enableGroupByControl: true,
   enableResizing: false,
   globalFilterFn: includesString,
+  headerActionsBeforeChildren: false,
   onColumnVisibilityChange: noop,
   onColumnOrderChange: noop,
   onSortingChange: noop,
@@ -74,6 +75,7 @@ const Table = memo(props => {
   const {
     bulkActions,
     headerChildren,
+    headerActionsBeforeChildren = tableDefaultProps.headerActionsBeforeChildren,
 
     data,
     dataColumns,
@@ -294,6 +296,19 @@ const Table = memo(props => {
   if (tableRef) tableRef.current = table
 
   const { getHasNextPage, loading, warning } = virtualizeOptions
+  const headerActions = (
+    <HeaderActions
+      rowSelection={rowSelection}
+      bulkActions={bulkActions}
+      columnPinning={columnPinning}
+      dataGa={dataGa}
+      enableColumnVisibility={enableColumnVisibility}
+      enableColumnPinning={enableColumnPinning}
+      table={table}
+      testPrefix={testPrefix}
+      onRowSelected={onRowSelected}
+    />
+  )
 
   return (
     <Flex
@@ -320,18 +335,9 @@ const Table = memo(props => {
         bulkActions={bulkActions}
         enableCustomSearch={enableCustomSearch}
       >
+        {headerActionsBeforeChildren && headerActions}
         {headerChildren || null}
-        <HeaderActions
-          rowSelection={rowSelection}
-          bulkActions={bulkActions}
-          columnPinning={columnPinning}
-          dataGa={dataGa}
-          enableColumnVisibility={enableColumnVisibility}
-          enableColumnPinning={enableColumnPinning}
-          table={table}
-          testPrefix={testPrefix}
-          onRowSelected={onRowSelected}
-        />
+        {!headerActionsBeforeChildren && headerActions}
       </Header>
       <Body
         table={table}

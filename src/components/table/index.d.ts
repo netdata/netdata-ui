@@ -140,6 +140,8 @@ export type TableProps<T = any, D = any> = {
   enableColumnVisibility?: boolean
   enableColumnPinning?: boolean
   enableGroupByControl?: boolean
+  headerActionsBeforeChildren?: boolean
+  headerChildren?: ReactNode
   onGlobalSearchChange?: (value: any) => void
   onRowSelected?: (value: any) => void
   onClickRow?: (value: any) => void
