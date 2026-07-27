@@ -72,6 +72,8 @@ const appColors = {
   staleSemi: rawColors.green.green900,
   unseen: rawColors.yellow.yellow900,
   offline: rawColors.neutral.grey90,
+  metricGap: rawColors.neutral.metricGapDark,
+  mapSearchHighlight: rawColors.blue.blue150,
 
   //=========================================\\
 

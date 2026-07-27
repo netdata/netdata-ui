@@ -151,6 +151,8 @@ const rawColors = {
     gunmetal: "#282C34",
     darkGunmetal: "#21252B",
     eerieBlack: "#181c20",
+    metricGapDark: "#312E27",
+    metricGapLight: "#E0DCD5",
     // Grey shades
     grey05: "#040505",
     grey10: "#080A0A",

@@ -10,6 +10,7 @@ const Header = ({
   hasSearch,
   onSearch,
   groupByColumns,
+  enableGroupByControl = true,
   grouping,
   onGroupBy,
   tableMeta,
@@ -27,7 +28,13 @@ const Header = ({
     []
   )
 
-  if (!title && !groupByColumns && !hasSearch && !bulkActions && !enableColumnVisibility)
+  if (
+    !title &&
+    !(enableGroupByControl && groupByColumns) &&
+    !hasSearch &&
+    !bulkActions &&
+    !enableColumnVisibility
+  )
     return null
 
   return (
@@ -59,14 +66,16 @@ const Header = ({
           />
         </Flex>
       )}
-      <GroupBy
-        groupByColumns={groupByColumns}
-        tableMeta={tableMeta}
-        dataColumns={dataColumns}
-        grouping={grouping}
-        onGroupBy={onGroupBy}
-        dataGa={dataGa}
-      />
+      {enableGroupByControl && (
+        <GroupBy
+          groupByColumns={groupByColumns}
+          tableMeta={tableMeta}
+          dataColumns={dataColumns}
+          grouping={grouping}
+          onGroupBy={onGroupBy}
+          dataGa={dataGa}
+        />
+      )}
       {children}
     </Flex>
   )
