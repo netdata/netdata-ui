@@ -422,6 +422,7 @@ import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import share from "./assets/share.svg"
 import sign_in from "./assets/sign_in.svg"
+import slo from "./assets/slo.svg"
 import socialChat from "./assets/social_chat.svg"
 import sort_ascending from "./assets/sort_ascending.svg"
 import sort_descending from "./assets/sort_descending.svg"
@@ -455,6 +456,7 @@ import unreachableNode from "./assets/unreachableNode.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import upload from "./assets/upload.svg"
+import uptime from "./assets/uptime.svg"
 import user from "./assets/user.svg"
 import userConfig from "./assets/user_config.svg"
 import userPress from "./assets/user_press.svg"
@@ -906,6 +908,7 @@ export const iconsList = {
   share,
   socialChat,
   sign_in,
+  slo,
   sort_ascending,
   sort_descending,
   sort_indicator,
@@ -938,6 +941,7 @@ export const iconsList = {
   update_pending,
   update,
   upload,
+  uptime,
   user,
   userConfig,
   userPress,
