@@ -134,6 +134,8 @@ import heart from "./assets/heart.svg"
 import heart_broken from "./assets/heart_broken.svg"
 import heart_hollow from "./assets/heart_hollow.svg"
 import help from "./assets/help.svg"
+import hexagon_hollow from "./assets/hexagon_hollow.svg"
+import hexagon_more from "./assets/hexagon_more.svg"
 import hide from "./assets/hide.svg"
 import highlightArea from "./assets/highlight_area.svg"
 import holder from "./assets/holder.svg"
@@ -215,6 +217,7 @@ import node_notification_l from "./assets/node_notification_l.svg"
 import node_parent from "./assets/node_parent.svg"
 import node_selected_l from "./assets/node_selected_l.svg"
 import nodes from "./assets/nodes.svg"
+import nodes_hexagon from "./assets/nodes_hexagon.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import nodes_update from "./assets/nodes_update.svg"
 import none_selected from "./assets/none_selected.svg"
@@ -419,6 +422,7 @@ import settings from "./assets/settings.svg"
 import settings_h from "./assets/settings_h.svg"
 import share from "./assets/share.svg"
 import sign_in from "./assets/sign_in.svg"
+import slo from "./assets/slo.svg"
 import socialChat from "./assets/social_chat.svg"
 import sort_ascending from "./assets/sort_ascending.svg"
 import sort_descending from "./assets/sort_descending.svg"
@@ -452,6 +456,7 @@ import unreachableNode from "./assets/unreachableNode.svg"
 import update from "./assets/update.svg"
 import update_pending from "./assets/update_pending.svg"
 import upload from "./assets/upload.svg"
+import uptime from "./assets/uptime.svg"
 import user from "./assets/user.svg"
 import userConfig from "./assets/user_config.svg"
 import userPress from "./assets/user_press.svg"
@@ -614,6 +619,8 @@ export const iconsList = {
   heart_hollow,
   heart,
   help,
+  hexagon_hollow,
+  hexagon_more,
   hide,
   highlightArea,
   holder,
@@ -694,6 +701,7 @@ export const iconsList = {
   node_parent,
   node_selected_l,
   node,
+  nodes_hexagon,
   nodes_hollow,
   nodes_update,
   nodes,
@@ -900,6 +908,7 @@ export const iconsList = {
   share,
   socialChat,
   sign_in,
+  slo,
   sort_ascending,
   sort_descending,
   sort_indicator,
@@ -932,6 +941,7 @@ export const iconsList = {
   update_pending,
   update,
   upload,
+  uptime,
   user,
   userConfig,
   userPress,
