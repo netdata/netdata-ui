@@ -134,6 +134,7 @@ import heart from "./assets/heart.svg"
 import heart_broken from "./assets/heart_broken.svg"
 import heart_hollow from "./assets/heart_hollow.svg"
 import help from "./assets/help.svg"
+import hexagon_more from "./assets/hexagon_more.svg"
 import hide from "./assets/hide.svg"
 import highlightArea from "./assets/highlight_area.svg"
 import holder from "./assets/holder.svg"
@@ -615,6 +616,7 @@ export const iconsList = {
   heart_hollow,
   heart,
   help,
+  hexagon_more,
   hide,
   highlightArea,
   holder,
