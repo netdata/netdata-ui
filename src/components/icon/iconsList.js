@@ -215,6 +215,7 @@ import node_notification_l from "./assets/node_notification_l.svg"
 import node_parent from "./assets/node_parent.svg"
 import node_selected_l from "./assets/node_selected_l.svg"
 import nodes from "./assets/nodes.svg"
+import nodes_hexagon from "./assets/nodes_hexagon.svg"
 import nodes_hollow from "./assets/nodes_hollow.svg"
 import nodes_update from "./assets/nodes_update.svg"
 import none_selected from "./assets/none_selected.svg"
@@ -694,6 +695,7 @@ export const iconsList = {
   node_parent,
   node_selected_l,
   node,
+  nodes_hexagon,
   nodes_hollow,
   nodes_update,
   nodes,
