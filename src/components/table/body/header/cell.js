@@ -152,7 +152,9 @@ const BodyHeaderCell = ({
           overflow="hidden"
           width="100%"
         >
-          <DragHandle dragHandleProps={dragHandleProps} visible={isDragging} />
+          {!hasSubheaders && !header.isPlaceholder && (
+            <DragHandle dragHandleProps={dragHandleProps} visible={isDragging} />
+          )}
           {column.isPlaceholder ? null : (
             <Label
               as={column.columnDef.labelAs}
