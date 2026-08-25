@@ -243,6 +243,7 @@ import osAVTECH from "./assets/os/avtech.svg"
 import osBarracuda from "./assets/os/barracuda.svg"
 import osBrocade from "./assets/os/brocade.svg"
 import osBrother from "./assets/os/brother.svg"
+import osCachyOS from "./assets/os/cachyos.svg"
 import osCelarOS from "./assets/os/celarOS.svg"
 import osCentos from "./assets/os/centos.svg"
 import osCentosColored from "./assets/os/centos_colored.svg"
@@ -728,6 +729,7 @@ export const iconsList = {
   osBarracuda,
   osBrocade,
   osBrother,
+  osCachyOS,
   osCelarOS,
   osCentos,
   osCentosColored,
