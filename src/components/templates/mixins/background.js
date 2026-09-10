@@ -7,5 +7,9 @@ export default ({ theme, background, backgroundOpacity }) => {
     ? getRgbColor(background, backgroundOpacity)({ theme })
     : getColor(background)({ theme })
 
-  return value && `background-color: ${value};`
+  if (!value) return value
+
+  return typeof value === "string" && value.startsWith("linear-gradient")
+    ? `background: ${value};`
+    : `background-color: ${value};`
 }

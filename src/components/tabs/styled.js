@@ -35,17 +35,17 @@ export const StyledTabs = styled(Flex).attrs(props => ({
 `
 
 const colorsByFlavour = {
-  success: { background: "menuItemSelected", borderColor: "border", color: "menuItem" },
-  warning: { background: "warningSemi", borderColor: "border", color: "menuItem" },
-  error: { background: "errorSemi", borderColor: "border", color: "menuItem" },
-  default: { background: "modalBackground", borderColor: "border", color: "menuItem" },
+  success: { background: "tabActiveBackground", borderColor: "border", color: "tabItem" },
+  warning: { background: "warningSemi", borderColor: "border", color: "tabItem" },
+  error: { background: "errorSemi", borderColor: "border", color: "tabItem" },
+  default: { background: "modalBackground", borderColor: "border", color: "tabItem" },
 }
 
 const activeColorsByFlavour = {
   success: { ...colorsByFlavour.success, borderColor: "primary", color: "primary" },
   warning: { ...colorsByFlavour.warning, borderColor: "warning", color: "warning" },
   error: { ...colorsByFlavour.error, borderColor: "error", color: "error" },
-  default: { background: "menuItemSelected", borderColor: "accent", color: "primary" },
+  default: { background: "tabActiveBackground", borderColor: "accent", color: "primary" },
 }
 
 const hoverColorsByFlavour = {
@@ -100,9 +100,8 @@ export const StyledTab = styled(Flex).attrs(props => ({
 
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
-  margin-bottom: -1px;
-
   ${colors}
+
 `
 
 export const StyledTabMenu = styled(Flex)`

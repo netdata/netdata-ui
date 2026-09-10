@@ -240,7 +240,7 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => ({
     color: getOptionColor(theme, state),
     backgroundColor: getOptionBackground(theme, state),
     ":hover": {
-      backgroundColor: theme.colors.secondaryHighlight,
+      backgroundColor: theme.colors.menuItemHover,
       color: theme.colors.text,
     },
     fontSize,

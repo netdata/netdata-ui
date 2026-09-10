@@ -123,7 +123,7 @@ const BodyHeaderCell = ({
       style={enableColumnReordering ? sortableStyle : undefined}
       flex={getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)}
       width={`${header.subHeaders.length ? header.subHeaders.reduce((s, h) => s + h.column.getSize(), 0) : column.getSize()}px`}
-      height={{ min: "45px" }}
+      height="40px"
       position="relative"
       {...(column.getCanSort() &&
         coloredSortedColumn &&
