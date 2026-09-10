@@ -18,8 +18,10 @@ const appColors = {
   modalTabsBackground: rawColors.neutral.grey20,
   modalBackground: rawColors.neutral.grey30,
   modalInfoBackground: rawColors.neutral.grey50,
-  menuItemSelected: rawColors.green.green30,
-  menuItemHover: rawColors.green.green10,
+  menuItemSelected: rawColors.neutral.grey30,
+  menuItemHover: rawColors.neutral.grey40,
+  tabActiveBackground: rawColors.green.green30,
+  tabItem: rawColors.neutral.grey155,
   scrollBarTrack: rawColors.neutral.grey25,
   scrollBarThumb: rawColors.neutral.grey50,
   scrollBarThumbHover: rawColors.neutral.grey100,
@@ -100,6 +102,7 @@ const appColors = {
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey25,
+  panelBgGrad: `linear-gradient(to right, ${rawColors.neutral.grey25} 0%, ${rawColors.neutral.grey15} 50%, ${rawColors.neutral.grey25} 100%)`,
   mainChartBg: rawColors.neutral.grey25,
   mainChartHeaderBg: rawColors.neutral.grey35,
   mainChartBorder: rawColors.neutral.grey25,
@@ -119,8 +122,8 @@ const appColors = {
   dateTimePickerChipBg: rawColors.violet.violet20,
   dateTimePickerChipAccent: rawColors.violet.violet120,
   // Input colors
-  inputBg: rawColors.neutral.grey55,
-  inputBorder: rawColors.neutral.grey65,
+  inputBg: rawColors.neutral.grey30,
+  inputBorder: rawColors.neutral.grey45,
   inputBorderHover: rawColors.neutral.grey85,
   inputBorderFocus: rawColors.neutral.grey85,
   // Badges
@@ -140,12 +143,11 @@ const appColors = {
   idleClear: rawColors.green.green20,
 
   // Table
-  dropdownTable: rawColors.neutral.eerieBlack,
-  tableRowBgHover: rawColors.neutral.grey35,
+  tableRowBgHover: rawColors.neutral.grey25,
   tableRowBg: rawColors.neutral.grey25,
-  tableRowBg2: rawColors.neutral.grey20,
-  tableRowBg2Hover: rawColors.neutral.grey35,
-  columnHighlight: rawColors.green.green30,
+  tableRowBg2: rawColors.neutral.grey25,
+  tableRowBg2Hover: rawColors.neutral.grey25,
+  columnHighlight: rawColors.neutral.grey35,
 
   // Progress Bare
   progressBg: rawColors.neutral.bluebayoux,

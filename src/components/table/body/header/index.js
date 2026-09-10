@@ -38,7 +38,7 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, enableColumnReorderi
       id={id}
       data-testid={`netdata-table-headRow${testPrefix}`}
       flex
-      background="mainBackground"
+      background="panelBg"
       rowReverse={rowReverse}
     >
       {headers.map((header, index) => (

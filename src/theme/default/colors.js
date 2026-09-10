@@ -4,22 +4,24 @@ const appColors = {
   primary: rawColors.green.green100,
   accent: rawColors.green.chateau,
   main: rawColors.neutral.limedSpruce,
-  border: rawColors.neutral.grey185,
-  borderSecondary: rawColors.neutral.grey180,
+  border: rawColors.neutral.grey180,
+  borderSecondary: rawColors.neutral.grey175,
   disabled: rawColors.neutral.grey160,
   disabledBackground: rawColors.neutral.grey160,
   dropdown: rawColors.neutral.white,
   dropdownShadow: rawColors.shadows.dropdownLight,
   elementBackground: rawColors.neutral.blackhaze,
   elementBackgroundHover: rawColors.neutral.white,
-  mainBackground: rawColors.neutral.grey195,
+  mainBackground: rawColors.neutral.white,
   mainBackgroundDisabled: rawColors.neutral.blackhaze,
   modalHeaderBackground: rawColors.neutral.grey185,
   modalTabsBackground: rawColors.neutral.grey190,
   modalBackground: rawColors.neutral.grey195,
   modalInfoBackground: rawColors.neutral.blackhaze,
-  menuItemSelected: rawColors.green.green196,
-  menuItemHover: rawColors.green.green190,
+  menuItemSelected: rawColors.neutral.grey180,
+  menuItemHover: rawColors.neutral.grey185,
+  tabActiveBackground: rawColors.transparent.full,
+  tabItem: rawColors.neutral.grey100,
   scrollBarTrack: rawColors.neutral.grey190,
   scrollBarThumb: rawColors.neutral.grey170,
   scrollBarThumbHover: rawColors.neutral.grey150,
@@ -49,7 +51,7 @@ const appColors = {
   successBackground: rawColors.green.green50,
   successText: rawColors.green.green100,
 
-  warning: rawColors.yellow.yellow80,
+  warning: rawColors.yellow.yellow70,
   warningLite: rawColors.yellow.yellow190,
   warningSemi: rawColors.yellow.yellow190,
   warningBackground: rawColors.yellow.yellow160,
@@ -97,7 +99,8 @@ const appColors = {
   placeholder: rawColors.neutral.grey140,
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
-  panelBg: rawColors.neutral.grey190,
+  panelBg: rawColors.neutral.grey195,
+  panelBgGrad: `linear-gradient(to right, ${rawColors.neutral.grey195} 0%, ${rawColors.neutral.white} 50%, ${rawColors.neutral.grey195} 100%)`,
   mainChartBg: rawColors.neutral.blackhaze,
   mainChartHeaderBg: rawColors.neutral.grey190,
   mainChartBorder: rawColors.neutral.grey185,
@@ -109,7 +112,7 @@ const appColors = {
   spaceHovered: rawColors.neutral.grey180,
   hoverHighlight: rawColors.green.green70,
   menuItem: rawColors.neutral.grey120,
-  topBarBg: rawColors.neutral.grey190,
+  topBarBg: rawColors.neutral.grey195,
   elevationLevelOne: rawColors.neutral.grey185,
 
   // Date picker
@@ -119,8 +122,8 @@ const appColors = {
   dateTimePickerChipAccent: rawColors.violet.violet130,
 
   // Input colors
-  inputBg: rawColors.neutral.grey190,
-  inputBorder: rawColors.neutral.grey185,
+  inputBg: rawColors.neutral.white,
+  inputBorder: rawColors.neutral.grey180,
   inputBorderHover: rawColors.neutral.grey165,
   inputBorderFocus: rawColors.neutral.grey165,
 
@@ -142,11 +145,11 @@ const appColors = {
 
   // Table
   dropdownTable: rawColors.neutral.white,
-  tableRowBg: rawColors.neutral.grey190,
+  tableRowBg: rawColors.neutral.grey195,
   tableRowBgHover: rawColors.neutral.grey180,
   tableRowBg2: rawColors.neutral.grey195,
-  tableRowBg2Hover: rawColors.neutral.grey185,
-  columnHighlight: rawColors.green.green190,
+  tableRowBg2Hover: rawColors.neutral.grey180,
+  columnHighlight: rawColors.neutral.grey190,
 
   // IconButton
   iconColor: rawColors.neutral.limedSpruce,
