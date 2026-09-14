@@ -53,7 +53,7 @@ const appColors = {
   successBackground: rawColors.green.green50,
   successText: rawColors.green.green100,
 
-  warning: rawColors.yellow.yellow80,
+  warning: rawColors.yellow.yellow60,
   warningLite: rawColors.yellow.yellow190,
   warningSemi: rawColors.yellow.yellow20,
   warningBackground: rawColors.yellow.yellow60,
