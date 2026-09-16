@@ -1,3 +1,4 @@
+import add_more_charts from "./assets/add_more_charts.svg"
 import add_node from "./assets/add_node.svg"
 import add_user from "./assets/add_user.svg"
 import aggregation_avg from "./assets/aggregation_avg.svg"
@@ -95,6 +96,7 @@ import cpu from "./assets/cpu.svg"
 import cross_s from "./assets/cross_s.svg"
 import dashboard from "./assets/dashboard.svg"
 import dashboard_add from "./assets/dashboard_add.svg"
+import dashboard_import from "./assets/dashboard_import.svg"
 import dashboards from "./assets/dashboards.svg"
 import data_retention from "./assets/data_retention.svg"
 import database from "./assets/database.svg"
@@ -203,6 +205,7 @@ import monitoring from "./assets/monitoring.svg"
 import more from "./assets/more.svg"
 import nav_arrow_goto from "./assets/nav_arrow_goto.svg"
 import nav_dots from "./assets/nav_dots.svg"
+import nav_reset from "./assets/nav_reset.svg"
 import navLeft from "./assets/nav_left.svg"
 import navRight from "./assets/nav_right.svg"
 import netdata from "./assets/netdata.svg"
@@ -484,6 +487,7 @@ import D from "./assets/D.svg"
 import L from "./assets/L.svg"
 
 export const iconsList = {
+  add_more_charts,
   add_node,
   add_user,
   aggregation_avg,
@@ -581,6 +585,7 @@ export const iconsList = {
   cross_s,
   dashboard_add,
   dashboard,
+  dashboard_import,
   dashboards,
   data_retention,
   database,
@@ -689,6 +694,7 @@ export const iconsList = {
   more,
   nav_arrow_goto,
   nav_dots,
+  nav_reset,
   navLeft,
   navRight,
   netdata,

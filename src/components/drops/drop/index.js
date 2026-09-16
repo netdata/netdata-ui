@@ -8,6 +8,7 @@ import useForwardRef from "@/hooks/useForwardRef"
 import useDimensionChange from "./useDimensionChange"
 import useMakeUpdatePosition from "./useMakeUpdatePosition"
 import Container from "./container"
+import { withDropdownDefaults } from "../dropdownStyles"
 import backdropBlur from "@/components/templates/layer/mixins/backdropBlur"
 import styled from "styled-components"
 
@@ -41,10 +42,7 @@ const Drop = ({
   backdropProps = {},
   ...props
 }) => {
-  const rest =
-    props.background === "dropdown" && props.border === undefined
-      ? { border: { side: "all", size: "1px", type: "solid", color: "border" }, ...props }
-      : props
+  const rest = withDropdownDefaults(props)
 
   const [ref, setRef] = useForwardRef(parentRef)
 

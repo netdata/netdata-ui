@@ -89,7 +89,7 @@ const appColors = {
   tooltipText: rawColors.neutral.grey150,
   tooltipBg: rawColors.neutral.grey10,
   bright: rawColors.neutral.white,
-  text: rawColors.neutral.grey155,
+  text: rawColors.neutral.grey150,
   textLite: rawColors.neutral.grey120,
   textNoFocus: rawColors.neutral.grey105,
   textFocus: rawColors.neutral.grey160,
@@ -122,8 +122,8 @@ const appColors = {
   dateTimePickerChipBg: rawColors.violet.violet20,
   dateTimePickerChipAccent: rawColors.violet.violet120,
   // Input colors
-  inputBg: rawColors.neutral.grey30,
-  inputBorder: rawColors.neutral.grey45,
+  inputBg: rawColors.neutral.grey55,
+  inputBorder: rawColors.neutral.grey65,
   inputBorderHover: rawColors.neutral.grey85,
   inputBorderFocus: rawColors.neutral.grey85,
   // Badges
