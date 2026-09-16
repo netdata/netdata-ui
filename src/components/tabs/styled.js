@@ -101,7 +101,6 @@ export const StyledTab = styled(Flex).attrs(props => ({
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
   ${colors}
-
 `
 
 export const StyledTabMenu = styled(Flex)`
