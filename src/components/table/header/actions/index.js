@@ -36,6 +36,7 @@ const useSelectedRowsObserver = (table, { onRowSelected = noop, rowSelection }) 
 const HeaderActions = ({
   bulkActions,
   columnPinning,
+  columnVisibilityFlavour,
   dataGa,
   enableColumnVisibility,
   enableColumnPinning,
@@ -65,6 +66,7 @@ const HeaderActions = ({
         />
       ))}
       <ColumnVisibility
+        buttonFlavour={columnVisibilityFlavour}
         isVisible={enableColumnVisibility}
         table={table}
         testPrefix={testPrefix}

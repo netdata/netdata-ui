@@ -78,6 +78,7 @@ import cluster_spaces from "./assets/cluster_spaces.svg"
 import code from "./assets/code.svg"
 import collapse from "./assets/collapse.svg"
 import collect from "./assets/collect.svg"
+import columns from "./assets/columns.svg"
 import community from "./assets/community.svg"
 import connection_to_cloud from "./assets/connection_to_cloud.svg"
 import connectivityStatusLive from "./assets/connectivity_status_live.svg"
@@ -563,6 +564,7 @@ export const iconsList = {
   code,
   collapse,
   collect,
+  columns,
   community,
   connection_to_cloud,
   connectivityStatusLive,

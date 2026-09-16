@@ -1,4 +1,5 @@
 import React from "react"
+import { fireEvent } from "@testing-library/react"
 import { renderWithProviders } from "testUtilities"
 import Table from "./table"
 
@@ -39,5 +40,38 @@ describe("Table header action order", () => {
     const { getByTestId } = renderTable({ headerActionsBeforeChildren: true })
 
     expectBefore(getByTestId("bulk-actions"), getByTestId("trailing-control"))
+  })
+})
+
+describe("Table column visibility trigger", () => {
+  it("renders a subtle labelled columns trigger that opens the columns menu", () => {
+    const { getByRole, getByTestId, getByText, queryByText } = renderTable()
+
+    const trigger = getByRole("button", { name: "Columns" })
+    expect(trigger.querySelector('[title="columns"]')).not.toBeNull()
+    expect(trigger.parentElement).not.toBe(getByTestId("bulk-actions"))
+    expect(queryByText("Edit columns")).not.toBeInTheDocument()
+
+    fireEvent.click(trigger)
+
+    expect(getByText("Edit columns")).toBeInTheDocument()
+  })
+
+  it("renders an outlined columns button when opted in", () => {
+    const { getByRole, getByTestId, getByText } = renderTable({
+      columnVisibilityFlavour: "hollow",
+    })
+
+    const trigger = getByRole("button", { name: "Columns" })
+    expect(trigger.querySelector('[title="columns"]')).not.toBeNull()
+    expect(trigger.parentElement).toBe(getByTestId("bulk-actions"))
+    expect(trigger).toHaveAttribute(
+      "data-testid",
+      "netdata-table-action-columnVisibility-bulk-bulk"
+    )
+
+    fireEvent.click(trigger)
+
+    expect(getByText("Edit columns")).toBeInTheDocument()
   })
 })

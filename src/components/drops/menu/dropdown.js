@@ -79,6 +79,7 @@ const Dropdown = ({
       as="ul"
       role="listbox"
       background="dropdown"
+      border={{ side: "all", size: "1px", type: "solid", color: "border" }}
       hideShadow={hideShadow}
       padding={[0]}
       margin={[1, 0]}

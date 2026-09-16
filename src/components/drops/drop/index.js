@@ -39,8 +39,13 @@ const Drop = ({
   dataDrop = "drop-content",
   ref: parentRef,
   backdropProps = {},
-  ...rest
+  ...props
 }) => {
+  const rest =
+    props.background === "dropdown" && props.border === undefined
+      ? { border: { side: "all", size: "1px", type: "solid", color: "border" }, ...props }
+      : props
+
   const [ref, setRef] = useForwardRef(parentRef)
 
   const updatePosition = useMakeUpdatePosition(

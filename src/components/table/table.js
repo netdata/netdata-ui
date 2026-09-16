@@ -92,6 +92,7 @@ const Table = memo(props => {
 
     enableColumnVisibility = tableDefaultProps.enableColumnVisibility,
     columnVisibility: defaultColumnVisibility,
+    columnVisibilityFlavour,
     onColumnVisibilityChange: visibilityChangeCb = tableDefaultProps.onColumnVisibilityChange,
 
     columnSizing: defaultColumnSizing,
@@ -303,6 +304,7 @@ const Table = memo(props => {
       rowSelection={rowSelection}
       bulkActions={bulkActions}
       columnPinning={columnPinning}
+      columnVisibilityFlavour={columnVisibilityFlavour}
       dataGa={dataGa}
       enableColumnVisibility={enableColumnVisibility}
       enableColumnPinning={enableColumnPinning}

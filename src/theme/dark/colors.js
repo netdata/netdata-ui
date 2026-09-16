@@ -8,7 +8,7 @@ const appColors = {
   borderSecondary: rawColors.neutral.grey35,
   disabled: rawColors.neutral.grey100,
   disabledBackground: rawColors.neutral.grey100,
-  dropdown: rawColors.neutral.grey40,
+  dropdown: rawColors.neutral.grey30,
   dropdownShadow: rawColors.shadows.dropdownDark,
   elementBackground: rawColors.neutral.grey35,
   elementBackgroundHover: rawColors.neutral.tuna,

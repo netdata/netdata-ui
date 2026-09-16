@@ -138,6 +138,7 @@ export type TableProps<T = any, D = any> = {
   globalFilterFn?: FilterFnOption<T>
   columnVisibility?: VisibilityTableState
   enableColumnVisibility?: boolean
+  columnVisibilityFlavour?: "borderless" | "hollow"
   enableColumnPinning?: boolean
   enableGroupByControl?: boolean
   bordered?: boolean

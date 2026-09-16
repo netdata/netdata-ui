@@ -138,7 +138,7 @@ const rerenderSelector = state => ({
 
 const StyledRow = styled(Flex)`
   &:hover .row-content {
-    background: ${getColor("mainBackgroundHover")};
+    background: ${getColor("tableRowBgHover")};
   }
 `
 
@@ -148,9 +148,13 @@ const DirectStyledRow = styled(Flex).attrs({
   background: "mainBackground",
   border: { side: "bottom" },
 })`
+  .row-content {
+    background-color: ${getColor("mainBackground")};
+  }
+
   &:hover,
   &:hover .row-content {
-    background: ${getColor("mainBackgroundHover")};
+    background-color: ${getColor("tableRowBgHover")};
   }
 `
 
@@ -216,7 +220,6 @@ const TableRow = ({
               borderRight: `1px solid ${getColor("border")({ theme })}`,
               zIndex: zIndex || 10,
               flex: `0 0 ${table.getLeftTotalSize()}px`,
-              backgroundColor: getColor("mainBackground")({ theme }),
             }}
           >
             {row.getLeftVisibleCells().map((cell, index) => (
@@ -239,7 +242,6 @@ const TableRow = ({
             display: "flex",
             width: `${table.getCenterTotalSize()}px`,
             flex: "1 0 auto",
-            backgroundColor: getColor("mainBackground")({ theme }),
           }}
         >
           {row.getCenterVisibleCells().map((cell, index) => (
@@ -266,7 +268,6 @@ const TableRow = ({
               zIndex: zIndex || 10,
               flex: `0 0 ${table.getRightTotalSize()}px`,
               flexDirection: "row-reverse",
-              backgroundColor: getColor("mainBackground")({ theme }),
             }}
           >
             {row.getRightVisibleCells().map((cell, index) => (
@@ -296,7 +297,7 @@ const TableRow = ({
             flex={false}
             background="mainBackground"
             _hover={{
-              background: "mainBackgroundHover",
+              background: "tableRowBgHover",
             }}
             className="row-content"
           >
@@ -318,7 +319,7 @@ const TableRow = ({
           flex="grow"
           background="mainBackground"
           _hover={{
-            background: "mainBackgroundHover",
+            background: "tableRowBgHover",
           }}
           className="row-content"
         >
@@ -346,7 +347,7 @@ const TableRow = ({
             flex={false}
             background="mainBackground"
             _hover={{
-              background: "mainBackgroundHover",
+              background: "tableRowBgHover",
             }}
             rowReverse
             className="row-content"
@@ -383,7 +384,7 @@ const TableRow = ({
         flex: true,
         column: true,
         background: "mainBackground",
-        _hover: { background: "mainBackgroundHover" },
+        _hover: { background: "tableRowBgHover" },
         border: { side: "bottom" },
       })}
     >

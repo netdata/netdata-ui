@@ -16,7 +16,7 @@ export const supportedBulkActions = {
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
   addEntry: { icon: "plus", alwaysEnabled: true, flavour: "default", iconColor: "white" },
   remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
-  columnVisibility: { icon: "gear", alwaysEnabled: true },
+  columnVisibility: { icon: "columns", alwaysEnabled: true, tooltipText: "Columns" },
 }
 
 export default actions =>
