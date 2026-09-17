@@ -100,7 +100,7 @@ const ColumnsMenu = ({
           }}
           padding={[3, 3, 1]}
         >
-          <Text color="textLite">Edit columns</Text>
+          <Text color="textLite">Show columns</Text>
         </Flex>
 
         <Flex padding={[2, 3]}>

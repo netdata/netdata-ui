@@ -50,11 +50,11 @@ describe("Table column visibility trigger", () => {
     const trigger = getByRole("button", { name: "Columns" })
     expect(trigger.querySelector('[title="columns"]')).not.toBeNull()
     expect(trigger.parentElement).not.toBe(getByTestId("bulk-actions"))
-    expect(queryByText("Edit columns")).not.toBeInTheDocument()
+    expect(queryByText("Show columns")).not.toBeInTheDocument()
 
     fireEvent.click(trigger)
 
-    expect(getByText("Edit columns")).toBeInTheDocument()
+    expect(getByText("Show columns")).toBeInTheDocument()
   })
 
   it("renders an outlined columns button when opted in", () => {
@@ -72,6 +72,6 @@ describe("Table column visibility trigger", () => {
 
     fireEvent.click(trigger)
 
-    expect(getByText("Edit columns")).toBeInTheDocument()
+    expect(getByText("Show columns")).toBeInTheDocument()
   })
 })
