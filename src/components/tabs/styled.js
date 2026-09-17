@@ -14,7 +14,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   flexWrap: false,
   justifyContent: "start",
   alignItems: "center",
-  padding: [0, 4],
+  padding: props.column ? [0, 0.5] : [0, 4],
   flex: false,
   border: !props.noDefaultBorder && {
     side: "bottom",
@@ -61,7 +61,7 @@ const colors = ({ theme, active, green, flavour }) => {
 
   const styles = [
     `border-bottom-color: ${getColor(borderColor)({ theme })};`,
-    `background: ${getColor(background)({ theme })};`,
+    `background: ${getColor(theme.name === "Dark" ? background : ["transparent", "full"])({ theme })};`,
     `& > span { color: ${getColor(color)({ theme })}; }`,
   ]
 
