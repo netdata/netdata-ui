@@ -123,6 +123,20 @@ describe("Button states", () => {
     expect(button).toMatchSnapshot()
   })
 
+  it("renders active styles when active", () => {
+    const { container } = renderWithProviders(<Button label="Test" active />)
+    expect(container.firstChild).toHaveStyleRule("box-shadow", "inset 0 4px 4px rgba(0,0,0,0.25)", {
+      modifier: "&&",
+    })
+  })
+
+  it("renders active styles while its dropdown is expanded", () => {
+    const { container } = renderWithProviders(<Button label="Test" aria-expanded />)
+    expect(container.firstChild).toHaveStyleRule("box-shadow", "inset 0 4px 4px rgba(0,0,0,0.25)", {
+      modifier: '&&[aria-expanded="true"]',
+    })
+  })
+
   it("renders loading icon", () => {
     const { container, getByText, queryByTitle } = renderWithProviders(
       <Button label="Test prop text" icon="plus" isLoading />

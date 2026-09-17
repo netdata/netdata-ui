@@ -48,6 +48,8 @@ const getTextColor = props =>
   props.neutral
     ? getColor(props.flavour === HOLLOW ? "text" : "mainBackground")(props)
     : getColor(props.flavour === HOLLOW ? "secondaryColor" : "mainBackground")(props)
+const getBorderHoverColor = props =>
+  props.neutral ? getColor("inputBorderHover")(props) : getColor("primary")(props)
 const getHoverColor = props =>
   props.neutral ? getColor("generic")(props) : getColor("accent")(props)
 
@@ -100,8 +102,8 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color 
       bgHover: getAccentColor,
       bgActive: getAccentColor,
       border: getSpecialColor || getBorderColor,
-      borderHover: getSpecialColorHover || getPrimaryColor,
-      borderActive: getSpecialColorActive || getPrimaryColor,
+      borderHover: getSpecialColorHover || getBorderHoverColor,
+      borderActive: getSpecialColorActive || getBorderHoverColor,
       iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
     },
     [BORDER_LESS]: {
@@ -190,14 +192,11 @@ export const StyledButton = styled.button.attrs(
       }
     }
 
-    &:active {
+    &:active,
+    &[aria-expanded="true"] {
       ${activeStyles}
     }
-    ${props =>
-      props.active &&
-      `
-      ${activeStyles}
-    `}
+    ${props => props.active && activeStyles}
 
     &:focus {
       outline: none;

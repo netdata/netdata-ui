@@ -44,7 +44,8 @@ exports[`Borderless Button renders 1`] = `
   fill: #00CD51;
 }
 
-.c0.c0:active {
+.c0.c0:active,
+.c0.c0[aria-expanded="true"] {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
   color: #00CD51;
@@ -255,7 +256,8 @@ exports[`Button states renders only icon 1`] = `
   fill: #00AB44;
 }
 
-.c0.c0:active {
+.c0.c0:active,
+.c0.c0[aria-expanded="true"] {
   border-color: #00AB44;
   background-color: #DDFFEB;
   color: #00AB44;
@@ -376,7 +378,8 @@ exports[`Button states renders smaller only icon 1`] = `
   fill: #00AB44;
 }
 
-.c0.c0:active {
+.c0.c0:active,
+.c0.c0[aria-expanded="true"] {
   border-color: #00AB44;
   background-color: #DDFFEB;
   color: #00AB44;
@@ -581,7 +584,8 @@ exports[`Hollow Button renders 1`] = `
   fill: #00AB44;
 }
 
-.c0.c0:active {
+.c0.c0:active,
+.c0.c0[aria-expanded="true"] {
   border-color: #00AB44;
   background-color: #DDFFEB;
   color: #00AB44;

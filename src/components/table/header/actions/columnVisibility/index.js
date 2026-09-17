@@ -109,6 +109,7 @@ const ColumnVisibilityAction = ({
             <Button
               ref={actionRef}
               aria-label={tooltipText}
+              aria-expanded={!!isOpen}
               data-ga={dataGa}
               data-testid={`netdata-table-action-${id}-bulk${testPrefix}-bulk`}
               disabled={triggerDisabled}
@@ -127,6 +128,7 @@ const ColumnVisibilityAction = ({
         <BulkAction
           ref={actionRef}
           aria-label={tooltipText}
+          aria-expanded={!!isOpen}
           testPrefix={`-bulk${testPrefix}`}
           visible={visible}
           id={id}
