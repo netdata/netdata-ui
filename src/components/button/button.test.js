@@ -172,7 +172,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#00AB44", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#F6F7F7", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
 
@@ -190,7 +190,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#DB162F", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#F6F7F7", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
   })
@@ -198,13 +198,13 @@ describe("Default Button", () => {
   it("renders for warning", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" warning />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#FF9700", {
+    expect(button).toHaveStyleRule("background-color", "#DF8400", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#FF9700", {
+    expect(button).toHaveStyleRule("border-color", "#DF8400", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#F6F7F7", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
   })
@@ -218,7 +218,7 @@ describe("Default Button", () => {
     expect(button).toHaveStyleRule("border-color", "#526161", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#F6F7F7", {
+    expect(button).toHaveStyleRule("color", "#FFFFFF", {
       modifier: "&&",
     })
   })
@@ -273,10 +273,10 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#FF9700", {
+    expect(button).toHaveStyleRule("border-color", "#DF8400", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FF9700", {
+    expect(button).toHaveStyleRule("color", "#DF8400", {
       modifier: "&&",
     })
   })
@@ -350,7 +350,7 @@ describe("Borderless Button", () => {
     expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#FF9700", {
+    expect(button).toHaveStyleRule("color", "#DF8400", {
       modifier: "&&",
     })
   })

@@ -14,10 +14,10 @@ describe("theme colors", () => {
 
   it("owns a horizontal panel background gradient in both themes", () => {
     expect(DefaultTheme.colors.panelBgGrad).toBe(
-      `linear-gradient(to right, ${rawColors.neutral.white} 0%, ${rawColors.neutral.grey195} 50%, ${rawColors.neutral.white} 100%)`
+      `linear-gradient(to right, ${rawColors.neutral.grey195} 0%, ${rawColors.neutral.white} 50%, ${rawColors.neutral.grey195} 100%)`
     )
     expect(DarkTheme.colors.panelBgGrad).toBe(
-      `linear-gradient(to right, ${rawColors.neutral.grey15} 0%, ${rawColors.neutral.grey25} 50%, ${rawColors.neutral.grey15} 100%)`
+      `linear-gradient(to right, ${rawColors.neutral.grey25} 0%, ${rawColors.neutral.grey15} 50%, ${rawColors.neutral.grey25} 100%)`
     )
   })
 })
