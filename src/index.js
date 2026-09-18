@@ -73,6 +73,7 @@ export {
   ItemContainer as MenuItemContainer,
 } from "./components/drops/menu/dropdownItem"
 export { default as MenuButton } from "./components/drops/menu/menuButton"
+export { dropdownBorder, dropdownRound } from "./components/drops/dropdownStyles"
 
 export { default as Flex } from "./components/templates/flex"
 export { default as makeFlex } from "./components/templates/flex/flex"

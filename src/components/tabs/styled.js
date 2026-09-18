@@ -14,7 +14,7 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   flexWrap: false,
   justifyContent: "start",
   alignItems: "center",
-  padding: [0, 0.5],
+  padding: props.column ? [0, 0.5] : [0, 4],
   flex: false,
   border: !props.noDefaultBorder && {
     side: "bottom",
@@ -35,17 +35,17 @@ export const StyledTabs = styled(Flex).attrs(props => ({
 `
 
 const colorsByFlavour = {
-  success: { background: "menuItemSelected", borderColor: "border", color: "menuItem" },
-  warning: { background: "warningSemi", borderColor: "border", color: "menuItem" },
-  error: { background: "errorSemi", borderColor: "border", color: "menuItem" },
-  default: { background: "modalBackground", borderColor: "border", color: "menuItem" },
+  success: { background: "tabActiveBackground", borderColor: "border", color: "tabItem" },
+  warning: { background: "warningSemi", borderColor: "border", color: "tabItem" },
+  error: { background: "errorSemi", borderColor: "border", color: "tabItem" },
+  default: { background: "modalBackground", borderColor: "border", color: "tabItem" },
 }
 
 const activeColorsByFlavour = {
   success: { ...colorsByFlavour.success, borderColor: "primary", color: "primary" },
   warning: { ...colorsByFlavour.warning, borderColor: "warning", color: "warning" },
   error: { ...colorsByFlavour.error, borderColor: "error", color: "error" },
-  default: { background: "menuItemSelected", borderColor: "accent", color: "primary" },
+  default: { background: "tabActiveBackground", borderColor: "accent", color: "primary" },
 }
 
 const hoverColorsByFlavour = {
@@ -61,7 +61,7 @@ const colors = ({ theme, active, green, flavour }) => {
 
   const styles = [
     `border-bottom-color: ${getColor(borderColor)({ theme })};`,
-    `background: ${getColor(background)({ theme })};`,
+    `background: ${getColor(theme.name === "Dark" ? background : ["transparent", "full"])({ theme })};`,
     `& > span { color: ${getColor(color)({ theme })}; }`,
   ]
 
@@ -99,8 +99,6 @@ export const StyledTab = styled(Flex).attrs(props => ({
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-
-  margin-bottom: -1px;
 
   ${colors}
 `

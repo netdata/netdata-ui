@@ -15,9 +15,9 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   flex-wrap: nowrap;
   align-items: center;
   justify-content: start;
-  padding: 0 2px;
+  padding: 0 16px;
   color: #526161;
-  border-bottom: 1px solid #E4E8E8;
+  border-bottom: 1px solid #DBE1E1;
   overflow-y: hidden;
   overflow-x: auto;
 }
@@ -51,9 +51,8 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  margin-bottom: -1px;
   border-bottom-color: #42B861;
-  background: #F1FFF7;
+  background: rgba(255,255,255,0.0);
 }
 
 .c4>span {
@@ -75,13 +74,12 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  margin-bottom: -1px;
-  border-bottom-color: #E4E8E8;
-  background: #F6F7F7;
+  border-bottom-color: #DBE1E1;
+  background: rgba(255,255,255,0.0);
 }
 
 .c5>span {
-  color: #708585;
+  color: #526161;
 }
 
 .c5:hover {
@@ -98,7 +96,7 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
     flex="0"
     justifycontent="start"
     overflow="[object Object]"
-    padding="0,0.5"
+    padding="0,4"
   >
     <div
       alignitems="center"
