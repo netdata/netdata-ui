@@ -35,7 +35,6 @@ const Action = ({
   ...rest
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
-  if (visible === false) return null
 
   const onActionClicked = e => {
     e.stopPropagation()
@@ -92,6 +91,8 @@ const Action = ({
       rest,
     ]
   )
+
+  if (visible === false) return null
 
   return (
     <>

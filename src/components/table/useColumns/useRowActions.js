@@ -62,10 +62,10 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
     [rowActions]
   )
 
-  if (availableRowActions.length < 1) return null
+  return useMemo(() => {
+    if (availableRowActions.length < 1) return null
 
-  return useMemo(
-    () => ({
+    return {
       id: "actions",
       enableResizing: false,
       header: "Actions",
@@ -124,7 +124,6 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
           justifyContent: "end",
         },
       },
-    }),
-    [availableRowActions]
-  )
+    }
+  }, [availableRowActions])
 }
