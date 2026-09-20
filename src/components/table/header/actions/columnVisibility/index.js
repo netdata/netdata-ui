@@ -1,5 +1,7 @@
 import React, { useRef, useMemo } from "react"
 import useToggle from "@/hooks/useToggle"
+import Tooltip from "@/components/drops/tooltip"
+import { Button } from "@/components/button"
 import BulkAction from "../action"
 import ColumnsMenu from "./columnsMenu"
 import { supportedBulkActions } from "../useActions"
@@ -14,6 +16,7 @@ const excludedById = {
 
 const ColumnVisibilityAction = ({
   alwaysEnabled,
+  buttonFlavour,
   columnPinning = {},
   dataGa,
   enableColumnPinning,
@@ -34,6 +37,7 @@ const ColumnVisibilityAction = ({
   const actionRef = useRef()
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
   const visible = typeof isVisible === "function" ? isVisible() : isVisible
+  const triggerDisabled = (!alwaysEnabled && selectedRows?.length < 1) || disabled
 
   const columnGroups = useMemo(() => {
     const groups = []
@@ -99,20 +103,45 @@ const ColumnVisibilityAction = ({
 
   return (
     <>
-      <BulkAction
-        ref={actionRef}
-        testPrefix={`-bulk${testPrefix}`}
-        visible={visible}
-        id={id}
-        icon={icon}
-        handleAction={() => handleAction(selectedRows, table)}
-        tooltipText={tooltipText}
-        disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
-        background="elementBackground"
-        selectedRows={selectedRows}
-        dataGa={dataGa}
-        {...rest}
-      />
+      {buttonFlavour === "hollow" ? (
+        visible !== false && (
+          <Tooltip content={tooltipText}>
+            <Button
+              ref={actionRef}
+              aria-label={tooltipText}
+              aria-expanded={!!isOpen}
+              data-ga={dataGa}
+              data-testid={`netdata-table-action-${id}-bulk${testPrefix}-bulk`}
+              disabled={triggerDisabled}
+              flavour="hollow"
+              icon={icon}
+              onClick={event => {
+                event.stopPropagation()
+                handleAction(selectedRows, table)
+              }}
+              small
+              type="button"
+            />
+          </Tooltip>
+        )
+      ) : (
+        <BulkAction
+          ref={actionRef}
+          aria-label={tooltipText}
+          aria-expanded={!!isOpen}
+          testPrefix={`-bulk${testPrefix}`}
+          visible={visible}
+          id={id}
+          icon={icon}
+          handleAction={() => handleAction(selectedRows, table)}
+          tooltipText={tooltipText}
+          disabled={triggerDisabled}
+          background="elementBackground"
+          selectedRows={selectedRows}
+          dataGa={dataGa}
+          {...rest}
+        />
+      )}
       <ColumnsMenu
         columns={columns}
         columnGroups={columnGroups}

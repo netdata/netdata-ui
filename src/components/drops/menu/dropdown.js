@@ -6,6 +6,7 @@ import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
+import { dropdownBorder, dropdownRound } from "../dropdownStyles"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) =>
@@ -79,6 +80,8 @@ const Dropdown = ({
       as="ul"
       role="listbox"
       background="dropdown"
+      border={dropdownBorder}
+      round={dropdownRound}
       hideShadow={hideShadow}
       padding={[0]}
       margin={[1, 0]}

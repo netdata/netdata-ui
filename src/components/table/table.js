@@ -45,6 +45,7 @@ const filterFns = {
 const emptyArray = []
 
 const tableDefaultProps = {
+  bordered: true,
   coloredSortedColumn: true,
   enableColumnPinning: false,
   enableColumnReordering: false,
@@ -73,6 +74,7 @@ const tableDefaultProps = {
 
 const Table = memo(props => {
   const {
+    bordered = tableDefaultProps.bordered,
     bulkActions,
     headerChildren,
     headerActionsBeforeChildren = tableDefaultProps.headerActionsBeforeChildren,
@@ -90,6 +92,7 @@ const Table = memo(props => {
 
     enableColumnVisibility = tableDefaultProps.enableColumnVisibility,
     columnVisibility: defaultColumnVisibility,
+    columnVisibilityFlavour,
     onColumnVisibilityChange: visibilityChangeCb = tableDefaultProps.onColumnVisibilityChange,
 
     columnSizing: defaultColumnSizing,
@@ -301,6 +304,7 @@ const Table = memo(props => {
       rowSelection={rowSelection}
       bulkActions={bulkActions}
       columnPinning={columnPinning}
+      columnVisibilityFlavour={columnVisibilityFlavour}
       dataGa={dataGa}
       enableColumnVisibility={enableColumnVisibility}
       enableColumnPinning={enableColumnPinning}
@@ -319,6 +323,8 @@ const Table = memo(props => {
       ref={ref}
       className={className}
       width={width}
+      border={bordered ? { side: "all", color: "border" } : undefined}
+      round={1}
     >
       <Header
         q={globalFilter}

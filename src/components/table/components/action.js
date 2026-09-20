@@ -131,7 +131,7 @@ const Action = ({
           cursor={disabled ? "auto" : "pointer"}
           key={id}
           round
-          background={label ? null : background}
+          background={label ? null : rest["aria-expanded"] ? "borderSecondary" : background}
         >
           <Component {...componentProps} />
         </Flex>

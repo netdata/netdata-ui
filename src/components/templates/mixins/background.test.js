@@ -11,6 +11,18 @@ it("renders color", () => {
   )
 })
 
+it("renders gradient", () => {
+  expect(background({ theme, background: "panelBgGrad" })).toBe(
+    `background: ${theme.colors.panelBgGrad};`
+  )
+})
+
+it("renders unresolved color path", () => {
+  expect(background({ theme, background: ["invalid", "path"] })).toBe(
+    `background-color: invalid,path;`
+  )
+})
+
 it("renders invalid color", () => {
   expect(background({ theme, background: "invalid" })).toBe(`background-color: invalid;`)
 })
