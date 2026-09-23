@@ -17,7 +17,7 @@ module.exports = {
     "^.+\\.js$": "babel-jest",
   },
   verbose: true,
-  roots: ["src/", "eslint/"],
+  roots: ["src/"],
   coverageDirectory: "<rootDir>/coverage",
   coveragePathIgnorePatterns: ["/node_modules/", "/jest/"],
   coverageThreshold: {
