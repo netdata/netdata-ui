@@ -6,6 +6,25 @@ import { renderWithProviders, fireEvent } from "testUtilities"
 import { Button } from "./button"
 
 describe("Button states", () => {
+  it("shows a focus ring for keyboard focus only", () => {
+    const { container } = renderWithProviders(<Button label="Test prop text" />)
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("outline", "none", { modifier: "&&:focus" })
+    expect(button).toHaveStyleRule("outline", expect.stringMatching(/^2px solid /), {
+      modifier: "&&:focus-visible",
+    })
+    expect(button).toHaveStyleRule("outline-offset", "2px", { modifier: "&&:focus-visible" })
+  })
+
+  it("stops the loading spinner when reduced motion is requested", () => {
+    const { container } = renderWithProviders(<Button label="Save" isLoading />)
+    const button = container.firstChild
+    expect(button).toHaveStyleRule("animation", "none", {
+      modifier: "&& .ntd-spinner",
+      media: "(prefers-reduced-motion:reduce)",
+    })
+  })
+
   it("renders disabled", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" disabled />)
     const button = container.firstChild

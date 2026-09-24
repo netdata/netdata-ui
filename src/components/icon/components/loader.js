@@ -14,6 +14,11 @@ const StyledSvg = styled.svg`
     stroke: ${getColor("bright")};
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
   @keyframes ntd-draw {
     to {
       stroke-dashoffset: 0;
