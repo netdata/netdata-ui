@@ -202,6 +202,11 @@ export const StyledButton = styled.button.attrs(
       outline: none;
     }
 
+    &:focus-visible {
+      outline: ${getSizeBy(0.25)} solid ${getColor("textFocus")};
+      outline-offset: ${getSizeBy(0.25)};
+    }
+
     .button-icon {
       height: ${props =>
         props.iconWidth
@@ -226,6 +231,11 @@ export const StyledButton = styled.button.attrs(
       animation: ntd-draw 1s linear infinite;
       stroke: ${props => props.colors.color(props)};
       width: 24px;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        stroke-dashoffset: 0;
+      }
     }
 
     .path {

@@ -56,6 +56,11 @@ exports[`Borderless Button renders 1`] = `
   outline: none;
 }
 
+.c0.c0:focus-visible {
+  outline: 2px solid #4A5757;
+  outline-offset: 2px;
+}
+
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
@@ -74,6 +79,13 @@ exports[`Borderless Button renders 1`] = `
 
 .c0.c0 .path {
   stroke: #00AB44;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 .ntd-spinner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 <button
@@ -146,6 +158,11 @@ exports[`Button states renders loading icon 1`] = `
   outline: none;
 }
 
+.c0.c0:focus-visible {
+  outline: 2px solid #4A5757;
+  outline-offset: 2px;
+}
+
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
@@ -178,6 +195,20 @@ exports[`Button states renders loading icon 1`] = `
 
 .c1 .path {
   stroke: #FFFFFF;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 .ntd-spinner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c1 {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 <button
@@ -269,6 +300,11 @@ exports[`Button states renders only icon 1`] = `
   outline: none;
 }
 
+.c0.c0:focus-visible {
+  outline: 2px solid #4A5757;
+  outline-offset: 2px;
+}
+
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
@@ -305,6 +341,13 @@ exports[`Button states renders only icon 1`] = `
   width: auto;
   height: 100%;
   color: #526161;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 .ntd-spinner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 <button
@@ -391,6 +434,11 @@ exports[`Button states renders smaller only icon 1`] = `
   outline: none;
 }
 
+.c0.c0:focus-visible {
+  outline: 2px solid #4A5757;
+  outline-offset: 2px;
+}
+
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
@@ -427,6 +475,13 @@ exports[`Button states renders smaller only icon 1`] = `
   width: auto;
   height: 100%;
   color: #526161;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 .ntd-spinner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 <button
@@ -509,6 +564,11 @@ exports[`Default Button renders 1`] = `
   outline: none;
 }
 
+.c0.c0:focus-visible {
+  outline: 2px solid #4A5757;
+  outline-offset: 2px;
+}
+
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
@@ -527,6 +587,13 @@ exports[`Default Button renders 1`] = `
 
 .c0.c0 .path {
   stroke: #FFFFFF;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 .ntd-spinner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 <button
@@ -598,6 +665,11 @@ exports[`Hollow Button renders 1`] = `
   outline: none;
 }
 
+.c0.c0:focus-visible {
+  outline: 2px solid #4A5757;
+  outline-offset: 2px;
+}
+
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
@@ -616,6 +688,13 @@ exports[`Hollow Button renders 1`] = `
 
 .c0.c0 .path {
   stroke: #00AB44;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 .ntd-spinner {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 
 <button
