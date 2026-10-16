@@ -438,6 +438,7 @@ import sorting_vertical from "./assets/sorting_vertical.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import spaces_v2 from "./assets/spaces_v2.svg"
+import speaker from "./assets/speaker.svg"
 import stockConfig from "./assets/stock_config.svg"
 import switch_off from "./assets/switch_off.svg"
 import system_overview from "./assets/system_overview.svg"
@@ -928,6 +929,7 @@ export const iconsList = {
   space_new,
   space,
   spaces_v2,
+  speaker,
   stockConfig,
   switch_off,
   system_overview,
