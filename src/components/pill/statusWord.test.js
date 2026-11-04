@@ -13,7 +13,10 @@ describe("StatusWord", () => {
     expect(word).toHaveStyleRule("font-size", "13px")
     expect(word).toHaveStyleRule("font-weight", "500")
     expect(word).toHaveStyleRule("color", light.errorSoftText)
-    expect(screen.getByTestId("status-word-dot")).toHaveStyleRule("background-color", light.errorSoftText)
+    expect(screen.getByTestId("status-word-dot")).toHaveStyleRule(
+      "background-color",
+      light.errorSoftText
+    )
     expect(screen.getByTestId("status-word-dot")).toHaveAttribute("aria-hidden", "true")
   })
 
@@ -43,6 +46,20 @@ describe("StatusWord", () => {
 
   it("renders no detail when none is given", () => {
     renderWithProviders(<StatusWord>Idle</StatusWord>)
+    expect(screen.queryByTestId("status-word-detail")).not.toBeInTheDocument()
+  })
+
+  it("renders a zero detail after the separator", () => {
+    renderWithProviders(
+      <StatusWord tone="error" detail={0}>
+        Critical
+      </StatusWord>
+    )
+    expect(screen.getByTestId("status-word-detail")).toHaveTextContent("· 0")
+  })
+
+  it("renders no detail for an empty string", () => {
+    renderWithProviders(<StatusWord detail="">Idle</StatusWord>)
     expect(screen.queryByTestId("status-word-detail")).not.toBeInTheDocument()
   })
 

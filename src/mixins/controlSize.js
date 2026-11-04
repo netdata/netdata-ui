@@ -1,12 +1,7 @@
 import { getOrElse } from "@/theme/utils"
+import { CONTROL_SIZES } from "@/theme/default/constants"
 
-const fallback = {
-  compact: { height: 24, fontSize: 12 },
-  default: { height: 28, fontSize: 13 },
-  large: { height: 32, fontSize: 14 },
-}
-
-const getSizes = getOrElse(["constants", "CONTROL_SIZES"], fallback)
+const getSizes = getOrElse(["constants", "CONTROL_SIZES"], CONTROL_SIZES)
 
 // Buttons use boolean `large`/`compact`; fields use `size`. Both resolve to the same ladder.
 export const controlSizeOf = ({ size, large, compact } = {}) => {

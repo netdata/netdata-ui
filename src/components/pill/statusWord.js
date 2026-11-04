@@ -20,6 +20,9 @@ const Detail = styled.span`
   color: ${getColor("textLite")};
 `
 
+const hasDetail = detail =>
+  detail !== undefined && detail !== null && detail !== false && detail !== ""
+
 const StatusWord = ({
   children,
   "data-testid": testId = "status-word",
@@ -34,7 +37,7 @@ const StatusWord = ({
     <Word color={color} data-testid={testId} {...rest}>
       <Dot color={color} data-testid={`${testId}-dot`} dot={dot} />
       <span>{children}</span>
-      {detail && <Detail data-testid={`${testId}-detail`}>· {detail}</Detail>}
+      {hasDetail(detail) && <Detail data-testid={`${testId}-detail`}>· {detail}</Detail>}
     </Word>
   )
 }

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 import Dot from "./dot"
 import { getPillColor } from "./mixins/colors"
+import visuallyHidden from "@/mixins/visuallyHidden"
 
 const Counts = styled.span`
   display: inline-flex;
@@ -21,15 +22,7 @@ const Count = styled.span`
 `
 
 const VisuallyHidden = styled.span`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
+  ${visuallyHidden}
 `
 
 const MarkCounts = ({ counts = [], "data-testid": testId = "mark-counts", ...rest }) => (

@@ -4,7 +4,7 @@ import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
 import { Icon } from "@/components/icon"
 import { useVirtualizer } from "@tanstack/react-virtual"
-import { dropdownRound, floatingShadow } from "@/components/drops/dropdownStyles"
+import { dropdownRound, floatingShadowValue } from "@/components/drops/dropdownStyles"
 import { getRgbColor, getSizeBy } from "@/theme"
 import { controlHeight, controlFontSize } from "@/mixins/controlSize"
 
@@ -153,16 +153,6 @@ const VirtualizedMenuList = props => {
 
 const sizeBy = (theme, multiplier) => getSizeBy(multiplier)({ theme })
 
-// react-select takes object styles, so the shared css fragment is resolved to its box-shadow value.
-const getFloatingShadow = theme =>
-  floatingShadow
-    .map(rule => (typeof rule === "function" ? rule({ theme }) : rule))
-    .join("")
-    .replace(/^\s*box-shadow:\s*/, "")
-    .replace(/;\s*$/, "")
-    .replace(/\s+/g, " ")
-    .trim()
-
 const indicatorStyles = theme => ({
   color: theme.colors.textLite,
   padding: `0 ${sizeBy(theme, 0.75)}`,
@@ -259,7 +249,7 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       backgroundColor: theme.colors.dropdown,
       border: `1px solid ${theme.colors.border}`,
       borderRadius: dropdownRound * theme.constants.SIZE_SUB_UNIT,
-      boxShadow: getFloatingShadow(theme),
+      boxShadow: floatingShadowValue(theme),
       marginTop: sizeBy(theme, 0.5),
       overflow: "hidden",
       zIndex: 100,

@@ -8,6 +8,7 @@ import { dropdownBorder, dropdownRound, floatingShadow } from "@/components/drop
 import copyToClipboard from "@/utils/copyToClipboard"
 import useDropElement from "@/hooks/useDropElement"
 import { getSizeBy } from "@/theme/utils"
+import visuallyHidden from "@/mixins/visuallyHidden"
 
 const FEEDBACK_DURATION = 1200
 
@@ -72,15 +73,7 @@ const FeedbackText = styled(TextSmall)`
 
 // Persistent so screen readers announce later text changes; a region inserted with its content is often silent.
 const LiveRegion = styled(TextSmall).attrs({ role: "status", "aria-live": "polite" })`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
+  ${visuallyHidden}
 `
 
 const ClickableWrapper = styled.span`

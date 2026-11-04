@@ -2,20 +2,12 @@ import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { getColor } from "@/theme"
 import { focusRingOutline } from "@/mixins/focusRing"
+import visuallyHidden from "@/mixins/visuallyHidden"
 
 export const HiddenCheckboxInput = styled.input.attrs({
   type: "checkbox",
 })`
-  border: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
+  ${visuallyHidden}
 `
 
 const isFilled = props => props["data-state"] === "checked" || props["data-state"] === "mixed"
