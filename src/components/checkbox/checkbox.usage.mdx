@@ -1,0 +1,50 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./checkbox.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Checkbox
+
+A box for an independent yes/no choice, or for selecting items from a list.
+
+## When to use
+
+- Select several rows, for example nodes to include in a room.
+- A choice submitted with a form.
+- For a setting that applies instantly, use `Toggle`. For one choice among many, use `RadioButton`.
+
+## Usage
+
+- The component is controlled: pass `checked` and `onChange`.
+- `onChange` receives the new boolean and the click event: `(checked, event)`.
+- `label` renders text beside the box. `labelPosition` is `right` by default; use `left` to put the label first.
+- `labelProps`, `checkboxProps` and `iconProps` pass props to the label, the box and the check icon.
+
+<Canvas of={Stories.Basic} />
+
+## Select all with indeterminate
+
+When a parent checkbox stands for a list, set `indeterminate` while only some children are checked. The `useCheckboxesList(values, handlers)` hook returns `[allChecked, indeterminate, switchAll]` for this.
+
+<Canvas of={Stories.List} />
+
+## States
+
+- Unchecked, checked and indeterminate. The box has a green outline and a green check.
+- Keyboard focus shows the green focus ring.
+- `disabled` fades the control to 40% and ignores clicks.
+- Pass `checkboxProps={{ error: true }}` for the error look.
+
+<Canvas of={Stories.States} />
+
+## Accessibility
+
+- It renders a native checkbox inside a `label`, so the whole row is clickable and Space toggles it.
+- `indeterminate` is set on the input's `indeterminate` property, so assistive tech reads it as mixed.
+- Always pass a `label`. Without one, add an `aria-label`.
+
+## Do and don't
+
+- Do write the label as the thing being selected: "Include stopped nodes".
+- Don't use a checkbox for an instant on/off setting.
+- Don't leave the component uncontrolled; it needs `checked`.

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Toggle test  * should render with labels 1`] = `
-.c1 {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Ubuntu,"Helvetica Neue",sans-serif;
+.c2 {
+  font-family: "IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Ubuntu,"Helvetica Neue",sans-serif;
   font-style: normal;
   font-size: 12px;
   line-height: 16px;
@@ -11,55 +11,27 @@ exports[`Toggle test  * should render with labels 1`] = `
   text-transform: none;
 }
 
-.c3 {
+.c4 {
   display: block;
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-}
-
-.c5 {
-  display: none;
 }
 
 .c6 {
-  box-sizing: border-box;
-  width: 40px;
-  height: 20px;
-  background: #FFFFFF;
-  border: 1px solid #DBE1E1;
-  border-radius: 100px;
-  transition: unset;
-  display: block;
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
-  align-self: flex-start;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.c6:after {
-  display: block;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
   position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: unset;
-  opacity: 1;
-  background-color: #35414A;
+  white-space: nowrap;
+  width: 1px;
 }
 
-.c4:focus+.c6 {
-  border-color: #35414A;
-  box-shadow: 0 0 0 1px #35414A;
-}
-
-.c0 {
+.c1 {
   position: relative;
   cursor: pointer;
   display: flex;
@@ -67,37 +39,87 @@ exports[`Toggle test  * should render with labels 1`] = `
   align-items: center;
 }
 
-.c2 {
+.c7 {
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+  background: #FFFFFF;
+  border: 1px solid #708585;
+  border-radius: 100px;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out;
+  display: block;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c7:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  transform: none;
+  transition: transform 140ms ease-out,background-color 140ms ease-out;
+  background-color: #35414A;
+}
+
+.c0:hover .c7 {
+  border-color: #526161;
+}
+
+.c5:focus-visible+.c7 {
+  outline: 2px solid #007830;
+  outline-offset: 2px;
+}
+
+.c3 {
   margin-right: 8px;
 }
 
-.c7 {
+.c8 {
   margin-left: 8px;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c7 {
+    transition: none;
+  }
+
+  .c7:after {
+    transition: none;
+  }
 }
 
 <div>
   <label
-    class="c0"
+    class="c0 c1"
   >
     <span
-      class="c1 c2"
+      class="c2 c3"
     >
       Dark theme
     </span>
     <div
-      class="c3"
+      class="c4"
     >
       <input
-        class="c4 c5"
+        class="c5 c6"
+        role="switch"
         type="checkbox"
       />
       <div
-        class="c6"
-        role="switch"
+        aria-hidden="true"
+        class="c7"
       />
     </div>
     <span
-      class="c1 c7"
+      class="c2 c8"
     >
       Light theme
     </span>
@@ -106,55 +128,27 @@ exports[`Toggle test  * should render with labels 1`] = `
 `;
 
 exports[`Toggle test  * should render with required props 1`] = `
-.c1 {
+.c2 {
   display: block;
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-}
-
-.c3 {
-  display: none;
 }
 
 .c4 {
-  box-sizing: border-box;
-  width: 40px;
-  height: 20px;
-  background: #FFFFFF;
-  border: 1px solid #DBE1E1;
-  border-radius: 100px;
-  transition: unset;
-  display: block;
-  position: relative;
-  -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
-  align-self: flex-start;
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.c4:after {
-  display: block;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
   position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  left: 5%;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: unset;
-  opacity: 1;
-  background-color: #35414A;
+  white-space: nowrap;
+  width: 1px;
 }
 
-.c2:focus+.c4 {
-  border-color: #35414A;
-  box-shadow: 0 0 0 1px #35414A;
-}
-
-.c0 {
+.c1 {
   position: relative;
   cursor: pointer;
   display: flex;
@@ -162,20 +156,70 @@ exports[`Toggle test  * should render with required props 1`] = `
   align-items: center;
 }
 
+.c5 {
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+  background: #FFFFFF;
+  border: 1px solid #708585;
+  border-radius: 100px;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out;
+  display: block;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.c5:after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  transform: none;
+  transition: transform 140ms ease-out,background-color 140ms ease-out;
+  background-color: #35414A;
+}
+
+.c0:hover .c5 {
+  border-color: #526161;
+}
+
+.c3:focus-visible+.c5 {
+  outline: 2px solid #007830;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c5 {
+    transition: none;
+  }
+
+  .c5:after {
+    transition: none;
+  }
+}
+
 <div>
   <label
-    class="c0"
+    class="c0 c1"
   >
     <div
-      class="c1"
+      class="c2"
     >
       <input
-        class="c2 c3"
+        class="c3 c4"
+        role="switch"
         type="checkbox"
       />
       <div
-        class="c4"
-        role="switch"
+        aria-hidden="true"
+        class="c5"
       />
     </div>
   </label>

@@ -15,9 +15,8 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   flex-wrap: nowrap;
   align-items: center;
   justify-content: start;
-  padding: 0 16px;
+  padding: 0;
   color: #526161;
-  border-bottom: 1px solid #DBE1E1;
   overflow-y: hidden;
   overflow-x: auto;
 }
@@ -27,11 +26,12 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
+  padding: 0 12px;
   color: #526161;
 }
 
 .c2 {
+  box-shadow: inset 0 -1px 0 #DBE1E1;
   -ms-overflow-style: none;
   overflow: -moz-scrollbars-none;
 }
@@ -42,8 +42,10 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 
 .c4 {
   white-space: nowrap;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: safe center;
+  font-variant-numeric: tabular-nums;
   box-sizing: border-box;
   border-radius: 2px 2px 0 0;
   max-width: 208px;
@@ -51,22 +53,31 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  border-bottom-color: #42B861;
+  transition: color 140ms ease-out,background 140ms ease-out,box-shadow 140ms ease-out;
+  color: #007830;
   background: rgba(255,255,255,0.0);
+  box-shadow: inset 0 -2px 0 #007830;
+}
+
+.c4:focus-visible {
+  outline: 2px solid #007830;
+  outline-offset: -2px;
 }
 
 .c4>span {
-  color: #00AB44;
+  color: #007830;
 }
 
 .c4:hover {
-  border-bottom-color: #00AB44;
+  box-shadow: inset 0 -2px 0 #007830;
 }
 
-.c5 {
+.c6 {
   white-space: nowrap;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  overflow: hidden;
+  flex-shrink: 0;
+  justify-content: safe center;
+  font-variant-numeric: tabular-nums;
   box-sizing: border-box;
   border-radius: 2px 2px 0 0;
   max-width: 208px;
@@ -74,16 +85,49 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  border-bottom-color: #DBE1E1;
+  transition: color 140ms ease-out,background 140ms ease-out,box-shadow 140ms ease-out;
+  color: #526161;
   background: rgba(255,255,255,0.0);
+  box-shadow: none;
 }
 
-.c5>span {
+.c6:focus-visible {
+  outline: 2px solid #007830;
+  outline-offset: -2px;
+}
+
+.c6>span {
   color: #526161;
 }
 
-.c5:hover {
-  border-bottom-color: #00AB44;
+.c6:hover {
+  color: #35414A;
+  background: #F6F7F7;
+  box-shadow: inset 0 -2px 0 #708585;
+}
+
+.c6:hover>span {
+  color: #35414A;
+}
+
+.c5 {
+  font-size: 13px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c4 {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c6 {
+    transition: none;
+  }
 }
 
 <div
@@ -91,48 +135,81 @@ exports[`Tabs states  * should render uncontrolled 1`] = `
 >
   <nav
     alignitems="center"
-    border="[object Object]"
     class="c1 c2 tabs"
     flex="0"
     justifycontent="start"
     overflow="[object Object]"
-    padding="0,4"
+    padding="0"
+    role="tablist"
+    variant="line"
   >
     <div
       alignitems="center"
+      aria-selected="true"
       class="c3 c4"
       justifycontent="center"
       label="hi"
-      padding="0,6"
+      padding="0,3"
+      role="tab"
+      tabindex="0"
+      variant="line"
     >
-      hi
+      <span
+        class="c5"
+      >
+        hi
+      </span>
     </div>
     <div
       alignitems="center"
-      class="c3 c5"
+      aria-selected="false"
+      class="c3 c6"
       justifycontent="center"
       label="Hi again"
-      padding="0,6"
+      padding="0,3"
+      role="tab"
+      tabindex="-1"
+      variant="line"
     >
-      Hi again
+      <span
+        class="c5"
+      >
+        Hi again
+      </span>
     </div>
     <div
       alignitems="center"
-      class="c3 c5"
+      aria-selected="false"
+      class="c3 c6"
       justifycontent="center"
       label="Bye"
-      padding="0,6"
+      padding="0,3"
+      role="tab"
+      tabindex="-1"
+      variant="line"
     >
-      Bye
+      <span
+        class="c5"
+      >
+        Bye
+      </span>
     </div>
     <div
       alignitems="center"
-      class="c3 c5"
+      aria-selected="false"
+      class="c3 c6"
       justifycontent="center"
       label="Bye Bye"
-      padding="0,6"
+      padding="0,3"
+      role="tab"
+      tabindex="-1"
+      variant="line"
     >
-      Bye Bye
+      <span
+        class="c5"
+      >
+        Bye Bye
+      </span>
     </div>
   </nav>
   Hello

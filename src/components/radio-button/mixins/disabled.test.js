@@ -11,5 +11,6 @@ it("renders disabled", () => {
   expect(disabled({ disabled: true })).toBe(`
   pointer-events: none;
   cursor: default;
+  opacity: 0.4;
 `)
 })

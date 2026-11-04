@@ -1,0 +1,101 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Pill
+
+A compact rounded label for a status, a count or a short tag. `MasterCard` and `AlertMasterCard` join several pills into one segmented track. `StatusWord` and `MarkCounts` show a status or counts without a container.
+
+## When to use
+
+- Use a `Pill` for a status ("Offline"), a count ("128") or a short tag ("system.cpu").
+- Use `MasterCard` for a trio of counts such as critical, warning and clear.
+- Use `AlertMasterCard` when the counts belong to alerts: it adds a leading alarm-bell segment.
+- Use `StatusWord` for a status in running text or a table cell, where a container would be noise.
+- Use `MarkCounts` for a compact row of status counts, such as critical, warning and clear.
+- Don't use a pill for an action. Use `Button`. A pill can take `onClick`, but it stays a label.
+
+<Canvas of={Stories.Pills} />
+
+## Looks
+
+- Soft is the default: a tinted fill, a 1px tinted ring, tone-coloured text at weight 500. Use it for most statuses and tags; it stays quiet in dense views.
+- `filled` gives a saturated fill with bright text. Use it sparingly, for the one status that must stand out. `MasterCard` and `AlertMasterCard` segments always use it.
+- `hollow` gives a transparent fill with a coloured border and text. Use it for secondary tags next to soft or filled pills. Add `semi` for the stronger status tint.
+- `hollow` wins over `filled` when both are set.
+
+<Canvas of={Stories.LooksByToneAndSize} />
+
+## Dot
+
+- `dot` (or `dot="filled"`) adds a 7px dot before the label; `dot="hollow"` draws a 1.5px ring instead. Use the ring for stale, paused or inactive states.
+- The dot takes the tone colour of the look, so on a `filled` pill it follows the bright text.
+- The dot is hidden from screen readers, so keep the label.
+
+<Canvas of={Stories.Dots} />
+
+## Flavours
+
+- Status flavours: `success`, `warning`, `error`, `stale`, plus the aliases `clear` (same as success) and `critical` (same as error).
+- `neutral` is the default. An unknown flavour falls back to neutral.
+- `muted` uses the secondary text colour with no status hue, for disabled or not-applicable states.
+- Idle flavours: `idleClear`, `idleWarning`, `idleError` for pale, inactive states. A hollow idle pill uses muted grey text on a faint edge of its base tone, so it reads as quiet but keeps its hue.
+- Filled pills use bright text on saturated fills and normal text on neutral and idle fills.
+- A hollow `semi` stale pill uses bold bright text, the most readable theme colour on its fill.
+- `background`, `borderColor` and `color` take theme colour keys when a flavour does not fit.
+
+<Canvas of={Stories.FlavoursBySize} />
+
+## Sizes
+
+- `tiny` is 14px high.
+- `small` is 18px, `default` and `normal` are 20px, `large` is 24px.
+- `textSize` changes the text size without changing the pill height.
+
+## Icons
+
+- `icon` takes an icon name or a React element. The icon sits before the text; `reverse` moves it after.
+- Without children the pill is icon only. Pass `iconSize` to change the default 14px (16px for `large`).
+
+<Canvas of={Stories.PillsLabelIcon} />
+
+## MasterCard
+
+- `pillLeft`, `pillRight` and optional `pillEnd` take pill props such as `text`, `flavour`, `icon` and `background`.
+- Defaults are a pale error segment, a pale warning segment and, for `pillEnd`, a pale clear segment. Empty pills show "-".
+- Only the outer ends are rounded, and segments are separated by a 1px seam. Pass `round` to override.
+- `size` accepts `default` or `large`. Pass `children` to render your own segments.
+- `AlertMasterCard` takes the same props. Use `labelProps` to style the alarm segment, or `labelProps={{ hidden: true }}` to remove it.
+
+<Canvas of={Stories.MasterCards} />
+
+## StatusWord
+
+- A dot, a 13px tone-coloured word at weight 500 and an optional muted `detail` such as "since 14:02".
+- `tone` takes the pill flavours, including `muted`. Pass `dot="hollow"` for a ring.
+
+<Canvas of={Stories.StatusWords} />
+
+## MarkCounts
+
+- `counts` is a list of `{ tone, count, label }`, plus an optional `dot: "hollow"`. Each renders a tone dot and a tabular number.
+- `label` is visually hidden but read by screen readers, so "3" is announced as "3 critical". Each label must be unique.
+
+<Canvas of={Stories.MarkCountsRow} />
+
+## States
+
+- Passing `onClick` shows a pointer cursor. Pills have no hover, focus or disabled styling.
+
+## Accessibility
+
+- A pill is a plain container with no role. Colour alone should not carry the status: keep a text label or an icon with the colour.
+- A clickable pill is not focusable by default. If it must be keyboard operable, use a `Button` instead.
+
+## Do and don't
+
+- Do keep pill text to a word or a number.
+- Do use status flavours only for status.
+- Do use soft by default and keep `filled` for the one status that must stand out.
+- Don't mix looks in the same row to mean different things.

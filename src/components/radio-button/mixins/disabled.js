@@ -1,5 +1,5 @@
 export default ({ disabled }) =>
   `
   pointer-events: ${disabled ? "none" : "auto"};
-  cursor: ${disabled ? "default" : "pointer"};
+  cursor: ${disabled ? "default" : "pointer"};${disabled ? "\n  opacity: 0.4;" : ""}
 `

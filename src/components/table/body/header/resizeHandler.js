@@ -2,6 +2,7 @@ import React, { useRef } from "react"
 import { flushSync } from "react-dom"
 import styled from "styled-components"
 import Flex from "@/components/templates/flex"
+import { getColor, getSizeBy } from "@/theme"
 import { useTableState } from "../../provider"
 
 const rerenderSelector = state => state.columnSizingInfo?.deltaPercentage
@@ -23,10 +24,39 @@ const naturalWidthStyles = {
 
 export const Handler = styled(Flex).attrs({
   position: "absolute",
-  top: "2px",
+  top: 0,
   right: 0,
-  bottom: "2px",
-})``
+  bottom: 0,
+})`
+  &::after {
+    content: "";
+    position: absolute;
+    top: ${getSizeBy(1)};
+    bottom: ${getSizeBy(1)};
+    right: 0;
+    width: 1px;
+    background-color: ${getColor("border")};
+    transition:
+      top 120ms ease-out,
+      bottom 120ms ease-out,
+      width 120ms ease-out,
+      background-color 120ms ease-out;
+  }
+
+  &:hover::after,
+  &:active::after {
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: ${getColor("resizerLine")};
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      transition: none;
+    }
+  }
+`
 
 const measureNaturalWidth = (nodes, forceNowrap) => {
   const probe = document.createElement("div")
@@ -116,9 +146,6 @@ const ResizeHandler = ({ header, table, testPrefix = "" }) => {
     <Handler
       ref={ref}
       data-testid={`netdata-table-header-resize-handler-${column.id}${testPrefix}`}
-      border={{ side: "right", size: "1px", color: "borderSecondary" }}
-      _hover={{ border: { side: "right", size: "3px", color: "resizerLine" } }}
-      _active={{ border: { side: "right", size: "3px", color: "resizerLine" } }}
       width="8px"
       sx={{
         userSelect: "none",

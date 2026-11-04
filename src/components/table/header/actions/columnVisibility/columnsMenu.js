@@ -86,7 +86,6 @@ const ColumnsMenu = ({
         height={{ max: "70vh" }}
         onClickOutside={onClose}
         overflow={{ vertical: "auto" }}
-        round={1}
         target={parentRef.current}
         width={{ base: 100, max: "90vw" }}
         align={{ top: "bottom", right: "right" }}

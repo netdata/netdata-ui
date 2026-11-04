@@ -1,0 +1,32 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# MultiRange
+
+A two-thumb slider that selects a lower and an upper value. The current values show under the track.
+
+## When to use
+
+- Use it to filter by a numeric span.
+- Use `Range` for a single value.
+
+<Canvas of={Stories.InputMultiRange} />
+
+## Behavior
+
+- `initMin` and `initMax` set the starting values; they fall back to `min` and `max`. Changing `min` or `max` resets the thumbs to those initial values.
+- `onInput` fires while dragging with `{ max, min }`. `onChange` fires when a drag ends with the same shape. Values arrive as strings from the event.
+- The thumbs cannot cross: they stay at least one `step` apart.
+- `TextComponent` replaces the component used for the two value labels.
+
+## Accessibility
+
+- It is two native range inputs, so each thumb supports arrow keys, Home and End.
+- The component renders no label; add one next to it.
+
+## Do and don't
+
+- Do give it a wide container; it fills its parent.
+- Don't use it for tiny ranges where thumbs would have no room.

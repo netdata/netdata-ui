@@ -1,0 +1,53 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Popover
+
+A floating panel that opens on hover or focus of its child and stays open while the pointer is over the target or the panel.
+
+## When to use
+
+- Show read-only detail that does not fit inline, e.g. the alerts raised on a node.
+- Offer a few small controls the user can reach with the pointer.
+- Don't use it for a short hint. Use `Tooltip`.
+- Don't use it for choosing from a list. Use `Menu`.
+- Don't use it for content that must be answered or dismissed. Use a modal.
+
+<Canvas of={Stories.Simple} />
+
+## Placement
+
+- `align` is the side of the target: `top` (default), `right`, `bottom` or `left`. The arrow points at the target.
+- Pass `dropProps={{ align }}` for finer control, using `Drop` alignment.
+
+## Content
+
+- `content` is a node or a function that returns a node.
+- By default content sits on the dropdown surface: bordered, 6px radius, padded, with an arrow.
+- `plain` renders your content as is. Use it when the content draws its own surface.
+
+<Canvas of={Stories.Custom} />
+
+## States
+
+- Opens on mouse over and focus of the target. Closes on mouse leave of both target and panel, blur, and Escape.
+- `open` controls the state: `true` opens it, `false` closes it. Use it for always-open reviews and tests.
+- `onHoverChange` reports when the pointer enters and leaves the target.
+- The child gets an `aria-describedby` that points to the popover while it is open.
+- `animation` fades and lifts it in; reduced motion removes the movement.
+
+<Canvas of={Stories.OpenStates} />
+
+## Accessibility
+
+- Give the child a focusable element, such as a button, so keyboard users can open it with focus.
+- Content is described, not focus-trapped. Tab order continues from the target; keep interactive content minimal.
+
+## Do and don't
+
+- Do keep the panel narrow, around 200px wide, for readable lines.
+- Do use theme colours in custom content.
+- Don't depend on hover as the only way to reach important information.
+- Don't open a second popover from inside the first.

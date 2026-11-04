@@ -14,7 +14,7 @@ const appColors = {
   elementBackgroundHover: rawColors.neutral.tuna,
   mainBackground: rawColors.neutral.grey15,
   mainBackgroundDisabled: rawColors.neutral.outerSpace,
-  modalHeaderBackground: rawColors.neutral.grey10,
+  modalHeaderBackground: rawColors.neutral.grey30,
   modalTabsBackground: rawColors.neutral.grey20,
   modalBackground: rawColors.neutral.grey30,
   modalInfoBackground: rawColors.neutral.grey50,
@@ -32,6 +32,8 @@ const appColors = {
   linkHover: rawColors.green.green120,
   // Buttons
   primaryHighlight: rawColors.green.green100,
+  primaryHover: rawColors.green.green110,
+  primaryPressed: rawColors.green.green90,
   secondaryColor: rawColors.green.green110,
   secondaryHighlight: rawColors.green.green40,
   neutralHighlight: rawColors.neutral.grey50,
@@ -52,6 +54,11 @@ const appColors = {
   successSemi: rawColors.green.green20,
   successBackground: rawColors.green.green50,
   successText: rawColors.green.green100,
+  // Text on soft (tinted) status pills: one step past the tone so it reaches 4.5:1 on its own fill.
+  successSoftText: rawColors.green.green100,
+  warningSoftText: rawColors.yellow.yellow70,
+  errorSoftText: rawColors.red.red120,
+  staleSoftText: rawColors.neutral.grey150,
 
   warning: rawColors.yellow.yellow60,
   warningLite: rawColors.yellow.yellow190,
@@ -85,9 +92,9 @@ const appColors = {
   controlFocused: rawColors.neutral.white,
   selected: rawColors.neutral.grey55,
   highlight: rawColors.neutral.grey55,
-  tooltip: rawColors.neutral.outerSpace,
-  tooltipText: rawColors.neutral.grey150,
-  tooltipBg: rawColors.neutral.grey10,
+  tooltip: rawColors.neutral.grey55,
+  tooltipText: rawColors.neutral.grey185,
+  tooltipBg: rawColors.neutral.grey55,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.grey150,
   textLite: rawColors.neutral.grey120,
@@ -98,7 +105,7 @@ const appColors = {
   sectionTitle: rawColors.neutral.grey155,
   sectionDescription: rawColors.neutral.grey150,
   menuItem: rawColors.neutral.grey140,
-  placeholder: rawColors.neutral.grey110,
+  placeholder: rawColors.neutral.grey125,
   key: rawColors.neutral.iron,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey25,
@@ -122,10 +129,13 @@ const appColors = {
   dateTimePickerChipBg: rawColors.violet.violet20,
   dateTimePickerChipAccent: rawColors.violet.violet120,
   // Input colors
+  // Resting edge for fields: 3:1 against the page so the field is findable without hover.
+  controlBorder: rawColors.neutral.grey120,
+  textInfo: rawColors.blue.blue150,
   inputBg: rawColors.neutral.grey55,
-  inputBorder: rawColors.neutral.grey65,
-  inputBorderHover: rawColors.neutral.grey85,
-  inputBorderFocus: rawColors.neutral.grey85,
+  inputBorder: rawColors.neutral.grey85,
+  inputBorderHover: rawColors.neutral.grey100,
+  inputBorderFocus: rawColors.neutral.grey100,
   // Badges
   nodeBadgeBackground: rawColors.neutral.grey90,
   nodeBadgeBorder: rawColors.neutral.bluebayoux,
@@ -143,7 +153,7 @@ const appColors = {
   idleClear: rawColors.green.green20,
 
   // Table
-  tableRowBgHover: rawColors.neutral.grey25,
+  tableRowBgHover: rawColors.neutral.grey30,
   tableRowBg: rawColors.neutral.grey25,
   tableRowBg2: rawColors.neutral.grey25,
   tableRowBg2Hover: rawColors.neutral.grey25,
@@ -156,7 +166,7 @@ const appColors = {
   iconColor: rawColors.neutral.grey160,
 
   // table-resizer
-  resizerLine: rawColors.green.vista,
+  resizerLine: rawColors.green.green100,
 
   anomalyText: rawColors.purple.mauve,
   anomalyTextLite: rawColors.purple.mauveDark,

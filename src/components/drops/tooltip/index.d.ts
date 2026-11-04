@@ -16,4 +16,6 @@ declare const Popover: FC<PopoverProps & JSX.IntrinsicElements["div"]>
 
 export { Popover }
 
+export declare const TooltipInk: FC<{ children?: ReactNode }>
+
 export default Popover

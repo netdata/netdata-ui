@@ -1,0 +1,38 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./range.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Range
+
+A single-thumb slider built on a native range input.
+
+## When to use
+
+- Use it for approximate numeric settings where dragging is easier than typing.
+- Use `MultiRangeInput` for a lower and an upper bound.
+- Use `TextInput` when users need an exact value.
+
+The value is controlled: pass `value` and update it from `onChange` (`e.target.value`, a string).
+
+<Canvas of={Stories.States} />
+
+## Props
+
+- `min`, `max` and `step` default to 0, 100 and 1.
+- The filled part of the track follows the value.
+
+## States
+
+- At `min` the track has no fill.
+- `disabled` fades the slider to 40%.
+
+## Accessibility
+
+- It is a native `input[type=range]`: arrow keys, Home and End work.
+- Place a visible label next to it; the component does not render one.
+
+## Do and don't
+
+- Do show the current value in text next to the slider.
+- Don't use a slider for values users must enter precisely.

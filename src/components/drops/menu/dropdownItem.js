@@ -1,40 +1,62 @@
 import React from "react"
-import styled from "styled-components"
-import { getColor, getRgbColor } from "@/theme"
+import styled, { css } from "styled-components"
+import { getColor, getRgbColor, getSizeBy } from "@/theme"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
 
 export const ItemContainer = styled(Flex).attrs(props => ({
   as: "li",
   role: "option",
-  padding: [1, 4],
+  padding: [1.5, 3],
   ...props,
 }))`
+  ${({ alignItems }) => !alignItems && "align-items: center;"}
+  ${({ height }) =>
+    height === undefined &&
+    css`
+      min-height: ${getSizeBy(3.5)};
+    `}
   cursor: ${({ cursor }) => cursor ?? "pointer"};
-  opacity: ${({ disabled, selected }) => (selected ? 0.9 : disabled ? 0.4 : 1)};
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  transition: background-color 120ms ease-out;
 
   &:hover {
-    background-color: ${props => getColor("borderSecondary")(props)};
+    background-color: ${getColor("menuItemHover")};
   }
+
   ${({ justDesc, theme }) =>
     justDesc &&
     `
     pointer-events: none;
-    border-top: 1px solid ${getColor("borderSecondary")({ theme })};
+    border-top: 1px solid ${getColor("separator")({ theme })};
     & > * {
       color: ${getColor("textLite")({ theme })}
     }
   `}
-  ${({ selected, theme }) =>
+
+  ${({ selected }) =>
     selected &&
-    `
-    background-color: ${
-      theme.name === "Dark"
-        ? getRgbColor(["green", "netdata"], 0.3)({ theme })
-        : getRgbColor(["green", "frostee"])({ theme })
-    }
-  `}
+    css`
+      background-color: ${getRgbColor("primary", 0.12)};
+      box-shadow: inset 2px 0 0 ${getColor("primary")};
+
+      &:hover {
+        background-color: ${getRgbColor("primary", 0.18)};
+      }
+    `}
+
+  /* Styling hook only: consumers that make rows focusable or track an active row get a visible ring. */
+  &:focus-visible,
+  &[data-focused="true"] {
+    outline: none;
+    box-shadow: ${({ selected }) => (selected ? css`inset 2px 0 0 ${getColor("primary")}, ` : "")}
+      inset 0 0 0 2px ${getColor("primary")};
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 const DropdownItem = ({
@@ -56,6 +78,7 @@ const DropdownItem = ({
     <ItemContainer
       data-index={index}
       aria-selected={selected}
+      gap={2}
       disabled={disabled}
       selected={selected}
       onClick={onSelect}

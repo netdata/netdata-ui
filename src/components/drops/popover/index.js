@@ -6,6 +6,7 @@ import useClonedChildren from "@/components/drops/mixins/useClonedChildren"
 import useDescribedId from "@/components/drops/mixins/useDescribedId"
 import dropAlignMap from "@/components/drops/mixins/dropAlignMap"
 import Container from "@/components/drops/container"
+import { dropdownBorder } from "@/components/drops/dropdownStyles"
 
 const noop = () => {}
 const getContent = content => (typeof content === "function" ? content() : content)
@@ -24,7 +25,8 @@ const Popover = ({
   ...rest
 }) => {
   const id = useDescribedId(rest["aria-describedby"])
-  const [isOpen, , open, close] = useToggle(initialOpen)
+  // Start closed: the target ref only exists after mount, so the effect below opens it once it can be anchored.
+  const [isOpen, , open, close] = useToggle(false)
   const dropHoverRef = useRef(false)
   const boxHoverRef = useRef(false)
 
@@ -91,7 +93,7 @@ const Popover = ({
           {plain ? (
             getContent(content)
           ) : (
-            <Container align={align} background="tooltip" backgroundOpacity={0.9} padding={[2, 4]}>
+            <Container align={align} background="dropdown" border={dropdownBorder} padding={[2, 3]}>
               {getContent(content)}
             </Container>
           )}

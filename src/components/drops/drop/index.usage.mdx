@@ -1,0 +1,55 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Drop
+
+A floating container that follows a target element. `Menu`, `Tooltip` and `Popover` are built on it.
+
+## When to use
+
+- Use `Drop` directly for custom floating content that none of the higher-level components cover.
+- Use `Menu` for lists of choices, `Tooltip` for short hints and `Popover` for hover panels.
+- Don't use it for blocking content. Use a modal instead.
+
+<Canvas of={Stories.Basic} />
+
+## How it works
+
+- Pass the target as a DOM element in `target`. The element only exists after mount, so render the `Drop` once `ref.current` is set.
+- The drop is portaled to the drop layer and positioned with `position: fixed`. It repositions when the target or the drop resizes.
+- `onClickOutside` fires for clicks outside the drop and its target. `onEsc` fires on Escape. The drop does not close itself; your state does.
+- The content brings its own surface. Use `background="dropdown"` to get the standard border and 6px radius; other backgrounds are left as you set them.
+
+## Alignment
+
+- `align` maps a drop edge to a target edge. The default `{ top: "bottom", left: "left" }` puts the drop under the target, left edges aligned.
+- Use `{ bottom: "top", right: "right" }` to open upward and align right edges.
+- `stretch` is `"width"` by default (drop is at least as wide as the target). `"align"` makes it no wider than the target. `false` uses the content size, capped at the viewport width.
+- When the drop would overflow the viewport it flips to the opposite side of the target, then is clamped inside the viewport. `canHideTarget` turns the flip off, so the drop may cover the target.
+
+<Canvas of={Stories.Positions} />
+
+<Canvas of={Stories.Stretch} />
+
+## Backdrop
+
+- `backdrop` adds a dimmed, blurred layer behind the drop. Clicking it calls `onClickOutside`.
+- Use it when the drop should hold focus of the page. Customise it with `backdropProps`.
+
+<Canvas of={Stories.WithBackdrop} />
+
+## Layering and motion
+
+- The drop z-index is 70 by default. Tooltips use 80.
+- The floating shadow is on by default. Pass `hideShadow` when the content draws its own, as `Tooltip` and `Popover` do.
+- `animation` fades and lifts the drop in over 120ms. Under reduced motion it appears without movement.
+- `noEvents` makes the drop ignore the pointer.
+
+## Do and don't
+
+- Do clean up state in `onEsc` and `onClickOutside`, or the drop stays open.
+- Do keep the drop content short enough to fit the viewport.
+- Don't use raw colours on the content. Use theme keys such as `dropdown`.
+- Don't render the drop before the target ref exists.

@@ -1,0 +1,55 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Layer
+
+A positioned surface rendered in a portal above the page. With a backdrop it blocks the page behind a scrim; without one it floats over the page. `Modal` and `ConfirmationDialog` are built on it.
+
+## When to use
+
+- Use `Layer` for custom overlays: notifications, side panels, anchored banners.
+- For a standard dialog, use `Modal`. For a yes/no question, use `ConfirmationDialog`.
+- For a menu or tooltip anchored to an element, use the drops components.
+
+<Canvas of={Stories.Simple} />
+
+## Positioning
+
+- `position`: `top-left`, `top`, `top-right`, `left`, `center` (default), `right`, `bottom-left`, `bottom`, `bottom-right`.
+- `full`: `true` stretches over the whole viewport. `"horizontal"` stretches across and `"vertical"` stretches down, keeping the position on the other axis.
+- `margin` keeps space from the viewport edges, in theme units (4px). The layer is capped to the viewport minus its margin.
+- The layer has no background of its own. Give the child a `background`, `border` and `round`.
+
+<Canvas of={Stories.Positions} />
+
+## Backdrop
+
+- The backdrop is on by default and uses the theme scrim (lighter on light, darker on dark).
+- `backdrop={false}` removes it, and the layer becomes `position: fixed` on a transparent page area.
+- Blur is opt-in: `backdropProps={{ backdropBlur: true }}`.
+- `borderShadow` adds the shared modal shadow, useful when there is no backdrop.
+- `backdropContainerProps` forwards props such as `zIndex` to the backdrop container. The default z-index is 35.
+
+<Canvas of={Stories.BackdropScrim} />
+
+## Closing
+
+- The layer holds no open state. Mount it only while open.
+- `onClickOutside` fires on a backdrop click. With `backdrop={false}`, it fires on a mouse press outside the layer.
+- `onEsc` fires on Escape.
+
+<Canvas of={Stories.RightSidebar} />
+
+## Accessibility
+
+- `Layer` sets no role, label or focus handling. Add `role="dialog"` and `aria-label` through props on the layer or its child when it behaves as a dialog.
+- Always provide a visible close control as well as `onEsc`.
+
+## Do and don't
+
+- Do give the child its own surface (`background`, `border`, `round`).
+- Do use `Modal` for dialogs so header, body and footer are consistent.
+- Don't stack several backdrops.
+- Don't use raw colours; pass theme keys.

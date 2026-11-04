@@ -3,9 +3,19 @@ import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Icon } from "@/components/icon"
 import { Text } from "@/components/typography"
+import { focusRing } from "@/mixins/focusRing"
 
 const MenuContainer = styled(Flex)`
   cursor: pointer;
+  ${focusRing}
+
+  > svg:last-child {
+    transition: transform 120ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
 `
 
 const MenuButton = ({ open, icon, label, caret, ref, ...rest }) => (

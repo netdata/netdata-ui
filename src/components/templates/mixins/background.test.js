@@ -11,10 +11,11 @@ it("renders color", () => {
   )
 })
 
+// Theme gradients are flat now, so a local theme keeps the gradient path covered for custom themes.
 it("renders gradient", () => {
-  expect(background({ theme, background: "panelBgGrad" })).toBe(
-    `background: ${theme.colors.panelBgGrad};`
-  )
+  const gradient = "linear-gradient(to right, #F6F7F7 0%, #FFFFFF 50%, #F6F7F7 100%)"
+  const gradientTheme = { ...theme, colors: { ...theme.colors, panelBgGrad: gradient } }
+  expect(background({ theme: gradientTheme, background: "panelBgGrad" })).toBe(`background: ${gradient};`)
 })
 
 it("renders unresolved color path", () => {

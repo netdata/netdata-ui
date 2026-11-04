@@ -5,6 +5,8 @@ import { DarkTheme } from "@/theme/dark"
 import { GlobalStyles } from "@/global-styles"
 import Flex from "@/components/templates/flex"
 
+const themes = { light: DefaultTheme, dark: DarkTheme }
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -20,7 +22,18 @@ const preview = {
 
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme === "dark" ? DarkTheme : DefaultTheme
+      const theme = themes[context.globals.theme] || DefaultTheme
+
+      // Docs pages render many stories inline, so a full-viewport frame would give each one a screen of whitespace.
+      if (context.viewMode === "docs")
+        return (
+          <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <Flex background="mainBackground" padding={[6]} justifyContent="center" round={1.5}>
+              <Story />
+            </Flex>
+          </ThemeProvider>
+        )
 
       return (
         <ThemeProvider theme={theme}>
@@ -49,7 +62,10 @@ export const globalTypes = {
     toolbar: {
       title: "Theme",
       icon: "circlehollow",
-      items: ["light", "dark"],
+      items: [
+        { value: "light", title: "Light" },
+        { value: "dark", title: "Dark" },
+      ],
       dynamicTitle: true,
     },
   },

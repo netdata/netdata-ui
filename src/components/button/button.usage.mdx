@@ -1,0 +1,67 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as ButtonStories from "./button.stories"
+
+<Meta of={ButtonStories} name="Usage" />
+
+# Button
+
+Triggers an action. Use one primary (`default` flavour) button per view for the main action; everything else is `hollow`, `borderless` or `link`.
+
+## Choosing a flavour
+
+- `default`: the main action of a view or dialog, e.g. "New alert".
+- `hollow`: secondary actions next to a primary one, e.g. "Cancel".
+- `borderless`: low-emphasis or inline actions and toolbar icons.
+- `link`: text-only actions inside or next to text, e.g. "View docs". Tone colour, underline on hover, no surface, same heights as other buttons. Works with `danger` and `warning`.
+
+Add `neutral` for actions that should not draw the eye (toolbars, filters). Use `danger` only for destructive actions and `warning` only for actions that need caution.
+
+<Canvas of={ButtonStories.StateMatrix} />
+
+## Sizes
+
+- Default is 28px tall with 13px text and lines up with `TextInput`, `Select` and `Search` in the same row.
+- `large` is 32px with 14px text. Use it only for a page's main action, paired with a 32px field.
+- `compact` is 24px with 12px text, for dense table toolbars, paired with `size="compact"` fields.
+- Icon-only buttons are squares at the same heights. Use `IconButton` and always pass a `tooltip` or `aria-label`.
+
+<Canvas of={ButtonStories.SizesAndAlignment} />
+
+## Icon buttons
+
+- `IconButton` is a `borderless` and `neutral` button with a tooltip. Pass `icon` and `tooltip`.
+- Squares are 28px by default, 24px with `compact` and 32px with `large`. The icon is 16px, or 14px when `compact`. Change it with `width` and `height`.
+- Pass `neutral={false}` for a green icon, and `aria-expanded` for a menu trigger that is open.
+- `disabled` uses the native attribute, so the button leaves the tab order and its tooltip cannot be reached. Add `focusableWhenDisabled` to use `aria-disabled` instead: it stays focusable, shows its tooltip and ignores clicks.
+
+<Canvas of={ButtonStories.IconButtonSizes} />
+
+<Canvas of={ButtonStories.IconButtons} />
+
+## Toolbars
+
+- `useRovingFocus({ count, orientation })` gives a row of icon buttons one tab stop. Arrow keys, Home and End move between them, and the last focused one keeps the tab stop.
+- Spread `getItemProps(index)` on each button and put them in an element with `role="toolbar"` and an `aria-label`.
+- It is opt-in; a plain row of `IconButton`s keeps one tab stop per button.
+
+<Canvas of={ButtonStories.RovingToolbar} />
+
+## Grouping
+
+Use `ButtonGroup` to join buttons into a segmented control. See its own Usage page.
+
+<Canvas of={ButtonStories.Segmented} />
+
+## States
+
+- Hover and pressed step one shade toward the ink colour; they never change hue.
+- Keyboard focus shows a 2px green ring with a 2px offset.
+- `disabled` fades the button to 40% and removes pointer events. `aria-disabled="true"` fades it the same way and turns off its hover, but keeps it focusable.
+- `isLoading` keeps the width and swaps the icon for a spinner; set `loadingLabel` when the label should change.
+
+## Do and don't
+
+- Do write labels as verbs that say what happens: "Save changes", not "Submit".
+- Do keep status colours (`danger`, `warning`) for status meaning.
+- Don't place two `default` buttons side by side.
+- Don't style a button with a raw colour; pass a theme colour key through `color`.

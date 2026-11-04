@@ -43,9 +43,9 @@ const Header = ({
       data-noprint
       width="100%"
       zIndex={10}
-      background="panelBgGrad"
+      background="mainBackground"
       position="relative"
-      gap={1}
+      gap={2}
       alignItems="center"
       padding={[2, 4]}
       border={{ side: "bottom", color: "border" }}

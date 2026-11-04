@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { flexRender } from "@tanstack/react-table"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
+import { focusRing } from "@/mixins/focusRing"
+import { getSizeBy } from "@/theme"
 import { useTableState } from "../../provider"
 import ResizeHandler from "./resizeHandler"
 import getColumnFlex from "../columnFlex"
@@ -14,6 +16,12 @@ import DragHandle, { tableHeaderDragHandleSelector } from "./dragHandle"
 
 const Label = styled(Text)`
   width: 100%;
+  ${focusRing}
+
+  /* Header cells clip overflow, so the ring is drawn inside the label. */
+  &:focus-visible {
+    outline-offset: -${getSizeBy(0.25)};
+  }
 
   * {
     white-space: nowrap;
@@ -123,13 +131,13 @@ const BodyHeaderCell = ({
       style={enableColumnReordering ? sortableStyle : undefined}
       flex={getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)}
       width={`${header.subHeaders.length ? header.subHeaders.reduce((s, h) => s + h.column.getSize(), 0) : column.getSize()}px`}
-      height={{ min: "40px" }}
+      height={{ min: "32px" }}
       position="relative"
       {...(column.getCanSort() &&
         coloredSortedColumn &&
         !!column.getIsSorted() && {
           background: "columnHighlight",
-          backgroundOpacity: "0.2",
+          backgroundOpacity: "0.5",
         })}
       padding={!hasSubheaders || isSubheader ? [1, 2] : [0]}
       {...headStyles}
@@ -158,6 +166,7 @@ const BodyHeaderCell = ({
           {column.isPlaceholder ? null : (
             <Label
               as={column.columnDef.labelAs}
+              color={sorting ? "main" : "textLite"}
               {...labelProps}
               role={labelRole ?? (canSort ? "button" : undefined)}
               tabIndex={labelTabIndex ?? (headerTooltipContent || canSort ? 0 : undefined)}

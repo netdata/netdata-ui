@@ -5,9 +5,32 @@ import useToggle from "@/hooks/useToggle"
 import useClonedChildren from "@/components/drops/mixins/useClonedChildren"
 import useDescribedId from "@/components/drops/mixins/useDescribedId"
 import dropAlignMap from "@/components/drops/mixins/dropAlignMap"
+import styled from "styled-components"
 import Container from "@/components/drops/container"
+import { Text } from "@/components/typography"
+import TooltipInk from "./tooltipInk"
 
 const getContent = content => (typeof content === "function" ? content() : content)
+
+const TooltipText = styled(Text).attrs({ color: "tooltipText" })`
+  font-size: 13px;
+  line-height: 18px;
+`
+
+// Strings and { title, description } get the standard tooltip card; any other node renders as given.
+const renderBody = content => {
+  if (typeof content === "string") return <TooltipText>{content}</TooltipText>
+  if (content && typeof content === "object" && !React.isValidElement(content)) {
+    const { title, description } = content
+    return (
+      <>
+        {title ? <TooltipText strong>{title}</TooltipText> : null}
+        {description ? <TooltipText>{description}</TooltipText> : null}
+      </>
+    )
+  }
+  return content
+}
 
 const Tooltip = ({
   plain,
@@ -18,7 +41,7 @@ const Tooltip = ({
   animation,
   disabled,
   zIndex = 80,
-  delay = 0,
+  delay = 600,
   children,
   allowHoverOnTooltip,
   ref: parentRef,
@@ -89,7 +112,13 @@ const Tooltip = ({
           onEsc={close}
           zIndex={zIndex}
         >
-          {plain ? getContent(content) : <Container align={align}>{getContent(content)}</Container>}
+          {plain ? (
+            getContent(content)
+          ) : (
+            <Container gap={0.5} width={{ max: "300px" }}>
+              <TooltipInk>{renderBody(getContent(content))}</TooltipInk>
+            </Container>
+          )}
         </Drop>
       )}
     </Fragment>

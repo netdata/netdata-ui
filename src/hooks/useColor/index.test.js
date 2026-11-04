@@ -1,10 +1,11 @@
 import { renderHookWithProviders } from "testUtilities"
+import { DefaultTheme } from "@/theme"
 import useColor from "./index"
 
 describe("useColor", () => {
   it("should return the desired color", () => {
     const colorToReturn = "primary"
-    const expetedColorHexCode = "#00AB44"
+    const expetedColorHexCode = DefaultTheme.colors.primary
 
     const { result } = renderHookWithProviders(() => useColor(), {})
 

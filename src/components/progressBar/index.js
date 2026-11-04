@@ -1,9 +1,8 @@
 import React from "react"
-import Box from "@/components/templates/box"
-import Flex from "@/components/templates/flex"
+import { Segment, Track } from "./styled"
 
 const ProgressBar = ({
-  background = "nodeBadgeBackground",
+  background = "separator",
   className,
   color = "text",
   containerWidth = "100%",
@@ -16,9 +15,8 @@ const ProgressBar = ({
   value = Array.isArray(value) ? value : [value || { width, color }]
 
   return (
-    <Flex
+    <Track
       background={background}
-      border={{ side: "all", color: background }}
       className={className}
       data-testid="progressBar"
       height={height}
@@ -27,22 +25,20 @@ const ProgressBar = ({
       width={containerWidth}
       {...rest}
     >
-      {value.map(({ color, width }, index, arr) =>
+      {value.map(({ color, width }, index) =>
         width === "0%" ? null : (
-          <Box
+          <Segment
             background={color}
-            border={{ side: "all", color }}
             data-testid={`progressBar-progress${width}`}
             height="100%"
             key={`${width}-${index}`}
             position="relative"
-            round={!index ? "2px 0 0 2px" : arr.length - 1 === index ? "0 2px 2px 0" : "0"}
             width={width}
             zIndex={index}
           />
         )
       )}
-    </Flex>
+    </Track>
   )
 }
 

@@ -1,79 +1,120 @@
-import styled from "styled-components"
-import { getColor, getSizeUnit } from "@/theme/utils"
-import { controlFocused } from "@/mixins"
+import styled, { css } from "styled-components"
+import { getColor, getSizeBy, getSizeUnit } from "@/theme/utils"
+import { focusRingOutline } from "@/mixins/focusRing"
 import margin from "@/mixins/margin"
 import alignSelf from "@/mixins/alignSelf"
 
 export const ToggleContainer = styled.div`
   display: block;
   box-sizing: border-box;
-  width: 40px;
-  height: 20px;
+  width: ${getSizeBy(5)};
+  height: ${getSizeBy(2.5)};
 `
 
+// Visually hidden instead of display:none so the switch stays reachable by keyboard.
 export const HiddenToggleInput = styled.input.attrs({
   type: "checkbox",
 })`
-  display: none;
-`
-
-export const StyledToggle = styled.div`
-  box-sizing: border-box;
-  width: 40px;
-  height: 20px;
-  background: ${props =>
-    props.disabled ? getColor("mainBackgroundDisabled") : getColor("mainBackground")};
-  border: 1px solid ${getColor("border")};
-  border-radius: 100px;
-  transition: ${({ withTransition }) => (withTransition ? "all 150ms" : "unset")};
-
-  display: block;
-  position: relative;
-
-  -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
-  align-self: flex-start;
-  cursor: pointer;
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-  &:after {
-    display: block;
-    position: absolute;
-    content: "";
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: ${({ withTransition }) => (withTransition ? "left 0.2s ease" : "unset")};
-    opacity: ${({ disabled }) => (disabled ? "0.4" : "1")};
-    background-color: ${({ colored, checked, checkedColor, uncheckedColor, defaultColor }) => {
-      if (!colored) return getColor(defaultColor || "controlFocused")
-      return checked ? getColor(checkedColor || "primary") : getColor(uncheckedColor || "error")
-    }};
-  }
-
-  ${({ checked }) =>
-    checked &&
-    `
-    &:after {
-      left: 55%;
-    }
-  `}
-
-  ${HiddenToggleInput}:focus + & {
-    ${controlFocused}
-  }
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 `
 
 export const StyledLabel = styled.label`
   ${margin}
   ${alignSelf}
   position: relative;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  ${({ disabled }) => disabled && "opacity: 0.4;"}
+`
+
+const getTrackFill = ({ checked, colored, checkedColor }) => {
+  if (!checked) return getColor("mainBackground")
+  return getColor((colored && checkedColor) || "primary")
+}
+
+const getKnobColor = ({ colored, checked, uncheckedColor, defaultColor }) => {
+  if (checked) return getColor("bright")
+  // iconColor keeps the light knob dark slate and stays grey in dark, where controlFocused is pure white.
+  if (!colored) return getColor(defaultColor || "iconColor")
+  return getColor(uncheckedColor || "iconColor")
+}
+
+export const StyledToggle = styled.div`
+  box-sizing: border-box;
+  width: ${getSizeBy(5)};
+  height: ${getSizeBy(2.5)};
+  background: ${getTrackFill};
+  border: 1px solid ${getColor("textLite")};
+  ${props => props.checked && `border-color: ${getTrackFill(props)(props)};`}
+  border-radius: 100px;
+  transition:
+    background-color 140ms ease-out,
+    border-color 140ms ease-out;
+
+  display: block;
+  position: relative;
+
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  &:after {
+    display: block;
+    position: absolute;
+    content: "";
+    width: ${getSizeBy(1.75)};
+    height: ${getSizeBy(1.75)};
+    border-radius: 50%;
+    left: ${getSizeBy(0.25)};
+    top: ${getSizeBy(0.25)};
+    transform: ${props => (props.checked ? `translateX(${getSizeBy(2.5)(props)})` : "none")};
+    transition:
+      transform 140ms ease-out,
+      background-color 140ms ease-out;
+    background-color: ${getKnobColor};
+  }
+
+  ${({ disabled }) =>
+    !disabled &&
+    css`
+      ${StyledLabel}:hover & {
+        border-color: ${props => (props.checked ? getColor("primaryHover") : getColor("text"))};
+        ${props => props.checked && `background: ${getColor("primaryHover")(props)};`}
+      }
+    `}
+
+  ${HiddenToggleInput}:focus-visible + & {
+    ${focusRingOutline}
+  }
+
+  ${({ withTransition }) =>
+    withTransition === false &&
+    css`
+      transition: none;
+
+      &:after {
+        transition: none;
+      }
+    `}
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:after {
+      transition: none;
+    }
+  }
 `
 
 export const LabelText = styled.span`

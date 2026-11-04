@@ -187,4 +187,42 @@ describe("Search", () => {
       expect(handleChange).toHaveBeenCalledWith("")
     })
   })
+
+  describe("layout", () => {
+    it("reserves the clear button slot so the field width does not change with a value", () => {
+      const { unmount } = renderWithProviders(<Search placeholder="Search" />)
+      expect(screen.getByRole("textbox")).toHaveStyleRule("padding-right", "28px")
+      unmount()
+      renderWithProviders(<Search placeholder="Search" value="nginx" />)
+      expect(screen.getByRole("textbox")).toHaveStyleRule("padding-right", "28px")
+    })
+  })
+})
+
+// Round 6 D1: Search follows TextInput on the 28px ladder.
+describe("Search sizing", () => {
+  it("is 28px tall with 13px text by default", () => {
+    renderWithProviders(<Search placeholder="Search" />)
+    expect(screen.getByRole("textbox")).toHaveStyleRule("height", "28px")
+    expect(screen.getByRole("textbox")).toHaveStyleRule("font-size", "13px")
+  })
+
+  it("is 24px tall for size compact", () => {
+    renderWithProviders(<Search placeholder="Search" size="compact" />)
+    expect(screen.getByRole("textbox")).toHaveStyleRule("height", "24px")
+  })
+
+  it("keeps the clear button a compact 24px square inside the field", () => {
+    renderWithProviders(<Search placeholder="Search" value="nginx" />)
+    const clear = screen.getByTitle("x").closest("button")
+    expect(clear).toHaveStyleRule("min-width", "24px", { modifier: "&&" })
+    expect(clear).toHaveStyleRule("min-height", "24px", { modifier: "&&" })
+  })
+})
+
+describe("Search prominence", () => {
+  it("lets a page's main search opt into the 32px large height through existing props", () => {
+    renderWithProviders(<Search placeholder="Filter alerts" height={8} />)
+    expect(screen.getByPlaceholderText("Filter alerts")).toHaveStyleRule("height", "32px")
+  })
 })

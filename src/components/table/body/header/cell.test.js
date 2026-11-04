@@ -47,7 +47,7 @@ describe("header cell height", () => {
   it("keeps the row compact when the header holds only a label", async () => {
     renderHeaderCell()
 
-    expect(await headerCell()).toHaveStyleRule("min-height", "40px")
+    expect(await headerCell()).toHaveStyleRule("min-height", "32px")
   })
 
   it("grows past the compact row so a header filter is not cut off", async () => {
@@ -56,7 +56,7 @@ describe("header cell height", () => {
     })
 
     const cell = await headerCell()
-    expect(cell).toHaveStyleRule("min-height", "40px")
-    expect(cell).not.toHaveStyleRule("height", "40px")
+    expect(cell).toHaveStyleRule("min-height", "32px")
+    expect(cell).not.toHaveStyleRule("height", "32px")
   })
 })

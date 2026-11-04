@@ -1,0 +1,60 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Menu
+
+A button that opens a dropdown list of items, or any custom dropdown view.
+
+## When to use
+
+- Choose one value from a list, e.g. a metric or a time range.
+- Offer a short list of actions, using `onClick` on each item.
+- Don't use it for two or three options visible at once. Use `ButtonGroup` or radios.
+- Don't use it for hover-only detail. Use `Popover`.
+
+<Canvas of={Stories.MenuSimple} />
+
+## Items
+
+- `items` is an array of `{ value, label }`. Optional keys: `icon`, `disabled`, `reverse` (icon after the label), `onClick` and `justDesc`.
+- `justDesc` turns a row into a section title: separated by a line, muted and not clickable.
+- The selected row, matched by `value`, has a green marker and a tinted background.
+- `disabled` rows fade to 40% and ignore the pointer.
+- `hasSearch` adds a search field that filters string labels and values.
+
+<Canvas of={Stories.States} />
+
+## Controlled and uncontrolled
+
+- Pass `value` and `onChange` to control the selection. The trigger shows the selected item label unless you set `label`.
+- `closeOnClick` is true by default, so the menu closes after a choice.
+- `onOpen` and `onClose` report open state. `open` starts the menu open.
+
+<Canvas of={Stories.Controlled} />
+
+## Custom trigger and content
+
+- Pass a child to use your own trigger, such as a `Button`. It receives `onClick`, `aria-haspopup` and `aria-expanded`.
+- The default trigger shows `icon`, `label` and a chevron (`caret`, true by default). The chevron turns while open.
+- Replace rows with `Item`, the whole list with `Dropdown`, and add a `Footer`. `dropTitle` shows content above the items.
+- `dropProps` is forwarded to `Drop`. Use `align` to open to the right: `{ top: "bottom", right: "right" }`.
+
+<Canvas of={Stories.RenderMenuButton} />
+
+<Canvas of={Stories.Aligns} />
+
+## Accessibility
+
+- The trigger has `aria-haspopup="listbox"` and `aria-expanded`. The default trigger has `role="button"`, `tabindex` 0 and a green focus ring.
+- The list is a `listbox` and each row is an `option` with `aria-selected`.
+- Escape and a click outside close the menu.
+- Rows are not focusable by default and there is no arrow-key navigation. Keep that in mind for long menus; `data-focused="true"` on a row shows the focus ring if you add your own navigation.
+
+## Do and don't
+
+- Do keep labels short; use `align` right for triggers near the right edge.
+- Do use `justDesc` titles to group long lists.
+- Don't show a long list without `hasSearch`.
+- Don't use a menu for primary page actions. Use a `Button`.

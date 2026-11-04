@@ -1,0 +1,49 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./input.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# TextInput
+
+A single-line text field with label, hint, error message, icons and an optional field indicator. It is a text input only.
+
+## When to use
+
+- Use it for short free text: names, filters, metric contexts.
+- Use `Search` for filtering lists and `Select` when the values come from a fixed list.
+- Use `RangeInput` or `MultiRangeInput` for approximate numeric picks.
+
+The input is controlled. Always pass `value` and `onChange`. Any other valid input prop (`onKeyDown`, `autoFocus`, `maxLength`) is passed to the underlying `input`.
+
+<Canvas of={Stories.States} />
+
+## Sizes
+
+- Default (`large`) and `small` are 28px tall with 13px text and a 10px inset, and line up with `Button`, `Select` and `Search`.
+- `compact` (and the older `tiny`) is 24px with 12px text and an 8px inset, for dense rows next to `compact` buttons.
+- `height` still overrides the height, in 4px units (`height={8}` is 32px).
+- For a page's main search, `Search` accepts a 32px height next to a large button.
+
+<Canvas of={Stories.Sizes} />
+
+## States
+
+- Ghost field: no fill at rest, the surface comes up on hover and focus.
+- Keyboard focus shows a green ring; with an error it is red.
+- `error` accepts a string (shown as the message) or `true` (shows "invalid"). `hideErrorMessage` keeps the red border and removes the text.
+- `hint` shows helper text under the field.
+- `disabled` fades the field to 40%.
+- `fieldIndicator` shows meta text, such as a character count, inside the right edge.
+
+## Accessibility
+
+- The field is wrapped in a `label` element, so clicking the label focuses the input.
+- `name` is also set as the input's `aria-label`.
+- Give every field a `label`, or a `name` when the label is visually hidden.
+
+## Do and don't
+
+- Do write hints as short, concrete examples: "Use a metric context, e.g. system.cpu".
+- Do show errors as soon as the value is known to be wrong, and say how to fix it.
+- Don't use it for passwords, numbers or dates: the type is fixed to text.
+- Don't put an error and a hint together expecting both: the error renders below the hint.

@@ -1,0 +1,109 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./table.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Table
+
+Shows rows of records, such as nodes, alerts or users, with optional selection, sorting, grouping, pinning, pagination and actions. Every feature is opt-in through a prop; the props reference on the Docs page groups them by category.
+
+## When to use
+
+- Use it when users compare many records across several attributes, or act on one or many rows.
+- Use it for thousands of rows with `largeDataOptions`; the body is virtualised either way.
+- Don't use it for a short list of one or two fields. A plain list is lighter.
+
+## Minimum setup
+
+- `data` is an array of row objects.
+- `dataColumns` is an array of column definitions with an `id`, a `header` and, usually, an `accessorKey` or a `cell` renderer.
+- Give the table a parent with a height (or a `height` of its own). The body scrolls inside it.
+
+<Canvas of={Stories.SimpleTable} />
+
+## Selection and bulk actions
+
+- `enableSelection` adds a checkbox column and a select-all checkbox. `singleRowSelection` turns the checkboxes into radio buttons.
+- `onRowSelected` receives the selected rows' data. For a controlled selection, pass `rowSelection` (keyed by row id) and `onRowSelectionChange`, and set `getRowId` so the keys are stable.
+- `bulkActions` adds header buttons that are enabled while rows are selected. Built-in keys are `delete`, `download`, `toggleAlarm`, `userSettings`, `addEntry`, `remove` and `columnVisibility`. Each takes a `handleAction`.
+- Actions with `confirmation` open a confirm dialog before `handleAction` runs. `delete` and `remove` do by default.
+- A row with `disabled: true` in its data shows a disabled checkbox.
+
+<Canvas of={Stories.BulkActions} />
+
+## Row actions and clickable rows
+
+- `rowActions` adds a trailing `actions` column with icon buttons. Built-in keys are `delete`, `edit`, `replace`, `info`, `toggleAlarm`, `userSettings`, `remove` and `goto`.
+- Each action takes `handleAction(rowData, table)`, and optionally `isDisabled` and `isVisible` (a boolean or a function of the row).
+- `onClickRow` makes rows clickable and receives `{ data, table, fullRow }`. `disableClickRow` opts individual rows out.
+
+<Canvas of={Stories.Actions} />
+
+## Sorting
+
+- `enableSorting` makes headers sortable. Hold Shift, Ctrl or Cmd to sort by more than one column.
+- `sortBy` sets the initial order, for example `[{ id: "cpu", desc: true }]`. `onSortingChange` reports changes.
+- Use `manualSorting` when the data is already sorted on the server.
+
+<Canvas of={Stories.Sorting} />
+
+## Grouping and expanding
+
+- Pass `groupByColumns` to show a "Group by" select in the header. Each entry is keyed by column id and lists the `columns` to group by.
+- `grouping` holds the active key and `onGroupByChange` reports the choice. Leave `enableGroupByControl` on (the default) to show the select.
+- For a tree, put sub-rows in a `children` array on the row, set `getRowCanExpand`, and toggle with `fullRow.toggleExpanded()` from `onClickRow`. `expanded` and `onExpandedChange` control the state.
+
+<Canvas of={Stories.Grouping} />
+<Canvas of={Stories.Expanding} />
+
+## Pinning
+
+- `enableColumnPinning` lets users pin columns from the column menu.
+- `columnPinning` sets the initial state: `{ left: ["checkbox", "name"], right: ["actions"] }`. `checkbox` and `actions` are the ids of the built-in columns.
+- Pinned columns stay in view while the rest scrolls horizontally.
+
+<Canvas of={Stories.Pinning} />
+
+## Column visibility
+
+- `enableColumnVisibility` adds a "Columns" button that toggles each column.
+- Hide a column from the start with `columnVisibility={{ agent: false }}`. Set `enableHiding: false` on a column that must always show.
+- `columnVisibilityFlavour` switches the button between `borderless` and `hollow`.
+
+<Canvas of={Stories.ColumnVisibility} />
+
+## Pagination
+
+- `enablePagination` shows the pager. `paginationOptions` sets the initial `pageIndex` and `pageSize` (default 0 and 100).
+- Without it, all rows render in the scrolling body.
+
+<Canvas of={Stories.NodePagination} />
+
+## Large data
+
+- Pass `largeDataOptions={{ enabled: true }}` together with `getRowId`. Sorting, filtering, grouping and expansion run on the full data set, and only a window of rows is rendered.
+- For data you manage yourself, build a source with `createLargeDataSource` and pass it as `largeDataOptions.source`.
+- `virtualizeOptions` tunes the body: `loading` shows a "Loading more..." pill, `warning` shows a notice once `getHasNextPage` returns false, and `loadMore` fetches more rows.
+
+<Canvas of={Stories.LargeData} />
+
+## States
+
+- Hover highlights the row; a selected row is tinted; the sorted column is tinted unless `coloredSortedColumn` is false.
+- An empty `data` array renders the header with no body rows; show your own empty message outside the table.
+- Truncated cell text shows a tooltip on hover. Tune it with `overflowTooltip`.
+
+<Canvas of={Stories.NodeStates} />
+
+## Accessibility
+
+- Selection uses the Checkbox and RadioButton components, so rows can be toggled with the keyboard.
+- Row actions are icon buttons with a tooltip. Give custom actions a `tooltipText`.
+- Clickable rows are pointer targets only. Keep the same action reachable from a cell link or a row action.
+
+## Do and don't
+
+- Do set `getRowId` when selection, expansion or large-data mode is used, so state survives sorting and refreshes.
+- Do keep numeric columns right-aligned and use theme colour keys such as `error` and `warning` for status text.
+- Don't enable every feature at once. Pick the ones the task needs.
+- Don't pass `data` or `dataColumns` as new arrays on every render; memoise them.

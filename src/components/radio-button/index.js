@@ -2,15 +2,10 @@ import React from "react"
 import { Text } from "@/components/typography"
 import { Container, IconContainer, Input, StyledIcon } from "./styled"
 
+// Disabled keeps the enabled look; the container dims it once (opacity 0.4).
 const radioButtonStyles = {
-  disabled: {
-    containerColor: "disabledBackground",
-    dotColor: "disabledBackground",
-    borderColor: "disabledBackground",
-  },
-  checked: { containerColor: "inputBg", dotColor: "primary", borderColor: "inputBorder" },
-  checkedDisabled: { containerColor: "inputBg", dotColor: "disabled", borderColor: "inputBorder" },
-  default: { containerColor: "inputBg", dotColor: "bright", borderColor: "inputBorder" },
+  checked: { containerColor: ["transparent", "full"], dotColor: "primary", borderColor: "primary" },
+  default: { containerColor: ["transparent", "full"], dotColor: "primary", borderColor: "textLite" },
 }
 
 const RadioButton = ({
@@ -24,20 +19,7 @@ const RadioButton = ({
   margin,
   ...rest
 }) => {
-  const radioStatus =
-    disabled && !checked
-      ? "disabled"
-      : checked && disabled
-        ? "checkedDisabled"
-        : checked
-          ? "checked"
-          : "default"
-
-  const radioStyles = React.useMemo(() => {
-    return radioButtonStyles[radioStatus]
-  }, [radioStatus])
-
-  const showIcon = radioStatus === "checkedDisabled" || radioStatus === "checked"
+  const radioStyles = checked ? radioButtonStyles.checked : radioButtonStyles.default
 
   return (
     <Container alignItems={alignItems} alignSelf={alignSelf} disabled={disabled} margin={margin}>
@@ -45,9 +27,9 @@ const RadioButton = ({
       <IconContainer
         background={radioStyles.containerColor}
         borderColor={radioStyles.borderColor}
-        margin={children || label ? [0.5, 2, 0, 0] : null}
+        margin={children || label ? [0, 2, 0, 0] : null}
       >
-        {showIcon && <StyledIcon name="dot" color={radioStyles.dotColor} {...iconProps} />}
+        {checked && <StyledIcon name="dot" color={radioStyles.dotColor} {...iconProps} />}
       </IconContainer>
       {children}
       {label && !children && <Text>{label}</Text>}

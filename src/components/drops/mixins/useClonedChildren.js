@@ -25,4 +25,5 @@ export default (children, ref, childProps) =>
         setRef(child.props.ref, node)
       },
     })
-  }, [children, childProps.open])
+    // Open state and its aria link must re-clone, otherwise the target never gets aria-describedby.
+  }, [children, childProps.open, childProps.isOpen, childProps["aria-describedby"]])

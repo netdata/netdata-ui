@@ -1,0 +1,61 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Flex
+
+A `div` with `display: flex` and theme-aware layout props. It is the default building block for rows, stacks and cards. Most netdata-ui components are built on it.
+
+## When to use
+
+- Use `Flex` for any row or stack of elements instead of writing CSS.
+- Use `Box` when you need a plain block container without flex behaviour.
+- For text, use the typography components. `Flex` only sets `color` through its `color` prop.
+
+<Canvas of={Stories.List} />
+
+## Direction
+
+- Default is a row. Add `column` for a vertical stack.
+- `rowReverse` and `columnReverse` reverse the order.
+
+<Canvas of={Stories.Directions} />
+
+## Spacing and size
+
+- Numbers are theme units of 4px. `gap={2}` is 8px, `padding={[1, 3]}` is 4px vertical and 12px horizontal.
+- `padding` and `margin` take an array in CSS shorthand order: one, two, three or four values.
+- `gap` uses CSS `gap`. A string value is used as is, e.g. `gap="1rem"`. `gapY` sets the row gap.
+- `width` and `height` accept a number (units), a string, or an object with `base`, `min` and `max`.
+
+## Alignment and growth
+
+- `justifyContent`: `start`, `center`, `end`, `between`, `around`, `evenly`, `stretch`.
+- `alignItems`: `start`, `center`, `end`, `baseline`, `stretch`.
+- `flex` is the shorthand: `true` is `1 1`, `false` is `0 0`, `"grow"` is `1 0`, `"shrink"` is `0 1`, a number is the grow factor. `basis` sets the basis.
+- `flexWrap` wraps children. Use it with `gap` for tag-like rows.
+
+<Canvas of={Stories.Alignment} />
+
+## Surface props
+
+- `background` and `color` take theme colour keys, not raw colours. `backgroundOpacity` adds transparency.
+- `border` is `true` for a 1px border in the theme border colour, or an object with `side`, `size`, `type` and `color`.
+- `round` is `true` for 4px, a number in units, or `{ side, size }` for one side.
+- `overflow`, `opacity`, `position`, `zIndex` and `cursor` are supported.
+- `as` renders another element or component, e.g. `as="header"`.
+- `sx` takes a styled-system style object for one-off overrides.
+- Pseudo props such as `_hover`, `_focus` and `_disabled` take an object of styles.
+
+## Accessibility
+
+- `Flex` is a generic `div`. Use `as` to render the right element (`header`, `nav`, `button`, `ul`).
+- When using `as="button"`, add `type`, `aria-expanded` and similar attributes yourself.
+
+## Do and don't
+
+- Do use theme keys and units for colour and spacing.
+- Do prefer `gap` over margins between children.
+- Don't pass raw hex colours or px values for spacing when a unit works.
+- Don't use `Flex` for a single block of text. Use `Text`.

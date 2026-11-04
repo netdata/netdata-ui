@@ -30,7 +30,10 @@
     "prepublishOnly": "yarn clean && yarn build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier --write \"**/*.{js,mjs}\""
+    "format": "prettier --write \"**/*.{js,mjs}\"",
+    "visual:build": "storybook build -o storybook-static --quiet",
+    "test:visual": "yarn visual:build && docker run --rm --ipc=host -v \"$PWD\":/work -w /work mcr.microsoft.com/playwright:v1.62.1-noble npx playwright test -c visual/playwright.config.js",
+    "test:visual:update": "yarn visual:build && docker run --rm --ipc=host -v \"$PWD\":/work -w /work mcr.microsoft.com/playwright:v1.62.1-noble npx playwright test -c visual/playwright.config.js --update-snapshots"
   },
   "keywords": [
     "netdata",
@@ -43,6 +46,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@elastic/react-search-ui": "^1.24.2",
     "@elastic/search-ui-site-search-connector": "^1.24.2",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
     "@prismicio/client": "^7.21.6",
     "@styled-system/css": "^5.1.5",
     "@tanstack/react-table": "^8.21.3",
@@ -69,6 +73,7 @@
     "@babel/plugin-transform-runtime": "^7.29.0",
     "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
+    "@playwright/test": "1.62.1",
     "@storybook/addon-docs": "10.2.10",
     "@storybook/addon-links": "10.2.10",
     "@storybook/addon-webpack5-compiler-babel": "^4.0.0",

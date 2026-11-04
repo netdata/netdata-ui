@@ -1,0 +1,49 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Box
+
+A `div` with theme-aware layout and surface props. It shares the spacing, size, border, radius and background props of `Flex`, without `display: flex`.
+
+## When to use
+
+- Use `Box` for a block container that only needs spacing, a border, a background or positioning.
+- Use `Flex` for rows, stacks and anything that needs alignment, `flex` or wrapping. `Box` has no `column`, `alignItems`, `justifyContent` or `flex` styling.
+- Use `as` to render another element or component while keeping the Box props.
+
+<Canvas of={Stories.Surface} />
+
+## Props
+
+- Spacing: `padding` and `margin` take theme units (4px) in CSS shorthand order.
+- Size: `width` and `height` accept a number (units), a string, or `{ base, min, max }`.
+- Surface: `background` (theme key), `border`, `round`, `opacity`, `overflow`.
+- Position: `position` with `top`, `right`, `bottom`, `left`, plus `zIndex`.
+- `gap` adds a margin to every child but the last: on the right by default, at the bottom when `column` is set. Prefer `Flex` with `gap` for new layouts.
+- `sx` takes a styled-system style object for one-off overrides.
+- Pseudo props such as `_hover` and `_focus` take an object of styles.
+
+## Positioning
+
+<Canvas of={Stories.Positions} />
+
+- Set `position="relative"` on the parent so absolute children stay inside it.
+- `position="fixed"` pins the box to the viewport, outside the parent.
+
+## Composing with other components
+
+<Canvas of={Stories.As} />
+
+- `as={Text}` gives you a text component that also accepts Box layout props.
+
+## Accessibility
+
+- `Box` is a generic `div`. Use `as` to render a semantic element (`section`, `nav`, `article`) when the content calls for it.
+
+## Do and don't
+
+- Do use theme colour keys and units for colour and spacing.
+- Don't pass raw hex colours or px spacing.
+- Don't reach for `Box` when you need alignment. Use `Flex`.

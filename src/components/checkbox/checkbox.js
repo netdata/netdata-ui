@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useEffect } from "react"
+import useForwardRef from "@/hooks/useForwardRef"
 import { Text } from "@/components/typography"
 import { Icon } from "@/components/icon"
 import Box from "@/components/templates/box"
@@ -21,8 +22,16 @@ export const Checkbox = (
   },
   ref
 ) => {
+  const [inputRef, setInputRef] = useForwardRef(ref)
+
+  // "mixed" is only exposed through the IDL property; aria-checked is not allowed on a native checkbox.
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.indeterminate = !!indeterminate
+  }, [indeterminate])
+
   const onClick = e => {
-    e.preventDefault()
+    // Cancelling the input's own click (Space key) would undo the controlled checked value after render.
+    if (e.target !== inputRef.current) e.preventDefault()
 
     if (disabled) return
 
@@ -34,8 +43,9 @@ export const Checkbox = (
       as="label"
       position="relative"
       alignItems="center"
-      gap={1}
+      gap={2}
       cursor={disabled ? "auto" : "pointer"}
+      opacity={disabled ? 0.4 : undefined}
       rowReverse={labelPosition === "left"}
       data-testid="checkbox"
       disabled={disabled}
@@ -45,27 +55,32 @@ export const Checkbox = (
       <Box width="16px" height="16px">
         <HiddenCheckboxInput
           data-testid="checkbox-input"
-          ref={ref}
+          ref={setInputRef}
           disabled={disabled}
+          checked={!!checked}
+          readOnly
           {...(indeterminate && { "data-indeterminate": true })}
           data-checked={checked}
         />
-        <StyledCheckbox data-testid="styled-checkbox" disabled={disabled} {...checkboxProps}>
+        <StyledCheckbox
+          data-testid="styled-checkbox"
+          data-state={indeterminate ? "mixed" : checked ? "checked" : "unchecked"}
+          disabled={disabled}
+          {...checkboxProps}
+        >
           {(!!checked || !!indeterminate) && (
             <Icon
-              disabled={disabled}
               name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
               width="16px"
               height="16px"
-              color="accent"
-              hoverColor="primary"
+              color="primary"
               {...iconProps}
             />
           )}
         </StyledCheckbox>
       </Box>
       {label && (
-        <Text as={Label} opacity={disabled ? 0.4 : 1} {...labelProps}>
+        <Text as={Label} {...labelProps}>
           {label}
         </Text>
       )}

@@ -1,9 +1,15 @@
 import React from "react"
+import styled from "styled-components"
 import { TextBig, Text, TextNano, TextSmall } from "@/components/typography"
 import Flex from "@/components/templates/flex"
+import Dot from "./dot"
 import PillIcon from "./icon"
 import { getPillColor } from "./mixins/colors"
+import { getPillLook, getTextColorType } from "./mixins/look"
 import { PillContainer } from "./styled"
+
+export { default as StatusWord } from "./statusWord"
+export { default as MarkCounts } from "./markCounts"
 
 const textComponents = {
   default: Text,
@@ -13,11 +19,24 @@ const textComponents = {
   tiny: TextNano,
 }
 
+const medium = Component => styled(Component)`
+  font-weight: 500;
+`
+
+const softTextComponents = Object.fromEntries(
+  Object.entries(textComponents).map(([key, Component]) => [key, medium(Component)])
+)
+
+// Bright on staleSemi reaches only 3.7:1, so that text is bold.
+const needsBoldText = (look, flavour) => look === "semi" && flavour === "stale"
+
 const Pill = ({
   children,
   background,
   color,
   "data-testid": testId = "pill",
+  dot,
+  filled,
   flavour,
   hollow,
   icon,
@@ -32,13 +51,18 @@ const Pill = ({
   ref,
   ...rest
 }) => {
-  const iconProps = { color, flavour, hollow, icon, size: iconSize }
+  const look = getPillLook({ filled, hollow, semi })
+  const toneColor = getPillColor(getTextColorType(look), flavour)
+  const textColor = color || toneColor
+  const strong = !normal || (!color && needsBoldText(look, flavour))
+  const iconProps = { color: textColor, icon, size: iconSize }
 
+  const components = look === "soft" && !strong ? softTextComponents : textComponents
   const TextComponent = tiny
-    ? textComponents.tiny
+    ? components.tiny
     : textSize
-      ? textComponents[textSize]
-      : textComponents[size] || textComponents.default
+      ? components[textSize]
+      : components[size] || components.default
 
   return (
     <PillContainer
@@ -46,20 +70,20 @@ const Pill = ({
       data-testid={testId}
       flavour={flavour}
       gap={1}
-      hollow={hollow}
+      look={look}
       ref={ref}
       size={size}
       tiny={tiny}
-      semi={semi}
       {...rest}
     >
       {!reverse && <PillIcon data-testid={`${testId}-icon-left`} {...iconProps} />}
+      {dot && <Dot data-testid={`${testId}-dot`} dot={dot} color={toneColor} />}
       {children && (
         <Flex
           as={TextComponent}
-          color={color || (hollow ? getPillColor("color", flavour) : "bright")}
+          color={textColor}
           data-testid={`${testId}-text`}
-          strong={!normal}
+          strong={strong}
           whiteSpace="nowrap"
           {...textProps}
         >

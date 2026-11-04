@@ -11,3 +11,5 @@ coverage/
 dist
 coverage
 storybook-static/
+visual/test-results/
+visual/report/

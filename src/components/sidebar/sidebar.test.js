@@ -35,3 +35,13 @@ describe("Sidebar component test", () => {
     expect(staticComponent && staticComponent.textContent).toBe(TEST_INFO_ANCHOR)
   })
 })
+
+describe("Sidebar info box", () => {
+  it("keeps its inset shadow offset (shadowSide now actually evaluated)", () => {
+    const { queryByText } = renderWithProviders(<Sidebar info={TEST_INFO_ANCHOR} />)
+    expect(queryByText(TEST_INFO_ANCHOR)).toHaveStyleRule(
+      "box-shadow",
+      "inset 0px 2px 68px rgba(0,0,0,0.288)"
+    )
+  })
+})

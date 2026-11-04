@@ -13,7 +13,6 @@ import { restrictToHorizontalAxis } from "@dnd-kit/modifiers"
 import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
 import Cell from "./cell"
-import { Handler } from "./resizeHandler"
 import DragOverlay from "./dragOverlay"
 
 const rerenderSelector = state => {
@@ -108,14 +107,6 @@ const HeaderGroups = ({ groups, size, side, flex = "grow", enableColumnReorderin
 }
 
 const HeaderRow = styled(Flex)`
-  ${Handler} {
-    display: none;
-  }
-
-  &:hover ${Handler} {
-    display: block;
-  }
-
   &:hover .drag-handle {
     opacity: 1;
   }

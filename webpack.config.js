@@ -45,6 +45,8 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
+      // The script-tag bundle cannot inject CSS or emit font files; bundler consumers load the fonts via the cjs/es6 builds.
+      "@fontsource/ibm-plex-sans": false,
     },
   },
 }

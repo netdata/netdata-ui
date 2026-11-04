@@ -8,6 +8,7 @@ export interface TabsProps {
   selected: boolean
   TabContent?: ReactNode
   TabsHeader?: ReactNode
+  variant?: "line" | "contained"
   [s: string]: any
 }
 

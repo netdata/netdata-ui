@@ -136,7 +136,6 @@ const ColumnVisibilityAction = ({
           handleAction={() => handleAction(selectedRows, table)}
           tooltipText={tooltipText}
           disabled={triggerDisabled}
-          background="elementBackground"
           selectedRows={selectedRows}
           dataGa={dataGa}
           {...rest}

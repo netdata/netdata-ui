@@ -154,6 +154,7 @@ import integrationDiscord from "./assets/integrations/discord.svg"
 import integrationDiscordColored from "./assets/integrations/discord_colored.svg"
 import integrationEmail from "./assets/integrations/email.svg"
 import integrationEmailColored from "./assets/integrations/email_colored.svg"
+import integrationGitlabColored from "./assets/integrations/gitlab_colored.svg"
 import integrationGroupEmailColored from "./assets/integrations/group_email_colored.svg"
 import integrationIlert from "./assets/integrations/ilert.svg"
 import integrationIlertColored from "./assets/integrations/ilert_colored.svg"
@@ -437,6 +438,7 @@ import sorting_vertical from "./assets/sorting_vertical.svg"
 import space from "./assets/space.svg"
 import space_new from "./assets/space_new.svg"
 import spaces_v2 from "./assets/spaces_v2.svg"
+import speaker from "./assets/speaker.svg"
 import stockConfig from "./assets/stock_config.svg"
 import switch_off from "./assets/switch_off.svg"
 import system_overview from "./assets/system_overview.svg"
@@ -643,6 +645,7 @@ export const iconsList = {
   integrationDiscordColored,
   integrationEmail,
   integrationEmailColored,
+  integrationGitlabColored,
   integrationGroupEmailColored,
   integrationIlert,
   integrationIlertColored,
@@ -926,6 +929,7 @@ export const iconsList = {
   space_new,
   space,
   spaces_v2,
+  speaker,
   stockConfig,
   switch_off,
   system_overview,

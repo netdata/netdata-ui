@@ -1,7 +1,7 @@
-import { FC, SyntheticEvent } from "react"
+import { FC, KeyboardEvent, FocusEvent, Ref, SyntheticEvent } from "react"
 import { MarginProps, PaddingProps, AlignSelfProps } from "@/mixins/types"
 
-export type ButtonFlavour = "default" | "hollow" | "borderless"
+export type ButtonFlavour = "default" | "hollow" | "borderless" | "link"
 export type ThemeType = "light" | "dark"
 
 export interface ButtonProps {
@@ -21,6 +21,8 @@ export interface ButtonProps {
   flavour?: ButtonFlavour
   disabled?: boolean
   small?: boolean
+  large?: boolean
+  compact?: boolean
   neutral?: boolean
   uppercase?: boolean
   themeType?: ThemeType | undefined
@@ -41,13 +43,14 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
 
 type IconButtonProps = Pick<
   ButtonWrapperProps,
-  "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize"
-> & { width?: string; height?: string; tooltip?: string }
+  "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize" | "large" | "compact"
+> & { width?: string; height?: string; tooltip?: string; focusableWhenDisabled?: boolean }
 
 export interface ButtonGroupProps {
   items?: Array<RadioButtonGroupItem>
   checked?: string | number
   onChange?: (value: string | number) => void
+  variant?: "default" | "segmented"
 }
 
 export interface RadioButtonGroupItem {
@@ -65,6 +68,32 @@ declare const Button: FC<ButtonWrapperProps>
 declare const IconButton: FC<IconButtonProps>
 declare const ButtonGroup: FC<ButtonGroupWrapperProps>
 
-export { Button, IconButton, ButtonGroup }
+export interface RovingItemProps {
+  tabIndex: number
+  ref: (node: HTMLElement | null) => void
+  onFocus: (event: FocusEvent<HTMLElement>) => void
+  onKeyDown: (event: KeyboardEvent<HTMLElement>) => void
+}
+
+export interface UseRovingFocusOptions {
+  count: number
+  orientation?: "horizontal" | "vertical"
+  initialIndex?: number
+}
+
+declare function useRovingFocus(options: UseRovingFocusOptions): {
+  activeIndex: number
+  setActiveIndex: (index: number) => void
+  getItemProps: (
+    index: number,
+    own?: {
+      onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void
+      onFocus?: (event: FocusEvent<HTMLElement>) => void
+      ref?: Ref<HTMLElement>
+    }
+  ) => RovingItemProps
+}
+
+export { Button, IconButton, ButtonGroup, useRovingFocus }
 
 export default Button

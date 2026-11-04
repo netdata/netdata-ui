@@ -36,7 +36,7 @@ const SearchInput = ({
       onChange={onChange}
       placeholder="Search Netdata’s docs & community"
       autoFocus
-      iconLeft={<Icon name="search_s" size="small" color={value ? "text" : "border"} />}
+      iconLeft={<Icon name="search_s" size="small" color={value ? "text" : "textLite"} />}
       {...props}
     />
   )
