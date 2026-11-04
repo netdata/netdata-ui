@@ -19,10 +19,11 @@ export const useRovingFocus = ({ count, orientation = "horizontal", initialIndex
   const [activeIndex, setActiveIndex] = useState(initialIndex)
   const nodes = useRef([])
   const keys = keysByOrientation[orientation] || keysByOrientation.horizontal
+  const reachableIndex = count > 0 ? Math.min(Math.max(activeIndex, 0), count - 1) : activeIndex
 
   const getItemProps = useCallback(
     (index, { onKeyDown, onFocus, ref } = {}) => ({
-      tabIndex: index === activeIndex ? 0 : -1,
+      tabIndex: index === reachableIndex ? 0 : -1,
       ref: node => {
         nodes.current[index] = node
         setRef(ref, node)
@@ -40,10 +41,10 @@ export const useRovingFocus = ({ count, orientation = "horizontal", initialIndex
         nodes.current[next]?.focus()
       },
     }),
-    [activeIndex, count, keys]
+    [reachableIndex, count, keys]
   )
 
-  return { activeIndex, setActiveIndex, getItemProps }
+  return { activeIndex: reachableIndex, setActiveIndex, getItemProps }
 }
 
 export default useRovingFocus

@@ -218,3 +218,16 @@ describe("tooltip behaviour", () => {
 })
 
 const getByTestIdDrop = () => document.querySelector('[data-testid="drop"]')
+
+describe("tooltip content shapes", () => {
+  it("renders an array of nodes as given", () => {
+    const { getByText } = renderWithProviders(
+      <Tooltip content={[<span key="a">first part</span>, " second part"]} delay={0}>
+        <Text>tooltip target</Text>
+      </Tooltip>
+    )
+    fireEvent.mouseOver(getByText("tooltip target"))
+    expect(getByText("first part")).toBeInTheDocument()
+    expect(getByTestIdDrop()).toHaveTextContent("first part second part")
+  })
+})

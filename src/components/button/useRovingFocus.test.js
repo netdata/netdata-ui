@@ -82,3 +82,30 @@ describe("useRovingFocus", () => {
     expect(button("Settings")).toHaveFocus()
   })
 })
+
+describe("when items disappear", () => {
+  const Shrinking = ({ count }) => {
+    const { getItemProps, setActiveIndex } = useRovingFocus({ count })
+    return (
+      <div role="toolbar">
+        {actions.slice(0, count).map(({ icon, label }, index) => (
+          <IconButton key={label} icon={icon} aria-label={label} {...getItemProps(index)} />
+        ))}
+        <button onClick={() => setActiveIndex(count - 1)}>last</button>
+      </div>
+    )
+  }
+
+  it("keeps one remaining item reachable by Tab after the active last item is removed", async () => {
+    const { rerender } = renderWithProviders(<Shrinking count={3} />)
+    await user().click(screen.getByText("last"))
+    expect(screen.getByRole("button", { name: "Settings" })).toHaveAttribute("tabindex", "0")
+
+    rerender(<Shrinking count={2} />)
+
+    const reachable = ["Refresh", "Filter"].filter(
+      name => screen.getByRole("button", { name }).getAttribute("tabindex") === "0"
+    )
+    expect(reachable).toEqual(["Filter"])
+  })
+})

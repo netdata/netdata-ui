@@ -248,3 +248,29 @@ describe("Toggle accessibility", () => {
     expect(getTrack()).toHaveAttribute("aria-hidden", "true")
   })
 })
+
+describe("accessibility attributes passed through toggleProps", () => {
+  it("names the switch input from toggleProps aria attributes", () => {
+    renderWithProviders(
+      <Toggle
+        checked={false}
+        onChange={() => {}}
+        toggleProps={{ "aria-label": "Enable Payments team", "aria-describedby": "hint" }}
+      />
+    )
+    const toggle = screen.getByRole("switch", { name: "Enable Payments team" })
+    expect(toggle).toHaveAttribute("aria-describedby", "hint")
+  })
+
+  it("lets direct props win over toggleProps", () => {
+    renderWithProviders(
+      <Toggle
+        checked={false}
+        onChange={() => {}}
+        aria-label="Direct"
+        toggleProps={{ "aria-label": "From toggleProps" }}
+      />
+    )
+    expect(screen.getByRole("switch", { name: "Direct" })).toBeInTheDocument()
+  })
+})

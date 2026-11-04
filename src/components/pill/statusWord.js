@@ -34,7 +34,7 @@ const StatusWord = ({
     <Word color={color} data-testid={testId} {...rest}>
       <Dot color={color} data-testid={`${testId}-dot`} dot={dot} />
       <span>{children}</span>
-      {detail && <Detail data-testid={`${testId}-detail`}>{`· ${detail}`}</Detail>}
+      {detail && <Detail data-testid={`${testId}-detail`}>· {detail}</Detail>}
     </Word>
   )
 }

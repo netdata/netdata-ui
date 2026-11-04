@@ -164,3 +164,25 @@ describe("IconButton", () => {
     })
   })
 })
+
+describe("focusableWhenDisabled inside a form", () => {
+  it("does not submit or reset the form when activated", async () => {
+    const onSubmit = jest.fn(event => event.preventDefault())
+    const onReset = jest.fn()
+    renderWithProviders(
+      <form onSubmit={onSubmit} onReset={onReset}>
+        <IconButton icon="trashcan" tooltip="Locked" disabled focusableWhenDisabled />
+        <IconButton icon="reload" type="reset" tooltip="Locked" disabled focusableWhenDisabled />
+      </form>
+    )
+    const [submitButton, resetButton] = screen.getAllByRole("button")
+    await user().click(submitButton)
+    await user().click(resetButton)
+    submitButton.focus()
+    await user().keyboard("{Enter}")
+
+    expect(onSubmit).not.toHaveBeenCalled()
+    expect(onReset).not.toHaveBeenCalled()
+    expect(submitButton).toHaveFocus()
+  })
+})

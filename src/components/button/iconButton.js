@@ -9,7 +9,13 @@ const glyphSize = ({ large, compact }) =>
   controlSizeOf({ large, compact }) === "compact" ? "14px" : "16px"
 
 // Native disabled drops focus and hover, so the tooltip that explains why becomes unreachable.
-const focusableDisabledProps = { disabled: false, "aria-disabled": "true", onClick: undefined }
+const preventActivation = event => event.preventDefault()
+
+const focusableDisabledProps = {
+  disabled: false,
+  "aria-disabled": "true",
+  onClick: preventActivation,
+}
 
 const IconButton = ({
   width,

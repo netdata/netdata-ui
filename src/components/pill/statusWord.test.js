@@ -59,4 +59,15 @@ describe("StatusWord", () => {
     expect(screen.getByTestId("node-status")).toBeInTheDocument()
     expect(screen.getByTestId("node-status-dot")).toBeInTheDocument()
   })
+
+  it("renders a React node detail after the separator", () => {
+    renderWithProviders(
+      <StatusWord tone="error" detail={<strong>3 nodes</strong>}>
+        Critical
+      </StatusWord>
+    )
+    const detail = screen.getByTestId("status-word-detail")
+    expect(detail).toHaveTextContent("· 3 nodes")
+    expect(detail.querySelector("strong")).toHaveTextContent("3 nodes")
+  })
 })

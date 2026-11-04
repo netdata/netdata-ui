@@ -17,10 +17,17 @@ const TooltipText = styled(Text).attrs({ color: "tooltipText" })`
   line-height: 18px;
 `
 
+const isTitleDescription = content =>
+  !!content &&
+  typeof content === "object" &&
+  !Array.isArray(content) &&
+  !React.isValidElement(content) &&
+  ("title" in content || "description" in content)
+
 // Strings and { title, description } get the standard tooltip card; any other node renders as given.
 const renderBody = content => {
   if (typeof content === "string") return <TooltipText>{content}</TooltipText>
-  if (content && typeof content === "object" && !React.isValidElement(content)) {
+  if (isTitleDescription(content)) {
     const { title, description } = content
     return (
       <>
