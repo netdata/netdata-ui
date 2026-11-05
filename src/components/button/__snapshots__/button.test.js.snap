@@ -6,20 +6,23 @@ exports[`Borderless Button renders 1`] = `
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 28px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 4px 12px;
-  transition: all 150ms;
+  padding: 0 12px;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: rgba(255,255,255,0.0);
-  color: #00AB44;
+  color: #007830;
   border-width: 1px;
   border-style: solid;
   border-color: rgba(255,255,255,0.0);
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -36,20 +39,37 @@ exports[`Borderless Button renders 1`] = `
 .c0.c0:hover {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
-  color: #00CD51;
+  color: #006729;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #00CD51;
+  fill: #006729;
 }
 
 .c0.c0:active,
 .c0.c0[aria-expanded="true"] {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
-  color: #00CD51;
-  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+  color: #005622;
+}
+
+.c0.c0[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c0.c0[aria-disabled="true"]:hover,
+.c0.c0[aria-disabled="true"]:active {
+  border-color: rgba(255,255,255,0.0);
+  background-color: rgba(255,255,255,0.0);
+  color: #007830;
+  text-decoration: none;
+}
+
+.c0.c0[aria-disabled="true"]:hover .button-icon,
+.c0.c0[aria-disabled="true"]:active .button-icon {
+  fill: #007830;
 }
 
 .c0.c0:focus {
@@ -57,14 +77,14 @@ exports[`Borderless Button renders 1`] = `
 }
 
 .c0.c0:focus-visible {
-  outline: 2px solid #4A5757;
+  outline: 2px solid #007830;
   outline-offset: 2px;
 }
 
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0 .ntd-spinner {
@@ -73,12 +93,18 @@ exports[`Borderless Button renders 1`] = `
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   animation: ntd-draw 1s linear infinite;
-  stroke: #00AB44;
+  stroke: #007830;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #00AB44;
+  stroke: #007830;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 {
+    transition: none;
+  }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -92,8 +118,8 @@ exports[`Borderless Button renders 1`] = `
   class="c0"
   colors="[object Object]"
   flavour="borderless"
-  padding="1,3"
-  round="0.5"
+  padding="0,3"
+  round="1"
   texttransform="firstLetter"
 >
   <span>
@@ -108,20 +134,23 @@ exports[`Button states renders loading icon 1`] = `
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 28px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 4px 12px;
-  transition: all 150ms;
-  background-color: #00AB44;
+  padding: 0 12px;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
+  background-color: #007830;
   color: #FFFFFF;
   border-width: 1px;
   border-style: solid;
-  border-color: #00AB44;
-  border-radius: 2px;
+  border-color: #007830;
+  border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -136,8 +165,8 @@ exports[`Button states renders loading icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42B861;
-  background-color: #42B861;
+  border-color: #006729;
+  background-color: #006729;
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -148,10 +177,27 @@ exports[`Button states renders loading icon 1`] = `
 
 .c0.c0:active,
 .c0.c0[aria-expanded="true"] {
-  border-color: #00CD51;
-  background-color: #00CD51;
+  border-color: #005622;
+  background-color: #005622;
   color: #FFFFFF;
-  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+}
+
+.c0.c0[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c0.c0[aria-disabled="true"]:hover,
+.c0.c0[aria-disabled="true"]:active {
+  border-color: #007830;
+  background-color: #007830;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.c0.c0[aria-disabled="true"]:hover .button-icon,
+.c0.c0[aria-disabled="true"]:active .button-icon {
+  fill: #FFFFFF;
 }
 
 .c0.c0:focus {
@@ -159,7 +205,7 @@ exports[`Button states renders loading icon 1`] = `
 }
 
 .c0.c0:focus-visible {
-  outline: 2px solid #4A5757;
+  outline: 2px solid #007830;
   outline-offset: 2px;
 }
 
@@ -198,6 +244,12 @@ exports[`Button states renders loading icon 1`] = `
 }
 
 @media (prefers-reduced-motion:reduce) {
+  .c0.c0 {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
   .c0.c0 .ntd-spinner {
     animation: none;
     stroke-dashoffset: 0;
@@ -214,8 +266,8 @@ exports[`Button states renders loading icon 1`] = `
 <button
   class="c0"
   colors="[object Object]"
-  padding="1,3"
-  round="0.5"
+  padding="0,3"
+  round="1"
   texttransform="firstLetter"
 >
   <svg
@@ -250,20 +302,24 @@ exports[`Button states renders only icon 1`] = `
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 28px;
+  min-width: 28px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 4px 6px;
-  transition: all 150ms;
+  padding: 0;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: rgba(255,255,255,0.0);
-  color: #00AB44;
+  color: #007830;
   border-width: 1px;
   border-style: solid;
-  border-color: #00AB44;
-  border-radius: 2px;
+  border-color: #007830;
+  border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -278,22 +334,39 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #00AB44;
+  border-color: #006729;
   background-color: #DDFFEB;
-  color: #00AB44;
+  color: #007830;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0:active,
 .c0.c0[aria-expanded="true"] {
-  border-color: #00AB44;
+  border-color: #005622;
   background-color: #DDFFEB;
-  color: #00AB44;
-  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+  color: #007830;
+}
+
+.c0.c0[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c0.c0[aria-disabled="true"]:hover,
+.c0.c0[aria-disabled="true"]:active {
+  border-color: #007830;
+  background-color: rgba(255,255,255,0.0);
+  color: #007830;
+  text-decoration: none;
+}
+
+.c0.c0[aria-disabled="true"]:hover .button-icon,
+.c0.c0[aria-disabled="true"]:active .button-icon {
+  fill: #007830;
 }
 
 .c0.c0:focus {
@@ -301,14 +374,14 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c0.c0:focus-visible {
-  outline: 2px solid #4A5757;
+  outline: 2px solid #007830;
   outline-offset: 2px;
 }
 
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0 .ntd-spinner {
@@ -317,12 +390,12 @@ exports[`Button states renders only icon 1`] = `
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   animation: ntd-draw 1s linear infinite;
-  stroke: #00AB44;
+  stroke: #007830;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #00AB44;
+  stroke: #007830;
 }
 
 .c2 {
@@ -331,6 +404,7 @@ exports[`Button states renders only icon 1`] = `
   opacity: 1;
   pointer-events: unset;
   transform: rotate(0deg);
+  fill: currentColor;
 }
 
 .c1 {
@@ -344,6 +418,12 @@ exports[`Button states renders only icon 1`] = `
 }
 
 @media (prefers-reduced-motion:reduce) {
+  .c0.c0 {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
   .c0.c0 .ntd-spinner {
     animation: none;
     stroke-dashoffset: 0;
@@ -354,8 +434,8 @@ exports[`Button states renders only icon 1`] = `
   class="c0"
   colors="[object Object]"
   flavour="hollow"
-  padding="1,1.5"
-  round="0.5"
+  padding="0"
+  round="1"
   texttransform="firstLetter"
 >
   <div
@@ -384,20 +464,24 @@ exports[`Button states renders smaller only icon 1`] = `
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 28px;
+  min-width: 28px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 4px 6px;
-  transition: all 150ms;
+  padding: 0;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: rgba(255,255,255,0.0);
-  color: #00AB44;
+  color: #007830;
   border-width: 1px;
   border-style: solid;
-  border-color: #00AB44;
-  border-radius: 2px;
+  border-color: #007830;
+  border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -412,22 +496,39 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #00AB44;
+  border-color: #006729;
   background-color: #DDFFEB;
-  color: #00AB44;
+  color: #007830;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0:active,
 .c0.c0[aria-expanded="true"] {
-  border-color: #00AB44;
+  border-color: #005622;
   background-color: #DDFFEB;
-  color: #00AB44;
-  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+  color: #007830;
+}
+
+.c0.c0[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c0.c0[aria-disabled="true"]:hover,
+.c0.c0[aria-disabled="true"]:active {
+  border-color: #007830;
+  background-color: rgba(255,255,255,0.0);
+  color: #007830;
+  text-decoration: none;
+}
+
+.c0.c0[aria-disabled="true"]:hover .button-icon,
+.c0.c0[aria-disabled="true"]:active .button-icon {
+  fill: #007830;
 }
 
 .c0.c0:focus {
@@ -435,14 +536,14 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c0.c0:focus-visible {
-  outline: 2px solid #4A5757;
+  outline: 2px solid #007830;
   outline-offset: 2px;
 }
 
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0 .ntd-spinner {
@@ -451,12 +552,12 @@ exports[`Button states renders smaller only icon 1`] = `
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   animation: ntd-draw 1s linear infinite;
-  stroke: #00AB44;
+  stroke: #007830;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #00AB44;
+  stroke: #007830;
 }
 
 .c2 {
@@ -465,6 +566,7 @@ exports[`Button states renders smaller only icon 1`] = `
   opacity: 1;
   pointer-events: unset;
   transform: rotate(0deg);
+  fill: currentColor;
 }
 
 .c1 {
@@ -478,6 +580,12 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 @media (prefers-reduced-motion:reduce) {
+  .c0.c0 {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
   .c0.c0 .ntd-spinner {
     animation: none;
     stroke-dashoffset: 0;
@@ -488,8 +596,8 @@ exports[`Button states renders smaller only icon 1`] = `
   class="c0"
   colors="[object Object]"
   flavour="hollow"
-  padding="1,1.5"
-  round="0.5"
+  padding="0"
+  round="1"
   texttransform="firstLetter"
 >
   <div
@@ -518,20 +626,23 @@ exports[`Default Button renders 1`] = `
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 28px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 4px 12px;
-  transition: all 150ms;
-  background-color: #00AB44;
+  padding: 0 12px;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
+  background-color: #007830;
   color: #FFFFFF;
   border-width: 1px;
   border-style: solid;
-  border-color: #00AB44;
-  border-radius: 2px;
+  border-color: #007830;
+  border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -542,8 +653,8 @@ exports[`Default Button renders 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #42B861;
-  background-color: #42B861;
+  border-color: #006729;
+  background-color: #006729;
   color: #FFFFFF;
   text-decoration: none;
 }
@@ -554,10 +665,27 @@ exports[`Default Button renders 1`] = `
 
 .c0.c0:active,
 .c0.c0[aria-expanded="true"] {
-  border-color: #00CD51;
-  background-color: #00CD51;
+  border-color: #005622;
+  background-color: #005622;
   color: #FFFFFF;
-  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+}
+
+.c0.c0[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c0.c0[aria-disabled="true"]:hover,
+.c0.c0[aria-disabled="true"]:active {
+  border-color: #007830;
+  background-color: #007830;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.c0.c0[aria-disabled="true"]:hover .button-icon,
+.c0.c0[aria-disabled="true"]:active .button-icon {
+  fill: #FFFFFF;
 }
 
 .c0.c0:focus {
@@ -565,7 +693,7 @@ exports[`Default Button renders 1`] = `
 }
 
 .c0.c0:focus-visible {
-  outline: 2px solid #4A5757;
+  outline: 2px solid #007830;
   outline-offset: 2px;
 }
 
@@ -590,6 +718,12 @@ exports[`Default Button renders 1`] = `
 }
 
 @media (prefers-reduced-motion:reduce) {
+  .c0.c0 {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
   .c0.c0 .ntd-spinner {
     animation: none;
     stroke-dashoffset: 0;
@@ -599,8 +733,8 @@ exports[`Default Button renders 1`] = `
 <button
   class="c0"
   colors="[object Object]"
-  padding="1,3"
-  round="0.5"
+  padding="0,3"
+  round="1"
   texttransform="fullWidth"
 >
   <span>
@@ -615,20 +749,23 @@ exports[`Hollow Button renders 1`] = `
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 28px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 4px 12px;
-  transition: all 150ms;
+  padding: 0 12px;
+  transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: rgba(255,255,255,0.0);
-  color: #00AB44;
+  color: #007830;
   border-width: 1px;
   border-style: solid;
-  border-color: #00AB44;
-  border-radius: 2px;
+  border-color: #007830;
+  border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
 }
@@ -643,22 +780,39 @@ exports[`Hollow Button renders 1`] = `
 }
 
 .c0.c0:hover {
-  border-color: #00AB44;
+  border-color: #006729;
   background-color: #DDFFEB;
-  color: #00AB44;
+  color: #007830;
   text-decoration: none;
 }
 
 .c0.c0:hover .button-icon {
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0:active,
 .c0.c0[aria-expanded="true"] {
-  border-color: #00AB44;
+  border-color: #005622;
   background-color: #DDFFEB;
-  color: #00AB44;
-  box-shadow: inset 0 4px 4px rgba(0,0,0,0.25);
+  color: #007830;
+}
+
+.c0.c0[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c0.c0[aria-disabled="true"]:hover,
+.c0.c0[aria-disabled="true"]:active {
+  border-color: #007830;
+  background-color: rgba(255,255,255,0.0);
+  color: #007830;
+  text-decoration: none;
+}
+
+.c0.c0[aria-disabled="true"]:hover .button-icon,
+.c0.c0[aria-disabled="true"]:active .button-icon {
+  fill: #007830;
 }
 
 .c0.c0:focus {
@@ -666,14 +820,14 @@ exports[`Hollow Button renders 1`] = `
 }
 
 .c0.c0:focus-visible {
-  outline: 2px solid #4A5757;
+  outline: 2px solid #007830;
   outline-offset: 2px;
 }
 
 .c0.c0 .button-icon {
   height: 14px;
   width: 14px;
-  fill: #00AB44;
+  fill: #007830;
 }
 
 .c0.c0 .ntd-spinner {
@@ -682,12 +836,18 @@ exports[`Hollow Button renders 1`] = `
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
   animation: ntd-draw 1s linear infinite;
-  stroke: #00AB44;
+  stroke: #007830;
   width: 24px;
 }
 
 .c0.c0 .path {
-  stroke: #00AB44;
+  stroke: #007830;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .c0.c0 {
+    transition: none;
+  }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -701,8 +861,8 @@ exports[`Hollow Button renders 1`] = `
   class="c0"
   colors="[object Object]"
   flavour="hollow"
-  padding="1,3"
-  round="0.5"
+  padding="0,3"
+  round="1"
   texttransform="firstLetter"
 >
   <span>

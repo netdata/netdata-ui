@@ -1,0 +1,50 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Navigation
+
+A horizontal tab bar. `Tabs` is the container, `Tab` is one tab, `TabSeparator` is a divider and `Sortable` renders a list of tabs that can be closed, reordered and scrolled.
+
+## When to use
+
+- Use fixed tabs for the main views of a page, such as Overview, Nodes and Dashboards.
+- Use `Sortable` for tabs the user opens and closes, such as individual nodes.
+- Do not use it for in-page content switching with few options. Use a simpler control instead.
+
+## Parts
+
+- `Tabs`: the row. It has a topbar background and 1px borders. It collapses tab labels when the sortable list overflows.
+- `Tab`: one tab with an optional `icon`, label children, `active`, `fixed`, `draggable` and `onActivate`.
+- `TabSeparator`: a 1px vertical divider between groups of tabs.
+- `Sortable`: takes `items`, an `Item` renderer, `onDragEnd(from, to)`, `onTabClose(index)` and `onResize(collapsed)`. It shows scroll arrows when the tabs overflow.
+
+<Canvas of={Stories.StaticTabsWithActivate} />
+
+## States
+
+- Active: the icon and label use the full text colour.
+- Hover or keyboard focus: a non-fixed tab swaps its icon for a close button. Hover also shows the drag handle.
+- Fixed: no close button, no drag handle.
+- Dragging: the source tab stays as a placeholder and a drag overlay follows the pointer.
+- Collapsed: labels are hidden and only icons remain.
+
+<Canvas of={Stories.TabStates} />
+
+## Full example
+
+<Canvas of={Stories.TabbedNavigation} />
+
+## Accessibility
+
+- Each tab has `tabIndex="0"`, so it can be focused with the keyboard.
+- The close button has the label "Close tab" and appears while the tab has focus, so Tab moves onto it. The scroll arrows have labels too.
+- A tab is activated by click. Pass `tooltip` when a truncated label needs its full text.
+
+## Do and don't
+
+- Do give every item in `Sortable` a unique `id`.
+- Do truncate long labels with `<Text truncate>`.
+- Don't mark more than one tab as `active`.
+- Don't make the only way to reach a view a drag action.

@@ -1,20 +1,38 @@
 import React, { useState, useCallback } from "react"
 import ReactDOM from "react-dom"
-import styled, { keyframes } from "styled-components"
+import styled, { css, keyframes } from "styled-components"
 import { TextSmall } from "@/components/typography"
-import { getColor } from "@/theme"
+import Flex from "@/components/templates/flex"
+import { Icon } from "@/components/icon"
+import { dropdownBorder, dropdownRound, floatingShadow } from "@/components/drops/dropdownStyles"
 import copyToClipboard from "@/utils/copyToClipboard"
 import useDropElement from "@/hooks/useDropElement"
+import { getSizeBy } from "@/theme/utils"
+import visuallyHidden from "@/mixins/visuallyHidden"
 
-const fadeOutAnimation = keyframes`
+const FEEDBACK_DURATION = 1200
+
+// Arrive quickly, hold so the message is readable, then leave; the motion stays within a few pixels.
+const feedbackAnimation = props => keyframes`
   0% {
+    opacity: 0;
+    transform: translateY(${getSizeBy(0.5)(props)});
+  }
+  12%,
+  75% {
     opacity: 1;
     transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-${getSizeBy(0.5)(props)});
   }
+`
+
+const feedbackFade = keyframes`
+  0% { opacity: 0; }
+  12%, 75% { opacity: 1; }
+  100% { opacity: 0; }
 `
 
 const FeedbackContainer = styled.div`
@@ -24,18 +42,45 @@ const FeedbackContainer = styled.div`
   transform: translateX(-50%);
 `
 
-const FeedbackText = styled(TextSmall)`
-  display: inline-block;
-  animation: ${fadeOutAnimation} 0.5s ease-out forwards;
-  color: ${props => (props.isError ? getColor("error") : getColor("success"))};
-  font-weight: 600;
+const FeedbackPill = styled(Flex).attrs({
+  "aria-hidden": true,
+  alignItems: "center",
+  gap: 1,
+  padding: [0.5, 2],
+  background: "dropdown",
+  border: dropdownBorder,
+  round: dropdownRound,
+})`
+  ${floatingShadow}
   white-space: nowrap;
+  ${props => css`
+    animation: ${feedbackAnimation(props)} ${FEEDBACK_DURATION}ms ease-out forwards;
+  `}
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-name: ${feedbackFade};
+  }
+`
+
+// Drawn from an attribute so the message has a single text node (the live region) for consumers to query.
+const FeedbackText = styled(TextSmall)`
+  font-weight: 600;
+
+  &::after {
+    content: attr(data-label);
+  }
+`
+
+// Persistent so screen readers announce later text changes; a region inserted with its content is often silent.
+const LiveRegion = styled(TextSmall).attrs({ role: "status", "aria-live": "polite" })`
+  ${visuallyHidden}
 `
 
 const ClickableWrapper = styled.span`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  transition: opacity 120ms ease-out;
 
   &:hover {
     opacity: 0.8;
@@ -43,6 +88,10 @@ const ClickableWrapper = styled.span`
 
   &:active {
     opacity: 0.6;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
   }
 `
 
@@ -94,7 +143,7 @@ const CopyToClipboard = ({
 
         setTimeout(() => {
           setFeedback(null)
-        }, 500)
+        }, FEEDBACK_DURATION)
       } catch (error) {
         setFeedback({
           x: mouseX,
@@ -105,7 +154,7 @@ const CopyToClipboard = ({
 
         setTimeout(() => {
           setFeedback(null)
-        }, 500)
+        }, FEEDBACK_DURATION)
       }
     },
     [text, disabled, feedback, onCopy, onError]
@@ -116,6 +165,7 @@ const CopyToClipboard = ({
       <ClickableWrapper onClick={handleCopy} style={style} className={className} {...props}>
         {children}
       </ClickableWrapper>
+      <LiveRegion>{feedback ? (feedback.isError ? "Failed to copy!" : "Copied!") : ""}</LiveRegion>
       {feedback &&
         ReactDOM.createPortal(
           <FeedbackContainer
@@ -124,9 +174,18 @@ const CopyToClipboard = ({
               top: `${feedback.y}px`,
             }}
           >
-            <FeedbackText isError={feedback.isError}>
-              {feedback.isError ? "Failed to copy!" : "Copied!"}
-            </FeedbackText>
+            <FeedbackPill>
+              <Icon
+                name={feedback.isError ? "x" : "checkmark_s"}
+                color={feedback.isError ? "error" : "success"}
+                width="12px"
+                height="12px"
+              />
+              <FeedbackText
+                color="main"
+                data-label={feedback.isError ? "Failed to copy!" : "Copied!"}
+              />
+            </FeedbackPill>
           </FeedbackContainer>,
           dropElement
         )}

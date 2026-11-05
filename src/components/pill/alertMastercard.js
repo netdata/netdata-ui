@@ -2,6 +2,7 @@ import React from "react"
 import MasterCardPill from "./mastercardPill"
 import { getMasterCardBackground } from "./mixins/background"
 import { masterCardColorMap } from "./mixins/colors"
+import { getSegmentRound, SEGMENT_GAP } from "./mixins/segment"
 import { MasterCardContainer } from "./styled"
 
 const AlertMasterCard = ({
@@ -19,12 +20,17 @@ const AlertMasterCard = ({
   ref,
   ...rest
 }) => {
-  const commonProps = { height, round, size, ...containerProps }
+  const commonProps = { height, size, ...containerProps }
+  const hasLabel = !labelProps.hidden
+  const offset = hasLabel ? 1 : 0
+  const count = offset + (pillEnd ? 3 : 2)
+  const segmentRound = index => getSegmentRound(index, count, round)
+
   const iconProps = {
     background: masterCardColorMap.alert,
     color: "text",
     icon: "alarm_bell",
-    zIndex: 4,
+    round: segmentRound(0),
     ...labelProps,
     ...commonProps,
   }
@@ -33,47 +39,40 @@ const AlertMasterCard = ({
     ...commonProps,
     ...rest,
   }
-  const pillLeftBackground = getMasterCardBackground(
-    pillLeft.background,
-    pillLeft.flavour || "disabledError"
-  )
-  const pillRightBackground = getMasterCardBackground(
-    pillRight.background,
-    pillRight.flavour || "disabledWarning"
-  )
-  const pillEndBackground =
-    pillEnd && getMasterCardBackground(pillEnd.background, pillEnd.flavour || "disabledClear")
 
   const pillLeftProps = {
-    background: pillLeftBackground,
+    background: getMasterCardBackground(pillLeft.background, pillLeft.flavour || "disabledError"),
     position: "relative",
-    margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
-    padding: [0, 2, 0, size === "large" ? 5 : 4],
-    zIndex: 3,
+    round: segmentRound(offset),
     ...pillProps,
     ...pillLeft,
-    round: labelProps.hidden,
   }
   const pillRightProps = {
-    background: pillRightBackground,
-    margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
-    padding: [0, 2, 0, size === "large" ? 5 : 4],
-    zIndex: 2,
+    background: getMasterCardBackground(
+      pillRight.background,
+      pillRight.flavour || "disabledWarning"
+    ),
+    round: segmentRound(offset + 1),
     ...pillProps,
     ...pillRight,
   }
   const pillEndProps = pillEnd && {
-    background: pillEndBackground,
-    margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
-    padding: [0, 2, 0, size === "large" ? 5 : 4],
-    zIndex: 1,
+    background: getMasterCardBackground(pillEnd.background, pillEnd.flavour || "disabledClear"),
+    round: segmentRound(offset + 2),
     ...pillProps,
     ...pillEnd,
   }
 
   return (
-    <MasterCardContainer data-testid={testId} onClick={onClick} ref={ref} {...commonProps}>
-      {!labelProps.hidden && <MasterCardPill data-testid={`${testId}-icon-pill`} {...iconProps} />}
+    <MasterCardContainer
+      data-testid={testId}
+      gap={SEGMENT_GAP}
+      onClick={onClick}
+      ref={ref}
+      round={round}
+      {...commonProps}
+    >
+      {hasLabel && <MasterCardPill data-testid={`${testId}-icon-pill`} {...iconProps} />}
       <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />
       <MasterCardPill data-testid={`${testId}-right-pill`} {...pillRightProps} />
       {pillEndProps && <MasterCardPill data-testid={`${testId}-end-pill`} {...pillEndProps} />}

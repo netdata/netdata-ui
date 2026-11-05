@@ -4,7 +4,7 @@ import { Text } from "@/components/typography"
 import { Icon } from "@/components/icon"
 
 const borderProps = {
-  border: { side: "top", color: "disabled" },
+  border: { side: "top", color: "border" },
   padding: [6, 0, 0],
 }
 

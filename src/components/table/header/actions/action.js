@@ -33,7 +33,6 @@ const HeaderAction = ({
       handleAction={() => handleAction(selectedRows, table)}
       tooltipText={tooltipText}
       disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
-      background="elementBackground"
       selectedRows={selectedRows}
       disabledTooltipText={
         typeof disabledTooltipText === "function"

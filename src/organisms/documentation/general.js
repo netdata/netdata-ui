@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 import styled from "styled-components"
-import { getColor } from "@/theme"
+import { getColor, getSizeBy } from "@/theme"
 import { H5, Text } from "@/components/typography"
 import { Icon } from "@/components/icon"
 import { Button } from "@/components/button"
@@ -12,8 +12,8 @@ const Anchor = styled(Text).attrs({ as: "a", target: "_blank" })`
     color: ${getColor("primary")};
 
     &:hover {
-      color: ${getColor("accent")};
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: ${getSizeBy(0.25)};
     }
   }
 `
@@ -28,6 +28,7 @@ const Section = ({
   label,
   labelTransform,
   onClick,
+  primary = false,
 }) => (
   <Flex width="100%" column gap={2}>
     <Flex gap={2} alignItems="center">
@@ -41,6 +42,7 @@ const Section = ({
         onClick={onClick}
         label={label}
         data-testid={testid}
+        {...(!primary && { flavour: "hollow", neutral: true })}
         {...(labelTransform && { textTransform: labelTransform })}
         {...(url && { as: "a", target: "_blank", href: url })}
       />
@@ -103,7 +105,7 @@ const General = ({
             label="Learn to use the Dashboard"
             onClick={onDashboardClick}
           />
-          <Flex width="100%" height={{ min: "1px" }} background="disabled" />
+          <Flex width="100%" height={{ min: "1px" }} background="border" />
         </Fragment>
       )}
       <Section
@@ -115,6 +117,7 @@ const General = ({
         testid="documentation-link"
         label="Visit the docs"
         onClick={onVisitDocumentClick}
+        primary
       />
       <Section
         icon="unknownError"

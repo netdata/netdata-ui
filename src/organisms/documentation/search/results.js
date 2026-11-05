@@ -3,27 +3,54 @@ import styled from "styled-components"
 import { Tabs, Tab } from "@/components/tabs"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
-import { getColor } from "@/theme"
+import { getColor, getSizeBy } from "@/theme"
 
 const Link = styled.a`
   text-decoration: none;
 
-  &:hover,
+  &:hover {
+    color: ${getColor("primary")};
+    text-decoration: underline;
+    text-underline-offset: ${getSizeBy(0.25)};
+  }
+
   &:visited {
     color: ${getColor("primary")};
   }
 `
 
+const TitleLink = styled(Text).attrs({ as: "a", target: "_blank", strong: true })`
+  text-decoration: none;
+
+  &:hover {
+    color: ${getColor("primary")};
+  }
+`
+
+const Row = styled(Flex).attrs({ gap: 1, column: true, padding: [3, 0] })`
+  &:not(:last-child) {
+    border-bottom: 1px solid ${getColor("border")};
+  }
+
+  /* Elastic wraps matches in <em>; italics are hard to scan, bold ink is not. */
+  em {
+    font-style: normal;
+    font-weight: 600;
+    color: ${getColor("main")};
+  }
+`
+
 const Section = ({ title, description, url }) => (
-  <Flex gap={2} column>
-    <Text
-      strong
+  <Row>
+    <TitleLink
+      href={url}
       dangerouslySetInnerHTML={{
         __html: title?.snippet || title?.raw || "Untitled",
       }}
     />
     {!!description && (
       <Text
+        color="textLite"
         dangerouslySetInnerHTML={{
           __html: `${description?.snippet || description?.raw || "No description"}&hellip;`,
         }}
@@ -31,14 +58,14 @@ const Section = ({ title, description, url }) => (
     )}
     <Flex alignSelf="end">
       <Text as={Link} color="primary" href={url} target="_blank">
-        Read &rarr;
+        Read
       </Text>
     </Flex>
-  </Flex>
+  </Row>
 )
 
 const Container = props => (
-  <Flex overflow={{ vertical: "auto" }} padding={[6, 4]} gap={6} column {...props} />
+  <Flex overflow={{ vertical: "auto" }} padding={[2, 4]} column {...props} />
 )
 
 const StyledTabs = styled(Tabs)`
@@ -76,7 +103,8 @@ const SearchResults = ({ results }) => {
       overflow={{ vertical: "auto" }}
       data-testid="searchResults"
       flex
-      width="1000px"
+      // The layer is shrink-wrapped, so a % width would collapse; 136px = the layer's 68px side margins.
+      width={{ base: "1000px", max: "calc(100vw - 136px)" }}
       height="60vh"
     >
       <StyledTabs>

@@ -4,6 +4,8 @@ export interface TabProps {
   active?: boolean
   disabled?: boolean
   "data-testid"?: string
+  count?: number
+  icon?: string
   index?: number
   label: JSX.Element | string
   maxWidth?: number | string

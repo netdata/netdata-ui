@@ -42,7 +42,7 @@ const Menu = ({
       if (onChange) onChange(nextValue)
       if (closeOnClick) close()
     },
-    [onChange]
+    [onChange, closeOnClick, close]
   )
 
   const onClickOutside = useCallback(

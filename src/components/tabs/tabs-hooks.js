@@ -1,7 +1,7 @@
 import React, { Children, useState, useCallback, useMemo, useEffect } from "react"
 import { Tab } from "./tab"
 
-export const useBuildTabs = (children, activeIndex, onChange) => {
+export const useBuildTabs = (children, activeIndex, onChange, variant) => {
   return useMemo(() => {
     const indeces = []
     const nav = []
@@ -17,7 +17,16 @@ export const useBuildTabs = (children, activeIndex, onChange) => {
       const key = `${index}-${props.label}`
 
       if (tab) {
-        nav.push(<Tab key={key} {...props} onChange={onChange} index={index} active={isActive} />)
+        nav.push(
+          <Tab
+            key={key}
+            variant={variant}
+            {...props}
+            onChange={onChange}
+            index={index}
+            active={isActive}
+          />
+        )
       }
 
       if (isActive) {
@@ -29,7 +38,7 @@ export const useBuildTabs = (children, activeIndex, onChange) => {
     })
 
     return [nav, content, firstActiveIndex, activeIsDisabled]
-  }, [children, activeIndex, onChange])
+  }, [children, activeIndex, onChange, variant])
 }
 
 export const useSetActive = (selected = 0, onChange) => {

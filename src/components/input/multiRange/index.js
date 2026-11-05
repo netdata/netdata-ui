@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
-import { Range, Slider, SliderTrack } from "./styled"
+import { Range, Slider, SliderTrack, Values } from "./styled"
 
 const MultiRangeInput = ({
   initMax,
@@ -101,10 +101,10 @@ const MultiRangeInput = ({
           />
         </Slider>
       </Flex>
-      <Flex data-testid="multiRange-values" justifyContent="between">
+      <Values data-testid="multiRange-values" justifyContent="between">
         <TextComponent data-testid="multiRange-minValue">{minValue}</TextComponent>
         <TextComponent data-testid="multiRange-maxValue">{maxValue}</TextComponent>
-      </Flex>
+      </Values>
     </Flex>
   )
 }

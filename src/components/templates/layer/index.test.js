@@ -1,6 +1,7 @@
 import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
 import { DefaultTheme as theme } from "@/theme/default"
+import { DarkTheme } from "@/theme/dark"
 import Layer from "./index"
 
 const base = theme.constants.SIZE_SUB_UNIT
@@ -9,6 +10,17 @@ it("renders", () => {
   const { getByText, getByTestId } = renderWithProviders(<Layer>layer content</Layer>)
   expect(getByTestId("layer-backdropContainer")).toBeInTheDocument()
   expect(getByText("layer content")).toBeVisible()
+})
+
+it("pins the backdrop to the viewport, not to the page or a parent", () => {
+  const { getByTestId } = renderWithProviders(<Layer>layer content</Layer>)
+  const container = getByTestId("layer-backdropContainer")
+
+  expect(container).toHaveStyleRule("position", "fixed")
+  expect(container).toHaveStyleRule("inset", "0")
+  expect(container.parentElement.parentElement).toBe(document.body)
+  expect(getByTestId("layer-backdrop")).toHaveStyleRule("position", "absolute")
+  expect(getByTestId("layer-backdrop")).toHaveStyleRule("inset", "0")
 })
 
 it("renders without backdrop", () => {
@@ -159,4 +171,46 @@ it("sets margin on full layer", () => {
   expect(getByText("layer content")).toHaveStyleRule("right", `${base * 2}px`)
   expect(getByText("layer content")).toHaveStyleRule("bottom", `${base * 3}px`)
   expect(getByText("layer content")).toHaveStyleRule("left", `${base * 4}px`)
+})
+
+describe("backdrop and elevation", () => {
+  it("dims light pages with an ink-tinted scrim", () => {
+    const { getByTestId } = renderWithProviders(<Layer>layer content</Layer>)
+    expect(getByTestId("layer-backdrop")).toHaveStyleRule(
+      "background-color",
+      "rgba(53, 65, 74, 0.32)"
+    )
+  })
+
+  it("dims dark pages with a near-black scrim so the modal separates from grey15", () => {
+    const { getByTestId } = renderWithProviders(<Layer>layer content</Layer>, {
+      theme: DarkTheme,
+    })
+    expect(getByTestId("layer-backdrop")).toHaveStyleRule(
+      "background-color",
+      "rgba(8, 10, 10, 0.6)"
+    )
+  })
+
+  it("does not blur unless asked", () => {
+    const { getByTestId } = renderWithProviders(<Layer>layer content</Layer>)
+    expect(getByTestId("layer-backdrop")).not.toHaveStyleRule("backdrop-filter")
+  })
+
+  it("uses the shared modal shadow for borderShadow", () => {
+    const { getByText } = renderWithProviders(<Layer borderShadow>layer content</Layer>)
+    const c = theme.colors.dropdownShadow
+    expect(getByText("layer content")).toHaveStyleRule(
+      "box-shadow",
+      `0 16px 40px -8px ${c},0 2px 6px ${c}`
+    )
+  })
+
+  it("emits no stray closing brace in the backdrop rule", () => {
+    renderWithProviders(<Layer>layer content</Layer>)
+    const cssText = Array.from(document.querySelectorAll("style"))
+      .map(node => node.textContent)
+      .join("")
+    expect(cssText).not.toMatch(/}}/)
+  })
 })

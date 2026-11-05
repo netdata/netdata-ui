@@ -17,7 +17,7 @@ const makeLineHeight = size => () => `line-height: ${size};`
 const makeFontWeight =
   defaultStrong =>
   ({ strong = defaultStrong }) =>
-    `font-weight: ${strong ? "bold" : "normal"};`
+    `font-weight: ${strong ? 600 : "normal"};`
 export const fontColor = ({ theme, color = "text" }) => `color: ${getColor(color)({ theme })};`
 export const fontCode = ({ background = "text", code, color = "elementBackground", theme }) =>
   code &&
@@ -55,8 +55,10 @@ const typography = css`
   `}
 `
 
-export const makeTypography = (Component, { fontSize, lineHeight, strong }) => styled(Component)`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
+export const makeTypography = (Component, { fontSize, lineHeight, strong, color }) => styled(
+  Component
+).attrs(props => (color && props.color === undefined ? { color } : {}))`
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
   font-style: normal;
   ${makeFontSize(fontSize)}
   ${makeLineHeight(lineHeight)}
@@ -68,6 +70,7 @@ export const makeH0 = Component =>
     fontSize: "26px",
     lineHeight: "32px",
     strong: true,
+    color: "main",
   })
 
 export const makeH1 = Component =>
@@ -75,6 +78,7 @@ export const makeH1 = Component =>
     fontSize: "24px",
     lineHeight: "28px",
     strong: true,
+    color: "main",
   })
 
 export const makeH2 = Component =>
@@ -82,6 +86,7 @@ export const makeH2 = Component =>
     fontSize: "22px",
     lineHeight: "24px",
     strong: true,
+    color: "main",
   })
 
 export const makeH3 = Component =>
@@ -89,6 +94,7 @@ export const makeH3 = Component =>
     fontSize: "20px",
     lineHeight: "24px",
     strong: true,
+    color: "main",
   })
 
 export const makeH4 = Component =>
@@ -96,6 +102,7 @@ export const makeH4 = Component =>
     fontSize: "16px",
     lineHeight: "21px",
     strong: true,
+    color: "main",
   })
 
 export const makeH5 = Component =>
@@ -103,6 +110,7 @@ export const makeH5 = Component =>
     fontSize: "14px",
     lineHeight: "18px",
     strong: true,
+    color: "main",
   })
 
 export const makeH6 = Component =>
@@ -110,6 +118,7 @@ export const makeH6 = Component =>
     fontSize: "12px",
     lineHeight: "14px",
     strong: true,
+    color: "main",
   })
 
 // Text

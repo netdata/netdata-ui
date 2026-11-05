@@ -3,6 +3,7 @@ import alignItems from "@/components/templates/mixins/alignItems"
 import alignContent from "@/components/templates/mixins/alignContent"
 import justifyContent from "@/components/templates/mixins/justifyContent"
 import getMarginDimensions from "./mixins/getMarginDimensions"
+import { modalShadow } from "./mixins/elevation"
 
 const getCalc = (from, to) => {
   if (from !== "0" && to !== "0") return `calc((100% - ${from}) - ${to})`
@@ -78,8 +79,7 @@ const transform = ({ full, position }) => {
   return value && `transform: ${value};`
 }
 
-const boxShadow = ({ borderShadow }) =>
-  borderShadow && "box-shadow: 0px 2px 68px rgba(0, 0, 0, 0.288);"
+const boxShadow = props => props.borderShadow && `box-shadow: ${modalShadow(props)};`
 
 const zIndex = ({ zIndex = 35 }) => `z-index: ${zIndex};`
 

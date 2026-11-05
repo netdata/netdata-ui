@@ -1,7 +1,12 @@
 import React, { memo } from "react"
 import Flex from "@/components/templates/flex"
+import styled from "styled-components"
 import { Text } from "@/components/typography"
 import { IconButton } from "@/components/button"
+
+const Counter = styled(Text).attrs({ color: "textLite" })`
+  font-variant-numeric: tabular-nums;
+`
 
 const Pagination = ({ table }) => {
   const {
@@ -20,9 +25,11 @@ const Pagination = ({ table }) => {
     <Flex
       alignItems="center"
       justifyContent="end"
-      height="45px"
+      height="36px"
+      padding={[0, 2]}
+      gap={1}
       background="mainBackground"
-      border={{ side: "top", color: "borderSecondary" }}
+      border={{ side: "top", color: "border" }}
     >
       <IconButton
         title="First"
@@ -31,7 +38,7 @@ const Pagination = ({ table }) => {
         onClick={resetPageIndex}
         icon="chevron_left_start"
         iconSize="small"
-        tooltip="test"
+        tooltip="First"
         disabled={!getCanPreviousPage()}
       />
       <IconButton
@@ -44,9 +51,9 @@ const Pagination = ({ table }) => {
         tooltip="Previous"
         disabled={!getCanPreviousPage()}
       />
-      <Text data-testid={"pagination-counter"}>
-        Page {getPageCount() === 0 ? 0 : pageIndex} of {getPageCount()}
-      </Text>
+      <Counter data-testid={"pagination-counter"}>
+        Page {getPageCount() === 0 ? 0 : pageIndex + 1} of {getPageCount()}
+      </Counter>
       <IconButton
         title="Next"
         data-testid={"pagination-go-to-next"}

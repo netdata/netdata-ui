@@ -1,0 +1,62 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./confirmation-dialog.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Confirmation dialog
+
+A modal that asks the user to confirm or cancel one action. It renders a title, a message and a row of buttons on top of the page backdrop.
+
+## When to use
+
+- Use it before destructive or irreversible actions, e.g. deleting a node or removing a member.
+- Use the positive variant for confirmations that are not destructive, e.g. leaving a space.
+- For a form or any content beyond a short message, use `Modal` directly.
+- Don't use it for information the user only needs to read. Use a toast or an inline message.
+
+<Canvas of={Stories.Destructive} />
+
+## Variants
+
+- Destructive (default): warning icon and confirm button in the danger colour.
+- Positive: `isConfirmPositive` switches the icon to the brand colour and the confirm button to the default green button.
+- With middle action: pass `middleLabel` and `handleMiddle` for a third choice. The middle button is `hollow` and follows the danger or positive colour.
+- Without icon: `hideIcon`. Use `iconName` to change the icon.
+- Without decline: omit `handleDecline`. The cancel and header close buttons are not rendered, and Escape does nothing.
+
+<Canvas of={Stories.Positive} />
+
+## Message
+
+- A string is wrapped in `Text`.
+- An element is rendered as is, so you can bold the affected item: `Removes <strong>web-prod-03</strong>`.
+- Name the thing that will be affected and say whether it can be undone.
+
+## States
+
+- `isConfirmLoading` shows a spinner on the confirm button while the request runs. Pair it with `isDeclineDisabled` to block cancelling mid-request.
+- `isConfirmDisabled` disables the confirm button, e.g. until the user types the node name.
+- Disabled buttons fade to 40%.
+- Long titles wrap and stay clear of the close button.
+
+<Canvas of={Stories.Loading} />
+
+## Sizing
+
+- The dialog is 128 units wide by default (min 70, max 140) and never taller than the viewport minus 32px.
+- Buttons are 128px wide by default. Change them with `confirmWidth`, `declineWidth` and `middleWidth`.
+
+## Accessibility
+
+- Escape and the header close button both call `handleDecline`.
+- In a destructive dialog the cancel button is neutral, so red is the only accent. With `isConfirmPositive` it stays green.
+- Buttons are real buttons and reachable by keyboard; the green focus ring comes from `Button`.
+- The dialog does not set `role="dialog"` or trap focus.
+- Parts carry test ids built from `data-testid` (default `confirmationDialog`), e.g. `confirmationDialog-confirmAction`.
+
+## Do and don't
+
+- Do label the confirm button with the action: "Delete node", not "OK".
+- Do keep the title to a short question or statement.
+- Don't use the danger colour for non-destructive actions. Use `isConfirmPositive`.
+- Don't hide the decline option unless the user truly has no alternative.

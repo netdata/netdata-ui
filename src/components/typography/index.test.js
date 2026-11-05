@@ -35,10 +35,49 @@ it("renders", () => {
   })
 })
 
-it("renders headers as bold weight", () => {
+it("renders headers as semibold weight", () => {
   headers.forEach(Component => {
     const { container, unmount } = renderWithProviders(<Component>Typo content</Component>)
-    expect(container.firstChild).toHaveStyleRule("font-weight", "bold")
+    expect(container.firstChild).toHaveStyleRule("font-weight", "600")
+    unmount()
+  })
+})
+
+it("renders strong texts as semibold weight", () => {
+  texts.forEach(Component => {
+    const { container, unmount } = renderWithProviders(<Component strong>Typo content</Component>)
+    expect(container.firstChild).toHaveStyleRule("font-weight", "600")
+    unmount()
+  })
+})
+
+it("renders headers with strong false as normal weight", () => {
+  const { container } = renderWithProviders(<H1 strong={false}>Typo content</H1>)
+  expect(container.firstChild).toHaveStyleRule("font-weight", "normal")
+})
+
+it("keeps the heading and text size scale unchanged", () => {
+  const scale = [
+    [H0, "26px", "32px"],
+    [H1, "24px", "28px"],
+    [H2, "22px", "24px"],
+    [H3, "20px", "24px"],
+    [H4, "16px", "21px"],
+    [H5, "14px", "18px"],
+    [H6, "12px", "14px"],
+    [TextHuge, "24px", "32px"],
+    [TextBigger, "16px", "18px"],
+    [TextBig, "14px", "20px"],
+    [Text, "12px", "16px"],
+    [TextSmall, "11px", "14px"],
+    [TextMicro, "10px", "13px"],
+    [TextNano, "8px", "10px"],
+    [TextFemto, "7px", "8px"],
+  ]
+  scale.forEach(([Component, fontSize, lineHeight]) => {
+    const { container, unmount } = renderWithProviders(<Component>Typo content</Component>)
+    expect(container.firstChild).toHaveStyleRule("font-size", fontSize)
+    expect(container.firstChild).toHaveStyleRule("line-height", lineHeight)
     unmount()
   })
 })
@@ -55,7 +94,8 @@ it("renders typography default mixins", () => {
   typographies.forEach(Component => {
     const { container, unmount } = renderWithProviders(<Component>Typo content</Component>)
 
-    expect(container.firstChild).toHaveStyleRule("color", theme.colors.text)
+    const expectedColor = headers.includes(Component) ? theme.colors.main : theme.colors.text
+    expect(container.firstChild).toHaveStyleRule("color", expectedColor)
     expect(container.firstChild).not.toHaveStyleRule("align-self")
     expect(container.firstChild).not.toHaveStyleRule("margin")
     expect(container.firstChild).not.toHaveStyleRule("padding")
@@ -87,7 +127,7 @@ it("renders typography mixins", () => {
     )
 
     expect(container.firstChild).toHaveStyleRule("color", theme.colors.disabled)
-    expect(container.firstChild).toHaveStyleRule("font-weight", "bold")
+    expect(container.firstChild).toHaveStyleRule("font-weight", "600")
     expect(container.firstChild).toHaveStyleRule("align-self", "flex-end")
     expect(container.firstChild).toHaveStyleRule("margin", "8px 12px")
     expect(container.firstChild).toHaveStyleRule("padding", "0")
@@ -110,5 +150,22 @@ it("renders list mixins", () => {
     expect(container.firstChild).toHaveStyleRule("padding", "0")
 
     unmount()
+  })
+})
+
+describe("heading colour", () => {
+  it.each([H0, H1, H2, H3, H4, H5, H6])("headings default to the main ink colour", Heading => {
+    const { container } = renderWithProviders(<Heading>Node health</Heading>)
+    expect(container.firstChild).toHaveStyleRule("color", theme.colors.main)
+  })
+
+  it("keeps body text on the text colour", () => {
+    const { container } = renderWithProviders(<Text>12 nodes live</Text>)
+    expect(container.firstChild).toHaveStyleRule("color", theme.colors.text)
+  })
+
+  it("still lets a heading take an explicit colour", () => {
+    const { container } = renderWithProviders(<H3 color="textLite">Node health</H3>)
+    expect(container.firstChild).toHaveStyleRule("color", theme.colors.textLite)
   })
 })

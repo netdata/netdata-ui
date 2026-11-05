@@ -13,7 +13,7 @@ const PillIcon = ({ icon, color, hollow, flavour, size, ...rest }) => {
 
   return (
     <Icon
-      color={color || (hollow ? getPillColor("color", flavour) : "bright")}
+      color={color || getPillColor(hollow ? "color" : "filledText", flavour)}
       data-testid="pill-icon"
       height={sizes[size] || sizes.default}
       width={sizes[size] || sizes.default}

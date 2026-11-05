@@ -1,0 +1,53 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./icon.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Icon
+
+Renders one of the bundled SVG icons by `name`. The full list of names is in the IconsList story.
+
+## When to use
+
+- Use an icon to support a label, a status or an action, such as `alarm_bell` next to an alert.
+- Don't use an icon alone to carry meaning. Pair it with text, or give the control that holds it a tooltip or `aria-label`.
+- For a clickable icon, use `IconButton` so it gets hover, focus and disabled states.
+
+<Canvas of={Stories.Basic} />
+
+## Sizes
+
+- `small` is 14px, `medium` is 16px, `large` is 24px.
+- Without `size`, the size comes from the name: a name ending in `_s` is small, `_l` is large, anything else is medium.
+- `width` and `height` override the preset.
+
+<Canvas of={Stories.Sizes} />
+
+## Colour
+
+- Without `color` the icon inherits the current text colour, so it follows light and dark themes.
+- `color` and `hoverColor` take theme colour keys. Keep status colours for status.
+
+<Canvas of={Stories.InheritsTextColor} />
+
+## States
+
+- `disabled` fades the icon to 40% and removes pointer events.
+- `rotate` turns the icon in quarter turns, e.g. `rotate={2}` to flip a chevron.
+- An unknown `name` renders nothing, so check the name against the list.
+
+<Canvas of={Stories.States} />
+
+## Adding an icon
+
+- Add the `.svg` to `./assets` and export it from `iconsList.js`. Assets are not picked up automatically.
+
+## Accessibility
+
+- The icon is an `svg` with no role or label. Label the surrounding control, because the icon itself carries no accessible name.
+
+## Do and don't
+
+- Do let icons inherit colour from their text.
+- Do keep one size per row of icons.
+- Don't hard-code a fill colour in the SVG; the component sets `fill` itself.

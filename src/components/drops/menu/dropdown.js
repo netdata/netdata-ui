@@ -6,12 +6,10 @@ import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
-import { dropdownBorder, dropdownRound } from "../dropdownStyles"
+import { dropdownBorder, dropdownRound, floatingShadow } from "../dropdownStyles"
 
 const Container = styled(Flex)`
-  ${({ hideShadow }) =>
-    !hideShadow &&
-    "box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);"}
+  ${({ hideShadow }) => !hideShadow && floatingShadow}
   list-style-type: none;
 `
 
@@ -20,7 +18,7 @@ const defaultEstimateSize = () => 28
 const DefaultNoSearchResultsComponent = () => {
   return (
     <Flex padding={[2, 0]} justifyContent="center">
-      <Text>No results were found</Text>
+      <Text color="textLite">No results were found</Text>
     </Flex>
   )
 }
@@ -83,7 +81,7 @@ const Dropdown = ({
       border={dropdownBorder}
       round={dropdownRound}
       hideShadow={hideShadow}
-      padding={[0]}
+      padding={[1, 0]}
       margin={[1, 0]}
       column
       tabindex="-1"

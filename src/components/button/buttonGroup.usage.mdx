@@ -1,0 +1,54 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./buttonGroup.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# ButtonGroup
+
+Joins buttons into one segmented control. Use it for a small set of related choices or actions.
+
+## When to use
+
+- Pick one option from a short list, such as a time range (`1h`, `6h`, `24h`, `7d`).
+- Toggle several filters at once with `isMulti`, such as alert severities.
+- Group related actions (`Edit`, `Copy`) by passing `Button` children.
+- For more than five or six options, use a `Select` instead.
+
+<Canvas of={Stories.TimeRange} />
+
+## Modes
+
+- Single select: pass `items`, `value` and `onChange`. `onChange` receives the clicked item's `value`.
+- Multi select: add `isMulti` and pass an array as `value`. `onChange` receives the new array.
+- Children: pass `Button` children and no `items`. The group only joins the corners; it holds no state.
+
+<Canvas of={Stories.SeverityFilter} />
+
+## Look
+
+- The selected segment keeps its flavour (green by default). Unselected segments become `hollow` and `neutral`, so only the selection carries colour.
+- To colour every segment, pass `danger`, `warning` or `color` in `buttonProps`.
+- An item can override props with its own `buttonProps`, and set a native `title`.
+- `buttonProps` apply to every segment, so `{ large: true }` gives the 32px size.
+
+## Segmented variant
+
+- `variant="segmented"` draws the items on the same tinted track as contained tabs: a raised selected item, 22px items with 13px text.
+- Use it to switch a value in place, such as a time range or chart type. The default joined-button look stays the default.
+- It works with `items`, `value`, `onChange` and `isMulti`. `ButtonComponent` is not used, and `buttonProps` go to each native item button (for example `{ disabled: true }`).
+- Each item sets `aria-pressed` to show whether it is selected.
+
+<Canvas of={Stories.SegmentedVariant} />
+
+## Accessibility
+
+- Each segment is a real `button`, reachable by Tab and activated with Enter or Space.
+- The default look does not set `aria-pressed` or a radiogroup role. Give each item a clear label or `title`.
+- The segmented variant sets `aria-pressed` on each item and `role="group"` on the track; pass an `aria-label` for the group.
+
+## Do and don't
+
+- Do keep labels short and of similar length.
+- Do keep the selection controlled by your own state.
+- Don't mix `items` and children; `items` wins.
+- Don't use it for navigation between pages. Use tabs.

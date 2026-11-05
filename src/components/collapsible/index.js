@@ -13,8 +13,13 @@ const Animated = styled(Flex).attrs(props => ({
   column: true,
   ...props,
 }))`
-  transition: ${({ duration, measurement }) => `max-${measurement} ${duration}ms ease-in-out`};
+  transition: ${({ duration, measurement }) => `max-${measurement} ${duration}ms ease-out`};
   ${({ measurement, maxDimension }) => `max-${measurement}: ${maxDimension}`};
+
+  /* The JS timeout still settles the dimension, so content just appears without motion. */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 const Collapsible = ({

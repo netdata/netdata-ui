@@ -22,7 +22,6 @@ const Backdrop = styled(Box).attrs(props => ({
   inset: 0;
   pointer-events: all;
   ${backdropBlur};
-}
 `
 
 const defaultAlignValue = { top: "bottom", left: "left" }

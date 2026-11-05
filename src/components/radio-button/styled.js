@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import { getColor } from "@/theme/utils"
+import { getColor, getSizeBy } from "@/theme/utils"
 import margin from "@/mixins/margin"
 import alignItems from "@/components/templates/mixins/alignItems"
 import alignSelf from "@/mixins/alignSelf"
 import { Icon } from "@/components/icon"
+import { focusRingOutline } from "@/mixins/focusRing"
 import disabled from "./mixins/disabled"
 
 export const Input = styled.input`
@@ -42,11 +43,24 @@ export const IconContainer = styled.div`
   border: 1px solid ${props => getColor(props.borderColor)(props)};
   border-radius: 100%;
   background: ${props => getColor(props.background)(props)};
+  transition: border-color 140ms ease-out;
 
   ${margin}
+
+  ${Container}:hover ${Input}:not(:checked) + & {
+    border-color: ${getColor("text")};
+  }
+
+  ${Input}:focus-visible + & {
+    ${focusRingOutline}
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 export const StyledIcon = styled(Icon)`
   fill: ${props => getColor(props.color)(props)};
-  height: 8px;
-  width: 8px;
+  height: ${getSizeBy(0.75)};
+  width: ${getSizeBy(0.75)};
 `

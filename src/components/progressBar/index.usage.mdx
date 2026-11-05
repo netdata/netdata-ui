@@ -1,0 +1,50 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# ProgressBar
+
+A thin horizontal bar that shows how much of a whole is used. It has one filled part, or several stacked segments.
+
+## When to use
+
+- Use it to compare shares or levels in a list, such as disk or memory usage per node.
+- Don't use it for an unknown duration. It has no indeterminate state; use a loader instead.
+
+<Canvas of={Stories.Statuses} />
+
+## Single value
+
+- Pass `width` as a percentage and `color` as a theme colour key. The default colour is `text`.
+- Use `primary` for healthy, `warning` and `error` for thresholds. Keep status colours for status.
+
+## Stacked segments
+
+- Pass `value` as a list of `{ color, width }`. Segments render in order from the left.
+- `value` wins over `width` and `color`. A segment with `0%` width is not rendered.
+- A one pixel seam in the track colour separates adjacent segments.
+
+<Canvas of={Stories.WithValue} />
+
+## Sizes
+
+- `height` is in 4px units. The default `2` is 8px, `1` is 4px.
+- `containerWidth` sets the track width and defaults to `100%`. Place the bar in a fixed-width cell so rows line up.
+
+<Canvas of={Stories.Sizes} />
+
+## States
+
+- Width changes animate over 160ms, and the animation is off when the user prefers reduced motion.
+- There is no hover, focus or disabled state.
+
+## Accessibility
+
+- The bar renders plain elements and sets no `role="progressbar"` or `aria-valuenow`. Always show the value as text next to it, as in the stories.
+
+## Do and don't
+
+- Do put the label and the numeric value beside the bar.
+- Do use the same `containerWidth` for bars that are compared.
+- Don't rely on colour alone to show a threshold.

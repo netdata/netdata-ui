@@ -11,7 +11,7 @@ describe("PillIcon component", () => {
   test("should render default component", () => {
     renderWithProviders(<PillIcon icon="alarm_bell" />)
     expect(screen.queryByTestId("pill-icon")).toBeInTheDocument()
-    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("color", "bright")
+    expect(screen.queryByTestId("pill-icon")).toHaveAttribute("color", "text")
     expect(screen.queryByTestId("pill-icon")).toHaveAttribute("height", "14px")
     expect(screen.queryByTestId("pill-icon")).toHaveAttribute("width", "14px")
   })

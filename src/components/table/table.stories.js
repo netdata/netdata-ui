@@ -533,7 +533,9 @@ export const ColumnReordering = () => {
 
   return (
     <Box width="800px">
-      <Text>Drag column headers to reorder columns. Current order: {columnOrder.join(", ") || "default"}</Text>
+      <Text>
+        Drag column headers to reorder columns. Current order: {columnOrder.join(", ") || "default"}
+      </Text>
       <Table
         enableColumnReordering
         columnOrder={columnOrder}
@@ -576,7 +578,10 @@ export const ColumnReorderingWithPinning = () => {
 
   return (
     <Box width="1000px">
-      <Text>Columns can only be reordered within their pinned group. Checkbox and Actions columns are not draggable.</Text>
+      <Text>
+        Columns can only be reordered within their pinned group. Checkbox and Actions columns are
+        not draggable.
+      </Text>
       <Table
         enableColumnReordering
         enableColumnPinning
@@ -706,10 +711,397 @@ const mockData = () => [
   { nodes: "node30", alerts: 22, user: "decker", status: "online", untouchable: "false" },
 ]
 
+const prop = (category, description, type, defaultValue, control = false) => ({
+  description,
+  control,
+  table: {
+    category,
+    type: { summary: type },
+    ...(defaultValue === undefined ? {} : { defaultValue: { summary: defaultValue } }),
+  },
+})
+
+const argTypes = {
+  // Data
+  data: prop("Data", "Array of row objects. Rows with a `children` array become expandable sub-rows.", "Array<object>", undefined, "object"),
+  dataColumns: prop("Data", "Column definitions (TanStack `ColumnDef`: `id`, `header`, `cell`, `accessorKey`, `size`, `enableColumnFilter`, `filterFn`).", "Array<ColumnDef>", undefined, "object"),
+  getRowId: prop("Data", "Returns a stable id for a row. Required in large-data mode; recommended whenever selection or expansion is controlled.", "(row, index) => string"),
+  title: prop("Data", "Title rendered in the table header.", "ReactNode", undefined, "text"),
+  onSearch: prop("Data", "Shows the search field in the header and is called with the query. The built-in filter matches any string column.", "(value) => void"),
+  globalFilter: prop("Data", "Initial search query.", "string", '""', "text"),
+  globalFilterFn: prop("Data", "Custom global filter function.", "FilterFnOption", "includesString"),
+  enableCustomSearch: prop("Data", "Skips the built-in filtering so the search query can be applied to `data` outside the table.", "boolean", "undefined", "boolean"),
+  testPrefix: prop("Data", "Prefix for the `data-testid` attributes of the table parts.", "string", '""', "text"),
+  testPrefixCallback: prop("Data", "Per-row test id generator, used when the id depends on row values.", "(rowData) => string"),
+  dataGa: prop("Data", "Value for the `data-ga` attributes of header controls.", "string", undefined, "text"),
+  tableRef: prop("Data", "Ref that receives the TanStack table instance.", "MutableRefObject<Table>"),
+
+  // Selection
+  enableSelection: prop("Selection", "Adds a checkbox column (and a select-all checkbox in the header).", "boolean", "undefined", "boolean"),
+  singleRowSelection: prop("Selection", "Renders a radio-style cell so only one row can be selected.", "boolean", "undefined", "boolean"),
+  enableSubRowSelection: prop("Selection", "Selecting a parent row also selects its sub-rows.", "boolean", "undefined", "boolean"),
+  rowSelection: prop("Selection", "Selected rows keyed by row id, e.g. `{ \"prod-web-02\": true }`.", "Record<string, boolean>", "{}", "object"),
+  onRowSelectionChange: prop("Selection", "Called with the new selection map.", "(rowSelection) => void"),
+  onRowSelected: prop("Selection", "Called with the selected rows' data when the selection changes.", "(rows) => void"),
+
+  // Sorting
+  enableSorting: prop("Sorting", "Makes column headers sortable. Hold Shift, Ctrl or Cmd to sort by several columns.", "boolean", "undefined", "boolean"),
+  sortBy: prop("Sorting", "Initial/controlled sorting state.", "Array<{ id: string, desc?: boolean }>", undefined, "object"),
+  onSortingChange: prop("Sorting", "Called with the new sorting state.", "(sorting) => void"),
+  manualSorting: prop("Sorting", "Skips client-side sorting, for server-side sorted data.", "boolean", "false", "boolean"),
+  coloredSortedColumn: prop("Sorting", "Tints the cells of the sorted column.", "boolean", "true", "boolean"),
+
+  // Grouping
+  groupByColumns: prop("Grouping", "Group-by options keyed by column id: `{ status: { name: \"Status\", columns: [\"status\"] } }`. Renders the \"Group by\" select.", "Record<string, { name?: string, columns: string[] }>", undefined, "object"),
+  grouping: prop("Grouping", "Key of the active `groupByColumns` entry (empty string for none).", "string", '""', "text"),
+  onGroupByChange: prop("Grouping", "Called with the chosen `groupByColumns` key.", "(key) => void"),
+  enableGroupByControl: prop("Grouping", "Shows the \"Group by\" select when `groupByColumns` is set.", "boolean", "true", "boolean"),
+  expanded: prop("Grouping", "Expanded rows keyed by row id, or `true` for all.", "Record<string, boolean> | true", "{}", "object"),
+  onExpandedChange: prop("Grouping", "Called with the new expanded state.", "(expanded) => void"),
+  getRowCanExpand: prop("Grouping", "Decides whether a row can expand. Pair it with `onClickRow` and `row.toggleExpanded()`.", "(row) => boolean"),
+  autoResetExpanded: prop("Grouping", "Collapses rows when data changes.", "boolean", "false", "boolean"),
+
+  // Pinning
+  enableColumnPinning: prop("Pinning", "Lets users pin columns from the column menu.", "boolean", "false", "boolean"),
+  columnPinning: prop("Pinning", "Pinned column ids per side. Use the `checkbox` and `actions` ids for the built-in columns.", "{ left?: string[], right?: string[] }", undefined, "object"),
+  onColumnPinningChange: prop("Pinning", "Called with the new pinning state.", "(pinning) => void"),
+
+  // Pagination
+  enablePagination: prop("Pagination", "Shows the pager and paginates rows client-side. Without it every row is rendered in the scroll area.", "boolean", "undefined", "boolean"),
+  paginationOptions: prop("Pagination", "Initial page and page size.", "{ pageIndex: number, pageSize: number }", "{ pageIndex: 0, pageSize: 100 }", "object"),
+  onPaginationChange: prop("Pagination", "Called with the new pagination state.", "(pagination) => void"),
+
+  // Actions
+  bulkActions: prop("Actions", "Header buttons enabled while rows are selected. Built-in keys: delete, download, toggleAlarm, userSettings, addEntry, remove, columnVisibility. Each takes `handleAction(rows, table)` plus optional icon, tooltipText and confirmation texts.", "Record<string, { handleAction, icon?, confirmation?, tooltipText? }>", undefined, "object"),
+  rowActions: prop("Actions", "Per-row icon buttons in a trailing `actions` column. Built-in keys: delete, edit, replace, info, toggleAlarm, userSettings, remove, goto. Each takes `handleAction(rowData, table)`, optional `isDisabled` and `isVisible`.", "Record<string, { handleAction, isDisabled?, isVisible? }>", "{}", "object"),
+  onClickRow: prop("Actions", "Makes rows clickable. Called with `{ data, table, fullRow }`.", "({ data, table, fullRow }, event) => void"),
+  disableClickRow: prop("Actions", "Returns true for rows that should not react to `onClickRow`.", "({ data, table, fullRow }) => boolean"),
+  onHoverCell: prop("Actions", "Called with `{ row }` (the row index) on mouse enter.", "({ row }) => void"),
+  headerChildren: prop("Actions", "Extra content rendered in the table header.", "ReactNode"),
+  headerActionsBeforeChildren: prop("Actions", "Renders the header actions before `headerChildren`.", "boolean", "false", "boolean"),
+
+  // Virtualization / large data
+  virtualizeOptions: prop("Virtualization/large data", "Options for the virtualised body: `overscan`, `loading`, `warning`, `loadMore`, `getHasNextPage`, `getHasPrevPage`, `getItemKey`, `initialOffset`, `onScroll`, `onVirtualChange`, `virtualRef`, `deferRowMount`, `RowPlaceholder`, `placeholdersLength`.", "TableVirtualizeOptions", "{}", "object"),
+  largeDataOptions: prop("Virtualization/large data", "Switches to large-data mode: sorting, filtering and grouping run through a row source and only a window of rows is rendered. Needs `enabled: true` and `getRowId`, or a `source` from `createLargeDataSource`.", "{ enabled?, source?, filterRow?, sortingFns?, getEstimatedRowHeight?, initialRowCount? }", undefined, "object"),
+  RowWrapper: prop("Virtualization/large data", "Component wrapping every rendered row.", "ComponentType<{ children, row, virtualIndex, logicalIndex? }>"),
+
+  // Appearance
+  bordered: prop("Appearance", "Draws a border and rounded corners around the table.", "boolean", "true", "boolean"),
+  width: prop("Appearance", "Width of the table container.", "string", undefined, "text"),
+  className: prop("Appearance", "Class name for the table container.", "string", undefined, "text"),
+  meta: prop("Appearance", "Style overrides: `cellStyles`, `headStyles`, `searchStyles`, `searchContainerStyles`, `bulkActionsStyles`, `groupByContainerStyles`, `groupBySelectStyles`. May be a function.", "TableMeta | (...args) => TableMeta", "{}", "object"),
+  enableColumnVisibility: prop("Appearance", "Adds a column menu to show or hide columns. A column opts out with `enableHiding: false`.", "boolean", "false", "boolean"),
+  columnVisibility: prop("Appearance", "Visibility map keyed by column id, e.g. `{ agent: false }`.", "Record<string, boolean>", undefined, "object"),
+  columnVisibilityFlavour: prop("Appearance", "Button flavour of the column menu trigger.", '"borderless" | "hollow"', undefined, { type: "inline-radio" }),
+  onColumnVisibilityChange: prop("Appearance", "Called with the new visibility map.", "(visibility) => void"),
+  enableResizing: prop("Appearance", "Lets users drag column borders to resize. Width comes from each column's `size`.", "boolean", "false", "boolean"),
+  columnSizing: prop("Appearance", "Column widths keyed by column id.", "Record<string, number>", undefined, "object"),
+  onColumnSizingChange: prop("Appearance", "Called with the new sizing map.", "(sizing) => void"),
+  enableColumnReordering: prop("Appearance", "Lets users drag column headers to reorder them.", "boolean", "false", "boolean"),
+  columnOrder: prop("Appearance", "Column ids in display order.", "string[]", "[]", "object"),
+  onColumnOrderChange: prop("Appearance", "Called with the new column order.", "(order) => void"),
+  overflowTooltip: prop("Appearance", "Options for the tooltip that shows truncated cell text: `delay`, `align`, `selector`, `getContent`, `renderContent`, `zIndex`.", "OverflowTooltipOptions", undefined, "object"),
+}
+
 export default {
+  title: "Components/Table",
   component: Table,
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A data table built on TanStack Table with selection, sorting, grouping, column pinning, pagination, row and bulk actions, and a virtualised body. Use it for lists of nodes, alerts or users that need comparison and bulk work.",
+      },
+    },
+  },
+  argTypes,
   args: {
     data: mockData(),
     dataColumns: mockDataColumns,
   },
 }
+
+const statusColors = { live: "primary", stale: "warning", offline: "textLite" }
+
+const Numeric = ({ children, color }) => (
+  <Flex width="100%" justifyContent="end">
+    <Text color={color}>{children}</Text>
+  </Flex>
+)
+
+const nodeColumns = [
+  {
+    id: "name",
+    header: "Name",
+    name: "Name",
+    size: 180,
+    cell: ({ getValue, row }) => (
+      <Text color="main" padding={[0, 0, 0, row.depth * 4]}>
+        {getValue()}
+      </Text>
+    ),
+  },
+  {
+    id: "status",
+    header: "Status",
+    name: "Status",
+    size: 100,
+    cell: ({ getValue }) =>
+      getValue() ? <Text color={statusColors[getValue()]}>{getValue()}</Text> : null,
+  },
+  {
+    id: "cpu",
+    header: "CPU %",
+    name: "CPU %",
+    size: 100,
+    cell: ({ getValue }) => <Numeric>{getValue() == null ? "—" : getValue().toFixed(1)}</Numeric>,
+  },
+  {
+    id: "memory",
+    header: "Memory GiB",
+    name: "Memory GiB",
+    size: 120,
+    cell: ({ getValue }) => <Numeric>{getValue() == null ? "—" : getValue().toFixed(1)}</Numeric>,
+  },
+  {
+    id: "alerts",
+    header: "Alerts",
+    name: "Alerts",
+    size: 80,
+    cell: ({ getValue }) => (
+      <Numeric color={getValue() > 1 ? "error" : getValue() === 1 ? "warning" : "textLite"}>
+        {getValue()}
+      </Numeric>
+    ),
+  },
+  {
+    id: "agent",
+    header: "Agent",
+    name: "Agent",
+    size: 100,
+    cell: ({ getValue }) => <Text>{getValue()}</Text>,
+  },
+]
+
+const nodeRows = [
+  {
+    id: "k8s-prod",
+    name: "k8s-prod",
+    alerts: 3,
+    children: [
+      {
+        id: "prod-web-01",
+        name: "prod-web-01",
+        status: "live",
+        cpu: 42.1,
+        memory: 3.2,
+        alerts: 0,
+        agent: "v2.1.0",
+      },
+      {
+        id: "prod-web-02",
+        name: "prod-web-02",
+        status: "live",
+        cpu: 87.6,
+        memory: 6.9,
+        alerts: 2,
+        agent: "v2.1.0",
+      },
+      {
+        id: "prod-db-01",
+        name: "prod-db-01",
+        status: "stale",
+        cpu: 12.4,
+        memory: 14.1,
+        alerts: 1,
+        agent: "v2.0.3",
+      },
+    ],
+  },
+  { id: "edge-gw-07", name: "edge-gw-07", status: "offline", alerts: 0, agent: "v1.44.3" },
+  {
+    id: "lab-rpi-3",
+    name: "lab-rpi-3",
+    status: "live",
+    cpu: 5,
+    memory: 0.5,
+    alerts: 0,
+    agent: "v2.1.0",
+  },
+  ...Array.from({ length: 12 }, (_, index) => ({
+    id: `worker-${index}`,
+    name: `worker-${index}`,
+    status: index % 5 === 0 ? "stale" : "live",
+    cpu: (index * 7.3) % 100,
+    memory: 1 + index * 0.75,
+    alerts: index % 4 === 0 ? 1 : 0,
+    agent: "v2.1.0",
+  })),
+]
+
+const nodeTableProps = {
+  data: nodeRows,
+  dataColumns: nodeColumns,
+  getRowId: row => row.id,
+  enableSorting: true,
+  sortBy: [{ id: "cpu", desc: true }],
+  enableSelection: true,
+  enableResizing: true,
+  enableColumnPinning: true,
+  columnPinning: { left: ["checkbox", "name"] },
+  enableColumnVisibility: true,
+  onSearch: () => {},
+  getRowCanExpand: row => !!row.original.children,
+  onClickRow: () => {},
+  rowActions: {
+    goto: { handleAction: () => {} },
+    edit: { handleAction: () => {} },
+  },
+  bulkActions: { download: { handleAction: () => {} }, delete: { handleAction: () => {} } },
+}
+
+// Group, offline, stale and alert rows all sit in the first nine entries; 12 rows fit one screen.
+const nodeStatesRows = nodeRows.slice(0, 9)
+
+export const NodeStates = () => {
+  const [rowSelection, setRowSelection] = useState({ "prod-web-02": true })
+  const [expanded, setExpanded] = useState({ "k8s-prod": true })
+
+  return (
+    // No fixed height: the table grows to its rows, so the last row is never cut mid-height.
+    <Flex column gap={2} width="920px">
+      <Text color="textLite">
+        Sorted by CPU, pinned name, a selected row, an expanded group with sub-rows, hover any row.
+      </Text>
+      <Table
+        {...nodeTableProps}
+        data={nodeStatesRows}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
+        expanded={expanded}
+        onExpandedChange={setExpanded}
+      />
+    </Flex>
+  )
+}
+
+export const NodePagination = () => (
+  <Flex width="920px" height="360px">
+    <Table {...nodeTableProps} enablePagination paginationOptions={{ pageIndex: 0, pageSize: 5 }} />
+  </Flex>
+)
+
+export const NodeLoadingAndWarning = () => (
+  <Flex column gap={4} width="920px">
+    <Flex height="240px">
+      <Table {...nodeTableProps} virtualizeOptions={{ loading: true }} />
+    </Flex>
+    <Flex height="240px">
+      <Table
+        {...nodeTableProps}
+        virtualizeOptions={{
+          warning: "Showing the first 15 nodes",
+          getHasNextPage: () => false,
+        }}
+      />
+    </Flex>
+  </Flex>
+)
+
+export const NodeEmpty = () => (
+  <Flex width="920px" height="200px">
+    <Table {...nodeTableProps} data={[]} />
+  </Flex>
+)
+
+const groupColumns = [
+  { id: "name", accessorKey: "name", header: "Name", name: "Name", size: 200 },
+  { id: "status", accessorKey: "status", header: "Status", name: "Status", size: 120 },
+  { id: "agent", accessorKey: "agent", header: "Agent", name: "Agent", size: 120 },
+  { id: "alerts", accessorKey: "alerts", header: "Alerts", name: "Alerts", size: 100 },
+]
+
+const groupRows = nodeRows
+  .filter(row => !row.children)
+  .map(row => ({ ...row, status: row.status || "live" }))
+  .slice(0, 10)
+
+const groupByColumns = {
+  status: { name: "Status", columns: ["status"] },
+  agent: { name: "Agent version", columns: ["agent"] },
+}
+
+export const Grouping = () => {
+  const [grouping, setGrouping] = useState("status")
+
+  return (
+    <Flex width="720px" height="420px">
+      <Table
+        data={groupRows}
+        dataColumns={groupColumns}
+        getRowId={row => row.id}
+        groupByColumns={groupByColumns}
+        grouping={grouping}
+        onGroupByChange={setGrouping}
+        enableSorting
+      />
+    </Flex>
+  )
+}
+
+export const ColumnVisibility = () => {
+  const [columnVisibility, setColumnVisibility] = useState({ agent: false })
+
+  return (
+    <Flex width="920px" height="320px">
+      <Table
+        {...nodeTableProps}
+        enableSelection={false}
+        bulkActions={undefined}
+        rowActions={undefined}
+        enableColumnVisibility
+        columnVisibility={columnVisibility}
+        onColumnVisibilityChange={setColumnVisibility}
+      />
+    </Flex>
+  )
+}
+
+const largeNodeRows = Array.from({ length: 5000 }, (_, index) => ({
+  id: `node-${index}`,
+  name: `node-${String(index).padStart(4, "0")}`,
+  status: index % 7 === 0 ? "stale" : index % 11 === 0 ? "offline" : "live",
+  cpu: (index * 7.3) % 100,
+  alerts: index % 13 === 0 ? 2 : 0,
+}))
+
+const largeNodeColumns = [
+  { id: "name", accessorKey: "name", header: "Name", name: "Name", size: 200 },
+  { id: "status", accessorKey: "status", header: "Status", name: "Status", size: 120 },
+  {
+    id: "cpu",
+    accessorKey: "cpu",
+    header: "CPU %",
+    name: "CPU %",
+    size: 100,
+    cell: ({ getValue }) => <Numeric>{getValue().toFixed(1)}</Numeric>,
+  },
+  { id: "alerts", accessorKey: "alerts", header: "Alerts", name: "Alerts", size: 100 },
+]
+
+export const LargeData = () => (
+  <Flex column gap={2} width="720px">
+    <Text color="textLite">5,000 nodes. Only the visible window is rendered; sorting stays fast.</Text>
+    <Flex height="360px">
+      <Table
+        data={largeNodeRows}
+        dataColumns={largeNodeColumns}
+        getRowId={row => row.id}
+        largeDataOptions={{ enabled: true }}
+        enableSorting
+        sortBy={[{ id: "cpu", desc: true }]}
+      />
+    </Flex>
+  </Flex>
+)

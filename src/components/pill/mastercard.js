@@ -1,6 +1,7 @@
 import React from "react"
 import MasterCardPill from "./mastercardPill"
 import { getMasterCardBackground } from "./mixins/background"
+import { getSegmentRound, SEGMENT_GAP } from "./mixins/segment"
 import { MasterCardContainer } from "./styled"
 
 const minWidths = {
@@ -23,45 +24,46 @@ const MasterCard = ({
   ref,
   ...rest
 }) => {
-  const commonProps = { height, round, size }
+  const commonProps = { height, size }
   const pillProps = { normal, ...commonProps, ...rest }
-
-  const pillRightBackground = getMasterCardBackground(
-    pillRight.background,
-    pillRight.flavour || "disabledWarning"
-  )
-  const pillEndBackground =
-    pillEnd && getMasterCardBackground(pillEnd.background, pillEnd.flavour || "disabledClear")
+  const minWidth = { min: minWidths[size] || minWidths.default }
+  const count = pillEnd ? 3 : 2
 
   const pillLeftProps = {
     background: getMasterCardBackground(pillLeft.background, pillLeft.flavour || "disabledError"),
     position: "relative",
-    width: { min: minWidths[rest.size] || minWidths.default },
+    width: minWidth,
+    round: getSegmentRound(0, count, round),
     ...pillProps,
     ...pillLeft,
-    zIndex: 3,
   }
   const pillRightProps = {
-    background: pillRightBackground,
-    margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
-    padding: [0, 2, 0, size === "large" ? 5 : 4],
-    width: { min: minWidths[rest.size] || minWidths.default },
+    background: getMasterCardBackground(
+      pillRight.background,
+      pillRight.flavour || "disabledWarning"
+    ),
+    width: minWidth,
+    round: getSegmentRound(1, count, round),
     ...pillProps,
     ...pillRight,
-    zIndex: 2,
   }
   const pillEndProps = pillEnd && {
-    background: pillEndBackground,
-    margin: [0, 0, 0, size === "large" ? -4.5 : -3.5],
-    padding: [0, 2, 0, size === "large" ? 5 : 4],
-    width: { min: minWidths[rest.size] || minWidths.default },
+    background: getMasterCardBackground(pillEnd.background, pillEnd.flavour || "disabledClear"),
+    width: minWidth,
+    round: getSegmentRound(2, count, round),
     ...pillProps,
     ...pillEnd,
-    zIndex: 1,
   }
 
   return (
-    <MasterCardContainer data-testid={testId} onClick={onClick} ref={ref} {...commonProps}>
+    <MasterCardContainer
+      data-testid={testId}
+      gap={SEGMENT_GAP}
+      onClick={onClick}
+      ref={ref}
+      round={round}
+      {...commonProps}
+    >
       {children || (
         <>
           <MasterCardPill data-testid={`${testId}-left-pill`} {...pillLeftProps} />

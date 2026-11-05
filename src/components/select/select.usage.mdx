@@ -1,0 +1,49 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Select
+
+A themed dropdown built on react-select. It accepts react-select props such as `options`, `value`, `onChange`, `isMulti` and `isClearable`.
+
+## When to use
+
+- Use it to choose one or several values from a known list.
+- Use `isCreatable` when users may add values outside the list.
+- Use `Menu` for actions and `TextInput` for free text.
+
+Options are `{ label, value }`. Add `icon` to show an icon before the label, and `isDisabled` to lock one option.
+
+<Canvas of={Stories.States} />
+
+## Variants
+
+- Single select (default).
+- `isMulti`: selected values show as chips; a chip with `isDisabled` is locked.
+- `isCreatable`: typing offers a "create" option and calls `onCreateOption`.
+
+<Canvas of={Stories.Multi} />
+
+## Size
+
+- The control is 28px tall with 13px text and a 10px inset, so it lines up with default `Button`, `TextInput` and `Search` controls.
+- Options are 28px rows with 13px text; multi-value chips are 20px with 12px text.
+
+## States
+
+- Keyboard focus shows the green focus ring.
+- `isDisabled` fades the control to 40%.
+- `isClearable` adds a clear button.
+- The option list is virtualized, so long lists stay fast.
+
+## Accessibility
+
+- Keyboard handling comes from react-select: arrows move, Enter selects, Escape closes.
+- Pair it with a visible label; the component does not render one.
+- `data-testid` and `data-ga` are applied to its inner parts with the part name appended.
+
+## Do and don't
+
+- Do give it a width; it fills its container.
+- Don't use it for two or three options that fit as buttons.

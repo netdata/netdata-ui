@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components"
-import { lighten, darken } from "polished"
+import { mix, getContrast, rgba } from "polished"
 import { getColor as themeGetColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
+import { focusRing } from "@/mixins/focusRing"
+import { controlSizeOf, controlHeight, controlFontSize } from "@/mixins/controlSize"
 import margin from "@/mixins/margin"
 import padding from "@/mixins/padding"
 import round from "@/mixins/round"
@@ -8,7 +10,11 @@ import alignSelf from "@/mixins/alignSelf"
 import textTransform from "@/mixins/textTransform"
 import position from "@/mixins/position"
 import { position as styledSystemPosition } from "styled-system"
-import { DEFAULT, HOLLOW, BORDER_LESS } from "./constants"
+import { DEFAULT, HOLLOW, BORDER_LESS, LINK } from "./constants"
+
+// Buttons size by the boolean `large`/`compact` props only.
+const buttonSize = ({ large, compact }) => controlSizeOf({ large, compact })
+const buttonHeight = props => controlHeight(buttonSize(props))(props)
 
 const themes = {
   light: DefaultTheme,
@@ -19,7 +25,6 @@ const activeStyles = css`
   border-color: ${props => props.colors.borderActive(props)};
   background-color: ${props => props.colors.bgActive(props)};
   color: ${props => props.colors.colorActive(props)};
-  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const withTheme = props => {
@@ -32,84 +37,128 @@ const withTheme = props => {
   return { ...props, theme: props.theme }
 }
 
+// A colorPalette written before primaryHover/primaryPressed existed maps those states via accent/primaryHighlight.
+const legacyPaletteKeys = { primaryHover: "accent", primaryPressed: "primaryHighlight" }
+
 const getColor = name => props => {
-  const prop = props?.colorPalette?.[name] || name
+  const palette = props?.colorPalette
+  const prop = palette?.[name] || palette?.[legacyPaletteKeys[name]] || name
   return themeGetColor(prop)(props)
 }
 
+const getTransparent = getColor(["transparent", "full"])
+
+const isNeutral = props => !!props.neutral
+
 const getPrimaryColor = props =>
-  props.neutral
+  isNeutral(props)
     ? getColor(props.flavour === HOLLOW ? "textFocus" : "neutralPillColor")(props)
     : getColor("primary")(props)
 
 const getBorderColor = props =>
-  props.neutral ? getColor("generic")(props) : getColor("primary")(props)
+  isNeutral(props) ? getColor("generic")(props) : getColor("primary")(props)
 const getTextColor = props =>
-  props.neutral
+  isNeutral(props)
     ? getColor(props.flavour === HOLLOW ? "text" : "mainBackground")(props)
     : getColor(props.flavour === HOLLOW ? "secondaryColor" : "mainBackground")(props)
 const getBorderHoverColor = props =>
-  props.neutral ? getColor("inputBorderHover")(props) : getColor("primary")(props)
+  isNeutral(props) ? getColor("placeholder")(props) : getColor("primaryHover")(props)
+const getBorderPressedColor = props =>
+  isNeutral(props) ? getColor("placeholder")(props) : getColor("primaryPressed")(props)
+
+// One hover step and one more pressed step toward the ink colour: darker on light, lighter on dark, never black or white.
+const HOVER_STEP = 0.12
+const PRESSED_STEP = 0.24
+const stepToInk = (step, getBase) => props => mix(step, getColor("main")(props), getBase(props))
+
+const getNeutralColor = getColor("neutralPillColor")
+
 const getHoverColor = props =>
-  props.neutral ? getColor("generic")(props) : getColor("accent")(props)
+  isNeutral(props) ? stepToInk(HOVER_STEP, getNeutralColor)(props) : getColor("primaryHover")(props)
+const getPressedColor = props =>
+  isNeutral(props)
+    ? stepToInk(PRESSED_STEP, getNeutralColor)(props)
+    : getColor("primaryPressed")(props)
 
-const getAccentColor = props => {
-  if (props.neutral)
-    return getColor(props.flavour === BORDER_LESS ? "textFocus" : "neutralHighlight")(props)
-
-  const errorColor = props.danger ? "error" : undefined
-  const errorBgColor = props.danger ? "errorSemi" : undefined
-  const warningColor = props.warning ? "warning" : undefined
-  const warningBgColor = props.warning ? "warningSemi" : undefined
-  const primaryColor = errorColor || warningColor || "primaryHighlight"
-  const secondaryHollow = errorBgColor || warningBgColor || "secondaryHighlight"
-
-  return getColor(props.flavour === HOLLOW ? secondaryHollow : primaryColor)(props)
+// Status fills sit mid-lightness, so the label takes whichever ink reads better on each state's fill.
+const readableLabelOn = getFill => props => {
+  const fill = getFill(props)
+  const surfaceInk = getColor("mainBackground")(props)
+  const mainInk = getColor("main")(props)
+  return getContrast(surfaceInk, fill) >= getContrast(mainInk, fill) ? surfaceInk : mainInk
 }
 
-const getTransparent = getColor(["transparent", "full"])
+const getHollowSurface = props => {
+  if (isNeutral(props)) return getColor("neutralHighlight")(props)
+  if (props.danger) return getColor("errorSemi")(props)
+  if (props.warning) return getColor("warningSemi")(props)
+  if (props.color) return rgba(getColor(props.color)(props), 0.12)
+  return getColor("secondaryHighlight")(props)
+}
+
+const getBorderlessHoverColor = props =>
+  isNeutral(props) ? stepToInk(HOVER_STEP, getNeutralColor)(props) : getColor("primaryHover")(props)
+const getBorderlessPressedColor = props =>
+  isNeutral(props)
+    ? stepToInk(PRESSED_STEP, getNeutralColor)(props)
+    : getColor("primaryPressed")(props)
+const getBorderlessHoverSurface = props =>
+  isNeutral(props) ? getColor("menuItemHover")(props) : getTransparent(props)
+const getBorderlessPressedSurface = props =>
+  isNeutral(props) ? getColor("neutralHighlight")(props) : getTransparent(props)
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color }) => {
   const getErrorColor = danger ? getColor("error") : undefined
   const getWarningColor = warning ? getColor("warning") : undefined
   const getSpecialColor = getErrorColor || getWarningColor || (color ? getColor(color) : undefined)
-  const getSpecialColorHover = getSpecialColor
-    ? props => lighten(0.2, getSpecialColor(props))
-    : undefined
+  const getSpecialColorHover = getSpecialColor ? stepToInk(HOVER_STEP, getSpecialColor) : undefined
   const getSpecialColorActive = getSpecialColor
-    ? props => darken(0.2, getSpecialColor(props))
+    ? stepToInk(PRESSED_STEP, getSpecialColor)
     : undefined
   const specialIconColor = iconColor ? getColor(iconColor) : undefined
+  const getSpecialLabel = getSpecialColor ? readableLabelOn(getSpecialColor) : undefined
 
   const flavours = {
     [DEFAULT]: {
-      color: getTextColor,
-      colorHover: getTextColor,
-      colorActive: getTextColor,
+      color: getSpecialLabel || getTextColor,
+      colorHover: getSpecialColor ? readableLabelOn(getSpecialColorHover) : getTextColor,
+      colorActive: getSpecialColor ? readableLabelOn(getSpecialColorActive) : getTextColor,
       bg: getSpecialColor || getPrimaryColor,
       bgHover: getSpecialColorHover || getHoverColor,
-      bgActive: getSpecialColorActive || getAccentColor,
+      bgActive: getSpecialColorActive || getPressedColor,
       border: getSpecialColor || getPrimaryColor,
       borderHover: getSpecialColorHover || getHoverColor,
-      borderActive: getSpecialColorActive || getAccentColor,
-      iconColor: specialIconColor || getTextColor,
+      borderActive: getSpecialColorActive || getPressedColor,
+      iconColor: specialIconColor || getSpecialLabel || getTextColor,
     },
     [HOLLOW]: {
       color: getSpecialColor || getTextColor,
       colorHover: getSpecialColorHover || getTextColor,
       colorActive: getSpecialColorActive || getTextColor,
       bg: getTransparent,
-      bgHover: getAccentColor,
-      bgActive: getAccentColor,
+      bgHover: getHollowSurface,
+      bgActive: getHollowSurface,
       border: getSpecialColor || getBorderColor,
       borderHover: getSpecialColorHover || getBorderHoverColor,
-      borderActive: getSpecialColorActive || getBorderHoverColor,
+      borderActive: getSpecialColorActive || getBorderPressedColor,
       iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
     },
     [BORDER_LESS]: {
       color: getSpecialColor || getPrimaryColor,
-      colorHover: getSpecialColorHover || getAccentColor,
-      colorActive: getSpecialColorActive || getAccentColor,
+      colorHover: getSpecialColorHover || getBorderlessHoverColor,
+      colorActive: getSpecialColorActive || getBorderlessPressedColor,
+      bg: getTransparent,
+      bgHover: getBorderlessHoverSurface,
+      bgActive: getBorderlessPressedSurface,
+      border: getTransparent,
+      borderHover: getTransparent,
+      borderActive: getTransparent,
+      iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
+    },
+    [LINK]: {
+      color: getSpecialColor || getPrimaryColor,
+      colorHover: getSpecialColorHover || getBorderlessHoverColor,
+      colorActive: getSpecialColorActive || getBorderlessPressedColor,
       bg: getTransparent,
       bgHover: getTransparent,
       bgActive: getTransparent,
@@ -125,21 +174,24 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color 
 
 export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
-    padding: props.large
-      ? !props.hasLabel
-        ? [1.5, 3]
-        : [1.5, 4]
-      : !props.hasLabel
-        ? [1, 1.5]
-        : [1, 3],
+    padding: !props.hasLabel
+      ? [0]
+      : props.flavour === LINK
+        ? [0, 1]
+        : props.large
+          ? [0, 4]
+          : [0, 3],
     colors: colorsByFlavour(props),
-    round: groupFirst
-      ? { side: "left", size: 0.5 }
-      : groupLast
-        ? { side: "right", size: 0.5 }
-        : groupMiddle
-          ? false
-          : 0.5,
+    round:
+      groupFirst && groupLast
+        ? 1
+        : groupFirst
+          ? { side: "left", size: 1 }
+          : groupLast
+            ? { side: "right", size: 1 }
+            : groupMiddle
+              ? false
+              : 1,
     ...withTheme(props),
   })
 )`
@@ -150,8 +202,16 @@ export const StyledButton = styled.button.attrs(
     position: relative;
     ${alignSelf};
 
+    font-family: inherit;
     font-weight: ${({ strong }) => (strong ? 700 : 500)};
-    font-size: ${({ large }) => (large ? "16px" : "12px")};
+    font-size: ${props => controlFontSize(buttonSize(props))(props)};
+    line-height: ${({ large }) => getSizeBy(large ? 2.5 : 2)};
+    min-height: ${buttonHeight};
+    ${({ hasLabel }) =>
+      !hasLabel &&
+      css`
+        min-width: ${buttonHeight};
+      `}
     white-space: nowrap;
     word-break: keep-all;
 
@@ -159,9 +219,26 @@ export const StyledButton = styled.button.attrs(
     ${({ disabled }) => disabled && `opacity: 0.4;`}
     pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 
+    ${({ groupMiddle, groupLast }) => (groupMiddle || groupLast) && "margin-left: -1px;"}
+    ${({ groupFirst, groupMiddle, groupLast, flavour }) =>
+      (groupFirst || groupMiddle || groupLast) &&
+      css`
+        ${flavour !== HOLLOW && "z-index: 1;"}
+        &:hover,
+        &:focus-visible {
+          z-index: 2;
+        }
+      `}
     ${margin}
     ${padding}
-    transition: all 150ms;
+    transition:
+      background-color 140ms ease-out,
+      border-color 140ms ease-out,
+      color 140ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     background-color: ${props => props.colors.bg(props)};
     color: ${props => props.colors.color(props)};
@@ -185,7 +262,7 @@ export const StyledButton = styled.button.attrs(
       border-color: ${props => props.colors.borderHover(props)};
       background-color: ${props => props.colors.bgHover(props)};
       color: ${props => props.colors.colorHover(props)};
-      text-decoration: none;
+      text-decoration: ${({ flavour }) => (flavour === LINK ? "underline" : "none")};
 
       .button-icon {
         fill: ${props => props.colors.colorHover(props)};
@@ -198,14 +275,24 @@ export const StyledButton = styled.button.attrs(
     }
     ${props => props.active && activeStyles}
 
-    &:focus {
-      outline: none;
+    &[aria-disabled="true"] {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
-    &:focus-visible {
-      outline: ${getSizeBy(0.25)} solid ${getColor("textFocus")};
-      outline-offset: ${getSizeBy(0.25)};
+    &[aria-disabled="true"]:hover,
+    &[aria-disabled="true"]:active {
+      border-color: ${props => props.colors.border(props)};
+      background-color: ${props => props.colors.bg(props)};
+      color: ${props => props.colors.color(props)};
+      text-decoration: none;
+
+      .button-icon {
+        fill: ${props => props.colors.iconColor(props)};
+      }
     }
+
+    ${focusRing}
 
     .button-icon {
       height: ${props =>

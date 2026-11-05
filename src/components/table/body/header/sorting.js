@@ -14,8 +14,12 @@ export const SortIconContainer = styled(Flex).attrs(props => ({
   flex: 0,
   ...props,
 }))`
-  transition: opacity 200ms ease;
-  opacity: ${({ sorting }) => (sorting ? 1 : 0)};
+  transition: opacity 140ms ease-out;
+  opacity: ${({ sorting }) => (sorting ? 1 : 0.35)};
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 `
 
 const Sorting = ({ sortable, sorting, ...rest }) => {
@@ -26,7 +30,7 @@ const Sorting = ({ sortable, sorting, ...rest }) => {
       <Icon
         height="12px"
         width="12px"
-        color={sorting ? "text" : "textLite"}
+        color={sorting ? "main" : "textLite"}
         name={sortingIcons[sorting] || sortingIcons.indicator}
         {...rest}
       />

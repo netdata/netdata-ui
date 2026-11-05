@@ -1,0 +1,57 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Documentation
+
+A help panel opened from a trigger you provide. It links to the docs, bug reporting, the community and the public demo space, and has a docs search field.
+
+## When to use
+
+- Use it for a global "Need help?" entry point in the app.
+- Do not use it for contextual help on one field. Use a tooltip instead.
+
+## Usage
+
+- Pass a render-prop child. It receives `toggle` and `isOpen` and returns your trigger.
+- The panel opens as a layer at the bottom left with a backdrop.
+
+```jsx
+<Documentation app="cloud">
+  {(toggle, isOpen) => (
+    <Button onClick={toggle} label={`${isOpen ? "hide" : "show"} documentation modal`} />
+  )}
+</Documentation>
+```
+
+<Canvas of={Stories.CloudDocumentation} />
+
+## Variants
+
+- `app="cloud"` (default): the bug report links to Netdata Cloud and the secondary link points to the Agent.
+- `app="agent"`: adds a Dashboard section that opens a guide on using charts with mouse or touch. The bug report links to the Agent.
+
+## Views
+
+- General: the four sections (docs, bug report, community, demo space) and search.
+- Dashboard: the chart interaction guide, agent only. A back button returns to General.
+- Search: typing in the field shows results. Back clears the search.
+
+<Canvas of={Stories.SearchResultsView} />
+
+## Callbacks
+
+- `onVisitDocumentClick`, `onOpenIssueClick`, `onOpenBugClick`, `onSupportClick` and `onGoToDemoClick` fire when the matching link is clicked. Use them for analytics.
+- `onCloseClick` fires when the close button is clicked.
+- `onContributeClick` is declared in the types but is not used by the panel.
+
+## Accessibility
+
+- The close button and the back button are icon-only and have no text label.
+- Esc and clicking outside the panel close it.
+
+## Do and don't
+
+- Do give the trigger a clear label.
+- Do not render the trigger conditionally on `isOpen` in a way that removes it from the page.

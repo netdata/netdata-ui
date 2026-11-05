@@ -1,0 +1,49 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./toggle.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Toggle
+
+A switch for an option that takes effect as soon as it changes, such as auto refresh.
+
+## When to use
+
+- Settings that apply immediately, with no Save step.
+- A choice between two named states, using `labelLeft` and `labelRight`.
+- For options submitted with a form, or several independent selections, use `Checkbox`.
+
+<Canvas of={Stories.Settings} />
+
+## Usage
+
+- The component is controlled: pass `checked` and an `onChange` handler.
+- `onChange` is the native input change event. Read `event.currentTarget.checked`.
+- Labels: `labelRight` (or `labelLeft`, which also takes `children`) sit beside the switch. Clicking a label toggles it.
+
+## Variants
+
+- Default: neutral knob when off, white knob on a green track when on.
+- `colored`: the off knob uses the error colour, for options where "off" needs attention.
+- `toggleProps` overrides colours (`checkedColor`, `uncheckedColor`, `defaultColor`) and can set `withTransition: false`.
+
+<Canvas of={Stories.States} />
+
+## States
+
+- Hover darkens the track border, or the track fill when on.
+- Keyboard focus shows the green focus ring around the switch.
+- `disabled` fades the whole control to 40% and removes pointer events.
+- Animations are turned off when the user prefers reduced motion.
+
+## Accessibility
+
+- The input is visually hidden but stays in the tab order, so Space toggles it.
+- The real input carries `role="switch"`, so screen readers announce one switch with its label and on/off state. The drawn track is hidden from assistive technology.
+- Always give the switch a visible label.
+
+## Do and don't
+
+- Do label what the switch turns on, not the state: "Auto refresh".
+- Don't use a toggle for an action that needs confirmation.
+- Don't combine it with a Save button for the same setting.

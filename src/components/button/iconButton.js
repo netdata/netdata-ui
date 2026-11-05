@@ -1,26 +1,40 @@
 import React from "react"
 import Box from "@/components/templates/box"
-import Flex from "@/components/templates/flex"
 import Tooltip from "@/components/drops/tooltip"
-import { TextSmall } from "@/components/typography"
+import { controlSizeOf } from "@/mixins/controlSize"
 import { Button } from "./button"
 
-const CustomTooltipContent = ({ content }) => (
-  <Flex padding={[1.5, 2]} margin={[2]} background="tooltip" round={1} alignSelf="start">
-    <TextSmall color="tooltipText">{content}</TextSmall>
-  </Flex>
-)
+// Glyphs follow the square: 14px in the 24px compact square, 16px in 28 and 32.
+const glyphSize = ({ large, compact }) =>
+  controlSizeOf({ large, compact }) === "compact" ? "14px" : "16px"
 
-const IconButton = ({ width = "14px", height = "14px", tooltip = "", ref, ...props }) => (
-  <Tooltip plain animation content={tooltip && <CustomTooltipContent content={tooltip} />}>
+// Native disabled drops focus and hover, so the tooltip that explains why becomes unreachable.
+const preventActivation = event => event.preventDefault()
+
+const focusableDisabledProps = {
+  disabled: false,
+  "aria-disabled": "true",
+  onClick: preventActivation,
+}
+
+const IconButton = ({
+  width,
+  height,
+  tooltip = "",
+  focusableWhenDisabled = false,
+  ref,
+  ...props
+}) => (
+  <Tooltip animation content={tooltip}>
     <Box
       as={Button}
-      iconWidth={width}
-      iconHeight={height}
+      iconWidth={width || glyphSize(props)}
+      iconHeight={height || glyphSize(props)}
       ref={ref}
       flavour="borderless"
       neutral
       {...props}
+      {...(focusableWhenDisabled && props.disabled ? focusableDisabledProps : {})}
     />
   </Tooltip>
 )

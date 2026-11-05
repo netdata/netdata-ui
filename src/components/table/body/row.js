@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useCallback } from "react"
-import styled, { useTheme } from "styled-components"
+import styled, { css, useTheme } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { alignItemValuesMap } from "@/components/templates/mixins/alignItems"
 import { justifyContentMap } from "@/components/templates/mixins/justifyContent"
@@ -56,7 +56,7 @@ const CellGroup = ({
         coloredSortedColumn &&
         !!cell.column.getIsSorted() && {
           background: "columnHighlight",
-          backgroundOpacity: row.index % 2 === 0 ? "0.2" : "0.4",
+          backgroundOpacity: "0.5",
         })}
       padding={[1.5, 2]}
       alignItems={directCellContent ? cell.column.columnDef.align || "start" : undefined}
@@ -116,9 +116,7 @@ const DirectCellGroup = ({ cell, row, table, header, testPrefix, coloredSortedCo
         overflow: "hidden",
         padding: getDimensions(theme, [1.5, 2]),
         alignItems: alignItemValuesMap[column.columnDef.align] || "flex-start",
-        backgroundColor: sorted
-          ? getRgbColor("columnHighlight", row.index % 2 === 0 ? 0.2 : 0.4)({ theme })
-          : undefined,
+        backgroundColor: sorted ? getRgbColor("columnHighlight", 0.5)({ theme }) : undefined,
         ...cellStyles,
       }}
     >
@@ -136,10 +134,31 @@ const rerenderSelector = state => ({
   visibleColumns: state.visibleColumns,
 })
 
+const tint = color => `linear-gradient(${color},${color})`
+
+// Tints are layered as background-image so sticky pinned sections keep an opaque base colour.
+const rowStates = css`
+  font-variant-numeric: tabular-nums;
+
+  &[data-depth] > * > .row-content {
+    background-image: ${({ theme }) => tint(getRgbColor("main", 0.03)({ theme }))};
+  }
+
+  &[data-selected="true"] > * > .row-content {
+    background-image: ${({ theme }) => tint(getRgbColor("primary", 0.1)({ theme }))};
+  }
+
+  &[data-selected="true"] > * > .row-content:first-child {
+    box-shadow: inset 2px 0 0 ${getColor("primary")};
+  }
+`
+
 const StyledRow = styled(Flex)`
   &:hover .row-content {
     background: ${getColor("tableRowBgHover")};
   }
+
+  ${rowStates}
 `
 
 const DirectStyledRow = styled(Flex).attrs({
@@ -156,6 +175,8 @@ const DirectStyledRow = styled(Flex).attrs({
   &:hover .row-content {
     background-color: ${getColor("tableRowBgHover")};
   }
+
+  ${rowStates}
 `
 
 const TableRow = ({
@@ -376,6 +397,8 @@ const TableRow = ({
         testPrefixCallback ? "-" + testPrefixCallback(row.original) : ""
       }`}
       data-id={row.original?.id || row.id}
+      data-selected={row.getIsSelected() ? "true" : undefined}
+      data-depth={row.depth || undefined}
       onClick={onClick}
       cursor={isClickable ? "pointer" : "default"}
       onMouseEnter={() => onHoverCell?.({ row: row.index })}

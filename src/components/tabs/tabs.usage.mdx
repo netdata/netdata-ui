@@ -1,0 +1,71 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./tabs.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Tabs
+
+Switches between sibling views of the same page. Each `Tab` has a `label` and the content to show when it is selected.
+
+The strip lines up with the content edge. Space between the strip and the content is up to the consumer: pad the content, or pass a `TabContent` component (with `tabContentProps`) that adds it.
+
+## When to use
+
+- Use tabs for a few views that share one context, such as Overview, Nodes and Alerts of a room.
+- Don't use tabs for steps of a flow or for navigation between pages that have their own URL and layout.
+
+<Canvas of={Stories.Basic} />
+
+## Uncontrolled and controlled
+
+- Uncontrolled: render `Tabs` with no `onChange`. It keeps the selected index itself and starts on the first tab.
+- Controlled: pass `selected` and `onChange`. `onChange` receives the clicked index and the parent decides what to select, for example by navigating to a route and deriving `selected` from it.
+- If the selected tab is `disabled`, `Tabs` moves the selection to the first enabled tab.
+
+<Canvas of={Stories.Controlled} />
+
+## Labels
+
+- `label` can be a string, an element, or a function. The function receives `{ index, isMenuItem, active, ... }` so you can render a counter that changes with the selection.
+- String labels render at 13px and end in an ellipsis when they are wider than the tab.
+- `icon` renders an icon at 16px before the label. `count` shows a number after the label as a muted 12px count with tabular numerals. Both work with every label type and both variants.
+
+<Canvas of={Stories.WithCounters} />
+
+## Variants
+
+- `variant="line"` is the default: tabs sit on a divider and the selected tab gets an underline.
+- `variant="contained"` draws the strip as a track, the same look as segmented value pickers, and raises the selected tab. It has no divider and no underline, and it is only as wide as its tabs. Use it for a small switch between views, such as Charts and Table.
+
+<Canvas of={Stories.Variants} />
+
+## Flavours and sizes
+
+These apply to line tabs. Contained tabs always use the raised style and are 22px tall.
+
+- `flavour` sets the colour of the selected underline: `default` and `success` use the primary colour, `warning` and `error` use their status colour. Hover never changes hue.
+- Default tabs are 32px tall. `small={false}` makes them 40px. `green` gives compact 24px tabs (32px with `small={false}`).
+- `maxWidth` limits the width of a tab; the default is 26 size units.
+
+## States
+
+- The selected line tab shows a 2px underline that sits on the divider.
+- Hover on an unselected tab shows an element background and a lite underline.
+- `disabled` fades the tab to 40% and removes pointer events.
+- Keyboard focus shows a primary focus ring.
+- Set `noDefaultBorder` to drop the strip's divider on line tabs.
+
+<Canvas of={Stories.States} />
+
+## Accessibility
+
+- The strip is a `nav` with `role="tablist"`. Each tab has `role="tab"` and `aria-selected`; disabled tabs set `aria-disabled`.
+- Only the selected tab is in the page tab order. Left and right arrow keys move to the previous or next enabled tab and select it, wrapping at the ends, in both variants.
+- The `icon` is hidden from screen readers, because the label already names the tab.
+
+## Do and don't
+
+- Do keep labels short and noun-based: "Nodes", not "View all nodes".
+- Do use counters sparingly and neutral, since counts are not status.
+- Don't nest tab strips.
+- Don't put more tabs than fit; the strip scrolls horizontally but hides its scrollbar.

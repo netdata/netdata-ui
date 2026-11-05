@@ -1,0 +1,40 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# CopyToClipboard
+
+Wraps any content so a click copies a string to the clipboard, with a short note at the pointer.
+
+## When to use
+
+- Values people paste elsewhere: metric contexts such as `system.cpu`, node IDs, claim tokens and URLs.
+- Don't use it for large or sensitive blobs. Show a dedicated copy button with a clear label instead.
+
+<Canvas of={Stories.WithTextSmall} />
+
+## How it works
+
+- `text` is the string to copy. Anything that is not a string fails and calls `onError`.
+- `children` is the click target. It is wrapped in an inline span that dims on hover and press.
+- On success a `Copied!` note appears above the pointer. On failure it reads `Failed to copy!`. It lasts about 1.2 seconds and clicks are ignored while it shows.
+- Under reduced motion the note fades without moving.
+- `onCopy` receives the copied text. `onError` receives an `Error`.
+- `disabled` ignores clicks. It does not restyle the children, so dim them yourself.
+
+<Canvas of={Stories.WithIcon} />
+
+## Accessibility
+
+- A persistent `role="status"` region with `aria-live="polite"` announces `Copied!` or `Failed to copy!`. The visible note is hidden from assistive tech.
+- The wrapper span is not focusable and has no keyboard handler. To make it keyboard accessible, wrap a focusable control such as a `Button`; its click bubbles to the wrapper.
+
+<Canvas of={Stories.Disabled} />
+
+## Do and don't
+
+- Do wrap a text or icon that already looks clickable.
+- Do keep `text` plain; it is copied exactly as given.
+- Don't nest it inside another click handler that needs the event: the wrapper stops propagation and prevents default.
+- Don't rely on color alone for the disabled look.

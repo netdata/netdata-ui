@@ -1,0 +1,48 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# RadioButton
+
+Choose exactly one option from a short list, such as the aggregation of a chart: `avg`, `min`, `max`, `sum`.
+
+## When to use
+
+- Two to five mutually exclusive options that should all be visible.
+- For a yes/no choice, use `Checkbox` or `Toggle`. For long lists, use `Select`.
+
+<Canvas of={Stories.Group} />
+
+## Usage
+
+- The component is controlled: pass `checked` and an `onChange` handler.
+- Options of one group share the same `name`; each has its own `value`.
+- `onChange` is the native event, so read `event.target.value`.
+- `label` is the text beside the radio. Pass `children` for custom content instead.
+- `iconProps` customises the selected dot.
+
+## States
+
+- Unchecked has a muted outline; checked has a green outline and a green dot.
+- Keyboard focus shows the green focus ring.
+- `disabled` fades the option to 40%.
+
+<Canvas of={Stories.States} />
+
+## Alignment
+
+Radio buttons line up with `Checkbox` and `Toggle` when stacked in a form.
+
+<Canvas of={Stories.AlignedWithSiblings} />
+
+## Accessibility
+
+- It renders a native radio input, so arrow keys move within a named group and Space selects.
+- Always provide a `label`.
+
+## Do and don't
+
+- Do preselect a sensible default.
+- Do keep labels short and parallel.
+- Don't use a single radio on its own.

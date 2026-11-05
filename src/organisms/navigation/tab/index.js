@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react"
 import { Icon } from "@/components/icon/icon"
 import Flex from "@/components/templates/flex"
 import useStylesTab from "./use-styles-tab"
+import { TabRoot, CloseButton } from "./styled"
 
 const Tab = ({
   active,
@@ -31,7 +32,8 @@ const Tab = ({
   ...rest
 }) => {
   const [hover, setHover] = useState()
-  const { rootStyles } = useStylesTab({ active, showBorderLeft, isDragOverlay })
+  const [focused, setFocused] = useState(false)
+  const { rootStyles } = useStylesTab({ active, showBorderLeft, isDragOverlay, dragging })
 
   const onClickTab = useCallback(
     event => {
@@ -48,6 +50,13 @@ const Tab = ({
     },
     [mouseOver]
   )
+
+  const onFocus = useCallback(() => setFocused(true), [])
+
+  // Focus moving onto the close button stays inside the tab, so the button must not unmount.
+  const onBlur = useCallback(event => {
+    if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false)
+  }, [])
 
   const onMouseOut = useCallback(
     event => {
@@ -69,21 +78,27 @@ const Tab = ({
   const renderIcon = useCallback(
     iconProp =>
       React.cloneElement(iconProp, {
-        color: iconProp?.props?.color ? iconProp.props.color : active ? "text" : "textLite",
+        color: iconProp?.props?.color
+          ? iconProp.props.color
+          : active || hover
+            ? "text"
+            : "textLite",
       }),
-    [active]
+    [active, hover]
   )
 
-  const closable = hover && !fixed
+  const closable = (hover || focused) && !fixed
 
   return (
-    <Flex
+    <TabRoot
       {...rootStyles}
       ref={ref}
       {...(!isDragOverlay && {
         onClick: onClickTab,
         onMouseOver: onMouseOver,
         onMouseLeave: onMouseOut,
+        onFocus,
+        onBlur,
       })}
       tabIndex="0"
       data-index={index}
@@ -96,7 +111,9 @@ const Tab = ({
     >
       <Flex>
         {closable && !isDragOverlay && (
-          <Icon name="x" size="small" color={active ? "text" : "textLite"} onClick={onCloseTab} />
+          <CloseButton onClick={onCloseTab}>
+            <Icon name="x" size="small" color={active ? "text" : "textLite"} />
+          </CloseButton>
         )}
         {!closable && icon && renderIcon(icon)}
       </Flex>
@@ -107,12 +124,18 @@ const Tab = ({
           width="10px"
           height="10px"
           color={hover ? (active ? "text" : "textLite") : "textNoFocus"}
+          data-testid="navigation-tab-drag-handle"
+          sx={{
+            opacity: hover || active || isDragOverlay ? 1 : 0,
+            transition: "opacity 140ms ease-out",
+            "@media (prefers-reduced-motion: reduce)": { transition: "none" },
+          }}
           {...handleProps}
           {...listeners}
           cursor={sorting || dragging ? "grabbing" : "grab"}
         />
       )}
-    </Flex>
+    </TabRoot>
   )
 }
 

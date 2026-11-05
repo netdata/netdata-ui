@@ -1,0 +1,39 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Topbar
+
+A header row with a title on the left and a group of actions on the right.
+
+## When to use
+
+- Use it at the top of a page, panel or room for a heading and its actions.
+- Do not use it for tabbed navigation. Use Navigation instead.
+
+## Props
+
+- `mainChild`: content on the left, usually a heading.
+- `children`: actions on the right, usually buttons.
+- `extended`: widens the gap between actions.
+
+<Canvas of={Stories.Default} />
+
+## Spacing
+
+- Default: actions are spaced by 5 units.
+- Extended: actions are spaced by 8 units. Use it when the actions are icon buttons that need more air.
+
+<Canvas of={Stories.Extended} />
+
+## Accessibility
+
+- Topbar adds no roles. Give icon-only buttons an accessible label.
+- Put the heading in `mainChild` as a real heading component.
+
+## Do and don't
+
+- Do keep one primary action, placed last.
+- Do use borderless neutral buttons for secondary icon actions.
+- Don't put long content in `children`. The row does not wrap.

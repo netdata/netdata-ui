@@ -1,0 +1,40 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Search
+
+A search field with a leading search icon and a clear button. It is a `TextInput` and takes its props.
+
+## When to use
+
+- Use it to filter a list, table or menu as the user types.
+- Use `TextInput` for fields that are submitted, not filtered live.
+
+<Canvas of={Stories.States} />
+
+## Behavior
+
+- `value` is only the initial value; the field keeps its own state.
+- `onChange(value)` is debounced by 300ms, so it does not fire on every keystroke.
+- The clear button shows when there is text. It calls `onReset` and empties the field.
+- Setting `reset` to a truthy value clears the field from outside.
+- Its space is reserved while empty, so the field does not widen when typing starts.
+
+## Sizes
+
+- Default is a 28px field with 13px text, aligned with buttons and selects. Pass `size="compact"` for 24px.
+- A page's main search can use `height={8}` (32px) next to a large button.
+
+<Canvas of={Stories.Prominent} />
+
+## States
+
+- The icons turn to the focus colour once there is text.
+- `disabled` fades the field to 40%.
+
+## Do and don't
+
+- Do write placeholders that name what is searched: "Search nodes".
+- Don't trigger an expensive request in `onChange` without handling slow responses.

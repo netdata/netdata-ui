@@ -1,4 +1,4 @@
-export { Button, IconButton, ButtonGroup } from "./components/button"
+export { Button, IconButton, ButtonGroup, useRovingFocus } from "./components/button"
 
 export { Sidebar, PortalSidebar } from "./components/sidebar"
 export { Icon, iconsList, IconComponents } from "./components/icon"
@@ -65,6 +65,7 @@ export { default as MultiRangeInput } from "./components/input/multiRange"
 export { default as Drop } from "./components/drops/drop"
 export { default as DropContainer } from "./components/drops/container"
 export { default as Tooltip } from "./components/drops/tooltip"
+export { default as TooltipInk } from "./components/drops/tooltip/tooltipInk"
 export { default as Popover } from "./components/drops/popover"
 export { default as Menu } from "./components/drops/menu"
 export { default as MenuDropdown } from "./components/drops/menu/dropdown"
@@ -89,7 +90,6 @@ export { default as Animation } from "./components/animation"
 export { default as Collapsible } from "./components/collapsible"
 
 export { default as Documentation } from "./organisms/documentation"
-export { default as News } from "./organisms/news"
 
 export { default as NavigationTabs } from "./organisms/navigation/tabs"
 export { default as NavigationTab } from "./organisms/navigation/tab"
@@ -103,7 +103,7 @@ export { default as useNavigationArrows } from "./organisms/navigation/hooks/use
 export { default as Intersection } from "./components/intersection"
 export { default as useIntersection } from "./hooks/useIntersection"
 
-export { default as Pill } from "./components/pill"
+export { default as Pill, StatusWord, MarkCounts } from "./components/pill"
 
 export { default as ProgressBar } from "./components/progressBar"
 

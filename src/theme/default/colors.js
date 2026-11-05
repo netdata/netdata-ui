@@ -1,7 +1,7 @@
 import rawColors from "../rawColors"
 
 const appColors = {
-  primary: rawColors.green.green100,
+  primary: rawColors.green.green70,
   accent: rawColors.green.chateau,
   main: rawColors.neutral.limedSpruce,
   border: rawColors.neutral.grey180,
@@ -10,14 +10,14 @@ const appColors = {
   disabledBackground: rawColors.neutral.grey160,
   dropdown: rawColors.neutral.white,
   dropdownShadow: rawColors.shadows.dropdownLight,
-  elementBackground: rawColors.neutral.blackhaze,
+  elementBackground: rawColors.neutral.grey195,
   elementBackgroundHover: rawColors.neutral.white,
   mainBackground: rawColors.neutral.white,
-  mainBackgroundDisabled: rawColors.neutral.blackhaze,
+  mainBackgroundDisabled: rawColors.neutral.grey195,
   modalHeaderBackground: rawColors.neutral.grey185,
   modalTabsBackground: rawColors.neutral.grey190,
   modalBackground: rawColors.neutral.grey195,
-  modalInfoBackground: rawColors.neutral.blackhaze,
+  modalInfoBackground: rawColors.neutral.grey195,
   menuItemSelected: rawColors.neutral.grey180,
   menuItemHover: rawColors.neutral.grey185,
   tabActiveBackground: rawColors.transparent.full,
@@ -27,11 +27,13 @@ const appColors = {
   scrollBarThumbHover: rawColors.neutral.grey150,
   scrollBarBorder: rawColors.neutral.grey180,
   // Links
-  link: rawColors.green.green100,
-  linkHover: rawColors.green.green110,
+  link: rawColors.green.green70,
+  linkHover: rawColors.green.green60,
   // Buttons
   primaryHighlight: rawColors.green.green110,
-  secondaryColor: rawColors.green.green100,
+  primaryHover: rawColors.green.green60,
+  primaryPressed: rawColors.green.green50,
+  secondaryColor: rawColors.green.green70,
   secondaryHighlight: rawColors.green.green190,
   neutralHighlight: rawColors.neutral.grey180,
   // Buttons - AI
@@ -49,27 +51,32 @@ const appColors = {
   successLite: rawColors.green.green190,
   successSemi: rawColors.green.green190,
   successBackground: rawColors.green.green50,
-  successText: rawColors.green.green100,
+  successText: rawColors.green.green70,
+  // Text on soft (tinted) status pills: one step past the tone so it reaches 4.5:1 on its own fill.
+  successSoftText: rawColors.green.green70,
+  warningSoftText: rawColors.yellow.yellow50,
+  errorSoftText: rawColors.red.red90,
+  staleSoftText: rawColors.neutral.grey100,
 
-  warning: rawColors.yellow.yellow70,
+  warning: rawColors.yellow.yellow50,
   warningLite: rawColors.yellow.yellow190,
   warningSemi: rawColors.yellow.yellow190,
   warningBackground: rawColors.yellow.yellow160,
   warningBannerBg: rawColors.yellow.yellow160,
-  warningText: rawColors.yellow.seaBuckthorn,
+  warningText: rawColors.yellow.yellow40,
 
   error: rawColors.red.red100,
   errorLite: rawColors.red.red190,
   errorSemi: rawColors.red.red190,
   errorBackground: rawColors.red.red150,
   errorBannerBg: rawColors.red.red170,
-  errorText: rawColors.red.pomegranate,
+  errorText: rawColors.red.red100,
 
   generic: rawColors.neutral.grey165,
 
   live: rawColors.green.green100,
-  stale: rawColors.green.green1000,
-  staleSemi: rawColors.green.green900,
+  stale: rawColors.neutral.grey130,
+  staleSemi: rawColors.neutral.grey120,
   unseen: rawColors.yellow.yellow900,
   offline: rawColors.neutral.grey145,
   metricGap: rawColors.neutral.metricGapLight,
@@ -84,9 +91,9 @@ const appColors = {
   selected: rawColors.neutral.grey180,
   highlight: rawColors.neutral.grey180,
 
-  tooltip: rawColors.neutral.grey180,
-  tooltipText: rawColors.neutral.grey100,
-  tooltipBg: rawColors.neutral.grey190,
+  tooltip: rawColors.neutral.limedSpruce,
+  tooltipText: rawColors.neutral.grey195,
+  tooltipBg: rawColors.neutral.limedSpruce,
   bright: rawColors.neutral.white,
   text: rawColors.neutral.grey100,
   textLite: rawColors.neutral.grey120,
@@ -96,17 +103,18 @@ const appColors = {
   sectionHeaderBackground: rawColors.neutral.limedSpruce,
   sectionTitle: rawColors.neutral.grey100,
   sectionDescription: rawColors.neutral.grey120,
-  placeholder: rawColors.neutral.grey140,
+  placeholder: rawColors.neutral.grey110,
   key: rawColors.neutral.regentgrey,
   panel: rawColors.neutral.limedSpruce,
   panelBg: rawColors.neutral.grey195,
-  panelBgGrad: `linear-gradient(to right, ${rawColors.neutral.grey195} 0%, ${rawColors.neutral.white} 50%, ${rawColors.neutral.grey195} 100%)`,
-  mainChartBg: rawColors.neutral.blackhaze,
+  // Flat on purpose: gradients made panels read as a second surface system.
+  panelBgGrad: rawColors.neutral.grey195,
+  mainChartBg: rawColors.neutral.grey195,
   mainChartHeaderBg: rawColors.neutral.grey190,
   mainChartBorder: rawColors.neutral.grey185,
   mainChartTboxHover: rawColors.neutral.grey180,
   sideBar: rawColors.neutral.grey190,
-  sideBarMini: rawColors.neutral.grey185,
+  sideBarMini: rawColors.neutral.grey190,
   spaceSelected: rawColors.neutral.grey175,
   spaceIdle: rawColors.neutral.grey195,
   spaceHovered: rawColors.neutral.grey180,
@@ -116,16 +124,19 @@ const appColors = {
   elevationLevelOne: rawColors.neutral.grey185,
 
   // Date picker
-  datePickerPausedBg: rawColors.neutral.grey170,
-  datePickerPlayBg: rawColors.green.green180,
+  datePickerPausedBg: rawColors.neutral.grey185,
+  datePickerPlayBg: rawColors.neutral.grey190,
   dateTimePickerChipBg: rawColors.violet.violet190,
   dateTimePickerChipAccent: rawColors.violet.violet130,
 
   // Input colors
+  // Resting edge for fields: 3:1 against the page so the field is findable without hover.
+  controlBorder: rawColors.neutral.grey130,
+  textInfo: rawColors.blue.blue100,
   inputBg: rawColors.neutral.white,
-  inputBorder: rawColors.neutral.grey180,
-  inputBorderHover: rawColors.neutral.grey165,
-  inputBorderFocus: rawColors.neutral.grey165,
+  inputBorder: rawColors.neutral.grey130,
+  inputBorderHover: rawColors.neutral.grey110,
+  inputBorderFocus: rawColors.neutral.grey110,
 
   // Badges
   nodeBadgeBackground: rawColors.neutral.grey155,
@@ -146,7 +157,7 @@ const appColors = {
   // Table
   dropdownTable: rawColors.neutral.white,
   tableRowBg: rawColors.neutral.grey195,
-  tableRowBgHover: rawColors.neutral.grey180,
+  tableRowBgHover: rawColors.neutral.grey190,
   tableRowBg2: rawColors.neutral.grey195,
   tableRowBg2Hover: rawColors.neutral.grey180,
   columnHighlight: rawColors.neutral.grey190,
@@ -158,7 +169,7 @@ const appColors = {
   progressBg: rawColors.neutral.chineseWhite,
 
   // table-resizer
-  resizerLine: rawColors.green.vista,
+  resizerLine: rawColors.green.green100,
 
   anomalyText: rawColors.purple.lilac,
   anomalyTextLite: rawColors.purple.lilacLite,

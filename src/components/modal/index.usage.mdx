@@ -1,0 +1,49 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Modal
+
+A dialog layer for focused tasks. `Modal` renders a backdrop and portals its children above the page. You compose the surface from `ModalContent`, `ModalHeader`, `ModalBody` and `ModalFooter`.
+
+## When to use
+
+- Use a modal for a short task that must finish before the user goes back to the page, e.g. editing a room or scheduling a report.
+- For a yes/no question about a risky action, use `ConfirmationDialog`, which is built on `Modal`.
+- For a panel that slides in next to the page, use `PortalSidebar`.
+- Don't use a modal for content the user needs to compare with the page behind it.
+
+<Canvas of={Stories.Basic} />
+
+## Parts
+
+- `Modal`: the layer. Accepts every `Layer` prop (`position`, `full`, `backdrop`, `margin`, `onClickOutside`, `onEsc`).
+- `ModalContent`: the surface. Bordered, 8px radius, modal shadow, `mainBackground` by default. Set the size here with `width` and `height`.
+- `ModalHeader`: the title row on the `modalHeaderBackground` colour. Put a title and an optional icon inside.
+- `ModalCloseButton`: a small `x` icon button, positioned absolutely in the header's top-right corner. Pass `onClose`.
+- `ModalBody`: padded column for the content. Add `overflow={{ vertical: "auto" }}` and a `height` max on `ModalContent` to scroll long content.
+- `ModalFooter`: right-aligned actions with a top divider. `hasBorder={false}` removes the divider.
+- `ModalButton`: the neutral borderless icon button that `ModalCloseButton` is built on.
+
+<Canvas of={Stories.WithHeaderIcon} />
+
+## Backdrop
+
+- The backdrop is on by default and uses the theme scrim.
+- `backdrop={false}` removes it. The border and shadow then separate the surface from the page.
+- Blur is opt-in: `backdropProps={{ backdropBlur: true }}`.
+- `onClickOutside` fires on a backdrop click. `onEsc` fires on the Escape key. Neither closes the modal on its own, so you own the open state.
+
+## Accessibility
+
+- The close button is an icon button without a visible label. Pass `aria-label` or a `tooltip` through its props when the context needs it.
+- `onEsc` is how keyboard users dismiss the modal. Wire it to the same handler as the close button.
+- The modal does not set `role="dialog"` or trap focus. Add `role` and `aria-labelledby` on `ModalContent` when the dialog needs them.
+
+## Do and don't
+
+- Do put the primary action last (right) in the footer, with a `hollow` Cancel next to it.
+- Do keep the title short and say what the dialog does.
+- Don't stack modals.
+- Don't put raw colours on `ModalContent`; pass a theme colour key through `background`.

@@ -1,5 +1,6 @@
 import React from "react"
 import { renderWithProviders, fireEvent, waitFor } from "testUtilities"
+import { DefaultTheme } from "@/theme"
 import Drop from "./index"
 
 const getStyle = el => {
@@ -236,4 +237,57 @@ it("clicks escape", async () => {
 
   fireEvent.keyDown(document, { keyCode: 27 })
   expect(onEsc).toHaveBeenCalledTimes(1)
+})
+
+describe("floating layer styles", () => {
+  const renderDrop = props => {
+    const div = document.createElement("div")
+    return renderWithProviders(
+      <Drop target={div} {...props}>
+        Drop content
+      </Drop>
+    )
+  }
+
+  it("casts the theme floating shadow by default", () => {
+    const { getByTestId } = renderDrop()
+    const shadow = DefaultTheme.colors.dropdownShadow
+
+    expect(getByTestId("drop")).toHaveStyleRule(
+      "box-shadow",
+      `0 4px 12px ${shadow},0 1px 2px ${shadow}`
+    )
+  })
+
+  it("casts no shadow with hideShadow", () => {
+    const { getByTestId } = renderDrop({ hideShadow: true })
+
+    expect(getByTestId("drop")).not.toHaveStyleRule("box-shadow", expect.anything())
+  })
+
+  it("animates in with a short ease-out fade instead of a scale bounce", () => {
+    const { getByTestId } = renderDrop({ animation: true })
+
+    expect(getByTestId("drop")).toHaveStyleRule(
+      "animation",
+      expect.stringMatching(/120ms ease-out forwards/)
+    )
+  })
+
+  it("skips the entry animation for reduced motion", () => {
+    const { getByTestId } = renderDrop({ animation: true })
+
+    expect(getByTestId("drop")).toHaveStyleRule("animation", "none", {
+      media: "(prefers-reduced-motion: reduce)",
+    })
+    expect(getByTestId("drop")).toHaveStyleRule("opacity", "1", {
+      media: "(prefers-reduced-motion: reduce)",
+    })
+  })
+
+  it("keeps the backdrop marker for outside-click handling", () => {
+    renderDrop({ backdrop: true })
+
+    expect(document.querySelector('[data-drop="drop-backdrop"]')).toHaveStyleRule("inset", "0")
+  })
 })

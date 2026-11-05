@@ -1,7 +1,7 @@
 import React from "react"
 import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
-import { Input, LabelText } from "./styled"
+import { FieldIndicator, Input, LabelText } from "./styled"
 
 const ErrorMessage = ({ error, ...props }) => {
   const errorMessage = error === true ? "invalid" : error
@@ -42,7 +42,7 @@ export const TextInput = ({
       {typeof label === "string" ? <LabelText size={size}>{label}</LabelText> : label}
       <Flex position="relative" {...inputContainerStyles}>
         {iconLeft && (
-          <Flex position="absolute" left={1} top={0} bottom={0} alignItems="center">
+          <Flex position="absolute" left={2} top={0} bottom={0} alignItems="center">
             {iconLeft}
           </Flex>
         )}
@@ -66,8 +66,8 @@ export const TextInput = ({
         />
 
         {(!!iconRight || !!fieldIndicator) && (
-          <Flex position="absolute" right={1} top={0} bottom={0} alignItems="center" gap={1}>
-            {!!fieldIndicator && <TextMicro color="textLite">{fieldIndicator}</TextMicro>}
+          <Flex position="absolute" right={2} top={0} bottom={0} alignItems="center" gap={1}>
+            {!!fieldIndicator && <FieldIndicator color="textLite">{fieldIndicator}</FieldIndicator>}
             {!!iconRight && iconRight}
           </Flex>
         )}

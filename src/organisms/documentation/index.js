@@ -6,19 +6,21 @@ import { Icon } from "@/components/icon"
 import { Button } from "@/components/button"
 import Flex from "@/components/templates/flex"
 import Layer from "@/components/templates/layer"
+import { modalShadow } from "@/components/templates/layer/mixins/elevation"
 import General from "./general"
 import Dashboard from "./dashboard"
 import SearchProvider, { SearchInput, SearchResults } from "./search"
 
 const Container = styled(Flex).attrs({
-  padding: [6],
+  padding: [4],
   background: "dropdown",
-  gap: 6,
+  gap: 4,
   column: true,
-  round: true,
+  round: 2,
+  border: { side: "all", color: "border" },
   overflow: { vertical: "auto" },
 })`
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${modalShadow};
 `
 
 const Header = ({ children, onClose }) => {
@@ -27,8 +29,8 @@ const Header = ({ children, onClose }) => {
       width="100%"
       alignItems="center"
       justifyContent="between"
-      padding={[0, 0, 4]}
-      border={{ side: "bottom", color: "disabled" }}
+      padding={[0, 0, 3]}
+      border={{ side: "bottom", color: "border" }}
     >
       <Flex gap={2} alignItems="center">
         {children}
@@ -124,7 +126,7 @@ const Documentation = ({
                       />
                     )}
                     {isGeneral && (
-                      <Flex gap={6} overflow={{ vertical: "auto" }} column padding={[1]}>
+                      <Flex gap={4} overflow={{ vertical: "auto" }} column padding={[1]}>
                         <General
                           app={app}
                           onDashboardClick={setDashboardView}

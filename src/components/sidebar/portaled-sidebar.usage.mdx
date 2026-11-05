@@ -1,0 +1,50 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./portaled-sidebar.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Sidebar
+
+Two components for side panels. `PortalSidebar` is an overlay panel with a scrim. `Sidebar` is a static split view.
+
+## PortalSidebar
+
+- Mounts in a portal on the body, with a full-screen scrim behind a fixed panel.
+- The panel is full height and 50vw wide, attached to the left edge, or to the right with `right`.
+- It has the main background, a border on its inner edge and a side-panel shadow.
+- Use it for details of a selected item, e.g. a node, where the user keeps the page context behind the scrim.
+- Resize or restyle it by wrapping it with `styled(PortalSidebar)`; `className` is applied to the panel.
+
+<Canvas of={Stories.PortaledRight} />
+
+## Closing
+
+- The component does not hold open state. Render it only while open, and pass `onClose` to set the state back.
+- `closeOnEsc` calls `onClose` when Escape is pressed.
+- `closeOnOverlayClick` calls `onClose` when the scrim is clicked.
+- Add your own close button in the panel, e.g. `ModalCloseButton` with `position="static"`, and wire it to the same handler.
+- `Wrapper` wraps the panel inside the portal. It defaults to a `Fragment`.
+
+<Canvas of={Stories.PortaledLeft} />
+
+## Sidebar split view
+
+- `Sidebar` renders two 50% areas in a 100vw by 100vh box: your children in an `aside`, and `info` next to it.
+- `right` swaps the order so the sidebar is on the right.
+- The info area keeps its legacy styling: primary background and an inset shadow.
+- Use it only for full-page two-pane layouts. It has no portal and no scrim.
+
+<Canvas of={Stories.SplitViewRight} />
+
+## Accessibility
+
+- Both panels render an `aside`, which is a complementary landmark.
+- `PortalSidebar` does not move or trap focus, and does not set a dialog role. Add `aria-label` on the panel through its props, and move focus yourself when a keyboard flow needs it.
+- Always offer a visible close control. Don't rely on Escape alone.
+
+## Do and don't
+
+- Do put a short title and a close button at the top of the panel.
+- Do use `closeOnEsc` and `closeOnOverlayClick` for read-only detail panels.
+- Don't use `closeOnOverlayClick` for panels with unsaved form input.
+- Don't nest a `PortalSidebar` inside another one.

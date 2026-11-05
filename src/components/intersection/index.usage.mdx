@@ -1,0 +1,38 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Intersection
+
+Shows its children only while it is inside the viewport and a `fallback` otherwise. It uses `IntersectionObserver` and is built on `Flex`.
+
+## When to use
+
+- Use it for heavy content in long lists, e.g. one chart per node, so only visible rows render.
+- Don't use it for content that must always be in the DOM, such as text search targets or form fields whose state must survive scrolling.
+
+<Canvas of={Stories.DeferredList} />
+
+## Behaviour
+
+- The first render shows the `fallback`. Children appear once the observer reports the element as intersecting.
+- `children` and `fallback` may be elements or functions. A function is only called when its branch is shown.
+- When the element leaves the viewport, its last measured height becomes a `min` height, so the list doesn't jump while the content is swapped for the fallback.
+- `height` and `width` default to `100%`. Give rows a fixed `height` when you know it.
+- `rootMargin` widens or narrows the trigger area. Use a positive value to mount content before it scrolls in. `threshold` is the visible share (0 to 1) required.
+- `root` sets a scroll container as the viewport. `onVisibility` receives `true` or `false` on change.
+- Observers are shared between elements with the same `root`, `rootMargin` and `threshold`.
+- Extra props go to the underlying `Flex`.
+
+<Canvas of={Stories.EarlyRootMargin} />
+
+## Accessibility
+
+- Content that is not mounted is invisible to assistive technology and to find-in-page. Keep the fallback meaningful, e.g. the row title.
+
+## Do and don't
+
+- Do keep the fallback the same size as the content when you can.
+- Do use `rootMargin` for content that is slow to render.
+- Don't use it above the fold. It adds a render pass for no benefit.

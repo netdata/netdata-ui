@@ -1,0 +1,43 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Collapsible
+
+Animates its content open and closed by growing or shrinking `max-height` (or `max-width`). It has no trigger of its own: you own the `open` state and the button that changes it.
+
+## When to use
+
+- Use it for secondary content that most users don't need at once, e.g. the settings of a collection job.
+- Use it with a disclosure button, as in the Disclosure story.
+- Don't use it to hide content that matters for the task. Show it.
+
+<Canvas of={Stories.Disclosure} />
+
+## Behaviour
+
+- Children are mounted only while open or animating. Set `persist` to keep them mounted, e.g. to keep form state.
+- `children` may be a function. It receives whether the panel is mounted open.
+- `closedValue` keeps a strip of px visible when closed, e.g. a preview line.
+- `duration` is in ms and defaults to 150. Under `prefers-reduced-motion` the transition is removed and the content just appears.
+- The content is clipped while animating. Once fully open the size is released and `overflow` (default `visible`) applies, so drops and tooltips inside are not cut off.
+- Extra props go to the underlying `Flex`, so you can pad, size or style the panel.
+
+## Directions
+
+- `vertical` (default) animates height.
+- `horizontal` animates width. Give the content `whiteSpace="nowrap"` so it doesn't reflow while it grows.
+
+<Canvas of={Stories.Horizontal} />
+
+## Accessibility
+
+- The component does not set any ARIA attributes. Put `aria-expanded` on the button that controls it, and use a real `button` element.
+- Closed content is unmounted unless `persist` is set, so it is not reachable by keyboard. With `persist` it stays in the DOM but is only clipped, so keyboard users can still tab into it; avoid `persist` for interactive content.
+
+## Do and don't
+
+- Do keep the toggle in the same place when the panel opens.
+- Do use `open` as controlled state; the component does not toggle itself.
+- Don't use it for content that must stay reachable while closed; closed content is unmounted.

@@ -1,0 +1,67 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as Stories from "./index.stories"
+
+<Meta of={Stories} name="Usage" />
+
+# Tooltip
+
+A short hint on hover or keyboard focus of its child.
+
+## Content
+
+- A string renders as 13px text on the tooltip surface, wrapping at 300px.
+- `content={{ title, description }}` renders a 13px title at weight 600 above a 13px description. Use it for named things, e.g. a room: "Room: All nodes" and "See all your rooms and switch room".
+- Any other node renders inside the bubble as given, and its `text`, `textLite` and `textDescription` read as `tooltipText`. `plain` renders it with no bubble at all.
+
+## Your own tooltip surface
+
+- When you draw the dark `tooltip` surface yourself (a map read-out, a hover card on a canvas), wrap its content in `TooltipInk` so kit text reads as `tooltipText`, exactly as inside the bubble.
+
+<Canvas of={Stories.OwnSurface} />
+
+## When to use
+
+- Label icon-only controls, e.g. a refresh icon: "Refresh every 1s".
+- Explain a truncated or abbreviated value.
+- Show a small read-out, like the dimensions of a chart at a point.
+- Don't put actions or links in it. Use `Popover`, or `allowHoverOnTooltip` when the content must stay reachable.
+- Don't use it as the only place important information appears. Touch users have no hover.
+
+<Canvas of={Stories.OpenStates} />
+
+## Placement
+
+- `align` is the side of the target: `top` (default), `right`, `bottom` or `left`. Tooltips draw no arrow.
+- Pass `dropProps={{ align }}` for finer control, using `Drop` alignment.
+
+<Canvas of={Stories.Simple} />
+
+## Content
+
+- A string is wrapped in text with the tooltip colour. Any other node is rendered inside the dark bubble; use the `tooltipText` colour for text.
+- `content` can be a function that returns a node, evaluated when the tooltip opens.
+- `plain` renders your content without the bubble. Use it when the content draws its own surface.
+- Without `content`, the child renders alone.
+
+<Canvas of={Stories.Custom} />
+
+## Behaviour
+
+- Opens on mouse enter and focus. Closes on mouse leave, blur, Escape and a click outside.
+- `delay` waits that many milliseconds after hover before opening. The default is 600ms, so passing the pointer over a toolbar does not flash tooltips. Keyboard focus opens it at once.
+- `allowHoverOnTooltip` keeps it open while the pointer is over the tooltip, with a short grace period.
+- `disabled` never shows it. `open` shows it on mount.
+- The child gets an `aria-describedby` that points to the tooltip while it is open.
+- `animation` fades and lifts it in; reduced motion removes the movement.
+
+## Using DropContainer
+
+- `DropContainer` is the bubble used by `Tooltip` and `Popover`. Tooltips render it without an arrow; pass `align` to draw one when you build your own arrowed floating element inside a `Drop`.
+- Its `align` prop selects the arrow side, and `background` defaults to `tooltip`.
+
+## Do and don't
+
+- Do keep tooltips to one short line where possible.
+- Do give the child a focusable element, such as a button, so keyboard users can open the tooltip.
+- Don't rely on a tooltip for a control's accessible name. Add an `aria-label` too.
+- Don't nest interactive content in a non-plain tooltip.

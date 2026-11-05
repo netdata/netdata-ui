@@ -11,7 +11,9 @@ const SIZES = {
   large: "24px",
 }
 
-const styledColor = ({ theme, color }) => color && `fill: ${getColor(color)({ theme })};`
+// Without an explicit color, inherit the text color instead of the SVG default black (invisible in dark mode).
+const styledColor = ({ theme, color }) =>
+  `fill: ${color ? getColor(color)({ theme }) : "currentColor"};`
 const styledHoverColor = ({ theme, hoverColor }) =>
   hoverColor && `&:hover { fill: ${getColor(hoverColor)({ theme })}; }`
 const styledRotate = ({ rotate }) => !isNaN(rotate) && `transform: rotate(${rotate * 90}deg);`

@@ -8,6 +8,14 @@ import { Icon } from "."
 
 const iconsExposed = Object.keys(iconsList)
 
+const copyName = name => {
+  try {
+    navigator.clipboard.writeText(name)
+  } catch (e) {
+    // Clipboard is unavailable in some embeds; the name stays visible.
+  }
+}
+
 const Item = styled(Flex)`
   &:hover {
     background: ${getColor("mainBackgroundDisabled")};
@@ -17,11 +25,11 @@ const Item = styled(Flex)`
 export const Svgs = () => {
   return (
     <Flex column padding={[10, 4, 2]} gap={4}>
-      <TextBigger>Click item to copy icon name</TextBigger>
+      <TextBigger>Click an icon to copy its name</TextBigger>
       <Flex flexWrap>
         {iconsExposed.map(name => (
           <Item
-            onClick={() => alert(name)}
+            onClick={() => copyName(name)}
             cursor="pointer"
             key={name}
             padding={[3, 3]}
@@ -40,5 +48,22 @@ export const Svgs = () => {
 }
 
 export default {
+  title: "Components/Icon/IconsList",
   component: Icon,
+  tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Every icon name that Icon accepts, rendered at its default size. Click an icon to copy its name.",
+      },
+    },
+  },
+  argTypes: {
+    name: {
+      description: "Icon name, a key of iconsList.",
+      control: false,
+      table: { type: { summary: "string" } },
+    },
+  },
 }

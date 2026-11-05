@@ -31,6 +31,8 @@ export interface InputProps {
   name?: string
   placeholder?: string
   autoFocus?: boolean
+  // "tiny" and "compact" are 24px; "small" and "large" (the default) are 28px.
+  size?: "tiny" | "compact" | "small" | "large"
 }
 
 export interface MetaOptions {

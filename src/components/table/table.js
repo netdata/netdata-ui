@@ -372,8 +372,10 @@ const Table = memo(props => {
           padding={[0, 0, 10]}
           zIndex={20}
         >
-          <Flex background="tooltip" padding={[1, 2]} gap={2}>
-            <Text strong>Loading more...</Text>
+          <Flex background="tooltip" padding={[1, 2]} gap={2} round={1.5}>
+            <Text strong color="tooltipText">
+              Loading more...
+            </Text>
           </Flex>
         </Layer>
       )}

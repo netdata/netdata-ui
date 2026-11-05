@@ -1,25 +1,27 @@
 const colorMap = {
   background: {
-    neutral: "nodeBadgeBackground",
+    neutral: "neutralHighlight",
     success: "success",
     clear: "success",
     warning: "warning",
     error: "error",
     critical: "error",
     stale: "stale",
+    muted: "textLite",
 
     idleClear: "idleClear",
     idleError: "idleError",
     idleWarning: "idleWarning",
   },
   border: {
-    neutral: "nodeBadgeBackground",
+    neutral: "neutralHighlight",
     success: "success",
     clear: "success",
     warning: "warning",
     error: "error",
     critical: "error",
     stale: "stale",
+    muted: "textLite",
 
     idleClear: "idleClear",
     idleError: "idleError",
@@ -33,6 +35,22 @@ const colorMap = {
     error: "errorSemi",
     critical: "errorSemi",
     stale: "staleSemi",
+    muted: "neutralHighlight",
+  },
+  // Text on filled pills: bright on saturated status fills, text on neutral and pale idle fills.
+  filledText: {
+    neutral: "text",
+    success: "bright",
+    clear: "bright",
+    warning: "bright",
+    error: "bright",
+    critical: "bright",
+    stale: "bright",
+    muted: "bright",
+
+    idleClear: "text",
+    idleError: "text",
+    idleWarning: "text",
   },
   color: {
     neutral: "neutralPillColor",
@@ -42,12 +60,32 @@ const colorMap = {
     error: "error",
     critical: "error",
     stale: "stale",
+    muted: "textLite",
 
-    idleClear: "idleClear",
-    idleError: "idleError",
-    idleWarning: "idleWarning",
+    // Idle tones are background tints; as hollow text they vanish, so idle reads as quiet grey.
+    idleClear: "textLite",
+    idleError: "textLite",
+    idleWarning: "textLite",
+  },
+  // Soft (default) look: tone-coloured text on the tint from mixins/soft.
+  softText: {
+    neutral: "text",
+    success: "successSoftText",
+    clear: "successSoftText",
+    warning: "warningSoftText",
+    error: "errorSoftText",
+    critical: "errorSoftText",
+    stale: "staleSoftText",
+    muted: "textLite",
+
+    idleClear: "text",
+    idleError: "text",
+    idleWarning: "text",
   },
 }
+
+// Stale text on staleSemi is the same green; bright (bold) is the most readable token on it.
+colorMap.semiText = { ...colorMap.color, stale: "bright" }
 
 // TODO deprecated them by taking care all the mastcards in app
 export const masterCardColorMap = {

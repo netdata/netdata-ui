@@ -1,21 +1,28 @@
 import styled, { keyframes, css } from "styled-components"
 import Flex from "@/components/templates/flex"
+import { floatingShadow } from "../dropdownStyles"
 
+// A short lift reads as "appeared from the trigger" without the bounce of a scale.
 const dropKeyFrames = keyframes`
   0% {
-    opacity: 0.5;
-    transform: scale(0.8);
+    opacity: 0;
+    transform: translate3d(0, 2px, 0);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: translate3d(0, 0, 0);
   }
 `
 
 const styledAnimation = css`
   opacity: 0;
-  animation: ${dropKeyFrames} 0.1s forwards;
+  animation: ${dropKeyFrames} 120ms ease-out forwards;
   animation-delay: 0.01s;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
 `
 
 const Container = styled(Flex).attrs(({ zIndex = 70, ...rest }) => ({
@@ -26,7 +33,7 @@ const Container = styled(Flex).attrs(({ zIndex = 70, ...rest }) => ({
   left: -99999px;
 
   ${({ animation }) => animation && styledAnimation}
-  ${({ hideShadow }) => !hideShadow && "box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);"}
+  ${({ hideShadow }) => !hideShadow && floatingShadow}
   ${({ noEvents }) => !!noEvents && "pointer-events: none;"}
 
   backface-visibility: hidden;

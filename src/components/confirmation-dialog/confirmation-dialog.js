@@ -1,9 +1,11 @@
 import React from "react"
+import { useTheme } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"
-import { ModalCloseButton } from "@/components/modal"
+import Modal, { ModalCloseButton } from "@/components/modal"
 import { Text } from "@/components/typography"
-import { Actions, Body, Content, Dialog, Header, Title, TitleIcon } from "./styled"
+import { getSizeBy } from "@/theme/utils"
+import { Actions, Body, Content, Header, Title, TitleIcon } from "./styled"
 
 const BodyMessage = ({ children, ...rest }) =>
   typeof children === "object" ? children : <Text {...rest}>{children}</Text>
@@ -31,16 +33,29 @@ const ConfirmationDialog = ({
   backdropContainerProps,
   ...props
 }) => {
+  const theme = useTheme()
+
   return (
-    <Dialog onEsc={handleDecline} backdropContainerProps={backdropContainerProps} {...props}>
+    <Modal onEsc={handleDecline} backdropContainerProps={backdropContainerProps} {...props}>
       <Content data-testid={dataTestId}>
         <Header data-testid={`${dataTestId}-headerContainer`}>
-          <Flex data-testid={`${dataTestId}-header`} gap={2}>
-            {!hideIcon && <TitleIcon data-testid={`${dataTestId}-headerIcon`} name={iconName} />}
+          <Flex alignItems="center" data-testid={`${dataTestId}-header`} gap={2}>
+            {!hideIcon && (
+              <TitleIcon
+                color={isConfirmPositive ? "main" : "error"}
+                data-testid={`${dataTestId}-headerIcon`}
+                name={iconName}
+              />
+            )}
             <Title data-testid={`${dataTestId}-headerText`}>{title}</Title>
           </Flex>
           {handleDecline && (
-            <ModalCloseButton data-testid={`${dataTestId}-headerClose`} onClose={handleDecline} />
+            <ModalCloseButton
+              data-testid={`${dataTestId}-headerClose`}
+              onClose={handleDecline}
+              right={getSizeBy(2)({ theme })}
+              top={getSizeBy(1.75)({ theme })}
+            />
           )}
         </Header>
         <Body data-testid={`${dataTestId}-body`}>
@@ -52,6 +67,7 @@ const ConfirmationDialog = ({
               data-ga={`${dataGA}-::click-cancel::global-view`}
               data-testid={`${dataTestId}-cancelAction`}
               flavour="hollow"
+              neutral={!isConfirmPositive}
               disabled={isDeclineDisabled}
               label={declineLabel}
               onClick={handleDecline}
@@ -81,7 +97,7 @@ const ConfirmationDialog = ({
           />
         </Actions>
       </Content>
-    </Dialog>
+    </Modal>
   )
 }
 

@@ -50,6 +50,7 @@ const Search = ({
             }}
             padding={[0]}
             neutral
+            compact
           />
         )
       }
@@ -59,6 +60,8 @@ const Search = ({
       placeholder={placeholder}
       size="small"
       title="search"
+      // Keep the clear button slot reserved while empty, so the field does not widen when typing starts.
+      hasIconRight
       {...rest}
     />
   )
