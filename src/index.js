@@ -47,6 +47,7 @@ export {
   getSizeUnit,
   getSizeBy,
   getRgbColor,
+  getReadableColor,
   getOrElse,
   propOrElse,
   getColor,

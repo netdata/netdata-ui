@@ -29,7 +29,7 @@ const Pagination = ({ table }) => {
       padding={[0, 2]}
       gap={1}
       background="mainBackground"
-      border={{ side: "top", color: "border" }}
+      border={{ side: "top", color: "tableBorder" }}
     >
       <IconButton
         title="First"

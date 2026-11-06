@@ -1,17 +1,19 @@
 import React from "react"
 import styled from "styled-components"
-import { getColor, getSizeBy } from "@/theme"
+import { getColor } from "@/theme"
+import Flex from "@/components/templates/flex"
 import Dot from "./dot"
 import { getPillColor } from "./mixins/colors"
 
-const Word = styled.span`
+const Word = styled(Flex).attrs(({ alignItems = "center", gap = 1.5 }) => ({
+  as: "span",
+  alignItems,
+  gap,
+}))`
   display: inline-flex;
-  align-items: center;
-  gap: ${getSizeBy(0.75)};
   font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
-  color: ${({ color, theme }) => getColor(color)({ theme })};
 `
 
 const Detail = styled.span`
@@ -25,13 +27,14 @@ const hasDetail = detail =>
 
 const StatusWord = ({
   children,
+  color: customColor,
   "data-testid": testId = "status-word",
   detail,
   dot = "filled",
   tone,
   ...rest
 }) => {
-  const color = getPillColor("softText", tone)
+  const color = customColor ?? getPillColor("softText", tone)
 
   return (
     <Word color={color} data-testid={testId} {...rest}>

@@ -1,4 +1,5 @@
 import React, { useCallback } from "react"
+import { RaisedSegmentedItem } from "@/components/button/segmented"
 import { Icon } from "@/components/icon"
 import { StyledTab, StyledTabMenu, TabCount, TabLabel } from "./styled"
 
@@ -11,12 +12,13 @@ const tabRoleProps = ({ active, disabled }) => ({
 
 export const Tab = ({ index, isMenuItem, onChange, icon, count, ...rest }) => {
   const onClick = useCallback(e => onChange && onChange(index || 0, e), [index, onChange])
-  const TabComponent = isMenuItem ? StyledTabMenu : StyledTab
+  const isRaised = rest.variant === "contained" && rest.appearance === "raised"
+  const TabComponent = isMenuItem ? StyledTabMenu : isRaised ? RaisedSegmentedItem : StyledTab
   const hasSlots = !!icon || count !== undefined
 
   return (
     <TabComponent
-      justifyContent="center"
+      justifyContent={isRaised ? undefined : "center"}
       alignItems="center"
       gap={hasSlots ? 1.5 : undefined}
       onClick={rest.disabled ? undefined : onClick}

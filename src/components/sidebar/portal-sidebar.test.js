@@ -84,7 +84,7 @@ describe("PortalSidebar surface", () => {
 
   it("uses the theme scrim on the overlay", () => {
     renderPanel()
-    expect(overlay()).toHaveStyleRule("background-color", "rgba(53, 65, 74, 0.32)")
+    expect(overlay()).toHaveStyleRule("background-color", "rgba(57, 65, 60, 0.32)")
     expect(overlay()).not.toHaveStyleRule("opacity")
   })
 

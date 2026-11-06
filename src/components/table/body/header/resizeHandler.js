@@ -35,7 +35,7 @@ export const Handler = styled(Flex).attrs({
     bottom: ${getSizeBy(1)};
     right: 0;
     width: 1px;
-    background-color: ${getColor("border")};
+    background-color: ${getColor("tableBorder")};
     transition:
       top 120ms ease-out,
       bottom 120ms ease-out,

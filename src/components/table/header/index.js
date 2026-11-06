@@ -48,7 +48,7 @@ const Header = ({
       gap={2}
       alignItems="center"
       padding={[2, 4]}
-      border={{ side: "bottom", color: "border" }}
+      border={{ side: "bottom", color: "tableBorder" }}
       flexWrap
       {...tableMeta.bulkActionsStyles}
     >

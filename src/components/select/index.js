@@ -172,8 +172,8 @@ const makeCustomTheme = theme => selectTheme => {
       primary75: theme.colors.tooltip,
       danger: theme.colors.text,
       dangerLight: theme.colors.border,
-      neutral0: theme.colors.inputBg,
-      neutral5: theme.colors.mainBackgroundDisabled,
+      neutral0: theme.colors.controlBackground,
+      neutral5: theme.colors.controlPressedBackground,
       neutral30: theme.colors.controlFocused,
       neutral60: theme.colors.placeholder,
       neutral80: theme.colors.text,
@@ -225,12 +225,12 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       minWidth: minWidth || sizeBy(theme, 20),
       opacity: state.isDisabled ? 0.4 : 1,
       // Ghost field, matching TextInput: no fill at rest, the element surface on hover and focus.
-      backgroundColor: state.isFocused ? theme.colors.elementBackground : "transparent",
+      backgroundColor: state.isFocused ? theme.colors.controlHoverBackground : theme.colors.controlBackground,
       transition,
       [reducedMotion]: { transition: "none" },
       ":hover": {
         borderColor: state.isFocused ? theme.colors.primary : theme.colors.inputBorderHover,
-        backgroundColor: theme.colors.elementBackground,
+        backgroundColor: theme.colors.controlHoverBackground,
       },
     }),
     input: (styles, state) => ({

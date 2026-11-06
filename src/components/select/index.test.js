@@ -47,11 +47,11 @@ describe("Select", () => {
     it.each([
       ["light", DefaultTheme],
       ["dark", DarkTheme],
-    ])("is a transparent hairline at rest like TextInput (%s)", (_, theme) => {
+    ])("uses the field surface and a hairline border at rest (%s)", (_, theme) => {
       setup({}, { theme })
       const control = screen.getByTestId("selControl")
       expect(style(control).borderColor).toBe(rgb(theme.colors.controlBorder))
-      expect(style(control).backgroundColor).toBe("rgba(0, 0, 0, 0)")
+      expect(style(control).backgroundColor).toBe(rgb(theme.colors.controlBackground))
     })
 
     it("shows the primary border, the element surface and a soft 3px halo when focused", async () => {

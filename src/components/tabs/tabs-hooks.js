@@ -1,7 +1,9 @@
 import React, { Children, useState, useCallback, useMemo, useEffect } from "react"
 import { Tab } from "./tab"
 
-export const useBuildTabs = (children, activeIndex, onChange, variant) => {
+export const useBuildTabs = (children, activeIndex, onChange, styleOptions) => {
+  const { variant, appearance, accent } = styleOptions
+
   return useMemo(() => {
     const indeces = []
     const nav = []
@@ -20,7 +22,7 @@ export const useBuildTabs = (children, activeIndex, onChange, variant) => {
         nav.push(
           <Tab
             key={key}
-            variant={variant}
+            {...styleOptions}
             {...props}
             onChange={onChange}
             index={index}
@@ -38,7 +40,7 @@ export const useBuildTabs = (children, activeIndex, onChange, variant) => {
     })
 
     return [nav, content, firstActiveIndex, activeIsDisabled]
-  }, [children, activeIndex, onChange, variant])
+  }, [children, activeIndex, onChange, variant, appearance, accent])
 }
 
 export const useSetActive = (selected = 0, onChange) => {

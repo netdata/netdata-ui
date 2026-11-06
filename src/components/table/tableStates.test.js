@@ -1,8 +1,7 @@
 import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen } from "testUtilities"
-import { DarkTheme } from "@/theme"
-import rawColors from "@/theme/rawColors"
+import { DarkTheme, DefaultTheme } from "@/theme"
 import Table from "./table"
 
 const data = [{ id: "node-1", name: "Node 1" }]
@@ -15,8 +14,8 @@ describe("Table loading-more indicator", () => {
     )
 
     const text = screen.getByText("Loading more...")
-    expect(text).toHaveStyleRule("color", rawColors.neutral.grey195)
-    expect(text.parentElement).toHaveStyleRule("background-color", rawColors.neutral.limedSpruce)
+    expect(text).toHaveStyleRule("color", DefaultTheme.colors.tooltipText)
+    expect(text.parentElement).toHaveStyleRule("background-color", DefaultTheme.colors.tooltipBg)
     expect(text.parentElement).toHaveStyleRule("border-radius", "6px")
   })
 
@@ -26,7 +25,7 @@ describe("Table loading-more indicator", () => {
       { theme: DarkTheme }
     )
 
-    expect(screen.getByText("Loading more...")).toHaveStyleRule("color", rawColors.neutral.grey185)
+    expect(screen.getByText("Loading more...")).toHaveStyleRule("color", DarkTheme.colors.tooltipText)
   })
 })
 
@@ -61,7 +60,7 @@ describe("Table container", () => {
     const { rerender, container } = renderWithProviders(
       <Table data={data} dataColumns={dataColumns} />
     )
-    expect(container.firstChild).toHaveStyleRule("border", `1px solid ${rawColors.neutral.grey180}`)
+    expect(container.firstChild).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.tableBorder}`)
 
     rerender(<Table data={data} dataColumns={dataColumns} bordered={false} />)
     expect(container.firstChild).not.toHaveStyleRule("border", expect.anything())

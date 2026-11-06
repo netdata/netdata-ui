@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
-import { mix, getContrast, rgba } from "polished"
-import { getColor as themeGetColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
+import { mix, rgba } from "polished"
+import { getColor as themeGetColor, getReadableColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
 import { focusRing } from "@/mixins/focusRing"
 import { controlSizeOf, controlHeight, controlFontSize } from "@/mixins/controlSize"
 import margin from "@/mixins/margin"
@@ -51,61 +51,62 @@ const getTransparent = getColor(["transparent", "full"])
 const isNeutral = props => !!props.neutral
 
 const getPrimaryColor = props =>
-  isNeutral(props)
-    ? getColor(props.flavour === HOLLOW ? "textFocus" : "neutralPillColor")(props)
-    : getColor("primary")(props)
+  isNeutral(props) ? getColor("buttonNeutralFill")(props) : getColor("primary")(props)
 
 const getBorderColor = props =>
-  isNeutral(props) ? getColor("generic")(props) : getColor("primary")(props)
+  isNeutral(props) ? getColor("buttonNeutralBorder")(props) : getColor("primary")(props)
 const getTextColor = props =>
   isNeutral(props)
-    ? getColor(props.flavour === HOLLOW ? "text" : "mainBackground")(props)
-    : getColor(props.flavour === HOLLOW ? "secondaryColor" : "mainBackground")(props)
+    ? getColor(props.flavour === HOLLOW ? "text" : "buttonNeutralText")(props)
+    : getColor(props.flavour === HOLLOW ? "secondaryColor" : "actionContrastText")(props)
 const getBorderHoverColor = props =>
-  isNeutral(props) ? getColor("placeholder")(props) : getColor("primaryHover")(props)
+  isNeutral(props) ? getColor("buttonNeutralBorderHover")(props) : getColor("primaryHover")(props)
 const getBorderPressedColor = props =>
-  isNeutral(props) ? getColor("placeholder")(props) : getColor("primaryPressed")(props)
+  isNeutral(props) ? getColor("buttonNeutralBorderHover")(props) : getColor("primaryPressed")(props)
 
 // One hover step and one more pressed step toward the ink colour: darker on light, lighter on dark, never black or white.
 const HOVER_STEP = 0.12
 const PRESSED_STEP = 0.24
 const stepToInk = (step, getBase) => props => mix(step, getColor("main")(props), getBase(props))
 
-const getNeutralColor = getColor("neutralPillColor")
+const getNeutralColor = getColor("buttonNeutralFill")
 
 const getHoverColor = props =>
-  isNeutral(props) ? stepToInk(HOVER_STEP, getNeutralColor)(props) : getColor("primaryHover")(props)
+  isNeutral(props) ? getColor("buttonNeutralFillHover")(props) : getColor("primaryHover")(props)
 const getPressedColor = props =>
   isNeutral(props)
-    ? stepToInk(PRESSED_STEP, getNeutralColor)(props)
+    ? getColor("buttonNeutralFillPressed")(props)
     : getColor("primaryPressed")(props)
 
 // Status fills sit mid-lightness, so the label takes whichever ink reads better on each state's fill.
 const readableLabelOn = getFill => props => {
   const fill = getFill(props)
-  const surfaceInk = getColor("mainBackground")(props)
-  const mainInk = getColor("main")(props)
-  return getContrast(surfaceInk, fill) >= getContrast(mainInk, fill) ? surfaceInk : mainInk
+  return getReadableColor(fill, getColor("onColorDark")(props), getColor("onColorLight")(props))(props)
 }
 
 const getHollowSurface = props => {
-  if (isNeutral(props)) return getColor("neutralHighlight")(props)
+  if (isNeutral(props)) return getColor("buttonNeutralHollowHover")(props)
   if (props.danger) return getColor("errorSemi")(props)
   if (props.warning) return getColor("warningSemi")(props)
   if (props.color) return rgba(getColor(props.color)(props), 0.12)
   return getColor("secondaryHighlight")(props)
 }
 
+const getHollowPressedSurface = props => {
+  if (isNeutral(props)) return getColor("buttonNeutralHollowPressed")(props)
+  return getHollowSurface(props)
+}
+
 const getBorderlessHoverColor = props =>
-  isNeutral(props) ? stepToInk(HOVER_STEP, getNeutralColor)(props) : getColor("primaryHover")(props)
+  isNeutral(props) ? getColor("buttonNeutralFillHover")(props) : getColor("primaryHover")(props)
 const getBorderlessPressedColor = props =>
   isNeutral(props)
-    ? stepToInk(PRESSED_STEP, getNeutralColor)(props)
+    ? getColor("buttonNeutralFillPressed")(props)
     : getColor("primaryPressed")(props)
 const getBorderlessHoverSurface = props =>
-  isNeutral(props) ? getColor("menuItemHover")(props) : getTransparent(props)
+  isNeutral(props) ? getColor("buttonNeutralBorderlessHover")(props) : getTransparent(props)
 const getBorderlessPressedSurface = props =>
-  isNeutral(props) ? getColor("neutralHighlight")(props) : getTransparent(props)
+  isNeutral(props) ? getColor("buttonNeutralBorderlessPressed")(props) : getTransparent(props)
 
 const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color }) => {
   const getErrorColor = danger ? getColor("error") : undefined
@@ -137,7 +138,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color 
       colorActive: getSpecialColorActive || getTextColor,
       bg: getTransparent,
       bgHover: getHollowSurface,
-      bgActive: getHollowSurface,
+      bgActive: getHollowPressedSurface,
       border: getSpecialColor || getBorderColor,
       borderHover: getSpecialColorHover || getBorderHoverColor,
       borderActive: getSpecialColorActive || getBorderPressedColor,

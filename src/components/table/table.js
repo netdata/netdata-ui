@@ -323,7 +323,7 @@ const Table = memo(props => {
       ref={ref}
       className={className}
       width={width}
-      border={bordered ? { side: "all", color: "border" } : undefined}
+      border={bordered ? { side: "all", color: "tableBorder" } : undefined}
       round={1}
     >
       <Header

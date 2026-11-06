@@ -1,6 +1,7 @@
 import React from "react"
 import { renderWithProviders, screen, fireEvent, act, user } from "testUtilities"
 import { DarkTheme } from "@/theme/dark"
+import { DefaultTheme } from "@/theme/default"
 import IconButton from "./iconButton"
 
 describe("IconButton", () => {
@@ -11,7 +12,7 @@ describe("IconButton", () => {
     expect(button).toHaveStyleRule("min-width", "28px", { modifier: "&&" })
     expect(button).toHaveStyleRule("min-height", "28px", { modifier: "&&" })
     expect(button).toHaveStyleRule("width", "16px", { modifier: "&& .button-icon" })
-    expect(button).toHaveStyleRule("color", "#526161", { modifier: "&&" })
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFill, { modifier: "&&" })
   })
 
   it.each([
@@ -28,20 +29,20 @@ describe("IconButton", () => {
   it("shows a neutral hover surface and an ink glyph on hover", () => {
     renderWithProviders(<IconButton icon="plus" />)
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("background-color", "#E4E8E8", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("fill", "#4e5d5e", { modifier: "&&:hover .button-icon" })
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralBorderlessHover, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("fill", DefaultTheme.colors.buttonNeutralFillHover, { modifier: "&&:hover .button-icon" })
   })
 
   it("keeps the pressed surface while its menu is expanded", () => {
     renderWithProviders(<IconButton icon="plus" aria-expanded="true" />)
-    expect(screen.getByRole("button")).toHaveStyleRule("background-color", "#DBE1E1", {
+    expect(screen.getByRole("button")).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralBorderlessPressed, {
       modifier: '&&[aria-expanded="true"]',
     })
   })
 
   it("uses the dark hover surface in the dark theme", () => {
     renderWithProviders(<IconButton icon="plus" />, { theme: DarkTheme })
-    expect(screen.getByRole("button")).toHaveStyleRule("background-color", "#212727", {
+    expect(screen.getByRole("button")).toHaveStyleRule("background-color", DarkTheme.colors.buttonNeutralBorderlessHover, {
       modifier: "&&:hover",
     })
   })
@@ -77,9 +78,9 @@ describe("IconButton", () => {
     jest.useRealTimers()
     const text = screen.getByText("Previous")
     const bubble = text.parentElement
-    expect(bubble).toHaveStyleRule("background-color", "#35414A")
+    expect(bubble).toHaveStyleRule("background-color", DefaultTheme.colors.tooltipBg)
     expect(bubble).toHaveStyleRule("border-radius", "6px")
-    expect(text).toHaveStyleRule("color", "#F6F7F7")
+    expect(text).toHaveStyleRule("color", DefaultTheme.colors.tooltipText)
   })
 
   it("uses the standard tooltip bubble: 13px text wrapping at 300px", () => {

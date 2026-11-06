@@ -1,4 +1,5 @@
-import { FC, KeyboardEvent, FocusEvent, Ref, SyntheticEvent } from "react"
+import { FC, KeyboardEvent, FocusEvent, Ref, SyntheticEvent, ReactNode } from "react"
+import { FlexProps } from "@/components/templates/flex"
 import { MarginProps, PaddingProps, AlignSelfProps } from "@/mixins/types"
 
 export type ButtonFlavour = "default" | "hollow" | "borderless" | "link"
@@ -46,27 +47,46 @@ type IconButtonProps = Pick<
   "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize" | "large" | "compact"
 > & { width?: string; height?: string; tooltip?: string; focusableWhenDisabled?: boolean }
 
-export interface ButtonGroupProps {
-  items?: Array<RadioButtonGroupItem>
+export type ButtonGroupValue = string | number | boolean
+
+export interface SegmentedButtonProps extends ButtonProps {
+  height?: number | string
+  monospace?: boolean
+}
+
+export interface ButtonGroupProps<
+  Value extends ButtonGroupValue = ButtonGroupValue,
+  Multi extends boolean = false,
+> {
+  items?: Array<RadioButtonGroupItem<Value>>
   checked?: string | number
-  onChange?: (value: string | number) => void
+  value?: (Multi extends true ? Value[] : Value) | null
+  isMulti?: Multi
+  onChange?: (value: Multi extends true ? Value[] : Value) => void
+  appearance?: "raised"
+  compact?: boolean
+  buttonProps?: SegmentedButtonProps
   variant?: "default" | "segmented"
 }
 
-export interface RadioButtonGroupItem {
-  label: string
-  value: string | number
+export interface RadioButtonGroupItem<Value extends ButtonGroupValue = ButtonGroupValue> {
+  label: ReactNode
+  value: Value
+  title?: string
+  buttonProps?: SegmentedButtonProps
 }
 
-export interface ButtonGroupWrapperProps
-  extends ButtonGroupProps,
-    MarginProps,
-    PaddingProps,
-    AlignSelfProps {}
+export interface ButtonGroupWrapperProps<
+  Value extends ButtonGroupValue = ButtonGroupValue,
+  Multi extends boolean = false,
+>
+  extends ButtonGroupProps<Value, Multi>, FlexProps {}
 
 declare const Button: FC<ButtonWrapperProps>
 declare const IconButton: FC<IconButtonProps>
-declare const ButtonGroup: FC<ButtonGroupWrapperProps>
+declare function ButtonGroup<Value extends ButtonGroupValue, Multi extends boolean = false>(
+  props: ButtonGroupWrapperProps<Value, Multi>
+): ReactNode
 
 export interface RovingItemProps {
   tabIndex: number

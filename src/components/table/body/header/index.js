@@ -37,7 +37,7 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, enableColumnReorderi
       id={id}
       data-testid={`netdata-table-headRow${testPrefix}`}
       flex
-      background="panelBg"
+      background="tableHeaderBackground"
       rowReverse={rowReverse}
     >
       {headers.map((header, index) => (
@@ -87,9 +87,9 @@ const HeaderGroups = ({ groups, size, side, flex = "grow", enableColumnReorderin
       {...(side === "right"
         ? {
             right: 0,
-            border: { side: "left" },
+            border: { side: "left", color: "tableBorder" },
           }
-        : { left: 0, border: { side: "right" } })}
+        : { left: 0, border: { side: "right", color: "tableBorder" } })}
       zIndex={side ? 11 : undefined}
       width={`${size}px`}
       flex={flex}
@@ -169,12 +169,13 @@ const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest })
   const headerContent = (
     <HeaderRow
       data-testid={`netdata-table-head${testPrefix}`}
+      background="tableHeaderBackground"
       flex
       border={{
         size: "1px",
         type: "solid",
         side: "bottom",
-        color: "border",
+        color: "tableBorder",
       }}
     >
       <HeaderGroups

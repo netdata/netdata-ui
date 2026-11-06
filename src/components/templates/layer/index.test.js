@@ -178,7 +178,7 @@ describe("backdrop and elevation", () => {
     const { getByTestId } = renderWithProviders(<Layer>layer content</Layer>)
     expect(getByTestId("layer-backdrop")).toHaveStyleRule(
       "background-color",
-      "rgba(53, 65, 74, 0.32)"
+      "rgba(57, 65, 60, 0.32)"
     )
   })
 
@@ -188,7 +188,7 @@ describe("backdrop and elevation", () => {
     })
     expect(getByTestId("layer-backdrop")).toHaveStyleRule(
       "background-color",
-      "rgba(8, 10, 10, 0.6)"
+      "rgba(8, 10, 9, 0.6)"
     )
   })
 

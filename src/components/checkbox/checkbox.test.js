@@ -39,7 +39,7 @@ const input = () => screen.getByTestId("checkbox-input")
 describe("Checkbox visuals", () => {
   it("draws the unchecked box as a hairline with no fill", () => {
     renderWithProviders(<Checkbox checked={false} />)
-    expect(box()).toHaveStyleRule("border", "1px solid #708585")
+    expect(box()).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.textLite}`)
     expect(box()).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
     expect(box()).toHaveStyleRule("border-radius", "2px")
   })
@@ -74,7 +74,7 @@ describe("Checkbox visuals", () => {
 
   it("steps the border when the row is hovered", () => {
     renderWithProviders(<Checkbox label="cpu" />)
-    expect(box()).toHaveStyleRule("border-color", "#526161", { modifier: "label:hover &" })
+    expect(box()).toHaveStyleRule("border-color", DefaultTheme.colors.text, { modifier: "label:hover &" })
   })
 
   it("keeps the box still on hover when disabled", () => {

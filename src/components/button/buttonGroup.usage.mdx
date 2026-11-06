@@ -40,9 +40,34 @@ Joins buttons into one segmented control. Use it for a small set of related choi
 
 <Canvas of={Stories.SegmentedVariant} />
 
+Use `appearance="raised"` with `variant="segmented"` for a raised value picker with a 26px item height. Add `compact` for 22px items and 12px text. The existing segmented and contained-tabs styles remain unchanged.
+
+```jsx
+<ButtonGroup
+  variant="segmented"
+  appearance="raised"
+  compact
+  aria-label="Node layout"
+  items={[
+    { label: "All nodes", value: false },
+    { label: "Nodes with data", value: true },
+  ]}
+  value={hasData}
+  onChange={setHasData}
+/>
+```
+
+Item values support strings, numbers and booleans, and labels accept React nodes, including an icon and text in a `Flex`.
+
+Raised items accept `buttonProps.height` for a per-item Flex height override and `buttonProps.monospace`
+to use the theme's monospace font. Their default heights remain 26px (or 22px with `compact`).
+
 ## Accessibility
 
 - Each segment is a real `button`, reachable by Tab and activated with Enter or Space.
+- Pass `aria-disabled: true` or `"true"` in `buttonProps` or an item's `buttonProps` to keep a
+  segment focusable while preventing ButtonGroup's default `onChange`. A supplied `onClick` still
+  overrides the generated handler.
 - The default look does not set `aria-pressed` or a radiogroup role. Give each item a clear label or `title`.
 - The segmented variant sets `aria-pressed` on each item and `role="group"` on the track; pass an `aria-label` for the group.
 

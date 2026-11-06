@@ -36,12 +36,13 @@ The strip lines up with the content edge. Space between the strip and the conten
 
 - `variant="line"` is the default: tabs sit on a divider and the selected tab gets an underline.
 - `variant="contained"` draws the strip as a track, the same look as segmented value pickers, and raises the selected tab. It has no divider and no underline, and it is only as wide as its tabs. Use it for a small switch between views, such as Charts and Table.
+- Add `appearance="raised"` to a contained strip to use the shared raised segmented controls. Set `accent` when the selected tab should use the accent text, background, and outline tokens.
 
 <Canvas of={Stories.Variants} />
 
 ## Flavours and sizes
 
-These apply to line tabs. Contained tabs always use the raised style and are 22px tall.
+These apply to line tabs. Default contained tabs use the compact 22px segmented style; the raised appearance follows the shared raised segmented controls.
 
 - `flavour` sets the colour of the selected underline: `default` and `success` use the primary colour, `warning` and `error` use their status colour. Hover never changes hue.
 - Default tabs are 32px tall. `small={false}` makes them 40px. `green` gives compact 24px tabs (32px with `small={false}`).
@@ -60,7 +61,7 @@ These apply to line tabs. Contained tabs always use the raised style and are 22p
 ## Accessibility
 
 - The strip is a `nav` with `role="tablist"`. Each tab has `role="tab"` and `aria-selected`; disabled tabs set `aria-disabled`.
-- Only the selected tab is in the page tab order. Left and right arrow keys move to the previous or next enabled tab and select it, wrapping at the ends, in both variants.
+- Only the selected tab is in the page tab order. Left and right arrow keys move to the previous or next enabled tab and select it, wrapping at the ends, in both variants. Raised contained tabs also support Home and End.
 - The `icon` is hidden from screen readers, because the label already names the tab.
 
 ## Do and don't

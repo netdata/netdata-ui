@@ -16,7 +16,7 @@ const Surface = styled(Flex)`
   box-shadow: ${modalShadow};
 `
 
-export const ModalContent = ({ background = "mainBackground", children, testId, ...rest }) => (
+export const ModalContent = ({ background = "modalBackground", children, testId, ...rest }) => (
   <Surface background={background} border column data-testid={testId} round={MODAL_ROUND} {...rest}>
     {children}
   </Surface>

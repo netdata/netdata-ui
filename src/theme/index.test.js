@@ -1,7 +1,20 @@
+import { getContrast } from "polished"
 import { DarkTheme, DefaultTheme } from "./index"
 import rawColors from "./rawColors"
 
 describe("theme colors", () => {
+  it("separates Sage control and neutral-button state roles from surfaces", () => {
+    expect(DefaultTheme.colors.controlBackground).toBe("#FFFFFF")
+    expect(DefaultTheme.colors.controlHoverBackground).toBe("#EEF3EF")
+    expect(DefaultTheme.colors.buttonNeutralFill).toBe("#476453")
+    expect(DefaultTheme.colors.buttonNeutralText).toBe("#FFFFFF")
+    expect(DefaultTheme.colors.actionContrastText).toBe("#FFFFFF")
+    expect(DarkTheme.colors.controlBackground).toBe("#222B25")
+    expect(DarkTheme.colors.buttonNeutralFill).toBe("#B0C5B5")
+    expect(DarkTheme.colors.buttonNeutralText).toBe("#171D19")
+    expect(DarkTheme.colors.actionContrastText).toBe("#171D19")
+  })
+
   it("owns metric gaps as a semantic color in both themes", () => {
     expect(DefaultTheme.colors.metricGap).toBe(rawColors.neutral.metricGapLight)
     expect(DarkTheme.colors.metricGap).toBe(rawColors.neutral.metricGapDark)
@@ -12,10 +25,10 @@ describe("theme colors", () => {
     expect(DarkTheme.colors.mapSearchHighlight).toBe(rawColors.blue.blue150)
   })
 
-  it("keeps panelBgGrad flat in light so legacy panels follow the surface ladder", () => {
+  it("keeps panelBgGrad on the Sage panel and canvas ladder", () => {
     expect(DefaultTheme.colors.panelBgGrad).toBe(DefaultTheme.colors.panelBg)
     expect(DarkTheme.colors.panelBgGrad).toBe(
-      `linear-gradient(to right, ${rawColors.neutral.grey25} 0%, ${rawColors.neutral.grey15} 50%, ${rawColors.neutral.grey25} 100%)`
+      "linear-gradient(to right, #202723 0%, #171D19 50%, #202723 100%)"
     )
   })
 })
@@ -30,8 +43,8 @@ describe("visual refresh token values", () => {
   })
 
   it("gives dark input borders a visible edge", () => {
-    expect(DarkTheme.colors.inputBorder).toBe(rawColors.neutral.grey85)
-    expect(DarkTheme.colors.inputBorderHover).toBe(rawColors.neutral.grey100)
+    expect(DarkTheme.colors.inputBorder).toBe("#98A69D")
+    expect(DarkTheme.colors.inputBorderHover).toBe("#B0C5B5")
   })
 
   it("keeps dark focused input borders distinct from resting borders", () => {
@@ -39,10 +52,10 @@ describe("visual refresh token values", () => {
   })
 
   it("renders tooltips as an inverse surface", () => {
-    expect(DefaultTheme.colors.tooltip).toBe(rawColors.neutral.limedSpruce)
-    expect(DefaultTheme.colors.tooltipText).toBe(rawColors.neutral.grey195)
-    expect(DarkTheme.colors.tooltip).toBe(rawColors.neutral.grey55)
-    expect(DarkTheme.colors.tooltipText).toBe(rawColors.neutral.grey185)
+    expect(DefaultTheme.colors.tooltip).toBe("#293A2F")
+    expect(DefaultTheme.colors.tooltipText).toBe("#F0F4F1")
+    expect(DarkTheme.colors.tooltip).toBe("#344239")
+    expect(DarkTheme.colors.tooltipText).toBe("#F0F4F1")
   })
 
   it("keeps table row dividers visible under hover", () => {
@@ -56,7 +69,7 @@ describe("visual refresh token values", () => {
   })
 
   it("lifts the dark modal header above the page", () => {
-    expect(DarkTheme.colors.modalHeaderBackground).toBe(rawColors.neutral.grey30)
+    expect(DarkTheme.colors.modalHeaderBackground).toBe("#29312C")
   })
 
   it("exposes hover and pressed steps for primary actions", () => {
@@ -81,8 +94,8 @@ describe("soft pill text keys", () => {
 
 describe("approved colour proposal", () => {
   it("adds controlBorder and textInfo to both themes", () => {
-    expect(DefaultTheme.colors.controlBorder).toBe(rawColors.neutral.grey130)
-    expect(DarkTheme.colors.controlBorder).toBe(rawColors.neutral.grey120)
+    expect(DefaultTheme.colors.controlBorder).toBe("#5C6A61")
+    expect(DarkTheme.colors.controlBorder).toBe("#98A69D")
     expect(DefaultTheme.colors.textInfo).toBe(rawColors.blue.blue100)
     expect(DarkTheme.colors.textInfo).toBe(rawColors.blue.blue150)
   })
@@ -103,8 +116,8 @@ describe("approved colour proposal", () => {
 
   it("raises warning text and placeholder contrast", () => {
     expect(DefaultTheme.colors.warningText).toBe(rawColors.yellow.yellow40)
-    expect(DefaultTheme.colors.placeholder).toBe(rawColors.neutral.grey110)
-    expect(DarkTheme.colors.placeholder).toBe(rawColors.neutral.grey125)
+    expect(DefaultTheme.colors.placeholder).toBe("#5C6A61")
+    expect(DarkTheme.colors.placeholder).toBe("#98A69D")
   })
 })
 
@@ -122,27 +135,44 @@ it("paints dark tooltipBg like the drops tooltip", () => {
 describe("light surface ladder and field edges (audit L1–L4)", () => {
   const c = DefaultTheme.colors
   const n = rawColors.neutral
-  it("uses one lightest grey: blackhaze keys sit on grey195", () => {
-    ;["elementBackground", "mainChartBg", "mainBackgroundDisabled", "modalInfoBackground"].forEach(key =>
-      expect([key, c[key]]).toEqual([key, n.grey195])
-    )
+  it("uses distinct Sage canvas, panel and subtle surface roles", () => {
+    expect(c.elementBackground).toBe("#EEF3EF")
+    expect(c.mainChartBg).toBe("#FFFFFF")
+    expect(c.mainBackgroundDisabled).toBe("#EEF3EF")
+    expect(c.modalInfoBackground).toBe("#EEF3EF")
   })
   it("puts the sidebar on grey190 with hover one step darker", () => {
-    expect(c.sideBarMini).toBe(n.grey190)
-    expect(c.menuItemHover).toBe(n.grey185)
+    expect(c.sideBarMini).toBe("#F0F3F0")
+    expect(c.menuItemHover).toBe("#EEF3EF")
   })
   it("keeps the time picker neutral; green stays for status", () => {
     expect(c.datePickerPlayBg).toBe(n.grey190)
     expect(c.datePickerPausedBg).toBe(n.grey185)
   })
   it("gives fields one softer edge that still reaches 3:1, and darkens it on hover", () => {
-    expect(c.controlBorder).toBe(n.grey130)
-    expect(c.inputBorder).toBe(n.grey130)
-    expect(c.inputBorderHover).toBe(n.grey110)
-    expect(c.inputBorderFocus).toBe(n.grey110)
+    expect(c.controlBorder).toBe("#5C6A61")
+    expect(c.inputBorder).toBe("#5C6A61")
+    expect(c.inputBorderHover).toBe("#4D5C52")
+    expect(c.inputBorderFocus).toBe("#4D5C52")
   })
   it("renders stale as a neutral grey", () => {
     expect(c.stale).toBe(n.grey130)
     expect(c.staleSemi).toBe(n.grey120)
+  })
+})
+
+
+describe("Sage compact label contrast", () => {
+  it.each([
+    ["light", DefaultTheme],
+    ["dark", DarkTheme],
+  ])("keeps node badge labels readable on their neutral surface in %s theme", (_, theme) => {
+    const { nodeBadgeColor, nodeBadgeBackground } = theme.colors
+    expect(getContrast(nodeBadgeColor, nodeBadgeBackground)).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it("keeps muted text readable on the dark pressed control surface", () => {
+    const { textLite, controlPressedBackground } = DarkTheme.colors
+    expect(getContrast(textLite, controlPressedBackground)).toBeGreaterThanOrEqual(4.5)
   })
 })

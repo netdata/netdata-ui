@@ -74,6 +74,8 @@ A compact rounded label for a status, a count or a short tag. `MasterCard` and `
 
 - A dot, a 13px tone-coloured word at weight 500 and an optional muted `detail` such as "since 14:02".
 - `tone` takes the pill flavours, including `muted`. Pass `dot="hollow"` for a ring.
+- `alignItems` and `flex` use the normal `Flex` props. Alignment defaults to `center`; pass `flex={false}` to keep the word from growing or shrinking.
+- `color` overrides both the word and dot with a theme colour key, such as `statusSuccessText`, `statusErrorText`, `statusWarningText` or `statusMutedText`. Without it, `tone` determines their colour.
 
 <Canvas of={Stories.StatusWords} />
 

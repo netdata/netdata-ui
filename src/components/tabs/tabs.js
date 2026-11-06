@@ -1,13 +1,15 @@
 import React, { Fragment, useCallback, useEffect } from "react"
+import { SegmentedTrack } from "@/components/button/segmented"
 import { StyledTabs, StyledTabsWrapper } from "./styled"
 import { useBuildTabs, useSetActive } from "./tabs-hooks"
 
 const stepByKey = { ArrowRight: 1, ArrowLeft: -1 }
 
 // Roving focus: arrows move to the next enabled tab and select it, wrapping at the ends.
-const moveFocus = e => {
+const moveFocus = (e, appearance) => {
   const step = stepByKey[e.key]
-  if (!step) return
+  const boundary = appearance === "raised" && (e.key === "Home" || e.key === "End")
+  if (!step && !boundary) return
 
   const tabs = Array.from(
     e.currentTarget.querySelectorAll('[role="tab"]:not([aria-disabled="true"])')
@@ -16,7 +18,9 @@ const moveFocus = e => {
   if (current < 0) return
 
   e.preventDefault()
-  const next = tabs[(current + step + tabs.length) % tabs.length]
+  const next = boundary
+    ? tabs[e.key === "Home" ? 0 : tabs.length - 1]
+    : tabs[(current + step + tabs.length) % tabs.length]
   next.focus()
   next.click()
 }
@@ -30,6 +34,8 @@ export const Tabs = ({
   TabContent = Fragment,
   noDefaultBorder,
   variant = "line",
+  appearance,
+  accent,
   tabsProps,
   tabHeaderProps,
   tabContentProps,
@@ -42,15 +48,17 @@ export const Tabs = ({
     children,
     activeIndex,
     setActiveIndex,
-    variant
+    { variant, appearance, accent }
   )
+
+  const isRaised = variant === "contained" && appearance === "raised"
 
   const onKeyDown = useCallback(
     e => {
-      moveFocus(e)
+      moveFocus(e, isRaised ? appearance : undefined)
       tabsProps?.onKeyDown?.(e)
     },
-    [tabsProps]
+    [tabsProps, isRaised, appearance]
   )
 
   useEffect(() => {
@@ -60,15 +68,28 @@ export const Tabs = ({
   return (
     <StyledTabsWrapper className={className} {...rest} ref={ref}>
       <TabsHeader {...tabHeaderProps}>
-        <StyledTabs
-          className="tabs"
-          noDefaultBorder={noDefaultBorder}
-          variant={variant}
-          {...tabsProps}
-          onKeyDown={onKeyDown}
-        >
-          {nav}
-        </StyledTabs>
+        {isRaised ? (
+          <SegmentedTrack
+            className="tabs"
+            appearance={appearance}
+            {...tabsProps}
+            as="nav"
+            role="tablist"
+            onKeyDown={onKeyDown}
+          >
+            {nav}
+          </SegmentedTrack>
+        ) : (
+          <StyledTabs
+            className="tabs"
+            noDefaultBorder={noDefaultBorder}
+            variant={variant}
+            {...tabsProps}
+            onKeyDown={onKeyDown}
+          >
+            {nav}
+          </StyledTabs>
+        )}
       </TabsHeader>
       <TabContent {...tabContentProps}>{content}</TabContent>
     </StyledTabsWrapper>

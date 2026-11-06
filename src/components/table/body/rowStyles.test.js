@@ -21,7 +21,7 @@ const dataColumns = [
 ]
 
 const selectedTint = getRgbColor("primary", 0.1)({ theme: DefaultTheme })
-const depthTint = "rgba(53, 65, 74, 0.03)"
+const depthTint = "rgba(45, 62, 51, 0.03)"
 const selectedRule = { modifier: '[data-selected="true"]>*>.row-content' }
 const railRule = { modifier: '[data-selected="true"]>*>.row-content:first-child' }
 const depthRule = { modifier: "[data-depth]>*>.row-content" }
@@ -98,6 +98,6 @@ describe("Table row hover", () => {
     expect(row).toHaveStyleRule("background-color", rawColors.neutral.grey190, {
       modifier: ":hover",
     })
-    expect(row).toHaveStyleRule("border-bottom", `1px solid ${rawColors.neutral.grey180}`)
+    expect(row).toHaveStyleRule("border-bottom", `1px solid ${DefaultTheme.colors.tableBorder}`)
   })
 })

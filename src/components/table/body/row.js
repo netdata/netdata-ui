@@ -165,7 +165,7 @@ const DirectStyledRow = styled(Flex).attrs({
   flex: true,
   column: true,
   background: "mainBackground",
-  border: { side: "bottom" },
+  border: { side: "bottom", color: "tableBorder" },
 })`
   .row-content {
     background-color: ${getColor("mainBackground")};
@@ -238,7 +238,7 @@ const TableRow = ({
               display: "flex",
               position: "sticky",
               left: 0,
-              borderRight: `1px solid ${getColor("border")({ theme })}`,
+              borderRight: `1px solid ${getColor("tableBorder")({ theme })}`,
               zIndex: zIndex || 10,
               flex: `0 0 ${table.getLeftTotalSize()}px`,
             }}
@@ -285,7 +285,7 @@ const TableRow = ({
               display: "flex",
               position: "sticky",
               right: 0,
-              borderLeft: `1px solid ${getColor("border")({ theme })}`,
+              borderLeft: `1px solid ${getColor("tableBorder")({ theme })}`,
               zIndex: zIndex || 10,
               flex: `0 0 ${table.getRightTotalSize()}px`,
               flexDirection: "row-reverse",
@@ -312,7 +312,7 @@ const TableRow = ({
           <Flex
             position="sticky"
             left={0}
-            border={{ side: "right" }}
+            border={{ side: "right", color: "tableBorder" }}
             zIndex={zIndex || 10}
             basis={`${table.getLeftTotalSize()}px`}
             flex={false}
@@ -362,7 +362,7 @@ const TableRow = ({
           <Flex
             position="sticky"
             right={0}
-            border={{ side: "left" }}
+            border={{ side: "left", color: "tableBorder" }}
             zIndex={zIndex || 10}
             basis={`${table.getRightTotalSize()}px`}
             flex={false}
@@ -408,7 +408,7 @@ const TableRow = ({
         column: true,
         background: "mainBackground",
         _hover: { background: "tableRowBgHover" },
-        border: { side: "bottom" },
+        border: { side: "bottom", color: "tableBorder" },
       })}
     >
       {rowContent}

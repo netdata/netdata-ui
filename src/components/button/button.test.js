@@ -243,10 +243,10 @@ describe("Default Button", () => {
   it("renders neutral", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" neutral />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#526161", {
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralFill, {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#526161", {
+    expect(button).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralFill, {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#FFFFFF", {
@@ -320,10 +320,10 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#C0CACA", {
+    expect(button).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralBorder, {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#526161", {
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.text, {
       modifier: "&&",
     })
   })
@@ -397,7 +397,7 @@ describe("Borderless Button", () => {
     expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#526161", {
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFill, {
       modifier: "&&",
     })
   })
@@ -541,24 +541,50 @@ describe("Button state grammar", () => {
   it("keeps the neutral label readable on hover and pressed", () => {
     const { container } = renderWithProviders(<Button label="Apply" neutral />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#4e5d5e", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("color", "#FFFFFF", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("background-color", "#4b595b", { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralFillHover, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralText, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralFillPressed, { modifier: "&&:active" })
+  })
+
+  it("keeps the neutral hollow icon foreground separate from its border", () => {
+    const theme = {
+      ...DefaultTheme,
+      colors: {
+        ...DefaultTheme.colors,
+        buttonNeutralFill: "#123456",
+        buttonNeutralBorder: "#ABCDEF",
+      },
+    }
+    const { container } = renderWithProviders(
+      <Button icon="plus" label="Add" neutral flavour="hollow" />,
+      { theme }
+    )
+    expect(container.firstChild).toHaveStyleRule("border-color", "#ABCDEF", { modifier: "&&" })
+    expect(container.firstChild).toHaveStyleRule("fill", "#123456", { modifier: "&& .button-icon" })
   })
 
   it("steps the neutral hollow border on hover", () => {
     const { container } = renderWithProviders(<Button label="Apply" neutral flavour="hollow" />)
-    expect(container.firstChild).toHaveStyleRule("border-color", DefaultTheme.colors.placeholder, {
+    expect(container.firstChild).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralBorderHover, {
       modifier: "&&:hover",
     })
+  })
+
+  it("uses the dedicated neutral hollow pressed surface", () => {
+    const { container } = renderWithProviders(<Button label="Apply" neutral flavour="hollow" />)
+    expect(container.firstChild).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralHollowPressed,
+      { modifier: "&&:active" }
+    )
   })
 
   it("gives neutral borderless buttons a hover surface", () => {
     const { container } = renderWithProviders(<Button icon="plus" neutral flavour="borderless" />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#E4E8E8", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("color", "#4e5d5e", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("background-color", "#DBE1E1", { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralBorderlessHover, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFillHover, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralBorderlessPressed, { modifier: "&&:active" })
   })
 
   it("keeps primary borderless buttons flat on hover", () => {
@@ -591,6 +617,18 @@ describe("Button state grammar", () => {
     })
   })
 
+  it("uses custom contrast ink tokens from a color palette", () => {
+    const colorPalette = {
+      attention: "#FFFFFF",
+      onColorDark: "#123456",
+      onColorLight: "#FEDCBA",
+    }
+    const { container } = renderWithProviders(
+      <Button label="Ask AI" color="attention" colorPalette={colorPalette} />
+    )
+    expect(container.firstChild).toHaveStyleRule("color", "#123456", { modifier: "&&" })
+  })
+
   it("animates only colours, and not at all under reduced motion", () => {
     const { container } = renderWithProviders(<Button label="Apply" />)
     const button = container.firstChild
@@ -614,22 +652,29 @@ const readableOn = background => ({
   toAsymmetricMatcher: () => `a colour with >= 4.5:1 contrast on ${background}`,
 })
 
+const readableThemeInk = (theme, background) =>
+  getContrast(theme.colors.onColorDark, background) >= getContrast(theme.colors.onColorLight, background)
+    ? theme.colors.onColorDark
+    : theme.colors.onColorLight
+
 describe("Button status and neutral steps", () => {
   const steps = {
     light: {
       theme: DefaultTheme,
-      danger: ["#DB162F", "#c71b32", "#b32035"],
-      warning: ["#A05E00", "#935a08", "#865711"],
+      danger: "#DB162F",
+      warning: "#A05E00",
     },
     dark: {
       theme: DarkTheme,
-      danger: ["#DB162F", "#df3147", "#e34d60"],
-      warning: ["#BF7100", "#c6821e", "#ce933d"],
+      danger: "#DB162F",
+      warning: "#BF7100",
     },
   }
 
   Object.entries(steps).forEach(([themeName, { theme, ...tones }]) => {
-    Object.entries(tones).forEach(([tone, [rest, hover, pressed]]) => {
+    Object.entries(tones).forEach(([tone, rest]) => {
+      const hover = mix(0.12, theme.colors.main, rest)
+      const pressed = mix(0.24, theme.colors.main, rest)
       it(`steps ${tone} one mix toward the ink colour in the ${themeName} theme`, () => {
         renderWithProviders(<Button label="Delete" {...{ [tone]: true }} />, { theme })
         const button = screen.getByRole("button")
@@ -642,9 +687,9 @@ describe("Button status and neutral steps", () => {
       it(`keeps the ${tone} label readable in every state in the ${themeName} theme`, () => {
         renderWithProviders(<Button label="Delete" {...{ [tone]: true }} />, { theme })
         const button = screen.getByRole("button")
-        expect(button).toHaveStyleRule("color", readableOn(rest), { modifier: "&&" })
-        expect(button).toHaveStyleRule("color", readableOn(hover), { modifier: "&&:hover" })
-        expect(button).toHaveStyleRule("color", readableOn(pressed), { modifier: "&&:active" })
+        expect(button).toHaveStyleRule("color", readableThemeInk(theme, rest), { modifier: "&&" })
+        expect(button).toHaveStyleRule("color", readableThemeInk(theme, hover), { modifier: "&&:hover" })
+        expect(button).toHaveStyleRule("color", readableThemeInk(theme, pressed), { modifier: "&&:active" })
       })
 
       it(`does not dim a pressed borderless ${tone} label in the ${themeName} theme`, () => {
@@ -687,16 +732,16 @@ describe("Button status and neutral steps", () => {
   it("steps the dark neutral button one grey step instead of jumping to white", () => {
     renderWithProviders(<Button label="Apply" neutral />, { theme: DarkTheme })
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("background-color", "#819393", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("background-color", "#92a2a2", { modifier: "&&:active" })
-    expect(button).toHaveStyleRule("color", readableOn("#92a2a2"), { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("background-color", DarkTheme.colors.buttonNeutralFillHover, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("background-color", DarkTheme.colors.buttonNeutralFillPressed, { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("color", DarkTheme.colors.buttonNeutralText, { modifier: "&&:active" })
   })
 
   it("steps the dark neutral borderless label without jumping to white", () => {
     renderWithProviders(<Button label="More" neutral flavour="borderless" />, { theme: DarkTheme })
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("color", "#819393", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("color", "#92a2a2", { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("color", DarkTheme.colors.buttonNeutralFillHover, { modifier: "&&:hover" })
+    expect(button).toHaveStyleRule("color", DarkTheme.colors.buttonNeutralFillPressed, { modifier: "&&:active" })
   })
 })
 

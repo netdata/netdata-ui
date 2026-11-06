@@ -1,7 +1,7 @@
 import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
-import rawColors from "@/theme/rawColors"
+import { DefaultTheme } from "@/theme"
 import Table from "../table"
 
 const data = Array.from({ length: 5 }, (_, index) => ({
@@ -75,7 +75,7 @@ describe("Table pagination", () => {
     expect(bar).toHaveStyleRule("height", "36px")
     expect(bar).toHaveStyleRule("padding", "0 8px")
     expect(bar).toHaveStyleRule("gap", "4px")
-    expect(bar).toHaveStyleRule("border-top", `1px solid ${rawColors.neutral.grey180}`)
+    expect(bar).toHaveStyleRule("border-top", `1px solid ${DefaultTheme.colors.tableBorder}`)
   })
 
   it("renders the counter with tabular numerals in the lite text colour", () => {
@@ -83,6 +83,6 @@ describe("Table pagination", () => {
 
     const counter = screen.getByTestId("pagination-counter")
     expect(counter).toHaveStyleRule("font-variant-numeric", "tabular-nums")
-    expect(counter).toHaveStyleRule("color", rawColors.neutral.grey120)
+    expect(counter).toHaveStyleRule("color", DefaultTheme.colors.textLite)
   })
 })

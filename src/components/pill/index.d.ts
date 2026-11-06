@@ -1,6 +1,11 @@
 import { FC, ReactNode, SyntheticEvent } from "react"
 import { MarginProps, PaddingProps, PositionProps, RoundProps, RefType } from "@/mixins/types"
-import { HeightProps, WidthProps } from "@/components/templates/mixins"
+import {
+  AlignItemsProps,
+  FlexibleProps,
+  HeightProps,
+  WidthProps,
+} from "@/components/templates/mixins"
 
 export type PillFlavour =
   | "error"
@@ -43,8 +48,9 @@ export interface PillProps
   [s: string]: any
 }
 
-export interface StatusWordProps {
+export interface StatusWordProps extends AlignItemsProps, FlexibleProps {
   children?: ReactNode
+  color?: string
   "data-testid"?: string
   detail?: ReactNode
   dot?: "filled" | "hollow"

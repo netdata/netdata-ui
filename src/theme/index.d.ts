@@ -8,6 +8,34 @@ export type AppColorsT = {
   main: string
   border: string
   borderSecondary: string
+  appSidebarBackground: string
+  appBackground: string
+  workspaceSidebarBackground: string
+  workspaceBackground: string
+  tableBorder: string
+  tableHeaderBackground: string
+  segmentedBackground: string
+  segmentedSelectedBackground: string
+  segmentedFocus: string
+  segmentedAccentText: string
+  segmentedAccentBackground: string
+  segmentedBorder: string
+  controlBackground: string
+  controlHoverBackground: string
+  controlPressedBackground: string
+  buttonNeutralFill: string
+  buttonNeutralFillHover: string
+  buttonNeutralFillPressed: string
+  buttonNeutralText: string
+  buttonNeutralBorder: string
+  buttonNeutralBorderHover: string
+  buttonNeutralHollowHover: string
+  buttonNeutralHollowPressed: string
+  buttonNeutralBorderlessHover: string
+  buttonNeutralBorderlessPressed: string
+  actionContrastText: string
+  onColorDark: string
+  onColorLight: string
   tabsBorder: string
   disabled: string
   dropdown: string
@@ -17,6 +45,10 @@ export type AppColorsT = {
   success: string
   successLite: string
   successBackground: string
+  statusSuccessText: string
+  statusErrorText: string
+  statusWarningText: string
+  statusMutedText: string
   warning: string
   warningLite: string
   warningBackground: string
@@ -39,6 +71,9 @@ export type AppColorsT = {
   sectionHeaderBackground: string
   placeholder: string
   key: string
+  cardBackground: string
+  cardNestedBackground: string
+  popoverBackground: string
   panel: string
   datePickerPausedBg: string
   datePickerPlayBg: string
@@ -67,8 +102,13 @@ interface IDefaultTheme {
     SIZE_SUB_UNIT: number
     SIZE_UNIT: number
     GUTTER_HEIGHT: number
+    FONT_MONOSPACE: string
   }
   colors: AppColorsT
+  shadows: {
+    segmentedSelected: string
+    segmentedAccentSelected: string
+  }
 }
 
 interface IDarkTheme {
@@ -78,8 +118,13 @@ interface IDarkTheme {
     SIZE_SUB_UNIT: number
     SIZE_UNIT: number
     GUTTER_HEIGHT: number
+    FONT_MONOSPACE: string
   }
   colors: AppColorsT
+  shadows: {
+    segmentedSelected: string
+    segmentedAccentSelected: string
+  }
 }
 
 declare const DefaultTheme: IDefaultTheme
@@ -96,6 +141,11 @@ declare function getSizeUnit({ theme }: WrappedTheme): number | undefined
 declare function getColor(colorPath: string[] | string): any
 
 declare function getRgbColor(colorPath: string[] | string, opacity: number): any
+declare function getReadableColor(
+  backgroundPath: string[] | string,
+  darkColorPath?: string[] | string,
+  lightColorPath?: string[] | string
+): any
 
 declare function getSizeBy(multiplier?: number): (props: WrappedTheme) => any
 
@@ -119,6 +169,7 @@ export {
   getSizeUnit,
   getColor,
   getRgbColor,
+  getReadableColor,
   getSizeBy,
   getValidatedControlColor,
 }

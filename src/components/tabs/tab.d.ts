@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react"
+import { FC, MouseEvent, ReactNode } from "react"
 
 export interface TabProps {
   active?: boolean
@@ -7,11 +7,14 @@ export interface TabProps {
   count?: number
   icon?: string
   index?: number
-  label: JSX.Element | string
+  label: ReactNode | ((props: TabProps) => ReactNode)
   maxWidth?: number | string
   minWidth?: number | string
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  onChange?: (index: number, event: MouseEvent<HTMLElement>) => void
   small?: boolean
+  variant?: "line" | "contained"
+  appearance?: "raised"
+  accent?: boolean
   [s: string]: any
 }
 

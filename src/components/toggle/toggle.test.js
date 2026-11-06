@@ -28,8 +28,8 @@ describe("Toggle test", () => {
     expect(checkbox).toBeInTheDocument()
 
     const toggle = getByRole("switch").nextElementSibling
-    expect(toggle).toHaveStyleRule("background", "#FFFFFF")
-    expect(toggle).toHaveStyleRule("background-color", "#35414A", { modifier: ":after" })
+    expect(toggle).toHaveStyleRule("background", DefaultTheme.colors.mainBackground)
+    expect(toggle).toHaveStyleRule("background-color", DefaultTheme.colors.iconColor, { modifier: ":after" })
     expect(container).toMatchSnapshot()
   })
 
@@ -48,7 +48,7 @@ describe("Toggle test", () => {
     expect(checkbox).toBeDisabled()
 
     const toggle = getByRole("switch").nextElementSibling
-    expect(toggle).toHaveStyleRule("background-color", "#35414A", { modifier: ":after" })
+    expect(toggle).toHaveStyleRule("background-color", DefaultTheme.colors.iconColor, { modifier: ":after" })
   })
 
   it(" * should be colored", () => {
@@ -120,7 +120,7 @@ describe("Toggle visuals", () => {
   it("draws the unchecked track with a 3:1 border", () => {
     renderWithProviders(<Toggle checked={false} onChange={() => {}} />)
     const track = getTrack()
-    expect(track).toHaveStyleRule("border", "1px solid #708585")
+    expect(track).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.textLite}`)
     expect(screen.getByRole("switch")).not.toBeChecked()
   })
 
@@ -172,7 +172,7 @@ describe("Toggle visuals", () => {
     const { rerender } = renderWithProviders(
       <Toggle colored checked={false} toggleProps={toggleProps} onChange={() => {}} />
     )
-    expect(getTrack()).toHaveStyleRule("background-color", "#819595", {
+    expect(getTrack()).toHaveStyleRule("background-color", "#8A938D", {
       modifier: ":after",
     })
     rerender(<Toggle colored checked toggleProps={toggleProps} onChange={() => {}} />)
@@ -186,7 +186,7 @@ describe("Toggle visuals", () => {
       `,
     }
     const { rerender } = renderWithProviders(<Toggle checked={false} onChange={() => {}} />)
-    expect(getTrack()).toHaveStyleRule("border-color", "#526161", hover)
+    expect(getTrack()).toHaveStyleRule("border-color", DefaultTheme.colors.text, hover)
     rerender(<Toggle checked onChange={() => {}} />)
     expect(getTrack()).toHaveStyleRule("background", DefaultTheme.colors.primaryHover, hover)
   })
@@ -221,7 +221,7 @@ describe("Toggle fix pass", () => {
     const { rerender } = renderWithProviders(<Toggle checked={false} onChange={() => {}} />, {
       theme: DarkTheme,
     })
-    expect(getTrack()).toHaveStyleRule("background-color", "#B7C2C2", {
+    expect(getTrack()).toHaveStyleRule("background-color", DarkTheme.colors.iconColor, {
       modifier: ":after",
     })
     rerender(<Toggle checked onChange={() => {}} />)
@@ -232,7 +232,7 @@ describe("Toggle fix pass", () => {
 
   it("keeps the dark slate off knob in the light theme", () => {
     renderWithProviders(<Toggle checked={false} onChange={() => {}} />)
-    expect(getTrack()).toHaveStyleRule("background-color", "#35414A", {
+    expect(getTrack()).toHaveStyleRule("background-color", DefaultTheme.colors.iconColor, {
       modifier: ":after",
     })
   })

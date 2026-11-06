@@ -6,7 +6,7 @@ import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
 
 const OverlayContainer = styled(Flex).attrs({
-  background: "mainBackground",
+  background: "tableHeaderBackground",
   padding: [2, 4],
   round: 1,
   border: true,

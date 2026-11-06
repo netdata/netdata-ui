@@ -414,7 +414,7 @@ exports[`Button states renders only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
-  color: #526161;
+  color: #2D3E33;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -576,7 +576,7 @@ exports[`Button states renders smaller only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
-  color: #526161;
+  color: #2D3E33;
 }
 
 @media (prefers-reduced-motion:reduce) {

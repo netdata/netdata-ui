@@ -3,7 +3,7 @@
  */
 
 import React, { useState } from "react"
-import { renderWithProviders, fireEvent } from "testUtilities"
+import { renderWithProviders, fireEvent, user } from "testUtilities"
 import { Tabs, Tab } from "."
 
 describe("Tabs states", () => {
@@ -388,7 +388,7 @@ describe("Tabs contained variant", () => {
     const { container } = renderContained()
     const strip = container.querySelector("nav")
     expect(strip).toHaveStyleRule("background", getRgbColor("textLite", 0.12)({ theme }))
-    expect(strip).toHaveStyleRule("border", `1px solid ${light.borderSecondary}`)
+    expect(strip).toHaveStyleRule("border", `1px solid ${light.segmentedBorder}`)
     expect(strip).toHaveStyleRule("display", "inline-flex")
     expect(strip).toHaveStyleRule("align-self", "flex-start")
     expect(strip).not.toHaveStyleRule("box-shadow", expect.anything())
@@ -423,6 +423,113 @@ describe("Tabs contained variant", () => {
       </Tabs>
     )
     expect(container.querySelector("nav")).not.toHaveStyleRule("display", "inline-flex")
+  })
+})
+
+describe("Tabs raised contained appearance", () => {
+  const { DefaultTheme, DarkTheme } = require("@/theme")
+
+  const renderRaised = (props = {}, options) =>
+    renderWithProviders(
+      <Tabs variant="contained" appearance="raised" {...props}>
+        <Tab label="Overview">Overview content</Tab>
+        <Tab label="Billing" disabled>
+          Billing content
+        </Tab>
+        <Tab label="Nodes">Nodes content</Tab>
+      </Tabs>,
+      options
+    )
+
+  it.each([
+    ["light", DefaultTheme],
+    ["dark", DarkTheme],
+  ])("uses the raised segmented primitives and accent tokens in %s theme", (_, theme) => {
+    const { getByRole, getAllByRole } = renderRaised(
+      { accent: true, tabsProps: { "aria-label": "View switcher" } },
+      { theme }
+    )
+    const [active, , inactive] = getAllByRole("tab")
+
+    expect(getByRole("tablist").tagName).toBe("NAV")
+    expect(getByRole("tablist")).toHaveAttribute("aria-label", "View switcher")
+    expect(active.tagName).toBe("BUTTON")
+    expect(active).toHaveStyleRule("color", theme.colors.segmentedAccentText)
+    expect(active).toHaveStyleRule("background-color", theme.colors.segmentedAccentBackground)
+    expect(active).toHaveStyleRule("box-shadow", theme.shadows.segmentedAccentSelected)
+    expect(active).toHaveStyleRule("color", theme.colors.segmentedAccentText, {
+      modifier: ":hover",
+    })
+    expect(inactive).toHaveStyleRule("color", theme.colors.statusMutedText)
+    expect(inactive).toHaveStyleRule("box-shadow", "none")
+    expect(active).toHaveStyleRule("outline-color", theme.colors.segmentedFocus, {
+      modifier: ":focus-visible",
+    })
+  })
+
+  it("keeps controlled selection, native activation, and external tab attributes", async () => {
+    const onChange = jest.fn()
+    const { getAllByRole, queryByText } = renderWithProviders(
+      <Tabs variant="contained" appearance="raised" selected={0} onChange={onChange}>
+        <Tab label="Overview" id="overview-tab" aria-controls="overview-panel">
+          Overview content
+        </Tab>
+        <Tab label="Nodes" aria-label="Node view">
+          Nodes content
+        </Tab>
+      </Tabs>
+    )
+    const [, nodes] = getAllByRole("tab")
+
+    expect(getAllByRole("tab")[0]).toHaveAttribute("id", "overview-tab")
+    expect(getAllByRole("tab")[0]).toHaveAttribute("aria-controls", "overview-panel")
+    expect(nodes).toHaveAttribute("aria-label", "Node view")
+    nodes.focus()
+    await user().keyboard("{Enter}")
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenLastCalledWith(1)
+    await user().keyboard(" ")
+    expect(onChange).toHaveBeenCalledTimes(2)
+    expect(onChange).toHaveBeenLastCalledWith(1)
+    expect(queryByText("Overview content")).toBeInTheDocument()
+  })
+
+  it("uses Home and End only for raised tabs while arrows keep wrapping past disabled tabs", () => {
+    const { getAllByRole, queryByText } = renderRaised()
+    const [overview, , nodes] = getAllByRole("tab")
+
+    overview.focus()
+    fireEvent.keyDown(overview, { key: "End" })
+    expect(nodes).toHaveFocus()
+    expect(queryByText("Nodes content")).toBeInTheDocument()
+
+    fireEvent.keyDown(nodes, { key: "Home" })
+    expect(overview).toHaveFocus()
+    expect(queryByText("Overview content")).toBeInTheDocument()
+
+    fireEvent.keyDown(overview, { key: "ArrowLeft" })
+    expect(nodes).toHaveFocus()
+  })
+
+  it("does not add a panel when the active tab has no content", () => {
+    const { queryByRole } = renderWithProviders(
+      <Tabs variant="contained" appearance="raised">
+        <Tab label="Overview" />
+      </Tabs>
+    )
+
+    expect(queryByRole("tabpanel")).not.toBeInTheDocument()
+  })
+
+  it("preserves a supplied content wrapper when the active tab has no content", () => {
+    const Panel = ({ children }) => <section data-testid="panel">{children}</section>
+    const { queryByTestId } = renderWithProviders(
+      <Tabs variant="contained" appearance="raised" TabContent={Panel}>
+        <Tab label="Overview" />
+      </Tabs>
+    )
+
+    expect(queryByTestId("panel")).toBeInTheDocument()
   })
 })
 
@@ -483,6 +590,37 @@ describe("Tabs accessibility", () => {
     const [first] = getAllByRole("tab")
     fireEvent.keyDown(first, { key: "ArrowRight" })
     expect(onChange).toHaveBeenCalledWith(2)
+  })
+
+  it("enables Home and End only while the raised appearance is active", () => {
+    const tabsProps = {}
+    const renderTabs = appearance => (
+      <Tabs variant="contained" appearance={appearance} tabsProps={tabsProps}>
+        <Tab label="Overview">Overview content</Tab>
+        <Tab label="Nodes">Nodes content</Tab>
+      </Tabs>
+    )
+    const { getAllByRole, rerender } = renderWithProviders(renderTabs())
+    let [overview, nodes] = getAllByRole("tab")
+
+    overview.focus()
+    fireEvent.keyDown(overview, { key: "End" })
+    expect(overview).toHaveFocus()
+
+    rerender(renderTabs("raised"))
+    const raisedTabs = getAllByRole("tab")
+    overview = raisedTabs[0]
+    nodes = raisedTabs[1]
+    overview.focus()
+    fireEvent.keyDown(overview, { key: "End" })
+    expect(nodes).toHaveFocus()
+
+    rerender(renderTabs())
+    const defaultTabs = getAllByRole("tab")
+    nodes = defaultTabs[1]
+    nodes.focus()
+    fireEvent.keyDown(nodes, { key: "Home" })
+    expect(nodes).toHaveFocus()
   })
 
   it("shows a focus ring on keyboard focus", () => {

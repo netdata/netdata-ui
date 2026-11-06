@@ -34,19 +34,22 @@ const ghostBackground = ["transparent", "full"]
 
 const ownFocusSurface = css`
   &:focus-visible {
-    ${background}
+    background-color: ${({ background: backgroundToken }) =>
+      getColor(
+        backgroundToken === "controlBackground" ? "controlHoverBackground" : backgroundToken
+      )};
   }
 `
 
 export const Input = styled(Flex).attrs(props => ({
   round: 1,
   as: "input",
-  background: ghostBackground,
+  background: "controlBackground",
   width: "100%",
   border: props.error ? "error" : "controlBorder",
   _hover: {
     border: props.error ? "error" : "inputBorderHover",
-    background: props.disabled ? undefined : "elementBackground",
+    background: props.disabled ? undefined : "controlHoverBackground",
   },
   padding: fieldPadding(props.size),
   height: controlHeight(fieldSizeOf(props.size))(props),

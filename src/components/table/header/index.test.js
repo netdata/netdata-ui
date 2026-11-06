@@ -1,8 +1,7 @@
 import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen } from "testUtilities"
-import { DarkTheme } from "@/theme"
-import rawColors from "@/theme/rawColors"
+import { DarkTheme, DefaultTheme } from "@/theme"
 import Header from "."
 
 const props = {
@@ -30,7 +29,7 @@ describe("Table Header", () => {
     renderWithProviders(<Header {...props} />)
 
     const toolbar = screen.getByTestId("netdata-table-header-container")
-    expect(toolbar).toHaveStyleRule("background-color", rawColors.neutral.white)
+    expect(toolbar).toHaveStyleRule("background-color", DefaultTheme.colors.mainBackground)
     expect(toolbar).not.toHaveStyleRule("background", expect.stringContaining("gradient"))
   })
 
@@ -39,7 +38,7 @@ describe("Table Header", () => {
 
     expect(screen.getByTestId("netdata-table-header-container")).toHaveStyleRule(
       "background-color",
-      rawColors.neutral.grey15
+      DarkTheme.colors.mainBackground
     )
   })
 
