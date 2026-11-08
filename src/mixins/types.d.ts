@@ -6,7 +6,7 @@ export type CSSPropertiesValueType = number | string
 
 export type DimensionsType =
   | CSSPropertiesValueType
-  | { min?: CSSPropertiesValueType; max?: CSSPropertiesValueType }
+  | { min?: CSSPropertiesValueType; max?: CSSPropertiesValueType; base?: CSSPropertiesValueType }
 
 export type MultiplierType = number
 
@@ -54,6 +54,7 @@ export interface AlignSelfProps {
 export interface RoundProps {
   round?:
     | boolean
+    | string
     | MultiplierType
     | {
         side?:
@@ -65,7 +66,7 @@ export interface RoundProps {
           | "top-right"
           | "bottom-left"
           | "bottom-right"
-        size?: MultiplierType
+        size?: MultiplierType | string
       }
 }
 

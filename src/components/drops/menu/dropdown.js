@@ -6,14 +6,20 @@ import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
-import { dropdownBorder, dropdownRound, floatingShadow } from "../dropdownStyles"
+import { dropdownBorder, floatingShadow, insetMenuRound } from "../dropdownStyles"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) => !hideShadow && floatingShadow}
   list-style-type: none;
 `
 
-const defaultEstimateSize = () => 28
+const ItemList = styled.div`
+  height: 100%;
+  min-width: 0;
+  overflow: hidden auto;
+`
+
+const defaultEstimateSize = () => 34
 
 const DefaultNoSearchResultsComponent = () => {
   return (
@@ -29,13 +35,13 @@ const Dropdown = ({
   items,
   onItemClick,
   dropTitle,
-  dropTitlePadding = [3, 3, 0],
+  dropTitlePadding = [0, 1, 2],
   Item,
   Footer,
   value,
   hasSearch,
   renderComponent,
-  searchMargin = [4],
+  searchMargin = [0, 0, 2],
   gap = 0,
   estimateSize = defaultEstimateSize,
   close,
@@ -79,9 +85,9 @@ const Dropdown = ({
       role="listbox"
       background="dropdown"
       border={dropdownBorder}
-      round={dropdownRound}
+      round={insetMenuRound}
       hideShadow={hideShadow}
-      padding={[1, 0]}
+      padding={[3]}
       margin={[1, 0]}
       column
       tabindex="-1"
@@ -99,13 +105,7 @@ const Dropdown = ({
       {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
         <NoSearchResultsComponent />
       ) : null}
-      <div
-        ref={mergeRefs(ref, forwardedRef)}
-        style={{
-          height: "100%",
-          overflow: "auto",
-        }}
-      >
+      <ItemList ref={mergeRefs(ref, forwardedRef)}>
         <div
           style={{
             minHeight: `${rowVirtualizer.getTotalSize()}px`,
@@ -139,7 +139,7 @@ const Dropdown = ({
             </div>
           ))}
         </div>
-      </div>
+      </ItemList>
       {Footer && <Footer close={close} />}
     </Container>
   )

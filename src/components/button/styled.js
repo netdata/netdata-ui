@@ -1,20 +1,42 @@
 import styled, { css } from "styled-components"
 import { mix, rgba } from "polished"
-import { getColor as themeGetColor, getReadableColor, getSizeBy, DefaultTheme, DarkTheme } from "@/theme"
-import { focusRing } from "@/mixins/focusRing"
+import {
+  getColor as themeGetColor,
+  getReadableColor,
+  getOrElse,
+  getSizeBy,
+  DefaultTheme,
+  DarkTheme,
+} from "@/theme"
+import { focusRing, focusRingOutline } from "@/mixins/focusRing"
+import { FONT_MONOSPACE } from "@/theme/default/constants"
 import { controlSizeOf, controlHeight, controlFontSize } from "@/mixins/controlSize"
 import margin from "@/mixins/margin"
 import padding from "@/mixins/padding"
 import round from "@/mixins/round"
 import alignSelf from "@/mixins/alignSelf"
+import height from "@/components/templates/mixins/height"
+import width from "@/components/templates/mixins/width"
+import gap from "@/components/templates/mixins/cssGap"
+import justifyContent from "@/components/templates/mixins/justifyContent"
+import flex from "@/components/templates/mixins/flex"
 import textTransform from "@/mixins/textTransform"
 import position from "@/mixins/position"
 import { position as styledSystemPosition } from "styled-system"
 import { DEFAULT, HOLLOW, BORDER_LESS, LINK } from "./constants"
 
 // Buttons size by the boolean `large`/`compact` props only.
+const isInlineLink = ({ flavour, appearance }) => flavour === LINK && appearance === "inline"
+
 const buttonSize = ({ large, compact }) => controlSizeOf({ large, compact })
-const buttonHeight = props => controlHeight(buttonSize(props))(props)
+const dimensionMinimum = value => (typeof value === "object" ? (value.min ?? value.base) : value)
+const dimensionValue = value => props =>
+  typeof value === "number" ? getSizeBy(value / 2)(props) : value
+const buttonHeight = props =>
+  dimensionValue(dimensionMinimum(props.height))(props) ||
+  (isInlineLink(props) ? "0px" : controlHeight(buttonSize(props))(props))
+const buttonWidth = props =>
+  dimensionValue(dimensionMinimum(props.width))(props) || buttonHeight(props)
 
 const themes = {
   light: DefaultTheme,
@@ -69,19 +91,19 @@ const HOVER_STEP = 0.12
 const PRESSED_STEP = 0.24
 const stepToInk = (step, getBase) => props => mix(step, getColor("main")(props), getBase(props))
 
-const getNeutralColor = getColor("buttonNeutralFill")
-
 const getHoverColor = props =>
   isNeutral(props) ? getColor("buttonNeutralFillHover")(props) : getColor("primaryHover")(props)
 const getPressedColor = props =>
-  isNeutral(props)
-    ? getColor("buttonNeutralFillPressed")(props)
-    : getColor("primaryPressed")(props)
+  isNeutral(props) ? getColor("buttonNeutralFillPressed")(props) : getColor("primaryPressed")(props)
 
 // Status fills sit mid-lightness, so the label takes whichever ink reads better on each state's fill.
 const readableLabelOn = getFill => props => {
   const fill = getFill(props)
-  return getReadableColor(fill, getColor("onColorDark")(props), getColor("onColorLight")(props))(props)
+  return getReadableColor(
+    fill,
+    getColor("onColorDark")(props),
+    getColor("onColorLight")(props)
+  )(props)
 }
 
 const getHollowSurface = props => {
@@ -100,15 +122,21 @@ const getHollowPressedSurface = props => {
 const getBorderlessHoverColor = props =>
   isNeutral(props) ? getColor("buttonNeutralFillHover")(props) : getColor("primaryHover")(props)
 const getBorderlessPressedColor = props =>
-  isNeutral(props)
-    ? getColor("buttonNeutralFillPressed")(props)
-    : getColor("primaryPressed")(props)
+  isNeutral(props) ? getColor("buttonNeutralFillPressed")(props) : getColor("primaryPressed")(props)
 const getBorderlessHoverSurface = props =>
   isNeutral(props) ? getColor("buttonNeutralBorderlessHover")(props) : getTransparent(props)
 const getBorderlessPressedSurface = props =>
   isNeutral(props) ? getColor("buttonNeutralBorderlessPressed")(props) : getTransparent(props)
 
-const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color }) => {
+const colorsByFlavour = ({
+  flavour = DEFAULT,
+  appearance,
+  neutral,
+  danger,
+  warning,
+  iconColor,
+  color,
+}) => {
   const getErrorColor = danger ? getColor("error") : undefined
   const getWarningColor = warning ? getColor("warning") : undefined
   const getSpecialColor = getErrorColor || getWarningColor || (color ? getColor(color) : undefined)
@@ -118,6 +146,22 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color 
     : undefined
   const specialIconColor = iconColor ? getColor(iconColor) : undefined
   const getSpecialLabel = getSpecialColor ? readableLabelOn(getSpecialColor) : undefined
+
+  const surfaceColors =
+    appearance === "surface" && neutral && !getSpecialColor
+      ? {
+          color: getColor("controlText"),
+          colorHover: getColor("controlHoverText"),
+          colorActive: getColor("controlPressedText"),
+          bg: getColor("controlBackground"),
+          bgHover: getColor("controlHoverBackground"),
+          bgActive: getColor("controlPressedBackground"),
+          border: getColor("border"),
+          borderHover: getColor("controlBorder"),
+          borderActive: getColor("controlBorder"),
+          iconColor: specialIconColor || getColor("controlText"),
+        }
+      : {}
 
   const flavours = {
     [DEFAULT]: {
@@ -143,6 +187,7 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color 
       borderHover: getSpecialColorHover || getBorderHoverColor,
       borderActive: getSpecialColorActive || getBorderPressedColor,
       iconColor: specialIconColor || getSpecialColor || getPrimaryColor,
+      ...surfaceColors,
     },
     [BORDER_LESS]: {
       color: getSpecialColor || getPrimaryColor,
@@ -175,13 +220,14 @@ const colorsByFlavour = ({ flavour = DEFAULT, danger, warning, iconColor, color 
 
 export const StyledButton = styled.button.attrs(
   ({ groupFirst, groupLast, groupMiddle, ...props }) => ({
-    padding: !props.hasLabel
-      ? [0]
-      : props.flavour === LINK
-        ? [0, 1]
-        : props.large
-          ? [0, 4]
-          : [0, 3],
+    padding:
+      isInlineLink(props) || !props.hasLabel
+        ? [0]
+        : props.flavour === LINK
+          ? [0, 1]
+          : props.large
+            ? [0, 4]
+            : [0, props.compact ? 3 : 3.5],
     colors: colorsByFlavour(props),
     round:
       groupFirst && groupLast
@@ -197,28 +243,41 @@ export const StyledButton = styled.button.attrs(
   })
 )`
   && {
-    display: flex;
+    display: ${props => (isInlineLink(props) ? "inline-flex" : "flex")};
+    ${props => isInlineLink(props) && "vertical-align: baseline; text-align: inherit;"}
     justify-content: center;
     align-items: center;
     position: relative;
     ${alignSelf};
 
-    font-family: inherit;
-    font-weight: ${({ strong }) => (strong ? 700 : 500)};
-    font-size: ${props => controlFontSize(buttonSize(props))(props)};
-    line-height: ${({ large }) => getSizeBy(large ? 2.5 : 2)};
+    font-family: ${({ monospace }) =>
+      monospace ? getOrElse(["constants", "FONT_MONOSPACE"], FONT_MONOSPACE) : "inherit"};
+    font-weight: ${({ fontWeight, strong }) => fontWeight ?? (strong ? 700 : 500)};
+    font-size: ${props =>
+      props.fontSize
+        ? getSizeBy(props.fontSize / 2)(props)
+        : controlFontSize(buttonSize(props))(props)};
+    line-height: ${props =>
+      props.lineHeight ??
+      (isInlineLink(props) ? "inherit" : getSizeBy(props.large ? 2.5 : 2)(props))};
     min-height: ${buttonHeight};
     ${({ hasLabel }) =>
       !hasLabel &&
       css`
-        min-width: ${buttonHeight};
+        min-width: ${buttonWidth};
       `}
+    ${height}
+    ${width}
+    ${gap}
+    ${justifyContent}
+    ${flex}
     white-space: nowrap;
     word-break: keep-all;
 
     cursor: pointer;
-    ${({ disabled }) => disabled && `opacity: 0.4;`}
-    pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+    ${({ disabled, disabledOpacity = 0.4 }) => disabled && `opacity: ${disabledOpacity};`}
+    pointer-events: ${({ disabled, pointerEvents }) =>
+      pointerEvents ?? (disabled ? "none" : "auto")};
 
     ${({ groupMiddle, groupLast }) => (groupMiddle || groupLast) && "margin-left: -1px;"}
     ${({ groupFirst, groupMiddle, groupLast, flavour }) =>
@@ -244,7 +303,7 @@ export const StyledButton = styled.button.attrs(
     background-color: ${props => props.colors.bg(props)};
     color: ${props => props.colors.color(props)};
 
-    border-width: 1px;
+    border-width: ${props => (isInlineLink(props) ? "0" : "1px")};
     border-style: solid;
     border-color: ${props => props.colors.border(props)};
     ${round}
@@ -253,31 +312,46 @@ export const StyledButton = styled.button.attrs(
     ${position}
     ${styledSystemPosition}
 
-    text-decoration: none;
+    text-decoration: ${({ underline }) => (underline ? "underline" : "none")};
+    ${({ underlineColor }) =>
+      underlineColor &&
+      css`
+        text-decoration-color: ${getColor(underlineColor)};
+      `}
+    ${props =>
+      props.underlineOffset !== undefined &&
+      css`
+        text-underline-offset: ${dimensionValue(props.underlineOffset)};
+      `}
     & > span {
       ${textTransform};
-      margin-left: ${({ hasIcon }) => (hasIcon ? "4px" : "0px")};
+      ${props =>
+        props["data-unwrapped-children"] === undefined &&
+        `margin-left: ${props.hasIcon ? "4px" : "0px"};`}
     }
 
     &:hover {
       border-color: ${props => props.colors.borderHover(props)};
       background-color: ${props => props.colors.bgHover(props)};
       color: ${props => props.colors.colorHover(props)};
-      text-decoration: ${({ flavour }) => (flavour === LINK ? "underline" : "none")};
+      text-decoration: ${({ flavour, underline }) =>
+        flavour === LINK || underline ? "underline" : "none"};
+      ${({ underlineColor }) => underlineColor && "text-decoration-color: currentColor;"}
 
       .button-icon {
         fill: ${props => props.colors.colorHover(props)};
       }
     }
 
-    &:active,
-    &[aria-expanded="true"] {
+    &:active
+      ${props => props.highlightExpanded !== false && ', &[aria-expanded="true"]'}
+      ${props => props.highlightPressed !== false && ', &[aria-pressed="true"]'} {
       ${activeStyles}
     }
     ${props => props.active && activeStyles}
 
     &[aria-disabled="true"] {
-      opacity: 0.4;
+      opacity: ${({ disabledOpacity = 0.4 }) => disabledOpacity};
       cursor: not-allowed;
     }
 
@@ -293,7 +367,31 @@ export const StyledButton = styled.button.attrs(
       }
     }
 
+    ${({ hoverBrightness }) =>
+      hoverBrightness !== undefined &&
+      css`
+        &:hover:not(:disabled):not([aria-disabled="true"]) {
+          filter: brightness(${hoverBrightness});
+        }
+      `}
+    ${({ hoverBorderColor }) =>
+      hoverBorderColor !== undefined &&
+      css`
+        &:hover:not(:disabled):not([aria-disabled="true"]) {
+          border-color: ${getColor(hoverBorderColor)};
+        }
+      `}
+
     ${focusRing}
+    ${props =>
+      isInlineLink(props) &&
+      css`
+        &:focus-visible {
+          ${focusRingOutline}
+          outline-color: ${getColor("segmentedFocus")};
+          outline-offset: ${getSizeBy(-0.25)};
+        }
+      `}
 
     .button-icon {
       height: ${props =>

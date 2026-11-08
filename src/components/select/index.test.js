@@ -36,11 +36,11 @@ const style = el => getComputedStyle(el)
 
 describe("Select", () => {
   describe("control", () => {
-    // Round 6 D1: the Select control joins the 28px ladder with 13px text.
-    it("is 28px tall with a 4px radius", () => {
+    // Round 6 D1: the Select control joins the 30px ladder with 13px text.
+    it("is 30px tall with a 4px radius", () => {
       setup()
       const control = screen.getByTestId("selControl")
-      expect(style(control).minHeight).toBe("28px")
+      expect(style(control).minHeight).toBe("30px")
       expect(style(control).borderRadius).toBe("4px")
     })
 
@@ -54,12 +54,12 @@ describe("Select", () => {
       expect(style(control).backgroundColor).toBe(rgb(theme.colors.controlBackground))
     })
 
-    it("shows the primary border, the element surface and a soft 3px halo when focused", async () => {
+    it("uses the interactive field fill and primary border when focused", async () => {
       setup()
       await user().click(screen.getByRole("combobox"))
       const control = screen.getByTestId("selControl")
       expect(style(control).borderColor).toBe(rgb(DefaultTheme.colors.primary))
-      expect(style(control).backgroundColor).toBe(rgb(DefaultTheme.colors.elementBackground))
+      expect(style(control).backgroundColor).toBe(rgb(DefaultTheme.colors.controlHoverBackground))
       expect(style(control).boxShadow).toBe(`inset 0 0 0 1px ${DefaultTheme.colors.primary}`)
     })
 
@@ -69,15 +69,15 @@ describe("Select", () => {
       expect(style(screen.getByRole("combobox")).fontFamily).toBe("inherit")
     })
 
-    it("insets text by 10px like TextInput", () => {
+    it("insets text by 12px like TextInput", () => {
       setup()
-      expect(style(byClass("value-container")[0]).padding).toBe("0px 10px")
+      expect(style(byClass("value-container")[0]).padding).toBe("0px 12px")
     })
 
-    it("fits the value and indicators in the 26px inner box", () => {
+    it("fits the value and indicators in the 28px inner box", () => {
       setup()
-      expect(style(byClass("value-container")[0]).minHeight).toBe("26px")
-      expect(style(byClass("indicators")[0]).minHeight).toBe("26px")
+      expect(style(byClass("value-container")[0]).minHeight).toBe("28px")
+      expect(style(byClass("indicators")[0]).minHeight).toBe("28px")
     })
 
     it("uses 13px text for the value, placeholder and search input", () => {
@@ -105,12 +105,12 @@ describe("Select", () => {
   })
 
   describe("menu", () => {
-    it("sits on the dropdown surface with a 6px radius and border", async () => {
+    it("sits on the dropdown surface with a 12px radius and border", async () => {
       setup()
       await openMenu()
       const menu = screen.getByTestId("selMenu")
       expect(style(menu).backgroundColor).toBe(rgb(DefaultTheme.colors.dropdown))
-      expect(style(menu).borderRadius).toBe("6px")
+      expect(style(menu).borderRadius).toBe("12px")
       expect(style(menu).border).toBe(`1px solid ${rgb(DefaultTheme.colors.border)}`)
     })
 
@@ -142,12 +142,12 @@ describe("Select", () => {
       const u = await openMenu()
       const selected = () => screen.getAllByTestId("selOption").find(el => el.textContent === "Two")
       // react-select focuses the selected option when the menu opens.
-      expect(style(selected()).backgroundColor).toBe("rgba(0, 120, 48, 0.18)")
+      expect(style(selected()).backgroundColor).toBe(rgb(DefaultTheme.colors.menuItemSelectedHover))
       await u.keyboard("{ArrowDown}")
-      expect(style(selected()).backgroundColor).toBe("rgba(0, 120, 48, 0.12)")
-      expect(style(selected()).boxShadow).toBe(`inset 2px 0 0 ${DefaultTheme.colors.primary}`)
+      expect(style(selected()).backgroundColor).toBe(rgb(DefaultTheme.colors.menuItemSelected))
+      expect(style(selected()).boxShadow).toBe(`inset 3px 0 0 ${DefaultTheme.colors.primary}`)
       expect(style(selected()).fontWeight).toBe("500")
-      expect(style(selected()).color).toBe(rgb(DefaultTheme.colors.textFocus))
+      expect(style(selected()).color).toBe(rgb(DefaultTheme.colors.menuItemSelectedText))
     })
 
     it("floats on the shared two-layer menu shadow", async () => {
@@ -166,8 +166,9 @@ describe("Select", () => {
       await openMenu()
       expect(style(screen.getByTestId("selMenu")).marginTop).toBe("4px")
       const [option] = screen.getAllByTestId("selOption")
-      expect(style(option).padding).toBe("6px 10px")
-      expect(style(option).minHeight).toBe("28px")
+      expect(style(option).padding).toBe("8px 10px")
+      expect(style(option).borderRadius).toBe("7px")
+      expect(style(option).minHeight).toBe("34px")
       expect(style(option).fontSize).toBe("13px")
     })
 
@@ -274,4 +275,36 @@ describe("Select", () => {
       expect(within(screen.getByTestId("selOption")).getByText("Nodes").tagName).toBe("SPAN")
     })
   })
+})
+
+it("keeps a far-away keyboard option mounted as the active descendant", async () => {
+  setup({
+    options: Array.from({ length: 100 }, (_, index) => ({
+      label: `Option ${index + 1}`,
+      value: index + 1,
+    })),
+    estimatedOptionHeight: 28,
+  })
+  const keyboard = await openMenu()
+  await keyboard.keyboard("{End}")
+
+  const input = screen.getByRole("combobox")
+  const active = screen.getByRole("option", { name: "Option 100" })
+  expect(input).toHaveAttribute("aria-activedescendant", active.id)
+  await keyboard.keyboard("{Enter}")
+  expect(screen.getByText("Option 100")).toBeInTheDocument()
+})
+
+it("keeps the active option mounted when it belongs to a distant group", async () => {
+  setup({
+    options: Array.from({ length: 100 }, (_, index) => ({
+      label: `Group ${index + 1}`,
+      options: [{ label: `Grouped option ${index + 1}`, value: index + 1 }],
+    })),
+  })
+  const keyboard = await openMenu()
+  await keyboard.keyboard("{End}")
+
+  const active = screen.getByRole("option", { name: "Grouped option 100" })
+  expect(screen.getByRole("combobox")).toHaveAttribute("aria-activedescendant", active.id)
 })

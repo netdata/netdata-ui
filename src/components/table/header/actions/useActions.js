@@ -12,10 +12,22 @@ export const supportedBulkActions = {
     actionButtonDirection: "reverse",
   },
   download: { icon: "download", confirmation: false, tooltipText: "Download" },
-  toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Turn of Alarms" },
+  toggleAlarm: { icon: "alarm_off", confirmation: false, tooltipText: "Toggle alarms" },
   userSettings: { icon: "user", confirmation: false, tooltipText: "User Settings" },
-  addEntry: { icon: "plus", alwaysEnabled: true, flavour: "default", iconColor: "white" },
-  remove: { icon: "removeNode", confirmation: true, confirmLabel: "Yes", declineLabel: "No" },
+  addEntry: {
+    icon: "plus",
+    alwaysEnabled: true,
+    flavour: "default",
+    iconColor: "white",
+    tooltipText: "Add entry",
+  },
+  remove: {
+    icon: "removeNode",
+    confirmation: true,
+    tooltipText: "Remove",
+    confirmLabel: "Yes",
+    declineLabel: "No",
+  },
   columnVisibility: { icon: "columns", alwaysEnabled: true, tooltipText: "Columns" },
 }
 

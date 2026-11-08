@@ -207,6 +207,31 @@ export const StyledTabMenu = styled(Flex)`
   cursor: pointer;
   justify-content: flex-start;
   &:hover {
-    background: ${getColor("menuItemHover")};
+    background: ${({ active }) => getColor(active ? "menuItemSelectedHover" : "menuItemHover")};
+  }
+`
+
+export const VerticalTab = styled(StyledTab).attrs({
+  variant: "line",
+  appearance: "neutral",
+  round: 1,
+  padding: [1, 3],
+  height: { min: 7 },
+  width: "100%",
+})`
+  justify-content: flex-start;
+  height: auto;
+  color: ${({ active }) => getColor(active ? "menuItemSelectedText" : "text")};
+  background: ${({ active }) => getColor(active ? "menuItemSelected" : transparent)};
+  box-shadow: ${({ active, theme }) =>
+    active ? `inset 3px 0 0 ${getColor("primary")({ theme })}` : "none"};
+
+  &:hover {
+    background: ${({ active }) => getColor(active ? "menuItemSelectedHover" : "menuItemHover")};
+  }
+
+  > span {
+    text-align: start;
+    white-space: normal;
   }
 `

@@ -1,6 +1,24 @@
 ## Input
 
-Currently only of type "text", as other types may need some special tweaks and implementations.
+### Native input control
+
+`InputControl` exposes the styled native input used by `TextInput`, with no label, icon slots, or
+messages. Use it where a composed control needs its ref and `className` on the input itself. It
+accepts native input props and Flex geometry props; `size` uses TextInput's size names. `hasValue`
+controls the value/placeholder ink. Changes use the native event without additional state or delay.
+
+```jsx
+<InputControl
+  aria-label="Filter variables"
+  value={value}
+  hasValue={!!value}
+  onChange={event => setValue(event.target.value)}
+  height={7}
+  padding={[0, 2.75]}
+/>
+```
+
+TextInput defaults to type="text" and forwards an explicit native type. InputControl also accepts native input types; specialized controls still own their type-specific behavior.
 
 ### How to use
 

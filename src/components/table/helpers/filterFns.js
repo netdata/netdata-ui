@@ -26,7 +26,7 @@ const multiSelect = (row, columnId, value) => {
   if (value.length < 1) return true
 
   return value.some(({ value: filterValue }) => {
-    if (filterValue === ("all" || "")) return true
+    if (filterValue === "all") return true
     return filterValue?.toLowerCase?.() === rowValue?.toLowerCase?.()
   })
 }

@@ -5,7 +5,6 @@ import { mergeRefs } from "@/utils"
 
 const HeaderAction = ({
   isDisabled,
-  isVisible,
   testPrefix,
   id,
   icon,
@@ -20,18 +19,17 @@ const HeaderAction = ({
 }) => {
   const actionRef = useRef()
   const disabled = typeof isDisabled === "function" ? isDisabled() : isDisabled
-  const visible = typeof isVisible === "function" ? isVisible() : isVisible
 
   return (
     <Action
       ref={mergeRefs(actionRef, ref)}
       testPrefix={`${testPrefix}-bulk`}
       key={id}
-      visible={visible}
       id={id}
       icon={icon}
       handleAction={() => handleAction(selectedRows, table)}
       tooltipText={tooltipText}
+      {...(!rest.label && typeof tooltipText === "string" ? { "aria-label": tooltipText } : {})}
       disabled={(!alwaysEnabled && selectedRows?.length < 1) || disabled}
       selectedRows={selectedRows}
       disabledTooltipText={

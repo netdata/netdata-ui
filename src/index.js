@@ -1,4 +1,4 @@
-export { Button, IconButton, ButtonGroup, useRovingFocus } from "./components/button"
+export { Button, IconButton, ButtonGroup, focusInList, useRovingFocus } from "./components/button"
 
 export { Sidebar, PortalSidebar } from "./components/sidebar"
 export { Icon, iconsList, IconComponents } from "./components/icon"
@@ -53,7 +53,7 @@ export {
   getColor,
 } from "./theme"
 export { devices, breakpoints } from "./media"
-export { Checkbox, useCheckboxesList } from "./components/checkbox"
+export { Checkbox, CheckboxIndicator, useCheckboxesList } from "./components/checkbox"
 export * from "./components/input"
 export * from "./mixins"
 export { Toggle } from "./components/toggle"
@@ -75,7 +75,7 @@ export {
   ItemContainer as MenuItemContainer,
 } from "./components/drops/menu/dropdownItem"
 export { default as MenuButton } from "./components/drops/menu/menuButton"
-export { dropdownBorder, dropdownRound } from "./components/drops/dropdownStyles"
+export { dropdownBorder, dropdownRound, insetMenuRound } from "./components/drops/dropdownStyles"
 
 export { default as Flex } from "./components/templates/flex"
 export { default as makeFlex } from "./components/templates/flex/flex"
@@ -103,8 +103,11 @@ export { default as useNavigationArrows } from "./organisms/navigation/hooks/use
 
 export { default as Intersection } from "./components/intersection"
 export { default as useIntersection } from "./hooks/useIntersection"
+export { default as useKeyboardEsc, isComposingKey } from "./hooks/useKeyboardEsc"
+export { getFocusCandidates, trapTabFocus, useFocusTrap } from "./hooks/useFocusTrap"
+export { default as useFocusAfterCommit } from "./hooks/useFocusAfterCommit"
 
-export { default as Pill, StatusWord, MarkCounts } from "./components/pill"
+export { default as Pill, StatusDot, StatusWord, MarkCounts } from "./components/pill"
 
 export { default as ProgressBar } from "./components/progressBar"
 
@@ -137,3 +140,9 @@ export { default as CopyToClipboard } from "./components/copyToClipboard"
 
 export { GlobalStyles } from "./global-styles"
 export * from "./utils"
+
+export { default as VisuallyHidden } from "./components/visuallyHidden"
+
+export { default as Skeleton } from "./components/skeleton"
+export { getScrollInset } from "./utils/getScrollInset"
+export { virtualRangeWithIndex } from "./utils/virtualRangeWithIndex"

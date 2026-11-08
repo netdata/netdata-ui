@@ -13,8 +13,13 @@ type BorderSizeType = "all" | "horizontal" | "vertical" | "top" | "right" | "bot
 export interface BorderProps {
   border?:
     | boolean
-    | BorderSizeType
-    | { side: BorderSizeType; color?: ColorType; size?: DimensionsType; type?: string }
+    | ColorType
+    | {
+        side: BorderSizeType | BorderSizeType[]
+        color?: ColorType
+        size?: DimensionsType
+        type?: string
+      }
 }
 
 export interface DirectionProps {

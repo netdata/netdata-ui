@@ -3,34 +3,19 @@ import RadioButton from "."
 
 export const BaseRadioButton = () => {
   return (
-    <RadioButton
-      disabled={boolean("Disabled", false)}
-      onChange={() => {}}
-      checked={boolean("Checked", false)}
-      label={text("Label", "Toggle field")}
-    />
+    <RadioButton disabled={false} onChange={() => {}} checked={false} label="Toggle field" />
   )
 }
 
 export const RadioButtonDisabledAndChecked = () => {
   return (
-    <RadioButton
-      disabled={boolean("Disabled", true)}
-      onChange={() => {}}
-      checked={boolean("Checked", true)}
-      label={text("Label", "Toggle field")}
-    />
+    <RadioButton disabled onChange={() => {}} checked label="Toggle field" />
   )
 }
 
 export const RadioButtonChecked = () => {
   return (
-    <RadioButton
-      disabled={boolean("Disabled", false)}
-      onChange={() => {}}
-      checked={boolean("Checked", true)}
-      label={text("Label", "Toggle field")}
-    />
+    <RadioButton disabled={false} onChange={() => {}} checked label="Toggle field" />
   )
 }
 

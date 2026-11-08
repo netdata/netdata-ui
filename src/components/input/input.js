@@ -3,6 +3,8 @@ import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { FieldIndicator, Input, LabelText } from "./styled"
 
+export { Input as InputControl }
+
 const ErrorMessage = ({ error, ...props }) => {
   const errorMessage = error === true ? "invalid" : error
 

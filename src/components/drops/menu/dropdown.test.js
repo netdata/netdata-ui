@@ -24,11 +24,11 @@ describe("Dropdown surface", () => {
     expect(listbox().tagName).toBe("UL")
   })
 
-  it("rounds at 6px and casts the shared floating shadow", () => {
+  it("rounds at 12px and casts the shared floating shadow", () => {
     renderDropdown()
     const shadow = DefaultTheme.colors.dropdownShadow
 
-    expect(listbox()).toHaveStyleRule("border-radius", "6px")
+    expect(listbox()).toHaveStyleRule("border-radius", "12px")
     expect(listbox()).toHaveStyleRule("box-shadow", `0 4px 12px ${shadow},0 1px 2px ${shadow}`)
   })
 
@@ -38,10 +38,10 @@ describe("Dropdown surface", () => {
     expect(listbox()).not.toHaveStyleRule("box-shadow", expect.anything())
   })
 
-  it("insets rows from the rounded edge by 4px", () => {
+  it("insets rows from the rounded edge by 12px", () => {
     renderDropdown()
 
-    expect(listbox()).toHaveStyleRule("padding", "4px 0")
+    expect(listbox()).toHaveStyleRule("padding", "12px")
   })
 
   it("keeps consumer padding overrides", () => {

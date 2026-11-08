@@ -12,6 +12,10 @@ export type AppColorsT = {
   appBackground: string
   workspaceSidebarBackground: string
   workspaceBackground: string
+  menuItemHover: string
+  menuItemSelected: string
+  menuItemSelectedHover: string
+  menuItemSelectedText: string
   tableBorder: string
   tableHeaderBackground: string
   segmentedBackground: string
@@ -23,6 +27,9 @@ export type AppColorsT = {
   controlBackground: string
   controlHoverBackground: string
   controlPressedBackground: string
+  controlText: string
+  controlHoverText: string
+  controlPressedText: string
   buttonNeutralFill: string
   buttonNeutralFillHover: string
   buttonNeutralFillPressed: string
@@ -49,6 +56,32 @@ export type AppColorsT = {
   statusErrorText: string
   statusWarningText: string
   statusMutedText: string
+  labelTokenBackground: string
+  labelTokenBorder: string
+  labelTokenText: string
+  patternTokenBackground: string
+  patternTokenBorder: string
+  patternTokenText: string
+  patternTokenMark: string
+  negatedTokenBackground: string
+  negatedTokenBorder: string
+  negatedTokenText: string
+  negatedTokenMark: string
+  syntaxKey: string
+  syntaxNumber: string
+  syntaxParen1: string
+  syntaxParen2: string
+  syntaxParen3: string
+  linkedContentBackground: string
+  errorContentBackground: string
+  thresholdWarningText: string
+  thresholdCriticalText: string
+  chartSeries1: string
+  chartSeries2: string
+  chartSeries3: string
+  chartSeries4: string
+  chartWarningLine: string
+  chartMutedLine: string
   warning: string
   warningLite: string
   warningBackground: string
@@ -103,6 +136,7 @@ interface IDefaultTheme {
     SIZE_UNIT: number
     GUTTER_HEIGHT: number
     FONT_MONOSPACE: string
+    PILL_SUBTLE_TINT: string
   }
   colors: AppColorsT
   shadows: {
@@ -119,6 +153,7 @@ interface IDarkTheme {
     SIZE_UNIT: number
     GUTTER_HEIGHT: number
     FONT_MONOSPACE: string
+    PILL_SUBTLE_TINT: string
   }
   colors: AppColorsT
   shadows: {

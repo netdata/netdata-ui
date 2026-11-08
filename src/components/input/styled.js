@@ -1,21 +1,19 @@
 import styled, { css } from "styled-components"
 import { Icon } from "@/components/icon"
 import Flex from "@/components/templates/flex"
-import background from "@/components/templates/mixins/background"
 import { TextMicro, TextSmall } from "@/components/typography"
-import { getColor, getSizeBy, getValidatedControlColor } from "@/theme/utils"
+import { getColor, getOrElse, getSizeBy, getValidatedControlColor } from "@/theme/utils"
 import { fieldFocusRing } from "@/mixins/focusRing"
 import { controlHeight, controlFontSize } from "@/mixins/controlSize"
+import { FONT_MONOSPACE } from "@/theme/default/constants"
 
 const disabledCursorSupport = css`
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "")};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `
 
-// TextInput's own size names: "tiny" (legacy) and "compact" are the dense step; "small" and the
-// default "large" are the 28px default, so the ladder's "large" is never reached through `size`.
 const fieldSizeOf = size => (size === "tiny" || size === "compact" ? "compact" : "default")
-const fieldPadding = size => (fieldSizeOf(size) === "compact" ? [0, 2] : [0, 2.5])
+const fieldPadding = size => (fieldSizeOf(size) === "compact" ? [0, 2] : [0, 3])
 const fieldFontSize = props => controlFontSize(fieldSizeOf(props.size))(props)
 
 // Slots in 8px units: a 16px icon with 6px either side, and room for the length indicator.
@@ -55,9 +53,20 @@ export const Input = styled(Flex).attrs(props => ({
   height: controlHeight(fieldSizeOf(props.size))(props),
   ...props,
 }))`
-  font-family: inherit;
-  font-size: ${fieldFontSize};
-  line-height: ${getSizeBy(2)};
+  font-family: ${({ monospace }) =>
+    monospace ? getOrElse(["constants", "FONT_MONOSPACE"], FONT_MONOSPACE) : "inherit"};
+  font-size: ${props =>
+    props.fontSize === undefined
+      ? fieldFontSize(props)
+      : typeof props.fontSize === "number"
+        ? getSizeBy(props.fontSize / 2)(props)
+        : props.fontSize};
+  ${({ fontWeight }) =>
+    fontWeight !== undefined &&
+    css`
+      font-weight: ${fontWeight};
+    `}
+  line-height: ${props => props.lineHeight ?? getSizeBy(2)(props)};
   color: ${({ disabled, hasValue }) =>
     hasValue ? getColor("text") : disabled ? getColor("placeholder") : getColor("textLite")};
   ${props => props.hasIconLeft && `padding-left: ${getSizeBy(iconSlot)(props)};`}

@@ -23,18 +23,18 @@ describe("TextInput test", () => {
 })
 
 describe("TextInput sizing", () => {
-  // Round 6 D1: fields join the 28px control ladder; tiny and compact are the dense 24px step.
-  it("is 28px tall with 13px text by default", () => {
+  // Round 6 D1: fields join the 30px control ladder; tiny and compact are the dense 24px step.
+  it("is 30px tall with 13px text by default", () => {
     setup()
-    expect(field()).toHaveStyleRule("height", "28px")
+    expect(field()).toHaveStyleRule("height", "30px")
     expect(field()).toHaveStyleRule("font-size", "13px")
     expect(field()).toHaveStyleRule("font-size", "13px", { modifier: "::placeholder" })
   })
 
-  it.each(["small", "large"])("is 28px tall for size %s", size => {
+  it.each(["small", "large"])("is 30px tall for size %s", size => {
     setup({ size })
-    expect(field()).toHaveStyleRule("height", "28px")
-    expect(field()).toHaveStyleRule("padding", "0 10px")
+    expect(field()).toHaveStyleRule("height", "30px")
+    expect(field()).toHaveStyleRule("padding", "0 12px")
   })
 
   it.each(["tiny", "compact"])("is 24px tall with 12px text and an 8px inset for size %s", size => {
@@ -49,9 +49,9 @@ describe("TextInput sizing", () => {
     expect(field()).toHaveStyleRule("height", "32px")
   })
 
-  it("insets text by 10px with a 16px line", () => {
+  it("insets text by 12px with a 16px line", () => {
     setup()
-    expect(field()).toHaveStyleRule("padding", "0 10px")
+    expect(field()).toHaveStyleRule("padding", "0 12px")
     expect(field()).toHaveStyleRule("line-height", "16px")
   })
 

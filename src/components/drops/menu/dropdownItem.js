@@ -1,20 +1,27 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { getColor, getRgbColor, getSizeBy } from "@/theme"
+import { getColor, getSizeBy } from "@/theme"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
+import { insetMenuRowRound, menuSelectionMarker } from "../dropdownStyles"
+
+const Label = styled(TextSmall)`
+  min-width: 0;
+`
 
 export const ItemContainer = styled(Flex).attrs(props => ({
   as: "li",
   role: "option",
-  padding: [1.5, 3],
+  padding: [2, 2.5],
+  round: props.justDesc ? undefined : insetMenuRowRound,
+  color: props.selected ? "menuItemSelectedText" : "text",
   ...props,
 }))`
   ${({ alignItems }) => !alignItems && "align-items: center;"}
   ${({ height }) =>
     height === undefined &&
     css`
-      min-height: ${getSizeBy(3.5)};
+      min-height: ${getSizeBy(4.25)};
     `}
   cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
@@ -38,11 +45,11 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   ${({ selected }) =>
     selected &&
     css`
-      background-color: ${getRgbColor("primary", 0.12)};
-      box-shadow: inset 2px 0 0 ${getColor("primary")};
+      background-color: ${getColor("menuItemSelected")};
+      box-shadow: ${menuSelectionMarker};
 
       &:hover {
-        background-color: ${getRgbColor("primary", 0.18)};
+        background-color: ${getColor("menuItemSelectedHover")};
       }
     `}
 
@@ -50,7 +57,12 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   &:focus-visible,
   &[data-focused="true"] {
     outline: none;
-    box-shadow: ${({ selected }) => (selected ? css`inset 2px 0 0 ${getColor("primary")}, ` : "")}
+    box-shadow: ${({ selected }) =>
+        selected
+          ? css`
+              ${menuSelectionMarker},
+            `
+          : ""}
       inset 0 0 0 2px ${getColor("primary")};
   }
 
@@ -69,6 +81,16 @@ const DropdownItem = ({
 }) => {
   const selected = selectedValue === value
 
+  const name = (
+    <Label
+      color="inherit"
+      truncate={typeof label === "string"}
+      title={typeof label === "string" ? label : undefined}
+    >
+      {label}
+    </Label>
+  )
+
   const onSelect = event => {
     if (onClick) onClick(event)
     onItemClick(value)
@@ -86,9 +108,9 @@ const DropdownItem = ({
       {...rest}
       style={style}
     >
-      {reverse && <TextSmall>{label}</TextSmall>}
+      {reverse && name}
       {icon}
-      {!reverse && <TextSmall>{label}</TextSmall>}
+      {!reverse && name}
     </ItemContainer>
   )
 }

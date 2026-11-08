@@ -1,9 +1,13 @@
 import { css } from "styled-components"
-import { getColor } from "@/theme"
+import { getColor, getSizeBy } from "@/theme"
 
 export const dropdownBorder = { side: "all", size: "1px", type: "solid", color: "border" }
 
 export const dropdownRound = 1.5
+export const insetMenuRound = 3
+export const insetMenuRowRound = 1.75
+export const menuSelectionMarker = ({ theme }) =>
+  `inset ${getSizeBy(0.375)({ theme })} 0 0 ${getColor("primary")({ theme })}`
 
 export const withDropdownDefaults = props =>
   props.background === "dropdown"

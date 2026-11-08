@@ -169,8 +169,7 @@ export const Expanding = () => {
         enableExpanding
         dataColumns={mockDataColumns}
         data={mockData()}
-        onClickRow={({ data, table, fullRow }) => {
-          // console.log(data, table, fullRow)
+        onClickRow={({ fullRow }) => {
           console.log(fullRow.getCanExpand())
           fullRow.toggleExpanded()
         }}
@@ -787,6 +786,7 @@ const argTypes = {
 
   // Appearance
   bordered: prop("Appearance", "Draws a border and rounded corners around the table.", "boolean", "true", "boolean"),
+  surface: prop("Appearance", "Theme colour token for the table canvas, toolbar, headers, rows and pager.", "string", undefined, "text"),
   width: prop("Appearance", "Width of the table container.", "string", undefined, "text"),
   className: prop("Appearance", "Class name for the table container.", "string", undefined, "text"),
   meta: prop("Appearance", "Style overrides: `cellStyles`, `headStyles`, `searchStyles`, `searchContainerStyles`, `bulkActionsStyles`, `groupByContainerStyles`, `groupBySelectStyles`. May be a function.", "TableMeta | (...args) => TableMeta", "{}", "object"),

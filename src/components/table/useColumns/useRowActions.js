@@ -1,6 +1,7 @@
 import React, { useMemo } from "react"
-import Flex from "@/components/templates/flex"
-import Action from "../components/action"
+import { useTheme } from "styled-components"
+import { controlHeight } from "@/mixins/controlSize"
+import RowActionGroup from "../components/rowActionGroup"
 
 export const supportedRowActions = {
   delete: {
@@ -45,6 +46,9 @@ export const supportedRowActions = {
 const MIN_ACTIONS_COLUMN_WIDTH = 70
 
 export default (rowActions, { testPrefix, tableMeta } = {}) => {
+  const theme = useTheme()
+  const { SIZE_SUB_UNIT } = theme.constants
+  const actionHeight = Number.parseFloat(controlHeight("default")({ theme }))
   const availableRowActions = useMemo(
     () =>
       Object.keys(rowActions).reduce((acc, key) => {
@@ -65,59 +69,31 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
   return useMemo(() => {
     if (availableRowActions.length < 1) return null
 
+    const visibleSlots = Math.min(availableRowActions.length, 4)
     return {
       id: "actions",
       enableResizing: false,
       header: "Actions",
       headerString: "Actions",
-      cell: ({ row, table }) => (
-        <Flex
-          data-testid="action-cell"
-          height="100%"
-          gap={2}
-          flex={false}
-          onClick={e => e.stopPropagation()}
-        >
-          {availableRowActions.map(
-            ({
-              id,
-              handleAction,
-              isDisabled,
-              isVisible = true,
-              dataGa,
-              disabledTooltipText,
-              tooltipText,
-              ...rest
-            }) => (
-              <Action
-                {...rest}
-                disabled={typeof isDisabled === "function" ? isDisabled(row.original) : isDisabled}
-                visible={typeof isVisible === "function" ? isVisible(row.original) : isVisible}
-                dataGa={typeof dataGa === "function" ? dataGa(row.original) : dataGa}
-                disabledTooltipText={
-                  typeof disabledTooltipText === "function"
-                    ? disabledTooltipText(row.original)
-                    : disabledTooltipText
-                }
-                tooltipText={
-                  typeof tooltipText === "function" ? tooltipText(row.original) : tooltipText
-                }
-                key={id}
-                id={id}
-                handleAction={() => handleAction(row.original, table)}
-                testPrefix={testPrefix}
-                currentRow={row}
-              />
-            )
-          )}
-        </Flex>
+      cell: ({ row, table, inline }) => (
+        <RowActionGroup
+          inline={inline}
+          actions={availableRowActions}
+          row={row}
+          table={table}
+          testPrefix={testPrefix}
+        />
       ),
       enableColumnFilter: false,
       enableSorting: false,
       enableReordering: false,
       tableMeta,
-      size: Math.max(MIN_ACTIONS_COLUMN_WIDTH, availableRowActions.length * 35),
-      align: "end",
+      size: Math.max(
+        MIN_ACTIONS_COLUMN_WIDTH,
+        visibleSlots * actionHeight + (visibleSlots - 1) * 2 * SIZE_SUB_UNIT + 4 * SIZE_SUB_UNIT
+      ),
+      minSize: actionHeight + 4 * SIZE_SUB_UNIT,
+      align: "center",
       notFlex: true,
       meta: {
         cellStyles: {
@@ -125,5 +101,5 @@ export default (rowActions, { testPrefix, tableMeta } = {}) => {
         },
       },
     }
-  }, [availableRowActions])
+  }, [availableRowActions, actionHeight, SIZE_SUB_UNIT, testPrefix, tableMeta])
 }

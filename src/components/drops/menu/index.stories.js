@@ -50,7 +50,7 @@ export const RenderItem = {
 export const RenderDropdown = {
   render: () => (
     <Simple
-      Dropdown={({ value, onItemClick, items, Item }) => (
+      Dropdown={({ items }) => (
         <Flex background="mainBackgroundDisabled" padding={[2]}>
           Characters are: {items.map(({ value }) => value).join(", ")}
         </Flex>

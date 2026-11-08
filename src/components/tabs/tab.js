@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { RaisedSegmentedItem } from "@/components/button/segmented"
 import { Icon } from "@/components/icon"
-import { StyledTab, StyledTabMenu, TabCount, TabLabel, isNeutralLine } from "./styled"
+import { StyledTab, StyledTabMenu, VerticalTab, TabCount, TabLabel, isNeutralLine } from "./styled"
 
 const tabRoleProps = ({ active, disabled }) => ({
   role: "tab",
@@ -10,15 +10,16 @@ const tabRoleProps = ({ active, disabled }) => ({
   tabIndex: active && !disabled ? 0 : -1,
 })
 
-export const Tab = ({ index, isMenuItem, onChange, icon, count, ...rest }) => {
+export const Tab = ({ index, isMenuItem, onChange, icon, count, vertical, ...rest }) => {
   const onClick = useCallback(e => onChange && onChange(index || 0, e), [index, onChange])
-  const isRaised = rest.variant === "contained" && rest.appearance === "raised"
-  const TabComponent = isMenuItem ? StyledTabMenu : isRaised ? RaisedSegmentedItem : StyledTab
+  const isRaised = !vertical && rest.variant === "contained" && rest.appearance === "raised"
+  const LineTab = vertical ? VerticalTab : StyledTab
+  const TabComponent = isMenuItem ? StyledTabMenu : isRaised ? RaisedSegmentedItem : LineTab
   const hasSlots = !!icon || count !== undefined
 
   return (
     <TabComponent
-      justifyContent={isRaised ? undefined : "center"}
+      justifyContent={vertical ? "start" : isRaised ? undefined : "center"}
       alignItems="center"
       gap={isNeutralLine(rest) ? 1.75 : hasSlots ? 1.5 : undefined}
       onClick={rest.disabled ? undefined : onClick}
@@ -29,7 +30,9 @@ export const Tab = ({ index, isMenuItem, onChange, icon, count, ...rest }) => {
       {typeof rest.label === "function" ? (
         rest.label({ index, isMenuItem, icon, count, ...rest })
       ) : typeof rest.label === "string" ? (
-        <TabLabel appearance={isNeutralLine(rest) ? "neutral" : undefined}>{rest.label}</TabLabel>
+        <TabLabel appearance={vertical || isNeutralLine(rest) ? "neutral" : undefined}>
+          {rest.label}
+        </TabLabel>
       ) : (
         rest.label
       )}

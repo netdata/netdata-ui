@@ -20,6 +20,7 @@ const rerenderSelector = state => {
 
   return {
     sizing: state.columnSizing,
+    pinning: state.columnPinning,
     expanded: state.expanded,
     columnVisibility: state.columnVisibility,
     selectedRows: state.selectedRows,
@@ -29,15 +30,25 @@ const rerenderSelector = state => {
   }
 }
 
-const HeaderGroup = ({ id, headers, testPrefix, rowReverse, enableColumnReordering, ...rest }) => {
+const HeaderGroup = ({
+  id,
+  headers,
+  testPrefix,
+  rowReverse,
+  enableColumnReordering,
+  surface,
+  endAtPinnedEdge,
+  ...rest
+}) => {
   const columnIds = useMemo(() => headers.map(h => h.column.id), [headers])
+  const edgeHeader = endAtPinnedEdge ? headers.at(-1) : undefined
 
   const content = (
     <Flex
       id={id}
       data-testid={`netdata-table-headRow${testPrefix}`}
       flex
-      background="tableHeaderBackground"
+      background={surface}
       rowReverse={rowReverse}
     >
       {headers.map((header, index) => (
@@ -48,6 +59,7 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, enableColumnReorderi
           header={header}
           testPrefix={testPrefix}
           hasSubheaders={!!header.subHeaders.length}
+          hideResizeDivider={header === edgeHeader}
           enableColumnReordering={
             enableColumnReordering && header.column.columnDef.enableReordering !== false
           }
@@ -59,6 +71,8 @@ const HeaderGroup = ({ id, headers, testPrefix, rowReverse, enableColumnReorderi
               key={header.id}
               {...rest}
               enableColumnReordering={enableColumnReordering}
+              surface={surface}
+              endAtPinnedEdge={header === edgeHeader}
               isSubheader
             />
           )}
@@ -84,12 +98,8 @@ const HeaderGroups = ({ groups, size, side, flex = "grow", enableColumnReorderin
   return (
     <Flex
       position={side ? "sticky" : "relative"}
-      {...(side === "right"
-        ? {
-            right: 0,
-            border: { side: "left", color: "tableBorder" },
-          }
-        : { left: 0, border: { side: "right", color: "tableBorder" } })}
+      {...(side === "right" ? { right: 0 } : side === "left" ? { left: 0 } : {})}
+      data-table-pinned={side}
       zIndex={side ? 11 : undefined}
       width={`${size}px`}
       flex={flex}
@@ -112,7 +122,13 @@ const HeaderRow = styled(Flex)`
   }
 `
 
-const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest }) => {
+const BodyHeader = ({
+  table,
+  testPrefix,
+  enableColumnReordering,
+  surface = "tableHeaderBackground",
+  ...rest
+}) => {
   useTableState(rerenderSelector)
 
   const [activeId, setActiveId] = useState(null)
@@ -166,10 +182,12 @@ const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest })
     setActiveId(null)
   }, [])
 
+  const hasRightColumns = !!table.getRightVisibleLeafColumns().length
+  const hasCenterColumns = !!table.getCenterVisibleLeafColumns().length
   const headerContent = (
     <HeaderRow
       data-testid={`netdata-table-head${testPrefix}`}
-      background="tableHeaderBackground"
+      background={surface}
       flex
       border={{
         size: "1px",
@@ -181,18 +199,22 @@ const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest })
       <HeaderGroups
         groups={table.getLeftHeaderGroups()}
         side="left"
+        endAtPinnedEdge={hasCenterColumns || hasRightColumns}
         size={table.getLeftTotalSize()}
         testPrefix={testPrefix}
         {...rest}
+        surface={surface}
         flex={false}
         table={table}
         enableColumnReordering={enableColumnReordering}
       />
       <HeaderGroups
         groups={table.getCenterHeaderGroups()}
+        endAtPinnedEdge={hasRightColumns}
         size={table.getCenterTotalSize()}
         testPrefix={testPrefix}
         {...rest}
+        surface={surface}
         table={table}
         enableColumnReordering={enableColumnReordering}
       />
@@ -202,6 +224,7 @@ const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest })
         size={table.getRightTotalSize()}
         testPrefix={testPrefix}
         {...rest}
+        surface={surface}
         flex={false}
         table={table}
         enableColumnReordering={enableColumnReordering}
@@ -224,9 +247,9 @@ const BodyHeader = memo(({ table, testPrefix, enableColumnReordering, ...rest })
       onDragCancel={handleDragCancel}
     >
       {headerContent}
-      <DragOverlay activeColumn={activeColumn} />
+      <DragOverlay activeColumn={activeColumn} surface={surface} />
     </DndContext>
   )
-})
+}
 
-export default BodyHeader
+export default memo(BodyHeader)

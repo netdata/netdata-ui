@@ -1,5 +1,5 @@
 import colors from "./colors"
-import * as constants from "../default/constants"
+import * as constants from "./constants"
 
 const root = {
   name: "Dark",

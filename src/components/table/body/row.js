@@ -47,7 +47,7 @@ const CellGroup = ({
 
   return (
     <Flex
-      flex={getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)}
+      flex={getColumnFlex(table, column, header)}
       width={`${column.getSize()}px`}
       position="relative"
       data-testid={`netdata-table-cell-${cell.column.columnDef.id}${testPrefix}`}
@@ -59,13 +59,13 @@ const CellGroup = ({
           backgroundOpacity: "0.5",
         })}
       padding={[1.5, 2]}
-      alignItems={directCellContent ? cell.column.columnDef.align || "start" : undefined}
+      alignItems={cell.column.columnDef.align || "center"}
       {...cellStyles}
     >
       {directCellContent ? (
         content
       ) : (
-        <Flex flex width="100%" alignItems={cell.column.columnDef.align || "start"}>
+        <Flex flex width="100%" alignItems={cell.column.columnDef.align || "center"}>
           {content}
         </Flex>
       )}
@@ -108,14 +108,12 @@ const DirectCellGroup = ({ cell, row, table, header, testPrefix, coloredSortedCo
       style={{
         display: "flex",
         boxSizing: "border-box",
-        flex: getFlex(
-          getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)
-        ),
+        flex: getFlex(getColumnFlex(table, column, header)),
         width: `${column.getSize()}px`,
         position: "relative",
         overflow: "hidden",
         padding: getDimensions(theme, [1.5, 2]),
-        alignItems: alignItemValuesMap[column.columnDef.align] || "flex-start",
+        alignItems: alignItemValuesMap[column.columnDef.align] || "center",
         backgroundColor: sorted ? getRgbColor("columnHighlight", 0.5)({ theme }) : undefined,
         ...cellStyles,
       }}
@@ -127,6 +125,7 @@ const DirectCellGroup = ({ cell, row, table, header, testPrefix, coloredSortedCo
 
 const rerenderSelector = state => ({
   sizing: state.columnSizing,
+  pinning: state.columnPinning,
   expanded: state.expanded,
   columnVisibility: state.columnVisibility,
   selectedRows: state.selectedRows,
@@ -139,6 +138,13 @@ const tint = color => `linear-gradient(${color},${color})`
 // Tints are layered as background-image so sticky pinned sections keep an opaque base colour.
 const rowStates = css`
   font-variant-numeric: tabular-nums;
+
+  @media (hover: hover) {
+    &:not(:hover):not(:focus-within) [data-table-inline-actions]:not(:has([aria-expanded="true"])) {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 
   &[data-depth] > * > .row-content {
     background-image: ${({ theme }) => tint(getRgbColor("main", 0.03)({ theme }))};
@@ -164,11 +170,10 @@ const StyledRow = styled(Flex)`
 const DirectStyledRow = styled(Flex).attrs({
   flex: true,
   column: true,
-  background: "mainBackground",
   border: { side: "bottom", color: "tableBorder" },
 })`
   .row-content {
-    background-color: ${getColor("mainBackground")};
+    background-color: ${({ background, theme }) => getColor(background)({ theme })};
   }
 
   &:hover,
@@ -192,6 +197,7 @@ const TableRow = ({
   renderSubComponent,
   GroupRow,
   directCellContent,
+  surface = "mainBackground",
   ...rest
 }) => {
   useTableState(rerenderSelector)
@@ -234,11 +240,11 @@ const TableRow = ({
         {!!row.getLeftVisibleCells().length && (
           <div
             className="row-content"
+            data-table-pinned="left"
             style={{
               display: "flex",
               position: "sticky",
               left: 0,
-              borderRight: `1px solid ${getColor("tableBorder")({ theme })}`,
               zIndex: zIndex || 10,
               flex: `0 0 ${table.getLeftTotalSize()}px`,
             }}
@@ -281,11 +287,11 @@ const TableRow = ({
         {!!row.getRightVisibleCells().length && (
           <div
             className="row-content"
+            data-table-pinned="right"
             style={{
               display: "flex",
               position: "sticky",
               right: 0,
-              borderLeft: `1px solid ${getColor("tableBorder")({ theme })}`,
               zIndex: zIndex || 10,
               flex: `0 0 ${table.getRightTotalSize()}px`,
               flexDirection: "row-reverse",
@@ -312,11 +318,11 @@ const TableRow = ({
           <Flex
             position="sticky"
             left={0}
-            border={{ side: "right", color: "tableBorder" }}
+            data-table-pinned="left"
             zIndex={zIndex || 10}
             basis={`${table.getLeftTotalSize()}px`}
             flex={false}
-            background="mainBackground"
+            background={surface}
             _hover={{
               background: "tableRowBgHover",
             }}
@@ -338,7 +344,7 @@ const TableRow = ({
         <Flex
           width={`${table.getCenterTotalSize()}px`}
           flex="grow"
-          background="mainBackground"
+          background={surface}
           _hover={{
             background: "tableRowBgHover",
           }}
@@ -362,11 +368,11 @@ const TableRow = ({
           <Flex
             position="sticky"
             right={0}
-            border={{ side: "left", color: "tableBorder" }}
+            data-table-pinned="right"
             zIndex={zIndex || 10}
             basis={`${table.getRightTotalSize()}px`}
             flex={false}
-            background="mainBackground"
+            background={surface}
             _hover={{
               background: "tableRowBgHover",
             }}
@@ -399,6 +405,7 @@ const TableRow = ({
       data-id={row.original?.id || row.id}
       data-selected={row.getIsSelected() ? "true" : undefined}
       data-depth={row.depth || undefined}
+      background={surface}
       onClick={onClick}
       cursor={isClickable ? "pointer" : "default"}
       onMouseEnter={() => onHoverCell?.({ row: row.index })}
@@ -406,7 +413,6 @@ const TableRow = ({
       {...(!directCellContent && {
         flex: true,
         column: true,
-        background: "mainBackground",
         _hover: { background: "tableRowBgHover" },
         border: { side: "bottom", color: "tableBorder" },
       })}

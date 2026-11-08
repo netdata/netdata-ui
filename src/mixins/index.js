@@ -10,4 +10,12 @@ export { default as round } from "./round"
 export { default as textTransform } from "./textTransform"
 export { default as webkitVisibleScrollbar } from "./webkitVisibleScrollbar"
 export { default as zIndex } from "./zIndex"
-export { focusRing, focusRingOutline, fieldFocusRing, fieldFocusWithinRing } from "./focusRing"
+export {
+  focusRing,
+  focusRingAt,
+  focusRingOutline,
+  fieldFocusRing,
+  fieldFocusWithinRing,
+} from "./focusRing"
+
+export { default as visuallyHidden } from "./visuallyHidden"

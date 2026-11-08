@@ -1,5 +1,7 @@
 import rawColors from "../rawColors"
 
+const tableRowHover = "#29352D"
+
 const appColors = {
   primary: rawColors.green.green100,
   accent: rawColors.green.chateau,
@@ -24,8 +26,10 @@ const appColors = {
   modalTabsBackground: "#29312C",
   modalBackground: "#252D28",
   modalInfoBackground: "#29312C",
-  menuItemSelected: "#2C342F",
-  menuItemHover: "#29312C",
+  menuItemHover: "#2C382F",
+  menuItemSelected: "#354439",
+  menuItemSelectedHover: "#3C4B40",
+  menuItemSelectedText: "#A4E3B2",
   tabActiveBackground: rawColors.green.green30,
   tabItem: rawColors.neutral.grey155,
   scrollBarTrack: rawColors.neutral.grey25,
@@ -52,6 +56,9 @@ const appColors = {
   controlBackground: "#222B25",
   controlHoverBackground: "#2B352E",
   controlPressedBackground: "#303B33",
+  controlText: "#BAC6BE",
+  controlHoverText: "#BAC6BE",
+  controlPressedText: "#BAC6BE",
   buttonNeutralFill: "#B0C5B5",
   buttonNeutralFillHover: "#C2CAC4",
   buttonNeutralFillPressed: "#CBD1CD",
@@ -182,6 +189,34 @@ const appColors = {
   neutralPillBorder: "#2C342F",
   neutralPillColor: "#B0C5B5",
 
+  labelTokenBackground: "#24393b",
+  labelTokenBorder: "#3f5a5b",
+  labelTokenText: "#a8d5d7",
+  patternTokenBackground: "#163a3c",
+  patternTokenBorder: "#2c6468",
+  patternTokenText: "#a8e1dc",
+  patternTokenMark: "#62d6ce",
+  negatedTokenBackground: "#30284b",
+  negatedTokenBorder: "#58498a",
+  negatedTokenText: "#d6c9fc",
+  negatedTokenMark: "#b6a0f8",
+
+  syntaxKey: "#93c9cb",
+  syntaxNumber: "#d79bf2",
+  syntaxParen1: "#f38bc0",
+  syntaxParen2: "#c8c86b",
+  syntaxParen3: "#a8b4dc",
+  linkedContentBackground: "#22393a",
+  errorContentBackground: "#3a1d22",
+  thresholdWarningText: "#1f1300",
+  thresholdCriticalText: "#ffdfe3",
+  chartSeries1: "#93c9cb",
+  chartSeries2: "#a58be0",
+  chartSeries3: "#b4c0cc",
+  chartSeries4: "#d58fb0",
+  chartWarningLine: "#bf7100",
+  chartMutedLine: "#4d5c5c",
+
   // Alert MasterCard
   alertIcon: rawColors.neutral.grey50,
   idleError: rawColors.red.red20,
@@ -189,10 +224,10 @@ const appColors = {
   idleClear: rawColors.green.green20,
 
   // Table
-  tableRowBgHover: rawColors.neutral.grey30,
+  tableRowBgHover: tableRowHover,
   tableRowBg: rawColors.neutral.grey25,
   tableRowBg2: rawColors.neutral.grey25,
-  tableRowBg2Hover: rawColors.neutral.grey25,
+  tableRowBg2Hover: tableRowHover,
   columnHighlight: rawColors.neutral.grey35,
 
   // Progress Bare

@@ -6,6 +6,17 @@ import { StatusWord } from "./index"
 const light = DefaultTheme.colors
 
 describe("StatusWord", () => {
+  it("does not give a decorative count mark an unrelated status", () => {
+    const { container } = renderWithProviders(
+      <StatusWord size="small" dot="bar" color="statusWarningText" data-tone="warning">
+        1
+      </StatusWord>
+    )
+    expect([...container.querySelectorAll("[data-tone]")].map(node => node.dataset.tone)).toEqual([
+      "warning",
+    ])
+  })
+
   it("renders a filled tone dot and a 13px, 500 tone-coloured word", () => {
     renderWithProviders(<StatusWord tone="error">Critical</StatusWord>)
     const word = screen.getByTestId("status-word")
@@ -111,7 +122,7 @@ describe.each([
   ["light", DefaultTheme],
   ["dark", DarkTheme],
 ])("StatusWord colour in the %s theme", (name, theme) => {
-  it.each(["filled", "hollow"])("applies an explicit colour to the word and %s dot", dot => {
+  it.each(["filled", "hollow", "bar"])("applies an explicit colour to the word and %s dot", dot => {
     renderWithProviders(
       <StatusWord color="primary" dot={dot} tone="error">
         Running
@@ -127,10 +138,10 @@ describe.each([
 })
 
 describe.each([
-  ["light", DefaultTheme, "statusSuccessText", "#007a31", "filled"],
+  ["light", DefaultTheme, "statusSuccessText", "#006729", "filled"],
   ["light", DefaultTheme, "statusErrorText", "#c4122a", "hollow"],
-  ["light", DefaultTheme, "statusWarningText", "#905d00", "filled"],
-  ["light", DefaultTheme, "statusMutedText", "#5C6A61", "hollow"],
+  ["light", DefaultTheme, "statusWarningText", "#804B00", "filled"],
+  ["light", DefaultTheme, "statusMutedText", "#58615B", "hollow"],
   ["dark", DarkTheme, "statusSuccessText", "#1fc463", "filled"],
   ["dark", DarkTheme, "statusErrorText", "#ff6b7a", "hollow"],
   ["dark", DarkTheme, "statusWarningText", "#f5b638", "filled"],
@@ -149,4 +160,57 @@ describe.each([
       dot === "hollow" ? `1.5px solid ${expectedColor}` : expectedColor
     )
   })
+})
+
+it("renders a small strong bar status with a zero count and no dot chrome", () => {
+  renderWithProviders(
+    <StatusWord size="small" strong dot="bar" color="statusErrorText">
+      0
+    </StatusWord>
+  )
+  const word = screen.getByTestId("status-word")
+  const dot = screen.getByTestId("status-word-dot")
+  expect(word).toHaveTextContent("0")
+  expect(word).toHaveStyleRule("font-size", "12px")
+  expect(word).toHaveStyleRule("font-weight", "600")
+  expect(word).toHaveStyleRule("font-variant-numeric", "tabular-nums")
+  expect(word).toHaveStyleRule("gap", "4px")
+  expect(dot).toHaveStyleRule("width", "3px")
+  expect(dot).toHaveStyleRule("height", "11px")
+  expect(dot).toHaveStyleRule("border-radius", "4px")
+  expect(dot).toHaveStyleRule("background-color", light.statusErrorText)
+  expect(dot).toHaveAttribute("aria-hidden", "true")
+})
+
+it("renders a small plain zero count without a decorative dot", () => {
+  renderWithProviders(
+    <StatusWord size="small" dot={false} color="statusMutedText">
+      {0}
+    </StatusWord>
+  )
+  const word = screen.getByTestId("status-word")
+  expect(word).toHaveTextContent("0")
+  expect(word).toHaveStyleRule("font-size", "12px")
+  expect(word).toHaveStyleRule("font-weight", "500")
+  expect(word).toHaveStyleRule("font-variant-numeric", "tabular-nums")
+  expect(word).toHaveStyleRule("gap", "4px")
+  expect(screen.queryByTestId("status-word-dot")).not.toBeInTheDocument()
+})
+
+it("renders only the bar when the status is decorative", () => {
+  renderWithProviders(<StatusWord size="small" strong dot="bar" aria-hidden="true" />)
+  const word = screen.getByTestId("status-word")
+  expect(word).toHaveAttribute("aria-hidden", "true")
+  expect(word.children).toHaveLength(1)
+  expect(word.firstElementChild).toBe(screen.getByTestId("status-word-dot"))
+})
+
+it("supports an explicit decorative mark size without changing its label", () => {
+  renderWithProviders(
+    <StatusWord size="small" dotSize={1.5} color="textInfo">
+      Query removed
+    </StatusWord>
+  )
+  expect(screen.getByTestId("status-word")).toHaveTextContent("Query removed")
+  expect(screen.getByTestId("status-word-dot")).toHaveStyleRule("width", "6px")
 })

@@ -21,14 +21,14 @@ describe("control size ladder", () => {
   it("is one theme constant shared by both themes", () => {
     expect(DefaultTheme.constants.CONTROL_SIZES).toEqual({
       compact: { height: 24, fontSize: 12 },
-      default: { height: 28, fontSize: 13 },
+      default: { height: 30, fontSize: 13 },
       large: { height: 32, fontSize: 14 },
     })
     expect(DarkTheme.constants.CONTROL_SIZES).toBe(DefaultTheme.constants.CONTROL_SIZES)
   })
 
   it.each([
-    [{}, "28px", "13px"],
+    [{}, "30px", "13px"],
     [{ large: true }, "32px", "14px"],
     [{ compact: true }, "24px", "12px"],
     [{ size: "large" }, "32px", "14px"],

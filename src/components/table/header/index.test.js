@@ -48,6 +48,15 @@ describe("Table Header", () => {
     expect(screen.getByTestId("netdata-table-header-container")).toHaveStyleRule("gap", "8px")
   })
 
+  it("keeps a 48px toolbar band while allowing controls to wrap", () => {
+    renderWithProviders(<Header {...props} />)
+
+    const toolbar = screen.getByTestId("netdata-table-header-container")
+    expect(toolbar).toHaveStyleRule("min-height", "48px")
+    expect(toolbar).toHaveStyleRule("flex-wrap", "wrap")
+    expect(toolbar).not.toHaveStyleRule("height", "48px")
+  })
+
   it("lets bulkActionsStyles override the toolbar spacing", () => {
     renderWithProviders(
       <Header {...props} tableMeta={{ bulkActionsStyles: { padding: [1, 2] } }} />

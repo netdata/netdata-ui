@@ -20,7 +20,7 @@ Add `neutral` for actions that should not draw the eye (toolbars, filters). Use 
 
 ## Sizes
 
-- Default is 28px tall with 13px text and lines up with `TextInput`, `Select` and `Search` in the same row.
+- Default is 30px tall with 13px text and 14px side padding and lines up with `TextInput`, `Select` and `Search` in the same row.
 - `large` is 32px with 14px text. Use it only for a page's main action, paired with a 32px field.
 - `compact` is 24px with 12px text, for dense table toolbars, paired with `size="compact"` fields.
 - Icon-only buttons are squares at the same heights. Use `IconButton` and always pass a `tooltip` or `aria-label`.
@@ -30,7 +30,7 @@ Add `neutral` for actions that should not draw the eye (toolbars, filters). Use 
 ## Icon buttons
 
 - `IconButton` is a `borderless` and `neutral` button with a tooltip. Pass `icon` and `tooltip`.
-- Squares are 28px by default, 24px with `compact` and 32px with `large`. The icon is 16px, or 14px when `compact`. Change it with `width` and `height`.
+- Squares are 30px by default, 24px with `compact` and 32px with `large`. The icon is 16px, or 14px when `compact`. Change it with `width` and `height`.
 - Pass `neutral={false}` for a green icon, and `aria-expanded` for a menu trigger that is open.
 - `disabled` uses the native attribute, so the button leaves the tab order and its tooltip cannot be reached. Add `focusableWhenDisabled` to use `aria-disabled` instead: it stays focusable, shows its tooltip and ignores clicks.
 

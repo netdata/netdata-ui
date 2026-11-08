@@ -1,10 +1,21 @@
 import { css } from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 
-// Selector-agnostic ring, for controls whose visual box is a sibling of a hidden native input.
-export const focusRingOutline = css`
-  outline: ${getSizeBy(0.25)} solid ${getColor("primary")};
-  outline-offset: ${getSizeBy(0.25)};
+const ringOutline = ({ offset = 2, color = "primary", radius } = {}) => css`
+  outline: ${getSizeBy(0.25)} solid ${getColor(color)};
+  outline-offset: ${getSizeBy(offset / 8)};
+  ${radius !== undefined &&
+  css`
+    border-radius: ${typeof radius === "number" ? getSizeBy(radius / 2) : radius};
+  `}
+`
+
+export const focusRingOutline = ringOutline()
+
+export const focusRingAt = options => css`
+  &:focus-visible {
+    ${ringOutline(options)}
+  }
 `
 
 export const focusRing = css`
@@ -12,9 +23,7 @@ export const focusRing = css`
     outline: none;
   }
 
-  &:focus-visible {
-    ${focusRingOutline}
-  }
+  ${focusRingAt()}
 `
 
 // A 2px edge drawn inside the field (border + inset line): one clear line that overflow cannot clip.

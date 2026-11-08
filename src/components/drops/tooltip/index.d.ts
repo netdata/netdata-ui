@@ -1,12 +1,16 @@
 import { ReactNode, FC } from "react"
 import { DropProps } from "../drop"
 
+export type TooltipContent = ReactNode | { title?: ReactNode; description?: ReactNode }
+
 export interface PopoverProps {
+  appearance?: "inverse" | "surface"
+  maxWidth?: number | string
   plain?: boolean
   open?: boolean
   align?: "top" | "right" | "bottom" | "left"
   dropProps?: DropProps
-  content: ReactNode | (() => ReactNode)
+  content: TooltipContent | (() => TooltipContent)
   children: any
   allowHoverOnTooltip?: boolean
   [key: string]: any

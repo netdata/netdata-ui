@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import backdropBlur from "@/components/templates/layer/mixins/backdropBlur"
 import { scrimColor } from "@/components/templates/layer/mixins/elevation"
+import background from "@/components/templates/mixins/background"
 
 const Container = styled.div`
   position: fixed;
@@ -16,6 +17,7 @@ const Backdrop = styled.div`
   inset: 0;
   pointer-events: all;
   background-color: ${scrimColor};
+  ${background};
   ${backdropBlur};
 `
 

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
-import { getColor } from "@/theme"
+import { getColor, getOrElse } from "@/theme"
+import { FONT_MONOSPACE } from "@/theme/default/constants"
 import alignSelf from "@/mixins/alignSelf"
 import margin from "@/mixins/margin"
 import padding from "@/mixins/padding"
@@ -58,7 +59,19 @@ const typography = css`
 export const makeTypography = (Component, { fontSize, lineHeight, strong, color }) => styled(
   Component
 ).attrs(props => (color && props.color === undefined ? { color } : {}))`
-  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
+  font-family:
+    "IBM Plex Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Ubuntu,
+    "Helvetica Neue",
+    sans-serif;
+  ${({ monospace }) =>
+    monospace &&
+    css`
+      font-family: ${getOrElse(["constants", "FONT_MONOSPACE"], FONT_MONOSPACE)};
+    `}
   font-style: normal;
   ${makeFontSize(fontSize)}
   ${makeLineHeight(lineHeight)}
@@ -67,7 +80,7 @@ export const makeTypography = (Component, { fontSize, lineHeight, strong, color 
 `
 export const makeH0 = Component =>
   makeTypography(Component, {
-    fontSize: "26px",
+    fontSize: "27px",
     lineHeight: "32px",
     strong: true,
     color: "main",
@@ -75,7 +88,7 @@ export const makeH0 = Component =>
 
 export const makeH1 = Component =>
   makeTypography(Component, {
-    fontSize: "24px",
+    fontSize: "25px",
     lineHeight: "28px",
     strong: true,
     color: "main",
@@ -83,15 +96,15 @@ export const makeH1 = Component =>
 
 export const makeH2 = Component =>
   makeTypography(Component, {
-    fontSize: "22px",
-    lineHeight: "24px",
+    fontSize: "23px",
+    lineHeight: "26px",
     strong: true,
     color: "main",
   })
 
 export const makeH3 = Component =>
   makeTypography(Component, {
-    fontSize: "20px",
+    fontSize: "21px",
     lineHeight: "24px",
     strong: true,
     color: "main",
@@ -99,7 +112,7 @@ export const makeH3 = Component =>
 
 export const makeH4 = Component =>
   makeTypography(Component, {
-    fontSize: "16px",
+    fontSize: "17px",
     lineHeight: "21px",
     strong: true,
     color: "main",
@@ -107,7 +120,7 @@ export const makeH4 = Component =>
 
 export const makeH5 = Component =>
   makeTypography(Component, {
-    fontSize: "14px",
+    fontSize: "15px",
     lineHeight: "18px",
     strong: true,
     color: "main",
@@ -115,7 +128,7 @@ export const makeH5 = Component =>
 
 export const makeH6 = Component =>
   makeTypography(Component, {
-    fontSize: "12px",
+    fontSize: "13px",
     lineHeight: "14px",
     strong: true,
     color: "main",
@@ -125,48 +138,48 @@ export const makeH6 = Component =>
 
 export const makeFemto = Component =>
   makeTypography(Component, {
-    fontSize: "7px",
-    lineHeight: "8px",
+    fontSize: "8px",
+    lineHeight: "10px",
   })
 
 export const makeNano = Component =>
   makeTypography(Component, {
-    fontSize: "8px",
+    fontSize: "9px",
     lineHeight: "10px",
   })
 
 export const makeMicro = Component =>
   makeTypography(Component, {
-    fontSize: "10px",
+    fontSize: "11px",
     lineHeight: "13px",
   })
 
 export const makeSmall = Component =>
   makeTypography(Component, {
-    fontSize: "11px",
+    fontSize: "12px",
     lineHeight: "14px",
   })
 
 export const makeText = Component =>
   makeTypography(Component, {
-    fontSize: "12px",
+    fontSize: "13px",
     lineHeight: "16px",
   })
 
 export const makeBig = Component =>
   makeTypography(Component, {
-    fontSize: "14px",
+    fontSize: "15px",
     lineHeight: "20px",
   })
 
 export const makeBigger = Component =>
   makeTypography(Component, {
-    fontSize: "16px",
+    fontSize: "17px",
     lineHeight: "18px",
   })
 
 export const makeHuge = Component =>
   makeTypography(Component, {
-    fontSize: "24px",
+    fontSize: "25px",
     lineHeight: "32px",
   })

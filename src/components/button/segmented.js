@@ -51,7 +51,17 @@ export const SegmentedItem = styled.button.attrs({ type: "button" })`
 `
 
 export const RaisedSegmentedItem = styled(Flex).attrs(
-  ({ active, accent, compact, cursor, height, opacity, "aria-disabled": ariaDisabled }) => {
+  ({
+    active,
+    accent,
+    compact,
+    cursor,
+    height,
+    padding,
+    round,
+    opacity,
+    "aria-disabled": ariaDisabled,
+  }) => {
     const isAriaDisabled = ariaDisabled === true || ariaDisabled === "true"
 
     return {
@@ -60,8 +70,8 @@ export const RaisedSegmentedItem = styled(Flex).attrs(
       alignItems: "center",
       justifyContent: "start",
       height: height === undefined ? (compact ? 5.5 : 6.5) : height,
-      padding: [0, compact ? 2 : 2.5],
-      round: compact ? 1 : 1.5,
+      padding: padding === undefined ? [0, compact ? 2 : 2.5] : padding,
+      round: round === undefined ? (compact ? 1 : 1.5) : round,
       color: active ? (accent ? "segmentedAccentText" : "textFocus") : "statusMutedText",
       background: active
         ? accent
@@ -81,7 +91,7 @@ export const RaisedSegmentedItem = styled(Flex).attrs(
   font-family: ${({ monospace }) =>
     monospace ? getOrElse(["constants", "FONT_MONOSPACE"], FONT_MONOSPACE) : "inherit"};
   font-size: ${({ compact }) => controlFontSize(compact ? "compact" : "default")};
-  font-weight: ${({ active }) => (active ? 600 : 500)};
+  font-weight: ${({ active, fontWeight }) => fontWeight ?? (active ? 600 : 500)};
   line-height: inherit;
   white-space: nowrap;
   box-shadow: ${({ active, accent }) =>

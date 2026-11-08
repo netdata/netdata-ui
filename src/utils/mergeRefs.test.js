@@ -120,11 +120,7 @@ describe("mergeRefs", () => {
       expect(goodRef).toHaveBeenCalledWith("value")
     })
 
-    it("works with React component refs", () => {
-      const Component = React.forwardRef((props, ref) => {
-        return <div ref={ref} />
-      })
-
+    it("sets multiple React object refs to the same value", () => {
       const ref1 = React.createRef()
       const ref2 = React.createRef()
       const merged = mergeRefs(ref1, ref2)

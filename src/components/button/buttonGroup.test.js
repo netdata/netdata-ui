@@ -245,9 +245,15 @@ describe("ButtonGroup", () => {
       expect(selected).toHaveStyleRule("background-color", DefaultTheme.colors.primary, {
         modifier: "&&",
       })
-      expect(unselected).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralBorder, { modifier: "&&" })
+      expect(unselected).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralBorder, {
+        modifier: "&&",
+      })
       expect(unselected).toHaveStyleRule("color", DefaultTheme.colors.text, { modifier: "&&" })
-      expect(unselected).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralHollowHover, { modifier: "&&:hover" })
+      expect(unselected).toHaveStyleRule(
+        "background-color",
+        DefaultTheme.colors.buttonNeutralHollowHover,
+        { modifier: "&&:hover" }
+      )
     })
 
     it("keeps hollow children green in children mode", () => {
@@ -541,7 +547,7 @@ describe("ButtonGroup", () => {
         "light",
         DefaultTheme,
         "#F0F3F0",
-        "#FFFFFF",
+        "#E0E7E2",
         "0 0 0 1px #D3DBD5,0 1px 2px rgba(23, 32, 32, 0.14)",
         "#007830",
       ],
@@ -733,4 +739,32 @@ describe("ButtonGroup", () => {
       expect(screen.getAllByRole("button")[0]).toHaveStyleRule("font-size", "13px")
     })
   })
+})
+
+it("preserves explicit raised item geometry and weight alongside unchanged defaults", () => {
+  renderWithProviders(
+    <ButtonGroup
+      variant="segmented"
+      appearance="raised"
+      value="custom"
+      items={[
+        { label: "Default", value: "default" },
+        {
+          label: "Custom",
+          value: "custom",
+          buttonProps: { height: 7, padding: [1, 3], round: 1, fontWeight: 500 },
+        },
+      ]}
+    />
+  )
+  const normal = screen.getByRole("button", { name: "Default" })
+  expect(normal).toHaveStyleRule("height", "26px")
+  expect(normal).toHaveStyleRule("padding", "0 10px")
+  expect(normal).toHaveStyleRule("border-radius", "6px")
+  expect(normal).toHaveStyleRule("font-weight", "500")
+  const custom = screen.getByRole("button", { name: "Custom" })
+  expect(custom).toHaveStyleRule("height", "28px")
+  expect(custom).toHaveStyleRule("padding", "4px 12px")
+  expect(custom).toHaveStyleRule("border-radius", "4px")
+  expect(custom).toHaveStyleRule("font-weight", "500")
 })

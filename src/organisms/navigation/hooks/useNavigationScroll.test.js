@@ -15,7 +15,9 @@ describe("useNavigationScroll", () => {
     let scrollLeft = 10
     Object.defineProperty(strip, "scrollLeft", {
       get: () => scrollLeft,
-      set: value => (scrollLeft = value),
+      set: value => {
+        scrollLeft = value
+      },
       configurable: true,
     })
 

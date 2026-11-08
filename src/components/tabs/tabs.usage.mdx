@@ -70,3 +70,11 @@ These apply to line tabs. Default contained tabs use the compact 22px segmented 
 - Do use counters sparingly and neutral, since counts are not status.
 - Don't nest tab strips.
 - Don't put more tabs than fit; the strip scrolls horizontally but hides its scrollbar.
+
+### Vertical navigation
+
+Use `orientation="vertical"` for a workspace sidebar. Tabs use the menu selection
+and hover colors, and Up/Down, Home and End move to enabled tabs. The default
+panel has `role="tabpanel"` and is labelled by its selected tab. Pass
+`TabContent={Fragment}` for a caller-owned external panel with its own ARIA IDs.
+Use `tabsProps` to set the rail's width, surface, divider and accessible name.

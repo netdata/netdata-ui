@@ -114,6 +114,21 @@ it("announces the popup state on the trigger", () => {
 })
 
 describe("MenuButton", () => {
+  it("aligns the default trigger with other 30px controls", () => {
+    const { getByRole } = render()
+    const trigger = getByRole("button")
+    expect(trigger).toHaveStyleRule("min-height", "30px")
+    expect(trigger).toHaveStyleRule("padding", "4px 16px")
+  })
+
+  it("preserves an explicit trigger height and padding", () => {
+    const { getByRole } = render({ height: 6, padding: [0, 2] })
+    const trigger = getByRole("button")
+    expect(trigger).toHaveStyleRule("height", "24px")
+    expect(trigger).not.toHaveStyleRule("min-height")
+    expect(trigger).toHaveStyleRule("padding", "0 8px")
+  })
+
   it("is keyboard reachable", () => {
     const { getByRole } = render()
 

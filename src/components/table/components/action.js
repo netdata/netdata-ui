@@ -1,8 +1,39 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useImperativeHandle } from "react"
 import Tooltip from "@/components/drops/tooltip"
+import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"
+import { getColor, getRgbColor } from "@/theme"
 import { ConfirmationDialog } from "@/components/confirmation-dialog"
 import { Button, IconButton } from "@/components/button"
+
+const chipInteraction = css`
+  border-color: ${getRgbColor("primary", 0.5)};
+  background: ${getRgbColor("primary", 0.1)};
+
+  .button-icon {
+    fill: ${getColor("primary")};
+  }
+`
+
+const Chip = styled(IconButton)`
+  && {
+    color: ${getColor("textLite")};
+    border-color: var(--table-action-chip-border, ${getColor("border")});
+  }
+
+  &&:hover:not(:disabled):not([aria-disabled="true"]),
+  &&:focus-visible:not(:disabled):not([aria-disabled="true"]) {
+    ${chipInteraction}
+  }
+`
+
+const QuietChip = styled(Chip)`
+  --table-action-chip-border: transparent;
+
+  &&[aria-expanded="true"]:not(:disabled):not([aria-disabled="true"]) {
+    ${chipInteraction}
+  }
+`
 
 const Action = ({
   id,
@@ -32,6 +63,10 @@ const Action = ({
   label,
   TooltipComponent = Tooltip,
   ref,
+  rowChip,
+  bulkChip,
+  hiddenControl,
+  activationRef,
   ...rest
 }) => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false)
@@ -48,6 +83,8 @@ const Action = ({
     handleAction()
   }
 
+  useImperativeHandle(activationRef, () => onActionClicked)
+
   const onActionDeclined = () => {
     setConfirmationOpen(false)
     handleDecline?.()
@@ -58,7 +95,8 @@ const Action = ({
     handleAction?.()
   }
 
-  const Component = CustomComponent || (label ? Button : IconButton)
+  const chip = !label && !CustomComponent && (bulkChip ? QuietChip : rowChip ? Chip : null)
+  const Component = CustomComponent || chip || (label ? Button : IconButton)
 
   const componentProps = useMemo(
     () => ({
@@ -71,6 +109,15 @@ const Action = ({
       flavour,
       iconColor,
       label,
+      ...(chip
+        ? {
+            type: "button",
+            round: "50%",
+            iconColor: iconColor || "textLite",
+            ...(bulkChip ? { compact: true } : { width: "14px", height: "14px" }),
+            "aria-label": typeof tooltipText === "string" ? tooltipText : id,
+          }
+        : {}),
       padding: [0.5],
       ...(CustomComponent ? { data: currentRow?.original || selectedRows } : {}),
       ...rest,
@@ -88,6 +135,9 @@ const Action = ({
       currentRow?.original,
       selectedRows,
       CustomComponent,
+      chip,
+      bulkChip,
+      tooltipText,
       rest,
     ]
   )
@@ -122,20 +172,24 @@ const Action = ({
           handleConfirm={onActionConfirmed}
         />
       )}
-      <TooltipComponent content={disabled ? disabledTooltipText : tooltipText}>
-        <Flex
-          ref={ref}
-          alignItems="center"
-          justifyContent="center"
-          _hover={{ background: disabled || label ? null : "borderSecondary" }}
-          cursor={disabled ? "auto" : "pointer"}
-          key={id}
-          round
-          background={label ? null : rest["aria-expanded"] ? "borderSecondary" : background}
-        >
-          <Component {...componentProps} />
-        </Flex>
-      </TooltipComponent>
+      {!hiddenControl && (
+        <TooltipComponent content={disabled ? disabledTooltipText : tooltipText}>
+          <Flex
+            ref={ref}
+            alignItems="center"
+            justifyContent="center"
+            _hover={{ background: chip || disabled || label ? null : "borderSecondary" }}
+            cursor={disabled ? "auto" : "pointer"}
+            key={id}
+            round
+            background={
+              label || bulkChip ? null : rest["aria-expanded"] ? "borderSecondary" : background
+            }
+          >
+            <Component {...componentProps} />
+          </Flex>
+        </TooltipComponent>
+      )}
     </>
   )
 }

@@ -87,7 +87,7 @@ export const Alignment = () => (
   <Flex column gap={4} width="400px">
     {["start", "center", "end", "between", "around", "evenly"].map(value => (
       <Flex key={value} column gap={1}>
-        <TextSmall color="textLite">justifyContent="{value}"</TextSmall>
+        <TextSmall color="textLite">{`justifyContent="${value}"`}</TextSmall>
         <Flex justifyContent={value} border padding={[1]} round>
           <Item>cpu</Item>
           <Item>ram</Item>

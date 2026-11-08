@@ -3,7 +3,11 @@ import styled, { useTheme } from "styled-components"
 import Layer from "@/components/templates/layer"
 import Flex from "@/components/templates/flex"
 import { IconButton } from "@/components/button"
-import { modalShadow } from "@/components/templates/layer/mixins/elevation"
+import {
+  dialogShadow,
+  isDarkTheme,
+  modalShadow,
+} from "@/components/templates/layer/mixins/elevation"
 import { getSizeBy } from "@/theme/utils"
 
 const TOP_BOTTOM_PADDING = 3
@@ -13,11 +17,26 @@ const MODAL_ROUND = 2
 const HEADER_ROUND = { side: "top", size: 1.75 }
 
 const Surface = styled(Flex)`
-  box-shadow: ${modalShadow};
+  box-shadow: ${props =>
+    props.appearance === "dialog" ? dialogShadow(props) : modalShadow(props)};
 `
 
-export const ModalContent = ({ background = "modalBackground", children, testId, ...rest }) => (
-  <Surface background={background} border column data-testid={testId} round={MODAL_ROUND} {...rest}>
+export const ModalContent = ({
+  appearance,
+  background = "modalBackground",
+  children,
+  testId,
+  ...rest
+}) => (
+  <Surface
+    appearance={appearance}
+    background={background}
+    border
+    column
+    data-testid={testId}
+    round={appearance === "dialog" ? 3 : MODAL_ROUND}
+    {...rest}
+  >
     {children}
   </Surface>
 )
@@ -97,6 +116,26 @@ export const ModalCloseButton = ({ onClose, testId, ...rest }) => {
   )
 }
 
-const Modal = ({ children, ...rest }) => <Layer {...rest}>{children}</Layer>
+const Modal = ({ appearance, children, backdropProps, ...rest }) => {
+  const theme = useTheme()
+  const dialog = appearance === "dialog"
+
+  return (
+    <Layer
+      {...(dialog && { margin: [4], zIndex: 120, backdropContainerProps: { zIndex: 120 } })}
+      backdropProps={{
+        ...(dialog && {
+          background: "onColorDark",
+          backgroundOpacity: isDarkTheme({ theme }) ? 0.5 : 0.28,
+          backdropBlur: 2,
+        }),
+        ...backdropProps,
+      }}
+      {...rest}
+    >
+      {children}
+    </Layer>
+  )
+}
 
 export default Modal

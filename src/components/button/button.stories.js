@@ -77,7 +77,7 @@ const statusOptions = [
 // One control ladder: every row lines up at 24 (compact), 28 (default) or 32 (large).
 const ladderRows = [
   { name: "compact · 24px · 12px text", button: { compact: true }, field: { size: "compact" } },
-  { name: "default · 28px · 13px text", button: {}, field: {} },
+  { name: "default · 30px · 13px text", button: {}, field: {} },
   { name: "large · 32px · 14px text", button: { large: true }, field: { height: 8 } },
 ]
 
@@ -151,7 +151,7 @@ export const IconButtonSizes = () => (
     <Cell caption="compact · 24px">
       <IconButton icon="gear" tooltip="Settings" compact />
     </Cell>
-    <Cell caption="default · 28px">
+    <Cell caption="default · 30px">
       <IconButton icon="gear" tooltip="Settings" />
     </Cell>
     <Cell caption="large · 32px">

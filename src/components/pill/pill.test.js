@@ -9,7 +9,7 @@ describe("Pill component", () => {
     expect(screen.queryByTestId("pill")).toBeInTheDocument()
     expect(screen.queryByTestId("pill-text")).toBeInTheDocument()
     expect(screen.queryByTestId("pill-text")).toHaveAttribute("color", "text")
-    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "13px")
     expect(screen.queryByTestId("pill-icon-left")).not.toBeInTheDocument()
     expect(screen.queryByTestId("pill-icon-right")).not.toBeInTheDocument()
   })
@@ -42,13 +42,13 @@ describe("Pill component", () => {
   test("should render component with small text", () => {
     renderWithProviders(<Pill textSize="small">Test</Pill>)
 
-    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "11px")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
   })
 
   test("should render component with normal text", () => {
     renderWithProviders(<Pill size="normal">Test</Pill>)
 
-    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "12px")
+    expect(screen.queryByTestId("pill-text")).toHaveStyleRule("font-size", "13px")
   })
 
   test("should render component with custom colored text", () => {
@@ -445,3 +445,46 @@ describe("hollow idle pills", () => {
     expect(screen.getByTestId("pill")).toHaveStyleRule("background-color", light.idleError)
   })
 })
+
+it.each([
+  ["light", require("@/theme").DefaultTheme, "8%"],
+  ["dark", require("@/theme").DarkTheme, "13%"],
+])(
+  "supports a subtle status pill with preserved geometry and custom dot ink in %s",
+  (name, theme, tint) => {
+    renderWithProviders(
+      <Pill
+        appearance="subtle"
+        color="statusMutedText"
+        flavour="muted"
+        dot="hollow"
+        height="22px"
+        padding={[0, 2.25]}
+        round="999px"
+        gap={1.5}
+        textProps={{ lineHeight: "1" }}
+      >
+        Accepted
+      </Pill>,
+      { theme }
+    )
+    const pill = screen.getByTestId("pill")
+    expect(pill).toHaveStyleRule("height", "22px")
+    expect(pill).toHaveStyleRule("padding", "0 9px")
+    expect(pill).toHaveStyleRule("border-radius", "999px")
+    expect(pill).toHaveStyleRule("border", "0")
+    expect(pill).toHaveStyleRule(
+      "background",
+      `color-mix( in srgb,currentColor ${tint},transparent )`
+    )
+    expect(pill).toHaveStyleRule(
+      "box-shadow",
+      "inset 0 0 0 1px color-mix(in srgb,currentColor 22%,transparent)"
+    )
+    expect(screen.getByTestId("pill-dot")).toHaveStyleRule(
+      "border",
+      `1.5px solid ${theme.colors.statusMutedText}`
+    )
+    expect(screen.getByTestId("pill-text")).toHaveStyleRule("font-weight", "500")
+  }
+)

@@ -9,6 +9,7 @@ export interface TabsProps {
   TabContent?: ComponentType<any>
   TabsHeader?: ComponentType<any>
   variant?: "line" | "contained"
+  orientation?: "horizontal" | "vertical"
   appearance?: "raised" | "neutral"
   accent?: boolean
   [s: string]: any

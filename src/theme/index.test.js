@@ -1,11 +1,56 @@
-import { getContrast } from "polished"
+import { getContrast, getLuminance } from "polished"
 import { DarkTheme, DefaultTheme } from "./index"
 import rawColors from "./rawColors"
 
 describe("theme colors", () => {
+  it.each([DefaultTheme, DarkTheme])("separates menu interaction states in $name", ({ colors }) => {
+    const {
+      appSidebarBackground,
+      workspaceSidebarBackground,
+      menuItemHover,
+      menuItemSelected,
+      menuItemSelectedHover,
+      menuItemSelectedText,
+      primary,
+      text,
+    } = colors
+
+    for (const surface of [appSidebarBackground, workspaceSidebarBackground]) {
+      expect(getContrast(surface, menuItemHover)).toBeGreaterThanOrEqual(1.15)
+      expect(getContrast(surface, menuItemSelected)).toBeGreaterThanOrEqual(1.25)
+    }
+    expect(getContrast(menuItemSelected, menuItemSelectedHover)).toBeGreaterThanOrEqual(1.1)
+    expect(getContrast(text, menuItemHover)).toBeGreaterThanOrEqual(4.5)
+    expect(getContrast(menuItemSelectedText, menuItemSelectedHover)).toBeGreaterThanOrEqual(4.5)
+    expect(getContrast(primary, menuItemSelectedHover)).toBeGreaterThanOrEqual(3)
+  })
+
+  it("darkens light surfaces from the page to nested controls", () => {
+    const colors = DefaultTheme.colors
+    const luminance = role => getLuminance(colors[role])
+    expect(colors.workspaceBackground).toBe(colors.appBackground)
+    const steps = [
+      "appBackground",
+      "cardBackground",
+      "cardNestedBackground",
+      "controlBackground",
+      "controlHoverBackground",
+      "controlPressedBackground",
+    ]
+
+    steps.slice(1).forEach((role, i) => {
+      expect(luminance(role)).toBeLessThan(luminance(steps[i]))
+    })
+    expect(luminance("appSidebarBackground")).toBeLessThan(luminance("workspaceBackground"))
+    expect(luminance("workspaceSidebarBackground")).toBeLessThan(luminance("appSidebarBackground"))
+    expect(luminance("inputBg")).toBeLessThan(luminance("workspaceSidebarBackground"))
+    expect(luminance("segmentedSelectedBackground")).toBeLessThan(luminance("segmentedBackground"))
+    expect(luminance("popoverBackground")).toBeLessThan(luminance("workspaceBackground"))
+  })
+
   it("separates Sage control and neutral-button state roles from surfaces", () => {
-    expect(DefaultTheme.colors.controlBackground).toBe("#FFFFFF")
-    expect(DefaultTheme.colors.controlHoverBackground).toBe("#EEF3EF")
+    expect(DefaultTheme.colors.controlBackground).toBe("#EEF3EF")
+    expect(DefaultTheme.colors.controlHoverBackground).toBe("#E8EFEA")
     expect(DefaultTheme.colors.buttonNeutralFill).toBe("#476453")
     expect(DefaultTheme.colors.buttonNeutralText).toBe("#FFFFFF")
     expect(DefaultTheme.colors.actionContrastText).toBe("#FFFFFF")
@@ -60,7 +105,31 @@ describe("visual refresh token values", () => {
 
   it("keeps table row dividers visible under hover", () => {
     expect(DefaultTheme.colors.tableRowBgHover).toBe(rawColors.neutral.grey190)
-    expect(DarkTheme.colors.tableRowBgHover).toBe(rawColors.neutral.grey30)
+    const { workspaceBackground, cardBackground, tableBorder, tableRowBgHover, text } =
+      DarkTheme.colors
+    expect(getLuminance(tableRowBgHover)).toBeGreaterThan(getLuminance(cardBackground))
+    expect(getContrast(tableRowBgHover, workspaceBackground)).toBeGreaterThanOrEqual(1.25)
+    expect(getContrast(tableRowBgHover, cardBackground)).toBeGreaterThanOrEqual(1.15)
+    expect(getContrast(tableRowBgHover, tableBorder)).toBeGreaterThanOrEqual(1.15)
+    expect(getContrast(text, tableRowBgHover)).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it("makes dark grouped-row hover visible on table and card surfaces", () => {
+    const { cardBackground, tableRowBg2, tableRowBg2Hover, textLite } = DarkTheme.colors
+    expect(getLuminance(tableRowBg2Hover)).toBeGreaterThan(getLuminance(cardBackground))
+    expect(getContrast(tableRowBg2Hover, tableRowBg2)).toBeGreaterThanOrEqual(1.25)
+    expect(getContrast(tableRowBg2Hover, cardBackground)).toBeGreaterThanOrEqual(1.15)
+    expect(getContrast(textLite, tableRowBg2Hover)).toBeGreaterThanOrEqual(4.5)
+  })
+
+  describe.each([DefaultTheme, DarkTheme])("grouped rows in $name theme", ({ colors }) => {
+    it.each(["statusSuccessText", "statusErrorText", "statusWarningText", "statusMutedText"])(
+      "%s stays readable at rest and on hover",
+      role => {
+        expect(getContrast(colors[role], colors.tableRowBg2)).toBeGreaterThanOrEqual(4.5)
+        expect(getContrast(colors[role], colors.tableRowBg2Hover)).toBeGreaterThanOrEqual(4.5)
+      }
+    )
   })
 
   it("draws the column resizer in primary green", () => {
@@ -141,9 +210,8 @@ describe("light surface ladder and field edges (audit L1–L4)", () => {
     expect(c.mainBackgroundDisabled).toBe("#EEF3EF")
     expect(c.modalInfoBackground).toBe("#EEF3EF")
   })
-  it("puts the sidebar on grey190 with hover one step darker", () => {
+  it("keeps the compact sidebar surface on its own Sage step", () => {
     expect(c.sideBarMini).toBe("#F0F3F0")
-    expect(c.menuItemHover).toBe("#EEF3EF")
   })
   it("keeps the time picker neutral; green stays for status", () => {
     expect(c.datePickerPlayBg).toBe(n.grey190)

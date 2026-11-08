@@ -1,4 +1,5 @@
-import { MarginProps } from "../../../mixins/types"
+import React from "react"
+import { ColorType, MarginProps } from "../../../mixins/types"
 
 export interface PositionProps {
   position?:
@@ -18,7 +19,19 @@ export interface FullProps {
 }
 
 export interface LayerProps extends MarginProps, FullProps, PositionProps {
+  children?: React.ReactNode
+  zIndex?: number | string
   backdrop?: boolean
+  backdropContainerProps?: React.HTMLAttributes<HTMLDivElement> & {
+    zIndex?: number | string
+    "data-testid"?: string
+  }
+  backdropProps?: React.HTMLAttributes<HTMLDivElement> & {
+    background?: ColorType
+    backgroundOpacity?: number
+    backdropBlur?: boolean | number | string
+    "data-testid"?: string
+  }
   onClickOutside?: Function
   onEsc?: Function
   borderShadow?: boolean

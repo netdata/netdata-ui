@@ -5,14 +5,16 @@ import { DefaultTheme } from "@/theme/default"
 import IconButton from "./iconButton"
 
 describe("IconButton", () => {
-  // Round 6 D4: explicit squares on the control ladder, 28px by default.
-  it("renders a 28px square neutral icon button with a 16px glyph", () => {
+  // Round 6 D4: explicit squares on the control ladder, 30px by default.
+  it("renders a 30px square neutral icon button with a 16px glyph", () => {
     renderWithProviders(<IconButton icon="plus" />)
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("min-width", "28px", { modifier: "&&" })
-    expect(button).toHaveStyleRule("min-height", "28px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("min-width", "30px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("min-height", "30px", { modifier: "&&" })
     expect(button).toHaveStyleRule("width", "16px", { modifier: "&& .button-icon" })
-    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFill, { modifier: "&&" })
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFill, {
+      modifier: "&&",
+    })
   })
 
   it.each([
@@ -29,22 +31,36 @@ describe("IconButton", () => {
   it("shows a neutral hover surface and an ink glyph on hover", () => {
     renderWithProviders(<IconButton icon="plus" />)
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralBorderlessHover, { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("fill", DefaultTheme.colors.buttonNeutralFillHover, { modifier: "&&:hover .button-icon" })
+    expect(button).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralBorderlessHover,
+      { modifier: "&&:hover" }
+    )
+    expect(button).toHaveStyleRule("fill", DefaultTheme.colors.buttonNeutralFillHover, {
+      modifier: "&&:hover .button-icon",
+    })
   })
 
   it("keeps the pressed surface while its menu is expanded", () => {
     renderWithProviders(<IconButton icon="plus" aria-expanded="true" />)
-    expect(screen.getByRole("button")).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralBorderlessPressed, {
-      modifier: '&&[aria-expanded="true"]',
-    })
+    expect(screen.getByRole("button")).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralBorderlessPressed,
+      {
+        modifier: '&&[aria-expanded="true"]',
+      }
+    )
   })
 
   it("uses the dark hover surface in the dark theme", () => {
     renderWithProviders(<IconButton icon="plus" />, { theme: DarkTheme })
-    expect(screen.getByRole("button")).toHaveStyleRule("background-color", DarkTheme.colors.buttonNeutralBorderlessHover, {
-      modifier: "&&:hover",
-    })
+    expect(screen.getByRole("button")).toHaveStyleRule(
+      "background-color",
+      DarkTheme.colors.buttonNeutralBorderlessHover,
+      {
+        modifier: "&&:hover",
+      }
+    )
   })
 
   // Consumers size glyphs against this historical axis mapping; changing it is a separate decision.
@@ -186,4 +202,39 @@ describe("focusableWhenDisabled inside a form", () => {
     expect(onReset).not.toHaveBeenCalled()
     expect(submitButton).toHaveFocus()
   })
+})
+
+it("keeps rectangular action geometry, refs and existing tooltip descriptions", () => {
+  const ref = React.createRef()
+  const ActionTooltip = ({ children }) =>
+    children({ ref: () => {}, "aria-describedby": "tooltip-help" })
+  renderWithProviders(
+    <IconButton
+      ref={ref}
+      icon="plus"
+      aria-label="Add"
+      buttonSize={5}
+      buttonHeight={7}
+      aria-describedby="existing-help"
+      tooltip="Add"
+      TooltipComponent={ActionTooltip}
+    />
+  )
+  const button = screen.getByRole("button", { name: "Add" })
+  expect(ref.current).toBe(button)
+  expect(button.getAttribute("aria-describedby")).toBe("existing-help tooltip-help")
+  expect(button).toHaveStyleRule("width", "20px", { modifier: "&&" })
+  expect(button).toHaveStyleRule("min-width", "20px", { modifier: "&&" })
+  expect(button).toHaveStyleRule("min-height", "28px", { modifier: "&&" })
+})
+
+it("keeps a custom glyph inside its icon-only control geometry", () => {
+  renderWithProviders(
+    <IconButton aria-label="Reveal" buttonSize={5.5} wrapChildren={false}>
+      <svg aria-hidden="true" />
+    </IconButton>
+  )
+  const button = screen.getByRole("button", { name: "Reveal" })
+  expect(button).toHaveStyleRule("padding", "0", { modifier: "&&" })
+  expect(button).toHaveStyleRule("min-width", "22px", { modifier: "&&" })
 })

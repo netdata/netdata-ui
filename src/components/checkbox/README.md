@@ -15,6 +15,8 @@ interface CheckboxProps {
   className?: string
   disabled?: boolean
   indeterminate?: boolean
+  variant?: "default" | "filled"
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement>
 }
 ```
 
@@ -66,4 +68,36 @@ type UseCheckboxesList = (
   values: boolean[],
   handlers: Array<ChangeHandler>
 ) => [boolean, boolean, () => void]
+```
+
+### Filled row-selection checkboxes
+
+`variant="filled"` preserves the 16px row-selection control: a 1.5px border, 4px radius,
+9px checkmark, and a 9×2px indeterminate dash. Dimensions derive from the theme size unit.
+The off state uses `inputBg` and `controlBorder`; checked and mixed states use
+`buttonNeutralFill` and `buttonNeutralText`. Hover uses `buttonNeutralFill` and keyboard
+focus uses `segmentedFocus`. The default appearance is unchanged.
+
+`inputProps` passes native input attributes and events to the real checkbox, including
+`id`, `aria-label`, `aria-invalid`, `aria-describedby`, `title`, `autoFocus`, and test IDs.
+The controlled `checked`, `disabled`, `readOnly` and internal ref remain owned by Checkbox.
+`onChange(nextChecked, event)` retains the existing boolean-first callback contract.
+Indeterminate state remains the native `input.indeterminate` property.
+
+For a control inside an existing label, use `as="span"` on the Checkbox wrapper to avoid
+nested labels. The input remains a native checkbox and Space toggles it. Clicking the filled
+visual box also focuses its native input.
+
+```jsx
+<label>
+  <Checkbox
+    as="span"
+    variant="filled"
+    checked={selected}
+    indeterminate={partiallySelected}
+    onChange={setSelected}
+    inputProps={{ "aria-label": "Select jobs", "data-testid": "row-selection" }}
+  />
+  Select jobs
+</label>
 ```
