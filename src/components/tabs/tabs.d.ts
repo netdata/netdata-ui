@@ -9,7 +9,7 @@ export interface TabsProps {
   TabContent?: ComponentType<any>
   TabsHeader?: ComponentType<any>
   variant?: "line" | "contained"
-  appearance?: "raised"
+  appearance?: "raised" | "neutral"
   accent?: boolean
   [s: string]: any
 }

@@ -1,14 +1,14 @@
 import React, { Fragment, useCallback, useEffect } from "react"
 import { SegmentedTrack } from "@/components/button/segmented"
-import { StyledTabs, StyledTabsWrapper } from "./styled"
+import { isNeutralLine, StyledTabs, StyledTabsWrapper } from "./styled"
 import { useBuildTabs, useSetActive } from "./tabs-hooks"
 
 const stepByKey = { ArrowRight: 1, ArrowLeft: -1 }
 
 // Roving focus: arrows move to the next enabled tab and select it, wrapping at the ends.
-const moveFocus = (e, appearance) => {
+const moveFocus = (e, supportsBoundaryKeys) => {
   const step = stepByKey[e.key]
-  const boundary = appearance === "raised" && (e.key === "Home" || e.key === "End")
+  const boundary = supportsBoundaryKeys && (e.key === "Home" || e.key === "End")
   if (!step && !boundary) return
 
   const tabs = Array.from(
@@ -52,13 +52,14 @@ export const Tabs = ({
   )
 
   const isRaised = variant === "contained" && appearance === "raised"
+  const supportsBoundaryKeys = isRaised || isNeutralLine({ variant, appearance })
 
   const onKeyDown = useCallback(
     e => {
-      moveFocus(e, isRaised ? appearance : undefined)
+      moveFocus(e, supportsBoundaryKeys)
       tabsProps?.onKeyDown?.(e)
     },
-    [tabsProps, isRaised, appearance]
+    [tabsProps, supportsBoundaryKeys]
   )
 
   useEffect(() => {

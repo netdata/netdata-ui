@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { RaisedSegmentedItem } from "@/components/button/segmented"
 import { Icon } from "@/components/icon"
-import { StyledTab, StyledTabMenu, TabCount, TabLabel } from "./styled"
+import { StyledTab, StyledTabMenu, TabCount, TabLabel, isNeutralLine } from "./styled"
 
 const tabRoleProps = ({ active, disabled }) => ({
   role: "tab",
@@ -20,7 +20,7 @@ export const Tab = ({ index, isMenuItem, onChange, icon, count, ...rest }) => {
     <TabComponent
       justifyContent={isRaised ? undefined : "center"}
       alignItems="center"
-      gap={hasSlots ? 1.5 : undefined}
+      gap={isNeutralLine(rest) ? 1.75 : hasSlots ? 1.5 : undefined}
       onClick={rest.disabled ? undefined : onClick}
       {...(isMenuItem ? {} : tabRoleProps(rest))}
       {...rest}
@@ -29,7 +29,7 @@ export const Tab = ({ index, isMenuItem, onChange, icon, count, ...rest }) => {
       {typeof rest.label === "function" ? (
         rest.label({ index, isMenuItem, icon, count, ...rest })
       ) : typeof rest.label === "string" ? (
-        <TabLabel>{rest.label}</TabLabel>
+        <TabLabel appearance={isNeutralLine(rest) ? "neutral" : undefined}>{rest.label}</TabLabel>
       ) : (
         rest.label
       )}

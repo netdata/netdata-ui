@@ -2,8 +2,14 @@ import styled, { css } from "styled-components"
 import { getColor, getSizeBy } from "@/theme/utils"
 import Flex from "@/components/templates/flex"
 import { segmentedTrack, segmentedItem } from "@/mixins/segmented"
+import { focusRingOutline } from "@/mixins/focusRing"
+import height from "@/components/templates/mixins/height"
+import width from "@/components/templates/mixins/width"
+import round from "@/mixins/round"
 
 const isContained = ({ variant }) => variant === "contained"
+export const isNeutralLine = ({ variant = "line", appearance }) =>
+  variant === "line" && appearance === "neutral"
 
 export const StyledTabsWrapper = styled(Flex).attrs(props => ({
   column: true,
@@ -18,7 +24,6 @@ export const StyledTabs = styled(Flex).attrs(props => ({
   justifyContent: "start",
   alignItems: "center",
   padding: props.column ? [0, 0.5] : [0],
-  flex: false,
   // Contained strips hold a few items and must not clip the items' outer focus ring.
   overflow: isContained(props) ? "visible" : { horizontal: "auto", vertical: "hidden" },
   flex: 0,
@@ -53,8 +58,22 @@ const activeColorByFlavour = {
 
 const transparent = ["transparent", "full"]
 
-const colors = ({ theme, active, flavour, variant }) => {
+const neutralLineColors = css`
+  color: ${getColor("textFocus")};
+  background: ${getColor(transparent)};
+  box-shadow: ${({ active, theme }) =>
+    active ? `inset 0 -2px 0 ${getColor("textFocus")({ theme })}` : "none"};
+
+  &:hover,
+  &[aria-expanded="true"] {
+    background: ${getColor("controlHoverBackground")};
+  }
+`
+
+const colors = props => {
+  const { theme, active, flavour, variant } = props
   if (variant === "contained") return segmentedItem
+  if (isNeutralLine(props)) return neutralLineColors
 
   const color = active ? activeColorByFlavour[flavour] || activeColorByFlavour.default : "text"
   const resolvedColor = getColor(color)({ theme })
@@ -84,6 +103,7 @@ const colors = ({ theme, active, flavour, variant }) => {
 export const StyledTab = styled(Flex).attrs(props => ({
   small: true,
   padding: isContained(props) ? [0, 1.25] : [0, 3],
+  ...(isNeutralLine(props) ? { as: "button", type: "button", flex: false } : {}),
   ...props,
 }))`
   white-space: nowrap;
@@ -130,10 +150,37 @@ export const StyledTab = styled(Flex).attrs(props => ({
   }
 
   ${colors}
+  ${props =>
+    isNeutralLine(props) &&
+    css`
+      display: inline-flex;
+      border: 0;
+      border-radius: 0;
+      font-family: inherit;
+      font-style: inherit;
+      font-variant-numeric: inherit;
+      text-align: inherit;
+      appearance: none;
+      font-size: ${({ fontSize = 3.25 }) =>
+        typeof fontSize === "number" ? getSizeBy(fontSize / 2) : fontSize};
+      line-height: ${props => props.lineHeight ?? getSizeBy(2.5)(props)};
+      font-weight: ${({ active, fontWeight }) => fontWeight ?? (active ? 600 : 500)};
+      max-width: ${({ maxWidth }) => maxWidth ?? "none"};
+      height: ${getSizeBy(4.25)};
+      ${height}
+      ${width}
+      ${round}
+
+      &:focus-visible {
+        ${focusRingOutline}
+        outline-color: ${getColor("segmentedFocus")};
+        outline-offset: ${getSizeBy(-0.5)};
+      }
+    `}
 `
 
 export const TabLabel = styled.span`
-  font-size: 13px;
+  font-size: ${props => (isNeutralLine(props) ? "inherit" : "13px")};
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
