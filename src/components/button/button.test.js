@@ -864,6 +864,25 @@ describe("composed action buttons", () => {
   })
 })
 
+it.each([true, false])(
+  "preserves its element label during loading (wrapChildren: %s)",
+  wrapChildren => {
+    const label = <span data-testid="loading-label">Save</span>
+    const { rerender } = renderWithProviders(<Button wrapChildren={wrapChildren}>{label}</Button>)
+    const labelElement = screen.getByTestId("loading-label")
+
+    rerender(
+      <Button wrapChildren={wrapChildren} isLoading>
+        {label}
+      </Button>
+    )
+    expect(screen.getByTestId("loading-label")).toBe(labelElement)
+
+    rerender(<Button wrapChildren={wrapChildren}>{label}</Button>)
+    expect(screen.getByTestId("loading-label")).toBe(labelElement)
+  }
+)
+
 it("updates a text-only composed action after page translation", () => {
   const { rerender } = renderWithProviders(<Button wrapChildren={false}>Discard</Button>)
   const button = screen.getByRole("button")

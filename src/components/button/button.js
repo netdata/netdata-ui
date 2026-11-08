@@ -44,6 +44,8 @@ export const Button = ({
       />
     </Flex>
   ) : null
+  const bareText =
+    !iconContent && (typeof labelContent === "string" || typeof labelContent === "number")
 
   return (
     <StyledButton
@@ -59,13 +61,13 @@ export const Button = ({
       iconHeight={iconHeight}
       {...rest}
     >
-      {iconContent ? (
+      {bareText ? (
+        labelContent
+      ) : (
         <>
           {iconContent}
           {labelContent}
         </>
-      ) : (
-        labelContent
       )}
     </StyledButton>
   )

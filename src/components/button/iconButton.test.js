@@ -86,6 +86,29 @@ describe("IconButton", () => {
     expect(screen.queryByTestId("drop")).not.toBeInTheDocument()
   })
 
+  it("retains focus when the default tooltip gains and loses content", async () => {
+    const { rerender } = renderWithProviders(<IconButton icon="plus" aria-label="Add" />)
+    const button = screen.getByRole("button", { name: "Add" })
+    await user().tab()
+    expect(button).toHaveFocus()
+
+    rerender(<IconButton icon="plus" aria-label="Add" tooltip="Add" />)
+    expect(screen.getByRole("button", { name: "Add" })).toBe(button)
+    expect(button).toHaveFocus()
+
+    rerender(<IconButton icon="plus" aria-label="Add" />)
+    expect(screen.getByRole("button", { name: "Add" })).toBe(button)
+    expect(button).toHaveFocus()
+  })
+
+  it("applies the control height independently of the glyph and button size", () => {
+    renderWithProviders(<IconButton icon="plus" buttonHeight={5} />)
+    const button = screen.getByRole("button")
+    expect(button).toHaveStyleRule("height", "20px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("min-height", "20px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("height", "16px", { modifier: "&& .button-icon" })
+  })
+
   it("shows the tooltip on the inverse surface with the 6px floating radius", () => {
     jest.useFakeTimers()
     renderWithProviders(<IconButton icon="plus" tooltip="Previous" />)

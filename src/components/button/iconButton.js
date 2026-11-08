@@ -48,7 +48,8 @@ const IconButton = ({
       {...props}
       {...triggerProps}
       hasLabel={false}
-      {...(buttonSize ? { width: buttonSize, height: buttonHeight } : {})}
+      {...(buttonSize !== undefined && { width: buttonSize })}
+      {...(buttonHeight !== undefined && { height: buttonHeight })}
       {...(focusableWhenDisabled && props.disabled ? focusableDisabledProps : {})}
       aria-describedby={joinIds(props["aria-describedby"], description)}
     />
@@ -58,7 +59,7 @@ const IconButton = ({
       {renderButton}
     </TooltipComponent>
   ) : (
-    renderButton()
+    <Tooltip>{renderButton()}</Tooltip>
   )
 }
 
