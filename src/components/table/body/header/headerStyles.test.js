@@ -39,7 +39,7 @@ describe("Table header label", () => {
 
     expect(await label("Name, sortable, not sorted")).toHaveStyleRule(
       "color",
-      rawColors.neutral.grey120
+      DefaultTheme.colors.textLite
     )
   })
 
@@ -48,14 +48,14 @@ describe("Table header label", () => {
 
     expect(await label("CPU, sorted descending")).toHaveStyleRule(
       "color",
-      rawColors.neutral.limedSpruce
+      DefaultTheme.colors.main
     )
   })
 
   it("uses the dark ink for the sorted label in the dark theme", async () => {
     renderSorted({ theme: DarkTheme })
 
-    expect(await label("CPU, sorted descending")).toHaveStyleRule("color", rawColors.neutral.white)
+    expect(await label("CPU, sorted descending")).toHaveStyleRule("color", DarkTheme.colors.main)
   })
 
   it("shows a green focus ring inset so the clipped cell does not hide it", async () => {
@@ -100,7 +100,7 @@ describe("Table sorted column tint", () => {
 
     const cell = (await screen.findByTestId("netdata-table-header-resize-handler-cpu"))
       .parentElement
-    expect(cell).toHaveStyleRule("background-color", "rgba(237, 240, 240, 0.5)")
+    expect(cell).toHaveStyleRule("background-color", "rgba(238, 240, 238, 0.5)")
   })
 
   it("tints every sorted body cell the same regardless of the row's data index", async () => {
@@ -112,7 +112,7 @@ describe("Table sorted column tint", () => {
       return found
     })
     cells.forEach(cell =>
-      expect(cell).toHaveStyleRule("background-color", "rgba(237, 240, 240, 0.5)")
+      expect(cell).toHaveStyleRule("background-color", "rgba(238, 240, 238, 0.5)")
     )
   })
 })
@@ -133,7 +133,7 @@ describe("Table column resize handle", () => {
     expect(el).toHaveStyleRule("width", "1px", { modifier: "::after" })
     expect(el).toHaveStyleRule("top", "8px", { modifier: "::after" })
     expect(el).toHaveStyleRule("bottom", "8px", { modifier: "::after" })
-    expect(el).toHaveStyleRule("background-color", rawColors.neutral.grey180, {
+    expect(el).toHaveStyleRule("background-color", DefaultTheme.colors.tableBorder, {
       modifier: "::after",
     })
   })

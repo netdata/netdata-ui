@@ -7,7 +7,6 @@ export default ({ theme, margin }) => {
     return `margin: ${getDimensions(theme, margin)};`
   }
 
-  // eslint-disable-next-line no-console
   console.error("Please provide an array (max 4 elements) for `margin` style helper.")
 
   return ""

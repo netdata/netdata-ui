@@ -6,6 +6,7 @@ import { renderWithProviders, user, screen } from "testUtilities"
 import { ButtonGroup } from "./buttonGroup"
 import { Button } from "./button"
 import { DefaultTheme } from "@/theme/default"
+import { DarkTheme } from "@/theme/dark"
 
 describe("ButtonGroup", () => {
   describe("rendering", () => {
@@ -244,9 +245,15 @@ describe("ButtonGroup", () => {
       expect(selected).toHaveStyleRule("background-color", DefaultTheme.colors.primary, {
         modifier: "&&",
       })
-      expect(unselected).toHaveStyleRule("border-color", "#C0CACA", { modifier: "&&" })
-      expect(unselected).toHaveStyleRule("color", "#526161", { modifier: "&&" })
-      expect(unselected).toHaveStyleRule("background-color", "#DBE1E1", { modifier: "&&:hover" })
+      expect(unselected).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralBorder, {
+        modifier: "&&",
+      })
+      expect(unselected).toHaveStyleRule("color", DefaultTheme.colors.text, { modifier: "&&" })
+      expect(unselected).toHaveStyleRule(
+        "background-color",
+        DefaultTheme.colors.buttonNeutralHollowHover,
+        { modifier: "&&:hover" }
+      )
     })
 
     it("keeps hollow children green in children mode", () => {
@@ -256,13 +263,11 @@ describe("ButtonGroup", () => {
           <Button label="Copy" flavour="hollow" />
         </ButtonGroup>
       )
-      screen
-        .getAllByRole("button")
-        .forEach(button =>
-          expect(button).toHaveStyleRule("border-color", DefaultTheme.colors.primary, {
-            modifier: "&&",
-          })
-        )
+      screen.getAllByRole("button").forEach(button =>
+        expect(button).toHaveStyleRule("border-color", DefaultTheme.colors.primary, {
+          modifier: "&&",
+        })
+      )
     })
 
     it("keeps unselected segments coloured when buttonProps ask for a status colour", () => {
@@ -332,7 +337,7 @@ describe("ButtonGroup", () => {
     it("draws the shared tinted track with a 3px inset", () => {
       setup()
       const track = screen.getByTestId("group")
-      expect(track).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.borderSecondary}`)
+      expect(track).toHaveStyleRule("border", `1px solid ${DefaultTheme.colors.segmentedBorder}`)
       expect(track).toHaveStyleRule("padding", "3px")
       expect(track).toHaveStyleRule("border-radius", "4px")
     })
@@ -382,5 +387,384 @@ describe("ButtonGroup", () => {
       expect(item).toHaveAttribute("title", "Last hour")
       expect(item).toBeDisabled()
     })
+
+    it.each([
+      ["default", undefined, { "aria-disabled": true }],
+      ["raised", "raised", { "aria-disabled": "true" }],
+    ])(
+      "keeps an aria-disabled %s item focusable without changing its value",
+      async (_appearanceName, appearance, itemButtonProps) => {
+        const onChange = jest.fn()
+        const u = user()
+        renderWithProviders(
+          <ButtonGroup
+            variant="segmented"
+            appearance={appearance}
+            items={[
+              { label: "Locked", value: "locked", buttonProps: itemButtonProps },
+              { label: "Available", value: "available" },
+            ]}
+            value="available"
+            onChange={onChange}
+          />
+        )
+
+        const locked = screen.getByRole("button", { name: "Locked" })
+        await u.tab()
+        expect(locked).toHaveFocus()
+        await u.keyboard("{Enter}")
+        await u.keyboard(" ")
+        await u.click(locked)
+        expect(onChange).not.toHaveBeenCalled()
+
+        await u.click(screen.getByRole("button", { name: "Available" }))
+        expect(onChange).toHaveBeenCalledWith("available")
+      }
+    )
+
+    it("keeps a supplied item click handler ahead of the generated aria-disabled handler", async () => {
+      const onChange = jest.fn()
+      const onClick = jest.fn()
+      renderWithProviders(
+        <ButtonGroup
+          variant="segmented"
+          items={[
+            {
+              label: "Locked",
+              value: "locked",
+              buttonProps: { "aria-disabled": true, onClick },
+            },
+          ]}
+          value="locked"
+          onChange={onChange}
+        />
+      )
+
+      await user().click(screen.getByRole("button", { name: "Locked" }))
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(onChange).not.toHaveBeenCalled()
+    })
+
+    it.each([false, "false"])(
+      "allows aria-disabled=%p when an item overrides a disabled group",
+      async ariaDisabled => {
+        const onChange = jest.fn()
+        renderWithProviders(
+          <ButtonGroup
+            variant="segmented"
+            appearance="raised"
+            items={[
+              {
+                label: "Available",
+                value: "available",
+                buttonProps: { "aria-disabled": ariaDisabled },
+              },
+            ]}
+            value="available"
+            buttonProps={{ "aria-disabled": true }}
+            onChange={onChange}
+          />
+        )
+
+        await user().click(screen.getByRole("button", { name: "Available" }))
+        expect(onChange).toHaveBeenCalledWith("available")
+      }
+    )
+
+    it.each([[undefined], ["raised"]])(
+      "keeps a natively disabled %s item disabled and out of the tab order",
+      async appearance => {
+        const onChange = jest.fn()
+        renderWithProviders(
+          <ButtonGroup
+            variant="segmented"
+            appearance={appearance}
+            items={[{ label: "Disabled", value: "disabled" }]}
+            value="disabled"
+            buttonProps={{ disabled: true }}
+            onChange={onChange}
+          />
+        )
+
+        const disabled = screen.getByRole("button", { name: "Disabled" })
+        expect(disabled).toBeDisabled()
+        await user().tab()
+        expect(disabled).not.toHaveFocus()
+        await user().click(disabled)
+        expect(onChange).not.toHaveBeenCalled()
+        expect(disabled).toHaveStyleRule("opacity", "0.4", { modifier: ":disabled" })
+      }
+    )
+
+    it("styles raised aria-disabled items without replacing a supplied enabled opacity", () => {
+      const { rerender } = renderWithProviders(
+        <ButtonGroup
+          variant="segmented"
+          appearance="raised"
+          items={[{ label: "Locked", value: "locked", buttonProps: { "aria-disabled": "true" } }]}
+          value="locked"
+        />
+      )
+
+      const locked = screen.getByRole("button", { name: "Locked" })
+      expect(locked).toHaveStyleRule("opacity", "0.5")
+      expect(locked).toHaveStyleRule("cursor", "not-allowed")
+
+      rerender(
+        <ButtonGroup
+          variant="segmented"
+          appearance="raised"
+          items={[{ label: "Available", value: "available" }]}
+          value="available"
+          buttonProps={{ opacity: 0.75 }}
+        />
+      )
+      expect(screen.getByRole("button", { name: "Available" })).toHaveStyleRule("opacity", "0.75")
+    })
   })
+
+  describe('segmented appearance="raised"', () => {
+    const items = [
+      { label: <span>All nodes</span>, value: false },
+      { label: <span>Nodes with data</span>, value: true },
+    ]
+
+    const setup = (theme, props = {}) =>
+      renderWithProviders(
+        <ButtonGroup
+          variant="segmented"
+          appearance="raised"
+          items={items}
+          value={false}
+          aria-label="Node layout"
+          {...props}
+        />,
+        { theme }
+      )
+
+    describe.each([
+      [
+        "light",
+        DefaultTheme,
+        "#F0F3F0",
+        "#E0E7E2",
+        "0 0 0 1px #D3DBD5,0 1px 2px rgba(23, 32, 32, 0.14)",
+        "#007830",
+      ],
+      ["dark", DarkTheme, "#29312C", "rgba(255,255,255,0.11)", "none", "#00CD51"],
+    ])("%s theme", (_name, theme, background, selectedBackground, shadow, focus) => {
+      it.each([
+        [true, "2px", "6px", "22px", "12px", "0 8px", "4px"],
+        [false, "3px", "8px", "26px", "13px", "0 10px", "6px"],
+      ])(
+        "uses the approved geometry with compact=%s",
+        (compact, inset, radius, height, fontSize, padding, itemRadius) => {
+          setup(theme, { compact })
+          const track = screen.getByRole("group", { name: "Node layout" })
+          expect(track).toHaveStyleRule("padding", inset)
+          expect(track).toHaveStyleRule("gap", "2px")
+          expect(track).toHaveStyleRule("border-radius", radius)
+          expect(track).toHaveStyleRule("flex", "0 0 auto")
+          expect(track).toHaveStyleRule("border", `1px solid ${theme.colors.segmentedBorder}`)
+          expect(track).toHaveStyleRule("background-color", background)
+          screen.getAllByRole("button").forEach(button => {
+            expect(button).toHaveStyleRule("height", height)
+            expect(button).toHaveStyleRule("font-size", fontSize)
+            expect(button).toHaveStyleRule("padding", padding)
+            expect(button).toHaveStyleRule("border-radius", itemRadius)
+            expect(button).toHaveStyleRule("appearance", "none")
+            expect(button).toHaveStyleRule("text-align", "inherit")
+            expect(button).toHaveStyleRule("font-family", "inherit")
+            expect(button).toHaveStyleRule("line-height", "inherit")
+            expect(button).toHaveStyleRule("justify-content", "start")
+          })
+        }
+      )
+
+      it("distinguishes selected, idle, hovered and focused items", () => {
+        setup(theme, { compact: true })
+        const [selected, idle] = screen.getAllByRole("button")
+        expect(selected).toHaveStyleRule("background-color", selectedBackground)
+        expect(selected).toHaveStyleRule("box-shadow", shadow)
+        expect(selected).toHaveStyleRule("font-weight", "600")
+        expect(selected).toHaveStyleRule("color", theme.colors.textFocus)
+        expect(idle).toHaveStyleRule("color", theme.colors.statusMutedText)
+        expect(idle).toHaveStyleRule("font-weight", "500")
+        expect(idle).toHaveStyleRule("box-shadow", "none")
+        expect(idle).toHaveStyleRule("transition", "color 120ms ease,background 120ms ease")
+        expect(idle).toHaveStyleRule("color", theme.colors.textFocus, { modifier: ":hover" })
+        expect(idle).toHaveStyleRule("outline", `2px solid ${theme.colors.primary}`, {
+          modifier: ":focus-visible",
+        })
+        expect(idle).toHaveStyleRule("outline-color", focus, { modifier: ":focus-visible" })
+        expect(idle).toHaveStyleRule("outline-offset", "-2px", { modifier: ":focus-visible" })
+      })
+
+      it("resolves the selected shadow from the theme shadows namespace", () => {
+        setup({ ...theme, shadows: { segmentedSelected: "inset 0 0 0 1px currentColor" } })
+        expect(screen.getAllByRole("button")[0]).toHaveStyleRule(
+          "box-shadow",
+          "inset 0 0 0 1px currentColor"
+        )
+      })
+
+      it("lets a raised item override its height without changing the normal font size", () => {
+        setup(theme, {
+          items: [
+            { label: "Default", value: false },
+            { label: "Compact height", value: true, buttonProps: { height: 5.5 } },
+          ],
+        })
+
+        const [, compactHeight] = screen.getAllByRole("button")
+        expect(compactHeight).toHaveStyleRule("height", "22px")
+        expect(compactHeight).toHaveStyleRule("font-size", "13px")
+      })
+
+      it("uses the shared monospace fallback and honors a theme override", () => {
+        const monospaceItems = [
+          { label: "Monospace", value: false, buttonProps: { monospace: true } },
+        ]
+        setup(theme, { items: monospaceItems })
+        expect(screen.getByRole("button")).toHaveStyleRule(
+          "font-family",
+          "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        )
+
+        renderWithProviders(
+          <ButtonGroup
+            variant="segmented"
+            appearance="raised"
+            items={monospaceItems}
+            value={false}
+            aria-label="Node layout"
+          />,
+          {
+            theme: {
+              ...theme,
+              constants: { ...theme.constants, FONT_MONOSPACE: "Custom Mono" },
+            },
+          }
+        )
+        expect(screen.getAllByRole("button")[1]).toHaveStyleRule("font-family", "Custom Mono")
+      })
+
+      it("honors raised hover color and disabled opacity pseudo props", () => {
+        setup(theme, {
+          items: [
+            {
+              label: "Native disabled",
+              value: false,
+              buttonProps: { disabled: true, _disabled: { opacity: 0.5 } },
+            },
+            {
+              label: "Aria disabled",
+              value: true,
+              buttonProps: { "aria-disabled": true, _disabled: { opacity: 0.5 } },
+            },
+            {
+              label: "Muted hover",
+              value: "hover",
+              buttonProps: { _hover: { color: "statusMutedText" } },
+            },
+          ],
+        })
+
+        const [nativeDisabled, ariaDisabled, mutedHover] = screen.getAllByRole("button")
+        expect(nativeDisabled).toHaveStyleRule("opacity", "0.5", { modifier: ":disabled" })
+        expect(ariaDisabled).toHaveStyleRule("opacity", "0.5", {
+          modifier: "[aria-disabled=true]",
+        })
+        expect(mutedHover).toHaveStyleRule("color", theme.colors.statusMutedText, {
+          modifier: ":hover",
+        })
+      })
+
+      it("keeps boolean selection and native button props with ReactNode labels", async () => {
+        const onChange = jest.fn()
+        const onFocus = jest.fn()
+        const ref = React.createRef()
+        const { rerender } = setup(theme, {
+          compact: true,
+          onChange,
+          items: [items[0], { ...items[1], buttonProps: { ref, onFocus, title: "Filter nodes" } }],
+        })
+        const [all, filtered] = screen.getAllByRole("button")
+        expect(all).toHaveAttribute("aria-pressed", "true")
+        expect(filtered).toHaveAttribute("aria-pressed", "false")
+        expect(filtered).toHaveAttribute("type", "button")
+        expect(filtered).toHaveAttribute("title", "Filter nodes")
+        expect(ref.current).toBe(filtered)
+        await user().click(filtered)
+        expect(onChange).toHaveBeenLastCalledWith(true)
+        expect(onFocus).toHaveBeenCalledTimes(1)
+        rerender(
+          <ButtonGroup
+            variant="segmented"
+            appearance="raised"
+            compact
+            items={items}
+            value={true}
+            onChange={onChange}
+          />
+        )
+        expect(screen.getByRole("button", { name: "Nodes with data" })).toHaveAttribute(
+          "aria-pressed",
+          "true"
+        )
+        await user().click(screen.getByRole("button", { name: "All nodes" }))
+        expect(onChange).toHaveBeenLastCalledWith(false)
+      })
+    })
+
+    it("lets supplied layout props override raised track defaults", () => {
+      setup(DefaultTheme, {
+        compact: true,
+        padding: [2],
+        gap: 2,
+        round: 3,
+        background: "mainBackground",
+      })
+      const track = screen.getByRole("group")
+      expect(track).toHaveStyleRule("padding", "8px")
+      expect(track).toHaveStyleRule("gap", "8px")
+      expect(track).toHaveStyleRule("border-radius", "12px")
+      expect(track).toHaveStyleRule("background-color", DefaultTheme.colors.mainBackground)
+    })
+
+    it("leaves the existing segmented appearance unchanged when only compact is supplied", () => {
+      renderWithProviders(<ButtonGroup variant="segmented" compact items={items} value={false} />)
+      expect(screen.getByRole("group")).toHaveStyleRule("padding", "3px")
+      expect(screen.getByRole("group")).toHaveStyleRule("border-radius", "4px")
+      expect(screen.getAllByRole("button")[0]).toHaveStyleRule("font-size", "13px")
+    })
+  })
+})
+
+it("preserves explicit raised item geometry and weight alongside unchanged defaults", () => {
+  renderWithProviders(
+    <ButtonGroup
+      variant="segmented"
+      appearance="raised"
+      value="custom"
+      items={[
+        { label: "Default", value: "default" },
+        {
+          label: "Custom",
+          value: "custom",
+          buttonProps: { height: 7, padding: [1, 3], round: 1, fontWeight: 500 },
+        },
+      ]}
+    />
+  )
+  const normal = screen.getByRole("button", { name: "Default" })
+  expect(normal).toHaveStyleRule("height", "26px")
+  expect(normal).toHaveStyleRule("padding", "0 10px")
+  expect(normal).toHaveStyleRule("border-radius", "6px")
+  expect(normal).toHaveStyleRule("font-weight", "500")
+  const custom = screen.getByRole("button", { name: "Custom" })
+  expect(custom).toHaveStyleRule("height", "28px")
+  expect(custom).toHaveStyleRule("padding", "4px 12px")
+  expect(custom).toHaveStyleRule("border-radius", "4px")
+  expect(custom).toHaveStyleRule("font-weight", "500")
 })

@@ -109,3 +109,37 @@ describe("when items disappear", () => {
     expect(reachable).toEqual(["Filter"])
   })
 })
+
+it("moves and activates controlled choices with either arrow axis", async () => {
+  const Choices = () => {
+    const [selected, setSelected] = React.useState(0)
+    const { getItemProps } = useRovingFocus({
+      count: actions.length,
+      activeIndex: selected,
+      onNavigate: setSelected,
+      orientation: "both",
+    })
+
+    return (
+      <div role="radiogroup">
+        {actions.map(({ label }, index) => (
+          <button
+            key={label}
+            type="button"
+            role="radio"
+            aria-checked={selected === index}
+            {...getItemProps(index)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  renderWithProviders(<Choices />)
+  const keyboard = user()
+  await keyboard.tab()
+  await keyboard.keyboard("{ArrowUp}{ArrowLeft}")
+  expect(screen.getByRole("radio", { name: "Filter", checked: true })).toHaveFocus()
+})

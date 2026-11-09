@@ -12,6 +12,8 @@ export const Checkbox = (
     disabled,
     iconProps,
     checkboxProps = {},
+    inputProps = {},
+    variant = "default",
     indeterminate,
     Label = Text,
     label,
@@ -34,6 +36,7 @@ export const Checkbox = (
     if (e.target !== inputRef.current) e.preventDefault()
 
     if (disabled) return
+    if (variant === "filled" && e.target !== inputRef.current) inputRef.current?.focus()
 
     onChange?.(!checked, e)
   }
@@ -55,6 +58,7 @@ export const Checkbox = (
       <Box width="16px" height="16px">
         <HiddenCheckboxInput
           data-testid="checkbox-input"
+          {...inputProps}
           ref={setInputRef}
           disabled={disabled}
           checked={!!checked}
@@ -66,9 +70,10 @@ export const Checkbox = (
           data-testid="styled-checkbox"
           data-state={indeterminate ? "mixed" : checked ? "checked" : "unchecked"}
           disabled={disabled}
+          variant={variant === "default" ? undefined : variant}
           {...checkboxProps}
         >
-          {(!!checked || !!indeterminate) && (
+          {variant !== "filled" && (!!checked || !!indeterminate) && (
             <Icon
               name={indeterminate ? "checkmark_partial_s" : "checkmark_s"}
               width="16px"

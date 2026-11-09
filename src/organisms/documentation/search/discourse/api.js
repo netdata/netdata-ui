@@ -30,7 +30,7 @@ const fetchTopics = async (searchTerm, onSuccess) => {
 
     if (!response.data) return
     if (onSuccess) onSuccess(response)
-  } catch (e) {
+  } catch {
     return
   }
 }

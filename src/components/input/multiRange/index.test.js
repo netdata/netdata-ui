@@ -38,14 +38,14 @@ describe("MultiRangeInput component", () => {
     const track = screen.getByTestId("multiRange-sliderTrack")
     expect(track).toHaveStyleRule("height", "4px")
     expect(track).toHaveStyleRule("border-radius", "2px")
-    expect(track).toHaveStyleRule("background-color", DefaultTheme.colors.border)
+    expect(track).toHaveStyleRule("background-color", DefaultTheme.colors.neutralHighlight)
   })
 
   test("lifts the dark unfilled track one surface step above the border", () => {
     setup({}, { theme: DarkTheme })
     expect(screen.getByTestId("multiRange-sliderTrack")).toHaveStyleRule(
       "background-color",
-      "#293030"
+      DarkTheme.colors.neutralHighlight
     )
   })
 

@@ -4,10 +4,10 @@ exports[`Toggle test  * should render with labels 1`] = `
 .c2 {
   font-family: "IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Ubuntu,"Helvetica Neue",sans-serif;
   font-style: normal;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 16px;
   font-weight: normal;
-  color: #526161;
+  color: #2D3E33;
   text-transform: none;
 }
 
@@ -43,8 +43,8 @@ exports[`Toggle test  * should render with labels 1`] = `
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-  background: #FFFFFF;
-  border: 1px solid #708585;
+  background: #F6F8F6;
+  border: 1px solid #5C6A61;
   border-radius: 100px;
   transition: background-color 140ms ease-out,border-color 140ms ease-out;
   display: block;
@@ -66,11 +66,11 @@ exports[`Toggle test  * should render with labels 1`] = `
   top: 2px;
   transform: none;
   transition: transform 140ms ease-out,background-color 140ms ease-out;
-  background-color: #35414A;
+  background-color: #39413C;
 }
 
 .c0:hover .c7 {
-  border-color: #526161;
+  border-color: #2D3E33;
 }
 
 .c5:focus-visible+.c7 {
@@ -160,8 +160,8 @@ exports[`Toggle test  * should render with required props 1`] = `
   box-sizing: border-box;
   width: 40px;
   height: 20px;
-  background: #FFFFFF;
-  border: 1px solid #708585;
+  background: #F6F8F6;
+  border: 1px solid #5C6A61;
   border-radius: 100px;
   transition: background-color 140ms ease-out,border-color 140ms ease-out;
   display: block;
@@ -183,11 +183,11 @@ exports[`Toggle test  * should render with required props 1`] = `
   top: 2px;
   transform: none;
   transition: transform 140ms ease-out,background-color 140ms ease-out;
-  background-color: #35414A;
+  background-color: #39413C;
 }
 
 .c0:hover .c5 {
-  border-color: #526161;
+  border-color: #2D3E33;
 }
 
 .c3:focus-visible+.c5 {

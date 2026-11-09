@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useLayoutEffect, useMemo, useRef } from "react"
+import React, { memo, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -25,6 +25,7 @@ import Body from "./body"
 import usePinning from "./usePinning"
 import useVisibility from "./useVisibility"
 import useSizing from "./useSizing"
+import { fitColumnWidths } from "./fluidSizing"
 import useExpanding from "./useExpanding"
 import usePaginating from "./usePaginating"
 import useSearching from "./useSearching"
@@ -96,6 +97,7 @@ const Table = memo(props => {
     onColumnVisibilityChange: visibilityChangeCb = tableDefaultProps.onColumnVisibilityChange,
 
     columnSizing: defaultColumnSizing,
+    columnSizingMode,
     onColumnSizingChange: sizingChangeCb,
 
     enablePagination,
@@ -139,6 +141,7 @@ const Table = memo(props => {
     tableRef,
     className,
     width,
+    surface,
     overflowTooltip,
     getRowCanExpand,
     getRowId,
@@ -152,6 +155,8 @@ const Table = memo(props => {
   )
 
   const [columnSizing, onColumnSizingChange] = useSizing(defaultColumnSizing, sizingChangeCb)
+  const [viewportWidth, setViewportWidth] = useState(0)
+  const fluidSizing = columnSizingMode === "fluid"
 
   const [columnPinning, onColumnPinningChange] = usePinning(defaultColumnPinning, pinningChangeCb)
 
@@ -179,6 +184,7 @@ const Table = memo(props => {
     enableResizing,
     enableSorting,
     rowActions,
+    columnVisibility,
     tableMeta,
   })
 
@@ -200,15 +206,24 @@ const Table = memo(props => {
   })
   const tableData = largeDataPublication?.rows || data
 
+  const fluidGeometry = useMemo(
+    () =>
+      fluidSizing && viewportWidth > 0
+        ? fitColumnWidths(columns, viewportWidth, columnVisibility, columnPinning, columnSizing)
+        : undefined,
+    [fluidSizing, columns, viewportWidth, columnVisibility, columnPinning, columnSizing]
+  )
+
   const table = useReactTable({
     columns,
     data: tableData,
     manualPagination: !enablePagination,
     columnResizeMode: "onEnd",
+    meta: { fluidSizing },
     filterFns,
     state: {
       columnVisibility,
-      columnSizing,
+      columnSizing: fluidGeometry?.sizes ?? columnSizing,
       rowSelection,
       globalFilter: enableCustomSearch ? "" : globalFilter,
       sorting,
@@ -285,6 +300,7 @@ const Table = memo(props => {
     dispatchThrottled({
       sorting: state.sorting,
       columnSizing: state.columnSizing,
+      columnPinning: state.columnPinning,
       expanded: state.expanded,
       grouping: state.grouping,
       columnVisibility: state.columnVisibility,
@@ -323,8 +339,9 @@ const Table = memo(props => {
       ref={ref}
       className={className}
       width={width}
-      border={bordered ? { side: "all", color: "border" } : undefined}
-      round={1}
+      background={surface}
+      border={bordered ? { side: "all", color: "tableBorder" } : undefined}
+      round={bordered ? 2 : 1}
     >
       <Header
         q={globalFilter}
@@ -340,6 +357,7 @@ const Table = memo(props => {
         enableColumnVisibility={enableColumnVisibility}
         bulkActions={bulkActions}
         enableCustomSearch={enableCustomSearch}
+        surface={surface}
       >
         {headerActionsBeforeChildren && headerActions}
         {headerChildren || null}
@@ -347,6 +365,13 @@ const Table = memo(props => {
       </Header>
       <Body
         table={table}
+        onViewportWidthChange={fluidSizing ? setViewportWidth : undefined}
+        suspendPins={fluidGeometry?.suspendPins}
+        hasPinnedEdges={
+          !fluidGeometry?.suspendPins &&
+          !!table.getCenterVisibleLeafColumns().length &&
+          !!(table.getLeftVisibleLeafColumns().length || table.getRightVisibleLeafColumns().length)
+        }
         dataGa={dataGa}
         testPrefix={testPrefix}
         meta={tableMeta}
@@ -357,6 +382,7 @@ const Table = memo(props => {
         overflowTooltip={overflowTooltip}
         {...rest}
         {...virtualizeOptions}
+        surface={surface}
       />
       {!getHasNextPage?.() && !loading && !!warning && (
         <Flex alignItems="center" justifyContent="center" gap={2} padding={[4]} width="100%">
@@ -379,7 +405,7 @@ const Table = memo(props => {
           </Flex>
         </Layer>
       )}
-      {enablePagination && <Pagination table={table} />}
+      {enablePagination && <Pagination table={table} surface={surface} />}
     </Flex>
   )
 })

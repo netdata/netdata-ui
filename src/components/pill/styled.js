@@ -1,6 +1,7 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"
-import { getRgbColor } from "@/theme"
+import { getOrElse, getRgbColor, getSizeBy } from "@/theme"
+import { FONT_MONOSPACE } from "@/theme/default/constants"
 import getPillBackground from "./mixins/background"
 import { getPillColor } from "./mixins/colors"
 import getPillHeight from "./mixins/height"
@@ -18,7 +19,7 @@ const getPillBorderColor = ({ flavour, look, theme }) => {
 }
 
 export const MasterCardContainer = styled(Flex).attrs(
-  ({ background, height, onClick, round = 999, size, ...props }) => ({
+  ({ background, onClick, round = 999, size, ...props }) => ({
     background,
     ...(onClick && { cursor: "pointer" }),
     position: "relative",
@@ -39,6 +40,18 @@ export const MasterCardContainer = styled(Flex).attrs(
 const cursorStyle = props => {
   if (props.onClick) return `&& { cursor: pointer; }`
   return ""
+}
+
+const appearanceStyles = {
+  subtle: css`
+    border: 0;
+    background: color-mix(
+      in srgb,
+      currentColor ${({ theme }) => theme.constants.PILL_SUBTLE_TINT},
+      transparent
+    );
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent);
+  `,
 }
 
 export const PillContainer = styled(Flex).attrs(
@@ -78,6 +91,30 @@ export const PillContainer = styled(Flex).attrs(
     ...rest,
   })
 )`
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: ${({ wrapChildren }) =>
+    wrapChildren === false ? "inherit" : "tabular-nums"};
+  ${({ monospace }) =>
+    monospace &&
+    css`
+      font-family: ${getOrElse(["constants", "FONT_MONOSPACE"], FONT_MONOSPACE)};
+    `}
+  ${props =>
+    props.fontSize !== undefined &&
+    css`
+      font-size: ${typeof props.fontSize === "number"
+        ? getSizeBy(props.fontSize / 2)(props)
+        : props.fontSize};
+    `}
+  ${({ fontWeight }) =>
+    fontWeight !== undefined &&
+    css`
+      font-weight: ${fontWeight};
+    `}
+  ${({ lineHeight }) =>
+    lineHeight !== undefined &&
+    css`
+      line-height: ${lineHeight};
+    `}
   ${cursorStyle}
+  ${({ appearance }) => appearanceStyles[appearance]}
 `

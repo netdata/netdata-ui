@@ -1,9 +1,7 @@
 import React from "react"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
-import { DefaultTheme, DarkTheme, getRgbColor } from "@/theme"
+import { DefaultTheme, DarkTheme } from "@/theme"
 import DropdownItem, { ItemContainer } from "./dropdownItem"
-
-const primaryTint = opacity => getRgbColor("primary", opacity)({ theme: DefaultTheme })
 
 const renderItem = ({ item = {}, theme, ...props } = {}) =>
   renderWithProviders(
@@ -63,11 +61,12 @@ describe("DropdownItem contract", () => {
 })
 
 describe("DropdownItem row styles", () => {
-  it("is a 28px row with a 12px inset", () => {
+  it("is a 34px row with rounded corners and a 10px text inset", () => {
     renderItem()
 
-    expect(option()).toHaveStyleRule("min-height", "28px")
-    expect(option()).toHaveStyleRule("padding", "6px 12px")
+    expect(option()).toHaveStyleRule("min-height", "34px")
+    expect(option()).toHaveStyleRule("padding", "8px 10px")
+    expect(option()).toHaveStyleRule("border-radius", "7px")
   })
 
   it("lets consumers set their own alignment and height", () => {
@@ -111,18 +110,42 @@ describe("DropdownItem row styles", () => {
     renderItem({ value: "cpu" })
 
     expect(option()).toHaveStyleRule("opacity", "1")
-    expect(option()).toHaveStyleRule("background-color", primaryTint(0.12))
-    expect(option()).toHaveStyleRule("box-shadow", `inset 2px 0 0 ${DefaultTheme.colors.primary}`)
-    expect(option()).toHaveStyleRule("background-color", primaryTint(0.18), {
-      modifier: ":hover",
-    })
+    expect(option()).toHaveStyleRule("background-color", DefaultTheme.colors.menuItemSelected)
+    expect(option()).toHaveStyleRule("box-shadow", `inset 3px 0 0 ${DefaultTheme.colors.primary}`)
+    expect(option()).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.menuItemSelectedHover,
+      {
+        modifier: ":hover",
+      }
+    )
   })
 
   it("uses the same selected grammar in dark mode", () => {
     renderItem({ value: "cpu", theme: DarkTheme })
 
-    expect(option()).toHaveStyleRule("background-color", "rgba(0, 171, 68, 0.12)")
-    expect(option()).toHaveStyleRule("box-shadow", "inset 2px 0 0 #00AB44")
+    expect(option()).toHaveStyleRule("background-color", DarkTheme.colors.menuItemSelected)
+    expect(option()).toHaveStyleRule("box-shadow", "inset 3px 0 0 #00AB44")
+  })
+
+  it.each([
+    ["light", DefaultTheme, "black"],
+    ["dark", DarkTheme, "white"],
+  ])("uses neutral row states in a quiet custom option in %s", (_, theme, ink) => {
+    renderWithProviders(
+      <ItemContainer selectionStyle="quiet" selected>
+        row
+      </ItemContainer>,
+      { theme }
+    )
+
+    const { dropdown, neutral, text } = theme.colors
+    const mix = amount => `color-mix(in srgb, ${dropdown}, ${neutral[ink]} ${amount}%)`
+    expect(option()).toHaveStyleRule("color", text)
+    expect(option()).toHaveStyleRule("background-color", mix(14))
+    expect(option()).toHaveStyleRule("background-color", mix(18), { modifier: ":hover" })
+    expect(option()).not.toHaveStyleRule("box-shadow", expect.stringContaining("inset 3px"))
+    expect(option().querySelector("svg")).toBeNull()
   })
 
   it("fades and disables disabled rows", () => {
@@ -151,7 +174,7 @@ describe("DropdownItem row styles", () => {
     renderItem({ value: "cpu" })
 
     const { primary } = DefaultTheme.colors
-    const railAndRing = `inset 2px 0 0 ${primary},inset 0 0 0 2px ${primary}`
+    const railAndRing = `inset 3px 0 0 ${primary},inset 0 0 0 2px ${primary}`
     expect(option()).toHaveStyleRule("box-shadow", railAndRing, { modifier: ":focus-visible" })
     expect(option()).toHaveStyleRule("box-shadow", railAndRing, {
       modifier: '[data-focused="true"]',

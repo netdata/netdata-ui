@@ -1,20 +1,37 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { getColor, getRgbColor, getSizeBy } from "@/theme"
+import { getColor, getSizeBy } from "@/theme"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
+import { getDropdownOptionColors, insetMenuRowRound, menuSelectionMarker } from "../dropdownStyles"
+import DropdownSelectionCheck from "../dropdownSelectionCheck"
 
-export const ItemContainer = styled(Flex).attrs(props => ({
+const Label = styled(TextSmall)`
+  min-width: 0;
+`
+
+const optionColor =
+  state =>
+  ({ theme, "data-selection-style": selectionStyle }) =>
+    getDropdownOptionColors(theme, selectionStyle)[state]
+
+export const ItemContainer = styled(Flex).attrs(({ selectionStyle, ...props }) => ({
   as: "li",
   role: "option",
-  padding: [1.5, 3],
+  padding: [2, 2.5],
+  round: props.justDesc ? undefined : insetMenuRowRound,
+  color: props.selected
+    ? getDropdownOptionColors(props.theme, selectionStyle).selectedText
+    : "text",
+  "data-selection-style": selectionStyle,
+  selectionStyle: undefined,
   ...props,
 }))`
   ${({ alignItems }) => !alignItems && "align-items: center;"}
   ${({ height }) =>
     height === undefined &&
     css`
-      min-height: ${getSizeBy(3.5)};
+      min-height: ${getSizeBy(4.25)};
     `}
   cursor: ${({ cursor }) => cursor ?? "pointer"};
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
@@ -22,7 +39,7 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   transition: background-color 120ms ease-out;
 
   &:hover {
-    background-color: ${getColor("menuItemHover")};
+    background-color: ${optionColor("hover")};
   }
 
   ${({ justDesc, theme }) =>
@@ -35,14 +52,17 @@ export const ItemContainer = styled(Flex).attrs(props => ({
     }
   `}
 
-  ${({ selected }) =>
+  ${({ selected, "data-selection-style": selectionStyle }) =>
     selected &&
     css`
-      background-color: ${getRgbColor("primary", 0.12)};
-      box-shadow: inset 2px 0 0 ${getColor("primary")};
+      background-color: ${optionColor("selected")};
+      ${selectionStyle !== "quiet" &&
+      css`
+        box-shadow: ${menuSelectionMarker};
+      `}
 
       &:hover {
-        background-color: ${getRgbColor("primary", 0.18)};
+        background-color: ${optionColor("selectedHover")};
       }
     `}
 
@@ -50,7 +70,12 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   &:focus-visible,
   &[data-focused="true"] {
     outline: none;
-    box-shadow: ${({ selected }) => (selected ? css`inset 2px 0 0 ${getColor("primary")}, ` : "")}
+    box-shadow: ${({ selected, "data-selection-style": selectionStyle }) =>
+        selected && selectionStyle !== "quiet"
+          ? css`
+              ${menuSelectionMarker},
+            `
+          : ""}
       inset 0 0 0 2px ${getColor("primary")};
   }
 
@@ -60,14 +85,25 @@ export const ItemContainer = styled(Flex).attrs(props => ({
 `
 
 const DropdownItem = ({
-  item: { value, label, icon, reverse, disabled, onClick, ...restItem },
+  item: { value, label, icon, reverse, disabled, onClick, justDesc, ...restItem },
   value: selectedValue,
   onItemClick,
   index,
   style,
+  selectionStyle,
   ...rest
 }) => {
-  const selected = selectedValue === value
+  const selected = value !== undefined && selectedValue === value && !justDesc
+
+  const name = (
+    <Label
+      color="inherit"
+      truncate={typeof label === "string"}
+      title={typeof label === "string" ? label : undefined}
+    >
+      {label}
+    </Label>
+  )
 
   const onSelect = event => {
     if (onClick) onClick(event)
@@ -81,14 +117,17 @@ const DropdownItem = ({
       gap={2}
       disabled={disabled}
       selected={selected}
+      selectionStyle={selectionStyle}
+      justDesc={justDesc}
       onClick={onSelect}
       {...restItem}
       {...rest}
       style={style}
     >
-      {reverse && <TextSmall>{label}</TextSmall>}
+      {reverse && name}
       {icon}
-      {!reverse && <TextSmall>{label}</TextSmall>}
+      {!reverse && name}
+      {selected && selectionStyle === "quiet" && <DropdownSelectionCheck />}
     </ItemContainer>
   )
 }

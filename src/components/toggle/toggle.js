@@ -21,39 +21,59 @@ export const Toggle = ({
   labelLeft = children,
   labelRight,
   Label = Text,
+  labelGap,
   colored = false,
   margin,
   alignSelf,
   toggleProps = {},
+  size = "default",
+  variant = "default",
+  activateOnEnter = false,
+  onKeyDown,
   ...props
 }) => {
   const { accessibility, visual } = splitAccessibility(toggleProps)
 
   return (
-    <StyledLabel className={className} margin={margin} alignSelf={alignSelf} disabled={disabled}>
+    <StyledLabel
+      className={className}
+      margin={margin}
+      alignSelf={alignSelf}
+      disabled={disabled}
+      variant={variant === "default" ? undefined : variant}
+    >
       {labelLeft && (
-        <LabelText as={Label} left>
+        <LabelText as={Label} labelGap={labelGap} left>
           {labelLeft}
         </LabelText>
       )}
-      <ToggleContainer>
+      <ToggleContainer size={size}>
         <HiddenToggleInput
           role="switch"
           disabled={disabled}
           checked={checked}
           {...accessibility}
           {...props}
+          onKeyDown={event => {
+            onKeyDown?.(event)
+            if (activateOnEnter && event.key === "Enter" && !event.defaultPrevented) {
+              event.preventDefault()
+              if (!event.repeat) event.currentTarget.click()
+            }
+          }}
         />
         <StyledToggle
           checked={checked}
           disabled={disabled}
           colored={colored}
+          size={size}
+          variant={variant === "default" ? undefined : variant}
           {...visual}
           aria-hidden="true"
         />
       </ToggleContainer>
       {labelRight && (
-        <LabelText as={Label} right>
+        <LabelText as={Label} labelGap={labelGap} right>
           {labelRight}
         </LabelText>
       )}

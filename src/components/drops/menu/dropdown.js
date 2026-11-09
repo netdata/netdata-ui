@@ -6,14 +6,20 @@ import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
-import { dropdownBorder, dropdownRound, floatingShadow } from "../dropdownStyles"
+import { dropdownBorder, floatingShadow, insetMenuPadding, insetMenuRound } from "../dropdownStyles"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) => !hideShadow && floatingShadow}
   list-style-type: none;
 `
 
-const defaultEstimateSize = () => 28
+const ItemList = styled.div`
+  height: 100%;
+  min-width: 0;
+  overflow: hidden auto;
+`
+
+const defaultEstimateSize = () => 34
 
 const DefaultNoSearchResultsComponent = () => {
   return (
@@ -26,17 +32,19 @@ const DefaultNoSearchResultsComponent = () => {
 const Dropdown = ({
   hideShadow,
   itemProps,
+  selectionStyle,
   items,
   onItemClick,
   dropTitle,
-  dropTitlePadding = [3, 3, 0],
+  dropTitlePadding = [0, 1, 2],
   Item,
   Footer,
   value,
   hasSearch,
   renderComponent,
-  searchMargin = [4],
+  searchMargin = [0, 0, 2],
   gap = 0,
+  padding = [insetMenuPadding],
   estimateSize = defaultEstimateSize,
   close,
   containerRef,
@@ -46,6 +54,7 @@ const Dropdown = ({
   ...rest
 }) => {
   const [searchValue, setSearchValue] = useState("")
+  const [top = 0, right = top, bottom = top, left = right] = padding || []
 
   const filteredItems = useMemo(() => {
     if (!searchValue) return items
@@ -79,9 +88,8 @@ const Dropdown = ({
       role="listbox"
       background="dropdown"
       border={dropdownBorder}
-      round={dropdownRound}
+      round={insetMenuRound}
       hideShadow={hideShadow}
-      padding={[1, 0]}
       margin={[1, 0]}
       column
       tabindex="-1"
@@ -89,58 +97,57 @@ const Dropdown = ({
       ref={containerRef}
       {...rest}
     >
-      {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}
-      {hasSearch && (
-        <Box margin={searchMargin}>
-          <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
+      <Box padding={[top, right, 0, left]}>
+        {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}
+        {hasSearch && (
+          <Box margin={searchMargin}>
+            <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
+          </Box>
+        )}
+        {typeof renderComponent === "function" && renderComponent({ searchValue, filteredItems })}
+        {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
+          <NoSearchResultsComponent />
+        ) : null}
+      </Box>
+      <ItemList ref={mergeRefs(ref, forwardedRef)}>
+        <Box padding={[0, right, 0, left]}>
+          <div
+            style={{
+              minHeight: `${rowVirtualizer.getTotalSize()}px`,
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map(virtualRow => (
+              <div
+                key={virtualRow.key}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  transform: `translateY(${virtualRow.start}px)`,
+                  padding: gap * 2,
+                  overflow: "hidden",
+                }}
+                data-index={virtualRow.index}
+                ref={rowVirtualizer.measureElement}
+              >
+                <Item
+                  item={filteredItems[virtualRow.index]}
+                  index={virtualRow.index}
+                  itemProps={itemProps}
+                  value={value}
+                  onItemClick={onItemClick}
+                  close={close}
+                  {...(selectionStyle && { selectionStyle })}
+                />
+              </div>
+            ))}
+          </div>
         </Box>
-      )}
-      {typeof renderComponent === "function" && renderComponent({ searchValue, filteredItems })}
-      {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
-        <NoSearchResultsComponent />
-      ) : null}
-      <div
-        ref={mergeRefs(ref, forwardedRef)}
-        style={{
-          height: "100%",
-          overflow: "auto",
-        }}
-      >
-        <div
-          style={{
-            minHeight: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map(virtualRow => (
-            <div
-              key={virtualRow.key}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                transform: `translateY(${virtualRow.start}px)`,
-                padding: gap * 2,
-                overflow: "hidden",
-              }}
-              data-index={virtualRow.index}
-              ref={rowVirtualizer.measureElement}
-            >
-              <Item
-                item={filteredItems[virtualRow.index]}
-                index={virtualRow.index}
-                itemProps={itemProps}
-                value={value}
-                onItemClick={onItemClick}
-                close={close}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      {Footer && <Footer close={close} />}
+      </ItemList>
+      <Box padding={[0, right, bottom, left]}>{Footer && <Footer close={close} />}</Box>
     </Container>
   )
 }

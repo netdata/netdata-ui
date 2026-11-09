@@ -9,7 +9,7 @@ export const segmentedTrack = css`
   gap: ${getSizeBy(0.25)};
   padding: ${getSizeBy(0.375)};
   border-radius: ${getSizeBy(0.5)};
-  border: 1px solid ${getColor("borderSecondary")};
+  border: 1px solid ${getColor("segmentedBorder")};
   background: ${getRgbColor("textLite", 0.12)};
 `
 

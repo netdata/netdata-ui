@@ -11,7 +11,7 @@ export default () => {
     return () => {
       try {
         document.body.removeChild(el)
-      } catch (e) {
+      } catch {
         // Do nothing
       }
     }

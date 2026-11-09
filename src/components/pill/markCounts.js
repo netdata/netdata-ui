@@ -3,7 +3,8 @@ import styled from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 import Dot from "./dot"
 import { getPillColor } from "./mixins/colors"
-import visuallyHidden from "@/mixins/visuallyHidden"
+import VisuallyHidden from "@/components/visuallyHidden"
+import margin from "@/mixins/margin"
 
 const Counts = styled.span`
   display: inline-flex;
@@ -12,6 +13,7 @@ const Counts = styled.span`
   font-size: 12px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
+  ${margin}
 `
 
 const Count = styled.span`
@@ -21,18 +23,14 @@ const Count = styled.span`
   color: ${({ color, theme }) => getColor(color)({ theme })};
 `
 
-const VisuallyHidden = styled.span`
-  ${visuallyHidden}
-`
-
 const MarkCounts = ({ counts = [], "data-testid": testId = "mark-counts", ...rest }) => (
   <Counts data-testid={testId} {...rest}>
-    {counts.map(({ tone, dot = "filled", count, label }) => {
-      const color = getPillColor("softText", tone)
+    {counts.map(({ tone, color: customColor, dot = "filled", dotSize, count, label }) => {
+      const color = customColor ?? getPillColor("softText", tone)
 
       return (
         <Count color={color} data-testid={`${testId}-item`} key={label}>
-          <Dot color={color} data-testid={`${testId}-dot`} dot={dot} />
+          <Dot color={color} data-testid={`${testId}-dot`} dot={dot} size={dotSize} />
           {count}
           <VisuallyHidden>{` ${label}`}</VisuallyHidden>
         </Count>

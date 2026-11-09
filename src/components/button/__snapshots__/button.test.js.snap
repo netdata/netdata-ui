@@ -10,12 +10,12 @@ exports[`Borderless Button renders 1`] = `
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  min-height: 28px;
+  min-height: 30px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 0 12px;
+  padding: 0 14px;
   transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: rgba(255,255,255,0.0);
   color: #007830;
@@ -48,7 +48,8 @@ exports[`Borderless Button renders 1`] = `
 }
 
 .c0.c0:active,
-.c0.c0[aria-expanded="true"] {
+.c0.c0[aria-expanded="true"],
+.c0.c0[aria-pressed="true"] {
   border-color: rgba(255,255,255,0.0);
   background-color: rgba(255,255,255,0.0);
   color: #005622;
@@ -118,7 +119,7 @@ exports[`Borderless Button renders 1`] = `
   class="c0"
   colors="[object Object]"
   flavour="borderless"
-  padding="0,3"
+  padding="0,3.5"
   round="1"
   texttransform="firstLetter"
 >
@@ -138,12 +139,12 @@ exports[`Button states renders loading icon 1`] = `
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  min-height: 28px;
+  min-height: 30px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 0 12px;
+  padding: 0 14px;
   transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: #007830;
   color: #FFFFFF;
@@ -176,7 +177,8 @@ exports[`Button states renders loading icon 1`] = `
 }
 
 .c0.c0:active,
-.c0.c0[aria-expanded="true"] {
+.c0.c0[aria-expanded="true"],
+.c0.c0[aria-pressed="true"] {
   border-color: #005622;
   background-color: #005622;
   color: #FFFFFF;
@@ -266,7 +268,7 @@ exports[`Button states renders loading icon 1`] = `
 <button
   class="c0"
   colors="[object Object]"
-  padding="0,3"
+  padding="0,3.5"
   round="1"
   texttransform="firstLetter"
 >
@@ -306,8 +308,8 @@ exports[`Button states renders only icon 1`] = `
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  min-height: 28px;
-  min-width: 28px;
+  min-height: 30px;
+  min-width: 30px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -345,7 +347,8 @@ exports[`Button states renders only icon 1`] = `
 }
 
 .c0.c0:active,
-.c0.c0[aria-expanded="true"] {
+.c0.c0[aria-expanded="true"],
+.c0.c0[aria-pressed="true"] {
   border-color: #005622;
   background-color: #DDFFEB;
   color: #007830;
@@ -414,7 +417,7 @@ exports[`Button states renders only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
-  color: #526161;
+  color: #2D3E33;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -468,8 +471,8 @@ exports[`Button states renders smaller only icon 1`] = `
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  min-height: 28px;
-  min-width: 28px;
+  min-height: 30px;
+  min-width: 30px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
@@ -507,7 +510,8 @@ exports[`Button states renders smaller only icon 1`] = `
 }
 
 .c0.c0:active,
-.c0.c0[aria-expanded="true"] {
+.c0.c0[aria-expanded="true"],
+.c0.c0[aria-pressed="true"] {
   border-color: #005622;
   background-color: #DDFFEB;
   color: #007830;
@@ -576,7 +580,7 @@ exports[`Button states renders smaller only icon 1`] = `
   justify-content: center;
   width: auto;
   height: 100%;
-  color: #526161;
+  color: #2D3E33;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -630,12 +634,12 @@ exports[`Default Button renders 1`] = `
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  min-height: 28px;
+  min-height: 30px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 0 12px;
+  padding: 0 14px;
   transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: #007830;
   color: #FFFFFF;
@@ -664,7 +668,8 @@ exports[`Default Button renders 1`] = `
 }
 
 .c0.c0:active,
-.c0.c0[aria-expanded="true"] {
+.c0.c0[aria-expanded="true"],
+.c0.c0[aria-pressed="true"] {
   border-color: #005622;
   background-color: #005622;
   color: #FFFFFF;
@@ -733,7 +738,7 @@ exports[`Default Button renders 1`] = `
 <button
   class="c0"
   colors="[object Object]"
-  padding="0,3"
+  padding="0,3.5"
   round="1"
   texttransform="fullWidth"
 >
@@ -753,12 +758,12 @@ exports[`Hollow Button renders 1`] = `
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  min-height: 28px;
+  min-height: 30px;
   white-space: nowrap;
   word-break: keep-all;
   cursor: pointer;
   pointer-events: auto;
-  padding: 0 12px;
+  padding: 0 14px;
   transition: background-color 140ms ease-out,border-color 140ms ease-out,color 140ms ease-out;
   background-color: rgba(255,255,255,0.0);
   color: #007830;
@@ -791,7 +796,8 @@ exports[`Hollow Button renders 1`] = `
 }
 
 .c0.c0:active,
-.c0.c0[aria-expanded="true"] {
+.c0.c0[aria-expanded="true"],
+.c0.c0[aria-pressed="true"] {
   border-color: #005622;
   background-color: #DDFFEB;
   color: #007830;
@@ -861,7 +867,7 @@ exports[`Hollow Button renders 1`] = `
   class="c0"
   colors="[object Object]"
   flavour="hollow"
-  padding="0,3"
+  padding="0,3.5"
   round="1"
   texttransform="firstLetter"
 >

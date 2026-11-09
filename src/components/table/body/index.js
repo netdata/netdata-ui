@@ -9,7 +9,7 @@ import React, {
 } from "react"
 import { useVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual"
 import identity from "lodash/identity"
-import Flex from "@/components/templates/flex"
+import { virtualRangeWithIndex } from "@/utils/virtualRangeWithIndex"
 import { useTableState } from "../provider"
 import Row from "./row"
 import Header from "./header"
@@ -18,6 +18,7 @@ import { normalizeWindowRange } from "../largeData"
 import { createRowMountController } from "./rowMountController"
 import { measureTableElement } from "./measureElement"
 import OverflowTooltip from "../components/overflowTooltip"
+import ScrollViewport, { usePinnedEdges } from "./scrollViewport"
 
 const deferredRowScrollResetDelayMs = 50
 
@@ -62,6 +63,9 @@ const Body = memo(
   ({
     dataGa,
     table,
+    hasPinnedEdges,
+    suspendPins,
+    onViewportWidthChange,
     testPrefix,
     testPrefixCallback,
     coloredSortedColumn,
@@ -91,6 +95,18 @@ const Body = memo(
   }) => {
     useTableState(rerenderSelector)
     const ref = useRef()
+    const contentRef = useRef()
+    usePinnedEdges(ref, contentRef, hasPinnedEdges)
+    useLayoutEffect(() => {
+      if (!onViewportWidthChange) return
+
+      const viewport = ref.current
+      const updateWidth = () => onViewportWidthChange(viewport.clientWidth)
+      const observer = new ResizeObserver(updateWidth)
+      updateWidth()
+      observer.observe(viewport)
+      return () => observer.disconnect()
+    }, [onViewportWidthChange])
     const publishedWindowRef = useRef()
     const pendingWindowRef = useRef()
     const rowMountController = useMemo(() => createRowMountController(), [])
@@ -129,14 +145,11 @@ const Body = memo(
       getItemKey: resolveItemKey,
       measureElement,
       ...(deferRowMount ? { isScrollingResetDelay: deferredRowScrollResetDelayMs } : {}),
-      rangeExtractor: useCallback(range => {
-        if (range.count && range.startIndex >= 0) {
-          const next = new Set([0, ...defaultRangeExtractor(range)])
-          return [...next].sort((a, b) => a - b)
-        }
-
-        return defaultRangeExtractor(range)
-      }, []),
+      rangeExtractor: useCallback(
+        range =>
+          range.startIndex >= 0 ? virtualRangeWithIndex(range, 0) : defaultRangeExtractor(range),
+        []
+      ),
     })
 
     if (virtualRef) virtualRef.current = rowVirtualizer
@@ -247,15 +260,17 @@ const Body = memo(
     }, [virtualRows, getHasPrevPage(), loading])
 
     return (
-      <Flex
+      <ScrollViewport
         ref={ref}
         height="100%"
         overflow="auto"
         flex="1"
         data-testid={`netdata-table${testPrefix}`}
+        data-table-suspend-pins={suspendPins ? "" : undefined}
         onScroll={onScroll}
       >
         <div
+          ref={contentRef}
           style={{
             height: `${rowVirtualizer.getTotalSize()}px`,
             position: "relative",
@@ -348,7 +363,7 @@ const Body = memo(
           />
         </div>
         {overflowTooltip ? <OverflowTooltip containerRef={ref} options={overflowTooltip} /> : null}
-      </Flex>
+      </ScrollViewport>
     )
   }
 )

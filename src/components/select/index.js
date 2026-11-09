@@ -1,11 +1,20 @@
-import React, { useRef, useMemo } from "react"
+import React, { useMemo } from "react"
 import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
 import { Icon } from "@/components/icon"
-import { useVirtualizer } from "@tanstack/react-virtual"
-import { dropdownRound, floatingShadowValue } from "@/components/drops/dropdownStyles"
-import { getRgbColor, getSizeBy } from "@/theme"
+import { CheckboxIndicator } from "@/components/checkbox"
+import DropdownSelectionCheck from "@/components/drops/dropdownSelectionCheck"
+import VirtualizedMenuList from "./virtualizedMenuList"
+import {
+  floatingShadowValue,
+  getDropdownOptionColors,
+  insetMenuPadding,
+  insetMenuRound,
+  insetMenuRowRound,
+  menuSelectionMarker,
+} from "@/components/drops/dropdownStyles"
+import { getSizeBy } from "@/theme"
 import { controlHeight, controlFontSize } from "@/mixins/controlSize"
 
 const useDataAttrs = (props, name) => {
@@ -45,17 +54,28 @@ const withDOMDataAttrs = (Component, name) => props => {
 
 const OriginalOption = defaultComponents.Option
 
-const Option = props => {
-  if (props.data.icon) {
-    return (
-      <OriginalOption {...props}>
-        <Icon name={props.data.icon} color="textLite" margin={[0, 1, 0, 0]} />
-        <span>{props.data.label}</span>
-      </OriginalOption>
-    )
-  }
+const OptionLabel = styled.span`
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
 
-  return <OriginalOption {...props} />
+const Option = props => {
+  const { children, data, innerProps, isMulti, isSelected, selectProps } = props
+  const title = typeof children === "string" ? children : undefined
+  const quiet = selectProps.selectionStyle === "quiet"
+
+  return (
+    <OriginalOption {...props} innerProps={title ? { ...innerProps, title } : innerProps}>
+      {quiet && isMulti && (
+        <CheckboxIndicator checked={isSelected} margin={[0, 2, 0, 0]} flex="none" />
+      )}
+      {data.icon && <Icon name={data.icon} color="textLite" margin={[0, 1, 0, 0]} flex="none" />}
+      {title ? <OptionLabel>{children}</OptionLabel> : children}
+      {quiet && !isMulti && isSelected && <DropdownSelectionCheck />}
+    </OriginalOption>
+  )
 }
 
 const customComponents = {
@@ -87,70 +107,6 @@ const customComponents = {
   ValueContainer: withDataAttrs(defaultComponents.ValueContainer, "ValueContainer"),
 }
 
-const VirtualItem = ({ virtualRow, child, virtualizer }) => (
-  <div
-    key={virtualRow.key}
-    style={{
-      transform: `translateY(${virtualRow.start}px)`,
-      top: 0,
-      left: 0,
-      right: 0,
-      position: "absolute",
-    }}
-    ref={virtualizer.measureElement}
-    data-index={virtualRow.index}
-  >
-    {child}
-  </div>
-)
-
-const VirtualList = ({ children, parentRef }) => {
-  const virtualizer = useVirtualizer({
-    count: children.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 35,
-    overscan: 5,
-  })
-
-  const virtualItems = virtualizer.getVirtualItems()
-
-  return (
-    <div
-      style={{
-        height: `${virtualizer.getTotalSize()}px`,
-        position: "relative",
-      }}
-    >
-      {virtualItems.map(virtualRow => (
-        <VirtualItem
-          key={virtualRow.key}
-          virtualRow={virtualRow}
-          child={children[virtualRow.index]}
-          virtualizer={virtualizer}
-        />
-      ))}
-    </div>
-  )
-}
-
-const VirtualizedMenuList = props => {
-  const parentRef = useRef()
-
-  return (
-    <customComponents.MenuList
-      {...props}
-      innerRef={parentRef}
-      styles={{
-        height: "300px",
-        overflow: "auto",
-        position: "relative",
-      }}
-    >
-      <VirtualList parentRef={parentRef}>{props.children}</VirtualList>
-    </customComponents.MenuList>
-  )
-}
-
 const sizeBy = (theme, multiplier) => getSizeBy(multiplier)({ theme })
 
 const indicatorStyles = theme => ({
@@ -172,8 +128,8 @@ const makeCustomTheme = theme => selectTheme => {
       primary75: theme.colors.tooltip,
       danger: theme.colors.text,
       dangerLight: theme.colors.border,
-      neutral0: theme.colors.inputBg,
-      neutral5: theme.colors.mainBackgroundDisabled,
+      neutral0: theme.colors.controlBackground,
+      neutral5: theme.colors.controlPressedBackground,
       neutral30: theme.colors.controlFocused,
       neutral60: theme.colors.placeholder,
       neutral80: theme.colors.text,
@@ -185,24 +141,20 @@ const makeCustomTheme = theme => selectTheme => {
   }
 }
 
-const getOptionColor = (theme, state) => {
+const getOptionColor = (theme, optionColors, state) => {
   if (state.isDisabled) return theme.colors.placeholder
-  if (state.isSelected) return theme.colors.textFocus
+  if (state.isSelected) return optionColors.selectedText
   return theme.colors.text
 }
 
 // Keyboard navigation sets isFocused without a hover, so the highlight must follow focus, not :hover.
-// Selected rows share the DropdownItem tint so every menu marks the selection the same way.
-const getOptionBackground = (theme, state) => {
-  if (state.isSelected) return getRgbColor("primary", state.isFocused ? 0.18 : 0.12)({ theme })
-  return state.isFocused && !state.isDisabled ? theme.colors.menuItemHover : "transparent"
+const getOptionBackground = (optionColors, state) => {
+  if (state.isSelected) return state.isFocused ? optionColors.selectedHover : optionColors.selected
+  return state.isFocused && !state.isDisabled ? optionColors.hover : "transparent"
 }
 
-// Round 6 D1: the default 28px control step; chips take the compact text size.
 const fontSizeOf = theme => controlFontSize("default")({ theme })
 const chipFontSizeOf = theme => controlFontSize("compact")({ theme })
-// Inner boxes fill the control minus its 1px hairlines.
-const innerHeight = theme => sizeBy(theme, 3.25)
 const lineHeight = "16px"
 const transition =
   "background-color 120ms ease-out, border-color 120ms ease-out, box-shadow 160ms ease-out"
@@ -213,24 +165,29 @@ const getControlBorder = (theme, state) => {
   return theme.colors.controlBorder
 }
 
-const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
+const makeCustomStyles = (theme, selectionStyle, { minWidth, ...providedStyles } = {}) => {
+  const optionColors = getDropdownOptionColors(theme, selectionStyle)
   const fontSize = fontSizeOf(theme)
+  const minHeight = Number.parseFloat(controlHeight("default")({ theme }))
+  const innerMinHeight = minHeight - 2
   return {
     control: (styles, state) => ({
       ...styles,
       borderColor: getControlBorder(theme, state),
       borderRadius: theme.constants.SIZE_SUB_UNIT,
       boxShadow: state.isFocused ? `inset 0 0 0 1px ${theme.colors.primary}` : "none",
-      minHeight: controlHeight("default")({ theme }),
+      minHeight,
       minWidth: minWidth || sizeBy(theme, 20),
       opacity: state.isDisabled ? 0.4 : 1,
       // Ghost field, matching TextInput: no fill at rest, the element surface on hover and focus.
-      backgroundColor: state.isFocused ? theme.colors.elementBackground : "transparent",
+      backgroundColor: state.isFocused
+        ? theme.colors.controlHoverBackground
+        : theme.colors.controlBackground,
       transition,
       [reducedMotion]: { transition: "none" },
       ":hover": {
         borderColor: state.isFocused ? theme.colors.primary : theme.colors.inputBorderHover,
-        backgroundColor: theme.colors.elementBackground,
+        backgroundColor: theme.colors.controlHoverBackground,
       },
     }),
     input: (styles, state) => ({
@@ -248,11 +205,18 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       ...styles,
       backgroundColor: theme.colors.dropdown,
       border: `1px solid ${theme.colors.border}`,
-      borderRadius: dropdownRound * theme.constants.SIZE_SUB_UNIT,
+      borderRadius: insetMenuRound * theme.constants.SIZE_SUB_UNIT,
       boxShadow: floatingShadowValue(theme),
       marginTop: sizeBy(theme, 0.5),
       overflow: "hidden",
       zIndex: 100,
+    }),
+    menuList: (styles, { selectProps }) => ({
+      ...styles,
+      padding: selectProps.insetMenuContent
+        ? 0
+        : `${insetMenuPadding * theme.constants.SIZE_SUB_UNIT}px`,
+      overflowX: "hidden",
     }),
     menuPortal: styles => ({ ...styles, zIndex: 9999 }),
     multiValue: styles => ({
@@ -295,22 +259,22 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       ...styles,
       display: "flex",
       alignItems: "center",
-      color: getOptionColor(theme, state),
-      backgroundColor: getOptionBackground(theme, state),
-      boxShadow: state.isSelected
-        ? `inset ${sizeBy(theme, 0.25)} 0 0 ${theme.colors.primary}`
-        : "none",
+      color: getOptionColor(theme, optionColors, state),
+      backgroundColor: getOptionBackground(optionColors, state),
+      borderRadius: insetMenuRowRound * theme.constants.SIZE_SUB_UNIT,
+      boxShadow:
+        state.isSelected && selectionStyle !== "quiet" ? menuSelectionMarker({ theme }) : "none",
       fontWeight: state.isSelected ? 500 : 400,
       // The placeholder colour is close to body text, so disabled options also fade like other disabled controls.
       opacity: state.isDisabled ? 0.4 : 1,
       cursor: state.isDisabled ? "not-allowed" : "pointer",
       ":active": {
-        backgroundColor: state.isDisabled ? "transparent" : theme.colors.menuItemSelected,
+        backgroundColor: state.isDisabled ? "transparent" : optionColors.selected,
       },
       fontSize,
       lineHeight,
-      minHeight: sizeBy(theme, 3.5),
-      padding: `${sizeBy(theme, 0.75)} ${sizeBy(theme, 1.25)}`,
+      minHeight: sizeBy(theme, 4.25),
+      padding: `${sizeBy(theme, 1)} ${sizeBy(theme, 1.25)}`,
     }),
     placeholder: styles => ({
       ...styles,
@@ -326,7 +290,7 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       lineHeight,
       margin: 0,
     }),
-    indicatorsContainer: styles => ({ ...styles, minHeight: innerHeight(theme) }),
+    indicatorsContainer: styles => ({ ...styles, minHeight: innerMinHeight }),
     dropdownIndicator: (styles, state) => ({
       ...styles,
       ...indicatorStyles(theme),
@@ -335,20 +299,23 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
     clearIndicator: styles => ({ ...styles, ...indicatorStyles(theme) }),
     valueContainer: styles => ({
       ...styles,
-      minHeight: innerHeight(theme),
-      padding: `0 ${sizeBy(theme, 1.25)}`,
+      minHeight: innerMinHeight,
+      padding: `0 ${sizeBy(theme, 1.5)}`,
     }),
     ...providedStyles,
   }
 }
 
-const components = { ...customComponents, MenuList: VirtualizedMenuList }
+const MenuList = props => <VirtualizedMenuList {...props} MenuList={customComponents.MenuList} />
+
+const components = { ...customComponents, MenuList }
 
 const getAttrs = props => ({
   ...props,
+  insetMenuContent: !props.styles?.menuList && !props.components?.MenuList,
   components: props.components ? { ...components, ...props.components } : components,
   theme: makeCustomTheme(props.theme),
-  styles: makeCustomStyles(props.theme, props.styles),
+  styles: makeCustomStyles(props.theme, props.selectionStyle, props.styles),
 })
 
 const SelectComponent = styled(ReactSelect).attrs(getAttrs)``

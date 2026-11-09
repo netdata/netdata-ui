@@ -243,10 +243,10 @@ describe("Default Button", () => {
   it("renders neutral", () => {
     const { container } = renderWithProviders(<Button label="Test prop text" neutral />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#526161", {
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralFill, {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#526161", {
+    expect(button).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralFill, {
       modifier: "&&",
     })
     expect(button).toHaveStyleRule("color", "#FFFFFF", {
@@ -320,10 +320,10 @@ describe("Hollow Button", () => {
     expect(button).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", "#C0CACA", {
+    expect(button).toHaveStyleRule("border-color", DefaultTheme.colors.buttonNeutralBorder, {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#526161", {
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.text, {
       modifier: "&&",
     })
   })
@@ -397,7 +397,7 @@ describe("Borderless Button", () => {
     expect(button).toHaveStyleRule("border-color", "rgba(255,255,255,0.0)", {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("color", "#526161", {
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFill, {
       modifier: "&&",
     })
   })
@@ -427,7 +427,7 @@ describe("Link Button", () => {
 
   it("keeps the control heights with a 4px text inset", () => {
     const { unmount } = renderWithProviders(<Button label="View docs" flavour="link" />)
-    expect(screen.getByRole("button")).toHaveStyleRule("min-height", "28px", { modifier: "&&" })
+    expect(screen.getByRole("button")).toHaveStyleRule("min-height", "30px", { modifier: "&&" })
     expect(screen.getByRole("button")).toHaveStyleRule("padding", "0 4px", { modifier: "&&" })
     unmount()
     renderWithProviders(<Button label="View docs" flavour="link" large />)
@@ -447,14 +447,14 @@ describe("Link Button", () => {
 })
 
 describe("Button sizing", () => {
-  // Round 6 D1: one control ladder, 28px default.
-  it("is 28px tall with 13px text, a 16px line box and 12px side padding by default", () => {
+  // Round 6 D1: one control ladder, 30px default.
+  it("is 30px tall with 13px text, a 16px line box and 14px side padding by default", () => {
     const { container } = renderWithProviders(<Button label="Apply" />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("min-height", "28px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("min-height", "30px", { modifier: "&&" })
     expect(button).toHaveStyleRule("font-size", "13px", { modifier: "&&" })
     expect(button).toHaveStyleRule("line-height", "16px", { modifier: "&&" })
-    expect(button).toHaveStyleRule("padding", "0 12px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("padding", "0 14px", { modifier: "&&" })
   })
 
   it("is 32px tall with 14px text and 16px side padding when large", () => {
@@ -482,7 +482,7 @@ describe("Button sizing", () => {
 
   it.each([
     ["compact", { compact: true }, "24px"],
-    ["default", {}, "28px"],
+    ["default", {}, "30px"],
     ["large", { large: true }, "32px"],
   ])("is a square at the %s height when it only has an icon", (_, sizeProps, size) => {
     const { container } = renderWithProviders(<Button icon="plus" {...sizeProps} />)
@@ -541,24 +541,72 @@ describe("Button state grammar", () => {
   it("keeps the neutral label readable on hover and pressed", () => {
     const { container } = renderWithProviders(<Button label="Apply" neutral />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#4e5d5e", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("color", "#FFFFFF", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("background-color", "#4b595b", { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("background-color", DefaultTheme.colors.buttonNeutralFillHover, {
+      modifier: "&&:hover",
+    })
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralText, {
+      modifier: "&&:hover",
+    })
+    expect(button).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralFillPressed,
+      { modifier: "&&:active" }
+    )
+  })
+
+  it("keeps the neutral hollow icon foreground separate from its border", () => {
+    const theme = {
+      ...DefaultTheme,
+      colors: {
+        ...DefaultTheme.colors,
+        buttonNeutralFill: "#123456",
+        buttonNeutralBorder: "#ABCDEF",
+      },
+    }
+    const { container } = renderWithProviders(
+      <Button icon="plus" label="Add" neutral flavour="hollow" />,
+      { theme }
+    )
+    expect(container.firstChild).toHaveStyleRule("border-color", "#ABCDEF", { modifier: "&&" })
+    expect(container.firstChild).toHaveStyleRule("fill", "#123456", { modifier: "&& .button-icon" })
   })
 
   it("steps the neutral hollow border on hover", () => {
     const { container } = renderWithProviders(<Button label="Apply" neutral flavour="hollow" />)
-    expect(container.firstChild).toHaveStyleRule("border-color", DefaultTheme.colors.placeholder, {
-      modifier: "&&:hover",
-    })
+    expect(container.firstChild).toHaveStyleRule(
+      "border-color",
+      DefaultTheme.colors.buttonNeutralBorderHover,
+      {
+        modifier: "&&:hover",
+      }
+    )
+  })
+
+  it("uses the dedicated neutral hollow pressed surface", () => {
+    const { container } = renderWithProviders(<Button label="Apply" neutral flavour="hollow" />)
+    expect(container.firstChild).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralHollowPressed,
+      { modifier: "&&:active" }
+    )
   })
 
   it("gives neutral borderless buttons a hover surface", () => {
     const { container } = renderWithProviders(<Button icon="plus" neutral flavour="borderless" />)
     const button = container.firstChild
-    expect(button).toHaveStyleRule("background-color", "#E4E8E8", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("color", "#4e5d5e", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("background-color", "#DBE1E1", { modifier: "&&:active" })
+    expect(button).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralBorderlessHover,
+      { modifier: "&&:hover" }
+    )
+    expect(button).toHaveStyleRule("color", DefaultTheme.colors.buttonNeutralFillHover, {
+      modifier: "&&:hover",
+    })
+    expect(button).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralBorderlessPressed,
+      { modifier: "&&:active" }
+    )
   })
 
   it("keeps primary borderless buttons flat on hover", () => {
@@ -591,6 +639,18 @@ describe("Button state grammar", () => {
     })
   })
 
+  it("uses custom contrast ink tokens from a color palette", () => {
+    const colorPalette = {
+      attention: "#FFFFFF",
+      onColorDark: "#123456",
+      onColorLight: "#FEDCBA",
+    }
+    const { container } = renderWithProviders(
+      <Button label="Ask AI" color="attention" colorPalette={colorPalette} />
+    )
+    expect(container.firstChild).toHaveStyleRule("color", "#123456", { modifier: "&&" })
+  })
+
   it("animates only colours, and not at all under reduced motion", () => {
     const { container } = renderWithProviders(<Button label="Apply" />)
     const button = container.firstChild
@@ -608,28 +668,30 @@ describe("Button state grammar", () => {
   })
 })
 
-// WCAG AA for 12px labels.
-const readableOn = background => ({
-  asymmetricMatch: color => getContrast(color, background) >= 4.5,
-  toAsymmetricMatcher: () => `a colour with >= 4.5:1 contrast on ${background}`,
-})
+const readableThemeInk = (theme, background) =>
+  getContrast(theme.colors.onColorDark, background) >=
+  getContrast(theme.colors.onColorLight, background)
+    ? theme.colors.onColorDark
+    : theme.colors.onColorLight
 
 describe("Button status and neutral steps", () => {
   const steps = {
     light: {
       theme: DefaultTheme,
-      danger: ["#DB162F", "#c71b32", "#b32035"],
-      warning: ["#A05E00", "#935a08", "#865711"],
+      danger: "#DB162F",
+      warning: "#A05E00",
     },
     dark: {
       theme: DarkTheme,
-      danger: ["#DB162F", "#df3147", "#e34d60"],
-      warning: ["#BF7100", "#c6821e", "#ce933d"],
+      danger: "#DB162F",
+      warning: "#BF7100",
     },
   }
 
   Object.entries(steps).forEach(([themeName, { theme, ...tones }]) => {
-    Object.entries(tones).forEach(([tone, [rest, hover, pressed]]) => {
+    Object.entries(tones).forEach(([tone, rest]) => {
+      const hover = mix(0.12, theme.colors.main, rest)
+      const pressed = mix(0.24, theme.colors.main, rest)
       it(`steps ${tone} one mix toward the ink colour in the ${themeName} theme`, () => {
         renderWithProviders(<Button label="Delete" {...{ [tone]: true }} />, { theme })
         const button = screen.getByRole("button")
@@ -642,9 +704,13 @@ describe("Button status and neutral steps", () => {
       it(`keeps the ${tone} label readable in every state in the ${themeName} theme`, () => {
         renderWithProviders(<Button label="Delete" {...{ [tone]: true }} />, { theme })
         const button = screen.getByRole("button")
-        expect(button).toHaveStyleRule("color", readableOn(rest), { modifier: "&&" })
-        expect(button).toHaveStyleRule("color", readableOn(hover), { modifier: "&&:hover" })
-        expect(button).toHaveStyleRule("color", readableOn(pressed), { modifier: "&&:active" })
+        expect(button).toHaveStyleRule("color", readableThemeInk(theme, rest), { modifier: "&&" })
+        expect(button).toHaveStyleRule("color", readableThemeInk(theme, hover), {
+          modifier: "&&:hover",
+        })
+        expect(button).toHaveStyleRule("color", readableThemeInk(theme, pressed), {
+          modifier: "&&:active",
+        })
       })
 
       it(`does not dim a pressed borderless ${tone} label in the ${themeName} theme`, () => {
@@ -687,16 +753,26 @@ describe("Button status and neutral steps", () => {
   it("steps the dark neutral button one grey step instead of jumping to white", () => {
     renderWithProviders(<Button label="Apply" neutral />, { theme: DarkTheme })
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("background-color", "#819393", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("background-color", "#92a2a2", { modifier: "&&:active" })
-    expect(button).toHaveStyleRule("color", readableOn("#92a2a2"), { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("background-color", DarkTheme.colors.buttonNeutralFillHover, {
+      modifier: "&&:hover",
+    })
+    expect(button).toHaveStyleRule("background-color", DarkTheme.colors.buttonNeutralFillPressed, {
+      modifier: "&&:active",
+    })
+    expect(button).toHaveStyleRule("color", DarkTheme.colors.buttonNeutralText, {
+      modifier: "&&:active",
+    })
   })
 
   it("steps the dark neutral borderless label without jumping to white", () => {
     renderWithProviders(<Button label="More" neutral flavour="borderless" />, { theme: DarkTheme })
     const button = screen.getByRole("button")
-    expect(button).toHaveStyleRule("color", "#819393", { modifier: "&&:hover" })
-    expect(button).toHaveStyleRule("color", "#92a2a2", { modifier: "&&:active" })
+    expect(button).toHaveStyleRule("color", DarkTheme.colors.buttonNeutralFillHover, {
+      modifier: "&&:hover",
+    })
+    expect(button).toHaveStyleRule("color", DarkTheme.colors.buttonNeutralFillPressed, {
+      modifier: "&&:active",
+    })
   })
 })
 
@@ -747,5 +823,88 @@ describe("Button behaviour", () => {
     const ref = React.createRef()
     renderWithProviders(<Button label="Save" ref={ref} />)
     expect(ref.current).toBe(screen.getByRole("button"))
+  })
+})
+
+describe("composed action buttons", () => {
+  it("preserves composed content, exact geometry and pressed filter states", () => {
+    renderWithProviders(
+      <Button
+        neutral
+        flavour="hollow"
+        height={6.5}
+        fontWeight={400}
+        width={20}
+        fontSize={3}
+        gap={1.5}
+        justifyContent="start"
+        wrapChildren={false}
+        aria-pressed="true"
+      >
+        <span>Filter</span>
+        <span>3</span>
+      </Button>
+    )
+    const button = screen.getByRole("button", { name: "Filter 3" })
+    expect(button.children).toHaveLength(2)
+    expect(button).toHaveStyleRule("font-weight", "400", { modifier: "&&" })
+    expect(button).toHaveStyleRule("height", "26px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("min-height", "26px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("width", "80px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("font-size", "12px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("gap", "6px", { modifier: "&&" })
+    expect(button).toHaveStyleRule("justify-content", "start", { modifier: "&&" })
+    expect(button).toHaveStyleRule(
+      "background-color",
+      DefaultTheme.colors.buttonNeutralHollowPressed,
+      {
+        modifier: '&&[aria-pressed="true"]',
+      }
+    )
+  })
+})
+
+it.each([true, false])(
+  "preserves its element label during loading (wrapChildren: %s)",
+  wrapChildren => {
+    const label = <span data-testid="loading-label">Save</span>
+    const { rerender } = renderWithProviders(<Button wrapChildren={wrapChildren}>{label}</Button>)
+    const labelElement = screen.getByTestId("loading-label")
+
+    rerender(
+      <Button wrapChildren={wrapChildren} isLoading>
+        {label}
+      </Button>
+    )
+    expect(screen.getByTestId("loading-label")).toBe(labelElement)
+
+    rerender(<Button wrapChildren={wrapChildren}>{label}</Button>)
+    expect(screen.getByTestId("loading-label")).toBe(labelElement)
+  }
+)
+
+it("updates a text-only composed action after page translation", () => {
+  const { rerender } = renderWithProviders(<Button wrapChildren={false}>Discard</Button>)
+  const button = screen.getByRole("button")
+  const translated = document.createElement("font")
+  translated.textContent = button.textContent
+  button.firstChild.replaceWith(translated)
+  rerender(<Button wrapChildren={false}>Restore default</Button>)
+  expect(button.textContent).toBe("Restore default")
+})
+
+it("keeps dimension objects for minimum widths and bounded heights", () => {
+  renderWithProviders(<Button icon="plus" width={{ min: 20 }} height={{ base: 5.5, max: 6 }} />)
+  const button = screen.getByRole("button")
+  expect(button).toHaveStyleRule("min-width", "80px", { modifier: "&&" })
+  expect(button).toHaveStyleRule("min-height", "22px", { modifier: "&&" })
+  expect(button).toHaveStyleRule("height", "22px", { modifier: "&&" })
+  expect(button).toHaveStyleRule("max-height", "24px", { modifier: "&&" })
+})
+
+it("keeps an explicit link underline visible before hover", () => {
+  renderWithProviders(<Button label="Discard" flavour="link" underline />)
+  expect(screen.getByRole("button")).toHaveStyleRule("text-decoration", "underline", {
+    modifier: "&&",
   })
 })

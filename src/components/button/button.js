@@ -18,36 +18,57 @@ export const Button = ({
   iconHeight,
   iconRotate = 0,
   children = label,
+  wrapChildren = true,
   ref,
   ...rest
-}) => (
-  <StyledButton
-    flavour={flavour}
-    textTransform={textTransform}
-    hasIcon={!!icon || isLoading}
-    hasLabel={!!children}
-    onClick={isLoading ? undefined : onClick}
-    ref={ref}
-    iconColor={iconColor}
-    iconWidth={iconWidth}
-    iconHeight={iconHeight}
-    {...rest}
-  >
-    {isLoading && <LoaderIcon className="button-icon" />}
-    {icon && !isLoading && (
-      <Flex justifyContent="center" alignItems="center" width="auto" height="100%">
-        <Icon
-          size={iconSize}
-          className="button-icon"
-          title={icon}
-          name={icon}
-          width={iconWidth}
-          height={iconHeight}
-          rotate={iconRotate}
-        />
-      </Flex>
-    )}
+}) => {
+  const labelContent =
+    !!children &&
+    (wrapChildren ? (
+      <span>{(isLoading && loadingLabel) || children}</span>
+    ) : (
+      (isLoading && loadingLabel) || children
+    ))
+  const iconContent = isLoading ? (
+    <LoaderIcon className="button-icon" />
+  ) : icon ? (
+    <Flex justifyContent="center" alignItems="center" width="auto" height="100%">
+      <Icon
+        size={iconSize}
+        className="button-icon"
+        title={icon}
+        name={icon}
+        width={iconWidth}
+        height={iconHeight}
+        rotate={iconRotate}
+      />
+    </Flex>
+  ) : null
+  const bareText =
+    !iconContent && (typeof labelContent === "string" || typeof labelContent === "number")
 
-    {!!children && <span>{(isLoading && loadingLabel) || children}</span>}
-  </StyledButton>
-)
+  return (
+    <StyledButton
+      flavour={flavour}
+      textTransform={textTransform}
+      hasIcon={!!icon || isLoading}
+      hasLabel={!!children}
+      data-unwrapped-children={wrapChildren ? undefined : ""}
+      onClick={isLoading ? undefined : onClick}
+      ref={ref}
+      iconColor={iconColor}
+      iconWidth={iconWidth}
+      iconHeight={iconHeight}
+      {...rest}
+    >
+      {bareText ? (
+        labelContent
+      ) : (
+        <>
+          {iconContent}
+          {labelContent}
+        </>
+      )}
+    </StyledButton>
+  )
+}

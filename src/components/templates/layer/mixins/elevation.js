@@ -1,4 +1,4 @@
-import { getColor, getRgbColor } from "@/theme/utils"
+import { getColor, getRgbColor, getSizeBy } from "@/theme/utils"
 
 // Luminance of mainBackground, so custom themes built on either palette pick the right scrim.
 export const isDarkTheme = props => {
@@ -18,6 +18,9 @@ export const modalShadow = props => {
   const color = getColor("dropdownShadow")(props)
   return `0 16px 40px -8px ${color}, 0 2px 6px ${color}`
 }
+
+export const dialogShadow = props =>
+  `0 ${getSizeBy(2)(props)} ${getSizeBy(6)(props)} ${getRgbColor("onColorDark", isDarkTheme(props) ? 0.5 : 0.2)(props)}`
 
 // A plain black wash barely dims the dark app, so dark gets a denser near-black scrim.
 export const scrimColor = props =>

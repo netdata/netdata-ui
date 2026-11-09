@@ -1,32 +1,40 @@
 import { css } from "styled-components"
-import { getSizeBy, getRgbColor } from "@/theme/utils"
+import { getColor, getRgbColor, getSizeBy } from "@/theme/utils"
+
+const thumb = getRgbColor("controlBorder", 0.32)
+const thumbHover = getColor("main")
 
 export default css`
-  scrollbar-width: ${getSizeBy(1)};
-  scrollbar-color: ${getRgbColor("scrollBarThumb", 0.3)} ${getRgbColor("scrollBarThumb", 0.1)};
+  @media (forced-colors: none) {
+    scrollbar-width: thin;
+    scrollbar-color: ${thumb} transparent;
 
-  &::-webkit-scrollbar {
-    width: ${getSizeBy(1)};
-  }
+    @supports selector(::-webkit-scrollbar) {
+      scrollbar-width: auto;
+      scrollbar-color: auto;
 
-  &::-webkit-scrollbar-track {
-    background-color: ${getRgbColor("scrollBarTrack", 1)};
-    border: 1px solid ${getRgbColor("scrollBarBorder", 0.4)};
-    border-radius: ${getSizeBy(1)};
-  }
-  &::-webkit-scrollbar-thumb {
-    width: ${getSizeBy(0.5)};
-    border: 1px solid ${getRgbColor("scrollBarBorder", 1)};
-    border-radius: ${getSizeBy(1)};
-    background-color: ${getRgbColor("scrollBarThumb", 1)};
-  }
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: ${getRgbColor("scrollBarThumbHover", 1)};
-  }
-  &::-webkit-scrollbar-track-piece {
-    background-color: ${getRgbColor("scrollBarThumb", 0.3)};
-  }
-  &::-webkit-scrollbar-corner {
-    background-color: ${getRgbColor("scrollBarThumb", 0.3)};
+      &::-webkit-scrollbar {
+        width: ${getSizeBy(1)};
+        height: ${getSizeBy(1)};
+      }
+
+      &::-webkit-scrollbar-track,
+      &::-webkit-scrollbar-corner {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: ${getSizeBy(0.25)} solid transparent;
+        border-radius: ${getSizeBy(1)};
+        background: ${thumb};
+        background-clip: padding-box;
+      }
+
+      &::-webkit-scrollbar-thumb:hover,
+      &::-webkit-scrollbar-thumb:active {
+        border-width: ${getSizeBy(0.125)};
+        background-color: ${thumbHover};
+      }
+    }
   }
 `

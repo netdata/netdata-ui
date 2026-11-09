@@ -69,6 +69,7 @@ const BodyHeaderCell = ({
   children,
   isSubheader,
   hasSubheaders,
+  hideResizeDivider,
   enableColumnReordering,
 }) => {
   useTableState(rerenderSelector)
@@ -129,8 +130,8 @@ const BodyHeaderCell = ({
     <Flex
       ref={sortableRef}
       style={enableColumnReordering ? sortableStyle : undefined}
-      flex={getColumnFlex(column, header, table.getState().columnSizing?.[column.id] != null)}
-      width={`${header.subHeaders.length ? header.subHeaders.reduce((s, h) => s + h.column.getSize(), 0) : column.getSize()}px`}
+      flex={getColumnFlex(table, column, header)}
+      width={`${header.getSize()}px`}
       height={{ min: "32px" }}
       position="relative"
       {...(column.getCanSort() &&
@@ -187,7 +188,12 @@ const BodyHeaderCell = ({
         </LabelContainer>
         <Filter column={column} testPrefix={testPrefix} index={index} />
       </Flex>
-      <ResizeHandler header={header} table={table} testPrefix={testPrefix} />
+      <ResizeHandler
+        header={header}
+        table={table}
+        testPrefix={testPrefix}
+        hideDivider={hideResizeDivider}
+      />
       {children}
     </Flex>
   )

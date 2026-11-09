@@ -24,11 +24,11 @@ describe("Dropdown surface", () => {
     expect(listbox().tagName).toBe("UL")
   })
 
-  it("rounds at 6px and casts the shared floating shadow", () => {
+  it("rounds at 12px and casts the shared floating shadow", () => {
     renderDropdown()
     const shadow = DefaultTheme.colors.dropdownShadow
 
-    expect(listbox()).toHaveStyleRule("border-radius", "6px")
+    expect(listbox()).toHaveStyleRule("border-radius", "12px")
     expect(listbox()).toHaveStyleRule("box-shadow", `0 4px 12px ${shadow},0 1px 2px ${shadow}`)
   })
 
@@ -38,16 +38,28 @@ describe("Dropdown surface", () => {
     expect(listbox()).not.toHaveStyleRule("box-shadow", expect.anything())
   })
 
-  it("insets rows from the rounded edge by 4px", () => {
-    renderDropdown()
+  it("insets the virtual content while the scroll viewport reaches the panel edge", () => {
+    const scrollRef = React.createRef()
+    renderDropdown({ ref: scrollRef })
 
-    expect(listbox()).toHaveStyleRule("padding", "4px 0")
+    expect(listbox()).not.toHaveStyleRule("padding", expect.anything())
+    expect(scrollRef.current).toHaveStyleRule("overflow", "hidden auto")
+    expect(scrollRef.current).not.toHaveStyleRule("padding", expect.anything())
+    expect(scrollRef.current.firstElementChild).toHaveStyleRule("padding", "0 12px 0 12px")
   })
 
-  it("keeps consumer padding overrides", () => {
-    renderDropdown({ padding: [2] })
+  it("keeps asymmetric consumer padding on the menu content", () => {
+    const scrollRef = React.createRef()
+    renderDropdown({
+      ref: scrollRef,
+      padding: [1, 2, 3, 4],
+      dropTitle: "Metrics",
+      Footer: () => <div>Footer</div>,
+    })
 
-    expect(listbox()).toHaveStyleRule("padding", "8px")
+    expect(screen.getByText("Metrics").parentElement).toHaveStyleRule("padding", "4px 8px 0 16px")
+    expect(scrollRef.current.firstElementChild).toHaveStyleRule("padding", "0 8px 0 16px")
+    expect(screen.getByText("Footer").parentElement).toHaveStyleRule("padding", "0 8px 12px 16px")
   })
 })
 

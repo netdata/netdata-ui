@@ -14,7 +14,14 @@ import { StylesConfig } from "react-select"
 import { supportedBulkActions } from "./header/actions/useActions"
 import { supportedRowActions } from "./useColumns/useRowActions"
 
-type NetdataCoreColumns<T = any> = Pick<ColumnDef<T>, "id" | "header" | "cell" | "filterFn">
+type NetdataCoreColumns<T = any> = Pick<
+  ColumnDef<T>,
+  "id" | "header" | "cell" | "filterFn" | "size" | "minSize" | "maxSize"
+> & {
+  hasActions?: boolean
+  notFlex?: boolean
+  columns?: Array<NetdataCoreColumns<T>>
+}
 
 export type LargeDataSource<D = any> = {
   forEachExportRow?: (callback: (row: D, id: string) => void) => void
@@ -136,12 +143,18 @@ export type TableProps<T = any, D = any> = {
   }
   testPrefix?: string
   globalFilterFn?: FilterFnOption<T>
+  enableResizing?: boolean
+  columnSizingMode?: "fluid"
+  columnSizing?: Record<string, number>
+  onColumnSizingChange?: (sizes: Record<string, number>) => void
   columnVisibility?: VisibilityTableState
   enableColumnVisibility?: boolean
   columnVisibilityFlavour?: "borderless" | "hollow"
   enableColumnPinning?: boolean
   enableGroupByControl?: boolean
   bordered?: boolean
+  surface?: string
+  coloredSortedColumn?: boolean
   headerActionsBeforeChildren?: boolean
   headerChildren?: ReactNode
   onGlobalSearchChange?: (value: any) => void

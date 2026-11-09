@@ -11,7 +11,7 @@ const iconsExposed = Object.keys(iconsList)
 const copyName = name => {
   try {
     navigator.clipboard.writeText(name)
-  } catch (e) {
+  } catch {
     // Clipboard is unavailable in some embeds; the name stays visible.
   }
 }

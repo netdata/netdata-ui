@@ -1,4 +1,5 @@
-import { useMemo } from "react"
+import React, { useMemo } from "react"
+import Flex from "@/components/templates/flex"
 import useRowSelection from "./useRowSelection"
 import useRowActions from "./useRowActions"
 
@@ -7,6 +8,7 @@ export default (
   {
     rowActions,
     enableSelection,
+    columnVisibility,
     singleRowSelection,
     enableResizing,
     enableSorting,
@@ -23,6 +25,29 @@ export default (
 
   return useMemo(() => {
     if (!dataColumns || dataColumns.length < 1) return []
+
+    const actionHost =
+      rowActionsColumn &&
+      dataColumns
+        .flatMap(column => column.columns || [column])
+        .find(column => column.hasActions && columnVisibility?.[column.id] !== false)
+    const Actions = rowActionsColumn?.cell
+    const withActions = (column, minimum) => {
+      if (column !== actionHost) return column
+      const Cell = column.cell
+      return {
+        ...column,
+        minSize: Math.max(column.minSize ?? minimum, rowActionsColumn.minSize),
+        cell: props => (
+          <Flex width="100%" alignItems="center">
+            <Flex flex width={{ min: "0" }} overflow="hidden" alignItems={column.align || "center"}>
+              {Cell ? <Cell {...props} /> : props.getValue()}
+            </Flex>
+            <Actions {...props} inline />
+          </Flex>
+        ),
+      }
+    }
 
     let isGrouped = false
 
@@ -46,7 +71,7 @@ export default (
               enableResizing,
               footer: props => props.column.id,
               tableMeta,
-              ...subCol,
+              ...withActions(subCol, 60),
               accessorKey: subCol.accessorKey || subCol.id,
             }
           }),
@@ -65,7 +90,7 @@ export default (
         enableResizing,
         footer: props => props.column.id,
         tableMeta,
-        ...col,
+        ...withActions(col, 10),
         accessorKey: col.accessorKey || col.id,
       }
     })
@@ -82,7 +107,7 @@ export default (
           : selectionColumn
       )
 
-    if (rowActionsColumn)
+    if (rowActionsColumn && !actionHost)
       dataColumns.push(
         isGrouped
           ? {
@@ -95,5 +120,13 @@ export default (
       )
 
     return dataColumns
-  }, [dataColumns, rowActionsColumn, selectionColumn])
+  }, [
+    dataColumns,
+    rowActionsColumn,
+    selectionColumn,
+    columnVisibility,
+    enableResizing,
+    enableSorting,
+    tableMeta,
+  ])
 }

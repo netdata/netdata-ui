@@ -1,6 +1,6 @@
 import React from "react"
 import { renderWithProviders, screen } from "testUtilities"
-import { DefaultTheme } from "@/theme"
+import { DefaultTheme, DarkTheme } from "@/theme"
 import { MarkCounts } from "./index"
 
 const light = DefaultTheme.colors
@@ -37,3 +37,34 @@ describe("MarkCounts", () => {
     expect(screen.queryByTestId("mark-counts-item")).not.toBeInTheDocument()
   })
 })
+
+it.each([DefaultTheme, DarkTheme])(
+  "preserves domain mark ink, sizes and alignment in $name",
+  theme => {
+    renderWithProviders(
+      <MarkCounts
+        margin={[0, 0, 0, "auto"]}
+        counts={[
+          { color: "textInfo", dotSize: 1.5, count: 2, label: "edited" },
+          {
+            color: "segmentedAccentText",
+            dot: "dashed",
+            dotSize: 1.75,
+            count: 1,
+            label: "to fill",
+          },
+        ]}
+      />,
+      { theme }
+    )
+    const items = screen.getAllByTestId("mark-counts-item")
+    const dots = screen.getAllByTestId("mark-counts-dot")
+    expect(screen.getByTestId("mark-counts")).toHaveStyleRule("margin", "0 0 0 auto")
+    expect(items[0]).toHaveStyleRule("color", theme.colors.textInfo)
+    expect(items[0]).toHaveTextContent("2 edited")
+    expect(dots[0]).toHaveStyleRule("width", "6px")
+    expect(dots[0]).toHaveStyleRule("background-color", theme.colors.textInfo)
+    expect(dots[1]).toHaveStyleRule("border", `1.5px dashed ${theme.colors.segmentedAccentText}`)
+    expect(dots[1]).toHaveStyleRule("width", "7px")
+  }
+)

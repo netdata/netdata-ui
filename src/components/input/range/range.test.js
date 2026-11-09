@@ -52,12 +52,12 @@ describe("InputRange component", () => {
     setup()
     expect(range()).toHaveStyleRule("height", "4px")
     expect(range()).toHaveStyleRule("border-radius", "2px")
-    expect(range()).toHaveStyleRule("background-color", colors.border)
+    expect(range()).toHaveStyleRule("background-color", colors.neutralHighlight)
   })
 
   test("lifts the dark unfilled track one surface step above the border", () => {
     setup({}, { theme: DarkTheme })
-    expect(range()).toHaveStyleRule("background-color", "#293030")
+    expect(range()).toHaveStyleRule("background-color", DarkTheme.colors.neutralHighlight)
   })
 
   test("thumb is a 12px ring that does not grow when pressed", () => {

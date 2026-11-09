@@ -4,8 +4,11 @@ import Flex from "@/components/templates/flex"
 import { Icon } from "@/components/icon"
 import { Text } from "@/components/typography"
 import { focusRing } from "@/mixins/focusRing"
+import { controlHeight } from "@/mixins/controlSize"
 
-const MenuContainer = styled(Flex)`
+const MenuContainer = styled(Flex).attrs(props => ({
+  height: props.height ?? { min: controlHeight("default")(props) },
+}))`
   cursor: pointer;
   ${focusRing}
 
@@ -21,7 +24,7 @@ const MenuContainer = styled(Flex)`
 const MenuButton = ({ open, icon, label, caret, ref, ...rest }) => (
   <MenuContainer
     gap={2}
-    padding={[2, 4]}
+    padding={[1, 4]}
     justifyContent="between"
     alignItems="center"
     role="button"

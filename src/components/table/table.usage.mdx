@@ -25,7 +25,7 @@ Shows rows of records, such as nodes, alerts or users, with optional selection, 
 
 - `enableSelection` adds a checkbox column and a select-all checkbox. `singleRowSelection` turns the checkboxes into radio buttons.
 - `onRowSelected` receives the selected rows' data. For a controlled selection, pass `rowSelection` (keyed by row id) and `onRowSelectionChange`, and set `getRowId` so the keys are stable.
-- `bulkActions` adds header buttons that are enabled while rows are selected. Built-in keys are `delete`, `download`, `toggleAlarm`, `userSettings`, `addEntry`, `remove` and `columnVisibility`. Each takes a `handleAction`.
+- `bulkActions` groups standard icon actions and the default Columns trigger in a compact track. Selection adds a count and a tint. Row-dependent actions are disabled until rows are selected. Use `alwaysEnabled` for utilities such as downloads. Labeled controls, custom actions and an explicitly hollow Columns trigger sit outside the track. Built-in keys are `delete`, `download`, `toggleAlarm`, `userSettings`, `addEntry`, `remove` and `columnVisibility`. Each takes a `handleAction`.
 - Actions with `confirmation` open a confirm dialog before `handleAction` runs. `delete` and `remove` do by default.
 - A row with `disabled: true` in its data shows a disabled checkbox.
 
@@ -33,7 +33,7 @@ Shows rows of records, such as nodes, alerts or users, with optional selection, 
 
 ## Row actions and clickable rows
 
-- `rowActions` adds a trailing `actions` column with icon buttons. Built-in keys are `delete`, `edit`, `replace`, `info`, `toggleAlarm`, `userSettings`, `remove` and `goto`.
+- `rowActions` renders neutral circular icon buttons in a trailing `actions` column. The first visible leaf column with `hasActions: true` hosts the actions at its trailing edge instead. Inline actions appear on hover and keyboard focus, and stay visible on touch. Standard icon actions that exceed the available space go into an overflow menu. Custom and labeled controls retain their own triggers. Built-in keys are `delete`, `edit`, `replace`, `info`, `toggleAlarm`, `userSettings`, `remove` and `goto`.
 - Each action takes `handleAction(rowData, table)`, and optionally `isDisabled` and `isVisible` (a boolean or a function of the row).
 - `onClickRow` makes rows clickable and receives `{ data, table, fullRow }`. `disableClickRow` opts individual rows out.
 
@@ -55,6 +55,13 @@ Shows rows of records, such as nodes, alerts or users, with optional selection, 
 
 <Canvas of={Stories.Grouping} />
 <Canvas of={Stories.Expanding} />
+
+## Column sizing
+
+- `enableResizing` enables drag handles. A completed mouse or touch drag reports the new width through `onColumnSizingChange`. A click or canceled drag leaves saved widths alone.
+- Opt in with `columnSizingMode="fluid"` to fit unpinned columns to the scroll viewport within their declared `minSize` and `maxSize`. Pinned columns and `notFlex` columns keep their preferred sizes. Saved `columnSizing` values override fitted widths.
+- Persist the sparse manual width map emitted by `onColumnSizingChange`. Read `column.getSize()` for the resolved geometry when building custom group rows.
+- When the pinned sections leave too little room for the center, they scroll with the row while preserving pinning state.
 
 ## Pinning
 
@@ -86,6 +93,12 @@ Shows rows of records, such as nodes, alerts or users, with optional selection, 
 - `virtualizeOptions` tunes the body: `loading` shows a "Loading more..." pill, `warning` shows a notice once `getHasNextPage` returns false, and `loadMore` fetches more rows.
 
 <Canvas of={Stories.LargeData} />
+
+## Surface
+
+The default table frame uses an 8px corner radius.
+
+Pass a theme colour token to `surface` to share one background across the toolbar, column headers, rows and pager. For a table embedded in a workspace, use `surface="workspaceBackground"`. Hover, selection and dividers keep their own tokens.
 
 ## States
 

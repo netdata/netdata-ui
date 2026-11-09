@@ -21,7 +21,7 @@ describe("segmented track", () => {
       </ThemeProvider>
     )
     const track = screen.getByTestId("t")
-    expect(track).toHaveStyleRule("border", `1px solid ${colors.borderSecondary}`)
+    expect(track).toHaveStyleRule("border", `1px solid ${colors.segmentedBorder}`)
     expect(track).toHaveStyleRule("padding", "3px")
     expect(track).toHaveStyleRule("border-radius", "4px")
   })

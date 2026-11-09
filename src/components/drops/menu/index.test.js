@@ -113,7 +113,48 @@ it("announces the popup state on the trigger", () => {
   expect(trigger).toHaveAttribute("aria-expanded", "true")
 })
 
+it("shows the selected option with a trailing check in a quiet menu", async () => {
+  const { getByText, findByRole } = render({ selectionStyle: "quiet", value: "durgen" })
+
+  fireEvent.click(getByText("character"))
+  const option = await findByRole("option", { name: "Tyler Durden" })
+
+  expect(option).toHaveAttribute("aria-selected", "true")
+  expect(option.lastElementChild?.getAttribute("aria-hidden")).toBe("true")
+  expect(option).not.toHaveStyleRule("box-shadow", expect.stringContaining("inset 3px"))
+})
+
+it("keeps section labels and commands without a value unselected", async () => {
+  const { getByText, findByRole } = render({
+    items: [{ justDesc: true, label: "Actions" }, { label: "Refresh" }],
+  })
+
+  fireEvent.click(getByText("character"))
+
+  expect((await findByRole("option", { name: "Actions" })).getAttribute("aria-selected")).toBe(
+    "false"
+  )
+  expect((await findByRole("option", { name: "Refresh" })).getAttribute("aria-selected")).toBe(
+    "false"
+  )
+})
+
 describe("MenuButton", () => {
+  it("aligns the default trigger with other 30px controls", () => {
+    const { getByRole } = render()
+    const trigger = getByRole("button")
+    expect(trigger).toHaveStyleRule("min-height", "30px")
+    expect(trigger).toHaveStyleRule("padding", "4px 16px")
+  })
+
+  it("preserves an explicit trigger height and padding", () => {
+    const { getByRole } = render({ height: 6, padding: [0, 2] })
+    const trigger = getByRole("button")
+    expect(trigger).toHaveStyleRule("height", "24px")
+    expect(trigger).not.toHaveStyleRule("min-height")
+    expect(trigger).toHaveStyleRule("padding", "0 8px")
+  })
+
   it("is keyboard reachable", () => {
     const { getByRole } = render()
 

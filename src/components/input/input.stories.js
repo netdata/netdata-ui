@@ -53,8 +53,8 @@ export const Sizes = () => (
   <Flex column gap={3}>
     <Sample label="compact (24px)" size="compact" placeholder="compact" value="" />
     <Sample label="tiny (24px, same as compact)" size="tiny" placeholder="tiny" value="" />
-    <Sample label="small (28px)" size="small" placeholder="small" value="" />
-    <Sample label="large / default (28px)" placeholder="large" value="" />
+    <Sample label="small (30px)" size="small" placeholder="small" value="" />
+    <Sample label="large / default (30px)" placeholder="large" value="" />
     <Sample label="height={8} override (32px)" height={8} placeholder="32px" value="" />
   </Flex>
 )
@@ -99,7 +99,7 @@ export default {
     hint: { description: "Helper text under the field.", table: t("string | ReactNode", "undefined"), control: "text" },
     error: { description: "A string shows as the error message; true shows 'invalid'. Also colours the border.", table: t("boolean | string | ReactNode", "undefined"), control: "text" },
     disabled: { description: "Fades the field to 40% and blocks input.", table: t("boolean", "undefined"), control: "boolean" },
-    size: { description: "Field height: tiny and compact are 24px (12px text), small and large are 28px (13px text). `height` overrides it.", table: t('"tiny" | "compact" | "small" | "large"', '"large"'), control: { type: "radio" }, options: ["tiny", "compact", "small", "large"] },
+    size: { description: "Field height: tiny and compact are 24px (12px text), small and large are 30px (13px text). `height` overrides it.", table: t('"tiny" | "compact" | "small" | "large"', '"large"'), control: { type: "radio" }, options: ["tiny", "compact", "small", "large"] },
     name: { description: "Input name; also used as its aria-label.", table: t("string", "undefined"), control: "text" },
     iconLeft: { description: "Element shown inside the field, left side.", table: t("ReactNode", "undefined"), control: false },
     iconRight: { description: "Element shown inside the field, right side.", table: t("ReactNode", "undefined"), control: false },

@@ -1,4 +1,5 @@
 import get from "lodash/get"
+import { getContrast } from "polished"
 
 export const propOrElse = (pathName, defaultValue) => props => get(props, pathName, defaultValue)
 
@@ -24,6 +25,19 @@ export const getRgbColor = (colorPath, opacity = 1) => {
 
     return `rgba(${r}, ${g}, ${b}, ${opacity})`
   }
+}
+
+export const getReadableColor = (
+  backgroundPath,
+  darkColorPath = "onColorDark",
+  lightColorPath = "onColorLight"
+) => ({ theme }) => {
+  const background = getColor(backgroundPath)({ theme })
+  const dark = getColor(darkColorPath)({ theme })
+  const light = getColor(lightColorPath)({ theme })
+  return getContrast(dark, background) >= getContrast(light, background)
+    ? dark
+    : light
 }
 
 export const getSizeBy =

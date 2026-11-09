@@ -1,11 +1,6 @@
-import React, { isValidElement } from "react"
+import React from "react"
 
-const RowPlaceholdersRenderer = ({
-  RowPlaceholder,
-  items = [],
-  getPlaceholderOffset,
-  ...props
-}) => {
+const RowPlaceholdersRenderer = ({ RowPlaceholder, items = [], getPlaceholderOffset }) => {
   if (!items.length) return null
 
   return (

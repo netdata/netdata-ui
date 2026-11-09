@@ -8,7 +8,7 @@ const Counter = styled(Text).attrs({ color: "textLite" })`
   font-variant-numeric: tabular-nums;
 `
 
-const Pagination = ({ table }) => {
+const Pagination = ({ table, surface = "mainBackground" }) => {
   const {
     nextPage,
     previousPage,
@@ -28,8 +28,8 @@ const Pagination = ({ table }) => {
       height="36px"
       padding={[0, 2]}
       gap={1}
-      background="mainBackground"
-      border={{ side: "top", color: "border" }}
+      background={surface}
+      border={{ side: "top", color: "tableBorder" }}
     >
       <IconButton
         title="First"

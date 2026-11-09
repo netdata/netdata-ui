@@ -1,7 +1,9 @@
 import React, { Children, useState, useCallback, useMemo, useEffect } from "react"
 import { Tab } from "./tab"
 
-export const useBuildTabs = (children, activeIndex, onChange, variant) => {
+export const useBuildTabs = (children, activeIndex, onChange, styleOptions) => {
+  const { variant, appearance, accent, vertical, panelId } = styleOptions
+
   return useMemo(() => {
     const indeces = []
     const nav = []
@@ -11,7 +13,7 @@ export const useBuildTabs = (children, activeIndex, onChange, variant) => {
 
     Children.forEach(children, (tab, index) => {
       const props = tab?.props || {}
-      if (firstActiveIndex < 0 && !props.disabled) firstActiveIndex = index
+      if (firstActiveIndex < 0 && tab && !props.disabled) firstActiveIndex = index
 
       const isActive = activeIndex === indeces.length
       const key = `${index}-${props.label}`
@@ -21,7 +23,12 @@ export const useBuildTabs = (children, activeIndex, onChange, variant) => {
           <Tab
             key={key}
             variant={variant}
+            appearance={appearance}
+            accent={accent}
             {...props}
+            vertical={vertical}
+            id={props.id ?? (panelId ? `${panelId}-tab-${index}` : undefined)}
+            aria-controls={props["aria-controls"] ?? panelId}
             onChange={onChange}
             index={index}
             active={isActive}
@@ -30,15 +37,16 @@ export const useBuildTabs = (children, activeIndex, onChange, variant) => {
       }
 
       if (isActive) {
-        activeIsDisabled = !!props.disabled
+        activeIsDisabled = !!props.disabled || (vertical && !tab)
         content = props.children
       }
 
       indeces.push(index)
     })
 
+    if (vertical && !nav.some(tab => tab.props.active)) activeIsDisabled = true
     return [nav, content, firstActiveIndex, activeIsDisabled]
-  }, [children, activeIndex, onChange, variant])
+  }, [children, activeIndex, onChange, variant, appearance, accent, vertical, panelId])
 }
 
 export const useSetActive = (selected = 0, onChange) => {

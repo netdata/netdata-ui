@@ -9,6 +9,7 @@ import styled from "styled-components"
 import Container from "@/components/drops/container"
 import { Text } from "@/components/typography"
 import TooltipInk from "./tooltipInk"
+import TooltipSurface from "./surface"
 
 const getContent = content => (typeof content === "function" ? content() : content)
 
@@ -51,6 +52,8 @@ const Tooltip = ({
   delay = 600,
   children,
   allowHoverOnTooltip,
+  appearance = "inverse",
+  maxWidth,
   ref: parentRef,
   ...rest
 }) => {
@@ -98,6 +101,8 @@ const Tooltip = ({
     return children
   }
 
+  const body = isOpen && ref.current && !disabled ? getContent(content) : null
+
   return (
     <Fragment>
       {targetElement}
@@ -120,10 +125,16 @@ const Tooltip = ({
           zIndex={zIndex}
         >
           {plain ? (
-            getContent(content)
+            body
+          ) : appearance === "surface" ? (
+            <TooltipSurface
+              content={body}
+              structured={isTitleDescription(body)}
+              maxWidth={maxWidth}
+            />
           ) : (
             <Container gap={0.5} width={{ max: "300px" }}>
-              <TooltipInk>{renderBody(getContent(content))}</TooltipInk>
+              <TooltipInk>{renderBody(body)}</TooltipInk>
             </Container>
           )}
         </Drop>

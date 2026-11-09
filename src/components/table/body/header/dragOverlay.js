@@ -6,7 +6,6 @@ import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
 
 const OverlayContainer = styled(Flex).attrs({
-  background: "mainBackground",
   padding: [2, 4],
   round: 1,
   border: true,
@@ -15,12 +14,12 @@ const OverlayContainer = styled(Flex).attrs({
   opacity: 0.9;
 `
 
-const DragOverlay = ({ activeColumn }) => {
+const DragOverlay = ({ activeColumn, surface }) => {
   if (!activeColumn) return null
 
   return createPortal(
     <DndDragOverlay>
-      <OverlayContainer alignItems="center" gap={2}>
+      <OverlayContainer alignItems="center" gap={2} background={surface}>
         <Text strong>{activeColumn.columnDef.header || activeColumn.id}</Text>
       </OverlayContainer>
     </DndDragOverlay>,

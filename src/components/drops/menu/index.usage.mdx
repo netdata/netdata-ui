@@ -20,7 +20,9 @@ A button that opens a dropdown list of items, or any custom dropdown view.
 
 - `items` is an array of `{ value, label }`. Optional keys: `icon`, `disabled`, `reverse` (icon after the label), `onClick` and `justDesc`.
 - `justDesc` turns a row into a section title: separated by a line, muted and not clickable.
-- The selected row, matched by `value`, has a green marker and a tinted background.
+- Menu content has a 12px inset and option rows have 7px corners. The vertical scrollbar sits at the panel edge. String labels truncate and expose the full label in the tooltip.
+- `selectionStyle="marker"` (default) uses a selected tint, selected text color, and 3px left marker for a row matched by `value`. Use this for the active destination in a navigation menu. Commands without a selected value use hover and focus styling.
+- `selectionStyle="quiet"` uses a neutral selected fill and a trailing check for the current value. Use it for option pickers such as chart type. `MenuItemContainer` supports the same row colours and lets custom renderers place their own checkbox or `DropdownSelectionCheck`.
 - `disabled` rows fade to 40% and ignore the pointer.
 - `hasSearch` adds a search field that filters string labels and values.
 
@@ -37,7 +39,7 @@ A button that opens a dropdown list of items, or any custom dropdown view.
 ## Custom trigger and content
 
 - Pass a child to use your own trigger, such as a `Button`. It receives `onClick`, `aria-haspopup` and `aria-expanded`.
-- The default trigger shows `icon`, `label` and a chevron (`caret`, true by default). The chevron turns while open.
+- The default trigger shares the 30px minimum height of `Button` and `Select`. It shows `icon`, `label` and a chevron (`caret`, true by default) that turns while open.
 - Replace rows with `Item`, the whole list with `Dropdown`, and add a `Footer`. `dropTitle` shows content above the items.
 - `dropProps` is forwarded to `Drop`. Use `align` to open to the right: `{ top: "bottom", right: "right" }`.
 

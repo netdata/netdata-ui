@@ -1,5 +1,21 @@
-import { FC, KeyboardEvent, FocusEvent, Ref, SyntheticEvent } from "react"
-import { MarginProps, PaddingProps, AlignSelfProps } from "@/mixins/types"
+import {
+  CSSProperties,
+  FC,
+  KeyboardEvent,
+  FocusEvent,
+  Ref,
+  SyntheticEvent,
+  ReactNode,
+  ElementType,
+} from "react"
+import { FlexProps } from "@/components/templates/flex"
+import {
+  MarginProps,
+  PaddingProps,
+  AlignSelfProps,
+  DimensionsType,
+  ColorType,
+} from "@/mixins/types"
 
 export type ButtonFlavour = "default" | "hollow" | "borderless" | "link"
 export type ThemeType = "light" | "dark"
@@ -19,14 +35,35 @@ export interface ButtonProps {
   warning?: boolean
   type?: string
   flavour?: ButtonFlavour
+  appearance?: "surface" | "inline"
   disabled?: boolean
   small?: boolean
   large?: boolean
   compact?: boolean
   neutral?: boolean
   uppercase?: boolean
+  underline?: boolean
+  underlineColor?: string | string[]
+  underlineOffset?: number | string
+  monospace?: boolean
   themeType?: ThemeType | undefined
   active?: boolean
+  highlightExpanded?: boolean
+  highlightPressed?: boolean
+  height?: DimensionsType
+  width?: DimensionsType
+  fontWeight?: number | string
+  fontSize?: number
+  lineHeight?: CSSProperties["lineHeight"]
+  flex?: FlexProps["flex"]
+  basis?: FlexProps["basis"]
+  disabledOpacity?: number
+  pointerEvents?: CSSProperties["pointerEvents"]
+  hoverBrightness?: number
+  hoverBorderColor?: ColorType
+  gap?: number | string
+  justifyContent?: "start" | "center" | "end" | "between" | "around" | "evenly" | "stretch"
+  wrapChildren?: boolean
   iconSize?: string
   [s: string]: any
 }
@@ -41,32 +78,59 @@ export interface ButtonWrapperProps extends ButtonProps, MarginProps, PaddingPro
   strong?: boolean
 }
 
-type IconButtonProps = Pick<
-  ButtonWrapperProps,
-  "iconColor" | "flavour" | "icon" | "disabled" | "onClick" | "iconSize" | "large" | "compact"
-> & { width?: string; height?: string; tooltip?: string; focusableWhenDisabled?: boolean }
+export interface IconButtonProps extends ButtonWrapperProps {
+  children?: ReactNode
+  ref?: Ref<HTMLButtonElement>
+  width?: string
+  height?: string
+  buttonSize?: number
+  buttonHeight?: number
+  tooltip?: ReactNode
+  tooltipProps?: Record<string, unknown>
+  TooltipComponent?: ElementType
+  focusableWhenDisabled?: boolean
+}
 
-export interface ButtonGroupProps {
-  items?: Array<RadioButtonGroupItem>
+export type ButtonGroupValue = string | number | boolean
+
+export interface SegmentedButtonProps extends ButtonProps {
+  height?: DimensionsType
+  monospace?: boolean
+}
+
+export interface ButtonGroupProps<
+  Value extends ButtonGroupValue = ButtonGroupValue,
+  Multi extends boolean = false,
+> {
+  items?: Array<RadioButtonGroupItem<Value>>
   checked?: string | number
-  onChange?: (value: string | number) => void
+  value?: (Multi extends true ? Value[] : Value) | null
+  isMulti?: Multi
+  onChange?: (value: Multi extends true ? Value[] : Value) => void
+  appearance?: "raised"
+  compact?: boolean
+  buttonProps?: SegmentedButtonProps
   variant?: "default" | "segmented"
 }
 
-export interface RadioButtonGroupItem {
-  label: string
-  value: string | number
+export interface RadioButtonGroupItem<Value extends ButtonGroupValue = ButtonGroupValue> {
+  label: ReactNode
+  value: Value
+  title?: string
+  buttonProps?: SegmentedButtonProps
 }
 
-export interface ButtonGroupWrapperProps
-  extends ButtonGroupProps,
-    MarginProps,
-    PaddingProps,
-    AlignSelfProps {}
+export interface ButtonGroupWrapperProps<
+  Value extends ButtonGroupValue = ButtonGroupValue,
+  Multi extends boolean = false,
+>
+  extends ButtonGroupProps<Value, Multi>, FlexProps {}
 
 declare const Button: FC<ButtonWrapperProps>
 declare const IconButton: FC<IconButtonProps>
-declare const ButtonGroup: FC<ButtonGroupWrapperProps>
+declare function ButtonGroup<Value extends ButtonGroupValue, Multi extends boolean = false>(
+  props: ButtonGroupWrapperProps<Value, Multi>
+): ReactNode
 
 export interface RovingItemProps {
   tabIndex: number
@@ -75,10 +139,14 @@ export interface RovingItemProps {
   onKeyDown: (event: KeyboardEvent<HTMLElement>) => void
 }
 
+export type FocusOrientation = "horizontal" | "vertical" | "both"
+
 export interface UseRovingFocusOptions {
   count: number
-  orientation?: "horizontal" | "vertical"
+  orientation?: FocusOrientation
   initialIndex?: number
+  activeIndex?: number
+  onNavigate?: (index: number) => void
 }
 
 declare function useRovingFocus(options: UseRovingFocusOptions): {
@@ -94,6 +162,13 @@ declare function useRovingFocus(options: UseRovingFocusOptions): {
   ) => RovingItemProps
 }
 
-export { Button, IconButton, ButtonGroup, useRovingFocus }
+declare function focusInList(
+  event: KeyboardEvent<HTMLElement>,
+  items: readonly HTMLElement[],
+  from?: EventTarget | null,
+  orientation?: FocusOrientation
+): void
+
+export { Button, IconButton, ButtonGroup, focusInList, useRovingFocus }
 
 export default Button

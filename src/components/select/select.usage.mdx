@@ -22,20 +22,22 @@ Options are `{ label, value }`. Add `icon` to show an icon before the label, and
 - Single select (default).
 - `isMulti`: selected values show as chips; a chip with `isDisabled` is locked.
 - `isCreatable`: typing offers a "create" option and calls `onCreateOption`.
+- `selectionStyle="quiet"`: choices use a neutral hover and selected fill. Single-choice options show a trailing check, and multi-choice options show a checkbox indicator. Set `hideSelectedOptions={false}` to keep checked rows visible in a multi-choice list.
+- `selectionStyle="marker"` (default): selected options use the menu tint and a 3px left marker.
 
 <Canvas of={Stories.Multi} />
 
 ## Size
 
-- The control is 28px tall with 13px text and a 10px inset, so it lines up with default `Button`, `TextInput` and `Search` controls.
-- Options are 28px rows with 13px text; multi-value chips are 20px with 12px text.
+- The control is 30px tall with 13px text and a 12px inset, so it lines up with default `Button`, `TextInput` and `Search` controls.
+- Options are 34px rows with 13px text and 7px corners, inset inside the menu. The vertical scrollbar sits at the panel edge. Multi-value chips are 20px with 12px text.
 
 ## States
 
 - Keyboard focus shows the green focus ring.
 - `isDisabled` fades the control to 40%.
 - `isClearable` adds a clear button.
-- The option list is virtualized, so long lists stay fast.
+- The option list is virtualized and keeps the keyboard-active option mounted. Set `estimatedOptionHeight` in pixels when custom rows differ from the default estimate of 35.
 
 ## Accessibility
 

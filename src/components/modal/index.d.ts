@@ -1,26 +1,23 @@
 import React from "react"
 import { LayerProps } from "../templates/layer"
-import appColors from "../../theme/default/colors"
-import rawColors from "../../theme/rawColors"
+import { FlexProps } from "../templates/flex"
+import { PaddingProps } from "../../mixins/types"
 
-export type ModalContentProps = {
-  height?: number | string
-  width?: number | string
-  testId?: string
-  background?: Exclude<keyof typeof appColors, keyof typeof rawColors>
+type ModalSurfaceProps = FlexProps &
+  Omit<React.ComponentPropsWithRef<"div">, keyof FlexProps> & { testId?: string }
+
+export type ModalContentProps = ModalSurfaceProps & {
+  appearance?: "dialog"
 }
 
-export type ModalHeaderProps = {
-  testId?: string
-}
+export type ModalHeaderProps = ModalSurfaceProps
 
-export type ModalBodyProps = {
-  testId?: string
-}
+export type ModalBodyProps = ModalSurfaceProps
 
-export type ModalFooterProps = {
-  testId?: string
+export type ModalFooterProps = ModalSurfaceProps & {
   hasBorder?: boolean
+  parentPadding?: PaddingProps["padding"]
+  containerProps?: FlexProps
 }
 
 export type ModalButtonProps = {
@@ -34,7 +31,7 @@ export type ModalCloseButtonProps = {
   testId?: string
 }
 
-declare const Modal: React.FC<LayerProps>
+declare const Modal: React.FC<LayerProps & { appearance?: "dialog" }>
 declare const ModalContent: React.FC<ModalContentProps>
 declare const ModalHeader: React.FC<ModalHeaderProps>
 declare const ModalBody: React.FC<ModalBodyProps>

@@ -19,8 +19,8 @@ describe("elevation", () => {
   })
 
   it("uses an ink scrim on light and a near-black scrim on dark", () => {
-    expect(scrimColor({ theme: DefaultTheme })).toBe("rgba(53, 65, 74, 0.32)")
-    expect(scrimColor({ theme: DarkTheme })).toBe("rgba(8, 10, 10, 0.6)")
+    expect(scrimColor({ theme: DefaultTheme })).toBe("rgba(57, 65, 60, 0.32)")
+    expect(scrimColor({ theme: DarkTheme })).toBe("rgba(8, 10, 9, 0.6)")
   })
 })
 

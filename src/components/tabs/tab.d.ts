@@ -1,17 +1,26 @@
-import { ChangeEvent, FC } from "react"
+import { CSSProperties, FC, MouseEvent, ReactNode, Ref } from "react"
 
-export interface TabProps {
+import { FlexProps } from "@/components/templates/flex"
+
+export interface TabProps extends FlexProps {
   active?: boolean
   disabled?: boolean
   "data-testid"?: string
   count?: number
   icon?: string
   index?: number
-  label: JSX.Element | string
+  label: ReactNode | ((props: TabProps) => ReactNode)
   maxWidth?: number | string
   minWidth?: number | string
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  onChange?: (index: number, event: MouseEvent<HTMLElement>) => void
   small?: boolean
+  variant?: "line" | "contained"
+  appearance?: "raised" | "neutral"
+  fontSize?: number | string
+  lineHeight?: CSSProperties["lineHeight"]
+  fontWeight?: number | string
+  ref?: Ref<HTMLElement>
+  accent?: boolean
   [s: string]: any
 }
 

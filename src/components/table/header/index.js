@@ -22,6 +22,7 @@ const Header = ({
   bulkActions,
   enableColumnVisibility,
   enableCustomSearch,
+  surface = "mainBackground",
 }) => {
   tableMeta = useMemo(
     () => (typeof tableMeta === "function" ? tableMeta({}, {}, null) : tableMeta),
@@ -42,13 +43,14 @@ const Header = ({
       data-testid="netdata-table-header-container"
       data-noprint
       width="100%"
+      height={{ min: 12 }}
       zIndex={10}
-      background="mainBackground"
+      background={surface}
       position="relative"
       gap={2}
       alignItems="center"
       padding={[2, 4]}
-      border={{ side: "bottom", color: "border" }}
+      border={{ side: "bottom", color: "tableBorder" }}
       flexWrap
       {...tableMeta.bulkActionsStyles}
     >

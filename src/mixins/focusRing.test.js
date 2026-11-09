@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react"
 import "jest-styled-components"
 import { DefaultTheme, DarkTheme } from "@/theme"
 import rawColors from "@/theme/rawColors"
-import { focusRing, fieldFocusRing, focusRingOutline } from "./focusRing"
+import { focusRing, fieldFocusRing, focusRingOutline, focusRingAt } from "./focusRing"
 
 const Ring = styled.button`
   ${focusRing}
@@ -55,4 +55,20 @@ describe("focusRingOutline", () => {
     })
     expect(el).toHaveStyleRule("outline-offset", "2px", { modifier: "input:focus-visible+&" })
   })
+})
+
+it.each([DefaultTheme, DarkTheme])("preserves an explicit inset focus role in $name", theme => {
+  const InsetRing = styled.button`
+    ${focusRingAt({ offset: -2, color: "segmentedFocus", radius: "var(--field-radius)" })}
+  `
+  renderIn(theme, <InsetRing>inset</InsetRing>)
+  const ring = screen.getByRole("button", { name: "inset" })
+  expect(ring).toHaveStyleRule("outline", `2px solid ${theme.colors.segmentedFocus}`, {
+    modifier: ":focus-visible",
+  })
+  expect(ring).toHaveStyleRule("outline-offset", "-2px", { modifier: ":focus-visible" })
+  expect(ring).toHaveStyleRule("border-radius", "var(--field-radius)", {
+    modifier: ":focus-visible",
+  })
+  expect(ring).not.toHaveStyleRule("outline", "none", { modifier: ":focus" })
 })

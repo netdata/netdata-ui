@@ -56,23 +56,23 @@ it("renders headers with strong false as normal weight", () => {
   expect(container.firstChild).toHaveStyleRule("font-weight", "normal")
 })
 
-it("keeps the heading and text size scale unchanged", () => {
+it("renders the heading and text size scale", () => {
   const scale = [
-    [H0, "26px", "32px"],
-    [H1, "24px", "28px"],
-    [H2, "22px", "24px"],
-    [H3, "20px", "24px"],
-    [H4, "16px", "21px"],
-    [H5, "14px", "18px"],
-    [H6, "12px", "14px"],
-    [TextHuge, "24px", "32px"],
-    [TextBigger, "16px", "18px"],
-    [TextBig, "14px", "20px"],
-    [Text, "12px", "16px"],
-    [TextSmall, "11px", "14px"],
-    [TextMicro, "10px", "13px"],
-    [TextNano, "8px", "10px"],
-    [TextFemto, "7px", "8px"],
+    [H0, "27px", "32px"],
+    [H1, "25px", "28px"],
+    [H2, "23px", "26px"],
+    [H3, "21px", "24px"],
+    [H4, "17px", "21px"],
+    [H5, "15px", "18px"],
+    [H6, "13px", "14px"],
+    [TextHuge, "25px", "32px"],
+    [TextBigger, "17px", "18px"],
+    [TextBig, "15px", "20px"],
+    [Text, "13px", "16px"],
+    [TextSmall, "12px", "14px"],
+    [TextMicro, "11px", "13px"],
+    [TextNano, "9px", "10px"],
+    [TextFemto, "8px", "10px"],
   ]
   scale.forEach(([Component, fontSize, lineHeight]) => {
     const { container, unmount } = renderWithProviders(<Component>Typo content</Component>)
@@ -80,6 +80,19 @@ it("keeps the heading and text size scale unchanged", () => {
     expect(container.firstChild).toHaveStyleRule("line-height", lineHeight)
     unmount()
   })
+})
+
+it("preserves explicit font size and line height overrides", () => {
+  const { getByText } = renderWithProviders(
+    <>
+      <Text fontSize="18px">Inherited line box</Text>
+      <TextSmall fontSize="14px" lineHeight="19px">Explicit line box</TextSmall>
+    </>
+  )
+  expect(getByText("Inherited line box")).toHaveStyleRule("font-size", "18px")
+  expect(getByText("Inherited line box")).toHaveStyleRule("line-height", "18px")
+  expect(getByText("Explicit line box")).toHaveStyleRule("font-size", "14px")
+  expect(getByText("Explicit line box")).toHaveStyleRule("line-height", "19px")
 })
 
 it("renders texts as normal weight", () => {

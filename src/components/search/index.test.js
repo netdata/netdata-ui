@@ -199,11 +199,11 @@ describe("Search", () => {
   })
 })
 
-// Round 6 D1: Search follows TextInput on the 28px ladder.
+// Round 6 D1: Search follows TextInput on the 30px ladder.
 describe("Search sizing", () => {
-  it("is 28px tall with 13px text by default", () => {
+  it("is 30px tall with 13px text by default", () => {
     renderWithProviders(<Search placeholder="Search" />)
-    expect(screen.getByRole("textbox")).toHaveStyleRule("height", "28px")
+    expect(screen.getByRole("textbox")).toHaveStyleRule("height", "30px")
     expect(screen.getByRole("textbox")).toHaveStyleRule("font-size", "13px")
   })
 

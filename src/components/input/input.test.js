@@ -23,18 +23,18 @@ describe("TextInput test", () => {
 })
 
 describe("TextInput sizing", () => {
-  // Round 6 D1: fields join the 28px control ladder; tiny and compact are the dense 24px step.
-  it("is 28px tall with 13px text by default", () => {
+  // Round 6 D1: fields join the 30px control ladder; tiny and compact are the dense 24px step.
+  it("is 30px tall with 13px text by default", () => {
     setup()
-    expect(field()).toHaveStyleRule("height", "28px")
+    expect(field()).toHaveStyleRule("height", "30px")
     expect(field()).toHaveStyleRule("font-size", "13px")
     expect(field()).toHaveStyleRule("font-size", "13px", { modifier: "::placeholder" })
   })
 
-  it.each(["small", "large"])("is 28px tall for size %s", size => {
+  it.each(["small", "large"])("is 30px tall for size %s", size => {
     setup({ size })
-    expect(field()).toHaveStyleRule("height", "28px")
-    expect(field()).toHaveStyleRule("padding", "0 10px")
+    expect(field()).toHaveStyleRule("height", "30px")
+    expect(field()).toHaveStyleRule("padding", "0 12px")
   })
 
   it.each(["tiny", "compact"])("is 24px tall with 12px text and an 8px inset for size %s", size => {
@@ -49,9 +49,9 @@ describe("TextInput sizing", () => {
     expect(field()).toHaveStyleRule("height", "32px")
   })
 
-  it("insets text by 10px with a 16px line", () => {
+  it("insets text by 12px with a 16px line", () => {
     setup()
-    expect(field()).toHaveStyleRule("padding", "0 10px")
+    expect(field()).toHaveStyleRule("padding", "0 12px")
     expect(field()).toHaveStyleRule("line-height", "16px")
   })
 
@@ -105,15 +105,15 @@ describe("TextInput states", () => {
     })
   })
 
-  it("is a transparent hairline at rest so it sits on any card surface", () => {
+  it("uses the dedicated control surface at rest", () => {
     setup()
-    expect(field()).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
+    expect(field()).toHaveStyleRule("background-color", colors.controlBackground)
     expect(field()).toHaveStyleRule("border", `1px solid ${colors.controlBorder}`)
   })
 
   it("brings up the element surface on hover", () => {
     setup()
-    expect(field()).toHaveStyleRule("background-color", colors.elementBackground, {
+    expect(field()).toHaveStyleRule("background-color", colors.controlHoverBackground, {
       modifier: ":hover",
     })
   })
@@ -121,7 +121,7 @@ describe("TextInput states", () => {
   it("shows the primary border, the element surface and a soft 3px halo on focus", () => {
     setup()
     expect(field()).toHaveStyleRule("border-color", colors.primary, { modifier: ":focus-visible" })
-    expect(field()).toHaveStyleRule("background-color", colors.elementBackground, {
+    expect(field()).toHaveStyleRule("background-color", colors.controlHoverBackground, {
       modifier: ":focus-visible",
     })
     expect(field()).toHaveStyleRule("box-shadow", `inset 0 0 0 1px ${colors.primary}`, {
@@ -156,7 +156,7 @@ describe("TextInput states", () => {
   it("fades the whole field when disabled", () => {
     setup({ disabled: true })
     expect(field()).toHaveStyleRule("opacity", "0.4")
-    expect(field()).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
+    expect(field()).toHaveStyleRule("background-color", colors.controlBackground)
     expect(field()).toBeDisabled()
   })
 
@@ -173,9 +173,9 @@ describe("TextInput states", () => {
 
   it("uses the dark card hairline instead of a grey slab in dark mode", () => {
     setup({}, { theme: DarkTheme })
-    expect(field()).toHaveStyleRule("background-color", "rgba(255,255,255,0.0)")
+    expect(field()).toHaveStyleRule("background-color", DarkTheme.colors.controlBackground)
     expect(field()).toHaveStyleRule("border", `1px solid ${DarkTheme.colors.controlBorder}`)
-    expect(field()).toHaveStyleRule("background-color", DarkTheme.colors.elementBackground, {
+    expect(field()).toHaveStyleRule("background-color", DarkTheme.colors.controlHoverBackground, {
       modifier: ":hover",
     })
   })

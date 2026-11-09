@@ -98,11 +98,11 @@ describe("ConfirmationDialog component", () => {
 })
 
 describe("ConfirmationDialog styling", () => {
-  test("title stays an h3 and uses the H4 typography step (16px/21px semibold)", () => {
+  test("title stays an h3 and uses the H4 typography step (17px/21px semibold)", () => {
     setup()
     const title = screen.getByTestId("confirmationDialog-headerText")
     expect(title.tagName).toBe("H3")
-    expect(title).toHaveStyleRule("font-size", "16px")
+    expect(title).toHaveStyleRule("font-size", "17px")
     expect(title).toHaveStyleRule("line-height", "21px")
     expect(title).toHaveStyleRule("font-weight", "600")
     expect(title).toHaveStyleRule("color", DefaultTheme.colors.main)

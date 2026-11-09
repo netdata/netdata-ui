@@ -1,14 +1,17 @@
-import { ChangeEvent, FC, ReactNode } from "react"
+import { ComponentType, FC } from "react"
 
 export interface TabsProps {
   className?: string
   "data-testid"?: string
   noDefaultBorder?: boolean
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  selected: boolean
-  TabContent?: ReactNode
-  TabsHeader?: ReactNode
+  onChange?: (index: number) => void
+  selected?: number
+  TabContent?: ComponentType<any>
+  TabsHeader?: ComponentType<any>
   variant?: "line" | "contained"
+  orientation?: "horizontal" | "vertical"
+  appearance?: "raised" | "neutral"
+  accent?: boolean
   [s: string]: any
 }
 

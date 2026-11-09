@@ -45,6 +45,25 @@ export const States = () => (
   </Flex>
 )
 
+export const Outline = () => (
+  <Flex column gap={3}>
+    {["small", "compact"].map(size => (
+      <Flex key={size} gap={6}>
+        <Toggle size={size} variant="outline" checked={false} onChange={noop} labelRight="Off" />
+        <Toggle size={size} variant="outline" checked onChange={noop} labelRight="On" />
+        <Toggle
+          size={size}
+          variant="outline"
+          checked
+          disabled
+          onChange={noop}
+          labelRight="Disabled"
+        />
+      </Flex>
+    ))}
+  </Flex>
+)
+
 export const TwoOptions = () => {
   const [checked, setChecked] = useState(false)
 
@@ -135,7 +154,8 @@ export default {
       control: "object",
     },
     onChange: {
-      description: "Change handler of the underlying checkbox input; read event.currentTarget.checked.",
+      description:
+        "Change handler of the underlying checkbox input; read event.currentTarget.checked.",
       table: { type: { summary: "(e: ChangeEvent<HTMLInputElement>) => void" } },
       action: "onChange",
     },

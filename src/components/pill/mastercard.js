@@ -1,4 +1,5 @@
 import React from "react"
+import omit from "lodash/omit"
 import MasterCardPill from "./mastercardPill"
 import { getMasterCardBackground } from "./mixins/background"
 import { getSegmentRound, SEGMENT_GAP } from "./mixins/segment"
@@ -20,12 +21,11 @@ const MasterCard = ({
   pillEnd,
   round,
   size,
-  zIndex,
   ref,
   ...rest
 }) => {
   const commonProps = { height, size }
-  const pillProps = { normal, ...commonProps, ...rest }
+  const pillProps = { normal, ...commonProps, ...omit(rest, "zIndex") }
   const minWidth = { min: minWidths[size] || minWidths.default }
   const count = pillEnd ? 3 : 2
 

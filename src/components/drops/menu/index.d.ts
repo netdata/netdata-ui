@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react"
 import { DropProps } from "../drop"
+import { DropdownSelectionStyle } from "../dropdownStyles"
 
 export interface Item {
   value?: string | number
@@ -13,6 +14,7 @@ export type RenderItemType = (props: {
   item: Item
   value: string | number
   onItemClick: Function
+  selectionStyle?: DropdownSelectionStyle
 }) => JSX.Element
 
 export interface MenuProps {
@@ -25,6 +27,7 @@ export interface MenuProps {
   icon?: JSX.Element
   label?: ReactNode
   caret?: boolean | JSX.Element
+  selectionStyle?: DropdownSelectionStyle
   children?: ReactNode
   dropProps?: DropProps
   dropdownProps?: {
@@ -37,6 +40,7 @@ export interface MenuProps {
     value: string | number
     onItemClick: Function
     Item: RenderItemType
+    selectionStyle?: DropdownSelectionStyle
   }) => JSX.Element
 
   [key: string]: any

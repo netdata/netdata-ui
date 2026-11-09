@@ -1,7 +1,7 @@
 import React, { Children, isValidElement, cloneElement } from "react"
 import Flex from "@/components/templates/flex"
 import { Button } from "./button"
-import { SegmentedTrack, SegmentedItem } from "./segmented"
+import { SegmentedTrack, SegmentedItem, RaisedSegmentedItem } from "./segmented"
 
 const noop = () => {}
 
@@ -42,23 +42,38 @@ const nextValue = (item, value, isMulti) => {
   return value.includes(item.value) ? value.filter(v => v !== item.value) : [...value, item.value]
 }
 
-const SegmentedItems = ({ items, value, isMulti, buttonProps = {}, onChange }) =>
-  items.map(item => {
+const SegmentedItems = ({
+  items,
+  value,
+  isMulti,
+  appearance,
+  compact,
+  buttonProps = {},
+  onChange,
+}) => {
+  const Item = appearance === "raised" ? RaisedSegmentedItem : SegmentedItem
+  return items.map(item => {
     const isSelected = isItemSelected(item, value)
+    const callerProps = { ...buttonProps, ...item.buttonProps }
+    const isAriaDisabled =
+      callerProps["aria-disabled"] === true || callerProps["aria-disabled"] === "true"
     return (
-      <SegmentedItem
-        key={item.value}
+      <Item
+        key={String(item.value)}
+        compact={compact}
         active={isSelected}
         aria-pressed={isSelected}
-        onClick={() => onChange(nextValue(item, value, isMulti))}
+        onClick={() => {
+          if (!isAriaDisabled) onChange(nextValue(item, value, isMulti))
+        }}
         {...(item.title ? { title: item.title } : {})}
-        {...buttonProps}
-        {...item.buttonProps}
+        {...callerProps}
       >
         {item.label}
-      </SegmentedItem>
+      </Item>
     )
   })
+}
 
 const RadioButtons = ({
   items,
@@ -107,10 +122,12 @@ export const ButtonGroup = ({
   ButtonComponent,
   buttonProps,
   variant,
+  appearance,
+  compact,
   ...props
 }) =>
   variant === "segmented" ? (
-    <SegmentedTrack role="group" {...props}>
+    <SegmentedTrack role="group" appearance={appearance} compact={compact} {...props}>
       {items?.length ? (
         <SegmentedItems
           items={items}
@@ -118,6 +135,8 @@ export const ButtonGroup = ({
           isMulti={isMulti}
           onChange={onChange}
           buttonProps={buttonProps}
+          appearance={appearance}
+          compact={compact}
         />
       ) : (
         children

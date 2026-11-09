@@ -21,7 +21,7 @@ const dataColumns = [
 ]
 
 const selectedTint = getRgbColor("primary", 0.1)({ theme: DefaultTheme })
-const depthTint = "rgba(53, 65, 74, 0.03)"
+const depthTint = "rgba(45, 62, 51, 0.03)"
 const selectedRule = { modifier: '[data-selected="true"]>*>.row-content' }
 const railRule = { modifier: '[data-selected="true"]>*>.row-content:first-child' }
 const depthRule = { modifier: "[data-depth]>*>.row-content" }
@@ -49,6 +49,33 @@ describe.each([
   ["flex cells", {}],
   ["direct cells", { virtualizeOptions: { directCellContent: true } }],
 ])("Table row states with %s", (_, extraProps) => {
+  it("centers cell contents without fixing their height", async () => {
+    renderRows(extraProps)
+
+    const cell = (await rowByText("db")).querySelector('[data-testid="netdata-table-cell-name"]')
+    if (extraProps.virtualizeOptions?.directCellContent) {
+      expect(cell).toHaveStyle({ alignItems: "center" })
+      expect(cell.style.height).toBe("")
+    } else {
+      expect(cell).toHaveStyleRule("align-items", "center")
+      expect(cell).not.toHaveStyleRule("height")
+    }
+  })
+
+  it("preserves an explicit vertical cell alignment", async () => {
+    renderRows({
+      ...extraProps,
+      dataColumns: [{ ...dataColumns[0], align: "start" }],
+    })
+
+    const cell = (await rowByText("db")).querySelector('[data-testid="netdata-table-cell-name"]')
+    if (extraProps.virtualizeOptions?.directCellContent) {
+      expect(cell).toHaveStyle({ alignItems: "flex-start" })
+    } else {
+      expect(cell).toHaveStyleRule("align-items", "flex-start")
+    }
+  })
+
   it("marks only selected rows", async () => {
     renderRows({ rowSelection: { db: true }, ...extraProps })
 
@@ -98,6 +125,6 @@ describe("Table row hover", () => {
     expect(row).toHaveStyleRule("background-color", rawColors.neutral.grey190, {
       modifier: ":hover",
     })
-    expect(row).toHaveStyleRule("border-bottom", `1px solid ${rawColors.neutral.grey180}`)
+    expect(row).toHaveStyleRule("border-bottom", `1px solid ${DefaultTheme.colors.tableBorder}`)
   })
 })

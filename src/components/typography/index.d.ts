@@ -16,7 +16,8 @@ import {
 } from "./mixins"
 
 export interface TypographyProps
-  extends StyledComponentProps,
+  extends
+    StyledComponentProps,
     AlignSelfProps,
     TextAlignType,
     TextDecorationType,
@@ -26,6 +27,7 @@ export interface TypographyProps
     MarginProps,
     PaddingProps,
     OpacityProps {
+  monospace?: boolean
   strong?: boolean
   color?: ColorType
   truncate?: boolean
