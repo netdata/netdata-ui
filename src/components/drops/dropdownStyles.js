@@ -5,9 +5,28 @@ export const dropdownBorder = { side: "all", size: "1px", type: "solid", color: 
 
 export const dropdownRound = 1.5
 export const insetMenuRound = 3
+export const insetMenuPadding = 3
 export const insetMenuRowRound = 1.75
 export const menuSelectionMarker = ({ theme }) =>
   `inset ${getSizeBy(0.375)({ theme })} 0 0 ${getColor("primary")({ theme })}`
+
+export const getDropdownOptionColors = (theme, selectionStyle = "marker", surface = "dropdown") => {
+  const { colors } = theme
+  if (selectionStyle !== "quiet") {
+    return {
+      hover: colors.menuItemHover,
+      selected: colors.menuItemSelected,
+      selectedHover: colors.menuItemSelectedHover,
+      selectedText: colors.menuItemSelectedText,
+    }
+  }
+
+  const background = colors[surface] || colors.dropdown
+  const contrast = colors.neutral[theme.name === "Dark" ? "white" : "black"]
+  const mix = amount => `color-mix(in srgb, ${background}, ${contrast} ${amount}%)`
+
+  return { hover: mix(9), selected: mix(14), selectedHover: mix(18), selectedText: colors.text }
+}
 
 export const withDropdownDefaults = props =>
   props.background === "dropdown"

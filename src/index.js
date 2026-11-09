@@ -70,12 +70,18 @@ export { default as TooltipInk } from "./components/drops/tooltip/tooltipInk"
 export { default as Popover } from "./components/drops/popover"
 export { default as Menu } from "./components/drops/menu"
 export { default as MenuDropdown } from "./components/drops/menu/dropdown"
+export { default as DropdownSelectionCheck } from "./components/drops/dropdownSelectionCheck"
 export {
   default as MenuDropdownItem,
   ItemContainer as MenuItemContainer,
 } from "./components/drops/menu/dropdownItem"
 export { default as MenuButton } from "./components/drops/menu/menuButton"
-export { dropdownBorder, dropdownRound, insetMenuRound } from "./components/drops/dropdownStyles"
+export {
+  dropdownBorder,
+  dropdownRound,
+  getDropdownOptionColors,
+  insetMenuRound,
+} from "./components/drops/dropdownStyles"
 
 export { default as Flex } from "./components/templates/flex"
 export { default as makeFlex } from "./components/templates/flex/flex"

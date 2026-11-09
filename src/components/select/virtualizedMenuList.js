@@ -7,6 +7,8 @@ import React, {
   useRef,
 } from "react"
 import { useVirtualizer } from "@tanstack/react-virtual"
+import { useTheme } from "styled-components"
+import { insetMenuPadding } from "@/components/drops/dropdownStyles"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils/mergeRefs"
 import { virtualRangeWithIndex } from "@/utils/virtualRangeWithIndex"
@@ -33,10 +35,14 @@ const VirtualizedMenuList = ({ MenuList, children, innerRef, innerProps, ...prop
   )
   const focusedOption = items[focused]?.props?.isFocused
   const estimate = props.selectProps.estimatedOptionHeight ?? 35
+  const inset = props.selectProps.insetMenuContent ? insetMenuPadding : 0
+  const padding = inset * useTheme().constants.SIZE_SUB_UNIT
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => scrollRef.current,
     estimateSize: () => estimate,
+    paddingStart: padding,
+    paddingEnd: padding,
     overscan: 5,
     rangeExtractor: range => virtualRangeWithIndex(range, focused),
   })
@@ -70,23 +76,25 @@ const VirtualizedMenuList = ({ MenuList, children, innerRef, innerProps, ...prop
         },
       }}
     >
-      <Box position="relative" height={`${virtualizer.getTotalSize()}px`}>
-        {virtualizer.getVirtualItems().map(row => (
-          <Box
-            key={row.key}
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            ref={virtualizer.measureElement}
-            data-index={row.index}
-            style={{ transform: `translateY(${row.start}px)` }}
-          >
-            {isValidElement(items[row.index]) && "innerRef" in items[row.index].props
-              ? cloneElement(items[row.index], { innerRef: undefined })
-              : items[row.index]}
-          </Box>
-        ))}
+      <Box padding={[0, inset]}>
+        <Box position="relative" height={`${virtualizer.getTotalSize()}px`}>
+          {virtualizer.getVirtualItems().map(row => (
+            <Box
+              key={row.key}
+              position="absolute"
+              top={0}
+              left={0}
+              right={0}
+              ref={virtualizer.measureElement}
+              data-index={row.index}
+              style={{ transform: `translateY(${row.start}px)` }}
+            >
+              {isValidElement(items[row.index]) && "innerRef" in items[row.index].props
+                ? cloneElement(items[row.index], { innerRef: undefined })
+                : items[row.index]}
+            </Box>
+          ))}
+        </Box>
       </Box>
     </MenuList>
   )

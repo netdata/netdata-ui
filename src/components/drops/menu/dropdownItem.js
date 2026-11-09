@@ -3,18 +3,28 @@ import styled, { css } from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
-import { insetMenuRowRound, menuSelectionMarker } from "../dropdownStyles"
+import { getDropdownOptionColors, insetMenuRowRound, menuSelectionMarker } from "../dropdownStyles"
+import DropdownSelectionCheck from "../dropdownSelectionCheck"
 
 const Label = styled(TextSmall)`
   min-width: 0;
 `
 
-export const ItemContainer = styled(Flex).attrs(props => ({
+const optionColor =
+  state =>
+  ({ theme, "data-selection-style": selectionStyle }) =>
+    getDropdownOptionColors(theme, selectionStyle)[state]
+
+export const ItemContainer = styled(Flex).attrs(({ selectionStyle, ...props }) => ({
   as: "li",
   role: "option",
   padding: [2, 2.5],
   round: props.justDesc ? undefined : insetMenuRowRound,
-  color: props.selected ? "menuItemSelectedText" : "text",
+  color: props.selected
+    ? getDropdownOptionColors(props.theme, selectionStyle).selectedText
+    : "text",
+  "data-selection-style": selectionStyle,
+  selectionStyle: undefined,
   ...props,
 }))`
   ${({ alignItems }) => !alignItems && "align-items: center;"}
@@ -29,7 +39,7 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   transition: background-color 120ms ease-out;
 
   &:hover {
-    background-color: ${getColor("menuItemHover")};
+    background-color: ${optionColor("hover")};
   }
 
   ${({ justDesc, theme }) =>
@@ -42,14 +52,17 @@ export const ItemContainer = styled(Flex).attrs(props => ({
     }
   `}
 
-  ${({ selected }) =>
+  ${({ selected, "data-selection-style": selectionStyle }) =>
     selected &&
     css`
-      background-color: ${getColor("menuItemSelected")};
-      box-shadow: ${menuSelectionMarker};
+      background-color: ${optionColor("selected")};
+      ${selectionStyle !== "quiet" &&
+      css`
+        box-shadow: ${menuSelectionMarker};
+      `}
 
       &:hover {
-        background-color: ${getColor("menuItemSelectedHover")};
+        background-color: ${optionColor("selectedHover")};
       }
     `}
 
@@ -57,8 +70,8 @@ export const ItemContainer = styled(Flex).attrs(props => ({
   &:focus-visible,
   &[data-focused="true"] {
     outline: none;
-    box-shadow: ${({ selected }) =>
-        selected
+    box-shadow: ${({ selected, "data-selection-style": selectionStyle }) =>
+        selected && selectionStyle !== "quiet"
           ? css`
               ${menuSelectionMarker},
             `
@@ -72,14 +85,15 @@ export const ItemContainer = styled(Flex).attrs(props => ({
 `
 
 const DropdownItem = ({
-  item: { value, label, icon, reverse, disabled, onClick, ...restItem },
+  item: { value, label, icon, reverse, disabled, onClick, justDesc, ...restItem },
   value: selectedValue,
   onItemClick,
   index,
   style,
+  selectionStyle,
   ...rest
 }) => {
-  const selected = selectedValue === value
+  const selected = value !== undefined && selectedValue === value && !justDesc
 
   const name = (
     <Label
@@ -103,6 +117,8 @@ const DropdownItem = ({
       gap={2}
       disabled={disabled}
       selected={selected}
+      selectionStyle={selectionStyle}
+      justDesc={justDesc}
       onClick={onSelect}
       {...restItem}
       {...rest}
@@ -111,6 +127,7 @@ const DropdownItem = ({
       {reverse && name}
       {icon}
       {!reverse && name}
+      {selected && selectionStyle === "quiet" && <DropdownSelectionCheck />}
     </ItemContainer>
   )
 }

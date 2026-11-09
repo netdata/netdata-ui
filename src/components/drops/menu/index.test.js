@@ -113,6 +113,32 @@ it("announces the popup state on the trigger", () => {
   expect(trigger).toHaveAttribute("aria-expanded", "true")
 })
 
+it("shows the selected option with a trailing check in a quiet menu", async () => {
+  const { getByText, findByRole } = render({ selectionStyle: "quiet", value: "durgen" })
+
+  fireEvent.click(getByText("character"))
+  const option = await findByRole("option", { name: "Tyler Durden" })
+
+  expect(option).toHaveAttribute("aria-selected", "true")
+  expect(option.lastElementChild?.getAttribute("aria-hidden")).toBe("true")
+  expect(option).not.toHaveStyleRule("box-shadow", expect.stringContaining("inset 3px"))
+})
+
+it("keeps section labels and commands without a value unselected", async () => {
+  const { getByText, findByRole } = render({
+    items: [{ justDesc: true, label: "Actions" }, { label: "Refresh" }],
+  })
+
+  fireEvent.click(getByText("character"))
+
+  expect((await findByRole("option", { name: "Actions" })).getAttribute("aria-selected")).toBe(
+    "false"
+  )
+  expect((await findByRole("option", { name: "Refresh" })).getAttribute("aria-selected")).toBe(
+    "false"
+  )
+})
+
 describe("MenuButton", () => {
   it("aligns the default trigger with other 30px controls", () => {
     const { getByRole } = render()

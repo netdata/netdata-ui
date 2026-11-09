@@ -122,6 +122,47 @@ describe("Select", () => {
       )
     })
 
+    it.each([
+      ["light", DefaultTheme, "black"],
+      ["dark", DarkTheme, "white"],
+    ])(
+      "shows quiet choices with a check and neutral keyboard focus in %s",
+      async (_, theme, ink) => {
+        setup({ defaultValue: options[1], selectionStyle: "quiet" }, { theme })
+        const u = await openMenu()
+        const selected = screen.getAllByTestId("selOption").find(el => el.textContent === "Two")
+        const { dropdown, neutral, text } = theme.colors
+        const mix = amount =>
+          `color-mix(in srgb, ${rgb(dropdown)} ${100 - amount}%, ${rgb(neutral[ink])})`
+
+        expect(style(selected).backgroundColor).toBe(mix(18))
+        expect(style(selected).color).toBe(rgb(text))
+        expect(style(selected).boxShadow).toBe("none")
+        expect(selected.lastElementChild?.getAttribute("aria-hidden")).toBe("true")
+
+        await u.keyboard("{ArrowDown}")
+        expect(style(selected).backgroundColor).toBe(mix(14))
+        expect(style(document.querySelector(".rs__option--is-focused")).backgroundColor).toBe(
+          mix(9)
+        )
+      }
+    )
+
+    it("uses passive checkboxes for quiet multi-choice options", async () => {
+      setup({
+        defaultValue: [options[1]],
+        hideSelectedOptions: false,
+        isMulti: true,
+        selectionStyle: "quiet",
+      })
+      await openMenu()
+
+      const option = name => screen.getAllByTestId("selOption").find(el => el.textContent === name)
+      expect(option("One").firstElementChild?.getAttribute("data-state")).toBe("unchecked")
+      expect(option("Two").firstElementChild?.getAttribute("data-state")).toBe("checked")
+      expect(option("Two").firstElementChild?.getAttribute("aria-hidden")).toBe("true")
+    })
+
     it("highlights the keyboard-focused option", async () => {
       setup()
       const u = await openMenu()
@@ -166,6 +207,10 @@ describe("Select", () => {
       await openMenu()
       expect(style(screen.getByTestId("selMenu")).marginTop).toBe("4px")
       const [option] = screen.getAllByTestId("selOption")
+      const scrollViewport = screen.getByTestId("selMenuList")
+      expect(style(scrollViewport).padding).toBe("0px")
+      expect(style(scrollViewport).overflowX).toBe("hidden")
+      expect(style(scrollViewport.firstElementChild).padding).toBe("0px 12px")
       expect(style(option).padding).toBe("8px 10px")
       expect(style(option).borderRadius).toBe("7px")
       expect(style(option).minHeight).toBe("34px")
@@ -254,6 +299,15 @@ describe("Select", () => {
     it("lets consumer styles override internal ones", () => {
       setup({ styles: { control: base => ({ ...base, borderRadius: "10px" }) } })
       expect(style(screen.getByTestId("selControl")).borderRadius).toBe("10px")
+    })
+
+    it("keeps consumer menuList padding overrides", async () => {
+      setup({ styles: { menuList: base => ({ ...base, padding: "6px" }) } })
+      await openMenu()
+
+      const scrollViewport = screen.getByTestId("selMenuList")
+      expect(style(scrollViewport).padding).toBe("6px")
+      expect(style(scrollViewport.firstElementChild).padding).toBe("0px")
     })
 
     it("respects a consumer minWidth", () => {

@@ -30,6 +30,7 @@ const Menu = ({
   dropTitle,
   dropTitlePadding,
   hasSearch = false,
+  selectionStyle,
   ref: parentRef,
   ...rest
 }) => {
@@ -106,6 +107,7 @@ const Menu = ({
             Footer={Footer}
             hasSearch={hasSearch}
             close={close}
+            {...(selectionStyle && { selectionStyle })}
             {...dropdownProps}
           />
         </Drop>

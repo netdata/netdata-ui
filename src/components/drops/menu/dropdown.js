@@ -6,7 +6,7 @@ import { Text } from "@/components/typography"
 import Search from "@/components/search"
 import Box from "@/components/templates/box"
 import { mergeRefs } from "@/utils"
-import { dropdownBorder, floatingShadow, insetMenuRound } from "../dropdownStyles"
+import { dropdownBorder, floatingShadow, insetMenuPadding, insetMenuRound } from "../dropdownStyles"
 
 const Container = styled(Flex)`
   ${({ hideShadow }) => !hideShadow && floatingShadow}
@@ -32,6 +32,7 @@ const DefaultNoSearchResultsComponent = () => {
 const Dropdown = ({
   hideShadow,
   itemProps,
+  selectionStyle,
   items,
   onItemClick,
   dropTitle,
@@ -43,6 +44,7 @@ const Dropdown = ({
   renderComponent,
   searchMargin = [0, 0, 2],
   gap = 0,
+  padding = [insetMenuPadding],
   estimateSize = defaultEstimateSize,
   close,
   containerRef,
@@ -52,6 +54,7 @@ const Dropdown = ({
   ...rest
 }) => {
   const [searchValue, setSearchValue] = useState("")
+  const [top = 0, right = top, bottom = top, left = right] = padding || []
 
   const filteredItems = useMemo(() => {
     if (!searchValue) return items
@@ -87,7 +90,6 @@ const Dropdown = ({
       border={dropdownBorder}
       round={insetMenuRound}
       hideShadow={hideShadow}
-      padding={[3]}
       margin={[1, 0]}
       column
       tabindex="-1"
@@ -95,52 +97,57 @@ const Dropdown = ({
       ref={containerRef}
       {...rest}
     >
-      {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}
-      {hasSearch && (
-        <Box margin={searchMargin}>
-          <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
-        </Box>
-      )}
-      {typeof renderComponent === "function" && renderComponent({ searchValue, filteredItems })}
-      {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
-        <NoSearchResultsComponent />
-      ) : null}
+      <Box padding={[top, right, 0, left]}>
+        {dropTitle && <Flex padding={dropTitlePadding}>{dropTitle}</Flex>}
+        {hasSearch && (
+          <Box margin={searchMargin}>
+            <Search data-testid="dropdown-search" placeholder="Search" onChange={setSearchValue} />
+          </Box>
+        )}
+        {typeof renderComponent === "function" && renderComponent({ searchValue, filteredItems })}
+        {showNoSearchResults && filteredItems.length === 0 && searchValue ? (
+          <NoSearchResultsComponent />
+        ) : null}
+      </Box>
       <ItemList ref={mergeRefs(ref, forwardedRef)}>
-        <div
-          style={{
-            minHeight: `${rowVirtualizer.getTotalSize()}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map(virtualRow => (
-            <div
-              key={virtualRow.key}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                transform: `translateY(${virtualRow.start}px)`,
-                padding: gap * 2,
-                overflow: "hidden",
-              }}
-              data-index={virtualRow.index}
-              ref={rowVirtualizer.measureElement}
-            >
-              <Item
-                item={filteredItems[virtualRow.index]}
-                index={virtualRow.index}
-                itemProps={itemProps}
-                value={value}
-                onItemClick={onItemClick}
-                close={close}
-              />
-            </div>
-          ))}
-        </div>
+        <Box padding={[0, right, 0, left]}>
+          <div
+            style={{
+              minHeight: `${rowVirtualizer.getTotalSize()}px`,
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map(virtualRow => (
+              <div
+                key={virtualRow.key}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  transform: `translateY(${virtualRow.start}px)`,
+                  padding: gap * 2,
+                  overflow: "hidden",
+                }}
+                data-index={virtualRow.index}
+                ref={rowVirtualizer.measureElement}
+              >
+                <Item
+                  item={filteredItems[virtualRow.index]}
+                  index={virtualRow.index}
+                  itemProps={itemProps}
+                  value={value}
+                  onItemClick={onItemClick}
+                  close={close}
+                  {...(selectionStyle && { selectionStyle })}
+                />
+              </div>
+            ))}
+          </div>
+        </Box>
       </ItemList>
-      {Footer && <Footer close={close} />}
+      <Box padding={[0, right, bottom, left]}>{Footer && <Footer close={close} />}</Box>
     </Container>
   )
 }

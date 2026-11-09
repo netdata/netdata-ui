@@ -128,6 +128,26 @@ describe("DropdownItem row styles", () => {
     expect(option()).toHaveStyleRule("box-shadow", "inset 3px 0 0 #00AB44")
   })
 
+  it.each([
+    ["light", DefaultTheme, "black"],
+    ["dark", DarkTheme, "white"],
+  ])("uses neutral row states in a quiet custom option in %s", (_, theme, ink) => {
+    renderWithProviders(
+      <ItemContainer selectionStyle="quiet" selected>
+        row
+      </ItemContainer>,
+      { theme }
+    )
+
+    const { dropdown, neutral, text } = theme.colors
+    const mix = amount => `color-mix(in srgb, ${dropdown}, ${neutral[ink]} ${amount}%)`
+    expect(option()).toHaveStyleRule("color", text)
+    expect(option()).toHaveStyleRule("background-color", mix(14))
+    expect(option()).toHaveStyleRule("background-color", mix(18), { modifier: ":hover" })
+    expect(option()).not.toHaveStyleRule("box-shadow", expect.stringContaining("inset 3px"))
+    expect(option().querySelector("svg")).toBeNull()
+  })
+
   it("fades and disables disabled rows", () => {
     renderItem({ value: "memory", item: { disabled: true } })
 

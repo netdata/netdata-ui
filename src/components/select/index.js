@@ -3,9 +3,13 @@ import styled from "styled-components"
 import ReactSelect, { components as defaultComponents } from "react-select"
 import Creatable from "react-select/creatable"
 import { Icon } from "@/components/icon"
+import { CheckboxIndicator } from "@/components/checkbox"
+import DropdownSelectionCheck from "@/components/drops/dropdownSelectionCheck"
 import VirtualizedMenuList from "./virtualizedMenuList"
 import {
   floatingShadowValue,
+  getDropdownOptionColors,
+  insetMenuPadding,
   insetMenuRound,
   insetMenuRowRound,
   menuSelectionMarker,
@@ -58,13 +62,18 @@ const OptionLabel = styled.span`
 `
 
 const Option = props => {
-  const { children, data, innerProps } = props
+  const { children, data, innerProps, isMulti, isSelected, selectProps } = props
   const title = typeof children === "string" ? children : undefined
+  const quiet = selectProps.selectionStyle === "quiet"
 
   return (
     <OriginalOption {...props} innerProps={title ? { ...innerProps, title } : innerProps}>
+      {quiet && isMulti && (
+        <CheckboxIndicator checked={isSelected} margin={[0, 2, 0, 0]} flex="none" />
+      )}
       {data.icon && <Icon name={data.icon} color="textLite" margin={[0, 1, 0, 0]} flex="none" />}
       {title ? <OptionLabel>{children}</OptionLabel> : children}
+      {quiet && !isMulti && isSelected && <DropdownSelectionCheck />}
     </OriginalOption>
   )
 }
@@ -132,17 +141,16 @@ const makeCustomTheme = theme => selectTheme => {
   }
 }
 
-const getOptionColor = (theme, state) => {
+const getOptionColor = (theme, optionColors, state) => {
   if (state.isDisabled) return theme.colors.placeholder
-  if (state.isSelected) return theme.colors.menuItemSelectedText
+  if (state.isSelected) return optionColors.selectedText
   return theme.colors.text
 }
 
 // Keyboard navigation sets isFocused without a hover, so the highlight must follow focus, not :hover.
-const getOptionBackground = (theme, state) => {
-  if (state.isSelected)
-    return state.isFocused ? theme.colors.menuItemSelectedHover : theme.colors.menuItemSelected
-  return state.isFocused && !state.isDisabled ? theme.colors.menuItemHover : "transparent"
+const getOptionBackground = (optionColors, state) => {
+  if (state.isSelected) return state.isFocused ? optionColors.selectedHover : optionColors.selected
+  return state.isFocused && !state.isDisabled ? optionColors.hover : "transparent"
 }
 
 const fontSizeOf = theme => controlFontSize("default")({ theme })
@@ -157,7 +165,8 @@ const getControlBorder = (theme, state) => {
   return theme.colors.controlBorder
 }
 
-const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
+const makeCustomStyles = (theme, selectionStyle, { minWidth, ...providedStyles } = {}) => {
+  const optionColors = getDropdownOptionColors(theme, selectionStyle)
   const fontSize = fontSizeOf(theme)
   const minHeight = Number.parseFloat(controlHeight("default")({ theme }))
   const innerMinHeight = minHeight - 2
@@ -202,9 +211,11 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       overflow: "hidden",
       zIndex: 100,
     }),
-    menuList: styles => ({
+    menuList: (styles, { selectProps }) => ({
       ...styles,
-      padding: sizeBy(theme, 1.5),
+      padding: selectProps.insetMenuContent
+        ? 0
+        : `${insetMenuPadding * theme.constants.SIZE_SUB_UNIT}px`,
       overflowX: "hidden",
     }),
     menuPortal: styles => ({ ...styles, zIndex: 9999 }),
@@ -248,16 +259,17 @@ const makeCustomStyles = (theme, { minWidth, ...providedStyles } = {}) => {
       ...styles,
       display: "flex",
       alignItems: "center",
-      color: getOptionColor(theme, state),
-      backgroundColor: getOptionBackground(theme, state),
+      color: getOptionColor(theme, optionColors, state),
+      backgroundColor: getOptionBackground(optionColors, state),
       borderRadius: insetMenuRowRound * theme.constants.SIZE_SUB_UNIT,
-      boxShadow: state.isSelected ? menuSelectionMarker({ theme }) : "none",
+      boxShadow:
+        state.isSelected && selectionStyle !== "quiet" ? menuSelectionMarker({ theme }) : "none",
       fontWeight: state.isSelected ? 500 : 400,
       // The placeholder colour is close to body text, so disabled options also fade like other disabled controls.
       opacity: state.isDisabled ? 0.4 : 1,
       cursor: state.isDisabled ? "not-allowed" : "pointer",
       ":active": {
-        backgroundColor: state.isDisabled ? "transparent" : theme.colors.menuItemSelected,
+        backgroundColor: state.isDisabled ? "transparent" : optionColors.selected,
       },
       fontSize,
       lineHeight,
@@ -300,9 +312,10 @@ const components = { ...customComponents, MenuList }
 
 const getAttrs = props => ({
   ...props,
+  insetMenuContent: !props.styles?.menuList && !props.components?.MenuList,
   components: props.components ? { ...components, ...props.components } : components,
   theme: makeCustomTheme(props.theme),
-  styles: makeCustomStyles(props.theme, props.styles),
+  styles: makeCustomStyles(props.theme, props.selectionStyle, props.styles),
 })
 
 const SelectComponent = styled(ReactSelect).attrs(getAttrs)``
