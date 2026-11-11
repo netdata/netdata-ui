@@ -106,14 +106,14 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "rimraf": "^6.1.4",
-    "sass-loader": "^16.0.7",
+    "sass-loader": "^17.1.0",
     "storybook": "10.6.6",
     "styled-components": "^6.3.10",
     "svg-sprite-loader": "^6.0.11",
-    "svgo-loader": "^4.0.0",
+    "svgo-loader": "^5.0.0",
     "typescript": "^6.0.3",
     "url-loader": "^4.1.1",
     "webpack": "^5.112.2",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^7.3.1"
   }
 }
