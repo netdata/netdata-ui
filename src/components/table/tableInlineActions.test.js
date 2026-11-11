@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, user } from "testUtilities"
 import Table from "./table"
 

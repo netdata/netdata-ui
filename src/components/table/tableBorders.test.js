@@ -1,4 +1,3 @@
-import React from "react"
 import "jest-styled-components"
 import { fireEvent, renderWithProviders, screen } from "testUtilities"
 import { DefaultTheme } from "@/theme"

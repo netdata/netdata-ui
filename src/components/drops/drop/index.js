@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react"
+import { useLayoutEffect } from "react"
 import ReactDOM from "react-dom"
 import Box from "@/components/templates/box"
 import useDropElement from "@/hooks/useDropElement"

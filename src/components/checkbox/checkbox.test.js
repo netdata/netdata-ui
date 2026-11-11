@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, user, screen } from "testUtilities"
 import { css } from "styled-components"
 import { DarkTheme } from "@/theme/dark"

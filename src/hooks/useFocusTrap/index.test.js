@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { render, screen, userEvent } from "testUtilities"
 import { getFocusCandidates, useFocusTrap } from "."
 

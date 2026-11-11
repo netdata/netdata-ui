@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import Drop from "@/components/drops/drop"
 import Container from "@/components/drops/container"
 import dropAlignMap from "@/components/drops/mixins/dropAlignMap"

@@ -1,5 +1,4 @@
 // Proposed StatusDot: the Pill dot (src/components/pill/dot.js) usable on its own.
-import React from "react"
 import styled, { css, keyframes } from "styled-components"
 import Box from "@/components/templates/box"
 import { getColor } from "@/theme"

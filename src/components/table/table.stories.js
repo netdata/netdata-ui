@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Table from "./table"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

@@ -1,4 +1,3 @@
-import React from "react"
 import { Button } from "@/components/button"
 import { H4 } from "@/components/typography"
 import Flex from "@/components/templates/flex"

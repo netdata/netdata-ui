@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import Flex from "@/components/templates/flex"
 import { Checkbox } from "@/components/checkbox"
 import { Toggle } from "@/components/toggle"

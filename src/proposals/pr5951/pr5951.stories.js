@@ -1,6 +1,6 @@
 // Faithful copies of the custom elements added in cloud-frontend PR 5951 (Dyncfg rework). Raw hex/px values
 // in this folder are deliberate so the review shows the PR as written; do not reuse them as netdata-ui code.
-import React, { useState } from "react"
+import { useState } from "react"
 import Flex from "@/components/templates/flex"
 import { Icon } from "@/components/icon"
 import { Text, TextSmall } from "@/components/typography"

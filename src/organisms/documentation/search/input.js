@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback } from "react"
 import useDebounce from "@/hooks/useDebounce"
 import { TextInput } from "@/components/input"
 import { Icon } from "@/components/icon"

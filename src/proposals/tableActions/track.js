@@ -1,5 +1,4 @@
 // Proposal-only pill track that groups header and bulk chips, after the topbar trigger.
-import React from "react"
 import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"
 import Box from "@/components/templates/box"

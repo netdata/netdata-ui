@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import { Fragment } from "react"
 import { Text } from "@/components/typography"
 import Section, { Container } from "./section"
 

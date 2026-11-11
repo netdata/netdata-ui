@@ -1,6 +1,5 @@
 // Proposed Pill additions (soft look, leading dot, status word, mark counts), adapted from the PR's
 // StatePill / StatusWord / MarkCounts onto netdata-ui flavours and theme tokens.
-import React from "react"
 import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"
 import Box from "@/components/templates/box"

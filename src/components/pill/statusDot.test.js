@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen } from "testUtilities"
 import { DarkTheme, DefaultTheme } from "@/theme"
 import { StatusDot } from "./index"

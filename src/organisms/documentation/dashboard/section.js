@@ -1,4 +1,3 @@
-import React from "react"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
 import { Icon } from "@/components/icon"

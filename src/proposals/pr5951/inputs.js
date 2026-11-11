@@ -1,6 +1,6 @@
 // Copied from PR 5951: switchTrack.js + widgets/switchWidget.js, configItem/rowCheckbox.js,
 // workspace/filterInput.js, filters/activeFilters.js, workspace/styled.js.
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import styled, { css } from "styled-components"
 import Box from "@/components/templates/box"
 import { Icon } from "@/components/icon"

@@ -1,6 +1,5 @@
 // Simulations: styled wrappers that override the real Button, IconButton, SearchInput and Select
 // metrics, so the proposed ladder can be judged before any component changes.
-import React from "react"
 import styled, { css } from "styled-components"
 import Box from "@/components/templates/box"
 import { Button, IconButton } from "@/components/button"

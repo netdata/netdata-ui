@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, act, screen, fireEvent, userEvent } from "testUtilities"
 import { DefaultTheme } from "@/theme"
 import { PortalSidebar } from "./portaled-sidebar"

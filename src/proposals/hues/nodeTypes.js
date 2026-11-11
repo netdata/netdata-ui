@@ -1,5 +1,4 @@
 // Story-only replica of the CF Overview "Total Nodes" distributions row, with node-type hue options.
-import React from "react"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"
 import { Distribution, useIsDark } from "./distribution"

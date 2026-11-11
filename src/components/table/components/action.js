@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useImperativeHandle } from "react"
+import { useState, useMemo, useImperativeHandle } from "react"
 import Tooltip from "@/components/drops/tooltip"
 import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"

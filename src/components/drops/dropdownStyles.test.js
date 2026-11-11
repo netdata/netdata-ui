@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { renderWithProviders } from "testUtilities"
 import { DefaultTheme, DarkTheme } from "@/theme"

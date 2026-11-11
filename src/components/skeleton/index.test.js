@@ -1,4 +1,3 @@
-import React from "react"
 import { createRef } from "react"
 import { StyleSheetManager } from "styled-components"
 import isPropValid from "@emotion/is-prop-valid"

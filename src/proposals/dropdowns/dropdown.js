@@ -1,4 +1,4 @@
-import React, { useId, useRef, useState } from "react"
+import { useId, useRef, useState } from "react"
 import styled, { css } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Icon } from "@/components/icon"

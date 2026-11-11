@@ -1,4 +1,3 @@
-import React from "react"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
 import ProgressBar from "."

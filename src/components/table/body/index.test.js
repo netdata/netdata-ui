@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, waitFor } from "testUtilities"
 import TableProvider from "../provider"
 import Body from "."

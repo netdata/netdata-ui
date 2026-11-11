@@ -1,4 +1,3 @@
-import React from "react"
 import { Compare } from "../refresh/layout"
 import { ProposedDividers, TodayDividers } from "./dividerScenes"
 import { ProposedDots, TodayDots } from "./statusDotScenes"

@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { flexRender } from "@tanstack/react-table"
 import Flex from "@/components/templates/flex"

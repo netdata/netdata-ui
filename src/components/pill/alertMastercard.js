@@ -1,4 +1,3 @@
-import React from "react"
 import MasterCardPill from "./mastercardPill"
 import { getMasterCardBackground } from "./mixins/background"
 import { masterCardColorMap } from "./mixins/colors"

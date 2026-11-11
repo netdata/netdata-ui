@@ -1,4 +1,3 @@
-import React from "react"
 import useToggle from "@/hooks/useToggle"
 import { H2, H3, Text } from "@/components/typography"
 import { Icon } from "@/components/icon"

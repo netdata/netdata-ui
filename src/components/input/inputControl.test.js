@@ -1,4 +1,4 @@
-import React, { createRef } from "react"
+import { createRef } from "react"
 import { fireEvent, renderWithProviders, screen } from "testUtilities"
 import { InputControl } from "@/index"
 

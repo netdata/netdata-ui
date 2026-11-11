@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { getColor, getSizeBy } from "@/theme"

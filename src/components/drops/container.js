@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import { Fragment } from "react"
 import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Text } from "@/components/typography"

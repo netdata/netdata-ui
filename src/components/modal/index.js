@@ -1,4 +1,3 @@
-import React from "react"
 import styled, { useTheme } from "styled-components"
 import Layer from "@/components/templates/layer"
 import Flex from "@/components/templates/flex"

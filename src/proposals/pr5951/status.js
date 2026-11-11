@@ -1,5 +1,4 @@
 // Copied from PR 5951: configItem/badges.js, alertEditor/cardParts.js (StatusPill), templates/changeMarks.js.
-import React from "react"
 import styled, { css } from "styled-components"
 import Box from "@/components/templates/box"
 import { getColor, getSizeBy } from "@/theme"

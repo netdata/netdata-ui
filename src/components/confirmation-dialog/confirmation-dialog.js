@@ -1,4 +1,3 @@
-import React from "react"
 import { useTheme } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"

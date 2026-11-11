@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { Checkbox } from "@/components/checkbox"
 import RadioButton from "@/components/radio-button"
 import Flex from "@/components/templates/flex"

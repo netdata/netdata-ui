@@ -1,4 +1,3 @@
-import React from "react"
 import { Segment, Track } from "./styled"
 
 const ProgressBar = ({

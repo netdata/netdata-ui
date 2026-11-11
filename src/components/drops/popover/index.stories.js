@@ -1,4 +1,3 @@
-import React from "react"
 import useToggle from "@/hooks/useToggle"
 import Flex from "@/components/templates/flex"
 import { H5, Text } from "@/components/typography"

@@ -1,4 +1,3 @@
-import React from "react"
 import { Button, IconButton, ButtonGroup, useRovingFocus } from "."
 import Select from "@/components/select"
 import Search from "@/components/search"

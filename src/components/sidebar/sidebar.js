@@ -1,4 +1,3 @@
-import React from "react"
 import { SidebarBox, ComponentBox, InfoBox } from "./styled"
 
 export const Sidebar = ({ info, children, className, right = false }) => (

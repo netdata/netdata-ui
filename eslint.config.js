@@ -1,6 +1,6 @@
 import globals from "globals"
 import pluginJs from "@eslint/js"
-import pluginReact from "eslint-plugin-react"
+import eslintReact from "@eslint-react/eslint-plugin"
 import storybook from "eslint-plugin-storybook"
 import translationSafeText from "./eslint/rules/translationSafeText.js"
 
@@ -18,13 +18,11 @@ export default [
     },
   },
   pluginJs.configs.recommended,
-  pluginReact.configs.flat.recommended,
+  eslintReact.configs.recommended,
   ...storybook.configs["flat/recommended"],
   {
     rules: {
-      "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-      "react/prop-types": "off",
-      "react/display-name": "off",
+      "@eslint-react/exhaustive-deps": "off",
     },
   },
   {

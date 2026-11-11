@@ -1,4 +1,3 @@
-import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen, waitFor } from "testUtilities"
 import { DarkTheme, DefaultTheme } from "@/theme"

@@ -1,4 +1,4 @@
-import React, { createRef } from "react"
+import { createRef } from "react"
 import { renderWithProviders, screen } from "testUtilities"
 import { DefaultTheme, DarkTheme } from "@/theme"
 import Pill from "./index"

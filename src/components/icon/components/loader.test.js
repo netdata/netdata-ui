@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import React, { createRef } from "react"
+import { createRef } from "react"
 import { renderWithProviders } from "testUtilities"
 import { DefaultTheme, DarkTheme } from "@/theme"
 import { LoaderIcon } from "./loader"

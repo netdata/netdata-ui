@@ -1,6 +1,6 @@
 module.exports = {
   rootDir: "../",
-  moduleDirectories: ["<rootDir>/node_modules", "./node_modules", "<rootDir>/jest"],
+  moduleDirectories: ["node_modules", "<rootDir>/jest"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
     "^.+\\.(css|less|scss)$": "identity-obj-proxy",

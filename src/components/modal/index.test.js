@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen } from "testUtilities"
 import userEvent from "@testing-library/user-event"
 import { DefaultTheme, DarkTheme } from "@/theme"

@@ -1,4 +1,3 @@
-import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen, fireEvent, waitFor } from "testUtilities"
 import Table from "../../../table"

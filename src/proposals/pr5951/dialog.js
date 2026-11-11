@@ -1,6 +1,6 @@
 // Copied from PR 5951: components/confirmDialog.js. useDialogFocus (focus trap/return) is replaced by a
 // plain Escape listener; the markup and styles are unchanged.
-import React, { useEffect, useId } from "react"
+import { useEffect, useId } from "react"
 import { createPortal } from "react-dom"
 import styled from "styled-components"
 import Box from "@/components/templates/box"

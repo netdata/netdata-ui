@@ -1,5 +1,4 @@
 // Story-only replica of cloud-frontend `components/distribution` (ProgressBar + dot legend).
-import React from "react"
 import { useTheme } from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

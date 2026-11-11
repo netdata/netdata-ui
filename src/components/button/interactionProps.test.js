@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, userEvent } from "testUtilities"
 import { DefaultTheme, DarkTheme } from "@/theme"
 import { Button } from "./button"

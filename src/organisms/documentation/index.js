@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useState } from "react"
+import { Fragment, useCallback, useState } from "react"
 import styled from "styled-components"
 import useToggle from "@/hooks/useToggle"
 import { H5 } from "@/components/typography"

@@ -1,4 +1,3 @@
-import React from "react"
 import Flex from "@/components/templates/flex"
 import { TextMicro } from "@/components/typography"
 import { FieldIndicator, Input, LabelText } from "./styled"

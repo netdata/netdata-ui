@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import { useState, useMemo } from "react"
 import Drop from "@/components/drops/drop/index.js"
 import Flex from "@/components/templates/flex"
 import { ListItem, Text } from "@/components/typography"

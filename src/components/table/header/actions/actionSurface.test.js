@@ -1,4 +1,3 @@
-import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen, user, within } from "testUtilities"
 import { waitFor } from "@testing-library/react"

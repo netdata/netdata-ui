@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react"
+import { useMemo, useRef } from "react"
 import styled from "styled-components"
 import { Transition } from "react-transition-group"
 import makeAnimations from "./makeAnimations"

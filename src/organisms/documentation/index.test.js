@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"
 import Documentation from "."

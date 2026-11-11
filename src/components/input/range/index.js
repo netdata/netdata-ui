@@ -1,4 +1,3 @@
-import React from "react"
 import { InputRange as StyledInputRange } from "./styled"
 
 const InputRange = ({ max = 100, min = 0, step = 1, value = 0, ref, ...rest }) => (

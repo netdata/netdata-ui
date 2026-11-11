@@ -1,6 +1,5 @@
 // Copied from PR 5951: configItem/collectorLogo.js, workspace/addItemButton.js, templates/disclosureButton.js,
 // requiredTag.js, validationIcon.js, alertEditor/silentSign.js.
-import React from "react"
 import styled, { css, keyframes } from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

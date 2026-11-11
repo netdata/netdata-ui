@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import Flex from "@/components/templates/flex"
 import useRowSelection from "./useRowSelection"
 import useRowActions from "./useRowActions"

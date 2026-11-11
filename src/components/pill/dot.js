@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 import { getPillColor } from "./mixins/colors"

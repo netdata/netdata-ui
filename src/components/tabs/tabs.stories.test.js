@@ -1,4 +1,3 @@
-import React from "react"
 import { composeStories, setProjectAnnotations } from "@storybook/react"
 import { render, screen, user } from "testUtilities"
 import preview from "../../../.storybook/preview"

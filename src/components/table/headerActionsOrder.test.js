@@ -1,4 +1,3 @@
-import React from "react"
 import { fireEvent } from "@testing-library/react"
 import { renderWithProviders } from "testUtilities"
 import Table from "./table"

@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
 import { DefaultTheme } from "@/theme"
 import Menu from "./index"

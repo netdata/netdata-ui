@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"
 import TabSeparator from "./tabSeparator"

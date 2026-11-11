@@ -1,4 +1,3 @@
-import React from "react"
 import { Compare } from "../refresh/layout"
 import {
   ProposedBulkActions,

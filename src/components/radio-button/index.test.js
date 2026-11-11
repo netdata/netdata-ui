@@ -1,4 +1,3 @@
-import React from "react"
 import { css } from "styled-components"
 import { renderWithProviders, fireEvent, screen, user } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"
