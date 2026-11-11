@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, fireEvent, waitFor } from "testUtilities"
 import { DefaultTheme } from "@/theme"
 import Drop from "./index"

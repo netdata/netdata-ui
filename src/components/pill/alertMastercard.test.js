@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, userEvent } from "testUtilities"
 import AlertMasterCard from "./alertMastercard"
 

@@ -1,5 +1,4 @@
 // Story-only frames for the primitives proposal.
-import React from "react"
 import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Text, TextSmall } from "@/components/typography"

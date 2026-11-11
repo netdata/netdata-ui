@@ -1,4 +1,3 @@
-import React from "react"
 import ConfirmationDialog from "./confirmation-dialog"
 
 export const Basic = args => <ConfirmationDialog {...args} />

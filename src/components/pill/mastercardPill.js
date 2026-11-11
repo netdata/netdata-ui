@@ -1,4 +1,3 @@
-import React from "react"
 import Pill from "./index"
 import { masterCardColorMap } from "./mixins/colors"
 

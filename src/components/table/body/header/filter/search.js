@@ -1,4 +1,3 @@
-import React from "react"
 import Box from "@/components/templates/box"
 import { Icon } from "@/components/icon"
 import SearchInput from "@/components/search"

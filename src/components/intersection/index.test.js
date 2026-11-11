@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders } from "testUtilities"
 import Intersection from "./index"
 

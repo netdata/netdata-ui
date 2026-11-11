@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Button, ButtonGroup } from "."
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"

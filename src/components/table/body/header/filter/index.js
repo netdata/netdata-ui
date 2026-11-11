@@ -1,4 +1,3 @@
-import React from "react"
 import ComparisonFilter from "./comparison"
 import SelectFilter from "./select"
 import SearchFilter from "./search"

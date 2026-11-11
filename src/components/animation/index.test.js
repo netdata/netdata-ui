@@ -1,4 +1,3 @@
-import React from "react"
 import { render, waitForElementToBeRemoved } from "testUtilities"
 import { config } from "react-transition-group"
 import Animation from "."

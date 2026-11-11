@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 import Flex from "@/components/templates/flex"
 import styled from "styled-components"
 import { Text } from "@/components/typography"

@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 import styled, { keyframes } from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 

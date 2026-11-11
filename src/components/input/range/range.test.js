@@ -1,4 +1,3 @@
-import React from "react"
 import RangeInput from "./index"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"

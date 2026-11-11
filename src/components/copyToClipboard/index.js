@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import { useState, useCallback } from "react"
 import ReactDOM from "react-dom"
 import styled, { css, keyframes } from "styled-components"
 import { TextSmall } from "@/components/typography"

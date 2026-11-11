@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react"
+import { memo, useState, useEffect, useRef } from "react"
 import Flex from "@/components/templates/flex"
 import { useTableState } from "../../provider"
 import { isRowSelectable } from "../../largeDataSelection"

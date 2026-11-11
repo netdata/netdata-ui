@@ -1,4 +1,3 @@
-import React from "react"
 import { H4, Text, TextSmall } from "@/components/typography"
 import Flex from "."
 

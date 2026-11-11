@@ -2,7 +2,6 @@
  * @jest-environment jsdom
  */
 
-import React from "react"
 import { Sidebar } from "./sidebar"
 import { renderWithProviders } from "testUtilities"
 

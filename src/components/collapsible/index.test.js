@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, waitForElementToBeRemoved } from "testUtilities"
 import Collapsible from "./index"
 

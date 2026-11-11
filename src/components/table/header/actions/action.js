@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import Action from "@/components/table/components/action"
 
 import { mergeRefs } from "@/utils"

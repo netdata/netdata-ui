@@ -1,4 +1,3 @@
-import React from "react"
 import Modal, { ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton } from "."
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"

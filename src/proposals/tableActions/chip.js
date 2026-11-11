@@ -1,5 +1,4 @@
 // Proposal-only chip action for table rows and toolbars. Not wired into src/components.
-import React from "react"
 import styled, { css } from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

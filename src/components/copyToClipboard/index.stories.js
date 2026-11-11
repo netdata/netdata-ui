@@ -1,4 +1,3 @@
-import React from "react"
 import CopyToClipboard from "./index"
 import { Text, TextSmall, H3 } from "@/components/typography"
 import Box from "@/components/templates/box"

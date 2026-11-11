@@ -1,4 +1,3 @@
-import React from "react"
 import styled, { ThemeProvider } from "styled-components"
 import { render, screen } from "@testing-library/react"
 import "jest-styled-components"

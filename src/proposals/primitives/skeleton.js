@@ -1,5 +1,4 @@
 // Proposed Skeleton: one calm pulse on theme colours, radius by variant, still under reduced motion.
-import React from "react"
 import styled, { css, keyframes } from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

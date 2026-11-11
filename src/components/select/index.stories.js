@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import { useCallback } from "react"
 import Flex from "@/components/templates/flex"
 import { TextSmall } from "@/components/typography"
 import Select from "."

@@ -1,4 +1,3 @@
-import React from "react"
 import "jest-styled-components"
 import { renderWithProviders, screen } from "testUtilities"
 import { H1, Text, TextSmall } from "./index"

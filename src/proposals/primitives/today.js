@@ -1,7 +1,6 @@
 // Faithful copies of today's cloud-frontend (CF) and charts (CH) dividers, dots and skeletons.
 // Raw px values, local keyframes and ad-hoc colours are kept on purpose, for comparison only.
 // They live only in this proposal file and must not be copied into src/components.
-import React from "react"
 import styled, { css } from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

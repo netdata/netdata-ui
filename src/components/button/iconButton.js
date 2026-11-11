@@ -1,4 +1,3 @@
-import React from "react"
 import Box from "@/components/templates/box"
 import Tooltip from "@/components/drops/tooltip"
 import { controlSizeOf } from "@/mixins/controlSize"

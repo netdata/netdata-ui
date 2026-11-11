@@ -1,4 +1,3 @@
-import React from "react"
 import AlertMasterCard from "./alertMastercard"
 import { iconsList } from "@/components/icon/iconsList"
 import Flex from "@/components/templates/flex"

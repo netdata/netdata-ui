@@ -1,7 +1,6 @@
 // Faithful copies of today's skeletons: CF SkeletonBox, anomalies Bone + Shine, configuration
 // Shimmer and CH Bone. Raw px values and the CH raw hex track colours are kept on purpose, for
 // comparison only. They live only in this proposal file and must not be copied into src/components.
-import React from "react"
 import styled, { css, keyframes } from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

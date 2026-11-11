@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { memo, useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
 import {
   getCoreRowModel,
   getFilteredRowModel,

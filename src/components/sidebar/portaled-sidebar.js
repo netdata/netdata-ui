@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react"
+import { Fragment, useEffect } from "react"
 import { Portal } from "react-portal"
 import { PortalSidebox, DisabledOverlay } from "./styled"
 

@@ -1,4 +1,3 @@
-import React from "react"
 import { StyledButton } from "./styled"
 import { Icon } from "@/components/icon"
 import { LoaderIcon } from "@/components/icon/components"

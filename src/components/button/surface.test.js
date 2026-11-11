@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { renderWithProviders, fireEvent, screen, user } from "testUtilities"
 import { DefaultTheme, DarkTheme } from "@/theme"
 import { Button } from "./button"

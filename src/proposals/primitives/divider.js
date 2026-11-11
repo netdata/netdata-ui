@@ -1,5 +1,4 @@
 // Proposed Divider: a 1px theme-coloured rule. Spacing and inset come from the Box margin prop.
-import React from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 

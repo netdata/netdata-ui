@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import backdropBlur from "@/components/templates/layer/mixins/backdropBlur"
 import { scrimColor } from "@/components/templates/layer/mixins/elevation"

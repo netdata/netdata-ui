@@ -1,4 +1,3 @@
-import React from "react"
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"
 import Documentation from "."

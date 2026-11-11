@@ -1,4 +1,3 @@
-import React from "react"
 import { iconsList } from "./iconsList"
 import { StyledIcon } from "./styled"
 

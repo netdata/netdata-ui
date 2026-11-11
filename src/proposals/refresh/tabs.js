@@ -1,6 +1,5 @@
 // Proposed contained track: one visual for contained tabs and segmented value pickers
 // (after the PR's TabStrip and Segmented), plus icon/count slots for our line tabs.
-import React from "react"
 import styled from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Icon } from "@/components/icon"

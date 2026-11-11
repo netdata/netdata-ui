@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import { Icon } from "@/components/icon"
 import { DefaultTheme } from "@/theme/default"

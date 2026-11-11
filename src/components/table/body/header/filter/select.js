@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo } from "react"
 import DropdownFilter from "./dropdown"
 
 const all = { value: "all", label: "All" }

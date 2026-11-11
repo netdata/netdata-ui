@@ -1,4 +1,3 @@
-import React from "react"
 import { ThemeProvider } from "styled-components"
 
 const inkedKeys = ["text", "textLite", "textDescription"]

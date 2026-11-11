@@ -1,5 +1,4 @@
 // Proposal-only "more actions" trigger: the topbar Add new chip stack, reused as a row overflow.
-import React from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

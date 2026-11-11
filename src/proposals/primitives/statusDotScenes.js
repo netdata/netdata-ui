@@ -1,4 +1,3 @@
-import React from "react"
 import Flex from "@/components/templates/flex"
 import { Text, TextSmall } from "@/components/typography"
 import { Row, Section, Stack } from "../refresh/layout"

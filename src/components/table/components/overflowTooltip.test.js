@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import { act, fireEvent, renderWithProviders } from "testUtilities"
 import OverflowTooltip from "./overflowTooltip"
 

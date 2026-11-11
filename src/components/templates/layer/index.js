@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import ReactDOM from "react-dom"
 import useDropElement from "@/hooks/useDropElement"
 import useOutsideClick from "@/hooks/useOutsideClick"

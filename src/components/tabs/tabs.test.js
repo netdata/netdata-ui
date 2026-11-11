@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import React, { useState } from "react"
+import { useState } from "react"
 import { renderWithProviders, fireEvent, user } from "testUtilities"
 import { Tabs, Tab } from "."
 

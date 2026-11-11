@@ -1,4 +1,3 @@
-import React from "react"
 import { Icon } from "@/components/icon"
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"

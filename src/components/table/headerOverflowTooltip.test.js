@@ -1,4 +1,3 @@
-import React from "react"
 import { fireEvent, renderWithProviders, waitFor } from "testUtilities"
 import Table from "./table"
 

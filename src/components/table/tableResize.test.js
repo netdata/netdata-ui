@@ -1,4 +1,3 @@
-import React from "react"
 import { act, fireEvent, renderWithProviders, screen } from "testUtilities"
 import Table from "./table"
 

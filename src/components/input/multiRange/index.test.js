@@ -1,4 +1,3 @@
-import React from "react"
 import MultiRangeInput from "."
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"

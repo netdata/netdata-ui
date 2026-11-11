@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef } from "react"
+import { useMemo, useState, useRef } from "react"
 import styled from "styled-components"
 import { useVirtualizer } from "@tanstack/react-virtual"
 import Flex from "@/components/templates/flex"

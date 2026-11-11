@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import { Fragment } from "react"
 import styled from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 import { H5, Text } from "@/components/typography"

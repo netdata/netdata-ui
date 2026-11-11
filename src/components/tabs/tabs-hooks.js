@@ -1,4 +1,4 @@
-import React, { Children, useState, useCallback, useMemo, useEffect } from "react"
+import { Children, useState, useCallback, useMemo, useEffect } from "react"
 import { Tab } from "./tab"
 
 export const useBuildTabs = (children, activeIndex, onChange, styleOptions) => {

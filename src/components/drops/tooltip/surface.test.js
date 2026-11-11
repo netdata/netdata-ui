@@ -1,4 +1,3 @@
-import React from "react"
 import { fireEvent, renderWithProviders } from "testUtilities"
 import { DarkTheme, DefaultTheme } from "@/theme"
 import Tooltip from "./index"

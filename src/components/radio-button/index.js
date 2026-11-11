@@ -1,4 +1,3 @@
-import React from "react"
 import { Text } from "@/components/typography"
 import { Container, IconContainer, Input, StyledIcon } from "./styled"
 

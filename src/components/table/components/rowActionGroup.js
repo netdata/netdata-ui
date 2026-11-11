@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 import styled, { useTheme } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { Button } from "@/components/button"

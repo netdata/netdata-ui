@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react"
+import { useRef, useMemo } from "react"
 import useToggle from "@/hooks/useToggle"
 import Tooltip from "@/components/drops/tooltip"
 import { Button } from "@/components/button"

@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, waitFor } from "testUtilities"
 import Table from "../../table"
 import { getHeaderTooltipContent } from "./cell"

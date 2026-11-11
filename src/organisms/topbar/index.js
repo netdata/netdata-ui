@@ -1,4 +1,3 @@
-import React from "react"
 import Flex from "@/components/templates/flex"
 
 const Topbar = ({ extended = false, children, mainChild }) => {

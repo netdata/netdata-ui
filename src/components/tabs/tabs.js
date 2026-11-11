@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useId } from "react"
+import { Fragment, useCallback, useEffect, useId } from "react"
 import Flex from "@/components/templates/flex"
 import { SegmentedTrack } from "@/components/button/segmented"
 import { isNeutralLine, StyledTabs, StyledTabsWrapper } from "./styled"

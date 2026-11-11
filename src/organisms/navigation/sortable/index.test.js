@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import Tab from "@/organisms/navigation/tab"
 import Tabs from "@/organisms/navigation/tabs"

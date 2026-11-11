@@ -1,4 +1,3 @@
-import React from "react"
 import { Icon } from "@/components/icon"
 import { getPillColor } from "./mixins/colors"
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Checkbox } from "."
 import Flex from "@/components/templates/flex"
 import { MockedCheckboxList } from "./checkbox.mock"

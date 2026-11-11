@@ -1,4 +1,3 @@
-import React from "react"
 import { createPortal } from "react-dom"
 import { DragOverlay as DndDragOverlay } from "@dnd-kit/core"
 import styled from "styled-components"

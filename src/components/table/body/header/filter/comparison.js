@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react"
+import { useEffect, useCallback, useState } from "react"
 import DropdownFilter from "./dropdown"
 
 import Box from "@/components/templates/box"

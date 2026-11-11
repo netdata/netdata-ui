@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import React, { useState } from "react"
+import { useState } from "react"
 import { css } from "styled-components"
 import { renderWithProviders, fireEvent, screen, user } from "testUtilities"
 import { DarkTheme } from "@/theme/dark"

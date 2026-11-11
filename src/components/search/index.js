@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import useDebounce from "@/hooks/useDebounce"
 import usePrevious from "@/hooks/usePrevious"
 import { Icon } from "@/components/icon"

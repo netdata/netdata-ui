@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import usePrevious from "@/hooks/usePrevious"
 import Flex from "@/components/templates/flex"
 import useIntersection from "@/hooks/useIntersection"

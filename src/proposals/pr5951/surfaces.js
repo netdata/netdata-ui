@@ -1,5 +1,4 @@
 // Copied from PR 5951: emptyResults.js, workspace/emptyState.js, configForm/jobStateBanner.js.
-import React from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 import { Icon } from "@/components/icon"

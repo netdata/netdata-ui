@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react"
+import { forwardRef } from "react"
 import { Checkbox as StyledCheckbox } from "./styled"
 
 export const CheckboxIndicator = forwardRef(function CheckboxIndicator(

@@ -1,5 +1,4 @@
 // Story-only replica of CF Insights type styling (report sample cards + "new report" menu), with hue options.
-import React from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

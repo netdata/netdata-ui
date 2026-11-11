@@ -1,4 +1,3 @@
-import React from "react"
 import omit from "lodash/omit"
 import MasterCardPill from "./mastercardPill"
 import { getMasterCardBackground } from "./mixins/background"

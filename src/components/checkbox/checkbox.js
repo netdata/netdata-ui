@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import useForwardRef from "@/hooks/useForwardRef"
 import { Text } from "@/components/typography"
 import { Icon } from "@/components/icon"

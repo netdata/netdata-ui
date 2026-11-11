@@ -1,6 +1,6 @@
 // Copied from PR 5951: alertEditor/cardParts.js and configForm/templates/clampedDescription.js
 // (MarkdownParser replaced by plain text; the fit-to-width header logic is omitted).
-import React, { useId, useLayoutEffect, useRef, useState } from "react"
+import { useId, useLayoutEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 import { Icon } from "@/components/icon"

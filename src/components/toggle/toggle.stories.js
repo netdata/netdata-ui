@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Toggle } from "./toggle"
 import { useCallback } from "react"
 import Flex from "@/components/templates/flex"

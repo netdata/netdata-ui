@@ -1,4 +1,3 @@
-import React from "react"
 import styled, { css } from "styled-components"
 import { getColor, getSizeBy } from "@/theme"
 import Flex from "@/components/templates/flex"

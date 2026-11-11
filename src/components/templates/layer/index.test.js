@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, fireEvent } from "testUtilities"
 import { DefaultTheme as theme } from "@/theme/default"
 import { DarkTheme } from "@/theme/dark"

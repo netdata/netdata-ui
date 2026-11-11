@@ -1,5 +1,3 @@
-import React from "react"
-
 const RowPlaceholdersRenderer = ({ RowPlaceholder, items = [], getPlaceholderOffset }) => {
   if (!items.length) return null
 

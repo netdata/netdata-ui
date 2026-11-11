@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, fireEvent, act } from "testUtilities"
 import { DefaultTheme } from "@/theme"
 import CopyToClipboard from "./index"

@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { TextBig, Text, TextNano, TextSmall } from "@/components/typography"
 import Flex from "@/components/templates/flex"

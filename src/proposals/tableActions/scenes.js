@@ -1,5 +1,5 @@
 // Story scenes: today's real Table + Action next to proposal-only chip renderings of the same rows.
-import React, { useState } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 import Flex from "@/components/templates/flex"

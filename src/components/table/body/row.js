@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback } from "react"
+import { memo, useMemo, useCallback } from "react"
 import styled, { css, useTheme } from "styled-components"
 import Flex from "@/components/templates/flex"
 import { alignItemValuesMap } from "@/components/templates/mixins/alignItems"

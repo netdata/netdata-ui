@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import useToggle from "@/hooks/useToggle"
 import Flex from "@/components/templates/flex"
 import { H2, Text } from "@/components/typography"

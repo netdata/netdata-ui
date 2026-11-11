@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { Tabs, Tab } from "@/components/tabs"
 import Flex from "@/components/templates/flex"

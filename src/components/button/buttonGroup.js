@@ -1,4 +1,4 @@
-import React, { Children, isValidElement, cloneElement } from "react"
+import { Children, isValidElement, cloneElement } from "react"
 import Flex from "@/components/templates/flex"
 import { Button } from "./button"
 import { SegmentedTrack, SegmentedItem, RaisedSegmentedItem } from "./segmented"

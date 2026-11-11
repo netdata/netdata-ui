@@ -1,5 +1,5 @@
 // Copied from PR 5951: components/tooltip.js, iconAction.js, rovingFocus.js, tabStrip.js.
-import React, { forwardRef, useCallback } from "react"
+import { forwardRef, useCallback } from "react"
 import styled from "styled-components"
 import Box from "@/components/templates/box"
 import { Icon } from "@/components/icon"

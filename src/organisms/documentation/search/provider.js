@@ -1,4 +1,3 @@
-import React from "react"
 import SiteSearchAPIConnector from "@elastic/search-ui-site-search-connector"
 import { SearchProvider as ElasticSearchProvider, WithSearch } from "@elastic/react-search-ui"
 import DiscourseSearch from "./discourse"

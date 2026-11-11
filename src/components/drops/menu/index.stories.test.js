@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen } from "testUtilities"
 import * as stories from "./index.stories"
 

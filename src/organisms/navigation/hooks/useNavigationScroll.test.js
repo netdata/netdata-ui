@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import useNavigationScroll from "./useNavigationScroll"
 

@@ -1,4 +1,3 @@
-import React from "react"
 import { renderWithProviders, screen, fireEvent } from "testUtilities"
 import { DefaultTheme, DarkTheme } from "@/theme"
 import DropdownItem, { ItemContainer } from "./dropdownItem"

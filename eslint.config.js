@@ -22,7 +22,6 @@ export default [
   ...storybook.configs["flat/recommended"],
   {
     rules: {
-      "no-unused-vars": ["error", { varsIgnorePattern: "^React$" }],
       "@eslint-react/exhaustive-deps": "off",
     },
   },

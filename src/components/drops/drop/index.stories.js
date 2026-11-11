@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { action } from "storybook/actions"
 import Flex from "@/components/templates/flex"
 import { Text, TextSmall } from "@/components/typography"
