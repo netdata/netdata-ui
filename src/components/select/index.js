@@ -14,8 +14,10 @@ import {
   insetMenuRowRound,
   menuSelectionMarker,
 } from "@/components/drops/dropdownStyles"
-import { getSizeBy } from "@/theme"
+import Box from "@/components/templates/box"
+import { getColor, getSizeBy } from "@/theme"
 import { controlHeight, controlFontSize } from "@/mixins/controlSize"
+import { chevronMark, fieldHaloShadow, fieldSurfaceRound } from "@/mixins/fieldSurface"
 
 const useDataAttrs = (props, name) => {
   const { "data-ga": dataGA, "data-testid": dataTestId } = props.selectProps
@@ -53,6 +55,43 @@ const withDOMDataAttrs = (Component, name) => props => {
 }
 
 const OriginalOption = defaultComponents.Option
+const OriginalMenu = defaultComponents.Menu
+
+// react-select keeps the hovered option in the Select's own state, so every hover rebuilds every option.
+const withoutHoverState = innerProps => ({
+  ...innerProps,
+  onMouseMove: undefined,
+  onMouseOver: undefined,
+})
+
+const pointerFreeOptions = new WeakMap()
+
+const pointerFree = Component => {
+  if (!pointerFreeOptions.has(Component))
+    pointerFreeOptions.set(Component, props => (
+      <Component {...props} innerProps={withoutHoverState(props.innerProps)} />
+    ))
+  return pointerFreeOptions.get(Component)
+}
+
+const MenuFooter = styled(Box)`
+  padding: ${getSizeBy(0.75)} ${getSizeBy(1.5)};
+  border-top: 1px solid ${getColor("border")};
+  font-size: ${getSizeBy(1.5)};
+  line-height: 18px;
+  color: ${getColor("statusMutedText")};
+`
+
+const Menu = props => (
+  <OriginalMenu {...props}>
+    {props.children}
+    {props.selectProps.menuFooter ? (
+      <MenuFooter className={props.cx({ "menu-footer": true })}>
+        {props.selectProps.menuFooter}
+      </MenuFooter>
+    ) : null}
+  </OriginalMenu>
+)
 
 const OptionLabel = styled.span`
   min-width: 0;
@@ -62,9 +101,10 @@ const OptionLabel = styled.span`
 `
 
 const Option = props => {
-  const { children, data, innerProps, isMulti, isSelected, selectProps } = props
+  const { children, data, isMulti, isSelected, selectProps } = props
   const title = typeof children === "string" ? children : undefined
   const quiet = selectProps.selectionStyle === "quiet"
+  const innerProps = withoutHoverState(props.innerProps)
 
   return (
     <OriginalOption {...props} innerProps={title ? { ...innerProps, title } : innerProps}>
@@ -91,7 +131,7 @@ const customComponents = {
   IndicatorSeparator: null,
   Input: withDOMDataAttrs(defaultComponents.Input, "Input"),
   LoadingIndicator: withDataAttrs(defaultComponents.LoadingIndicator, "LoadingIndicator"),
-  Menu: withDataAttrs(defaultComponents.Menu, "Menu"),
+  Menu: withDataAttrs(Menu, "Menu"),
   MenuList: withDataAttrs(defaultComponents.MenuList, "MenuList"),
   MenuPortal: withDataAttrs(defaultComponents.MenuPortal, "MenuPortal"),
   LoadingMessage: withDataAttrs(defaultComponents.LoadingMessage, "LoadingMessage"),
@@ -165,7 +205,59 @@ const getControlBorder = (theme, state) => {
   return theme.colors.controlBorder
 }
 
-const makeCustomStyles = (theme, selectionStyle, { minWidth, ...providedStyles } = {}) => {
+export const selectSurfaceStyles = theme => {
+  const { panelBg, controlBorder, inputBorderHover, placeholder, segmentedFocus, text } =
+    theme.colors
+  const muted = theme.colors.statusMutedText
+  const fontSize = fontSizeOf(theme)
+
+  return {
+    control: (styles, state) => ({
+      ...styles,
+      outline: "none",
+      borderRadius: sizeBy(theme, fieldSurfaceRound),
+      ...(state.isDisabled ? {} : { backgroundColor: panelBg }),
+      borderColor: state.isFocused ? segmentedFocus : controlBorder,
+      boxShadow: state.isFocused ? fieldHaloShadow(segmentedFocus) : "none",
+      ":hover": {
+        borderColor: state.isFocused ? segmentedFocus : inputBorderHover,
+      },
+    }),
+    dropdownIndicator: styles => ({
+      ...styles,
+      padding: `0 ${sizeBy(theme, 1.5)} 0 ${sizeBy(theme, 0.25)}`,
+      color: muted,
+      ":hover": { color: text },
+      "& svg": { display: "none" },
+      "&::after": chevronMark,
+    }),
+    input: styles => ({ ...styles, color: text }),
+    singleValue: (styles, state) => ({
+      ...styles,
+      fontSize,
+      color: state.isDisabled ? muted : text,
+    }),
+    placeholder: styles => ({ ...styles, fontSize, color: placeholder }),
+    groupHeading: styles => ({
+      ...styles,
+      textTransform: "none",
+      fontSize: 11,
+      lineHeight,
+      fontWeight: 600,
+      color: muted,
+    }),
+  }
+}
+
+const appearanceStylesBy = { surface: selectSurfaceStyles }
+
+const makeCustomStyles = (
+  theme,
+  selectionStyle,
+  { minWidth, ...providedStyles } = {},
+  appearance
+) => {
+  const appearanceStyles = appearanceStylesBy[appearance]?.(theme)
   const optionColors = getDropdownOptionColors(theme, selectionStyle)
   const fontSize = fontSizeOf(theme)
   const minHeight = Number.parseFloat(controlHeight("default")({ theme }))
@@ -268,8 +360,19 @@ const makeCustomStyles = (theme, selectionStyle, { minWidth, ...providedStyles }
       // The placeholder colour is close to body text, so disabled options also fade like other disabled controls.
       opacity: state.isDisabled ? 0.4 : 1,
       cursor: state.isDisabled ? "not-allowed" : "pointer",
+      ...(state.isDisabled
+        ? {}
+        : {
+            ":hover": {
+              backgroundColor: state.isSelected ? optionColors.selectedHover : optionColors.hover,
+            },
+            // While the pointer drives the list, only the row under it is highlighted.
+            "[data-pointing] &:not(:hover)": {
+              backgroundColor: state.isSelected ? optionColors.selected : "transparent",
+            },
+          }),
       ":active": {
-        backgroundColor: state.isDisabled ? "transparent" : optionColors.selected,
+        backgroundColor: state.isDisabled ? "transparent" : optionColors.pressed,
       },
       fontSize,
       lineHeight,
@@ -302,6 +405,7 @@ const makeCustomStyles = (theme, selectionStyle, { minWidth, ...providedStyles }
       minHeight: innerMinHeight,
       padding: `0 ${sizeBy(theme, 1.5)}`,
     }),
+    ...appearanceStyles,
     ...providedStyles,
   }
 }
@@ -310,12 +414,18 @@ const MenuList = props => <VirtualizedMenuList {...props} MenuList={customCompon
 
 const components = { ...customComponents, MenuList }
 
+const mergeComponents = provided => ({
+  ...components,
+  ...provided,
+  ...(provided.Option ? { Option: pointerFree(provided.Option) } : {}),
+})
+
 const getAttrs = props => ({
   ...props,
   insetMenuContent: !props.styles?.menuList && !props.components?.MenuList,
-  components: props.components ? { ...components, ...props.components } : components,
+  components: props.components ? mergeComponents(props.components) : components,
   theme: makeCustomTheme(props.theme),
-  styles: makeCustomStyles(props.theme, props.selectionStyle, props.styles),
+  styles: makeCustomStyles(props.theme, props.selectionStyle, props.styles, props.appearance),
 })
 
 const SelectComponent = styled(ReactSelect).attrs(getAttrs)``

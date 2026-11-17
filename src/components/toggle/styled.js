@@ -117,12 +117,12 @@ export const StyledToggle = styled.div`
   ${({ variant, checked, disabled }) =>
     variant === "outline" &&
     css`
-      background: ${checked ? getColor("segmentedAccentText") : getColor(["transparent", "full"])};
+      background: ${checked ? getColor("text") : getColor(["transparent", "full"])};
       opacity: ${disabled ? 0.4 : 1};
       cursor: ${disabled ? "not-allowed" : "pointer"};
       pointer-events: auto;
       border-width: ${getSizeBy(0.1875)};
-      border-color: ${getColor(checked ? "segmentedAccentText" : "controlBorder")};
+      border-color: ${getColor(checked ? "text" : "controlBorder")};
       border-radius: ${getSizeBy(12.5)};
 
       ${HiddenToggleInput}:focus-visible + & {
@@ -133,16 +133,20 @@ export const StyledToggle = styled.div`
         background-color: ${getColor(checked ? "buttonNeutralText" : "controlBorder")};
       }
 
-      ${!disabled &&
-      css`
-        ${StyledLabel}:hover & {
-          border-color: ${getColor(checked ? "segmentedAccentText" : "textFocus")};
-          ${checked &&
-          css`
-            background: ${getColor("segmentedAccentText")};
-          `}
-        }
-      `}
+      ${
+        !disabled &&
+        css`
+          ${StyledLabel}:hover & {
+            border-color: ${getColor(checked ? "text" : "inputBorderHover")};
+            ${
+              checked &&
+              css`
+                background: ${getColor("text")};
+              `
+            }
+          }
+        `
+      }
     `}
 
   @media (prefers-reduced-motion: reduce) {

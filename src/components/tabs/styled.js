@@ -221,13 +221,14 @@ export const VerticalTab = styled(StyledTab).attrs({
 })`
   justify-content: flex-start;
   height: auto;
-  color: ${({ active }) => getColor(active ? "menuItemSelectedText" : "text")};
-  background: ${({ active }) => getColor(active ? "menuItemSelected" : transparent)};
+  color: ${getColor("text")};
+  background: ${({ active }) => getColor(active ? "segmentedSelectedBackground" : transparent)};
   box-shadow: ${({ active, theme }) =>
     active ? `inset 3px 0 0 ${getColor("primary")({ theme })}` : "none"};
 
   &:hover {
-    background: ${({ active }) => getColor(active ? "menuItemSelectedHover" : "menuItemHover")};
+    background: ${({ active }) =>
+      getColor(active ? "segmentedSelectedBackground" : "menuItemHover")};
   }
 
   > span {

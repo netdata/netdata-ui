@@ -1,7 +1,6 @@
 import "jest-styled-components"
 import { renderWithProviders, screen, waitFor } from "testUtilities"
 import { DefaultTheme, getRgbColor } from "@/theme"
-import rawColors from "@/theme/rawColors"
 import Table from "../table"
 
 const data = [
@@ -121,7 +120,7 @@ describe("Table row hover", () => {
     renderRows()
 
     const row = await rowByText("db")
-    expect(row).toHaveStyleRule("background-color", rawColors.neutral.grey190, {
+    expect(row).toHaveStyleRule("background-color", DefaultTheme.colors.tableRowBgHover, {
       modifier: ":hover",
     })
     expect(row).toHaveStyleRule("border-bottom", `1px solid ${DefaultTheme.colors.tableBorder}`)

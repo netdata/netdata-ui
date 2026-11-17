@@ -19,3 +19,4 @@ export {
 } from "./focusRing"
 
 export { default as visuallyHidden } from "./visuallyHidden"
+export { chevronMark, fieldSurface, fieldHalo, fieldHaloShadow } from "./fieldSurface"

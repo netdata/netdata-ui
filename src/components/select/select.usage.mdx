@@ -24,6 +24,7 @@ Options are `{ label, value }`. Add `icon` to show an icon before the label, and
 - `isCreatable`: typing offers a "create" option and calls `onCreateOption`.
 - `selectionStyle="quiet"`: choices use a neutral hover and selected fill. Single-choice options show a trailing check, and multi-choice options show a checkbox indicator. Set `hideSelectedOptions={false}` to keep checked rows visible in a multi-choice list.
 - `selectionStyle="marker"` (default): selected options use the menu tint and a 3px left marker.
+- `appearance="surface"`: a filled editor field with a 6px radius, a `segmentedFocus` edge and soft halo on focus, and a CSS chevron. A `styles` part replaces the matching surface part; extend one with `selectSurfaceStyles(theme)`.
 
 <Canvas of={Stories.Multi} />
 

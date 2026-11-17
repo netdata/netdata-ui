@@ -10,7 +10,7 @@ export const insetMenuRowRound = 1.75
 export const menuSelectionMarker = ({ theme }) =>
   `inset ${getSizeBy(0.375)({ theme })} 0 0 ${getColor("primary")({ theme })}`
 
-export const getDropdownOptionColors = (theme, selectionStyle = "marker", surface = "dropdown") => {
+export const getDropdownOptionColors = (theme, selectionStyle = "marker") => {
   const { colors } = theme
   if (selectionStyle !== "quiet") {
     return {
@@ -18,14 +18,17 @@ export const getDropdownOptionColors = (theme, selectionStyle = "marker", surfac
       selected: colors.menuItemSelected,
       selectedHover: colors.menuItemSelectedHover,
       selectedText: colors.menuItemSelectedText,
+      pressed: colors.menuItemSelected,
     }
   }
 
-  const background = colors[surface] || colors.dropdown
-  const contrast = colors.neutral[theme.name === "Dark" ? "white" : "black"]
-  const mix = amount => `color-mix(in srgb, ${background}, ${contrast} ${amount}%)`
-
-  return { hover: mix(9), selected: mix(14), selectedHover: mix(18), selectedText: colors.text }
+  return {
+    hover: colors.tableRowBgHover,
+    selected: "transparent",
+    selectedHover: colors.tableRowBgHover,
+    selectedText: colors.text,
+    pressed: colors.selected,
+  }
 }
 
 export const withDropdownDefaults = props =>

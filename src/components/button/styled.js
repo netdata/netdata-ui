@@ -156,9 +156,9 @@ const colorsByFlavour = ({
           bg: getColor("controlBackground"),
           bgHover: getColor("controlHoverBackground"),
           bgActive: getColor("controlPressedBackground"),
-          border: getColor("border"),
-          borderHover: getColor("controlBorder"),
-          borderActive: getColor("controlBorder"),
+          border: getColor("controlBorder"),
+          borderHover: getColor("inputBorderHover"),
+          borderActive: getColor("inputBorderHover"),
           iconColor: specialIconColor || getColor("controlText"),
         }
       : {}

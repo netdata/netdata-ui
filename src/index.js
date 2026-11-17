@@ -139,7 +139,7 @@ export {
   OverflowTooltip,
 } from "./components/table"
 
-export { default as Select } from "./components/select"
+export { default as Select, selectSurfaceStyles } from "./components/select"
 export { default as SearchInput } from "./components/search"
 
 export { default as CopyToClipboard } from "./components/copyToClipboard"

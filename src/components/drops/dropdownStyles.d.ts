@@ -15,7 +15,13 @@ export function getDropdownOptionColors(
   theme: DropdownTheme,
   selectionStyle?: DropdownSelectionStyle,
   surface?: string
-): { hover: string; selected: string; selectedHover: string; selectedText: string }
+): {
+  hover: string
+  selected: string
+  selectedHover: string
+  selectedText: string
+  pressed: string
+}
 
 export function withDropdownDefaults<T extends { background?: unknown }>(
   props: T

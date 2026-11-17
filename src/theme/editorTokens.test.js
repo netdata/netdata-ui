@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, getColor } from "./index"
+import { DarkTheme, DefaultTheme, getColor, getRgbColor } from "./index"
 
 describe("editor chip tokens", () => {
   it.each([
@@ -16,5 +16,35 @@ describe("editor chip tokens", () => {
   ])("resolves %s to the existing editor chip color in each theme", (token, light, dark) => {
     expect(getColor(token)({ theme: DefaultTheme })).toBe(light)
     expect(getColor(token)({ theme: DarkTheme })).toBe(dark)
+  })
+})
+
+describe("editor surface tokens", () => {
+  it.each([
+    ["editorAccent", "#1d6470", "#93c9cb"],
+    ["modalBackdrop", "rgba(0, 0, 0, 0.28)", "rgba(0, 0, 0, 0.5)"],
+    ["dialogShadow", "rgba(0, 0, 0, 0.2)", "rgba(0, 0, 0, 0.5)"],
+    ["stripShadow", "rgba(0, 0, 0, 0.18)", "rgba(0, 0, 0, 0.7)"],
+    ["logoTileBackground", "#F6F7F7", "#C2CAC4"],
+    ["searchMatchBackground", "rgba(113, 128, 115, 0.12)", "rgba(152, 166, 157, 0.2)"],
+  ])("resolves %s in each theme", (token, light, dark) => {
+    expect(getColor(token)({ theme: DefaultTheme })).toBe(light)
+    expect(getColor(token)({ theme: DarkTheme })).toBe(dark)
+  })
+})
+
+describe("threshold tint tokens", () => {
+  it.each([
+    ["thresholdWarningBand", "warningBackground", 0.8, 0.32],
+    ["thresholdWarningZone", "warningBackground", 0.4, 0.15],
+    ["thresholdCriticalBand", "errorBackground", 0.35, 0.55],
+    ["thresholdCriticalZone", "errorBackground", 0.18, 0.28],
+  ])("resolves %s from %s in each theme", (token, base, lightAlpha, darkAlpha) => {
+    expect(getColor(token)({ theme: DefaultTheme })).toBe(
+      getRgbColor(base, lightAlpha)({ theme: DefaultTheme })
+    )
+    expect(getColor(token)({ theme: DarkTheme })).toBe(
+      getRgbColor(base, darkAlpha)({ theme: DarkTheme })
+    )
   })
 })

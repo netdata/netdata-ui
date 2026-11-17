@@ -51,6 +51,7 @@ export interface InputProps extends InputTypographyProps {
   autoFocus?: boolean
   // "tiny" and "compact" are 24px; "small" and "large" (the default) are 30px.
   size?: "tiny" | "compact" | "small" | "large"
+  appearance?: "surface"
 }
 
 export interface MetaOptions {
@@ -80,6 +81,7 @@ export type TextInputProps = InputProps &
 type InputControlStyleProps = Omit<FlexProps, "as"> &
   InputTypographyProps & {
     size?: InputProps["size"]
+    appearance?: InputProps["appearance"]
     error?: boolean | string
     hasValue?: boolean
     textAlign?: CSSProperties["textAlign"]

@@ -128,9 +128,9 @@ describe("DropdownItem row styles", () => {
   })
 
   it.each([
-    ["light", DefaultTheme, "black"],
-    ["dark", DarkTheme, "white"],
-  ])("uses neutral row states in a quiet custom option in %s", (_, theme, ink) => {
+    ["light", DefaultTheme],
+    ["dark", DarkTheme],
+  ])("uses neutral row states in a quiet custom option in %s", (_, theme) => {
     renderWithProviders(
       <ItemContainer selectionStyle="quiet" selected>
         row
@@ -138,11 +138,10 @@ describe("DropdownItem row styles", () => {
       { theme }
     )
 
-    const { dropdown, neutral, text } = theme.colors
-    const mix = amount => `color-mix(in srgb, ${dropdown}, ${neutral[ink]} ${amount}%)`
+    const { tableRowBgHover, text } = theme.colors
     expect(option()).toHaveStyleRule("color", text)
-    expect(option()).toHaveStyleRule("background-color", mix(14))
-    expect(option()).toHaveStyleRule("background-color", mix(18), { modifier: ":hover" })
+    expect(option()).toHaveStyleRule("background-color", "transparent")
+    expect(option()).toHaveStyleRule("background-color", tableRowBgHover, { modifier: ":hover" })
     expect(option()).not.toHaveStyleRule("box-shadow", expect.stringContaining("inset 3px"))
     expect(option().querySelector("svg")).toBeNull()
   })

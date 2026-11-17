@@ -8,6 +8,7 @@ export type AppColorsT = {
   main: string
   border: string
   borderSecondary: string
+  chipBorder: string
   appSidebarBackground: string
   appBackground: string
   workspaceSidebarBackground: string
@@ -17,6 +18,7 @@ export type AppColorsT = {
   menuItemSelectedHover: string
   menuItemSelectedText: string
   tableBorder: string
+  tableRowBorder: string
   tableHeaderBackground: string
   segmentedBackground: string
   segmentedSelectedBackground: string
@@ -68,6 +70,12 @@ export type AppColorsT = {
   negatedTokenText: string
   negatedTokenMark: string
   syntaxKey: string
+  editorAccent: string
+  modalBackdrop: string
+  dialogShadow: string
+  stripShadow: string
+  logoTileBackground: string
+  searchMatchBackground: string
   syntaxNumber: string
   syntaxParen1: string
   syntaxParen2: string
@@ -76,6 +84,10 @@ export type AppColorsT = {
   errorContentBackground: string
   thresholdWarningText: string
   thresholdCriticalText: string
+  thresholdWarningBand: string
+  thresholdWarningZone: string
+  thresholdCriticalBand: string
+  thresholdCriticalZone: string
   chartSeries1: string
   chartSeries2: string
   chartSeries3: string

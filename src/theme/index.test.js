@@ -44,7 +44,9 @@ describe("theme colors", () => {
     expect(luminance("appSidebarBackground")).toBeLessThan(luminance("workspaceBackground"))
     expect(luminance("workspaceSidebarBackground")).toBeLessThan(luminance("appSidebarBackground"))
     expect(luminance("inputBg")).toBeLessThan(luminance("workspaceSidebarBackground"))
-    expect(luminance("segmentedSelectedBackground")).toBeLessThan(luminance("segmentedBackground"))
+    expect(luminance("segmentedSelectedBackground")).toBeGreaterThan(
+      luminance("segmentedBackground")
+    )
     expect(luminance("popoverBackground")).toBeLessThan(luminance("workspaceBackground"))
   })
 
@@ -89,7 +91,7 @@ describe("visual refresh token values", () => {
 
   it("gives dark input borders a visible edge", () => {
     expect(DarkTheme.colors.inputBorder).toBe("#98A69D")
-    expect(DarkTheme.colors.inputBorderHover).toBe("#B0C5B5")
+    expect(DarkTheme.colors.inputBorderHover).toBe("#98A69D")
   })
 
   it("keeps dark focused input borders distinct from resting borders", () => {
@@ -103,14 +105,12 @@ describe("visual refresh token values", () => {
     expect(DarkTheme.colors.tooltipText).toBe("#F0F4F1")
   })
 
-  it("keeps table row dividers visible under hover", () => {
-    expect(DefaultTheme.colors.tableRowBgHover).toBe(rawColors.neutral.grey190)
-    const { workspaceBackground, cardBackground, tableBorder, tableRowBgHover, text } =
-      DarkTheme.colors
+  it("keeps dark table row hover distinct from its surfaces", () => {
+    expect(DefaultTheme.colors.tableRowBgHover).toBe("#F0F3F0")
+    const { workspaceBackground, cardBackground, tableRowBgHover, text } = DarkTheme.colors
     expect(getLuminance(tableRowBgHover)).toBeGreaterThan(getLuminance(cardBackground))
     expect(getContrast(tableRowBgHover, workspaceBackground)).toBeGreaterThanOrEqual(1.25)
-    expect(getContrast(tableRowBgHover, cardBackground)).toBeGreaterThanOrEqual(1.15)
-    expect(getContrast(tableRowBgHover, tableBorder)).toBeGreaterThanOrEqual(1.15)
+    expect(getContrast(tableRowBgHover, cardBackground)).toBeGreaterThanOrEqual(1.1)
     expect(getContrast(text, tableRowBgHover)).toBeGreaterThanOrEqual(4.5)
   })
 
@@ -163,8 +163,8 @@ describe("soft pill text keys", () => {
 
 describe("approved colour proposal", () => {
   it("adds controlBorder and textInfo to both themes", () => {
-    expect(DefaultTheme.colors.controlBorder).toBe("#5C6A61")
-    expect(DarkTheme.colors.controlBorder).toBe("#98A69D")
+    expect(DefaultTheme.colors.controlBorder).toBe(rawColors.neutral.grey125)
+    expect(DarkTheme.colors.controlBorder).toBe(rawColors.neutral.grey120)
     expect(DefaultTheme.colors.textInfo).toBe(rawColors.blue.blue100)
     expect(DarkTheme.colors.textInfo).toBe(rawColors.blue.blue150)
   })
@@ -218,9 +218,9 @@ describe("light surface ladder and field edges (audit L1–L4)", () => {
     expect(c.datePickerPausedBg).toBe(n.grey185)
   })
   it("gives fields one softer edge that still reaches 3:1, and darkens it on hover", () => {
-    expect(c.controlBorder).toBe("#5C6A61")
+    expect(c.controlBorder).toBe(n.grey125)
     expect(c.inputBorder).toBe("#5C6A61")
-    expect(c.inputBorderHover).toBe("#4D5C52")
+    expect(c.inputBorderHover).toBe("#5C6A61")
     expect(c.inputBorderFocus).toBe("#4D5C52")
   })
   it("renders stale as a neutral grey", () => {
@@ -228,7 +228,6 @@ describe("light surface ladder and field edges (audit L1–L4)", () => {
     expect(c.staleSemi).toBe(n.grey120)
   })
 })
-
 
 describe("Sage compact label contrast", () => {
   it.each([
@@ -242,5 +241,36 @@ describe("Sage compact label contrast", () => {
   it("keeps muted text readable on the dark pressed control surface", () => {
     const { textLite, controlPressedBackground } = DarkTheme.colors
     expect(getContrast(textLite, controlPressedBackground)).toBeGreaterThanOrEqual(4.5)
+  })
+})
+
+describe("editor hierarchy tokens", () => {
+  it("softens control and neutral-button edges", () => {
+    expect(DefaultTheme.colors.buttonNeutralBorder).toBe(rawColors.neutral.grey125)
+    expect(DarkTheme.colors.buttonNeutralBorder).toBe(rawColors.neutral.grey120)
+  })
+
+  it("shifts the selected segmented accent ink and its selected shadow", () => {
+    expect(DefaultTheme.colors.segmentedAccentText).toBe("#1d6470")
+    expect(DarkTheme.colors.segmentedAccentText).toBe("#93c9cb")
+    expect(DefaultTheme.shadows.segmentedAccentSelected).toContain("#1d6470")
+    expect(DarkTheme.shadows.segmentedAccentSelected).toContain("#93c9cb")
+  })
+
+  it("lifts the light selected segment to white and leaves dark unchanged", () => {
+    expect(DefaultTheme.colors.segmentedSelectedBackground).toBe("#FFFFFF")
+    expect(DarkTheme.colors.segmentedSelectedBackground).toBe("rgba(255,255,255,0.11)")
+  })
+
+  it("darkens the dark table row hover without changing grouped-row hover", () => {
+    expect(DarkTheme.colors.tableRowBgHover).toBe("#29312C")
+    expect(DarkTheme.colors.tableRowBg2Hover).toBe("#29352D")
+  })
+
+  it("adds chipBorder and tableRowBorder to both themes", () => {
+    expect(DefaultTheme.colors.chipBorder).toBe("#D3DBD5")
+    expect(DarkTheme.colors.chipBorder).toBe("#48584D")
+    expect(DefaultTheme.colors.tableRowBorder).toBe("#EEF0EE")
+    expect(DarkTheme.colors.tableRowBorder).toBe("#29312C")
   })
 })

@@ -1,5 +1,6 @@
 import { renderWithProviders, screen, user } from "testUtilities"
 import { Tab, Tabs } from "."
+import { DefaultTheme, DarkTheme } from "@/theme"
 
 it("selects and labels a vertical panel with keyboard navigation", async () => {
   renderWithProviders(
@@ -31,4 +32,27 @@ it("selects and labels a vertical panel with keyboard navigation", async () => {
   expect(nodes).toHaveFocus()
   await keyboard.keyboard("{Home}")
   expect(info).toHaveFocus()
+})
+
+describe.each([
+  ["light", DefaultTheme],
+  ["dark", DarkTheme],
+])("selected vertical tab in %s", (name, theme) => {
+  it("rests and hovers on the neutral selected surface with body text", () => {
+    renderWithProviders(
+      <Tabs orientation="vertical">
+        <Tab label="Info">Info panel</Tab>
+        <Tab label="Nodes">Nodes panel</Tab>
+      </Tabs>,
+      { theme }
+    )
+    const selected = screen.getByRole("tab", { name: "Info" })
+    const { segmentedSelectedBackground, text } = theme.colors
+
+    expect(selected).toHaveStyleRule("color", text)
+    expect(selected).toHaveStyleRule("background", segmentedSelectedBackground)
+    expect(selected).toHaveStyleRule("background", segmentedSelectedBackground, {
+      modifier: "&:hover",
+    })
+  })
 })
