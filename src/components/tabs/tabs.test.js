@@ -461,10 +461,23 @@ describe("Tabs raised contained appearance", () => {
       modifier: ":hover",
     })
     expect(inactive).toHaveStyleRule("color", theme.colors.statusMutedText)
+    expect(inactive).toHaveStyleRule("color", theme.colors.textFocus, { modifier: ":hover" })
     expect(inactive).toHaveStyleRule("box-shadow", "none")
     expect(active).toHaveStyleRule("outline-color", theme.colors.segmentedFocus, {
       modifier: ":focus-visible",
     })
+  })
+
+  it.each([
+    ["light", DefaultTheme],
+    ["dark", DarkTheme],
+  ])("inks the selected non-accent raised tab with text in %s theme", (_, theme) => {
+    const { getAllByRole } = renderRaised({}, { theme })
+    const [active, , inactive] = getAllByRole("tab")
+
+    expect(active).toHaveStyleRule("color", theme.colors.text)
+    expect(active).toHaveStyleRule("color", theme.colors.text, { modifier: ":hover" })
+    expect(inactive).toHaveStyleRule("color", theme.colors.textFocus, { modifier: ":hover" })
   })
 
   it("keeps controlled selection, native activation, and external tab attributes", async () => {

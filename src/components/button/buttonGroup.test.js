@@ -547,7 +547,7 @@ describe("ButtonGroup", () => {
         "light",
         DefaultTheme,
         "#F0F3F0",
-        "#E0E7E2",
+        "#FFFFFF",
         "0 0 0 1px #D3DBD5,0 1px 2px rgba(23, 32, 32, 0.14)",
         "#007830",
       ],
@@ -587,7 +587,8 @@ describe("ButtonGroup", () => {
         expect(selected).toHaveStyleRule("background-color", selectedBackground)
         expect(selected).toHaveStyleRule("box-shadow", shadow)
         expect(selected).toHaveStyleRule("font-weight", "600")
-        expect(selected).toHaveStyleRule("color", theme.colors.textFocus)
+        expect(selected).toHaveStyleRule("color", theme.colors.text)
+        expect(selected).toHaveStyleRule("color", theme.colors.text, { modifier: ":hover" })
         expect(idle).toHaveStyleRule("color", theme.colors.statusMutedText)
         expect(idle).toHaveStyleRule("font-weight", "500")
         expect(idle).toHaveStyleRule("box-shadow", "none")

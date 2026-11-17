@@ -1,7 +1,7 @@
 import { renderWithProviders, screen, user, within } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"
 import { DarkTheme } from "@/theme/dark"
-import Select from "."
+import Select, { selectSurfaceStyles } from "."
 
 const rgb = hex => {
   const n = parseInt(hex.slice(1), 16)
@@ -122,30 +122,40 @@ describe("Select", () => {
     })
 
     it.each([
-      ["light", DefaultTheme, "black"],
-      ["dark", DarkTheme, "white"],
-    ])(
-      "shows quiet choices with a check and neutral keyboard focus in %s",
-      async (_, theme, ink) => {
-        setup({ defaultValue: options[1], selectionStyle: "quiet" }, { theme })
-        const u = await openMenu()
-        const selected = screen.getAllByTestId("selOption").find(el => el.textContent === "Two")
-        const { dropdown, neutral, text } = theme.colors
-        const mix = amount =>
-          `color-mix(in srgb, ${rgb(dropdown)} ${100 - amount}%, ${rgb(neutral[ink])})`
+      ["light", DefaultTheme],
+      ["dark", DarkTheme],
+    ])("shows quiet choices with a check and neutral keyboard focus in %s", async (_, theme) => {
+      setup({ defaultValue: options[1], selectionStyle: "quiet" }, { theme })
+      const u = await openMenu()
+      const selected = screen.getAllByTestId("selOption").find(el => el.textContent === "Two")
+      const { tableRowBgHover, text } = theme.colors
 
-        expect(style(selected).backgroundColor).toBe(mix(18))
-        expect(style(selected).color).toBe(rgb(text))
-        expect(style(selected).boxShadow).toBe("none")
-        expect(selected.lastElementChild?.getAttribute("aria-hidden")).toBe("true")
+      expect(style(selected).backgroundColor).toBe(rgb(tableRowBgHover))
+      expect(style(selected).color).toBe(rgb(text))
+      expect(style(selected).boxShadow).toBe("none")
+      expect(selected.lastElementChild?.getAttribute("aria-hidden")).toBe("true")
 
-        await u.keyboard("{ArrowDown}")
-        expect(style(selected).backgroundColor).toBe(mix(14))
-        expect(style(document.querySelector(".rs__option--is-focused")).backgroundColor).toBe(
-          mix(9)
-        )
-      }
-    )
+      await u.keyboard("{ArrowDown}")
+      expect(style(selected).backgroundColor).toBe("rgba(0, 0, 0, 0)")
+      expect(style(document.querySelector(".rs__option--is-focused")).backgroundColor).toBe(
+        rgb(tableRowBgHover)
+      )
+    })
+
+    it.each([
+      ["quiet", "selected"],
+      ["marker", "menuItemSelected"],
+    ])("presses a %s option with the %s tint", async (selectionStyle, token) => {
+      setup({ selectionStyle })
+      await openMenu()
+      const option = screen.getAllByTestId("selOption")[0]
+      const pressed = [...document.styleSheets]
+        .flatMap(sheet => [...sheet.cssRules])
+        .find(rule => rule.selectorText === `.${option.className.split(" ").pop()}:active`)
+      expect(pressed.cssText).toBe(
+        `${pressed.selectorText} {background-color: ${DefaultTheme.colors[token]};}`
+      )
+    })
 
     it("uses passive checkboxes for quiet multi-choice options", async () => {
       setup({
@@ -360,4 +370,62 @@ it("keeps the active option mounted when it belongs to a distant group", async (
 
   const active = screen.getByRole("option", { name: "Grouped option 100" })
   expect(screen.getByRole("combobox")).toHaveAttribute("aria-activedescendant", active.id)
+})
+
+describe.each([
+  ["light", DefaultTheme],
+  ["dark", DarkTheme],
+])("surface Select in %s", (name, theme) => {
+  const { panelBg, controlBorder, segmentedFocus, statusMutedText } = theme.colors
+
+  it("rests as a filled field", () => {
+    setup({ appearance: "surface" }, { theme })
+    const control = screen.getByTestId("selControl")
+
+    expect(style(control).backgroundColor).toBe(rgb(panelBg))
+    expect(style(control).borderColor).toBe(rgb(controlBorder))
+    expect(style(control).borderRadius).toBe("6px")
+    expect(style(control).minWidth).not.toBe("160px")
+    expect(style(control).opacity).toBe("")
+    expect(style(screen.getByTestId("selDropdownIndicator")).color).toBe(rgb(statusMutedText))
+  })
+
+  it("keeps its fill and takes the focus edge with a halo when focused", async () => {
+    setup({ appearance: "surface" }, { theme })
+    await user().click(screen.getByRole("combobox"))
+    const control = screen.getByTestId("selControl")
+
+    expect(style(control).backgroundColor).toBe(rgb(panelBg))
+    expect(style(control).borderColor).toBe(rgb(segmentedFocus))
+    expect(style(control).boxShadow).toContain("0 0 0 3px")
+  })
+
+  it("lets a site extend one part of the surface", () => {
+    const surface = selectSurfaceStyles(theme)
+    setup(
+      {
+        appearance: "surface",
+        styles: {
+          control: (base, state) => ({ ...surface.control(base, state), borderTopRightRadius: 0 }),
+        },
+      },
+      { theme }
+    )
+    const control = screen.getByTestId("selControl")
+
+    expect(style(control).borderTopRightRadius).toBe("0")
+    expect(style(control).backgroundColor).toBe(rgb(panelBg))
+  })
+
+  it("does not fade a disabled field", () => {
+    setup({ appearance: "surface", isDisabled: true }, { theme })
+
+    expect(style(screen.getByTestId("selControl")).opacity).toBe("")
+  })
+})
+
+it("keeps replacing a part's styles when no appearance is set", () => {
+  setup({ styles: { control: base => ({ ...base, borderTopRightRadius: 0 }) } })
+
+  expect(style(screen.getByTestId("selControl")).minHeight).not.toBe("30px")
 })

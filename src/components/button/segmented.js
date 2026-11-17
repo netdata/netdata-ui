@@ -72,7 +72,7 @@ export const RaisedSegmentedItem = styled(Flex).attrs(
       height: height === undefined ? (compact ? 5.5 : 6.5) : height,
       padding: padding === undefined ? [0, compact ? 2 : 2.5] : padding,
       round: round === undefined ? (compact ? 1 : 1.5) : round,
-      color: active ? (accent ? "segmentedAccentText" : "textFocus") : "statusMutedText",
+      color: active ? (accent ? "segmentedAccentText" : "text") : "statusMutedText",
       background: active
         ? accent
           ? "segmentedAccentBackground"
@@ -104,7 +104,9 @@ export const RaisedSegmentedItem = styled(Flex).attrs(
 
   &:hover {
     color: ${({ active, accent, _hover }) =>
-      getColor(_hover?.color || (active && accent ? "segmentedAccentText" : "textFocus"))};
+      getColor(
+        _hover?.color || (active ? (accent ? "segmentedAccentText" : "text") : "textFocus")
+      )};
   }
 
   &:focus-visible {

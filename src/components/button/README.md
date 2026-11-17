@@ -67,7 +67,7 @@ const myButton: Button = (
 
 ### Surface appearance
 
-`<Button neutral flavour="hollow" appearance="surface" />` uses `controlBackground` and the softer `border` at rest. Hover uses `controlHoverBackground`, `controlBorder`, and `controlHoverText`; active, expanded, and pressed controls use `controlPressedBackground`, `controlBorder`, and `controlPressedText`. Resting label ink uses `controlText`. All three text roles default to the existing `textFocus` value in each theme. Resting icons follow the label unless `iconColor` is set; hover follows the existing label-ink behavior. `colorPalette` can remap these theme roles, including token arrays such as `colorPalette={{ controlBackground: ["transparent", "full"] }}` to preserve an originally transparent control.
+`<Button neutral flavour="hollow" appearance="surface" />` uses `controlBackground` and `controlBorder` at rest. Hover uses `controlHoverBackground`, `inputBorderHover`, and `controlHoverText`; active, expanded, and pressed controls use `controlPressedBackground`, `inputBorderHover`, and `controlPressedText`. Resting label ink uses `controlText`. All three text roles default to the existing `textFocus` value in each theme. Resting icons follow the label unless `iconColor` is set; hover follows the existing label-ink behavior. `colorPalette` can remap these theme roles, including token arrays such as `colorPalette={{ controlBackground: ["transparent", "full"] }}` to preserve an originally transparent control.
 
 Use `colorPalette={{ controlText: "statusMutedText", controlHoverText: "textFocus", controlPressedText: "textFocus" }}` for a muted trigger that gains emphasis on interaction.
 

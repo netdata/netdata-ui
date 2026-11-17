@@ -20,13 +20,13 @@ describe.each(themes)("surface Button in %s", (name, theme) => {
     expect(button).toHaveStyleRule("background-color", theme.colors.controlBackground, {
       modifier: "&&",
     })
-    expect(button).toHaveStyleRule("border-color", theme.colors.border, { modifier: "&&" })
+    expect(button).toHaveStyleRule("border-color", theme.colors.controlBorder, { modifier: "&&" })
     expect(button).toHaveStyleRule("color", theme.colors.textFocus, { modifier: "&&" })
     expect(button).toHaveStyleRule("border-radius", "4px", { modifier: "&&" })
     expect(button).toHaveStyleRule("background-color", theme.colors.controlHoverBackground, {
       modifier: "&&:hover",
     })
-    expect(button).toHaveStyleRule("border-color", theme.colors.controlBorder, {
+    expect(button).toHaveStyleRule("border-color", theme.colors.inputBorderHover, {
       modifier: "&&:hover",
     })
     expect(button).toHaveStyleRule("color", theme.colors.textFocus, { modifier: "&&:hover" })
@@ -34,7 +34,7 @@ describe.each(themes)("surface Button in %s", (name, theme) => {
       expect(button).toHaveStyleRule("background-color", theme.colors.controlPressedBackground, {
         modifier,
       })
-      expect(button).toHaveStyleRule("border-color", theme.colors.controlBorder, { modifier })
+      expect(button).toHaveStyleRule("border-color", theme.colors.inputBorderHover, { modifier })
       expect(button).toHaveStyleRule("color", theme.colors.textFocus, { modifier })
     }
   })
@@ -123,7 +123,7 @@ describe.each(themes)("surface Button in %s", (name, theme) => {
     expect(button).toHaveStyleRule("background-color", theme.colors.controlBackground, {
       modifier: '&&[aria-disabled="true"]:hover',
     })
-    expect(button).toHaveStyleRule("border-color", theme.colors.border, {
+    expect(button).toHaveStyleRule("border-color", theme.colors.controlBorder, {
       modifier: '&&[aria-disabled="true"]:hover',
     })
   })

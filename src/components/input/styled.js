@@ -4,6 +4,7 @@ import Flex from "@/components/templates/flex"
 import { TextMicro, TextSmall } from "@/components/typography"
 import { getColor, getOrElse, getSizeBy, getValidatedControlColor } from "@/theme/utils"
 import { fieldFocusRing } from "@/mixins/focusRing"
+import { fieldHalo, fieldSurfaceRound } from "@/mixins/fieldSurface"
 import { controlHeight, controlFontSize } from "@/mixins/controlSize"
 import { FONT_MONOSPACE } from "@/theme/default/constants"
 
@@ -39,15 +40,27 @@ const ownFocusSurface = css`
   }
 `
 
+const isSurface = ({ appearance }) => appearance === "surface"
+
+const surfaceFocusRing = css`
+  &:focus-visible {
+    border-color: ${({ error }) => getColor(error ? "error" : "segmentedFocus")};
+    ${({ error }) => fieldHalo(error ? "error" : "segmentedFocus")}
+  }
+`
+
+const restBackground = props => (isSurface(props) ? "panelBg" : "controlBackground")
+const hoverBackground = props => (isSurface(props) ? "panelBg" : "controlHoverBackground")
+
 export const Input = styled(Flex).attrs(props => ({
-  round: 1,
+  round: isSurface(props) ? fieldSurfaceRound * 2 : 1,
   as: "input",
-  background: "controlBackground",
+  background: restBackground(props),
   width: "100%",
   border: props.error ? "error" : "controlBorder",
   _hover: {
     border: props.error ? "error" : "inputBorderHover",
-    background: props.disabled ? undefined : "controlHoverBackground",
+    background: props.disabled ? undefined : hoverBackground(props),
   },
   padding: fieldPadding(props.size),
   height: controlHeight(fieldSizeOf(props.size))(props),
@@ -89,6 +102,7 @@ export const Input = styled(Flex).attrs(props => ({
   ${fieldFocusRing}
   ${props => props.background !== ghostBackground && ownFocusSurface}
   ${({ error }) => error && errorFocusRing}
+  ${props => isSurface(props) && surfaceFocusRing}
 
   &::placeholder {
     font-size: ${fieldFontSize};

@@ -1,7 +1,9 @@
+import { css } from "styled-components"
 import { renderWithProviders, screen, user } from "testUtilities"
 import { DefaultTheme } from "@/theme/default"
 import { DarkTheme } from "@/theme/dark"
 import { Toggle } from "."
+import { StyledLabel } from "./styled"
 
 const OutlineToggle = props => (
   <Toggle variant="outline" size="small" checked={false} onChange={() => {}} {...props} />
@@ -44,11 +46,32 @@ it.each([
   })
   rerender(<OutlineToggle checked />)
   const onTrack = screen.getByRole("switch").nextElementSibling
-  expect(onTrack).toHaveStyleRule("background", theme.colors.segmentedAccentText)
-  expect(onTrack).toHaveStyleRule("border-color", theme.colors.segmentedAccentText)
+  expect(onTrack).toHaveStyleRule("background", theme.colors.text)
+  expect(onTrack).toHaveStyleRule("border-color", theme.colors.text)
   expect(onTrack).toHaveStyleRule("background-color", theme.colors.buttonNeutralText, {
     modifier: ":after",
   })
+})
+
+it.each([
+  ["light", DefaultTheme],
+  ["dark", DarkTheme],
+])("darkens the outline edge on hover in the %s theme", (_, theme) => {
+  const hover = {
+    modifier: css`
+      ${StyledLabel}:hover &
+    `,
+  }
+  const { rerender } = renderWithProviders(<OutlineToggle />, { theme })
+  expect(screen.getByRole("switch").nextElementSibling).toHaveStyleRule(
+    "border-color",
+    theme.colors.inputBorderHover,
+    hover
+  )
+  rerender(<OutlineToggle checked />)
+  const onTrack = screen.getByRole("switch").nextElementSibling
+  expect(onTrack).toHaveStyleRule("border-color", theme.colors.text, hover)
+  expect(onTrack).toHaveStyleRule("background", theme.colors.text, hover)
 })
 
 it("opts into Enter activation once without submitting its form", async () => {

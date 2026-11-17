@@ -41,8 +41,8 @@ export const ContolledToggle = () => {
 `"compact"` is 26×16 with a 9px knob. All dimensions use the theme size unit.
 
 `variant="outline"` draws a transparent off track with a 1.5px border. It uses
-`controlBorder` for the off border and knob, `segmentedAccentText` for the checked track,
-`buttonNeutralText` for its checked knob, `textFocus` for off hover, and `segmentedFocus`
+`controlBorder` for the off border and knob, `text` for the checked track,
+`buttonNeutralText` for its checked knob, `inputBorderHover` for off hover, and `segmentedFocus`
 for keyboard focus. Disabled outline switches dim the track while their labels stay legible.
 The default variant retains its existing palette.
 
